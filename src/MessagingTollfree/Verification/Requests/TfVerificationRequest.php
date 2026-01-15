@@ -40,6 +40,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   businessRegistrationCountry?: string|null,
  *   businessRegistrationNumber?: string|null,
  *   businessRegistrationType?: string|null,
+ *   campaignVerifyAuthorizationToken?: string|null,
  *   doingBusinessAs?: string|null,
  *   entityType?: null|TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>,
  *   helpMessageResponse?: string|null,
@@ -208,6 +209,12 @@ final class TfVerificationRequest implements BaseModel
     public ?string $businessRegistrationType;
 
     /**
+     * Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
+     */
+    #[Optional(nullable: true)]
+    public ?string $campaignVerifyAuthorizationToken;
+
+    /**
      * Doing Business As (DBA) name if different from legal name.
      */
     #[Optional(nullable: true)]
@@ -351,6 +358,7 @@ final class TfVerificationRequest implements BaseModel
         ?string $businessRegistrationCountry = null,
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
+        ?string $campaignVerifyAuthorizationToken = null,
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
@@ -387,6 +395,7 @@ final class TfVerificationRequest implements BaseModel
         null !== $businessRegistrationCountry && $self['businessRegistrationCountry'] = $businessRegistrationCountry;
         null !== $businessRegistrationNumber && $self['businessRegistrationNumber'] = $businessRegistrationNumber;
         null !== $businessRegistrationType && $self['businessRegistrationType'] = $businessRegistrationType;
+        null !== $campaignVerifyAuthorizationToken && $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
         null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
         null !== $entityType && $self['entityType'] = $entityType;
         null !== $helpMessageResponse && $self['helpMessageResponse'] = $helpMessageResponse;
@@ -675,6 +684,18 @@ final class TfVerificationRequest implements BaseModel
     ): self {
         $self = clone $this;
         $self['businessRegistrationType'] = $businessRegistrationType;
+
+        return $self;
+    }
+
+    /**
+     * Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
+     */
+    public function withCampaignVerifyAuthorizationToken(
+        ?string $campaignVerifyAuthorizationToken
+    ): self {
+        $self = clone $this;
+        $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
 
         return $self;
     }

@@ -233,7 +233,7 @@ final class BrandTest extends TestCase
         }
 
         $result = $this->client->messaging10dlc->brand->retrieveSMSOtpStatus(
-            'OTP4B2001'
+            '4b20019b-043a-78f8-0657-b3be3f4b4002'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

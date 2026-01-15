@@ -382,30 +382,25 @@ final class BrandService implements BrandContract
     /**
      * @api
      *
-     * Query the status of an SMS OTP (One-Time Password) for Sole Proprietor brand verification.
+     * Query the status of an SMS OTP (One-Time Password) for Sole Proprietor brand verification using the Brand ID.
      *
-     * This endpoint allows you to check the delivery and verification status of an OTP sent during the Sole Proprietor brand verification process. You can query by either:
-     *
-     * * `referenceId` - The reference ID returned when the OTP was initially triggered
-     * * `brandId` - Query parameter for portal users to look up OTP status by Brand ID
+     * This endpoint allows you to check the delivery and verification status of an OTP sent during the Sole Proprietor brand verification process by looking it up with the brand ID.
      *
      * The response includes delivery status, verification dates, and detailed delivery information.
      *
-     * @param string $referenceID The reference ID returned when the OTP was initially triggered
-     * @param string $brandID Filter by Brand ID for easier lookup in portal applications
+     * **Note:** This is an alternative to the `/10dlc/brand/smsOtp/{referenceId}` endpoint when you have the Brand ID but not the reference ID.
+     *
+     * @param string $brandID The Brand ID for which to query OTP status
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveSMSOtpStatus(
-        string $referenceID,
-        ?string $brandID = null,
-        RequestOptions|array|null $requestOptions = null,
+        string $brandID,
+        RequestOptions|array|null $requestOptions = null
     ): BrandGetSMSOtpStatusResponse {
-        $params = Util::removeNulls(['brandID' => $brandID]);
-
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveSMSOtpStatus($referenceID, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->retrieveSMSOtpStatus($brandID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

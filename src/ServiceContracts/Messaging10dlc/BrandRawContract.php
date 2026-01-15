@@ -12,7 +12,6 @@ use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Messaging10dlc\Brand\BrandListParams;
 use Telnyx\Messaging10dlc\Brand\BrandListResponse;
-use Telnyx\Messaging10dlc\Brand\BrandRetrieveSMSOtpStatusParams;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpParams;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Messaging10dlc\Brand\BrandUpdateParams;
@@ -131,8 +130,7 @@ interface BrandRawContract
     /**
      * @api
      *
-     * @param string $referenceID The reference ID returned when the OTP was initially triggered
-     * @param array<string,mixed>|BrandRetrieveSMSOtpStatusParams $params
+     * @param string $brandID The Brand ID for which to query OTP status
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetSMSOtpStatusResponse>
@@ -140,9 +138,8 @@ interface BrandRawContract
      * @throws APIException
      */
     public function retrieveSMSOtpStatus(
-        string $referenceID,
-        array|BrandRetrieveSMSOtpStatusParams $params,
-        RequestOptions|array|null $requestOptions = null,
+        string $brandID,
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
