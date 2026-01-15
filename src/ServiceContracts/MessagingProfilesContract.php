@@ -44,6 +44,7 @@ interface MessagingProfilesContract
      * assigned to the messaging profile.
      *
      * To disable this feature, set the object field to `null`.
+     * @param bool $smartEncoding Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
      * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings The URL shortener feature allows automatic replacement of URLs that were generated using
      * a public URL shortener service. Some examples include bit.do, bit.ly, goo.gl, ht.ly,
      * is.gd, ow.ly, rebrand.ly, t.co, tiny.cc, and tinyurl.com. Such URLs are replaced with
@@ -69,6 +70,7 @@ interface MessagingProfilesContract
         bool $mmsTranscoding = false,
         bool $mobileOnly = false,
         NumberPoolSettings|array|null $numberPoolSettings = null,
+        bool $smartEncoding = false,
         URLShortenerSettings|array|null $urlShortenerSettings = null,
         WebhookAPIVersion|string $webhookAPIVersion = '2',
         ?string $webhookFailoverURL = '',
@@ -106,6 +108,7 @@ interface MessagingProfilesContract
      * assigned to the messaging profile.
      *
      * To disable this feature, set the object field to `null`.
+     * @param bool $smartEncoding Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
      * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings The URL shortener feature allows automatic replacement of URLs that were generated using
      * a public URL shortener service. Some examples include bit.do, bit.ly, goo.gl, ht.ly,
      * is.gd, ow.ly, rebrand.ly, t.co, tiny.cc, and tinyurl.com. Such URLs are replaced with
@@ -135,6 +138,7 @@ interface MessagingProfilesContract
         bool $mobileOnly = false,
         ?string $name = null,
         NumberPoolSettings|array|null $numberPoolSettings = null,
+        bool $smartEncoding = false,
         URLShortenerSettings|array|null $urlShortenerSettings = null,
         ?string $v1Secret = null,
         \Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion|string|null $webhookAPIVersion = null,
