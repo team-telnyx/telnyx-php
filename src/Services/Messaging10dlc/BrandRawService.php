@@ -17,7 +17,6 @@ use Telnyx\Messaging10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Messaging10dlc\Brand\BrandListParams;
 use Telnyx\Messaging10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Messaging10dlc\Brand\BrandListResponse;
-use Telnyx\Messaging10dlc\Brand\BrandRetrieveSMSOtpStatusParams;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpParams;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Messaging10dlc\Brand\BrandUpdateParams;
@@ -311,17 +310,15 @@ final class BrandRawService implements BrandRawContract
     /**
      * @api
      *
-     * Query the status of an SMS OTP (One-Time Password) for Sole Proprietor brand verification.
+     * Query the status of an SMS OTP (One-Time Password) for Sole Proprietor brand verification using the Brand ID.
      *
-     * This endpoint allows you to check the delivery and verification status of an OTP sent during the Sole Proprietor brand verification process. You can query by either:
-     *
-     * * `referenceId` - The reference ID returned when the OTP was initially triggered
-     * * `brandId` - Query parameter for portal users to look up OTP status by Brand ID
+     * This endpoint allows you to check the delivery and verification status of an OTP sent during the Sole Proprietor brand verification process by looking it up with the brand ID.
      *
      * The response includes delivery status, verification dates, and detailed delivery information.
      *
-     * @param string $referenceID The reference ID returned when the OTP was initially triggered
-     * @param array{brandID?: string}|BrandRetrieveSMSOtpStatusParams $params
+     * **Note:** This is an alternative to the `/10dlc/brand/smsOtp/{referenceId}` endpoint when you have the Brand ID but not the reference ID.
+     *
+     * @param string $brandID The Brand ID for which to query OTP status
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetSMSOtpStatusResponse>
@@ -329,21 +326,14 @@ final class BrandRawService implements BrandRawContract
      * @throws APIException
      */
     public function retrieveSMSOtpStatus(
-        string $referenceID,
-        array|BrandRetrieveSMSOtpStatusParams $params,
-        RequestOptions|array|null $requestOptions = null,
+        string $brandID,
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
-        [$parsed, $options] = BrandRetrieveSMSOtpStatusParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
-            path: ['10dlc/brand/smsOtp/%1$s', $referenceID],
-            query: Util::array_transform_keys($parsed, ['brandID' => 'brandId']),
-            options: $options,
+            path: ['10dlc/brand/%1$s/smsOtp', $brandID],
+            options: $requestOptions,
             convert: BrandGetSMSOtpStatusResponse::class,
         );
     }

@@ -50,6 +50,7 @@ interface RequestsContract
      * @param string|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
      * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
      * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
+     * @param string|null $campaignVerifyAuthorizationToken Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
@@ -87,6 +88,7 @@ interface RequestsContract
         ?string $businessRegistrationCountry = null,
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
+        ?string $campaignVerifyAuthorizationToken = null,
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
@@ -137,6 +139,7 @@ interface RequestsContract
      * @param string|null $businessRegistrationCountry ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
      * @param string|null $businessRegistrationNumber Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
      * @param string|null $businessRegistrationType Type of business registration being provided. Required from January 2026.
+     * @param string|null $campaignVerifyAuthorizationToken Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
@@ -175,6 +178,7 @@ interface RequestsContract
         ?string $businessRegistrationCountry = null,
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
+        ?string $campaignVerifyAuthorizationToken = null,
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,

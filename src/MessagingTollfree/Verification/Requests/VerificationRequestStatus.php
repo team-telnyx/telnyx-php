@@ -42,6 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   businessRegistrationCountry?: string|null,
  *   businessRegistrationNumber?: string|null,
  *   businessRegistrationType?: string|null,
+ *   campaignVerifyAuthorizationToken?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   doingBusinessAs?: string|null,
  *   entityType?: null|TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>,
@@ -154,6 +155,12 @@ final class VerificationRequestStatus implements BaseModel
 
     #[Optional]
     public ?string $businessRegistrationType;
+
+    /**
+     * Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026.
+     */
+    #[Optional(nullable: true)]
+    public ?string $campaignVerifyAuthorizationToken;
 
     #[Optional]
     public ?\DateTimeInterface $createdAt;
@@ -294,6 +301,7 @@ final class VerificationRequestStatus implements BaseModel
         ?string $businessRegistrationCountry = null,
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
+        ?string $campaignVerifyAuthorizationToken = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
@@ -335,6 +343,7 @@ final class VerificationRequestStatus implements BaseModel
         null !== $businessRegistrationCountry && $self['businessRegistrationCountry'] = $businessRegistrationCountry;
         null !== $businessRegistrationNumber && $self['businessRegistrationNumber'] = $businessRegistrationNumber;
         null !== $businessRegistrationType && $self['businessRegistrationType'] = $businessRegistrationType;
+        null !== $campaignVerifyAuthorizationToken && $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
         null !== $entityType && $self['entityType'] = $entityType;
@@ -584,6 +593,18 @@ final class VerificationRequestStatus implements BaseModel
     ): self {
         $self = clone $this;
         $self['businessRegistrationType'] = $businessRegistrationType;
+
+        return $self;
+    }
+
+    /**
+     * Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026.
+     */
+    public function withCampaignVerifyAuthorizationToken(
+        ?string $campaignVerifyAuthorizationToken
+    ): self {
+        $self = clone $this;
+        $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
 
         return $self;
     }

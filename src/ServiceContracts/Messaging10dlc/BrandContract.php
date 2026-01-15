@@ -225,16 +225,14 @@ interface BrandContract
     /**
      * @api
      *
-     * @param string $referenceID The reference ID returned when the OTP was initially triggered
-     * @param string $brandID Filter by Brand ID for easier lookup in portal applications
+     * @param string $brandID The Brand ID for which to query OTP status
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveSMSOtpStatus(
-        string $referenceID,
-        ?string $brandID = null,
-        RequestOptions|array|null $requestOptions = null,
+        string $brandID,
+        RequestOptions|array|null $requestOptions = null
     ): BrandGetSMSOtpStatusResponse;
 
     /**
