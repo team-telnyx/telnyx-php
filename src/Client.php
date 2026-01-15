@@ -99,6 +99,7 @@ use Telnyx\Services\OAuthClientsService;
 use Telnyx\Services\OAuthGrantsService;
 use Telnyx\Services\OAuthService;
 use Telnyx\Services\OperatorConnectService;
+use Telnyx\Services\OrganizationsService;
 use Telnyx\Services\OtaUpdatesService;
 use Telnyx\Services\OutboundVoiceProfilesService;
 use Telnyx\Services\PaymentService;
@@ -926,6 +927,11 @@ class Client extends BaseClient
     public SpeechToTextService $speechToText;
 
     /**
+     * @api
+     */
+    public OrganizationsService $organizations;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1121,6 +1127,7 @@ class Client extends BaseClient
         $this->mobileVoiceConnections = new MobileVoiceConnectionsService($this);
         $this->messaging10dlc = new Messaging10dlcService($this);
         $this->speechToText = new SpeechToTextService($this);
+        $this->organizations = new OrganizationsService($this);
     }
 
     /** @return array<string,string> */
