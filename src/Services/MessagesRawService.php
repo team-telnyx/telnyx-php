@@ -43,7 +43,7 @@ final class MessagesRawService implements MessagesRawContract
     /**
      * @api
      *
-     * Note: This API endpoint can only retrieve messages that are no older than 10 days since their creation. If you require messages older than this, please generate an [MDR report.](https://developers.telnyx.com/api/v1/mission-control/add-mdr-request)
+     * Note: This API endpoint can only retrieve messages that are no older than 10 days since their creation. If you require messages older than this, please generate an [MDR report.](https://developers.telnyx.com/api-reference/mdr-usage-reports/create-mdr-usage-report)
      *
      * @param string $id The id of the message
      * @param RequestOpts|null $requestOptions
