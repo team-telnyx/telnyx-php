@@ -20,7 +20,7 @@ final class InferenceEmbeddingBucketIDs implements BaseModel
     use SdkModel;
 
     /**
-     * List of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) to use for retrieval-augmented generation.
+     * List of [embedded storage buckets](https://developers.telnyx.com/api-reference/embeddings/embed-documents) to use for retrieval-augmented generation.
      *
      * @var list<string> $bucketIDs
      */
@@ -73,7 +73,7 @@ final class InferenceEmbeddingBucketIDs implements BaseModel
     }
 
     /**
-     * List of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) to use for retrieval-augmented generation.
+     * List of [embedded storage buckets](https://developers.telnyx.com/api-reference/embeddings/embed-documents) to use for retrieval-augmented generation.
      *
      * @param list<string> $bucketIDs
      */

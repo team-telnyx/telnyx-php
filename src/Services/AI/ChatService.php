@@ -58,7 +58,7 @@ final class ChatService implements ChatContract
      * @param bool $stream whether or not to stream data-only server-sent events as they become available
      * @param float $temperature Adjusts the "creativity" of the model. Lower values make the model more deterministic and repetitive, while higher values make the model more random and creative.
      * @param ToolChoice|value-of<ToolChoice> $toolChoice
-     * @param list<ToolShape> $tools The `function` tool type follows the same schema as the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat). The `retrieval` tool type is unique to Telnyx. You may pass a list of [embedded storage buckets](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) for retrieval-augmented generation.
+     * @param list<ToolShape> $tools The `function` tool type follows the same schema as the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat). The `retrieval` tool type is unique to Telnyx. You may pass a list of [embedded storage buckets](https://developers.telnyx.com/api-reference/embeddings/embed-documents) for retrieval-augmented generation.
      * @param int $topLogprobs This is used with `logprobs`. An integer between 0 and 20 specifying the number of most likely tokens to return at each token position, each with an associated log probability.
      * @param float $topP An alternative or complement to `temperature`. This adjusts how many of the top possibilities to consider.
      * @param bool $useBeamSearch Setting this to `true` will allow the model to [explore more completion options](https://huggingface.co/blog/how-to-generate#beam-search). This is not supported by OpenAI.

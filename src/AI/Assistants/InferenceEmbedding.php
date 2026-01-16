@@ -63,7 +63,7 @@ final class InferenceEmbedding implements BaseModel
     public string $instructions;
 
     /**
-     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api/inference/inference-embedding/get-models-public-models-get) to see all of your available models,.
+     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,.
      */
     #[Required]
     public string $model;
@@ -105,7 +105,7 @@ final class InferenceEmbedding implements BaseModel
     public ?InsightSettings $insightSettings;
 
     /**
-     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      */
     #[Optional('llm_api_key_ref')]
     public ?string $llmAPIKeyRef;
@@ -259,7 +259,7 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
-     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api/inference/inference-embedding/get-models-public-models-get) to see all of your available models,.
+     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,.
      */
     public function withModel(string $model): self
     {
@@ -357,7 +357,7 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
-     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      */
     public function withLlmAPIKeyRef(string $llmAPIKeyRef): self
     {
