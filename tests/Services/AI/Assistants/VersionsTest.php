@@ -97,6 +97,7 @@ final class VersionsTest extends TestCase
             instructions: 'instructions',
             llmAPIKeyRef: 'llm_api_key_ref',
             messagingSettings: [
+                'conversationInactivityMinutes' => 1,
                 'defaultMessagingProfileID' => 'default_messaging_profile_id',
                 'deliveryStatusWebhookURL' => 'delivery_status_webhook_url',
             ],
@@ -105,12 +106,21 @@ final class VersionsTest extends TestCase
             privacySettings: ['dataRetention' => true],
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
-                'noiseSuppression' => 'deepfilternet',
+                'noiseSuppression' => 'krisp',
                 'noiseSuppressionConfig' => [
                     'attenuationLimit' => 0, 'mode' => 'advanced',
                 ],
                 'supportsUnauthenticatedWebCalls' => true,
                 'timeLimitSecs' => 30,
+                'userIdleTimeoutSecs' => 30,
+                'voicemailDetection' => [
+                    'onVoicemailDetected' => [
+                        'action' => 'stop_assistant',
+                        'voicemailMessage' => [
+                            'message' => 'message', 'prompt' => 'prompt', 'type' => 'prompt',
+                        ],
+                    ],
+                ],
             ],
             tools: [
                 [
@@ -119,6 +129,7 @@ final class VersionsTest extends TestCase
                         'description' => 'description',
                         'name' => 'name',
                         'url' => 'https://example.com/api/v1/function',
+                        'async' => true,
                         'bodyParameters' => [
                             'properties' => ['age' => 'bar', 'location' => 'bar'],
                             'required' => ['age', 'location'],
@@ -136,6 +147,7 @@ final class VersionsTest extends TestCase
                             'required' => ['page'],
                             'type' => 'object',
                         ],
+                        'timeoutMs' => 500,
                     ],
                 ],
             ],

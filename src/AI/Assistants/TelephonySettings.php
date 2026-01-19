@@ -6,12 +6,14 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\TelephonySettings\NoiseSuppression;
 use Telnyx\AI\Assistants\TelephonySettings\NoiseSuppressionConfig;
+use Telnyx\AI\Assistants\TelephonySettings\VoicemailDetection;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type NoiseSuppressionConfigShape from \Telnyx\AI\Assistants\TelephonySettings\NoiseSuppressionConfig
+ * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\TelephonySettings\VoicemailDetection
  *
  * @phpstan-type TelephonySettingsShape = array{
  *   defaultTexmlAppID?: string|null,
@@ -19,6 +21,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   noiseSuppressionConfig?: null|NoiseSuppressionConfig|NoiseSuppressionConfigShape,
  *   supportsUnauthenticatedWebCalls?: bool|null,
  *   timeLimitSecs?: int|null,
+ *   userIdleTimeoutSecs?: int|null,
+ *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  * }
  */
 final class TelephonySettings implements BaseModel
@@ -58,6 +62,18 @@ final class TelephonySettings implements BaseModel
     #[Optional('time_limit_secs')]
     public ?int $timeLimitSecs;
 
+    /**
+     * Maximum duration in seconds of end user silence on the call. When this limit is reached the assistant will be stopped. This limit does not apply to portions of a call without an active assistant (for instance, a call transferred to a human representative).
+     */
+    #[Optional('user_idle_timeout_secs')]
+    public ?int $userIdleTimeoutSecs;
+
+    /**
+     * Configuration for voicemail detection (AMD - Answering Machine Detection) on outgoing calls.
+     */
+    #[Optional('voicemail_detection')]
+    public ?VoicemailDetection $voicemailDetection;
+
     public function __construct()
     {
         $this->initialize();
@@ -70,6 +86,7 @@ final class TelephonySettings implements BaseModel
      *
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
      * @param NoiseSuppressionConfig|NoiseSuppressionConfigShape|null $noiseSuppressionConfig
+     * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      */
     public static function with(
         ?string $defaultTexmlAppID = null,
@@ -77,6 +94,8 @@ final class TelephonySettings implements BaseModel
         NoiseSuppressionConfig|array|null $noiseSuppressionConfig = null,
         ?bool $supportsUnauthenticatedWebCalls = null,
         ?int $timeLimitSecs = null,
+        ?int $userIdleTimeoutSecs = null,
+        VoicemailDetection|array|null $voicemailDetection = null,
     ): self {
         $self = new self;
 
@@ -85,6 +104,8 @@ final class TelephonySettings implements BaseModel
         null !== $noiseSuppressionConfig && $self['noiseSuppressionConfig'] = $noiseSuppressionConfig;
         null !== $supportsUnauthenticatedWebCalls && $self['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
         null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
+        null !== $userIdleTimeoutSecs && $self['userIdleTimeoutSecs'] = $userIdleTimeoutSecs;
+        null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
 
         return $self;
     }
@@ -147,6 +168,31 @@ final class TelephonySettings implements BaseModel
     {
         $self = clone $this;
         $self['timeLimitSecs'] = $timeLimitSecs;
+
+        return $self;
+    }
+
+    /**
+     * Maximum duration in seconds of end user silence on the call. When this limit is reached the assistant will be stopped. This limit does not apply to portions of a call without an active assistant (for instance, a call transferred to a human representative).
+     */
+    public function withUserIdleTimeoutSecs(int $userIdleTimeoutSecs): self
+    {
+        $self = clone $this;
+        $self['userIdleTimeoutSecs'] = $userIdleTimeoutSecs;
+
+        return $self;
+    }
+
+    /**
+     * Configuration for voicemail detection (AMD - Answering Machine Detection) on outgoing calls.
+     *
+     * @param VoicemailDetection|VoicemailDetectionShape $voicemailDetection
+     */
+    public function withVoicemailDetection(
+        VoicemailDetection|array $voicemailDetection
+    ): self {
+        $self = clone $this;
+        $self['voicemailDetection'] = $voicemailDetection;
 
         return $self;
     }

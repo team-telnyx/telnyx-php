@@ -10,6 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type MessagingSettingsShape = array{
+ *   conversationInactivityMinutes?: int|null,
  *   defaultMessagingProfileID?: string|null,
  *   deliveryStatusWebhookURL?: string|null,
  * }
@@ -18,6 +19,12 @@ final class MessagingSettings implements BaseModel
 {
     /** @use SdkModel<MessagingSettingsShape> */
     use SdkModel;
+
+    /**
+     * If more than this many minutes have passed since the last message, the assistant will start a new conversation instead of continuing the existing one.
+     */
+    #[Optional('conversation_inactivity_minutes')]
+    public ?int $conversationInactivityMinutes;
 
     /**
      * Default Messaging Profile used for messaging exchanges with your assistant. This will be created automatically on assistant creation.
@@ -42,13 +49,27 @@ final class MessagingSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        ?int $conversationInactivityMinutes = null,
         ?string $defaultMessagingProfileID = null,
         ?string $deliveryStatusWebhookURL = null,
     ): self {
         $self = new self;
 
+        null !== $conversationInactivityMinutes && $self['conversationInactivityMinutes'] = $conversationInactivityMinutes;
         null !== $defaultMessagingProfileID && $self['defaultMessagingProfileID'] = $defaultMessagingProfileID;
         null !== $deliveryStatusWebhookURL && $self['deliveryStatusWebhookURL'] = $deliveryStatusWebhookURL;
+
+        return $self;
+    }
+
+    /**
+     * If more than this many minutes have passed since the last message, the assistant will start a new conversation instead of continuing the existing one.
+     */
+    public function withConversationInactivityMinutes(
+        int $conversationInactivityMinutes
+    ): self {
+        $self = clone $this;
+        $self['conversationInactivityMinutes'] = $conversationInactivityMinutes;
 
         return $self;
     }
