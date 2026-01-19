@@ -24,11 +24,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *   description: string,
  *   name: string,
  *   url: string,
+ *   async?: bool|null,
  *   bodyParameters?: null|BodyParameters|BodyParametersShape,
  *   headers?: list<Header|HeaderShape>|null,
  *   method?: null|Method|value-of<Method>,
  *   pathParameters?: null|PathParameters|PathParametersShape,
  *   queryParameters?: null|QueryParameters|QueryParametersShape,
+ *   timeoutMs?: int|null,
  * }
  */
 final class InferenceEmbeddingWebhookToolParams implements BaseModel
@@ -53,6 +55,12 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      */
     #[Required]
     public string $url;
+
+    /**
+     * If async, the assistant will move forward without waiting for your server to respond.
+     */
+    #[Optional]
+    public ?bool $async;
 
     /**
      * The body parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the body of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
@@ -87,6 +95,12 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      */
     #[Optional('query_parameters')]
     public ?QueryParameters $queryParameters;
+
+    /**
+     * The maximum number of milliseconds to wait for the webhook to respond. Only applicable when async is false.
+     */
+    #[Optional('timeout_ms')]
+    public ?int $timeoutMs;
 
     /**
      * `new InferenceEmbeddingWebhookToolParams()` is missing required properties by the API.
@@ -125,11 +139,13 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
         string $description,
         string $name,
         string $url,
+        ?bool $async = null,
         BodyParameters|array|null $bodyParameters = null,
         ?array $headers = null,
         Method|string|null $method = null,
         PathParameters|array|null $pathParameters = null,
         QueryParameters|array|null $queryParameters = null,
+        ?int $timeoutMs = null,
     ): self {
         $self = new self;
 
@@ -137,11 +153,13 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
         $self['name'] = $name;
         $self['url'] = $url;
 
+        null !== $async && $self['async'] = $async;
         null !== $bodyParameters && $self['bodyParameters'] = $bodyParameters;
         null !== $headers && $self['headers'] = $headers;
         null !== $method && $self['method'] = $method;
         null !== $pathParameters && $self['pathParameters'] = $pathParameters;
         null !== $queryParameters && $self['queryParameters'] = $queryParameters;
+        null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
 
         return $self;
     }
@@ -175,6 +193,17 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     {
         $self = clone $this;
         $self['url'] = $url;
+
+        return $self;
+    }
+
+    /**
+     * If async, the assistant will move forward without waiting for your server to respond.
+     */
+    public function withAsync(bool $async): self
+    {
+        $self = clone $this;
+        $self['async'] = $async;
 
         return $self;
     }
@@ -243,6 +272,17 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['queryParameters'] = $queryParameters;
+
+        return $self;
+    }
+
+    /**
+     * The maximum number of milliseconds to wait for the webhook to respond. Only applicable when async is false.
+     */
+    public function withTimeoutMs(int $timeoutMs): self
+    {
+        $self = clone $this;
+        $self['timeoutMs'] = $timeoutMs;
 
         return $self;
     }

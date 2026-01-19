@@ -9,6 +9,8 @@ namespace Telnyx\AI\Assistants\TelephonySettings;
  */
 enum NoiseSuppression: string
 {
+    case KRISP = 'krisp';
+
     case DEEPFILTERNET = 'deepfilternet';
 
     case DISABLED = 'disabled';
