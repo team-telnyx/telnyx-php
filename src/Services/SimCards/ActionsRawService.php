@@ -104,7 +104,7 @@ final class ActionsRawService implements ActionsRawContract
      * @api
      *
      * This API triggers an asynchronous operation to set a public IP for each of the specified SIM cards.<br/>
-     * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
+     * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
      *
      * @param array{simCardIDs: list<string>}|ActionBulkSetPublicIPsParams $params
      * @param RequestOpts|null $requestOptions
@@ -136,7 +136,7 @@ final class ActionsRawService implements ActionsRawContract
      * @api
      *
      * This API disables a SIM card, disconnecting it from the network and making it impossible to consume data.<br/>
-     * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the disabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
+     * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the disabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
      *
      * @param string $id identifies the SIM
      * @param RequestOpts|null $requestOptions
@@ -163,7 +163,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * This API enables a SIM card, connecting it to the network and making it possible to consume data.<br/>
      * To enable a SIM card, it must be associated with a SIM card group.<br/>
-     * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the enabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
+     * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the enabled state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
      *
      * @param string $id identifies the SIM
      * @param RequestOpts|null $requestOptions
@@ -189,7 +189,7 @@ final class ActionsRawService implements ActionsRawContract
      * @api
      *
      * This API removes an existing public IP from a SIM card. <br/><br/>
-     *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
+     *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
      *
      * @param string $id identifies the SIM
      * @param RequestOpts|null $requestOptions
@@ -215,7 +215,7 @@ final class ActionsRawService implements ActionsRawContract
      * @api
      *
      * This API makes a SIM card reachable on the public internet by mapping a random public IP to the SIM card. <br/><br/>
-     *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API. <br/><br/>
+     *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API. <br/><br/>
      *  Setting a Public IP to a SIM Card incurs a charge and will only succeed if the account has sufficient funds.
      *
      * @param string $id identifies the SIM
@@ -254,7 +254,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * The SIM card will be able to connect to the network once the process to set it to standby has been completed, thus making it possible to consume data.<br/>
      * To set a SIM card to standby, it must be associated with SIM card group.<br/>
-     * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the standby state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
+     * The API will trigger an asynchronous operation called a SIM Card Action. Transitioning to the standby state may take a period of time. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
      *
      * @param string $id identifies the SIM
      * @param RequestOpts|null $requestOptions
