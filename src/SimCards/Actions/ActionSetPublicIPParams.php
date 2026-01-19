@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * This API makes a SIM card reachable on the public internet by mapping a random public IP to the SIM card. <br/><br/>
- *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API. <br/><br/>
+ *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API. <br/><br/>
  *  Setting a Public IP to a SIM Card incurs a charge and will only succeed if the account has sufficient funds.
  *
  * @see Telnyx\Services\SimCards\ActionsService::setPublicIP()
