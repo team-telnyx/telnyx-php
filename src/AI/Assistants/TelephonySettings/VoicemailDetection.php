@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Configuration for voicemail detection (AMD - Answering Machine Detection) on outgoing calls.
+ * Configuration for voicemail detection (AMD - Answering Machine Detection) on outgoing calls. These settings only apply if AMD is enabled on the Dial command. See [TeXML Dial documentation](https://developers.telnyx.com/api-reference/texml-rest-commands/initiate-an-outbound-call) for enabling AMD. Recommended settings: MachineDetection=Enable, AsyncAmd=true, DetectionMode=Premium.
  *
  * @phpstan-import-type OnVoicemailDetectedShape from \Telnyx\AI\Assistants\TelephonySettings\VoicemailDetection\OnVoicemailDetected
  *
