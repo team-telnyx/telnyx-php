@@ -5,6 +5,7 @@ namespace Tests\Services\Calls;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
 use Telnyx\Calls\Actions\ActionAnswerResponse;
 use Telnyx\Calls\Actions\ActionBridgeResponse;
 use Telnyx\Calls\Actions\ActionEnqueueResponse;
@@ -61,6 +62,24 @@ final class ActionsTest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
+    }
+
+    #[Test]
+    public function testAddAIAssistantMessages(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->calls->actions->addAIAssistantMessages(
+            'call_control_id'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionAddAIAssistantMessagesResponse::class,
+            $result
+        );
     }
 
     #[Test]

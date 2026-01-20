@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Calls;
 
+use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams;
+use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
 use Telnyx\Calls\Actions\ActionAnswerParams;
 use Telnyx\Calls\Actions\ActionAnswerResponse;
 use Telnyx\Calls\Actions\ActionBridgeParams;
@@ -85,6 +87,23 @@ use Telnyx\RequestOptions;
  */
 interface ActionsRawContract
 {
+    /**
+     * @api
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array<string,mixed>|ActionAddAIAssistantMessagesParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionAddAIAssistantMessagesResponse>
+     *
+     * @throws APIException
+     */
+    public function addAIAssistantMessages(
+        string $callControlID,
+        array|ActionAddAIAssistantMessagesParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
     /**
      * @api
      *
