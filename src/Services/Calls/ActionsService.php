@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Calls;
 
 use Telnyx\AI\Assistants\Assistant;
+use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
@@ -105,6 +106,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Calls\ActionsContract;
 
 /**
+ * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
  * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
@@ -118,10 +120,10 @@ use Telnyx\ServiceContracts\Calls\ActionsContract;
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  * @phpstan-import-type TranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
- * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
  */
@@ -138,6 +140,40 @@ final class ActionsService implements ActionsContract
     public function __construct(private Client $client)
     {
         $this->raw = new ActionsRawService($client);
+    }
+
+    /**
+     * @api
+     *
+     * Add messages to the conversation started by an AI assistant on the call.
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+     * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param list<MessageShape> $messages the messages to add to the conversation
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function addAIAssistantMessages(
+        string $callControlID,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?array $messages = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionAddAIAssistantMessagesResponse {
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'messages' => $messages,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->addAIAssistantMessages($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
