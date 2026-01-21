@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\WebhookTool\Type;
+use Telnyx\AI\Assistants\WebhookTool\Webhook;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type InferenceEmbeddingWebhookToolParamsShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams
+ * @phpstan-import-type WebhookShape from \Telnyx\AI\Assistants\WebhookTool\Webhook
  *
  * @phpstan-type WebhookToolShape = array{
- *   type: Type|value-of<Type>,
- *   webhook: InferenceEmbeddingWebhookToolParams|InferenceEmbeddingWebhookToolParamsShape,
+ *   type: Type|value-of<Type>, webhook: Webhook|WebhookShape
  * }
  */
 final class WebhookTool implements BaseModel
@@ -27,7 +27,7 @@ final class WebhookTool implements BaseModel
     public string $type;
 
     #[Required]
-    public InferenceEmbeddingWebhookToolParams $webhook;
+    public Webhook $webhook;
 
     /**
      * `new WebhookTool()` is missing required properties by the API.
@@ -54,12 +54,10 @@ final class WebhookTool implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Type|value-of<Type> $type
-     * @param InferenceEmbeddingWebhookToolParams|InferenceEmbeddingWebhookToolParamsShape $webhook
+     * @param Webhook|WebhookShape $webhook
      */
-    public static function with(
-        Type|string $type,
-        InferenceEmbeddingWebhookToolParams|array $webhook
-    ): self {
+    public static function with(Type|string $type, Webhook|array $webhook): self
+    {
         $self = new self;
 
         $self['type'] = $type;
@@ -80,11 +78,10 @@ final class WebhookTool implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingWebhookToolParams|InferenceEmbeddingWebhookToolParamsShape $webhook
+     * @param Webhook|WebhookShape $webhook
      */
-    public function withWebhook(
-        InferenceEmbeddingWebhookToolParams|array $webhook
-    ): self {
+    public function withWebhook(Webhook|array $webhook): self
+    {
         $self = clone $this;
         $self['webhook'] = $webhook;
 

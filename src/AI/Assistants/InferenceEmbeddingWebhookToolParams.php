@@ -4,33 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\BodyParameters;
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Header;
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Method;
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\PathParameters;
-use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\QueryParameters;
-use Telnyx\Core\Attributes\Optional;
+use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Type;
+use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type BodyParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\BodyParameters
- * @phpstan-import-type HeaderShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Header
- * @phpstan-import-type PathParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\PathParameters
- * @phpstan-import-type QueryParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\QueryParameters
+ * @phpstan-import-type WebhookShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook
  *
  * @phpstan-type InferenceEmbeddingWebhookToolParamsShape = array{
- *   description: string,
- *   name: string,
- *   url: string,
- *   async?: bool|null,
- *   bodyParameters?: null|BodyParameters|BodyParametersShape,
- *   headers?: list<Header|HeaderShape>|null,
- *   method?: null|Method|value-of<Method>,
- *   pathParameters?: null|PathParameters|PathParametersShape,
- *   queryParameters?: null|QueryParameters|QueryParametersShape,
- *   timeoutMs?: int|null,
+ *   type: Type|value-of<Type>, webhook: Webhook|WebhookShape
  * }
  */
 final class InferenceEmbeddingWebhookToolParams implements BaseModel
@@ -38,85 +22,25 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
     /** @use SdkModel<InferenceEmbeddingWebhookToolParamsShape> */
     use SdkModel;
 
-    /**
-     * The description of the tool.
-     */
+    /** @var value-of<Type> $type */
+    #[Required(enum: Type::class)]
+    public string $type;
+
     #[Required]
-    public string $description;
-
-    /**
-     * The name of the tool.
-     */
-    #[Required]
-    public string $name;
-
-    /**
-     * The URL of the external tool to be called. This URL is going to be used by the assistant. The URL can be templated like: `https://example.com/api/v1/{id}`, where `{id}` is a placeholder for a value that will be provided by the assistant if `path_parameters` are provided with the `id` attribute.
-     */
-    #[Required]
-    public string $url;
-
-    /**
-     * If async, the assistant will move forward without waiting for your server to respond.
-     */
-    #[Optional]
-    public ?bool $async;
-
-    /**
-     * The body parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the body of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
-     */
-    #[Optional('body_parameters')]
-    public ?BodyParameters $bodyParameters;
-
-    /**
-     * The headers to be sent to the external tool.
-     *
-     * @var list<Header>|null $headers
-     */
-    #[Optional(list: Header::class)]
-    public ?array $headers;
-
-    /**
-     * The HTTP method to be used when calling the external tool.
-     *
-     * @var value-of<Method>|null $method
-     */
-    #[Optional(enum: Method::class)]
-    public ?string $method;
-
-    /**
-     * The path parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the path of the request if the URL contains a placeholder for a value. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
-     */
-    #[Optional('path_parameters')]
-    public ?PathParameters $pathParameters;
-
-    /**
-     * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
-     */
-    #[Optional('query_parameters')]
-    public ?QueryParameters $queryParameters;
-
-    /**
-     * The maximum number of milliseconds to wait for the webhook to respond. Only applicable when async is false.
-     */
-    #[Optional('timeout_ms')]
-    public ?int $timeoutMs;
+    public Webhook $webhook;
 
     /**
      * `new InferenceEmbeddingWebhookToolParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * InferenceEmbeddingWebhookToolParams::with(description: ..., name: ..., url: ...)
+     * InferenceEmbeddingWebhookToolParams::with(type: ..., webhook: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new InferenceEmbeddingWebhookToolParams)
-     *   ->withDescription(...)
-     *   ->withName(...)
-     *   ->withURL(...)
+     * (new InferenceEmbeddingWebhookToolParams)->withType(...)->withWebhook(...)
      * ```
      */
     public function __construct()
@@ -129,160 +53,37 @@ final class InferenceEmbeddingWebhookToolParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BodyParameters|BodyParametersShape|null $bodyParameters
-     * @param list<Header|HeaderShape>|null $headers
-     * @param Method|value-of<Method>|null $method
-     * @param PathParameters|PathParametersShape|null $pathParameters
-     * @param QueryParameters|QueryParametersShape|null $queryParameters
+     * @param Type|value-of<Type> $type
+     * @param Webhook|WebhookShape $webhook
      */
-    public static function with(
-        string $description,
-        string $name,
-        string $url,
-        ?bool $async = null,
-        BodyParameters|array|null $bodyParameters = null,
-        ?array $headers = null,
-        Method|string|null $method = null,
-        PathParameters|array|null $pathParameters = null,
-        QueryParameters|array|null $queryParameters = null,
-        ?int $timeoutMs = null,
-    ): self {
+    public static function with(Type|string $type, Webhook|array $webhook): self
+    {
         $self = new self;
 
-        $self['description'] = $description;
-        $self['name'] = $name;
-        $self['url'] = $url;
-
-        null !== $async && $self['async'] = $async;
-        null !== $bodyParameters && $self['bodyParameters'] = $bodyParameters;
-        null !== $headers && $self['headers'] = $headers;
-        null !== $method && $self['method'] = $method;
-        null !== $pathParameters && $self['pathParameters'] = $pathParameters;
-        null !== $queryParameters && $self['queryParameters'] = $queryParameters;
-        null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
+        $self['type'] = $type;
+        $self['webhook'] = $webhook;
 
         return $self;
     }
 
     /**
-     * The description of the tool.
+     * @param Type|value-of<Type> $type
      */
-    public function withDescription(string $description): self
+    public function withType(Type|string $type): self
     {
         $self = clone $this;
-        $self['description'] = $description;
+        $self['type'] = $type;
 
         return $self;
     }
 
     /**
-     * The name of the tool.
+     * @param Webhook|WebhookShape $webhook
      */
-    public function withName(string $name): self
+    public function withWebhook(Webhook|array $webhook): self
     {
         $self = clone $this;
-        $self['name'] = $name;
-
-        return $self;
-    }
-
-    /**
-     * The URL of the external tool to be called. This URL is going to be used by the assistant. The URL can be templated like: `https://example.com/api/v1/{id}`, where `{id}` is a placeholder for a value that will be provided by the assistant if `path_parameters` are provided with the `id` attribute.
-     */
-    public function withURL(string $url): self
-    {
-        $self = clone $this;
-        $self['url'] = $url;
-
-        return $self;
-    }
-
-    /**
-     * If async, the assistant will move forward without waiting for your server to respond.
-     */
-    public function withAsync(bool $async): self
-    {
-        $self = clone $this;
-        $self['async'] = $async;
-
-        return $self;
-    }
-
-    /**
-     * The body parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the body of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
-     *
-     * @param BodyParameters|BodyParametersShape $bodyParameters
-     */
-    public function withBodyParameters(
-        BodyParameters|array $bodyParameters
-    ): self {
-        $self = clone $this;
-        $self['bodyParameters'] = $bodyParameters;
-
-        return $self;
-    }
-
-    /**
-     * The headers to be sent to the external tool.
-     *
-     * @param list<Header|HeaderShape> $headers
-     */
-    public function withHeaders(array $headers): self
-    {
-        $self = clone $this;
-        $self['headers'] = $headers;
-
-        return $self;
-    }
-
-    /**
-     * The HTTP method to be used when calling the external tool.
-     *
-     * @param Method|value-of<Method> $method
-     */
-    public function withMethod(Method|string $method): self
-    {
-        $self = clone $this;
-        $self['method'] = $method;
-
-        return $self;
-    }
-
-    /**
-     * The path parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the path of the request if the URL contains a placeholder for a value. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
-     *
-     * @param PathParameters|PathParametersShape $pathParameters
-     */
-    public function withPathParameters(
-        PathParameters|array $pathParameters
-    ): self {
-        $self = clone $this;
-        $self['pathParameters'] = $pathParameters;
-
-        return $self;
-    }
-
-    /**
-     * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
-     *
-     * @param QueryParameters|QueryParametersShape $queryParameters
-     */
-    public function withQueryParameters(
-        QueryParameters|array $queryParameters
-    ): self {
-        $self = clone $this;
-        $self['queryParameters'] = $queryParameters;
-
-        return $self;
-    }
-
-    /**
-     * The maximum number of milliseconds to wait for the webhook to respond. Only applicable when async is false.
-     */
-    public function withTimeoutMs(int $timeoutMs): self
-    {
-        $self = clone $this;
-        $self['timeoutMs'] = $timeoutMs;
+        $self['webhook'] = $webhook;
 
         return $self;
     }

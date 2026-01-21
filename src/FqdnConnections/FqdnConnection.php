@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\FqdnConnections;
 
+use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -13,11 +14,10 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\FqdnConnections\FqdnConnection\NoiseSuppression;
-use Telnyx\FqdnConnections\FqdnConnection\NoiseSuppressionDetails;
 
 /**
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
- * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\FqdnConnections\FqdnConnection\NoiseSuppressionDetails
+ * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  *
@@ -39,7 +39,7 @@ use Telnyx\FqdnConnections\FqdnConnection\NoiseSuppressionDetails;
  *   inbound?: null|InboundFqdn|InboundFqdnShape,
  *   microsoftTeamsSbc?: bool|null,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
- *   noiseSuppressionDetails?: null|NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
+ *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: null|OutboundFqdn|OutboundFqdnShape,
  *   password?: string|null,
@@ -177,7 +177,7 @@ final class FqdnConnection implements BaseModel
      * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      */
     #[Optional('noise_suppression_details')]
-    public ?NoiseSuppressionDetails $noiseSuppressionDetails;
+    public ?ConnectionNoiseSuppressionDetails $noiseSuppressionDetails;
 
     /**
      * Enable on-net T38 if you prefer that the sender and receiver negotiate T38 directly when both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call according to each leg's settings.
@@ -322,7 +322,7 @@ final class FqdnConnection implements BaseModel
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundFqdn|InboundFqdnShape|null $inbound
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
-     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape|null $noiseSuppressionDetails
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param OutboundFqdn|OutboundFqdnShape|null $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
      * @param list<string>|null $tags
@@ -347,7 +347,7 @@ final class FqdnConnection implements BaseModel
         InboundFqdn|array|null $inbound = null,
         ?bool $microsoftTeamsSbc = null,
         NoiseSuppression|string|null $noiseSuppression = null,
-        NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
+        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
         OutboundFqdn|array|null $outbound = null,
         ?string $password = null,
@@ -615,10 +615,10 @@ final class FqdnConnection implements BaseModel
     /**
      * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      *
-     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape $noiseSuppressionDetails
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails
      */
     public function withNoiseSuppressionDetails(
-        NoiseSuppressionDetails|array $noiseSuppressionDetails
+        ConnectionNoiseSuppressionDetails|array $noiseSuppressionDetails
     ): self {
         $self = clone $this;
         $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;

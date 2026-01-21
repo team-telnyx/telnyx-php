@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Assistant;
 
 use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
+use Telnyx\AI\Assistants\Assistant\Tool\CallControlRetrievalTool;
 use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
 use Telnyx\AI\Assistants\HangupTool;
-use Telnyx\AI\Assistants\RetrievalTool;
 use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\WebhookTool;
 use Telnyx\Core\Concerns\SdkUnion;
@@ -20,10 +20,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type WebhookToolShape from \Telnyx\AI\Assistants\WebhookTool
  * @phpstan-import-type HangupToolShape from \Telnyx\AI\Assistants\HangupTool
  * @phpstan-import-type TransferToolShape from \Telnyx\AI\Assistants\TransferTool
- * @phpstan-import-type RetrievalToolShape from \Telnyx\AI\Assistants\RetrievalTool
+ * @phpstan-import-type CallControlRetrievalToolShape from \Telnyx\AI\Assistants\Assistant\Tool\CallControlRetrievalTool
  *
- * @phpstan-type ToolVariants = BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool
- * @phpstan-type ToolShape = ToolVariants|BookAppointmentToolShape|CheckAvailabilityToolShape|WebhookToolShape|HangupToolShape|TransferToolShape|RetrievalToolShape
+ * @phpstan-type ToolVariants = BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|CallControlRetrievalTool
+ * @phpstan-type ToolShape = ToolVariants|BookAppointmentToolShape|CheckAvailabilityToolShape|WebhookToolShape|HangupToolShape|TransferToolShape|CallControlRetrievalToolShape
  */
 final class Tool implements ConverterSource
 {
@@ -45,7 +45,7 @@ final class Tool implements ConverterSource
             'webhook' => WebhookTool::class,
             'hangup' => HangupTool::class,
             'transfer' => TransferTool::class,
-            'retrieval' => RetrievalTool::class,
+            'retrieval' => CallControlRetrievalTool::class,
         ];
     }
 }

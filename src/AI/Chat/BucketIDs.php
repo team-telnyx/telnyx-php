@@ -19,7 +19,11 @@ final class BucketIDs implements BaseModel
     /** @use SdkModel<BucketIDsShape> */
     use SdkModel;
 
-    /** @var list<string> $bucketIDs */
+    /**
+     * List of [embedded storage buckets](https://developers.telnyx.com/api-reference/embeddings/embed-documents) to use for retrieval-augmented generation.
+     *
+     * @var list<string> $bucketIDs
+     */
     #[Required('bucket_ids', list: 'string')]
     public array $bucketIDs;
 
@@ -69,6 +73,8 @@ final class BucketIDs implements BaseModel
     }
 
     /**
+     * List of [embedded storage buckets](https://developers.telnyx.com/api-reference/embeddings/embed-documents) to use for retrieval-augmented generation.
+     *
      * @param list<string> $bucketIDs
      */
     public function withBucketIDs(array $bucketIDs): self

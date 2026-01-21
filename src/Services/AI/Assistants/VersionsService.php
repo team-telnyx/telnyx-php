@@ -12,8 +12,8 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
+use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -28,7 +28,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
- * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\WidgetSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VersionsService implements VersionsContract
