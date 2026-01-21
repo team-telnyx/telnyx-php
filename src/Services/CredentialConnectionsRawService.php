@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -13,7 +14,6 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppression;
-use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
@@ -33,10 +33,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnectionsRawContract;
 
 /**
- * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails
- * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
  * @phpstan-import-type FilterShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Filter
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
+ * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -69,7 +68,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
-     *   noiseSuppressionDetails?: NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
+     *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: CredentialOutbound|CredentialOutboundShape,
      *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
@@ -149,7 +148,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
      *   noiseSuppression?: CredentialConnectionUpdateParams\NoiseSuppression|value-of<CredentialConnectionUpdateParams\NoiseSuppression>,
-     *   noiseSuppressionDetails?: CredentialConnectionUpdateParams\NoiseSuppressionDetails|NoiseSuppressionDetailsShape1,
+     *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: CredentialOutbound|CredentialOutboundShape,
      *   password?: string,

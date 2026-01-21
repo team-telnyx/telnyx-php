@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\CredentialConnections;
 
+use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppression;
-use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 
@@ -20,7 +20,7 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVers
  * @see Telnyx\Services\CredentialConnectionsService::create()
  *
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
- * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails
+ * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  *
@@ -39,7 +39,7 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVers
  *   inbound?: null|CredentialInbound|CredentialInboundShape,
  *   iosPushCredentialID?: string|null,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
- *   noiseSuppressionDetails?: null|NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
+ *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: null|CredentialOutbound|CredentialOutboundShape,
  *   rtcpSettings?: null|ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
@@ -150,7 +150,7 @@ final class CredentialConnectionCreateParams implements BaseModel
      * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      */
     #[Optional('noise_suppression_details')]
-    public ?NoiseSuppressionDetails $noiseSuppressionDetails;
+    public ?ConnectionNoiseSuppressionDetails $noiseSuppressionDetails;
 
     /**
      * Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
@@ -243,7 +243,7 @@ final class CredentialConnectionCreateParams implements BaseModel
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param CredentialInbound|CredentialInboundShape|null $inbound
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
-     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape|null $noiseSuppressionDetails
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param CredentialOutbound|CredentialOutboundShape|null $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
      * @param SipUriCallingPreference|value-of<SipUriCallingPreference>|null $sipUriCallingPreference
@@ -265,7 +265,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         CredentialInbound|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         NoiseSuppression|string|null $noiseSuppression = null,
-        NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
+        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
         CredentialOutbound|array|null $outbound = null,
         ConnectionRtcpSettings|array|null $rtcpSettings = null,
@@ -478,10 +478,10 @@ final class CredentialConnectionCreateParams implements BaseModel
     /**
      * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      *
-     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape $noiseSuppressionDetails
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails
      */
     public function withNoiseSuppressionDetails(
-        NoiseSuppressionDetails|array $noiseSuppressionDetails
+        ConnectionNoiseSuppressionDetails|array $noiseSuppressionDetails
     ): self {
         $self = clone $this;
         $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;

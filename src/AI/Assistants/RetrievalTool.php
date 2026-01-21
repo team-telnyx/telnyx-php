@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\RetrievalTool\Type;
+use Telnyx\AI\Chat\BucketIDs;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type InferenceEmbeddingBucketIDsShape from \Telnyx\AI\Assistants\InferenceEmbeddingBucketIDs
+ * @phpstan-import-type BucketIDsShape from \Telnyx\AI\Chat\BucketIDs
  *
  * @phpstan-type RetrievalToolShape = array{
- *   retrieval: InferenceEmbeddingBucketIDs|InferenceEmbeddingBucketIDsShape,
- *   type: Type|value-of<Type>,
+ *   retrieval: BucketIDs|BucketIDsShape, type: Type|value-of<Type>
  * }
  */
 final class RetrievalTool implements BaseModel
@@ -23,7 +23,7 @@ final class RetrievalTool implements BaseModel
     use SdkModel;
 
     #[Required]
-    public InferenceEmbeddingBucketIDs $retrieval;
+    public BucketIDs $retrieval;
 
     /** @var value-of<Type> $type */
     #[Required(enum: Type::class)]
@@ -53,11 +53,11 @@ final class RetrievalTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InferenceEmbeddingBucketIDs|InferenceEmbeddingBucketIDsShape $retrieval
+     * @param BucketIDs|BucketIDsShape $retrieval
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        InferenceEmbeddingBucketIDs|array $retrieval,
+        BucketIDs|array $retrieval,
         Type|string $type
     ): self {
         $self = new self;
@@ -69,11 +69,10 @@ final class RetrievalTool implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingBucketIDs|InferenceEmbeddingBucketIDsShape $retrieval
+     * @param BucketIDs|BucketIDsShape $retrieval
      */
-    public function withRetrieval(
-        InferenceEmbeddingBucketIDs|array $retrieval
-    ): self {
+    public function withRetrieval(BucketIDs|array $retrieval): self
+    {
         $self = clone $this;
         $self['retrieval'] = $retrieval;
 

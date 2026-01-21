@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 
-use Telnyx\AI\Assistants\InferenceEmbeddingBucketIDs;
+use Telnyx\AI\Chat\BucketIDs;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type InferenceEmbeddingBucketIDsShape from \Telnyx\AI\Assistants\InferenceEmbeddingBucketIDs
+ * @phpstan-import-type BucketIDsShape from \Telnyx\AI\Chat\BucketIDs
  *
  * @phpstan-type RetrievalShape = array{
- *   retrieval: InferenceEmbeddingBucketIDs|InferenceEmbeddingBucketIDsShape,
- *   type: 'retrieval',
+ *   retrieval: BucketIDs|BucketIDsShape, type: 'retrieval'
  * }
  */
 final class Retrieval implements BaseModel
@@ -27,7 +26,7 @@ final class Retrieval implements BaseModel
     public string $type = 'retrieval';
 
     #[Required]
-    public InferenceEmbeddingBucketIDs $retrieval;
+    public BucketIDs $retrieval;
 
     /**
      * `new Retrieval()` is missing required properties by the API.
@@ -53,11 +52,10 @@ final class Retrieval implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InferenceEmbeddingBucketIDs|InferenceEmbeddingBucketIDsShape $retrieval
+     * @param BucketIDs|BucketIDsShape $retrieval
      */
-    public static function with(
-        InferenceEmbeddingBucketIDs|array $retrieval
-    ): self {
+    public static function with(BucketIDs|array $retrieval): self
+    {
         $self = new self;
 
         $self['retrieval'] = $retrieval;
@@ -66,11 +64,10 @@ final class Retrieval implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingBucketIDs|InferenceEmbeddingBucketIDsShape $retrieval
+     * @param BucketIDs|BucketIDsShape $retrieval
      */
-    public function withRetrieval(
-        InferenceEmbeddingBucketIDs|array $retrieval
-    ): self {
+    public function withRetrieval(BucketIDs|array $retrieval): self
+    {
         $self = clone $this;
         $self['retrieval'] = $retrieval;
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Assistants\AssistantChatResponse;
-use Telnyx\AI\Assistants\AssistantCreateParams\WidgetSettings;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
@@ -18,6 +17,7 @@ use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
+use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -30,8 +30,6 @@ use Telnyx\Services\AI\Assistants\ToolsService;
 use Telnyx\Services\AI\Assistants\VersionsService;
 
 /**
- * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\WidgetSettings
- * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\WidgetSettings as WidgetSettingsShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
@@ -40,6 +38,7 @@ use Telnyx\Services\AI\Assistants\VersionsService;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class AssistantsService implements AssistantsContract
@@ -211,7 +210,7 @@ final class AssistantsService implements AssistantsContract
      * @param list<AssistantToolShape> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
      * @param VoiceSettings|VoiceSettingsShape $voiceSettings
-     * @param \Telnyx\AI\Assistants\AssistantUpdateParams\WidgetSettings|WidgetSettingsShape1 $widgetSettings configuration settings for the assistant's web widget
+     * @param WidgetSettings|WidgetSettingsShape $widgetSettings configuration settings for the assistant's web widget
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -235,7 +234,7 @@ final class AssistantsService implements AssistantsContract
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
-        \Telnyx\AI\Assistants\AssistantUpdateParams\WidgetSettings|array|null $widgetSettings = null,
+        WidgetSettings|array|null $widgetSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
         $params = Util::removeNulls(

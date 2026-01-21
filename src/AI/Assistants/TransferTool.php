@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\TransferTool\Transfer;
 use Telnyx\AI\Assistants\TransferTool\Type;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type InferenceEmbeddingTransferToolParamsShape from \Telnyx\AI\Assistants\InferenceEmbeddingTransferToolParams
+ * @phpstan-import-type TransferShape from \Telnyx\AI\Assistants\TransferTool\Transfer
  *
  * @phpstan-type TransferToolShape = array{
- *   transfer: InferenceEmbeddingTransferToolParams|InferenceEmbeddingTransferToolParamsShape,
- *   type: Type|value-of<Type>,
+ *   transfer: Transfer|TransferShape, type: Type|value-of<Type>
  * }
  */
 final class TransferTool implements BaseModel
@@ -23,7 +23,7 @@ final class TransferTool implements BaseModel
     use SdkModel;
 
     #[Required]
-    public InferenceEmbeddingTransferToolParams $transfer;
+    public Transfer $transfer;
 
     /** @var value-of<Type> $type */
     #[Required(enum: Type::class)]
@@ -53,11 +53,11 @@ final class TransferTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InferenceEmbeddingTransferToolParams|InferenceEmbeddingTransferToolParamsShape $transfer
+     * @param Transfer|TransferShape $transfer
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        InferenceEmbeddingTransferToolParams|array $transfer,
+        Transfer|array $transfer,
         Type|string $type
     ): self {
         $self = new self;
@@ -69,11 +69,10 @@ final class TransferTool implements BaseModel
     }
 
     /**
-     * @param InferenceEmbeddingTransferToolParams|InferenceEmbeddingTransferToolParamsShape $transfer
+     * @param Transfer|TransferShape $transfer
      */
-    public function withTransfer(
-        InferenceEmbeddingTransferToolParams|array $transfer
-    ): self {
+    public function withTransfer(Transfer|array $transfer): self
+    {
         $self = clone $this;
         $self['transfer'] = $transfer;
 
