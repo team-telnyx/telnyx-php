@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\Versions\UpdateAssistant\WidgetSettings;
+namespace Telnyx\AI\Assistants\WidgetSettings;
 
 /**
  * The positioning style for the widget.

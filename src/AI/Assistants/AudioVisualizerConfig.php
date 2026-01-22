@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantCreateParams\WidgetSettings;
+namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantCreateParams\WidgetSettings\AudioVisualizerConfig\Color;
+use Telnyx\AI\Assistants\AudioVisualizerConfig\Color;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;

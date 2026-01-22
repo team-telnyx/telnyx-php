@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -15,7 +16,6 @@ use Telnyx\DefaultPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
-use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppressionDetails;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams;
@@ -33,11 +33,10 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FqdnConnectionsRawContract;
 
 /**
- * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppressionDetails
- * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
  * @phpstan-import-type FilterShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Filter
  * @phpstan-import-type PageShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Page
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
+ * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -69,7 +68,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   iosPushCredentialID?: string|null,
      *   microsoftTeamsSbc?: bool,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
-     *   noiseSuppressionDetails?: NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
+     *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: OutboundFqdn|OutboundFqdnShape,
      *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
@@ -149,7 +148,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   inbound?: InboundFqdn|InboundFqdnShape,
      *   iosPushCredentialID?: string|null,
      *   noiseSuppression?: FqdnConnectionUpdateParams\NoiseSuppression|value-of<FqdnConnectionUpdateParams\NoiseSuppression>,
-     *   noiseSuppressionDetails?: FqdnConnectionUpdateParams\NoiseSuppressionDetails|NoiseSuppressionDetailsShape1,
+     *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: OutboundFqdn|OutboundFqdnShape,
      *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,

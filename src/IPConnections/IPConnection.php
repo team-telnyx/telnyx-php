@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections;
 
+use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,13 +13,12 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\IPConnections\IPConnection\NoiseSuppression;
-use Telnyx\IPConnections\IPConnection\NoiseSuppressionDetails;
 use Telnyx\IPConnections\IPConnection\TransportProtocol;
 use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
 
 /**
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
- * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\IPConnections\IPConnection\NoiseSuppressionDetails
+ * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  *
@@ -35,7 +35,7 @@ use Telnyx\IPConnections\IPConnection\WebhookAPIVersion;
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   inbound?: null|InboundIP|InboundIPShape,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
- *   noiseSuppressionDetails?: null|NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
+ *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: null|OutboundIP|OutboundIPShape,
  *   recordType?: string|null,
@@ -132,7 +132,7 @@ final class IPConnection implements BaseModel
      * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      */
     #[Optional('noise_suppression_details')]
-    public ?NoiseSuppressionDetails $noiseSuppressionDetails;
+    public ?ConnectionNoiseSuppressionDetails $noiseSuppressionDetails;
 
     /**
      * Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
@@ -215,7 +215,7 @@ final class IPConnection implements BaseModel
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundIP|InboundIPShape|null $inbound
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
-     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape|null $noiseSuppressionDetails
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param OutboundIP|OutboundIPShape|null $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
      * @param list<string>|null $tags
@@ -235,7 +235,7 @@ final class IPConnection implements BaseModel
         EncryptedMedia|string|null $encryptedMedia = null,
         InboundIP|array|null $inbound = null,
         NoiseSuppression|string|null $noiseSuppression = null,
-        NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
+        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
         OutboundIP|array|null $outbound = null,
         ?string $recordType = null,
@@ -423,10 +423,10 @@ final class IPConnection implements BaseModel
     /**
      * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      *
-     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape $noiseSuppressionDetails
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails
      */
     public function withNoiseSuppressionDetails(
-        NoiseSuppressionDetails|array $noiseSuppressionDetails
+        ConnectionNoiseSuppressionDetails|array $noiseSuppressionDetails
     ): self {
         $self = clone $this;
         $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;

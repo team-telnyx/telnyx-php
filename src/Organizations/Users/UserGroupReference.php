@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Organizations\Users\UserGetGroupsReportResponse\Data;
+namespace Telnyx\Organizations\Users;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A reference to a group that a user belongs to.
  *
- * @phpstan-type GroupShape = array{id: string, name: string}
+ * @phpstan-type UserGroupReferenceShape = array{id: string, name: string}
  */
-final class Group implements BaseModel
+final class UserGroupReference implements BaseModel
 {
-    /** @use SdkModel<GroupShape> */
+    /** @use SdkModel<UserGroupReferenceShape> */
     use SdkModel;
 
     /**
@@ -31,17 +31,17 @@ final class Group implements BaseModel
     public string $name;
 
     /**
-     * `new Group()` is missing required properties by the API.
+     * `new UserGroupReference()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Group::with(id: ..., name: ...)
+     * UserGroupReference::with(id: ..., name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Group)->withID(...)->withName(...)
+     * (new UserGroupReference)->withID(...)->withName(...)
      * ```
      */
     public function __construct()

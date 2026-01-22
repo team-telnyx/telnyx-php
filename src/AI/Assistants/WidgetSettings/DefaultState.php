@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantCreateParams\WidgetSettings;
+namespace Telnyx\AI\Assistants\WidgetSettings;
 
 /**
  * The default state of the widget.

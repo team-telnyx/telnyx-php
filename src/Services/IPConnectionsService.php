@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -16,7 +17,6 @@ use Telnyx\IPConnections\InboundIP;
 use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
 use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
-use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppressionDetails;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
@@ -32,11 +32,10 @@ use Telnyx\ServiceContracts\IPConnectionsContract;
 
 /**
  * @phpstan-import-type InboundShape from \Telnyx\IPConnections\IPConnectionCreateParams\Inbound
- * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppressionDetails
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
- * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
  * @phpstan-import-type FilterShape from \Telnyx\IPConnections\IPConnectionListParams\Filter
  * @phpstan-import-type PageShape from \Telnyx\IPConnections\IPConnectionListParams\Page
+ * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -72,7 +71,7 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param Inbound|InboundShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
-     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      * @param OutboundIP|OutboundIPShape $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
@@ -99,7 +98,7 @@ final class IPConnectionsService implements IPConnectionsContract
         Inbound|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         NoiseSuppression|string|null $noiseSuppression = null,
-        NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
+        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         OutboundIP|array|null $outbound = null,
         ConnectionRtcpSettings|array|null $rtcpSettings = null,
@@ -181,7 +180,7 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param InboundIP|InboundIPShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression|value-of<\Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
-     * @param \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppressionDetails|NoiseSuppressionDetailsShape1 $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      * @param OutboundIP|OutboundIPShape $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
@@ -209,7 +208,7 @@ final class IPConnectionsService implements IPConnectionsContract
         InboundIP|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression|string|null $noiseSuppression = null,
-        \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
+        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         OutboundIP|array|null $outbound = null,
         ConnectionRtcpSettings|array|null $rtcpSettings = null,

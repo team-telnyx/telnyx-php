@@ -11,8 +11,8 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\Versions\UpdateAssistant\WidgetSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
+use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -26,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
- * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\Versions\UpdateAssistant\WidgetSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  *
  * @phpstan-type UpdateAssistantShape = array{
  *   description?: string|null,
