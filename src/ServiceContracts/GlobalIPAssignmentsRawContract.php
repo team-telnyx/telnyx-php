@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
@@ -72,7 +72,7 @@ interface GlobalIPAssignmentsRawContract
      * @param array<string,mixed>|GlobalIPAssignmentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<GlobalIPAssignment>>
+     * @return BaseResponse<DefaultPagination<GlobalIPAssignment>>
      *
      * @throws APIException
      */

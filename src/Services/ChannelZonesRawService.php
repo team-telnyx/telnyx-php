@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\ChannelZones\ChannelZoneListParams;
+use Telnyx\ChannelZones\ChannelZoneListParams\Page;
 use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateParams;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChannelZonesRawContract;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\ChannelZones\ChannelZoneListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ChannelZonesRawService implements ChannelZonesRawContract
@@ -65,10 +66,10 @@ final class ChannelZonesRawService implements ChannelZonesRawContract
      *
      * Returns the non-US voice channels for your account. voice channels allow you to use Channel Billing for calls to your Telnyx phone numbers. Please check the <a href="https://support.telnyx.com/en/articles/8428806-global-channel-billing">Telnyx Support Articles</a> section for full information and examples of how to utilize Channel Billing.
      *
-     * @param array{pageNumber?: int, pageSize?: int}|ChannelZoneListParams $params
+     * @param array{page?: Page|PageShape}|ChannelZoneListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ChannelZoneListResponse>>
+     * @return BaseResponse<DefaultPagination<ChannelZoneListResponse>>
      *
      * @throws APIException
      */
@@ -85,13 +86,10 @@ final class ChannelZonesRawService implements ChannelZonesRawContract
         return $this->client->request(
             method: 'get',
             path: 'channel_zones',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: ChannelZoneListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

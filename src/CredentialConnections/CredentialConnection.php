@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\CredentialConnections;
 
-use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\CredentialConnection\NoiseSuppression;
+use Telnyx\CredentialConnections\CredentialConnection\NoiseSuppressionDetails;
 use Telnyx\CredentialConnections\CredentialConnection\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
 
 /**
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
- * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnection\NoiseSuppressionDetails
  * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  *
@@ -31,7 +31,7 @@ use Telnyx\CredentialConnections\CredentialConnection\WebhookAPIVersion;
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   inbound?: null|CredentialInbound|CredentialInboundShape,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
- *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
+ *   noiseSuppressionDetails?: null|NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: null|CredentialOutbound|CredentialOutboundShape,
  *   password?: string|null,
@@ -130,7 +130,7 @@ final class CredentialConnection implements BaseModel
      * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      */
     #[Optional('noise_suppression_details')]
-    public ?ConnectionNoiseSuppressionDetails $noiseSuppressionDetails;
+    public ?NoiseSuppressionDetails $noiseSuppressionDetails;
 
     /**
      * Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
@@ -228,7 +228,7 @@ final class CredentialConnection implements BaseModel
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param CredentialInbound|CredentialInboundShape|null $inbound
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
-     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
+     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param CredentialOutbound|CredentialOutboundShape|null $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
      * @param SipUriCallingPreference|value-of<SipUriCallingPreference>|null $sipUriCallingPreference
@@ -248,7 +248,7 @@ final class CredentialConnection implements BaseModel
         EncryptedMedia|string|null $encryptedMedia = null,
         CredentialInbound|array|null $inbound = null,
         NoiseSuppression|string|null $noiseSuppression = null,
-        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
+        NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
         CredentialOutbound|array|null $outbound = null,
         ?string $password = null,
@@ -440,10 +440,10 @@ final class CredentialConnection implements BaseModel
     /**
      * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      *
-     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails
+     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape $noiseSuppressionDetails
      */
     public function withNoiseSuppressionDetails(
-        ConnectionNoiseSuppressionDetails|array $noiseSuppressionDetails
+        NoiseSuppressionDetails|array $noiseSuppressionDetails
     ): self {
         $self = clone $this;
         $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;

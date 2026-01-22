@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
@@ -44,7 +44,7 @@ interface AssociatedPhoneNumbersRawContract
      * @param array<string,mixed>|AssociatedPhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingAssociatedPhoneNumber>>
+     * @return BaseResponse<DefaultPagination<PortingAssociatedPhoneNumber>>
      *
      * @throws APIException
      */

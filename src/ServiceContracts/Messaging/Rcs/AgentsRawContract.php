@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Messaging\Rcs;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
 use Telnyx\Messaging\Rcs\Agents\AgentUpdateParams;
 use Telnyx\RcsAgents\RcsAgent;
@@ -56,7 +56,7 @@ interface AgentsRawContract
      * @param array<string,mixed>|AgentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RcsAgent>>
+     * @return BaseResponse<DefaultPagination<RcsAgent>>
      *
      * @throws APIException
      */

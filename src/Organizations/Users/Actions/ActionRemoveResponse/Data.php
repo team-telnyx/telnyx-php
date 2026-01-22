@@ -7,17 +7,17 @@ namespace Telnyx\Organizations\Users\Actions\ActionRemoveResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Organizations\Users\Actions\ActionRemoveResponse\Data\Group;
 use Telnyx\Organizations\Users\Actions\ActionRemoveResponse\Data\UserStatus;
-use Telnyx\Organizations\Users\UserGroupReference;
 
 /**
- * @phpstan-import-type UserGroupReferenceShape from \Telnyx\Organizations\Users\UserGroupReference
+ * @phpstan-import-type GroupShape from \Telnyx\Organizations\Users\Actions\ActionRemoveResponse\Data\Group
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
  *   email?: string|null,
- *   groups?: list<UserGroupReference|UserGroupReferenceShape>|null,
+ *   groups?: list<Group|GroupShape>|null,
  *   lastSignInAt?: string|null,
  *   organizationUserBypassesSSO?: bool|null,
  *   recordType?: string|null,
@@ -50,9 +50,9 @@ final class Data implements BaseModel
     /**
      * The groups the user belongs to. Only included when include_groups parameter is true.
      *
-     * @var list<UserGroupReference>|null $groups
+     * @var list<Group>|null $groups
      */
-    #[Optional(list: UserGroupReference::class)]
+    #[Optional(list: Group::class)]
     public ?array $groups;
 
     /**
@@ -91,7 +91,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserGroupReference|UserGroupReferenceShape>|null $groups
+     * @param list<Group|GroupShape>|null $groups
      * @param UserStatus|value-of<UserStatus>|null $userStatus
      */
     public static function with(
@@ -154,7 +154,7 @@ final class Data implements BaseModel
     /**
      * The groups the user belongs to. Only included when include_groups parameter is true.
      *
-     * @param list<UserGroupReference|UserGroupReferenceShape> $groups
+     * @param list<Group|GroupShape> $groups
      */
     public function withGroups(array $groups): self
     {

@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
+use Telnyx\MessagingProfiles\MessagingProfileListParams\Page;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
@@ -21,6 +22,9 @@ use Telnyx\ShortCode;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Page
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page as PageShape1
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page as PageShape2
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -152,18 +156,18 @@ interface MessagingProfilesContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<MessagingProfile>
+     * @return DefaultPagination<MessagingProfile>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): DefaultPagination;
 
     /**
      * @api
@@ -182,33 +186,33 @@ interface MessagingProfilesContract
      * @api
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param \Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PhoneNumberWithMessagingSettings>
+     * @return DefaultPagination<PhoneNumberWithMessagingSettings>
      *
      * @throws APIException
      */
     public function listPhoneNumbers(
         string $messagingProfileID,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        \Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): DefaultPagination;
 
     /**
      * @api
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param \Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page|PageShape2 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<ShortCode>
+     * @return DefaultPagination<ShortCode>
      *
      * @throws APIException
      */
     public function listShortCodes(
         string $messagingProfileID,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        \Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): DefaultPagination;
 }

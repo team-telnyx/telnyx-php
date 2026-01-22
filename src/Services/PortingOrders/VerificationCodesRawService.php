@@ -7,10 +7,10 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
@@ -23,6 +23,7 @@ use Telnyx\ServiceContracts\PortingOrders\VerificationCodesRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort
  * @phpstan-import-type VerificationCodeShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -42,14 +43,11 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
      *
      * @param string $id Porting Order id
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|SortShape,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|VerificationCodeListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VerificationCodeListResponse>>
+     * @return BaseResponse<DefaultPagination<VerificationCodeListResponse>>
      *
      * @throws APIException
      */
@@ -67,13 +65,10 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/verification_codes', $id],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: VerificationCodeListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
@@ -55,7 +55,7 @@ interface CsvDownloadsRawContract
      * @param array<string,mixed>|CsvDownloadListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<CsvDownload>>
+     * @return BaseResponse<DefaultPagination<CsvDownload>>
      *
      * @throws APIException
      */

@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\IPs\IP;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
 use Telnyx\IPs\IPListParams\Filter;
+use Telnyx\IPs\IPListParams\Page;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\IPs\IPListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\IPs\IPListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface IPsContract
@@ -73,18 +75,18 @@ interface IPsContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<IP>
+     * @return DefaultPagination<IP>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): DefaultPagination;
 
     /**
      * @api

@@ -10,7 +10,7 @@ use Telnyx\ChannelZones\ChannelZoneUpdateParams;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -41,7 +41,7 @@ interface ChannelZonesRawContract
      * @param array<string,mixed>|ChannelZoneListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ChannelZoneListResponse>>
+     * @return BaseResponse<DefaultPagination<ChannelZoneListResponse>>
      *
      * @throws APIException
      */

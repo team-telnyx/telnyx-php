@@ -7,12 +7,12 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Page;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Sort;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse;
@@ -22,6 +22,7 @@ use Telnyx\ServiceContracts\PortingOrders\PhoneNumberConfigurationsRawContract;
 /**
  * @phpstan-import-type PhoneNumberConfigurationShape from \Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Sort
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -72,14 +73,11 @@ final class PhoneNumberConfigurationsRawService implements PhoneNumberConfigurat
      * Returns a list of phone number configurations paginated.
      *
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|SortShape,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|PhoneNumberConfigurationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberConfigurationListResponse,>,>
+     * @return BaseResponse<DefaultPagination<PhoneNumberConfigurationListResponse>>
      *
      * @throws APIException
      */
@@ -96,13 +94,10 @@ final class PhoneNumberConfigurationsRawService implements PhoneNumberConfigurat
         return $this->client->request(
             method: 'get',
             path: 'porting_orders/phone_number_configurations',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: PhoneNumberConfigurationListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

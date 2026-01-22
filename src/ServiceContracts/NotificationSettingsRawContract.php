@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\NotificationSettings\NotificationSetting;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
@@ -56,7 +56,7 @@ interface NotificationSettingsRawContract
      * @param array<string,mixed>|NotificationSettingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NotificationSetting>>
+     * @return BaseResponse<DefaultPagination<NotificationSetting>>
      *
      * @throws APIException
      */

@@ -7,16 +7,17 @@ namespace Telnyx\Organizations\Users;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Organizations\Users\UserListResponse\Group;
 use Telnyx\Organizations\Users\UserListResponse\UserStatus;
 
 /**
- * @phpstan-import-type UserGroupReferenceShape from \Telnyx\Organizations\Users\UserGroupReference
+ * @phpstan-import-type GroupShape from \Telnyx\Organizations\Users\UserListResponse\Group
  *
  * @phpstan-type UserListResponseShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
  *   email?: string|null,
- *   groups?: list<UserGroupReference|UserGroupReferenceShape>|null,
+ *   groups?: list<Group|GroupShape>|null,
  *   lastSignInAt?: string|null,
  *   organizationUserBypassesSSO?: bool|null,
  *   recordType?: string|null,
@@ -49,9 +50,9 @@ final class UserListResponse implements BaseModel
     /**
      * The groups the user belongs to. Only included when include_groups parameter is true.
      *
-     * @var list<UserGroupReference>|null $groups
+     * @var list<Group>|null $groups
      */
-    #[Optional(list: UserGroupReference::class)]
+    #[Optional(list: Group::class)]
     public ?array $groups;
 
     /**
@@ -90,7 +91,7 @@ final class UserListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserGroupReference|UserGroupReferenceShape>|null $groups
+     * @param list<Group|GroupShape>|null $groups
      * @param UserStatus|value-of<UserStatus>|null $userStatus
      */
     public static function with(
@@ -153,7 +154,7 @@ final class UserListResponse implements BaseModel
     /**
      * The groups the user belongs to. Only included when include_groups parameter is true.
      *
-     * @param list<UserGroupReference|UserGroupReferenceShape> $groups
+     * @param list<Group|GroupShape> $groups
      */
     public function withGroups(array $groups): self
     {

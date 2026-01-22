@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
@@ -68,7 +68,7 @@ final class PhoneNumbersTest extends TestCase
         $page = $this->client->phoneNumbers->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -99,7 +99,7 @@ final class PhoneNumbersTest extends TestCase
         $page = $this->client->phoneNumbers->slimList();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

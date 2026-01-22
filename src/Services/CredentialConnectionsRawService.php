@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppression;
+use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
 use Telnyx\CredentialConnections\CredentialConnectionListParams;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Filter;
+use Telnyx\CredentialConnections\CredentialConnectionListParams\Page;
 use Telnyx\CredentialConnections\CredentialConnectionListParams\Sort;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams;
@@ -28,14 +28,16 @@ use Telnyx\CredentialConnections\CredentialInbound;
 use Telnyx\CredentialConnections\CredentialOutbound;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnectionsRawContract;
 
 /**
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppressionDetails
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
  * @phpstan-import-type FilterShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Page
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
- * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -68,7 +70,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
-     *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
+     *   noiseSuppressionDetails?: NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: CredentialOutbound|CredentialOutboundShape,
      *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
@@ -148,7 +150,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
      *   noiseSuppression?: CredentialConnectionUpdateParams\NoiseSuppression|value-of<CredentialConnectionUpdateParams\NoiseSuppression>,
-     *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
+     *   noiseSuppressionDetails?: CredentialConnectionUpdateParams\NoiseSuppressionDetails|NoiseSuppressionDetailsShape1,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: CredentialOutbound|CredentialOutboundShape,
      *   password?: string,
@@ -193,14 +195,11 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      * Returns a list of your credential connections.
      *
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|value-of<Sort>,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|CredentialConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<CredentialConnection>>
+     * @return BaseResponse<DefaultPagination<CredentialConnection>>
      *
      * @throws APIException
      */
@@ -217,13 +216,10 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
         return $this->client->request(
             method: 'get',
             path: 'credential_connections',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: CredentialConnection::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

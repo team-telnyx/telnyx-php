@@ -8,7 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderCreateParams;
 use Telnyx\PortingOrders\PortingOrderDocuments;
@@ -20,6 +20,7 @@ use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter;
+use Telnyx\PortingOrders\PortingOrderListParams\Page;
 use Telnyx\PortingOrders\PortingOrderListParams\Sort;
 use Telnyx\PortingOrders\PortingOrderMisc;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
@@ -46,7 +47,9 @@ use Telnyx\ServiceContracts\PortingOrdersRawContract;
  * @phpstan-import-type RequirementShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement
  * @phpstan-import-type PortingOrderUserFeedbackShape from \Telnyx\PortingOrders\PortingOrderUserFeedback
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PortingOrderListParams\Sort
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page as PageShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PortingOrdersRawService implements PortingOrdersRawContract
@@ -186,13 +189,12 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      * @param array{
      *   filter?: Filter|FilterShape,
      *   includePhoneNumbers?: bool,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: Page|PageShape,
      *   sort?: Sort|SortShape,
      * }|PortingOrderListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingOrder>>
+     * @return BaseResponse<DefaultPagination<PortingOrder>>
      *
      * @throws APIException
      */
@@ -211,15 +213,11 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
             path: 'porting_orders',
             query: Util::array_transform_keys(
                 $parsed,
-                [
-                    'includePhoneNumbers' => 'include_phone_numbers',
-                    'pageNumber' => 'page[number]',
-                    'pageSize' => 'page[size]',
-                ],
+                ['includePhoneNumbers' => 'include_phone_numbers']
             ),
             options: $options,
             convert: PortingOrder::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -342,11 +340,11 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
      *
      * @param string $id Porting Order id
      * @param array{
-     *   pageNumber?: int, pageSize?: int
+     *   page?: PortingOrderRetrieveRequirementsParams\Page|PageShape1,
      * }|PortingOrderRetrieveRequirementsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingOrderGetRequirementsResponse>>
+     * @return BaseResponse<DefaultPagination<PortingOrderGetRequirementsResponse>>
      *
      * @throws APIException
      */
@@ -364,13 +362,10 @@ final class PortingOrdersRawService implements PortingOrdersRawContract
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/requirements', $id],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: PortingOrderGetRequirementsResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -6,16 +6,18 @@ namespace Telnyx\Services\BundlePricing;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Filter;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Page;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BillingBundlesService implements BillingBundlesContract
@@ -65,27 +67,24 @@ final class BillingBundlesService implements BillingBundlesContract
      * Get all allowed bundles.
      *
      * @param Filter|FilterShape $filter Query param: Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
-     * @param int $pageNumber Query param
-     * @param int $pageSize Query param
+     * @param Page|PageShape $page Query param: Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<BillingBundleSummary>
+     * @return DefaultPagination<BillingBundleSummary>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'page' => $page,
                 'authorizationBearer' => $authorizationBearer,
             ],
         );

@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
@@ -77,7 +77,7 @@ interface ManagedAccountsRawContract
      * @param array<string,mixed>|ManagedAccountListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ManagedAccountListResponse>>
+     * @return BaseResponse<DefaultPagination<ManagedAccountListResponse>>
      *
      * @throws APIException
      */

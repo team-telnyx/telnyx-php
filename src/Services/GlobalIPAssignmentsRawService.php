@@ -7,12 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
@@ -22,6 +22,7 @@ use Telnyx\ServiceContracts\GlobalIPAssignmentsRawContract;
 
 /**
  * @phpstan-import-type GlobalIPAssignmentUpdateRequestShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContract
@@ -120,12 +121,10 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
      *
      * List all Global IP assignments.
      *
-     * @param array{
-     *   pageNumber?: int, pageSize?: int
-     * }|GlobalIPAssignmentListParams $params
+     * @param array{page?: Page|PageShape}|GlobalIPAssignmentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<GlobalIPAssignment>>
+     * @return BaseResponse<DefaultPagination<GlobalIPAssignment>>
      *
      * @throws APIException
      */
@@ -142,13 +141,10 @@ final class GlobalIPAssignmentsRawService implements GlobalIPAssignmentsRawContr
         return $this->client->request(
             method: 'get',
             path: 'global_ip_assignments',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: GlobalIPAssignment::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

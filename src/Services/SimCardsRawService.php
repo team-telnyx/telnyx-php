@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardsRawContract;
 use Telnyx\SimCards\SimCardDeleteParams;
@@ -19,6 +20,7 @@ use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
 use Telnyx\SimCards\SimCardListParams;
 use Telnyx\SimCards\SimCardListParams\Filter;
+use Telnyx\SimCards\SimCardListParams\Page;
 use Telnyx\SimCards\SimCardListParams\Sort;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsParams;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
@@ -33,6 +35,7 @@ use Telnyx\SimpleSimCard;
  * @phpstan-import-type DataLimitShape from \Telnyx\SimCards\SimCardUpdateParams\DataLimit
  * @phpstan-import-type SimCardStatusShape from \Telnyx\SimCardStatus
  * @phpstan-import-type FilterShape from \Telnyx\SimCards\SimCardListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCards\SimCardListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SimCardsRawService implements SimCardsRawContract
@@ -132,13 +135,12 @@ final class SimCardsRawService implements SimCardsRawContract
      *   filter?: Filter|FilterShape,
      *   filterSimCardGroupID?: string,
      *   includeSimCardGroup?: bool,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: Page|PageShape,
      *   sort?: value-of<Sort>,
      * }|SimCardListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<SimpleSimCard>>
+     * @return BaseResponse<DefaultPagination<SimpleSimCard>>
      *
      * @throws APIException
      */
@@ -160,13 +162,11 @@ final class SimCardsRawService implements SimCardsRawContract
                 [
                     'filterSimCardGroupID' => 'filter[sim_card_group_id]',
                     'includeSimCardGroup' => 'include_sim_card_group',
-                    'pageNumber' => 'page[number]',
-                    'pageSize' => 'page[size]',
                 ],
             ),
             options: $options,
             convert: SimpleSimCard::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

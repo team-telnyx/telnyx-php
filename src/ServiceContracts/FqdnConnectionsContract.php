@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
+use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppressionDetails;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams\Filter;
+use Telnyx\FqdnConnections\FqdnConnectionListParams\Page;
 use Telnyx\FqdnConnections\FqdnConnectionListParams\Sort;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateResponse;
@@ -26,9 +27,11 @@ use Telnyx\FqdnConnections\WebhookAPIVersion;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppressionDetails
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
  * @phpstan-import-type FilterShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Page
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
- * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -51,7 +54,7 @@ interface FqdnConnectionsContract
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param bool $microsoftTeamsSbc When enabled, the connection will be created for Microsoft Teams Direct Routing. A *.mstsbc.telnyx.tech FQDN will be created for the connection automatically.
      * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
-     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     * @param NoiseSuppressionDetails|NoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      * @param OutboundFqdn|OutboundFqdnShape $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
@@ -79,7 +82,7 @@ interface FqdnConnectionsContract
         ?string $iosPushCredentialID = null,
         bool $microsoftTeamsSbc = false,
         NoiseSuppression|string|null $noiseSuppression = null,
-        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
+        NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         OutboundFqdn|array|null $outbound = null,
         ConnectionRtcpSettings|array|null $rtcpSettings = null,
@@ -121,7 +124,7 @@ interface FqdnConnectionsContract
      * @param InboundFqdn|InboundFqdnShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppression|value-of<\Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
-     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     * @param \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppressionDetails|NoiseSuppressionDetailsShape1 $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer that the sender and receiver negotiate T38 directly when both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call according to each leg's settings.
      * @param OutboundFqdn|OutboundFqdnShape $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
@@ -149,7 +152,7 @@ interface FqdnConnectionsContract
         InboundFqdn|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppression|string|null $noiseSuppression = null,
-        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
+        \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         OutboundFqdn|array|null $outbound = null,
         ConnectionRtcpSettings|array|null $rtcpSettings = null,
@@ -166,6 +169,7 @@ interface FqdnConnectionsContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -180,17 +184,16 @@ interface FqdnConnectionsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<FqdnConnection>
+     * @return DefaultPagination<FqdnConnection>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): DefaultPagination;
 
     /**
      * @api

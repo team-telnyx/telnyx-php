@@ -7,12 +7,13 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\MessagingHostedNumberOrder;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificationCodesParams\VerificationMethod;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderGetResponse;
+use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode;
@@ -22,6 +23,7 @@ use Telnyx\ServiceContracts\MessagingHostedNumberOrdersContract;
 use Telnyx\Services\MessagingHostedNumberOrders\ActionsService;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page
  * @phpstan-import-type VerificationCodeShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -100,20 +102,18 @@ final class MessagingHostedNumberOrdersService implements MessagingHostedNumberO
      *
      * List messaging hosted number orders
      *
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<MessagingHostedNumberOrder>
+     * @return DefaultPagination<MessagingHostedNumberOrder>
      *
      * @throws APIException
      */
     public function list(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination {
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

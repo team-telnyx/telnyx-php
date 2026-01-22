@@ -10,6 +10,7 @@ use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams\Filter;
+use Telnyx\Conferences\ConferenceListParams\Page;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -21,7 +22,9 @@ use Telnyx\Services\Conferences\ActionsService;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Page as PageShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ConferencesService implements ConferencesContract
@@ -143,6 +146,7 @@ final class ConferencesService implements ConferencesContract
      * Lists conferences. Conferences are created on demand, and will expire after all participants have left the conference or after 4 hours regardless of the number of active participants. Conferences are listed in descending order by `expires_at`.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param \Telnyx\Conferences\ConferenceListParams\Region|value-of<\Telnyx\Conferences\ConferenceListParams\Region> $region Region where the conference data is located
      * @param RequestOpts|null $requestOptions
      *
@@ -152,6 +156,7 @@ final class ConferencesService implements ConferencesContract
      */
     public function list(
         Filter|array|null $filter = null,
+        Page|array|null $page = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         \Telnyx\Conferences\ConferenceListParams\Region|string|null $region = null,
@@ -160,6 +165,7 @@ final class ConferencesService implements ConferencesContract
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
+                'page' => $page,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'region' => $region,
@@ -179,6 +185,7 @@ final class ConferencesService implements ConferencesContract
      *
      * @param string $conferenceID Uniquely identifies the conference by id
      * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
+     * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Region|value-of<\Telnyx\Conferences\ConferenceListParticipantsParams\Region> $region Region where the conference data is located
      * @param RequestOpts|null $requestOptions
      *
@@ -189,6 +196,7 @@ final class ConferencesService implements ConferencesContract
     public function listParticipants(
         string $conferenceID,
         \Telnyx\Conferences\ConferenceListParticipantsParams\Filter|array|null $filter = null,
+        \Telnyx\Conferences\ConferenceListParticipantsParams\Page|array|null $page = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         \Telnyx\Conferences\ConferenceListParticipantsParams\Region|string|null $region = null,
@@ -197,6 +205,7 @@ final class ConferencesService implements ConferencesContract
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
+                'page' => $page,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'region' => $region,

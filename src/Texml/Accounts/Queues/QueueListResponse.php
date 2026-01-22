@@ -7,17 +7,19 @@ namespace Telnyx\Texml\Accounts\Queues;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Texml\Accounts\Queues\QueueListResponse\Queue;
 
 /**
+ * @phpstan-import-type QueueShape from \Telnyx\Texml\Accounts\Queues\QueueListResponse\Queue
+ *
  * @phpstan-type QueueListResponseShape = array{
- *   accountSid?: string|null,
- *   averageWaitTime?: int|null,
- *   currentSize?: int|null,
- *   dateCreated?: string|null,
- *   dateUpdated?: string|null,
- *   maxSize?: int|null,
- *   sid?: string|null,
- *   subresourceUris?: array<string,mixed>|null,
+ *   end?: int|null,
+ *   firstPageUri?: string|null,
+ *   nextPageUri?: string|null,
+ *   page?: int|null,
+ *   pageSize?: int|null,
+ *   queues?: list<Queue|QueueShape>|null,
+ *   start?: int|null,
  *   uri?: string|null,
  * }
  */
@@ -27,57 +29,47 @@ final class QueueListResponse implements BaseModel
     use SdkModel;
 
     /**
-     * The id of the account the resource belongs to.
-     */
-    #[Optional('account_sid')]
-    public ?string $accountSid;
-
-    /**
-     * The average wait time in seconds for members in the queue.
-     */
-    #[Optional('average_wait_time')]
-    public ?int $averageWaitTime;
-
-    /**
-     * The current number of members in the queue.
-     */
-    #[Optional('current_size')]
-    public ?int $currentSize;
-
-    /**
-     * The timestamp of when the resource was created.
-     */
-    #[Optional('date_created')]
-    public ?string $dateCreated;
-
-    /**
-     * The timestamp of when the resource was last updated.
-     */
-    #[Optional('date_updated')]
-    public ?string $dateUpdated;
-
-    /**
-     * The maximum size of the queue.
-     */
-    #[Optional('max_size')]
-    public ?int $maxSize;
-
-    /**
-     * The unique identifier of the queue.
+     * The number of the last element on the page, zero-indexed.
      */
     #[Optional]
-    public ?string $sid;
+    public ?int $end;
 
     /**
-     * A list of related resources identified by their relative URIs.
-     *
-     * @var array<string,mixed>|null $subresourceUris
+     * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Queues.json?Page=0&PageSize=1.
      */
-    #[Optional('subresource_uris', map: 'mixed')]
-    public ?array $subresourceUris;
+    #[Optional('first_page_uri')]
+    public ?string $firstPageUri;
 
     /**
-     * The relative URI for this queue.
+     * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Queues.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
+     */
+    #[Optional('next_page_uri')]
+    public ?string $nextPageUri;
+
+    /**
+     * Current page number, zero-indexed.
+     */
+    #[Optional]
+    public ?int $page;
+
+    /**
+     * The number of items on the page.
+     */
+    #[Optional('page_size')]
+    public ?int $pageSize;
+
+    /** @var list<Queue>|null $queues */
+    #[Optional(list: Queue::class)]
+    public ?array $queues;
+
+    /**
+     * The number of the first element on the page, zero-indexed.
+     */
+    #[Optional]
+    public ?int $start;
+
+    /**
+     * The URI of the current page.
      */
     #[Optional]
     public ?string $uri;
@@ -92,126 +84,111 @@ final class QueueListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed>|null $subresourceUris
+     * @param list<Queue|QueueShape>|null $queues
      */
     public static function with(
-        ?string $accountSid = null,
-        ?int $averageWaitTime = null,
-        ?int $currentSize = null,
-        ?string $dateCreated = null,
-        ?string $dateUpdated = null,
-        ?int $maxSize = null,
-        ?string $sid = null,
-        ?array $subresourceUris = null,
+        ?int $end = null,
+        ?string $firstPageUri = null,
+        ?string $nextPageUri = null,
+        ?int $page = null,
+        ?int $pageSize = null,
+        ?array $queues = null,
+        ?int $start = null,
         ?string $uri = null,
     ): self {
         $self = new self;
 
-        null !== $accountSid && $self['accountSid'] = $accountSid;
-        null !== $averageWaitTime && $self['averageWaitTime'] = $averageWaitTime;
-        null !== $currentSize && $self['currentSize'] = $currentSize;
-        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
-        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
-        null !== $maxSize && $self['maxSize'] = $maxSize;
-        null !== $sid && $self['sid'] = $sid;
-        null !== $subresourceUris && $self['subresourceUris'] = $subresourceUris;
+        null !== $end && $self['end'] = $end;
+        null !== $firstPageUri && $self['firstPageUri'] = $firstPageUri;
+        null !== $nextPageUri && $self['nextPageUri'] = $nextPageUri;
+        null !== $page && $self['page'] = $page;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $queues && $self['queues'] = $queues;
+        null !== $start && $self['start'] = $start;
         null !== $uri && $self['uri'] = $uri;
 
         return $self;
     }
 
     /**
-     * The id of the account the resource belongs to.
+     * The number of the last element on the page, zero-indexed.
      */
-    public function withAccountSid(string $accountSid): self
+    public function withEnd(int $end): self
     {
         $self = clone $this;
-        $self['accountSid'] = $accountSid;
+        $self['end'] = $end;
 
         return $self;
     }
 
     /**
-     * The average wait time in seconds for members in the queue.
+     * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Queues.json?Page=0&PageSize=1.
      */
-    public function withAverageWaitTime(int $averageWaitTime): self
+    public function withFirstPageUri(string $firstPageUri): self
     {
         $self = clone $this;
-        $self['averageWaitTime'] = $averageWaitTime;
+        $self['firstPageUri'] = $firstPageUri;
 
         return $self;
     }
 
     /**
-     * The current number of members in the queue.
+     * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Queues.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
      */
-    public function withCurrentSize(int $currentSize): self
+    public function withNextPageUri(string $nextPageUri): self
     {
         $self = clone $this;
-        $self['currentSize'] = $currentSize;
+        $self['nextPageUri'] = $nextPageUri;
 
         return $self;
     }
 
     /**
-     * The timestamp of when the resource was created.
+     * Current page number, zero-indexed.
      */
-    public function withDateCreated(string $dateCreated): self
+    public function withPage(int $page): self
     {
         $self = clone $this;
-        $self['dateCreated'] = $dateCreated;
+        $self['page'] = $page;
 
         return $self;
     }
 
     /**
-     * The timestamp of when the resource was last updated.
+     * The number of items on the page.
      */
-    public function withDateUpdated(string $dateUpdated): self
+    public function withPageSize(int $pageSize): self
     {
         $self = clone $this;
-        $self['dateUpdated'] = $dateUpdated;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }
 
     /**
-     * The maximum size of the queue.
+     * @param list<Queue|QueueShape> $queues
      */
-    public function withMaxSize(int $maxSize): self
+    public function withQueues(array $queues): self
     {
         $self = clone $this;
-        $self['maxSize'] = $maxSize;
+        $self['queues'] = $queues;
 
         return $self;
     }
 
     /**
-     * The unique identifier of the queue.
+     * The number of the first element on the page, zero-indexed.
      */
-    public function withSid(string $sid): self
+    public function withStart(int $start): self
     {
         $self = clone $this;
-        $self['sid'] = $sid;
+        $self['start'] = $start;
 
         return $self;
     }
 
     /**
-     * A list of related resources identified by their relative URIs.
-     *
-     * @param array<string,mixed> $subresourceUris
-     */
-    public function withSubresourceUris(array $subresourceUris): self
-    {
-        $self = clone $this;
-        $self['subresourceUris'] = $subresourceUris;
-
-        return $self;
-    }
-
-    /**
-     * The relative URI for this queue.
+     * The URI of the current page.
      */
     public function withUri(string $uri): self
     {

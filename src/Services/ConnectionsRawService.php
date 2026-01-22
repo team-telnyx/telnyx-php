@@ -10,17 +10,21 @@ use Telnyx\Connections\ConnectionListActiveCallsParams;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams;
 use Telnyx\Connections\ConnectionListParams\Filter;
+use Telnyx\Connections\ConnectionListParams\Page;
 use Telnyx\Connections\ConnectionListParams\Sort;
 use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConnectionsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Connections\ConnectionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Connections\ConnectionListParams\Page
+ * @phpstan-import-type PageShape from \Telnyx\Connections\ConnectionListActiveCallsParams\Page as PageShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ConnectionsRawService implements ConnectionsRawContract
@@ -62,14 +66,11 @@ final class ConnectionsRawService implements ConnectionsRawContract
      * Returns a list of your connections irrespective of type.
      *
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|value-of<Sort>,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|ConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ConnectionListResponse>>
+     * @return BaseResponse<DefaultPagination<ConnectionListResponse>>
      *
      * @throws APIException
      */
@@ -86,13 +87,10 @@ final class ConnectionsRawService implements ConnectionsRawContract
         return $this->client->request(
             method: 'get',
             path: 'connections',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: ConnectionListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -103,7 +101,9 @@ final class ConnectionsRawService implements ConnectionsRawContract
      *
      * @param string $connectionID Telnyx connection id
      * @param array{
-     *   pageNumber?: int, pageSize?: int
+     *   page?: ConnectionListActiveCallsParams\Page|PageShape1,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|ConnectionListActiveCallsParams $params
      * @param RequestOpts|null $requestOptions
      *

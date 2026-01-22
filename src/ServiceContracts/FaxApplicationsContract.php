@@ -6,13 +6,14 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
 use Telnyx\FaxApplications\FaxApplicationListParams\Filter;
+use Telnyx\FaxApplications\FaxApplicationListParams\Page;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
@@ -24,6 +25,7 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type InboundShape from \Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound as InboundShape1
  * @phpstan-import-type OutboundShape from \Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound as OutboundShape1
  * @phpstan-import-type FilterShape from \Telnyx\FaxApplications\FaxApplicationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\FaxApplications\FaxApplicationListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface FaxApplicationsContract
@@ -107,6 +109,7 @@ interface FaxApplicationsContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -121,17 +124,16 @@ interface FaxApplicationsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<FaxApplication>
+     * @return DefaultPagination<FaxApplication>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): DefaultPagination;
 
     /**
      * @api

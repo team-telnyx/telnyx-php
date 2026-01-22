@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteParams;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
@@ -44,7 +44,7 @@ interface PhoneNumberBlocksRawContract
      * @param array<string,mixed>|PhoneNumberBlockListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingPhoneNumberBlock>>
+     * @return BaseResponse<DefaultPagination<PortingPhoneNumberBlock>>
      *
      * @throws APIException
      */

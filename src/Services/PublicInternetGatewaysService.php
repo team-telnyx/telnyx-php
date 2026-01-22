@@ -7,10 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
 use Telnyx\RequestOptions;
@@ -18,6 +19,7 @@ use Telnyx\ServiceContracts\PublicInternetGatewaysContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PublicInternetGatewaysService implements PublicInternetGatewaysContract
@@ -89,25 +91,19 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      * List all Public Internet Gateways.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PublicInternetGatewayListResponse>
+     * @return DefaultPagination<PublicInternetGatewayListResponse>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-            ],
-        );
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

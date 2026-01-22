@@ -7,12 +7,13 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams\Filter;
+use Telnyx\Documents\DocumentListParams\Page;
 use Telnyx\Documents\DocumentListParams\Sort;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonResponse;
@@ -23,6 +24,7 @@ use Telnyx\ServiceContracts\DocumentsContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Documents\DocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Documents\DocumentListParams\Page
  * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadParams\Document
  * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadJsonParams\Document as DocumentShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -96,27 +98,22 @@ final class DocumentsService implements DocumentsContract
      * List all documents ordered by created_at descending.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<DocServiceDocument>
+     * @return DefaultPagination<DocServiceDocument>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         ?array $sort = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): DefaultPagination {
         $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
-            ],
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
         // @phpstan-ignore-next-line argument.type

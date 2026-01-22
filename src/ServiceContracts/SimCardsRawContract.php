@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\SimCardDeleteParams;
 use Telnyx\SimCards\SimCardDeleteResponse;
@@ -67,7 +68,7 @@ interface SimCardsRawContract
      * @param array<string,mixed>|SimCardListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<SimpleSimCard>>
+     * @return BaseResponse<DefaultPagination<SimpleSimCard>>
      *
      * @throws APIException
      */

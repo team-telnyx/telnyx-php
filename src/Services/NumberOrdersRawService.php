@@ -7,14 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\NumberOrders\NumberOrderCreateParams;
 use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
 use Telnyx\NumberOrders\NumberOrderListParams;
 use Telnyx\NumberOrders\NumberOrderListParams\Filter;
+use Telnyx\NumberOrders\NumberOrderListParams\Page;
 use Telnyx\NumberOrders\NumberOrderListResponse;
 use Telnyx\NumberOrders\NumberOrderNewResponse;
 use Telnyx\NumberOrders\NumberOrderUpdateParams;
@@ -26,6 +26,7 @@ use Telnyx\ServiceContracts\NumberOrdersRawContract;
  * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber
  * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
  * @phpstan-import-type FilterShape from \Telnyx\NumberOrders\NumberOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberOrders\NumberOrderListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NumberOrdersRawService implements NumberOrdersRawContract
@@ -140,11 +141,11 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
      * Get a paginated list of number orders.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NumberOrderListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NumberOrderListResponse>>
+     * @return BaseResponse<DefaultPagination<NumberOrderListResponse>>
      *
      * @throws APIException
      */
@@ -161,13 +162,10 @@ final class NumberOrdersRawService implements NumberOrdersRawContract
         return $this->client->request(
             method: 'get',
             path: 'number_orders',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: NumberOrderListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

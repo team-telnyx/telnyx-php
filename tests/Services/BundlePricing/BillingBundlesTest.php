@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -54,7 +54,7 @@ final class BillingBundlesTest extends TestCase
         $page = $this->client->bundlePricing->billingBundles->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
@@ -149,7 +149,7 @@ final class FaxApplicationsTest extends TestCase
         $page = $this->client->faxApplications->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

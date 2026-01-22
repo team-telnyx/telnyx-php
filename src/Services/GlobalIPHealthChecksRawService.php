@@ -7,18 +7,19 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPHealthChecksRawContract;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawContract
@@ -94,12 +95,10 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      *
      * List all Global IP health checks.
      *
-     * @param array{
-     *   pageNumber?: int, pageSize?: int
-     * }|GlobalIPHealthCheckListParams $params
+     * @param array{page?: Page|PageShape}|GlobalIPHealthCheckListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<GlobalIPHealthCheckListResponse>>
+     * @return BaseResponse<DefaultPagination<GlobalIPHealthCheckListResponse>>
      *
      * @throws APIException
      */
@@ -116,13 +115,10 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
         return $this->client->request(
             method: 'get',
             path: 'global_ip_health_checks',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: GlobalIPHealthCheckListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

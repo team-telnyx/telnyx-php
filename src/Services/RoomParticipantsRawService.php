@@ -7,17 +7,18 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\RoomParticipant;
 use Telnyx\RoomParticipants\RoomParticipantGetResponse;
 use Telnyx\RoomParticipants\RoomParticipantListParams;
 use Telnyx\RoomParticipants\RoomParticipantListParams\Filter;
+use Telnyx\RoomParticipants\RoomParticipantListParams\Page;
 use Telnyx\ServiceContracts\RoomParticipantsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\RoomParticipants\RoomParticipantListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\RoomParticipants\RoomParticipantListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RoomParticipantsRawService implements RoomParticipantsRawContract
@@ -59,11 +60,11 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
      * View a list of room participants.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|RoomParticipantListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RoomParticipant>>
+     * @return BaseResponse<DefaultPagination<RoomParticipant>>
      *
      * @throws APIException
      */
@@ -80,13 +81,10 @@ final class RoomParticipantsRawService implements RoomParticipantsRawContract
         return $this->client->request(
             method: 'get',
             path: 'room_participants',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: RoomParticipant::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

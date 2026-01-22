@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\AssistantCreateParams\WidgetSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -23,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
- * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\WidgetSettings
  *
  * @phpstan-type AssistantCreateParamsShape = array{
  *   instructions: string,

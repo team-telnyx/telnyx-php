@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\DocumentLinks\DocumentLinkListParams;
 use Telnyx\DocumentLinks\DocumentLinkListResponse;
 use Telnyx\RequestOptions;
@@ -22,7 +22,7 @@ interface DocumentLinksRawContract
      * @param array<string,mixed>|DocumentLinkListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DocumentLinkListResponse>>
+     * @return BaseResponse<DefaultPagination<DocumentLinkListResponse>>
      *
      * @throws APIException
      */

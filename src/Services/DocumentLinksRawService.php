@@ -7,16 +7,17 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\DocumentLinks\DocumentLinkListParams;
 use Telnyx\DocumentLinks\DocumentLinkListParams\Filter;
+use Telnyx\DocumentLinks\DocumentLinkListParams\Page;
 use Telnyx\DocumentLinks\DocumentLinkListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DocumentLinksRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\DocumentLinks\DocumentLinkListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\DocumentLinks\DocumentLinkListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class DocumentLinksRawService implements DocumentLinksRawContract
@@ -33,11 +34,11 @@ final class DocumentLinksRawService implements DocumentLinksRawContract
      * List all documents links ordered by created_at descending.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|DocumentLinkListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DocumentLinkListResponse>>
+     * @return BaseResponse<DefaultPagination<DocumentLinkListResponse>>
      *
      * @throws APIException
      */
@@ -54,13 +55,10 @@ final class DocumentLinksRawService implements DocumentLinksRawContract
         return $this->client->request(
             method: 'get',
             path: 'document_links',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: DocumentLinkListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

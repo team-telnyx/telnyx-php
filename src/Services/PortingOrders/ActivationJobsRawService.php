@@ -7,10 +7,10 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobRetrieveParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateParams;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
@@ -19,6 +19,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsRawContract;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActivationJobsRawService implements ActivationJobsRawContract
@@ -106,10 +107,10 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
      * Returns a list of your porting activation jobs.
      *
      * @param string $id Porting Order id
-     * @param array{pageNumber?: int, pageSize?: int}|ActivationJobListParams $params
+     * @param array{page?: Page|PageShape}|ActivationJobListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingOrdersActivationJob>>
+     * @return BaseResponse<DefaultPagination<PortingOrdersActivationJob>>
      *
      * @throws APIException
      */
@@ -127,13 +128,10 @@ final class ActivationJobsRawService implements ActivationJobsRawContract
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/activation_jobs', $id],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: PortingOrdersActivationJob::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

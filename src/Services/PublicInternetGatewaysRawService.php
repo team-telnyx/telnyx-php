@@ -7,13 +7,13 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
 use Telnyx\RequestOptions;
@@ -21,6 +21,7 @@ use Telnyx\ServiceContracts\PublicInternetGatewaysRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRawContract
@@ -95,11 +96,11 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      * List all Public Internet Gateways.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|PublicInternetGatewayListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PublicInternetGatewayListResponse>>
+     * @return BaseResponse<DefaultPagination<PublicInternetGatewayListResponse>>
      *
      * @throws APIException
      */
@@ -116,13 +117,10 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
         return $this->client->request(
             method: 'get',
             path: 'public_internet_gateways',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: PublicInternetGatewayListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

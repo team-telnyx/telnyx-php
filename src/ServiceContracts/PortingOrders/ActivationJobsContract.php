@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ActivationJobsContract
@@ -52,16 +54,16 @@ interface ActivationJobsContract
      * @api
      *
      * @param string $id Porting Order id
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PortingOrdersActivationJob>
+     * @return DefaultPagination<PortingOrdersActivationJob>
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): DefaultPagination;
 }
