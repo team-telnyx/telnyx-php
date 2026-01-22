@@ -7,10 +7,10 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
+use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
@@ -18,6 +18,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\MessagingRawContract;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagingRawService implements MessagingRawContract
@@ -93,10 +94,10 @@ final class MessagingRawService implements MessagingRawContract
      *
      * List phone numbers with messaging settings
      *
-     * @param array{pageNumber?: int, pageSize?: int}|MessagingListParams $params
+     * @param array{page?: Page|PageShape}|MessagingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberWithMessagingSettings>>
+     * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
      *
      * @throws APIException
      */
@@ -113,13 +114,10 @@ final class MessagingRawService implements MessagingRawContract
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers/messaging',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: PhoneNumberWithMessagingSettings::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\ChannelZones\ChannelZoneListParams\Page;
 use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\ChannelZones\ChannelZoneListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ChannelZonesContract
@@ -33,15 +35,15 @@ interface ChannelZonesContract
     /**
      * @api
      *
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<ChannelZoneListResponse>
+     * @return DefaultPagination<ChannelZoneListResponse>
      *
      * @throws APIException
      */
     public function list(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination;
 }

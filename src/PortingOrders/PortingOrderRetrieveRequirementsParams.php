@@ -8,14 +8,17 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page;
 
 /**
  * Returns a list of all requirements based on country/number type for this porting order.
  *
  * @see Telnyx\Services\PortingOrdersService::retrieveRequirements()
  *
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page
+ *
  * @phpstan-type PortingOrderRetrieveRequirementsParamsShape = array{
- *   pageNumber?: int|null, pageSize?: int|null
+ *   page?: null|Page|PageShape
  * }
  */
 final class PortingOrderRetrieveRequirementsParams implements BaseModel
@@ -24,11 +27,11 @@ final class PortingOrderRetrieveRequirementsParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     public function __construct()
     {
@@ -39,31 +42,27 @@ final class PortingOrderRetrieveRequirementsParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Page|PageShape|null $page
      */
-    public static function with(
-        ?int $pageNumber = null,
-        ?int $pageSize = null
-    ): self {
+    public static function with(Page|array|null $page = null): self
+    {
         $self = new self;
 
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
 
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|PageShape $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

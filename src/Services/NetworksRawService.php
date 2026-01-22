@@ -7,8 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
@@ -16,6 +15,7 @@ use Telnyx\Networks\NetworkListInterfacesParams;
 use Telnyx\Networks\NetworkListInterfacesResponse;
 use Telnyx\Networks\NetworkListParams;
 use Telnyx\Networks\NetworkListParams\Filter;
+use Telnyx\Networks\NetworkListParams\Page;
 use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateParams;
@@ -25,7 +25,9 @@ use Telnyx\ServiceContracts\NetworksRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListInterfacesParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListInterfacesParams\Page as PageShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NetworksRawService implements NetworksRawContract
@@ -131,11 +133,11 @@ final class NetworksRawService implements NetworksRawContract
      * List all Networks.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NetworkListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NetworkListResponse>>
+     * @return BaseResponse<DefaultPagination<NetworkListResponse>>
      *
      * @throws APIException
      */
@@ -152,13 +154,10 @@ final class NetworksRawService implements NetworksRawContract
         return $this->client->request(
             method: 'get',
             path: 'networks',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: NetworkListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -195,12 +194,11 @@ final class NetworksRawService implements NetworksRawContract
      * @param string $id identifies the resource
      * @param array{
      *   filter?: NetworkListInterfacesParams\Filter|FilterShape1,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: NetworkListInterfacesParams\Page|PageShape1,
      * }|NetworkListInterfacesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NetworkListInterfacesResponse>>
+     * @return BaseResponse<DefaultPagination<NetworkListInterfacesResponse>>
      *
      * @throws APIException
      */
@@ -218,13 +216,10 @@ final class NetworksRawService implements NetworksRawContract
         return $this->client->request(
             method: 'get',
             path: ['networks/%1$s/network_interfaces', $id],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: NetworkListInterfacesResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

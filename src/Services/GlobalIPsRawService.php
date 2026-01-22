@@ -7,18 +7,19 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
 use Telnyx\GlobalIPs\GlobalIPListParams;
+use Telnyx\GlobalIPs\GlobalIPListParams\Page;
 use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPsRawContract;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPs\GlobalIPListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class GlobalIPsRawService implements GlobalIPsRawContract
@@ -92,10 +93,10 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      *
      * List all Global IPs.
      *
-     * @param array{pageNumber?: int, pageSize?: int}|GlobalIPListParams $params
+     * @param array{page?: Page|PageShape}|GlobalIPListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<GlobalIPListResponse>>
+     * @return BaseResponse<DefaultPagination<GlobalIPListResponse>>
      *
      * @throws APIException
      */
@@ -112,13 +113,10 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
         return $this->client->request(
             method: 'get',
             path: 'global_ips',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: GlobalIPListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

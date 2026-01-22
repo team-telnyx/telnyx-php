@@ -12,6 +12,7 @@ use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Filter;
+use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Page;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesParams;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams;
@@ -22,13 +23,14 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesRawContract;
 
 /**
  * @phpstan-import-type ItemShape from \Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item
  * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\UserBundles\UserBundleListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\BundlePricing\UserBundles\UserBundleListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter as FilterShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -126,13 +128,12 @@ final class UserBundlesRawService implements UserBundlesRawContract
      *
      * @param array{
      *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: Page|PageShape,
      *   authorizationBearer?: string,
      * }|UserBundleListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<UserBundle>>
+     * @return BaseResponse<DefaultPagination<UserBundle>>
      *
      * @throws APIException
      */
@@ -144,7 +145,7 @@ final class UserBundlesRawService implements UserBundlesRawContract
             $params,
             $requestOptions,
         );
-        $query_params = array_flip(['filter', 'pageNumber', 'pageSize']);
+        $query_params = array_flip(['filter', 'page']);
 
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
@@ -153,17 +154,14 @@ final class UserBundlesRawService implements UserBundlesRawContract
         return $this->client->request(
             method: 'get',
             path: 'bundle_pricing/user_bundles',
-            query: Util::array_transform_keys(
-                array_intersect_key($parsed, $query_params),
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]'],
-            ),
+            query: array_intersect_key($parsed, $query_params),
             headers: Util::array_transform_keys(
                 $header_params,
                 ['authorizationBearer' => 'authorization_bearer']
             ),
             options: $options,
             convert: UserBundle::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

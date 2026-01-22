@@ -7,14 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams;
 use Telnyx\Documents\DocumentListParams\Filter;
+use Telnyx\Documents\DocumentListParams\Page;
 use Telnyx\Documents\DocumentListParams\Sort;
 use Telnyx\Documents\DocumentUpdateParams;
 use Telnyx\Documents\DocumentUpdateResponse;
@@ -28,6 +28,7 @@ use Telnyx\ServiceContracts\DocumentsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Documents\DocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Documents\DocumentListParams\Page
  * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadParams\Document
  * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadJsonParams\Document as DocumentShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -107,13 +108,12 @@ final class DocumentsRawService implements DocumentsRawContract
      *
      * @param array{
      *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: Page|PageShape,
      *   sort?: list<Sort|value-of<Sort>>,
      * }|DocumentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DocServiceDocument>>
+     * @return BaseResponse<DefaultPagination<DocServiceDocument>>
      *
      * @throws APIException
      */
@@ -130,13 +130,10 @@ final class DocumentsRawService implements DocumentsRawContract
         return $this->client->request(
             method: 'get',
             path: 'documents',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: DocServiceDocument::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

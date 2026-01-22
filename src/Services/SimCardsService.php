@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardsContract;
 use Telnyx\Services\SimCards\ActionsService;
@@ -17,6 +18,7 @@ use Telnyx\SimCards\SimCardGetDeviceDetailsResponse;
 use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
 use Telnyx\SimCards\SimCardListParams\Filter;
+use Telnyx\SimCards\SimCardListParams\Page;
 use Telnyx\SimCards\SimCardListParams\Sort;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardUpdateParams\DataLimit;
@@ -28,6 +30,7 @@ use Telnyx\SimpleSimCard;
  * @phpstan-import-type DataLimitShape from \Telnyx\SimCards\SimCardUpdateParams\DataLimit
  * @phpstan-import-type SimCardStatusShape from \Telnyx\SimCardStatus
  * @phpstan-import-type FilterShape from \Telnyx\SimCards\SimCardListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCards\SimCardListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SimCardsService implements SimCardsContract
@@ -127,13 +130,14 @@ final class SimCardsService implements SimCardsContract
      *
      * Get all SIM cards belonging to the user that match the given filters.
      *
-     * @param Filter|FilterShape $filter Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status]
+     * @param Filter|FilterShape $filter Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags]
      * @param string $filterSimCardGroupID a valid SIM card group ID
      * @param bool $includeSimCardGroup it includes the associated SIM card group object in the response when present
+     * @param Page|PageShape $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Sorts SIM cards by the given field. Defaults to ascending order unless field is prefixed with a minus sign.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<SimpleSimCard>
+     * @return DefaultPagination<SimpleSimCard>
      *
      * @throws APIException
      */
@@ -141,18 +145,16 @@ final class SimCardsService implements SimCardsContract
         Filter|array|null $filter = null,
         ?string $filterSimCardGroupID = null,
         bool $includeSimCardGroup = false,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): DefaultPagination {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
                 'filterSimCardGroupID' => $filterSimCardGroupID,
                 'includeSimCardGroup' => $includeSimCardGroup,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
+                'page' => $page,
                 'sort' => $sort,
             ],
         );

@@ -7,13 +7,13 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Page;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Telnyx\RequestOptions;
@@ -21,6 +21,7 @@ use Telnyx\ServiceContracts\PortingOrders\ActionRequirementsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort
  * @phpstan-import-type ParamsShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -40,14 +41,11 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
      *
      * @param string $portingOrderID The ID of the porting order
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|SortShape,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|ActionRequirementListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ActionRequirementListResponse>>
+     * @return BaseResponse<DefaultPagination<ActionRequirementListResponse>>
      *
      * @throws APIException
      */
@@ -65,13 +63,10 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/action_requirements', $portingOrderID],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: ActionRequirementListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

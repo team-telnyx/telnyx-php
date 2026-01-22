@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\IPConnections\InboundIP;
 use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
 use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
+use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppressionDetails;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
 use Telnyx\IPConnections\IPConnectionGetResponse;
 use Telnyx\IPConnections\IPConnectionListParams;
 use Telnyx\IPConnections\IPConnectionListParams\Filter;
+use Telnyx\IPConnections\IPConnectionListParams\Page;
 use Telnyx\IPConnections\IPConnectionListParams\Sort;
 use Telnyx\IPConnections\IPConnectionNewResponse;
 use Telnyx\IPConnections\IPConnectionUpdateParams;
@@ -35,9 +35,11 @@ use Telnyx\ServiceContracts\IPConnectionsRawContract;
 
 /**
  * @phpstan-import-type InboundShape from \Telnyx\IPConnections\IPConnectionCreateParams\Inbound
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppressionDetails
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
+ * @phpstan-import-type NoiseSuppressionDetailsShape from \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppressionDetails as NoiseSuppressionDetailsShape1
  * @phpstan-import-type FilterShape from \Telnyx\IPConnections\IPConnectionListParams\Filter
- * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
+ * @phpstan-import-type PageShape from \Telnyx\IPConnections\IPConnectionListParams\Page
  * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -68,7 +70,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *   inbound?: Inbound|InboundShape,
      *   iosPushCredentialID?: string|null,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
-     *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
+     *   noiseSuppressionDetails?: NoiseSuppressionDetails|NoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: OutboundIP|OutboundIPShape,
      *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
@@ -148,7 +150,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *   inbound?: InboundIP|InboundIPShape,
      *   iosPushCredentialID?: string|null,
      *   noiseSuppression?: IPConnectionUpdateParams\NoiseSuppression|value-of<IPConnectionUpdateParams\NoiseSuppression>,
-     *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
+     *   noiseSuppressionDetails?: IPConnectionUpdateParams\NoiseSuppressionDetails|NoiseSuppressionDetailsShape1,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: OutboundIP|OutboundIPShape,
      *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
@@ -191,14 +193,11 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      * Returns a list of your IP connections.
      *
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|value-of<Sort>,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|IPConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<IPConnection>>
+     * @return BaseResponse<DefaultPagination<IPConnection>>
      *
      * @throws APIException
      */
@@ -215,13 +214,10 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
         return $this->client->request(
             method: 'get',
             path: 'ip_connections',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: IPConnection::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

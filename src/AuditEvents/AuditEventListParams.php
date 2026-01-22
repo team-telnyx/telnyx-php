@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AuditEvents;
 
 use Telnyx\AuditEvents\AuditEventListParams\Filter;
+use Telnyx\AuditEvents\AuditEventListParams\Page;
 use Telnyx\AuditEvents\AuditEventListParams\Sort;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -17,11 +18,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AuditEventsService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\AuditEvents\AuditEventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\AuditEvents\AuditEventListParams\Page
  *
  * @phpstan-type AuditEventListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
- *   pageNumber?: int|null,
- *   pageSize?: int|null,
+ *   page?: null|Page|PageShape,
  *   sort?: null|Sort|value-of<Sort>,
  * }
  */
@@ -37,11 +38,11 @@ final class AuditEventListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     /**
      * Set the order of the results by the creation date.
@@ -62,19 +63,18 @@ final class AuditEventListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
@@ -93,18 +93,15 @@ final class AuditEventListParams implements BaseModel
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

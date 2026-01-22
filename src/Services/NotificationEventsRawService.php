@@ -7,14 +7,15 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\NotificationEvents\NotificationEventListParams;
+use Telnyx\NotificationEvents\NotificationEventListParams\Page;
 use Telnyx\NotificationEvents\NotificationEventListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationEventsRawContract;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\NotificationEvents\NotificationEventListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NotificationEventsRawService implements NotificationEventsRawContract
@@ -30,12 +31,10 @@ final class NotificationEventsRawService implements NotificationEventsRawContrac
      *
      * Returns a list of your notifications events.
      *
-     * @param array{
-     *   pageNumber?: int, pageSize?: int
-     * }|NotificationEventListParams $params
+     * @param array{page?: Page|PageShape}|NotificationEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NotificationEventListResponse>>
+     * @return BaseResponse<DefaultPagination<NotificationEventListResponse>>
      *
      * @throws APIException
      */
@@ -52,13 +51,10 @@ final class NotificationEventsRawService implements NotificationEventsRawContrac
         return $this->client->request(
             method: 'get',
             path: 'notification_events',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: NotificationEventListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

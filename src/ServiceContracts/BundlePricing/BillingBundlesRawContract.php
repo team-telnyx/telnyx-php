@@ -10,7 +10,7 @@ use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -41,7 +41,7 @@ interface BillingBundlesRawContract
      * @param array<string,mixed>|BillingBundleListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<BillingBundleSummary>>
+     * @return BaseResponse<DefaultPagination<BillingBundleSummary>>
      *
      * @throws APIException
      */

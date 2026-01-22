@@ -7,10 +7,9 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlApplicationsRawContract;
 use Telnyx\TexmlApplications\TexmlApplication;
@@ -23,6 +22,7 @@ use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
 use Telnyx\TexmlApplications\TexmlApplicationListParams;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Filter;
+use Telnyx\TexmlApplications\TexmlApplicationListParams\Page;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
 use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateParams;
@@ -34,6 +34,7 @@ use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
  * @phpstan-import-type InboundShape from \Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Inbound as InboundShape1
  * @phpstan-import-type OutboundShape from \Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Outbound as OutboundShape1
  * @phpstan-import-type FilterShape from \Telnyx\TexmlApplications\TexmlApplicationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\TexmlApplications\TexmlApplicationListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TexmlApplicationsRawService implements TexmlApplicationsRawContract
@@ -171,14 +172,11 @@ final class TexmlApplicationsRawService implements TexmlApplicationsRawContract
      * Returns a list of your TeXML Applications.
      *
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|value-of<Sort>,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|TexmlApplicationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<TexmlApplication>>
+     * @return BaseResponse<DefaultPagination<TexmlApplication>>
      *
      * @throws APIException
      */
@@ -195,13 +193,10 @@ final class TexmlApplicationsRawService implements TexmlApplicationsRawContract
         return $this->client->request(
             method: 'get',
             path: 'texml_applications',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: TexmlApplication::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -7,13 +7,13 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
 use Telnyx\PhoneNumbers\Jobs\JobListParams;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter;
+use Telnyx\PhoneNumbers\Jobs\JobListParams\Page;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
@@ -26,6 +26,7 @@ use Telnyx\ServiceContracts\PhoneNumbers\JobsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Jobs\JobListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Jobs\JobListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter as FilterShape1
  * @phpstan-import-type UpdateVoiceSettingsShape from \Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -69,14 +70,11 @@ final class JobsRawService implements JobsRawContract
      * Lists the phone numbers jobs
      *
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|value-of<Sort>,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|JobListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumbersJob>>
+     * @return BaseResponse<DefaultPagination<PhoneNumbersJob>>
      *
      * @throws APIException
      */
@@ -93,13 +91,10 @@ final class JobsRawService implements JobsRawContract
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers/jobs',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: PhoneNumbersJob::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
@@ -75,7 +75,7 @@ interface VirtualCrossConnectsRawContract
      * @param array<string,mixed>|VirtualCrossConnectListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VirtualCrossConnectListResponse>>
+     * @return BaseResponse<DefaultPagination<VirtualCrossConnectListResponse>>
      *
      * @throws APIException
      */

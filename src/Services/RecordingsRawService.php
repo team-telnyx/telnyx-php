@@ -7,18 +7,19 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams;
 use Telnyx\Recordings\RecordingListParams\Filter;
+use Telnyx\Recordings\RecordingListParams\Page;
 use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Recordings\RecordingListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Recordings\RecordingListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RecordingsRawService implements RecordingsRawContract
@@ -60,11 +61,11 @@ final class RecordingsRawService implements RecordingsRawContract
      * Returns a list of your call recordings.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|RecordingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RecordingResponseData>>
+     * @return BaseResponse<DefaultPagination<RecordingResponseData>>
      *
      * @throws APIException
      */
@@ -81,13 +82,10 @@ final class RecordingsRawService implements RecordingsRawContract
         return $this->client->request(
             method: 'get',
             path: 'recordings',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: RecordingResponseData::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

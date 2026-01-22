@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\NetworkListParams\Filter;
+use Telnyx\Networks\NetworkListParams\Page;
 
 /**
  * List all Networks.
@@ -16,9 +17,10 @@ use Telnyx\Networks\NetworkListParams\Filter;
  * @see Telnyx\Services\NetworksService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListParams\Page
  *
  * @phpstan-type NetworkListParamsShape = array{
- *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class NetworkListParams implements BaseModel
@@ -33,11 +35,11 @@ final class NetworkListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     public function __construct()
     {
@@ -50,17 +52,16 @@ final class NetworkListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null
+        Page|array|null $page = null
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
 
         return $self;
     }
@@ -78,18 +79,15 @@ final class NetworkListParams implements BaseModel
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

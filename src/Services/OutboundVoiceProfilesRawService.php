@@ -7,8 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
@@ -17,6 +16,7 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams;
@@ -31,6 +31,7 @@ use Telnyx\ServiceContracts\OutboundVoiceProfilesRawContract;
  * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow
  * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow as CallingWindowShape1
  * @phpstan-import-type FilterShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page
  * @phpstan-import-type OutboundCallRecordingShape from \Telnyx\OutboundVoiceProfiles\OutboundCallRecording
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -167,14 +168,11 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
      * Get all outbound voice profiles belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: value-of<Sort>,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: value-of<Sort>
      * }|OutboundVoiceProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<OutboundVoiceProfile>>
+     * @return BaseResponse<DefaultPagination<OutboundVoiceProfile>>
      *
      * @throws APIException
      */
@@ -191,13 +189,10 @@ final class OutboundVoiceProfilesRawService implements OutboundVoiceProfilesRawC
         return $this->client->request(
             method: 'get',
             path: 'outbound_voice_profiles',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: OutboundVoiceProfile::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

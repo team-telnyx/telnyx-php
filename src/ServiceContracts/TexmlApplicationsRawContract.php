@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\TexmlApplications\TexmlApplication;
 use Telnyx\TexmlApplications\TexmlApplicationCreateParams;
@@ -75,7 +75,7 @@ interface TexmlApplicationsRawContract
      * @param array<string,mixed>|TexmlApplicationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<TexmlApplication>>
+     * @return BaseResponse<DefaultPagination<TexmlApplication>>
      *
      * @throws APIException
      */

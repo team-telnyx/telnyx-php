@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
+use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
 
 /**
  * Telnyx has a set of GSM mobile operators partners that are available through our mobile network roaming. This resource is entirely managed by Telnyx and may change over time. That means that this resource won't allow any write operations for it. Still, it's available so it can be used as a support resource that can be related to other resources or become a configuration option.
@@ -16,9 +17,10 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
  * @see Telnyx\Services\MobileNetworkOperatorsService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page
  *
  * @phpstan-type MobileNetworkOperatorListParamsShape = array{
- *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class MobileNetworkOperatorListParams implements BaseModel
@@ -33,11 +35,11 @@ final class MobileNetworkOperatorListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
+    /**
+     * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     public function __construct()
     {
@@ -50,17 +52,16 @@ final class MobileNetworkOperatorListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null
+        Page|array|null $page = null
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
 
         return $self;
     }
@@ -78,18 +79,15 @@ final class MobileNetworkOperatorListParams implements BaseModel
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

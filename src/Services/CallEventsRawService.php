@@ -6,6 +6,7 @@ namespace Telnyx\Services;
 
 use Telnyx\CallEvents\CallEventListParams;
 use Telnyx\CallEvents\CallEventListParams\Filter;
+use Telnyx\CallEvents\CallEventListParams\Page;
 use Telnyx\CallEvents\CallEventListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -17,6 +18,7 @@ use Telnyx\ServiceContracts\CallEventsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\CallEvents\CallEventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CallEvents\CallEventListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CallEventsRawService implements CallEventsRawContract
@@ -35,7 +37,10 @@ final class CallEventsRawService implements CallEventsRawContract
      * **Note**: Only one `filter[occurred_at]` can be passed.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|CallEventListParams $params
      * @param RequestOpts|null $requestOptions
      *

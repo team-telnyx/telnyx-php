@@ -7,17 +7,18 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter;
+use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
 use Telnyx\OtaUpdates\OtaUpdateListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OtaUpdatesRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\OtaUpdates\OtaUpdateListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\OtaUpdates\OtaUpdateListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class OtaUpdatesRawService implements OtaUpdatesRawContract
@@ -59,11 +60,11 @@ final class OtaUpdatesRawService implements OtaUpdatesRawContract
      * List OTA updates
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|OtaUpdateListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<OtaUpdateListResponse>>
+     * @return BaseResponse<DefaultPagination<OtaUpdateListResponse>>
      *
      * @throws APIException
      */
@@ -80,13 +81,10 @@ final class OtaUpdatesRawService implements OtaUpdatesRawContract
         return $this->client->request(
             method: 'get',
             path: 'ota_updates',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: OtaUpdateListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

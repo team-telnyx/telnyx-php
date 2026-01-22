@@ -7,20 +7,21 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyEndpointsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpointsRawContract
@@ -95,11 +96,11 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
      * Returns the dynamic emergency endpoints according to filters
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|DynamicEmergencyEndpointListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DynamicEmergencyEndpoint>>
+     * @return BaseResponse<DefaultPagination<DynamicEmergencyEndpoint>>
      *
      * @throws APIException
      */
@@ -116,13 +117,10 @@ final class DynamicEmergencyEndpointsRawService implements DynamicEmergencyEndpo
         return $this->client->request(
             method: 'get',
             path: 'dynamic_emergency_endpoints',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: DynamicEmergencyEndpoint::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

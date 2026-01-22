@@ -7,10 +7,12 @@ namespace Telnyx\ServiceContracts\Queues;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
+use Telnyx\Queues\Calls\CallListParams\Page;
 use Telnyx\Queues\Calls\CallListResponse;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\Queues\Calls\CallListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface CallsContract
@@ -51,6 +53,7 @@ interface CallsContract
      * @api
      *
      * @param string $queueName Uniquely identifies the queue by name
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<CallListResponse>
@@ -59,6 +62,7 @@ interface CallsContract
      */
     public function list(
         string $queueName,
+        Page|array|null $page = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
