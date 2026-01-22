@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantUpdateParams\WidgetSettings;
+namespace Telnyx\AI\Assistants\WidgetSettings;
 
 /**
  * The visual theme for the widget.

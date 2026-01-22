@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\IPConnections\IPConnection;
+namespace Telnyx;
 
+use Telnyx\ConnectionNoiseSuppressionDetails\Engine;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\IPConnections\IPConnection\NoiseSuppressionDetails\Engine;
 
 /**
  * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
  *
- * @phpstan-type NoiseSuppressionDetailsShape = array{
+ * @phpstan-type ConnectionNoiseSuppressionDetailsShape = array{
  *   attenuationLimit?: int|null, engine?: null|Engine|value-of<Engine>
  * }
  */
-final class NoiseSuppressionDetails implements BaseModel
+final class ConnectionNoiseSuppressionDetails implements BaseModel
 {
-    /** @use SdkModel<NoiseSuppressionDetailsShape> */
+    /** @use SdkModel<ConnectionNoiseSuppressionDetailsShape> */
     use SdkModel;
 
     /**

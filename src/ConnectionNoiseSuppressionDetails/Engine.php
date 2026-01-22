@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\IPConnections\IPConnection\NoiseSuppressionDetails;
+namespace Telnyx\ConnectionNoiseSuppressionDetails;
 
 /**
  * The noise suppression engine to use. 'denoiser' is the default engine. 'deep_filter_net' and 'deep_filter_net_large' are alternative engines with different performance characteristics. Krisp engines ('krisp_viva_tel', 'krisp_viva_tel_lite', 'krisp_viva_promodel', 'krisp_viva_ss') provide advanced noise suppression capabilities.
