@@ -13,6 +13,7 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\IPConnections\IPConnectionUpdateParams\JitterBuffer;
 use Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression;
 use Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
@@ -23,6 +24,7 @@ use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
  * @see Telnyx\Services\IPConnectionsService::update()
  *
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
+ * @phpstan-import-type JitterBufferShape from \Telnyx\IPConnections\IPConnectionUpdateParams\JitterBuffer
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -39,6 +41,7 @@ use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   inbound?: null|InboundIP|InboundIPShape,
  *   iosPushCredentialID?: string|null,
+ *   jitterBuffer?: null|JitterBuffer|JitterBufferShape,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
@@ -125,6 +128,12 @@ final class IPConnectionUpdateParams implements BaseModel
     public ?string $iosPushCredentialID;
 
     /**
+     * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     */
+    #[Optional('jitter_buffer')]
+    public ?JitterBuffer $jitterBuffer;
+
+    /**
      * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      *
      * @var value-of<NoiseSuppression>|null $noiseSuppression
@@ -206,6 +215,7 @@ final class IPConnectionUpdateParams implements BaseModel
      * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundIP|InboundIPShape|null $inbound
+     * @param JitterBuffer|JitterBufferShape|null $jitterBuffer
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param OutboundIP|OutboundIPShape|null $outbound
@@ -226,6 +236,7 @@ final class IPConnectionUpdateParams implements BaseModel
         EncryptedMedia|string|null $encryptedMedia = null,
         InboundIP|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
+        JitterBuffer|array|null $jitterBuffer = null,
         NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
@@ -251,6 +262,7 @@ final class IPConnectionUpdateParams implements BaseModel
         null !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
         null !== $inbound && $self['inbound'] = $inbound;
         null !== $iosPushCredentialID && $self['iosPushCredentialID'] = $iosPushCredentialID;
+        null !== $jitterBuffer && $self['jitterBuffer'] = $jitterBuffer;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
         null !== $noiseSuppressionDetails && $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
         null !== $onnetT38PassthroughEnabled && $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
@@ -391,6 +403,19 @@ final class IPConnectionUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['iosPushCredentialID'] = $iosPushCredentialID;
+
+        return $self;
+    }
+
+    /**
+     * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     *
+     * @param JitterBuffer|JitterBufferShape $jitterBuffer
+     */
+    public function withJitterBuffer(JitterBuffer|array $jitterBuffer): self
+    {
+        $self = clone $this;
+        $self['jitterBuffer'] = $jitterBuffer;
 
         return $self;
     }

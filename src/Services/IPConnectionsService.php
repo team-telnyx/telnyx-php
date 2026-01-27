@@ -16,6 +16,7 @@ use Telnyx\DefaultPagination;
 use Telnyx\IPConnections\InboundIP;
 use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
+use Telnyx\IPConnections\IPConnectionCreateParams\JitterBuffer;
 use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
@@ -32,7 +33,9 @@ use Telnyx\ServiceContracts\IPConnectionsContract;
 
 /**
  * @phpstan-import-type InboundShape from \Telnyx\IPConnections\IPConnectionCreateParams\Inbound
+ * @phpstan-import-type JitterBufferShape from \Telnyx\IPConnections\IPConnectionCreateParams\JitterBuffer
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
+ * @phpstan-import-type JitterBufferShape from \Telnyx\IPConnections\IPConnectionUpdateParams\JitterBuffer as JitterBufferShape1
  * @phpstan-import-type FilterShape from \Telnyx\IPConnections\IPConnectionListParams\Filter
  * @phpstan-import-type PageShape from \Telnyx\IPConnections\IPConnectionListParams\Page
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
@@ -70,6 +73,7 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      * @param Inbound|InboundShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
+     * @param JitterBuffer|JitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
@@ -97,6 +101,7 @@ final class IPConnectionsService implements IPConnectionsContract
         EncryptedMedia|string|null $encryptedMedia = null,
         Inbound|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
+        JitterBuffer|array|null $jitterBuffer = null,
         NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
@@ -123,6 +128,7 @@ final class IPConnectionsService implements IPConnectionsContract
                 'encryptedMedia' => $encryptedMedia,
                 'inbound' => $inbound,
                 'iosPushCredentialID' => $iosPushCredentialID,
+                'jitterBuffer' => $jitterBuffer,
                 'noiseSuppression' => $noiseSuppression,
                 'noiseSuppressionDetails' => $noiseSuppressionDetails,
                 'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,
@@ -179,6 +185,7 @@ final class IPConnectionsService implements IPConnectionsContract
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      * @param InboundIP|InboundIPShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
+     * @param \Telnyx\IPConnections\IPConnectionUpdateParams\JitterBuffer|JitterBufferShape1 $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      * @param \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression|value-of<\Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
@@ -207,6 +214,7 @@ final class IPConnectionsService implements IPConnectionsContract
         EncryptedMedia|string|null $encryptedMedia = null,
         InboundIP|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
+        \Telnyx\IPConnections\IPConnectionUpdateParams\JitterBuffer|array|null $jitterBuffer = null,
         \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
@@ -233,6 +241,7 @@ final class IPConnectionsService implements IPConnectionsContract
                 'encryptedMedia' => $encryptedMedia,
                 'inbound' => $inbound,
                 'iosPushCredentialID' => $iosPushCredentialID,
+                'jitterBuffer' => $jitterBuffer,
                 'noiseSuppression' => $noiseSuppression,
                 'noiseSuppressionDetails' => $noiseSuppressionDetails,
                 'onnetT38PassthroughEnabled' => $onnetT38PassthroughEnabled,

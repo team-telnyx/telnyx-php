@@ -13,10 +13,12 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\FqdnConnections\FqdnConnection\JitterBuffer;
 use Telnyx\FqdnConnections\FqdnConnection\NoiseSuppression;
 
 /**
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
+ * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnection\JitterBuffer
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -27,6 +29,7 @@ use Telnyx\FqdnConnections\FqdnConnection\NoiseSuppression;
  *   active?: bool|null,
  *   adjustDtmfTimestamp?: bool|null,
  *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   androidPushCredentialID?: string|null,
  *   callCostEnabled?: bool|null,
  *   callCostInWebhooks?: bool|null,
  *   createdAt?: string|null,
@@ -37,6 +40,8 @@ use Telnyx\FqdnConnections\FqdnConnection\NoiseSuppression;
  *   ignoreDtmfDuration?: bool|null,
  *   ignoreMarkBit?: bool|null,
  *   inbound?: null|InboundFqdn|InboundFqdnShape,
+ *   iosPushCredentialID?: string|null,
+ *   jitterBuffer?: null|JitterBuffer|JitterBufferShape,
  *   microsoftTeamsSbc?: bool|null,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
@@ -99,6 +104,12 @@ final class FqdnConnection implements BaseModel
     public ?string $anchorsiteOverride;
 
     /**
+     * The uuid of the push credential for Android.
+     */
+    #[Optional('android_push_credential_id', nullable: true)]
+    public ?string $androidPushCredentialID;
+
+    /**
      * Indicates whether call cost calculation is enabled.
      */
     #[Optional('call_cost_enabled')]
@@ -158,6 +169,18 @@ final class FqdnConnection implements BaseModel
 
     #[Optional]
     public ?InboundFqdn $inbound;
+
+    /**
+     * The uuid of the push credential for Ios.
+     */
+    #[Optional('ios_push_credential_id', nullable: true)]
+    public ?string $iosPushCredentialID;
+
+    /**
+     * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     */
+    #[Optional('jitter_buffer')]
+    public ?JitterBuffer $jitterBuffer;
 
     /**
      * The connection is enabled for Microsoft Teams Direct Routing.
@@ -321,6 +344,7 @@ final class FqdnConnection implements BaseModel
      * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundFqdn|InboundFqdnShape|null $inbound
+     * @param JitterBuffer|JitterBufferShape|null $jitterBuffer
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param OutboundFqdn|OutboundFqdnShape|null $outbound
@@ -335,6 +359,7 @@ final class FqdnConnection implements BaseModel
         ?bool $active = null,
         ?bool $adjustDtmfTimestamp = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        ?string $androidPushCredentialID = null,
         ?bool $callCostEnabled = null,
         ?bool $callCostInWebhooks = null,
         ?string $createdAt = null,
@@ -345,6 +370,8 @@ final class FqdnConnection implements BaseModel
         ?bool $ignoreDtmfDuration = null,
         ?bool $ignoreMarkBit = null,
         InboundFqdn|array|null $inbound = null,
+        ?string $iosPushCredentialID = null,
+        JitterBuffer|array|null $jitterBuffer = null,
         ?bool $microsoftTeamsSbc = null,
         NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
@@ -376,6 +403,7 @@ final class FqdnConnection implements BaseModel
         null !== $active && $self['active'] = $active;
         null !== $adjustDtmfTimestamp && $self['adjustDtmfTimestamp'] = $adjustDtmfTimestamp;
         null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
         null !== $callCostEnabled && $self['callCostEnabled'] = $callCostEnabled;
         null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
         null !== $createdAt && $self['createdAt'] = $createdAt;
@@ -386,6 +414,8 @@ final class FqdnConnection implements BaseModel
         null !== $ignoreDtmfDuration && $self['ignoreDtmfDuration'] = $ignoreDtmfDuration;
         null !== $ignoreMarkBit && $self['ignoreMarkBit'] = $ignoreMarkBit;
         null !== $inbound && $self['inbound'] = $inbound;
+        null !== $iosPushCredentialID && $self['iosPushCredentialID'] = $iosPushCredentialID;
+        null !== $jitterBuffer && $self['jitterBuffer'] = $jitterBuffer;
         null !== $microsoftTeamsSbc && $self['microsoftTeamsSbc'] = $microsoftTeamsSbc;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
         null !== $noiseSuppressionDetails && $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
@@ -466,6 +496,18 @@ final class FqdnConnection implements BaseModel
     ): self {
         $self = clone $this;
         $self['anchorsiteOverride'] = $anchorsiteOverride;
+
+        return $self;
+    }
+
+    /**
+     * The uuid of the push credential for Android.
+     */
+    public function withAndroidPushCredentialID(
+        ?string $androidPushCredentialID
+    ): self {
+        $self = clone $this;
+        $self['androidPushCredentialID'] = $androidPushCredentialID;
 
         return $self;
     }
@@ -583,6 +625,30 @@ final class FqdnConnection implements BaseModel
     {
         $self = clone $this;
         $self['inbound'] = $inbound;
+
+        return $self;
+    }
+
+    /**
+     * The uuid of the push credential for Ios.
+     */
+    public function withIosPushCredentialID(?string $iosPushCredentialID): self
+    {
+        $self = clone $this;
+        $self['iosPushCredentialID'] = $iosPushCredentialID;
+
+        return $self;
+    }
+
+    /**
+     * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     *
+     * @param JitterBuffer|JitterBufferShape $jitterBuffer
+     */
+    public function withJitterBuffer(JitterBuffer|array $jitterBuffer): self
+    {
+        $self = clone $this;
+        $self['jitterBuffer'] = $jitterBuffer;
 
         return $self;
     }
