@@ -88,6 +88,11 @@ final class FqdnConnectionsTest extends TestCase
                 'timeout2xxSecs' => 10,
             ],
             iosPushCredentialID: 'ec0c8e5d-439e-4620-a0c1-9d9c8d02a836',
+            jitterBuffer: [
+                'enableJitterBuffer' => true,
+                'jitterbufferMsecMax' => 200,
+                'jitterbufferMsecMin' => 60,
+            ],
             microsoftTeamsSbc: true,
             noiseSuppression: 'both',
             noiseSuppressionDetails: [

@@ -75,6 +75,7 @@ final class CredentialConnectionsTest extends TestCase
                 'aniNumberFormat' => '+E.164',
                 'channelLimit' => 10,
                 'codecs' => ['G722'],
+                'defaultRoutingMethod' => 'sequential',
                 'dnisNumberFormat' => '+e164',
                 'generateRingbackTone' => true,
                 'isupHeadersEnabled' => true,
@@ -86,6 +87,11 @@ final class CredentialConnectionsTest extends TestCase
                 'timeout2xxSecs' => 20,
             ],
             iosPushCredentialID: 'ec0c8e5d-439e-4620-a0c1-9d9c8d02a836',
+            jitterBuffer: [
+                'enableJitterBuffer' => true,
+                'jitterbufferMsecMax' => 200,
+                'jitterbufferMsecMin' => 60,
+            ],
             noiseSuppression: 'both',
             noiseSuppressionDetails: [
                 'attenuationLimit' => 80, 'engine' => 'deep_filter_net',

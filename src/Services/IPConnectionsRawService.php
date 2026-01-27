@@ -17,6 +17,7 @@ use Telnyx\IPConnections\InboundIP;
 use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
+use Telnyx\IPConnections\IPConnectionCreateParams\JitterBuffer;
 use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
@@ -35,7 +36,9 @@ use Telnyx\ServiceContracts\IPConnectionsRawContract;
 
 /**
  * @phpstan-import-type InboundShape from \Telnyx\IPConnections\IPConnectionCreateParams\Inbound
+ * @phpstan-import-type JitterBufferShape from \Telnyx\IPConnections\IPConnectionCreateParams\JitterBuffer
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
+ * @phpstan-import-type JitterBufferShape from \Telnyx\IPConnections\IPConnectionUpdateParams\JitterBuffer as JitterBufferShape1
  * @phpstan-import-type FilterShape from \Telnyx\IPConnections\IPConnectionListParams\Filter
  * @phpstan-import-type PageShape from \Telnyx\IPConnections\IPConnectionListParams\Page
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
@@ -68,6 +71,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: Inbound|InboundShape,
      *   iosPushCredentialID?: string|null,
+     *   jitterBuffer?: JitterBuffer|JitterBufferShape,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
@@ -148,6 +152,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: InboundIP|InboundIPShape,
      *   iosPushCredentialID?: string|null,
+     *   jitterBuffer?: IPConnectionUpdateParams\JitterBuffer|JitterBufferShape1,
      *   noiseSuppression?: IPConnectionUpdateParams\NoiseSuppression|value-of<IPConnectionUpdateParams\NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,

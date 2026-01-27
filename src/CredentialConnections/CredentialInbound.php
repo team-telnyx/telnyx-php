@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\CredentialInbound\AniNumberFormat;
+use Telnyx\CredentialConnections\CredentialInbound\DefaultRoutingMethod;
 use Telnyx\CredentialConnections\CredentialInbound\DnisNumberFormat;
 use Telnyx\CredentialConnections\CredentialInbound\SimultaneousRinging;
 
@@ -16,6 +17,7 @@ use Telnyx\CredentialConnections\CredentialInbound\SimultaneousRinging;
  *   aniNumberFormat?: null|AniNumberFormat|value-of<AniNumberFormat>,
  *   channelLimit?: int|null,
  *   codecs?: list<string>|null,
+ *   defaultRoutingMethod?: null|DefaultRoutingMethod|value-of<DefaultRoutingMethod>,
  *   dnisNumberFormat?: null|DnisNumberFormat|value-of<DnisNumberFormat>,
  *   generateRingbackTone?: bool|null,
  *   isupHeadersEnabled?: bool|null,
@@ -53,6 +55,14 @@ final class CredentialInbound implements BaseModel
      */
     #[Optional(list: 'string')]
     public ?array $codecs;
+
+    /**
+     * Default routing method to be used when a number is associated with the connection. Must be one of the routing method types or left blank, other values are not allowed.
+     *
+     * @var value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
+     */
+    #[Optional('default_routing_method', enum: DefaultRoutingMethod::class)]
+    public ?string $defaultRoutingMethod;
 
     /** @var value-of<DnisNumberFormat>|null $dnisNumberFormat */
     #[Optional('dnis_number_format', enum: DnisNumberFormat::class)]
@@ -120,6 +130,7 @@ final class CredentialInbound implements BaseModel
      *
      * @param AniNumberFormat|value-of<AniNumberFormat>|null $aniNumberFormat
      * @param list<string>|null $codecs
+     * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
      * @param DnisNumberFormat|value-of<DnisNumberFormat>|null $dnisNumberFormat
      * @param SimultaneousRinging|value-of<SimultaneousRinging>|null $simultaneousRinging
      */
@@ -127,6 +138,7 @@ final class CredentialInbound implements BaseModel
         AniNumberFormat|string|null $aniNumberFormat = null,
         ?int $channelLimit = null,
         ?array $codecs = null,
+        DefaultRoutingMethod|string|null $defaultRoutingMethod = null,
         DnisNumberFormat|string|null $dnisNumberFormat = null,
         ?bool $generateRingbackTone = null,
         ?bool $isupHeadersEnabled = null,
@@ -142,6 +154,7 @@ final class CredentialInbound implements BaseModel
         null !== $aniNumberFormat && $self['aniNumberFormat'] = $aniNumberFormat;
         null !== $channelLimit && $self['channelLimit'] = $channelLimit;
         null !== $codecs && $self['codecs'] = $codecs;
+        null !== $defaultRoutingMethod && $self['defaultRoutingMethod'] = $defaultRoutingMethod;
         null !== $dnisNumberFormat && $self['dnisNumberFormat'] = $dnisNumberFormat;
         null !== $generateRingbackTone && $self['generateRingbackTone'] = $generateRingbackTone;
         null !== $isupHeadersEnabled && $self['isupHeadersEnabled'] = $isupHeadersEnabled;
@@ -189,6 +202,20 @@ final class CredentialInbound implements BaseModel
     {
         $self = clone $this;
         $self['codecs'] = $codecs;
+
+        return $self;
+    }
+
+    /**
+     * Default routing method to be used when a number is associated with the connection. Must be one of the routing method types or left blank, other values are not allowed.
+     *
+     * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod> $defaultRoutingMethod
+     */
+    public function withDefaultRoutingMethod(
+        DefaultRoutingMethod|string $defaultRoutingMethod
+    ): self {
+        $self = clone $this;
+        $self['defaultRoutingMethod'] = $defaultRoutingMethod;
 
         return $self;
     }

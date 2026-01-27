@@ -15,6 +15,7 @@ use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\DefaultPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
+use Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
@@ -33,6 +34,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FqdnConnectionsRawContract;
 
 /**
+ * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer
+ * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\JitterBuffer as JitterBufferShape1
  * @phpstan-import-type FilterShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Filter
  * @phpstan-import-type PageShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Page
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
@@ -66,6 +69,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: InboundFqdn|InboundFqdnShape,
      *   iosPushCredentialID?: string|null,
+     *   jitterBuffer?: JitterBuffer|JitterBufferShape,
      *   microsoftTeamsSbc?: bool,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
@@ -147,6 +151,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: InboundFqdn|InboundFqdnShape,
      *   iosPushCredentialID?: string|null,
+     *   jitterBuffer?: FqdnConnectionUpdateParams\JitterBuffer|JitterBufferShape1,
      *   noiseSuppression?: FqdnConnectionUpdateParams\NoiseSuppression|value-of<FqdnConnectionUpdateParams\NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
