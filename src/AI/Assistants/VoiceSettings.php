@@ -42,7 +42,7 @@ final class VoiceSettings implements BaseModel
     public string $voice;
 
     /**
-     * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your ElevenLabs API key. Warning: Free plans are unlikely to work with this integration.
+     * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your ElevenLabs API key. Warning: Free plans are unlikely to work with this integration.
      */
     #[Optional('api_key_ref')]
     public ?string $apiKeyRef;
@@ -157,7 +157,7 @@ final class VoiceSettings implements BaseModel
     }
 
     /**
-     * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your ElevenLabs API key. Warning: Free plans are unlikely to work with this integration.
+     * The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your ElevenLabs API key. Warning: Free plans are unlikely to work with this integration.
      */
     public function withAPIKeyRef(string $apiKeyRef): self
     {

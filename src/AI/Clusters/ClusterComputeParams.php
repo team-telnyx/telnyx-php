@@ -30,7 +30,7 @@ final class ClusterComputeParams implements BaseModel
     use SdkParams;
 
     /**
-     * The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding).
+     * The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api-reference/embeddings/embed-documents).
      */
     #[Required]
     public string $bucket;
@@ -107,7 +107,7 @@ final class ClusterComputeParams implements BaseModel
     }
 
     /**
-     * The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding).
+     * The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api-reference/embeddings/embed-documents).
      */
     public function withBucket(string $bucket): self
     {
