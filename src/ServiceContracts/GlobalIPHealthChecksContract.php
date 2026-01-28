@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface GlobalIPHealthChecksContract
@@ -52,17 +50,17 @@ interface GlobalIPHealthChecksContract
     /**
      * @api
      *
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<GlobalIPHealthCheckListResponse>
+     * @return DefaultFlatPagination<GlobalIPHealthCheckListResponse>
      *
      * @throws APIException
      */
     public function list(
-        Page|array|null $page = null,
-        RequestOptions|array|null $requestOptions = null
-    ): DefaultPagination;
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
 
     /**
      * @api

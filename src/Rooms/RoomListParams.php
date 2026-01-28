@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\RoomListParams\Filter;
-use Telnyx\Rooms\RoomListParams\Page;
 
 /**
  * View a list of rooms.
@@ -17,12 +16,12 @@ use Telnyx\Rooms\RoomListParams\Page;
  * @see Telnyx\Services\RoomsService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\Rooms\RoomListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Rooms\RoomListParams\Page
  *
  * @phpstan-type RoomListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
  *   includeSessions?: bool|null,
- *   page?: null|Page|PageShape,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class RoomListParams implements BaseModel
@@ -43,11 +42,11 @@ final class RoomListParams implements BaseModel
     #[Optional]
     public ?bool $includeSessions;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -60,18 +59,19 @@ final class RoomListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
         ?bool $includeSessions = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
         null !== $includeSessions && $self['includeSessions'] = $includeSessions;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
         return $self;
     }
@@ -100,15 +100,18 @@ final class RoomListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

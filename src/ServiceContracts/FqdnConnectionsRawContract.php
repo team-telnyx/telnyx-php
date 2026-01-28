@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
@@ -75,7 +75,7 @@ interface FqdnConnectionsRawContract
      * @param array<string,mixed>|FqdnConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<FqdnConnection>>
+     * @return BaseResponse<DefaultFlatPagination<FqdnConnection>>
      *
      * @throws APIException
      */

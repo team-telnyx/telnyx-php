@@ -7,7 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\PortingOrder;
 use Telnyx\PortingOrders\PortingOrderDocuments;
 use Telnyx\PortingOrders\PortingOrderEndUser;
@@ -17,7 +17,6 @@ use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
 use Telnyx\PortingOrders\PortingOrderGetResponse;
 use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter;
-use Telnyx\PortingOrders\PortingOrderListParams\Page;
 use Telnyx\PortingOrders\PortingOrderListParams\Sort;
 use Telnyx\PortingOrders\PortingOrderMisc;
 use Telnyx\PortingOrders\PortingOrderNewResponse;
@@ -50,9 +49,7 @@ use Telnyx\Services\PortingOrders\VerificationCodesService;
  * @phpstan-import-type RequirementShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement
  * @phpstan-import-type PortingOrderUserFeedbackShape from \Telnyx\PortingOrders\PortingOrderUserFeedback
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PortingOrderListParams\Sort
- * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page as PageShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PortingOrdersService implements PortingOrdersContract
@@ -257,26 +254,27 @@ final class PortingOrdersService implements PortingOrdersContract
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains]
      * @param bool $includePhoneNumbers Include the first 50 phone number objects in the results
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<PortingOrder>
+     * @return DefaultFlatPagination<PortingOrder>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
         bool $includePhoneNumbers = true,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
                 'includePhoneNumbers' => $includePhoneNumbers,
-                'page' => $page,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
                 'sort' => $sort,
             ],
         );
@@ -375,19 +373,21 @@ final class PortingOrdersService implements PortingOrdersContract
      * Returns a list of all requirements based on country/number type for this porting order.
      *
      * @param string $id Porting Order id
-     * @param \Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<PortingOrderGetRequirementsResponse>
+     * @return DefaultFlatPagination<PortingOrderGetRequirementsResponse>
      *
      * @throws APIException
      */
     public function retrieveRequirements(
         string $id,
-        \Telnyx\PortingOrders\PortingOrderRetrieveRequirementsParams\Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
-        $params = Util::removeNulls(['page' => $page]);
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveRequirements($id, params: $params, requestOptions: $requestOptions);

@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Filter;
-use Telnyx\TexmlApplications\TexmlApplicationListParams\Page;
 use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
 
 /**
@@ -18,11 +17,11 @@ use Telnyx\TexmlApplications\TexmlApplicationListParams\Sort;
  * @see Telnyx\Services\TexmlApplicationsService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\TexmlApplications\TexmlApplicationListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\TexmlApplications\TexmlApplicationListParams\Page
  *
  * @phpstan-type TexmlApplicationListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
- *   page?: null|Page|PageShape,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  *   sort?: null|Sort|value-of<Sort>,
  * }
  */
@@ -38,11 +37,11 @@ final class TexmlApplicationListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
@@ -74,18 +73,19 @@ final class TexmlApplicationListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string|null $sort = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
@@ -104,15 +104,18 @@ final class TexmlApplicationListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

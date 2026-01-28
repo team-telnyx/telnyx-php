@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
@@ -15,14 +16,12 @@ use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyAddressesRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddressesRawContract
@@ -107,11 +106,11 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
      * Returns the dynamic emergency addresses according to filters
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|DynamicEmergencyAddressListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<DynamicEmergencyAddress>>
+     * @return BaseResponse<DefaultFlatPagination<DynamicEmergencyAddress>>
      *
      * @throws APIException
      */
@@ -128,10 +127,13 @@ final class DynamicEmergencyAddressesRawService implements DynamicEmergencyAddre
         return $this->client->request(
             method: 'get',
             path: 'dynamic_emergency_addresses',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: DynamicEmergencyAddress::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

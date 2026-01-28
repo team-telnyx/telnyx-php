@@ -7,19 +7,18 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsCoverageRawContract;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter
  * @phpstan-import-type FiltersShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters
- * @phpstan-import-type PageShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VirtualCrossConnectsCoverageRawService implements VirtualCrossConnectsCoverageRawContract
@@ -38,11 +37,12 @@ final class VirtualCrossConnectsCoverageRawService implements VirtualCrossConnec
      * @param array{
      *   filter?: Filter|FilterShape,
      *   filters?: Filters|FiltersShape,
-     *   page?: Page|PageShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|VirtualCrossConnectsCoverageListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<VirtualCrossConnectsCoverageListResponse,>,>
+     * @return BaseResponse<DefaultFlatPagination<VirtualCrossConnectsCoverageListResponse,>,>
      *
      * @throws APIException
      */
@@ -59,10 +59,13 @@ final class VirtualCrossConnectsCoverageRawService implements VirtualCrossConnec
         return $this->client->request(
             method: 'get',
             path: 'virtual_cross_connects_coverage',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: VirtualCrossConnectsCoverageListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

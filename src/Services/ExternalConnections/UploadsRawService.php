@@ -7,7 +7,8 @@ namespace Telnyx\Services\ExternalConnections;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\Uploads\Upload;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams;
 use Telnyx\ExternalConnections\Uploads\UploadCreateParams\AdditionalUsage;
@@ -15,7 +16,6 @@ use Telnyx\ExternalConnections\Uploads\UploadCreateParams\Usage;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
 use Telnyx\ExternalConnections\Uploads\UploadListParams;
 use Telnyx\ExternalConnections\Uploads\UploadListParams\Filter;
-use Telnyx\ExternalConnections\Uploads\UploadListParams\Page;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
 use Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 use Telnyx\ExternalConnections\Uploads\UploadRefreshStatusResponse;
@@ -27,7 +27,6 @@ use Telnyx\ServiceContracts\ExternalConnections\UploadsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\Uploads\UploadListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class UploadsRawService implements UploadsRawContract
@@ -118,11 +117,11 @@ final class UploadsRawService implements UploadsRawContract
      *
      * @param string $id identifies the resource
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|UploadListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<Upload>>
+     * @return BaseResponse<DefaultFlatPagination<Upload>>
      *
      * @throws APIException
      */
@@ -140,10 +139,13 @@ final class UploadsRawService implements UploadsRawContract
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/uploads', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: Upload::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

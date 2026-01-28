@@ -8,7 +8,7 @@ use Telnyx\AuditEvents\AuditEventListParams;
 use Telnyx\AuditEvents\AuditEventListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -22,7 +22,7 @@ interface AuditEventsRawContract
      * @param array<string,mixed>|AuditEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<AuditEventListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<AuditEventListResponse>>
      *
      * @throws APIException
      */

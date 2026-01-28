@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingHostedNumberOrder;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityParams;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCheckEligibilityResponse;
@@ -17,7 +18,6 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificat
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderDeleteResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderGetResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams;
@@ -27,7 +27,6 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumberOrdersRawContract;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderListParams\Page
  * @phpstan-import-type VerificationCodeShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -102,10 +101,12 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
      *
      * List messaging hosted number orders
      *
-     * @param array{page?: Page|PageShape}|MessagingHostedNumberOrderListParams $params
+     * @param array{
+     *   pageNumber?: int, pageSize?: int
+     * }|MessagingHostedNumberOrderListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<MessagingHostedNumberOrder>>
+     * @return BaseResponse<DefaultFlatPagination<MessagingHostedNumberOrder>>
      *
      * @throws APIException
      */
@@ -122,10 +123,13 @@ final class MessagingHostedNumberOrdersRawService implements MessagingHostedNumb
         return $this->client->request(
             method: 'get',
             path: 'messaging_hosted_number_orders',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: MessagingHostedNumberOrder::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

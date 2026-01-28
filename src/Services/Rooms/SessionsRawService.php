@@ -8,14 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\RoomParticipant;
 use Telnyx\Rooms\RoomSession;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
 use Telnyx\Rooms\Sessions\SessionList0Params;
 use Telnyx\Rooms\Sessions\SessionList0Params\Filter;
-use Telnyx\Rooms\Sessions\SessionList0Params\Page;
 use Telnyx\Rooms\Sessions\SessionList1Params;
 use Telnyx\Rooms\Sessions\SessionRetrieveParams;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
@@ -23,11 +22,8 @@ use Telnyx\ServiceContracts\Rooms\SessionsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList0Params\Filter
- * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList0Params\Page
  * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList1Params\Filter as FilterShape1
- * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList1Params\Page as PageShape1
  * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter as FilterShape2
- * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page as PageShape2
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SessionsRawService implements SessionsRawContract
@@ -80,11 +76,14 @@ final class SessionsRawService implements SessionsRawContract
      * View a list of room sessions.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, includeParticipants?: bool, page?: Page|PageShape
+     *   filter?: Filter|FilterShape,
+     *   includeParticipants?: bool,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|SessionList0Params $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RoomSession>>
+     * @return BaseResponse<DefaultFlatPagination<RoomSession>>
      *
      * @throws APIException
      */
@@ -103,11 +102,15 @@ final class SessionsRawService implements SessionsRawContract
             path: 'room_sessions',
             query: Util::array_transform_keys(
                 $parsed,
-                ['includeParticipants' => 'include_participants']
+                [
+                    'includeParticipants' => 'include_participants',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
             ),
             options: $options,
             convert: RoomSession::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 
@@ -120,11 +123,12 @@ final class SessionsRawService implements SessionsRawContract
      * @param array{
      *   filter?: SessionList1Params\Filter|FilterShape1,
      *   includeParticipants?: bool,
-     *   page?: SessionList1Params\Page|PageShape1,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|SessionList1Params $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RoomSession>>
+     * @return BaseResponse<DefaultFlatPagination<RoomSession>>
      *
      * @throws APIException
      */
@@ -144,11 +148,15 @@ final class SessionsRawService implements SessionsRawContract
             path: ['rooms/%1$s/sessions', $roomID],
             query: Util::array_transform_keys(
                 $parsed,
-                ['includeParticipants' => 'include_participants']
+                [
+                    'includeParticipants' => 'include_participants',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
             ),
             options: $options,
             convert: RoomSession::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 
@@ -160,11 +168,12 @@ final class SessionsRawService implements SessionsRawContract
      * @param string $roomSessionID the unique identifier of a room session
      * @param array{
      *   filter?: SessionRetrieveParticipantsParams\Filter|FilterShape2,
-     *   page?: SessionRetrieveParticipantsParams\Page|PageShape2,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|SessionRetrieveParticipantsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RoomParticipant>>
+     * @return BaseResponse<DefaultFlatPagination<RoomParticipant>>
      *
      * @throws APIException
      */
@@ -182,10 +191,13 @@ final class SessionsRawService implements SessionsRawContract
         return $this->client->request(
             method: 'get',
             path: ['room_sessions/%1$s/participants', $roomSessionID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: RoomParticipant::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

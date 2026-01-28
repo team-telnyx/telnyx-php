@@ -7,11 +7,10 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams\Filter;
-use Telnyx\Recordings\RecordingListParams\Page;
 use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsContract;
@@ -19,7 +18,6 @@ use Telnyx\Services\Recordings\ActionsService;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Recordings\RecordingListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Recordings\RecordingListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RecordingsService implements RecordingsContract
@@ -69,19 +67,25 @@ final class RecordingsService implements RecordingsContract
      * Returns a list of your call recordings.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<RecordingResponseData>
+     * @return DefaultFlatPagination<RecordingResponseData>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
-        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
