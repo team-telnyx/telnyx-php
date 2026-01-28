@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockDeleteResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Page;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockNewResponse;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PortingPhoneNumberBlock;
@@ -20,7 +19,6 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type ActivationRangeShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\ActivationRange
  * @phpstan-import-type PhoneNumberRangeShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams\PhoneNumberRange
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -48,21 +46,21 @@ interface PhoneNumberBlocksContract
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone number blocks
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<PortingPhoneNumberBlock>
+     * @return DefaultFlatPagination<PortingPhoneNumberBlock>
      *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api

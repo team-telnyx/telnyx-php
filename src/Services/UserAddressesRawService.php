@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserAddressesRawContract;
 use Telnyx\UserAddresses\UserAddress;
@@ -15,13 +16,11 @@ use Telnyx\UserAddresses\UserAddressCreateParams;
 use Telnyx\UserAddresses\UserAddressGetResponse;
 use Telnyx\UserAddresses\UserAddressListParams;
 use Telnyx\UserAddresses\UserAddressListParams\Filter;
-use Telnyx\UserAddresses\UserAddressListParams\Page;
 use Telnyx\UserAddresses\UserAddressListParams\Sort;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\UserAddresses\UserAddressListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\UserAddresses\UserAddressListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class UserAddressesRawService implements UserAddressesRawContract
@@ -109,11 +108,14 @@ final class UserAddressesRawService implements UserAddressesRawContract
      * Returns a list of your user addresses.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
+     *   filter?: Filter|FilterShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   sort?: Sort|value-of<Sort>,
      * }|UserAddressListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<UserAddress>>
+     * @return BaseResponse<DefaultFlatPagination<UserAddress>>
      *
      * @throws APIException
      */
@@ -130,10 +132,13 @@ final class UserAddressesRawService implements UserAddressesRawContract
         return $this->client->request(
             method: 'get',
             path: 'user_addresses',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: UserAddress::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

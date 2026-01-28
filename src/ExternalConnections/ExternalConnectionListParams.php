@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\ExternalConnectionListParams\Filter;
-use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
 
 /**
  * This endpoint returns a list of your External Connections inside the 'data' attribute of the response. External Connections are used by Telnyx customers to seamless configure SIP trunking integrations with Telnyx Partners, through External Voice Integrations in Mission Control Portal.
@@ -17,10 +16,9 @@ use Telnyx\ExternalConnections\ExternalConnectionListParams\Page;
  * @see Telnyx\Services\ExternalConnectionsService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\ExternalConnectionListParams\Page
  *
  * @phpstan-type ExternalConnectionListParamsShape = array{
- *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
+ *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class ExternalConnectionListParams implements BaseModel
@@ -35,11 +33,11 @@ final class ExternalConnectionListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -52,16 +50,17 @@ final class ExternalConnectionListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null
+        ?int $pageNumber = null,
+        ?int $pageSize = null
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
         return $self;
     }
@@ -79,15 +78,18 @@ final class ExternalConnectionListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

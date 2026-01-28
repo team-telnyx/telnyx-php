@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter;
-use Telnyx\PhoneNumbers\Voice\VoiceListParams\Page;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
 
 /**
@@ -18,11 +17,11 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
  * @see Telnyx\Services\PhoneNumbers\VoiceService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Voice\VoiceListParams\Page
  *
  * @phpstan-type VoiceListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
- *   page?: null|Page|PageShape,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  *   sort?: null|Sort|value-of<Sort>,
  * }
  */
@@ -38,11 +37,11 @@ final class VoiceListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
@@ -63,18 +62,19 @@ final class VoiceListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string|null $sort = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
@@ -93,15 +93,18 @@ final class VoiceListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

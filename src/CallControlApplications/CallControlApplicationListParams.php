@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\CallControlApplications;
 
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Page;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Sort;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -18,11 +17,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\CallControlApplicationsService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\CallControlApplications\CallControlApplicationListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\CallControlApplications\CallControlApplicationListParams\Page
  *
  * @phpstan-type CallControlApplicationListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
- *   page?: null|Page|PageShape,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  *   sort?: null|Sort|value-of<Sort>,
@@ -39,12 +36,6 @@ final class CallControlApplicationListParams implements BaseModel
      */
     #[Optional]
     public ?Filter $filter;
-
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
-     */
-    #[Optional]
-    public ?Page $page;
 
     #[Optional]
     public ?int $pageNumber;
@@ -82,12 +73,10 @@ final class CallControlApplicationListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         Sort|string|null $sort = null,
@@ -95,7 +84,6 @@ final class CallControlApplicationListParams implements BaseModel
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
@@ -112,19 +100,6 @@ final class CallControlApplicationListParams implements BaseModel
     {
         $self = clone $this;
         $self['filter'] = $filter;
-
-        return $self;
-    }
-
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
-    {
-        $self = clone $this;
-        $self['page'] = $page;
 
         return $self;
     }

@@ -7,17 +7,16 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingPhoneNumbersRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PortingPhoneNumbersRawService implements PortingPhoneNumbersRawContract
@@ -34,11 +33,11 @@ final class PortingPhoneNumbersRawService implements PortingPhoneNumbersRawContr
      * Returns a list of your porting phone numbers.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|PortingPhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PortingPhoneNumberListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<PortingPhoneNumberListResponse>>
      *
      * @throws APIException
      */
@@ -55,10 +54,13 @@ final class PortingPhoneNumbersRawService implements PortingPhoneNumbersRawContr
         return $this->client->request(
             method: 'get',
             path: 'porting_phone_numbers',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: PortingPhoneNumberListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

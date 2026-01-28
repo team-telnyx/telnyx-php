@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\CallEvents;
 
 use Telnyx\CallEvents\CallEventListParams\Filter;
-use Telnyx\CallEvents\CallEventListParams\Page;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -19,13 +18,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\CallEventsService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\CallEvents\CallEventListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\CallEvents\CallEventListParams\Page
  *
  * @phpstan-type CallEventListParamsShape = array{
- *   filter?: null|Filter|FilterShape,
- *   page?: null|Page|PageShape,
- *   pageNumber?: int|null,
- *   pageSize?: int|null,
+ *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class CallEventListParams implements BaseModel
@@ -39,12 +34,6 @@ final class CallEventListParams implements BaseModel
      */
     #[Optional]
     public ?Filter $filter;
-
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
-     */
-    #[Optional]
-    public ?Page $page;
 
     #[Optional]
     public ?int $pageNumber;
@@ -63,18 +52,15 @@ final class CallEventListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
         ?int $pageNumber = null,
-        ?int $pageSize = null,
+        ?int $pageSize = null
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
 
@@ -90,19 +76,6 @@ final class CallEventListParams implements BaseModel
     {
         $self = clone $this;
         $self['filter'] = $filter;
-
-        return $self;
-    }
-
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
-    {
-        $self = clone $this;
-        $self['page'] = $page;
 
         return $self;
     }

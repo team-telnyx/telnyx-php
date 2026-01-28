@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
@@ -60,7 +60,7 @@ interface PhoneNumbersRawContract
      * @param array<string,mixed>|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberDetailed>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberDetailed>>
      *
      * @throws APIException
      */
@@ -90,7 +90,7 @@ interface PhoneNumbersRawContract
      * @param array<string,mixed>|PhoneNumberSlimListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberSlimListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberSlimListResponse>>
      *
      * @throws APIException
      */

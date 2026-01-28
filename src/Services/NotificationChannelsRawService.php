@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\NotificationChannels\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
@@ -15,7 +16,6 @@ use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
 use Telnyx\NotificationChannels\NotificationChannelListParams;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter;
-use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
 use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
@@ -24,7 +24,6 @@ use Telnyx\ServiceContracts\NotificationChannelsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NotificationChannelsRawService implements NotificationChannelsRawContract
@@ -138,11 +137,11 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
      * List notification channels.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|NotificationChannelListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<NotificationChannel>>
+     * @return BaseResponse<DefaultFlatPagination<NotificationChannel>>
      *
      * @throws APIException
      */
@@ -159,10 +158,13 @@ final class NotificationChannelsRawService implements NotificationChannelsRawCon
         return $this->client->request(
             method: 'get',
             path: 'notification_channels',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: NotificationChannel::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

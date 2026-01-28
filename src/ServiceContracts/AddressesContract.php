@@ -8,16 +8,14 @@ use Telnyx\Addresses\Address;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressListParams\Filter;
-use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Addresses\AddressListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Addresses\AddressListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface AddressesContract
@@ -80,7 +78,6 @@ interface AddressesContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -95,16 +92,17 @@ interface AddressesContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<Address>
+     * @return DefaultFlatPagination<Address>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api

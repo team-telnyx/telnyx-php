@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
@@ -63,7 +63,7 @@ interface DocumentsRawContract
      * @param array<string,mixed>|DocumentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<DocServiceDocument>>
+     * @return BaseResponse<DefaultFlatPagination<DocServiceDocument>>
      *
      * @throws APIException
      */

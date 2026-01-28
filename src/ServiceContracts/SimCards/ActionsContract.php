@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\SimCards;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams\Filter;
-use Telnyx\SimCards\Actions\ActionListParams\Page;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
@@ -21,7 +20,6 @@ use Telnyx\SimCards\Actions\SimCardAction;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\SimCards\Actions\ActionListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\SimCards\Actions\ActionListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ActionsContract
@@ -43,18 +41,18 @@ interface ActionsContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter for SIM card actions (deepObject style). Originally: filter[sim_card_id], filter[status], filter[bulk_sim_card_action_id], filter[action_type]
-     * @param Page|PageShape $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<SimCardAction>
+     * @return DefaultFlatPagination<SimCardAction>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api

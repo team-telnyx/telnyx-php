@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
@@ -17,7 +16,6 @@ use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type GlobalIPAssignmentUpdateRequestShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest
- * @phpstan-import-type PageShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface GlobalIPAssignmentsContract
@@ -64,17 +62,17 @@ interface GlobalIPAssignmentsContract
     /**
      * @api
      *
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<GlobalIPAssignment>
+     * @return DefaultFlatPagination<GlobalIPAssignment>
      *
      * @throws APIException
      */
     public function list(
-        Page|array|null $page = null,
-        RequestOptions|array|null $requestOptions = null
-    ): DefaultPagination;
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
 
     /**
      * @api

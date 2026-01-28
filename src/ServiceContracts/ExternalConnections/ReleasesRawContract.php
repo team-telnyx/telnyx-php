@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams;
 use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
@@ -42,7 +42,7 @@ interface ReleasesRawContract
      * @param array<string,mixed>|ReleaseListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<ReleaseListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<ReleaseListResponse>>
      *
      * @throws APIException
      */

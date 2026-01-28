@@ -7,12 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\IPs\IP;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
 use Telnyx\IPs\IPListParams\Filter;
-use Telnyx\IPs\IPListParams\Page;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
@@ -20,7 +19,6 @@ use Telnyx\ServiceContracts\IPsContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\IPs\IPListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\IPs\IPListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class IPsService implements IPsContract
@@ -130,19 +128,25 @@ final class IPsService implements IPsContract
      * Get all IPs belonging to the user that match the given filters.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<IP>
+     * @return DefaultFlatPagination<IP>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
-        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

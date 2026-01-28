@@ -8,11 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt;
 use Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter;
-use Telnyx\MessagingOptouts\MessagingOptoutListParams\Page;
 use Telnyx\MessagingOptouts\MessagingOptoutListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingOptoutsRawContract;
@@ -20,7 +19,6 @@ use Telnyx\ServiceContracts\MessagingOptoutsRawContract;
 /**
  * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt
  * @phpstan-import-type FilterShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagingOptoutsRawService implements MessagingOptoutsRawContract
@@ -39,12 +37,13 @@ final class MessagingOptoutsRawService implements MessagingOptoutsRawContract
      * @param array{
      *   createdAt?: CreatedAt|CreatedAtShape,
      *   filter?: Filter|FilterShape,
-     *   page?: Page|PageShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      *   redactionEnabled?: string,
      * }|MessagingOptoutListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<MessagingOptoutListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<MessagingOptoutListResponse>>
      *
      * @throws APIException
      */
@@ -64,12 +63,15 @@ final class MessagingOptoutsRawService implements MessagingOptoutsRawContract
             query: Util::array_transform_keys(
                 $parsed,
                 [
-                    'createdAt' => 'created_at', 'redactionEnabled' => 'redaction_enabled',
+                    'createdAt' => 'created_at',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                    'redactionEnabled' => 'redaction_enabled',
                 ],
             ),
             options: $options,
             convert: MessagingOptoutListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

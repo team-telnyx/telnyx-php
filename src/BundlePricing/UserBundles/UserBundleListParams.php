@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Filter;
-use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Page;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -17,11 +16,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\BundlePricing\UserBundlesService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\UserBundles\UserBundleListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\BundlePricing\UserBundles\UserBundleListParams\Page
  *
  * @phpstan-type UserBundleListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
- *   page?: null|Page|PageShape,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  *   authorizationBearer?: string|null,
  * }
  */
@@ -37,11 +36,11 @@ final class UserBundleListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
@@ -60,17 +59,18 @@ final class UserBundleListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
-     * @param Page|PageShape|null $page
      */
     public static function with(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $authorizationBearer = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
         return $self;
@@ -89,15 +89,18 @@ final class UserBundleListParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

@@ -7,15 +7,13 @@ namespace Telnyx\Services\Messaging\Rcs;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
-use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RcsAgents\RcsAgent;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsContract;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\Messaging\Rcs\Agents\AgentListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class AgentsService implements AgentsContract
@@ -92,18 +90,20 @@ final class AgentsService implements AgentsContract
      *
      * List all RCS agents
      *
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<RcsAgent>
+     * @return DefaultFlatPagination<RcsAgent>
      *
      * @throws APIException
      */
     public function list(
-        Page|array|null $page = null,
-        RequestOptions|array|null $requestOptions = null
-    ): DefaultPagination {
-        $params = Util::removeNulls(['page' => $page]);
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

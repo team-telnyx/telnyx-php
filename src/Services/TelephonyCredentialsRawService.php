@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TelephonyCredentialsRawContract;
 use Telnyx\TelephonyCredentials\TelephonyCredential;
@@ -16,14 +17,12 @@ use Telnyx\TelephonyCredentials\TelephonyCredentialDeleteResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialGetResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Filter;
-use Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page;
 use Telnyx\TelephonyCredentials\TelephonyCredentialNewResponse;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateParams;
 use Telnyx\TelephonyCredentials\TelephonyCredentialUpdateResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\TelephonyCredentials\TelephonyCredentialListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TelephonyCredentialsRawService implements TelephonyCredentialsRawContract
@@ -133,11 +132,11 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
      * List all On-demand Credentials.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|TelephonyCredentialListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<TelephonyCredential>>
+     * @return BaseResponse<DefaultFlatPagination<TelephonyCredential>>
      *
      * @throws APIException
      */
@@ -154,10 +153,13 @@ final class TelephonyCredentialsRawService implements TelephonyCredentialsRawCon
         return $this->client->request(
             method: 'get',
             path: 'telephony_credentials',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: TelephonyCredential::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

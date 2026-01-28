@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
@@ -79,7 +79,7 @@ interface MessagingProfilesRawContract
      * @param array<string,mixed>|MessagingProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<MessagingProfile>>
+     * @return BaseResponse<DefaultFlatPagination<MessagingProfile>>
      *
      * @throws APIException
      */
@@ -110,7 +110,7 @@ interface MessagingProfilesRawContract
      * @param array<string,mixed>|MessagingProfileListPhoneNumbersParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberWithMessagingSettings>>
      *
      * @throws APIException
      */
@@ -127,7 +127,7 @@ interface MessagingProfilesRawContract
      * @param array<string,mixed>|MessagingProfileListShortCodesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<ShortCode>>
+     * @return BaseResponse<DefaultFlatPagination<ShortCode>>
      *
      * @throws APIException
      */
