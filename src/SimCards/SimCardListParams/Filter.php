@@ -10,11 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardListParams\Filter\Status;
 
 /**
- * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags].
+ * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
  *
  * @phpstan-type FilterShape = array{
  *   iccid?: string|null,
- *   msisdn?: string|null,
  *   status?: list<Status|value-of<Status>>|null,
  *   tags?: list<string>|null,
  * }
@@ -29,12 +28,6 @@ final class Filter implements BaseModel
      */
     #[Optional]
     public ?string $iccid;
-
-    /**
-     * A search string to match for the SIM card's MSISDN.
-     */
-    #[Optional]
-    public ?string $msisdn;
 
     /**
      * Filter by a SIM card's status.
@@ -74,14 +67,12 @@ final class Filter implements BaseModel
      */
     public static function with(
         ?string $iccid = null,
-        ?string $msisdn = null,
         ?array $status = null,
-        ?array $tags = null,
+        ?array $tags = null
     ): self {
         $self = new self;
 
         null !== $iccid && $self['iccid'] = $iccid;
-        null !== $msisdn && $self['msisdn'] = $msisdn;
         null !== $status && $self['status'] = $status;
         null !== $tags && $self['tags'] = $tags;
 
@@ -95,17 +86,6 @@ final class Filter implements BaseModel
     {
         $self = clone $this;
         $self['iccid'] = $iccid;
-
-        return $self;
-    }
-
-    /**
-     * A search string to match for the SIM card's MSISDN.
-     */
-    public function withMsisdn(string $msisdn): self
-    {
-        $self = clone $this;
-        $self['msisdn'] = $msisdn;
 
         return $self;
     }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\ChannelZones;
 
-use Telnyx\ChannelZones\ChannelZoneListParams\Page;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -15,9 +14,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\ChannelZonesService::list()
  *
- * @phpstan-import-type PageShape from \Telnyx\ChannelZones\ChannelZoneListParams\Page
- *
- * @phpstan-type ChannelZoneListParamsShape = array{page?: null|Page|PageShape}
+ * @phpstan-type ChannelZoneListParamsShape = array{
+ *   pageNumber?: int|null, pageSize?: int|null
+ * }
  */
 final class ChannelZoneListParams implements BaseModel
 {
@@ -25,11 +24,11 @@ final class ChannelZoneListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
     #[Optional]
-    public ?Page $page;
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -40,27 +39,31 @@ final class ChannelZoneListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param Page|PageShape|null $page
      */
-    public static function with(Page|array|null $page = null): self
-    {
+    public static function with(
+        ?int $pageNumber = null,
+        ?int $pageSize = null
+    ): self {
         $self = new self;
 
-        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
         return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     *
-     * @param Page|PageShape $page
-     */
-    public function withPage(Page|array $page): self
+    public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
-        $self['page'] = $page;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
         return $self;
     }

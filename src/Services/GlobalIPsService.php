@@ -7,17 +7,15 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
-use Telnyx\GlobalIPs\GlobalIPListParams\Page;
 use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPsContract;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\GlobalIPs\GlobalIPListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class GlobalIPsService implements GlobalIPsContract
@@ -88,18 +86,20 @@ final class GlobalIPsService implements GlobalIPsContract
      *
      * List all Global IPs.
      *
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<GlobalIPListResponse>
+     * @return DefaultFlatPagination<GlobalIPListResponse>
      *
      * @throws APIException
      */
     public function list(
-        Page|array|null $page = null,
-        RequestOptions|array|null $requestOptions = null
-    ): DefaultPagination {
-        $params = Util::removeNulls(['page' => $page]);
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

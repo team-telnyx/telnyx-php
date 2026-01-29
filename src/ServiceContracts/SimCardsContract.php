@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\SimCardDeleteResponse;
 use Telnyx\SimCards\SimCardGetActivationCodeResponse;
@@ -14,7 +13,6 @@ use Telnyx\SimCards\SimCardGetDeviceDetailsResponse;
 use Telnyx\SimCards\SimCardGetPublicIPResponse;
 use Telnyx\SimCards\SimCardGetResponse;
 use Telnyx\SimCards\SimCardListParams\Filter;
-use Telnyx\SimCards\SimCardListParams\Page;
 use Telnyx\SimCards\SimCardListParams\Sort;
 use Telnyx\SimCards\SimCardListWirelessConnectivityLogsResponse;
 use Telnyx\SimCards\SimCardUpdateParams\DataLimit;
@@ -26,7 +24,6 @@ use Telnyx\SimpleSimCard;
  * @phpstan-import-type DataLimitShape from \Telnyx\SimCards\SimCardUpdateParams\DataLimit
  * @phpstan-import-type SimCardStatusShape from \Telnyx\SimCardStatus
  * @phpstan-import-type FilterShape from \Telnyx\SimCards\SimCardListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\SimCards\SimCardListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface SimCardsContract
@@ -74,14 +71,13 @@ interface SimCardsContract
     /**
      * @api
      *
-     * @param Filter|FilterShape $filter Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags]
+     * @param Filter|FilterShape $filter Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status]
      * @param string $filterSimCardGroupID a valid SIM card group ID
      * @param bool $includeSimCardGroup it includes the associated SIM card group object in the response when present
-     * @param Page|PageShape $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Sorts SIM cards by the given field. Defaults to ascending order unless field is prefixed with a minus sign.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<SimpleSimCard>
+     * @return DefaultFlatPagination<SimpleSimCard>
      *
      * @throws APIException
      */
@@ -89,10 +85,11 @@ interface SimCardsContract
         Filter|array|null $filter = null,
         ?string $filterSimCardGroupID = null,
         bool $includeSimCardGroup = false,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api

@@ -7,19 +7,18 @@ namespace Telnyx\Services\ExternalConnections;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForLogMessages;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\LogMessagesRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class LogMessagesRawService implements LogMessagesRawContract
@@ -61,7 +60,7 @@ final class LogMessagesRawService implements LogMessagesRawContract
      * Retrieve a list of log messages for all external connections associated with your account.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|LogMessageListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -82,7 +81,10 @@ final class LogMessagesRawService implements LogMessagesRawContract
         return $this->client->request(
             method: 'get',
             path: 'external_connections/log_messages',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: LogMessageListResponse::class,
             page: DefaultPaginationForLogMessages::class,

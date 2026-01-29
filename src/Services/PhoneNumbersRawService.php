@@ -8,14 +8,13 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
-use Telnyx\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
@@ -26,9 +25,7 @@ use Telnyx\ServiceContracts\PhoneNumbersRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter as FilterShape1
- * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page as PageShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PhoneNumbersRawService implements PhoneNumbersRawContract
@@ -112,12 +109,13 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      * @param array{
      *   filter?: Filter|FilterShape,
      *   handleMessagingProfileError?: HandleMessagingProfileError|value-of<HandleMessagingProfileError>,
-     *   page?: Page|PageShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      *   sort?: Sort|value-of<Sort>,
      * }|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberDetailed>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberDetailed>>
      *
      * @throws APIException
      */
@@ -136,11 +134,15 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
             path: 'phone_numbers',
             query: Util::array_transform_keys(
                 $parsed,
-                ['handleMessagingProfileError' => 'handle_messaging_profile_error'],
+                [
+                    'handleMessagingProfileError' => 'handle_messaging_profile_error',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
             ),
             options: $options,
             convert: PhoneNumberDetailed::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 
@@ -178,12 +180,13 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *   filter?: PhoneNumberSlimListParams\Filter|FilterShape1,
      *   includeConnection?: bool,
      *   includeTags?: bool,
-     *   page?: PhoneNumberSlimListParams\Page|PageShape1,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      *   sort?: PhoneNumberSlimListParams\Sort|value-of<PhoneNumberSlimListParams\Sort>,
      * }|PhoneNumberSlimListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberSlimListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberSlimListResponse>>
      *
      * @throws APIException
      */
@@ -205,11 +208,13 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
                 [
                     'includeConnection' => 'include_connection',
                     'includeTags' => 'include_tags',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
                 ],
             ),
             options: $options,
             convert: PhoneNumberSlimListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

@@ -5,20 +5,18 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 use Telnyx\Porting\Reports\PortingReport;
 use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 use Telnyx\Porting\Reports\ReportGetResponse;
 use Telnyx\Porting\Reports\ReportListParams\Filter;
-use Telnyx\Porting\Reports\ReportListParams\Page;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type ExportPortingOrdersCsvReportShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport
  * @phpstan-import-type FilterShape from \Telnyx\Porting\Reports\ReportListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Porting\Reports\ReportListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ReportsContract
@@ -55,16 +53,16 @@ interface ReportsContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<PortingReport>
+     * @return DefaultFlatPagination<PortingReport>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 }

@@ -7,7 +7,8 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\Action;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
@@ -15,7 +16,6 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteParam
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Filter;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Page;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Sort;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
 use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber;
@@ -25,7 +25,6 @@ use Telnyx\ServiceContracts\PortingOrders\AssociatedPhoneNumbersRawContract;
 /**
  * @phpstan-import-type PhoneNumberRangeShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberListParams\Sort
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -80,11 +79,14 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
      *
      * @param string $portingOrderID Identifies the Porting Order associated with the phone numbers
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
+     *   filter?: Filter|FilterShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   sort?: Sort|SortShape,
      * }|AssociatedPhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PortingAssociatedPhoneNumber>>
+     * @return BaseResponse<DefaultFlatPagination<PortingAssociatedPhoneNumber>>
      *
      * @throws APIException
      */
@@ -102,10 +104,13 @@ final class AssociatedPhoneNumbersRawService implements AssociatedPhoneNumbersRa
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/associated_phone_numbers', $portingOrderID],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: PortingAssociatedPhoneNumber::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

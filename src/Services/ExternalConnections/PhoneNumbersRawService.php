@@ -7,12 +7,12 @@ namespace Telnyx\Services\ExternalConnections;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberRetrieveParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
@@ -21,7 +21,6 @@ use Telnyx\ServiceContracts\ExternalConnections\PhoneNumbersRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PhoneNumbersRawService implements PhoneNumbersRawContract
@@ -112,11 +111,11 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *
      * @param string $id identifies the resource
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<ExternalConnectionPhoneNumber>>
+     * @return BaseResponse<DefaultFlatPagination<ExternalConnectionPhoneNumber>>
      *
      * @throws APIException
      */
@@ -134,10 +133,13 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
         return $this->client->request(
             method: 'get',
             path: ['external_connections/%1$s/phone_numbers', $id],
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: ExternalConnectionPhoneNumber::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

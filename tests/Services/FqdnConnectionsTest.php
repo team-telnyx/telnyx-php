@@ -9,7 +9,7 @@ use Telnyx\Client;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
@@ -169,7 +169,7 @@ final class FqdnConnectionsTest extends TestCase
         $page = $this->client->fqdnConnections->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

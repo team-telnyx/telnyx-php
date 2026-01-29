@@ -14,7 +14,6 @@ use Telnyx\CallControlApplications\CallControlApplicationGetResponse;
 use Telnyx\CallControlApplications\CallControlApplicationInbound;
 use Telnyx\CallControlApplications\CallControlApplicationListParams;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Filter;
-use Telnyx\CallControlApplications\CallControlApplicationListParams\Page;
 use Telnyx\CallControlApplications\CallControlApplicationListParams\Sort;
 use Telnyx\CallControlApplications\CallControlApplicationNewResponse;
 use Telnyx\CallControlApplications\CallControlApplicationOutbound;
@@ -30,7 +29,6 @@ use Telnyx\ServiceContracts\CallControlApplicationsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\CallControlApplications\CallControlApplicationListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\CallControlApplications\CallControlApplicationListParams\Page
  * @phpstan-import-type CallControlApplicationInboundShape from \Telnyx\CallControlApplications\CallControlApplicationInbound
  * @phpstan-import-type CallControlApplicationOutboundShape from \Telnyx\CallControlApplications\CallControlApplicationOutbound
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -170,7 +168,6 @@ final class CallControlApplicationsRawService implements CallControlApplications
      *
      * @param array{
      *   filter?: Filter|FilterShape,
-     *   page?: Page|PageShape,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   sort?: Sort|value-of<Sort>,

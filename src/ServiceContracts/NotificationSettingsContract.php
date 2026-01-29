@@ -5,20 +5,18 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\NotificationSettings\NotificationSetting;
 use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 use Telnyx\NotificationSettings\NotificationSettingDeleteResponse;
 use Telnyx\NotificationSettings\NotificationSettingGetResponse;
 use Telnyx\NotificationSettings\NotificationSettingListParams\Filter;
-use Telnyx\NotificationSettings\NotificationSettingListParams\Page;
 use Telnyx\NotificationSettings\NotificationSettingNewResponse;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type ParameterShape from \Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter
  * @phpstan-import-type FilterShape from \Telnyx\NotificationSettings\NotificationSettingListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\NotificationSettings\NotificationSettingListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface NotificationSettingsContract
@@ -59,18 +57,18 @@ interface NotificationSettingsContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<NotificationSetting>
+     * @return DefaultFlatPagination<NotificationSetting>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api

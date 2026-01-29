@@ -7,16 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter;
-use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobileNetworkOperatorsContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MobileNetworkOperatorsService implements MobileNetworkOperatorsContract
@@ -40,19 +38,25 @@ final class MobileNetworkOperatorsService implements MobileNetworkOperatorsContr
      * Telnyx has a set of GSM mobile operators partners that are available through our mobile network roaming. This resource is entirely managed by Telnyx and may change over time. That means that this resource won't allow any write operations for it. Still, it's available so it can be used as a support resource that can be related to other resources or become a configuration option.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled]
-     * @param Page|PageShape $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<MobileNetworkOperatorListResponse>
+     * @return DefaultFlatPagination<MobileNetworkOperatorListResponse>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
-        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

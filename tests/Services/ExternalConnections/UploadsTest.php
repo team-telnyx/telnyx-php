@@ -6,7 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\ExternalConnections\Uploads\Upload;
 use Telnyx\ExternalConnections\Uploads\UploadGetResponse;
 use Telnyx\ExternalConnections\Uploads\UploadNewResponse;
@@ -121,7 +121,7 @@ final class UploadsTest extends TestCase
         $page = $this->client->externalConnections->uploads->list('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultPagination::class, $page);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -7,7 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrdersRawContract;
 use Telnyx\SimCardOrders\SimCardOrder;
@@ -15,12 +16,10 @@ use Telnyx\SimCardOrders\SimCardOrderCreateParams;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
 use Telnyx\SimCardOrders\SimCardOrderListParams;
 use Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
-use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SimCardOrdersRawService implements SimCardOrdersRawContract
@@ -93,11 +92,11 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
      * Get all SIM card orders according to filters.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|SimCardOrderListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<SimCardOrder>>
+     * @return BaseResponse<DefaultFlatPagination<SimCardOrder>>
      *
      * @throws APIException
      */
@@ -114,10 +113,13 @@ final class SimCardOrdersRawService implements SimCardOrdersRawContract
         return $this->client->request(
             method: 'get',
             path: 'sim_card_orders',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: SimCardOrder::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

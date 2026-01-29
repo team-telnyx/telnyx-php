@@ -7,18 +7,16 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\NumberBlockOrders\NumberBlockOrder;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter;
-use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberBlockOrdersContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NumberBlockOrdersService implements NumberBlockOrdersContract
@@ -100,19 +98,25 @@ final class NumberBlockOrdersService implements NumberBlockOrdersContract
      * Get a paginated list of number block orders.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<NumberBlockOrder>
+     * @return DefaultFlatPagination<NumberBlockOrder>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
-        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

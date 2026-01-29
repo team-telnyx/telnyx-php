@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\SimCards;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
@@ -48,7 +48,7 @@ interface ActionsRawContract
      * @param array<string,mixed>|ActionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<SimCardAction>>
+     * @return BaseResponse<DefaultFlatPagination<SimCardAction>>
      *
      * @throws APIException
      */

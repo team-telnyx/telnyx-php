@@ -7,7 +7,8 @@ namespace Telnyx\Services\PhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 use Telnyx\PhoneNumbers\Voice\CallForwarding;
 use Telnyx\PhoneNumbers\Voice\CallRecording;
@@ -16,7 +17,6 @@ use Telnyx\PhoneNumbers\Voice\MediaFeatures;
 use Telnyx\PhoneNumbers\Voice\VoiceGetResponse;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter;
-use Telnyx\PhoneNumbers\Voice\VoiceListParams\Page;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Sort;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams;
 use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\InboundCallScreening;
@@ -31,7 +31,6 @@ use Telnyx\ServiceContracts\PhoneNumbers\VoiceRawContract;
  * @phpstan-import-type CnamListingShape from \Telnyx\PhoneNumbers\Voice\CnamListing
  * @phpstan-import-type MediaFeaturesShape from \Telnyx\PhoneNumbers\Voice\MediaFeatures
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Voice\VoiceListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoiceRawService implements VoiceRawContract
@@ -116,11 +115,14 @@ final class VoiceRawService implements VoiceRawContract
      * List phone numbers with voice settings
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
+     *   filter?: Filter|FilterShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   sort?: Sort|value-of<Sort>,
      * }|VoiceListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PhoneNumberWithVoiceSettings>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberWithVoiceSettings>>
      *
      * @throws APIException
      */
@@ -137,10 +139,13 @@ final class VoiceRawService implements VoiceRawContract
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers/voice',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: PhoneNumberWithVoiceSettings::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

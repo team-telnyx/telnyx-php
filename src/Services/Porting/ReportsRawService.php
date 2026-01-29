@@ -7,7 +7,8 @@ namespace Telnyx\Services\Porting;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 use Telnyx\Porting\Reports\PortingReport;
 use Telnyx\Porting\Reports\ReportCreateParams;
@@ -15,7 +16,6 @@ use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 use Telnyx\Porting\Reports\ReportGetResponse;
 use Telnyx\Porting\Reports\ReportListParams;
 use Telnyx\Porting\Reports\ReportListParams\Filter;
-use Telnyx\Porting\Reports\ReportListParams\Page;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\ReportsRawContract;
@@ -23,7 +23,6 @@ use Telnyx\ServiceContracts\Porting\ReportsRawContract;
 /**
  * @phpstan-import-type ExportPortingOrdersCsvReportShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport
  * @phpstan-import-type FilterShape from \Telnyx\Porting\Reports\ReportListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Porting\Reports\ReportListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ReportsRawService implements ReportsRawContract
@@ -99,11 +98,11 @@ final class ReportsRawService implements ReportsRawContract
      * List the reports generated about porting operations.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|ReportListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PortingReport>>
+     * @return BaseResponse<DefaultFlatPagination<PortingReport>>
      *
      * @throws APIException
      */
@@ -120,10 +119,13 @@ final class ReportsRawService implements ReportsRawContract
         return $this->client->request(
             method: 'get',
             path: 'porting/reports',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: PortingReport::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

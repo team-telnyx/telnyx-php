@@ -9,21 +9,19 @@ use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item;
 use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Filter;
-use Telnyx\BundlePricing\UserBundles\UserBundleListParams\Page;
 use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\UserBundlesContract;
 
 /**
  * @phpstan-import-type ItemShape from \Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item
  * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\UserBundles\UserBundleListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\BundlePricing\UserBundles\UserBundleListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter as FilterShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -106,24 +104,27 @@ final class UserBundlesService implements UserBundlesContract
      * Get a paginated list of user bundles.
      *
      * @param Filter|FilterShape $filter Query param: Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942
-     * @param Page|PageShape $page Query param: Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param int $pageNumber Query param
+     * @param int $pageSize Query param
      * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<UserBundle>
+     * @return DefaultFlatPagination<UserBundle>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $authorizationBearer = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
-                'page' => $page,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
                 'authorizationBearer' => $authorizationBearer,
             ],
         );

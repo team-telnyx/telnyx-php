@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\WidgetSettings\AudioVisualizerConfig;
 use Telnyx\AI\Assistants\WidgetSettings\DefaultState;
 use Telnyx\AI\Assistants\WidgetSettings\Position;
 use Telnyx\AI\Assistants\WidgetSettings\Theme;
@@ -14,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Configuration settings for the assistant's web widget.
  *
- * @phpstan-import-type AudioVisualizerConfigShape from \Telnyx\AI\Assistants\AudioVisualizerConfig
+ * @phpstan-import-type AudioVisualizerConfigShape from \Telnyx\AI\Assistants\WidgetSettings\AudioVisualizerConfig
  *
  * @phpstan-type WidgetSettingsShape = array{
  *   agentThinkingText?: string|null,

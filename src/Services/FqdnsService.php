@@ -7,12 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Fqdns\Fqdn;
 use Telnyx\Fqdns\FqdnDeleteResponse;
 use Telnyx\Fqdns\FqdnGetResponse;
 use Telnyx\Fqdns\FqdnListParams\Filter;
-use Telnyx\Fqdns\FqdnListParams\Page;
 use Telnyx\Fqdns\FqdnNewResponse;
 use Telnyx\Fqdns\FqdnUpdateResponse;
 use Telnyx\RequestOptions;
@@ -20,7 +19,6 @@ use Telnyx\ServiceContracts\FqdnsContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Fqdns\FqdnListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Fqdns\FqdnListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class FqdnsService implements FqdnsContract
@@ -136,19 +134,25 @@ final class FqdnsService implements FqdnsContract
      * Get all FQDNs belonging to the user that match the given filters.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type]
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<Fqdn>
+     * @return DefaultFlatPagination<Fqdn>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination {
-        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

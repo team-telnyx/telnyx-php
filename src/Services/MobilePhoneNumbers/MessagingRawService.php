@@ -7,16 +7,15 @@ namespace Telnyx\Services\MobilePhoneNumbers;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams;
-use Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams\Page;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePhoneNumbers\MessagingRawContract;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagingRawService implements MessagingRawContract
@@ -57,10 +56,10 @@ final class MessagingRawService implements MessagingRawContract
      *
      * List mobile phone numbers with messaging settings
      *
-     * @param array{page?: Page|PageShape}|MessagingListParams $params
+     * @param array{pageNumber?: int, pageSize?: int}|MessagingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<MessagingListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<MessagingListResponse>>
      *
      * @throws APIException
      */
@@ -77,10 +76,13 @@ final class MessagingRawService implements MessagingRawContract
         return $this->client->request(
             method: 'get',
             path: 'mobile_phone_numbers/messaging',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: MessagingListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

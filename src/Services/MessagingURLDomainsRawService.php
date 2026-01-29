@@ -7,15 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams;
-use Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingURLDomainsRawContract;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\MessagingURLDomains\MessagingURLDomainListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContract
@@ -31,10 +30,12 @@ final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContr
      *
      * List messaging URL domains
      *
-     * @param array{page?: Page|PageShape}|MessagingURLDomainListParams $params
+     * @param array{
+     *   pageNumber?: int, pageSize?: int
+     * }|MessagingURLDomainListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<MessagingURLDomainListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<MessagingURLDomainListResponse>>
      *
      * @throws APIException
      */
@@ -51,10 +52,13 @@ final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContr
         return $this->client->request(
             method: 'get',
             path: 'messaging_url_domains',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: MessagingURLDomainListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

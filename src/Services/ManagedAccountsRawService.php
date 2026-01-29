@@ -8,13 +8,12 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\ManagedAccounts\ManagedAccountCreateParams;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
 use Telnyx\ManagedAccounts\ManagedAccountListParams;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter;
-use Telnyx\ManagedAccounts\ManagedAccountListParams\Page;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse;
 use Telnyx\ManagedAccounts\ManagedAccountNewResponse;
@@ -27,7 +26,6 @@ use Telnyx\ServiceContracts\ManagedAccountsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ManagedAccountsRawService implements ManagedAccountsRawContract
@@ -143,12 +141,13 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
      * @param array{
      *   filter?: Filter|FilterShape,
      *   includeCancelledAccounts?: bool,
-     *   page?: Page|PageShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      *   sort?: Sort|value-of<Sort>,
      * }|ManagedAccountListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<ManagedAccountListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<ManagedAccountListResponse>>
      *
      * @throws APIException
      */
@@ -167,11 +166,15 @@ final class ManagedAccountsRawService implements ManagedAccountsRawContract
             path: 'managed_accounts',
             query: Util::array_transform_keys(
                 $parsed,
-                ['includeCancelledAccounts' => 'include_cancelled_accounts']
+                [
+                    'includeCancelledAccounts' => 'include_cancelled_accounts',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
             ),
             options: $options,
             convert: ManagedAccountListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Recordings\RecordingDeleteResponse;
 use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams;
@@ -39,7 +39,7 @@ interface RecordingsRawContract
      * @param array<string,mixed>|RecordingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RecordingResponseData>>
+     * @return BaseResponse<DefaultFlatPagination<RecordingResponseData>>
      *
      * @throws APIException
      */

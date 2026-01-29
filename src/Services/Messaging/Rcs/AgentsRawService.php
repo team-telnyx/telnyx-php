@@ -7,9 +7,9 @@ namespace Telnyx\Services\Messaging\Rcs;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams;
-use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
 use Telnyx\Messaging\Rcs\Agents\AgentUpdateParams;
 use Telnyx\RcsAgents\RcsAgent;
 use Telnyx\RcsAgents\RcsAgentResponse;
@@ -17,7 +17,6 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging\Rcs\AgentsRawContract;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\Messaging\Rcs\Agents\AgentListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class AgentsRawService implements AgentsRawContract
@@ -95,10 +94,10 @@ final class AgentsRawService implements AgentsRawContract
      *
      * List all RCS agents
      *
-     * @param array{page?: Page|PageShape}|AgentListParams $params
+     * @param array{pageNumber?: int, pageSize?: int}|AgentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RcsAgent>>
+     * @return BaseResponse<DefaultFlatPagination<RcsAgent>>
      *
      * @throws APIException
      */
@@ -115,10 +114,13 @@ final class AgentsRawService implements AgentsRawContract
         return $this->client->request(
             method: 'get',
             path: 'messaging/rcs/agents',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: RcsAgent::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

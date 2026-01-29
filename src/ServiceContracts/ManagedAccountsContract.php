@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter;
-use Telnyx\ManagedAccounts\ManagedAccountListParams\Page;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 use Telnyx\ManagedAccounts\ManagedAccountListResponse;
 use Telnyx\ManagedAccounts\ManagedAccountNewResponse;
@@ -19,7 +18,6 @@ use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ManagedAccountsContract
@@ -78,7 +76,6 @@ interface ManagedAccountsContract
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq]
      * @param bool $includeCancelledAccounts specifies if cancelled accounts should be included in the results
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -93,17 +90,18 @@ interface ManagedAccountsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<ManagedAccountListResponse>
+     * @return DefaultFlatPagination<ManagedAccountListResponse>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
         bool $includeCancelledAccounts = false,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api
