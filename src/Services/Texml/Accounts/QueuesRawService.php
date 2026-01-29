@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\DefaultPaginationForQueues;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\QueuesRawContract;
 use Telnyx\Texml\Accounts\Queues\QueueCreateParams;
@@ -150,7 +151,7 @@ final class QueuesRawService implements QueuesRawContract
      * }|QueueListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<QueueListResponse>
+     * @return BaseResponse<DefaultPaginationForQueues<QueueListResponse>>
      *
      * @throws APIException
      */
@@ -180,6 +181,7 @@ final class QueuesRawService implements QueuesRawContract
             ),
             options: $options,
             convert: QueueListResponse::class,
+            page: DefaultPaginationForQueues::class,
         );
     }
 

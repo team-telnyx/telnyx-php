@@ -5,18 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomGetResponse;
 use Telnyx\Rooms\RoomListParams\Filter;
-use Telnyx\Rooms\RoomListParams\Page;
 use Telnyx\Rooms\RoomNewResponse;
 use Telnyx\Rooms\RoomUpdateResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Rooms\RoomListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Rooms\RoomListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface RoomsContract
@@ -89,19 +87,19 @@ interface RoomsContract
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
      * @param bool $includeSessions to decide if room sessions should be included in the response
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPagination<Room>
+     * @return DefaultFlatPagination<Room>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
         ?bool $includeSessions = null,
-        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPagination;
+    ): DefaultFlatPagination;
 
     /**
      * @api

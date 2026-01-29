@@ -7,14 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\RoomCompositions\RoomComposition;
 use Telnyx\RoomCompositions\RoomCompositionCreateParams;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
 use Telnyx\RoomCompositions\RoomCompositionListParams;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Filter;
-use Telnyx\RoomCompositions\RoomCompositionListParams\Page;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
 use Telnyx\RoomCompositions\VideoRegion;
 use Telnyx\ServiceContracts\RoomCompositionsRawContract;
@@ -22,7 +22,6 @@ use Telnyx\ServiceContracts\RoomCompositionsRawContract;
 /**
  * @phpstan-import-type VideoRegionShape from \Telnyx\RoomCompositions\VideoRegion
  * @phpstan-import-type FilterShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RoomCompositionsRawService implements RoomCompositionsRawContract
@@ -103,11 +102,11 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
      * View a list of room compositions.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|RoomCompositionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<RoomComposition>>
+     * @return BaseResponse<DefaultFlatPagination<RoomComposition>>
      *
      * @throws APIException
      */
@@ -124,10 +123,13 @@ final class RoomCompositionsRawService implements RoomCompositionsRawContract
         return $this->client->request(
             method: 'get',
             path: 'room_compositions',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: RoomComposition::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

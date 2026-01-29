@@ -7,11 +7,11 @@ namespace Telnyx\Services\Portouts;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
 use Telnyx\Portouts\Events\EventListParams\Filter;
-use Telnyx\Portouts\Events\EventListParams\Page;
 use Telnyx\Portouts\Events\EventListResponse;
 use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
 use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment;
@@ -21,7 +21,6 @@ use Telnyx\ServiceContracts\Portouts\EventsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Portouts\Events\EventListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Portouts\Events\EventListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EventsRawService implements EventsRawContract
@@ -63,11 +62,11 @@ final class EventsRawService implements EventsRawContract
      * Returns a list of all port-out events.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|EventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>,>
+     * @return BaseResponse<DefaultFlatPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>,>
      *
      * @throws APIException
      */
@@ -84,10 +83,13 @@ final class EventsRawService implements EventsRawContract
         return $this->client->request(
             method: 'get',
             path: 'portouts/events',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: EventListResponse::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

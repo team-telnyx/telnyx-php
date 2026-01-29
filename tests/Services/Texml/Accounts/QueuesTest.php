@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPaginationForQueues;
 use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
 use Telnyx\Texml\Accounts\Queues\QueueListResponse;
 use Telnyx\Texml\Accounts\Queues\QueueNewResponse;
@@ -115,10 +116,15 @@ final class QueuesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texml->accounts->queues->list('account_sid');
+        $page = $this->client->texml->accounts->queues->list('account_sid');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(QueueListResponse::class, $result);
+        $this->assertInstanceOf(DefaultPaginationForQueues::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(QueueListResponse::class, $item);
+        }
     }
 
     #[Test]

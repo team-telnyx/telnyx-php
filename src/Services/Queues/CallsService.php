@@ -9,13 +9,11 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
-use Telnyx\Queues\Calls\CallListParams\Page;
 use Telnyx\Queues\Calls\CallListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Queues\CallsContract;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\Queues\Calls\CallListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CallsService implements CallsContract
@@ -91,7 +89,6 @@ final class CallsService implements CallsContract
      * Retrieve the list of calls in an existing queue
      *
      * @param string $queueName Uniquely identifies the queue by name
-     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<CallListResponse>
@@ -100,13 +97,12 @@ final class CallsService implements CallsContract
      */
     public function list(
         string $queueName,
-        Page|array|null $page = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
-            ['page' => $page, 'pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
         );
 
         // @phpstan-ignore-next-line argument.type

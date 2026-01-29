@@ -7,7 +7,6 @@ namespace Telnyx\AI\Assistants;
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
-use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingWebhookTool;
 use Telnyx\AI\Assistants\AssistantTool\SendMessageTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\Core\Concerns\SdkUnion;
@@ -17,7 +16,7 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 /**
  * The handoff tool allows the assistant to hand off control of the conversation to another AI assistant. By default, this will happen transparently to the end user.
  *
- * @phpstan-import-type InferenceEmbeddingWebhookToolShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingWebhookTool
+ * @phpstan-import-type InferenceEmbeddingWebhookToolParamsShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams
  * @phpstan-import-type RetrievalToolShape from \Telnyx\AI\Assistants\RetrievalTool
  * @phpstan-import-type HandoffToolShape from \Telnyx\AI\Assistants\AssistantTool\HandoffTool
  * @phpstan-import-type HangupToolShape from \Telnyx\AI\Assistants\HangupTool
@@ -26,8 +25,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type DtmfToolShape from \Telnyx\AI\Assistants\AssistantTool\DtmfTool
  * @phpstan-import-type SendMessageToolShape from \Telnyx\AI\Assistants\AssistantTool\SendMessageTool
  *
- * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookTool|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|SipReferTool|DtmfTool|SendMessageTool
- * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape
+ * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|SipReferTool|DtmfTool|SendMessageTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape
  */
 final class AssistantTool implements ConverterSource
 {
@@ -44,7 +43,7 @@ final class AssistantTool implements ConverterSource
     public static function variants(): array
     {
         return [
-            'webhook' => InferenceEmbeddingWebhookTool::class,
+            'webhook' => InferenceEmbeddingWebhookToolParams::class,
             'retrieval' => RetrievalTool::class,
             'handoff' => HandoffTool::class,
             'hangup' => HangupTool::class,

@@ -7,14 +7,14 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\IPs\IP;
 use Telnyx\IPs\IPCreateParams;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
 use Telnyx\IPs\IPListParams;
 use Telnyx\IPs\IPListParams\Filter;
-use Telnyx\IPs\IPListParams\Page;
 use Telnyx\IPs\IPNewResponse;
 use Telnyx\IPs\IPUpdateParams;
 use Telnyx\IPs\IPUpdateResponse;
@@ -23,7 +23,6 @@ use Telnyx\ServiceContracts\IPsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\IPs\IPListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\IPs\IPListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class IPsRawService implements IPsRawContract
@@ -133,11 +132,11 @@ final class IPsRawService implements IPsRawContract
      * Get all IPs belonging to the user that match the given filters.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|IPListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<IP>>
+     * @return BaseResponse<DefaultFlatPagination<IP>>
      *
      * @throws APIException
      */
@@ -154,10 +153,13 @@ final class IPsRawService implements IPsRawContract
         return $this->client->request(
             method: 'get',
             path: 'ips',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: IP::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 
