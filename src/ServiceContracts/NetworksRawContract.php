@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
@@ -77,7 +77,7 @@ interface NetworksRawContract
      * @param array<string,mixed>|NetworkListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<NetworkListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<NetworkListResponse>>
      *
      * @throws APIException
      */
@@ -108,7 +108,7 @@ interface NetworksRawContract
      * @param array<string,mixed>|NetworkListInterfacesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<NetworkListInterfacesResponse>>
+     * @return BaseResponse<DefaultFlatPagination<NetworkListInterfacesResponse>>
      *
      * @throws APIException
      */

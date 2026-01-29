@@ -14,7 +14,7 @@ use Telnyx\CredentialConnections\CredentialConnectionListParams;
 use Telnyx\CredentialConnections\CredentialConnectionNewResponse;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateResponse;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -75,7 +75,7 @@ interface CredentialConnectionsRawContract
      * @param array<string,mixed>|CredentialConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<CredentialConnection>>
+     * @return BaseResponse<DefaultFlatPagination<CredentialConnection>>
      *
      * @throws APIException
      */

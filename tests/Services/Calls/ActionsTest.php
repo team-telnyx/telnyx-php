@@ -937,7 +937,7 @@ final class ActionsTest extends TestCase
                 'octaves' => 0.1, 'pitch' => 0.8, 'semitone' => -2, 'track' => 'both',
             ],
             targetLegClientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-            timeLimitSecs: 60,
+            timeLimitSecs: 600,
             timeoutSecs: 60,
             webhookURL: 'https://www.example.com/server-b/',
             webhookURLMethod: 'POST',

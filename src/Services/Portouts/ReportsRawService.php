@@ -7,7 +7,8 @@ namespace Telnyx\Services\Portouts;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport;
 use Telnyx\Portouts\Reports\PortoutReport;
 use Telnyx\Portouts\Reports\ReportCreateParams;
@@ -15,7 +16,6 @@ use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
 use Telnyx\Portouts\Reports\ReportGetResponse;
 use Telnyx\Portouts\Reports\ReportListParams;
 use Telnyx\Portouts\Reports\ReportListParams\Filter;
-use Telnyx\Portouts\Reports\ReportListParams\Page;
 use Telnyx\Portouts\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\ReportsRawContract;
@@ -23,7 +23,6 @@ use Telnyx\ServiceContracts\Portouts\ReportsRawContract;
 /**
  * @phpstan-import-type ExportPortoutsCsvReportShape from \Telnyx\Portouts\Reports\ExportPortoutsCsvReport
  * @phpstan-import-type FilterShape from \Telnyx\Portouts\Reports\ReportListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\Portouts\Reports\ReportListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ReportsRawService implements ReportsRawContract
@@ -99,11 +98,11 @@ final class ReportsRawService implements ReportsRawContract
      * List the reports generated about port-out operations.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|ReportListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<PortoutReport>>
+     * @return BaseResponse<DefaultFlatPagination<PortoutReport>>
      *
      * @throws APIException
      */
@@ -120,10 +119,13 @@ final class ReportsRawService implements ReportsRawContract
         return $this->client->request(
             method: 'get',
             path: 'portouts/reports',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: PortoutReport::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

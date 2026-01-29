@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\WireguardPeers\WireguardPeerCreateParams;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
@@ -75,7 +75,7 @@ interface WireguardPeersRawContract
      * @param array<string,mixed>|WireguardPeerListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<WireguardPeerListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WireguardPeerListResponse>>
      *
      * @throws APIException
      */

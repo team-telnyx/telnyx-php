@@ -7,21 +7,20 @@ namespace Telnyx\Services\PhoneNumberBlocks;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPagination;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumberBlocks\Jobs\Job;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter;
-use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Page;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Sort;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberBlocks\JobsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class JobsRawService implements JobsRawContract
@@ -63,11 +62,14 @@ final class JobsRawService implements JobsRawContract
      * Lists the phone number blocks jobs
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
+     *   filter?: Filter|FilterShape,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   sort?: Sort|value-of<Sort>,
      * }|JobListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<Job>>
+     * @return BaseResponse<DefaultFlatPagination<Job>>
      *
      * @throws APIException
      */
@@ -84,10 +86,13 @@ final class JobsRawService implements JobsRawContract
         return $this->client->request(
             method: 'get',
             path: 'phone_number_blocks/jobs',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: Job::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

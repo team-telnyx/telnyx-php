@@ -8,7 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPagination;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsRawContract;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
@@ -18,7 +18,6 @@ use Telnyx\SimCards\Actions\ActionEnableResponse;
 use Telnyx\SimCards\Actions\ActionGetResponse;
 use Telnyx\SimCards\Actions\ActionListParams;
 use Telnyx\SimCards\Actions\ActionListParams\Filter;
-use Telnyx\SimCards\Actions\ActionListParams\Page;
 use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
 use Telnyx\SimCards\Actions\ActionSetPublicIPParams;
 use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
@@ -29,7 +28,6 @@ use Telnyx\SimCards\Actions\SimCardAction;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\SimCards\Actions\ActionListParams\Filter
- * @phpstan-import-type PageShape from \Telnyx\SimCards\Actions\ActionListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsRawService implements ActionsRawContract
@@ -71,11 +69,11 @@ final class ActionsRawService implements ActionsRawContract
      * This API lists a paginated collection of SIM card actions. It enables exploring a collection of existing asynchronous operations using specific filters.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, page?: Page|PageShape
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
      * }|ActionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPagination<SimCardAction>>
+     * @return BaseResponse<DefaultFlatPagination<SimCardAction>>
      *
      * @throws APIException
      */
@@ -92,10 +90,13 @@ final class ActionsRawService implements ActionsRawContract
         return $this->client->request(
             method: 'get',
             path: 'sim_card_actions',
-            query: $parsed,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
             options: $options,
             convert: SimCardAction::class,
-            page: DefaultPagination::class,
+            page: DefaultFlatPagination::class,
         );
     }
 

@@ -49,7 +49,6 @@ use Telnyx\Calls\Actions\ActionStartPlaybackResponse;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Channels;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
-use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
 use Telnyx\Calls\Actions\ActionStartRecordingResponse;
@@ -57,6 +56,7 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
@@ -793,8 +793,8 @@ interface ActionsContract
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite)
      * @param bool $transcription Enable post recording transcription. The default value is false.
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
-     * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage
+     * @param string $transcriptionEngine Engine to use for speech recognition. `A` - `Google`
+     * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage Language to use for speech recognition
      * @param int $transcriptionMaxSpeakerCount Defines maximum number of speakers in the conversation. Applies to `google` engine only.
      * @param int $transcriptionMinSpeakerCount Defines minimum number of speakers in the conversation. Applies to `google` engine only.
      * @param bool $transcriptionProfanityFilter Enables profanity_filter. Applies to `google` engine only.
@@ -816,8 +816,8 @@ interface ActionsContract
         RecordingTrack|string $recordingTrack = 'both',
         int $timeoutSecs = 0,
         bool $transcription = false,
-        TranscriptionEngine|string $transcriptionEngine = 'A',
-        TranscriptionLanguage|string|null $transcriptionLanguage = null,
+        string $transcriptionEngine = 'A',
+        TranscriptionLanguage|string $transcriptionLanguage = 'en-US',
         int $transcriptionMaxSpeakerCount = 6,
         int $transcriptionMinSpeakerCount = 2,
         bool $transcriptionProfanityFilter = false,
@@ -894,7 +894,7 @@ interface ActionsContract
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine|value-of<\Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility.
+     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility.
      * @param TranscriptionEngineConfigShape $transcriptionEngineConfig
      * @param string $transcriptionTracks Indicates which leg of the call will be transcribed. Use `inbound` for the leg that requested the transcription, `outbound` for the other leg, and `both` for both legs of the call. Will default to `inbound`.
      * @param RequestOpts|null $requestOptions
@@ -905,7 +905,7 @@ interface ActionsContract
         string $callControlID,
         ?string $clientState = null,
         ?string $commandID = null,
-        \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine|string $transcriptionEngine = 'Google',
+        TranscriptionEngine|string $transcriptionEngine = 'Google',
         TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig = null,
         string $transcriptionTracks = 'inbound',
         RequestOptions|array|null $requestOptions = null,

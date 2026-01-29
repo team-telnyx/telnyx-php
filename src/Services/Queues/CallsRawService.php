@@ -11,7 +11,6 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
-use Telnyx\Queues\Calls\CallListParams\Page;
 use Telnyx\Queues\Calls\CallListResponse;
 use Telnyx\Queues\Calls\CallRemoveParams;
 use Telnyx\Queues\Calls\CallRetrieveParams;
@@ -20,7 +19,6 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Queues\CallsRawContract;
 
 /**
- * @phpstan-import-type PageShape from \Telnyx\Queues\Calls\CallListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CallsRawService implements CallsRawContract
@@ -106,9 +104,7 @@ final class CallsRawService implements CallsRawContract
      * Retrieve the list of calls in an existing queue
      *
      * @param string $queueName Uniquely identifies the queue by name
-     * @param array{
-     *   page?: Page|PageShape, pageNumber?: int, pageSize?: int
-     * }|CallListParams $params
+     * @param array{pageNumber?: int, pageSize?: int}|CallListParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<CallListResponse>>
