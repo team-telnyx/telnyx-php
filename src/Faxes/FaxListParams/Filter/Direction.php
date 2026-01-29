@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes\FaxListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Direction filtering operations.
  *
- * @phpstan-type direction_alias = array{eq?: string}
+ * @phpstan-type DirectionShape = array{eq?: string|null}
  */
 final class Direction implements BaseModel
 {
-    /** @use SdkModel<direction_alias> */
+    /** @use SdkModel<DirectionShape> */
     use SdkModel;
 
     /**
      * The direction, inbound or outbound, for filtering faxes sent from this account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Direction implements BaseModel
      */
     public static function with(?string $eq = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj->eq = $eq;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Direction implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj->eq = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

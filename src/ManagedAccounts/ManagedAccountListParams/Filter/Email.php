@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts\ManagedAccountListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type email_alias = array{contains?: string, eq?: string}
+ * @phpstan-type EmailShape = array{contains?: string|null, eq?: string|null}
  */
 final class Email implements BaseModel
 {
-    /** @use SdkModel<email_alias> */
+    /** @use SdkModel<EmailShape> */
     use SdkModel;
 
     /**
      * If present, email containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * If present, only returns results with the <code>email</code> matching exactly the value given.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class Email implements BaseModel
         ?string $contains = null,
         ?string $eq = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
-        null !== $eq && $obj->eq = $eq;
+        null !== $contains && $self['contains'] = $contains;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Email implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Email implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj->eq = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

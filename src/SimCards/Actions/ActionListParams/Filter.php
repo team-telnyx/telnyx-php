@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions\ActionListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\Actions\ActionListParams\Filter\ActionType;
@@ -13,16 +13,16 @@ use Telnyx\SimCards\Actions\ActionListParams\Filter\Status;
 /**
  * Consolidated filter parameter for SIM card actions (deepObject style). Originally: filter[sim_card_id], filter[status], filter[bulk_sim_card_action_id], filter[action_type].
  *
- * @phpstan-type filter_alias = array{
- *   actionType?: value-of<ActionType>,
- *   bulkSimCardActionID?: string,
- *   simCardID?: string,
- *   status?: value-of<Status>,
+ * @phpstan-type FilterShape = array{
+ *   actionType?: null|ActionType|value-of<ActionType>,
+ *   bulkSimCardActionID?: string|null,
+ *   simCardID?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -30,19 +30,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<ActionType>|null $actionType
      */
-    #[Api('action_type', enum: ActionType::class, optional: true)]
+    #[Optional('action_type', enum: ActionType::class)]
     public ?string $actionType;
 
     /**
      * Filter by a bulk SIM card action ID.
      */
-    #[Api('bulk_sim_card_action_id', optional: true)]
+    #[Optional('bulk_sim_card_action_id')]
     public ?string $bulkSimCardActionID;
 
     /**
      * A valid SIM card ID.
      */
-    #[Api('sim_card_id', optional: true)]
+    #[Optional('sim_card_id')]
     public ?string $simCardID;
 
     /**
@@ -50,7 +50,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -63,8 +63,8 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionType|value-of<ActionType> $actionType
-     * @param Status|value-of<Status> $status
+     * @param ActionType|value-of<ActionType>|null $actionType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ActionType|string|null $actionType = null,
@@ -72,14 +72,14 @@ final class Filter implements BaseModel
         ?string $simCardID = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $actionType && $obj['actionType'] = $actionType;
-        null !== $bulkSimCardActionID && $obj->bulkSimCardActionID = $bulkSimCardActionID;
-        null !== $simCardID && $obj->simCardID = $simCardID;
-        null !== $status && $obj['status'] = $status;
+        null !== $actionType && $self['actionType'] = $actionType;
+        null !== $bulkSimCardActionID && $self['bulkSimCardActionID'] = $bulkSimCardActionID;
+        null !== $simCardID && $self['simCardID'] = $simCardID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Filter implements BaseModel
      */
     public function withActionType(ActionType|string $actionType): self
     {
-        $obj = clone $this;
-        $obj['actionType'] = $actionType;
+        $self = clone $this;
+        $self['actionType'] = $actionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Filter implements BaseModel
      */
     public function withBulkSimCardActionID(string $bulkSimCardActionID): self
     {
-        $obj = clone $this;
-        $obj->bulkSimCardActionID = $bulkSimCardActionID;
+        $self = clone $this;
+        $self['bulkSimCardActionID'] = $bulkSimCardActionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class Filter implements BaseModel
      */
     public function withSimCardID(string $simCardID): self
     {
-        $obj = clone $this;
-        $obj->simCardID = $simCardID;
+        $self = clone $this;
+        $self['simCardID'] = $simCardID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +124,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

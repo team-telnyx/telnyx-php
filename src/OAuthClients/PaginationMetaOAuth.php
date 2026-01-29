@@ -4,44 +4,59 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthClients;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type pagination_meta_oauth = array{
- *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
+ * @phpstan-type PaginationMetaOAuthShape = array{
+ *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
  * }
  */
 final class PaginationMetaOAuth implements BaseModel
 {
-    /** @use SdkModel<pagination_meta_oauth> */
+    /** @use SdkModel<PaginationMetaOAuthShape> */
     use SdkModel;
 
     /**
      * Current page number.
      */
-    #[Api('page_number', optional: true)]
-    public ?int $pageNumber;
-
-    /**
-     * Number of items per page.
-     */
-    #[Api('page_size', optional: true)]
-    public ?int $pageSize;
+    #[Required('page_number')]
+    public int $pageNumber;
 
     /**
      * Total number of pages.
      */
-    #[Api('total_pages', optional: true)]
-    public ?int $totalPages;
+    #[Required('total_pages')]
+    public int $totalPages;
+
+    /**
+     * Number of items per page.
+     */
+    #[Optional('page_size')]
+    public ?int $pageSize;
 
     /**
      * Total number of results.
      */
-    #[Api('total_results', optional: true)]
+    #[Optional('total_results')]
     public ?int $totalResults;
 
+    /**
+     * `new PaginationMetaOAuth()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * PaginationMetaOAuth::with(pageNumber: ..., totalPages: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new PaginationMetaOAuth)->withPageNumber(...)->withTotalPages(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -53,19 +68,20 @@ final class PaginationMetaOAuth implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $pageNumber = null,
+        int $pageNumber,
+        int $totalPages,
         ?int $pageSize = null,
-        ?int $totalPages = null,
         ?int $totalResults = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $totalPages && $obj->totalPages = $totalPages;
-        null !== $totalResults && $obj->totalResults = $totalResults;
+        $self['pageNumber'] = $pageNumber;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $totalResults && $self['totalResults'] = $totalResults;
+
+        return $self;
     }
 
     /**
@@ -73,21 +89,10 @@ final class PaginationMetaOAuth implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
-    }
-
-    /**
-     * Number of items per page.
-     */
-    public function withPageSize(int $pageSize): self
-    {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
-
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +100,21 @@ final class PaginationMetaOAuth implements BaseModel
      */
     public function withTotalPages(int $totalPages): self
     {
-        $obj = clone $this;
-        $obj->totalPages = $totalPages;
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Number of items per page.
+     */
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 
     /**
@@ -106,9 +122,9 @@ final class PaginationMetaOAuth implements BaseModel
      */
     public function withTotalResults(int $totalResults): self
     {
-        $obj = clone $this;
-        $obj->totalResults = $totalResults;
+        $self = clone $this;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 }

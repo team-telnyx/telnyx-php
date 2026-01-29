@@ -4,73 +4,34 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Events;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
-use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
-use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Portouts\Events\EventListResponse\Data;
+use Telnyx\Core\Concerns\SdkUnion;
+use Telnyx\Core\Conversion\Contracts\Converter;
+use Telnyx\Core\Conversion\Contracts\ConverterSource;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged;
 
 /**
- * @phpstan-type event_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
- * }
+ * @phpstan-import-type WebhookPortoutStatusChangedShape from \Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged
+ * @phpstan-import-type WebhookPortoutNewCommentShape from \Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment
+ * @phpstan-import-type WebhookPortoutFocDateChangedShape from \Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged
+ *
+ * @phpstan-type EventListResponseVariants = WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged
+ * @phpstan-type EventListResponseShape = EventListResponseVariants|WebhookPortoutStatusChangedShape|WebhookPortoutNewCommentShape|WebhookPortoutFocDateChangedShape
  */
-final class EventListResponse implements BaseModel, ResponseConverter
+final class EventListResponse implements ConverterSource
 {
-    /** @use SdkModel<event_list_response> */
-    use SdkModel;
-
-    use SdkResponse;
-
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
-
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
-
-    public function __construct()
-    {
-        $this->initialize();
-    }
+    use SdkUnion;
 
     /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<Data> $data
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
-    public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
-    ): self {
-        $obj = new self;
-
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
-
-        return $obj;
-    }
-
-    /**
-     * @param list<Data> $data
-     */
-    public function withData(array $data): self
+    public static function variants(): array
     {
-        $obj = clone $this;
-        $obj->data = $data;
-
-        return $obj;
-    }
-
-    public function withMeta(PaginationMeta $meta): self
-    {
-        $obj = clone $this;
-        $obj->meta = $meta;
-
-        return $obj;
+        return [
+            WebhookPortoutStatusChanged::class,
+            WebhookPortoutNewComment::class,
+            WebhookPortoutFocDateChanged::class,
+        ];
     }
 }

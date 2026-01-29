@@ -11,14 +11,18 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\F
 
 /**
  * Filter by exact available bandwidth match.
+ *
+ * @phpstan-import-type ContainsShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters\AvailableBandwidth\Contains
+ *
+ * @phpstan-type AvailableBandwidthVariants = int|Contains
+ * @phpstan-type AvailableBandwidthShape = AvailableBandwidthVariants|ContainsShape
  */
 final class AvailableBandwidth implements ConverterSource
 {
     use SdkUnion;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {

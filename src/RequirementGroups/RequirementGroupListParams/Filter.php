@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups\RequirementGroupListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Action;
@@ -14,17 +14,17 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter\Status;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference].
  *
- * @phpstan-type filter_alias = array{
- *   action?: value-of<Action>,
- *   countryCode?: string,
- *   customerReference?: string,
- *   phoneNumberType?: value-of<PhoneNumberType>,
- *   status?: value-of<Status>,
+ * @phpstan-type FilterShape = array{
+ *   action?: null|Action|value-of<Action>,
+ *   countryCode?: string|null,
+ *   customerReference?: string|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -32,19 +32,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<Action>|null $action
      */
-    #[Api(enum: Action::class, optional: true)]
+    #[Optional(enum: Action::class)]
     public ?string $action;
 
     /**
      * Filter requirement groups by country code (iso alpha 2).
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * Filter requirement groups by customer reference.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
@@ -52,7 +52,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
     public ?string $phoneNumberType;
 
     /**
@@ -60,7 +60,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -73,9 +73,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Action|value-of<Action> $action
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param Status|value-of<Status> $status
+     * @param Action|value-of<Action>|null $action
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         Action|string|null $action = null,
@@ -84,15 +84,15 @@ final class Filter implements BaseModel
         PhoneNumberType|string|null $phoneNumberType = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $action && $obj['action'] = $action;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $status && $obj['status'] = $status;
+        null !== $action && $self['action'] = $action;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +102,10 @@ final class Filter implements BaseModel
      */
     public function withAction(Action|string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class Filter implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class Filter implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,9 +151,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberBlocks\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type job_delete_phone_number_block_response = array{data?: Job}
+ * @phpstan-import-type JobShape from \Telnyx\PhoneNumberBlocks\Jobs\Job
+ *
+ * @phpstan-type JobDeletePhoneNumberBlockResponseShape = array{
+ *   data?: null|Job|JobShape
+ * }
  */
-final class JobDeletePhoneNumberBlockResponse implements BaseModel, ResponseConverter
+final class JobDeletePhoneNumberBlockResponse implements BaseModel
 {
-    /** @use SdkModel<job_delete_phone_number_block_response> */
+    /** @use SdkModel<JobDeletePhoneNumberBlockResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Job $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class JobDeletePhoneNumberBlockResponse implements BaseModel, ResponseConv
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Job|JobShape|null $data
      */
-    public static function with(?Job $data = null): self
+    public static function with(Job|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Job $data): self
+    /**
+     * @param Job|JobShape $data
+     */
+    public function withData(Job|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[verified].
  *
- * @phpstan-type filter_alias = array{verified?: bool}
+ * @phpstan-type FilterShape = array{verified?: bool|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter verification codes that have been verified or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $verified;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?bool $verified = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $verified && $obj->verified = $verified;
+        null !== $verified && $self['verified'] = $verified;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withVerified(bool $verified): self
     {
-        $obj = clone $this;
-        $obj->verified = $verified;
+        $self = clone $this;
+        $self['verified'] = $verified;
 
-        return $obj;
+        return $self;
     }
 }

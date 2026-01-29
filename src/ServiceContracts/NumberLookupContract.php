@@ -9,33 +9,23 @@ use Telnyx\NumberLookup\NumberLookupGetResponse;
 use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberLookupContract
 {
     /**
      * @api
      *
+     * @param string $phoneNumber The phone number to be looked up
      * @param Type|value-of<Type> $type Specifies the type of number lookup to be performed
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumber,
-        $type = omit,
-        ?RequestOptions $requestOptions = null,
-    ): NumberLookupGetResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null,
+        Type|string|null $type = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberLookupGetResponse;
 }

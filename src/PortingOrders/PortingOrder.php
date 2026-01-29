@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
@@ -12,46 +12,56 @@ use Telnyx\PortingOrders\PortingOrder\PhoneNumberType;
 use Telnyx\PortingOrderStatus;
 
 /**
- * @phpstan-type porting_order = array{
- *   id?: string,
- *   activationSettings?: PortingOrderActivationSettings,
- *   additionalSteps?: list<value-of<AdditionalStep>>,
- *   createdAt?: \DateTimeInterface,
- *   customerGroupReference?: string,
- *   customerReference?: string,
- *   description?: string,
- *   documents?: PortingOrderDocuments,
- *   endUser?: PortingOrderEndUser,
- *   messaging?: PortingOrderMessaging,
- *   misc?: PortingOrderMisc,
- *   oldServiceProviderOcn?: string,
- *   parentSupportKey?: string,
- *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration,
- *   phoneNumberType?: value-of<PhoneNumberType>,
- *   portingPhoneNumbersCount?: int,
- *   recordType?: string,
- *   requirements?: list<PortingOrderRequirement>,
- *   requirementsMet?: bool,
- *   status?: PortingOrderStatus,
- *   supportKey?: string,
- *   updatedAt?: \DateTimeInterface,
- *   userFeedback?: PortingOrderUserFeedback,
- *   userID?: string,
- *   webhookURL?: string,
+ * @phpstan-import-type PortingOrderActivationSettingsShape from \Telnyx\PortingOrders\PortingOrderActivationSettings
+ * @phpstan-import-type PortingOrderDocumentsShape from \Telnyx\PortingOrders\PortingOrderDocuments
+ * @phpstan-import-type PortingOrderEndUserShape from \Telnyx\PortingOrders\PortingOrderEndUser
+ * @phpstan-import-type PortingOrderMessagingShape from \Telnyx\PortingOrders\PortingOrderMessaging
+ * @phpstan-import-type PortingOrderMiscShape from \Telnyx\PortingOrders\PortingOrderMisc
+ * @phpstan-import-type PortingOrderPhoneNumberConfigurationShape from \Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration
+ * @phpstan-import-type PortingOrderRequirementShape from \Telnyx\PortingOrders\PortingOrderRequirement
+ * @phpstan-import-type PortingOrderStatusShape from \Telnyx\PortingOrderStatus
+ * @phpstan-import-type PortingOrderUserFeedbackShape from \Telnyx\PortingOrders\PortingOrderUserFeedback
+ *
+ * @phpstan-type PortingOrderShape = array{
+ *   id?: string|null,
+ *   activationSettings?: null|PortingOrderActivationSettings|PortingOrderActivationSettingsShape,
+ *   additionalSteps?: list<AdditionalStep|value-of<AdditionalStep>>|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   customerGroupReference?: string|null,
+ *   customerReference?: string|null,
+ *   description?: string|null,
+ *   documents?: null|PortingOrderDocuments|PortingOrderDocumentsShape,
+ *   endUser?: null|PortingOrderEndUser|PortingOrderEndUserShape,
+ *   messaging?: null|PortingOrderMessaging|PortingOrderMessagingShape,
+ *   misc?: null|PortingOrderMisc|PortingOrderMiscShape,
+ *   oldServiceProviderOcn?: string|null,
+ *   parentSupportKey?: string|null,
+ *   phoneNumberConfiguration?: null|PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
+ *   portingPhoneNumbersCount?: int|null,
+ *   recordType?: string|null,
+ *   requirements?: list<PortingOrderRequirement|PortingOrderRequirementShape>|null,
+ *   requirementsMet?: bool|null,
+ *   status?: null|PortingOrderStatus|PortingOrderStatusShape,
+ *   supportKey?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
+ *   userFeedback?: null|PortingOrderUserFeedback|PortingOrderUserFeedbackShape,
+ *   userID?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class PortingOrder implements BaseModel
 {
-    /** @use SdkModel<porting_order> */
+    /** @use SdkModel<PortingOrderShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies this porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api('activation_settings', optional: true)]
+    #[Optional('activation_settings')]
     public ?PortingOrderActivationSettings $activationSettings;
 
     /**
@@ -59,64 +69,64 @@ final class PortingOrder implements BaseModel
      *
      * @var list<value-of<AdditionalStep>>|null $additionalSteps
      */
-    #[Api('additional_steps', list: AdditionalStep::class, optional: true)]
+    #[Optional('additional_steps', list: AdditionalStep::class)]
     public ?array $additionalSteps;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * A customer-specified group reference for customer bookkeeping purposes.
      */
-    #[Api('customer_group_reference', optional: true)]
+    #[Optional('customer_group_reference', nullable: true)]
     public ?string $customerGroupReference;
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference', nullable: true)]
     public ?string $customerReference;
 
     /**
      * A description of the porting order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderDocuments $documents;
 
-    #[Api('end_user', optional: true)]
+    #[Optional('end_user')]
     public ?PortingOrderEndUser $endUser;
 
     /**
      * Information about messaging porting process.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderMessaging $messaging;
 
-    #[Api(optional: true)]
+    #[Optional(nullable: true)]
     public ?PortingOrderMisc $misc;
 
     /**
      * Identifies the old service provider.
      */
-    #[Api('old_service_provider_ocn', optional: true)]
+    #[Optional('old_service_provider_ocn')]
     public ?string $oldServiceProviderOcn;
 
     /**
      * A key to reference for the porting order group when contacting Telnyx customer support. This information is not available for porting orders in `draft` state.
      */
-    #[Api('parent_support_key', optional: true)]
+    #[Optional('parent_support_key', nullable: true)]
     public ?string $parentSupportKey;
 
-    #[Api('phone_number_configuration', optional: true)]
+    #[Optional('phone_number_configuration')]
     public ?PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration;
 
     /**
@@ -124,19 +134,19 @@ final class PortingOrder implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
     public ?string $phoneNumberType;
 
     /**
      * Count of phone numbers associated with this porting order.
      */
-    #[Api('porting_phone_numbers_count', optional: true)]
+    #[Optional('porting_phone_numbers_count')]
     public ?int $portingPhoneNumbersCount;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -144,43 +154,43 @@ final class PortingOrder implements BaseModel
      *
      * @var list<PortingOrderRequirement>|null $requirements
      */
-    #[Api(list: PortingOrderRequirement::class, optional: true)]
+    #[Optional(list: PortingOrderRequirement::class)]
     public ?array $requirements;
 
     /**
      * Is true when the required documentation is met.
      */
-    #[Api('requirements_met', optional: true)]
+    #[Optional('requirements_met')]
     public ?bool $requirementsMet;
 
     /**
      * Porting order status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderStatus $status;
 
     /**
      * A key to reference this porting order when contacting Telnyx customer support. This information is not available in draft porting orders.
      */
-    #[Api('support_key', optional: true)]
+    #[Optional('support_key', nullable: true)]
     public ?string $supportKey;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
-    #[Api('user_feedback', optional: true)]
+    #[Optional('user_feedback')]
     public ?PortingOrderUserFeedback $userFeedback;
 
     /**
      * Identifies the user (or organization) who requested the porting order.
      */
-    #[Api('user_id', optional: true)]
+    #[Optional('user_id')]
     public ?string $userID;
 
-    #[Api('webhook_url', optional: true)]
+    #[Optional('webhook_url', nullable: true)]
     public ?string $webhookURL;
 
     public function __construct()
@@ -193,66 +203,74 @@ final class PortingOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdditionalStep|value-of<AdditionalStep>> $additionalSteps
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param list<PortingOrderRequirement> $requirements
+     * @param PortingOrderActivationSettings|PortingOrderActivationSettingsShape|null $activationSettings
+     * @param list<AdditionalStep|value-of<AdditionalStep>>|null $additionalSteps
+     * @param PortingOrderDocuments|PortingOrderDocumentsShape|null $documents
+     * @param PortingOrderEndUser|PortingOrderEndUserShape|null $endUser
+     * @param PortingOrderMessaging|PortingOrderMessagingShape|null $messaging
+     * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
+     * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape|null $phoneNumberConfiguration
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param list<PortingOrderRequirement|PortingOrderRequirementShape>|null $requirements
+     * @param PortingOrderStatus|PortingOrderStatusShape|null $status
+     * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape|null $userFeedback
      */
     public static function with(
         ?string $id = null,
-        ?PortingOrderActivationSettings $activationSettings = null,
+        PortingOrderActivationSettings|array|null $activationSettings = null,
         ?array $additionalSteps = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $customerGroupReference = null,
         ?string $customerReference = null,
         ?string $description = null,
-        ?PortingOrderDocuments $documents = null,
-        ?PortingOrderEndUser $endUser = null,
-        ?PortingOrderMessaging $messaging = null,
-        ?PortingOrderMisc $misc = null,
+        PortingOrderDocuments|array|null $documents = null,
+        PortingOrderEndUser|array|null $endUser = null,
+        PortingOrderMessaging|array|null $messaging = null,
+        PortingOrderMisc|array|null $misc = null,
         ?string $oldServiceProviderOcn = null,
         ?string $parentSupportKey = null,
-        ?PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration = null,
+        PortingOrderPhoneNumberConfiguration|array|null $phoneNumberConfiguration = null,
         PhoneNumberType|string|null $phoneNumberType = null,
         ?int $portingPhoneNumbersCount = null,
         ?string $recordType = null,
         ?array $requirements = null,
         ?bool $requirementsMet = null,
-        ?PortingOrderStatus $status = null,
+        PortingOrderStatus|array|null $status = null,
         ?string $supportKey = null,
         ?\DateTimeInterface $updatedAt = null,
-        ?PortingOrderUserFeedback $userFeedback = null,
+        PortingOrderUserFeedback|array|null $userFeedback = null,
         ?string $userID = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $activationSettings && $obj->activationSettings = $activationSettings;
-        null !== $additionalSteps && $obj['additionalSteps'] = $additionalSteps;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $description && $obj->description = $description;
-        null !== $documents && $obj->documents = $documents;
-        null !== $endUser && $obj->endUser = $endUser;
-        null !== $messaging && $obj->messaging = $messaging;
-        null !== $misc && $obj->misc = $misc;
-        null !== $oldServiceProviderOcn && $obj->oldServiceProviderOcn = $oldServiceProviderOcn;
-        null !== $parentSupportKey && $obj->parentSupportKey = $parentSupportKey;
-        null !== $phoneNumberConfiguration && $obj->phoneNumberConfiguration = $phoneNumberConfiguration;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $portingPhoneNumbersCount && $obj->portingPhoneNumbersCount = $portingPhoneNumbersCount;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $requirements && $obj->requirements = $requirements;
-        null !== $requirementsMet && $obj->requirementsMet = $requirementsMet;
-        null !== $status && $obj->status = $status;
-        null !== $supportKey && $obj->supportKey = $supportKey;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $userFeedback && $obj->userFeedback = $userFeedback;
-        null !== $userID && $obj->userID = $userID;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $id && $self['id'] = $id;
+        null !== $activationSettings && $self['activationSettings'] = $activationSettings;
+        null !== $additionalSteps && $self['additionalSteps'] = $additionalSteps;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $description && $self['description'] = $description;
+        null !== $documents && $self['documents'] = $documents;
+        null !== $endUser && $self['endUser'] = $endUser;
+        null !== $messaging && $self['messaging'] = $messaging;
+        null !== $misc && $self['misc'] = $misc;
+        null !== $oldServiceProviderOcn && $self['oldServiceProviderOcn'] = $oldServiceProviderOcn;
+        null !== $parentSupportKey && $self['parentSupportKey'] = $parentSupportKey;
+        null !== $phoneNumberConfiguration && $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $portingPhoneNumbersCount && $self['portingPhoneNumbersCount'] = $portingPhoneNumbersCount;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirements && $self['requirements'] = $requirements;
+        null !== $requirementsMet && $self['requirementsMet'] = $requirementsMet;
+        null !== $status && $self['status'] = $status;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userFeedback && $self['userFeedback'] = $userFeedback;
+        null !== $userID && $self['userID'] = $userID;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,19 +278,22 @@ final class PortingOrder implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param PortingOrderActivationSettings|PortingOrderActivationSettingsShape $activationSettings
+     */
     public function withActivationSettings(
-        PortingOrderActivationSettings $activationSettings
+        PortingOrderActivationSettings|array $activationSettings
     ): self {
-        $obj = clone $this;
-        $obj->activationSettings = $activationSettings;
+        $self = clone $this;
+        $self['activationSettings'] = $activationSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +303,10 @@ final class PortingOrder implements BaseModel
      */
     public function withAdditionalSteps(array $additionalSteps): self
     {
-        $obj = clone $this;
-        $obj['additionalSteps'] = $additionalSteps;
+        $self = clone $this;
+        $self['additionalSteps'] = $additionalSteps;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -293,33 +314,33 @@ final class PortingOrder implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A customer-specified group reference for customer bookkeeping purposes.
      */
     public function withCustomerGroupReference(
-        string $customerGroupReference
+        ?string $customerGroupReference
     ): self {
-        $obj = clone $this;
-        $obj->customerGroupReference = $customerGroupReference;
+        $self = clone $this;
+        $self['customerGroupReference'] = $customerGroupReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    public function withCustomerReference(string $customerReference): self
+    public function withCustomerReference(?string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -327,48 +348,58 @@ final class PortingOrder implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
+     *
+     * @param PortingOrderDocuments|PortingOrderDocumentsShape $documents
      */
-    public function withDocuments(PortingOrderDocuments $documents): self
+    public function withDocuments(PortingOrderDocuments|array $documents): self
     {
-        $obj = clone $this;
-        $obj->documents = $documents;
+        $self = clone $this;
+        $self['documents'] = $documents;
 
-        return $obj;
+        return $self;
     }
 
-    public function withEndUser(PortingOrderEndUser $endUser): self
+    /**
+     * @param PortingOrderEndUser|PortingOrderEndUserShape $endUser
+     */
+    public function withEndUser(PortingOrderEndUser|array $endUser): self
     {
-        $obj = clone $this;
-        $obj->endUser = $endUser;
+        $self = clone $this;
+        $self['endUser'] = $endUser;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Information about messaging porting process.
+     *
+     * @param PortingOrderMessaging|PortingOrderMessagingShape $messaging
      */
-    public function withMessaging(PortingOrderMessaging $messaging): self
+    public function withMessaging(PortingOrderMessaging|array $messaging): self
     {
-        $obj = clone $this;
-        $obj->messaging = $messaging;
+        $self = clone $this;
+        $self['messaging'] = $messaging;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMisc(PortingOrderMisc $misc): self
+    /**
+     * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
+     */
+    public function withMisc(PortingOrderMisc|array|null $misc): self
     {
-        $obj = clone $this;
-        $obj->misc = $misc;
+        $self = clone $this;
+        $self['misc'] = $misc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -377,30 +408,33 @@ final class PortingOrder implements BaseModel
     public function withOldServiceProviderOcn(
         string $oldServiceProviderOcn
     ): self {
-        $obj = clone $this;
-        $obj->oldServiceProviderOcn = $oldServiceProviderOcn;
+        $self = clone $this;
+        $self['oldServiceProviderOcn'] = $oldServiceProviderOcn;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A key to reference for the porting order group when contacting Telnyx customer support. This information is not available for porting orders in `draft` state.
      */
-    public function withParentSupportKey(string $parentSupportKey): self
+    public function withParentSupportKey(?string $parentSupportKey): self
     {
-        $obj = clone $this;
-        $obj->parentSupportKey = $parentSupportKey;
+        $self = clone $this;
+        $self['parentSupportKey'] = $parentSupportKey;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape $phoneNumberConfiguration
+     */
     public function withPhoneNumberConfiguration(
-        PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration
+        PortingOrderPhoneNumberConfiguration|array $phoneNumberConfiguration
     ): self {
-        $obj = clone $this;
-        $obj->phoneNumberConfiguration = $phoneNumberConfiguration;
+        $self = clone $this;
+        $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -411,10 +445,10 @@ final class PortingOrder implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -423,10 +457,10 @@ final class PortingOrder implements BaseModel
     public function withPortingPhoneNumbersCount(
         int $portingPhoneNumbersCount
     ): self {
-        $obj = clone $this;
-        $obj->portingPhoneNumbersCount = $portingPhoneNumbersCount;
+        $self = clone $this;
+        $self['portingPhoneNumbersCount'] = $portingPhoneNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -434,23 +468,23 @@ final class PortingOrder implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of documentation requirements for porting numbers. Can be set directly or via the `requirement_group_id` parameter.
      *
-     * @param list<PortingOrderRequirement> $requirements
+     * @param list<PortingOrderRequirement|PortingOrderRequirementShape> $requirements
      */
     public function withRequirements(array $requirements): self
     {
-        $obj = clone $this;
-        $obj->requirements = $requirements;
+        $self = clone $this;
+        $self['requirements'] = $requirements;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -458,32 +492,34 @@ final class PortingOrder implements BaseModel
      */
     public function withRequirementsMet(bool $requirementsMet): self
     {
-        $obj = clone $this;
-        $obj->requirementsMet = $requirementsMet;
+        $self = clone $this;
+        $self['requirementsMet'] = $requirementsMet;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Porting order status.
+     *
+     * @param PortingOrderStatus|PortingOrderStatusShape $status
      */
-    public function withStatus(PortingOrderStatus $status): self
+    public function withStatus(PortingOrderStatus|array $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A key to reference this porting order when contacting Telnyx customer support. This information is not available in draft porting orders.
      */
-    public function withSupportKey(string $supportKey): self
+    public function withSupportKey(?string $supportKey): self
     {
-        $obj = clone $this;
-        $obj->supportKey = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -491,19 +527,22 @@ final class PortingOrder implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape $userFeedback
+     */
     public function withUserFeedback(
-        PortingOrderUserFeedback $userFeedback
+        PortingOrderUserFeedback|array $userFeedback
     ): self {
-        $obj = clone $this;
-        $obj->userFeedback = $userFeedback;
+        $self = clone $this;
+        $self['userFeedback'] = $userFeedback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -511,17 +550,17 @@ final class PortingOrder implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
-    public function withWebhookURL(string $webhookURL): self
+    public function withWebhookURL(?string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

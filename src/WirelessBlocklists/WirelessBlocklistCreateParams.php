@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklists;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,22 +13,22 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
 /**
  * Create a Wireless Blocklist to prevent SIMs from connecting to certain networks.
  *
- * @see Telnyx\WirelessBlocklists->create
+ * @see Telnyx\Services\WirelessBlocklistsService::create()
  *
- * @phpstan-type wireless_blocklist_create_params = array{
+ * @phpstan-type WirelessBlocklistCreateParamsShape = array{
  *   name: string, type: Type|value-of<Type>, values: list<string>
  * }
  */
 final class WirelessBlocklistCreateParams implements BaseModel
 {
-    /** @use SdkModel<wireless_blocklist_create_params> */
+    /** @use SdkModel<WirelessBlocklistCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The name of the Wireless Blocklist.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -36,7 +36,7 @@ final class WirelessBlocklistCreateParams implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -44,7 +44,7 @@ final class WirelessBlocklistCreateParams implements BaseModel
      *
      * @var list<string> $values
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $values;
 
     /**
@@ -82,13 +82,13 @@ final class WirelessBlocklistCreateParams implements BaseModel
         Type|string $type,
         array $values
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->name = $name;
-        $obj['type'] = $type;
-        $obj->values = $values;
+        $self['name'] = $name;
+        $self['type'] = $type;
+        $self['values'] = $values;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class WirelessBlocklistCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class WirelessBlocklistCreateParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,9 +122,9 @@ final class WirelessBlocklistCreateParams implements BaseModel
      */
     public function withValues(array $values): self
     {
-        $obj = clone $this;
-        $obj->values = $values;
+        $self = clone $this;
+        $self['values'] = $values;
 
-        return $obj;
+        return $self;
     }
 }

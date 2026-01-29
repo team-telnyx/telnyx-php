@@ -4,41 +4,42 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings\Buckets\BucketGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   createdAt: \DateTimeInterface,
  *   filename: string,
  *   status: string,
- *   errorReason?: string,
- *   lastEmbeddedAt?: \DateTimeInterface,
- *   updatedAt?: \DateTimeInterface,
+ *   errorReason?: string|null,
+ *   lastEmbeddedAt?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('created_at')]
+    #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
-    #[Api]
+    #[Required]
     public string $filename;
 
-    #[Api]
+    #[Required]
     public string $status;
 
-    #[Api('error_reason', optional: true)]
+    #[Optional('error_reason')]
     public ?string $errorReason;
 
-    #[Api('last_embedded_at', optional: true)]
+    #[Optional('last_embedded_at')]
     public ?\DateTimeInterface $lastEmbeddedAt;
 
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     /**
@@ -73,64 +74,64 @@ final class Data implements BaseModel
         ?\DateTimeInterface $lastEmbeddedAt = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->createdAt = $createdAt;
-        $obj->filename = $filename;
-        $obj->status = $status;
+        $self['createdAt'] = $createdAt;
+        $self['filename'] = $filename;
+        $self['status'] = $status;
 
-        null !== $errorReason && $obj->errorReason = $errorReason;
-        null !== $lastEmbeddedAt && $obj->lastEmbeddedAt = $lastEmbeddedAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $errorReason && $self['errorReason'] = $errorReason;
+        null !== $lastEmbeddedAt && $self['lastEmbeddedAt'] = $lastEmbeddedAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj->filename = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withErrorReason(string $errorReason): self
     {
-        $obj = clone $this;
-        $obj->errorReason = $errorReason;
+        $self = clone $this;
+        $self['errorReason'] = $errorReason;
 
-        return $obj;
+        return $self;
     }
 
     public function withLastEmbeddedAt(\DateTimeInterface $lastEmbeddedAt): self
     {
-        $obj = clone $this;
-        $obj->lastEmbeddedAt = $lastEmbeddedAt;
+        $self = clone $this;
+        $self['lastEmbeddedAt'] = $lastEmbeddedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\Runs;
 
-use Telnyx\AI\Assistants\Tests\Runs\RunListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,26 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves paginated execution history for a specific assistant test with filtering options.
  *
- * @see Telnyx\AI\Assistants\Tests\Runs->list
+ * @see Telnyx\Services\AI\Assistants\Tests\RunsService::list()
  *
- * @phpstan-type run_list_params = array{page?: Page, status?: string}
+ * @phpstan-type RunListParamsShape = array{
+ *   pageNumber?: int|null, pageSize?: int|null, status?: string|null
+ * }
  */
 final class RunListParams implements BaseModel
 {
-    /** @use SdkModel<run_list_params> */
+    /** @use SdkModel<RunListParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Filter runs by execution status (pending, running, completed, failed, timeout).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()
@@ -45,25 +46,34 @@ final class RunListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Page $page = null, ?string $status = null): self
-    {
-        $obj = new self;
+    public static function with(
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?string $status = null
+    ): self {
+        $self = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $status && $obj->status = $status;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 
     /**
@@ -71,9 +81,9 @@ final class RunListParams implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\FaxApplications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type fax_application_get_response = array{data?: FaxApplication}
+ * @phpstan-import-type FaxApplicationShape from \Telnyx\FaxApplications\FaxApplication
+ *
+ * @phpstan-type FaxApplicationGetResponseShape = array{
+ *   data?: null|FaxApplication|FaxApplicationShape
+ * }
  */
-final class FaxApplicationGetResponse implements BaseModel, ResponseConverter
+final class FaxApplicationGetResponse implements BaseModel
 {
-    /** @use SdkModel<fax_application_get_response> */
+    /** @use SdkModel<FaxApplicationGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?FaxApplication $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class FaxApplicationGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param FaxApplication|FaxApplicationShape|null $data
      */
-    public static function with(?FaxApplication $data = null): self
+    public static function with(FaxApplication|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(FaxApplication $data): self
+    /**
+     * @param FaxApplication|FaxApplicationShape $data
+     */
+    public function withData(FaxApplication|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

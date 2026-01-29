@@ -4,36 +4,36 @@ declare(strict_types=1);
 
 namespace Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type region_alias = array{
- *   code?: string, name?: string, recordType?: string
+ * @phpstan-type RegionShape = array{
+ *   code?: string|null, name?: string|null, recordType?: string|null
  * }
  */
 final class Region implements BaseModel
 {
-    /** @use SdkModel<region_alias> */
+    /** @use SdkModel<RegionShape> */
     use SdkModel;
 
     /**
      * Region code of the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
      * Region name of the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -51,13 +51,13 @@ final class Region implements BaseModel
         ?string $name = null,
         ?string $recordType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $name && $obj->name = $name;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $code && $self['code'] = $code;
+        null !== $name && $self['name'] = $name;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +65,10 @@ final class Region implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Region implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +87,9 @@ final class Region implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

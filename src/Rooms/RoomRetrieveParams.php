@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * View a room.
  *
- * @see Telnyx\Rooms->retrieve
+ * @see Telnyx\Services\RoomsService::retrieve()
  *
- * @phpstan-type room_retrieve_params = array{includeSessions?: bool}
+ * @phpstan-type RoomRetrieveParamsShape = array{includeSessions?: bool|null}
  */
 final class RoomRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<room_retrieve_params> */
+    /** @use SdkModel<RoomRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * To decide if room sessions should be included in the response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeSessions;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class RoomRetrieveParams implements BaseModel
      */
     public static function with(?bool $includeSessions = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includeSessions && $obj->includeSessions = $includeSessions;
+        null !== $includeSessions && $self['includeSessions'] = $includeSessions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class RoomRetrieveParams implements BaseModel
      */
     public function withIncludeSessions(bool $includeSessions): self
     {
-        $obj = clone $this;
-        $obj->includeSessions = $includeSessions;
+        $self = clone $this;
+        $self['includeSessions'] = $includeSessions;
 
-        return $obj;
+        return $self;
     }
 }

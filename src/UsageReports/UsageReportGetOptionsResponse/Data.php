@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UsageReports\UsageReportGetOptionsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
@@ -12,22 +12,24 @@ use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType;
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
- * @phpstan-type data_alias = array{
- *   product?: string,
- *   productDimensions?: list<string>,
- *   productMetrics?: list<string>,
- *   recordTypes?: list<RecordType>,
+ * @phpstan-import-type RecordTypeShape from \Telnyx\UsageReports\UsageReportGetOptionsResponse\Data\RecordType
+ *
+ * @phpstan-type DataShape = array{
+ *   product?: string|null,
+ *   productDimensions?: list<string>|null,
+ *   productMetrics?: list<string>|null,
+ *   recordTypes?: list<RecordType|RecordTypeShape>|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Telnyx Product.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
     /**
@@ -35,7 +37,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $productDimensions
      */
-    #[Api('product_dimensions', list: 'string', optional: true)]
+    #[Optional('product_dimensions', list: 'string')]
     public ?array $productDimensions;
 
     /**
@@ -43,7 +45,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $productMetrics
      */
-    #[Api('product_metrics', list: 'string', optional: true)]
+    #[Optional('product_metrics', list: 'string')]
     public ?array $productMetrics;
 
     /**
@@ -51,7 +53,7 @@ final class Data implements BaseModel
      *
      * @var list<RecordType>|null $recordTypes
      */
-    #[Api('record_types', list: RecordType::class, optional: true)]
+    #[Optional('record_types', list: RecordType::class)]
     public ?array $recordTypes;
 
     public function __construct()
@@ -64,9 +66,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $productDimensions
-     * @param list<string> $productMetrics
-     * @param list<RecordType> $recordTypes
+     * @param list<string>|null $productDimensions
+     * @param list<string>|null $productMetrics
+     * @param list<RecordType|RecordTypeShape>|null $recordTypes
      */
     public static function with(
         ?string $product = null,
@@ -74,14 +76,14 @@ final class Data implements BaseModel
         ?array $productMetrics = null,
         ?array $recordTypes = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $product && $obj->product = $product;
-        null !== $productDimensions && $obj->productDimensions = $productDimensions;
-        null !== $productMetrics && $obj->productMetrics = $productMetrics;
-        null !== $recordTypes && $obj->recordTypes = $recordTypes;
+        null !== $product && $self['product'] = $product;
+        null !== $productDimensions && $self['productDimensions'] = $productDimensions;
+        null !== $productMetrics && $self['productMetrics'] = $productMetrics;
+        null !== $recordTypes && $self['recordTypes'] = $recordTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +91,10 @@ final class Data implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj->product = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +104,10 @@ final class Data implements BaseModel
      */
     public function withProductDimensions(array $productDimensions): self
     {
-        $obj = clone $this;
-        $obj->productDimensions = $productDimensions;
+        $self = clone $this;
+        $self['productDimensions'] = $productDimensions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,22 +117,22 @@ final class Data implements BaseModel
      */
     public function withProductMetrics(array $productMetrics): self
     {
-        $obj = clone $this;
-        $obj->productMetrics = $productMetrics;
+        $self = clone $this;
+        $self['productMetrics'] = $productMetrics;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Subproducts if applicable.
      *
-     * @param list<RecordType> $recordTypes
+     * @param list<RecordType|RecordTypeShape> $recordTypes
      */
     public function withRecordTypes(array $recordTypes): self
     {
-        $obj = clone $this;
-        $obj->recordTypes = $recordTypes;
+        $self = clone $this;
+        $self['recordTypes'] = $recordTypes;
 
-        return $obj;
+        return $self;
     }
 }

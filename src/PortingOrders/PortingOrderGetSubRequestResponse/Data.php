@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{portRequestID?: string, subRequestID?: string}
+ * @phpstan-type DataShape = array{
+ *   portRequestID?: string|null, subRequestID?: string|null
+ * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Identifies the Port Request associated with the Porting Order.
      */
-    #[Api('port_request_id', optional: true)]
+    #[Optional('port_request_id')]
     public ?string $portRequestID;
 
     /**
      * Identifies the Sub Request associated with the Porting Order.
      */
-    #[Api('sub_request_id', optional: true)]
+    #[Optional('sub_request_id')]
     public ?string $subRequestID;
 
     public function __construct()
@@ -42,12 +44,12 @@ final class Data implements BaseModel
         ?string $portRequestID = null,
         ?string $subRequestID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $portRequestID && $obj->portRequestID = $portRequestID;
-        null !== $subRequestID && $obj->subRequestID = $subRequestID;
+        null !== $portRequestID && $self['portRequestID'] = $portRequestID;
+        null !== $subRequestID && $self['subRequestID'] = $subRequestID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +57,10 @@ final class Data implements BaseModel
      */
     public function withPortRequestID(string $portRequestID): self
     {
-        $obj = clone $this;
-        $obj->portRequestID = $portRequestID;
+        $self = clone $this;
+        $self['portRequestID'] = $portRequestID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class Data implements BaseModel
      */
     public function withSubRequestID(string $subRequestID): self
     {
-        $obj = clone $this;
-        $obj->subRequestID = $subRequestID;
+        $self = clone $this;
+        $self['subRequestID'] = $subRequestID;
 
-        return $obj;
+        return $self;
     }
 }

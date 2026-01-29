@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuthClients;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_client_get_response = array{data?: OAuthClient}
+ * @phpstan-import-type OAuthClientShape from \Telnyx\OAuthClients\OAuthClient
+ *
+ * @phpstan-type OAuthClientGetResponseShape = array{
+ *   data?: null|OAuthClient|OAuthClientShape
+ * }
  */
-final class OAuthClientGetResponse implements BaseModel, ResponseConverter
+final class OAuthClientGetResponse implements BaseModel
 {
-    /** @use SdkModel<oauth_client_get_response> */
+    /** @use SdkModel<OAuthClientGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?OAuthClient $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class OAuthClientGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param OAuthClient|OAuthClientShape|null $data
      */
-    public static function with(?OAuthClient $data = null): self
+    public static function with(OAuthClient|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(OAuthClient $data): self
+    /**
+     * @param OAuthClient|OAuthClientShape $data
+     */
+    public function withData(OAuthClient|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

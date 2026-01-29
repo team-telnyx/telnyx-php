@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID\In;
@@ -12,17 +12,22 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID\In;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in].
  *
- * @phpstan-type filter_alias = array{globalIPID?: string|In}
+ * @phpstan-import-type GlobalIPIDVariants from \Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID
+ * @phpstan-import-type GlobalIPIDShape from \Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID
+ *
+ * @phpstan-type FilterShape = array{globalIPID?: GlobalIPIDShape|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by exact Global IP ID.
+     *
+     * @var GlobalIPIDVariants|null $globalIPID
      */
-    #[Api('global_ip_id', optional: true)]
+    #[Optional('global_ip_id')]
     public string|In|null $globalIPID;
 
     public function __construct()
@@ -34,24 +39,28 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param GlobalIPIDShape|null $globalIPID
      */
-    public static function with(string|In|null $globalIPID = null): self
+    public static function with(string|In|array|null $globalIPID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIPID && $obj->globalIPID = $globalIPID;
+        null !== $globalIPID && $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by exact Global IP ID.
+     *
+     * @param GlobalIPIDShape $globalIPID
      */
-    public function withGlobalIPID(string|In $globalIPID): self
+    public function withGlobalIpid(string|In|array $globalIPID): self
     {
-        $obj = clone $this;
-        $obj->globalIPID = $globalIPID;
+        $self = clone $this;
+        $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 }

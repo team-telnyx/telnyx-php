@@ -11,14 +11,16 @@ use Telnyx\Core\Conversion\ListOf;
 
 /**
  * Filter results by support key(s). Originally: filter[support_key][eq], filter[support_key][in][].
+ *
+ * @phpstan-type SupportKeyVariants = string|list<string>
+ * @phpstan-type SupportKeyShape = SupportKeyVariants
  */
 final class SupportKey implements ConverterSource
 {
     use SdkUnion;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {

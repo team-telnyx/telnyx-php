@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data\Found;
 
 /**
- * @phpstan-type data_alias = array{
- *   found?: list<Found>, notFound?: list<string>, recordType?: string
+ * @phpstan-import-type FoundShape from \Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data\Found
+ *
+ * @phpstan-type DataShape = array{
+ *   found?: list<Found|FoundShape>|null,
+ *   notFound?: list<string>|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
@@ -24,7 +28,7 @@ final class Data implements BaseModel
      *
      * @var list<Found>|null $found
      */
-    #[Api(list: Found::class, optional: true)]
+    #[Optional(list: Found::class)]
     public ?array $found;
 
     /**
@@ -32,13 +36,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $notFound
      */
-    #[Api('not_found', list: 'string', optional: true)]
+    #[Optional('not_found', list: 'string')]
     public ?array $notFound;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -51,34 +55,34 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Found> $found
-     * @param list<string> $notFound
+     * @param list<Found|FoundShape>|null $found
+     * @param list<string>|null $notFound
      */
     public static function with(
         ?array $found = null,
         ?array $notFound = null,
         ?string $recordType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $found && $obj->found = $found;
-        null !== $notFound && $obj->notFound = $notFound;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $found && $self['found'] = $found;
+        null !== $notFound && $self['notFound'] = $notFound;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The list of phone numbers which you own and are in an editable state.
      *
-     * @param list<Found> $found
+     * @param list<Found|FoundShape> $found
      */
     public function withFound(array $found): self
     {
-        $obj = clone $this;
-        $obj->found = $found;
+        $self = clone $this;
+        $self['found'] = $found;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +92,10 @@ final class Data implements BaseModel
      */
     public function withNotFound(array $notFound): self
     {
-        $obj = clone $this;
-        $obj->notFound = $notFound;
+        $self = clone $this;
+        $self['notFound'] = $notFound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,9 +103,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

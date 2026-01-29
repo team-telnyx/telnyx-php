@@ -4,50 +4,50 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type porting_order_phone_number_configuration = array{
- *   billingGroupID?: string,
- *   connectionID?: string,
- *   emergencyAddressID?: string,
- *   messagingProfileID?: string,
- *   tags?: list<string>,
+ * @phpstan-type PortingOrderPhoneNumberConfigurationShape = array{
+ *   billingGroupID?: string|null,
+ *   connectionID?: string|null,
+ *   emergencyAddressID?: string|null,
+ *   messagingProfileID?: string|null,
+ *   tags?: list<string>|null,
  * }
  */
 final class PortingOrderPhoneNumberConfiguration implements BaseModel
 {
-    /** @use SdkModel<porting_order_phone_number_configuration> */
+    /** @use SdkModel<PortingOrderPhoneNumberConfigurationShape> */
     use SdkModel;
 
     /**
      * identifies the billing group to set on the numbers when ported.
      */
-    #[Api('billing_group_id', optional: true)]
+    #[Optional('billing_group_id', nullable: true)]
     public ?string $billingGroupID;
 
     /**
      * identifies the connection to set on the numbers when ported.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id', nullable: true)]
     public ?string $connectionID;
 
     /**
      * identifies the emergency address to set on the numbers when ported.
      */
-    #[Api('emergency_address_id', optional: true)]
+    #[Optional('emergency_address_id', nullable: true)]
     public ?string $emergencyAddressID;
 
     /**
      * identifies the messaging profile to set on the numbers when ported.
      */
-    #[Api('messaging_profile_id', optional: true)]
+    #[Optional('messaging_profile_id', nullable: true)]
     public ?string $messagingProfileID;
 
     /** @var list<string>|null $tags */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     public function __construct()
@@ -60,7 +60,7 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $tags
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $billingGroupID = null,
@@ -69,59 +69,59 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
         ?string $messagingProfileID = null,
         ?array $tags = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
-        null !== $tags && $obj->tags = $tags;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $tags && $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * identifies the billing group to set on the numbers when ported.
      */
-    public function withBillingGroupID(string $billingGroupID): self
+    public function withBillingGroupID(?string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj->billingGroupID = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * identifies the connection to set on the numbers when ported.
      */
-    public function withConnectionID(string $connectionID): self
+    public function withConnectionID(?string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * identifies the emergency address to set on the numbers when ported.
      */
-    public function withEmergencyAddressID(string $emergencyAddressID): self
+    public function withEmergencyAddressID(?string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj->emergencyAddressID = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * identifies the messaging profile to set on the numbers when ported.
      */
-    public function withMessagingProfileID(string $messagingProfileID): self
+    public function withMessagingProfileID(?string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class PortingOrderPhoneNumberConfiguration implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

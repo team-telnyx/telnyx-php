@@ -4,32 +4,67 @@ declare(strict_types=1);
 
 namespace Telnyx\DocumentLinks;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\DocumentLinks\DocumentLinkListResponse\Data;
 
 /**
- * @phpstan-type document_link_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-type DocumentLinkListResponseShape = array{
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   documentID?: string|null,
+ *   linkedRecordType?: string|null,
+ *   linkedResourceID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
-final class DocumentLinkListResponse implements BaseModel, ResponseConverter
+final class DocumentLinkListResponse implements BaseModel
 {
-    /** @use SdkModel<document_link_list_response> */
+    /** @use SdkModel<DocumentLinkListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * Identifies the resource.
+     */
+    #[Optional]
+    public ?string $id;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * Identifies the associated document.
+     */
+    #[Optional('document_id')]
+    public ?string $documentID;
+
+    /**
+     * The linked resource's record type.
+     */
+    #[Optional('linked_record_type')]
+    public ?string $linkedRecordType;
+
+    /**
+     * Identifies the linked resource.
+     */
+    #[Optional('linked_resource_id')]
+    public ?string $linkedResourceID;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -40,37 +75,103 @@ final class DocumentLinkListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<Data> $data
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?string $id = null,
+        ?string $createdAt = null,
+        ?string $documentID = null,
+        ?string $linkedRecordType = null,
+        ?string $linkedResourceID = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $documentID && $self['documentID'] = $documentID;
+        null !== $linkedRecordType && $self['linkedRecordType'] = $linkedRecordType;
+        null !== $linkedResourceID && $self['linkedResourceID'] = $linkedResourceID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * Identifies the resource.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Identifies the associated document.
+     */
+    public function withDocumentID(string $documentID): self
+    {
+        $self = clone $this;
+        $self['documentID'] = $documentID;
+
+        return $self;
+    }
+
+    /**
+     * The linked resource's record type.
+     */
+    public function withLinkedRecordType(string $linkedRecordType): self
+    {
+        $self = clone $this;
+        $self['linkedRecordType'] = $linkedRecordType;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the linked resource.
+     */
+    public function withLinkedResourceID(string $linkedResourceID): self
+    {
+        $self = clone $this;
+        $self['linkedResourceID'] = $linkedResourceID;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
+
+        return $self;
     }
 }

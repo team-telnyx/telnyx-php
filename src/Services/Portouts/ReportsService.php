@@ -6,71 +6,63 @@ namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Reports\ExportPortoutsCsvReport;
-use Telnyx\Portouts\Reports\ReportCreateParams;
+use Telnyx\Portouts\Reports\PortoutReport;
 use Telnyx\Portouts\Reports\ReportCreateParams\ReportType;
 use Telnyx\Portouts\Reports\ReportGetResponse;
-use Telnyx\Portouts\Reports\ReportListParams;
 use Telnyx\Portouts\Reports\ReportListParams\Filter;
 use Telnyx\Portouts\Reports\ReportListParams\Page;
-use Telnyx\Portouts\Reports\ReportListResponse;
 use Telnyx\Portouts\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\ReportsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type ExportPortoutsCsvReportShape from \Telnyx\Portouts\Reports\ExportPortoutsCsvReport
+ * @phpstan-import-type FilterShape from \Telnyx\Portouts\Reports\ReportListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Portouts\Reports\ReportListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ReportsService implements ReportsContract
 {
     /**
+     * @api
+     */
+    public ReportsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ReportsRawService($client);
+    }
 
     /**
      * @api
      *
      * Generate reports about port-out operations.
      *
-     * @param ExportPortoutsCsvReport $params the parameters for generating a port-outs CSV report
+     * @param ExportPortoutsCsvReport|ExportPortoutsCsvReportShape $params the parameters for generating a port-outs CSV report
      * @param ReportType|value-of<ReportType> $reportType Identifies the type of report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $params,
-        $reportType,
-        ?RequestOptions $requestOptions = null
+        ExportPortoutsCsvReport|array $params,
+        ReportType|string $reportType,
+        RequestOptions|array|null $requestOptions = null,
     ): ReportNewResponse {
-        $params1 = ['params' => $params, 'reportType' => $reportType];
-
-        return $this->createRaw($params1, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ReportNewResponse {
-        [$parsed, $options] = ReportCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params1 = Util::removeNulls(
+            ['params' => $params, 'reportType' => $reportType]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'portouts/reports',
-            body: (object) $parsed,
-            options: $options,
-            convert: ReportNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params1, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -78,19 +70,19 @@ final class ReportsService implements ReportsContract
      *
      * Retrieve a specific report generated.
      *
+     * @param string $id identifies a report
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ReportGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['portouts/reports/%1$s', $id],
-            options: $requestOptions,
-            convert: ReportGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -98,44 +90,24 @@ final class ReportsService implements ReportsContract
      *
      * List the reports generated about port-out operations.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<PortoutReport>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): ReportListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ReportListResponse {
-        [$parsed, $options] = ReportListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'portouts/reports',
-            query: $parsed,
-            options: $options,
-            convert: ReportListResponse::class,
-        );
+        return $response->parse();
     }
 }

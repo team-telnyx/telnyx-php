@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Media;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,34 +13,34 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Upload media file to Telnyx so it can be used with other Telnyx services.
  *
- * @see Telnyx\Media->upload
+ * @see Telnyx\Services\MediaService::upload()
  *
- * @phpstan-type media_upload_params = array{
- *   mediaURL: string, mediaName?: string, ttlSecs?: int
+ * @phpstan-type MediaUploadParamsShape = array{
+ *   mediaURL: string, mediaName?: string|null, ttlSecs?: int|null
  * }
  */
 final class MediaUploadParams implements BaseModel
 {
-    /** @use SdkModel<media_upload_params> */
+    /** @use SdkModel<MediaUploadParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      */
-    #[Api('media_url')]
+    #[Required('media_url')]
     public string $mediaURL;
 
     /**
      * The unique identifier of a file.
      */
-    #[Api('media_name', optional: true)]
+    #[Optional('media_name')]
     public ?string $mediaName;
 
     /**
      * The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      */
-    #[Api('ttl_secs', optional: true)]
+    #[Optional('ttl_secs')]
     public ?int $ttlSecs;
 
     /**
@@ -71,14 +72,14 @@ final class MediaUploadParams implements BaseModel
         ?string $mediaName = null,
         ?int $ttlSecs = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->mediaURL = $mediaURL;
+        $self['mediaURL'] = $mediaURL;
 
-        null !== $mediaName && $obj->mediaName = $mediaName;
-        null !== $ttlSecs && $obj->ttlSecs = $ttlSecs;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $ttlSecs && $self['ttlSecs'] = $ttlSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +87,10 @@ final class MediaUploadParams implements BaseModel
      */
     public function withMediaURL(string $mediaURL): self
     {
-        $obj = clone $this;
-        $obj->mediaURL = $mediaURL;
+        $self = clone $this;
+        $self['mediaURL'] = $mediaURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +98,10 @@ final class MediaUploadParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +109,9 @@ final class MediaUploadParams implements BaseModel
      */
     public function withTtlSecs(int $ttlSecs): self
     {
-        $obj = clone $this;
-        $obj->ttlSecs = $ttlSecs;
+        $self = clone $this;
+        $self['ttlSecs'] = $ttlSecs;
 
-        return $obj;
+        return $self;
     }
 }

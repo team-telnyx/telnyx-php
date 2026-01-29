@@ -4,42 +4,45 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\OutboundMessagePayload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type media_alias = array{
- *   contentType?: string|null, sha256?: string|null, size?: int|null, url?: string
+ * @phpstan-type MediaShape = array{
+ *   contentType?: string|null,
+ *   sha256?: string|null,
+ *   size?: int|null,
+ *   url?: string|null,
  * }
  */
 final class Media implements BaseModel
 {
-    /** @use SdkModel<media_alias> */
+    /** @use SdkModel<MediaShape> */
     use SdkModel;
 
     /**
      * The MIME type of the requested media.
      */
-    #[Api('content_type', nullable: true, optional: true)]
+    #[Optional('content_type', nullable: true)]
     public ?string $contentType;
 
     /**
      * The SHA256 hash of the requested media.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $sha256;
 
     /**
      * The size of the requested media.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $size;
 
     /**
      * The url of the media requested to be sent.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()
@@ -58,14 +61,14 @@ final class Media implements BaseModel
         ?int $size = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentType && $obj->contentType = $contentType;
-        null !== $sha256 && $obj->sha256 = $sha256;
-        null !== $size && $obj->size = $size;
-        null !== $url && $obj->url = $url;
+        null !== $contentType && $self['contentType'] = $contentType;
+        null !== $sha256 && $self['sha256'] = $sha256;
+        null !== $size && $self['size'] = $size;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +76,10 @@ final class Media implements BaseModel
      */
     public function withContentType(?string $contentType): self
     {
-        $obj = clone $this;
-        $obj->contentType = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +87,10 @@ final class Media implements BaseModel
      */
     public function withSha256(?string $sha256): self
     {
-        $obj = clone $this;
-        $obj->sha256 = $sha256;
+        $self = clone $this;
+        $self['sha256'] = $sha256;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +98,10 @@ final class Media implements BaseModel
      */
     public function withSize(?int $size): self
     {
-        $obj = clone $this;
-        $obj->size = $size;
+        $self = clone $this;
+        $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +109,9 @@ final class Media implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

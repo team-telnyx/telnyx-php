@@ -8,31 +8,22 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsContract
 {
     /**
      * @api
      *
-     * @param string $verificationCode
+     * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function submitVerificationCode(
         string $phoneNumber,
-        $verificationCode,
-        ?RequestOptions $requestOptions = null,
-    ): VerifiedNumberDataWrapper;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function submitVerificationCodeRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null,
+        string $verificationCode,
+        RequestOptions|array|null $requestOptions = null,
     ): VerifiedNumberDataWrapper;
 }

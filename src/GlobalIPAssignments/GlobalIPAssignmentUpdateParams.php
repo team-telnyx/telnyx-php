@@ -4,40 +4,44 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignments;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
 
 /**
  * Update a Global IP assignment.
  *
- * @see Telnyx\GlobalIPAssignments->update
+ * @see Telnyx\Services\GlobalIPAssignmentsService::update()
  *
- * @phpstan-type global_ip_assignment_update_params = array{body: Body}
+ * @phpstan-import-type GlobalIPAssignmentUpdateRequestShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest
+ *
+ * @phpstan-type GlobalIPAssignmentUpdateParamsShape = array{
+ *   globalIPAssignmentUpdateRequest: GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape,
+ * }
  */
 final class GlobalIPAssignmentUpdateParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_assignment_update_params> */
+    /** @use SdkModel<GlobalIPAssignmentUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
-    public Body $body;
+    #[Required]
+    public GlobalIPAssignmentUpdateRequest $globalIPAssignmentUpdateRequest;
 
     /**
      * `new GlobalIPAssignmentUpdateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * GlobalIPAssignmentUpdateParams::with(body: ...)
+     * GlobalIPAssignmentUpdateParams::with(globalIPAssignmentUpdateRequest: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new GlobalIPAssignmentUpdateParams)->withBody(...)
+     * (new GlobalIPAssignmentUpdateParams)->withGlobalIPAssignmentUpdateRequest(...)
      * ```
      */
     public function __construct()
@@ -49,21 +53,28 @@ final class GlobalIPAssignmentUpdateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
      */
-    public static function with(Body $body): self
-    {
-        $obj = new self;
+    public static function with(
+        GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest
+    ): self {
+        $self = new self;
 
-        $obj->body = $body;
+        $self['globalIPAssignmentUpdateRequest'] = $globalIPAssignmentUpdateRequest;
 
-        return $obj;
+        return $self;
     }
 
-    public function withBody(Body $body): self
-    {
-        $obj = clone $this;
-        $obj->body = $body;
+    /**
+     * @param GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
+     */
+    public function withGlobalIPAssignmentUpdateRequest(
+        GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest
+    ): self {
+        $self = clone $this;
+        $self['globalIPAssignmentUpdateRequest'] = $globalIPAssignmentUpdateRequest;
 
-        return $obj;
+        return $self;
     }
 }

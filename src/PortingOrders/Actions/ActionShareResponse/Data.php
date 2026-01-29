@@ -4,56 +4,56 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Actions\ActionShareResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\Actions\ActionShareResponse\Data\Permission;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   token?: string,
- *   createdAt?: \DateTimeInterface,
- *   expiresAt?: \DateTimeInterface,
- *   expiresInSeconds?: int,
- *   permissions?: list<value-of<Permission>>,
- *   portingOrderID?: string,
- *   recordType?: string,
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   token?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   expiresAt?: \DateTimeInterface|null,
+ *   expiresInSeconds?: int|null,
+ *   permissions?: list<Permission|value-of<Permission>>|null,
+ *   portingOrderID?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies this sharing token.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * A signed JWT token that can be used to access the shared resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * ISO 8601 formatted date indicating when the sharing token expires.
      */
-    #[Api('expires_at', optional: true)]
+    #[Optional('expires_at')]
     public ?\DateTimeInterface $expiresAt;
 
     /**
      * The number of seconds until the sharing token expires.
      */
-    #[Api('expires_in_seconds', optional: true)]
+    #[Optional('expires_in_seconds')]
     public ?int $expiresInSeconds;
 
     /**
@@ -61,19 +61,19 @@ final class Data implements BaseModel
      *
      * @var list<value-of<Permission>>|null $permissions
      */
-    #[Api(list: Permission::class, optional: true)]
+    #[Optional(list: Permission::class)]
     public ?array $permissions;
 
     /**
      * Identifies the porting order resource being shared.
      */
-    #[Api('porting_order_id', optional: true)]
+    #[Optional('porting_order_id')]
     public ?string $portingOrderID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -86,7 +86,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Permission|value-of<Permission>> $permissions
+     * @param list<Permission|value-of<Permission>>|null $permissions
      */
     public static function with(
         ?string $id = null,
@@ -98,18 +98,18 @@ final class Data implements BaseModel
         ?string $portingOrderID = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $token && $obj->token = $token;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $expiresAt && $obj->expiresAt = $expiresAt;
-        null !== $expiresInSeconds && $obj->expiresInSeconds = $expiresInSeconds;
-        null !== $permissions && $obj['permissions'] = $permissions;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $token && $self['token'] = $token;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $expiresInSeconds && $self['expiresInSeconds'] = $expiresInSeconds;
+        null !== $permissions && $self['permissions'] = $permissions;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class Data implements BaseModel
      */
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj->token = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class Data implements BaseModel
      */
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
-        $obj = clone $this;
-        $obj->expiresAt = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class Data implements BaseModel
      */
     public function withExpiresInSeconds(int $expiresInSeconds): self
     {
-        $obj = clone $this;
-        $obj->expiresInSeconds = $expiresInSeconds;
+        $self = clone $this;
+        $self['expiresInSeconds'] = $expiresInSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class Data implements BaseModel
      */
     public function withPermissions(array $permissions): self
     {
-        $obj = clone $this;
-        $obj['permissions'] = $permissions;
+        $self = clone $this;
+        $self['permissions'] = $permissions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class Data implements BaseModel
      */
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,9 +196,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

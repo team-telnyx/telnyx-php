@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,20 +13,22 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
 /**
  * Returns the detail on API usage on a bucket of a particular time period, group by method category.
  *
- * @see Telnyx\Storage\Buckets\Usage->getAPIUsage
+ * @see Telnyx\Services\Storage\Buckets\UsageService::getAPIUsage()
  *
- * @phpstan-type usage_get_api_usage_params = array{filter: Filter}
+ * @phpstan-import-type FilterShape from \Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter
+ *
+ * @phpstan-type UsageGetAPIUsageParamsShape = array{filter: Filter|FilterShape}
  */
 final class UsageGetAPIUsageParams implements BaseModel
 {
-    /** @use SdkModel<usage_get_api_usage_params> */
+    /** @use SdkModel<UsageGetAPIUsageParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time].
      */
-    #[Api]
+    #[Required]
     public Filter $filter;
 
     /**
@@ -52,24 +54,28 @@ final class UsageGetAPIUsageParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape $filter
      */
-    public static function with(Filter $filter): self
+    public static function with(Filter|array $filter): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->filter = $filter;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 }

@@ -9,17 +9,20 @@ use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AIContract
 {
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieveModels(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AIGetModelsResponse;
 
     /**
@@ -28,25 +31,14 @@ interface AIContract
      * @param string $bucket the name of the bucket that contains the file to be summarized
      * @param string $filename the name of the file to be summarized
      * @param string $systemPrompt a system prompt to guide the summary generation
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function summarize(
-        $bucket,
-        $filename,
-        $systemPrompt = omit,
-        ?RequestOptions $requestOptions = null,
-    ): AISummarizeResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function summarizeRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $bucket,
+        string $filename,
+        ?string $systemPrompt = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AISummarizeResponse;
 }

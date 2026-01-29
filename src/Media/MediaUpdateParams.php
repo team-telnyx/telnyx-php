@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Media;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,26 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates a stored media file.
  *
- * @see Telnyx\Media->update
+ * @see Telnyx\Services\MediaService::update()
  *
- * @phpstan-type media_update_params = array{mediaURL?: string, ttlSecs?: int}
+ * @phpstan-type MediaUpdateParamsShape = array{
+ *   mediaURL?: string|null, ttlSecs?: int|null
+ * }
  */
 final class MediaUpdateParams implements BaseModel
 {
-    /** @use SdkModel<media_update_params> */
+    /** @use SdkModel<MediaUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      */
-    #[Api('media_url', optional: true)]
+    #[Optional('media_url')]
     public ?string $mediaURL;
 
     /**
      * The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
      */
-    #[Api('ttl_secs', optional: true)]
+    #[Optional('ttl_secs')]
     public ?int $ttlSecs;
 
     public function __construct()
@@ -48,12 +50,12 @@ final class MediaUpdateParams implements BaseModel
         ?string $mediaURL = null,
         ?int $ttlSecs = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $mediaURL && $obj->mediaURL = $mediaURL;
-        null !== $ttlSecs && $obj->ttlSecs = $ttlSecs;
+        null !== $mediaURL && $self['mediaURL'] = $mediaURL;
+        null !== $ttlSecs && $self['ttlSecs'] = $ttlSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,10 +63,10 @@ final class MediaUpdateParams implements BaseModel
      */
     public function withMediaURL(string $mediaURL): self
     {
-        $obj = clone $this;
-        $obj->mediaURL = $mediaURL;
+        $self = clone $this;
+        $self['mediaURL'] = $mediaURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,9 +74,9 @@ final class MediaUpdateParams implements BaseModel
      */
     public function withTtlSecs(int $ttlSecs): self
     {
-        $obj = clone $this;
-        $obj->ttlSecs = $ttlSecs;
+        $self = clone $this;
+        $self['ttlSecs'] = $ttlSecs;
 
-        return $obj;
+        return $self;
     }
 }

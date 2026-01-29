@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type assistants_list = array{data: list<InferenceEmbedding>}
+ * @phpstan-import-type InferenceEmbeddingShape from \Telnyx\AI\Assistants\InferenceEmbedding
+ *
+ * @phpstan-type AssistantsListShape = array{
+ *   data: list<InferenceEmbedding|InferenceEmbeddingShape>
+ * }
  */
-final class AssistantsList implements BaseModel, ResponseConverter
+final class AssistantsList implements BaseModel
 {
-    /** @use SdkModel<assistants_list> */
+    /** @use SdkModel<AssistantsListShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<InferenceEmbedding> $data */
-    #[Api(list: InferenceEmbedding::class)]
+    #[Required(list: InferenceEmbedding::class)]
     public array $data;
 
     /**
@@ -48,25 +48,25 @@ final class AssistantsList implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<InferenceEmbedding> $data
+     * @param list<InferenceEmbedding|InferenceEmbeddingShape> $data
      */
     public static function with(array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<InferenceEmbedding> $data
+     * @param list<InferenceEmbedding|InferenceEmbeddingShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

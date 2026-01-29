@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberBlocks\Jobs\Job;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * The phone numbers successfully updated.
  *
- * @phpstan-type successful_operation = array{id?: string, phoneNumber?: string}
+ * @phpstan-type SuccessfulOperationShape = array{
+ *   id?: string|null, phoneNumber?: string|null
+ * }
  */
 final class SuccessfulOperation implements BaseModel
 {
-    /** @use SdkModel<successful_operation> */
+    /** @use SdkModel<SuccessfulOperationShape> */
     use SdkModel;
 
     /**
      * The phone number's ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The phone number in e164 format.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     public function __construct()
@@ -44,12 +46,12 @@ final class SuccessfulOperation implements BaseModel
         ?string $id = null,
         ?string $phoneNumber = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $id && $self['id'] = $id;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +59,10 @@ final class SuccessfulOperation implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +70,9 @@ final class SuccessfulOperation implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

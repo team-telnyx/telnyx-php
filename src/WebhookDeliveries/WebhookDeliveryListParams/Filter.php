@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Attempts;
@@ -16,39 +16,45 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Webhook;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte].
  *
- * @phpstan-type filter_alias = array{
- *   attempts?: Attempts,
- *   eventType?: string,
- *   finishedAt?: FinishedAt,
- *   startedAt?: StartedAt,
- *   status?: Status,
- *   webhook?: Webhook,
+ * @phpstan-import-type AttemptsShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Attempts
+ * @phpstan-import-type FinishedAtShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\FinishedAt
+ * @phpstan-import-type StartedAtShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\StartedAt
+ * @phpstan-import-type StatusShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Status
+ * @phpstan-import-type WebhookShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter\Webhook
+ *
+ * @phpstan-type FilterShape = array{
+ *   attempts?: null|Attempts|AttemptsShape,
+ *   eventType?: string|null,
+ *   finishedAt?: null|FinishedAt|FinishedAtShape,
+ *   startedAt?: null|StartedAt|StartedAtShape,
+ *   status?: null|Status|StatusShape,
+ *   webhook?: null|Webhook|WebhookShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Attempts $attempts;
 
     /**
      * Return only webhook_deliveries matching the given value of `event_type`. Accepts multiple values separated by a `,`.
      */
-    #[Api('event_type', optional: true)]
+    #[Optional('event_type')]
     public ?string $eventType;
 
-    #[Api('finished_at', optional: true)]
+    #[Optional('finished_at')]
     public ?FinishedAt $finishedAt;
 
-    #[Api('started_at', optional: true)]
+    #[Optional('started_at')]
     public ?StartedAt $startedAt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Status $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Webhook $webhook;
 
     public function __construct()
@@ -60,33 +66,42 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Attempts|AttemptsShape|null $attempts
+     * @param FinishedAt|FinishedAtShape|null $finishedAt
+     * @param StartedAt|StartedAtShape|null $startedAt
+     * @param Status|StatusShape|null $status
+     * @param Webhook|WebhookShape|null $webhook
      */
     public static function with(
-        ?Attempts $attempts = null,
+        Attempts|array|null $attempts = null,
         ?string $eventType = null,
-        ?FinishedAt $finishedAt = null,
-        ?StartedAt $startedAt = null,
-        ?Status $status = null,
-        ?Webhook $webhook = null,
+        FinishedAt|array|null $finishedAt = null,
+        StartedAt|array|null $startedAt = null,
+        Status|array|null $status = null,
+        Webhook|array|null $webhook = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $attempts && $obj->attempts = $attempts;
-        null !== $eventType && $obj->eventType = $eventType;
-        null !== $finishedAt && $obj->finishedAt = $finishedAt;
-        null !== $startedAt && $obj->startedAt = $startedAt;
-        null !== $status && $obj->status = $status;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $attempts && $self['attempts'] = $attempts;
+        null !== $eventType && $self['eventType'] = $eventType;
+        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
+        null !== $status && $self['status'] = $status;
+        null !== $webhook && $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
-    public function withAttempts(Attempts $attempts): self
+    /**
+     * @param Attempts|AttemptsShape $attempts
+     */
+    public function withAttempts(Attempts|array $attempts): self
     {
-        $obj = clone $this;
-        $obj->attempts = $attempts;
+        $self = clone $this;
+        $self['attempts'] = $attempts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,41 +109,53 @@ final class Filter implements BaseModel
      */
     public function withEventType(string $eventType): self
     {
-        $obj = clone $this;
-        $obj->eventType = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
-    public function withFinishedAt(FinishedAt $finishedAt): self
+    /**
+     * @param FinishedAt|FinishedAtShape $finishedAt
+     */
+    public function withFinishedAt(FinishedAt|array $finishedAt): self
     {
-        $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withStartedAt(StartedAt $startedAt): self
+    /**
+     * @param StartedAt|StartedAtShape $startedAt
+     */
+    public function withStartedAt(StartedAt|array $startedAt): self
     {
-        $obj = clone $this;
-        $obj->startedAt = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withStatus(Status $status): self
+    /**
+     * @param Status|StatusShape $status
+     */
+    public function withStatus(Status|array $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
-    public function withWebhook(Webhook $webhook): self
+    /**
+     * @param Webhook|WebhookShape $webhook
+     */
+    public function withWebhook(Webhook|array $webhook): self
     {
-        $obj = clone $this;
-        $obj->webhook = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

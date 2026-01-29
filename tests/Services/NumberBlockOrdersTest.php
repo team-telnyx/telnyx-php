@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\NumberBlockOrders\NumberBlockOrder;
+use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
+use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +42,8 @@ final class NumberBlockOrdersTest extends TestCase
             startingNumber: '+19705555000'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberBlockOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -50,10 +55,14 @@ final class NumberBlockOrdersTest extends TestCase
 
         $result = $this->client->numberBlockOrders->create(
             range: 10,
-            startingNumber: '+19705555000'
+            startingNumber: '+19705555000',
+            connectionID: '346789098765567',
+            customerReference: 'MY REF 001',
+            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberBlockOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +76,8 @@ final class NumberBlockOrdersTest extends TestCase
             'number_block_order_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberBlockOrderGetResponse::class, $result);
     }
 
     #[Test]
@@ -77,8 +87,14 @@ final class NumberBlockOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->numberBlockOrders->list();
+        $page = $this->client->numberBlockOrders->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(NumberBlockOrder::class, $item);
+        }
     }
 }

@@ -4,23 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_refresh_response = array{result?: string}
+ * @phpstan-type ActionRefreshResponseShape = array{result?: string|null}
  */
-final class ActionRefreshResponse implements BaseModel, ResponseConverter
+final class ActionRefreshResponse implements BaseModel
 {
-    /** @use SdkModel<action_refresh_response> */
+    /** @use SdkModel<ActionRefreshResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $result;
 
     public function __construct()
@@ -35,18 +31,18 @@ final class ActionRefreshResponse implements BaseModel, ResponseConverter
      */
     public static function with(?string $result = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $result && $obj->result = $result;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj->result = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Can be specified directly or via the `requirement_group_id` parameter.
  *
- * @phpstan-type porting_order_documents = array{invoice?: string, loa?: string}
+ * @phpstan-type PortingOrderDocumentsShape = array{
+ *   invoice?: string|null, loa?: string|null
+ * }
  */
 final class PortingOrderDocuments implements BaseModel
 {
-    /** @use SdkModel<porting_order_documents> */
+    /** @use SdkModel<PortingOrderDocumentsShape> */
     use SdkModel;
 
     /**
      * Returned ID of the submitted Invoice via the Documents endpoint.
      */
-    #[Api(optional: true)]
+    #[Optional(nullable: true)]
     public ?string $invoice;
 
     /**
      * Returned ID of the submitted LOA via the Documents endpoint.
      */
-    #[Api(optional: true)]
+    #[Optional(nullable: true)]
     public ?string $loa;
 
     public function __construct()
@@ -44,33 +46,33 @@ final class PortingOrderDocuments implements BaseModel
         ?string $invoice = null,
         ?string $loa = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $invoice && $obj->invoice = $invoice;
-        null !== $loa && $obj->loa = $loa;
+        null !== $invoice && $self['invoice'] = $invoice;
+        null !== $loa && $self['loa'] = $loa;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Returned ID of the submitted Invoice via the Documents endpoint.
      */
-    public function withInvoice(string $invoice): self
+    public function withInvoice(?string $invoice): self
     {
-        $obj = clone $this;
-        $obj->invoice = $invoice;
+        $self = clone $this;
+        $self['invoice'] = $invoice;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Returned ID of the submitted LOA via the Documents endpoint.
      */
-    public function withLoa(string $loa): self
+    public function withLoa(?string $loa): self
     {
-        $obj = clone $this;
-        $obj->loa = $loa;
+        $self = clone $this;
+        $self['loa'] = $loa;
 
-        return $obj;
+        return $self;
     }
 }

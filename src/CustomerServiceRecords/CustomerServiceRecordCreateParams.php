@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,31 +14,35 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalDa
 /**
  * Create a new customer service record for the provided phone number.
  *
- * @see Telnyx\CustomerServiceRecords->create
+ * @see Telnyx\Services\CustomerServiceRecordsService::create()
  *
- * @phpstan-type customer_service_record_create_params = array{
- *   phoneNumber: string, additionalData?: AdditionalData, webhookURL?: string
+ * @phpstan-import-type AdditionalDataShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData
+ *
+ * @phpstan-type CustomerServiceRecordCreateParamsShape = array{
+ *   phoneNumber: string,
+ *   additionalData?: null|AdditionalData|AdditionalDataShape,
+ *   webhookURL?: string|null,
  * }
  */
 final class CustomerServiceRecordCreateParams implements BaseModel
 {
-    /** @use SdkModel<customer_service_record_create_params> */
+    /** @use SdkModel<CustomerServiceRecordCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A valid US phone number in E164 format.
      */
-    #[Api('phone_number')]
+    #[Required('phone_number')]
     public string $phoneNumber;
 
-    #[Api('additional_data', optional: true)]
+    #[Optional('additional_data')]
     public ?AdditionalData $additionalData;
 
     /**
      * Callback URL to receive webhook notifications.
      */
-    #[Api('webhook_url', optional: true)]
+    #[Optional('webhook_url')]
     public ?string $webhookURL;
 
     /**
@@ -63,20 +68,22 @@ final class CustomerServiceRecordCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AdditionalData|AdditionalDataShape|null $additionalData
      */
     public static function with(
         string $phoneNumber,
-        ?AdditionalData $additionalData = null,
+        AdditionalData|array|null $additionalData = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumber = $phoneNumber;
+        $self['phoneNumber'] = $phoneNumber;
 
-        null !== $additionalData && $obj->additionalData = $additionalData;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $additionalData && $self['additionalData'] = $additionalData;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,18 +91,22 @@ final class CustomerServiceRecordCreateParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
-    public function withAdditionalData(AdditionalData $additionalData): self
-    {
-        $obj = clone $this;
-        $obj->additionalData = $additionalData;
+    /**
+     * @param AdditionalData|AdditionalDataShape $additionalData
+     */
+    public function withAdditionalData(
+        AdditionalData|array $additionalData
+    ): self {
+        $self = clone $this;
+        $self['additionalData'] = $additionalData;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +114,9 @@ final class CustomerServiceRecordCreateParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

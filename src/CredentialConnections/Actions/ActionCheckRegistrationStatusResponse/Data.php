@@ -4,56 +4,56 @@ declare(strict_types=1);
 
 namespace Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\Actions\ActionCheckRegistrationStatusResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
- *   ipAddress?: string,
- *   lastRegistration?: string,
- *   port?: int,
- *   recordType?: string,
- *   sipUsername?: string,
- *   status?: value-of<Status>,
- *   transport?: string,
- *   userAgent?: string,
+ * @phpstan-type DataShape = array{
+ *   ipAddress?: string|null,
+ *   lastRegistration?: string|null,
+ *   port?: int|null,
+ *   recordType?: string|null,
+ *   sipUsername?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   transport?: string|null,
+ *   userAgent?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The ip used during the SIP connection.
      */
-    #[Api('ip_address', optional: true)]
+    #[Optional('ip_address')]
     public ?string $ipAddress;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Api('last_registration', optional: true)]
+    #[Optional('last_registration')]
     public ?string $lastRegistration;
 
     /**
      * The port of the SIP connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The user name of the SIP connection.
      */
-    #[Api('sip_username', optional: true)]
+    #[Optional('sip_username')]
     public ?string $sipUsername;
 
     /**
@@ -61,19 +61,19 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The protocol of the SIP connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $transport;
 
     /**
      * The user agent of the SIP connection.
      */
-    #[Api('user_agent', optional: true)]
+    #[Optional('user_agent')]
     public ?string $userAgent;
 
     public function __construct()
@@ -86,7 +86,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $ipAddress = null,
@@ -98,18 +98,18 @@ final class Data implements BaseModel
         ?string $transport = null,
         ?string $userAgent = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $ipAddress && $obj->ipAddress = $ipAddress;
-        null !== $lastRegistration && $obj->lastRegistration = $lastRegistration;
-        null !== $port && $obj->port = $port;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $sipUsername && $obj->sipUsername = $sipUsername;
-        null !== $status && $obj['status'] = $status;
-        null !== $transport && $obj->transport = $transport;
-        null !== $userAgent && $obj->userAgent = $userAgent;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $lastRegistration && $self['lastRegistration'] = $lastRegistration;
+        null !== $port && $self['port'] = $port;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sipUsername && $self['sipUsername'] = $sipUsername;
+        null !== $status && $self['status'] = $status;
+        null !== $transport && $self['transport'] = $transport;
+        null !== $userAgent && $self['userAgent'] = $userAgent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class Data implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class Data implements BaseModel
      */
     public function withLastRegistration(string $lastRegistration): self
     {
-        $obj = clone $this;
-        $obj->lastRegistration = $lastRegistration;
+        $self = clone $this;
+        $self['lastRegistration'] = $lastRegistration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class Data implements BaseModel
      */
     public function withPort(int $port): self
     {
-        $obj = clone $this;
-        $obj->port = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class Data implements BaseModel
      */
     public function withSipUsername(string $sipUsername): self
     {
-        $obj = clone $this;
-        $obj->sipUsername = $sipUsername;
+        $self = clone $this;
+        $self['sipUsername'] = $sipUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class Data implements BaseModel
      */
     public function withTransport(string $transport): self
     {
-        $obj = clone $this;
-        $obj->transport = $transport;
+        $self = clone $this;
+        $self['transport'] = $transport;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,9 +196,9 @@ final class Data implements BaseModel
      */
     public function withUserAgent(string $userAgent): self
     {
-        $obj = clone $this;
-        $obj->userAgent = $userAgent;
+        $self = clone $this;
+        $self['userAgent'] = $userAgent;
 
-        return $obj;
+        return $self;
     }
 }

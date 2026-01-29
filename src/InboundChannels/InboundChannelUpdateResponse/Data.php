@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\InboundChannels\InboundChannelUpdateResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{channels?: int, recordType?: string}
+ * @phpstan-type DataShape = array{channels?: int|null, recordType?: string|null}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The number of channels set for the account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $channels;
 
     /**
      * Identifies the type of the response.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class Data implements BaseModel
         ?int $channels = null,
         ?string $recordType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $channels && $obj->channels = $channels;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $channels && $self['channels'] = $channels;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Data implements BaseModel
      */
     public function withChannels(int $channels): self
     {
-        $obj = clone $this;
-        $obj->channels = $channels;
+        $self = clone $this;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

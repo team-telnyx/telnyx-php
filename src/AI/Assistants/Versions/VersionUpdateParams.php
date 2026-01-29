@@ -5,21 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Versions;
 
 use Telnyx\AI\Assistants\AssistantTool;
-use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\EnabledFeatures;
-use Telnyx\AI\Assistants\HangupTool;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
-use Telnyx\AI\Assistants\RetrievalTool;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\VoiceSettings;
-use Telnyx\AI\Assistants\WebhookTool;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\AI\Assistants\WidgetSettings;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -27,110 +22,127 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates the configuration of a specific assistant version. Can not update main version.
  *
- * @see Telnyx\AI\Assistants\Versions->update
+ * @see Telnyx\Services\AI\Assistants\VersionsService::update()
  *
- * @phpstan-type version_update_params = array{
+ * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
+ * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
+ * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
+ * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
+ * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
+ *
+ * @phpstan-type VersionUpdateParamsShape = array{
  *   assistantID: string,
- *   description?: string,
- *   dynamicVariables?: array<string, mixed>,
- *   dynamicVariablesWebhookURL?: string,
- *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
- *   greeting?: string,
- *   insightSettings?: InsightSettings,
- *   instructions?: string,
- *   llmAPIKeyRef?: string,
- *   messagingSettings?: MessagingSettings,
- *   model?: string,
- *   name?: string,
- *   privacySettings?: PrivacySettings,
- *   telephonySettings?: TelephonySettings,
- *   tools?: list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>,
- *   transcription?: TranscriptionSettings,
- *   voiceSettings?: VoiceSettings,
+ *   description?: string|null,
+ *   dynamicVariables?: array<string,mixed>|null,
+ *   dynamicVariablesWebhookURL?: string|null,
+ *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>|null,
+ *   greeting?: string|null,
+ *   insightSettings?: null|InsightSettings|InsightSettingsShape,
+ *   instructions?: string|null,
+ *   llmAPIKeyRef?: string|null,
+ *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
+ *   model?: string|null,
+ *   name?: string|null,
+ *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
+ *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
+ *   tools?: list<AssistantToolShape>|null,
+ *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
+ *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
+ *   widgetSettings?: null|WidgetSettings|WidgetSettingsShape,
  * }
  */
 final class VersionUpdateParams implements BaseModel
 {
-    /** @use SdkModel<version_update_params> */
+    /** @use SdkModel<VersionUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $assistantID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Map of dynamic variables and their default values.
      *
-     * @var array<string, mixed>|null $dynamicVariables
+     * @var array<string,mixed>|null $dynamicVariables
      */
-    #[Api('dynamic_variables', map: 'mixed', optional: true)]
+    #[Optional('dynamic_variables', map: 'mixed')]
     public ?array $dynamicVariables;
 
     /**
      * If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
      */
-    #[Api('dynamic_variables_webhook_url', optional: true)]
+    #[Optional('dynamic_variables_webhook_url')]
     public ?string $dynamicVariablesWebhookURL;
 
     /** @var list<value-of<EnabledFeatures>>|null $enabledFeatures */
-    #[Api('enabled_features', list: EnabledFeatures::class, optional: true)]
+    #[Optional('enabled_features', list: EnabledFeatures::class)]
     public ?array $enabledFeatures;
 
     /**
-     * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $greeting;
 
-    #[Api('insight_settings', optional: true)]
+    #[Optional('insight_settings')]
     public ?InsightSettings $insightSettings;
 
     /**
      * System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
-     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Api('llm_api_key_ref', optional: true)]
+    #[Optional('llm_api_key_ref')]
     public ?string $llmAPIKeyRef;
 
-    #[Api('messaging_settings', optional: true)]
+    #[Optional('messaging_settings')]
     public ?MessagingSettings $messagingSettings;
 
     /**
-     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api/inference/inference-embedding/get-models-public-models-get) to see all of your available models,.
+     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $model;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api('privacy_settings', optional: true)]
+    #[Optional('privacy_settings')]
     public ?PrivacySettings $privacySettings;
 
-    #[Api('telephony_settings', optional: true)]
+    #[Optional('telephony_settings')]
     public ?TelephonySettings $telephonySettings;
 
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @var list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool>|null $tools
+     * @var list<AssistantToolVariants>|null $tools
      */
-    #[Api(list: AssistantTool::class, optional: true)]
+    #[Optional(list: AssistantTool::class)]
     public ?array $tools;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?TranscriptionSettings $transcription;
 
-    #[Api('voice_settings', optional: true)]
+    #[Optional('voice_settings')]
     public ?VoiceSettings $voiceSettings;
+
+    /**
+     * Configuration settings for the assistant's web widget.
+     */
+    #[Optional('widget_settings')]
+    public ?WidgetSettings $widgetSettings;
 
     /**
      * `new VersionUpdateParams()` is missing required properties by the API.
@@ -156,9 +168,16 @@ final class VersionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $dynamicVariables
-     * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
-     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools
+     * @param array<string,mixed>|null $dynamicVariables
+     * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
+     * @param InsightSettings|InsightSettingsShape|null $insightSettings
+     * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
+     * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
+     * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
+     * @param list<AssistantToolShape>|null $tools
+     * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
+     * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
+     * @param WidgetSettings|WidgetSettingsShape|null $widgetSettings
      */
     public static function with(
         string $assistantID,
@@ -167,69 +186,71 @@ final class VersionUpdateParams implements BaseModel
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
         ?string $greeting = null,
-        ?InsightSettings $insightSettings = null,
+        InsightSettings|array|null $insightSettings = null,
         ?string $instructions = null,
         ?string $llmAPIKeyRef = null,
-        ?MessagingSettings $messagingSettings = null,
+        MessagingSettings|array|null $messagingSettings = null,
         ?string $model = null,
         ?string $name = null,
-        ?PrivacySettings $privacySettings = null,
-        ?TelephonySettings $telephonySettings = null,
+        PrivacySettings|array|null $privacySettings = null,
+        TelephonySettings|array|null $telephonySettings = null,
         ?array $tools = null,
-        ?TranscriptionSettings $transcription = null,
-        ?VoiceSettings $voiceSettings = null,
+        TranscriptionSettings|array|null $transcription = null,
+        VoiceSettings|array|null $voiceSettings = null,
+        WidgetSettings|array|null $widgetSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->assistantID = $assistantID;
+        $self['assistantID'] = $assistantID;
 
-        null !== $description && $obj->description = $description;
-        null !== $dynamicVariables && $obj->dynamicVariables = $dynamicVariables;
-        null !== $dynamicVariablesWebhookURL && $obj->dynamicVariablesWebhookURL = $dynamicVariablesWebhookURL;
-        null !== $enabledFeatures && $obj['enabledFeatures'] = $enabledFeatures;
-        null !== $greeting && $obj->greeting = $greeting;
-        null !== $insightSettings && $obj->insightSettings = $insightSettings;
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $llmAPIKeyRef && $obj->llmAPIKeyRef = $llmAPIKeyRef;
-        null !== $messagingSettings && $obj->messagingSettings = $messagingSettings;
-        null !== $model && $obj->model = $model;
-        null !== $name && $obj->name = $name;
-        null !== $privacySettings && $obj->privacySettings = $privacySettings;
-        null !== $telephonySettings && $obj->telephonySettings = $telephonySettings;
-        null !== $tools && $obj->tools = $tools;
-        null !== $transcription && $obj->transcription = $transcription;
-        null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
+        null !== $description && $self['description'] = $description;
+        null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
+        null !== $dynamicVariablesWebhookURL && $self['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
+        null !== $enabledFeatures && $self['enabledFeatures'] = $enabledFeatures;
+        null !== $greeting && $self['greeting'] = $greeting;
+        null !== $insightSettings && $self['insightSettings'] = $insightSettings;
+        null !== $instructions && $self['instructions'] = $instructions;
+        null !== $llmAPIKeyRef && $self['llmAPIKeyRef'] = $llmAPIKeyRef;
+        null !== $messagingSettings && $self['messagingSettings'] = $messagingSettings;
+        null !== $model && $self['model'] = $model;
+        null !== $name && $self['name'] = $name;
+        null !== $privacySettings && $self['privacySettings'] = $privacySettings;
+        null !== $telephonySettings && $self['telephonySettings'] = $telephonySettings;
+        null !== $tools && $self['tools'] = $tools;
+        null !== $transcription && $self['transcription'] = $transcription;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
+        null !== $widgetSettings && $self['widgetSettings'] = $widgetSettings;
 
-        return $obj;
+        return $self;
     }
 
     public function withAssistantID(string $assistantID): self
     {
-        $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $self = clone $this;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Map of dynamic variables and their default values.
      *
-     * @param array<string, mixed> $dynamicVariables
+     * @param array<string,mixed> $dynamicVariables
      */
     public function withDynamicVariables(array $dynamicVariables): self
     {
-        $obj = clone $this;
-        $obj->dynamicVariables = $dynamicVariables;
+        $self = clone $this;
+        $self['dynamicVariables'] = $dynamicVariables;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,10 +259,10 @@ final class VersionUpdateParams implements BaseModel
     public function withDynamicVariablesWebhookURL(
         string $dynamicVariablesWebhookURL
     ): self {
-        $obj = clone $this;
-        $obj->dynamicVariablesWebhookURL = $dynamicVariablesWebhookURL;
+        $self = clone $this;
+        $self['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -249,29 +270,33 @@ final class VersionUpdateParams implements BaseModel
      */
     public function withEnabledFeatures(array $enabledFeatures): self
     {
-        $obj = clone $this;
-        $obj['enabledFeatures'] = $enabledFeatures;
+        $self = clone $this;
+        $self['enabledFeatures'] = $enabledFeatures;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
      */
     public function withGreeting(string $greeting): self
     {
-        $obj = clone $this;
-        $obj->greeting = $greeting;
+        $self = clone $this;
+        $self['greeting'] = $greeting;
 
-        return $obj;
+        return $self;
     }
 
-    public function withInsightSettings(InsightSettings $insightSettings): self
-    {
-        $obj = clone $this;
-        $obj->insightSettings = $insightSettings;
+    /**
+     * @param InsightSettings|InsightSettingsShape $insightSettings
+     */
+    public function withInsightSettings(
+        InsightSettings|array $insightSettings
+    ): self {
+        $self = clone $this;
+        $self['insightSettings'] = $insightSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,95 +304,125 @@ final class VersionUpdateParams implements BaseModel
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj->instructions = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      */
     public function withLlmAPIKeyRef(string $llmAPIKeyRef): self
     {
-        $obj = clone $this;
-        $obj->llmAPIKeyRef = $llmAPIKeyRef;
+        $self = clone $this;
+        $self['llmAPIKeyRef'] = $llmAPIKeyRef;
 
-        return $obj;
-    }
-
-    public function withMessagingSettings(
-        MessagingSettings $messagingSettings
-    ): self {
-        $obj = clone $this;
-        $obj->messagingSettings = $messagingSettings;
-
-        return $obj;
+        return $self;
     }
 
     /**
-     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api/inference/inference-embedding/get-models-public-models-get) to see all of your available models,.
+     * @param MessagingSettings|MessagingSettingsShape $messagingSettings
+     */
+    public function withMessagingSettings(
+        MessagingSettings|array $messagingSettings
+    ): self {
+        $self = clone $this;
+        $self['messagingSettings'] = $messagingSettings;
+
+        return $self;
+    }
+
+    /**
+     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,.
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj->model = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPrivacySettings(PrivacySettings $privacySettings): self
-    {
-        $obj = clone $this;
-        $obj->privacySettings = $privacySettings;
-
-        return $obj;
-    }
-
-    public function withTelephonySettings(
-        TelephonySettings $telephonySettings
+    /**
+     * @param PrivacySettings|PrivacySettingsShape $privacySettings
+     */
+    public function withPrivacySettings(
+        PrivacySettings|array $privacySettings
     ): self {
-        $obj = clone $this;
-        $obj->telephonySettings = $telephonySettings;
+        $self = clone $this;
+        $self['privacySettings'] = $privacySettings;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * @param TelephonySettings|TelephonySettingsShape $telephonySettings
+     */
+    public function withTelephonySettings(
+        TelephonySettings|array $telephonySettings
+    ): self {
+        $self = clone $this;
+        $self['telephonySettings'] = $telephonySettings;
+
+        return $self;
     }
 
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
-     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools
+     * @param list<AssistantToolShape> $tools
      */
     public function withTools(array $tools): self
     {
-        $obj = clone $this;
-        $obj->tools = $tools;
+        $self = clone $this;
+        $self['tools'] = $tools;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
+     */
     public function withTranscription(
-        TranscriptionSettings $transcription
+        TranscriptionSettings|array $transcription
     ): self {
-        $obj = clone $this;
-        $obj->transcription = $transcription;
+        $self = clone $this;
+        $self['transcription'] = $transcription;
 
-        return $obj;
+        return $self;
     }
 
-    public function withVoiceSettings(VoiceSettings $voiceSettings): self
+    /**
+     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
+     */
+    public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
     {
-        $obj = clone $this;
-        $obj->voiceSettings = $voiceSettings;
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Configuration settings for the assistant's web widget.
+     *
+     * @param WidgetSettings|WidgetSettingsShape $widgetSettings
+     */
+    public function withWidgetSettings(
+        WidgetSettings|array $widgetSettings
+    ): self {
+        $self = clone $this;
+        $self['widgetSettings'] = $widgetSettings;
+
+        return $self;
     }
 }

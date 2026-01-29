@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\MigrationSources;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\Usage\PaginationMetaSimple;
 
 /**
- * @phpstan-type migration_source_list_response = array{
- *   data?: list<MigrationSourceParams>, meta?: PaginationMetaSimple
+ * @phpstan-import-type MigrationSourceParamsShape from \Telnyx\Storage\MigrationSources\MigrationSourceParams
+ * @phpstan-import-type PaginationMetaSimpleShape from \Telnyx\Storage\Buckets\Usage\PaginationMetaSimple
+ *
+ * @phpstan-type MigrationSourceListResponseShape = array{
+ *   data?: list<MigrationSourceParams|MigrationSourceParamsShape>|null,
+ *   meta?: null|PaginationMetaSimple|PaginationMetaSimpleShape,
  * }
  */
-final class MigrationSourceListResponse implements BaseModel, ResponseConverter
+final class MigrationSourceListResponse implements BaseModel
 {
-    /** @use SdkModel<migration_source_list_response> */
+    /** @use SdkModel<MigrationSourceListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<MigrationSourceParams>|null $data */
-    #[Api(list: MigrationSourceParams::class, optional: true)]
+    #[Optional(list: MigrationSourceParams::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMetaSimple $meta;
 
     public function __construct()
@@ -40,36 +40,40 @@ final class MigrationSourceListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MigrationSourceParams> $data
+     * @param list<MigrationSourceParams|MigrationSourceParamsShape>|null $data
+     * @param PaginationMetaSimple|PaginationMetaSimpleShape|null $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMetaSimple $meta = null
+        PaginationMetaSimple|array|null $meta = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<MigrationSourceParams> $data
+     * @param list<MigrationSourceParams|MigrationSourceParamsShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMetaSimple $meta): self
+    /**
+     * @param PaginationMetaSimple|PaginationMetaSimpleShape $meta
+     */
+    public function withMeta(PaginationMetaSimple|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

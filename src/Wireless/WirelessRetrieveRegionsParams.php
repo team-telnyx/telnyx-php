@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Wireless;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve all wireless regions for the given product.
  *
- * @see Telnyx\Wireless->retrieveRegions
+ * @see Telnyx\Services\WirelessService::retrieveRegions()
  *
- * @phpstan-type wireless_retrieve_regions_params = array{product: string}
+ * @phpstan-type WirelessRetrieveRegionsParamsShape = array{product: string}
  */
 final class WirelessRetrieveRegionsParams implements BaseModel
 {
-    /** @use SdkModel<wireless_retrieve_regions_params> */
+    /** @use SdkModel<WirelessRetrieveRegionsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
      */
-    #[Api]
+    #[Required]
     public string $product;
 
     /**
@@ -54,11 +54,11 @@ final class WirelessRetrieveRegionsParams implements BaseModel
      */
     public static function with(string $product): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->product = $product;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class WirelessRetrieveRegionsParams implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj->product = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 }

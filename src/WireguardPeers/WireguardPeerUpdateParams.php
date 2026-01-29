@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WireguardPeers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the WireGuard peer.
  *
- * @see Telnyx\WireguardPeers->update
+ * @see Telnyx\Services\WireguardPeersService::update()
  *
- * @phpstan-type wireguard_peer_update_params = array{publicKey?: string}
+ * @phpstan-type WireguardPeerUpdateParamsShape = array{publicKey?: string|null}
  */
 final class WireguardPeerUpdateParams implements BaseModel
 {
-    /** @use SdkModel<wireguard_peer_update_params> */
+    /** @use SdkModel<WireguardPeerUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      */
-    #[Api('public_key', optional: true)]
+    #[Optional('public_key')]
     public ?string $publicKey;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class WireguardPeerUpdateParams implements BaseModel
      */
     public static function with(?string $publicKey = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $publicKey && $obj->publicKey = $publicKey;
+        null !== $publicKey && $self['publicKey'] = $publicKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class WireguardPeerUpdateParams implements BaseModel
      */
     public function withPublicKey(string $publicKey): self
     {
-        $obj = clone $this;
-        $obj->publicKey = $publicKey;
+        $self = clone $this;
+        $self['publicKey'] = $publicKey;
 
-        return $obj;
+        return $self;
     }
 }

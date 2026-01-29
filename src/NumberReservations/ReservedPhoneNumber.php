@@ -4,46 +4,46 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberReservations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
 
 /**
- * @phpstan-type reserved_phone_number = array{
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   expiredAt?: \DateTimeInterface,
- *   phoneNumber?: string,
- *   recordType?: string,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-type ReservedPhoneNumberShape = array{
+ *   id?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   expiredAt?: \DateTimeInterface|null,
+ *   phoneNumber?: string|null,
+ *   recordType?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class ReservedPhoneNumber implements BaseModel
 {
-    /** @use SdkModel<reserved_phone_number> */
+    /** @use SdkModel<ReservedPhoneNumberShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * An ISO 8901 datetime string denoting when the individual number reservation was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * An ISO 8901 datetime string for when the individual number reservation is going to expire.
      */
-    #[Api('expired_at', optional: true)]
+    #[Optional('expired_at')]
     public ?\DateTimeInterface $expiredAt;
 
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -51,13 +51,13 @@ final class ReservedPhoneNumber implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * An ISO 8901 datetime string for when the the individual number reservation was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -70,7 +70,7 @@ final class ReservedPhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -81,25 +81,25 @@ final class ReservedPhoneNumber implements BaseModel
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $expiredAt && $obj->expiredAt = $expiredAt;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $expiredAt && $self['expiredAt'] = $expiredAt;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class ReservedPhoneNumber implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,26 +118,26 @@ final class ReservedPhoneNumber implements BaseModel
      */
     public function withExpiredAt(\DateTimeInterface $expiredAt): self
     {
-        $obj = clone $this;
-        $obj->expiredAt = $expiredAt;
+        $self = clone $this;
+        $self['expiredAt'] = $expiredAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class ReservedPhoneNumber implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,9 +158,9 @@ final class ReservedPhoneNumber implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

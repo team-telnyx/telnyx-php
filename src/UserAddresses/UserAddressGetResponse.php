@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\UserAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type user_address_get_response = array{data?: UserAddress}
+ * @phpstan-import-type UserAddressShape from \Telnyx\UserAddresses\UserAddress
+ *
+ * @phpstan-type UserAddressGetResponseShape = array{
+ *   data?: null|UserAddress|UserAddressShape
+ * }
  */
-final class UserAddressGetResponse implements BaseModel, ResponseConverter
+final class UserAddressGetResponse implements BaseModel
 {
-    /** @use SdkModel<user_address_get_response> */
+    /** @use SdkModel<UserAddressGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?UserAddress $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class UserAddressGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param UserAddress|UserAddressShape|null $data
      */
-    public static function with(?UserAddress $data = null): self
+    public static function with(UserAddress|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(UserAddress $data): self
+    /**
+     * @param UserAddress|UserAddressShape $data
+     */
+    public function withData(UserAddress|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

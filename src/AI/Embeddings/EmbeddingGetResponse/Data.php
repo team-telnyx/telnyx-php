@@ -5,28 +5,28 @@ declare(strict_types=1);
 namespace Telnyx\AI\Embeddings\EmbeddingGetResponse;
 
 use Telnyx\AI\Embeddings\BackgroundTaskStatus;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   createdAt?: string,
- *   finishedAt?: string,
- *   status?: value-of<BackgroundTaskStatus>,
- *   taskID?: string,
- *   taskName?: string,
+ * @phpstan-type DataShape = array{
+ *   createdAt?: string|null,
+ *   finishedAt?: string|null,
+ *   status?: null|BackgroundTaskStatus|value-of<BackgroundTaskStatus>,
+ *   taskID?: string|null,
+ *   taskName?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
-    #[Api('finished_at', optional: true)]
+    #[Optional('finished_at')]
     public ?string $finishedAt;
 
     /**
@@ -34,13 +34,13 @@ final class Data implements BaseModel
      *
      * @var value-of<BackgroundTaskStatus>|null $status
      */
-    #[Api(enum: BackgroundTaskStatus::class, optional: true)]
+    #[Optional(enum: BackgroundTaskStatus::class)]
     public ?string $status;
 
-    #[Api('task_id', optional: true)]
+    #[Optional('task_id')]
     public ?string $taskID;
 
-    #[Api('task_name', optional: true)]
+    #[Optional('task_name')]
     public ?string $taskName;
 
     public function __construct()
@@ -53,7 +53,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BackgroundTaskStatus|value-of<BackgroundTaskStatus> $status
+     * @param BackgroundTaskStatus|value-of<BackgroundTaskStatus>|null $status
      */
     public static function with(
         ?string $createdAt = null,
@@ -62,31 +62,31 @@ final class Data implements BaseModel
         ?string $taskID = null,
         ?string $taskName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $finishedAt && $obj->finishedAt = $finishedAt;
-        null !== $status && $obj['status'] = $status;
-        null !== $taskID && $obj->taskID = $taskID;
-        null !== $taskName && $obj->taskName = $taskName;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
+        null !== $status && $self['status'] = $status;
+        null !== $taskID && $self['taskID'] = $taskID;
+        null !== $taskName && $self['taskName'] = $taskName;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withFinishedAt(string $finishedAt): self
     {
-        $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,25 +96,25 @@ final class Data implements BaseModel
      */
     public function withStatus(BackgroundTaskStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaskID(string $taskID): self
     {
-        $obj = clone $this;
-        $obj->taskID = $taskID;
+        $self = clone $this;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaskName(string $taskName): self
     {
-        $obj = clone $this;
-        $obj->taskName = $taskName;
+        $self = clone $this;
+        $self['taskName'] = $taskName;
 
-        return $obj;
+        return $self;
     }
 }

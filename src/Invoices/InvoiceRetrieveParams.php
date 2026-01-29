@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Invoices;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,13 +13,15 @@ use Telnyx\Invoices\InvoiceRetrieveParams\Action;
 /**
  * Retrieve a single invoice by its unique identifier.
  *
- * @see Telnyx\Invoices->retrieve
+ * @see Telnyx\Services\InvoicesService::retrieve()
  *
- * @phpstan-type invoice_retrieve_params = array{action?: Action|value-of<Action>}
+ * @phpstan-type InvoiceRetrieveParamsShape = array{
+ *   action?: null|Action|value-of<Action>
+ * }
  */
 final class InvoiceRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<invoice_retrieve_params> */
+    /** @use SdkModel<InvoiceRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -28,7 +30,7 @@ final class InvoiceRetrieveParams implements BaseModel
      *
      * @var value-of<Action>|null $action
      */
-    #[Api(enum: Action::class, optional: true)]
+    #[Optional(enum: Action::class)]
     public ?string $action;
 
     public function __construct()
@@ -41,15 +43,15 @@ final class InvoiceRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Action|value-of<Action> $action
+     * @param Action|value-of<Action>|null $action
      */
     public static function with(Action|string|null $action = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $action && $obj['action'] = $action;
+        null !== $action && $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,9 +61,9 @@ final class InvoiceRetrieveParams implements BaseModel
      */
     public function withAction(Action|string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 }

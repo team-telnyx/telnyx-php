@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   acceptedAddressSuggestions?: bool,
- *   locationID?: string,
- *   staticEmergencyAddressID?: string,
+ * @phpstan-type DataShape = array{
+ *   acceptedAddressSuggestions?: bool|null,
+ *   locationID?: string|null,
+ *   staticEmergencyAddressID?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('accepted_address_suggestions', optional: true)]
+    #[Optional('accepted_address_suggestions')]
     public ?bool $acceptedAddressSuggestions;
 
-    #[Api('location_id', optional: true)]
+    #[Optional('location_id')]
     public ?string $locationID;
 
-    #[Api('static_emergency_address_id', optional: true)]
+    #[Optional('static_emergency_address_id')]
     public ?string $staticEmergencyAddressID;
 
     public function __construct()
@@ -44,38 +44,38 @@ final class Data implements BaseModel
         ?string $locationID = null,
         ?string $staticEmergencyAddressID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $acceptedAddressSuggestions && $obj->acceptedAddressSuggestions = $acceptedAddressSuggestions;
-        null !== $locationID && $obj->locationID = $locationID;
-        null !== $staticEmergencyAddressID && $obj->staticEmergencyAddressID = $staticEmergencyAddressID;
+        null !== $acceptedAddressSuggestions && $self['acceptedAddressSuggestions'] = $acceptedAddressSuggestions;
+        null !== $locationID && $self['locationID'] = $locationID;
+        null !== $staticEmergencyAddressID && $self['staticEmergencyAddressID'] = $staticEmergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     public function withAcceptedAddressSuggestions(
         bool $acceptedAddressSuggestions
     ): self {
-        $obj = clone $this;
-        $obj->acceptedAddressSuggestions = $acceptedAddressSuggestions;
+        $self = clone $this;
+        $self['acceptedAddressSuggestions'] = $acceptedAddressSuggestions;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocationID(string $locationID): self
     {
-        $obj = clone $this;
-        $obj->locationID = $locationID;
+        $self = clone $this;
+        $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 
     public function withStaticEmergencyAddressID(
         string $staticEmergencyAddressID
     ): self {
-        $obj = clone $this;
-        $obj->staticEmergencyAddressID = $staticEmergencyAddressID;
+        $self = clone $this;
+        $self['staticEmergencyAddressID'] = $staticEmergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 }

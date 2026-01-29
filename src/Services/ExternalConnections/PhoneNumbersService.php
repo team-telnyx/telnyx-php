@@ -6,73 +6,58 @@ namespace Telnyx\Services\ExternalConnections;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListResponse;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberRetrieveParams;
-use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\PhoneNumbersContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PhoneNumbersService implements PhoneNumbersContract
 {
     /**
+     * @api
+     */
+    public PhoneNumbersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PhoneNumbersRawService($client);
+    }
 
     /**
      * @api
      *
      * Return the details of a phone number associated with the given external connection.
      *
-     * @param string $id
+     * @param string $phoneNumberID A phone number's ID via the Telnyx API
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
-        $id,
-        ?RequestOptions $requestOptions = null
+        string $id,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberGetResponse {
-        $params = ['id' => $id];
+        $params = Util::removeNulls(['id' => $id]);
 
-        return $this->retrieveRaw($phoneNumberID, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($phoneNumberID, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberGetResponse {
-        [$parsed, $options] = PhoneNumberRetrieveParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: [
-                'external_connections/%1$s/phone_numbers/%2$s', $id, $phoneNumberID,
-            ],
-            options: $options,
-            convert: PhoneNumberGetResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -80,51 +65,25 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Asynchronously update settings of the phone number associated with the given external connection.
      *
-     * @param string $id
-     * @param string $locationID identifies the location to assign the phone number to
+     * @param string $phoneNumberID Path param: A phone number's ID via the Telnyx API
+     * @param string $id path param: Identifies the resource
+     * @param string $locationID body param: Identifies the location to assign the phone number to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumberID,
-        $id,
-        $locationID = omit,
-        ?RequestOptions $requestOptions = null,
+        string $id,
+        ?string $locationID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberUpdateResponse {
-        $params = ['id' => $id, 'locationID' => $locationID];
+        $params = Util::removeNulls(['id' => $id, 'locationID' => $locationID]);
 
-        return $this->updateRaw($phoneNumberID, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($phoneNumberID, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberUpdateResponse {
-        [$parsed, $options] = PhoneNumberUpdateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: [
-                'external_connections/%1$s/phone_numbers/%2$s', $id, $phoneNumberID,
-            ],
-            body: (object) array_diff_key($parsed, ['id']),
-            options: $options,
-            convert: PhoneNumberUpdateResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -132,46 +91,26 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Returns a list of all active phone numbers associated with the given external connection.
      *
-     * @param Filter $filter Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param string $id identifies the resource
+     * @param Filter|FilterShape $filter Filter parameter for phone numbers (deepObject style). Supports filtering by phone_number, civic_address_id, and location_id with eq/contains operations.
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<ExternalConnectionPhoneNumber>
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null,
-    ): PhoneNumberListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($id, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberListResponse {
-        [$parsed, $options] = PhoneNumberListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['external_connections/%1$s/phone_numbers', $id],
-            query: $parsed,
-            options: $options,
-            convert: PhoneNumberListResponse::class,
-        );
+        return $response->parse();
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ChannelZones;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the number of Voice Channels for the Non-US Zones. This allows your account to handle multiple simultaneous inbound calls to Non-US numbers. Use this endpoint to increase or decrease your capacity based on expected call volume.
  *
- * @see Telnyx\ChannelZones->update
+ * @see Telnyx\Services\ChannelZonesService::update()
  *
- * @phpstan-type channel_zone_update_params = array{channels: int}
+ * @phpstan-type ChannelZoneUpdateParamsShape = array{channels: int}
  */
 final class ChannelZoneUpdateParams implements BaseModel
 {
-    /** @use SdkModel<channel_zone_update_params> */
+    /** @use SdkModel<ChannelZoneUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The number of reserved channels.
      */
-    #[Api]
+    #[Required]
     public int $channels;
 
     /**
@@ -54,11 +54,11 @@ final class ChannelZoneUpdateParams implements BaseModel
      */
     public static function with(int $channels): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->channels = $channels;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class ChannelZoneUpdateParams implements BaseModel
      */
     public function withChannels(int $channels): self
     {
-        $obj = clone $this;
-        $obj->channels = $channels;
+        $self = clone $this;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 }

@@ -11,14 +11,16 @@ use Telnyx\Core\Conversion\ListOf;
 
 /**
  * Filter by phone number country ISO alpha-2 code. Can be a single value or an array of values.
+ *
+ * @phpstan-type CountryISOAlpha2Variants = string|list<string>
+ * @phpstan-type CountryISOAlpha2Shape = CountryISOAlpha2Variants
  */
 final class CountryISOAlpha2 implements ConverterSource
 {
     use SdkUnion;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {

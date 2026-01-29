@@ -6,16 +6,16 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
+use Telnyx\PhoneNumbers\PhoneNumberDetailed;
 use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
-use Telnyx\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
-use Telnyx\PhoneNumbers\PhoneNumberListResponse;
-use Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
-use Telnyx\PhoneNumbers\PhoneNumberUpdateParams;
 use Telnyx\PhoneNumbers\PhoneNumberUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbersContract;
@@ -26,37 +26,47 @@ use Telnyx\Services\PhoneNumbers\MessagingService;
 use Telnyx\Services\PhoneNumbers\VoicemailService;
 use Telnyx\Services\PhoneNumbers\VoiceService;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PhoneNumbersService implements PhoneNumbersContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public PhoneNumbersRawService $raw;
+
+    /**
+     * @api
      */
     public ActionsService $actions;
 
     /**
-     * @@api
+     * @api
      */
     public CsvDownloadsService $csvDownloads;
 
     /**
-     * @@api
+     * @api
      */
     public JobsService $jobs;
 
     /**
-     * @@api
+     * @api
      */
     public MessagingService $messaging;
 
     /**
-     * @@api
+     * @api
      */
     public VoiceService $voice;
 
     /**
-     * @@api
+     * @api
      */
     public VoicemailService $voicemail;
 
@@ -65,6 +75,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new PhoneNumbersRawService($client);
         $this->actions = new ActionsService($client);
         $this->csvDownloads = new CsvDownloadsService($client);
         $this->jobs = new JobsService($client);
@@ -78,19 +89,19 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Retrieve a phone number
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PhoneNumberGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['phone_numbers/%1$s', $id],
-            options: $requestOptions,
-            convert: PhoneNumberGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -98,62 +109,42 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Update a phone number
      *
+     * @param string $phoneNumberID identifies the resource
      * @param string $billingGroupID identifies the billing group associated with the phone number
      * @param string $connectionID identifies the connection associated with the phone number
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $externalPin If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      * @param bool $hdVoiceEnabled indicates whether HD voice is enabled for this number
      * @param list<string> $tags a list of user-assigned tags to help organize phone numbers
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        string $id,
-        $billingGroupID = omit,
-        $connectionID = omit,
-        $customerReference = omit,
-        $externalPin = omit,
-        $hdVoiceEnabled = omit,
-        $tags = omit,
-        ?RequestOptions $requestOptions = null,
+        string $phoneNumberID,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?string $externalPin = null,
+        ?bool $hdVoiceEnabled = null,
+        ?array $tags = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PhoneNumberUpdateResponse {
-        $params = [
-            'billingGroupID' => $billingGroupID,
-            'connectionID' => $connectionID,
-            'customerReference' => $customerReference,
-            'externalPin' => $externalPin,
-            'hdVoiceEnabled' => $hdVoiceEnabled,
-            'tags' => $tags,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberUpdateResponse {
-        [$parsed, $options] = PhoneNumberUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'billingGroupID' => $billingGroupID,
+                'connectionID' => $connectionID,
+                'customerReference' => $customerReference,
+                'externalPin' => $externalPin,
+                'hdVoiceEnabled' => $hdVoiceEnabled,
+                'tags' => $tags,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['phone_numbers/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: PhoneNumberUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($phoneNumberID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -161,47 +152,36 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * List phone numbers
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
+     * @param HandleMessagingProfileError|value-of<HandleMessagingProfileError> $handleMessagingProfileError Although it is an infrequent occurrence, due to the highly distributed nature of the Telnyx platform, it is possible that there will be an issue when loading in Messaging Profile information. As such, when this parameter is set to `true` and an error in fetching this information occurs, messaging profile related fields will be omitted in the response and an error message will be included instead of returning a 503 error.
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<PhoneNumberDetailed>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): PhoneNumberListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberListResponse {
-        [$parsed, $options] = PhoneNumberListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        HandleMessagingProfileError|string $handleMessagingProfileError = 'false',
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'handleMessagingProfileError' => $handleMessagingProfileError,
+                'page' => $page,
+                'sort' => $sort,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'phone_numbers',
-            query: $parsed,
-            options: $options,
-            convert: PhoneNumberListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -209,19 +189,19 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * Delete a phone number
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PhoneNumberDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['phone_numbers/%1$s', $id],
-            options: $requestOptions,
-            convert: PhoneNumberDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -229,56 +209,38 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * List phone numbers, This endpoint is a lighter version of the /phone_numbers endpoint having higher performance and rate limit.
      *
-     * @param PhoneNumberSlimListParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
+     * @param \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source]
      * @param bool $includeConnection include the connection associated with the phone number
      * @param bool $includeTags include the tags associated with the phone number
-     * @param PhoneNumberSlimListParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param PhoneNumberSlimListParams\Sort|value-of<PhoneNumberSlimListParams\Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     * @param \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort|value-of<\Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<PhoneNumberSlimListResponse>
      *
      * @throws APIException
      */
     public function slimList(
-        $filter = omit,
-        $includeConnection = omit,
-        $includeTags = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): PhoneNumberSlimListResponse {
-        $params = [
-            'filter' => $filter,
-            'includeConnection' => $includeConnection,
-            'includeTags' => $includeTags,
-            'page' => $page,
-            'sort' => $sort,
-        ];
-
-        return $this->slimListRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function slimListRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PhoneNumberSlimListResponse {
-        [$parsed, $options] = PhoneNumberSlimListParams::parseRequest(
-            $params,
-            $requestOptions
+        \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter|array|null $filter = null,
+        bool $includeConnection = false,
+        bool $includeTags = false,
+        \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page|array|null $page = null,
+        \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort|string|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'includeConnection' => $includeConnection,
+                'includeTags' => $includeTags,
+                'page' => $page,
+                'sort' => $sort,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'phone_numbers/slim',
-            query: $parsed,
-            options: $options,
-            convert: PhoneNumberSlimListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->slimList(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

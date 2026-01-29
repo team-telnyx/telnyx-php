@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementTypes\RequirementTypeListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name;
@@ -12,14 +12,16 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name;
 /**
  * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
  *
- * @phpstan-type filter_alias = array{name?: Name}
+ * @phpstan-import-type NameShape from \Telnyx\RequirementTypes\RequirementTypeListParams\Filter\Name
+ *
+ * @phpstan-type FilterShape = array{name?: null|Name|NameShape}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Name $name;
 
     public function __construct()
@@ -31,21 +33,26 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Name|NameShape|null $name
      */
-    public static function with(?Name $name = null): self
+    public static function with(Name|array|null $name = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
-    public function withName(Name $name): self
+    /**
+     * @param Name|NameShape $name
+     */
+    public function withName(Name|array $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

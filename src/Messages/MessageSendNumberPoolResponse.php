@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type message_send_number_pool_response = array{
- *   data?: OutboundMessagePayload
+ * @phpstan-import-type OutboundMessagePayloadShape from \Telnyx\Messages\OutboundMessagePayload
+ *
+ * @phpstan-type MessageSendNumberPoolResponseShape = array{
+ *   data?: null|OutboundMessagePayload|OutboundMessagePayloadShape
  * }
  */
-final class MessageSendNumberPoolResponse implements BaseModel, ResponseConverter
+final class MessageSendNumberPoolResponse implements BaseModel
 {
-    /** @use SdkModel<message_send_number_pool_response> */
+    /** @use SdkModel<MessageSendNumberPoolResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?OutboundMessagePayload $data;
 
     public function __construct()
@@ -34,21 +32,26 @@ final class MessageSendNumberPoolResponse implements BaseModel, ResponseConverte
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param OutboundMessagePayload|OutboundMessagePayloadShape|null $data
      */
-    public static function with(?OutboundMessagePayload $data = null): self
+    public static function with(OutboundMessagePayload|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(OutboundMessagePayload $data): self
+    /**
+     * @param OutboundMessagePayload|OutboundMessagePayloadShape $data
+     */
+    public function withData(OutboundMessagePayload|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

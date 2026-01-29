@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Wireless\DetailRecordsReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns the WDR Reports that match the given parameters.
  *
- * @see Telnyx\Wireless\DetailRecordsReports->list
+ * @see Telnyx\Services\Wireless\DetailRecordsReportsService::list()
  *
- * @phpstan-type detail_records_report_list_params = array{
- *   pageNumber?: int, pageSize?: int
+ * @phpstan-type DetailRecordsReportListParamsShape = array{
+ *   pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class DetailRecordsReportListParams implements BaseModel
 {
-    /** @use SdkModel<detail_records_report_list_params> */
+    /** @use SdkModel<DetailRecordsReportListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageNumber;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageSize;
 
     public function __construct()
@@ -50,12 +50,12 @@ final class DetailRecordsReportListParams implements BaseModel
         ?int $pageNumber = null,
         ?int $pageSize = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class DetailRecordsReportListParams implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class DetailRecordsReportListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 }

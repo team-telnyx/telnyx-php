@@ -6,74 +6,55 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\AccessIPRanges\AccessIPRange;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
-use Telnyx\AccessIPRanges\AccessIPRangeListParams\Page;
-use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AccessIPRangesContract
 {
     /**
      * @api
      *
-     * @param string $cidrBlock
-     * @param string $description
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $cidrBlock,
-        $description = omit,
-        ?RequestOptions $requestOptions = null
+        string $cidrBlock,
+        ?string $description = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AccessIPRange;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
+     * @param RequestOpts|null $requestOptions
      *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AccessIPRange;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @return DefaultFlatPagination<AccessIPRange>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): AccessIPRangeListResponse;
+        Filter|array|null $filter = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AccessIPRangeListResponse;
-
-    /**
-     * @api
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $accessIPRangeID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AccessIPRange;
 }

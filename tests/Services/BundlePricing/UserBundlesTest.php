@@ -5,7 +5,14 @@ namespace Tests\Services\BundlePricing;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\BundlePricing\UserBundles\UserBundle;
+use Telnyx\BundlePricing\UserBundles\UserBundleDeactivateResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleGetResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleListResourcesResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
+use Telnyx\BundlePricing\UserBundles\UserBundleNewResponse;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +42,8 @@ final class UserBundlesTest extends TestCase
 
         $result = $this->client->bundlePricing->userBundles->create();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +57,8 @@ final class UserBundlesTest extends TestCase
             'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleGetResponse::class, $result);
     }
 
     #[Test]
@@ -59,9 +68,15 @@ final class UserBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bundlePricing->userBundles->list();
+        $page = $this->client->bundlePricing->userBundles->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(UserBundle::class, $item);
+        }
     }
 
     #[Test]
@@ -75,7 +90,8 @@ final class UserBundlesTest extends TestCase
             'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleDeactivateResponse::class, $result);
     }
 
     #[Test]
@@ -89,7 +105,8 @@ final class UserBundlesTest extends TestCase
             'ca1d2263-d1f1-43ac-ba53-248e7a4bb26a'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleListResourcesResponse::class, $result);
     }
 
     #[Test]
@@ -101,6 +118,7 @@ final class UserBundlesTest extends TestCase
 
         $result = $this->client->bundlePricing->userBundles->listUnused();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserBundleListUnusedResponse::class, $result);
     }
 }

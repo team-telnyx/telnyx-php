@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActionRequirements;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,25 +13,27 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Para
 /**
  * Initiates a specific action requirement for a porting order.
  *
- * @see Telnyx\PortingOrders\ActionRequirements->initiate
+ * @see Telnyx\Services\PortingOrders\ActionRequirementsService::initiate()
  *
- * @phpstan-type action_requirement_initiate_params = array{
- *   portingOrderID: string, params: Params
+ * @phpstan-import-type ParamsShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params
+ *
+ * @phpstan-type ActionRequirementInitiateParamsShape = array{
+ *   portingOrderID: string, params: Params|ParamsShape
  * }
  */
 final class ActionRequirementInitiateParams implements BaseModel
 {
-    /** @use SdkModel<action_requirement_initiate_params> */
+    /** @use SdkModel<ActionRequirementInitiateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $portingOrderID;
 
     /**
      * Required information for initiating the action requirement for AU ID verification.
      */
-    #[Api]
+    #[Required]
     public Params $params;
 
     /**
@@ -57,33 +59,39 @@ final class ActionRequirementInitiateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Params|ParamsShape $params
      */
-    public static function with(string $portingOrderID, Params $params): self
-    {
-        $obj = new self;
+    public static function with(
+        string $portingOrderID,
+        Params|array $params
+    ): self {
+        $self = new self;
 
-        $obj->portingOrderID = $portingOrderID;
-        $obj->params = $params;
+        $self['portingOrderID'] = $portingOrderID;
+        $self['params'] = $params;
 
-        return $obj;
+        return $self;
     }
 
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Required information for initiating the action requirement for AU ID verification.
+     *
+     * @param Params|ParamsShape $params
      */
-    public function withParams(Params $params): self
+    public function withParams(Params|array $params): self
     {
-        $obj = clone $this;
-        $obj->params = $params;
+        $self = clone $this;
+        $self['params'] = $params;
 
-        return $obj;
+        return $self;
     }
 }

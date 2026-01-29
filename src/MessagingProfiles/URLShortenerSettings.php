@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -17,40 +18,40 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * To disable this feature, set the object field to `null`.
  *
- * @phpstan-type url_shortener_settings = array{
+ * @phpstan-type URLShortenerSettingsShape = array{
  *   domain: string,
- *   prefix?: string,
- *   replaceBlacklistOnly?: bool,
- *   sendWebhooks?: bool,
+ *   prefix?: string|null,
+ *   replaceBlacklistOnly?: bool|null,
+ *   sendWebhooks?: bool|null,
  * }
  */
 final class URLShortenerSettings implements BaseModel
 {
-    /** @use SdkModel<url_shortener_settings> */
+    /** @use SdkModel<URLShortenerSettingsShape> */
     use SdkModel;
 
     /**
      * One of the domains provided by the Telnyx URL shortener service.
      */
-    #[Api]
+    #[Required]
     public string $domain;
 
     /**
      * Optional prefix that can be used to identify your brand, and will appear in the Telnyx generated URLs after the domain name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $prefix;
 
     /**
      * Use the link replacement tool only for links that are specifically blacklisted by Telnyx.
      */
-    #[Api('replace_blacklist_only', optional: true)]
+    #[Optional('replace_blacklist_only')]
     public ?bool $replaceBlacklistOnly;
 
     /**
      * Receive webhooks for when your replaced links are clicked. Webhooks are sent to the webhooks on the messaging profile.
      */
-    #[Api('send_webhooks', optional: true)]
+    #[Optional('send_webhooks')]
     public ?bool $sendWebhooks;
 
     /**
@@ -83,15 +84,15 @@ final class URLShortenerSettings implements BaseModel
         ?bool $replaceBlacklistOnly = null,
         ?bool $sendWebhooks = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->domain = $domain;
+        $self['domain'] = $domain;
 
-        null !== $prefix && $obj->prefix = $prefix;
-        null !== $replaceBlacklistOnly && $obj->replaceBlacklistOnly = $replaceBlacklistOnly;
-        null !== $sendWebhooks && $obj->sendWebhooks = $sendWebhooks;
+        null !== $prefix && $self['prefix'] = $prefix;
+        null !== $replaceBlacklistOnly && $self['replaceBlacklistOnly'] = $replaceBlacklistOnly;
+        null !== $sendWebhooks && $self['sendWebhooks'] = $sendWebhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +100,10 @@ final class URLShortenerSettings implements BaseModel
      */
     public function withDomain(string $domain): self
     {
-        $obj = clone $this;
-        $obj->domain = $domain;
+        $self = clone $this;
+        $self['domain'] = $domain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +111,10 @@ final class URLShortenerSettings implements BaseModel
      */
     public function withPrefix(string $prefix): self
     {
-        $obj = clone $this;
-        $obj->prefix = $prefix;
+        $self = clone $this;
+        $self['prefix'] = $prefix;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +122,10 @@ final class URLShortenerSettings implements BaseModel
      */
     public function withReplaceBlacklistOnly(bool $replaceBlacklistOnly): self
     {
-        $obj = clone $this;
-        $obj->replaceBlacklistOnly = $replaceBlacklistOnly;
+        $self = clone $this;
+        $self['replaceBlacklistOnly'] = $replaceBlacklistOnly;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +133,9 @@ final class URLShortenerSettings implements BaseModel
      */
     public function withSendWebhooks(bool $sendWebhooks): self
     {
-        $obj = clone $this;
-        $obj->sendWebhooks = $sendWebhooks;
+        $self = clone $this;
+        $self['sendWebhooks'] = $sendWebhooks;
 
-        return $obj;
+        return $self;
     }
 }

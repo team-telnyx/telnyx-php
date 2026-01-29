@@ -5,80 +5,82 @@ declare(strict_types=1);
 namespace Telnyx\AuthenticationProviders;
 
 use Telnyx\AuthenticationProviders\AuthenticationProvider\Settings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type authentication_provider = array{
- *   id?: string,
- *   active?: bool,
- *   createdAt?: \DateTimeInterface,
- *   name?: string,
- *   organizationID?: string,
- *   recordType?: string,
- *   settings?: Settings,
- *   shortName?: string,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-import-type SettingsShape from \Telnyx\AuthenticationProviders\AuthenticationProvider\Settings
+ *
+ * @phpstan-type AuthenticationProviderShape = array{
+ *   id?: string|null,
+ *   active?: bool|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   name?: string|null,
+ *   organizationID?: string|null,
+ *   recordType?: string|null,
+ *   settings?: null|\Telnyx\AuthenticationProviders\AuthenticationProvider\Settings|SettingsShape,
+ *   shortName?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class AuthenticationProvider implements BaseModel
 {
-    /** @use SdkModel<authentication_provider> */
+    /** @use SdkModel<AuthenticationProviderShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies the authentication provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The active status of the authentication provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * The name associated with the authentication provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The id from the Organization the authentication provider belongs to.
      */
-    #[Api('organization_id', optional: true)]
+    #[Optional('organization_id')]
     public ?string $organizationID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The settings associated with the authentication provider.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Settings $settings;
 
     /**
      * The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      */
-    #[Api('short_name', optional: true)]
+    #[Optional('short_name')]
     public ?string $shortName;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -90,6 +92,8 @@ final class AuthenticationProvider implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Settings|SettingsShape|null $settings
      */
     public static function with(
         ?string $id = null,
@@ -98,23 +102,23 @@ final class AuthenticationProvider implements BaseModel
         ?string $name = null,
         ?string $organizationID = null,
         ?string $recordType = null,
-        ?Settings $settings = null,
+        Settings|array|null $settings = null,
         ?string $shortName = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $active && $obj->active = $active;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $name && $obj->name = $name;
-        null !== $organizationID && $obj->organizationID = $organizationID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $settings && $obj->settings = $settings;
-        null !== $shortName && $obj->shortName = $shortName;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $active && $self['active'] = $active;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $name && $self['name'] = $name;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $settings && $self['settings'] = $settings;
+        null !== $shortName && $self['shortName'] = $shortName;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +126,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +137,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj->active = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +148,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +159,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +170,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj->organizationID = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,21 +181,24 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The settings associated with the authentication provider.
+     *
+     * @param Settings|SettingsShape $settings
      */
-    public function withSettings(Settings $settings): self
-    {
-        $obj = clone $this;
-        $obj->settings = $settings;
+    public function withSettings(
+        Settings|array $settings,
+    ): self {
+        $self = clone $this;
+        $self['settings'] = $settings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +206,10 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withShortName(string $shortName): self
     {
-        $obj = clone $this;
-        $obj->shortName = $shortName;
+        $self = clone $this;
+        $self['shortName'] = $shortName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,9 +217,9 @@ final class AuthenticationProvider implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences\Participants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Gets conference participant resource.
  *
- * @see Telnyx\Texml\Accounts\Conferences\Participants->retrieve
+ * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::retrieve()
  *
- * @phpstan-type participant_retrieve_params = array{
+ * @phpstan-type ParticipantRetrieveParamsShape = array{
  *   accountSid: string, conferenceSid: string
  * }
  */
 final class ParticipantRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<participant_retrieve_params> */
+    /** @use SdkModel<ParticipantRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $accountSid;
 
-    #[Api]
+    #[Required]
     public string $conferenceSid;
 
     /**
@@ -56,27 +56,27 @@ final class ParticipantRetrieveParams implements BaseModel
      */
     public static function with(string $accountSid, string $conferenceSid): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->accountSid = $accountSid;
-        $obj->conferenceSid = $conferenceSid;
+        $self['accountSid'] = $accountSid;
+        $self['conferenceSid'] = $conferenceSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withConferenceSid(string $conferenceSid): self
     {
-        $obj = clone $this;
-        $obj->conferenceSid = $conferenceSid;
+        $self = clone $this;
+        $self['conferenceSid'] = $conferenceSid;
 
-        return $obj;
+        return $self;
     }
 }

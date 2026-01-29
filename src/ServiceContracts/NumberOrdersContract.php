@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber;
 use Telnyx\NumberOrders\NumberOrderGetResponse;
@@ -15,8 +16,13 @@ use Telnyx\NumberOrders\NumberOrderNewResponse;
 use Telnyx\NumberOrders\NumberOrderUpdateResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber
+ * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
+ * @phpstan-import-type FilterShape from \Telnyx\NumberOrders\NumberOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberOrders\NumberOrderListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberOrdersContract
 {
     /**
@@ -26,92 +32,64 @@ interface NumberOrdersContract
      * @param string $connectionID identifies the connection associated with this phone number
      * @param string $customerReference a customer reference string for customer look ups
      * @param string $messagingProfileID identifies the messaging profile associated with the phone number
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $billingGroupID = omit,
-        $connectionID = omit,
-        $customerReference = omit,
-        $messagingProfileID = omit,
-        $phoneNumbers = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?string $messagingProfileID = null,
+        ?array $phoneNumbers = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberOrderNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderNewResponse;
-
-    /**
-     * @api
+     * @param string $numberOrderID the number order ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $numberOrderID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NumberOrderGetResponse;
 
     /**
      * @api
      *
+     * @param string $numberOrderID the number order ID
      * @param string $customerReference a customer reference string for customer look ups
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape> $regulatoryRequirements
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $numberOrderID,
-        $customerReference = omit,
-        $regulatoryRequirements = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberOrderUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $numberOrderID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): NumberOrderUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers_count], filter[customer_reference], filter[requirements_met]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @return DefaultPagination<NumberOrderListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderListResponse;
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 }

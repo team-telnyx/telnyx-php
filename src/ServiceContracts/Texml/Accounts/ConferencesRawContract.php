@@ -1,0 +1,110 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\ServiceContracts\Texml\Accounts;
+
+use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\RequestOptions;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams;
+use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveParams;
+use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsJsonParams;
+use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsParams;
+use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams;
+use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
+
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
+interface ConferencesRawContract
+{
+    /**
+     * @api
+     *
+     * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
+     * @param array<string,mixed>|ConferenceRetrieveParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ConferenceGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $conferenceSid,
+        array|ConferenceRetrieveParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
+     * @param array<string,mixed>|ConferenceUpdateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ConferenceUpdateResponse>
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $conferenceSid,
+        array|ConferenceUpdateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $accountSid the id of the account the resource belongs to
+     * @param array<string,mixed>|ConferenceRetrieveConferencesParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ConferenceGetConferencesResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveConferences(
+        string $accountSid,
+        array|ConferenceRetrieveConferencesParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
+     * @param array<string,mixed>|ConferenceRetrieveRecordingsParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ConferenceGetRecordingsResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordings(
+        string $conferenceSid,
+        array|ConferenceRetrieveRecordingsParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
+     * @param array<string,mixed>|ConferenceRetrieveRecordingsJsonParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ConferenceGetRecordingsJsonResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveRecordingsJson(
+        string $conferenceSid,
+        array|ConferenceRetrieveRecordingsJsonParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+}

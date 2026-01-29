@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\SupportingDocuments;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data;
 
 /**
- * @phpstan-type supporting_document_list_response = array{data?: list<Data>}
+ * @phpstan-import-type DataShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse\Data
+ *
+ * @phpstan-type SupportingDocumentListResponseShape = array{
+ *   data?: list<Data|DataShape>|null
+ * }
  */
-final class SupportingDocumentListResponse implements BaseModel, ResponseConverter
+final class SupportingDocumentListResponse implements BaseModel
 {
-    /** @use SdkModel<supporting_document_list_response> */
+    /** @use SdkModel<SupportingDocumentListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
     public function __construct()
@@ -35,25 +35,25 @@ final class SupportingDocumentListResponse implements BaseModel, ResponseConvert
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|DataShape>|null $data
      */
     public static function with(?array $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

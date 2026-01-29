@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AccessIPRanges;
 
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
-use Telnyx\AccessIPRanges\AccessIPRangeListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,27 +13,31 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List all Access IP Ranges.
  *
- * @see Telnyx\AccessIPRanges->list
+ * @see Telnyx\Services\AccessIPRangesService::list()
  *
- * @phpstan-type access_ip_range_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter
+ *
+ * @phpstan-type AccessIPRangeListParamsShape = array{
+ *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
+ * }
  */
 final class AccessIPRangeListParams implements BaseModel
 {
-    /** @use SdkModel<access_ip_range_list_params> */
+    /** @use SdkModel<AccessIPRangeListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -45,36 +48,49 @@ final class AccessIPRangeListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
-        $obj = new self;
+    public static function with(
+        Filter|array|null $filter = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null
+    ): self {
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 }

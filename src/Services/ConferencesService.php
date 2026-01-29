@@ -5,27 +5,37 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Conferences\ConferenceCreateParams;
+use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
+use Telnyx\Conferences\ConferenceCreateParams\Region;
 use Telnyx\Conferences\ConferenceGetResponse;
-use Telnyx\Conferences\ConferenceListParams;
 use Telnyx\Conferences\ConferenceListParams\Filter;
 use Telnyx\Conferences\ConferenceListParams\Page;
-use Telnyx\Conferences\ConferenceListParticipantsParams;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
-use Telnyx\Conferences\ConferenceListResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ConferencesContract;
 use Telnyx\Services\Conferences\ActionsService;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ConferencesService implements ConferencesContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public ConferencesRawService $raw;
+
+    /**
+     * @api
      */
     public ActionsService $actions;
 
@@ -34,6 +44,7 @@ final class ConferencesService implements ConferencesContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ConferencesRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -61,65 +72,48 @@ final class ConferencesService implements ConferencesContract
      * @param string $holdAudioURL The URL of a file to be played to participants joining the conference. The URL can point to either a WAV or MP3 file. hold_media_name and hold_audio_url cannot be used together in one request. Takes effect only when "start_conference_on_create" is set to "false".
      * @param string $holdMediaName The media_name of a file to be played to participants joining the conference. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file. Takes effect only when "start_conference_on_create" is set to "false".
      * @param int $maxParticipants The maximum number of active conference participants to allow. Must be between 2 and 800. Defaults to 250
+     * @param Region|value-of<Region> $region Sets the region where the conference data will be hosted. Defaults to the region defined in user's data locality settings (Europe or US).
      * @param bool $startConferenceOnCreate Whether the conference should be started on creation. If the conference isn't started all participants that join are automatically put on hold. Defaults to "true".
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $callControlID,
-        $name,
-        $beepEnabled = omit,
-        $clientState = omit,
-        $comfortNoise = omit,
-        $commandID = omit,
-        $durationMinutes = omit,
-        $holdAudioURL = omit,
-        $holdMediaName = omit,
-        $maxParticipants = omit,
-        $startConferenceOnCreate = omit,
-        ?RequestOptions $requestOptions = null,
+        string $callControlID,
+        string $name,
+        BeepEnabled|string $beepEnabled = 'never',
+        ?string $clientState = null,
+        bool $comfortNoise = true,
+        ?string $commandID = null,
+        ?int $durationMinutes = null,
+        ?string $holdAudioURL = null,
+        ?string $holdMediaName = null,
+        ?int $maxParticipants = null,
+        Region|string|null $region = null,
+        ?bool $startConferenceOnCreate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ConferenceNewResponse {
-        $params = [
-            'callControlID' => $callControlID,
-            'name' => $name,
-            'beepEnabled' => $beepEnabled,
-            'clientState' => $clientState,
-            'comfortNoise' => $comfortNoise,
-            'commandID' => $commandID,
-            'durationMinutes' => $durationMinutes,
-            'holdAudioURL' => $holdAudioURL,
-            'holdMediaName' => $holdMediaName,
-            'maxParticipants' => $maxParticipants,
-            'startConferenceOnCreate' => $startConferenceOnCreate,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceNewResponse {
-        [$parsed, $options] = ConferenceCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'callControlID' => $callControlID,
+                'name' => $name,
+                'beepEnabled' => $beepEnabled,
+                'clientState' => $clientState,
+                'comfortNoise' => $comfortNoise,
+                'commandID' => $commandID,
+                'durationMinutes' => $durationMinutes,
+                'holdAudioURL' => $holdAudioURL,
+                'holdMediaName' => $holdMediaName,
+                'maxParticipants' => $maxParticipants,
+                'region' => $region,
+                'startConferenceOnCreate' => $startConferenceOnCreate,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'conferences',
-            body: (object) $parsed,
-            options: $options,
-            convert: ConferenceNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -127,19 +121,23 @@ final class ConferencesService implements ConferencesContract
      *
      * Retrieve an existing conference
      *
+     * @param string $id Uniquely identifies the conference by id
+     * @param \Telnyx\Conferences\ConferenceRetrieveParams\Region|value-of<\Telnyx\Conferences\ConferenceRetrieveParams\Region> $region Region where the conference data is located
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        \Telnyx\Conferences\ConferenceRetrieveParams\Region|string|null $region = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ConferenceGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['conferences/%1$s', $id],
-            options: $requestOptions,
-            convert: ConferenceGetResponse::class,
-        );
+        $params = Util::removeNulls(['region' => $region]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -147,45 +145,37 @@ final class ConferencesService implements ConferencesContract
      *
      * Lists conferences. Conferences are created on demand, and will expire after all participants have left the conference or after 4 hours regardless of the number of active participants. Conferences are listed in descending order by `expires_at`.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param \Telnyx\Conferences\ConferenceListParams\Region|value-of<\Telnyx\Conferences\ConferenceListParams\Region> $region Region where the conference data is located
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<Conference>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceListResponse {
-        [$parsed, $options] = ConferenceListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        \Telnyx\Conferences\ConferenceListParams\Region|string|null $region = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'page' => $page,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'region' => $region,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'conferences',
-            query: $parsed,
-            options: $options,
-            convert: ConferenceListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -193,46 +183,38 @@ final class ConferencesService implements ConferencesContract
      *
      * Lists conference participants
      *
-     * @param ConferenceListParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
-     * @param ConferenceListParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param string $conferenceID Uniquely identifies the conference by id
+     * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering]
+     * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number]
+     * @param \Telnyx\Conferences\ConferenceListParticipantsParams\Region|value-of<\Telnyx\Conferences\ConferenceListParticipantsParams\Region> $region Region where the conference data is located
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<ConferenceListParticipantsResponse>
      *
      * @throws APIException
      */
     public function listParticipants(
         string $conferenceID,
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ConferenceListParticipantsResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listParticipantsRaw($conferenceID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listParticipantsRaw(
-        string $conferenceID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceListParticipantsResponse {
-        [$parsed, $options] = ConferenceListParticipantsParams::parseRequest(
-            $params,
-            $requestOptions
+        \Telnyx\Conferences\ConferenceListParticipantsParams\Filter|array|null $filter = null,
+        \Telnyx\Conferences\ConferenceListParticipantsParams\Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        \Telnyx\Conferences\ConferenceListParticipantsParams\Region|string|null $region = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'page' => $page,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'region' => $region,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['conferences/%1$s/participants', $conferenceID],
-            query: $parsed,
-            options: $options,
-            convert: ConferenceListParticipantsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listParticipants($conferenceID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

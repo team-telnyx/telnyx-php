@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,23 +13,25 @@ use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 /**
  * Generate reports about porting operations.
  *
- * @see Telnyx\Porting\Reports->create
+ * @see Telnyx\Services\Porting\ReportsService::create()
  *
- * @phpstan-type report_create_params = array{
- *   params: ExportPortingOrdersCsvReport,
+ * @phpstan-import-type ExportPortingOrdersCsvReportShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport
+ *
+ * @phpstan-type ReportCreateParamsShape = array{
+ *   params: ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape,
  *   reportType: ReportType|value-of<ReportType>,
  * }
  */
 final class ReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<report_create_params> */
+    /** @use SdkModel<ReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The parameters for generating a porting orders CSV report.
      */
-    #[Api]
+    #[Required]
     public ExportPortingOrdersCsvReport $params;
 
     /**
@@ -37,7 +39,7 @@ final class ReportCreateParams implements BaseModel
      *
      * @var value-of<ReportType> $reportType
      */
-    #[Api('report_type', enum: ReportType::class)]
+    #[Required('report_type', enum: ReportType::class)]
     public string $reportType;
 
     /**
@@ -64,29 +66,32 @@ final class ReportCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape $params
      * @param ReportType|value-of<ReportType> $reportType
      */
     public static function with(
-        ExportPortingOrdersCsvReport $params,
+        ExportPortingOrdersCsvReport|array $params,
         ReportType|string $reportType
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->params = $params;
-        $obj['reportType'] = $reportType;
+        $self['params'] = $params;
+        $self['reportType'] = $reportType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The parameters for generating a porting orders CSV report.
+     *
+     * @param ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape $params
      */
-    public function withParams(ExportPortingOrdersCsvReport $params): self
+    public function withParams(ExportPortingOrdersCsvReport|array $params): self
     {
-        $obj = clone $this;
-        $obj->params = $params;
+        $self = clone $this;
+        $self['params'] = $params;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +101,9 @@ final class ReportCreateParams implements BaseModel
      */
     public function withReportType(ReportType|string $reportType): self
     {
-        $obj = clone $this;
-        $obj['reportType'] = $reportType;
+        $self = clone $this;
+        $self['reportType'] = $reportType;
 
-        return $obj;
+        return $self;
     }
 }

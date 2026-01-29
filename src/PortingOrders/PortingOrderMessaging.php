@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderMessaging\MessagingPortStatus;
@@ -12,34 +12,34 @@ use Telnyx\PortingOrders\PortingOrderMessaging\MessagingPortStatus;
 /**
  * Information about messaging porting process.
  *
- * @phpstan-type porting_order_messaging = array{
- *   enableMessaging?: bool,
- *   messagingCapable?: bool,
- *   messagingPortCompleted?: bool,
- *   messagingPortStatus?: value-of<MessagingPortStatus>,
+ * @phpstan-type PortingOrderMessagingShape = array{
+ *   enableMessaging?: bool|null,
+ *   messagingCapable?: bool|null,
+ *   messagingPortCompleted?: bool|null,
+ *   messagingPortStatus?: null|MessagingPortStatus|value-of<MessagingPortStatus>,
  * }
  */
 final class PortingOrderMessaging implements BaseModel
 {
-    /** @use SdkModel<porting_order_messaging> */
+    /** @use SdkModel<PortingOrderMessagingShape> */
     use SdkModel;
 
     /**
      * Indicates whether Telnyx will port messaging capabilities from the losing carrier. If false, any messaging capabilities will stay with their current provider.
      */
-    #[Api('enable_messaging', optional: true)]
+    #[Optional('enable_messaging')]
     public ?bool $enableMessaging;
 
     /**
      * Indicates whether the porting order can also port messaging capabilities.
      */
-    #[Api('messaging_capable', optional: true)]
+    #[Optional('messaging_capable')]
     public ?bool $messagingCapable;
 
     /**
      * Indicates whether the messaging porting has been completed.
      */
-    #[Api('messaging_port_completed', optional: true)]
+    #[Optional('messaging_port_completed')]
     public ?bool $messagingPortCompleted;
 
     /**
@@ -47,11 +47,7 @@ final class PortingOrderMessaging implements BaseModel
      *
      * @var value-of<MessagingPortStatus>|null $messagingPortStatus
      */
-    #[Api(
-        'messaging_port_status',
-        enum: MessagingPortStatus::class,
-        optional: true
-    )]
+    #[Optional('messaging_port_status', enum: MessagingPortStatus::class)]
     public ?string $messagingPortStatus;
 
     public function __construct()
@@ -64,7 +60,7 @@ final class PortingOrderMessaging implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MessagingPortStatus|value-of<MessagingPortStatus> $messagingPortStatus
+     * @param MessagingPortStatus|value-of<MessagingPortStatus>|null $messagingPortStatus
      */
     public static function with(
         ?bool $enableMessaging = null,
@@ -72,14 +68,14 @@ final class PortingOrderMessaging implements BaseModel
         ?bool $messagingPortCompleted = null,
         MessagingPortStatus|string|null $messagingPortStatus = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enableMessaging && $obj->enableMessaging = $enableMessaging;
-        null !== $messagingCapable && $obj->messagingCapable = $messagingCapable;
-        null !== $messagingPortCompleted && $obj->messagingPortCompleted = $messagingPortCompleted;
-        null !== $messagingPortStatus && $obj['messagingPortStatus'] = $messagingPortStatus;
+        null !== $enableMessaging && $self['enableMessaging'] = $enableMessaging;
+        null !== $messagingCapable && $self['messagingCapable'] = $messagingCapable;
+        null !== $messagingPortCompleted && $self['messagingPortCompleted'] = $messagingPortCompleted;
+        null !== $messagingPortStatus && $self['messagingPortStatus'] = $messagingPortStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +83,10 @@ final class PortingOrderMessaging implements BaseModel
      */
     public function withEnableMessaging(bool $enableMessaging): self
     {
-        $obj = clone $this;
-        $obj->enableMessaging = $enableMessaging;
+        $self = clone $this;
+        $self['enableMessaging'] = $enableMessaging;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +94,10 @@ final class PortingOrderMessaging implements BaseModel
      */
     public function withMessagingCapable(bool $messagingCapable): self
     {
-        $obj = clone $this;
-        $obj->messagingCapable = $messagingCapable;
+        $self = clone $this;
+        $self['messagingCapable'] = $messagingCapable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +106,10 @@ final class PortingOrderMessaging implements BaseModel
     public function withMessagingPortCompleted(
         bool $messagingPortCompleted
     ): self {
-        $obj = clone $this;
-        $obj->messagingPortCompleted = $messagingPortCompleted;
+        $self = clone $this;
+        $self['messagingPortCompleted'] = $messagingPortCompleted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +120,9 @@ final class PortingOrderMessaging implements BaseModel
     public function withMessagingPortStatus(
         MessagingPortStatus|string $messagingPortStatus
     ): self {
-        $obj = clone $this;
-        $obj['messagingPortStatus'] = $messagingPortStatus;
+        $self = clone $this;
+        $self['messagingPortStatus'] = $messagingPortStatus;
 
-        return $obj;
+        return $self;
     }
 }

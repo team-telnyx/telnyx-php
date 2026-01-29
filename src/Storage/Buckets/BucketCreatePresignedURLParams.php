@@ -4,35 +4,36 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Returns a timed and authenticated URL to get an object. This is the equivalent to AWS S3’s “presigned” URL. Please note that Telnyx performs authentication differently from AWS S3 and you MUST NOT use the presign method of AWS s3api CLI or sdk to generate the presigned URL.
+ * Returns a timed and authenticated URL to download (GET) or upload (PUT) an object. This is the equivalent to AWS S3’s “presigned” URL. Please note that Telnyx performs authentication differently from AWS S3 and you MUST NOT use the presign method of AWS s3api CLI or SDK to generate the presigned URL.
  *
  * Refer to: https://developers.telnyx.com/docs/cloud-storage/presigned-urls
  *
- * @see Telnyx\Storage\Buckets->createPresignedURL
+ * @see Telnyx\Services\Storage\BucketsService::createPresignedURL()
  *
- * @phpstan-type bucket_create_presigned_url_params = array{
- *   bucketName: string, ttl?: int
+ * @phpstan-type BucketCreatePresignedURLParamsShape = array{
+ *   bucketName: string, ttl?: int|null
  * }
  */
 final class BucketCreatePresignedURLParams implements BaseModel
 {
-    /** @use SdkModel<bucket_create_presigned_url_params> */
+    /** @use SdkModel<BucketCreatePresignedURLParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $bucketName;
 
     /**
      * The time to live of the token in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $ttl;
 
     /**
@@ -61,21 +62,21 @@ final class BucketCreatePresignedURLParams implements BaseModel
      */
     public static function with(string $bucketName, ?int $ttl = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->bucketName = $bucketName;
+        $self['bucketName'] = $bucketName;
 
-        null !== $ttl && $obj->ttl = $ttl;
+        null !== $ttl && $self['ttl'] = $ttl;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucketName(string $bucketName): self
     {
-        $obj = clone $this;
-        $obj->bucketName = $bucketName;
+        $self = clone $this;
+        $self['bucketName'] = $bucketName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,9 +84,9 @@ final class BucketCreatePresignedURLParams implements BaseModel
      */
     public function withTtl(int $ttl): self
     {
-        $obj = clone $this;
-        $obj->ttl = $ttl;
+        $self = clone $this;
+        $self['ttl'] = $ttl;
 
-        return $obj;
+        return $self;
     }
 }

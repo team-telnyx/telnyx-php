@@ -4,57 +4,59 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Reports\PortingReport\ReportType;
 use Telnyx\Porting\Reports\PortingReport\Status;
 
 /**
- * @phpstan-type porting_report = array{
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   documentID?: string,
- *   params?: ExportPortingOrdersCsvReport,
- *   recordType?: string,
- *   reportType?: value-of<ReportType>,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-import-type ExportPortingOrdersCsvReportShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport
+ *
+ * @phpstan-type PortingReportShape = array{
+ *   id?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   documentID?: string|null,
+ *   params?: null|ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape,
+ *   recordType?: string|null,
+ *   reportType?: null|ReportType|value-of<ReportType>,
+ *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class PortingReport implements BaseModel
 {
-    /** @use SdkModel<porting_report> */
+    /** @use SdkModel<PortingReportShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies the report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * Identifies the document that was uploaded when report was generated. This field is only populated when the report is under completed status.
      */
-    #[Api('document_id', optional: true)]
+    #[Optional('document_id')]
     public ?string $documentID;
 
     /**
      * The parameters for generating a porting orders CSV report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExportPortingOrdersCsvReport $params;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -62,7 +64,7 @@ final class PortingReport implements BaseModel
      *
      * @var value-of<ReportType>|null $reportType
      */
-    #[Api('report_type', enum: ReportType::class, optional: true)]
+    #[Optional('report_type', enum: ReportType::class)]
     public ?string $reportType;
 
     /**
@@ -70,13 +72,13 @@ final class PortingReport implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -89,31 +91,32 @@ final class PortingReport implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReportType|value-of<ReportType> $reportType
-     * @param Status|value-of<Status> $status
+     * @param ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape|null $params
+     * @param ReportType|value-of<ReportType>|null $reportType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $documentID = null,
-        ?ExportPortingOrdersCsvReport $params = null,
+        ExportPortingOrdersCsvReport|array|null $params = null,
         ?string $recordType = null,
         ReportType|string|null $reportType = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $documentID && $obj->documentID = $documentID;
-        null !== $params && $obj->params = $params;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $reportType && $obj['reportType'] = $reportType;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $documentID && $self['documentID'] = $documentID;
+        null !== $params && $self['params'] = $params;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $reportType && $self['reportType'] = $reportType;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +124,10 @@ final class PortingReport implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +135,10 @@ final class PortingReport implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,21 +146,23 @@ final class PortingReport implements BaseModel
      */
     public function withDocumentID(string $documentID): self
     {
-        $obj = clone $this;
-        $obj->documentID = $documentID;
+        $self = clone $this;
+        $self['documentID'] = $documentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The parameters for generating a porting orders CSV report.
+     *
+     * @param ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape $params
      */
-    public function withParams(ExportPortingOrdersCsvReport $params): self
+    public function withParams(ExportPortingOrdersCsvReport|array $params): self
     {
-        $obj = clone $this;
-        $obj->params = $params;
+        $self = clone $this;
+        $self['params'] = $params;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +170,10 @@ final class PortingReport implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +183,10 @@ final class PortingReport implements BaseModel
      */
     public function withReportType(ReportType|string $reportType): self
     {
-        $obj = clone $this;
-        $obj['reportType'] = $reportType;
+        $self = clone $this;
+        $self['reportType'] = $reportType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +196,10 @@ final class PortingReport implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -202,9 +207,9 @@ final class PortingReport implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

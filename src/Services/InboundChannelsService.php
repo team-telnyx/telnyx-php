@@ -6,18 +6,29 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\InboundChannels\InboundChannelListResponse;
-use Telnyx\InboundChannels\InboundChannelUpdateParams;
 use Telnyx\InboundChannels\InboundChannelUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InboundChannelsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InboundChannelsService implements InboundChannelsContract
 {
     /**
+     * @api
+     */
+    public InboundChannelsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new InboundChannelsRawService($client);
+    }
 
     /**
      * @api
@@ -25,42 +36,20 @@ final class InboundChannelsService implements InboundChannelsContract
      * Update the number of Voice Channels for the US Zone. This allows your account to handle multiple simultaneous inbound calls to US numbers. Use this endpoint to increase or decrease your capacity based on expected call volume.
      *
      * @param int $channels The new number of concurrent channels for the account
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        $channels,
-        ?RequestOptions $requestOptions = null
+        int $channels,
+        RequestOptions|array|null $requestOptions = null
     ): InboundChannelUpdateResponse {
-        $params = ['channels' => $channels];
+        $params = Util::removeNulls(['channels' => $channels]);
 
-        return $this->updateRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InboundChannelUpdateResponse {
-        [$parsed, $options] = InboundChannelUpdateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: 'inbound_channels',
-            body: (object) $parsed,
-            options: $options,
-            convert: InboundChannelUpdateResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -68,17 +57,16 @@ final class InboundChannelsService implements InboundChannelsContract
      *
      * Returns the US Zone voice channels for your account. voice channels allows you to use Channel Billing for calls to your Telnyx phone numbers. Please check the <a href="https://support.telnyx.com/en/articles/8428806-global-channel-billing">Telnyx Support Articles</a> section for full information and examples of how to utilize Channel Billing.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): InboundChannelListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'inbound_channels',
-            options: $requestOptions,
-            convert: InboundChannelListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

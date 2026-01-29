@@ -4,48 +4,48 @@ declare(strict_types=1);
 
 namespace Telnyx\Invoices\InvoiceGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   downloadURL?: string,
- *   fileID?: string,
- *   invoiceID?: string,
- *   paid?: bool,
- *   periodEnd?: \DateTimeInterface,
- *   periodStart?: \DateTimeInterface,
- *   url?: string,
+ * @phpstan-type DataShape = array{
+ *   downloadURL?: string|null,
+ *   fileID?: string|null,
+ *   invoiceID?: string|null,
+ *   paid?: bool|null,
+ *   periodEnd?: string|null,
+ *   periodStart?: string|null,
+ *   url?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Present only if the query parameter `action=link` is set.
      */
-    #[Api('download_url', optional: true)]
+    #[Optional('download_url')]
     public ?string $downloadURL;
 
-    #[Api('file_id', optional: true)]
+    #[Optional('file_id')]
     public ?string $fileID;
 
-    #[Api('invoice_id', optional: true)]
+    #[Optional('invoice_id')]
     public ?string $invoiceID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $paid;
 
-    #[Api('period_end', optional: true)]
-    public ?\DateTimeInterface $periodEnd;
+    #[Optional('period_end')]
+    public ?string $periodEnd;
 
-    #[Api('period_start', optional: true)]
-    public ?\DateTimeInterface $periodStart;
+    #[Optional('period_start')]
+    public ?string $periodStart;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()
@@ -63,21 +63,21 @@ final class Data implements BaseModel
         ?string $fileID = null,
         ?string $invoiceID = null,
         ?bool $paid = null,
-        ?\DateTimeInterface $periodEnd = null,
-        ?\DateTimeInterface $periodStart = null,
+        ?string $periodEnd = null,
+        ?string $periodStart = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $downloadURL && $obj->downloadURL = $downloadURL;
-        null !== $fileID && $obj->fileID = $fileID;
-        null !== $invoiceID && $obj->invoiceID = $invoiceID;
-        null !== $paid && $obj->paid = $paid;
-        null !== $periodEnd && $obj->periodEnd = $periodEnd;
-        null !== $periodStart && $obj->periodStart = $periodStart;
-        null !== $url && $obj->url = $url;
+        null !== $downloadURL && $self['downloadURL'] = $downloadURL;
+        null !== $fileID && $self['fileID'] = $fileID;
+        null !== $invoiceID && $self['invoiceID'] = $invoiceID;
+        null !== $paid && $self['paid'] = $paid;
+        null !== $periodEnd && $self['periodEnd'] = $periodEnd;
+        null !== $periodStart && $self['periodStart'] = $periodStart;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,57 +85,57 @@ final class Data implements BaseModel
      */
     public function withDownloadURL(string $downloadURL): self
     {
-        $obj = clone $this;
-        $obj->downloadURL = $downloadURL;
+        $self = clone $this;
+        $self['downloadURL'] = $downloadURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withFileID(string $fileID): self
     {
-        $obj = clone $this;
-        $obj->fileID = $fileID;
+        $self = clone $this;
+        $self['fileID'] = $fileID;
 
-        return $obj;
+        return $self;
     }
 
     public function withInvoiceID(string $invoiceID): self
     {
-        $obj = clone $this;
-        $obj->invoiceID = $invoiceID;
+        $self = clone $this;
+        $self['invoiceID'] = $invoiceID;
 
-        return $obj;
+        return $self;
     }
 
     public function withPaid(bool $paid): self
     {
-        $obj = clone $this;
-        $obj->paid = $paid;
+        $self = clone $this;
+        $self['paid'] = $paid;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPeriodEnd(\DateTimeInterface $periodEnd): self
+    public function withPeriodEnd(string $periodEnd): self
     {
-        $obj = clone $this;
-        $obj->periodEnd = $periodEnd;
+        $self = clone $this;
+        $self['periodEnd'] = $periodEnd;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPeriodStart(\DateTimeInterface $periodStart): self
+    public function withPeriodStart(string $periodStart): self
     {
-        $obj = clone $this;
-        $obj->periodStart = $periodStart;
+        $self = clone $this;
+        $self['periodStart'] = $periodStart;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

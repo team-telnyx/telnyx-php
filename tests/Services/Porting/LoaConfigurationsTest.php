@@ -6,9 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
+use Telnyx\DefaultPagination;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
+use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,23 +39,23 @@ final class LoaConfigurationsTest extends TestCase
         }
 
         $result = $this->client->porting->loaConfigurations->create(
-            address: Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            ),
+            address: [
+                'city' => 'Austin',
+                'countryCode' => 'US',
+                'state' => 'TX',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+            ],
             companyName: 'Telnyx',
-            contact: Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: Logo::with(documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'),
+            contact: [
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
+            ],
+            logo: ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             name: 'My LOA Configuration',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationNewResponse::class, $result);
     }
 
     #[Test]
@@ -64,24 +66,24 @@ final class LoaConfigurationsTest extends TestCase
         }
 
         $result = $this->client->porting->loaConfigurations->create(
-            address: Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            )
-                ->withExtendedAddress('14th Floor'),
+            address: [
+                'city' => 'Austin',
+                'countryCode' => 'US',
+                'state' => 'TX',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+                'extendedAddress' => '14th Floor',
+            ],
             companyName: 'Telnyx',
-            contact: Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: Logo::with(documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'),
+            contact: [
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
+            ],
+            logo: ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             name: 'My LOA Configuration',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationNewResponse::class, $result);
     }
 
     #[Test]
@@ -95,7 +97,8 @@ final class LoaConfigurationsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationGetResponse::class, $result);
     }
 
     #[Test]
@@ -107,25 +110,23 @@ final class LoaConfigurationsTest extends TestCase
 
         $result = $this->client->porting->loaConfigurations->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            ),
+            address: [
+                'city' => 'Austin',
+                'countryCode' => 'US',
+                'state' => 'TX',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+            ],
             companyName: 'Telnyx',
-            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo::with(
-                documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
-            ),
+            contact: [
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
+            ],
+            logo: ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             name: 'My LOA Configuration',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -137,26 +138,24 @@ final class LoaConfigurationsTest extends TestCase
 
         $result = $this->client->porting->loaConfigurations->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            )
-                ->withExtendedAddress('14th Floor'),
+            address: [
+                'city' => 'Austin',
+                'countryCode' => 'US',
+                'state' => 'TX',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+                'extendedAddress' => '14th Floor',
+            ],
             companyName: 'Telnyx',
-            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo::with(
-                documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
-            ),
+            contact: [
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
+            ],
+            logo: ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             name: 'My LOA Configuration',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LoaConfigurationUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -166,9 +165,15 @@ final class LoaConfigurationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->loaConfigurations->list();
+        $page = $this->client->porting->loaConfigurations->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PortingLoaConfiguration::class, $item);
+        }
     }
 
     #[Test]
@@ -182,79 +187,77 @@ final class LoaConfigurationsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
     public function testPreview0(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support application/pdf responses");
+            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->porting->loaConfigurations->preview0(
-            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            ),
+            address: [
+                'city' => 'Austin',
+                'countryCode' => 'US',
+                'state' => 'TX',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+            ],
             companyName: 'Telnyx',
-            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo::with(
-                documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
-            ),
+            contact: [
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
+            ],
+            logo: ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             name: 'My LOA Configuration',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
     public function testPreview0WithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support application/pdf responses");
+            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->porting->loaConfigurations->preview0(
-            address: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address::with(
-                city: 'Austin',
-                countryCode: 'US',
-                state: 'TX',
-                streetAddress: '600 Congress Avenue',
-                zipCode: '78701',
-            )
-                ->withExtendedAddress('14th Floor'),
+            address: [
+                'city' => 'Austin',
+                'countryCode' => 'US',
+                'state' => 'TX',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+                'extendedAddress' => '14th Floor',
+            ],
             companyName: 'Telnyx',
-            contact: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact::with(
-                email: 'testing@telnyx.com',
-                phoneNumber: '+12003270001'
-            ),
-            logo: \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo::with(
-                documentID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
-            ),
+            contact: [
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
+            ],
+            logo: ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
             name: 'My LOA Configuration',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
     public function testPreview1(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support application/pdf responses");
+            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->porting->loaConfigurations->preview1(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 }

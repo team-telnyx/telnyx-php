@@ -6,7 +6,13 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
+use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\ExternalConnection;
+use Telnyx\ExternalConnections\ExternalConnectionDeleteResponse;
+use Telnyx\ExternalConnections\ExternalConnectionGetResponse;
+use Telnyx\ExternalConnections\ExternalConnectionNewResponse;
+use Telnyx\ExternalConnections\ExternalConnectionUpdateLocationResponse;
+use Telnyx\ExternalConnections\ExternalConnectionUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,10 +42,11 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->create(
             externalSipConnection: 'zoom',
-            outbound: (new Outbound)
+            outbound: []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,12 +58,23 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->create(
             externalSipConnection: 'zoom',
-            outbound: (new Outbound)
-                ->withChannelLimit(10)
-                ->withOutboundVoiceProfileID('outbound_voice_profile_id'),
+            outbound: [
+                'channelLimit' => 10,
+                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+            ],
+            active: false,
+            inbound: [
+                'outboundVoiceProfileID' => '12345678-1234-1234-1234-123456789012',
+                'channelLimit' => 10,
+            ],
+            tags: ['tag1', 'tag2'],
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookEventURL: 'https://example.com',
+            webhookTimeoutSecs: 25,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionNewResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +86,8 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionGetResponse::class, $result);
     }
 
     #[Test]
@@ -80,12 +99,11 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            outbound: \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
-                outboundVoiceProfileID: 'outbound_voice_profile_id'
-            ),
+            outbound: ['outboundVoiceProfileID' => 'outbound_voice_profile_id']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -97,13 +115,20 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->update(
             'id',
-            outbound: \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound::with(
-                outboundVoiceProfileID: 'outbound_voice_profile_id'
-            )
-                ->withChannelLimit(10),
+            outbound: [
+                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+                'channelLimit' => 10,
+            ],
+            active: false,
+            inbound: ['channelLimit' => 10],
+            tags: ['tag1', 'tag2'],
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookEventURL: 'https://example.com',
+            webhookTimeoutSecs: 25,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -113,9 +138,15 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->list();
+        $page = $this->client->externalConnections->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ExternalConnection::class, $item);
+        }
     }
 
     #[Test]
@@ -127,7 +158,8 @@ final class ExternalConnectionsTest extends TestCase
 
         $result = $this->client->externalConnections->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ExternalConnectionDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -143,7 +175,11 @@ final class ExternalConnectionsTest extends TestCase
             staticEmergencyAddressID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ExternalConnectionUpdateLocationResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -159,6 +195,10 @@ final class ExternalConnectionsTest extends TestCase
             staticEmergencyAddressID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ExternalConnectionUpdateLocationResponse::class,
+            $result
+        );
     }
 }

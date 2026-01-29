@@ -8,7 +8,8 @@ use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -23,37 +24,40 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.dtmf.received` (you may receive many of these webhooks)
  * - `call.gather.ended`
  *
- * @see Telnyx\Calls\Actions->gatherUsingSpeak
+ * @see Telnyx\Services\Calls\ActionsService::gatherUsingSpeak()
  *
- * @phpstan-type action_gather_using_speak_params = array{
+ * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings
+ *
+ * @phpstan-type ActionGatherUsingSpeakParamsShape = array{
  *   payload: string,
  *   voice: string,
- *   clientState?: string,
- *   commandID?: string,
- *   interDigitTimeoutMillis?: int,
- *   invalidPayload?: string,
- *   language?: Language|value-of<Language>,
- *   maximumDigits?: int,
- *   maximumTries?: int,
- *   minimumDigits?: int,
- *   payloadType?: PayloadType|value-of<PayloadType>,
- *   serviceLevel?: ServiceLevel|value-of<ServiceLevel>,
- *   terminatingDigit?: string,
- *   timeoutMillis?: int,
- *   validDigits?: string,
- *   voiceSettings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   interDigitTimeoutMillis?: int|null,
+ *   invalidPayload?: string|null,
+ *   language?: null|Language|value-of<Language>,
+ *   maximumDigits?: int|null,
+ *   maximumTries?: int|null,
+ *   minimumDigits?: int|null,
+ *   payloadType?: null|PayloadType|value-of<PayloadType>,
+ *   serviceLevel?: null|ServiceLevel|value-of<ServiceLevel>,
+ *   terminatingDigit?: string|null,
+ *   timeoutMillis?: int|null,
+ *   validDigits?: string|null,
+ *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class ActionGatherUsingSpeakParams implements BaseModel
 {
-    /** @use SdkModel<action_gather_using_speak_params> */
+    /** @use SdkModel<ActionGatherUsingSpeakParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The text or SSML to be converted into speech. There is a 3,000 character limit.
      */
-    #[Api]
+    #[Required]
     public string $payload;
 
     /**
@@ -69,31 +73,31 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
      */
-    #[Api]
+    #[Required]
     public string $voice;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
      * The number of milliseconds to wait for input between digits.
      */
-    #[Api('inter_digit_timeout_millis', optional: true)]
+    #[Optional('inter_digit_timeout_millis')]
     public ?int $interDigitTimeoutMillis;
 
     /**
      * The text or SSML to be converted into speech when digits don't match the `valid_digits` parameter or the number of digits is not between `min` and `max`. There is a 3,000 character limit.
      */
-    #[Api('invalid_payload', optional: true)]
+    #[Optional('invalid_payload')]
     public ?string $invalidPayload;
 
     /**
@@ -101,25 +105,25 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * @var value-of<Language>|null $language
      */
-    #[Api(enum: Language::class, optional: true)]
+    #[Optional(enum: Language::class)]
     public ?string $language;
 
     /**
      * The maximum number of digits to fetch. This parameter has a maximum value of 128.
      */
-    #[Api('maximum_digits', optional: true)]
+    #[Optional('maximum_digits')]
     public ?int $maximumDigits;
 
     /**
      * The maximum number of times that a file should be played back if there is no input from the user on the call.
      */
-    #[Api('maximum_tries', optional: true)]
+    #[Optional('maximum_tries')]
     public ?int $maximumTries;
 
     /**
      * The minimum number of digits to fetch. This parameter has a minimum value of 1.
      */
-    #[Api('minimum_digits', optional: true)]
+    #[Optional('minimum_digits')]
     public ?int $minimumDigits;
 
     /**
@@ -127,7 +131,7 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * @var value-of<PayloadType>|null $payloadType
      */
-    #[Api('payload_type', enum: PayloadType::class, optional: true)]
+    #[Optional('payload_type', enum: PayloadType::class)]
     public ?string $payloadType;
 
     /**
@@ -135,34 +139,34 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * @var value-of<ServiceLevel>|null $serviceLevel
      */
-    #[Api('service_level', enum: ServiceLevel::class, optional: true)]
+    #[Optional('service_level', enum: ServiceLevel::class)]
     public ?string $serviceLevel;
 
     /**
      * The digit used to terminate input if fewer than `maximum_digits` digits have been gathered.
      */
-    #[Api('terminating_digit', optional: true)]
+    #[Optional('terminating_digit')]
     public ?string $terminatingDigit;
 
     /**
      * The number of milliseconds to wait for a DTMF response after speak ends before a replaying the sound file.
      */
-    #[Api('timeout_millis', optional: true)]
+    #[Optional('timeout_millis')]
     public ?int $timeoutMillis;
 
     /**
      * A list of all digits accepted as valid.
      */
-    #[Api('valid_digits', optional: true)]
+    #[Optional('valid_digits')]
     public ?string $validDigits;
 
     /**
      * The settings associated with the voice selected.
      *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voiceSettings
+     * @var VoiceSettingsVariants|null $voiceSettings
      */
-    #[Api('voice_settings', union: VoiceSettings::class, optional: true)]
-    public mixed $voiceSettings;
+    #[Optional('voice_settings', union: VoiceSettings::class)]
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings;
 
     /**
      * `new ActionGatherUsingSpeakParams()` is missing required properties by the API.
@@ -188,10 +192,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Language|value-of<Language> $language
-     * @param PayloadType|value-of<PayloadType> $payloadType
-     * @param ServiceLevel|value-of<ServiceLevel> $serviceLevel
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param Language|value-of<Language>|null $language
+     * @param PayloadType|value-of<PayloadType>|null $payloadType
+     * @param ServiceLevel|value-of<ServiceLevel>|null $serviceLevel
+     * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         string $payload,
@@ -209,29 +213,29 @@ final class ActionGatherUsingSpeakParams implements BaseModel
         ?string $terminatingDigit = null,
         ?int $timeoutMillis = null,
         ?string $validDigits = null,
-        mixed $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->payload = $payload;
-        $obj->voice = $voice;
+        $self['payload'] = $payload;
+        $self['voice'] = $voice;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $interDigitTimeoutMillis && $obj->interDigitTimeoutMillis = $interDigitTimeoutMillis;
-        null !== $invalidPayload && $obj->invalidPayload = $invalidPayload;
-        null !== $language && $obj['language'] = $language;
-        null !== $maximumDigits && $obj->maximumDigits = $maximumDigits;
-        null !== $maximumTries && $obj->maximumTries = $maximumTries;
-        null !== $minimumDigits && $obj->minimumDigits = $minimumDigits;
-        null !== $payloadType && $obj['payloadType'] = $payloadType;
-        null !== $serviceLevel && $obj['serviceLevel'] = $serviceLevel;
-        null !== $terminatingDigit && $obj->terminatingDigit = $terminatingDigit;
-        null !== $timeoutMillis && $obj->timeoutMillis = $timeoutMillis;
-        null !== $validDigits && $obj->validDigits = $validDigits;
-        null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $interDigitTimeoutMillis && $self['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
+        null !== $invalidPayload && $self['invalidPayload'] = $invalidPayload;
+        null !== $language && $self['language'] = $language;
+        null !== $maximumDigits && $self['maximumDigits'] = $maximumDigits;
+        null !== $maximumTries && $self['maximumTries'] = $maximumTries;
+        null !== $minimumDigits && $self['minimumDigits'] = $minimumDigits;
+        null !== $payloadType && $self['payloadType'] = $payloadType;
+        null !== $serviceLevel && $self['serviceLevel'] = $serviceLevel;
+        null !== $terminatingDigit && $self['terminatingDigit'] = $terminatingDigit;
+        null !== $timeoutMillis && $self['timeoutMillis'] = $timeoutMillis;
+        null !== $validDigits && $self['validDigits'] = $validDigits;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,10 +243,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withPayload(string $payload): self
     {
-        $obj = clone $this;
-        $obj->payload = $payload;
+        $self = clone $this;
+        $self['payload'] = $payload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,10 +264,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withVoice(string $voice): self
     {
-        $obj = clone $this;
-        $obj->voice = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +275,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +286,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +298,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
     public function withInterDigitTimeoutMillis(
         int $interDigitTimeoutMillis
     ): self {
-        $obj = clone $this;
-        $obj->interDigitTimeoutMillis = $interDigitTimeoutMillis;
+        $self = clone $this;
+        $self['interDigitTimeoutMillis'] = $interDigitTimeoutMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -305,10 +309,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withInvalidPayload(string $invalidPayload): self
     {
-        $obj = clone $this;
-        $obj->invalidPayload = $invalidPayload;
+        $self = clone $this;
+        $self['invalidPayload'] = $invalidPayload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,10 +322,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withLanguage(Language|string $language): self
     {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -329,10 +333,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withMaximumDigits(int $maximumDigits): self
     {
-        $obj = clone $this;
-        $obj->maximumDigits = $maximumDigits;
+        $self = clone $this;
+        $self['maximumDigits'] = $maximumDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -340,10 +344,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withMaximumTries(int $maximumTries): self
     {
-        $obj = clone $this;
-        $obj->maximumTries = $maximumTries;
+        $self = clone $this;
+        $self['maximumTries'] = $maximumTries;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -351,10 +355,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withMinimumDigits(int $minimumDigits): self
     {
-        $obj = clone $this;
-        $obj->minimumDigits = $minimumDigits;
+        $self = clone $this;
+        $self['minimumDigits'] = $minimumDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -364,10 +368,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withPayloadType(PayloadType|string $payloadType): self
     {
-        $obj = clone $this;
-        $obj['payloadType'] = $payloadType;
+        $self = clone $this;
+        $self['payloadType'] = $payloadType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -377,10 +381,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withServiceLevel(ServiceLevel|string $serviceLevel): self
     {
-        $obj = clone $this;
-        $obj['serviceLevel'] = $serviceLevel;
+        $self = clone $this;
+        $self['serviceLevel'] = $serviceLevel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -388,10 +392,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withTerminatingDigit(string $terminatingDigit): self
     {
-        $obj = clone $this;
-        $obj->terminatingDigit = $terminatingDigit;
+        $self = clone $this;
+        $self['terminatingDigit'] = $terminatingDigit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -399,10 +403,10 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withTimeoutMillis(int $timeoutMillis): self
     {
-        $obj = clone $this;
-        $obj->timeoutMillis = $timeoutMillis;
+        $self = clone $this;
+        $self['timeoutMillis'] = $timeoutMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -410,22 +414,23 @@ final class ActionGatherUsingSpeakParams implements BaseModel
      */
     public function withValidDigits(string $validDigits): self
     {
-        $obj = clone $this;
-        $obj->validDigits = $validDigits;
+        $self = clone $this;
+        $self['validDigits'] = $validDigits;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The settings associated with the voice selected.
      *
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
-    public function withVoiceSettings(mixed $voiceSettings): self
-    {
-        $obj = clone $this;
-        $obj->voiceSettings = $voiceSettings;
+    public function withVoiceSettings(
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
+    ): self {
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 }

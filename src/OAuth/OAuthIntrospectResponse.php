@@ -4,70 +4,67 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_introspect_response = array{
+ * @phpstan-type OAuthIntrospectResponseShape = array{
  *   active: bool,
- *   aud?: string,
- *   clientID?: string,
- *   exp?: int,
- *   iat?: int,
- *   iss?: string,
- *   scope?: string,
+ *   aud?: string|null,
+ *   clientID?: string|null,
+ *   exp?: int|null,
+ *   iat?: int|null,
+ *   iss?: string|null,
+ *   scope?: string|null,
  * }
  */
-final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
+final class OAuthIntrospectResponse implements BaseModel
 {
-    /** @use SdkModel<oauth_introspect_response> */
+    /** @use SdkModel<OAuthIntrospectResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Whether the token is active.
      */
-    #[Api]
+    #[Required]
     public bool $active;
 
     /**
      * Audience.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $aud;
 
     /**
      * Client identifier.
      */
-    #[Api('client_id', optional: true)]
+    #[Optional('client_id')]
     public ?string $clientID;
 
     /**
      * Expiration timestamp.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $exp;
 
     /**
      * Issued at timestamp.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $iat;
 
     /**
      * Issuer.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $iss;
 
     /**
      * Space-separated list of scopes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scope;
 
     /**
@@ -103,18 +100,18 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
         ?string $iss = null,
         ?string $scope = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->active = $active;
+        $self['active'] = $active;
 
-        null !== $aud && $obj->aud = $aud;
-        null !== $clientID && $obj->clientID = $clientID;
-        null !== $exp && $obj->exp = $exp;
-        null !== $iat && $obj->iat = $iat;
-        null !== $iss && $obj->iss = $iss;
-        null !== $scope && $obj->scope = $scope;
+        null !== $aud && $self['aud'] = $aud;
+        null !== $clientID && $self['clientID'] = $clientID;
+        null !== $exp && $self['exp'] = $exp;
+        null !== $iat && $self['iat'] = $iat;
+        null !== $iss && $self['iss'] = $iss;
+        null !== $scope && $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +119,10 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj->active = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +130,10 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
      */
     public function withAud(string $aud): self
     {
-        $obj = clone $this;
-        $obj->aud = $aud;
+        $self = clone $this;
+        $self['aud'] = $aud;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +141,10 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
      */
     public function withClientID(string $clientID): self
     {
-        $obj = clone $this;
-        $obj->clientID = $clientID;
+        $self = clone $this;
+        $self['clientID'] = $clientID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +152,10 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
      */
     public function withExp(int $exp): self
     {
-        $obj = clone $this;
-        $obj->exp = $exp;
+        $self = clone $this;
+        $self['exp'] = $exp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +163,10 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
      */
     public function withIat(int $iat): self
     {
-        $obj = clone $this;
-        $obj->iat = $iat;
+        $self = clone $this;
+        $self['iat'] = $iat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +174,10 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
      */
     public function withIss(string $iss): self
     {
-        $obj = clone $this;
-        $obj->iss = $iss;
+        $self = clone $this;
+        $self['iss'] = $iss;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,9 +185,9 @@ final class OAuthIntrospectResponse implements BaseModel, ResponseConverter
      */
     public function withScope(string $scope): self
     {
-        $obj = clone $this;
-        $obj->scope = $scope;
+        $self = clone $this;
+        $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 }

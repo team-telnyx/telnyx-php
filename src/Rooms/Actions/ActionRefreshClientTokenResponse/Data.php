@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   token?: string, tokenExpiresAt?: \DateTimeInterface
+ * @phpstan-type DataShape = array{
+ *   token?: string|null, tokenExpiresAt?: \DateTimeInterface|null
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token;
 
     /**
      * ISO 8601 timestamp when the token expires.
      */
-    #[Api('token_expires_at', optional: true)]
+    #[Optional('token_expires_at')]
     public ?\DateTimeInterface $tokenExpiresAt;
 
     public function __construct()
@@ -41,20 +41,20 @@ final class Data implements BaseModel
         ?string $token = null,
         ?\DateTimeInterface $tokenExpiresAt = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $token && $obj->token = $token;
-        null !== $tokenExpiresAt && $obj->tokenExpiresAt = $tokenExpiresAt;
+        null !== $token && $self['token'] = $token;
+        null !== $tokenExpiresAt && $self['tokenExpiresAt'] = $tokenExpiresAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj->token = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,9 +62,9 @@ final class Data implements BaseModel
      */
     public function withTokenExpiresAt(\DateTimeInterface $tokenExpiresAt): self
     {
-        $obj = clone $this;
-        $obj->tokenExpiresAt = $tokenExpiresAt;
+        $self = clone $this;
+        $self['tokenExpiresAt'] = $tokenExpiresAt;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\VerifiedNumbers\VerifiedNumber;
+use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
+use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +42,8 @@ final class VerifiedNumbersTest extends TestCase
             verificationMethod: 'sms'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberNewResponse::class, $result);
     }
 
     #[Test]
@@ -50,10 +55,12 @@ final class VerifiedNumbersTest extends TestCase
 
         $result = $this->client->verifiedNumbers->create(
             phoneNumber: '+15551234567',
-            verificationMethod: 'sms'
+            verificationMethod: 'sms',
+            extension: 'ww243w1',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +72,8 @@ final class VerifiedNumbersTest extends TestCase
 
         $result = $this->client->verifiedNumbers->retrieve('+15551234567');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberDataWrapper::class, $result);
     }
 
     #[Test]
@@ -75,9 +83,15 @@ final class VerifiedNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->verifiedNumbers->list();
+        $page = $this->client->verifiedNumbers->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(VerifiedNumber::class, $item);
+        }
     }
 
     #[Test]
@@ -89,6 +103,7 @@ final class VerifiedNumbersTest extends TestCase
 
         $result = $this->client->verifiedNumbers->delete('+15551234567');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberDataWrapper::class, $result);
     }
 }

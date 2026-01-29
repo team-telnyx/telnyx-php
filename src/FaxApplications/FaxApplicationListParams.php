@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\FaxApplications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,28 +15,33 @@ use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
 /**
  * This endpoint returns a list of your Fax Applications inside the 'data' attribute of the response. You can adjust which applications are listed by using filters. Fax Applications are used to configure how you send and receive faxes using the Programmable Fax API with Telnyx.
  *
- * @see Telnyx\FaxApplications->list
+ * @see Telnyx\Services\FaxApplicationsService::list()
  *
- * @phpstan-type fax_application_list_params = array{
- *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
+ * @phpstan-import-type FilterShape from \Telnyx\FaxApplications\FaxApplicationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\FaxApplications\FaxApplicationListParams\Page
+ *
+ * @phpstan-type FaxApplicationListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class FaxApplicationListParams implements BaseModel
 {
-    /** @use SdkModel<fax_application_list_params> */
+    /** @use SdkModel<FaxApplicationListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -55,7 +60,7 @@ final class FaxApplicationListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()
@@ -68,42 +73,48 @@ final class FaxApplicationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Sort|value-of<Sort> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        Sort|string|null $sort = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +135,9 @@ final class FaxApplicationListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

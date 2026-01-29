@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse;
+use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class SubNumberOrdersReportTest extends TestCase
 
         $result = $this->client->subNumberOrdersReport->create();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SubNumberOrdersReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +52,8 @@ final class SubNumberOrdersReportTest extends TestCase
             '12ade33a-21c0-473b-b055-b3c836e1c293'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SubNumberOrdersReportGetResponse::class, $result);
     }
 
     #[Test]
@@ -63,6 +67,7 @@ final class SubNumberOrdersReportTest extends TestCase
             '12ade33a-21c0-473b-b055-b3c836e1c293'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 }

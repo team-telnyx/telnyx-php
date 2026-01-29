@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Conferences\Actions\ActionHoldParams\Region;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +13,25 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Hold a list of participants in a conference call.
  *
- * @see Telnyx\Conferences\Actions->hold
+ * @see Telnyx\Services\Conferences\ActionsService::hold()
  *
- * @phpstan-type action_hold_params = array{
- *   audioURL?: string, callControlIDs?: list<string>, mediaName?: string
+ * @phpstan-type ActionHoldParamsShape = array{
+ *   audioURL?: string|null,
+ *   callControlIDs?: list<string>|null,
+ *   mediaName?: string|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ActionHoldParams implements BaseModel
 {
-    /** @use SdkModel<action_hold_params> */
+    /** @use SdkModel<ActionHoldParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The URL of a file to be played to the participants when they are put on hold. media_name and audio_url cannot be used together in one request.
      */
-    #[Api('audio_url', optional: true)]
+    #[Optional('audio_url')]
     public ?string $audioURL;
 
     /**
@@ -35,14 +39,22 @@ final class ActionHoldParams implements BaseModel
      *
      * @var list<string>|null $callControlIDs
      */
-    #[Api('call_control_ids', list: 'string', optional: true)]
+    #[Optional('call_control_ids', list: 'string')]
     public ?array $callControlIDs;
 
     /**
      * The media_name of a file to be played to the participants when they are put on hold. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Api('media_name', optional: true)]
+    #[Optional('media_name')]
     public ?string $mediaName;
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     public function __construct()
     {
@@ -54,20 +66,23 @@ final class ActionHoldParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $callControlIDs
+     * @param list<string>|null $callControlIDs
+     * @param Region|value-of<Region>|null $region
      */
     public static function with(
         ?string $audioURL = null,
         ?array $callControlIDs = null,
         ?string $mediaName = null,
+        Region|string|null $region = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $audioURL && $obj->audioURL = $audioURL;
-        null !== $callControlIDs && $obj->callControlIDs = $callControlIDs;
-        null !== $mediaName && $obj->mediaName = $mediaName;
+        null !== $audioURL && $self['audioURL'] = $audioURL;
+        null !== $callControlIDs && $self['callControlIDs'] = $callControlIDs;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $region && $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +90,10 @@ final class ActionHoldParams implements BaseModel
      */
     public function withAudioURL(string $audioURL): self
     {
-        $obj = clone $this;
-        $obj->audioURL = $audioURL;
+        $self = clone $this;
+        $self['audioURL'] = $audioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +103,10 @@ final class ActionHoldParams implements BaseModel
      */
     public function withCallControlIDs(array $callControlIDs): self
     {
-        $obj = clone $this;
-        $obj->callControlIDs = $callControlIDs;
+        $self = clone $this;
+        $self['callControlIDs'] = $callControlIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,9 +114,22 @@ final class ActionHoldParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
+
+        return $self;
     }
 }

@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementTypes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\DocReqsRequirementType;
 
 /**
- * @phpstan-type requirement_type_get_response = array{
- *   data?: DocReqsRequirementType
+ * @phpstan-import-type DocReqsRequirementTypeShape from \Telnyx\DocReqsRequirementType
+ *
+ * @phpstan-type RequirementTypeGetResponseShape = array{
+ *   data?: null|DocReqsRequirementType|DocReqsRequirementTypeShape
  * }
  */
-final class RequirementTypeGetResponse implements BaseModel, ResponseConverter
+final class RequirementTypeGetResponse implements BaseModel
 {
-    /** @use SdkModel<requirement_type_get_response> */
+    /** @use SdkModel<RequirementTypeGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?DocReqsRequirementType $data;
 
     public function __construct()
@@ -35,21 +33,26 @@ final class RequirementTypeGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DocReqsRequirementType|DocReqsRequirementTypeShape|null $data
      */
-    public static function with(?DocReqsRequirementType $data = null): self
+    public static function with(DocReqsRequirementType|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(DocReqsRequirementType $data): self
+    /**
+     * @param DocReqsRequirementType|DocReqsRequirementTypeShape $data
+     */
+    public function withData(DocReqsRequirementType|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

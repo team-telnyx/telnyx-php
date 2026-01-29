@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OutboundVoiceProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,28 +15,33 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
 /**
  * Get all outbound voice profiles belonging to the user that match the given filters.
  *
- * @see Telnyx\OutboundVoiceProfiles->list
+ * @see Telnyx\Services\OutboundVoiceProfilesService::list()
  *
- * @phpstan-type outbound_voice_profile_list_params = array{
- *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
+ * @phpstan-import-type FilterShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page
+ *
+ * @phpstan-type OutboundVoiceProfileListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class OutboundVoiceProfileListParams implements BaseModel
 {
-    /** @use SdkModel<outbound_voice_profile_list_params> */
+    /** @use SdkModel<OutboundVoiceProfileListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[name][contains].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -55,7 +60,7 @@ final class OutboundVoiceProfileListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()
@@ -68,42 +73,48 @@ final class OutboundVoiceProfileListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Sort|value-of<Sort> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        Sort|string|null $sort = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[name][contains].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +135,9 @@ final class OutboundVoiceProfileListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

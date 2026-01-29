@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +45,8 @@ final class NumberLookupTest extends TestCase
             ->create()
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberLookupNewResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +65,8 @@ final class NumberLookupTest extends TestCase
             ->retrieve('id')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberLookupGetResponse::class, $result);
     }
 
     #[Test]
@@ -80,7 +85,8 @@ final class NumberLookupTest extends TestCase
             ->list()
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberLookupListResponse::class, $result);
     }
 
     #[Test]
@@ -99,6 +105,7 @@ final class NumberLookupTest extends TestCase
             ->delete('id')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

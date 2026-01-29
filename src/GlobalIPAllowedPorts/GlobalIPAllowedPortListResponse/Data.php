@@ -4,59 +4,59 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAllowedPorts\GlobalIPAllowedPortListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   firstPort?: int,
- *   lastPort?: int,
- *   name?: string,
- *   protocolCode?: string,
- *   recordType?: string,
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   firstPort?: int|null,
+ *   lastPort?: int|null,
+ *   name?: string|null,
+ *   protocolCode?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * First port of a range.
      */
-    #[Api('first_port', optional: true)]
+    #[Optional('first_port')]
     public ?int $firstPort;
 
     /**
      * Last port of a range.
      */
-    #[Api('last_port', optional: true)]
+    #[Optional('last_port')]
     public ?int $lastPort;
 
     /**
      * A name for the Global IP ports range.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The Global IP Protocol code.
      */
-    #[Api('protocol_code', optional: true)]
+    #[Optional('protocol_code')]
     public ?string $protocolCode;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -77,16 +77,16 @@ final class Data implements BaseModel
         ?string $protocolCode = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $firstPort && $obj->firstPort = $firstPort;
-        null !== $lastPort && $obj->lastPort = $lastPort;
-        null !== $name && $obj->name = $name;
-        null !== $protocolCode && $obj->protocolCode = $protocolCode;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $firstPort && $self['firstPort'] = $firstPort;
+        null !== $lastPort && $self['lastPort'] = $lastPort;
+        null !== $name && $self['name'] = $name;
+        null !== $protocolCode && $self['protocolCode'] = $protocolCode;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Data implements BaseModel
      */
     public function withFirstPort(int $firstPort): self
     {
-        $obj = clone $this;
-        $obj->firstPort = $firstPort;
+        $self = clone $this;
+        $self['firstPort'] = $firstPort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class Data implements BaseModel
      */
     public function withLastPort(int $lastPort): self
     {
-        $obj = clone $this;
-        $obj->lastPort = $lastPort;
+        $self = clone $this;
+        $self['lastPort'] = $lastPort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class Data implements BaseModel
      */
     public function withProtocolCode(string $protocolCode): self
     {
-        $obj = clone $this;
-        $obj->protocolCode = $protocolCode;
+        $self = clone $this;
+        $self['protocolCode'] = $protocolCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,9 +149,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

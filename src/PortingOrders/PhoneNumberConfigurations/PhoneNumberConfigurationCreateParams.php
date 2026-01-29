@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberConfigurations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,23 +13,24 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreat
 /**
  * Creates a list of phone number configurations.
  *
- * @see Telnyx\PortingOrders\PhoneNumberConfigurations->create
+ * @see Telnyx\Services\PortingOrders\PhoneNumberConfigurationsService::create()
  *
- * @phpstan-type phone_number_configuration_create_params = array{
- *   phoneNumberConfigurations?: list<PhoneNumberConfiguration>
+ * @phpstan-import-type PhoneNumberConfigurationShape from \Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration
+ *
+ * @phpstan-type PhoneNumberConfigurationCreateParamsShape = array{
+ *   phoneNumberConfigurations?: list<PhoneNumberConfiguration|PhoneNumberConfigurationShape>|null,
  * }
  */
 final class PhoneNumberConfigurationCreateParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_configuration_create_params> */
+    /** @use SdkModel<PhoneNumberConfigurationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<PhoneNumberConfiguration>|null $phoneNumberConfigurations */
-    #[Api(
+    #[Optional(
         'phone_number_configurations',
-        list: PhoneNumberConfiguration::class,
-        optional: true,
+        list: PhoneNumberConfiguration::class
     )]
     public ?array $phoneNumberConfigurations;
 
@@ -43,26 +44,26 @@ final class PhoneNumberConfigurationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumberConfiguration> $phoneNumberConfigurations
+     * @param list<PhoneNumberConfiguration|PhoneNumberConfigurationShape>|null $phoneNumberConfigurations
      */
     public static function with(?array $phoneNumberConfigurations = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumberConfigurations && $obj->phoneNumberConfigurations = $phoneNumberConfigurations;
+        null !== $phoneNumberConfigurations && $self['phoneNumberConfigurations'] = $phoneNumberConfigurations;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<PhoneNumberConfiguration> $phoneNumberConfigurations
+     * @param list<PhoneNumberConfiguration|PhoneNumberConfigurationShape> $phoneNumberConfigurations
      */
     public function withPhoneNumberConfigurations(
         array $phoneNumberConfigurations
     ): self {
-        $obj = clone $this;
-        $obj->phoneNumberConfigurations = $phoneNumberConfigurations;
+        $self = clone $this;
+        $self['phoneNumberConfigurations'] = $phoneNumberConfigurations;
 
-        return $obj;
+        return $self;
     }
 }

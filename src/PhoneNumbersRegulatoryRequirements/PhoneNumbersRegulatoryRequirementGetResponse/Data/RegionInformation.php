@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type region_information = array{
- *   regionName?: string, regionType?: string
+ * @phpstan-type RegionInformationShape = array{
+ *   regionName?: string|null, regionType?: string|null
  * }
  */
 final class RegionInformation implements BaseModel
 {
-    /** @use SdkModel<region_information> */
+    /** @use SdkModel<RegionInformationShape> */
     use SdkModel;
 
-    #[Api('region_name', optional: true)]
+    #[Optional('region_name')]
     public ?string $regionName;
 
-    #[Api('region_type', optional: true)]
+    #[Optional('region_type')]
     public ?string $regionType;
 
     public function __construct()
@@ -38,27 +38,27 @@ final class RegionInformation implements BaseModel
         ?string $regionName = null,
         ?string $regionType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $regionName && $obj->regionName = $regionName;
-        null !== $regionType && $obj->regionType = $regionType;
+        null !== $regionName && $self['regionName'] = $regionName;
+        null !== $regionType && $self['regionType'] = $regionType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionName(string $regionName): self
     {
-        $obj = clone $this;
-        $obj->regionName = $regionName;
+        $self = clone $this;
+        $self['regionName'] = $regionName;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionType(string $regionType): self
     {
-        $obj = clone $this;
-        $obj->regionType = $regionType;
+        $self = clone $this;
+        $self['regionType'] = $regionType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,25 +4,27 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{conversationID?: string, result?: string}
+ * @phpstan-type DataShape = array{
+ *   conversationID?: string|null, result?: string|null
+ * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The ID of the conversation created by the command.
      */
-    #[Api('conversation_id', optional: true)]
+    #[Optional('conversation_id')]
     public ?string $conversationID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $result;
 
     public function __construct()
@@ -39,12 +41,12 @@ final class Data implements BaseModel
         ?string $conversationID = null,
         ?string $result = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $conversationID && $obj->conversationID = $conversationID;
-        null !== $result && $obj->result = $result;
+        null !== $conversationID && $self['conversationID'] = $conversationID;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,17 +54,17 @@ final class Data implements BaseModel
      */
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj->conversationID = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj->result = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

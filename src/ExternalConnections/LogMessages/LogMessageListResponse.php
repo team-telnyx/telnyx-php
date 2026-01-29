@@ -4,33 +4,59 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\LogMessage;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\Meta;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\Source;
 
 /**
- * @phpstan-type log_message_list_response = array{
- *   logMessages?: list<LogMessage>, meta?: ExternalVoiceIntegrationsPaginationMeta
+ * @phpstan-import-type MetaShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\Meta
+ * @phpstan-import-type SourceShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListResponse\Source
+ *
+ * @phpstan-type LogMessageListResponseShape = array{
+ *   code: string,
+ *   title: string,
+ *   detail?: string|null,
+ *   meta?: null|Meta|MetaShape,
+ *   source?: null|Source|SourceShape,
  * }
  */
-final class LogMessageListResponse implements BaseModel, ResponseConverter
+final class LogMessageListResponse implements BaseModel
 {
-    /** @use SdkModel<log_message_list_response> */
+    /** @use SdkModel<LogMessageListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    #[Required]
+    public string $code;
 
-    /** @var list<LogMessage>|null $logMessages */
-    #[Api('log_messages', list: LogMessage::class, optional: true)]
-    public ?array $logMessages;
+    #[Required]
+    public string $title;
 
-    #[Api(optional: true)]
-    public ?ExternalVoiceIntegrationsPaginationMeta $meta;
+    #[Optional]
+    public ?string $detail;
 
+    #[Optional]
+    public ?Meta $meta;
+
+    #[Optional]
+    public ?Source $source;
+
+    /**
+     * `new LogMessageListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * LogMessageListResponse::with(code: ..., title: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new LogMessageListResponse)->withCode(...)->withTitle(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -41,37 +67,71 @@ final class LogMessageListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LogMessage> $logMessages
+     * @param Meta|MetaShape|null $meta
+     * @param Source|SourceShape|null $source
      */
     public static function with(
-        ?array $logMessages = null,
-        ?ExternalVoiceIntegrationsPaginationMeta $meta = null,
+        string $code,
+        string $title,
+        ?string $detail = null,
+        Meta|array|null $meta = null,
+        Source|array|null $source = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $logMessages && $obj->logMessages = $logMessages;
-        null !== $meta && $obj->meta = $meta;
+        $self['code'] = $code;
+        $self['title'] = $title;
 
-        return $obj;
+        null !== $detail && $self['detail'] = $detail;
+        null !== $meta && $self['meta'] = $meta;
+        null !== $source && $self['source'] = $source;
+
+        return $self;
+    }
+
+    public function withCode(string $code): self
+    {
+        $self = clone $this;
+        $self['code'] = $code;
+
+        return $self;
+    }
+
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
+
+        return $self;
+    }
+
+    public function withDetail(string $detail): self
+    {
+        $self = clone $this;
+        $self['detail'] = $detail;
+
+        return $self;
     }
 
     /**
-     * @param list<LogMessage> $logMessages
+     * @param Meta|MetaShape $meta
      */
-    public function withLogMessages(array $logMessages): self
+    public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->logMessages = $logMessages;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(
-        ExternalVoiceIntegrationsPaginationMeta $meta
-    ): self {
-        $obj = clone $this;
-        $obj->meta = $meta;
+    /**
+     * @param Source|SourceShape $source
+     */
+    public function withSource(Source|array $source): self
+    {
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 }

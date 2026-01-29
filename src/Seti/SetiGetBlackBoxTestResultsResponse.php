@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\Seti;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data;
 
 /**
- * @phpstan-type seti_get_black_box_test_results_response = array{
- *   data?: list<Data>
+ * @phpstan-import-type DataShape from \Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data
+ *
+ * @phpstan-type SetiGetBlackBoxTestResultsResponseShape = array{
+ *   data?: list<Data|DataShape>|null
  * }
  */
-final class SetiGetBlackBoxTestResultsResponse implements BaseModel, ResponseConverter
+final class SetiGetBlackBoxTestResultsResponse implements BaseModel
 {
-    /** @use SdkModel<seti_get_black_box_test_results_response> */
+    /** @use SdkModel<SetiGetBlackBoxTestResultsResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
     public function __construct()
@@ -37,25 +35,25 @@ final class SetiGetBlackBoxTestResultsResponse implements BaseModel, ResponseCon
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|DataShape>|null $data
      */
     public static function with(?array $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

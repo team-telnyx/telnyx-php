@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPHealthChecks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,38 +12,38 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a Global IP health check.
  *
- * @see Telnyx\GlobalIPHealthChecks->create
+ * @see Telnyx\Services\GlobalIPHealthChecksService::create()
  *
- * @phpstan-type global_ip_health_check_create_params = array{
- *   globalIPID?: string,
- *   healthCheckParams?: array<string, mixed>,
- *   healthCheckType?: string,
+ * @phpstan-type GlobalIPHealthCheckCreateParamsShape = array{
+ *   globalIPID?: string|null,
+ *   healthCheckParams?: array<string,mixed>|null,
+ *   healthCheckType?: string|null,
  * }
  */
 final class GlobalIPHealthCheckCreateParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_health_check_create_params> */
+    /** @use SdkModel<GlobalIPHealthCheckCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Global IP ID.
      */
-    #[Api('global_ip_id', optional: true)]
+    #[Optional('global_ip_id')]
     public ?string $globalIPID;
 
     /**
      * A Global IP health check params.
      *
-     * @var array<string, mixed>|null $healthCheckParams
+     * @var array<string,mixed>|null $healthCheckParams
      */
-    #[Api('health_check_params', map: 'mixed', optional: true)]
+    #[Optional('health_check_params', map: 'mixed')]
     public ?array $healthCheckParams;
 
     /**
      * The Global IP health check type.
      */
-    #[Api('health_check_type', optional: true)]
+    #[Optional('health_check_type')]
     public ?string $healthCheckType;
 
     public function __construct()
@@ -56,44 +56,44 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $healthCheckParams
+     * @param array<string,mixed>|null $healthCheckParams
      */
     public static function with(
         ?string $globalIPID = null,
         ?array $healthCheckParams = null,
         ?string $healthCheckType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIPID && $obj->globalIPID = $globalIPID;
-        null !== $healthCheckParams && $obj->healthCheckParams = $healthCheckParams;
-        null !== $healthCheckType && $obj->healthCheckType = $healthCheckType;
+        null !== $globalIPID && $self['globalIPID'] = $globalIPID;
+        null !== $healthCheckParams && $self['healthCheckParams'] = $healthCheckParams;
+        null !== $healthCheckType && $self['healthCheckType'] = $healthCheckType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Global IP ID.
      */
-    public function withGlobalIPID(string $globalIPID): self
+    public function withGlobalIpid(string $globalIPID): self
     {
-        $obj = clone $this;
-        $obj->globalIPID = $globalIPID;
+        $self = clone $this;
+        $self['globalIPID'] = $globalIPID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A Global IP health check params.
      *
-     * @param array<string, mixed> $healthCheckParams
+     * @param array<string,mixed> $healthCheckParams
      */
     public function withHealthCheckParams(array $healthCheckParams): self
     {
-        $obj = clone $this;
-        $obj->healthCheckParams = $healthCheckParams;
+        $self = clone $this;
+        $self['healthCheckParams'] = $healthCheckParams;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,9 +101,9 @@ final class GlobalIPHealthCheckCreateParams implements BaseModel
      */
     public function withHealthCheckType(string $healthCheckType): self
     {
-        $obj = clone $this;
-        $obj->healthCheckType = $healthCheckType;
+        $self = clone $this;
+        $self['healthCheckType'] = $healthCheckType;
 
-        return $obj;
+        return $self;
     }
 }

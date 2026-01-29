@@ -4,46 +4,48 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement\AcceptanceCriteria;
 
 /**
- * @phpstan-type regulatory_requirement = array{
- *   id?: string,
- *   acceptanceCriteria?: AcceptanceCriteria,
- *   description?: string,
- *   example?: string,
- *   fieldType?: string,
- *   label?: string,
- *   recordType?: string,
+ * @phpstan-import-type AcceptanceCriteriaShape from \Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement\AcceptanceCriteria
+ *
+ * @phpstan-type RegulatoryRequirementShape = array{
+ *   id?: string|null,
+ *   acceptanceCriteria?: null|AcceptanceCriteria|AcceptanceCriteriaShape,
+ *   description?: string|null,
+ *   example?: string|null,
+ *   fieldType?: string|null,
+ *   label?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class RegulatoryRequirement implements BaseModel
 {
-    /** @use SdkModel<regulatory_requirement> */
+    /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api('acceptance_criteria', optional: true)]
+    #[Optional('acceptance_criteria')]
     public ?AcceptanceCriteria $acceptanceCriteria;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $example;
 
-    #[Api('field_type', optional: true)]
+    #[Optional('field_type')]
     public ?string $fieldType;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $label;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -55,83 +57,88 @@ final class RegulatoryRequirement implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AcceptanceCriteria|AcceptanceCriteriaShape|null $acceptanceCriteria
      */
     public static function with(
         ?string $id = null,
-        ?AcceptanceCriteria $acceptanceCriteria = null,
+        AcceptanceCriteria|array|null $acceptanceCriteria = null,
         ?string $description = null,
         ?string $example = null,
         ?string $fieldType = null,
         ?string $label = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $acceptanceCriteria && $obj->acceptanceCriteria = $acceptanceCriteria;
-        null !== $description && $obj->description = $description;
-        null !== $example && $obj->example = $example;
-        null !== $fieldType && $obj->fieldType = $fieldType;
-        null !== $label && $obj->label = $label;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $acceptanceCriteria && $self['acceptanceCriteria'] = $acceptanceCriteria;
+        null !== $description && $self['description'] = $description;
+        null !== $example && $self['example'] = $example;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $label && $self['label'] = $label;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param AcceptanceCriteria|AcceptanceCriteriaShape $acceptanceCriteria
+     */
     public function withAcceptanceCriteria(
-        AcceptanceCriteria $acceptanceCriteria
+        AcceptanceCriteria|array $acceptanceCriteria
     ): self {
-        $obj = clone $this;
-        $obj->acceptanceCriteria = $acceptanceCriteria;
+        $self = clone $this;
+        $self['acceptanceCriteria'] = $acceptanceCriteria;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withExample(string $example): self
     {
-        $obj = clone $this;
-        $obj->example = $example;
+        $self = clone $this;
+        $self['example'] = $example;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldType(string $fieldType): self
     {
-        $obj = clone $this;
-        $obj->fieldType = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     public function withLabel(string $label): self
     {
-        $obj = clone $this;
-        $obj->label = $label;
+        $self = clone $this;
+        $self['label'] = $label;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

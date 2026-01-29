@@ -4,35 +4,44 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCardListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardListParams\Filter\Status;
 
 /**
- * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
+ * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags].
  *
- * @phpstan-type filter_alias = array{
- *   iccid?: string, status?: list<value-of<Status>>, tags?: list<string>
+ * @phpstan-type FilterShape = array{
+ *   iccid?: string|null,
+ *   msisdn?: string|null,
+ *   status?: list<Status|value-of<Status>>|null,
+ *   tags?: list<string>|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * A search string to partially match for the SIM card's ICCID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $iccid;
+
+    /**
+     * A search string to match for the SIM card's MSISDN.
+     */
+    #[Optional]
+    public ?string $msisdn;
 
     /**
      * Filter by a SIM card's status.
      *
      * @var list<value-of<Status>>|null $status
      */
-    #[Api(list: Status::class, optional: true)]
+    #[Optional(list: Status::class)]
     public ?array $status;
 
     /**
@@ -47,7 +56,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     public function __construct()
@@ -60,21 +69,23 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Status|value-of<Status>> $status
-     * @param list<string> $tags
+     * @param list<Status|value-of<Status>>|null $status
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $iccid = null,
+        ?string $msisdn = null,
         ?array $status = null,
-        ?array $tags = null
+        ?array $tags = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $iccid && $obj->iccid = $iccid;
-        null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj->tags = $tags;
+        null !== $iccid && $self['iccid'] = $iccid;
+        null !== $msisdn && $self['msisdn'] = $msisdn;
+        null !== $status && $self['status'] = $status;
+        null !== $tags && $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +93,21 @@ final class Filter implements BaseModel
      */
     public function withIccid(string $iccid): self
     {
-        $obj = clone $this;
-        $obj->iccid = $iccid;
+        $self = clone $this;
+        $self['iccid'] = $iccid;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * A search string to match for the SIM card's MSISDN.
+     */
+    public function withMsisdn(string $msisdn): self
+    {
+        $self = clone $this;
+        $self['msisdn'] = $msisdn;
+
+        return $self;
     }
 
     /**
@@ -95,10 +117,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,9 +137,9 @@ final class Filter implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type external_connection_get_response = array{
- *   data?: ExternalConnection
+ * @phpstan-import-type ExternalConnectionShape from \Telnyx\ExternalConnections\ExternalConnection
+ *
+ * @phpstan-type ExternalConnectionGetResponseShape = array{
+ *   data?: null|ExternalConnection|ExternalConnectionShape
  * }
  */
-final class ExternalConnectionGetResponse implements BaseModel, ResponseConverter
+final class ExternalConnectionGetResponse implements BaseModel
 {
-    /** @use SdkModel<external_connection_get_response> */
+    /** @use SdkModel<ExternalConnectionGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalConnection $data;
 
     public function __construct()
@@ -34,21 +32,26 @@ final class ExternalConnectionGetResponse implements BaseModel, ResponseConverte
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ExternalConnection|ExternalConnectionShape|null $data
      */
-    public static function with(?ExternalConnection $data = null): self
+    public static function with(ExternalConnection|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(ExternalConnection $data): self
+    /**
+     * @param ExternalConnection|ExternalConnectionShape $data
+     */
+    public function withData(ExternalConnection|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

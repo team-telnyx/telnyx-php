@@ -8,35 +8,25 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsContract
 {
     /**
      * @api
      *
+     * @param string $id identifies the type of resource
      * @param string $bill must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format
      * @param string $loa must be a signed LOA for the numbers in the order in PDF format
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function uploadFile(
         string $id,
-        $bill = omit,
-        $loa = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ActionUploadFileResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadFileRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        ?string $bill = null,
+        ?string $loa = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionUploadFileResponse;
 }

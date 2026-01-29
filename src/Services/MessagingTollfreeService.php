@@ -11,7 +11,12 @@ use Telnyx\Services\MessagingTollfree\VerificationService;
 final class MessagingTollfreeService implements MessagingTollfreeContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public MessagingTollfreeRawService $raw;
+
+    /**
+     * @api
      */
     public VerificationService $verification;
 
@@ -20,6 +25,7 @@ final class MessagingTollfreeService implements MessagingTollfreeContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new MessagingTollfreeRawService($client);
         $this->verification = new VerificationService($client);
     }
 }

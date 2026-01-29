@@ -6,6 +6,14 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\Documents\DocServiceDocument;
+use Telnyx\Documents\DocumentDeleteResponse;
+use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
+use Telnyx\Documents\DocumentGetResponse;
+use Telnyx\Documents\DocumentUpdateResponse;
+use Telnyx\Documents\DocumentUploadJsonResponse;
+use Telnyx\Documents\DocumentUploadResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +45,8 @@ final class DocumentsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentGetResponse::class, $result);
     }
 
     #[Test]
@@ -51,7 +60,8 @@ final class DocumentsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -61,9 +71,15 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->list();
+        $page = $this->client->documents->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(DocServiceDocument::class, $item);
+        }
     }
 
     #[Test]
@@ -77,21 +93,23 @@ final class DocumentsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentDeleteResponse::class, $result);
     }
 
     #[Test]
     public function testDownload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support * responses");
+            $this->markTestSkipped('Prism doesn\'t support application/octet-stream responses');
         }
 
         $result = $this->client->documents->download(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -105,7 +123,11 @@ final class DocumentsTest extends TestCase
             '550e8400-e29b-41d4-a716-446655440000'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DocumentGenerateDownloadLinkResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -115,12 +137,10 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->upload(
-            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            file: 'U3RhaW5sZXNzIHJvY2tz',
-        );
+        $result = $this->client->documents->upload(document: []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUploadResponse::class, $result);
     }
 
     #[Test]
@@ -131,11 +151,16 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->upload(
-            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            file: 'U3RhaW5sZXNzIHJvY2tz',
+            document: [
+                'customerReference' => 'MY REF 001',
+                'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
+                'filename' => 'test-document.pdf',
+                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUploadResponse::class, $result);
     }
 
     #[Test]
@@ -145,12 +170,10 @@ final class DocumentsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->documents->uploadJson(
-            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            file: 'U3RhaW5sZXNzIHJvY2tz',
-        );
+        $result = $this->client->documents->uploadJson(document: []);
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUploadJsonResponse::class, $result);
     }
 
     #[Test]
@@ -161,10 +184,15 @@ final class DocumentsTest extends TestCase
         }
 
         $result = $this->client->documents->uploadJson(
-            url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-            file: 'U3RhaW5sZXNzIHJvY2tz',
+            document: [
+                'customerReference' => 'MY REF 001',
+                'file' => 'ZXhhbXBsZSBvZiBlbmNvZGVkIGNvbnRlbnQ=',
+                'filename' => 'test-document.pdf',
+                'url' => 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DocumentUploadJsonResponse::class, $result);
     }
 }

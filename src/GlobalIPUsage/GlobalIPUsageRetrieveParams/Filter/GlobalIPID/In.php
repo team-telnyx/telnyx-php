@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter\GlobalIPID;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Filtering operations.
  *
- * @phpstan-type in_alias = array{in?: string}
+ * @phpstan-type InShape = array{in?: string|null}
  */
 final class In implements BaseModel
 {
-    /** @use SdkModel<in_alias> */
+    /** @use SdkModel<InShape> */
     use SdkModel;
 
     /**
      * Filter by Global IP ID(s) separated by commas.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $in;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class In implements BaseModel
      */
     public static function with(?string $in = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $in && $obj->in = $in;
+        null !== $in && $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class In implements BaseModel
      */
     public function withIn(string $in): self
     {
-        $obj = clone $this;
-        $obj->in = $in;
+        $self = clone $this;
+        $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 }

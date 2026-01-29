@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Conferences\Actions\ActionStopParams\Region;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,13 +13,15 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Stop audio being played to all or some participants on a conference call.
  *
- * @see Telnyx\Conferences\Actions->stop
+ * @see Telnyx\Services\Conferences\ActionsService::stop()
  *
- * @phpstan-type action_stop_params = array{callControlIDs?: list<string>}
+ * @phpstan-type ActionStopParamsShape = array{
+ *   callControlIDs?: list<string>|null, region?: null|Region|value-of<Region>
+ * }
  */
 final class ActionStopParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_params> */
+    /** @use SdkModel<ActionStopParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -27,8 +30,16 @@ final class ActionStopParams implements BaseModel
      *
      * @var list<string>|null $callControlIDs
      */
-    #[Api('call_control_ids', list: 'string', optional: true)]
+    #[Optional('call_control_ids', list: 'string')]
     public ?array $callControlIDs;
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     public function __construct()
     {
@@ -40,15 +51,19 @@ final class ActionStopParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $callControlIDs
+     * @param list<string>|null $callControlIDs
+     * @param Region|value-of<Region>|null $region
      */
-    public static function with(?array $callControlIDs = null): self
-    {
-        $obj = new self;
+    public static function with(
+        ?array $callControlIDs = null,
+        Region|string|null $region = null
+    ): self {
+        $self = new self;
 
-        null !== $callControlIDs && $obj->callControlIDs = $callControlIDs;
+        null !== $callControlIDs && $self['callControlIDs'] = $callControlIDs;
+        null !== $region && $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -58,9 +73,22 @@ final class ActionStopParams implements BaseModel
      */
     public function withCallControlIDs(array $callControlIDs): self
     {
-        $obj = clone $this;
-        $obj->callControlIDs = $callControlIDs;
+        $self = clone $this;
+        $self['callControlIDs'] = $callControlIDs;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
+
+        return $self;
     }
 }

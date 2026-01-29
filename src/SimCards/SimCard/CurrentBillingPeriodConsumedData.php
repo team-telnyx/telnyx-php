@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCard;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * The SIM card consumption so far in the current billing cycle.
  *
- * @phpstan-type current_billing_period_consumed_data = array{
- *   amount?: string, unit?: string
+ * @phpstan-type CurrentBillingPeriodConsumedDataShape = array{
+ *   amount?: string|null, unit?: string|null
  * }
  */
 final class CurrentBillingPeriodConsumedData implements BaseModel
 {
-    /** @use SdkModel<current_billing_period_consumed_data> */
+    /** @use SdkModel<CurrentBillingPeriodConsumedDataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unit;
 
     public function __construct()
@@ -40,27 +40,27 @@ final class CurrentBillingPeriodConsumedData implements BaseModel
         ?string $amount = null,
         ?string $unit = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $unit && $obj->unit = $unit;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $unit && $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj->amount = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     public function withUnit(string $unit): self
     {
-        $obj = clone $this;
-        $obj->unit = $unit;
+        $self = clone $this;
+        $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 }

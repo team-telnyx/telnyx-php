@@ -4,33 +4,140 @@ declare(strict_types=1);
 
 namespace Telnyx\Queues\Calls;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Queues\Calls\CallListResponse\Data;
+use Telnyx\Queues\Calls\CallListResponse\RecordType;
 
 /**
- * @phpstan-type call_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-type CallListResponseShape = array{
+ *   callControlID: string,
+ *   callLegID: string,
+ *   callSessionID: string,
+ *   connectionID: string,
+ *   enqueuedAt: string,
+ *   from: string,
+ *   queueID: string,
+ *   queuePosition: int,
+ *   recordType: RecordType|value-of<RecordType>,
+ *   to: string,
+ *   waitTimeSecs: int,
+ *   isAlive?: bool|null,
  * }
  */
-final class CallListResponse implements BaseModel, ResponseConverter
+final class CallListResponse implements BaseModel
 {
-    /** @use SdkModel<call_list_response> */
+    /** @use SdkModel<CallListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * Unique identifier and token for controlling the call.
+     */
+    #[Required('call_control_id')]
+    public string $callControlID;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * ID that is unique to the call and can be used to correlate webhook events.
+     */
+    #[Required('call_leg_id')]
+    public string $callLegID;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
+     */
+    #[Required('call_session_id')]
+    public string $callSessionID;
 
+    /**
+     * Call Control App ID (formerly Telnyx connection ID) used in the call.
+     */
+    #[Required('connection_id')]
+    public string $connectionID;
+
+    /**
+     * ISO 8601 formatted date of when the call was put in the queue.
+     */
+    #[Required('enqueued_at')]
+    public string $enqueuedAt;
+
+    /**
+     * Number or SIP URI placing the call.
+     */
+    #[Required]
+    public string $from;
+
+    /**
+     * Unique identifier of the queue the call is in.
+     */
+    #[Required('queue_id')]
+    public string $queueID;
+
+    /**
+     * Current position of the call in the queue.
+     */
+    #[Required('queue_position')]
+    public int $queuePosition;
+
+    /** @var value-of<RecordType> $recordType */
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
+
+    /**
+     * Destination number or SIP URI of the call.
+     */
+    #[Required]
+    public string $to;
+
+    /**
+     * The time the call has been waiting in the queue, given in seconds.
+     */
+    #[Required('wait_time_secs')]
+    public int $waitTimeSecs;
+
+    /**
+     * Indicates whether the call is still active in the queue.
+     */
+    #[Optional('is_alive')]
+    public ?bool $isAlive;
+
+    /**
+     * `new CallListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * CallListResponse::with(
+     *   callControlID: ...,
+     *   callLegID: ...,
+     *   callSessionID: ...,
+     *   connectionID: ...,
+     *   enqueuedAt: ...,
+     *   from: ...,
+     *   queueID: ...,
+     *   queuePosition: ...,
+     *   recordType: ...,
+     *   to: ...,
+     *   waitTimeSecs: ...,
+     * )
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new CallListResponse)
+     *   ->withCallControlID(...)
+     *   ->withCallLegID(...)
+     *   ->withCallSessionID(...)
+     *   ->withConnectionID(...)
+     *   ->withEnqueuedAt(...)
+     *   ->withFrom(...)
+     *   ->withQueueID(...)
+     *   ->withQueuePosition(...)
+     *   ->withRecordType(...)
+     *   ->withTo(...)
+     *   ->withWaitTimeSecs(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -41,36 +148,170 @@ final class CallListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        string $callControlID,
+        string $callLegID,
+        string $callSessionID,
+        string $connectionID,
+        string $enqueuedAt,
+        string $from,
+        string $queueID,
+        int $queuePosition,
+        RecordType|string $recordType,
+        string $to,
+        int $waitTimeSecs,
+        ?bool $isAlive = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        $self['callControlID'] = $callControlID;
+        $self['callLegID'] = $callLegID;
+        $self['callSessionID'] = $callSessionID;
+        $self['connectionID'] = $connectionID;
+        $self['enqueuedAt'] = $enqueuedAt;
+        $self['from'] = $from;
+        $self['queueID'] = $queueID;
+        $self['queuePosition'] = $queuePosition;
+        $self['recordType'] = $recordType;
+        $self['to'] = $to;
+        $self['waitTimeSecs'] = $waitTimeSecs;
 
-        return $obj;
+        null !== $isAlive && $self['isAlive'] = $isAlive;
+
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * Unique identifier and token for controlling the call.
      */
-    public function withData(array $data): self
+    public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * ID that is unique to the call and can be used to correlate webhook events.
+     */
+    public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
+     */
+    public function withCallSessionID(string $callSessionID): self
+    {
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
+
+        return $self;
+    }
+
+    /**
+     * Call Control App ID (formerly Telnyx connection ID) used in the call.
+     */
+    public function withConnectionID(string $connectionID): self
+    {
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date of when the call was put in the queue.
+     */
+    public function withEnqueuedAt(string $enqueuedAt): self
+    {
+        $self = clone $this;
+        $self['enqueuedAt'] = $enqueuedAt;
+
+        return $self;
+    }
+
+    /**
+     * Number or SIP URI placing the call.
+     */
+    public function withFrom(string $from): self
+    {
+        $self = clone $this;
+        $self['from'] = $from;
+
+        return $self;
+    }
+
+    /**
+     * Unique identifier of the queue the call is in.
+     */
+    public function withQueueID(string $queueID): self
+    {
+        $self = clone $this;
+        $self['queueID'] = $queueID;
+
+        return $self;
+    }
+
+    /**
+     * Current position of the call in the queue.
+     */
+    public function withQueuePosition(int $queuePosition): self
+    {
+        $self = clone $this;
+        $self['queuePosition'] = $queuePosition;
+
+        return $self;
+    }
+
+    /**
+     * @param RecordType|value-of<RecordType> $recordType
+     */
+    public function withRecordType(RecordType|string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * Destination number or SIP URI of the call.
+     */
+    public function withTo(string $to): self
+    {
+        $self = clone $this;
+        $self['to'] = $to;
+
+        return $self;
+    }
+
+    /**
+     * The time the call has been waiting in the queue, given in seconds.
+     */
+    public function withWaitTimeSecs(int $waitTimeSecs): self
+    {
+        $self = clone $this;
+        $self['waitTimeSecs'] = $waitTimeSecs;
+
+        return $self;
+    }
+
+    /**
+     * Indicates whether the call is still active in the queue.
+     */
+    public function withIsAlive(bool $isAlive): self
+    {
+        $self = clone $this;
+        $self['isAlive'] = $isAlive;
+
+        return $self;
     }
 }

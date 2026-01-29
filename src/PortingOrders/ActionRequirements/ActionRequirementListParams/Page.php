@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
  *
- * @phpstan-type page_alias = array{number?: int, size?: int}
+ * @phpstan-type PageShape = array{number?: int|null, size?: int|null}
  */
 final class Page implements BaseModel
 {
-    /** @use SdkModel<page_alias> */
+    /** @use SdkModel<PageShape> */
     use SdkModel;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $number;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $size;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class Page implements BaseModel
      */
     public static function with(?int $number = null, ?int $size = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $number && $obj->number = $number;
-        null !== $size && $obj->size = $size;
+        null !== $number && $self['number'] = $number;
+        null !== $size && $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Page implements BaseModel
      */
     public function withNumber(int $number): self
     {
-        $obj = clone $this;
-        $obj->number = $number;
+        $self = clone $this;
+        $self['number'] = $number;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Page implements BaseModel
      */
     public function withSize(int $size): self
     {
-        $obj = clone $this;
-        $obj->size = $size;
+        $self = clone $this;
+        $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 }

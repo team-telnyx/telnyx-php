@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts\ManagedAccountListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type organization_name = array{contains?: string, eq?: string}
+ * @phpstan-type OrganizationNameShape = array{
+ *   contains?: string|null, eq?: string|null
+ * }
  */
 final class OrganizationName implements BaseModel
 {
-    /** @use SdkModel<organization_name> */
+    /** @use SdkModel<OrganizationNameShape> */
     use SdkModel;
 
     /**
      * If present, only returns results with the <code>organization_name</code> containing the given value. Matching is not case-sensitive. Requires at least three characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * If present, only returns results with the <code>organization_name</code> matching exactly the value given.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()
@@ -42,12 +44,12 @@ final class OrganizationName implements BaseModel
         ?string $contains = null,
         ?string $eq = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
-        null !== $eq && $obj->eq = $eq;
+        null !== $contains && $self['contains'] = $contains;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +57,10 @@ final class OrganizationName implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class OrganizationName implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj->eq = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

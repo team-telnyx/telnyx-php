@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,26 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create an OAuth authorization grant.
  *
- * @see Telnyx\OAuth->grants
+ * @see Telnyx\Services\OAuthService::grants()
  *
- * @phpstan-type oauth_grants_params = array{allowed: bool, consentToken: string}
+ * @phpstan-type OAuthGrantsParamsShape = array{
+ *   allowed: bool, consentToken: string
+ * }
  */
 final class OAuthGrantsParams implements BaseModel
 {
-    /** @use SdkModel<oauth_grants_params> */
+    /** @use SdkModel<OAuthGrantsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Whether the grant is allowed.
      */
-    #[Api]
+    #[Required]
     public bool $allowed;
 
     /**
      * Consent token.
      */
-    #[Api('consent_token')]
+    #[Required('consent_token')]
     public string $consentToken;
 
     /**
@@ -60,12 +62,12 @@ final class OAuthGrantsParams implements BaseModel
      */
     public static function with(bool $allowed, string $consentToken): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->allowed = $allowed;
-        $obj->consentToken = $consentToken;
+        $self['allowed'] = $allowed;
+        $self['consentToken'] = $consentToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +75,10 @@ final class OAuthGrantsParams implements BaseModel
      */
     public function withAllowed(bool $allowed): self
     {
-        $obj = clone $this;
-        $obj->allowed = $allowed;
+        $self = clone $this;
+        $self['allowed'] = $allowed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +86,9 @@ final class OAuthGrantsParams implements BaseModel
      */
     public function withConsentToken(string $consentToken): self
     {
-        $obj = clone $this;
-        $obj->consentToken = $consentToken;
+        $self = clone $this;
+        $self['consentToken'] = $consentToken;
 
-        return $obj;
+        return $self;
     }
 }

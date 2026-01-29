@@ -4,32 +4,92 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationEventConditions;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Data;
+use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\AssociatedRecordType;
+use Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Parameter;
 
 /**
- * @phpstan-type notification_event_condition_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-import-type ParameterShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListResponse\Parameter
+ *
+ * @phpstan-type NotificationEventConditionListResponseShape = array{
+ *   id?: string|null,
+ *   allowMultipleChannels?: bool|null,
+ *   associatedRecordType?: null|AssociatedRecordType|value-of<AssociatedRecordType>,
+ *   asynchronous?: bool|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   description?: string|null,
+ *   enabled?: bool|null,
+ *   name?: string|null,
+ *   notificationEventID?: string|null,
+ *   parameters?: list<Parameter|ParameterShape>|null,
+ *   supportedChannels?: list<string>|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
-final class NotificationEventConditionListResponse implements BaseModel, ResponseConverter
+final class NotificationEventConditionListResponse implements BaseModel
 {
-    /** @use SdkModel<notification_event_condition_list_response> */
+    /** @use SdkModel<NotificationEventConditionListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * A UUID.
+     */
+    #[Optional]
+    public ?string $id;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * Dictates whether a notification channel id needs to be provided when creating a notficiation setting.
+     */
+    #[Optional('allow_multiple_channels')]
+    public ?bool $allowMultipleChannels;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /** @var value-of<AssociatedRecordType>|null $associatedRecordType */
+    #[Optional('associated_record_type', enum: AssociatedRecordType::class)]
+    public ?string $associatedRecordType;
+
+    /**
+     * Dictates whether a notification setting will take effect immediately.
+     */
+    #[Optional]
+    public ?bool $asynchronous;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
+
+    #[Optional]
+    public ?string $description;
+
+    #[Optional]
+    public ?bool $enabled;
+
+    #[Optional]
+    public ?string $name;
+
+    #[Optional('notification_event_id')]
+    public ?string $notificationEventID;
+
+    /** @var list<Parameter>|null $parameters */
+    #[Optional(list: Parameter::class)]
+    public ?array $parameters;
+
+    /**
+     * Dictates the supported notification channel types that can be emitted.
+     *
+     * @var list<string>|null $supportedChannels
+     */
+    #[Optional('supported_channels', list: 'string')]
+    public ?array $supportedChannels;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -41,36 +101,162 @@ final class NotificationEventConditionListResponse implements BaseModel, Respons
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param AssociatedRecordType|value-of<AssociatedRecordType>|null $associatedRecordType
+     * @param list<Parameter|ParameterShape>|null $parameters
+     * @param list<string>|null $supportedChannels
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?string $id = null,
+        ?bool $allowMultipleChannels = null,
+        AssociatedRecordType|string|null $associatedRecordType = null,
+        ?bool $asynchronous = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $description = null,
+        ?bool $enabled = null,
+        ?string $name = null,
+        ?string $notificationEventID = null,
+        ?array $parameters = null,
+        ?array $supportedChannels = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $allowMultipleChannels && $self['allowMultipleChannels'] = $allowMultipleChannels;
+        null !== $associatedRecordType && $self['associatedRecordType'] = $associatedRecordType;
+        null !== $asynchronous && $self['asynchronous'] = $asynchronous;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $description && $self['description'] = $description;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $name && $self['name'] = $name;
+        null !== $notificationEventID && $self['notificationEventID'] = $notificationEventID;
+        null !== $parameters && $self['parameters'] = $parameters;
+        null !== $supportedChannels && $self['supportedChannels'] = $supportedChannels;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * A UUID.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * Dictates whether a notification channel id needs to be provided when creating a notficiation setting.
+     */
+    public function withAllowMultipleChannels(bool $allowMultipleChannels): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['allowMultipleChannels'] = $allowMultipleChannels;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * @param AssociatedRecordType|value-of<AssociatedRecordType> $associatedRecordType
+     */
+    public function withAssociatedRecordType(
+        AssociatedRecordType|string $associatedRecordType
+    ): self {
+        $self = clone $this;
+        $self['associatedRecordType'] = $associatedRecordType;
+
+        return $self;
+    }
+
+    /**
+     * Dictates whether a notification setting will take effect immediately.
+     */
+    public function withAsynchronous(bool $asynchronous): self
+    {
+        $self = clone $this;
+        $self['asynchronous'] = $asynchronous;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    public function withDescription(string $description): self
+    {
+        $self = clone $this;
+        $self['description'] = $description;
+
+        return $self;
+    }
+
+    public function withEnabled(bool $enabled): self
+    {
+        $self = clone $this;
+        $self['enabled'] = $enabled;
+
+        return $self;
+    }
+
+    public function withName(string $name): self
+    {
+        $self = clone $this;
+        $self['name'] = $name;
+
+        return $self;
+    }
+
+    public function withNotificationEventID(string $notificationEventID): self
+    {
+        $self = clone $this;
+        $self['notificationEventID'] = $notificationEventID;
+
+        return $self;
+    }
+
+    /**
+     * @param list<Parameter|ParameterShape> $parameters
+     */
+    public function withParameters(array $parameters): self
+    {
+        $self = clone $this;
+        $self['parameters'] = $parameters;
+
+        return $self;
+    }
+
+    /**
+     * Dictates the supported notification channel types that can be emitted.
+     *
+     * @param list<string> $supportedChannels
+     */
+    public function withSupportedChannels(array $supportedChannels): self
+    {
+        $self = clone $this;
+        $self['supportedChannels'] = $supportedChannels;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
+
+        return $self;
     }
 }

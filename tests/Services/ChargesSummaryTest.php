@@ -5,6 +5,7 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\ChargesSummary\ChargesSummaryGetResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -34,11 +35,12 @@ final class ChargesSummaryTest extends TestCase
         }
 
         $result = $this->client->chargesSummary->retrieve(
-            endDate: new \DateTimeImmutable('2025-06-01'),
-            startDate: new \DateTimeImmutable('2025-05-01'),
+            endDate: '2025-06-01',
+            startDate: '2025-05-01'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChargesSummaryGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,10 +51,11 @@ final class ChargesSummaryTest extends TestCase
         }
 
         $result = $this->client->chargesSummary->retrieve(
-            endDate: new \DateTimeImmutable('2025-06-01'),
-            startDate: new \DateTimeImmutable('2025-05-01'),
+            endDate: '2025-06-01',
+            startDate: '2025-05-01'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChargesSummaryGetResponse::class, $result);
     }
 }

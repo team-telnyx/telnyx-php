@@ -6,26 +6,35 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
-use Telnyx\NotificationProfiles\NotificationProfileListParams;
 use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
-use Telnyx\NotificationProfiles\NotificationProfileListResponse;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
-use Telnyx\NotificationProfiles\NotificationProfileUpdateParams;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationProfilesContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type PageShape from \Telnyx\NotificationProfiles\NotificationProfileListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationProfilesService implements NotificationProfilesContract
 {
     /**
+     * @api
+     */
+    public NotificationProfilesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NotificationProfilesRawService($client);
+    }
 
     /**
      * @api
@@ -33,42 +42,20 @@ final class NotificationProfilesService implements NotificationProfilesContract
      * Create a notification profile.
      *
      * @param string $name a human readable name
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $name = omit,
-        ?RequestOptions $requestOptions = null
+        ?string $name = null,
+        RequestOptions|array|null $requestOptions = null
     ): NotificationProfileNewResponse {
-        $params = ['name' => $name];
+        $params = Util::removeNulls(['name' => $name]);
 
-        return $this->createRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileNewResponse {
-        [$parsed, $options] = NotificationProfileCreateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'notification_profiles',
-            body: (object) $parsed,
-            options: $options,
-            convert: NotificationProfileNewResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -76,19 +63,19 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Get a notification profile.
      *
+     * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NotificationProfileGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['notification_profiles/%1$s', $id],
-            options: $requestOptions,
-            convert: NotificationProfileGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -96,45 +83,23 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Update a notification profile.
      *
+     * @param string $notificationProfileID the id of the resource
      * @param string $name a human readable name
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        string $id,
-        $name = omit,
-        ?RequestOptions $requestOptions = null
+        string $notificationProfileID,
+        ?string $name = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NotificationProfileUpdateResponse {
-        $params = ['name' => $name];
+        $params = Util::removeNulls(['name' => $name]);
 
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($notificationProfileID, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileUpdateResponse {
-        [$parsed, $options] = NotificationProfileUpdateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['notification_profiles/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: NotificationProfileUpdateResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -142,43 +107,23 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Returns a list of your notifications profiles.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<NotificationProfile>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileListResponse {
-        $params = ['page' => $page];
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination {
+        $params = Util::removeNulls(['page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NotificationProfileListResponse {
-        [$parsed, $options] = NotificationProfileListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'notification_profiles',
-            query: $parsed,
-            options: $options,
-            convert: NotificationProfileListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -186,18 +131,18 @@ final class NotificationProfilesService implements NotificationProfilesContract
      *
      * Delete a notification profile.
      *
+     * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NotificationProfileDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['notification_profiles/%1$s', $id],
-            options: $requestOptions,
-            convert: NotificationProfileDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

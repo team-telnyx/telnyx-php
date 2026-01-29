@@ -12,12 +12,17 @@ use Telnyx\Services\Legacy\Reporting\UsageReportsService;
 final class ReportingService implements ReportingContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public ReportingRawService $raw;
+
+    /**
+     * @api
      */
     public BatchDetailRecordsService $batchDetailRecords;
 
     /**
-     * @@api
+     * @api
      */
     public UsageReportsService $usageReports;
 
@@ -26,6 +31,7 @@ final class ReportingService implements ReportingContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ReportingRawService($client);
         $this->batchDetailRecords = new BatchDetailRecordsService($client);
         $this->usageReports = new UsageReportsService($client);
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AdditionalDocuments;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,24 +13,22 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\Addi
 /**
  * Creates a list of additional documents for a porting order.
  *
- * @see Telnyx\PortingOrders\AdditionalDocuments->create
+ * @see Telnyx\Services\PortingOrders\AdditionalDocumentsService::create()
  *
- * @phpstan-type additional_document_create_params = array{
- *   additionalDocuments?: list<AdditionalDocument>
+ * @phpstan-import-type AdditionalDocumentShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument
+ *
+ * @phpstan-type AdditionalDocumentCreateParamsShape = array{
+ *   additionalDocuments?: list<AdditionalDocument|AdditionalDocumentShape>|null
  * }
  */
 final class AdditionalDocumentCreateParams implements BaseModel
 {
-    /** @use SdkModel<additional_document_create_params> */
+    /** @use SdkModel<AdditionalDocumentCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<AdditionalDocument>|null $additionalDocuments */
-    #[Api(
-        'additional_documents',
-        list: AdditionalDocument::class,
-        optional: true
-    )]
+    #[Optional('additional_documents', list: AdditionalDocument::class)]
     public ?array $additionalDocuments;
 
     public function __construct()
@@ -43,25 +41,25 @@ final class AdditionalDocumentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdditionalDocument> $additionalDocuments
+     * @param list<AdditionalDocument|AdditionalDocumentShape>|null $additionalDocuments
      */
     public static function with(?array $additionalDocuments = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additionalDocuments && $obj->additionalDocuments = $additionalDocuments;
+        null !== $additionalDocuments && $self['additionalDocuments'] = $additionalDocuments;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<AdditionalDocument> $additionalDocuments
+     * @param list<AdditionalDocument|AdditionalDocumentShape> $additionalDocuments
      */
     public function withAdditionalDocuments(array $additionalDocuments): self
     {
-        $obj = clone $this;
-        $obj->additionalDocuments = $additionalDocuments;
+        $self = clone $this;
+        $self['additionalDocuments'] = $additionalDocuments;
 
-        return $obj;
+        return $self;
     }
 }

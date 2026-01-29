@@ -4,66 +4,66 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type porting_order_end_user_admin = array{
- *   accountNumber?: string,
- *   authPersonName?: string,
- *   billingPhoneNumber?: string,
- *   businessIdentifier?: string,
- *   entityName?: string,
- *   pinPasscode?: string,
- *   taxIdentifier?: string,
+ * @phpstan-type PortingOrderEndUserAdminShape = array{
+ *   accountNumber?: string|null,
+ *   authPersonName?: string|null,
+ *   billingPhoneNumber?: string|null,
+ *   businessIdentifier?: string|null,
+ *   entityName?: string|null,
+ *   pinPasscode?: string|null,
+ *   taxIdentifier?: string|null,
  * }
  */
 final class PortingOrderEndUserAdmin implements BaseModel
 {
-    /** @use SdkModel<porting_order_end_user_admin> */
+    /** @use SdkModel<PortingOrderEndUserAdminShape> */
     use SdkModel;
 
     /**
      * The authorized person's account number with the current service provider.
      */
-    #[Api('account_number', optional: true)]
+    #[Optional('account_number', nullable: true)]
     public ?string $accountNumber;
 
     /**
      * Name of person authorizing the porting order.
      */
-    #[Api('auth_person_name', optional: true)]
+    #[Optional('auth_person_name', nullable: true)]
     public ?string $authPersonName;
 
     /**
      * Billing phone number associated with these phone numbers.
      */
-    #[Api('billing_phone_number', optional: true)]
+    #[Optional('billing_phone_number', nullable: true)]
     public ?string $billingPhoneNumber;
 
     /**
      * European business identification number. Applicable only in the European Union.
      */
-    #[Api('business_identifier', optional: true)]
+    #[Optional('business_identifier', nullable: true)]
     public ?string $businessIdentifier;
 
     /**
      * Person Name or Company name requesting the port.
      */
-    #[Api('entity_name', optional: true)]
+    #[Optional('entity_name', nullable: true)]
     public ?string $entityName;
 
     /**
      * PIN/passcode possibly required by the old service provider for extra verification.
      */
-    #[Api('pin_passcode', optional: true)]
+    #[Optional('pin_passcode', nullable: true)]
     public ?string $pinPasscode;
 
     /**
      * European tax identification number. Applicable only in the European Union.
      */
-    #[Api('tax_identifier', optional: true)]
+    #[Optional('tax_identifier', nullable: true)]
     public ?string $taxIdentifier;
 
     public function __construct()
@@ -85,93 +85,93 @@ final class PortingOrderEndUserAdmin implements BaseModel
         ?string $pinPasscode = null,
         ?string $taxIdentifier = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountNumber && $obj->accountNumber = $accountNumber;
-        null !== $authPersonName && $obj->authPersonName = $authPersonName;
-        null !== $billingPhoneNumber && $obj->billingPhoneNumber = $billingPhoneNumber;
-        null !== $businessIdentifier && $obj->businessIdentifier = $businessIdentifier;
-        null !== $entityName && $obj->entityName = $entityName;
-        null !== $pinPasscode && $obj->pinPasscode = $pinPasscode;
-        null !== $taxIdentifier && $obj->taxIdentifier = $taxIdentifier;
+        null !== $accountNumber && $self['accountNumber'] = $accountNumber;
+        null !== $authPersonName && $self['authPersonName'] = $authPersonName;
+        null !== $billingPhoneNumber && $self['billingPhoneNumber'] = $billingPhoneNumber;
+        null !== $businessIdentifier && $self['businessIdentifier'] = $businessIdentifier;
+        null !== $entityName && $self['entityName'] = $entityName;
+        null !== $pinPasscode && $self['pinPasscode'] = $pinPasscode;
+        null !== $taxIdentifier && $self['taxIdentifier'] = $taxIdentifier;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The authorized person's account number with the current service provider.
      */
-    public function withAccountNumber(string $accountNumber): self
+    public function withAccountNumber(?string $accountNumber): self
     {
-        $obj = clone $this;
-        $obj->accountNumber = $accountNumber;
+        $self = clone $this;
+        $self['accountNumber'] = $accountNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Name of person authorizing the porting order.
      */
-    public function withAuthPersonName(string $authPersonName): self
+    public function withAuthPersonName(?string $authPersonName): self
     {
-        $obj = clone $this;
-        $obj->authPersonName = $authPersonName;
+        $self = clone $this;
+        $self['authPersonName'] = $authPersonName;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Billing phone number associated with these phone numbers.
      */
-    public function withBillingPhoneNumber(string $billingPhoneNumber): self
+    public function withBillingPhoneNumber(?string $billingPhoneNumber): self
     {
-        $obj = clone $this;
-        $obj->billingPhoneNumber = $billingPhoneNumber;
+        $self = clone $this;
+        $self['billingPhoneNumber'] = $billingPhoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * European business identification number. Applicable only in the European Union.
      */
-    public function withBusinessIdentifier(string $businessIdentifier): self
+    public function withBusinessIdentifier(?string $businessIdentifier): self
     {
-        $obj = clone $this;
-        $obj->businessIdentifier = $businessIdentifier;
+        $self = clone $this;
+        $self['businessIdentifier'] = $businessIdentifier;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Person Name or Company name requesting the port.
      */
-    public function withEntityName(string $entityName): self
+    public function withEntityName(?string $entityName): self
     {
-        $obj = clone $this;
-        $obj->entityName = $entityName;
+        $self = clone $this;
+        $self['entityName'] = $entityName;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * PIN/passcode possibly required by the old service provider for extra verification.
      */
-    public function withPinPasscode(string $pinPasscode): self
+    public function withPinPasscode(?string $pinPasscode): self
     {
-        $obj = clone $this;
-        $obj->pinPasscode = $pinPasscode;
+        $self = clone $this;
+        $self['pinPasscode'] = $pinPasscode;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * European tax identification number. Applicable only in the European Union.
      */
-    public function withTaxIdentifier(string $taxIdentifier): self
+    public function withTaxIdentifier(?string $taxIdentifier): self
     {
-        $obj = clone $this;
-        $obj->taxIdentifier = $taxIdentifier;
+        $self = clone $this;
+        $self['taxIdentifier'] = $taxIdentifier;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,6 +6,15 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\PortingOrders\PortingOrder;
+use Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
+use Telnyx\PortingOrders\PortingOrderGetExceptionTypesResponse;
+use Telnyx\PortingOrders\PortingOrderGetRequirementsResponse;
+use Telnyx\PortingOrders\PortingOrderGetResponse;
+use Telnyx\PortingOrders\PortingOrderGetSubRequestResponse;
+use Telnyx\PortingOrders\PortingOrderNewResponse;
+use Telnyx\PortingOrders\PortingOrderUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +46,8 @@ final class PortingOrdersTest extends TestCase
             phoneNumbers: ['+13035550000', '+13035550001', '+13035550002']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -48,10 +58,13 @@ final class PortingOrdersTest extends TestCase
         }
 
         $result = $this->client->portingOrders->create(
-            phoneNumbers: ['+13035550000', '+13035550001', '+13035550002']
+            phoneNumbers: ['+13035550000', '+13035550001', '+13035550002'],
+            customerGroupReference: 'Group-456',
+            customerReference: 'Acct 123abc',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +78,8 @@ final class PortingOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderGetResponse::class, $result);
     }
 
     #[Test]
@@ -79,7 +93,8 @@ final class PortingOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -89,9 +104,15 @@ final class PortingOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->list();
+        $page = $this->client->portingOrders->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PortingOrder::class, $item);
+        }
     }
 
     #[Test]
@@ -105,7 +126,8 @@ final class PortingOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -119,7 +141,11 @@ final class PortingOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PortingOrderGetAllowedFocWindowsResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -131,21 +157,26 @@ final class PortingOrdersTest extends TestCase
 
         $result = $this->client->portingOrders->retrieveExceptionTypes();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PortingOrderGetExceptionTypesResponse::class,
+            $result
+        );
     }
 
     #[Test]
     public function testRetrieveLoaTemplate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support application/pdf responses");
+            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->portingOrders->retrieveLoaTemplate(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -155,11 +186,20 @@ final class PortingOrdersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->retrieveRequirements(
+        $page = $this->client->portingOrders->retrieveRequirements(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(
+                PortingOrderGetRequirementsResponse::class,
+                $item
+            );
+        }
     }
 
     #[Test]
@@ -173,6 +213,7 @@ final class PortingOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortingOrderGetSubRequestResponse::class, $result);
     }
 }

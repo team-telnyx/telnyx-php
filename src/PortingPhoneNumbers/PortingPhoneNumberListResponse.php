@@ -4,32 +4,96 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingPhoneNumbers;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\Data;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\ActivationStatus;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\PhoneNumberType;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\PortabilityStatus;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\PortingOrderStatus;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse\RequirementsStatus;
 
 /**
- * @phpstan-type porting_phone_number_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-type PortingPhoneNumberListResponseShape = array{
+ *   activationStatus?: null|ActivationStatus|value-of<ActivationStatus>,
+ *   phoneNumber?: string|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
+ *   portabilityStatus?: null|PortabilityStatus|value-of<PortabilityStatus>,
+ *   portingOrderID?: string|null,
+ *   portingOrderStatus?: null|PortingOrderStatus|value-of<PortingOrderStatus>,
+ *   recordType?: string|null,
+ *   requirementsStatus?: null|RequirementsStatus|value-of<RequirementsStatus>,
+ *   supportKey?: string|null,
  * }
  */
-final class PortingPhoneNumberListResponse implements BaseModel, ResponseConverter
+final class PortingPhoneNumberListResponse implements BaseModel
 {
-    /** @use SdkModel<porting_phone_number_list_response> */
+    /** @use SdkModel<PortingPhoneNumberListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * Activation status.
+     *
+     * @var value-of<ActivationStatus>|null $activationStatus
+     */
+    #[Optional('activation_status', enum: ActivationStatus::class)]
+    public ?string $activationStatus;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * E164 formatted phone number.
+     */
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * The type of the phone number.
+     *
+     * @var value-of<PhoneNumberType>|null $phoneNumberType
+     */
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
+    public ?string $phoneNumberType;
+
+    /**
+     * Specifies whether Telnyx is able to confirm portability this number in the United States & Canada. International phone numbers are provisional by default.
+     *
+     * @var value-of<PortabilityStatus>|null $portabilityStatus
+     */
+    #[Optional('portability_status', enum: PortabilityStatus::class)]
+    public ?string $portabilityStatus;
+
+    /**
+     * Identifies the associated port request.
+     */
+    #[Optional('porting_order_id')]
+    public ?string $portingOrderID;
+
+    /**
+     * The current status of the porting order.
+     *
+     * @var value-of<PortingOrderStatus>|null $portingOrderStatus
+     */
+    #[Optional('porting_order_status', enum: PortingOrderStatus::class)]
+    public ?string $portingOrderStatus;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * The current status of the requirements in a INTL porting order.
+     *
+     * @var value-of<RequirementsStatus>|null $requirementsStatus
+     */
+    #[Optional('requirements_status', enum: RequirementsStatus::class)]
+    public ?string $requirementsStatus;
+
+    /**
+     * A key to reference this porting order when contacting Telnyx customer support.
+     */
+    #[Optional('support_key')]
+    public ?string $supportKey;
 
     public function __construct()
     {
@@ -41,36 +105,149 @@ final class PortingPhoneNumberListResponse implements BaseModel, ResponseConvert
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param ActivationStatus|value-of<ActivationStatus>|null $activationStatus
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param PortabilityStatus|value-of<PortabilityStatus>|null $portabilityStatus
+     * @param PortingOrderStatus|value-of<PortingOrderStatus>|null $portingOrderStatus
+     * @param RequirementsStatus|value-of<RequirementsStatus>|null $requirementsStatus
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ActivationStatus|string|null $activationStatus = null,
+        ?string $phoneNumber = null,
+        PhoneNumberType|string|null $phoneNumberType = null,
+        PortabilityStatus|string|null $portabilityStatus = null,
+        ?string $portingOrderID = null,
+        PortingOrderStatus|string|null $portingOrderStatus = null,
+        ?string $recordType = null,
+        RequirementsStatus|string|null $requirementsStatus = null,
+        ?string $supportKey = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $activationStatus && $self['activationStatus'] = $activationStatus;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $portabilityStatus && $self['portabilityStatus'] = $portabilityStatus;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $portingOrderStatus && $self['portingOrderStatus'] = $portingOrderStatus;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementsStatus && $self['requirementsStatus'] = $requirementsStatus;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * Activation status.
+     *
+     * @param ActivationStatus|value-of<ActivationStatus> $activationStatus
      */
-    public function withData(array $data): self
-    {
-        $obj = clone $this;
-        $obj->data = $data;
+    public function withActivationStatus(
+        ActivationStatus|string $activationStatus
+    ): self {
+        $self = clone $this;
+        $self['activationStatus'] = $activationStatus;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * E164 formatted phone number.
+     */
+    public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The type of the phone number.
+     *
+     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     */
+    public function withPhoneNumberType(
+        PhoneNumberType|string $phoneNumberType
+    ): self {
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
+
+        return $self;
+    }
+
+    /**
+     * Specifies whether Telnyx is able to confirm portability this number in the United States & Canada. International phone numbers are provisional by default.
+     *
+     * @param PortabilityStatus|value-of<PortabilityStatus> $portabilityStatus
+     */
+    public function withPortabilityStatus(
+        PortabilityStatus|string $portabilityStatus
+    ): self {
+        $self = clone $this;
+        $self['portabilityStatus'] = $portabilityStatus;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the associated port request.
+     */
+    public function withPortingOrderID(string $portingOrderID): self
+    {
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
+
+        return $self;
+    }
+
+    /**
+     * The current status of the porting order.
+     *
+     * @param PortingOrderStatus|value-of<PortingOrderStatus> $portingOrderStatus
+     */
+    public function withPortingOrderStatus(
+        PortingOrderStatus|string $portingOrderStatus
+    ): self {
+        $self = clone $this;
+        $self['portingOrderStatus'] = $portingOrderStatus;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * The current status of the requirements in a INTL porting order.
+     *
+     * @param RequirementsStatus|value-of<RequirementsStatus> $requirementsStatus
+     */
+    public function withRequirementsStatus(
+        RequirementsStatus|string $requirementsStatus
+    ): self {
+        $self = clone $this;
+        $self['requirementsStatus'] = $requirementsStatus;
+
+        return $self;
+    }
+
+    /**
+     * A key to reference this porting order when contacting Telnyx customer support.
+     */
+    public function withSupportKey(string $supportKey): self
+    {
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
+
+        return $self;
     }
 }

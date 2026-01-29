@@ -6,27 +6,29 @@ namespace Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse;
 
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\ConversationInsight;
 use Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-import-type ConversationInsightShape from \Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data\ConversationInsight
+ *
+ * @phpstan-type DataShape = array{
  *   id: string,
- *   conversationInsights: list<ConversationInsight>,
+ *   conversationInsights: list<ConversationInsight|ConversationInsightShape>,
  *   createdAt: \DateTimeInterface,
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Unique identifier for the conversation insight.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -34,13 +36,13 @@ final class Data implements BaseModel
      *
      * @var list<ConversationInsight> $conversationInsights
      */
-    #[Api('conversation_insights', list: ConversationInsight::class)]
+    #[Required('conversation_insights', list: ConversationInsight::class)]
     public array $conversationInsights;
 
     /**
      * Timestamp of when the object was created.
      */
-    #[Api('created_at')]
+    #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
     /**
@@ -48,7 +50,7 @@ final class Data implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
@@ -79,7 +81,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ConversationInsight> $conversationInsights
+     * @param list<ConversationInsight|ConversationInsightShape> $conversationInsights
      * @param Status|value-of<Status> $status
      */
     public static function with(
@@ -88,14 +90,14 @@ final class Data implements BaseModel
         \DateTimeInterface $createdAt,
         Status|string $status,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->conversationInsights = $conversationInsights;
-        $obj->createdAt = $createdAt;
-        $obj['status'] = $status;
+        $self['id'] = $id;
+        $self['conversationInsights'] = $conversationInsights;
+        $self['createdAt'] = $createdAt;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,23 +105,23 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of insights extracted from the conversation.
      *
-     * @param list<ConversationInsight> $conversationInsights
+     * @param list<ConversationInsight|ConversationInsightShape> $conversationInsights
      */
     public function withConversationInsights(array $conversationInsights): self
     {
-        $obj = clone $this;
-        $obj->conversationInsights = $conversationInsights;
+        $self = clone $this;
+        $self['conversationInsights'] = $conversationInsights;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +129,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,9 +142,9 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

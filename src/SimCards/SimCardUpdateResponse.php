@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type sim_card_update_response = array{data?: SimCard}
+ * @phpstan-import-type SimCardShape from \Telnyx\SimCards\SimCard
+ *
+ * @phpstan-type SimCardUpdateResponseShape = array{
+ *   data?: null|SimCard|SimCardShape
+ * }
  */
-final class SimCardUpdateResponse implements BaseModel, ResponseConverter
+final class SimCardUpdateResponse implements BaseModel
 {
-    /** @use SdkModel<sim_card_update_response> */
+    /** @use SdkModel<SimCardUpdateResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCard $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class SimCardUpdateResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param SimCard|SimCardShape|null $data
      */
-    public static function with(?SimCard $data = null): self
+    public static function with(SimCard|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(SimCard $data): self
+    /**
+     * @param SimCard|SimCardShape $data
+     */
+    public function withData(SimCard|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

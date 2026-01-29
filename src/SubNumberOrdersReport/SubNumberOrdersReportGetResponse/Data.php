@@ -4,50 +4,52 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data\Filters;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   filters?: Filters,
- *   orderType?: string,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
- *   userID?: string,
+ * @phpstan-import-type FiltersShape from \Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse\Data\Filters
+ *
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   filters?: null|Filters|FiltersShape,
+ *   orderType?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: \DateTimeInterface|null,
+ *   userID?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * The filters that were applied to generate this report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filters $filters;
 
     /**
      * The type of order report.
      */
-    #[Api('order_type', optional: true)]
+    #[Optional('order_type')]
     public ?string $orderType;
 
     /**
@@ -55,19 +57,19 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     /**
      * The ID of the user who created the report.
      */
-    #[Api('user_id', optional: true)]
+    #[Optional('user_id')]
     public ?string $userID;
 
     public function __construct()
@@ -80,28 +82,29 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Filters|FiltersShape|null $filters
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
-        ?Filters $filters = null,
+        Filters|array|null $filters = null,
         ?string $orderType = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $filters && $obj->filters = $filters;
-        null !== $orderType && $obj->orderType = $orderType;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $userID && $obj->userID = $userID;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $filters && $self['filters'] = $filters;
+        null !== $orderType && $self['orderType'] = $orderType;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +112,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,21 +123,23 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The filters that were applied to generate this report.
+     *
+     * @param Filters|FiltersShape $filters
      */
-    public function withFilters(Filters $filters): self
+    public function withFilters(Filters|array $filters): self
     {
-        $obj = clone $this;
-        $obj->filters = $filters;
+        $self = clone $this;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +147,10 @@ final class Data implements BaseModel
      */
     public function withOrderType(string $orderType): self
     {
-        $obj = clone $this;
-        $obj->orderType = $orderType;
+        $self = clone $this;
+        $self['orderType'] = $orderType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +160,10 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +171,10 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,9 +182,9 @@ final class Data implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

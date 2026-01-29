@@ -6,33 +6,41 @@ namespace Telnyx\AccessIPRanges\AccessIPRangeListParams;
 
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock\CidrBlockPatternFilter;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt\DateRangeFilter;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
- * @phpstan-type filter_alias = array{
- *   cidrBlock?: string|CidrBlockPatternFilter,
- *   createdAt?: \DateTimeInterface|DateRangeFilter,
+ * @phpstan-import-type CidrBlockVariants from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock
+ * @phpstan-import-type CreatedAtVariants from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt
+ * @phpstan-import-type CidrBlockShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock
+ * @phpstan-import-type CreatedAtShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CreatedAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   cidrBlock?: CidrBlockShape|null, createdAt?: CreatedAtShape|null
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by exact CIDR block match.
+     *
+     * @var CidrBlockVariants|null $cidrBlock
      */
-    #[Api('cidr_block', optional: true)]
+    #[Optional('cidr_block')]
     public string|CidrBlockPatternFilter|null $cidrBlock;
 
     /**
      * Filter by exact creation date-time.
+     *
+     * @var CreatedAtVariants|null $createdAt
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public \DateTimeInterface|DateRangeFilter|null $createdAt;
 
     public function __construct()
@@ -44,40 +52,47 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CidrBlockShape|null $cidrBlock
+     * @param CreatedAtShape|null $createdAt
      */
     public static function with(
-        string|CidrBlockPatternFilter|null $cidrBlock = null,
-        \DateTimeInterface|DateRangeFilter|null $createdAt = null,
+        string|CidrBlockPatternFilter|array|null $cidrBlock = null,
+        \DateTimeInterface|DateRangeFilter|array|null $createdAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $cidrBlock && $obj->cidrBlock = $cidrBlock;
-        null !== $createdAt && $obj->createdAt = $createdAt;
+        null !== $cidrBlock && $self['cidrBlock'] = $cidrBlock;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by exact CIDR block match.
+     *
+     * @param CidrBlockShape $cidrBlock
      */
     public function withCidrBlock(
-        string|CidrBlockPatternFilter $cidrBlock
+        string|CidrBlockPatternFilter|array $cidrBlock
     ): self {
-        $obj = clone $this;
-        $obj->cidrBlock = $cidrBlock;
+        $self = clone $this;
+        $self['cidrBlock'] = $cidrBlock;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by exact creation date-time.
+     *
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(
-        \DateTimeInterface|DateRangeFilter $createdAt
+        \DateTimeInterface|DateRangeFilter|array $createdAt
     ): self {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 }

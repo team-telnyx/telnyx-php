@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
+use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
+use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
+use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
+use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +41,8 @@ final class JobsTest extends TestCase
 
         $result = $this->client->phoneNumbers->jobs->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobGetResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +52,15 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->jobs->list();
+        $page = $this->client->phoneNumbers->jobs->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PhoneNumbersJob::class, $item);
+        }
     }
 
     #[Test]
@@ -58,10 +71,11 @@ final class JobsTest extends TestCase
         }
 
         $result = $this->client->phoneNumbers->jobs->deleteBatch(
-            ['+19705555098', '+19715555098', '32873127836']
+            phoneNumbers: ['+19705555098', '+19715555098', '32873127836']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobDeleteBatchResponse::class, $result);
     }
 
     #[Test]
@@ -72,10 +86,11 @@ final class JobsTest extends TestCase
         }
 
         $result = $this->client->phoneNumbers->jobs->deleteBatch(
-            ['+19705555098', '+19715555098', '32873127836']
+            phoneNumbers: ['+19705555098', '+19715555098', '32873127836']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobDeleteBatchResponse::class, $result);
     }
 
     #[Test]
@@ -89,7 +104,8 @@ final class JobsTest extends TestCase
             phoneNumbers: ['1583466971586889004', '+13127367254']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobUpdateBatchResponse::class, $result);
     }
 
     #[Test]
@@ -100,10 +116,60 @@ final class JobsTest extends TestCase
         }
 
         $result = $this->client->phoneNumbers->jobs->updateBatch(
-            phoneNumbers: ['1583466971586889004', '+13127367254']
+            phoneNumbers: ['1583466971586889004', '+13127367254'],
+            filter: [
+                'billingGroupID' => '62e4bf2e-c278-4282-b524-488d9c9c43b2',
+                'connectionID' => '1521916448077776306',
+                'customerReference' => 'customer_reference',
+                'emergencyAddressID' => '9102160989215728032',
+                'hasBundle' => 'has_bundle',
+                'phoneNumber' => 'phone_number',
+                'status' => 'active',
+                'tag' => 'tag',
+                'voiceConnectionName' => [
+                    'contains' => 'test',
+                    'endsWith' => 'test',
+                    'eq' => 'test',
+                    'startsWith' => 'test',
+                ],
+                'voiceUsagePaymentMethod' => 'channel',
+            ],
+            billingGroupID: 'dc8e4d67-33a0-4cbb-af74-7b58f05bd494',
+            connectionID: 'dc8e4d67-33a0-4cbb-af74-7b58f05bd494',
+            customerReference: 'customer-reference',
+            deletionLockEnabled: true,
+            externalPin: '123456',
+            hdVoiceEnabled: true,
+            tags: ['tag'],
+            voice: [
+                'callForwarding' => [
+                    'callForwardingEnabled' => true,
+                    'forwardingType' => 'always',
+                    'forwardsTo' => '+13035559123',
+                ],
+                'callRecording' => [
+                    'inboundCallRecordingChannels' => 'single',
+                    'inboundCallRecordingEnabled' => true,
+                    'inboundCallRecordingFormat' => 'wav',
+                ],
+                'callerIDNameEnabled' => true,
+                'cnamListing' => [
+                    'cnamListingDetails' => 'example', 'cnamListingEnabled' => true,
+                ],
+                'inboundCallScreening' => 'disabled',
+                'mediaFeatures' => [
+                    'acceptAnyRtpPacketsEnabled' => true,
+                    'rtpAutoAdjustEnabled' => true,
+                    't38FaxGatewayEnabled' => true,
+                ],
+                'techPrefixEnabled' => true,
+                'translatedNumber' => '+13035559999',
+                'usagePaymentMethod' => 'pay-per-minute',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobUpdateBatchResponse::class, $result);
     }
 
     #[Test]
@@ -118,7 +184,11 @@ final class JobsTest extends TestCase
             phoneNumbers: ['+19705555098', '+19715555098', '32873127836'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            JobUpdateEmergencySettingsBatchResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -131,8 +201,13 @@ final class JobsTest extends TestCase
         $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch(
             emergencyEnabled: true,
             phoneNumbers: ['+19705555098', '+19715555098', '32873127836'],
+            emergencyAddressID: '53829456729313',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            JobUpdateEmergencySettingsBatchResponse::class,
+            $result
+        );
     }
 }

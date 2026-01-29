@@ -5,51 +5,52 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\Assistant\Tool;
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool;
-use Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Assistant configuration including choice of LLM, custom instructions, and tools.
  *
- * @phpstan-type assistant_alias = array{
- *   instructions?: string,
- *   model?: string,
- *   openaiAPIKeyRef?: string,
- *   tools?: list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>,
+ * @phpstan-import-type ToolVariants from \Telnyx\AI\Assistants\Assistant\Tool
+ * @phpstan-import-type ToolShape from \Telnyx\AI\Assistants\Assistant\Tool
+ *
+ * @phpstan-type AssistantShape = array{
+ *   instructions?: string|null,
+ *   model?: string|null,
+ *   openaiAPIKeyRef?: string|null,
+ *   tools?: list<ToolShape>|null,
  * }
  */
 final class Assistant implements BaseModel
 {
-    /** @use SdkModel<assistant_alias> */
+    /** @use SdkModel<AssistantShape> */
     use SdkModel;
 
     /**
      * The system instructions that the voice assistant uses during the gather command.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
      * The model to be used by the voice assistant.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $model;
 
     /**
      * This is necessary only if the model selected is from OpenAI. You would pass the `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your OpenAI API Key. Warning: Free plans are unlikely to work with this integration.
      */
-    #[Api('openai_api_key_ref', optional: true)]
+    #[Optional('openai_api_key_ref')]
     public ?string $openaiAPIKeyRef;
 
     /**
      * The tools that the voice assistant can use.
      *
-     * @var list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool>|null $tools
+     * @var list<ToolVariants>|null $tools
      */
-    #[Api(list: Tool::class, optional: true)]
+    #[Optional(list: Tool::class)]
     public ?array $tools;
 
     public function __construct()
@@ -62,7 +63,7 @@ final class Assistant implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool> $tools
+     * @param list<ToolShape>|null $tools
      */
     public static function with(
         ?string $instructions = null,
@@ -70,14 +71,14 @@ final class Assistant implements BaseModel
         ?string $openaiAPIKeyRef = null,
         ?array $tools = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $model && $obj->model = $model;
-        null !== $openaiAPIKeyRef && $obj->openaiAPIKeyRef = $openaiAPIKeyRef;
-        null !== $tools && $obj->tools = $tools;
+        null !== $instructions && $self['instructions'] = $instructions;
+        null !== $model && $self['model'] = $model;
+        null !== $openaiAPIKeyRef && $self['openaiAPIKeyRef'] = $openaiAPIKeyRef;
+        null !== $tools && $self['tools'] = $tools;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +86,10 @@ final class Assistant implements BaseModel
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj->instructions = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +97,10 @@ final class Assistant implements BaseModel
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj->model = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,22 +108,22 @@ final class Assistant implements BaseModel
      */
     public function withOpenAIAPIKeyRef(string $openaiAPIKeyRef): self
     {
-        $obj = clone $this;
-        $obj->openaiAPIKeyRef = $openaiAPIKeyRef;
+        $self = clone $this;
+        $self['openaiAPIKeyRef'] = $openaiAPIKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The tools that the voice assistant can use.
      *
-     * @param list<BookAppointmentTool|CheckAvailabilityTool|WebhookTool|HangupTool|TransferTool|RetrievalTool> $tools
+     * @param list<ToolShape> $tools
      */
     public function withTools(array $tools): self
     {
-        $obj = clone $this;
-        $obj->tools = $tools;
+        $self = clone $this;
+        $self['tools'] = $tools;
 
-        return $obj;
+        return $self;
     }
 }

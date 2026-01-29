@@ -6,7 +6,7 @@ namespace Telnyx\Webhooks\CallHangupWebhookEvent\Data;
 
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats;
@@ -15,64 +15,68 @@ use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\HangupSource;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\State;
 
 /**
- * @phpstan-type payload_alias = array{
- *   callControlID?: string,
- *   callLegID?: string,
- *   callQualityStats?: CallQualityStats|null,
- *   callSessionID?: string,
- *   clientState?: string,
- *   connectionID?: string,
- *   customHeaders?: list<CustomSipHeader>,
- *   from?: string,
- *   hangupCause?: value-of<HangupCause>,
- *   hangupSource?: value-of<HangupSource>,
- *   sipHangupCause?: string,
- *   sipHeaders?: list<SipHeader>,
- *   startTime?: \DateTimeInterface,
- *   state?: value-of<State>,
- *   tags?: list<string>,
- *   to?: string,
+ * @phpstan-import-type CallQualityStatsShape from \Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ *
+ * @phpstan-type PayloadShape = array{
+ *   callControlID?: string|null,
+ *   callLegID?: string|null,
+ *   callQualityStats?: null|CallQualityStats|CallQualityStatsShape,
+ *   callSessionID?: string|null,
+ *   clientState?: string|null,
+ *   connectionID?: string|null,
+ *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
+ *   from?: string|null,
+ *   hangupCause?: null|HangupCause|value-of<HangupCause>,
+ *   hangupSource?: null|HangupSource|value-of<HangupSource>,
+ *   sipHangupCause?: string|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
+ *   startTime?: \DateTimeInterface|null,
+ *   state?: null|State|value-of<State>,
+ *   tags?: list<string>|null,
+ *   to?: string|null,
  * }
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api('call_control_id', optional: true)]
+    #[Optional('call_control_id')]
     public ?string $callControlID;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id', optional: true)]
+    #[Optional('call_leg_id')]
     public ?string $callLegID;
 
     /**
      * Call quality statistics aggregated from the CHANNEL_HANGUP_COMPLETE event. Only includes metrics that are available (filters out nil values). Returns nil if no metrics are available.
      */
-    #[Api('call_quality_stats', nullable: true, optional: true)]
+    #[Optional('call_quality_stats', nullable: true)]
     public ?CallQualityStats $callQualityStats;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id', optional: true)]
+    #[Optional('call_session_id')]
     public ?string $callSessionID;
 
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
@@ -80,21 +84,21 @@ final class Payload implements BaseModel
      *
      * @var list<CustomSipHeader>|null $customHeaders
      */
-    #[Api('custom_headers', list: CustomSipHeader::class, optional: true)]
+    #[Optional('custom_headers', list: CustomSipHeader::class)]
     public ?array $customHeaders;
 
     /**
      * Number or SIP URI placing the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
-     * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found` or `unspecified`).
+     * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found`, `no_answer` or `unspecified`).
      *
      * @var value-of<HangupCause>|null $hangupCause
      */
-    #[Api('hangup_cause', enum: HangupCause::class, optional: true)]
+    #[Optional('hangup_cause', enum: HangupCause::class)]
     public ?string $hangupCause;
 
     /**
@@ -102,13 +106,13 @@ final class Payload implements BaseModel
      *
      * @var value-of<HangupSource>|null $hangupSource
      */
-    #[Api('hangup_source', enum: HangupSource::class, optional: true)]
+    #[Optional('hangup_source', enum: HangupSource::class)]
     public ?string $hangupSource;
 
     /**
      * The reason the call was ended (SIP response code). If the SIP response is unavailable (in inbound calls for example) this is set to `unspecified`.
      */
-    #[Api('sip_hangup_cause', optional: true)]
+    #[Optional('sip_hangup_cause')]
     public ?string $sipHangupCause;
 
     /**
@@ -116,13 +120,13 @@ final class Payload implements BaseModel
      *
      * @var list<SipHeader>|null $sipHeaders
      */
-    #[Api('sip_headers', list: SipHeader::class, optional: true)]
+    #[Optional('sip_headers', list: SipHeader::class)]
     public ?array $sipHeaders;
 
     /**
      * ISO 8601 datetime of when the call started.
      */
-    #[Api('start_time', optional: true)]
+    #[Optional('start_time')]
     public ?\DateTimeInterface $startTime;
 
     /**
@@ -130,7 +134,7 @@ final class Payload implements BaseModel
      *
      * @var value-of<State>|null $state
      */
-    #[Api(enum: State::class, optional: true)]
+    #[Optional(enum: State::class)]
     public ?string $state;
 
     /**
@@ -138,13 +142,13 @@ final class Payload implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * Destination number or SIP URI of the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()
@@ -157,17 +161,18 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CustomSipHeader> $customHeaders
-     * @param HangupCause|value-of<HangupCause> $hangupCause
-     * @param HangupSource|value-of<HangupSource> $hangupSource
-     * @param list<SipHeader> $sipHeaders
-     * @param State|value-of<State> $state
-     * @param list<string> $tags
+     * @param CallQualityStats|CallQualityStatsShape|null $callQualityStats
+     * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
+     * @param HangupCause|value-of<HangupCause>|null $hangupCause
+     * @param HangupSource|value-of<HangupSource>|null $hangupSource
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
+     * @param State|value-of<State>|null $state
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $callControlID = null,
         ?string $callLegID = null,
-        ?CallQualityStats $callQualityStats = null,
+        CallQualityStats|array|null $callQualityStats = null,
         ?string $callSessionID = null,
         ?string $clientState = null,
         ?string $connectionID = null,
@@ -182,26 +187,26 @@ final class Payload implements BaseModel
         ?array $tags = null,
         ?string $to = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callQualityStats && $obj->callQualityStats = $callQualityStats;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $customHeaders && $obj->customHeaders = $customHeaders;
-        null !== $from && $obj->from = $from;
-        null !== $hangupCause && $obj['hangupCause'] = $hangupCause;
-        null !== $hangupSource && $obj['hangupSource'] = $hangupSource;
-        null !== $sipHangupCause && $obj->sipHangupCause = $sipHangupCause;
-        null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
-        null !== $startTime && $obj->startTime = $startTime;
-        null !== $state && $obj['state'] = $state;
-        null !== $tags && $obj->tags = $tags;
-        null !== $to && $obj->to = $to;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callQualityStats && $self['callQualityStats'] = $callQualityStats;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $from && $self['from'] = $from;
+        null !== $hangupCause && $self['hangupCause'] = $hangupCause;
+        null !== $hangupSource && $self['hangupSource'] = $hangupSource;
+        null !== $sipHangupCause && $self['sipHangupCause'] = $sipHangupCause;
+        null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
+        null !== $startTime && $self['startTime'] = $startTime;
+        null !== $state && $self['state'] = $state;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +214,10 @@ final class Payload implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,22 +225,24 @@ final class Payload implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Call quality statistics aggregated from the CHANNEL_HANGUP_COMPLETE event. Only includes metrics that are available (filters out nil values). Returns nil if no metrics are available.
+     *
+     * @param CallQualityStats|CallQualityStatsShape|null $callQualityStats
      */
     public function withCallQualityStats(
-        ?CallQualityStats $callQualityStats
+        CallQualityStats|array|null $callQualityStats
     ): self {
-        $obj = clone $this;
-        $obj->callQualityStats = $callQualityStats;
+        $self = clone $this;
+        $self['callQualityStats'] = $callQualityStats;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +250,10 @@ final class Payload implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +261,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,23 +272,23 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Custom headers set on answer command.
      *
-     * @param list<CustomSipHeader> $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj->customHeaders = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,23 +296,23 @@ final class Payload implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found` or `unspecified`).
+     * The reason the call was ended (`call_rejected`, `normal_clearing`, `originator_cancel`, `timeout`, `time_limit`, `user_busy`, `not_found`, `no_answer` or `unspecified`).
      *
      * @param HangupCause|value-of<HangupCause> $hangupCause
      */
     public function withHangupCause(HangupCause|string $hangupCause): self
     {
-        $obj = clone $this;
-        $obj['hangupCause'] = $hangupCause;
+        $self = clone $this;
+        $self['hangupCause'] = $hangupCause;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -315,10 +322,10 @@ final class Payload implements BaseModel
      */
     public function withHangupSource(HangupSource|string $hangupSource): self
     {
-        $obj = clone $this;
-        $obj['hangupSource'] = $hangupSource;
+        $self = clone $this;
+        $self['hangupSource'] = $hangupSource;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -326,23 +333,23 @@ final class Payload implements BaseModel
      */
     public function withSipHangupCause(string $sipHangupCause): self
     {
-        $obj = clone $this;
-        $obj->sipHangupCause = $sipHangupCause;
+        $self = clone $this;
+        $self['sipHangupCause'] = $sipHangupCause;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * User-to-User and Diversion headers from sip invite.
      *
-     * @param list<SipHeader> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
-        $obj = clone $this;
-        $obj->sipHeaders = $sipHeaders;
+        $self = clone $this;
+        $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -350,10 +357,10 @@ final class Payload implements BaseModel
      */
     public function withStartTime(\DateTimeInterface $startTime): self
     {
-        $obj = clone $this;
-        $obj->startTime = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -363,10 +370,10 @@ final class Payload implements BaseModel
      */
     public function withState(State|string $state): self
     {
-        $obj = clone $this;
-        $obj['state'] = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -376,10 +383,10 @@ final class Payload implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -387,9 +394,9 @@ final class Payload implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

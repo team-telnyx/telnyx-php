@@ -4,42 +4,42 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\BillingBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type pagination_response = array{
+ * @phpstan-type PaginationResponseShape = array{
  *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
  * }
  */
 final class PaginationResponse implements BaseModel
 {
-    /** @use SdkModel<pagination_response> */
+    /** @use SdkModel<PaginationResponseShape> */
     use SdkModel;
 
     /**
      * The current page number.
      */
-    #[Api('page_number')]
+    #[Required('page_number')]
     public int $pageNumber;
 
     /**
      * The number of results per page.
      */
-    #[Api('page_size')]
+    #[Required('page_size')]
     public int $pageSize;
 
     /**
      * Total number of pages from the results.
      */
-    #[Api('total_pages')]
+    #[Required('total_pages')]
     public int $totalPages;
 
     /**
      * Total number of results returned.
      */
-    #[Api('total_results')]
+    #[Required('total_results')]
     public int $totalResults;
 
     /**
@@ -78,14 +78,14 @@ final class PaginationResponse implements BaseModel
         int $totalPages,
         int $totalResults
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->pageNumber = $pageNumber;
-        $obj->pageSize = $pageSize;
-        $obj->totalPages = $totalPages;
-        $obj->totalResults = $totalResults;
+        $self['pageNumber'] = $pageNumber;
+        $self['pageSize'] = $pageSize;
+        $self['totalPages'] = $totalPages;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class PaginationResponse implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class PaginationResponse implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class PaginationResponse implements BaseModel
      */
     public function withTotalPages(int $totalPages): self
     {
-        $obj = clone $this;
-        $obj->totalPages = $totalPages;
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,9 +126,9 @@ final class PaginationResponse implements BaseModel
      */
     public function withTotalResults(int $totalResults): self
     {
-        $obj = clone $this;
-        $obj->totalResults = $totalResults;
+        $self = clone $this;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 }

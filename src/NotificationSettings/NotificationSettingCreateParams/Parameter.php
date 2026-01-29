@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationSettings\NotificationSettingCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type parameter_alias = array{name?: string, value?: string}
+ * @phpstan-type ParameterShape = array{name?: string|null, value?: string|null}
  */
 final class Parameter implements BaseModel
 {
-    /** @use SdkModel<parameter_alias> */
+    /** @use SdkModel<ParameterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $value;
 
     public function __construct()
@@ -34,27 +34,27 @@ final class Parameter implements BaseModel
      */
     public static function with(?string $name = null, ?string $value = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $value && $obj->value = $value;
+        null !== $name && $self['name'] = $name;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

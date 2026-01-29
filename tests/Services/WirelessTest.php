@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Wireless\WirelessGetRegionsResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -33,9 +34,10 @@ final class WirelessTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wireless->retrieveRegions('public_ips');
+        $result = $this->client->wireless->retrieveRegions(product: 'public_ips');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WirelessGetRegionsResponse::class, $result);
     }
 
     #[Test]
@@ -45,8 +47,9 @@ final class WirelessTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wireless->retrieveRegions('public_ips');
+        $result = $this->client->wireless->retrieveRegions(product: 'public_ips');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WirelessGetRegionsResponse::class, $result);
     }
 }

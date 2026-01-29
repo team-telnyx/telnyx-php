@@ -11,14 +11,18 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
  * Filter by exact CIDR block match.
+ *
+ * @phpstan-import-type CidrBlockPatternFilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock\CidrBlockPatternFilter
+ *
+ * @phpstan-type CidrBlockVariants = string|CidrBlockPatternFilter
+ * @phpstan-type CidrBlockShape = CidrBlockVariants|CidrBlockPatternFilterShape
  */
 final class CidrBlock implements ConverterSource
 {
     use SdkUnion;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {

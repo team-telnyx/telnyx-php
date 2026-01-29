@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Filter parameter for civic addresses (deepObject style). Supports filtering by country.
  *
- * @phpstan-type filter_alias = array{country?: list<string>}
+ * @phpstan-type FilterShape = array{country?: list<string>|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -23,7 +23,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $country
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $country;
 
     public function __construct()
@@ -36,15 +36,15 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $country
+     * @param list<string>|null $country
      */
     public static function with(?array $country = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $country && $obj->country = $country;
+        null !== $country && $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class Filter implements BaseModel
      */
     public function withCountry(array $country): self
     {
-        $obj = clone $this;
-        $obj->country = $country;
+        $self = clone $this;
+        $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 }

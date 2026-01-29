@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{roomRecordings?: int}
+ * @phpstan-type DataShape = array{roomRecordings?: int|null}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Amount of room recordings affected.
      */
-    #[Api('room_recordings', optional: true)]
+    #[Optional('room_recordings')]
     public ?int $roomRecordings;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class Data implements BaseModel
      */
     public static function with(?int $roomRecordings = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $roomRecordings && $obj->roomRecordings = $roomRecordings;
+        null !== $roomRecordings && $self['roomRecordings'] = $roomRecordings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Data implements BaseModel
      */
     public function withRoomRecordings(int $roomRecordings): self
     {
-        $obj = clone $this;
-        $obj->roomRecordings = $roomRecordings;
+        $self = clone $this;
+        $self['roomRecordings'] = $roomRecordings;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\SupportingDocuments;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,15 +13,17 @@ use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
 /**
  * Creates a list of supporting documents on a portout request.
  *
- * @see Telnyx\Portouts\SupportingDocuments->create
+ * @see Telnyx\Services\Portouts\SupportingDocumentsService::create()
  *
- * @phpstan-type supporting_document_create_params = array{
- *   documents?: list<Document>
+ * @phpstan-import-type DocumentShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document
+ *
+ * @phpstan-type SupportingDocumentCreateParamsShape = array{
+ *   documents?: list<Document|DocumentShape>|null
  * }
  */
 final class SupportingDocumentCreateParams implements BaseModel
 {
-    /** @use SdkModel<supporting_document_create_params> */
+    /** @use SdkModel<SupportingDocumentCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -30,7 +32,7 @@ final class SupportingDocumentCreateParams implements BaseModel
      *
      * @var list<Document>|null $documents
      */
-    #[Api(list: Document::class, optional: true)]
+    #[Optional(list: Document::class)]
     public ?array $documents;
 
     public function __construct()
@@ -43,27 +45,27 @@ final class SupportingDocumentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Document> $documents
+     * @param list<Document|DocumentShape>|null $documents
      */
     public static function with(?array $documents = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $documents && $obj->documents = $documents;
+        null !== $documents && $self['documents'] = $documents;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of supporting documents parameters.
      *
-     * @param list<Document> $documents
+     * @param list<Document|DocumentShape> $documents
      */
     public function withDocuments(array $documents): self
     {
-        $obj = clone $this;
-        $obj->documents = $documents;
+        $self = clone $this;
+        $self['documents'] = $documents;
 
-        return $obj;
+        return $self;
     }
 }

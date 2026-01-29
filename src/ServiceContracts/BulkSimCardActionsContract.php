@@ -8,20 +8,25 @@ use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface BulkSimCardActionsContract
 {
     /**
      * @api
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BulkSimCardActionGetResponse;
 
     /**
@@ -30,25 +35,16 @@ interface BulkSimCardActionsContract
      * @param FilterActionType|value-of<FilterActionType> $filterActionType filter by action type
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<BulkSimCardActionListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $filterActionType = omit,
-        $pageNumber = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null,
-    ): BulkSimCardActionListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): BulkSimCardActionListResponse;
+        FilterActionType|string|null $filterActionType = null,
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
 }

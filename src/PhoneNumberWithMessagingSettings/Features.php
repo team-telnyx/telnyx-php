@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberWithMessagingSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingFeatureSet;
 
 /**
- * @phpstan-type features_alias = array{
- *   mms?: MessagingFeatureSet|null, sms?: MessagingFeatureSet|null
+ * @phpstan-import-type MessagingFeatureSetShape from \Telnyx\MessagingFeatureSet
+ *
+ * @phpstan-type FeaturesShape = array{
+ *   mms?: null|MessagingFeatureSet|MessagingFeatureSetShape,
+ *   sms?: null|MessagingFeatureSet|MessagingFeatureSetShape,
  * }
  */
 final class Features implements BaseModel
 {
-    /** @use SdkModel<features_alias> */
+    /** @use SdkModel<FeaturesShape> */
     use SdkModel;
 
     /**
@@ -24,7 +27,7 @@ final class Features implements BaseModel
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?MessagingFeatureSet $mms;
 
     /**
@@ -32,7 +35,7 @@ final class Features implements BaseModel
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?MessagingFeatureSet $sms;
 
     public function __construct()
@@ -44,42 +47,49 @@ final class Features implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MessagingFeatureSet|MessagingFeatureSetShape|null $mms
+     * @param MessagingFeatureSet|MessagingFeatureSetShape|null $sms
      */
     public static function with(
-        ?MessagingFeatureSet $mms = null,
-        ?MessagingFeatureSet $sms = null
+        MessagingFeatureSet|array|null $mms = null,
+        MessagingFeatureSet|array|null $sms = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $mms && $obj->mms = $mms;
-        null !== $sms && $obj->sms = $sms;
+        null !== $mms && $self['mms'] = $mms;
+        null !== $sms && $self['sms'] = $sms;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The set of features available for a specific messaging use case (SMS or MMS). Features
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
+     *
+     * @param MessagingFeatureSet|MessagingFeatureSetShape|null $mms
      */
-    public function withMms(?MessagingFeatureSet $mms): self
+    public function withMms(MessagingFeatureSet|array|null $mms): self
     {
-        $obj = clone $this;
-        $obj->mms = $mms;
+        $self = clone $this;
+        $self['mms'] = $mms;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The set of features available for a specific messaging use case (SMS or MMS). Features
      * can vary depending on the characteristics the phone number, as well as its current
      * product configuration.
+     *
+     * @param MessagingFeatureSet|MessagingFeatureSetShape|null $sms
      */
-    public function withSMS(?MessagingFeatureSet $sms): self
+    public function withSMS(MessagingFeatureSet|array|null $sms): self
     {
-        $obj = clone $this;
-        $obj->sms = $sms;
+        $self = clone $this;
+        $self['sms'] = $sms;
 
-        return $obj;
+        return $self;
     }
 }

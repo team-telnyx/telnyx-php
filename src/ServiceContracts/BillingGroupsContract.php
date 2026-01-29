@@ -4,110 +4,86 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\BillingGroups\BillingGroup;
 use Telnyx\BillingGroups\BillingGroupDeleteResponse;
 use Telnyx\BillingGroups\BillingGroupGetResponse;
-use Telnyx\BillingGroups\BillingGroupListParams\Page;
-use Telnyx\BillingGroups\BillingGroupListResponse;
 use Telnyx\BillingGroups\BillingGroupNewResponse;
 use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface BillingGroupsContract
 {
     /**
      * @api
      *
      * @param string $name A name for the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $name = omit,
-        ?RequestOptions $requestOptions = null
+        ?string $name = null,
+        RequestOptions|array|null $requestOptions = null
     ): BillingGroupNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupNewResponse;
-
-    /**
-     * @api
+     * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BillingGroupGetResponse;
 
     /**
      * @api
      *
+     * @param string $id The id of the billing group
      * @param string $name A name for the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $name = omit,
-        ?RequestOptions $requestOptions = null
+        ?string $name = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BillingGroupUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * @param RequestOpts|null $requestOptions
      *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @return DefaultFlatPagination<BillingGroup>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupListResponse;
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): BillingGroupListResponse;
-
-    /**
-     * @api
+     * @param string $id The id of the billing group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BillingGroupDeleteResponse;
 }

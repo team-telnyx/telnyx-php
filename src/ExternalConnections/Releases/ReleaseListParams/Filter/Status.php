@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status\Eq;
 
 /**
- * @phpstan-type status_alias = array{eq?: list<value-of<Eq>>}
+ * @phpstan-type StatusShape = array{eq?: list<Eq|value-of<Eq>>|null}
  */
 final class Status implements BaseModel
 {
-    /** @use SdkModel<status_alias> */
+    /** @use SdkModel<StatusShape> */
     use SdkModel;
 
     /**
@@ -22,7 +22,7 @@ final class Status implements BaseModel
      *
      * @var list<value-of<Eq>>|null $eq
      */
-    #[Api(list: Eq::class, optional: true)]
+    #[Optional(list: Eq::class)]
     public ?array $eq;
 
     public function __construct()
@@ -35,15 +35,15 @@ final class Status implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Eq|value-of<Eq>> $eq
+     * @param list<Eq|value-of<Eq>>|null $eq
      */
     public static function with(?array $eq = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj['eq'] = $eq;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,9 +53,9 @@ final class Status implements BaseModel
      */
     public function withEq(array $eq): self
     {
-        $obj = clone $this;
-        $obj['eq'] = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,62 +5,66 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type user_bundle = array{
+ * @phpstan-import-type BillingBundleSummaryShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleSummary
+ * @phpstan-import-type UserBundleResourceShape from \Telnyx\BundlePricing\UserBundles\UserBundleResource
+ *
+ * @phpstan-type UserBundleShape = array{
  *   id: string,
  *   active: bool,
- *   billingBundle: BillingBundleSummary,
- *   createdAt: \DateTimeInterface,
- *   resources: list<UserBundleResource>,
+ *   billingBundle: BillingBundleSummary|BillingBundleSummaryShape,
+ *   createdAt: string,
+ *   resources: list<UserBundleResource|UserBundleResourceShape>,
  *   userID: string,
- *   updatedAt?: \DateTimeInterface|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class UserBundle implements BaseModel
 {
-    /** @use SdkModel<user_bundle> */
+    /** @use SdkModel<UserBundleShape> */
     use SdkModel;
 
     /**
      * User bundle's ID, this is used to identify the user bundle in the API.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Status of the user bundle.
      */
-    #[Api]
+    #[Required]
     public bool $active;
 
-    #[Api('billing_bundle')]
+    #[Required('billing_bundle')]
     public BillingBundleSummary $billingBundle;
 
     /**
      * Date the user bundle was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Required('created_at')]
+    public string $createdAt;
 
     /** @var list<UserBundleResource> $resources */
-    #[Api(list: UserBundleResource::class)]
+    #[Required(list: UserBundleResource::class)]
     public array $resources;
 
     /**
      * The customer's ID that owns this user bundle.
      */
-    #[Api('user_id')]
+    #[Required('user_id')]
     public string $userID;
 
     /**
      * Date the user bundle was last updated.
      */
-    #[Api('updated_at', nullable: true, optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Optional('updated_at', nullable: true)]
+    public ?string $updatedAt;
 
     /**
      * `new UserBundle()` is missing required properties by the API.
@@ -99,29 +103,30 @@ final class UserBundle implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserBundleResource> $resources
+     * @param BillingBundleSummary|BillingBundleSummaryShape $billingBundle
+     * @param list<UserBundleResource|UserBundleResourceShape> $resources
      */
     public static function with(
         string $id,
         bool $active,
-        BillingBundleSummary $billingBundle,
-        \DateTimeInterface $createdAt,
+        BillingBundleSummary|array $billingBundle,
+        string $createdAt,
         array $resources,
         string $userID,
-        ?\DateTimeInterface $updatedAt = null,
+        ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->active = $active;
-        $obj->billingBundle = $billingBundle;
-        $obj->createdAt = $createdAt;
-        $obj->resources = $resources;
-        $obj->userID = $userID;
+        $self['id'] = $id;
+        $self['active'] = $active;
+        $self['billingBundle'] = $billingBundle;
+        $self['createdAt'] = $createdAt;
+        $self['resources'] = $resources;
+        $self['userID'] = $userID;
 
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +134,10 @@ final class UserBundle implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,40 +145,44 @@ final class UserBundle implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj->active = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
-    public function withBillingBundle(BillingBundleSummary $billingBundle): self
-    {
-        $obj = clone $this;
-        $obj->billingBundle = $billingBundle;
+    /**
+     * @param BillingBundleSummary|BillingBundleSummaryShape $billingBundle
+     */
+    public function withBillingBundle(
+        BillingBundleSummary|array $billingBundle
+    ): self {
+        $self = clone $this;
+        $self['billingBundle'] = $billingBundle;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Date the user bundle was created.
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<UserBundleResource> $resources
+     * @param list<UserBundleResource|UserBundleResourceShape> $resources
      */
     public function withResources(array $resources): self
     {
-        $obj = clone $this;
-        $obj->resources = $resources;
+        $self = clone $this;
+        $self['resources'] = $resources;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,20 +190,20 @@ final class UserBundle implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Date the user bundle was last updated.
      */
-    public function withUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function withUpdatedAt(?string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

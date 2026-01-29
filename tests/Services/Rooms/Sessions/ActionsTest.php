@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
+use Telnyx\Rooms\Sessions\Actions\ActionKickResponse;
+use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse;
+use Telnyx\Rooms\Sessions\Actions\ActionUnmuteResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +41,8 @@ final class ActionsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionEndResponse::class, $result);
     }
 
     #[Test]
@@ -51,7 +56,8 @@ final class ActionsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionKickResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +71,8 @@ final class ActionsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionMuteResponse::class, $result);
     }
 
     #[Test]
@@ -79,6 +86,7 @@ final class ActionsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionUnmuteResponse::class, $result);
     }
 }

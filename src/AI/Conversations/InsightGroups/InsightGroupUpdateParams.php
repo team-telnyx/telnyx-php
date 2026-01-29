@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\InsightGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,25 +12,25 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an insight template group.
  *
- * @see Telnyx\AI\Conversations\InsightGroups->update
+ * @see Telnyx\Services\AI\Conversations\InsightGroupsService::update()
  *
- * @phpstan-type insight_group_update_params = array{
- *   description?: string, name?: string, webhook?: string
+ * @phpstan-type InsightGroupUpdateParamsShape = array{
+ *   description?: string|null, name?: string|null, webhook?: string|null
  * }
  */
 final class InsightGroupUpdateParams implements BaseModel
 {
-    /** @use SdkModel<insight_group_update_params> */
+    /** @use SdkModel<InsightGroupUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook;
 
     public function __construct()
@@ -48,36 +48,36 @@ final class InsightGroupUpdateParams implements BaseModel
         ?string $name = null,
         ?string $webhook = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $description && $obj->description = $description;
-        null !== $name && $obj->name = $name;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $description && $self['description'] = $description;
+        null !== $name && $self['name'] = $name;
+        null !== $webhook && $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhook(string $webhook): self
     {
-        $obj = clone $this;
-        $obj->webhook = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

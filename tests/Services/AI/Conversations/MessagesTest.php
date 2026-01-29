@@ -5,6 +5,7 @@ namespace Tests\Services\AI\Conversations;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Conversations\Messages\MessageListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,6 +38,7 @@ final class MessagesTest extends TestCase
             'conversation_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessageListResponse::class, $result);
     }
 }

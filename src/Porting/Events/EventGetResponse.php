@@ -4,25 +4,31 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Porting\Events\EventGetResponse\Data;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventDeletedPayload;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventNewCommentEvent;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventStatusChangedEvent;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventWithoutWebhook;
 
 /**
- * @phpstan-type event_get_response = array{data?: Data}
+ * @phpstan-import-type DataVariants from \Telnyx\Porting\Events\EventGetResponse\Data
+ * @phpstan-import-type DataShape from \Telnyx\Porting\Events\EventGetResponse\Data
+ *
+ * @phpstan-type EventGetResponseShape = array{data?: DataShape|null}
  */
-final class EventGetResponse implements BaseModel, ResponseConverter
+final class EventGetResponse implements BaseModel
 {
-    /** @use SdkModel<event_get_response> */
+    /** @use SdkModel<EventGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
-    public ?Data $data;
+    /** @var DataVariants|null $data */
+    #[Optional(union: Data::class)]
+    public PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook|null $data;
 
     public function __construct()
     {
@@ -33,21 +39,28 @@ final class EventGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DataShape|null $data
      */
-    public static function with(?Data $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        PortingEventDeletedPayload|array|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook|null $data = null,
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Data $data): self
-    {
-        $obj = clone $this;
-        $obj->data = $data;
+    /**
+     * @param DataShape $data
+     */
+    public function withData(
+        PortingEventDeletedPayload|array|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook $data,
+    ): self {
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

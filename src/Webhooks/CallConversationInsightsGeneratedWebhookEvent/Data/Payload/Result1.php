@@ -4,32 +4,37 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result;
 
 /**
- * @phpstan-type result1_alias = array{insightID?: string, result?: mixed|string}
+ * @phpstan-import-type ResultVariants from \Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result
+ * @phpstan-import-type ResultShape from \Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1\Result
+ *
+ * @phpstan-type Result1Shape = array{
+ *   insightID?: string|null, result?: ResultShape|null
+ * }
  */
 final class Result1 implements BaseModel
 {
-    /** @use SdkModel<result1_alias> */
+    /** @use SdkModel<Result1Shape> */
     use SdkModel;
 
     /**
      * ID that is unique to the insight result being generated for the call.
      */
-    #[Api('insight_id', optional: true)]
+    #[Optional('insight_id')]
     public ?string $insightID;
 
     /**
      * The result of the insight.
      *
-     * @var mixed|string|null $result
+     * @var ResultVariants|null $result
      */
-    #[Api(union: Result::class, optional: true)]
-    public mixed $result;
+    #[Optional(union: Result::class)]
+    public string|array|null $result;
 
     public function __construct()
     {
@@ -41,18 +46,18 @@ final class Result1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param mixed|string $result
+     * @param ResultShape|null $result
      */
     public static function with(
         ?string $insightID = null,
-        mixed $result = null
+        string|array|null $result = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $insightID && $obj->insightID = $insightID;
-        null !== $result && $obj->result = $result;
+        null !== $insightID && $self['insightID'] = $insightID;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,22 +65,22 @@ final class Result1 implements BaseModel
      */
     public function withInsightID(string $insightID): self
     {
-        $obj = clone $this;
-        $obj->insightID = $insightID;
+        $self = clone $this;
+        $self['insightID'] = $insightID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The result of the insight.
      *
-     * @param mixed|string $result
+     * @param ResultShape $result
      */
-    public function withResult(mixed $result): self
+    public function withResult(string|array $result): self
     {
-        $obj = clone $this;
-        $obj->result = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

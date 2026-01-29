@@ -6,66 +6,52 @@ namespace Telnyx\Services\MessagingHostedNumberOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileParams;
+use Telnyx\Core\Util;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumberOrders\ActionsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
-     * @internal
+     * @api
      */
-    public function __construct(private Client $client) {}
+    public ActionsRawService $raw;
 
     /**
-     * @api
-     *
-     * Upload file required for a messaging hosted number order
-     *
-     * @param string $bill must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format
-     * @param string $loa must be a signed LOA for the numbers in the order in PDF format
-     *
-     * @throws APIException
+     * @internal
      */
-    public function uploadFile(
-        string $id,
-        $bill = omit,
-        $loa = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ActionUploadFileResponse {
-        $params = ['bill' => $bill, 'loa' => $loa];
-
-        return $this->uploadFileRaw($id, $params, $requestOptions);
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
     }
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * Upload hosted number document
+     *
+     * @param string $id identifies the type of resource
+     * @param string $bill must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format
+     * @param string $loa must be a signed LOA for the numbers in the order in PDF format
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function uploadFileRaw(
+    public function uploadFile(
         string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        ?string $bill = null,
+        ?string $loa = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionUploadFileResponse {
-        [$parsed, $options] = ActionUploadFileParams::parseRequest(
-            $params,
-            $requestOptions
-        );
+        $params = Util::removeNulls(['bill' => $bill, 'loa' => $loa]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['messaging_hosted_number_orders/%1$s/actions/file_upload', $id],
-            headers: ['Content-Type' => 'multipart/form-data'],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionUploadFileResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->uploadFile($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -4,38 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderGetAllowedFocWindowsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   endedAt?: \DateTimeInterface,
- *   recordType?: string,
- *   startedAt?: \DateTimeInterface,
+ * @phpstan-type DataShape = array{
+ *   endedAt?: \DateTimeInterface|null,
+ *   recordType?: string|null,
+ *   startedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * ISO 8601 formatted date indicating the end of the range of foc window.
      */
-    #[Api('ended_at', optional: true)]
+    #[Optional('ended_at')]
     public ?\DateTimeInterface $endedAt;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating the start of the range of foc window.
      */
-    #[Api('started_at', optional: true)]
+    #[Optional('started_at')]
     public ?\DateTimeInterface $startedAt;
 
     public function __construct()
@@ -53,13 +53,13 @@ final class Data implements BaseModel
         ?string $recordType = null,
         ?\DateTimeInterface $startedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $endedAt && $obj->endedAt = $endedAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $startedAt && $obj->startedAt = $startedAt;
+        null !== $endedAt && $self['endedAt'] = $endedAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Data implements BaseModel
      */
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
-        $obj = clone $this;
-        $obj->endedAt = $endedAt;
+        $self = clone $this;
+        $self['endedAt'] = $endedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class Data implements BaseModel
      */
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
-        $obj = clone $this;
-        $obj->startedAt = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 }

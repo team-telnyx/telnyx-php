@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Storage\Buckets\SslCertificate\SslCertificateDeleteResponse;
+use Telnyx\Storage\Buckets\SslCertificate\SslCertificateGetResponse;
+use Telnyx\Storage\Buckets\SslCertificate\SslCertificateNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +38,8 @@ final class SslCertificateTest extends TestCase
 
         $result = $this->client->storage->buckets->sslCertificate->create('');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SslCertificateNewResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +51,8 @@ final class SslCertificateTest extends TestCase
 
         $result = $this->client->storage->buckets->sslCertificate->retrieve('');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SslCertificateGetResponse::class, $result);
     }
 
     #[Test]
@@ -59,6 +64,7 @@ final class SslCertificateTest extends TestCase
 
         $result = $this->client->storage->buckets->sslCertificate->delete('');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SslCertificateDeleteResponse::class, $result);
     }
 }

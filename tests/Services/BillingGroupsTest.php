@@ -5,7 +5,13 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\BillingGroups\BillingGroup;
+use Telnyx\BillingGroups\BillingGroupDeleteResponse;
+use Telnyx\BillingGroups\BillingGroupGetResponse;
+use Telnyx\BillingGroups\BillingGroupNewResponse;
+use Telnyx\BillingGroups\BillingGroupUpdateResponse;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +41,8 @@ final class BillingGroupsTest extends TestCase
 
         $result = $this->client->billingGroups->create();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BillingGroupNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +56,8 @@ final class BillingGroupsTest extends TestCase
             'f5586561-8ff0-4291-a0ac-84fe544797bd'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BillingGroupGetResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +71,8 @@ final class BillingGroupsTest extends TestCase
             'f5586561-8ff0-4291-a0ac-84fe544797bd'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BillingGroupUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -73,9 +82,15 @@ final class BillingGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->billingGroups->list();
+        $page = $this->client->billingGroups->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(BillingGroup::class, $item);
+        }
     }
 
     #[Test]
@@ -89,6 +104,7 @@ final class BillingGroupsTest extends TestCase
             'f5586561-8ff0-4291-a0ac-84fe544797bd'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BillingGroupDeleteResponse::class, $result);
     }
 }

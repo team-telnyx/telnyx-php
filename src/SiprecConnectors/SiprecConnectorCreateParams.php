@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\SiprecConnectors;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,40 +13,40 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new SIPREC connector configuration.
  *
- * @see Telnyx\SiprecConnectors->create
+ * @see Telnyx\Services\SiprecConnectorsService::create()
  *
- * @phpstan-type siprec_connector_create_params = array{
- *   host: string, name: string, port: int, appSubdomain?: string
+ * @phpstan-type SiprecConnectorCreateParamsShape = array{
+ *   host: string, name: string, port: int, appSubdomain?: string|null
  * }
  */
 final class SiprecConnectorCreateParams implements BaseModel
 {
-    /** @use SdkModel<siprec_connector_create_params> */
+    /** @use SdkModel<SiprecConnectorCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Hostname/IPv4 address of the SIPREC SRS.
      */
-    #[Api]
+    #[Required]
     public string $host;
 
     /**
      * Name for the SIPREC connector resource.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Port for the SIPREC SRS.
      */
-    #[Api]
+    #[Required]
     public int $port;
 
     /**
      * Subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS).
      */
-    #[Api('app_subdomain', optional: true)]
+    #[Optional('app_subdomain')]
     public ?string $appSubdomain;
 
     /**
@@ -78,15 +79,15 @@ final class SiprecConnectorCreateParams implements BaseModel
         int $port,
         ?string $appSubdomain = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->host = $host;
-        $obj->name = $name;
-        $obj->port = $port;
+        $self['host'] = $host;
+        $self['name'] = $name;
+        $self['port'] = $port;
 
-        null !== $appSubdomain && $obj->appSubdomain = $appSubdomain;
+        null !== $appSubdomain && $self['appSubdomain'] = $appSubdomain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +95,10 @@ final class SiprecConnectorCreateParams implements BaseModel
      */
     public function withHost(string $host): self
     {
-        $obj = clone $this;
-        $obj->host = $host;
+        $self = clone $this;
+        $self['host'] = $host;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +106,10 @@ final class SiprecConnectorCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +117,10 @@ final class SiprecConnectorCreateParams implements BaseModel
      */
     public function withPort(int $port): self
     {
-        $obj = clone $this;
-        $obj->port = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,9 +128,9 @@ final class SiprecConnectorCreateParams implements BaseModel
      */
     public function withAppSubdomain(string $appSubdomain): self
     {
-        $obj = clone $this;
-        $obj->appSubdomain = $appSubdomain;
+        $self = clone $this;
+        $self['appSubdomain'] = $appSubdomain;
 
-        return $obj;
+        return $self;
     }
 }

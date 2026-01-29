@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type privacy_settings = array{dataRetention?: bool}
+ * @phpstan-type PrivacySettingsShape = array{dataRetention?: bool|null}
  */
 final class PrivacySettings implements BaseModel
 {
-    /** @use SdkModel<privacy_settings> */
+    /** @use SdkModel<PrivacySettingsShape> */
     use SdkModel;
 
     /**
      * If true, conversation history and insights will be stored. If false, they will not be stored. This in‑tool toggle governs solely the retention of conversation history and insights via the AI assistant. It has no effect on any separate recording, transcription, or storage configuration that you have set at the account, number, or application level. All such external settings remain in force regardless of your selection here.
      */
-    #[Api('data_retention', optional: true)]
+    #[Optional('data_retention')]
     public ?bool $dataRetention;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class PrivacySettings implements BaseModel
      */
     public static function with(?bool $dataRetention = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dataRetention && $obj->dataRetention = $dataRetention;
+        null !== $dataRetention && $self['dataRetention'] = $dataRetention;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class PrivacySettings implements BaseModel
      */
     public function withDataRetention(bool $dataRetention): self
     {
-        $obj = clone $this;
-        $obj->dataRetention = $dataRetention;
+        $self = clone $this;
+        $self['dataRetention'] = $dataRetention;
 
-        return $obj;
+        return $self;
     }
 }

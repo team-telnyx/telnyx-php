@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\RecordingTranscriptions\RecordingTranscriptionDeleteResponse;
+use Telnyx\RecordingTranscriptions\RecordingTranscriptionGetResponse;
+use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +40,8 @@ final class RecordingTranscriptionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RecordingTranscriptionGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +53,8 @@ final class RecordingTranscriptionsTest extends TestCase
 
         $result = $this->client->recordingTranscriptions->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RecordingTranscriptionListResponse::class, $result);
     }
 
     #[Test]
@@ -63,6 +68,10 @@ final class RecordingTranscriptionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            RecordingTranscriptionDeleteResponse::class,
+            $result
+        );
     }
 }

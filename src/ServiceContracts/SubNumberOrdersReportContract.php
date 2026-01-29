@@ -10,8 +10,9 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SubNumberOrdersReportContract
 {
     /**
@@ -23,48 +24,43 @@ interface SubNumberOrdersReportContract
      * @param string $customerReference Filter by customer reference
      * @param string $orderRequestID Filter by specific order request ID
      * @param Status|value-of<Status> $status Filter by order status
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $countryCode = omit,
-        $createdAtGt = omit,
-        $createdAtLt = omit,
-        $customerReference = omit,
-        $orderRequestID = omit,
-        $status = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $countryCode = null,
+        ?\DateTimeInterface $createdAtGt = null,
+        ?\DateTimeInterface $createdAtLt = null,
+        ?string $customerReference = null,
+        ?string $orderRequestID = null,
+        Status|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SubNumberOrdersReportNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SubNumberOrdersReportNewResponse;
-
-    /**
-     * @api
+     * @param string $reportID The unique identifier of the sub number orders report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $reportID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SubNumberOrdersReportGetResponse;
 
     /**
      * @api
      *
+     * @param string $reportID The unique identifier of the sub number orders report
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function download(
         string $reportID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): string;
 }

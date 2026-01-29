@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_hangup_response = array{data?: CallControlCommandResult}
+ * @phpstan-import-type CallControlCommandResultShape from \Telnyx\Calls\Actions\CallControlCommandResult
+ *
+ * @phpstan-type ActionHangupResponseShape = array{
+ *   data?: null|CallControlCommandResult|CallControlCommandResultShape
+ * }
  */
-final class ActionHangupResponse implements BaseModel, ResponseConverter
+final class ActionHangupResponse implements BaseModel
 {
-    /** @use SdkModel<action_hangup_response> */
+    /** @use SdkModel<ActionHangupResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallControlCommandResult $data;
 
     public function __construct()
@@ -32,21 +32,27 @@ final class ActionHangupResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CallControlCommandResult|CallControlCommandResultShape|null $data
      */
-    public static function with(?CallControlCommandResult $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        CallControlCommandResult|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(CallControlCommandResult $data): self
+    /**
+     * @param CallControlCommandResult|CallControlCommandResultShape $data
+     */
+    public function withData(CallControlCommandResult|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,63 +4,65 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data\Payload\MessageHistory;
 
 /**
- * @phpstan-type payload_alias = array{
- *   callControlID?: string,
- *   callLegID?: string,
- *   callSessionID?: string,
- *   clientState?: string,
- *   connectionID?: string,
- *   from?: string,
- *   messageHistory?: list<MessageHistory>,
- *   partialResults?: mixed,
- *   to?: string,
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent\Data\Payload\MessageHistory
+ *
+ * @phpstan-type PayloadShape = array{
+ *   callControlID?: string|null,
+ *   callLegID?: string|null,
+ *   callSessionID?: string|null,
+ *   clientState?: string|null,
+ *   connectionID?: string|null,
+ *   from?: string|null,
+ *   messageHistory?: list<MessageHistory|MessageHistoryShape>|null,
+ *   partialResults?: array<string,mixed>|null,
+ *   to?: string|null,
  * }
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api('call_control_id', optional: true)]
+    #[Optional('call_control_id')]
     public ?string $callControlID;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id', optional: true)]
+    #[Optional('call_leg_id')]
     public ?string $callLegID;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id', optional: true)]
+    #[Optional('call_session_id')]
     public ?string $callSessionID;
 
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Telnyx connection ID used in the call.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * Number or SIP URI placing the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
@@ -68,19 +70,21 @@ final class Payload implements BaseModel
      *
      * @var list<MessageHistory>|null $messageHistory
      */
-    #[Api('message_history', list: MessageHistory::class, optional: true)]
+    #[Optional('message_history', list: MessageHistory::class)]
     public ?array $messageHistory;
 
     /**
      * The partial result of the AI gather, its type depends of the `parameters` provided in the command.
+     *
+     * @var array<string,mixed>|null $partialResults
      */
-    #[Api('partial_results', optional: true)]
-    public mixed $partialResults;
+    #[Optional('partial_results', map: 'mixed')]
+    public ?array $partialResults;
 
     /**
      * Destination number or SIP URI of the call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()
@@ -93,7 +97,8 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MessageHistory> $messageHistory
+     * @param list<MessageHistory|MessageHistoryShape>|null $messageHistory
+     * @param array<string,mixed>|null $partialResults
      */
     public static function with(
         ?string $callControlID = null,
@@ -103,22 +108,22 @@ final class Payload implements BaseModel
         ?string $connectionID = null,
         ?string $from = null,
         ?array $messageHistory = null,
-        mixed $partialResults = null,
+        ?array $partialResults = null,
         ?string $to = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $from && $obj->from = $from;
-        null !== $messageHistory && $obj->messageHistory = $messageHistory;
-        null !== $partialResults && $obj->partialResults = $partialResults;
-        null !== $to && $obj->to = $to;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $from && $self['from'] = $from;
+        null !== $messageHistory && $self['messageHistory'] = $messageHistory;
+        null !== $partialResults && $self['partialResults'] = $partialResults;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +131,10 @@ final class Payload implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +142,10 @@ final class Payload implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +153,10 @@ final class Payload implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +164,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +175,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,34 +186,36 @@ final class Payload implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The history of the messages exchanged during the AI gather.
      *
-     * @param list<MessageHistory> $messageHistory
+     * @param list<MessageHistory|MessageHistoryShape> $messageHistory
      */
     public function withMessageHistory(array $messageHistory): self
     {
-        $obj = clone $this;
-        $obj->messageHistory = $messageHistory;
+        $self = clone $this;
+        $self['messageHistory'] = $messageHistory;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The partial result of the AI gather, its type depends of the `parameters` provided in the command.
+     *
+     * @param array<string,mixed> $partialResults
      */
-    public function withPartialResults(mixed $partialResults): self
+    public function withPartialResults(array $partialResults): self
     {
-        $obj = clone $this;
-        $obj->partialResults = $partialResults;
+        $self = clone $this;
+        $self['partialResults'] = $partialResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -216,9 +223,9 @@ final class Payload implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

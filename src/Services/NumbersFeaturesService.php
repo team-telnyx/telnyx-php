@@ -6,17 +6,28 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NumbersFeatures\NumbersFeatureCreateParams;
+use Telnyx\Core\Util;
 use Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumbersFeaturesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumbersFeaturesService implements NumbersFeaturesContract
 {
     /**
+     * @api
+     */
+    public NumbersFeaturesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NumbersFeaturesRawService($client);
+    }
 
     /**
      * @api
@@ -24,41 +35,19 @@ final class NumbersFeaturesService implements NumbersFeaturesContract
      * Retrieve the features for a list of numbers
      *
      * @param list<string> $phoneNumbers
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $phoneNumbers,
-        ?RequestOptions $requestOptions = null
+        array $phoneNumbers,
+        RequestOptions|array|null $requestOptions = null
     ): NumbersFeatureNewResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
 
-        return $this->createRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NumbersFeatureNewResponse {
-        [$parsed, $options] = NumbersFeatureCreateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'numbers_features',
-            body: (object) $parsed,
-            options: $options,
-            convert: NumbersFeatureNewResponse::class,
-        );
+        return $response->parse();
     }
 }

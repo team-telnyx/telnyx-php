@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Return the details of an Upload request and its phone numbers.
  *
- * @see Telnyx\ExternalConnections\Uploads->retrieve
+ * @see Telnyx\Services\ExternalConnections\UploadsService::retrieve()
  *
- * @phpstan-type upload_retrieve_params = array{id: string}
+ * @phpstan-type UploadRetrieveParamsShape = array{id: string}
  */
 final class UploadRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<upload_retrieve_params> */
+    /** @use SdkModel<UploadRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -51,18 +51,18 @@ final class UploadRetrieveParams implements BaseModel
      */
     public static function with(string $id): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 }

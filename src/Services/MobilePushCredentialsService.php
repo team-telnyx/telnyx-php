@@ -6,82 +6,62 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateAndroidPushCredentialRequest;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateIosPushCredentialRequest;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
+use Telnyx\MobilePushCredentials\PushCredential;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePushCredentialsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type CreateMobilePushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest
+ * @phpstan-import-type FilterShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MobilePushCredentialsService implements MobilePushCredentialsContract
 {
     /**
+     * @api
+     */
+    public MobilePushCredentialsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MobilePushCredentialsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a new mobile push credential
      *
-     * @param string $alias Alias to uniquely identify the credential
-     * @param string $certificate Certificate as received from APNs
-     * @param string $privateKey Corresponding private key to the certificate as received from APNs
-     * @param Type|value-of<Type> $type Type of mobile push credential. Should be <code>android</code> here
-     * @param array<string,
-     * mixed,> $projectAccountJsonFile Private key file in JSON format
+     * @param CreateMobilePushCredentialRequestShape $createMobilePushCredentialRequest
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $alias,
-        $certificate,
-        $privateKey,
-        $type,
-        $projectAccountJsonFile,
-        ?RequestOptions $requestOptions = null,
+        CreateIosPushCredentialRequest|array|CreateAndroidPushCredentialRequest $createMobilePushCredentialRequest,
+        RequestOptions|array|null $requestOptions = null,
     ): PushCredentialResponse {
-        $params = [
-            'alias' => $alias,
-            'certificate' => $certificate,
-            'privateKey' => $privateKey,
-            'type' => $type,
-            'projectAccountJsonFile' => $projectAccountJsonFile,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PushCredentialResponse {
-        [$parsed, $options] = MobilePushCredentialCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'createMobilePushCredentialRequest' => $createMobilePushCredentialRequest,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'mobile_push_credentials',
-            body: (object) $parsed,
-            options: $options,
-            convert: PushCredentialResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -89,19 +69,19 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * Retrieves mobile push credential based on the given `push_credential_id`
      *
+     * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PushCredentialResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['mobile_push_credentials/%1$s', $pushCredentialID],
-            options: $requestOptions,
-            convert: PushCredentialResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($pushCredentialID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -109,45 +89,25 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * List mobile push credentials
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<PushCredential>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): MobilePushCredentialListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MobilePushCredentialListResponse {
-        [$parsed, $options] = MobilePushCredentialListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'mobile_push_credentials',
-            query: $parsed,
-            options: $options,
-            convert: MobilePushCredentialListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -155,18 +115,18 @@ final class MobilePushCredentialsService implements MobilePushCredentialsContrac
      *
      * Deletes a mobile push credential based on the given `push_credential_id`
      *
+     * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['mobile_push_credentials/%1$s', $pushCredentialID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($pushCredentialID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

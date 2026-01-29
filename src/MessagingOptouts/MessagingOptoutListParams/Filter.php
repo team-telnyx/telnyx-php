@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingOptouts\MessagingOptoutListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[messaging_profile_id], filter[from].
  *
- * @phpstan-type filter_alias = array{from?: string, messagingProfileID?: string}
+ * @phpstan-type FilterShape = array{
+ *   from?: string|null, messagingProfileID?: string|null
+ * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * The sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code) to retrieve opt-outs for.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The ID of the messaging profile to retrieve opt-outs for.
      */
-    #[Api('messaging_profile_id', optional: true)]
+    #[Optional('messaging_profile_id')]
     public ?string $messagingProfileID;
 
     public function __construct()
@@ -44,12 +46,12 @@ final class Filter implements BaseModel
         ?string $from = null,
         ?string $messagingProfileID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $from && $obj->from = $from;
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
+        null !== $from && $self['from'] = $from;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +59,10 @@ final class Filter implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +70,9 @@ final class Filter implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\AISummarizeResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{summary: string}
+ * @phpstan-type DataShape = array{summary: string}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $summary;
 
     /**
@@ -45,18 +45,18 @@ final class Data implements BaseModel
      */
     public static function with(string $summary): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->summary = $summary;
+        $self['summary'] = $summary;
 
-        return $obj;
+        return $self;
     }
 
     public function withSummary(string $summary): self
     {
-        $obj = clone $this;
-        $obj->summary = $summary;
+        $self = clone $this;
+        $self['summary'] = $summary;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type mdr_usage_report_get_response = array{data?: MdrUsageReport}
+ * @phpstan-import-type MdrUsageReportShape from \Telnyx\Reports\MdrUsageReports\MdrUsageReport
+ *
+ * @phpstan-type MdrUsageReportGetResponseShape = array{
+ *   data?: null|MdrUsageReport|MdrUsageReportShape
+ * }
  */
-final class MdrUsageReportGetResponse implements BaseModel, ResponseConverter
+final class MdrUsageReportGetResponse implements BaseModel
 {
-    /** @use SdkModel<mdr_usage_report_get_response> */
+    /** @use SdkModel<MdrUsageReportGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?MdrUsageReport $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class MdrUsageReportGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MdrUsageReport|MdrUsageReportShape|null $data
      */
-    public static function with(?MdrUsageReport $data = null): self
+    public static function with(MdrUsageReport|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(MdrUsageReport $data): self
+    /**
+     * @param MdrUsageReport|MdrUsageReportShape $data
+     */
+    public function withData(MdrUsageReport|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

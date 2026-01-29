@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\PortoutListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutListParams\Filter\InsertedAt;
@@ -15,36 +15,39 @@ use Telnyx\Portouts\PortoutListParams\Filter\StatusIn;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[carrier_name], filter[country_code], filter[country_code_in], filter[foc_date], filter[inserted_at], filter[phone_number], filter[pon], filter[ported_out_at], filter[spid], filter[status], filter[status_in], filter[support_key].
  *
- * @phpstan-type filter_alias = array{
- *   carrierName?: string,
- *   countryCode?: string,
- *   countryCodeIn?: list<string>,
- *   focDate?: \DateTimeInterface,
- *   insertedAt?: InsertedAt,
- *   phoneNumber?: string,
- *   pon?: string,
- *   portedOutAt?: PortedOutAt,
- *   spid?: string,
- *   status?: value-of<Status>,
- *   statusIn?: list<value-of<StatusIn>>,
- *   supportKey?: string,
+ * @phpstan-import-type InsertedAtShape from \Telnyx\Portouts\PortoutListParams\Filter\InsertedAt
+ * @phpstan-import-type PortedOutAtShape from \Telnyx\Portouts\PortoutListParams\Filter\PortedOutAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   carrierName?: string|null,
+ *   countryCode?: string|null,
+ *   countryCodeIn?: list<string>|null,
+ *   focDate?: \DateTimeInterface|null,
+ *   insertedAt?: null|InsertedAt|InsertedAtShape,
+ *   phoneNumber?: string|null,
+ *   pon?: string|null,
+ *   portedOutAt?: null|PortedOutAt|PortedOutAtShape,
+ *   spid?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   statusIn?: list<StatusIn|value-of<StatusIn>>|null,
+ *   supportKey?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by new carrier name.
      */
-    #[Api('carrier_name', optional: true)]
+    #[Optional('carrier_name')]
     public ?string $carrierName;
 
     /**
      * Filter by 2-letter country code.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
@@ -52,43 +55,43 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $countryCodeIn
      */
-    #[Api('country_code_in', list: 'string', optional: true)]
+    #[Optional('country_code_in', list: 'string')]
     public ?array $countryCodeIn;
 
     /**
      * Filter by foc_date. Matches all portouts with the same date.
      */
-    #[Api('foc_date', optional: true)]
+    #[Optional('foc_date')]
     public ?\DateTimeInterface $focDate;
 
     /**
      * Filter by inserted_at date range using nested operations.
      */
-    #[Api('inserted_at', optional: true)]
+    #[Optional('inserted_at')]
     public ?InsertedAt $insertedAt;
 
     /**
      * Filter by a phone number on the portout. Matches all portouts with the phone number.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
      * Filter by Port Order Number (PON).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pon;
 
     /**
      * Filter by ported_out_at date range using nested operations.
      */
-    #[Api('ported_out_at', optional: true)]
+    #[Optional('ported_out_at')]
     public ?PortedOutAt $portedOutAt;
 
     /**
      * Filter by new carrier spid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spid;
 
     /**
@@ -96,7 +99,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -104,13 +107,13 @@ final class Filter implements BaseModel
      *
      * @var list<value-of<StatusIn>>|null $statusIn
      */
-    #[Api('status_in', list: StatusIn::class, optional: true)]
+    #[Optional('status_in', list: StatusIn::class)]
     public ?array $statusIn;
 
     /**
      * Filter by the portout's support_key.
      */
-    #[Api('support_key', optional: true)]
+    #[Optional('support_key')]
     public ?string $supportKey;
 
     public function __construct()
@@ -123,40 +126,42 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $countryCodeIn
-     * @param Status|value-of<Status> $status
-     * @param list<StatusIn|value-of<StatusIn>> $statusIn
+     * @param list<string>|null $countryCodeIn
+     * @param InsertedAt|InsertedAtShape|null $insertedAt
+     * @param PortedOutAt|PortedOutAtShape|null $portedOutAt
+     * @param Status|value-of<Status>|null $status
+     * @param list<StatusIn|value-of<StatusIn>>|null $statusIn
      */
     public static function with(
         ?string $carrierName = null,
         ?string $countryCode = null,
         ?array $countryCodeIn = null,
         ?\DateTimeInterface $focDate = null,
-        ?InsertedAt $insertedAt = null,
+        InsertedAt|array|null $insertedAt = null,
         ?string $phoneNumber = null,
         ?string $pon = null,
-        ?PortedOutAt $portedOutAt = null,
+        PortedOutAt|array|null $portedOutAt = null,
         ?string $spid = null,
         Status|string|null $status = null,
         ?array $statusIn = null,
         ?string $supportKey = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrierName && $obj->carrierName = $carrierName;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $countryCodeIn && $obj->countryCodeIn = $countryCodeIn;
-        null !== $focDate && $obj->focDate = $focDate;
-        null !== $insertedAt && $obj->insertedAt = $insertedAt;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $pon && $obj->pon = $pon;
-        null !== $portedOutAt && $obj->portedOutAt = $portedOutAt;
-        null !== $spid && $obj->spid = $spid;
-        null !== $status && $obj['status'] = $status;
-        null !== $statusIn && $obj['statusIn'] = $statusIn;
-        null !== $supportKey && $obj->supportKey = $supportKey;
+        null !== $carrierName && $self['carrierName'] = $carrierName;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $countryCodeIn && $self['countryCodeIn'] = $countryCodeIn;
+        null !== $focDate && $self['focDate'] = $focDate;
+        null !== $insertedAt && $self['insertedAt'] = $insertedAt;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $pon && $self['pon'] = $pon;
+        null !== $portedOutAt && $self['portedOutAt'] = $portedOutAt;
+        null !== $spid && $self['spid'] = $spid;
+        null !== $status && $self['status'] = $status;
+        null !== $statusIn && $self['statusIn'] = $statusIn;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +169,10 @@ final class Filter implements BaseModel
      */
     public function withCarrierName(string $carrierName): self
     {
-        $obj = clone $this;
-        $obj->carrierName = $carrierName;
+        $self = clone $this;
+        $self['carrierName'] = $carrierName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +180,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +193,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCodeIn(array $countryCodeIn): self
     {
-        $obj = clone $this;
-        $obj->countryCodeIn = $countryCodeIn;
+        $self = clone $this;
+        $self['countryCodeIn'] = $countryCodeIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,21 +204,23 @@ final class Filter implements BaseModel
      */
     public function withFocDate(\DateTimeInterface $focDate): self
     {
-        $obj = clone $this;
-        $obj->focDate = $focDate;
+        $self = clone $this;
+        $self['focDate'] = $focDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by inserted_at date range using nested operations.
+     *
+     * @param InsertedAt|InsertedAtShape $insertedAt
      */
-    public function withInsertedAt(InsertedAt $insertedAt): self
+    public function withInsertedAt(InsertedAt|array $insertedAt): self
     {
-        $obj = clone $this;
-        $obj->insertedAt = $insertedAt;
+        $self = clone $this;
+        $self['insertedAt'] = $insertedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +228,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,21 +239,23 @@ final class Filter implements BaseModel
      */
     public function withPon(string $pon): self
     {
-        $obj = clone $this;
-        $obj->pon = $pon;
+        $self = clone $this;
+        $self['pon'] = $pon;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by ported_out_at date range using nested operations.
+     *
+     * @param PortedOutAt|PortedOutAtShape $portedOutAt
      */
-    public function withPortedOutAt(PortedOutAt $portedOutAt): self
+    public function withPortedOutAt(PortedOutAt|array $portedOutAt): self
     {
-        $obj = clone $this;
-        $obj->portedOutAt = $portedOutAt;
+        $self = clone $this;
+        $self['portedOutAt'] = $portedOutAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +263,10 @@ final class Filter implements BaseModel
      */
     public function withSpid(string $spid): self
     {
-        $obj = clone $this;
-        $obj->spid = $spid;
+        $self = clone $this;
+        $self['spid'] = $spid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +276,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -280,10 +289,10 @@ final class Filter implements BaseModel
      */
     public function withStatusIn(array $statusIn): self
     {
-        $obj = clone $this;
-        $obj['statusIn'] = $statusIn;
+        $self = clone $this;
+        $self['statusIn'] = $statusIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -291,9 +300,9 @@ final class Filter implements BaseModel
      */
     public function withSupportKey(string $supportKey): self
     {
-        $obj = clone $this;
-        $obj->supportKey = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 }

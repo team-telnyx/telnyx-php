@@ -6,10 +6,9 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort;
@@ -18,59 +17,52 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\AdditionalDocumentsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type AdditionalDocumentShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AdditionalDocumentsService implements AdditionalDocumentsContract
 {
     /**
+     * @api
+     */
+    public AdditionalDocumentsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AdditionalDocumentsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a list of additional documents for a porting order.
      *
-     * @param list<AdditionalDocument> $additionalDocuments
+     * @param string $id Porting Order id
+     * @param list<AdditionalDocument|AdditionalDocumentShape> $additionalDocuments
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        $additionalDocuments = omit,
-        ?RequestOptions $requestOptions = null,
+        ?array $additionalDocuments = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AdditionalDocumentNewResponse {
-        $params = ['additionalDocuments' => $additionalDocuments];
-
-        return $this->createRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AdditionalDocumentNewResponse {
-        [$parsed, $options] = AdditionalDocumentCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['additionalDocuments' => $additionalDocuments]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['porting_orders/%1$s/additional_documents', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: AdditionalDocumentNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -78,49 +70,31 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      *
      * Returns a list of additional documents for a porting order.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[document_type]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param string $id Porting Order id
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[document_type]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<AdditionalDocumentListResponse>
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): AdditionalDocumentListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AdditionalDocumentListResponse {
-        [$parsed, $options] = AdditionalDocumentListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|array|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['porting_orders/%1$s/additional_documents', $id],
-            query: $parsed,
-            options: $options,
-            convert: AdditionalDocumentListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -128,49 +102,22 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      *
      * Deletes an additional document for a porting order.
      *
-     * @param string $id
+     * @param string $additionalDocumentID additional document identification
+     * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $additionalDocumentID,
-        $id,
-        ?RequestOptions $requestOptions = null
+        string $id,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = ['id' => $id];
+        $params = Util::removeNulls(['id' => $id]);
 
-        return $this->deleteRaw($additionalDocumentID, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($additionalDocumentID, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        string $additionalDocumentID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
-        [$parsed, $options] = AdditionalDocumentDeleteParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $id = $parsed['id'];
-        unset($parsed['id']);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: [
-                'porting_orders/%1$s/additional_documents/%2$s',
-                $id,
-                $additionalDocumentID,
-            ],
-            options: $options,
-            convert: null,
-        );
+        return $response->parse();
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This action will asynchronously assign a Wireless Blocklist to all the SIMs in the SIM card group.
  *
- * @see Telnyx\SimCardGroups\Actions->setWirelessBlocklist
+ * @see Telnyx\Services\SimCardGroups\ActionsService::setWirelessBlocklist()
  *
- * @phpstan-type action_set_wireless_blocklist_params = array{
+ * @phpstan-type ActionSetWirelessBlocklistParamsShape = array{
  *   wirelessBlocklistID: string
  * }
  */
 final class ActionSetWirelessBlocklistParams implements BaseModel
 {
-    /** @use SdkModel<action_set_wireless_blocklist_params> */
+    /** @use SdkModel<ActionSetWirelessBlocklistParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The identification of the related Wireless Blocklist resource.
      */
-    #[Api('wireless_blocklist_id')]
+    #[Required('wireless_blocklist_id')]
     public string $wirelessBlocklistID;
 
     /**
@@ -56,11 +56,11 @@ final class ActionSetWirelessBlocklistParams implements BaseModel
      */
     public static function with(string $wirelessBlocklistID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->wirelessBlocklistID = $wirelessBlocklistID;
+        $self['wirelessBlocklistID'] = $wirelessBlocklistID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class ActionSetWirelessBlocklistParams implements BaseModel
      */
     public function withWirelessBlocklistID(string $wirelessBlocklistID): self
     {
-        $obj = clone $this;
-        $obj->wirelessBlocklistID = $wirelessBlocklistID;
+        $self = clone $this;
+        $self['wirelessBlocklistID'] = $wirelessBlocklistID;
 
-        return $obj;
+        return $self;
     }
 }

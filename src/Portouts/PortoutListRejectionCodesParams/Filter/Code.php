@@ -11,14 +11,16 @@ use Telnyx\Core\Conversion\ListOf;
 
 /**
  * Filter rejections of a specific code.
+ *
+ * @phpstan-type CodeVariants = int|list<int>
+ * @phpstan-type CodeShape = CodeVariants
  */
 final class Code implements ConverterSource
 {
     use SdkUnion;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {

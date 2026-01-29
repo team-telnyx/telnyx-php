@@ -6,16 +6,27 @@ namespace Telnyx\Services\Recordings;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Recordings\Actions\ActionDeleteParams;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Recordings\ActionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
@@ -23,39 +34,19 @@ final class ActionsService implements ActionsContract
      * Permanently deletes a list of call recordings.
      *
      * @param list<string> $ids list of call recording IDs to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function delete($ids, ?RequestOptions $requestOptions = null): mixed
-    {
-        $params = ['ids' => $ids];
-
-        return $this->deleteRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+    public function delete(
+        array $ids,
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        [$parsed, $options] = ActionDeleteParams::parseRequest(
-            $params,
-            $requestOptions
-        );
+        $params = Util::removeNulls(['ids' => $ids]);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'recordings/actions/delete',
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

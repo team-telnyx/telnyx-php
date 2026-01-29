@@ -5,33 +5,30 @@ declare(strict_types=1);
 namespace Telnyx\WirelessBlocklistValues;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data;
-use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Country;
-use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Mcc;
-use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data\Plmn;
 
 /**
- * @phpstan-type wireless_blocklist_value_list_response = array{
- *   data?: list<Country>|list<Mcc>|list<Plmn>, meta?: PaginationMeta
+ * @phpstan-import-type DataVariants from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data
+ * @phpstan-import-type DataShape from \Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
+ * @phpstan-type WirelessBlocklistValueListResponseShape = array{
+ *   data?: DataShape|null, meta?: null|PaginationMeta|PaginationMetaShape
  * }
  */
-final class WirelessBlocklistValueListResponse implements BaseModel, ResponseConverter
+final class WirelessBlocklistValueListResponse implements BaseModel
 {
-    /** @use SdkModel<wireless_blocklist_value_list_response> */
+    /** @use SdkModel<WirelessBlocklistValueListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    /** @var list<Country>|list<Mcc>|list<Plmn>|null $data */
-    #[Api(union: Data::class, optional: true)]
+    /** @var DataVariants|null $data */
+    #[Optional(union: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()
@@ -44,36 +41,40 @@ final class WirelessBlocklistValueListResponse implements BaseModel, ResponseCon
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Country>|list<Mcc>|list<Plmn> $data
+     * @param DataShape|null $data
+     * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Country>|list<Mcc>|list<Plmn> $data
+     * @param DataShape $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|PaginationMetaShape $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

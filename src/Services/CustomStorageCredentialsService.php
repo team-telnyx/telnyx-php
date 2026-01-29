@@ -6,71 +6,63 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Telnyx\CustomStorageCredentials\GcsConfigurationData;
 use Telnyx\CustomStorageCredentials\S3ConfigurationData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomStorageCredentialsContract;
 
+/**
+ * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration
+ * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration as ConfigurationShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CustomStorageCredentialsService implements CustomStorageCredentialsContract
 {
     /**
+     * @api
+     */
+    public CustomStorageCredentialsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CustomStorageCredentialsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a custom storage credentials configuration.
      *
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      * @param Backend|value-of<Backend> $backend
-     * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
+     * @param ConfigurationShape $configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $connectionID,
-        $backend,
-        $configuration,
-        ?RequestOptions $requestOptions = null,
+        Backend|string $backend,
+        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
+        RequestOptions|array|null $requestOptions = null,
     ): CustomStorageCredentialNewResponse {
-        $params = ['backend' => $backend, 'configuration' => $configuration];
-
-        return $this->createRaw($connectionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $connectionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CustomStorageCredentialNewResponse {
-        [$parsed, $options] = CustomStorageCredentialCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['backend' => $backend, 'configuration' => $configuration]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['custom_storage_credentials/%1$s', $connectionID],
-            body: (object) $parsed,
-            options: $options,
-            convert: CustomStorageCredentialNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($connectionID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -78,19 +70,19 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      *
      * Returns the information about custom storage credentials.
      *
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CustomStorageCredentialGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['custom_storage_credentials/%1$s', $connectionID],
-            options: $requestOptions,
-            convert: CustomStorageCredentialGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($connectionID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -98,47 +90,27 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      *
      * Updates a stored custom credentials configuration.
      *
-     * @param CustomStorageCredentialUpdateParams\Backend|value-of<CustomStorageCredentialUpdateParams\Backend> $backend
-     * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|value-of<\Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend> $backend
+     * @param ConfigurationShape1 $configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $connectionID,
-        $backend,
-        $configuration,
-        ?RequestOptions $requestOptions = null,
+        \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|string $backend,
+        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
+        RequestOptions|array|null $requestOptions = null,
     ): CustomStorageCredentialUpdateResponse {
-        $params = ['backend' => $backend, 'configuration' => $configuration];
-
-        return $this->updateRaw($connectionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $connectionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CustomStorageCredentialUpdateResponse {
-        [$parsed, $options] = CustomStorageCredentialUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['backend' => $backend, 'configuration' => $configuration]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'put',
-            path: ['custom_storage_credentials/%1$s', $connectionID],
-            body: (object) $parsed,
-            options: $options,
-            convert: CustomStorageCredentialUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($connectionID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -146,18 +118,18 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
      *
      * Deletes a stored custom credentials configuration.
      *
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['custom_storage_credentials/%1$s', $connectionID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($connectionID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

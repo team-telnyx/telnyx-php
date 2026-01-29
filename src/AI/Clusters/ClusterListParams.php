@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters;
 
-use Telnyx\AI\Clusters\ClusterListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,21 +12,23 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List all clusters.
  *
- * @see Telnyx\AI\Clusters->list
+ * @see Telnyx\Services\AI\ClustersService::list()
  *
- * @phpstan-type cluster_list_params = array{page?: Page}
+ * @phpstan-type ClusterListParamsShape = array{
+ *   pageNumber?: int|null, pageSize?: int|null
+ * }
  */
 final class ClusterListParams implements BaseModel
 {
-    /** @use SdkModel<cluster_list_params> */
+    /** @use SdkModel<ClusterListParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -39,23 +40,31 @@ final class ClusterListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Page $page = null): self
-    {
-        $obj = new self;
+    public static function with(
+        ?int $pageNumber = null,
+        ?int $pageSize = null
+    ): self {
+        $self = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 }

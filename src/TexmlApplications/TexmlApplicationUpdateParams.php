@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\TexmlApplications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -18,47 +19,51 @@ use Telnyx\TexmlApplications\TexmlApplicationUpdateParams\VoiceMethod;
 /**
  * Updates settings of an existing TeXML Application.
  *
- * @see Telnyx\TexmlApplications->update
+ * @see Telnyx\Services\TexmlApplicationsService::update()
  *
- * @phpstan-type texml_application_update_params = array{
+ * @phpstan-import-type InboundShape from \Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Outbound
+ *
+ * @phpstan-type TexmlApplicationUpdateParamsShape = array{
  *   friendlyName: string,
  *   voiceURL: string,
- *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
- *   dtmfType?: DtmfType|value-of<DtmfType>,
- *   firstCommandTimeout?: bool,
- *   firstCommandTimeoutSecs?: int,
- *   inbound?: Inbound,
- *   outbound?: Outbound,
- *   statusCallback?: string,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   tags?: list<string>,
- *   voiceFallbackURL?: string,
- *   voiceMethod?: VoiceMethod|value-of<VoiceMethod>,
+ *   active?: bool|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   callCostInWebhooks?: bool|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
+ *   firstCommandTimeout?: bool|null,
+ *   firstCommandTimeoutSecs?: int|null,
+ *   inbound?: null|Inbound|InboundShape,
+ *   outbound?: null|Outbound|OutboundShape,
+ *   statusCallback?: string|null,
+ *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   tags?: list<string>|null,
+ *   voiceFallbackURL?: string|null,
+ *   voiceMethod?: null|VoiceMethod|value-of<VoiceMethod>,
  * }
  */
 final class TexmlApplicationUpdateParams implements BaseModel
 {
-    /** @use SdkModel<texml_application_update_params> */
+    /** @use SdkModel<TexmlApplicationUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A user-assigned name to help manage the application.
      */
-    #[Api('friendly_name')]
+    #[Required('friendly_name')]
     public string $friendlyName;
 
     /**
      * URL to which Telnyx will deliver your XML Translator webhooks.
      */
-    #[Api('voice_url')]
+    #[Required('voice_url')]
     public string $voiceURL;
 
     /**
      * Specifies whether the connection can be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
@@ -66,39 +71,45 @@ final class TexmlApplicationUpdateParams implements BaseModel
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
      */
-    #[Api('anchorsite_override', enum: AnchorsiteOverride::class, optional: true)]
+    #[Optional('anchorsite_override', enum: AnchorsiteOverride::class)]
     public ?string $anchorsiteOverride;
+
+    /**
+     * Specifies if call cost webhooks should be sent for this TeXML Application.
+     */
+    #[Optional('call_cost_in_webhooks')]
+    public ?bool $callCostInWebhooks;
 
     /**
      * Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
      *
      * @var value-of<DtmfType>|null $dtmfType
      */
-    #[Api('dtmf_type', enum: DtmfType::class, optional: true)]
+    #[Optional('dtmf_type', enum: DtmfType::class)]
     public ?string $dtmfType;
 
     /**
      * Specifies whether calls to phone numbers associated with this connection should hangup after timing out.
      */
-    #[Api('first_command_timeout', optional: true)]
+    #[Optional('first_command_timeout')]
     public ?bool $firstCommandTimeout;
 
     /**
      * Specifies how many seconds to wait before timing out a dial command.
      */
-    #[Api('first_command_timeout_secs', optional: true)]
+    #[Optional('first_command_timeout_secs')]
     public ?int $firstCommandTimeoutSecs;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Outbound $outbound;
 
     /**
      * URL for Telnyx to send requests to containing information about call progress events.
      */
-    #[Api('status_callback', optional: true)]
+    #[Optional('status_callback')]
     public ?string $statusCallback;
 
     /**
@@ -106,11 +117,7 @@ final class TexmlApplicationUpdateParams implements BaseModel
      *
      * @var value-of<StatusCallbackMethod>|null $statusCallbackMethod
      */
-    #[Api(
-        'status_callback_method',
-        enum: StatusCallbackMethod::class,
-        optional: true
-    )]
+    #[Optional('status_callback_method', enum: StatusCallbackMethod::class)]
     public ?string $statusCallbackMethod;
 
     /**
@@ -118,13 +125,13 @@ final class TexmlApplicationUpdateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url.
      */
-    #[Api('voice_fallback_url', optional: true)]
+    #[Optional('voice_fallback_url')]
     public ?string $voiceFallbackURL;
 
     /**
@@ -132,7 +139,7 @@ final class TexmlApplicationUpdateParams implements BaseModel
      *
      * @var value-of<VoiceMethod>|null $voiceMethod
      */
-    #[Api('voice_method', enum: VoiceMethod::class, optional: true)]
+    #[Optional('voice_method', enum: VoiceMethod::class)]
     public ?string $voiceMethod;
 
     /**
@@ -159,47 +166,51 @@ final class TexmlApplicationUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
-     * @param list<string> $tags
-     * @param VoiceMethod|value-of<VoiceMethod> $voiceMethod
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
+     * @param Inbound|InboundShape|null $inbound
+     * @param Outbound|OutboundShape|null $outbound
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @param list<string>|null $tags
+     * @param VoiceMethod|value-of<VoiceMethod>|null $voiceMethod
      */
     public static function with(
         string $friendlyName,
         string $voiceURL,
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        ?bool $callCostInWebhooks = null,
         DtmfType|string|null $dtmfType = null,
         ?bool $firstCommandTimeout = null,
         ?int $firstCommandTimeoutSecs = null,
-        ?Inbound $inbound = null,
-        ?Outbound $outbound = null,
+        Inbound|array|null $inbound = null,
+        Outbound|array|null $outbound = null,
         ?string $statusCallback = null,
         StatusCallbackMethod|string|null $statusCallbackMethod = null,
         ?array $tags = null,
         ?string $voiceFallbackURL = null,
         VoiceMethod|string|null $voiceMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->friendlyName = $friendlyName;
-        $obj->voiceURL = $voiceURL;
+        $self['friendlyName'] = $friendlyName;
+        $self['voiceURL'] = $voiceURL;
 
-        null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
-        null !== $firstCommandTimeout && $obj->firstCommandTimeout = $firstCommandTimeout;
-        null !== $firstCommandTimeoutSecs && $obj->firstCommandTimeoutSecs = $firstCommandTimeoutSecs;
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $outbound && $obj->outbound = $outbound;
-        null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
-        null !== $tags && $obj->tags = $tags;
-        null !== $voiceFallbackURL && $obj->voiceFallbackURL = $voiceFallbackURL;
-        null !== $voiceMethod && $obj['voiceMethod'] = $voiceMethod;
+        null !== $active && $self['active'] = $active;
+        null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
+        null !== $dtmfType && $self['dtmfType'] = $dtmfType;
+        null !== $firstCommandTimeout && $self['firstCommandTimeout'] = $firstCommandTimeout;
+        null !== $firstCommandTimeoutSecs && $self['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $statusCallback && $self['statusCallback'] = $statusCallback;
+        null !== $statusCallbackMethod && $self['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $voiceFallbackURL && $self['voiceFallbackURL'] = $voiceFallbackURL;
+        null !== $voiceMethod && $self['voiceMethod'] = $voiceMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +218,10 @@ final class TexmlApplicationUpdateParams implements BaseModel
      */
     public function withFriendlyName(string $friendlyName): self
     {
-        $obj = clone $this;
-        $obj->friendlyName = $friendlyName;
+        $self = clone $this;
+        $self['friendlyName'] = $friendlyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +229,10 @@ final class TexmlApplicationUpdateParams implements BaseModel
      */
     public function withVoiceURL(string $voiceURL): self
     {
-        $obj = clone $this;
-        $obj->voiceURL = $voiceURL;
+        $self = clone $this;
+        $self['voiceURL'] = $voiceURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +240,10 @@ final class TexmlApplicationUpdateParams implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj->active = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +254,21 @@ final class TexmlApplicationUpdateParams implements BaseModel
     public function withAnchorsiteOverride(
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
-        $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $self = clone $this;
+        $self['anchorsiteOverride'] = $anchorsiteOverride;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this TeXML Application.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $self = clone $this;
+        $self['callCostInWebhooks'] = $callCostInWebhooks;
+
+        return $self;
     }
 
     /**
@@ -256,10 +278,10 @@ final class TexmlApplicationUpdateParams implements BaseModel
      */
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
-        $obj = clone $this;
-        $obj['dtmfType'] = $dtmfType;
+        $self = clone $this;
+        $self['dtmfType'] = $dtmfType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +289,10 @@ final class TexmlApplicationUpdateParams implements BaseModel
      */
     public function withFirstCommandTimeout(bool $firstCommandTimeout): self
     {
-        $obj = clone $this;
-        $obj->firstCommandTimeout = $firstCommandTimeout;
+        $self = clone $this;
+        $self['firstCommandTimeout'] = $firstCommandTimeout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,26 +301,32 @@ final class TexmlApplicationUpdateParams implements BaseModel
     public function withFirstCommandTimeoutSecs(
         int $firstCommandTimeoutSecs
     ): self {
-        $obj = clone $this;
-        $obj->firstCommandTimeoutSecs = $firstCommandTimeoutSecs;
+        $self = clone $this;
+        $self['firstCommandTimeoutSecs'] = $firstCommandTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
-    public function withInbound(Inbound $inbound): self
+    /**
+     * @param Inbound|InboundShape $inbound
+     */
+    public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj->inbound = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
-    public function withOutbound(Outbound $outbound): self
+    /**
+     * @param Outbound|OutboundShape $outbound
+     */
+    public function withOutbound(Outbound|array $outbound): self
     {
-        $obj = clone $this;
-        $obj->outbound = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,10 +334,10 @@ final class TexmlApplicationUpdateParams implements BaseModel
      */
     public function withStatusCallback(string $statusCallback): self
     {
-        $obj = clone $this;
-        $obj->statusCallback = $statusCallback;
+        $self = clone $this;
+        $self['statusCallback'] = $statusCallback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -320,10 +348,10 @@ final class TexmlApplicationUpdateParams implements BaseModel
     public function withStatusCallbackMethod(
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
-        $obj = clone $this;
-        $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        $self = clone $this;
+        $self['statusCallbackMethod'] = $statusCallbackMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -333,10 +361,10 @@ final class TexmlApplicationUpdateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -344,10 +372,10 @@ final class TexmlApplicationUpdateParams implements BaseModel
      */
     public function withVoiceFallbackURL(string $voiceFallbackURL): self
     {
-        $obj = clone $this;
-        $obj->voiceFallbackURL = $voiceFallbackURL;
+        $self = clone $this;
+        $self['voiceFallbackURL'] = $voiceFallbackURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -357,9 +385,9 @@ final class TexmlApplicationUpdateParams implements BaseModel
      */
     public function withVoiceMethod(VoiceMethod|string $voiceMethod): self
     {
-        $obj = clone $this;
-        $obj['voiceMethod'] = $voiceMethod;
+        $self = clone $this;
+        $self['voiceMethod'] = $voiceMethod;
 
-        return $obj;
+        return $self;
     }
 }

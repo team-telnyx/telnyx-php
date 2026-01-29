@@ -5,40 +5,45 @@ declare(strict_types=1);
 namespace Telnyx\AccessIPAddress\AccessIPAddressListParams;
 
 use Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter\CreatedAt\DateRangeFilter;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
  *
- * @phpstan-type filter_alias = array{
- *   createdAt?: \DateTimeInterface|DateRangeFilter,
- *   ipAddress?: string,
- *   ipSource?: string,
+ * @phpstan-import-type CreatedAtVariants from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter\CreatedAt
+ * @phpstan-import-type CreatedAtShape from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter\CreatedAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   createdAt?: CreatedAtShape|null,
+ *   ipAddress?: string|null,
+ *   ipSource?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by exact creation date-time.
+     *
+     * @var CreatedAtVariants|null $createdAt
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public \DateTimeInterface|DateRangeFilter|null $createdAt;
 
     /**
      * Filter by IP address.
      */
-    #[Api('ip_address', optional: true)]
+    #[Optional('ip_address')]
     public ?string $ipAddress;
 
     /**
      * Filter by IP source.
      */
-    #[Api('ip_source', optional: true)]
+    #[Optional('ip_source')]
     public ?string $ipSource;
 
     public function __construct()
@@ -50,31 +55,35 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAtShape|null $createdAt
      */
     public static function with(
-        \DateTimeInterface|DateRangeFilter|null $createdAt = null,
+        \DateTimeInterface|DateRangeFilter|array|null $createdAt = null,
         ?string $ipAddress = null,
         ?string $ipSource = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $ipAddress && $obj->ipAddress = $ipAddress;
-        null !== $ipSource && $obj->ipSource = $ipSource;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $ipSource && $self['ipSource'] = $ipSource;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by exact creation date-time.
+     *
+     * @param CreatedAtShape $createdAt
      */
     public function withCreatedAt(
-        \DateTimeInterface|DateRangeFilter $createdAt
+        \DateTimeInterface|DateRangeFilter|array $createdAt
     ): self {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +91,10 @@ final class Filter implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +102,9 @@ final class Filter implements BaseModel
      */
     public function withIPSource(string $ipSource): self
     {
-        $obj = clone $this;
-        $obj->ipSource = $ipSource;
+        $self = clone $this;
+        $self['ipSource'] = $ipSource;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -13,31 +13,31 @@ use Telnyx\Core\Contracts\BaseModel;
  * can vary depending on the characteristics the phone number, as well as its current
  * product configuration.
  *
- * @phpstan-type messaging_feature_set = array{
+ * @phpstan-type MessagingFeatureSetShape = array{
  *   domesticTwoWay: bool, internationalInbound: bool, internationalOutbound: bool
  * }
  */
 final class MessagingFeatureSet implements BaseModel
 {
-    /** @use SdkModel<messaging_feature_set> */
+    /** @use SdkModel<MessagingFeatureSetShape> */
     use SdkModel;
 
     /**
      * Send messages to and receive messages from numbers in the same country.
      */
-    #[Api('domestic_two_way')]
+    #[Required('domestic_two_way')]
     public bool $domesticTwoWay;
 
     /**
      * Receive messages from numbers in other countries.
      */
-    #[Api('international_inbound')]
+    #[Required('international_inbound')]
     public bool $internationalInbound;
 
     /**
      * Send messages to numbers in other countries.
      */
-    #[Api('international_outbound')]
+    #[Required('international_outbound')]
     public bool $internationalOutbound;
 
     /**
@@ -74,13 +74,13 @@ final class MessagingFeatureSet implements BaseModel
         bool $internationalInbound,
         bool $internationalOutbound,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->domesticTwoWay = $domesticTwoWay;
-        $obj->internationalInbound = $internationalInbound;
-        $obj->internationalOutbound = $internationalOutbound;
+        $self['domesticTwoWay'] = $domesticTwoWay;
+        $self['internationalInbound'] = $internationalInbound;
+        $self['internationalOutbound'] = $internationalOutbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +88,10 @@ final class MessagingFeatureSet implements BaseModel
      */
     public function withDomesticTwoWay(bool $domesticTwoWay): self
     {
-        $obj = clone $this;
-        $obj->domesticTwoWay = $domesticTwoWay;
+        $self = clone $this;
+        $self['domesticTwoWay'] = $domesticTwoWay;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +99,10 @@ final class MessagingFeatureSet implements BaseModel
      */
     public function withInternationalInbound(bool $internationalInbound): self
     {
-        $obj = clone $this;
-        $obj->internationalInbound = $internationalInbound;
+        $self = clone $this;
+        $self['internationalInbound'] = $internationalInbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +110,9 @@ final class MessagingFeatureSet implements BaseModel
      */
     public function withInternationalOutbound(bool $internationalOutbound): self
     {
-        $obj = clone $this;
-        $obj->internationalOutbound = $internationalOutbound;
+        $self = clone $this;
+        $self['internationalOutbound'] = $internationalOutbound;
 
-        return $obj;
+        return $self;
     }
 }

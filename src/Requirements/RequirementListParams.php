@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Requirements;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,28 +15,33 @@ use Telnyx\Requirements\RequirementListParams\Sort;
 /**
  * List all requirements with filtering, sorting, and pagination.
  *
- * @see Telnyx\Requirements->list
+ * @see Telnyx\Services\RequirementsService::list()
  *
- * @phpstan-type requirement_list_params = array{
- *   filter?: Filter, page?: Page, sort?: list<Sort|value-of<Sort>>
+ * @phpstan-import-type FilterShape from \Telnyx\Requirements\RequirementListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Requirements\RequirementListParams\Page
+ *
+ * @phpstan-type RequirementListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
+ *   sort?: list<Sort|value-of<Sort>>|null,
  * }
  */
 final class RequirementListParams implements BaseModel
 {
-    /** @use SdkModel<requirement_list_params> */
+    /** @use SdkModel<RequirementListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -44,7 +49,7 @@ final class RequirementListParams implements BaseModel
      *
      * @var list<value-of<Sort>>|null $sort
      */
-    #[Api(list: Sort::class, optional: true)]
+    #[Optional(list: Sort::class)]
     public ?array $sort;
 
     public function __construct()
@@ -57,42 +62,48 @@ final class RequirementListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Sort|value-of<Sort>> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param list<Sort|value-of<Sort>>|null $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
         ?array $sort = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +113,9 @@ final class RequirementListParams implements BaseModel
      */
     public function withSort(array $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

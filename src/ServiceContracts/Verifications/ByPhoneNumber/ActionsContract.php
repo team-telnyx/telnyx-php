@@ -8,33 +8,25 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsContract
 {
     /**
      * @api
      *
+     * @param string $phoneNumber +E164 formatted phone number
      * @param string $code this is the code the user submits for verification
      * @param string $verifyProfileID the identifier of the associated Verify profile
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function verify(
         string $phoneNumber,
-        $code,
-        $verifyProfileID,
-        ?RequestOptions $requestOptions = null,
-    ): VerifyVerificationCodeResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function verifyRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null,
+        string $code,
+        string $verifyProfileID,
+        RequestOptions|array|null $requestOptions = null,
     ): VerifyVerificationCodeResponse;
 }

@@ -5,6 +5,8 @@ namespace Tests\Services\Addresses;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse;
+use Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +39,8 @@ final class ActionsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionAcceptSuggestionsResponse::class, $result);
     }
 
     #[Test]
@@ -53,7 +56,8 @@ final class ActionsTest extends TestCase
             streetAddress: '600 Congress Avenue',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionValidateResponse::class, $result);
     }
 
     #[Test]
@@ -67,8 +71,12 @@ final class ActionsTest extends TestCase
             countryCode: 'US',
             postalCode: '78701',
             streetAddress: '600 Congress Avenue',
+            administrativeArea: 'TX',
+            extendedAddress: '14th Floor',
+            locality: 'Austin',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionValidateResponse::class, $result);
     }
 }

@@ -4,61 +4,62 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * The address of the company.
  *
- * @phpstan-type address_alias = array{
+ * @phpstan-type AddressShape = array{
  *   city: string,
  *   countryCode: string,
  *   state: string,
  *   streetAddress: string,
  *   zipCode: string,
- *   extendedAddress?: string,
+ *   extendedAddress?: string|null,
  * }
  */
 final class Address implements BaseModel
 {
-    /** @use SdkModel<address_alias> */
+    /** @use SdkModel<AddressShape> */
     use SdkModel;
 
     /**
      * The locality of the company.
      */
-    #[Api]
+    #[Required]
     public string $city;
 
     /**
      * The country code of the company.
      */
-    #[Api('country_code')]
+    #[Required('country_code')]
     public string $countryCode;
 
     /**
      * The administrative area of the company.
      */
-    #[Api]
+    #[Required]
     public string $state;
 
     /**
      * The street address of the company.
      */
-    #[Api('street_address')]
+    #[Required('street_address')]
     public string $streetAddress;
 
     /**
      * The postal code of the company.
      */
-    #[Api('zip_code')]
+    #[Required('zip_code')]
     public string $zipCode;
 
     /**
      * The extended address of the company.
      */
-    #[Api('extended_address', optional: true)]
+    #[Optional('extended_address')]
     public ?string $extendedAddress;
 
     /**
@@ -100,17 +101,17 @@ final class Address implements BaseModel
         string $zipCode,
         ?string $extendedAddress = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->city = $city;
-        $obj->countryCode = $countryCode;
-        $obj->state = $state;
-        $obj->streetAddress = $streetAddress;
-        $obj->zipCode = $zipCode;
+        $self['city'] = $city;
+        $self['countryCode'] = $countryCode;
+        $self['state'] = $state;
+        $self['streetAddress'] = $streetAddress;
+        $self['zipCode'] = $zipCode;
 
-        null !== $extendedAddress && $obj->extendedAddress = $extendedAddress;
+        null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +119,10 @@ final class Address implements BaseModel
      */
     public function withCity(string $city): self
     {
-        $obj = clone $this;
-        $obj->city = $city;
+        $self = clone $this;
+        $self['city'] = $city;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,10 +130,10 @@ final class Address implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +141,10 @@ final class Address implements BaseModel
      */
     public function withState(string $state): self
     {
-        $obj = clone $this;
-        $obj->state = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +152,10 @@ final class Address implements BaseModel
      */
     public function withStreetAddress(string $streetAddress): self
     {
-        $obj = clone $this;
-        $obj->streetAddress = $streetAddress;
+        $self = clone $this;
+        $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +163,10 @@ final class Address implements BaseModel
      */
     public function withZipCode(string $zipCode): self
     {
-        $obj = clone $this;
-        $obj->zipCode = $zipCode;
+        $self = clone $this;
+        $self['zipCode'] = $zipCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,9 +174,9 @@ final class Address implements BaseModel
      */
     public function withExtendedAddress(string $extendedAddress): self
     {
-        $obj = clone $this;
-        $obj->extendedAddress = $extendedAddress;
+        $self = clone $this;
+        $self['extendedAddress'] = $extendedAddress;
 
-        return $obj;
+        return $self;
     }
 }

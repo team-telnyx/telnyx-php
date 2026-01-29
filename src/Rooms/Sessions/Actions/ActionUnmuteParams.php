@@ -4,26 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Sessions\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants;
-use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\UnionMember0;
+use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\AllParticipants;
 
 /**
  * Unmute participants in room session.
  *
- * @see Telnyx\Rooms\Sessions\Actions->unmute
+ * @see Telnyx\Services\Rooms\Sessions\ActionsService::unmute()
  *
- * @phpstan-type action_unmute_params = array{
- *   exclude?: list<string>,
- *   participants?: UnionMember0|list<string>|value-of<UnionMember0>,
+ * @phpstan-import-type ParticipantsVariants from \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants
+ * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants
+ *
+ * @phpstan-type ActionUnmuteParamsShape = array{
+ *   exclude?: list<string>|null, participants?: ParticipantsShape|null
  * }
  */
 final class ActionUnmuteParams implements BaseModel
 {
-    /** @use SdkModel<action_unmute_params> */
+    /** @use SdkModel<ActionUnmuteParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -32,15 +34,15 @@ final class ActionUnmuteParams implements BaseModel
      *
      * @var list<string>|null $exclude
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $exclude;
 
     /**
      * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
      *
-     * @var list<string>|value-of<UnionMember0>|null $participants
+     * @var ParticipantsVariants|null $participants
      */
-    #[Api(union: Participants::class, optional: true)]
+    #[Optional(union: Participants::class)]
     public array|string|null $participants;
 
     public function __construct()
@@ -53,19 +55,19 @@ final class ActionUnmuteParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $exclude
-     * @param UnionMember0|list<string>|value-of<UnionMember0> $participants
+     * @param list<string>|null $exclude
+     * @param ParticipantsShape|null $participants
      */
     public static function with(
         ?array $exclude = null,
-        UnionMember0|array|string|null $participants = null
+        AllParticipants|array|string|null $participants = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $exclude && $obj->exclude = $exclude;
-        null !== $participants && $obj['participants'] = $participants;
+        null !== $exclude && $self['exclude'] = $exclude;
+        null !== $participants && $self['participants'] = $participants;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,23 +77,23 @@ final class ActionUnmuteParams implements BaseModel
      */
     public function withExclude(array $exclude): self
     {
-        $obj = clone $this;
-        $obj->exclude = $exclude;
+        $self = clone $this;
+        $self['exclude'] = $exclude;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant.
      *
-     * @param UnionMember0|list<string>|value-of<UnionMember0> $participants
+     * @param ParticipantsShape $participants
      */
     public function withParticipants(
-        UnionMember0|array|string $participants
+        AllParticipants|array|string $participants
     ): self {
-        $obj = clone $this;
-        $obj['participants'] = $participants;
+        $self = clone $this;
+        $self['participants'] = $participants;
 
-        return $obj;
+        return $self;
     }
 }

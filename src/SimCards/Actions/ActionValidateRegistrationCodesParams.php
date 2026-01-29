@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * It validates whether SIM card registration codes are valid or not.
  *
- * @see Telnyx\SimCards\Actions->validateRegistrationCodes
+ * @see Telnyx\Services\SimCards\ActionsService::validateRegistrationCodes()
  *
- * @phpstan-type action_validate_registration_codes_params = array{
- *   registrationCodes?: list<string>
+ * @phpstan-type ActionValidateRegistrationCodesParamsShape = array{
+ *   registrationCodes?: list<string>|null
  * }
  */
 final class ActionValidateRegistrationCodesParams implements BaseModel
 {
-    /** @use SdkModel<action_validate_registration_codes_params> */
+    /** @use SdkModel<ActionValidateRegistrationCodesParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<string>|null $registrationCodes */
-    #[Api('registration_codes', list: 'string', optional: true)]
+    #[Optional('registration_codes', list: 'string')]
     public ?array $registrationCodes;
 
     public function __construct()
@@ -38,15 +38,15 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $registrationCodes
+     * @param list<string>|null $registrationCodes
      */
     public static function with(?array $registrationCodes = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $registrationCodes && $obj->registrationCodes = $registrationCodes;
+        null !== $registrationCodes && $self['registrationCodes'] = $registrationCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class ActionValidateRegistrationCodesParams implements BaseModel
      */
     public function withRegistrationCodes(array $registrationCodes): self
     {
-        $obj = clone $this;
-        $obj->registrationCodes = $registrationCodes;
+        $self = clone $this;
+        $self['registrationCodes'] = $registrationCodes;
 
-        return $obj;
+        return $self;
     }
 }

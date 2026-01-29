@@ -10,53 +10,49 @@ use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DefaultGatewayContract
 {
     /**
      * @api
      *
+     * @param string $networkIdentifier identifies the resource
      * @param string $wireguardPeerID wireguard peer ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string $id,
-        $wireguardPeerID = omit,
-        ?RequestOptions $requestOptions = null,
+        string $networkIdentifier,
+        ?string $wireguardPeerID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultGatewayNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): DefaultGatewayNewResponse;
-
-    /**
-     * @api
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DefaultGatewayGetResponse;
 
     /**
      * @api
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DefaultGatewayDeleteResponse;
 }

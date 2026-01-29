@@ -5,8 +5,10 @@ namespace Tests\Services\AI\Assistants;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric;
+use Telnyx\AI\Assistants\Tests\AssistantTest;
+use Telnyx\AI\Assistants\Tests\TelnyxConversationChannel;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,13 +37,23 @@ final class TestsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->tests->create(
-            destination: 'x',
-            instructions: 'x',
-            name: 'x',
-            rubric: [Rubric::with(criteria: 'criteria', name: 'name')],
+            destination: '+15551234567',
+            instructions: 'Act as a frustrated customer who received a damaged product. Ask for a refund and escalate if not satisfied with the initial response.',
+            name: 'Customer Support Bot Test',
+            rubric: [
+                [
+                    'criteria' => 'Assistant responds within 30 seconds',
+                    'name' => 'Response Time',
+                ],
+                [
+                    'criteria' => 'Provides correct product information',
+                    'name' => 'Accuracy',
+                ],
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantTest::class, $result);
     }
 
     #[Test]
@@ -52,13 +64,27 @@ final class TestsTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->tests->create(
-            destination: 'x',
-            instructions: 'x',
-            name: 'x',
-            rubric: [Rubric::with(criteria: 'criteria', name: 'name')],
+            destination: '+15551234567',
+            instructions: 'Act as a frustrated customer who received a damaged product. Ask for a refund and escalate if not satisfied with the initial response.',
+            name: 'Customer Support Bot Test',
+            rubric: [
+                [
+                    'criteria' => 'Assistant responds within 30 seconds',
+                    'name' => 'Response Time',
+                ],
+                [
+                    'criteria' => 'Provides correct product information',
+                    'name' => 'Accuracy',
+                ],
+            ],
+            description: 'description',
+            maxDurationSeconds: 1,
+            telnyxConversationChannel: TelnyxConversationChannel::WEB_CHAT,
+            testSuite: 'test_suite',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantTest::class, $result);
     }
 
     #[Test]
@@ -70,7 +96,8 @@ final class TestsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->retrieve('test_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantTest::class, $result);
     }
 
     #[Test]
@@ -82,7 +109,8 @@ final class TestsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->update('test_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssistantTest::class, $result);
     }
 
     #[Test]
@@ -92,9 +120,15 @@ final class TestsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tests->list();
+        $page = $this->client->ai->assistants->tests->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AssistantTest::class, $item);
+        }
     }
 
     #[Test]
@@ -106,6 +140,7 @@ final class TestsTest extends TestCase
 
         $result = $this->client->ai->assistants->tests->delete('test_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

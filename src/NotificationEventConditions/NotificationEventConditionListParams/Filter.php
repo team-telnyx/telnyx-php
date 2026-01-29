@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationEventConditions\NotificationEventConditionListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\AssociatedRecordType;
@@ -17,36 +17,43 @@ use Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filt
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq].
  *
- * @phpstan-type filter_alias = array{
- *   associatedRecordType?: AssociatedRecordType,
- *   channelTypeID?: ChannelTypeID,
- *   notificationChannel?: NotificationChannel,
- *   notificationEventConditionID?: NotificationEventConditionID,
- *   notificationProfileID?: NotificationProfileID,
- *   status?: Status,
+ * @phpstan-import-type AssociatedRecordTypeShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\AssociatedRecordType
+ * @phpstan-import-type ChannelTypeIDShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\ChannelTypeID
+ * @phpstan-import-type NotificationChannelShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\NotificationChannel
+ * @phpstan-import-type NotificationEventConditionIDShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\NotificationEventConditionID
+ * @phpstan-import-type NotificationProfileIDShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\NotificationProfileID
+ * @phpstan-import-type StatusShape from \Telnyx\NotificationEventConditions\NotificationEventConditionListParams\Filter\Status
+ *
+ * @phpstan-type FilterShape = array{
+ *   associatedRecordType?: null|AssociatedRecordType|AssociatedRecordTypeShape,
+ *   channelTypeID?: null|ChannelTypeID|ChannelTypeIDShape,
+ *   notificationChannel?: null|NotificationChannel|NotificationChannelShape,
+ *   notificationEventConditionID?: null|NotificationEventConditionID|NotificationEventConditionIDShape,
+ *   notificationProfileID?: null|NotificationProfileID|NotificationProfileIDShape,
+ *   status?: null|Status|StatusShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('associated_record_type', optional: true)]
+    #[Optional('associated_record_type')]
     public ?AssociatedRecordType $associatedRecordType;
 
-    #[Api('channel_type_id', optional: true)]
+    #[Optional('channel_type_id')]
     public ?ChannelTypeID $channelTypeID;
 
-    #[Api('notification_channel', optional: true)]
+    #[Optional('notification_channel')]
     public ?NotificationChannel $notificationChannel;
 
-    #[Api('notification_event_condition_id', optional: true)]
+    #[Optional('notification_event_condition_id')]
     public ?NotificationEventConditionID $notificationEventConditionID;
 
-    #[Api('notification_profile_id', optional: true)]
+    #[Optional('notification_profile_id')]
     public ?NotificationProfileID $notificationProfileID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Status $status;
 
     public function __construct()
@@ -58,76 +65,101 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AssociatedRecordType|AssociatedRecordTypeShape|null $associatedRecordType
+     * @param ChannelTypeID|ChannelTypeIDShape|null $channelTypeID
+     * @param NotificationChannel|NotificationChannelShape|null $notificationChannel
+     * @param NotificationEventConditionID|NotificationEventConditionIDShape|null $notificationEventConditionID
+     * @param NotificationProfileID|NotificationProfileIDShape|null $notificationProfileID
+     * @param Status|StatusShape|null $status
      */
     public static function with(
-        ?AssociatedRecordType $associatedRecordType = null,
-        ?ChannelTypeID $channelTypeID = null,
-        ?NotificationChannel $notificationChannel = null,
-        ?NotificationEventConditionID $notificationEventConditionID = null,
-        ?NotificationProfileID $notificationProfileID = null,
-        ?Status $status = null,
+        AssociatedRecordType|array|null $associatedRecordType = null,
+        ChannelTypeID|array|null $channelTypeID = null,
+        NotificationChannel|array|null $notificationChannel = null,
+        NotificationEventConditionID|array|null $notificationEventConditionID = null,
+        NotificationProfileID|array|null $notificationProfileID = null,
+        Status|array|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $associatedRecordType && $obj->associatedRecordType = $associatedRecordType;
-        null !== $channelTypeID && $obj->channelTypeID = $channelTypeID;
-        null !== $notificationChannel && $obj->notificationChannel = $notificationChannel;
-        null !== $notificationEventConditionID && $obj->notificationEventConditionID = $notificationEventConditionID;
-        null !== $notificationProfileID && $obj->notificationProfileID = $notificationProfileID;
-        null !== $status && $obj->status = $status;
+        null !== $associatedRecordType && $self['associatedRecordType'] = $associatedRecordType;
+        null !== $channelTypeID && $self['channelTypeID'] = $channelTypeID;
+        null !== $notificationChannel && $self['notificationChannel'] = $notificationChannel;
+        null !== $notificationEventConditionID && $self['notificationEventConditionID'] = $notificationEventConditionID;
+        null !== $notificationProfileID && $self['notificationProfileID'] = $notificationProfileID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param AssociatedRecordType|AssociatedRecordTypeShape $associatedRecordType
+     */
     public function withAssociatedRecordType(
-        AssociatedRecordType $associatedRecordType
+        AssociatedRecordType|array $associatedRecordType
     ): self {
-        $obj = clone $this;
-        $obj->associatedRecordType = $associatedRecordType;
+        $self = clone $this;
+        $self['associatedRecordType'] = $associatedRecordType;
 
-        return $obj;
+        return $self;
     }
 
-    public function withChannelTypeID(ChannelTypeID $channelTypeID): self
+    /**
+     * @param ChannelTypeID|ChannelTypeIDShape $channelTypeID
+     */
+    public function withChannelTypeID(ChannelTypeID|array $channelTypeID): self
     {
-        $obj = clone $this;
-        $obj->channelTypeID = $channelTypeID;
+        $self = clone $this;
+        $self['channelTypeID'] = $channelTypeID;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param NotificationChannel|NotificationChannelShape $notificationChannel
+     */
     public function withNotificationChannel(
-        NotificationChannel $notificationChannel
+        NotificationChannel|array $notificationChannel
     ): self {
-        $obj = clone $this;
-        $obj->notificationChannel = $notificationChannel;
+        $self = clone $this;
+        $self['notificationChannel'] = $notificationChannel;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param NotificationEventConditionID|NotificationEventConditionIDShape $notificationEventConditionID
+     */
     public function withNotificationEventConditionID(
-        NotificationEventConditionID $notificationEventConditionID
+        NotificationEventConditionID|array $notificationEventConditionID
     ): self {
-        $obj = clone $this;
-        $obj->notificationEventConditionID = $notificationEventConditionID;
+        $self = clone $this;
+        $self['notificationEventConditionID'] = $notificationEventConditionID;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param NotificationProfileID|NotificationProfileIDShape $notificationProfileID
+     */
     public function withNotificationProfileID(
-        NotificationProfileID $notificationProfileID
+        NotificationProfileID|array $notificationProfileID
     ): self {
-        $obj = clone $this;
-        $obj->notificationProfileID = $notificationProfileID;
+        $self = clone $this;
+        $self['notificationProfileID'] = $notificationProfileID;
 
-        return $obj;
+        return $self;
     }
 
-    public function withStatus(Status $status): self
+    /**
+     * @param Status|StatusShape $status
+     */
+    public function withStatus(Status|array $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

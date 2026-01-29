@@ -4,32 +4,34 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrderRegulatoryRequirement\FieldType;
 
 /**
- * @phpstan-type sub_number_order_regulatory_requirement = array{
- *   fieldType?: value-of<FieldType>, recordType?: string, requirementID?: string
+ * @phpstan-type SubNumberOrderRegulatoryRequirementShape = array{
+ *   fieldType?: null|FieldType|value-of<FieldType>,
+ *   recordType?: string|null,
+ *   requirementID?: string|null,
  * }
  */
 final class SubNumberOrderRegulatoryRequirement implements BaseModel
 {
-    /** @use SdkModel<sub_number_order_regulatory_requirement> */
+    /** @use SdkModel<SubNumberOrderRegulatoryRequirementShape> */
     use SdkModel;
 
     /** @var value-of<FieldType>|null $fieldType */
-    #[Api('field_type', enum: FieldType::class, optional: true)]
+    #[Optional('field_type', enum: FieldType::class)]
     public ?string $fieldType;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * Unique id for a requirement.
      */
-    #[Api('requirement_id', optional: true)]
+    #[Optional('requirement_id')]
     public ?string $requirementID;
 
     public function __construct()
@@ -42,20 +44,20 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FieldType|value-of<FieldType> $fieldType
+     * @param FieldType|value-of<FieldType>|null $fieldType
      */
     public static function with(
         FieldType|string|null $fieldType = null,
         ?string $recordType = null,
         ?string $requirementID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fieldType && $obj['fieldType'] = $fieldType;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $requirementID && $obj->requirementID = $requirementID;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementID && $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,18 +65,18 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
      */
     public function withFieldType(FieldType|string $fieldType): self
     {
-        $obj = clone $this;
-        $obj['fieldType'] = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,9 +84,9 @@ final class SubNumberOrderRegulatoryRequirement implements BaseModel
      */
     public function withRequirementID(string $requirementID): self
     {
-        $obj = clone $this;
-        $obj->requirementID = $requirementID;
+        $self = clone $this;
+        $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 }

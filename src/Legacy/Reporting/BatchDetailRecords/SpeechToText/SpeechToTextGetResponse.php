@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type speech_to_text_get_response = array{
- *   data?: SttDetailReportResponse
+ * @phpstan-import-type SttDetailReportResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse
+ *
+ * @phpstan-type SpeechToTextGetResponseShape = array{
+ *   data?: null|SttDetailReportResponse|SttDetailReportResponseShape
  * }
  */
-final class SpeechToTextGetResponse implements BaseModel, ResponseConverter
+final class SpeechToTextGetResponse implements BaseModel
 {
-    /** @use SdkModel<speech_to_text_get_response> */
+    /** @use SdkModel<SpeechToTextGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?SttDetailReportResponse $data;
 
     public function __construct()
@@ -34,21 +32,27 @@ final class SpeechToTextGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param SttDetailReportResponse|SttDetailReportResponseShape|null $data
      */
-    public static function with(?SttDetailReportResponse $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        SttDetailReportResponse|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(SttDetailReportResponse $data): self
+    /**
+     * @param SttDetailReportResponse|SttDetailReportResponseShape $data
+     */
+    public function withData(SttDetailReportResponse|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

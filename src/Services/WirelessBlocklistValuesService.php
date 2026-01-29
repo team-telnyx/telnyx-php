@@ -6,18 +6,29 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistValuesContract;
-use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WirelessBlocklistValuesService implements WirelessBlocklistValuesContract
 {
     /**
+     * @api
+     */
+    public WirelessBlocklistValuesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new WirelessBlocklistValuesRawService($client);
+    }
 
     /**
      * @api
@@ -25,41 +36,19 @@ final class WirelessBlocklistValuesService implements WirelessBlocklistValuesCon
      * Retrieve all wireless blocklist values for a given blocklist type.
      *
      * @param Type|value-of<Type> $type The Wireless Blocklist type for which to list possible values (e.g., `country`, `mcc`, `plmn`).
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $type,
-        ?RequestOptions $requestOptions = null
+        Type|string $type,
+        RequestOptions|array|null $requestOptions = null
     ): WirelessBlocklistValueListResponse {
-        $params = ['type' => $type];
+        $params = Util::removeNulls(['type' => $type]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): WirelessBlocklistValueListResponse {
-        [$parsed, $options] = WirelessBlocklistValueListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'wireless_blocklist_values',
-            query: $parsed,
-            options: $options,
-            convert: WirelessBlocklistValueListResponse::class,
-        );
+        return $response->parse();
     }
 }

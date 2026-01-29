@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address;
@@ -12,82 +12,86 @@ use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Contact;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo;
 
 /**
- * @phpstan-type porting_loa_configuration = array{
- *   id?: string,
- *   address?: Address,
- *   companyName?: string,
- *   contact?: Contact,
- *   createdAt?: \DateTimeInterface,
- *   logo?: Logo,
- *   name?: string,
- *   organizationID?: string,
- *   recordType?: string,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Address
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Contact
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration\Logo
+ *
+ * @phpstan-type PortingLoaConfigurationShape = array{
+ *   id?: string|null,
+ *   address?: null|Address|AddressShape,
+ *   companyName?: string|null,
+ *   contact?: null|Contact|ContactShape,
+ *   createdAt?: \DateTimeInterface|null,
+ *   logo?: null|Logo|LogoShape,
+ *   name?: string|null,
+ *   organizationID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class PortingLoaConfiguration implements BaseModel
 {
-    /** @use SdkModel<porting_loa_configuration> */
+    /** @use SdkModel<PortingLoaConfigurationShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies the LOA configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The address of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Address $address;
 
     /**
      * The name of the company.
      */
-    #[Api('company_name', optional: true)]
+    #[Optional('company_name')]
     public ?string $companyName;
 
     /**
      * The contact information of the company.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Contact $contact;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * The logo to be used in the LOA.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Logo $logo;
 
     /**
      * The name of the LOA configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The organization that owns the LOA configuration.
      */
-    #[Api('organization_id', optional: true)]
+    #[Optional('organization_id')]
     public ?string $organizationID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -99,33 +103,37 @@ final class PortingLoaConfiguration implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Address|AddressShape|null $address
+     * @param Contact|ContactShape|null $contact
+     * @param Logo|LogoShape|null $logo
      */
     public static function with(
         ?string $id = null,
-        ?Address $address = null,
+        Address|array|null $address = null,
         ?string $companyName = null,
-        ?Contact $contact = null,
+        Contact|array|null $contact = null,
         ?\DateTimeInterface $createdAt = null,
-        ?Logo $logo = null,
+        Logo|array|null $logo = null,
         ?string $name = null,
         ?string $organizationID = null,
         ?string $recordType = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $address && $obj->address = $address;
-        null !== $companyName && $obj->companyName = $companyName;
-        null !== $contact && $obj->contact = $contact;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $logo && $obj->logo = $logo;
-        null !== $name && $obj->name = $name;
-        null !== $organizationID && $obj->organizationID = $organizationID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $address && $self['address'] = $address;
+        null !== $companyName && $self['companyName'] = $companyName;
+        null !== $contact && $self['contact'] = $contact;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $logo && $self['logo'] = $logo;
+        null !== $name && $self['name'] = $name;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,21 +141,23 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The address of the company.
+     *
+     * @param Address|AddressShape $address
      */
-    public function withAddress(Address $address): self
+    public function withAddress(Address|array $address): self
     {
-        $obj = clone $this;
-        $obj->address = $address;
+        $self = clone $this;
+        $self['address'] = $address;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,21 +165,23 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withCompanyName(string $companyName): self
     {
-        $obj = clone $this;
-        $obj->companyName = $companyName;
+        $self = clone $this;
+        $self['companyName'] = $companyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The contact information of the company.
+     *
+     * @param Contact|ContactShape $contact
      */
-    public function withContact(Contact $contact): self
+    public function withContact(Contact|array $contact): self
     {
-        $obj = clone $this;
-        $obj->contact = $contact;
+        $self = clone $this;
+        $self['contact'] = $contact;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,21 +189,23 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The logo to be used in the LOA.
+     *
+     * @param Logo|LogoShape $logo
      */
-    public function withLogo(Logo $logo): self
+    public function withLogo(Logo|array $logo): self
     {
-        $obj = clone $this;
-        $obj->logo = $logo;
+        $self = clone $this;
+        $self['logo'] = $logo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +213,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +224,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj->organizationID = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +235,10 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,9 +246,9 @@ final class PortingLoaConfiguration implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

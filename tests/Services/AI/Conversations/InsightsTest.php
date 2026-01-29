@@ -5,7 +5,10 @@ namespace Tests\Services\AI\Conversations;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Conversations\Insights\InsightTemplate;
+use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +41,8 @@ final class InsightsTest extends TestCase
             name: 'name'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateDetail::class, $result);
     }
 
     #[Test]
@@ -50,10 +54,13 @@ final class InsightsTest extends TestCase
 
         $result = $this->client->ai->conversations->insights->create(
             instructions: 'instructions',
-            name: 'name'
+            name: 'name',
+            jsonSchema: 'string',
+            webhook: 'webhook',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateDetail::class, $result);
     }
 
     #[Test]
@@ -67,7 +74,8 @@ final class InsightsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateDetail::class, $result);
     }
 
     #[Test]
@@ -81,7 +89,8 @@ final class InsightsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(InsightTemplateDetail::class, $result);
     }
 
     #[Test]
@@ -91,9 +100,15 @@ final class InsightsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->conversations->insights->list();
+        $page = $this->client->ai->conversations->insights->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(InsightTemplate::class, $item);
+        }
     }
 
     #[Test]
@@ -107,6 +122,7 @@ final class InsightsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

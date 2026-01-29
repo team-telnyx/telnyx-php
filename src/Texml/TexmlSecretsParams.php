@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,26 +12,26 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a TeXML secret which can be later used as a Dynamic Parameter for TeXML when using Mustache Templates in your TeXML. In your TeXML you will be able to use your secret name, and this name will be replaced by the actual secret value when processing the TeXML on Telnyx side.  The secrets are not visible in any logs.
  *
- * @see Telnyx\Texml->secrets
+ * @see Telnyx\Services\TexmlService::secrets()
  *
- * @phpstan-type texml_secrets_params = array{name: string, value: string}
+ * @phpstan-type TexmlSecretsParamsShape = array{name: string, value: string}
  */
 final class TexmlSecretsParams implements BaseModel
 {
-    /** @use SdkModel<texml_secrets_params> */
+    /** @use SdkModel<TexmlSecretsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Name used as a reference for the secret, if the name already exists within the account its value will be replaced.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Secret value which will be used when rendering the TeXML template.
      */
-    #[Api]
+    #[Required]
     public string $value;
 
     /**
@@ -60,12 +60,12 @@ final class TexmlSecretsParams implements BaseModel
      */
     public static function with(string $name, string $value): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->name = $name;
-        $obj->value = $value;
+        $self['name'] = $name;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class TexmlSecretsParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class TexmlSecretsParams implements BaseModel
      */
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

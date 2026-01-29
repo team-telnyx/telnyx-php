@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data\Metadata;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -24,22 +24,24 @@ use Telnyx\Core\Contracts\BaseModel;
  *   }
  * }.
  *
- * @phpstan-type data_alias = array{
- *   distance: float, documentChunk: string, metadata: Metadata
+ * @phpstan-import-type MetadataShape from \Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data\Metadata
+ *
+ * @phpstan-type DataShape = array{
+ *   distance: float, documentChunk: string, metadata: Metadata|MetadataShape
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public float $distance;
 
-    #[Api('document_chunk')]
+    #[Required('document_chunk')]
     public string $documentChunk;
 
-    #[Api]
+    #[Required]
     public Metadata $metadata;
 
     /**
@@ -65,42 +67,47 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Metadata|MetadataShape $metadata
      */
     public static function with(
         float $distance,
         string $documentChunk,
-        Metadata $metadata
+        Metadata|array $metadata
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->distance = $distance;
-        $obj->documentChunk = $documentChunk;
-        $obj->metadata = $metadata;
+        $self['distance'] = $distance;
+        $self['documentChunk'] = $documentChunk;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withDistance(float $distance): self
     {
-        $obj = clone $this;
-        $obj->distance = $distance;
+        $self = clone $this;
+        $self['distance'] = $distance;
 
-        return $obj;
+        return $self;
     }
 
     public function withDocumentChunk(string $documentChunk): self
     {
-        $obj = clone $this;
-        $obj->documentChunk = $documentChunk;
+        $self = clone $this;
+        $self['documentChunk'] = $documentChunk;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMetadata(Metadata $metadata): self
+    /**
+     * @param Metadata|MetadataShape $metadata
+     */
+    public function withMetadata(Metadata|array $metadata): self
     {
-        $obj = clone $this;
-        $obj->metadata = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,20 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\ConferenceCreatedWebhookEvent\Data;
 
 /**
- * @phpstan-type conference_created_webhook_event = array{data?: Data}
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\ConferenceCreatedWebhookEvent\Data
+ *
+ * @phpstan-type ConferenceCreatedWebhookEventShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
 final class ConferenceCreatedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<conference_created_webhook_event> */
+    /** @use SdkModel<ConferenceCreatedWebhookEventShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()
@@ -29,21 +33,26 @@ final class ConferenceCreatedWebhookEvent implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|DataShape|null $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|DataShape $data
+     */
+    public function withData(Data|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

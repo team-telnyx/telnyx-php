@@ -5,30 +5,30 @@ declare(strict_types=1);
 namespace Telnyx\Networks\DefaultGateway;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse\Data;
 
 /**
- * @phpstan-type default_gateway_new_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-import-type DataShape from \Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse\Data
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
+ * @phpstan-type DefaultGatewayNewResponseShape = array{
+ *   data?: list<Data|DataShape>|null,
+ *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
-final class DefaultGatewayNewResponse implements BaseModel, ResponseConverter
+final class DefaultGatewayNewResponse implements BaseModel
 {
-    /** @use SdkModel<default_gateway_new_response> */
+    /** @use SdkModel<DefaultGatewayNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()
@@ -41,36 +41,40 @@ final class DefaultGatewayNewResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|DataShape>|null $data
+     * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|PaginationMetaShape $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

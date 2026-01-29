@@ -1,12 +1,5 @@
 # Telnyx PHP API library
 
-> [!NOTE]
-> The Telnyx PHP API Library is currently in **beta** and we're excited for you to experiment with it!
->
-> This library has not yet been exhaustively tested in production environments and may be missing some features you'd expect in a stable release. As we continue development, there may be breaking changes that require updates to your code.
->
-> **We'd love your feedback!** Please share any suggestions, bug reports, feature requests, or general thoughts by [filing an issue](https://www.github.com/team-telnyx/telnyx-php/issues/new).
-
 The Telnyx PHP library provides convenient access to the Telnyx REST API from any PHP 8.1.0+ application.
 
 It is generated with [Stainless](https://www.stainless.com/).
@@ -15,22 +8,10 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
-To use this package, install via Composer by adding the following to your application's `composer.json`:
-
 <!-- x-release-please-start-version -->
 
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:team-telnyx/telnyx-php.git"
-    }
-  ],
-  "require": {
-    "telnyx/telnyx-php": "dev-main"
-  }
-}
+```
+composer require "telnyx/telnyx-php 6.0.0"
 ```
 
 <!-- x-release-please-end -->
@@ -45,10 +26,13 @@ Parameters with a default value must be set by name.
 
 use Telnyx\Client;
 
-$client = new Client(apiKey: getenv("TELNYX_API_KEY") ?: "My API Key");
+$client = new Client(apiKey: getenv('TELNYX_API_KEY') ?: 'My API Key');
 
 $response = $client->calls->dial(
-  connectionID: "conn12345", from: "+15557654321", to: "+15551234567"
+  connectionID: 'conn12345',
+  from: '+15557654321',
+  to: '+15551234567',
+  webhookURL: 'https://your-webhook.url/events',
 );
 
 var_dump($response->data);
@@ -56,10 +40,37 @@ var_dump($response->data);
 
 ### Value Objects
 
-It is recommended to use the static `with` constructor `HangupTool::with(hangup: [], ...)`
+It is recommended to use the static `with` constructor `HangupTool::with(hangup: (object)[], ...)`
 and named parameters to initialize value objects.
 
-However, builders are also provided `(new HangupTool)->withHangup([])`.
+However, builders are also provided `(new HangupTool)->withHangup((object)[])`.
+
+### Pagination
+
+List methods in the Telnyx API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```php
+<?php
+
+use Telnyx\Client;
+
+$client = new Client(apiKey: getenv('TELNYX_API_KEY') ?: 'My API Key');
+
+$page = $client->accessIPAddress->list(pageNumber: 1, pageSize: 50);
+
+var_dump($page);
+
+// fetch items from the current page
+foreach ($page->getItems() as $item) {
+  var_dump($item->id);
+}
+// make additional network requests to fetch items from all pages, including and after the current page
+foreach ($page->pagingEachItem() as $item) {
+  var_dump($item->id);
+}
+```
 
 ### Handling errors
 
@@ -69,15 +80,17 @@ When the library is unable to connect to the API, or if the API returns a non-su
 <?php
 
 use Telnyx\Core\Exceptions\APIConnectionException;
+use Telnyx\Core\Exceptions\RateLimitException;
+use Telnyx\Core\Exceptions\APIStatusException;
 
 try {
   $numberOrder = $client->numberOrders->create();
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $_) {
+} catch (RateLimitException $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
-} catch (APIStatusError $e) {
+} catch (APIStatusException $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
   echo $e->getMessage();
 }
@@ -111,14 +124,14 @@ You can use the `maxRetries` option to configure or disable this:
 <?php
 
 use Telnyx\Client;
-use Telnyx\RequestOptions;
 
 // Configure the default for all requests:
-$client = new Client(maxRetries: 0);
+$client = new Client(requestOptions: ['maxRetries' => 0]);
 
 // Or, configure per-request:
 $result = $client->numberOrders->create(
-  requestOptions: RequestOptions::with(maxRetries: 5)
+  phoneNumbers: [['phoneNumber' => '+15558675309']],
+  requestOptions: ['maxRetries' => 5],
 );
 ```
 
@@ -135,17 +148,14 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 ```php
 <?php
 
-use Telnyx\RequestOptions;
-
 $numberOrder = $client->numberOrders->create(
-  requestOptions: RequestOptions::with(
-    extraQueryParams: ["my_query_parameter" => "value"],
-    extraBodyParams: ["my_body_parameter" => "value"],
-    extraHeaders: ["my-header" => "value"],
-  ),
+  phoneNumbers: [['phoneNumber' => '+15558675309']],
+  requestOptions: [
+    'extraQueryParams' => ['my_query_parameter' => 'value'],
+    'extraBodyParams' => ['my_body_parameter' => 'value'],
+    'extraHeaders' => ['my-header' => 'value'],
+  ],
 );
-
-var_dump($numberOrder["my_undocumented_property"]);
 ```
 
 #### Undocumented request params

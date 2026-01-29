@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a single managed account.
  *
- * @see Telnyx\ManagedAccounts->update
+ * @see Telnyx\Services\ManagedAccountsService::update()
  *
- * @phpstan-type managed_account_update_params = array{
- *   managedAccountAllowCustomPricing?: bool
+ * @phpstan-type ManagedAccountUpdateParamsShape = array{
+ *   managedAccountAllowCustomPricing?: bool|null
  * }
  */
 final class ManagedAccountUpdateParams implements BaseModel
 {
-    /** @use SdkModel<managed_account_update_params> */
+    /** @use SdkModel<ManagedAccountUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed, but there may be time lag between when the value is changed and pricing changes take effect.
      */
-    #[Api('managed_account_allow_custom_pricing', optional: true)]
+    #[Optional('managed_account_allow_custom_pricing')]
     public ?bool $managedAccountAllowCustomPricing;
 
     public function __construct()
@@ -43,11 +43,11 @@ final class ManagedAccountUpdateParams implements BaseModel
     public static function with(
         ?bool $managedAccountAllowCustomPricing = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $managedAccountAllowCustomPricing && $obj->managedAccountAllowCustomPricing = $managedAccountAllowCustomPricing;
+        null !== $managedAccountAllowCustomPricing && $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -56,9 +56,9 @@ final class ManagedAccountUpdateParams implements BaseModel
     public function withManagedAccountAllowCustomPricing(
         bool $managedAccountAllowCustomPricing
     ): self {
-        $obj = clone $this;
-        $obj->managedAccountAllowCustomPricing = $managedAccountAllowCustomPricing;
+        $self = clone $this;
+        $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
 
-        return $obj;
+        return $self;
     }
 }

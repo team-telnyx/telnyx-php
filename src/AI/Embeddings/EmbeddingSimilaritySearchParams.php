@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -20,25 +21,25 @@ use Telnyx\Core\Contracts\BaseModel;
  * If a bucket was embedded using a custom loader, such as `intercom`, the additional metadata will be returned in the
  * `loader_metadata` field.
  *
- * @see Telnyx\AI\Embeddings->similaritySearch
+ * @see Telnyx\Services\AI\EmbeddingsService::similaritySearch()
  *
- * @phpstan-type embedding_similarity_search_params = array{
- *   bucketName: string, query: string, numOfDocs?: int
+ * @phpstan-type EmbeddingSimilaritySearchParamsShape = array{
+ *   bucketName: string, query: string, numOfDocs?: int|null
  * }
  */
 final class EmbeddingSimilaritySearchParams implements BaseModel
 {
-    /** @use SdkModel<embedding_similarity_search_params> */
+    /** @use SdkModel<EmbeddingSimilaritySearchParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api('bucket_name')]
+    #[Required('bucket_name')]
     public string $bucketName;
 
-    #[Api]
+    #[Required]
     public string $query;
 
-    #[Api('num_of_docs', optional: true)]
+    #[Optional('num_of_docs')]
     public ?int $numOfDocs;
 
     /**
@@ -70,37 +71,37 @@ final class EmbeddingSimilaritySearchParams implements BaseModel
         string $query,
         ?int $numOfDocs = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->bucketName = $bucketName;
-        $obj->query = $query;
+        $self['bucketName'] = $bucketName;
+        $self['query'] = $query;
 
-        null !== $numOfDocs && $obj->numOfDocs = $numOfDocs;
+        null !== $numOfDocs && $self['numOfDocs'] = $numOfDocs;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucketName(string $bucketName): self
     {
-        $obj = clone $this;
-        $obj->bucketName = $bucketName;
+        $self = clone $this;
+        $self['bucketName'] = $bucketName;
 
-        return $obj;
+        return $self;
     }
 
     public function withQuery(string $query): self
     {
-        $obj = clone $this;
-        $obj->query = $query;
+        $self = clone $this;
+        $self['query'] = $query;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumOfDocs(int $numOfDocs): self
     {
-        $obj = clone $this;
-        $obj->numOfDocs = $numOfDocs;
+        $self = clone $this;
+        $self['numOfDocs'] = $numOfDocs;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
  *
- * @phpstan-type created_at = array{gte?: string, lte?: string}
+ * @phpstan-type CreatedAtShape = array{gte?: string|null, lte?: string|null}
  */
 final class CreatedAt implements BaseModel
 {
-    /** @use SdkModel<created_at> */
+    /** @use SdkModel<CreatedAtShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gte;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lte;
 
     public function __construct()
@@ -36,27 +36,27 @@ final class CreatedAt implements BaseModel
      */
     public static function with(?string $gte = null, ?string $lte = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $gte && $obj->gte = $gte;
-        null !== $lte && $obj->lte = $lte;
+        null !== $gte && $self['gte'] = $gte;
+        null !== $lte && $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 
     public function withGte(string $gte): self
     {
-        $obj = clone $this;
-        $obj->gte = $gte;
+        $self = clone $this;
+        $self['gte'] = $gte;
 
-        return $obj;
+        return $self;
     }
 
     public function withLte(string $lte): self
     {
-        $obj = clone $this;
-        $obj->lte = $lte;
+        $self = clone $this;
+        $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,6 +5,7 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -37,7 +38,8 @@ final class AudioTest extends TestCase
             model: 'distil-whisper/distil-large-v2'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AudioTranscribeResponse::class, $result);
     }
 
     #[Test]
@@ -48,9 +50,14 @@ final class AudioTest extends TestCase
         }
 
         $result = $this->client->ai->audio->transcribe(
-            model: 'distil-whisper/distil-large-v2'
+            model: 'distil-whisper/distil-large-v2',
+            file: 'file',
+            fileURL: 'https://example.com/file.mp3',
+            responseFormat: 'json',
+            timestampGranularities: 'segment',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AudioTranscribeResponse::class, $result);
     }
 }

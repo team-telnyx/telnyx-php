@@ -4,244 +4,43 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventGetResponse;
 
-use Telnyx\Core\Attributes\Api;
-use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Porting\Events\EventGetResponse\Data\AvailableNotificationMethod;
-use Telnyx\Porting\Events\EventGetResponse\Data\EventType;
-use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderDeletedPayload;
-use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderMessagingChangedPayload;
-use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderNewCommentPayload;
-use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderSplitPayload;
-use Telnyx\Porting\Events\EventGetResponse\Data\Payload\WebhookPortingOrderStatusChangedPayload;
-use Telnyx\Porting\Events\EventGetResponse\Data\PayloadStatus;
+use Telnyx\Core\Concerns\SdkUnion;
+use Telnyx\Core\Conversion\Contracts\Converter;
+use Telnyx\Core\Conversion\Contracts\ConverterSource;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventDeletedPayload;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventNewCommentEvent;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventStatusChangedEvent;
+use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventWithoutWebhook;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>,
- *   createdAt?: \DateTimeInterface,
- *   eventType?: value-of<EventType>,
- *   payload?: WebhookPortingOrderDeletedPayload|WebhookPortingOrderMessagingChangedPayload|WebhookPortingOrderStatusChangedPayload|WebhookPortingOrderNewCommentPayload|WebhookPortingOrderSplitPayload,
- *   payloadStatus?: value-of<PayloadStatus>,
- *   portingOrderID?: string,
- *   recordType?: string,
- *   updatedAt?: \DateTimeInterface,
- * }
+ * @phpstan-import-type PortingEventDeletedPayloadShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventDeletedPayload
+ * @phpstan-import-type PortingEventMessagingChangedPayloadShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload
+ * @phpstan-import-type PortingEventStatusChangedEventShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventStatusChangedEvent
+ * @phpstan-import-type PortingEventNewCommentEventShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventNewCommentEvent
+ * @phpstan-import-type PortingEventSplitEventShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent
+ * @phpstan-import-type PortingEventWithoutWebhookShape from \Telnyx\Porting\Events\EventGetResponse\Data\PortingEventWithoutWebhook
+ *
+ * @phpstan-type DataVariants = PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook
+ * @phpstan-type DataShape = DataVariants|PortingEventDeletedPayloadShape|PortingEventMessagingChangedPayloadShape|PortingEventStatusChangedEventShape|PortingEventNewCommentEventShape|PortingEventSplitEventShape|PortingEventWithoutWebhookShape
  */
-final class Data implements BaseModel
+final class Data implements ConverterSource
 {
-    /** @use SdkModel<data_alias> */
-    use SdkModel;
+    use SdkUnion;
 
     /**
-     * Uniquely identifies the event.
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
-    #[Api(optional: true)]
-    public ?string $id;
-
-    /**
-     * Indicates the notification methods used.
-     *
-     * @var list<value-of<AvailableNotificationMethod>>|null $availableNotificationMethods
-     */
-    #[Api(
-        'available_notification_methods',
-        list: AvailableNotificationMethod::class,
-        optional: true,
-    )]
-    public ?array $availableNotificationMethods;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
-
-    /**
-     * Identifies the event type.
-     *
-     * @var value-of<EventType>|null $eventType
-     */
-    #[Api('event_type', enum: EventType::class, optional: true)]
-    public ?string $eventType;
-
-    /**
-     * The webhook payload for the porting_order.deleted event.
-     */
-    #[Api(optional: true)]
-    public WebhookPortingOrderDeletedPayload|WebhookPortingOrderMessagingChangedPayload|WebhookPortingOrderStatusChangedPayload|WebhookPortingOrderNewCommentPayload|WebhookPortingOrderSplitPayload|null $payload;
-
-    /**
-     * The status of the payload generation.
-     *
-     * @var value-of<PayloadStatus>|null $payloadStatus
-     */
-    #[Api('payload_status', enum: PayloadStatus::class, optional: true)]
-    public ?string $payloadStatus;
-
-    /**
-     * Identifies the porting order associated with the event.
-     */
-    #[Api('porting_order_id', optional: true)]
-    public ?string $portingOrderID;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
-
-    public function __construct()
+    public static function variants(): array
     {
-        $this->initialize();
-    }
-
-    /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
-     * @param EventType|value-of<EventType> $eventType
-     * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
-     */
-    public static function with(
-        ?string $id = null,
-        ?array $availableNotificationMethods = null,
-        ?\DateTimeInterface $createdAt = null,
-        EventType|string|null $eventType = null,
-        WebhookPortingOrderDeletedPayload|WebhookPortingOrderMessagingChangedPayload|WebhookPortingOrderStatusChangedPayload|WebhookPortingOrderNewCommentPayload|WebhookPortingOrderSplitPayload|null $payload = null,
-        PayloadStatus|string|null $payloadStatus = null,
-        ?string $portingOrderID = null,
-        ?string $recordType = null,
-        ?\DateTimeInterface $updatedAt = null,
-    ): self {
-        $obj = new self;
-
-        null !== $id && $obj->id = $id;
-        null !== $availableNotificationMethods && $obj['availableNotificationMethods'] = $availableNotificationMethods;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $eventType && $obj['eventType'] = $eventType;
-        null !== $payload && $obj->payload = $payload;
-        null !== $payloadStatus && $obj['payloadStatus'] = $payloadStatus;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-
-        return $obj;
-    }
-
-    /**
-     * Uniquely identifies the event.
-     */
-    public function withID(string $id): self
-    {
-        $obj = clone $this;
-        $obj->id = $id;
-
-        return $obj;
-    }
-
-    /**
-     * Indicates the notification methods used.
-     *
-     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
-     */
-    public function withAvailableNotificationMethods(
-        array $availableNotificationMethods
-    ): self {
-        $obj = clone $this;
-        $obj['availableNotificationMethods'] = $availableNotificationMethods;
-
-        return $obj;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the event type.
-     *
-     * @param EventType|value-of<EventType> $eventType
-     */
-    public function withEventType(EventType|string $eventType): self
-    {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
-
-        return $obj;
-    }
-
-    /**
-     * The webhook payload for the porting_order.deleted event.
-     */
-    public function withPayload(
-        WebhookPortingOrderDeletedPayload|WebhookPortingOrderMessagingChangedPayload|WebhookPortingOrderStatusChangedPayload|WebhookPortingOrderNewCommentPayload|WebhookPortingOrderSplitPayload $payload,
-    ): self {
-        $obj = clone $this;
-        $obj->payload = $payload;
-
-        return $obj;
-    }
-
-    /**
-     * The status of the payload generation.
-     *
-     * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
-     */
-    public function withPayloadStatus(PayloadStatus|string $payloadStatus): self
-    {
-        $obj = clone $this;
-        $obj['payloadStatus'] = $payloadStatus;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the porting order associated with the event.
-     */
-    public function withPortingOrderID(string $portingOrderID): self
-    {
-        $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
-
-        return $obj;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
-
-        return $obj;
+        return [
+            PortingEventDeletedPayload::class,
+            PortingEventMessagingChangedPayload::class,
+            PortingEventStatusChangedEvent::class,
+            PortingEventNewCommentEvent::class,
+            PortingEventSplitEvent::class,
+            PortingEventWithoutWebhook::class,
+        ];
     }
 }

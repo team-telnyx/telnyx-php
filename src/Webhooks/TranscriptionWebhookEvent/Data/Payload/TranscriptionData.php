@@ -4,40 +4,40 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\TranscriptionWebhookEvent\Data\Payload\TranscriptionData\TranscriptionTrack;
 
 /**
- * @phpstan-type transcription_data = array{
- *   confidence?: float,
- *   isFinal?: bool,
- *   transcript?: string,
- *   transcriptionTrack?: value-of<TranscriptionTrack>,
+ * @phpstan-type TranscriptionDataShape = array{
+ *   confidence?: float|null,
+ *   isFinal?: bool|null,
+ *   transcript?: string|null,
+ *   transcriptionTrack?: null|TranscriptionTrack|value-of<TranscriptionTrack>,
  * }
  */
 final class TranscriptionData implements BaseModel
 {
-    /** @use SdkModel<transcription_data> */
+    /** @use SdkModel<TranscriptionDataShape> */
     use SdkModel;
 
     /**
      * Speech recognition confidence level.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $confidence;
 
     /**
      * When false, it means that this is an interim result.
      */
-    #[Api('is_final', optional: true)]
+    #[Optional('is_final')]
     public ?bool $isFinal;
 
     /**
      * Recognized text.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $transcript;
 
     /**
@@ -45,7 +45,7 @@ final class TranscriptionData implements BaseModel
      *
      * @var value-of<TranscriptionTrack>|null $transcriptionTrack
      */
-    #[Api('transcription_track', enum: TranscriptionTrack::class, optional: true)]
+    #[Optional('transcription_track', enum: TranscriptionTrack::class)]
     public ?string $transcriptionTrack;
 
     public function __construct()
@@ -58,7 +58,7 @@ final class TranscriptionData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionTrack|value-of<TranscriptionTrack> $transcriptionTrack
+     * @param TranscriptionTrack|value-of<TranscriptionTrack>|null $transcriptionTrack
      */
     public static function with(
         ?float $confidence = null,
@@ -66,14 +66,14 @@ final class TranscriptionData implements BaseModel
         ?string $transcript = null,
         TranscriptionTrack|string|null $transcriptionTrack = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $confidence && $obj->confidence = $confidence;
-        null !== $isFinal && $obj->isFinal = $isFinal;
-        null !== $transcript && $obj->transcript = $transcript;
-        null !== $transcriptionTrack && $obj['transcriptionTrack'] = $transcriptionTrack;
+        null !== $confidence && $self['confidence'] = $confidence;
+        null !== $isFinal && $self['isFinal'] = $isFinal;
+        null !== $transcript && $self['transcript'] = $transcript;
+        null !== $transcriptionTrack && $self['transcriptionTrack'] = $transcriptionTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class TranscriptionData implements BaseModel
      */
     public function withConfidence(float $confidence): self
     {
-        $obj = clone $this;
-        $obj->confidence = $confidence;
+        $self = clone $this;
+        $self['confidence'] = $confidence;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class TranscriptionData implements BaseModel
      */
     public function withIsFinal(bool $isFinal): self
     {
-        $obj = clone $this;
-        $obj->isFinal = $isFinal;
+        $self = clone $this;
+        $self['isFinal'] = $isFinal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class TranscriptionData implements BaseModel
      */
     public function withTranscript(string $transcript): self
     {
-        $obj = clone $this;
-        $obj->transcript = $transcript;
+        $self = clone $this;
+        $self['transcript'] = $transcript;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +117,9 @@ final class TranscriptionData implements BaseModel
     public function withTranscriptionTrack(
         TranscriptionTrack|string $transcriptionTrack
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionTrack'] = $transcriptionTrack;
+        $self = clone $this;
+        $self['transcriptionTrack'] = $transcriptionTrack;
 
-        return $obj;
+        return $self;
     }
 }

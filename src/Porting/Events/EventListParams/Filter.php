@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events\EventListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventListParams\Filter\CreatedAt;
@@ -13,25 +13,29 @@ use Telnyx\Porting\Events\EventListParams\Filter\Type;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[porting_order_id], filter[created_at][gte], filter[created_at][lte].
  *
- * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt, portingOrderID?: string, type?: value-of<Type>
+ * @phpstan-import-type CreatedAtShape from \Telnyx\Porting\Events\EventListParams\Filter\CreatedAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   portingOrderID?: string|null,
+ *   type?: null|Type|value-of<Type>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Created at date range filtering operations.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?CreatedAt $createdAt;
 
     /**
      * Filter by porting order ID.
      */
-    #[Api('porting_order_id', optional: true)]
+    #[Optional('porting_order_id')]
     public ?string $portingOrderID;
 
     /**
@@ -39,7 +43,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()
@@ -52,31 +56,34 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
+        CreatedAt|array|null $createdAt = null,
         ?string $portingOrderID = null,
         Type|string|null $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $type && $obj['type'] = $type;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Created at date range filtering operations.
+     *
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +91,10 @@ final class Filter implements BaseModel
      */
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,9 +104,9 @@ final class Filter implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

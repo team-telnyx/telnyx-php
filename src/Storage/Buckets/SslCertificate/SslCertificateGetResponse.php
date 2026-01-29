@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\SslCertificate;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ssl_certificate_get_response = array{data?: SslCertificate}
+ * @phpstan-import-type SslCertificateShape from \Telnyx\Storage\Buckets\SslCertificate\SslCertificate
+ *
+ * @phpstan-type SslCertificateGetResponseShape = array{
+ *   data?: null|SslCertificate|SslCertificateShape
+ * }
  */
-final class SslCertificateGetResponse implements BaseModel, ResponseConverter
+final class SslCertificateGetResponse implements BaseModel
 {
-    /** @use SdkModel<ssl_certificate_get_response> */
+    /** @use SdkModel<SslCertificateGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?SslCertificate $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class SslCertificateGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param SslCertificate|SslCertificateShape|null $data
      */
-    public static function with(?SslCertificate $data = null): self
+    public static function with(SslCertificate|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(SslCertificate $data): self
+    /**
+     * @param SslCertificate|SslCertificateShape $data
+     */
+    public function withData(SslCertificate|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

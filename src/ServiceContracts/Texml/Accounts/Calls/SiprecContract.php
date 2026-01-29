@@ -9,37 +9,27 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SiprecContract
 {
     /**
      * @api
      *
-     * @param string $accountSid
-     * @param string $callSid
-     * @param Status|value-of<Status> $status The new status of the resource. Specifying `stopped` will end the siprec session.
+     * @param string $siprecSid path param: The SiprecSid that uniquely identifies the Sip Recording
+     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $callSid path param: The CallSid that identifies the call to update
+     * @param Status|value-of<Status> $status Body param: The new status of the resource. Specifying `stopped` will end the siprec session.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function siprecSidJson(
         string $siprecSid,
-        $accountSid,
-        $callSid,
-        $status = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SiprecSiprecSidJsonResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function siprecSidJsonRaw(
-        string $siprecSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $accountSid,
+        string $callSid,
+        Status|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SiprecSiprecSidJsonResponse;
 }

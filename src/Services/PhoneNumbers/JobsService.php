@@ -6,49 +6,60 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Jobs\JobDeleteBatchResponse;
 use Telnyx\PhoneNumbers\Jobs\JobGetResponse;
-use Telnyx\PhoneNumbers\Jobs\JobListParams;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Filter;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Page;
 use Telnyx\PhoneNumbers\Jobs\JobListParams\Sort;
-use Telnyx\PhoneNumbers\Jobs\JobListResponse;
-use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateBatchResponse;
-use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchParams;
 use Telnyx\PhoneNumbers\Jobs\JobUpdateEmergencySettingsBatchResponse;
+use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob;
 use Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\JobsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Jobs\JobListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Jobs\JobListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter as FilterShape1
+ * @phpstan-import-type UpdateVoiceSettingsShape from \Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class JobsService implements JobsContract
 {
     /**
+     * @api
+     */
+    public JobsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new JobsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a phone numbers job
      *
+     * @param string $id identifies the Phone Numbers Job
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): JobGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['phone_numbers/jobs/%1$s', $id],
-            options: $requestOptions,
-            convert: JobGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -56,44 +67,29 @@ final class JobsService implements JobsContract
      *
      * Lists the phone numbers jobs
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<PhoneNumbersJob>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): JobListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): JobListResponse {
-        [$parsed, $options] = JobListParams::parseRequest($params, $requestOptions);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'phone_numbers/jobs',
-            query: $parsed,
-            options: $options,
-            convert: JobListResponse::class,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -102,42 +98,20 @@ final class JobsService implements JobsContract
      * Creates a new background job to delete a batch of numbers. At most one thousand numbers can be updated per API call.
      *
      * @param list<string> $phoneNumbers
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function deleteBatch(
-        $phoneNumbers,
-        ?RequestOptions $requestOptions = null
+        array $phoneNumbers,
+        RequestOptions|array|null $requestOptions = null
     ): JobDeleteBatchResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
 
-        return $this->deleteBatchRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->deleteBatch(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deleteBatchRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): JobDeleteBatchResponse {
-        [$parsed, $options] = JobDeleteBatchParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'phone_numbers/jobs/delete_phone_numbers',
-            body: (object) $parsed,
-            options: $options,
-            convert: JobDeleteBatchResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -145,74 +119,52 @@ final class JobsService implements JobsContract
      *
      * Creates a new background job to update a batch of numbers. At most one thousand numbers can be updated per API call. At least one of the updateable fields must be submitted. IMPORTANT: You must either specify filters (using the filter parameters) or specific phone numbers (using the phone_numbers parameter in the request body). If you specify filters, ALL phone numbers that match the given filters (up to 1000 at a time) will be updated. If you want to update only specific numbers, you must use the phone_numbers parameter in the request body. When using the phone_numbers parameter, ensure you follow the correct format as shown in the example (either phone number IDs or phone numbers in E164 format).
      *
-     * @param list<string> $phoneNumbers Array of phone number ids and/or phone numbers in E164 format to update. This parameter is required if no filter parameters are provided. If you want to update specific numbers rather than all numbers matching a filter, you must use this parameter. Each item must be either a valid phone number ID or a phone number in E164 format (e.g., '+13127367254').
-     * @param JobUpdateBatchParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
-     * @param string $billingGroupID identifies the billing group associated with the phone number
-     * @param string $connectionID identifies the connection associated with the phone number
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param bool $deletionLockEnabled Indicates whether to enable or disable the deletion lock on each phone number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
-     * @param string $externalPin If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
-     * @param bool $hdVoiceEnabled Indicates whether to enable or disable HD Voice on each phone number. HD Voice is a paid feature and may not be available for all phone numbers, more details about it can be found in the Telnyx support documentation.
-     * @param list<string> $tags a list of user-assigned tags to help organize phone numbers
-     * @param UpdateVoiceSettings $voice
+     * @param list<string> $phoneNumbers Body param: Array of phone number ids and/or phone numbers in E164 format to update. This parameter is required if no filter parameters are provided. If you want to update specific numbers rather than all numbers matching a filter, you must use this parameter. Each item must be either a valid phone number ID or a phone number in E164 format (e.g., '+13127367254').
+     * @param \Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter|FilterShape1 $filter Query param: Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference]
+     * @param string $billingGroupID body param: Identifies the billing group associated with the phone number
+     * @param string $connectionID body param: Identifies the connection associated with the phone number
+     * @param string $customerReference body param: A customer reference string for customer look ups
+     * @param bool $deletionLockEnabled Body param: Indicates whether to enable or disable the deletion lock on each phone number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
+     * @param string $externalPin Body param: If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
+     * @param bool $hdVoiceEnabled Body param: Indicates whether to enable or disable HD Voice on each phone number. HD Voice is a paid feature and may not be available for all phone numbers, more details about it can be found in the Telnyx support documentation.
+     * @param list<string> $tags body param: A list of user-assigned tags to help organize phone numbers
+     * @param UpdateVoiceSettings|UpdateVoiceSettingsShape $voice Body param
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function updateBatch(
-        $phoneNumbers,
-        $filter = omit,
-        $billingGroupID = omit,
-        $connectionID = omit,
-        $customerReference = omit,
-        $deletionLockEnabled = omit,
-        $externalPin = omit,
-        $hdVoiceEnabled = omit,
-        $tags = omit,
-        $voice = omit,
-        ?RequestOptions $requestOptions = null,
+        array $phoneNumbers,
+        \Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter|array|null $filter = null,
+        ?string $billingGroupID = null,
+        ?string $connectionID = null,
+        ?string $customerReference = null,
+        ?bool $deletionLockEnabled = null,
+        ?string $externalPin = null,
+        ?bool $hdVoiceEnabled = null,
+        ?array $tags = null,
+        UpdateVoiceSettings|array|null $voice = null,
+        RequestOptions|array|null $requestOptions = null,
     ): JobUpdateBatchResponse {
-        $params = [
-            'phoneNumbers' => $phoneNumbers,
-            'filter' => $filter,
-            'billingGroupID' => $billingGroupID,
-            'connectionID' => $connectionID,
-            'customerReference' => $customerReference,
-            'deletionLockEnabled' => $deletionLockEnabled,
-            'externalPin' => $externalPin,
-            'hdVoiceEnabled' => $hdVoiceEnabled,
-            'tags' => $tags,
-            'voice' => $voice,
-        ];
-
-        return $this->updateBatchRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateBatchRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): JobUpdateBatchResponse {
-        [$parsed, $options] = JobUpdateBatchParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'phoneNumbers' => $phoneNumbers,
+                'filter' => $filter,
+                'billingGroupID' => $billingGroupID,
+                'connectionID' => $connectionID,
+                'customerReference' => $customerReference,
+                'deletionLockEnabled' => $deletionLockEnabled,
+                'externalPin' => $externalPin,
+                'hdVoiceEnabled' => $hdVoiceEnabled,
+                'tags' => $tags,
+                'voice' => $voice,
+            ],
         );
-        $query_params = ['filter'];
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'phone_numbers/jobs/update_phone_numbers',
-            query: array_diff_key($parsed, $query_params),
-            body: (object) array_diff_key($parsed, $query_params),
-            options: $options,
-            convert: JobUpdateBatchResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateBatch(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -223,47 +175,27 @@ final class JobsService implements JobsContract
      * @param bool $emergencyEnabled indicates whether to enable or disable emergency services on the numbers
      * @param list<string> $phoneNumbers
      * @param string|null $emergencyAddressID Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function updateEmergencySettingsBatch(
-        $emergencyEnabled,
-        $phoneNumbers,
-        $emergencyAddressID = omit,
-        ?RequestOptions $requestOptions = null,
+        bool $emergencyEnabled,
+        array $phoneNumbers,
+        ?string $emergencyAddressID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): JobUpdateEmergencySettingsBatchResponse {
-        $params = [
-            'emergencyEnabled' => $emergencyEnabled,
-            'phoneNumbers' => $phoneNumbers,
-            'emergencyAddressID' => $emergencyAddressID,
-        ];
-
-        return $this->updateEmergencySettingsBatchRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateEmergencySettingsBatchRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): JobUpdateEmergencySettingsBatchResponse {
-        [$parsed, $options] = JobUpdateEmergencySettingsBatchParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'emergencyEnabled' => $emergencyEnabled,
+                'phoneNumbers' => $phoneNumbers,
+                'emergencyAddressID' => $emergencyAddressID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'phone_numbers/jobs/update_emergency_settings',
-            body: (object) $parsed,
-            options: $options,
-            convert: JobUpdateEmergencySettingsBatchResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateEmergencySettingsBatch(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

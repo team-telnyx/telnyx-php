@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voicemail;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type voicemail_pref_response = array{enabled?: bool, pin?: string}
+ * @phpstan-type VoicemailPrefResponseShape = array{
+ *   enabled?: bool|null, pin?: string|null
+ * }
  */
 final class VoicemailPrefResponse implements BaseModel
 {
-    /** @use SdkModel<voicemail_pref_response> */
+    /** @use SdkModel<VoicemailPrefResponseShape> */
     use SdkModel;
 
     /**
      * Whether voicemail is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
     /**
      * The pin used for the voicemail.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pin;
 
     public function __construct()
@@ -40,12 +42,12 @@ final class VoicemailPrefResponse implements BaseModel
      */
     public static function with(?bool $enabled = null, ?string $pin = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $pin && $obj->pin = $pin;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $pin && $self['pin'] = $pin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,10 +55,10 @@ final class VoicemailPrefResponse implements BaseModel
      */
     public function withEnabled(bool $enabled): self
     {
-        $obj = clone $this;
-        $obj->enabled = $enabled;
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +66,9 @@ final class VoicemailPrefResponse implements BaseModel
      */
     public function withPin(string $pin): self
     {
-        $obj = clone $this;
-        $obj->pin = $pin;
+        $self = clone $this;
+        $self['pin'] = $pin;
 
-        return $obj;
+        return $self;
     }
 }

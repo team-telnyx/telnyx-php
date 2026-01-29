@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type message_template = array{
- *   data?: VerifyProfileMessageTemplateResponse
+ * @phpstan-import-type VerifyProfileMessageTemplateResponseShape from \Telnyx\VerifyProfiles\VerifyProfileMessageTemplateResponse
+ *
+ * @phpstan-type MessageTemplateShape = array{
+ *   data?: null|VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape,
  * }
  */
-final class MessageTemplate implements BaseModel, ResponseConverter
+final class MessageTemplate implements BaseModel
 {
-    /** @use SdkModel<message_template> */
+    /** @use SdkModel<MessageTemplateShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?VerifyProfileMessageTemplateResponse $data;
 
     public function __construct()
@@ -34,22 +32,28 @@ final class MessageTemplate implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape|null $data
      */
     public static function with(
-        ?VerifyProfileMessageTemplateResponse $data = null
+        VerifyProfileMessageTemplateResponse|array|null $data = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(VerifyProfileMessageTemplateResponse $data): self
-    {
-        $obj = clone $this;
-        $obj->data = $data;
+    /**
+     * @param VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape $data
+     */
+    public function withData(
+        VerifyProfileMessageTemplateResponse|array $data
+    ): self {
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

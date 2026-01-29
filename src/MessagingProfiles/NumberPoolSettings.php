@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -15,17 +16,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * To disable this feature, set the object field to `null`.
  *
- * @phpstan-type number_pool_settings = array{
+ * @phpstan-type NumberPoolSettingsShape = array{
  *   longCodeWeight: float,
  *   skipUnhealthy: bool,
  *   tollFreeWeight: float,
- *   geomatch?: bool,
- *   stickySender?: bool,
+ *   geomatch?: bool|null,
+ *   stickySender?: bool|null,
  * }
  */
 final class NumberPoolSettings implements BaseModel
 {
-    /** @use SdkModel<number_pool_settings> */
+    /** @use SdkModel<NumberPoolSettingsShape> */
     use SdkModel;
 
     /**
@@ -34,7 +35,7 @@ final class NumberPoolSettings implements BaseModel
      * does not necessarily need to add to 100.  Weight must be a non-negative number, and when equal
      * to zero it will remove the number type from the pool.
      */
-    #[Api('long_code_weight')]
+    #[Required('long_code_weight')]
     public float $longCodeWeight;
 
     /**
@@ -43,7 +44,7 @@ final class NumberPoolSettings implements BaseModel
      * rate and the amount of messages marked as spam by upstream carriers.
      * Numbers with a deliverability rate below 25% or spam ratio over 75% will be considered unhealthy.
      */
-    #[Api('skip_unhealthy')]
+    #[Required('skip_unhealthy')]
     public bool $skipUnhealthy;
 
     /**
@@ -52,7 +53,7 @@ final class NumberPoolSettings implements BaseModel
      * does not necessarily need to add to 100. Weight must be a non-negative number, and when equal
      * to zero it will remove the number type from the pool.
      */
-    #[Api('toll_free_weight')]
+    #[Required('toll_free_weight')]
     public float $tollFreeWeight;
 
     /**
@@ -60,7 +61,7 @@ final class NumberPoolSettings implements BaseModel
      * number. If there are no such numbers available, a nunber with a different area code will be chosen. Currently
      * only NANP numbers are supported.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $geomatch;
 
     /**
@@ -68,7 +69,7 @@ final class NumberPoolSettings implements BaseModel
      * recipient. If the sending number becomes unhealthy and `skip_unhealthy` is set to true, a new
      * number will be chosen.
      */
-    #[Api('sticky_sender', optional: true)]
+    #[Optional('sticky_sender')]
     public ?bool $stickySender;
 
     /**
@@ -107,16 +108,16 @@ final class NumberPoolSettings implements BaseModel
         ?bool $geomatch = null,
         ?bool $stickySender = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->longCodeWeight = $longCodeWeight;
-        $obj->skipUnhealthy = $skipUnhealthy;
-        $obj->tollFreeWeight = $tollFreeWeight;
+        $self['longCodeWeight'] = $longCodeWeight;
+        $self['skipUnhealthy'] = $skipUnhealthy;
+        $self['tollFreeWeight'] = $tollFreeWeight;
 
-        null !== $geomatch && $obj->geomatch = $geomatch;
-        null !== $stickySender && $obj->stickySender = $stickySender;
+        null !== $geomatch && $self['geomatch'] = $geomatch;
+        null !== $stickySender && $self['stickySender'] = $stickySender;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +128,10 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withLongCodeWeight(float $longCodeWeight): self
     {
-        $obj = clone $this;
-        $obj->longCodeWeight = $longCodeWeight;
+        $self = clone $this;
+        $self['longCodeWeight'] = $longCodeWeight;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +142,10 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withSkipUnhealthy(bool $skipUnhealthy): self
     {
-        $obj = clone $this;
-        $obj->skipUnhealthy = $skipUnhealthy;
+        $self = clone $this;
+        $self['skipUnhealthy'] = $skipUnhealthy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +156,10 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withTollFreeWeight(float $tollFreeWeight): self
     {
-        $obj = clone $this;
-        $obj->tollFreeWeight = $tollFreeWeight;
+        $self = clone $this;
+        $self['tollFreeWeight'] = $tollFreeWeight;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +169,10 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withGeomatch(bool $geomatch): self
     {
-        $obj = clone $this;
-        $obj->geomatch = $geomatch;
+        $self = clone $this;
+        $self['geomatch'] = $geomatch;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,9 +182,9 @@ final class NumberPoolSettings implements BaseModel
      */
     public function withStickySender(bool $stickySender): self
     {
-        $obj = clone $this;
-        $obj->stickySender = $stickySender;
+        $self = clone $this;
+        $self['stickySender'] = $stickySender;
 
-        return $obj;
+        return $self;
     }
 }

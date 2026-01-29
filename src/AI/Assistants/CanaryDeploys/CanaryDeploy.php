@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Request model for creating or updating canary deploys.
  *
- * @phpstan-type canary_deploy = array{versions: list<VersionConfig>}
+ * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
+ *
+ * @phpstan-type CanaryDeployShape = array{
+ *   versions: list<VersionConfig|VersionConfigShape>
+ * }
  */
 final class CanaryDeploy implements BaseModel
 {
-    /** @use SdkModel<canary_deploy> */
+    /** @use SdkModel<CanaryDeployShape> */
     use SdkModel;
 
     /**
@@ -23,7 +27,7 @@ final class CanaryDeploy implements BaseModel
      *
      * @var list<VersionConfig> $versions
      */
-    #[Api(list: VersionConfig::class)]
+    #[Required(list: VersionConfig::class)]
     public array $versions;
 
     /**
@@ -50,27 +54,27 @@ final class CanaryDeploy implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public static function with(array $versions): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->versions = $versions;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of version configurations.
      *
-     * @param list<VersionConfig> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public function withVersions(array $versions): self
     {
-        $obj = clone $this;
-        $obj->versions = $versions;
+        $self = clone $this;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 }

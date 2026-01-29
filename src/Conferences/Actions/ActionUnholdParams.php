@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Conferences\Actions\ActionUnholdParams\Region;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,13 +14,15 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Unhold a list of participants in a conference call.
  *
- * @see Telnyx\Conferences\Actions->unhold
+ * @see Telnyx\Services\Conferences\ActionsService::unhold()
  *
- * @phpstan-type action_unhold_params = array{callControlIDs: list<string>}
+ * @phpstan-type ActionUnholdParamsShape = array{
+ *   callControlIDs: list<string>, region?: null|Region|value-of<Region>
+ * }
  */
 final class ActionUnholdParams implements BaseModel
 {
-    /** @use SdkModel<action_unhold_params> */
+    /** @use SdkModel<ActionUnholdParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -27,8 +31,16 @@ final class ActionUnholdParams implements BaseModel
      *
      * @var list<string> $callControlIDs
      */
-    #[Api('call_control_ids', list: 'string')]
+    #[Required('call_control_ids', list: 'string')]
     public array $callControlIDs;
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     /**
      * `new ActionUnholdParams()` is missing required properties by the API.
@@ -55,14 +67,19 @@ final class ActionUnholdParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $callControlIDs
+     * @param Region|value-of<Region>|null $region
      */
-    public static function with(array $callControlIDs): self
-    {
-        $obj = new self;
+    public static function with(
+        array $callControlIDs,
+        Region|string|null $region = null
+    ): self {
+        $self = new self;
 
-        $obj->callControlIDs = $callControlIDs;
+        $self['callControlIDs'] = $callControlIDs;
 
-        return $obj;
+        null !== $region && $self['region'] = $region;
+
+        return $self;
     }
 
     /**
@@ -72,9 +89,22 @@ final class ActionUnholdParams implements BaseModel
      */
     public function withCallControlIDs(array $callControlIDs): self
     {
-        $obj = clone $this;
-        $obj->callControlIDs = $callControlIDs;
+        $self = clone $this;
+        $self['callControlIDs'] = $callControlIDs;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
+
+        return $self;
     }
 }

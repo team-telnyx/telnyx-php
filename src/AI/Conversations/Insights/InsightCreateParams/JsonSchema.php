@@ -7,20 +7,23 @@ namespace Telnyx\AI\Conversations\Insights\InsightCreateParams;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
+use Telnyx\Core\Conversion\MapOf;
 
 /**
  * If specified, the output will follow the JSON schema.
+ *
+ * @phpstan-type JsonSchemaVariants = string|array<string,mixed>
+ * @phpstan-type JsonSchemaShape = JsonSchemaVariants
  */
 final class JsonSchema implements ConverterSource
 {
     use SdkUnion;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
-        return ['string', 'mixed'];
+        return ['string', new MapOf('mixed')];
     }
 }

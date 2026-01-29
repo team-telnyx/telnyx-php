@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type activation_settings = array{
- *   focDatetimeRequested?: \DateTimeInterface
+ * @phpstan-type ActivationSettingsShape = array{
+ *   focDatetimeRequested?: \DateTimeInterface|null
  * }
  */
 final class ActivationSettings implements BaseModel
 {
-    /** @use SdkModel<activation_settings> */
+    /** @use SdkModel<ActivationSettingsShape> */
     use SdkModel;
 
     /**
      * ISO 8601 formatted Date/Time requested for the FOC date.
      */
-    #[Api('foc_datetime_requested', optional: true)]
+    #[Optional('foc_datetime_requested')]
     public ?\DateTimeInterface $focDatetimeRequested;
 
     public function __construct()
@@ -37,11 +37,11 @@ final class ActivationSettings implements BaseModel
     public static function with(
         ?\DateTimeInterface $focDatetimeRequested = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $focDatetimeRequested && $obj->focDatetimeRequested = $focDatetimeRequested;
+        null !== $focDatetimeRequested && $self['focDatetimeRequested'] = $focDatetimeRequested;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -50,9 +50,9 @@ final class ActivationSettings implements BaseModel
     public function withFocDatetimeRequested(
         \DateTimeInterface $focDatetimeRequested
     ): self {
-        $obj = clone $this;
-        $obj->focDatetimeRequested = $focDatetimeRequested;
+        $self = clone $this;
+        $self['focDatetimeRequested'] = $focDatetimeRequested;
 
-        return $obj;
+        return $self;
     }
 }

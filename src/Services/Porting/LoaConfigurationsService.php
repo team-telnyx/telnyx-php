@@ -6,86 +6,83 @@ namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationListResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
+use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\LoaConfigurationsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Address
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Contact
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address as AddressShape1
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact as ContactShape1
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo as LogoShape1
+ * @phpstan-import-type PageShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams\Page
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address as AddressShape2
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact as ContactShape2
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo as LogoShape2
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class LoaConfigurationsService implements LoaConfigurationsContract
 {
     /**
+     * @api
+     */
+    public LoaConfigurationsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new LoaConfigurationsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a LOA configuration.
      *
-     * @param Address $address the address of the company
+     * @param Address|AddressShape $address the address of the company
      * @param string $companyName The name of the company
-     * @param Contact $contact the contact information of the company
-     * @param Logo $logo The logo of the LOA configuration
+     * @param Contact|ContactShape $contact the contact information of the company
+     * @param Logo|LogoShape $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $address,
-        $companyName,
-        $contact,
-        $logo,
-        $name,
-        ?RequestOptions $requestOptions = null,
+        Address|array $address,
+        string $companyName,
+        Contact|array $contact,
+        Logo|array $logo,
+        string $name,
+        RequestOptions|array|null $requestOptions = null,
     ): LoaConfigurationNewResponse {
-        $params = [
-            'address' => $address,
-            'companyName' => $companyName,
-            'contact' => $contact,
-            'logo' => $logo,
-            'name' => $name,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): LoaConfigurationNewResponse {
-        [$parsed, $options] = LoaConfigurationCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'address' => $address,
+                'companyName' => $companyName,
+                'contact' => $contact,
+                'logo' => $logo,
+                'name' => $name,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'porting/loa_configurations',
-            body: (object) $parsed,
-            options: $options,
-            convert: LoaConfigurationNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -93,19 +90,19 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      *
      * Retrieve a specific LOA configuration.
      *
+     * @param string $id identifies a LOA configuration
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): LoaConfigurationGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['porting/loa_configurations/%1$s', $id],
-            options: $requestOptions,
-            convert: LoaConfigurationGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -113,59 +110,39 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      *
      * Update a specific LOA configuration.
      *
-     * @param LoaConfigurationUpdateParams\Address $address the address of the company
+     * @param string $id identifies a LOA configuration
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address|AddressShape1 $address the address of the company
      * @param string $companyName The name of the company
-     * @param LoaConfigurationUpdateParams\Contact $contact the contact information of the company
-     * @param LoaConfigurationUpdateParams\Logo $logo The logo of the LOA configuration
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact|ContactShape1 $contact the contact information of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo|LogoShape1 $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $address,
-        $companyName,
-        $contact,
-        $logo,
-        $name,
-        ?RequestOptions $requestOptions = null,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address|array $address,
+        string $companyName,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact|array $contact,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo|array $logo,
+        string $name,
+        RequestOptions|array|null $requestOptions = null,
     ): LoaConfigurationUpdateResponse {
-        $params = [
-            'address' => $address,
-            'companyName' => $companyName,
-            'contact' => $contact,
-            'logo' => $logo,
-            'name' => $name,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): LoaConfigurationUpdateResponse {
-        [$parsed, $options] = LoaConfigurationUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'address' => $address,
+                'companyName' => $companyName,
+                'contact' => $contact,
+                'logo' => $logo,
+                'name' => $name,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['porting/loa_configurations/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: LoaConfigurationUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -173,43 +150,23 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      *
      * List the LOA configurations.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<PortingLoaConfiguration>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): LoaConfigurationListResponse {
-        $params = ['page' => $page];
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination {
+        $params = Util::removeNulls(['page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): LoaConfigurationListResponse {
-        [$parsed, $options] = LoaConfigurationListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'porting/loa_configurations',
-            query: $parsed,
-            options: $options,
-            convert: LoaConfigurationListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -217,19 +174,19 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      *
      * Delete a specific LOA configuration.
      *
+     * @param string $id identifies a LOA configuration
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['porting/loa_configurations/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -237,58 +194,37 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      *
      * Preview the LOA template that would be generated without need to create LOA configuration.
      *
-     * @param LoaConfigurationPreview0Params\Address $address the address of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address|AddressShape2 $address the address of the company
      * @param string $companyName The name of the company
-     * @param LoaConfigurationPreview0Params\Contact $contact the contact information of the company
-     * @param LoaConfigurationPreview0Params\Logo $logo The logo of the LOA configuration
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact|ContactShape2 $contact the contact information of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo|LogoShape2 $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function preview0(
-        $address,
-        $companyName,
-        $contact,
-        $logo,
-        $name,
-        ?RequestOptions $requestOptions = null,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address|array $address,
+        string $companyName,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact|array $contact,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo|array $logo,
+        string $name,
+        RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = [
-            'address' => $address,
-            'companyName' => $companyName,
-            'contact' => $contact,
-            'logo' => $logo,
-            'name' => $name,
-        ];
-
-        return $this->preview0Raw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function preview0Raw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): string {
-        [$parsed, $options] = LoaConfigurationPreview0Params::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'address' => $address,
+                'companyName' => $companyName,
+                'contact' => $contact,
+                'logo' => $logo,
+                'name' => $name,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'porting/loa_configuration/preview',
-            headers: ['Accept' => 'application/pdf'],
-            body: (object) $parsed,
-            options: $options,
-            convert: 'string',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->preview0(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -296,19 +232,18 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
      *
      * Preview a specific LOA configuration.
      *
+     * @param string $id identifies a LOA configuration
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function preview1(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['porting/loa_configurations/%1$s/preview', $id],
-            headers: ['Accept' => 'application/pdf'],
-            options: $requestOptions,
-            convert: 'string',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->preview1($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -6,30 +6,32 @@ namespace Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\ActionType;
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\SimCardActionsSummary;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   actionType?: value-of<ActionType>,
- *   createdAt?: string,
- *   recordType?: string,
- *   settings?: array<string, mixed>,
- *   simCardActionsSummary?: list<SimCardActionsSummary>,
- *   updatedAt?: string,
+ * @phpstan-import-type SimCardActionsSummaryShape from \Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data\SimCardActionsSummary
+ *
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   actionType?: null|ActionType|value-of<ActionType>,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   settings?: array<string,mixed>|null,
+ *   simCardActionsSummary?: list<SimCardActionsSummary|SimCardActionsSummaryShape>|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -40,38 +42,34 @@ final class Data implements BaseModel
      *
      * @var value-of<ActionType>|null $actionType
      */
-    #[Api('action_type', enum: ActionType::class, optional: true)]
+    #[Optional('action_type', enum: ActionType::class)]
     public ?string $actionType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * A JSON object representation of the bulk action payload.
      *
-     * @var array<string, mixed>|null $settings
+     * @var array<string,mixed>|null $settings
      */
-    #[Api(map: 'mixed', optional: true)]
+    #[Optional(map: 'mixed')]
     public ?array $settings;
 
     /** @var list<SimCardActionsSummary>|null $simCardActionsSummary */
-    #[Api(
-        'sim_card_actions_summary',
-        list: SimCardActionsSummary::class,
-        optional: true,
-    )]
+    #[Optional('sim_card_actions_summary', list: SimCardActionsSummary::class)]
     public ?array $simCardActionsSummary;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     public function __construct()
@@ -84,9 +82,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActionType|value-of<ActionType> $actionType
-     * @param array<string, mixed> $settings
-     * @param list<SimCardActionsSummary> $simCardActionsSummary
+     * @param ActionType|value-of<ActionType>|null $actionType
+     * @param array<string,mixed>|null $settings
+     * @param list<SimCardActionsSummary|SimCardActionsSummaryShape>|null $simCardActionsSummary
      */
     public static function with(
         ?string $id = null,
@@ -97,17 +95,17 @@ final class Data implements BaseModel
         ?array $simCardActionsSummary = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $actionType && $obj['actionType'] = $actionType;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $settings && $obj->settings = $settings;
-        null !== $simCardActionsSummary && $obj->simCardActionsSummary = $simCardActionsSummary;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $actionType && $self['actionType'] = $actionType;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $settings && $self['settings'] = $settings;
+        null !== $simCardActionsSummary && $self['simCardActionsSummary'] = $simCardActionsSummary;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +113,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +129,10 @@ final class Data implements BaseModel
      */
     public function withActionType(ActionType|string $actionType): self
     {
-        $obj = clone $this;
-        $obj['actionType'] = $actionType;
+        $self = clone $this;
+        $self['actionType'] = $actionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,43 +140,43 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A JSON object representation of the bulk action payload.
      *
-     * @param array<string, mixed> $settings
+     * @param array<string,mixed> $settings
      */
     public function withSettings(array $settings): self
     {
-        $obj = clone $this;
-        $obj->settings = $settings;
+        $self = clone $this;
+        $self['settings'] = $settings;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<SimCardActionsSummary> $simCardActionsSummary
+     * @param list<SimCardActionsSummary|SimCardActionsSummaryShape> $simCardActionsSummary
      */
     public function withSimCardActionsSummary(
         array $simCardActionsSummary
     ): self {
-        $obj = clone $this;
-        $obj->simCardActionsSummary = $simCardActionsSummary;
+        $self = clone $this;
+        $self['simCardActionsSummary'] = $simCardActionsSummary;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,9 +184,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

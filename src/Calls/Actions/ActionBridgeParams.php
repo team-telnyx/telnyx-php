@@ -11,7 +11,8 @@ use Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat;
 use Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionBridgeParams\Ringtone;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,51 +25,51 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.bridged` for Leg A
  * - `call.bridged` for Leg B
  *
- * @see Telnyx\Calls\Actions->bridge
+ * @see Telnyx\Services\Calls\ActionsService::bridge()
  *
- * @phpstan-type action_bridge_params = array{
- *   callControlID: string,
- *   clientState?: string,
- *   commandID?: string,
- *   muteDtmf?: MuteDtmf|value-of<MuteDtmf>,
- *   parkAfterUnbridge?: string,
- *   playRingtone?: bool,
- *   queue?: string,
- *   record?: Record|value-of<Record>,
- *   recordChannels?: RecordChannels|value-of<RecordChannels>,
- *   recordCustomFileName?: string,
- *   recordFormat?: RecordFormat|value-of<RecordFormat>,
- *   recordMaxLength?: int,
- *   recordTimeoutSecs?: int,
- *   recordTrack?: RecordTrack|value-of<RecordTrack>,
- *   recordTrim?: RecordTrim|value-of<RecordTrim>,
- *   ringtone?: Ringtone|value-of<Ringtone>,
- *   videoRoomContext?: string,
- *   videoRoomID?: string,
+ * @phpstan-type ActionBridgeParamsShape = array{
+ *   callControlIDToBridgeWith: string,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   muteDtmf?: null|MuteDtmf|value-of<MuteDtmf>,
+ *   parkAfterUnbridge?: string|null,
+ *   playRingtone?: bool|null,
+ *   queue?: string|null,
+ *   record?: null|Record|value-of<Record>,
+ *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
+ *   recordCustomFileName?: string|null,
+ *   recordFormat?: null|RecordFormat|value-of<RecordFormat>,
+ *   recordMaxLength?: int|null,
+ *   recordTimeoutSecs?: int|null,
+ *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
+ *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
+ *   ringtone?: null|Ringtone|value-of<Ringtone>,
+ *   videoRoomContext?: string|null,
+ *   videoRoomID?: string|null,
  * }
  */
 final class ActionBridgeParams implements BaseModel
 {
-    /** @use SdkModel<action_bridge_params> */
+    /** @use SdkModel<ActionBridgeParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter.
      */
-    #[Api('call_control_id')]
-    public string $callControlID;
+    #[Required('call_control_id')]
+    public string $callControlIDToBridgeWith;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
@@ -76,25 +77,25 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<MuteDtmf>|null $muteDtmf
      */
-    #[Api('mute_dtmf', enum: MuteDtmf::class, optional: true)]
+    #[Optional('mute_dtmf', enum: MuteDtmf::class)]
     public ?string $muteDtmf;
 
     /**
      * Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
      */
-    #[Api('park_after_unbridge', optional: true)]
+    #[Optional('park_after_unbridge')]
     public ?string $parkAfterUnbridge;
 
     /**
      * Specifies whether to play a ringtone if the call you want to bridge with has not yet been answered.
      */
-    #[Api('play_ringtone', optional: true)]
+    #[Optional('play_ringtone')]
     public ?bool $playRingtone;
 
     /**
      * The name of the queue you want to bridge with, can't be used together with call_control_id parameter or video_room_id parameter. Bridging with a queue means bridging with the first call in the queue. The call will always be removed from the queue regardless of whether bridging succeeds. Returns an error when the queue is empty.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $queue;
 
     /**
@@ -102,7 +103,7 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<Record>|null $record
      */
-    #[Api(enum: Record::class, optional: true)]
+    #[Optional(enum: Record::class)]
     public ?string $record;
 
     /**
@@ -110,13 +111,13 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<RecordChannels>|null $recordChannels
      */
-    #[Api('record_channels', enum: RecordChannels::class, optional: true)]
+    #[Optional('record_channels', enum: RecordChannels::class)]
     public ?string $recordChannels;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api('record_custom_file_name', optional: true)]
+    #[Optional('record_custom_file_name')]
     public ?string $recordCustomFileName;
 
     /**
@@ -124,19 +125,19 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<RecordFormat>|null $recordFormat
      */
-    #[Api('record_format', enum: RecordFormat::class, optional: true)]
+    #[Optional('record_format', enum: RecordFormat::class)]
     public ?string $recordFormat;
 
     /**
      * Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      */
-    #[Api('record_max_length', optional: true)]
+    #[Optional('record_max_length')]
     public ?int $recordMaxLength;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api('record_timeout_secs', optional: true)]
+    #[Optional('record_timeout_secs')]
     public ?int $recordTimeoutSecs;
 
     /**
@@ -144,7 +145,7 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<RecordTrack>|null $recordTrack
      */
-    #[Api('record_track', enum: RecordTrack::class, optional: true)]
+    #[Optional('record_track', enum: RecordTrack::class)]
     public ?string $recordTrack;
 
     /**
@@ -152,7 +153,7 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<RecordTrim>|null $recordTrim
      */
-    #[Api('record_trim', enum: RecordTrim::class, optional: true)]
+    #[Optional('record_trim', enum: RecordTrim::class)]
     public ?string $recordTrim;
 
     /**
@@ -160,19 +161,19 @@ final class ActionBridgeParams implements BaseModel
      *
      * @var value-of<Ringtone>|null $ringtone
      */
-    #[Api(enum: Ringtone::class, optional: true)]
+    #[Optional(enum: Ringtone::class)]
     public ?string $ringtone;
 
     /**
      * The additional parameter that will be passed to the video conference. It is a text field and the user can decide how to use it. For example, you can set the participant name or pass JSON text. It can be used only with video_room_id parameter.
      */
-    #[Api('video_room_context', optional: true)]
+    #[Optional('video_room_context')]
     public ?string $videoRoomContext;
 
     /**
      * The ID of the video room you want to bridge with, can't be used together with call_control_id parameter or queue parameter.
      */
-    #[Api('video_room_id', optional: true)]
+    #[Optional('video_room_id')]
     public ?string $videoRoomID;
 
     /**
@@ -180,13 +181,13 @@ final class ActionBridgeParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ActionBridgeParams::with(callControlID: ...)
+     * ActionBridgeParams::with(callControlIDToBridgeWith: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ActionBridgeParams)->withCallControlID(...)
+     * (new ActionBridgeParams)->withCallControlIDToBridgeWith(...)
      * ```
      */
     public function __construct()
@@ -199,16 +200,16 @@ final class ActionBridgeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MuteDtmf|value-of<MuteDtmf> $muteDtmf
-     * @param Record|value-of<Record> $record
-     * @param RecordChannels|value-of<RecordChannels> $recordChannels
-     * @param RecordFormat|value-of<RecordFormat> $recordFormat
-     * @param RecordTrack|value-of<RecordTrack> $recordTrack
-     * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param Ringtone|value-of<Ringtone> $ringtone
+     * @param MuteDtmf|value-of<MuteDtmf>|null $muteDtmf
+     * @param Record|value-of<Record>|null $record
+     * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
+     * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
+     * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
+     * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
+     * @param Ringtone|value-of<Ringtone>|null $ringtone
      */
     public static function with(
-        string $callControlID,
+        string $callControlIDToBridgeWith,
         ?string $clientState = null,
         ?string $commandID = null,
         MuteDtmf|string|null $muteDtmf = null,
@@ -227,40 +228,41 @@ final class ActionBridgeParams implements BaseModel
         ?string $videoRoomContext = null,
         ?string $videoRoomID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->callControlID = $callControlID;
+        $self['callControlIDToBridgeWith'] = $callControlIDToBridgeWith;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $muteDtmf && $obj['muteDtmf'] = $muteDtmf;
-        null !== $parkAfterUnbridge && $obj->parkAfterUnbridge = $parkAfterUnbridge;
-        null !== $playRingtone && $obj->playRingtone = $playRingtone;
-        null !== $queue && $obj->queue = $queue;
-        null !== $record && $obj['record'] = $record;
-        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
-        null !== $recordCustomFileName && $obj->recordCustomFileName = $recordCustomFileName;
-        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
-        null !== $recordMaxLength && $obj->recordMaxLength = $recordMaxLength;
-        null !== $recordTimeoutSecs && $obj->recordTimeoutSecs = $recordTimeoutSecs;
-        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
-        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
-        null !== $ringtone && $obj['ringtone'] = $ringtone;
-        null !== $videoRoomContext && $obj->videoRoomContext = $videoRoomContext;
-        null !== $videoRoomID && $obj->videoRoomID = $videoRoomID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $muteDtmf && $self['muteDtmf'] = $muteDtmf;
+        null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
+        null !== $playRingtone && $self['playRingtone'] = $playRingtone;
+        null !== $queue && $self['queue'] = $queue;
+        null !== $record && $self['record'] = $record;
+        null !== $recordChannels && $self['recordChannels'] = $recordChannels;
+        null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
+        null !== $recordFormat && $self['recordFormat'] = $recordFormat;
+        null !== $recordMaxLength && $self['recordMaxLength'] = $recordMaxLength;
+        null !== $recordTimeoutSecs && $self['recordTimeoutSecs'] = $recordTimeoutSecs;
+        null !== $recordTrack && $self['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $self['recordTrim'] = $recordTrim;
+        null !== $ringtone && $self['ringtone'] = $ringtone;
+        null !== $videoRoomContext && $self['videoRoomContext'] = $videoRoomContext;
+        null !== $videoRoomID && $self['videoRoomID'] = $videoRoomID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter.
      */
-    public function withCallControlID(string $callControlID): self
-    {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+    public function withCallControlIDToBridgeWith(
+        string $callControlIDToBridgeWith
+    ): self {
+        $self = clone $this;
+        $self['callControlIDToBridgeWith'] = $callControlIDToBridgeWith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,10 +270,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +281,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +294,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withMuteDtmf(MuteDtmf|string $muteDtmf): self
     {
-        $obj = clone $this;
-        $obj['muteDtmf'] = $muteDtmf;
+        $self = clone $this;
+        $self['muteDtmf'] = $muteDtmf;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -303,10 +305,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withParkAfterUnbridge(string $parkAfterUnbridge): self
     {
-        $obj = clone $this;
-        $obj->parkAfterUnbridge = $parkAfterUnbridge;
+        $self = clone $this;
+        $self['parkAfterUnbridge'] = $parkAfterUnbridge;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -314,10 +316,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withPlayRingtone(bool $playRingtone): self
     {
-        $obj = clone $this;
-        $obj->playRingtone = $playRingtone;
+        $self = clone $this;
+        $self['playRingtone'] = $playRingtone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -325,10 +327,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withQueue(string $queue): self
     {
-        $obj = clone $this;
-        $obj->queue = $queue;
+        $self = clone $this;
+        $self['queue'] = $queue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -338,10 +340,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withRecord(Record|string $record): self
     {
-        $obj = clone $this;
-        $obj['record'] = $record;
+        $self = clone $this;
+        $self['record'] = $record;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -352,10 +354,10 @@ final class ActionBridgeParams implements BaseModel
     public function withRecordChannels(
         RecordChannels|string $recordChannels
     ): self {
-        $obj = clone $this;
-        $obj['recordChannels'] = $recordChannels;
+        $self = clone $this;
+        $self['recordChannels'] = $recordChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -363,10 +365,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withRecordCustomFileName(string $recordCustomFileName): self
     {
-        $obj = clone $this;
-        $obj->recordCustomFileName = $recordCustomFileName;
+        $self = clone $this;
+        $self['recordCustomFileName'] = $recordCustomFileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -376,10 +378,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
-        $obj = clone $this;
-        $obj['recordFormat'] = $recordFormat;
+        $self = clone $this;
+        $self['recordFormat'] = $recordFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -387,10 +389,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withRecordMaxLength(int $recordMaxLength): self
     {
-        $obj = clone $this;
-        $obj->recordMaxLength = $recordMaxLength;
+        $self = clone $this;
+        $self['recordMaxLength'] = $recordMaxLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -398,10 +400,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->recordTimeoutSecs = $recordTimeoutSecs;
+        $self = clone $this;
+        $self['recordTimeoutSecs'] = $recordTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -411,10 +413,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
-        $obj = clone $this;
-        $obj['recordTrack'] = $recordTrack;
+        $self = clone $this;
+        $self['recordTrack'] = $recordTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -424,10 +426,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
-        $obj = clone $this;
-        $obj['recordTrim'] = $recordTrim;
+        $self = clone $this;
+        $self['recordTrim'] = $recordTrim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -437,10 +439,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withRingtone(Ringtone|string $ringtone): self
     {
-        $obj = clone $this;
-        $obj['ringtone'] = $ringtone;
+        $self = clone $this;
+        $self['ringtone'] = $ringtone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -448,10 +450,10 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withVideoRoomContext(string $videoRoomContext): self
     {
-        $obj = clone $this;
-        $obj->videoRoomContext = $videoRoomContext;
+        $self = clone $this;
+        $self['videoRoomContext'] = $videoRoomContext;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -459,9 +461,9 @@ final class ActionBridgeParams implements BaseModel
      */
     public function withVideoRoomID(string $videoRoomID): self
     {
-        $obj = clone $this;
-        $obj->videoRoomID = $videoRoomID;
+        $self = clone $this;
+        $self['videoRoomID'] = $videoRoomID;
 
-        return $obj;
+        return $self;
     }
 }

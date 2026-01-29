@@ -4,56 +4,56 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCardGetPublicIPResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardGetPublicIPResponse\Data\Type;
 
 /**
- * @phpstan-type data_alias = array{
- *   createdAt?: string,
- *   ip?: string,
- *   recordType?: string,
- *   regionCode?: string,
- *   simCardID?: string,
- *   type?: value-of<Type>,
- *   updatedAt?: string,
+ * @phpstan-type DataShape = array{
+ *   createdAt?: string|null,
+ *   ip?: string|null,
+ *   recordType?: string|null,
+ *   regionCode?: string|null,
+ *   simCardID?: string|null,
+ *   type?: null|Type|value-of<Type>,
+ *   updatedAt?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * The provisioned IP address. This attribute will only be available when underlying resource status is in a "provisioned" status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $ip;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
-    #[Api('region_code', optional: true)]
+    #[Optional('region_code')]
     public ?string $regionCode;
 
-    #[Api('sim_card_id', optional: true)]
+    #[Optional('sim_card_id')]
     public ?string $simCardID;
 
     /** @var value-of<Type>|null $type */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     public function __construct()
@@ -66,7 +66,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $createdAt = null,
@@ -77,17 +77,17 @@ final class Data implements BaseModel
         Type|string|null $type = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $ip && $obj->ip = $ip;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $regionCode && $obj->regionCode = $regionCode;
-        null !== $simCardID && $obj->simCardID = $simCardID;
-        null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $ip && $self['ip'] = $ip;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
+        null !== $simCardID && $self['simCardID'] = $simCardID;
+        null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,34 +106,34 @@ final class Data implements BaseModel
      */
     public function withIP(string $ip): self
     {
-        $obj = clone $this;
-        $obj->ip = $ip;
+        $self = clone $this;
+        $self['ip'] = $ip;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withSimCardID(string $simCardID): self
     {
-        $obj = clone $this;
-        $obj->simCardID = $simCardID;
+        $self = clone $this;
+        $self['simCardID'] = $simCardID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class Data implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,9 +152,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

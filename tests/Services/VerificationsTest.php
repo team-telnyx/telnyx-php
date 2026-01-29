@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Verifications\CreateVerificationResponse;
+use Telnyx\Verifications\VerificationGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +39,8 @@ final class VerificationsTest extends TestCase
             '12ade33a-21c0-473b-b055-b3c836e1c292'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerificationGetResponse::class, $result);
     }
 
     #[Test]
@@ -52,7 +55,8 @@ final class VerificationsTest extends TestCase
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CreateVerificationResponse::class, $result);
     }
 
     #[Test]
@@ -65,9 +69,13 @@ final class VerificationsTest extends TestCase
         $result = $this->client->verifications->triggerCall(
             phoneNumber: '+13035551234',
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+            customCode: '43612',
+            extension: '1www2WABCDw9',
+            timeoutSecs: 300,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CreateVerificationResponse::class, $result);
     }
 
     #[Test]
@@ -82,7 +90,8 @@ final class VerificationsTest extends TestCase
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CreateVerificationResponse::class, $result);
     }
 
     #[Test]
@@ -95,9 +104,11 @@ final class VerificationsTest extends TestCase
         $result = $this->client->verifications->triggerFlashcall(
             phoneNumber: '+13035551234',
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+            timeoutSecs: 300,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CreateVerificationResponse::class, $result);
     }
 
     #[Test]
@@ -112,7 +123,8 @@ final class VerificationsTest extends TestCase
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CreateVerificationResponse::class, $result);
     }
 
     #[Test]
@@ -125,8 +137,11 @@ final class VerificationsTest extends TestCase
         $result = $this->client->verifications->triggerSMS(
             phoneNumber: '+13035551234',
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+            customCode: '43612',
+            timeoutSecs: 300,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CreateVerificationResponse::class, $result);
     }
 }

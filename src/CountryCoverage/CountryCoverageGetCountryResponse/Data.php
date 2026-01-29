@@ -4,40 +4,43 @@ declare(strict_types=1);
 
 namespace Telnyx\CountryCoverage\CountryCoverageGetCountryResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\Local;
 use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\TollFree;
 
 /**
- * @phpstan-type data_alias = array{
- *   code?: string,
- *   features?: list<string>,
- *   internationalSMS?: bool,
- *   inventoryCoverage?: bool,
- *   local?: Local,
- *   mobile?: array<string, mixed>,
- *   national?: array<string, mixed>,
- *   numbers?: bool,
- *   p2p?: bool,
- *   phoneNumberType?: list<string>,
- *   quickship?: bool,
+ * @phpstan-import-type LocalShape from \Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\Local
+ * @phpstan-import-type TollFreeShape from \Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data\TollFree
+ *
+ * @phpstan-type DataShape = array{
+ *   code?: string|null,
+ *   features?: list<string>|null,
+ *   internationalSMS?: bool|null,
+ *   inventoryCoverage?: bool|null,
+ *   local?: null|Local|LocalShape,
+ *   mobile?: array<string,mixed>|null,
+ *   national?: array<string,mixed>|null,
+ *   numbers?: bool|null,
+ *   p2p?: bool|null,
+ *   phoneNumberType?: list<string>|null,
+ *   quickship?: bool|null,
  *   region?: string|null,
- *   reservable?: bool,
- *   sharedCost?: array<string, mixed>,
- *   tollFree?: TollFree,
+ *   reservable?: bool|null,
+ *   sharedCost?: array<string,mixed>|null,
+ *   tollFree?: null|TollFree|TollFreeShape,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Country ISO code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
@@ -45,33 +48,33 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $features
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $features;
 
-    #[Api('international_sms', optional: true)]
+    #[Optional('international_sms')]
     public ?bool $internationalSMS;
 
     /**
      * Indicates whether country can be queried with inventory coverage endpoint.
      */
-    #[Api('inventory_coverage', optional: true)]
+    #[Optional('inventory_coverage')]
     public ?bool $inventoryCoverage;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Local $local;
 
-    /** @var array<string, mixed>|null $mobile */
-    #[Api(map: 'mixed', optional: true)]
+    /** @var array<string,mixed>|null $mobile */
+    #[Optional(map: 'mixed')]
     public ?array $mobile;
 
-    /** @var array<string, mixed>|null $national */
-    #[Api(map: 'mixed', optional: true)]
+    /** @var array<string,mixed>|null $national */
+    #[Optional(map: 'mixed')]
     public ?array $national;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $numbers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $p2p;
 
     /**
@@ -79,32 +82,32 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $phoneNumberType
      */
-    #[Api('phone_number_type', list: 'string', optional: true)]
+    #[Optional('phone_number_type', list: 'string')]
     public ?array $phoneNumberType;
 
     /**
      * Supports quickship.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $quickship;
 
     /**
      * Geographic region (e.g., AMER, EMEA, APAC).
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $region;
 
     /**
      * Supports reservable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $reservable;
 
-    /** @var array<string, mixed>|null $sharedCost */
-    #[Api('shared_cost', map: 'mixed', optional: true)]
+    /** @var array<string,mixed>|null $sharedCost */
+    #[Optional('shared_cost', map: 'mixed')]
     public ?array $sharedCost;
 
-    #[Api('toll_free', optional: true)]
+    #[Optional('toll_free')]
     public ?TollFree $tollFree;
 
     public function __construct()
@@ -117,18 +120,20 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $features
-     * @param array<string, mixed> $mobile
-     * @param array<string, mixed> $national
-     * @param list<string> $phoneNumberType
-     * @param array<string, mixed> $sharedCost
+     * @param list<string>|null $features
+     * @param Local|LocalShape|null $local
+     * @param array<string,mixed>|null $mobile
+     * @param array<string,mixed>|null $national
+     * @param list<string>|null $phoneNumberType
+     * @param array<string,mixed>|null $sharedCost
+     * @param TollFree|TollFreeShape|null $tollFree
      */
     public static function with(
         ?string $code = null,
         ?array $features = null,
         ?bool $internationalSMS = null,
         ?bool $inventoryCoverage = null,
-        ?Local $local = null,
+        Local|array|null $local = null,
         ?array $mobile = null,
         ?array $national = null,
         ?bool $numbers = null,
@@ -138,27 +143,27 @@ final class Data implements BaseModel
         ?string $region = null,
         ?bool $reservable = null,
         ?array $sharedCost = null,
-        ?TollFree $tollFree = null,
+        TollFree|array|null $tollFree = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $features && $obj->features = $features;
-        null !== $internationalSMS && $obj->internationalSMS = $internationalSMS;
-        null !== $inventoryCoverage && $obj->inventoryCoverage = $inventoryCoverage;
-        null !== $local && $obj->local = $local;
-        null !== $mobile && $obj->mobile = $mobile;
-        null !== $national && $obj->national = $national;
-        null !== $numbers && $obj->numbers = $numbers;
-        null !== $p2p && $obj->p2p = $p2p;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
-        null !== $quickship && $obj->quickship = $quickship;
-        null !== $region && $obj->region = $region;
-        null !== $reservable && $obj->reservable = $reservable;
-        null !== $sharedCost && $obj->sharedCost = $sharedCost;
-        null !== $tollFree && $obj->tollFree = $tollFree;
+        null !== $code && $self['code'] = $code;
+        null !== $features && $self['features'] = $features;
+        null !== $internationalSMS && $self['internationalSMS'] = $internationalSMS;
+        null !== $inventoryCoverage && $self['inventoryCoverage'] = $inventoryCoverage;
+        null !== $local && $self['local'] = $local;
+        null !== $mobile && $self['mobile'] = $mobile;
+        null !== $national && $self['national'] = $national;
+        null !== $numbers && $self['numbers'] = $numbers;
+        null !== $p2p && $self['p2p'] = $p2p;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $quickship && $self['quickship'] = $quickship;
+        null !== $region && $self['region'] = $region;
+        null !== $reservable && $self['reservable'] = $reservable;
+        null !== $sharedCost && $self['sharedCost'] = $sharedCost;
+        null !== $tollFree && $self['tollFree'] = $tollFree;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +171,10 @@ final class Data implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,18 +184,18 @@ final class Data implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj->features = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     public function withInternationalSMS(bool $internationalSMS): self
     {
-        $obj = clone $this;
-        $obj->internationalSMS = $internationalSMS;
+        $self = clone $this;
+        $self['internationalSMS'] = $internationalSMS;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,56 +203,59 @@ final class Data implements BaseModel
      */
     public function withInventoryCoverage(bool $inventoryCoverage): self
     {
-        $obj = clone $this;
-        $obj->inventoryCoverage = $inventoryCoverage;
+        $self = clone $this;
+        $self['inventoryCoverage'] = $inventoryCoverage;
 
-        return $obj;
-    }
-
-    public function withLocal(Local $local): self
-    {
-        $obj = clone $this;
-        $obj->local = $local;
-
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param array<string, mixed> $mobile
+     * @param Local|LocalShape $local
+     */
+    public function withLocal(Local|array $local): self
+    {
+        $self = clone $this;
+        $self['local'] = $local;
+
+        return $self;
+    }
+
+    /**
+     * @param array<string,mixed> $mobile
      */
     public function withMobile(array $mobile): self
     {
-        $obj = clone $this;
-        $obj->mobile = $mobile;
+        $self = clone $this;
+        $self['mobile'] = $mobile;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param array<string, mixed> $national
+     * @param array<string,mixed> $national
      */
     public function withNational(array $national): self
     {
-        $obj = clone $this;
-        $obj->national = $national;
+        $self = clone $this;
+        $self['national'] = $national;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumbers(bool $numbers): self
     {
-        $obj = clone $this;
-        $obj->numbers = $numbers;
+        $self = clone $this;
+        $self['numbers'] = $numbers;
 
-        return $obj;
+        return $self;
     }
 
     public function withP2p(bool $p2p): self
     {
-        $obj = clone $this;
-        $obj->p2p = $p2p;
+        $self = clone $this;
+        $self['p2p'] = $p2p;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -257,10 +265,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumberType(array $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,10 +276,10 @@ final class Data implements BaseModel
      */
     public function withQuickship(bool $quickship): self
     {
-        $obj = clone $this;
-        $obj->quickship = $quickship;
+        $self = clone $this;
+        $self['quickship'] = $quickship;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +287,10 @@ final class Data implements BaseModel
      */
     public function withRegion(?string $region): self
     {
-        $obj = clone $this;
-        $obj->region = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -290,28 +298,31 @@ final class Data implements BaseModel
      */
     public function withReservable(bool $reservable): self
     {
-        $obj = clone $this;
-        $obj->reservable = $reservable;
+        $self = clone $this;
+        $self['reservable'] = $reservable;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param array<string, mixed> $sharedCost
+     * @param array<string,mixed> $sharedCost
      */
     public function withSharedCost(array $sharedCost): self
     {
-        $obj = clone $this;
-        $obj->sharedCost = $sharedCost;
+        $self = clone $this;
+        $self['sharedCost'] = $sharedCost;
 
-        return $obj;
+        return $self;
     }
 
-    public function withTollFree(TollFree $tollFree): self
+    /**
+     * @param TollFree|TollFreeShape $tollFree
+     */
+    public function withTollFree(TollFree|array $tollFree): self
     {
-        $obj = clone $this;
-        $obj->tollFree = $tollFree;
+        $self = clone $this;
+        $self['tollFree'] = $tollFree;
 
-        return $obj;
+        return $self;
     }
 }

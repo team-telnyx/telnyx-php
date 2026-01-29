@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * If there were any errors during the upload process, this endpoint will retry the upload request. In some cases this will reattempt the existing upload request, in other cases it may create a new upload request. Please check the ticket_id in the response to determine if a new upload request was created.
  *
- * @see Telnyx\ExternalConnections\Uploads->retry
+ * @see Telnyx\Services\ExternalConnections\UploadsService::retry()
  *
- * @phpstan-type upload_retry_params = array{id: string}
+ * @phpstan-type UploadRetryParamsShape = array{id: string}
  */
 final class UploadRetryParams implements BaseModel
 {
-    /** @use SdkModel<upload_retry_params> */
+    /** @use SdkModel<UploadRetryParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -51,18 +51,18 @@ final class UploadRetryParams implements BaseModel
      */
     public static function with(string $id): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 }

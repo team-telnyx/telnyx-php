@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BillingGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a billing group.
  *
- * @see Telnyx\BillingGroups->create
+ * @see Telnyx\Services\BillingGroupsService::create()
  *
- * @phpstan-type billing_group_create_params = array{name?: string}
+ * @phpstan-type BillingGroupCreateParamsShape = array{name?: string|null}
  */
 final class BillingGroupCreateParams implements BaseModel
 {
-    /** @use SdkModel<billing_group_create_params> */
+    /** @use SdkModel<BillingGroupCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A name for the billing group.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class BillingGroupCreateParams implements BaseModel
      */
     public static function with(?string $name = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class BillingGroupCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

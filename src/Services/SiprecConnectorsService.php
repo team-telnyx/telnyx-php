@@ -6,22 +6,30 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SiprecConnectorsContract;
-use Telnyx\SiprecConnectors\SiprecConnectorCreateParams;
 use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
-use Telnyx\SiprecConnectors\SiprecConnectorUpdateParams;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SiprecConnectorsService implements SiprecConnectorsContract
 {
     /**
+     * @api
+     */
+    public SiprecConnectorsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SiprecConnectorsRawService($client);
+    }
 
     /**
      * @api
@@ -32,50 +40,30 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $host,
-        $name,
-        $port,
-        $appSubdomain = omit,
-        ?RequestOptions $requestOptions = null,
+        string $host,
+        string $name,
+        int $port,
+        ?string $appSubdomain = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorNewResponse {
-        $params = [
-            'host' => $host,
-            'name' => $name,
-            'port' => $port,
-            'appSubdomain' => $appSubdomain,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SiprecConnectorNewResponse {
-        [$parsed, $options] = SiprecConnectorCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'host' => $host,
+                'name' => $name,
+                'port' => $port,
+                'appSubdomain' => $appSubdomain,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'siprec_connectors',
-            body: (object) $parsed,
-            options: $options,
-            convert: SiprecConnectorNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -83,19 +71,19 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      *
      * Returns details of a stored SIPREC connector.
      *
+     * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SiprecConnectorGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['siprec_connectors/%1$s', $connectorName],
-            options: $requestOptions,
-            convert: SiprecConnectorGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($connectorName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -103,56 +91,36 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      *
      * Updates a stored SIPREC connector configuration.
      *
+     * @param string $connectorName uniquely identifies a SIPREC connector
      * @param string $host hostname/IPv4 address of the SIPREC SRS
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $connectorName,
-        $host,
-        $name,
-        $port,
-        $appSubdomain = omit,
-        ?RequestOptions $requestOptions = null,
+        string $host,
+        string $name,
+        int $port,
+        ?string $appSubdomain = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorUpdateResponse {
-        $params = [
-            'host' => $host,
-            'name' => $name,
-            'port' => $port,
-            'appSubdomain' => $appSubdomain,
-        ];
-
-        return $this->updateRaw($connectorName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $connectorName,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SiprecConnectorUpdateResponse {
-        [$parsed, $options] = SiprecConnectorUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'host' => $host,
+                'name' => $name,
+                'port' => $port,
+                'appSubdomain' => $appSubdomain,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'put',
-            path: ['siprec_connectors/%1$s', $connectorName],
-            body: (object) $parsed,
-            options: $options,
-            convert: SiprecConnectorUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($connectorName, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -160,18 +128,18 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
      *
      * Deletes a stored SIPREC connector.
      *
+     * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['siprec_connectors/%1$s', $connectorName],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($connectorName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

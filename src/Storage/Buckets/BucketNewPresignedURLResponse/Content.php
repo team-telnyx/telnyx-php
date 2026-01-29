@@ -4,36 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type content_alias = array{
- *   token?: string, expiresAt?: \DateTimeInterface, presignedURL?: string
+ * @phpstan-type ContentShape = array{
+ *   token?: string|null,
+ *   expiresAt?: \DateTimeInterface|null,
+ *   presignedURL?: string|null,
  * }
  */
 final class Content implements BaseModel
 {
-    /** @use SdkModel<content_alias> */
+    /** @use SdkModel<ContentShape> */
     use SdkModel;
 
     /**
      * The token for the object.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token;
 
     /**
      * The expiration time of the token.
      */
-    #[Api('expires_at', optional: true)]
+    #[Optional('expires_at')]
     public ?\DateTimeInterface $expiresAt;
 
     /**
      * The presigned URL for the object.
      */
-    #[Api('presigned_url', optional: true)]
+    #[Optional('presigned_url')]
     public ?string $presignedURL;
 
     public function __construct()
@@ -51,13 +53,13 @@ final class Content implements BaseModel
         ?\DateTimeInterface $expiresAt = null,
         ?string $presignedURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $token && $obj->token = $token;
-        null !== $expiresAt && $obj->expiresAt = $expiresAt;
-        null !== $presignedURL && $obj->presignedURL = $presignedURL;
+        null !== $token && $self['token'] = $token;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $presignedURL && $self['presignedURL'] = $presignedURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +67,10 @@ final class Content implements BaseModel
      */
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj->token = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +78,10 @@ final class Content implements BaseModel
      */
     public function withExpiresAt(\DateTimeInterface $expiresAt): self
     {
-        $obj = clone $this;
-        $obj->expiresAt = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +89,9 @@ final class Content implements BaseModel
      */
     public function withPresignedURL(string $presignedURL): self
     {
-        $obj = clone $this;
-        $obj->presignedURL = $presignedURL;
+        $self = clone $this;
+        $self['presignedURL'] = $presignedURL;
 
-        return $obj;
+        return $self;
     }
 }

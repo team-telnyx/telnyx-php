@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type verification_get_response = array{data: Verification}
+ * @phpstan-import-type VerificationShape from \Telnyx\Verifications\Verification
+ *
+ * @phpstan-type VerificationGetResponseShape = array{
+ *   data: Verification|VerificationShape
+ * }
  */
-final class VerificationGetResponse implements BaseModel, ResponseConverter
+final class VerificationGetResponse implements BaseModel
 {
-    /** @use SdkModel<verification_get_response> */
+    /** @use SdkModel<VerificationGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public Verification $data;
 
     /**
@@ -46,21 +46,26 @@ final class VerificationGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Verification|VerificationShape $data
      */
-    public static function with(Verification $data): self
+    public static function with(Verification|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Verification $data): self
+    /**
+     * @param Verification|VerificationShape $data
+     */
+    public function withData(Verification|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

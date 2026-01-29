@@ -6,7 +6,7 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -20,52 +20,52 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `siprec.stopped`
  * - `siprec.failed`
  *
- * @see Telnyx\Calls\Actions->startSiprec
+ * @see Telnyx\Services\Calls\ActionsService::startSiprec()
  *
- * @phpstan-type action_start_siprec_params = array{
- *   clientState?: string,
- *   connectorName?: string,
- *   includeMetadataCustomHeaders?: bool,
- *   secure?: bool,
- *   sessionTimeoutSecs?: int,
- *   sipTransport?: SipTransport|value-of<SipTransport>,
- *   siprecTrack?: SiprecTrack|value-of<SiprecTrack>,
+ * @phpstan-type ActionStartSiprecParamsShape = array{
+ *   clientState?: string|null,
+ *   connectorName?: string|null,
+ *   includeMetadataCustomHeaders?: bool|null,
+ *   secure?: bool|null,
+ *   sessionTimeoutSecs?: int|null,
+ *   sipTransport?: null|SipTransport|value-of<SipTransport>,
+ *   siprecTrack?: null|SiprecTrack|value-of<SiprecTrack>,
  * }
  */
 final class ActionStartSiprecParams implements BaseModel
 {
-    /** @use SdkModel<action_start_siprec_params> */
+    /** @use SdkModel<ActionStartSiprecParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Name of configured SIPREC connector to be used.
      */
-    #[Api('connector_name', optional: true)]
+    #[Optional('connector_name')]
     public ?string $connectorName;
 
     /**
      * When set, custom parameters will be added as metadata (recording.session.ExtensionParameters). Otherwise, they’ll be added to sip headers.
      */
-    #[Api('include_metadata_custom_headers', optional: true)]
+    #[Optional('include_metadata_custom_headers')]
     public ?bool $includeMetadataCustomHeaders;
 
     /**
      * Controls whether to encrypt media sent to your SRS using SRTP and TLS. When set you need to configure SRS port in your connector to 5061.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $secure;
 
     /**
      * Sets `Session-Expires` header to the INVITE. A reinvite is sent every half the value set. Usefull for session keep alive. Minimum value is 90, set to 0 to disable.
      */
-    #[Api('session_timeout_secs', optional: true)]
+    #[Optional('session_timeout_secs')]
     public ?int $sessionTimeoutSecs;
 
     /**
@@ -73,7 +73,7 @@ final class ActionStartSiprecParams implements BaseModel
      *
      * @var value-of<SipTransport>|null $sipTransport
      */
-    #[Api('sip_transport', enum: SipTransport::class, optional: true)]
+    #[Optional('sip_transport', enum: SipTransport::class)]
     public ?string $sipTransport;
 
     /**
@@ -81,7 +81,7 @@ final class ActionStartSiprecParams implements BaseModel
      *
      * @var value-of<SiprecTrack>|null $siprecTrack
      */
-    #[Api('siprec_track', enum: SiprecTrack::class, optional: true)]
+    #[Optional('siprec_track', enum: SiprecTrack::class)]
     public ?string $siprecTrack;
 
     public function __construct()
@@ -94,8 +94,8 @@ final class ActionStartSiprecParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SipTransport|value-of<SipTransport> $sipTransport
-     * @param SiprecTrack|value-of<SiprecTrack> $siprecTrack
+     * @param SipTransport|value-of<SipTransport>|null $sipTransport
+     * @param SiprecTrack|value-of<SiprecTrack>|null $siprecTrack
      */
     public static function with(
         ?string $clientState = null,
@@ -106,17 +106,17 @@ final class ActionStartSiprecParams implements BaseModel
         SipTransport|string|null $sipTransport = null,
         SiprecTrack|string|null $siprecTrack = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectorName && $obj->connectorName = $connectorName;
-        null !== $includeMetadataCustomHeaders && $obj->includeMetadataCustomHeaders = $includeMetadataCustomHeaders;
-        null !== $secure && $obj->secure = $secure;
-        null !== $sessionTimeoutSecs && $obj->sessionTimeoutSecs = $sessionTimeoutSecs;
-        null !== $sipTransport && $obj['sipTransport'] = $sipTransport;
-        null !== $siprecTrack && $obj['siprecTrack'] = $siprecTrack;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $connectorName && $self['connectorName'] = $connectorName;
+        null !== $includeMetadataCustomHeaders && $self['includeMetadataCustomHeaders'] = $includeMetadataCustomHeaders;
+        null !== $secure && $self['secure'] = $secure;
+        null !== $sessionTimeoutSecs && $self['sessionTimeoutSecs'] = $sessionTimeoutSecs;
+        null !== $sipTransport && $self['sipTransport'] = $sipTransport;
+        null !== $siprecTrack && $self['siprecTrack'] = $siprecTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +124,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withConnectorName(string $connectorName): self
     {
-        $obj = clone $this;
-        $obj->connectorName = $connectorName;
+        $self = clone $this;
+        $self['connectorName'] = $connectorName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +147,10 @@ final class ActionStartSiprecParams implements BaseModel
     public function withIncludeMetadataCustomHeaders(
         bool $includeMetadataCustomHeaders
     ): self {
-        $obj = clone $this;
-        $obj->includeMetadataCustomHeaders = $includeMetadataCustomHeaders;
+        $self = clone $this;
+        $self['includeMetadataCustomHeaders'] = $includeMetadataCustomHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +158,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withSecure(bool $secure): self
     {
-        $obj = clone $this;
-        $obj->secure = $secure;
+        $self = clone $this;
+        $self['secure'] = $secure;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +169,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withSessionTimeoutSecs(int $sessionTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->sessionTimeoutSecs = $sessionTimeoutSecs;
+        $self = clone $this;
+        $self['sessionTimeoutSecs'] = $sessionTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +182,10 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withSipTransport(SipTransport|string $sipTransport): self
     {
-        $obj = clone $this;
-        $obj['sipTransport'] = $sipTransport;
+        $self = clone $this;
+        $self['sipTransport'] = $sipTransport;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,9 +195,9 @@ final class ActionStartSiprecParams implements BaseModel
      */
     public function withSiprecTrack(SiprecTrack|string $siprecTrack): self
     {
-        $obj = clone $this;
-        $obj['siprecTrack'] = $siprecTrack;
+        $self = clone $this;
+        $self['siprecTrack'] = $siprecTrack;
 
-        return $obj;
+        return $self;
     }
 }

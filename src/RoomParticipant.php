@@ -4,63 +4,63 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type room_participant = array{
- *   id?: string,
- *   context?: string,
- *   joinedAt?: \DateTimeInterface,
- *   leftAt?: \DateTimeInterface,
- *   recordType?: string,
- *   sessionID?: string,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-type RoomParticipantShape = array{
+ *   id?: string|null,
+ *   context?: string|null,
+ *   joinedAt?: \DateTimeInterface|null,
+ *   leftAt?: \DateTimeInterface|null,
+ *   recordType?: string|null,
+ *   sessionID?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class RoomParticipant implements BaseModel
 {
-    /** @use SdkModel<room_participant> */
+    /** @use SdkModel<RoomParticipantShape> */
     use SdkModel;
 
     /**
      * A unique identifier for the room participant.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Context provided to the given participant through the client SDK.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $context;
 
     /**
      * ISO 8601 timestamp when the participant joined the session.
      */
-    #[Api('joined_at', optional: true)]
+    #[Optional('joined_at')]
     public ?\DateTimeInterface $joinedAt;
 
     /**
      * ISO 8601 timestamp when the participant left the session.
      */
-    #[Api('left_at', optional: true)]
+    #[Optional('left_at')]
     public ?\DateTimeInterface $leftAt;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * Identify the room session that participant is part of.
      */
-    #[Api('session_id', optional: true)]
+    #[Optional('session_id')]
     public ?string $sessionID;
 
     /**
      * ISO 8601 timestamp when the participant was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -82,17 +82,17 @@ final class RoomParticipant implements BaseModel
         ?string $sessionID = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $context && $obj->context = $context;
-        null !== $joinedAt && $obj->joinedAt = $joinedAt;
-        null !== $leftAt && $obj->leftAt = $leftAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $sessionID && $obj->sessionID = $sessionID;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $context && $self['context'] = $context;
+        null !== $joinedAt && $self['joinedAt'] = $joinedAt;
+        null !== $leftAt && $self['leftAt'] = $leftAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sessionID && $self['sessionID'] = $sessionID;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class RoomParticipant implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class RoomParticipant implements BaseModel
      */
     public function withContext(string $context): self
     {
-        $obj = clone $this;
-        $obj->context = $context;
+        $self = clone $this;
+        $self['context'] = $context;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class RoomParticipant implements BaseModel
      */
     public function withJoinedAt(\DateTimeInterface $joinedAt): self
     {
-        $obj = clone $this;
-        $obj->joinedAt = $joinedAt;
+        $self = clone $this;
+        $self['joinedAt'] = $joinedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,18 +133,18 @@ final class RoomParticipant implements BaseModel
      */
     public function withLeftAt(\DateTimeInterface $leftAt): self
     {
-        $obj = clone $this;
-        $obj->leftAt = $leftAt;
+        $self = clone $this;
+        $self['leftAt'] = $leftAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class RoomParticipant implements BaseModel
      */
     public function withSessionID(string $sessionID): self
     {
-        $obj = clone $this;
-        $obj->sessionID = $sessionID;
+        $self = clone $this;
+        $self['sessionID'] = $sessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,9 +163,9 @@ final class RoomParticipant implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

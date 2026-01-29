@@ -4,34 +4,34 @@ declare(strict_types=1);
 
 namespace Telnyx\Messaging\Rcs\RcInviteTestNumberResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging\Rcs\RcInviteTestNumberResponse\Data\RecordType;
 
 /**
- * @phpstan-type data_alias = array{
- *   agentID?: string,
- *   phoneNumber?: string,
- *   recordType?: value-of<RecordType>,
- *   status?: string,
+ * @phpstan-type DataShape = array{
+ *   agentID?: string|null,
+ *   phoneNumber?: string|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   status?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * RCS agent ID.
      */
-    #[Api('agent_id', optional: true)]
+    #[Optional('agent_id')]
     public ?string $agentID;
 
     /**
      * Phone number that was invited for testing.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
@@ -39,13 +39,13 @@ final class Data implements BaseModel
      *
      * @var value-of<RecordType>|null $recordType
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
     /**
      * Status of the test number invitation.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()
@@ -58,7 +58,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $agentID = null,
@@ -66,14 +66,14 @@ final class Data implements BaseModel
         RecordType|string|null $recordType = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $agentID && $obj->agentID = $agentID;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $status && $obj->status = $status;
+        null !== $agentID && $self['agentID'] = $agentID;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class Data implements BaseModel
      */
     public function withAgentID(string $agentID): self
     {
-        $obj = clone $this;
-        $obj->agentID = $agentID;
+        $self = clone $this;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,9 +116,9 @@ final class Data implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

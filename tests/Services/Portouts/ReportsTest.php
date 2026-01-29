@@ -6,8 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Portouts\Reports\ExportPortoutsCsvReport;
-use Telnyx\Portouts\Reports\ExportPortoutsCsvReport\Filters;
+use Telnyx\DefaultPagination;
+use Telnyx\Portouts\Reports\PortoutReport;
+use Telnyx\Portouts\Reports\ReportGetResponse;
+use Telnyx\Portouts\Reports\ReportNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,11 +38,12 @@ final class ReportsTest extends TestCase
         }
 
         $result = $this->client->portouts->reports->create(
-            params: ExportPortoutsCsvReport::with(filters: (new Filters)),
-            reportType: 'export_portouts_csv',
+            params: ['filters' => []],
+            reportType: 'export_portouts_csv'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,19 +54,21 @@ final class ReportsTest extends TestCase
         }
 
         $result = $this->client->portouts->reports->create(
-            params: ExportPortoutsCsvReport::with(
-                filters: (new Filters)
-                    ->withCreatedAtGt(new \DateTimeImmutable('2019-12-27T18:11:19.117Z'))
-                    ->withCreatedAtLt(new \DateTimeImmutable('2019-12-27T18:11:19.117Z'))
-                    ->withCustomerReferenceIn(['my-customer-reference'])
-                    ->withEndUserName('McPortersen')
-                    ->withPhoneNumbersOverlaps(['+1234567890'])
-                    ->withStatusIn(['pending']),
-            ),
+            params: [
+                'filters' => [
+                    'createdAtGt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'createdAtLt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'customerReferenceIn' => ['my-customer-reference'],
+                    'endUserName' => 'McPortersen',
+                    'phoneNumbersOverlaps' => ['+1234567890'],
+                    'statusIn' => ['pending'],
+                ],
+            ],
             reportType: 'export_portouts_csv',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -77,7 +82,8 @@ final class ReportsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportGetResponse::class, $result);
     }
 
     #[Test]
@@ -87,8 +93,14 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->reports->list();
+        $page = $this->client->portouts->reports->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PortoutReport::class, $item);
+        }
     }
 }

@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type private_wireless_gateway_new_response = array{
- *   data?: PrivateWirelessGateway
+ * @phpstan-import-type PrivateWirelessGatewayShape from \Telnyx\PrivateWirelessGateways\PrivateWirelessGateway
+ *
+ * @phpstan-type PrivateWirelessGatewayNewResponseShape = array{
+ *   data?: null|PrivateWirelessGateway|PrivateWirelessGatewayShape
  * }
  */
-final class PrivateWirelessGatewayNewResponse implements BaseModel, ResponseConverter
+final class PrivateWirelessGatewayNewResponse implements BaseModel
 {
-    /** @use SdkModel<private_wireless_gateway_new_response> */
+    /** @use SdkModel<PrivateWirelessGatewayNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?PrivateWirelessGateway $data;
 
     public function __construct()
@@ -34,21 +32,26 @@ final class PrivateWirelessGatewayNewResponse implements BaseModel, ResponseConv
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PrivateWirelessGateway|PrivateWirelessGatewayShape|null $data
      */
-    public static function with(?PrivateWirelessGateway $data = null): self
+    public static function with(PrivateWirelessGateway|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(PrivateWirelessGateway $data): self
+    /**
+     * @param PrivateWirelessGateway|PrivateWirelessGatewayShape $data
+     */
+    public function withData(PrivateWirelessGateway|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UserAddresses\UserAddressListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UserAddresses\UserAddressListParams\Filter\CustomerReference;
@@ -13,25 +13,29 @@ use Telnyx\UserAddresses\UserAddressListParams\Filter\StreetAddress;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[street_address][contains].
  *
- * @phpstan-type filter_alias = array{
- *   customerReference?: CustomerReference, streetAddress?: StreetAddress
+ * @phpstan-import-type CustomerReferenceShape from \Telnyx\UserAddresses\UserAddressListParams\Filter\CustomerReference
+ * @phpstan-import-type StreetAddressShape from \Telnyx\UserAddresses\UserAddressListParams\Filter\StreetAddress
+ *
+ * @phpstan-type FilterShape = array{
+ *   customerReference?: null|CustomerReference|CustomerReferenceShape,
+ *   streetAddress?: null|StreetAddress|StreetAddressShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter user addresses via the customer reference. Supports both exact matching (eq) and partial matching (contains). Matching is not case-sensitive.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?CustomerReference $customerReference;
 
     /**
      * Filter user addresses via street address. Supports partial matching (contains). Matching is not case-sensitive.
      */
-    #[Api('street_address', optional: true)]
+    #[Optional('street_address')]
     public ?StreetAddress $streetAddress;
 
     public function __construct()
@@ -43,39 +47,46 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CustomerReference|CustomerReferenceShape|null $customerReference
+     * @param StreetAddress|StreetAddressShape|null $streetAddress
      */
     public static function with(
-        ?CustomerReference $customerReference = null,
-        ?StreetAddress $streetAddress = null,
+        CustomerReference|array|null $customerReference = null,
+        StreetAddress|array|null $streetAddress = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $streetAddress && $obj->streetAddress = $streetAddress;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $streetAddress && $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter user addresses via the customer reference. Supports both exact matching (eq) and partial matching (contains). Matching is not case-sensitive.
+     *
+     * @param CustomerReference|CustomerReferenceShape $customerReference
      */
     public function withCustomerReference(
-        CustomerReference $customerReference
+        CustomerReference|array $customerReference
     ): self {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter user addresses via street address. Supports partial matching (contains). Matching is not case-sensitive.
+     *
+     * @param StreetAddress|StreetAddressShape $streetAddress
      */
-    public function withStreetAddress(StreetAddress $streetAddress): self
+    public function withStreetAddress(StreetAddress|array $streetAddress): self
     {
-        $obj = clone $this;
-        $obj->streetAddress = $streetAddress;
+        $self = clone $this;
+        $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\OutboundVoiceProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type outbound_voice_profile_update_response = array{
- *   data?: OutboundVoiceProfile
+ * @phpstan-import-type OutboundVoiceProfileShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile
+ *
+ * @phpstan-type OutboundVoiceProfileUpdateResponseShape = array{
+ *   data?: null|OutboundVoiceProfile|OutboundVoiceProfileShape
  * }
  */
-final class OutboundVoiceProfileUpdateResponse implements BaseModel, ResponseConverter
+final class OutboundVoiceProfileUpdateResponse implements BaseModel
 {
-    /** @use SdkModel<outbound_voice_profile_update_response> */
+    /** @use SdkModel<OutboundVoiceProfileUpdateResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?OutboundVoiceProfile $data;
 
     public function __construct()
@@ -34,21 +32,26 @@ final class OutboundVoiceProfileUpdateResponse implements BaseModel, ResponseCon
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param OutboundVoiceProfile|OutboundVoiceProfileShape|null $data
      */
-    public static function with(?OutboundVoiceProfile $data = null): self
+    public static function with(OutboundVoiceProfile|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(OutboundVoiceProfile $data): self
+    /**
+     * @param OutboundVoiceProfile|OutboundVoiceProfileShape $data
+     */
+    public function withData(OutboundVoiceProfile|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

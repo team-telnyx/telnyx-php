@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,44 +15,47 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Sort;
 /**
  * List phone numbers, This endpoint is a lighter version of the /phone_numbers endpoint having higher performance and rate limit.
  *
- * @see Telnyx\PhoneNumbers->slimList
+ * @see Telnyx\Services\PhoneNumbersService::slimList()
  *
- * @phpstan-type phone_number_slim_list_params = array{
- *   filter?: Filter,
- *   includeConnection?: bool,
- *   includeTags?: bool,
- *   page?: Page,
- *   sort?: Sort|value-of<Sort>,
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Page
+ *
+ * @phpstan-type PhoneNumberSlimListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   includeConnection?: bool|null,
+ *   includeTags?: bool|null,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class PhoneNumberSlimListParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_slim_list_params> */
+    /** @use SdkModel<PhoneNumberSlimListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Include the connection associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeConnection;
 
     /**
      * Include the tags associated with the phone number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeTags;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -60,7 +63,7 @@ final class PhoneNumberSlimListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()
@@ -73,35 +76,39 @@ final class PhoneNumberSlimListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Sort|value-of<Sort> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
-        ?Filter $filter = null,
+        Filter|array|null $filter = null,
         ?bool $includeConnection = null,
         ?bool $includeTags = null,
-        ?Page $page = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $includeConnection && $obj->includeConnection = $includeConnection;
-        null !== $includeTags && $obj->includeTags = $includeTags;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $includeConnection && $self['includeConnection'] = $includeConnection;
+        null !== $includeTags && $self['includeTags'] = $includeTags;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +116,10 @@ final class PhoneNumberSlimListParams implements BaseModel
      */
     public function withIncludeConnection(bool $includeConnection): self
     {
-        $obj = clone $this;
-        $obj->includeConnection = $includeConnection;
+        $self = clone $this;
+        $self['includeConnection'] = $includeConnection;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,21 +127,23 @@ final class PhoneNumberSlimListParams implements BaseModel
      */
     public function withIncludeTags(bool $includeTags): self
     {
-        $obj = clone $this;
-        $obj->includeTags = $includeTags;
+        $self = clone $this;
+        $self['includeTags'] = $includeTags;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,9 +153,9 @@ final class PhoneNumberSlimListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

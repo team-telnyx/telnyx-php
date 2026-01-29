@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests\TestSuites\Runs;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Paginated list of test runs with metadata.
@@ -17,29 +15,30 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Returns test run execution results with pagination support for
  * handling large numbers of test executions.
  *
- * @phpstan-type paginated_test_run_list = array{
- *   data: list<TestRunResponse>, meta: Meta
+ * @phpstan-import-type TestRunResponseShape from \Telnyx\AI\Assistants\Tests\Runs\TestRunResponse
+ * @phpstan-import-type MetaShape from \Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta
+ *
+ * @phpstan-type PaginatedTestRunListShape = array{
+ *   data: list<TestRunResponse|TestRunResponseShape>, meta: Meta|MetaShape
  * }
  */
-final class PaginatedTestRunList implements BaseModel, ResponseConverter
+final class PaginatedTestRunList implements BaseModel
 {
-    /** @use SdkModel<paginated_test_run_list> */
+    /** @use SdkModel<PaginatedTestRunListShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Array of test run objects for the current page.
      *
      * @var list<TestRunResponse> $data
      */
-    #[Api(list: TestRunResponse::class)]
+    #[Required(list: TestRunResponse::class)]
     public array $data;
 
     /**
      * Pagination metadata including total counts and current page info.
      */
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**
@@ -66,39 +65,42 @@ final class PaginatedTestRunList implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TestRunResponse> $data
+     * @param list<TestRunResponse|TestRunResponseShape> $data
+     * @param Meta|MetaShape $meta
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, Meta|array $meta): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $self['data'] = $data;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Array of test run objects for the current page.
      *
-     * @param list<TestRunResponse> $data
+     * @param list<TestRunResponse|TestRunResponseShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Pagination metadata including total counts and current page info.
+     *
+     * @param Meta|MetaShape $meta
      */
-    public function withMeta(Meta $meta): self
+    public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

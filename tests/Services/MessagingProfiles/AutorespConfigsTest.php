@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListResponse;
+use Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfigResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -40,7 +42,8 @@ final class AutorespConfigsTest extends TestCase
             op: 'start',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -55,9 +58,11 @@ final class AutorespConfigsTest extends TestCase
             countryCode: 'US',
             keywords: ['keyword1', 'keyword2'],
             op: 'start',
+            respText: 'Thank you for your message',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -69,10 +74,11 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            profileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -84,10 +90,11 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->retrieve(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            profileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -105,7 +112,8 @@ final class AutorespConfigsTest extends TestCase
             op: 'start',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -121,9 +129,11 @@ final class AutorespConfigsTest extends TestCase
             countryCode: 'US',
             keywords: ['keyword1', 'keyword2'],
             op: 'start',
+            respText: 'Thank you for your message',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutoRespConfigResponse::class, $result);
     }
 
     #[Test]
@@ -137,7 +147,8 @@ final class AutorespConfigsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AutorespConfigListResponse::class, $result);
     }
 
     #[Test]
@@ -149,10 +160,11 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            profileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -164,9 +176,10 @@ final class AutorespConfigsTest extends TestCase
 
         $result = $this->client->messagingProfiles->autorespConfigs->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            profileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 }

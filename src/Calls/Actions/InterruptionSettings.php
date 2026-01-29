@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Settings for handling user interruptions during assistant speech.
  *
- * @phpstan-type interruption_settings = array{enable?: bool}
+ * @phpstan-type InterruptionSettingsShape = array{enable?: bool|null}
  */
 final class InterruptionSettings implements BaseModel
 {
-    /** @use SdkModel<interruption_settings> */
+    /** @use SdkModel<InterruptionSettingsShape> */
     use SdkModel;
 
     /**
      * When true, allows users to interrupt the assistant while speaking.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enable;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class InterruptionSettings implements BaseModel
      */
     public static function with(?bool $enable = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enable && $obj->enable = $enable;
+        null !== $enable && $self['enable'] = $enable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class InterruptionSettings implements BaseModel
      */
     public function withEnable(bool $enable): self
     {
-        $obj = clone $this;
-        $obj->enable = $enable;
+        $self = clone $this;
+        $self['enable'] = $enable;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates client state.
  *
- * @see Telnyx\Calls\Actions->updateClientState
+ * @see Telnyx\Services\Calls\ActionsService::updateClientState()
  *
- * @phpstan-type action_update_client_state_params = array{clientState: string}
+ * @phpstan-type ActionUpdateClientStateParamsShape = array{clientState: string}
  */
 final class ActionUpdateClientStateParams implements BaseModel
 {
-    /** @use SdkModel<action_update_client_state_params> */
+    /** @use SdkModel<ActionUpdateClientStateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state')]
+    #[Required('client_state')]
     public string $clientState;
 
     /**
@@ -54,11 +54,11 @@ final class ActionUpdateClientStateParams implements BaseModel
      */
     public static function with(string $clientState): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->clientState = $clientState;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class ActionUpdateClientStateParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences\Participants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,19 +12,19 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Lists conference participants.
  *
- * @see Telnyx\Texml\Accounts\Conferences\Participants->retrieveParticipants
+ * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::retrieveParticipants()
  *
- * @phpstan-type participant_retrieve_participants_params = array{
+ * @phpstan-type ParticipantRetrieveParticipantsParamsShape = array{
  *   accountSid: string
  * }
  */
 final class ParticipantRetrieveParticipantsParams implements BaseModel
 {
-    /** @use SdkModel<participant_retrieve_participants_params> */
+    /** @use SdkModel<ParticipantRetrieveParticipantsParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $accountSid;
 
     /**
@@ -53,18 +53,18 @@ final class ParticipantRetrieveParticipantsParams implements BaseModel
      */
     public static function with(string $accountSid): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->accountSid = $accountSid;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 }

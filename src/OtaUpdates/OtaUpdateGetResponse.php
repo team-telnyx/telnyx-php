@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\OtaUpdates;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data;
 
 /**
- * @phpstan-type ota_update_get_response = array{data?: Data}
+ * @phpstan-import-type DataShape from \Telnyx\OtaUpdates\OtaUpdateGetResponse\Data
+ *
+ * @phpstan-type OtaUpdateGetResponseShape = array{data?: null|Data|DataShape}
  */
-final class OtaUpdateGetResponse implements BaseModel, ResponseConverter
+final class OtaUpdateGetResponse implements BaseModel
 {
-    /** @use SdkModel<ota_update_get_response> */
+    /** @use SdkModel<OtaUpdateGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * This object represents an Over the Air (OTA) update request. It allows tracking the current status of a operation that apply settings in a particular SIM card. <br/><br/>.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()
@@ -36,24 +34,28 @@ final class OtaUpdateGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|DataShape|null $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * This object represents an Over the Air (OTA) update request. It allows tracking the current status of a operation that apply settings in a particular SIM card. <br/><br/>.
+     *
+     * @param Data|DataShape $data
      */
-    public function withData(Data $data): self
+    public function withData(Data|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

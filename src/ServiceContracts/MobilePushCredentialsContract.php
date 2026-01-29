@@ -5,93 +5,76 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\Type;
+use Telnyx\DefaultPagination;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateAndroidPushCredentialRequest;
+use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest\CreateIosPushCredentialRequest;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
-use Telnyx\MobilePushCredentials\MobilePushCredentialListResponse;
+use Telnyx\MobilePushCredentials\PushCredential;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type CreateMobilePushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest
+ * @phpstan-import-type FilterShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MobilePushCredentialsContract
 {
     /**
      * @api
      *
-     * @param string $alias Alias to uniquely identify the credential
-     * @param string $certificate Certificate as received from APNs
-     * @param string $privateKey Corresponding private key to the certificate as received from APNs
-     * @param Type|value-of<Type> $type Type of mobile push credential. Should be <code>android</code> here
-     * @param array<string,
-     * mixed,> $projectAccountJsonFile Private key file in JSON format
+     * @param CreateMobilePushCredentialRequestShape $createMobilePushCredentialRequest
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $alias,
-        $certificate,
-        $privateKey,
-        $type,
-        $projectAccountJsonFile,
-        ?RequestOptions $requestOptions = null,
+        CreateIosPushCredentialRequest|array|CreateAndroidPushCredentialRequest $createMobilePushCredentialRequest,
+        RequestOptions|array|null $requestOptions = null,
     ): PushCredentialResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PushCredentialResponse;
-
-    /**
-     * @api
+     * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PushCredentialResponse;
 
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<PushCredential>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): MobilePushCredentialListResponse;
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MobilePushCredentialListResponse;
-
-    /**
-     * @api
+     * @param string $pushCredentialID The unique identifier of a mobile push credential
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $pushCredentialID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

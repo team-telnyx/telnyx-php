@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -19,34 +20,34 @@ use Telnyx\Core\Contracts\BaseModel;
  * - flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm
  * - Up to 100 MB
  *
- * @see Telnyx\AI->summarize
+ * @see Telnyx\Services\AIService::summarize()
  *
- * @phpstan-type ai_summarize_params = array{
- *   bucket: string, filename: string, systemPrompt?: string
+ * @phpstan-type AISummarizeParamsShape = array{
+ *   bucket: string, filename: string, systemPrompt?: string|null
  * }
  */
 final class AISummarizeParams implements BaseModel
 {
-    /** @use SdkModel<ai_summarize_params> */
+    /** @use SdkModel<AISummarizeParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The name of the bucket that contains the file to be summarized.
      */
-    #[Api]
+    #[Required]
     public string $bucket;
 
     /**
      * The name of the file to be summarized.
      */
-    #[Api]
+    #[Required]
     public string $filename;
 
     /**
      * A system prompt to guide the summary generation.
      */
-    #[Api('system_prompt', optional: true)]
+    #[Optional('system_prompt')]
     public ?string $systemPrompt;
 
     /**
@@ -78,14 +79,14 @@ final class AISummarizeParams implements BaseModel
         string $filename,
         ?string $systemPrompt = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->bucket = $bucket;
-        $obj->filename = $filename;
+        $self['bucket'] = $bucket;
+        $self['filename'] = $filename;
 
-        null !== $systemPrompt && $obj->systemPrompt = $systemPrompt;
+        null !== $systemPrompt && $self['systemPrompt'] = $systemPrompt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +94,10 @@ final class AISummarizeParams implements BaseModel
      */
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj->bucket = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +105,10 @@ final class AISummarizeParams implements BaseModel
      */
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj->filename = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,9 +116,9 @@ final class AISummarizeParams implements BaseModel
      */
     public function withSystemPrompt(string $systemPrompt): self
     {
-        $obj = clone $this;
-        $obj->systemPrompt = $systemPrompt;
+        $self = clone $this;
+        $self['systemPrompt'] = $systemPrompt;
 
-        return $obj;
+        return $self;
     }
 }

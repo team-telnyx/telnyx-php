@@ -13,12 +13,14 @@ use Telnyx\Calls\Actions\ActionTransferParams\RecordChannels;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordFormat;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordTrim;
+use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Calls\SoundModifications;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -36,53 +38,59 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
  * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
  *
- * @see Telnyx\Calls\Actions->transfer
+ * @see Telnyx\Services\Calls\ActionsService::transfer()
  *
- * @phpstan-type action_transfer_params = array{
+ * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
+ *
+ * @phpstan-type ActionTransferParamsShape = array{
  *   to: string,
- *   answeringMachineDetection?: AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
- *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfig,
- *   audioURL?: string,
- *   clientState?: string,
- *   commandID?: string,
- *   customHeaders?: list<CustomSipHeader>,
- *   earlyMedia?: bool,
- *   from?: string,
- *   fromDisplayName?: string,
- *   mediaEncryption?: MediaEncryption|value-of<MediaEncryption>,
- *   mediaName?: string,
- *   muteDtmf?: MuteDtmf|value-of<MuteDtmf>,
- *   parkAfterUnbridge?: string,
- *   record?: Record|value-of<Record>,
- *   recordChannels?: RecordChannels|value-of<RecordChannels>,
- *   recordCustomFileName?: string,
- *   recordFormat?: RecordFormat|value-of<RecordFormat>,
- *   recordMaxLength?: int,
- *   recordTimeoutSecs?: int,
- *   recordTrack?: RecordTrack|value-of<RecordTrack>,
- *   recordTrim?: RecordTrim|value-of<RecordTrim>,
- *   sipAuthPassword?: string,
- *   sipAuthUsername?: string,
- *   sipHeaders?: list<SipHeader>,
- *   sipTransportProtocol?: SipTransportProtocol|value-of<SipTransportProtocol>,
- *   soundModifications?: SoundModifications,
- *   targetLegClientState?: string,
- *   timeLimitSecs?: int,
- *   timeoutSecs?: int,
- *   webhookURL?: string,
- *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
+ *   answeringMachineDetection?: null|AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
+ *   answeringMachineDetectionConfig?: null|AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape,
+ *   audioURL?: string|null,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
+ *   earlyMedia?: bool|null,
+ *   from?: string|null,
+ *   fromDisplayName?: string|null,
+ *   mediaEncryption?: null|MediaEncryption|value-of<MediaEncryption>,
+ *   mediaName?: string|null,
+ *   muteDtmf?: null|MuteDtmf|value-of<MuteDtmf>,
+ *   parkAfterUnbridge?: string|null,
+ *   record?: null|Record|value-of<Record>,
+ *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
+ *   recordCustomFileName?: string|null,
+ *   recordFormat?: null|RecordFormat|value-of<RecordFormat>,
+ *   recordMaxLength?: int|null,
+ *   recordTimeoutSecs?: int|null,
+ *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
+ *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
+ *   sipAuthPassword?: string|null,
+ *   sipAuthUsername?: string|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
+ *   sipRegion?: null|SipRegion|value-of<SipRegion>,
+ *   sipTransportProtocol?: null|SipTransportProtocol|value-of<SipTransportProtocol>,
+ *   soundModifications?: null|SoundModifications|SoundModificationsShape,
+ *   targetLegClientState?: string|null,
+ *   timeLimitSecs?: int|null,
+ *   timeoutSecs?: int|null,
+ *   webhookURL?: string|null,
+ *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
  * }
  */
 final class ActionTransferParams implements BaseModel
 {
-    /** @use SdkModel<action_transfer_params> */
+    /** @use SdkModel<ActionTransferParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The DID or SIP URI to dial out to.
      */
-    #[Api]
+    #[Required]
     public string $to;
 
     /**
@@ -90,35 +98,34 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<AnsweringMachineDetection>|null $answeringMachineDetection
      */
-    #[Api(
+    #[Optional(
         'answering_machine_detection',
-        enum: AnsweringMachineDetection::class,
-        optional: true,
+        enum: AnsweringMachineDetection::class
     )]
     public ?string $answeringMachineDetection;
 
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
      */
-    #[Api('answering_machine_detection_config', optional: true)]
+    #[Optional('answering_machine_detection_config')]
     public ?AnsweringMachineDetectionConfig $answeringMachineDetectionConfig;
 
     /**
      * The URL of a file to be played back when the transfer destination answers before bridging the call. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      */
-    #[Api('audio_url', optional: true)]
+    #[Optional('audio_url')]
     public ?string $audioURL;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
@@ -126,25 +133,25 @@ final class ActionTransferParams implements BaseModel
      *
      * @var list<CustomSipHeader>|null $customHeaders
      */
-    #[Api('custom_headers', list: CustomSipHeader::class, optional: true)]
+    #[Optional('custom_headers', list: CustomSipHeader::class)]
     public ?array $customHeaders;
 
     /**
      * If set to false, early media will not be passed to the originating leg.
      */
-    #[Api('early_media', optional: true)]
+    #[Optional('early_media')]
     public ?bool $earlyMedia;
 
     /**
      * The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format. This attribute will default to the `to` number of the original call if omitted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      */
-    #[Api('from_display_name', optional: true)]
+    #[Optional('from_display_name')]
     public ?string $fromDisplayName;
 
     /**
@@ -152,13 +159,13 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<MediaEncryption>|null $mediaEncryption
      */
-    #[Api('media_encryption', enum: MediaEncryption::class, optional: true)]
+    #[Optional('media_encryption', enum: MediaEncryption::class)]
     public ?string $mediaEncryption;
 
     /**
      * The media_name of a file to be played back when the transfer destination answers before bridging the call. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Api('media_name', optional: true)]
+    #[Optional('media_name')]
     public ?string $mediaName;
 
     /**
@@ -166,13 +173,13 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<MuteDtmf>|null $muteDtmf
      */
-    #[Api('mute_dtmf', enum: MuteDtmf::class, optional: true)]
+    #[Optional('mute_dtmf', enum: MuteDtmf::class)]
     public ?string $muteDtmf;
 
     /**
      * Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
      */
-    #[Api('park_after_unbridge', optional: true)]
+    #[Optional('park_after_unbridge')]
     public ?string $parkAfterUnbridge;
 
     /**
@@ -180,7 +187,7 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<Record>|null $record
      */
-    #[Api(enum: Record::class, optional: true)]
+    #[Optional(enum: Record::class)]
     public ?string $record;
 
     /**
@@ -188,13 +195,13 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<RecordChannels>|null $recordChannels
      */
-    #[Api('record_channels', enum: RecordChannels::class, optional: true)]
+    #[Optional('record_channels', enum: RecordChannels::class)]
     public ?string $recordChannels;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api('record_custom_file_name', optional: true)]
+    #[Optional('record_custom_file_name')]
     public ?string $recordCustomFileName;
 
     /**
@@ -202,19 +209,19 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<RecordFormat>|null $recordFormat
      */
-    #[Api('record_format', enum: RecordFormat::class, optional: true)]
+    #[Optional('record_format', enum: RecordFormat::class)]
     public ?string $recordFormat;
 
     /**
      * Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      */
-    #[Api('record_max_length', optional: true)]
+    #[Optional('record_max_length')]
     public ?int $recordMaxLength;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api('record_timeout_secs', optional: true)]
+    #[Optional('record_timeout_secs')]
     public ?int $recordTimeoutSecs;
 
     /**
@@ -222,7 +229,7 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<RecordTrack>|null $recordTrack
      */
-    #[Api('record_track', enum: RecordTrack::class, optional: true)]
+    #[Optional('record_track', enum: RecordTrack::class)]
     public ?string $recordTrack;
 
     /**
@@ -230,19 +237,19 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<RecordTrim>|null $recordTrim
      */
-    #[Api('record_trim', enum: RecordTrim::class, optional: true)]
+    #[Optional('record_trim', enum: RecordTrim::class)]
     public ?string $recordTrim;
 
     /**
      * SIP Authentication password used for SIP challenges.
      */
-    #[Api('sip_auth_password', optional: true)]
+    #[Optional('sip_auth_password')]
     public ?string $sipAuthPassword;
 
     /**
      * SIP Authentication username used for SIP challenges.
      */
-    #[Api('sip_auth_username', optional: true)]
+    #[Optional('sip_auth_username')]
     public ?string $sipAuthUsername;
 
     /**
@@ -250,49 +257,53 @@ final class ActionTransferParams implements BaseModel
      *
      * @var list<SipHeader>|null $sipHeaders
      */
-    #[Api('sip_headers', list: SipHeader::class, optional: true)]
+    #[Optional('sip_headers', list: SipHeader::class)]
     public ?array $sipHeaders;
+
+    /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @var value-of<SipRegion>|null $sipRegion
+     */
+    #[Optional('sip_region', enum: SipRegion::class)]
+    public ?string $sipRegion;
 
     /**
      * Defines SIP transport protocol to be used on the call.
      *
      * @var value-of<SipTransportProtocol>|null $sipTransportProtocol
      */
-    #[Api(
-        'sip_transport_protocol',
-        enum: SipTransportProtocol::class,
-        optional: true
-    )]
+    #[Optional('sip_transport_protocol', enum: SipTransportProtocol::class)]
     public ?string $sipTransportProtocol;
 
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      */
-    #[Api('sound_modifications', optional: true)]
+    #[Optional('sound_modifications')]
     public ?SoundModifications $soundModifications;
 
     /**
      * Use this field to add state to every subsequent webhook for the new leg. It must be a valid Base-64 encoded string.
      */
-    #[Api('target_leg_client_state', optional: true)]
+    #[Optional('target_leg_client_state')]
     public ?string $targetLegClientState;
 
     /**
      * Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
      */
-    #[Api('time_limit_secs', optional: true)]
+    #[Optional('time_limit_secs')]
     public ?int $timeLimitSecs;
 
     /**
      * The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being transferred. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 600 seconds.
      */
-    #[Api('timeout_secs', optional: true)]
+    #[Optional('timeout_secs')]
     public ?int $timeoutSecs;
 
     /**
      * Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
      */
-    #[Api('webhook_url', optional: true)]
+    #[Optional('webhook_url')]
     public ?string $webhookURL;
 
     /**
@@ -300,7 +311,7 @@ final class ActionTransferParams implements BaseModel
      *
      * @var value-of<WebhookURLMethod>|null $webhookURLMethod
      */
-    #[Api('webhook_url_method', enum: WebhookURLMethod::class, optional: true)]
+    #[Optional('webhook_url_method', enum: WebhookURLMethod::class)]
     public ?string $webhookURLMethod;
 
     /**
@@ -327,23 +338,26 @@ final class ActionTransferParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection
-     * @param list<CustomSipHeader> $customHeaders
-     * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption
-     * @param MuteDtmf|value-of<MuteDtmf> $muteDtmf
-     * @param Record|value-of<Record> $record
-     * @param RecordChannels|value-of<RecordChannels> $recordChannels
-     * @param RecordFormat|value-of<RecordFormat> $recordFormat
-     * @param RecordTrack|value-of<RecordTrack> $recordTrack
-     * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param list<SipHeader> $sipHeaders
-     * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
-     * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
+     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection>|null $answeringMachineDetection
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape|null $answeringMachineDetectionConfig
+     * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
+     * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
+     * @param MuteDtmf|value-of<MuteDtmf>|null $muteDtmf
+     * @param Record|value-of<Record>|null $record
+     * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
+     * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
+     * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
+     * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
+     * @param SipRegion|value-of<SipRegion>|null $sipRegion
+     * @param SipTransportProtocol|value-of<SipTransportProtocol>|null $sipTransportProtocol
+     * @param SoundModifications|SoundModificationsShape|null $soundModifications
+     * @param WebhookURLMethod|value-of<WebhookURLMethod>|null $webhookURLMethod
      */
     public static function with(
         string $to,
         AnsweringMachineDetection|string|null $answeringMachineDetection = null,
-        ?AnsweringMachineDetectionConfig $answeringMachineDetectionConfig = null,
+        AnsweringMachineDetectionConfig|array|null $answeringMachineDetectionConfig = null,
         ?string $audioURL = null,
         ?string $clientState = null,
         ?string $commandID = null,
@@ -366,51 +380,53 @@ final class ActionTransferParams implements BaseModel
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
         ?array $sipHeaders = null,
+        SipRegion|string|null $sipRegion = null,
         SipTransportProtocol|string|null $sipTransportProtocol = null,
-        ?SoundModifications $soundModifications = null,
+        SoundModifications|array|null $soundModifications = null,
         ?string $targetLegClientState = null,
         ?int $timeLimitSecs = null,
         ?int $timeoutSecs = null,
         ?string $webhookURL = null,
         WebhookURLMethod|string|null $webhookURLMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->to = $to;
+        $self['to'] = $to;
 
-        null !== $answeringMachineDetection && $obj['answeringMachineDetection'] = $answeringMachineDetection;
-        null !== $answeringMachineDetectionConfig && $obj->answeringMachineDetectionConfig = $answeringMachineDetectionConfig;
-        null !== $audioURL && $obj->audioURL = $audioURL;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $customHeaders && $obj->customHeaders = $customHeaders;
-        null !== $earlyMedia && $obj->earlyMedia = $earlyMedia;
-        null !== $from && $obj->from = $from;
-        null !== $fromDisplayName && $obj->fromDisplayName = $fromDisplayName;
-        null !== $mediaEncryption && $obj['mediaEncryption'] = $mediaEncryption;
-        null !== $mediaName && $obj->mediaName = $mediaName;
-        null !== $muteDtmf && $obj['muteDtmf'] = $muteDtmf;
-        null !== $parkAfterUnbridge && $obj->parkAfterUnbridge = $parkAfterUnbridge;
-        null !== $record && $obj['record'] = $record;
-        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
-        null !== $recordCustomFileName && $obj->recordCustomFileName = $recordCustomFileName;
-        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
-        null !== $recordMaxLength && $obj->recordMaxLength = $recordMaxLength;
-        null !== $recordTimeoutSecs && $obj->recordTimeoutSecs = $recordTimeoutSecs;
-        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
-        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
-        null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
-        null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
-        null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
-        null !== $sipTransportProtocol && $obj['sipTransportProtocol'] = $sipTransportProtocol;
-        null !== $soundModifications && $obj->soundModifications = $soundModifications;
-        null !== $targetLegClientState && $obj->targetLegClientState = $targetLegClientState;
-        null !== $timeLimitSecs && $obj->timeLimitSecs = $timeLimitSecs;
-        null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
-        null !== $webhookURLMethod && $obj['webhookURLMethod'] = $webhookURLMethod;
+        null !== $answeringMachineDetection && $self['answeringMachineDetection'] = $answeringMachineDetection;
+        null !== $answeringMachineDetectionConfig && $self['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
+        null !== $audioURL && $self['audioURL'] = $audioURL;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $earlyMedia && $self['earlyMedia'] = $earlyMedia;
+        null !== $from && $self['from'] = $from;
+        null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
+        null !== $mediaEncryption && $self['mediaEncryption'] = $mediaEncryption;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $muteDtmf && $self['muteDtmf'] = $muteDtmf;
+        null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
+        null !== $record && $self['record'] = $record;
+        null !== $recordChannels && $self['recordChannels'] = $recordChannels;
+        null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
+        null !== $recordFormat && $self['recordFormat'] = $recordFormat;
+        null !== $recordMaxLength && $self['recordMaxLength'] = $recordMaxLength;
+        null !== $recordTimeoutSecs && $self['recordTimeoutSecs'] = $recordTimeoutSecs;
+        null !== $recordTrack && $self['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $self['recordTrim'] = $recordTrim;
+        null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $self['sipAuthUsername'] = $sipAuthUsername;
+        null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
+        null !== $sipRegion && $self['sipRegion'] = $sipRegion;
+        null !== $sipTransportProtocol && $self['sipTransportProtocol'] = $sipTransportProtocol;
+        null !== $soundModifications && $self['soundModifications'] = $soundModifications;
+        null !== $targetLegClientState && $self['targetLegClientState'] = $targetLegClientState;
+        null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $webhookURLMethod && $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -418,10 +434,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -432,22 +448,24 @@ final class ActionTransferParams implements BaseModel
     public function withAnsweringMachineDetection(
         AnsweringMachineDetection|string $answeringMachineDetection
     ): self {
-        $obj = clone $this;
-        $obj['answeringMachineDetection'] = $answeringMachineDetection;
+        $self = clone $this;
+        $self['answeringMachineDetection'] = $answeringMachineDetection;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
+     *
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
      */
     public function withAnsweringMachineDetectionConfig(
-        AnsweringMachineDetectionConfig $answeringMachineDetectionConfig
+        AnsweringMachineDetectionConfig|array $answeringMachineDetectionConfig
     ): self {
-        $obj = clone $this;
-        $obj->answeringMachineDetectionConfig = $answeringMachineDetectionConfig;
+        $self = clone $this;
+        $self['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -455,10 +473,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withAudioURL(string $audioURL): self
     {
-        $obj = clone $this;
-        $obj->audioURL = $audioURL;
+        $self = clone $this;
+        $self['audioURL'] = $audioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -466,10 +484,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -477,23 +495,23 @@ final class ActionTransferParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @param list<CustomSipHeader> $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj->customHeaders = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -501,10 +519,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withEarlyMedia(bool $earlyMedia): self
     {
-        $obj = clone $this;
-        $obj->earlyMedia = $earlyMedia;
+        $self = clone $this;
+        $self['earlyMedia'] = $earlyMedia;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -512,10 +530,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -523,10 +541,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withFromDisplayName(string $fromDisplayName): self
     {
-        $obj = clone $this;
-        $obj->fromDisplayName = $fromDisplayName;
+        $self = clone $this;
+        $self['fromDisplayName'] = $fromDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -537,10 +555,10 @@ final class ActionTransferParams implements BaseModel
     public function withMediaEncryption(
         MediaEncryption|string $mediaEncryption
     ): self {
-        $obj = clone $this;
-        $obj['mediaEncryption'] = $mediaEncryption;
+        $self = clone $this;
+        $self['mediaEncryption'] = $mediaEncryption;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -548,10 +566,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -561,10 +579,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withMuteDtmf(MuteDtmf|string $muteDtmf): self
     {
-        $obj = clone $this;
-        $obj['muteDtmf'] = $muteDtmf;
+        $self = clone $this;
+        $self['muteDtmf'] = $muteDtmf;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -572,10 +590,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withParkAfterUnbridge(string $parkAfterUnbridge): self
     {
-        $obj = clone $this;
-        $obj->parkAfterUnbridge = $parkAfterUnbridge;
+        $self = clone $this;
+        $self['parkAfterUnbridge'] = $parkAfterUnbridge;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -585,10 +603,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecord(Record|string $record): self
     {
-        $obj = clone $this;
-        $obj['record'] = $record;
+        $self = clone $this;
+        $self['record'] = $record;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -599,10 +617,10 @@ final class ActionTransferParams implements BaseModel
     public function withRecordChannels(
         RecordChannels|string $recordChannels
     ): self {
-        $obj = clone $this;
-        $obj['recordChannels'] = $recordChannels;
+        $self = clone $this;
+        $self['recordChannels'] = $recordChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -610,10 +628,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordCustomFileName(string $recordCustomFileName): self
     {
-        $obj = clone $this;
-        $obj->recordCustomFileName = $recordCustomFileName;
+        $self = clone $this;
+        $self['recordCustomFileName'] = $recordCustomFileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -623,10 +641,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
-        $obj = clone $this;
-        $obj['recordFormat'] = $recordFormat;
+        $self = clone $this;
+        $self['recordFormat'] = $recordFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -634,10 +652,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordMaxLength(int $recordMaxLength): self
     {
-        $obj = clone $this;
-        $obj->recordMaxLength = $recordMaxLength;
+        $self = clone $this;
+        $self['recordMaxLength'] = $recordMaxLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -645,10 +663,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->recordTimeoutSecs = $recordTimeoutSecs;
+        $self = clone $this;
+        $self['recordTimeoutSecs'] = $recordTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -658,10 +676,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
-        $obj = clone $this;
-        $obj['recordTrack'] = $recordTrack;
+        $self = clone $this;
+        $self['recordTrack'] = $recordTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -671,10 +689,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
-        $obj = clone $this;
-        $obj['recordTrim'] = $recordTrim;
+        $self = clone $this;
+        $self['recordTrim'] = $recordTrim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -682,10 +700,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
-        $obj = clone $this;
-        $obj->sipAuthPassword = $sipAuthPassword;
+        $self = clone $this;
+        $self['sipAuthPassword'] = $sipAuthPassword;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -693,23 +711,36 @@ final class ActionTransferParams implements BaseModel
      */
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
-        $obj = clone $this;
-        $obj->sipAuthUsername = $sipAuthUsername;
+        $self = clone $this;
+        $self['sipAuthUsername'] = $sipAuthUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeader> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
-        $obj = clone $this;
-        $obj->sipHeaders = $sipHeaders;
+        $self = clone $this;
+        $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @param SipRegion|value-of<SipRegion> $sipRegion
+     */
+    public function withSipRegion(SipRegion|string $sipRegion): self
+    {
+        $self = clone $this;
+        $self['sipRegion'] = $sipRegion;
+
+        return $self;
     }
 
     /**
@@ -720,22 +751,24 @@ final class ActionTransferParams implements BaseModel
     public function withSipTransportProtocol(
         SipTransportProtocol|string $sipTransportProtocol
     ): self {
-        $obj = clone $this;
-        $obj['sipTransportProtocol'] = $sipTransportProtocol;
+        $self = clone $this;
+        $self['sipTransportProtocol'] = $sipTransportProtocol;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
+     *
+     * @param SoundModifications|SoundModificationsShape $soundModifications
      */
     public function withSoundModifications(
-        SoundModifications $soundModifications
+        SoundModifications|array $soundModifications
     ): self {
-        $obj = clone $this;
-        $obj->soundModifications = $soundModifications;
+        $self = clone $this;
+        $self['soundModifications'] = $soundModifications;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -743,10 +776,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withTargetLegClientState(string $targetLegClientState): self
     {
-        $obj = clone $this;
-        $obj->targetLegClientState = $targetLegClientState;
+        $self = clone $this;
+        $self['targetLegClientState'] = $targetLegClientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -754,10 +787,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withTimeLimitSecs(int $timeLimitSecs): self
     {
-        $obj = clone $this;
-        $obj->timeLimitSecs = $timeLimitSecs;
+        $self = clone $this;
+        $self['timeLimitSecs'] = $timeLimitSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -765,10 +798,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withTimeoutSecs(int $timeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->timeoutSecs = $timeoutSecs;
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -776,10 +809,10 @@ final class ActionTransferParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -790,9 +823,9 @@ final class ActionTransferParams implements BaseModel
     public function withWebhookURLMethod(
         WebhookURLMethod|string $webhookURLMethod
     ): self {
-        $obj = clone $this;
-        $obj['webhookURLMethod'] = $webhookURLMethod;
+        $self = clone $this;
+        $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 }

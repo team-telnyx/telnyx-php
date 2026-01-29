@@ -4,31 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\AIGetModelsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   id: string, created: int, ownedBy: string, object1?: string
+ * @phpstan-type DataShape = array{
+ *   id: string, created: int, ownedBy: string, object?: string|null
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public int $created;
 
-    #[Api('owned_by')]
+    #[Required('owned_by')]
     public string $ownedBy;
 
-    #[Api(optional: true)]
-    public ?string $object1;
+    #[Optional]
+    public ?string $object;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -58,48 +59,48 @@ final class Data implements BaseModel
         string $id,
         int $created,
         string $ownedBy,
-        ?string $object1 = null
+        ?string $object = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->created = $created;
-        $obj->ownedBy = $ownedBy;
+        $self['id'] = $id;
+        $self['created'] = $created;
+        $self['ownedBy'] = $ownedBy;
 
-        null !== $object1 && $obj->object1 = $object1;
+        null !== $object && $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreated(int $created): self
     {
-        $obj = clone $this;
-        $obj->created = $created;
+        $self = clone $this;
+        $self['created'] = $created;
 
-        return $obj;
+        return $self;
     }
 
     public function withOwnedBy(string $ownedBy): self
     {
-        $obj = clone $this;
-        $obj->ownedBy = $ownedBy;
+        $self = clone $this;
+        $self['ownedBy'] = $ownedBy;
 
-        return $obj;
+        return $self;
     }
 
-    public function withObject(string $object1): self
+    public function withObject(string $object): self
     {
-        $obj = clone $this;
-        $obj->object1 = $object1;
+        $self = clone $this;
+        $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 }

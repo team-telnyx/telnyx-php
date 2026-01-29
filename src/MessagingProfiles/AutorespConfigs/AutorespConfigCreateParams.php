@@ -4,42 +4,43 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigCreateParams\Op;
 
 /**
- * Create Auto-Reponse Setting.
+ * Create auto-response setting.
  *
- * @see Telnyx\MessagingProfiles\AutorespConfigs->create
+ * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::create()
  *
- * @phpstan-type autoresp_config_create_params = array{
+ * @phpstan-type AutorespConfigCreateParamsShape = array{
  *   countryCode: string,
  *   keywords: list<string>,
  *   op: Op|value-of<Op>,
- *   respText?: string,
+ *   respText?: string|null,
  * }
  */
 final class AutorespConfigCreateParams implements BaseModel
 {
-    /** @use SdkModel<autoresp_config_create_params> */
+    /** @use SdkModel<AutorespConfigCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api('country_code')]
+    #[Required('country_code')]
     public string $countryCode;
 
     /** @var list<string> $keywords */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $keywords;
 
     /** @var value-of<Op> $op */
-    #[Api(enum: Op::class)]
+    #[Required(enum: Op::class)]
     public string $op;
 
-    #[Api('resp_text', optional: true)]
+    #[Optional('resp_text')]
     public ?string $respText;
 
     /**
@@ -78,23 +79,23 @@ final class AutorespConfigCreateParams implements BaseModel
         Op|string $op,
         ?string $respText = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->countryCode = $countryCode;
-        $obj->keywords = $keywords;
-        $obj['op'] = $op;
+        $self['countryCode'] = $countryCode;
+        $self['keywords'] = $keywords;
+        $self['op'] = $op;
 
-        null !== $respText && $obj->respText = $respText;
+        null !== $respText && $self['respText'] = $respText;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +103,10 @@ final class AutorespConfigCreateParams implements BaseModel
      */
     public function withKeywords(array $keywords): self
     {
-        $obj = clone $this;
-        $obj->keywords = $keywords;
+        $self = clone $this;
+        $self['keywords'] = $keywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,17 +114,17 @@ final class AutorespConfigCreateParams implements BaseModel
      */
     public function withOp(Op|string $op): self
     {
-        $obj = clone $this;
-        $obj['op'] = $op;
+        $self = clone $this;
+        $self['op'] = $op;
 
-        return $obj;
+        return $self;
     }
 
     public function withRespText(string $respText): self
     {
-        $obj = clone $this;
-        $obj->respText = $respText;
+        $self = clone $this;
+        $self['respText'] = $respText;
 
-        return $obj;
+        return $self;
     }
 }

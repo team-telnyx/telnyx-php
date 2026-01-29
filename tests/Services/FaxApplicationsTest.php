@@ -6,6 +6,13 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CredentialConnections\AnchorsiteOverride;
+use Telnyx\DefaultPagination;
+use Telnyx\FaxApplications\FaxApplication;
+use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
+use Telnyx\FaxApplications\FaxApplicationGetResponse;
+use Telnyx\FaxApplications\FaxApplicationNewResponse;
+use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +45,8 @@ final class FaxApplicationsTest extends TestCase
             webhookEventURL: 'https://example.com'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxApplicationNewResponse::class, $result);
     }
 
     #[Test]
@@ -50,10 +58,24 @@ final class FaxApplicationsTest extends TestCase
 
         $result = $this->client->faxApplications->create(
             applicationName: 'fax-router',
-            webhookEventURL: 'https://example.com'
+            webhookEventURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            inbound: [
+                'channelLimit' => 10,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
+            ],
+            outbound: [
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
+            ],
+            tags: ['tag1', 'tag2'],
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookTimeoutSecs: 25,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxApplicationNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +87,8 @@ final class FaxApplicationsTest extends TestCase
 
         $result = $this->client->faxApplications->retrieve('1293384261075731499');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxApplicationGetResponse::class, $result);
     }
 
     #[Test]
@@ -81,7 +104,8 @@ final class FaxApplicationsTest extends TestCase
             webhookEventURL: 'https://example.com',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxApplicationUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -95,9 +119,24 @@ final class FaxApplicationsTest extends TestCase
             '1293384261075731499',
             applicationName: 'fax-router',
             webhookEventURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            faxEmailRecipient: 'user@example.com',
+            inbound: [
+                'channelLimit' => 10,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
+            ],
+            outbound: [
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
+            ],
+            tags: ['tag1', 'tag2'],
+            webhookEventFailoverURL: 'https://failover.example.com',
+            webhookTimeoutSecs: 25,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxApplicationUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -107,9 +146,15 @@ final class FaxApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->faxApplications->list();
+        $page = $this->client->faxApplications->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(FaxApplication::class, $item);
+        }
     }
 
     #[Test]
@@ -121,6 +166,7 @@ final class FaxApplicationsTest extends TestCase
 
         $result = $this->client->faxApplications->delete('1293384261075731499');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FaxApplicationDeleteResponse::class, $result);
     }
 }

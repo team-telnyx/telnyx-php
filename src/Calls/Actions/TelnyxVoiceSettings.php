@@ -4,24 +4,50 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Calls\Actions\TelnyxVoiceSettings\Type;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type telnyx_voice_settings = array{voiceSpeed?: float}
+ * @phpstan-type TelnyxVoiceSettingsShape = array{
+ *   type: Type|value-of<Type>, voiceSpeed?: float|null
+ * }
  */
 final class TelnyxVoiceSettings implements BaseModel
 {
-    /** @use SdkModel<telnyx_voice_settings> */
+    /** @use SdkModel<TelnyxVoiceSettingsShape> */
     use SdkModel;
+
+    /**
+     * Voice settings provider type.
+     *
+     * @var value-of<Type> $type
+     */
+    #[Required(enum: Type::class)]
+    public string $type;
 
     /**
      * The voice speed to be used for the voice. The voice speed must be between 0.1 and 2.0. Default value is 1.0.
      */
-    #[Api('voice_speed', optional: true)]
+    #[Optional('voice_speed')]
     public ?float $voiceSpeed;
 
+    /**
+     * `new TelnyxVoiceSettings()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * TelnyxVoiceSettings::with(type: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new TelnyxVoiceSettings)->withType(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -31,14 +57,33 @@ final class TelnyxVoiceSettings implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Type|value-of<Type> $type
      */
-    public static function with(?float $voiceSpeed = null): self
+    public static function with(
+        Type|string $type,
+        ?float $voiceSpeed = null
+    ): self {
+        $self = new self;
+
+        $self['type'] = $type;
+
+        null !== $voiceSpeed && $self['voiceSpeed'] = $voiceSpeed;
+
+        return $self;
+    }
+
+    /**
+     * Voice settings provider type.
+     *
+     * @param Type|value-of<Type> $type
+     */
+    public function withType(Type|string $type): self
     {
-        $obj = new self;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        null !== $voiceSpeed && $obj->voiceSpeed = $voiceSpeed;
-
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +91,9 @@ final class TelnyxVoiceSettings implements BaseModel
      */
     public function withVoiceSpeed(float $voiceSpeed): self
     {
-        $obj = clone $this;
-        $obj->voiceSpeed = $voiceSpeed;
+        $self = clone $this;
+        $self['voiceSpeed'] = $voiceSpeed;
 
-        return $obj;
+        return $self;
     }
 }

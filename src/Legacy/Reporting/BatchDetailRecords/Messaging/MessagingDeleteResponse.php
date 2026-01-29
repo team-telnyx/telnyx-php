@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type messaging_delete_response = array{data?: MdrDetailReportResponse}
+ * @phpstan-import-type MdrDetailReportResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
+ *
+ * @phpstan-type MessagingDeleteResponseShape = array{
+ *   data?: null|MdrDetailReportResponse|MdrDetailReportResponseShape
+ * }
  */
-final class MessagingDeleteResponse implements BaseModel, ResponseConverter
+final class MessagingDeleteResponse implements BaseModel
 {
-    /** @use SdkModel<messaging_delete_response> */
+    /** @use SdkModel<MessagingDeleteResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?MdrDetailReportResponse $data;
 
     public function __construct()
@@ -32,21 +32,27 @@ final class MessagingDeleteResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MdrDetailReportResponse|MdrDetailReportResponseShape|null $data
      */
-    public static function with(?MdrDetailReportResponse $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        MdrDetailReportResponse|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(MdrDetailReportResponse $data): self
+    /**
+     * @param MdrDetailReportResponse|MdrDetailReportResponseShape $data
+     */
+    public function withData(MdrDetailReportResponse|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

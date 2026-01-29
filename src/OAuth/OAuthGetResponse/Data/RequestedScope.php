@@ -4,36 +4,36 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth\OAuthGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type requested_scope = array{
- *   id?: string, description?: string, name?: string
+ * @phpstan-type RequestedScopeShape = array{
+ *   id?: string|null, description?: string|null, name?: string|null
  * }
  */
 final class RequestedScope implements BaseModel
 {
-    /** @use SdkModel<requested_scope> */
+    /** @use SdkModel<RequestedScopeShape> */
     use SdkModel;
 
     /**
      * Scope ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Scope description.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Scope name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()
@@ -51,13 +51,13 @@ final class RequestedScope implements BaseModel
         ?string $description = null,
         ?string $name = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $description && $obj->description = $description;
-        null !== $name && $obj->name = $name;
+        null !== $id && $self['id'] = $id;
+        null !== $description && $self['description'] = $description;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +65,10 @@ final class RequestedScope implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class RequestedScope implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +87,9 @@ final class RequestedScope implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

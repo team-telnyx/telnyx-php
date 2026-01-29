@@ -4,26 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type assistant_chat_response = array{content: string}
+ * @phpstan-type AssistantChatResponseShape = array{content: string}
  */
-final class AssistantChatResponse implements BaseModel, ResponseConverter
+final class AssistantChatResponse implements BaseModel
 {
-    /** @use SdkModel<assistant_chat_response> */
+    /** @use SdkModel<AssistantChatResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The assistant's generated response based on the input message and context.
      */
-    #[Api]
+    #[Required]
     public string $content;
 
     /**
@@ -52,11 +48,11 @@ final class AssistantChatResponse implements BaseModel, ResponseConverter
      */
     public static function with(string $content): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->content = $content;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +60,9 @@ final class AssistantChatResponse implements BaseModel, ResponseConverter
      */
     public function withContent(string $content): self
     {
-        $obj = clone $this;
-        $obj->content = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 }

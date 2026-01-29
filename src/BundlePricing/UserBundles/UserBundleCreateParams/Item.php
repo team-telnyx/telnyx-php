@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles\UserBundleCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type item_alias = array{billingBundleID: string, quantity: int}
+ * @phpstan-type ItemShape = array{billingBundleID: string, quantity: int}
  */
 final class Item implements BaseModel
 {
-    /** @use SdkModel<item_alias> */
+    /** @use SdkModel<ItemShape> */
     use SdkModel;
 
     /**
      * Quantity of user bundles to order.
      */
-    #[Api('billing_bundle_id')]
+    #[Required('billing_bundle_id')]
     public string $billingBundleID;
 
     /**
      * Quantity of user bundles to order.
      */
-    #[Api]
+    #[Required]
     public int $quantity;
 
     /**
@@ -54,12 +54,12 @@ final class Item implements BaseModel
      */
     public static function with(string $billingBundleID, int $quantity): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->billingBundleID = $billingBundleID;
-        $obj->quantity = $quantity;
+        $self['billingBundleID'] = $billingBundleID;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Item implements BaseModel
      */
     public function withBillingBundleID(string $billingBundleID): self
     {
-        $obj = clone $this;
-        $obj->billingBundleID = $billingBundleID;
+        $self = clone $this;
+        $self['billingBundleID'] = $billingBundleID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Item implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj->quantity = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 }

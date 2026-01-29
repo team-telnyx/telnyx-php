@@ -4,34 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment\WireguardPeer;
 
 /**
- * @phpstan-type global_ip_assignment = array{
- *   id?: string, wireguardPeer?: WireguardPeer, wireguardPeerID?: string
+ * @phpstan-import-type WireguardPeerShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment\WireguardPeer
+ *
+ * @phpstan-type GlobalIPAssignmentShape = array{
+ *   id?: string|null,
+ *   wireguardPeer?: null|WireguardPeer|WireguardPeerShape,
+ *   wireguardPeerID?: string|null,
  * }
  */
 final class GlobalIPAssignment implements BaseModel
 {
-    /** @use SdkModel<global_ip_assignment> */
+    /** @use SdkModel<GlobalIPAssignmentShape> */
     use SdkModel;
 
     /**
      * Global IP assignment ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api('wireguard_peer', optional: true)]
+    #[Optional('wireguard_peer')]
     public ?WireguardPeer $wireguardPeer;
 
     /**
      * Wireguard peer ID.
      */
-    #[Api('wireguard_peer_id', optional: true)]
+    #[Optional('wireguard_peer_id')]
     public ?string $wireguardPeerID;
 
     public function __construct()
@@ -43,19 +47,21 @@ final class GlobalIPAssignment implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param WireguardPeer|WireguardPeerShape|null $wireguardPeer
      */
     public static function with(
         ?string $id = null,
-        ?WireguardPeer $wireguardPeer = null,
+        WireguardPeer|array|null $wireguardPeer = null,
         ?string $wireguardPeerID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $wireguardPeer && $obj->wireguardPeer = $wireguardPeer;
-        null !== $wireguardPeerID && $obj->wireguardPeerID = $wireguardPeerID;
+        null !== $id && $self['id'] = $id;
+        null !== $wireguardPeer && $self['wireguardPeer'] = $wireguardPeer;
+        null !== $wireguardPeerID && $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,18 +69,21 @@ final class GlobalIPAssignment implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withWireguardPeer(WireguardPeer $wireguardPeer): self
+    /**
+     * @param WireguardPeer|WireguardPeerShape $wireguardPeer
+     */
+    public function withWireguardPeer(WireguardPeer|array $wireguardPeer): self
     {
-        $obj = clone $this;
-        $obj->wireguardPeer = $wireguardPeer;
+        $self = clone $this;
+        $self['wireguardPeer'] = $wireguardPeer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,9 +91,9 @@ final class GlobalIPAssignment implements BaseModel
      */
     public function withWireguardPeerID(string $wireguardPeerID): self
     {
-        $obj = clone $this;
-        $obj->wireguardPeerID = $wireguardPeerID;
+        $self = clone $this;
+        $self['wireguardPeerID'] = $wireguardPeerID;
 
-        return $obj;
+        return $self;
     }
 }

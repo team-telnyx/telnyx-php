@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\ActionType;
@@ -13,16 +13,16 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter\S
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[id][in][], filter[requirement_type_id], filter[action_type], filter[status].
  *
- * @phpstan-type filter_alias = array{
- *   id?: list<string>,
- *   actionType?: value-of<ActionType>,
- *   requirementTypeID?: string,
- *   status?: value-of<Status>,
+ * @phpstan-type FilterShape = array{
+ *   id?: list<string>|null,
+ *   actionType?: null|ActionType|value-of<ActionType>,
+ *   requirementTypeID?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -30,7 +30,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $id
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $id;
 
     /**
@@ -38,13 +38,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<ActionType>|null $actionType
      */
-    #[Api('action_type', enum: ActionType::class, optional: true)]
+    #[Optional('action_type', enum: ActionType::class)]
     public ?string $actionType;
 
     /**
      * Filter action requirements by requirement type ID.
      */
-    #[Api('requirement_type_id', optional: true)]
+    #[Optional('requirement_type_id')]
     public ?string $requirementTypeID;
 
     /**
@@ -52,7 +52,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -65,9 +65,9 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $id
-     * @param ActionType|value-of<ActionType> $actionType
-     * @param Status|value-of<Status> $status
+     * @param list<string>|null $id
+     * @param ActionType|value-of<ActionType>|null $actionType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?array $id = null,
@@ -75,14 +75,14 @@ final class Filter implements BaseModel
         ?string $requirementTypeID = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $actionType && $obj['actionType'] = $actionType;
-        null !== $requirementTypeID && $obj->requirementTypeID = $requirementTypeID;
-        null !== $status && $obj['status'] = $status;
+        null !== $id && $self['id'] = $id;
+        null !== $actionType && $self['actionType'] = $actionType;
+        null !== $requirementTypeID && $self['requirementTypeID'] = $requirementTypeID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Filter implements BaseModel
      */
     public function withID(array $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class Filter implements BaseModel
      */
     public function withActionType(ActionType|string $actionType): self
     {
-        $obj = clone $this;
-        $obj['actionType'] = $actionType;
+        $self = clone $this;
+        $self['actionType'] = $actionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class Filter implements BaseModel
      */
     public function withRequirementTypeID(string $requirementTypeID): self
     {
-        $obj = clone $this;
-        $obj->requirementTypeID = $requirementTypeID;
+        $self = clone $this;
+        $self['requirementTypeID'] = $requirementTypeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

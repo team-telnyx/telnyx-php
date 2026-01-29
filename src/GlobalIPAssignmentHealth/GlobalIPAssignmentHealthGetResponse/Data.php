@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIP;
@@ -12,31 +12,35 @@ use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Glo
 use Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Health;
 
 /**
- * @phpstan-type data_alias = array{
- *   globalIP?: GlobalIP,
- *   globalIPAssignment?: GlobalIPAssignment,
- *   health?: Health,
- *   timestamp?: \DateTimeInterface,
+ * @phpstan-import-type GlobalIPShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIP
+ * @phpstan-import-type GlobalIPAssignmentShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment
+ * @phpstan-import-type HealthShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\Health
+ *
+ * @phpstan-type DataShape = array{
+ *   globalIP?: null|GlobalIP|GlobalIPShape,
+ *   globalIPAssignment?: null|GlobalIPAssignment|GlobalIPAssignmentShape,
+ *   health?: null|Health|HealthShape,
+ *   timestamp?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('global_ip', optional: true)]
+    #[Optional('global_ip')]
     public ?GlobalIP $globalIP;
 
-    #[Api('global_ip_assignment', optional: true)]
+    #[Optional('global_ip_assignment')]
     public ?GlobalIPAssignment $globalIPAssignment;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Health $health;
 
     /**
      * The timestamp of the metric.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $timestamp;
 
     public function __construct()
@@ -48,46 +52,59 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param GlobalIP|GlobalIPShape|null $globalIP
+     * @param GlobalIPAssignment|GlobalIPAssignmentShape|null $globalIPAssignment
+     * @param Health|HealthShape|null $health
      */
     public static function with(
-        ?GlobalIP $globalIP = null,
-        ?GlobalIPAssignment $globalIPAssignment = null,
-        ?Health $health = null,
+        GlobalIP|array|null $globalIP = null,
+        GlobalIPAssignment|array|null $globalIPAssignment = null,
+        Health|array|null $health = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIP && $obj->globalIP = $globalIP;
-        null !== $globalIPAssignment && $obj->globalIPAssignment = $globalIPAssignment;
-        null !== $health && $obj->health = $health;
-        null !== $timestamp && $obj->timestamp = $timestamp;
+        null !== $globalIP && $self['globalIP'] = $globalIP;
+        null !== $globalIPAssignment && $self['globalIPAssignment'] = $globalIPAssignment;
+        null !== $health && $self['health'] = $health;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
-    public function withGlobalIP(GlobalIP $globalIP): self
+    /**
+     * @param GlobalIP|GlobalIPShape $globalIP
+     */
+    public function withGlobalIP(GlobalIP|array $globalIP): self
     {
-        $obj = clone $this;
-        $obj->globalIP = $globalIP;
+        $self = clone $this;
+        $self['globalIP'] = $globalIP;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param GlobalIPAssignment|GlobalIPAssignmentShape $globalIPAssignment
+     */
     public function withGlobalIPAssignment(
-        GlobalIPAssignment $globalIPAssignment
+        GlobalIPAssignment|array $globalIPAssignment
     ): self {
-        $obj = clone $this;
-        $obj->globalIPAssignment = $globalIPAssignment;
+        $self = clone $this;
+        $self['globalIPAssignment'] = $globalIPAssignment;
 
-        return $obj;
+        return $self;
     }
 
-    public function withHealth(Health $health): self
+    /**
+     * @param Health|HealthShape $health
+     */
+    public function withHealth(Health|array $health): self
     {
-        $obj = clone $this;
-        $obj->health = $health;
+        $self = clone $this;
+        $self['health'] = $health;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +112,9 @@ final class Data implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

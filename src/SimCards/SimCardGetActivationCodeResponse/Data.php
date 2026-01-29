@@ -4,25 +4,27 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCardGetActivationCodeResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{activationCode?: string, recordType?: string}
+ * @phpstan-type DataShape = array{
+ *   activationCode?: string|null, recordType?: string|null
+ * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Contents of the eSIM activation QR code.
      */
-    #[Api('activation_code', optional: true)]
+    #[Optional('activation_code')]
     public ?string $activationCode;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -39,12 +41,12 @@ final class Data implements BaseModel
         ?string $activationCode = null,
         ?string $recordType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $activationCode && $obj->activationCode = $activationCode;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $activationCode && $self['activationCode'] = $activationCode;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,17 +54,17 @@ final class Data implements BaseModel
      */
     public function withActivationCode(string $activationCode): self
     {
-        $obj = clone $this;
-        $obj->activationCode = $activationCode;
+        $self = clone $this;
+        $self['activationCode'] = $activationCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

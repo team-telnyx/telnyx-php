@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
@@ -12,28 +12,28 @@ use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters\StatusIn;
 /**
  * The filters to apply to the export porting order CSV report.
  *
- * @phpstan-type filters_alias = array{
- *   createdAtGt?: \DateTimeInterface,
- *   createdAtLt?: \DateTimeInterface,
- *   customerReferenceIn?: list<string>,
- *   statusIn?: list<value-of<StatusIn>>,
+ * @phpstan-type FiltersShape = array{
+ *   createdAtGt?: \DateTimeInterface|null,
+ *   createdAtLt?: \DateTimeInterface|null,
+ *   customerReferenceIn?: list<string>|null,
+ *   statusIn?: list<StatusIn|value-of<StatusIn>>|null,
  * }
  */
 final class Filters implements BaseModel
 {
-    /** @use SdkModel<filters_alias> */
+    /** @use SdkModel<FiltersShape> */
     use SdkModel;
 
     /**
      * The date and time the porting order was created after.
      */
-    #[Api('created_at__gt', optional: true)]
+    #[Optional('created_at__gt')]
     public ?\DateTimeInterface $createdAtGt;
 
     /**
      * The date and time the porting order was created before.
      */
-    #[Api('created_at__lt', optional: true)]
+    #[Optional('created_at__lt')]
     public ?\DateTimeInterface $createdAtLt;
 
     /**
@@ -41,7 +41,7 @@ final class Filters implements BaseModel
      *
      * @var list<string>|null $customerReferenceIn
      */
-    #[Api('customer_reference__in', list: 'string', optional: true)]
+    #[Optional('customer_reference__in', list: 'string')]
     public ?array $customerReferenceIn;
 
     /**
@@ -49,7 +49,7 @@ final class Filters implements BaseModel
      *
      * @var list<value-of<StatusIn>>|null $statusIn
      */
-    #[Api('status__in', list: StatusIn::class, optional: true)]
+    #[Optional('status__in', list: StatusIn::class)]
     public ?array $statusIn;
 
     public function __construct()
@@ -62,8 +62,8 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $customerReferenceIn
-     * @param list<StatusIn|value-of<StatusIn>> $statusIn
+     * @param list<string>|null $customerReferenceIn
+     * @param list<StatusIn|value-of<StatusIn>>|null $statusIn
      */
     public static function with(
         ?\DateTimeInterface $createdAtGt = null,
@@ -71,14 +71,14 @@ final class Filters implements BaseModel
         ?array $customerReferenceIn = null,
         ?array $statusIn = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAtGt && $obj->createdAtGt = $createdAtGt;
-        null !== $createdAtLt && $obj->createdAtLt = $createdAtLt;
-        null !== $customerReferenceIn && $obj->customerReferenceIn = $customerReferenceIn;
-        null !== $statusIn && $obj['statusIn'] = $statusIn;
+        null !== $createdAtGt && $self['createdAtGt'] = $createdAtGt;
+        null !== $createdAtLt && $self['createdAtLt'] = $createdAtLt;
+        null !== $customerReferenceIn && $self['customerReferenceIn'] = $customerReferenceIn;
+        null !== $statusIn && $self['statusIn'] = $statusIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +86,10 @@ final class Filters implements BaseModel
      */
     public function withCreatedAtGt(\DateTimeInterface $createdAtGt): self
     {
-        $obj = clone $this;
-        $obj->createdAtGt = $createdAtGt;
+        $self = clone $this;
+        $self['createdAtGt'] = $createdAtGt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class Filters implements BaseModel
      */
     public function withCreatedAtLt(\DateTimeInterface $createdAtLt): self
     {
-        $obj = clone $this;
-        $obj->createdAtLt = $createdAtLt;
+        $self = clone $this;
+        $self['createdAtLt'] = $createdAtLt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +110,10 @@ final class Filters implements BaseModel
      */
     public function withCustomerReferenceIn(array $customerReferenceIn): self
     {
-        $obj = clone $this;
-        $obj->customerReferenceIn = $customerReferenceIn;
+        $self = clone $this;
+        $self['customerReferenceIn'] = $customerReferenceIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,9 +123,9 @@ final class Filters implements BaseModel
      */
     public function withStatusIn(array $statusIn): self
     {
-        $obj = clone $this;
-        $obj['statusIn'] = $statusIn;
+        $self = clone $this;
+        $self['statusIn'] = $statusIn;
 
-        return $obj;
+        return $self;
     }
 }

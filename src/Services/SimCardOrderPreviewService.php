@@ -6,17 +6,28 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrderPreviewContract;
-use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewParams;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SimCardOrderPreviewService implements SimCardOrderPreviewContract
 {
     /**
+     * @api
+     */
+    public SimCardOrderPreviewRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SimCardOrderPreviewRawService($client);
+    }
 
     /**
      * @api
@@ -25,42 +36,22 @@ final class SimCardOrderPreviewService implements SimCardOrderPreviewContract
      *
      * @param string $addressID uniquely identifies the address for the order
      * @param int $quantity the amount of SIM cards that the user would like to purchase in the SIM card order
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function preview(
-        $addressID,
-        $quantity,
-        ?RequestOptions $requestOptions = null
+        string $addressID,
+        int $quantity,
+        RequestOptions|array|null $requestOptions = null,
     ): SimCardOrderPreviewPreviewResponse {
-        $params = ['addressID' => $addressID, 'quantity' => $quantity];
-
-        return $this->previewRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function previewRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardOrderPreviewPreviewResponse {
-        [$parsed, $options] = SimCardOrderPreviewPreviewParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['addressID' => $addressID, 'quantity' => $quantity]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'sim_card_order_preview',
-            body: (object) $parsed,
-            options: $options,
-            convert: SimCardOrderPreviewPreviewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->preview(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

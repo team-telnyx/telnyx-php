@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,43 +16,47 @@ use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
 /**
  * Creates a new Verify profile to associate verifications with.
  *
- * @see Telnyx\VerifyProfiles->create
+ * @see Telnyx\Services\VerifyProfilesService::create()
  *
- * @phpstan-type verify_profile_create_params = array{
+ * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call
+ * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall
+ * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS
+ *
+ * @phpstan-type VerifyProfileCreateParamsShape = array{
  *   name: string,
- *   call?: Call,
- *   flashcall?: Flashcall,
- *   language?: string,
- *   sms?: SMS,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   call?: null|Call|CallShape,
+ *   flashcall?: null|Flashcall|FlashcallShape,
+ *   language?: string|null,
+ *   sms?: null|SMS|SMSShape,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class VerifyProfileCreateParams implements BaseModel
 {
-    /** @use SdkModel<verify_profile_create_params> */
+    /** @use SdkModel<VerifyProfileCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Call $call;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Flashcall $flashcall;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?SMS $sms;
 
-    #[Api('webhook_failover_url', optional: true)]
+    #[Optional('webhook_failover_url')]
     public ?string $webhookFailoverURL;
 
-    #[Api('webhook_url', optional: true)]
+    #[Optional('webhook_url')]
     public ?string $webhookURL;
 
     /**
@@ -77,83 +82,96 @@ final class VerifyProfileCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Call|CallShape|null $call
+     * @param Flashcall|FlashcallShape|null $flashcall
+     * @param SMS|SMSShape|null $sms
      */
     public static function with(
         string $name,
-        ?Call $call = null,
-        ?Flashcall $flashcall = null,
+        Call|array|null $call = null,
+        Flashcall|array|null $flashcall = null,
         ?string $language = null,
-        ?SMS $sms = null,
+        SMS|array|null $sms = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->name = $name;
+        $self['name'] = $name;
 
-        null !== $call && $obj->call = $call;
-        null !== $flashcall && $obj->flashcall = $flashcall;
-        null !== $language && $obj->language = $language;
-        null !== $sms && $obj->sms = $sms;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $call && $self['call'] = $call;
+        null !== $flashcall && $self['flashcall'] = $flashcall;
+        null !== $language && $self['language'] = $language;
+        null !== $sms && $self['sms'] = $sms;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
-    public function withCall(Call $call): self
+    /**
+     * @param Call|CallShape $call
+     */
+    public function withCall(Call|array $call): self
     {
-        $obj = clone $this;
-        $obj->call = $call;
+        $self = clone $this;
+        $self['call'] = $call;
 
-        return $obj;
+        return $self;
     }
 
-    public function withFlashcall(Flashcall $flashcall): self
+    /**
+     * @param Flashcall|FlashcallShape $flashcall
+     */
+    public function withFlashcall(Flashcall|array $flashcall): self
     {
-        $obj = clone $this;
-        $obj->flashcall = $flashcall;
+        $self = clone $this;
+        $self['flashcall'] = $flashcall;
 
-        return $obj;
+        return $self;
     }
 
     public function withLanguage(string $language): self
     {
-        $obj = clone $this;
-        $obj->language = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
-    public function withSMS(SMS $sms): self
+    /**
+     * @param SMS|SMSShape $sms
+     */
+    public function withSMS(SMS|array $sms): self
     {
-        $obj = clone $this;
-        $obj->sms = $sms;
+        $self = clone $this;
+        $self['sms'] = $sms;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

@@ -17,18 +17,22 @@ use Telnyx\OAuth\OAuthTokenParams\GrantType;
 use Telnyx\OAuth\OAuthTokenResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface OAuthContract
 {
     /**
      * @api
      *
+     * @param string $consentToken OAuth consent token
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $consentToken,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OAuthGetResponse;
 
     /**
@@ -36,49 +40,27 @@ interface OAuthContract
      *
      * @param bool $allowed Whether the grant is allowed
      * @param string $consentToken Consent token
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function grants(
-        $allowed,
-        $consentToken,
-        ?RequestOptions $requestOptions = null
-    ): OAuthGrantsResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function grantsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        bool $allowed,
+        string $consentToken,
+        RequestOptions|array|null $requestOptions = null,
     ): OAuthGrantsResponse;
 
     /**
      * @api
      *
      * @param string $token The token to introspect
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function introspect(
-        $token,
-        ?RequestOptions $requestOptions = null
-    ): OAuthIntrospectResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function introspectRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $token,
+        RequestOptions|array|null $requestOptions = null
     ): OAuthIntrospectResponse;
 
     /**
@@ -93,32 +75,21 @@ interface OAuthContract
      * @param string $scope Space-separated string of scope values that the client may use
      * @param TokenEndpointAuthMethod|value-of<TokenEndpointAuthMethod> $tokenEndpointAuthMethod Authentication method for the token endpoint
      * @param string $tosUri URL of the client's terms of service
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function register(
-        $clientName = omit,
-        $grantTypes = omit,
-        $logoUri = omit,
-        $policyUri = omit,
-        $redirectUris = omit,
-        $responseTypes = omit,
-        $scope = omit,
-        $tokenEndpointAuthMethod = omit,
-        $tosUri = omit,
-        ?RequestOptions $requestOptions = null,
-    ): OAuthRegisterResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function registerRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        ?string $clientName = null,
+        array $grantTypes = ['authorization_code'],
+        ?string $logoUri = null,
+        ?string $policyUri = null,
+        ?array $redirectUris = null,
+        array $responseTypes = ['code'],
+        ?string $scope = null,
+        TokenEndpointAuthMethod|string $tokenEndpointAuthMethod = 'client_secret_basic',
+        ?string $tosUri = null,
+        RequestOptions|array|null $requestOptions = null,
     ): OAuthRegisterResponse;
 
     /**
@@ -131,39 +102,30 @@ interface OAuthContract
      * @param CodeChallengeMethod|value-of<CodeChallengeMethod> $codeChallengeMethod PKCE code challenge method
      * @param string $scope Space-separated list of requested scopes
      * @param string $state State parameter for CSRF protection
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveAuthorize(
-        $clientID,
-        $redirectUri,
-        $responseType,
-        $codeChallenge = omit,
-        $codeChallengeMethod = omit,
-        $scope = omit,
-        $state = omit,
-        ?RequestOptions $requestOptions = null,
+        string $clientID,
+        string $redirectUri,
+        ResponseType|string $responseType,
+        ?string $codeChallenge = null,
+        CodeChallengeMethod|string|null $codeChallengeMethod = null,
+        ?string $scope = null,
+        ?string $state = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveAuthorizeRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveJwks(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OAuthGetJwksResponse;
 
     /**
@@ -177,30 +139,19 @@ interface OAuthContract
      * @param string $redirectUri Redirect URI (for authorization_code flow)
      * @param string $refreshToken Refresh token (for refresh_token flow)
      * @param string $scope Space-separated list of requested scopes (for client_credentials)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function token(
-        $grantType,
-        $clientID = omit,
-        $clientSecret = omit,
-        $code = omit,
-        $codeVerifier = omit,
-        $redirectUri = omit,
-        $refreshToken = omit,
-        $scope = omit,
-        ?RequestOptions $requestOptions = null,
-    ): OAuthTokenResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function tokenRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        GrantType|string $grantType,
+        ?string $clientID = null,
+        ?string $clientSecret = null,
+        ?string $code = null,
+        ?string $codeVerifier = null,
+        ?string $redirectUri = null,
+        ?string $refreshToken = null,
+        ?string $scope = null,
+        RequestOptions|array|null $requestOptions = null,
     ): OAuthTokenResponse;
 }

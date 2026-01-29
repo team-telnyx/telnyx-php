@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type address_delete_response = array{data?: Address}
+ * @phpstan-import-type AddressShape from \Telnyx\Addresses\Address
+ *
+ * @phpstan-type AddressDeleteResponseShape = array{
+ *   data?: null|Address|AddressShape
+ * }
  */
-final class AddressDeleteResponse implements BaseModel, ResponseConverter
+final class AddressDeleteResponse implements BaseModel
 {
-    /** @use SdkModel<address_delete_response> */
+    /** @use SdkModel<AddressDeleteResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Address $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class AddressDeleteResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Address|AddressShape|null $data
      */
-    public static function with(?Address $data = null): self
+    public static function with(Address|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Address $data): self
+    /**
+     * @param Address|AddressShape $data
+     */
+    public function withData(Address|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

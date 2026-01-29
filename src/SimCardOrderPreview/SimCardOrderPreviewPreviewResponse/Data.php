@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\ShippingCost;
@@ -12,38 +12,42 @@ use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\SimCardsC
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\TotalCost;
 
 /**
- * @phpstan-type data_alias = array{
- *   quantity?: int,
- *   recordType?: string,
- *   shippingCost?: ShippingCost,
- *   simCardsCost?: SimCardsCost,
- *   totalCost?: TotalCost,
+ * @phpstan-import-type ShippingCostShape from \Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\ShippingCost
+ * @phpstan-import-type SimCardsCostShape from \Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\SimCardsCost
+ * @phpstan-import-type TotalCostShape from \Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data\TotalCost
+ *
+ * @phpstan-type DataShape = array{
+ *   quantity?: int|null,
+ *   recordType?: string|null,
+ *   shippingCost?: null|ShippingCost|ShippingCostShape,
+ *   simCardsCost?: null|SimCardsCost|SimCardsCostShape,
+ *   totalCost?: null|TotalCost|TotalCostShape,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The amount of SIM cards requested in the SIM card order.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $quantity;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
-    #[Api('shipping_cost', optional: true)]
+    #[Optional('shipping_cost')]
     public ?ShippingCost $shippingCost;
 
-    #[Api('sim_cards_cost', optional: true)]
+    #[Optional('sim_cards_cost')]
     public ?SimCardsCost $simCardsCost;
 
-    #[Api('total_cost', optional: true)]
+    #[Optional('total_cost')]
     public ?TotalCost $totalCost;
 
     public function __construct()
@@ -55,23 +59,27 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ShippingCost|ShippingCostShape|null $shippingCost
+     * @param SimCardsCost|SimCardsCostShape|null $simCardsCost
+     * @param TotalCost|TotalCostShape|null $totalCost
      */
     public static function with(
         ?int $quantity = null,
         ?string $recordType = null,
-        ?ShippingCost $shippingCost = null,
-        ?SimCardsCost $simCardsCost = null,
-        ?TotalCost $totalCost = null,
+        ShippingCost|array|null $shippingCost = null,
+        SimCardsCost|array|null $simCardsCost = null,
+        TotalCost|array|null $totalCost = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $quantity && $obj->quantity = $quantity;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $shippingCost && $obj->shippingCost = $shippingCost;
-        null !== $simCardsCost && $obj->simCardsCost = $simCardsCost;
-        null !== $totalCost && $obj->totalCost = $totalCost;
+        null !== $quantity && $self['quantity'] = $quantity;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $shippingCost && $self['shippingCost'] = $shippingCost;
+        null !== $simCardsCost && $self['simCardsCost'] = $simCardsCost;
+        null !== $totalCost && $self['totalCost'] = $totalCost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +87,10 @@ final class Data implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj->quantity = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,33 +98,42 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
-    public function withShippingCost(ShippingCost $shippingCost): self
+    /**
+     * @param ShippingCost|ShippingCostShape $shippingCost
+     */
+    public function withShippingCost(ShippingCost|array $shippingCost): self
     {
-        $obj = clone $this;
-        $obj->shippingCost = $shippingCost;
+        $self = clone $this;
+        $self['shippingCost'] = $shippingCost;
 
-        return $obj;
+        return $self;
     }
 
-    public function withSimCardsCost(SimCardsCost $simCardsCost): self
+    /**
+     * @param SimCardsCost|SimCardsCostShape $simCardsCost
+     */
+    public function withSimCardsCost(SimCardsCost|array $simCardsCost): self
     {
-        $obj = clone $this;
-        $obj->simCardsCost = $simCardsCost;
+        $self = clone $this;
+        $self['simCardsCost'] = $simCardsCost;
 
-        return $obj;
+        return $self;
     }
 
-    public function withTotalCost(TotalCost $totalCost): self
+    /**
+     * @param TotalCost|TotalCostShape $totalCost
+     */
+    public function withTotalCost(TotalCost|array $totalCost): self
     {
-        $obj = clone $this;
-        $obj->totalCost = $totalCost;
+        $self = clone $this;
+        $self['totalCost'] = $totalCost;
 
-        return $obj;
+        return $self;
     }
 }

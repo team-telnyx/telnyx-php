@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\Actions\SimCardGroupAction;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * A JSON object representation of the action params.
  *
- * @phpstan-type settings_alias = array{privateWirelessGatewayID?: string}
+ * @phpstan-type SettingsShape = array{privateWirelessGatewayID?: string|null}
  */
 final class Settings implements BaseModel
 {
-    /** @use SdkModel<settings_alias> */
+    /** @use SdkModel<SettingsShape> */
     use SdkModel;
 
     /**
      * The identification of the related Private Wireless Gateway resource.
      */
-    #[Api('private_wireless_gateway_id', optional: true)]
+    #[Optional('private_wireless_gateway_id')]
     public ?string $privateWirelessGatewayID;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Settings implements BaseModel
      */
     public static function with(?string $privateWirelessGatewayID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $privateWirelessGatewayID && $obj->privateWirelessGatewayID = $privateWirelessGatewayID;
+        null !== $privateWirelessGatewayID && $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -49,9 +49,9 @@ final class Settings implements BaseModel
     public function withPrivateWirelessGatewayID(
         string $privateWirelessGatewayID
     ): self {
-        $obj = clone $this;
-        $obj->privateWirelessGatewayID = $privateWirelessGatewayID;
+        $self = clone $this;
+        $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 }

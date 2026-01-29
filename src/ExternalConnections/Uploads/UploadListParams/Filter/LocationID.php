@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads\UploadListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type location_id = array{eq?: string}
+ * @phpstan-type LocationIDShape = array{eq?: string|null}
  */
 final class LocationID implements BaseModel
 {
-    /** @use SdkModel<location_id> */
+    /** @use SdkModel<LocationIDShape> */
     use SdkModel;
 
     /**
      * The location ID to filter by.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class LocationID implements BaseModel
      */
     public static function with(?string $eq = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj->eq = $eq;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class LocationID implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj->eq = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

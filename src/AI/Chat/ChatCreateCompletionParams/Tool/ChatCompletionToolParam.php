@@ -4,41 +4,42 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Function1;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\FunctionDefinition;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type chat_completion_tool_param = array{
- *   function1: Function1, type: value-of<Type>
+ * @phpstan-import-type FunctionDefinitionShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\ChatCompletionToolParam\FunctionDefinition
+ *
+ * @phpstan-type ChatCompletionToolParamShape = array{
+ *   function: FunctionDefinition|FunctionDefinitionShape, type: 'function'
  * }
  */
 final class ChatCompletionToolParam implements BaseModel
 {
-    /** @use SdkModel<chat_completion_tool_param> */
+    /** @use SdkModel<ChatCompletionToolParamShape> */
     use SdkModel;
 
-    #[Api]
-    public Function1 $function1;
+    /** @var 'function' $type */
+    #[Required]
+    public string $type = 'function';
 
-    /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
-    public string $type;
+    #[Required]
+    public FunctionDefinition $function;
 
     /**
      * `new ChatCompletionToolParam()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ChatCompletionToolParam::with(function1: ..., type: ...)
+     * ChatCompletionToolParam::with(function: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ChatCompletionToolParam)->withFunction(...)->withType(...)
+     * (new ChatCompletionToolParam)->withFunction(...)
      * ```
      */
     public function __construct()
@@ -51,34 +52,25 @@ final class ChatCompletionToolParam implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param FunctionDefinition|FunctionDefinitionShape $function
      */
-    public static function with(Function1 $function1, Type|string $type): self
+    public static function with(FunctionDefinition|array $function): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->function1 = $function1;
-        $obj['type'] = $type;
+        $self['function'] = $function;
 
-        return $obj;
-    }
-
-    public function withFunction(Function1 $function1): self
-    {
-        $obj = clone $this;
-        $obj->function1 = $function1;
-
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param Type|value-of<Type> $type
+     * @param FunctionDefinition|FunctionDefinitionShape $function
      */
-    public function withType(Type|string $type): self
+    public function withFunction(FunctionDefinition|array $function): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['function'] = $function;
 
-        return $obj;
+        return $self;
     }
 }

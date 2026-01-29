@@ -14,12 +14,14 @@ use Telnyx\Calls\CallDialParams\RecordChannels;
 use Telnyx\Calls\CallDialParams\RecordFormat;
 use Telnyx\Calls\CallDialParams\RecordTrack;
 use Telnyx\Calls\CallDialParams\RecordTrim;
+use Telnyx\Calls\CallDialParams\SipRegion;
 use Telnyx\Calls\CallDialParams\SipTransportProtocol;
 use Telnyx\Calls\CallDialParams\StreamTrack;
 use Telnyx\Calls\CallDialParams\SupervisorRole;
 use Telnyx\Calls\CallDialParams\To;
 use Telnyx\Calls\CallDialParams\WebhookURLMethod;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -39,86 +41,97 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
  *
- * @see Telnyx\Calls->dial
+ * @see Telnyx\Services\CallsService::dial()
  *
- * @phpstan-type call_dial_params = array{
+ * @phpstan-import-type ToVariants from \Telnyx\Calls\CallDialParams\To
+ * @phpstan-import-type ToShape from \Telnyx\Calls\CallDialParams\To
+ * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig
+ * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
+ * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ *
+ * @phpstan-type CallDialParamsShape = array{
  *   connectionID: string,
  *   from: string,
- *   to: string|list<string>,
- *   answeringMachineDetection?: AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
- *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfig,
- *   audioURL?: string,
- *   billingGroupID?: string,
- *   bridgeIntent?: bool,
- *   bridgeOnAnswer?: bool,
- *   clientState?: string,
- *   commandID?: string,
- *   conferenceConfig?: ConferenceConfig,
- *   customHeaders?: list<CustomSipHeader>,
- *   dialogflowConfig?: DialogflowConfig,
- *   enableDialogflow?: bool,
- *   fromDisplayName?: string,
- *   linkTo?: string,
- *   mediaEncryption?: MediaEncryption|value-of<MediaEncryption>,
- *   mediaName?: string,
- *   parkAfterUnbridge?: string,
- *   preferredCodecs?: string,
- *   record?: Record|value-of<Record>,
- *   recordChannels?: RecordChannels|value-of<RecordChannels>,
- *   recordCustomFileName?: string,
- *   recordFormat?: RecordFormat|value-of<RecordFormat>,
- *   recordMaxLength?: int,
- *   recordTimeoutSecs?: int,
- *   recordTrack?: RecordTrack|value-of<RecordTrack>,
- *   recordTrim?: RecordTrim|value-of<RecordTrim>,
- *   sendSilenceWhenIdle?: bool,
- *   sipAuthPassword?: string,
- *   sipAuthUsername?: string,
- *   sipHeaders?: list<SipHeader>,
- *   sipTransportProtocol?: SipTransportProtocol|value-of<SipTransportProtocol>,
- *   soundModifications?: SoundModifications,
- *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
- *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
- *   streamBidirectionalSamplingRate?: 8000|16000|22050|24000|48000,
- *   streamBidirectionalTargetLegs?: StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
- *   streamCodec?: StreamCodec|value-of<StreamCodec>,
- *   streamEstablishBeforeCallOriginate?: bool,
- *   streamTrack?: StreamTrack|value-of<StreamTrack>,
- *   streamURL?: string,
- *   superviseCallControlID?: string,
- *   supervisorRole?: SupervisorRole|value-of<SupervisorRole>,
- *   timeLimitSecs?: int,
- *   timeoutSecs?: int,
- *   transcription?: bool,
- *   transcriptionConfig?: TranscriptionStartRequest,
- *   webhookURL?: string,
- *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
+ *   to: ToShape,
+ *   answeringMachineDetection?: null|AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
+ *   answeringMachineDetectionConfig?: null|AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape,
+ *   audioURL?: string|null,
+ *   billingGroupID?: string|null,
+ *   bridgeIntent?: bool|null,
+ *   bridgeOnAnswer?: bool|null,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   conferenceConfig?: null|ConferenceConfig|ConferenceConfigShape,
+ *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
+ *   dialogflowConfig?: null|DialogflowConfig|DialogflowConfigShape,
+ *   enableDialogflow?: bool|null,
+ *   fromDisplayName?: string|null,
+ *   linkTo?: string|null,
+ *   mediaEncryption?: null|MediaEncryption|value-of<MediaEncryption>,
+ *   mediaName?: string|null,
+ *   parkAfterUnbridge?: string|null,
+ *   preferredCodecs?: string|null,
+ *   record?: null|Record|value-of<Record>,
+ *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
+ *   recordCustomFileName?: string|null,
+ *   recordFormat?: null|RecordFormat|value-of<RecordFormat>,
+ *   recordMaxLength?: int|null,
+ *   recordTimeoutSecs?: int|null,
+ *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
+ *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
+ *   sendSilenceWhenIdle?: bool|null,
+ *   sipAuthPassword?: string|null,
+ *   sipAuthUsername?: string|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
+ *   sipRegion?: null|SipRegion|value-of<SipRegion>,
+ *   sipTransportProtocol?: null|SipTransportProtocol|value-of<SipTransportProtocol>,
+ *   soundModifications?: null|SoundModifications|SoundModificationsShape,
+ *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
+ *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
+ *   streamBidirectionalSamplingRate?: null|StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
+ *   streamBidirectionalTargetLegs?: null|StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>,
+ *   streamCodec?: null|StreamCodec|value-of<StreamCodec>,
+ *   streamEstablishBeforeCallOriginate?: bool|null,
+ *   streamTrack?: null|StreamTrack|value-of<StreamTrack>,
+ *   streamURL?: string|null,
+ *   superviseCallControlID?: string|null,
+ *   supervisorRole?: null|SupervisorRole|value-of<SupervisorRole>,
+ *   timeLimitSecs?: int|null,
+ *   timeoutSecs?: int|null,
+ *   transcription?: bool|null,
+ *   transcriptionConfig?: null|TranscriptionStartRequest|TranscriptionStartRequestShape,
+ *   webhookURL?: string|null,
+ *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
  * }
  */
 final class CallDialParams implements BaseModel
 {
-    /** @use SdkModel<call_dial_params> */
+    /** @use SdkModel<CallDialParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The ID of the Call Control App (formerly ID of the connection) to be used when dialing the destination.
      */
-    #[Api('connection_id')]
+    #[Required('connection_id')]
     public string $connectionID;
 
     /**
      * The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format.
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
      * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings.
      *
-     * @var string|list<string> $to
+     * @var ToVariants $to
      */
-    #[Api(union: To::class)]
+    #[Required(union: To::class)]
     public string|array $to;
 
     /**
@@ -126,59 +139,58 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<AnsweringMachineDetection>|null $answeringMachineDetection
      */
-    #[Api(
+    #[Optional(
         'answering_machine_detection',
-        enum: AnsweringMachineDetection::class,
-        optional: true,
+        enum: AnsweringMachineDetection::class
     )]
     public ?string $answeringMachineDetection;
 
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
      */
-    #[Api('answering_machine_detection_config', optional: true)]
+    #[Optional('answering_machine_detection_config')]
     public ?AnsweringMachineDetectionConfig $answeringMachineDetectionConfig;
 
     /**
      * The URL of a file to be played back to the callee when the call is answered. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      */
-    #[Api('audio_url', optional: true)]
+    #[Optional('audio_url')]
     public ?string $audioURL;
 
     /**
      * Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      */
-    #[Api('billing_group_id', optional: true)]
+    #[Optional('billing_group_id')]
     public ?string $billingGroupID;
 
     /**
      * Indicates the intent to bridge this call with the call specified in link_to. When bridge_intent is true, link_to becomes required and the from number will be overwritten by the from number from the linked call.
      */
-    #[Api('bridge_intent', optional: true)]
+    #[Optional('bridge_intent')]
     public ?bool $bridgeIntent;
 
     /**
      * Whether to automatically bridge answered call to the call specified in link_to. When bridge_on_answer is true, link_to becomes required.
      */
-    #[Api('bridge_on_answer', optional: true)]
+    #[Optional('bridge_on_answer')]
     public ?bool $bridgeOnAnswer;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore others Dial commands with the same `command_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
      * Optional configuration parameters to dial new participant into a conference.
      */
-    #[Api('conference_config', optional: true)]
+    #[Optional('conference_config')]
     public ?ConferenceConfig $conferenceConfig;
 
     /**
@@ -186,28 +198,28 @@ final class CallDialParams implements BaseModel
      *
      * @var list<CustomSipHeader>|null $customHeaders
      */
-    #[Api('custom_headers', list: CustomSipHeader::class, optional: true)]
+    #[Optional('custom_headers', list: CustomSipHeader::class)]
     public ?array $customHeaders;
 
-    #[Api('dialogflow_config', optional: true)]
+    #[Optional('dialogflow_config')]
     public ?DialogflowConfig $dialogflowConfig;
 
     /**
      * Enables Dialogflow for the current call. The default value is false.
      */
-    #[Api('enable_dialogflow', optional: true)]
+    #[Optional('enable_dialogflow')]
     public ?bool $enableDialogflow;
 
     /**
      * The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      */
-    #[Api('from_display_name', optional: true)]
+    #[Optional('from_display_name')]
     public ?string $fromDisplayName;
 
     /**
      * Use another call's control id for sharing the same call session id.
      */
-    #[Api('link_to', optional: true)]
+    #[Optional('link_to')]
     public ?string $linkTo;
 
     /**
@@ -215,25 +227,25 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<MediaEncryption>|null $mediaEncryption
      */
-    #[Api('media_encryption', enum: MediaEncryption::class, optional: true)]
+    #[Optional('media_encryption', enum: MediaEncryption::class)]
     public ?string $mediaEncryption;
 
     /**
      * The media_name of a file to be played back to the callee when the call is answered. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      */
-    #[Api('media_name', optional: true)]
+    #[Optional('media_name')]
     public ?string $mediaName;
 
     /**
      * If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg. When park_after_unbridge is set, link_to becomes required.
      */
-    #[Api('park_after_unbridge', optional: true)]
+    #[Optional('park_after_unbridge')]
     public ?string $parkAfterUnbridge;
 
     /**
      * The list of comma-separated codecs in a preferred order for the forked media to be received.
      */
-    #[Api('preferred_codecs', optional: true)]
+    #[Optional('preferred_codecs')]
     public ?string $preferredCodecs;
 
     /**
@@ -241,7 +253,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<Record>|null $record
      */
-    #[Api(enum: Record::class, optional: true)]
+    #[Optional(enum: Record::class)]
     public ?string $record;
 
     /**
@@ -249,13 +261,13 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<RecordChannels>|null $recordChannels
      */
-    #[Api('record_channels', enum: RecordChannels::class, optional: true)]
+    #[Optional('record_channels', enum: RecordChannels::class)]
     public ?string $recordChannels;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api('record_custom_file_name', optional: true)]
+    #[Optional('record_custom_file_name')]
     public ?string $recordCustomFileName;
 
     /**
@@ -263,19 +275,19 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<RecordFormat>|null $recordFormat
      */
-    #[Api('record_format', enum: RecordFormat::class, optional: true)]
+    #[Optional('record_format', enum: RecordFormat::class)]
     public ?string $recordFormat;
 
     /**
      * Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      */
-    #[Api('record_max_length', optional: true)]
+    #[Optional('record_max_length')]
     public ?int $recordMaxLength;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api('record_timeout_secs', optional: true)]
+    #[Optional('record_timeout_secs')]
     public ?int $recordTimeoutSecs;
 
     /**
@@ -283,7 +295,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<RecordTrack>|null $recordTrack
      */
-    #[Api('record_track', enum: RecordTrack::class, optional: true)]
+    #[Optional('record_track', enum: RecordTrack::class)]
     public ?string $recordTrack;
 
     /**
@@ -291,25 +303,25 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<RecordTrim>|null $recordTrim
      */
-    #[Api('record_trim', enum: RecordTrim::class, optional: true)]
+    #[Optional('record_trim', enum: RecordTrim::class)]
     public ?string $recordTrim;
 
     /**
      * Generate silence RTP packets when no transmission available.
      */
-    #[Api('send_silence_when_idle', optional: true)]
+    #[Optional('send_silence_when_idle')]
     public ?bool $sendSilenceWhenIdle;
 
     /**
      * SIP Authentication password used for SIP challenges.
      */
-    #[Api('sip_auth_password', optional: true)]
+    #[Optional('sip_auth_password')]
     public ?string $sipAuthPassword;
 
     /**
      * SIP Authentication username used for SIP challenges.
      */
-    #[Api('sip_auth_username', optional: true)]
+    #[Optional('sip_auth_username')]
     public ?string $sipAuthUsername;
 
     /**
@@ -317,25 +329,29 @@ final class CallDialParams implements BaseModel
      *
      * @var list<SipHeader>|null $sipHeaders
      */
-    #[Api('sip_headers', list: SipHeader::class, optional: true)]
+    #[Optional('sip_headers', list: SipHeader::class)]
     public ?array $sipHeaders;
+
+    /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @var value-of<SipRegion>|null $sipRegion
+     */
+    #[Optional('sip_region', enum: SipRegion::class)]
+    public ?string $sipRegion;
 
     /**
      * Defines SIP transport protocol to be used on the call.
      *
      * @var value-of<SipTransportProtocol>|null $sipTransportProtocol
      */
-    #[Api(
-        'sip_transport_protocol',
-        enum: SipTransportProtocol::class,
-        optional: true
-    )]
+    #[Optional('sip_transport_protocol', enum: SipTransportProtocol::class)]
     public ?string $sipTransportProtocol;
 
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
      */
-    #[Api('sound_modifications', optional: true)]
+    #[Optional('sound_modifications')]
     public ?SoundModifications $soundModifications;
 
     /**
@@ -343,10 +359,9 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
      */
-    #[Api(
+    #[Optional(
         'stream_bidirectional_codec',
-        enum: StreamBidirectionalCodec::class,
-        optional: true,
+        enum: StreamBidirectionalCodec::class
     )]
     public ?string $streamBidirectionalCodec;
 
@@ -355,22 +370,17 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
      */
-    #[Api(
-        'stream_bidirectional_mode',
-        enum: StreamBidirectionalMode::class,
-        optional: true,
-    )]
+    #[Optional('stream_bidirectional_mode', enum: StreamBidirectionalMode::class)]
     public ?string $streamBidirectionalMode;
 
     /**
      * Audio sampling rate.
      *
-     * @var 8000|16000|22050|24000|48000|null $streamBidirectionalSamplingRate
+     * @var value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
      */
-    #[Api(
+    #[Optional(
         'stream_bidirectional_sampling_rate',
         enum: StreamBidirectionalSamplingRate::class,
-        optional: true,
     )]
     public ?int $streamBidirectionalSamplingRate;
 
@@ -379,10 +389,9 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamBidirectionalTargetLegs>|null $streamBidirectionalTargetLegs
      */
-    #[Api(
+    #[Optional(
         'stream_bidirectional_target_legs',
         enum: StreamBidirectionalTargetLegs::class,
-        optional: true,
     )]
     public ?string $streamBidirectionalTargetLegs;
 
@@ -391,13 +400,13 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamCodec>|null $streamCodec
      */
-    #[Api('stream_codec', enum: StreamCodec::class, optional: true)]
+    #[Optional('stream_codec', enum: StreamCodec::class)]
     public ?string $streamCodec;
 
     /**
      * Establish websocket connection before dialing the destination. This is useful for cases where the websocket connection takes a long time to establish.
      */
-    #[Api('stream_establish_before_call_originate', optional: true)]
+    #[Optional('stream_establish_before_call_originate')]
     public ?bool $streamEstablishBeforeCallOriginate;
 
     /**
@@ -405,19 +414,19 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<StreamTrack>|null $streamTrack
      */
-    #[Api('stream_track', enum: StreamTrack::class, optional: true)]
+    #[Optional('stream_track', enum: StreamTrack::class)]
     public ?string $streamTrack;
 
     /**
      * The destination WebSocket address where the stream is going to be delivered.
      */
-    #[Api('stream_url', optional: true)]
+    #[Optional('stream_url')]
     public ?string $streamURL;
 
     /**
      * The call leg which will be supervised by the new call.
      */
-    #[Api('supervise_call_control_id', optional: true)]
+    #[Optional('supervise_call_control_id')]
     public ?string $superviseCallControlID;
 
     /**
@@ -425,34 +434,34 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<SupervisorRole>|null $supervisorRole
      */
-    #[Api('supervisor_role', enum: SupervisorRole::class, optional: true)]
+    #[Optional('supervisor_role', enum: SupervisorRole::class)]
     public ?string $supervisorRole;
 
     /**
      * Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
      */
-    #[Api('time_limit_secs', optional: true)]
+    #[Optional('time_limit_secs')]
     public ?int $timeLimitSecs;
 
     /**
      * The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being called. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 600 seconds.
      */
-    #[Api('timeout_secs', optional: true)]
+    #[Optional('timeout_secs')]
     public ?int $timeoutSecs;
 
     /**
      * Enable transcription upon call answer. The default value is false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $transcription;
 
-    #[Api('transcription_config', optional: true)]
+    #[Optional('transcription_config')]
     public ?TranscriptionStartRequest $transcriptionConfig;
 
     /**
      * Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
      */
-    #[Api('webhook_url', optional: true)]
+    #[Optional('webhook_url')]
     public ?string $webhookURL;
 
     /**
@@ -460,7 +469,7 @@ final class CallDialParams implements BaseModel
      *
      * @var value-of<WebhookURLMethod>|null $webhookURLMethod
      */
-    #[Api('webhook_url_method', enum: WebhookURLMethod::class, optional: true)]
+    #[Optional('webhook_url_method', enum: WebhookURLMethod::class)]
     public ?string $webhookURLMethod;
 
     /**
@@ -487,41 +496,47 @@ final class CallDialParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|list<string> $to
-     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection
-     * @param list<CustomSipHeader> $customHeaders
-     * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption
-     * @param Record|value-of<Record> $record
-     * @param RecordChannels|value-of<RecordChannels> $recordChannels
-     * @param RecordFormat|value-of<RecordFormat> $recordFormat
-     * @param RecordTrack|value-of<RecordTrack> $recordTrack
-     * @param RecordTrim|value-of<RecordTrim> $recordTrim
-     * @param list<SipHeader> $sipHeaders
-     * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol
-     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec
-     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode
-     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
-     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs
-     * @param StreamCodec|value-of<StreamCodec> $streamCodec
-     * @param StreamTrack|value-of<StreamTrack> $streamTrack
-     * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
-     * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod
+     * @param ToShape $to
+     * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection>|null $answeringMachineDetection
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape|null $answeringMachineDetectionConfig
+     * @param ConferenceConfig|ConferenceConfigShape|null $conferenceConfig
+     * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
+     * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
+     * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
+     * @param Record|value-of<Record>|null $record
+     * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
+     * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
+     * @param RecordTrack|value-of<RecordTrack>|null $recordTrack
+     * @param RecordTrim|value-of<RecordTrim>|null $recordTrim
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
+     * @param SipRegion|value-of<SipRegion>|null $sipRegion
+     * @param SipTransportProtocol|value-of<SipTransportProtocol>|null $sipTransportProtocol
+     * @param SoundModifications|SoundModificationsShape|null $soundModifications
+     * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
+     * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>|null $streamBidirectionalSamplingRate
+     * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs>|null $streamBidirectionalTargetLegs
+     * @param StreamCodec|value-of<StreamCodec>|null $streamCodec
+     * @param StreamTrack|value-of<StreamTrack>|null $streamTrack
+     * @param SupervisorRole|value-of<SupervisorRole>|null $supervisorRole
+     * @param TranscriptionStartRequest|TranscriptionStartRequestShape|null $transcriptionConfig
+     * @param WebhookURLMethod|value-of<WebhookURLMethod>|null $webhookURLMethod
      */
     public static function with(
         string $connectionID,
         string $from,
         string|array $to,
         AnsweringMachineDetection|string|null $answeringMachineDetection = null,
-        ?AnsweringMachineDetectionConfig $answeringMachineDetectionConfig = null,
+        AnsweringMachineDetectionConfig|array|null $answeringMachineDetectionConfig = null,
         ?string $audioURL = null,
         ?string $billingGroupID = null,
         ?bool $bridgeIntent = null,
         ?bool $bridgeOnAnswer = null,
         ?string $clientState = null,
         ?string $commandID = null,
-        ?ConferenceConfig $conferenceConfig = null,
+        ConferenceConfig|array|null $conferenceConfig = null,
         ?array $customHeaders = null,
-        ?DialogflowConfig $dialogflowConfig = null,
+        DialogflowConfig|array|null $dialogflowConfig = null,
         ?bool $enableDialogflow = null,
         ?string $fromDisplayName = null,
         ?string $linkTo = null,
@@ -541,11 +556,12 @@ final class CallDialParams implements BaseModel
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
         ?array $sipHeaders = null,
+        SipRegion|string|null $sipRegion = null,
         SipTransportProtocol|string|null $sipTransportProtocol = null,
-        ?SoundModifications $soundModifications = null,
+        SoundModifications|array|null $soundModifications = null,
         StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
         StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
-        ?int $streamBidirectionalSamplingRate = null,
+        StreamBidirectionalSamplingRate|int|null $streamBidirectionalSamplingRate = null,
         StreamBidirectionalTargetLegs|string|null $streamBidirectionalTargetLegs = null,
         StreamCodec|string|null $streamCodec = null,
         ?bool $streamEstablishBeforeCallOriginate = null,
@@ -556,66 +572,67 @@ final class CallDialParams implements BaseModel
         ?int $timeLimitSecs = null,
         ?int $timeoutSecs = null,
         ?bool $transcription = null,
-        ?TranscriptionStartRequest $transcriptionConfig = null,
+        TranscriptionStartRequest|array|null $transcriptionConfig = null,
         ?string $webhookURL = null,
         WebhookURLMethod|string|null $webhookURLMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->connectionID = $connectionID;
-        $obj->from = $from;
-        $obj->to = $to;
+        $self['connectionID'] = $connectionID;
+        $self['from'] = $from;
+        $self['to'] = $to;
 
-        null !== $answeringMachineDetection && $obj['answeringMachineDetection'] = $answeringMachineDetection;
-        null !== $answeringMachineDetectionConfig && $obj->answeringMachineDetectionConfig = $answeringMachineDetectionConfig;
-        null !== $audioURL && $obj->audioURL = $audioURL;
-        null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
-        null !== $bridgeIntent && $obj->bridgeIntent = $bridgeIntent;
-        null !== $bridgeOnAnswer && $obj->bridgeOnAnswer = $bridgeOnAnswer;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $conferenceConfig && $obj->conferenceConfig = $conferenceConfig;
-        null !== $customHeaders && $obj->customHeaders = $customHeaders;
-        null !== $dialogflowConfig && $obj->dialogflowConfig = $dialogflowConfig;
-        null !== $enableDialogflow && $obj->enableDialogflow = $enableDialogflow;
-        null !== $fromDisplayName && $obj->fromDisplayName = $fromDisplayName;
-        null !== $linkTo && $obj->linkTo = $linkTo;
-        null !== $mediaEncryption && $obj['mediaEncryption'] = $mediaEncryption;
-        null !== $mediaName && $obj->mediaName = $mediaName;
-        null !== $parkAfterUnbridge && $obj->parkAfterUnbridge = $parkAfterUnbridge;
-        null !== $preferredCodecs && $obj->preferredCodecs = $preferredCodecs;
-        null !== $record && $obj['record'] = $record;
-        null !== $recordChannels && $obj['recordChannels'] = $recordChannels;
-        null !== $recordCustomFileName && $obj->recordCustomFileName = $recordCustomFileName;
-        null !== $recordFormat && $obj['recordFormat'] = $recordFormat;
-        null !== $recordMaxLength && $obj->recordMaxLength = $recordMaxLength;
-        null !== $recordTimeoutSecs && $obj->recordTimeoutSecs = $recordTimeoutSecs;
-        null !== $recordTrack && $obj['recordTrack'] = $recordTrack;
-        null !== $recordTrim && $obj['recordTrim'] = $recordTrim;
-        null !== $sendSilenceWhenIdle && $obj->sendSilenceWhenIdle = $sendSilenceWhenIdle;
-        null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
-        null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
-        null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
-        null !== $sipTransportProtocol && $obj['sipTransportProtocol'] = $sipTransportProtocol;
-        null !== $soundModifications && $obj->soundModifications = $soundModifications;
-        null !== $streamBidirectionalCodec && $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
-        null !== $streamBidirectionalMode && $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
-        null !== $streamBidirectionalSamplingRate && $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate;
-        null !== $streamBidirectionalTargetLegs && $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
-        null !== $streamCodec && $obj['streamCodec'] = $streamCodec;
-        null !== $streamEstablishBeforeCallOriginate && $obj->streamEstablishBeforeCallOriginate = $streamEstablishBeforeCallOriginate;
-        null !== $streamTrack && $obj['streamTrack'] = $streamTrack;
-        null !== $streamURL && $obj->streamURL = $streamURL;
-        null !== $superviseCallControlID && $obj->superviseCallControlID = $superviseCallControlID;
-        null !== $supervisorRole && $obj['supervisorRole'] = $supervisorRole;
-        null !== $timeLimitSecs && $obj->timeLimitSecs = $timeLimitSecs;
-        null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
-        null !== $transcription && $obj->transcription = $transcription;
-        null !== $transcriptionConfig && $obj->transcriptionConfig = $transcriptionConfig;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
-        null !== $webhookURLMethod && $obj['webhookURLMethod'] = $webhookURLMethod;
+        null !== $answeringMachineDetection && $self['answeringMachineDetection'] = $answeringMachineDetection;
+        null !== $answeringMachineDetectionConfig && $self['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
+        null !== $audioURL && $self['audioURL'] = $audioURL;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $bridgeIntent && $self['bridgeIntent'] = $bridgeIntent;
+        null !== $bridgeOnAnswer && $self['bridgeOnAnswer'] = $bridgeOnAnswer;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $conferenceConfig && $self['conferenceConfig'] = $conferenceConfig;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $dialogflowConfig && $self['dialogflowConfig'] = $dialogflowConfig;
+        null !== $enableDialogflow && $self['enableDialogflow'] = $enableDialogflow;
+        null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
+        null !== $linkTo && $self['linkTo'] = $linkTo;
+        null !== $mediaEncryption && $self['mediaEncryption'] = $mediaEncryption;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
+        null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
+        null !== $record && $self['record'] = $record;
+        null !== $recordChannels && $self['recordChannels'] = $recordChannels;
+        null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
+        null !== $recordFormat && $self['recordFormat'] = $recordFormat;
+        null !== $recordMaxLength && $self['recordMaxLength'] = $recordMaxLength;
+        null !== $recordTimeoutSecs && $self['recordTimeoutSecs'] = $recordTimeoutSecs;
+        null !== $recordTrack && $self['recordTrack'] = $recordTrack;
+        null !== $recordTrim && $self['recordTrim'] = $recordTrim;
+        null !== $sendSilenceWhenIdle && $self['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
+        null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $self['sipAuthUsername'] = $sipAuthUsername;
+        null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
+        null !== $sipRegion && $self['sipRegion'] = $sipRegion;
+        null !== $sipTransportProtocol && $self['sipTransportProtocol'] = $sipTransportProtocol;
+        null !== $soundModifications && $self['soundModifications'] = $soundModifications;
+        null !== $streamBidirectionalCodec && $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        null !== $streamBidirectionalMode && $self['streamBidirectionalMode'] = $streamBidirectionalMode;
+        null !== $streamBidirectionalSamplingRate && $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
+        null !== $streamBidirectionalTargetLegs && $self['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        null !== $streamCodec && $self['streamCodec'] = $streamCodec;
+        null !== $streamEstablishBeforeCallOriginate && $self['streamEstablishBeforeCallOriginate'] = $streamEstablishBeforeCallOriginate;
+        null !== $streamTrack && $self['streamTrack'] = $streamTrack;
+        null !== $streamURL && $self['streamURL'] = $streamURL;
+        null !== $superviseCallControlID && $self['superviseCallControlID'] = $superviseCallControlID;
+        null !== $supervisorRole && $self['supervisorRole'] = $supervisorRole;
+        null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
+        null !== $transcription && $self['transcription'] = $transcription;
+        null !== $transcriptionConfig && $self['transcriptionConfig'] = $transcriptionConfig;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $webhookURLMethod && $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -623,10 +640,10 @@ final class CallDialParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -634,23 +651,23 @@ final class CallDialParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings.
      *
-     * @param string|list<string> $to
+     * @param ToShape $to
      */
     public function withTo(string|array $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -661,22 +678,24 @@ final class CallDialParams implements BaseModel
     public function withAnsweringMachineDetection(
         AnsweringMachineDetection|string $answeringMachineDetection
     ): self {
-        $obj = clone $this;
-        $obj['answeringMachineDetection'] = $answeringMachineDetection;
+        $self = clone $this;
+        $self['answeringMachineDetection'] = $answeringMachineDetection;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Optional configuration parameters to modify 'answering_machine_detection' performance.
+     *
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
      */
     public function withAnsweringMachineDetectionConfig(
-        AnsweringMachineDetectionConfig $answeringMachineDetectionConfig
+        AnsweringMachineDetectionConfig|array $answeringMachineDetectionConfig
     ): self {
-        $obj = clone $this;
-        $obj->answeringMachineDetectionConfig = $answeringMachineDetectionConfig;
+        $self = clone $this;
+        $self['answeringMachineDetectionConfig'] = $answeringMachineDetectionConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -684,10 +703,10 @@ final class CallDialParams implements BaseModel
      */
     public function withAudioURL(string $audioURL): self
     {
-        $obj = clone $this;
-        $obj->audioURL = $audioURL;
+        $self = clone $this;
+        $self['audioURL'] = $audioURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -695,10 +714,10 @@ final class CallDialParams implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj->billingGroupID = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -706,10 +725,10 @@ final class CallDialParams implements BaseModel
      */
     public function withBridgeIntent(bool $bridgeIntent): self
     {
-        $obj = clone $this;
-        $obj->bridgeIntent = $bridgeIntent;
+        $self = clone $this;
+        $self['bridgeIntent'] = $bridgeIntent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -717,10 +736,10 @@ final class CallDialParams implements BaseModel
      */
     public function withBridgeOnAnswer(bool $bridgeOnAnswer): self
     {
-        $obj = clone $this;
-        $obj->bridgeOnAnswer = $bridgeOnAnswer;
+        $self = clone $this;
+        $self['bridgeOnAnswer'] = $bridgeOnAnswer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -728,10 +747,10 @@ final class CallDialParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -739,44 +758,49 @@ final class CallDialParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Optional configuration parameters to dial new participant into a conference.
+     *
+     * @param ConferenceConfig|ConferenceConfigShape $conferenceConfig
      */
     public function withConferenceConfig(
-        ConferenceConfig $conferenceConfig
+        ConferenceConfig|array $conferenceConfig
     ): self {
-        $obj = clone $this;
-        $obj->conferenceConfig = $conferenceConfig;
+        $self = clone $this;
+        $self['conferenceConfig'] = $conferenceConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Custom headers to be added to the SIP INVITE.
      *
-     * @param list<CustomSipHeader> $customHeaders
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj->customHeaders = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param DialogflowConfig|DialogflowConfigShape $dialogflowConfig
+     */
     public function withDialogflowConfig(
-        DialogflowConfig $dialogflowConfig
+        DialogflowConfig|array $dialogflowConfig
     ): self {
-        $obj = clone $this;
-        $obj->dialogflowConfig = $dialogflowConfig;
+        $self = clone $this;
+        $self['dialogflowConfig'] = $dialogflowConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -784,10 +808,10 @@ final class CallDialParams implements BaseModel
      */
     public function withEnableDialogflow(bool $enableDialogflow): self
     {
-        $obj = clone $this;
-        $obj->enableDialogflow = $enableDialogflow;
+        $self = clone $this;
+        $self['enableDialogflow'] = $enableDialogflow;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -795,10 +819,10 @@ final class CallDialParams implements BaseModel
      */
     public function withFromDisplayName(string $fromDisplayName): self
     {
-        $obj = clone $this;
-        $obj->fromDisplayName = $fromDisplayName;
+        $self = clone $this;
+        $self['fromDisplayName'] = $fromDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -806,10 +830,10 @@ final class CallDialParams implements BaseModel
      */
     public function withLinkTo(string $linkTo): self
     {
-        $obj = clone $this;
-        $obj->linkTo = $linkTo;
+        $self = clone $this;
+        $self['linkTo'] = $linkTo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -820,10 +844,10 @@ final class CallDialParams implements BaseModel
     public function withMediaEncryption(
         MediaEncryption|string $mediaEncryption
     ): self {
-        $obj = clone $this;
-        $obj['mediaEncryption'] = $mediaEncryption;
+        $self = clone $this;
+        $self['mediaEncryption'] = $mediaEncryption;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -831,10 +855,10 @@ final class CallDialParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -842,10 +866,10 @@ final class CallDialParams implements BaseModel
      */
     public function withParkAfterUnbridge(string $parkAfterUnbridge): self
     {
-        $obj = clone $this;
-        $obj->parkAfterUnbridge = $parkAfterUnbridge;
+        $self = clone $this;
+        $self['parkAfterUnbridge'] = $parkAfterUnbridge;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -853,10 +877,10 @@ final class CallDialParams implements BaseModel
      */
     public function withPreferredCodecs(string $preferredCodecs): self
     {
-        $obj = clone $this;
-        $obj->preferredCodecs = $preferredCodecs;
+        $self = clone $this;
+        $self['preferredCodecs'] = $preferredCodecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -866,10 +890,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecord(Record|string $record): self
     {
-        $obj = clone $this;
-        $obj['record'] = $record;
+        $self = clone $this;
+        $self['record'] = $record;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -880,10 +904,10 @@ final class CallDialParams implements BaseModel
     public function withRecordChannels(
         RecordChannels|string $recordChannels
     ): self {
-        $obj = clone $this;
-        $obj['recordChannels'] = $recordChannels;
+        $self = clone $this;
+        $self['recordChannels'] = $recordChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -891,10 +915,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordCustomFileName(string $recordCustomFileName): self
     {
-        $obj = clone $this;
-        $obj->recordCustomFileName = $recordCustomFileName;
+        $self = clone $this;
+        $self['recordCustomFileName'] = $recordCustomFileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -904,10 +928,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordFormat(RecordFormat|string $recordFormat): self
     {
-        $obj = clone $this;
-        $obj['recordFormat'] = $recordFormat;
+        $self = clone $this;
+        $self['recordFormat'] = $recordFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -915,10 +939,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordMaxLength(int $recordMaxLength): self
     {
-        $obj = clone $this;
-        $obj->recordMaxLength = $recordMaxLength;
+        $self = clone $this;
+        $self['recordMaxLength'] = $recordMaxLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -926,10 +950,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordTimeoutSecs(int $recordTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->recordTimeoutSecs = $recordTimeoutSecs;
+        $self = clone $this;
+        $self['recordTimeoutSecs'] = $recordTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -939,10 +963,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordTrack(RecordTrack|string $recordTrack): self
     {
-        $obj = clone $this;
-        $obj['recordTrack'] = $recordTrack;
+        $self = clone $this;
+        $self['recordTrack'] = $recordTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -952,10 +976,10 @@ final class CallDialParams implements BaseModel
      */
     public function withRecordTrim(RecordTrim|string $recordTrim): self
     {
-        $obj = clone $this;
-        $obj['recordTrim'] = $recordTrim;
+        $self = clone $this;
+        $self['recordTrim'] = $recordTrim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -963,10 +987,10 @@ final class CallDialParams implements BaseModel
      */
     public function withSendSilenceWhenIdle(bool $sendSilenceWhenIdle): self
     {
-        $obj = clone $this;
-        $obj->sendSilenceWhenIdle = $sendSilenceWhenIdle;
+        $self = clone $this;
+        $self['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -974,10 +998,10 @@ final class CallDialParams implements BaseModel
      */
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
-        $obj = clone $this;
-        $obj->sipAuthPassword = $sipAuthPassword;
+        $self = clone $this;
+        $self['sipAuthPassword'] = $sipAuthPassword;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -985,23 +1009,36 @@ final class CallDialParams implements BaseModel
      */
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
-        $obj = clone $this;
-        $obj->sipAuthUsername = $sipAuthUsername;
+        $self = clone $this;
+        $self['sipAuthUsername'] = $sipAuthUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * SIP headers to be added to the SIP INVITE request. Currently only User-to-User header is supported.
      *
-     * @param list<SipHeader> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
-        $obj = clone $this;
-        $obj->sipHeaders = $sipHeaders;
+        $self = clone $this;
+        $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @param SipRegion|value-of<SipRegion> $sipRegion
+     */
+    public function withSipRegion(SipRegion|string $sipRegion): self
+    {
+        $self = clone $this;
+        $self['sipRegion'] = $sipRegion;
+
+        return $self;
     }
 
     /**
@@ -1012,22 +1049,24 @@ final class CallDialParams implements BaseModel
     public function withSipTransportProtocol(
         SipTransportProtocol|string $sipTransportProtocol
     ): self {
-        $obj = clone $this;
-        $obj['sipTransportProtocol'] = $sipTransportProtocol;
+        $self = clone $this;
+        $self['sipTransportProtocol'] = $sipTransportProtocol;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Use this field to modify sound effects, for example adjust the pitch.
+     *
+     * @param SoundModifications|SoundModificationsShape $soundModifications
      */
     public function withSoundModifications(
-        SoundModifications $soundModifications
+        SoundModifications|array $soundModifications
     ): self {
-        $obj = clone $this;
-        $obj->soundModifications = $soundModifications;
+        $self = clone $this;
+        $self['soundModifications'] = $soundModifications;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1038,10 +1077,10 @@ final class CallDialParams implements BaseModel
     public function withStreamBidirectionalCodec(
         StreamBidirectionalCodec|string $streamBidirectionalCodec
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalCodec'] = $streamBidirectionalCodec;
+        $self = clone $this;
+        $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1052,24 +1091,24 @@ final class CallDialParams implements BaseModel
     public function withStreamBidirectionalMode(
         StreamBidirectionalMode|string $streamBidirectionalMode
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalMode'] = $streamBidirectionalMode;
+        $self = clone $this;
+        $self['streamBidirectionalMode'] = $streamBidirectionalMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Audio sampling rate.
      *
-     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate
      */
     public function withStreamBidirectionalSamplingRate(
-        int $streamBidirectionalSamplingRate
+        StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate
     ): self {
-        $obj = clone $this;
-        $obj->streamBidirectionalSamplingRate = $streamBidirectionalSamplingRate;
+        $self = clone $this;
+        $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1080,10 +1119,10 @@ final class CallDialParams implements BaseModel
     public function withStreamBidirectionalTargetLegs(
         StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs
     ): self {
-        $obj = clone $this;
-        $obj['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
+        $self = clone $this;
+        $self['streamBidirectionalTargetLegs'] = $streamBidirectionalTargetLegs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1093,10 +1132,10 @@ final class CallDialParams implements BaseModel
      */
     public function withStreamCodec(StreamCodec|string $streamCodec): self
     {
-        $obj = clone $this;
-        $obj['streamCodec'] = $streamCodec;
+        $self = clone $this;
+        $self['streamCodec'] = $streamCodec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1105,10 +1144,10 @@ final class CallDialParams implements BaseModel
     public function withStreamEstablishBeforeCallOriginate(
         bool $streamEstablishBeforeCallOriginate
     ): self {
-        $obj = clone $this;
-        $obj->streamEstablishBeforeCallOriginate = $streamEstablishBeforeCallOriginate;
+        $self = clone $this;
+        $self['streamEstablishBeforeCallOriginate'] = $streamEstablishBeforeCallOriginate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1118,10 +1157,10 @@ final class CallDialParams implements BaseModel
      */
     public function withStreamTrack(StreamTrack|string $streamTrack): self
     {
-        $obj = clone $this;
-        $obj['streamTrack'] = $streamTrack;
+        $self = clone $this;
+        $self['streamTrack'] = $streamTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1129,10 +1168,10 @@ final class CallDialParams implements BaseModel
      */
     public function withStreamURL(string $streamURL): self
     {
-        $obj = clone $this;
-        $obj->streamURL = $streamURL;
+        $self = clone $this;
+        $self['streamURL'] = $streamURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1141,10 +1180,10 @@ final class CallDialParams implements BaseModel
     public function withSuperviseCallControlID(
         string $superviseCallControlID
     ): self {
-        $obj = clone $this;
-        $obj->superviseCallControlID = $superviseCallControlID;
+        $self = clone $this;
+        $self['superviseCallControlID'] = $superviseCallControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1155,10 +1194,10 @@ final class CallDialParams implements BaseModel
     public function withSupervisorRole(
         SupervisorRole|string $supervisorRole
     ): self {
-        $obj = clone $this;
-        $obj['supervisorRole'] = $supervisorRole;
+        $self = clone $this;
+        $self['supervisorRole'] = $supervisorRole;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1166,10 +1205,10 @@ final class CallDialParams implements BaseModel
      */
     public function withTimeLimitSecs(int $timeLimitSecs): self
     {
-        $obj = clone $this;
-        $obj->timeLimitSecs = $timeLimitSecs;
+        $self = clone $this;
+        $self['timeLimitSecs'] = $timeLimitSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1177,10 +1216,10 @@ final class CallDialParams implements BaseModel
      */
     public function withTimeoutSecs(int $timeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->timeoutSecs = $timeoutSecs;
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1188,19 +1227,22 @@ final class CallDialParams implements BaseModel
      */
     public function withTranscription(bool $transcription): self
     {
-        $obj = clone $this;
-        $obj->transcription = $transcription;
+        $self = clone $this;
+        $self['transcription'] = $transcription;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param TranscriptionStartRequest|TranscriptionStartRequestShape $transcriptionConfig
+     */
     public function withTranscriptionConfig(
-        TranscriptionStartRequest $transcriptionConfig
+        TranscriptionStartRequest|array $transcriptionConfig
     ): self {
-        $obj = clone $this;
-        $obj->transcriptionConfig = $transcriptionConfig;
+        $self = clone $this;
+        $self['transcriptionConfig'] = $transcriptionConfig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1208,10 +1250,10 @@ final class CallDialParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -1222,9 +1264,9 @@ final class CallDialParams implements BaseModel
     public function withWebhookURLMethod(
         WebhookURLMethod|string $webhookURLMethod
     ): self {
-        $obj = clone $this;
-        $obj['webhookURLMethod'] = $webhookURLMethod;
+        $self = clone $this;
+        $self['webhookURLMethod'] = $webhookURLMethod;
 
-        return $obj;
+        return $self;
     }
 }

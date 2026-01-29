@@ -7,7 +7,8 @@ namespace Telnyx\AI\Audio;
 use Telnyx\AI\Audio\AudioTranscribeParams\Model;
 use Telnyx\AI\Audio\AudioTranscribeParams\ResponseFormat;
 use Telnyx\AI\Audio\AudioTranscribeParams\TimestampGranularities;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,19 +16,19 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Transcribe speech to text. This endpoint is consistent with the [OpenAI Transcription API](https://platform.openai.com/docs/api-reference/audio/createTranscription) and may be used with the OpenAI JS or Python SDK.
  *
- * @see Telnyx\AI\Audio->transcribe
+ * @see Telnyx\Services\AI\AudioService::transcribe()
  *
- * @phpstan-type audio_transcribe_params = array{
+ * @phpstan-type AudioTranscribeParamsShape = array{
  *   model: Model|value-of<Model>,
- *   file?: string,
- *   fileURL?: string,
- *   responseFormat?: ResponseFormat|value-of<ResponseFormat>,
- *   timestampGranularities?: TimestampGranularities|value-of<TimestampGranularities>,
+ *   file?: string|null,
+ *   fileURL?: string|null,
+ *   responseFormat?: null|ResponseFormat|value-of<ResponseFormat>,
+ *   timestampGranularities?: null|TimestampGranularities|value-of<TimestampGranularities>,
  * }
  */
 final class AudioTranscribeParams implements BaseModel
 {
-    /** @use SdkModel<audio_transcribe_params> */
+    /** @use SdkModel<AudioTranscribeParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -36,19 +37,19 @@ final class AudioTranscribeParams implements BaseModel
      *
      * @var value-of<Model> $model
      */
-    #[Api(enum: Model::class)]
+    #[Required(enum: Model::class)]
     public string $model;
 
     /**
      * The audio file object to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. File uploads are limited to 100 MB. Cannot be used together with `file_url`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $file;
 
     /**
      * Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`.
      */
-    #[Api('file_url', optional: true)]
+    #[Optional('file_url')]
     public ?string $fileURL;
 
     /**
@@ -56,7 +57,7 @@ final class AudioTranscribeParams implements BaseModel
      *
      * @var value-of<ResponseFormat>|null $responseFormat
      */
-    #[Api('response_format', enum: ResponseFormat::class, optional: true)]
+    #[Optional('response_format', enum: ResponseFormat::class)]
     public ?string $responseFormat;
 
     /**
@@ -64,11 +65,7 @@ final class AudioTranscribeParams implements BaseModel
      *
      * @var value-of<TimestampGranularities>|null $timestampGranularities
      */
-    #[Api(
-        'timestamp_granularities[]',
-        enum: TimestampGranularities::class,
-        optional: true,
-    )]
+    #[Optional('timestamp_granularities[]', enum: TimestampGranularities::class)]
     public ?string $timestampGranularities;
 
     /**
@@ -96,8 +93,8 @@ final class AudioTranscribeParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Model|value-of<Model> $model
-     * @param ResponseFormat|value-of<ResponseFormat> $responseFormat
-     * @param TimestampGranularities|value-of<TimestampGranularities> $timestampGranularities
+     * @param ResponseFormat|value-of<ResponseFormat>|null $responseFormat
+     * @param TimestampGranularities|value-of<TimestampGranularities>|null $timestampGranularities
      */
     public static function with(
         Model|string $model = 'distil-whisper/distil-large-v2',
@@ -106,16 +103,16 @@ final class AudioTranscribeParams implements BaseModel
         ResponseFormat|string|null $responseFormat = null,
         TimestampGranularities|string|null $timestampGranularities = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['model'] = $model;
+        $self['model'] = $model;
 
-        null !== $file && $obj->file = $file;
-        null !== $fileURL && $obj->fileURL = $fileURL;
-        null !== $responseFormat && $obj['responseFormat'] = $responseFormat;
-        null !== $timestampGranularities && $obj['timestampGranularities'] = $timestampGranularities;
+        null !== $file && $self['file'] = $file;
+        null !== $fileURL && $self['fileURL'] = $fileURL;
+        null !== $responseFormat && $self['responseFormat'] = $responseFormat;
+        null !== $timestampGranularities && $self['timestampGranularities'] = $timestampGranularities;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +122,10 @@ final class AudioTranscribeParams implements BaseModel
      */
     public function withModel(Model|string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +133,10 @@ final class AudioTranscribeParams implements BaseModel
      */
     public function withFile(string $file): self
     {
-        $obj = clone $this;
-        $obj->file = $file;
+        $self = clone $this;
+        $self['file'] = $file;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +144,10 @@ final class AudioTranscribeParams implements BaseModel
      */
     public function withFileURL(string $fileURL): self
     {
-        $obj = clone $this;
-        $obj->fileURL = $fileURL;
+        $self = clone $this;
+        $self['fileURL'] = $fileURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +158,10 @@ final class AudioTranscribeParams implements BaseModel
     public function withResponseFormat(
         ResponseFormat|string $responseFormat
     ): self {
-        $obj = clone $this;
-        $obj['responseFormat'] = $responseFormat;
+        $self = clone $this;
+        $self['responseFormat'] = $responseFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,9 +172,9 @@ final class AudioTranscribeParams implements BaseModel
     public function withTimestampGranularities(
         TimestampGranularities|string $timestampGranularities
     ): self {
-        $obj = clone $this;
-        $obj['timestampGranularities'] = $timestampGranularities;
+        $self = clone $this;
+        $self['timestampGranularities'] = $timestampGranularities;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,7 +5,9 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class AccessIPAddressTest extends TestCase
 
         $result = $this->client->accessIPAddress->create(ipAddress: 'ip_address');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPAddressResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +48,13 @@ final class AccessIPAddressTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPAddress->create(ipAddress: 'ip_address');
+        $result = $this->client->accessIPAddress->create(
+            ipAddress: 'ip_address',
+            description: 'description'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPAddressResponse::class, $result);
     }
 
     #[Test]
@@ -59,7 +66,8 @@ final class AccessIPAddressTest extends TestCase
 
         $result = $this->client->accessIPAddress->retrieve('access_ip_address_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPAddressResponse::class, $result);
     }
 
     #[Test]
@@ -69,9 +77,15 @@ final class AccessIPAddressTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPAddress->list();
+        $page = $this->client->accessIPAddress->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AccessIPAddressResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -83,6 +97,7 @@ final class AccessIPAddressTest extends TestCase
 
         $result = $this->client->accessIPAddress->delete('access_ip_address_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPAddressResponse::class, $result);
     }
 }

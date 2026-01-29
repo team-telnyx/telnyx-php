@@ -4,42 +4,43 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type metadata_alias = array{
+ * @phpstan-type MetadataShape = array{
  *   checksum: string,
  *   embedding: string,
  *   filename: string,
  *   source: string,
- *   certainty?: float,
- *   loaderMetadata?: array<string, mixed>,
+ *   certainty?: float|null,
+ *   loaderMetadata?: array<string,mixed>|null,
  * }
  */
 final class Metadata implements BaseModel
 {
-    /** @use SdkModel<metadata_alias> */
+    /** @use SdkModel<MetadataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $checksum;
 
-    #[Api]
+    #[Required]
     public string $embedding;
 
-    #[Api]
+    #[Required]
     public string $filename;
 
-    #[Api]
+    #[Required]
     public string $source;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $certainty;
 
-    /** @var array<string, mixed>|null $loaderMetadata */
-    #[Api('loader_metadata', map: 'mixed', optional: true)]
+    /** @var array<string,mixed>|null $loaderMetadata */
+    #[Optional('loader_metadata', map: 'mixed')]
     public ?array $loaderMetadata;
 
     /**
@@ -70,7 +71,7 @@ final class Metadata implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $loaderMetadata
+     * @param array<string,mixed>|null $loaderMetadata
      */
     public static function with(
         string $checksum,
@@ -80,67 +81,67 @@ final class Metadata implements BaseModel
         ?float $certainty = null,
         ?array $loaderMetadata = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->checksum = $checksum;
-        $obj->embedding = $embedding;
-        $obj->filename = $filename;
-        $obj->source = $source;
+        $self['checksum'] = $checksum;
+        $self['embedding'] = $embedding;
+        $self['filename'] = $filename;
+        $self['source'] = $source;
 
-        null !== $certainty && $obj->certainty = $certainty;
-        null !== $loaderMetadata && $obj->loaderMetadata = $loaderMetadata;
+        null !== $certainty && $self['certainty'] = $certainty;
+        null !== $loaderMetadata && $self['loaderMetadata'] = $loaderMetadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withChecksum(string $checksum): self
     {
-        $obj = clone $this;
-        $obj->checksum = $checksum;
+        $self = clone $this;
+        $self['checksum'] = $checksum;
 
-        return $obj;
+        return $self;
     }
 
     public function withEmbedding(string $embedding): self
     {
-        $obj = clone $this;
-        $obj->embedding = $embedding;
+        $self = clone $this;
+        $self['embedding'] = $embedding;
 
-        return $obj;
+        return $self;
     }
 
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj->filename = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     public function withSource(string $source): self
     {
-        $obj = clone $this;
-        $obj->source = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     public function withCertainty(float $certainty): self
     {
-        $obj = clone $this;
-        $obj->certainty = $certainty;
+        $self = clone $this;
+        $self['certainty'] = $certainty;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param array<string, mixed> $loaderMetadata
+     * @param array<string,mixed> $loaderMetadata
      */
     public function withLoaderMetadata(array $loaderMetadata): self
     {
-        $obj = clone $this;
-        $obj->loaderMetadata = $loaderMetadata;
+        $self = clone $this;
+        $self['loaderMetadata'] = $loaderMetadata;
 
-        return $obj;
+        return $self;
     }
 }

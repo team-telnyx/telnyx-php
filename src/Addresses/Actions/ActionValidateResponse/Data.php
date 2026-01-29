@@ -7,21 +7,25 @@ namespace Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Result;
 use Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested;
 use Telnyx\APIError;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   result: value-of<Result>,
- *   suggested: Suggested,
- *   errors?: list<APIError>,
- *   recordType?: string,
+ * @phpstan-import-type SuggestedShape from \Telnyx\Addresses\Actions\ActionValidateResponse\Data\Suggested
+ * @phpstan-import-type APIErrorShape from \Telnyx\APIError
+ *
+ * @phpstan-type DataShape = array{
+ *   result: Result|value-of<Result>,
+ *   suggested: Suggested|SuggestedShape,
+ *   errors?: list<APIError|APIErrorShape>|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
@@ -29,23 +33,23 @@ final class Data implements BaseModel
      *
      * @var value-of<Result> $result
      */
-    #[Api(enum: Result::class)]
+    #[Required(enum: Result::class)]
     public string $result;
 
     /**
      * Provides normalized address when available.
      */
-    #[Api]
+    #[Required]
     public Suggested $suggested;
 
     /** @var list<APIError>|null $errors */
-    #[Api(list: APIError::class, optional: true)]
+    #[Optional(list: APIError::class)]
     public ?array $errors;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -73,23 +77,24 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Result|value-of<Result> $result
-     * @param list<APIError> $errors
+     * @param Suggested|SuggestedShape $suggested
+     * @param list<APIError|APIErrorShape>|null $errors
      */
     public static function with(
         Result|string $result,
-        Suggested $suggested,
+        Suggested|array $suggested,
         ?array $errors = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['result'] = $result;
-        $obj->suggested = $suggested;
+        $self['result'] = $result;
+        $self['suggested'] = $suggested;
 
-        null !== $errors && $obj->errors = $errors;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $errors && $self['errors'] = $errors;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,32 +104,34 @@ final class Data implements BaseModel
      */
     public function withResult(Result|string $result): self
     {
-        $obj = clone $this;
-        $obj['result'] = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Provides normalized address when available.
+     *
+     * @param Suggested|SuggestedShape $suggested
      */
-    public function withSuggested(Suggested $suggested): self
+    public function withSuggested(Suggested|array $suggested): self
     {
-        $obj = clone $this;
-        $obj->suggested = $suggested;
+        $self = clone $this;
+        $self['suggested'] = $suggested;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<APIError> $errors
+     * @param list<APIError|APIErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj->errors = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +139,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

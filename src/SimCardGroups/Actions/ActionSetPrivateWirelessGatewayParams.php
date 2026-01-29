@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This action will asynchronously assign a provisioned Private Wireless Gateway to the SIM card group. Completing this operation defines that all SIM cards in the SIM card group will get their traffic controlled by the associated Private Wireless Gateway. This operation will also imply that new SIM cards assigned to a group will inherit its network definitions. If it's moved to a different group that doesn't have a Private Wireless Gateway, it'll use Telnyx's default mobile network configuration.
  *
- * @see Telnyx\SimCardGroups\Actions->setPrivateWirelessGateway
+ * @see Telnyx\Services\SimCardGroups\ActionsService::setPrivateWirelessGateway()
  *
- * @phpstan-type action_set_private_wireless_gateway_params = array{
+ * @phpstan-type ActionSetPrivateWirelessGatewayParamsShape = array{
  *   privateWirelessGatewayID: string
  * }
  */
 final class ActionSetPrivateWirelessGatewayParams implements BaseModel
 {
-    /** @use SdkModel<action_set_private_wireless_gateway_params> */
+    /** @use SdkModel<ActionSetPrivateWirelessGatewayParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The identification of the related Private Wireless Gateway resource.
      */
-    #[Api('private_wireless_gateway_id')]
+    #[Required('private_wireless_gateway_id')]
     public string $privateWirelessGatewayID;
 
     /**
@@ -56,11 +56,11 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
      */
     public static function with(string $privateWirelessGatewayID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->privateWirelessGatewayID = $privateWirelessGatewayID;
+        $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,9 +69,9 @@ final class ActionSetPrivateWirelessGatewayParams implements BaseModel
     public function withPrivateWirelessGatewayID(
         string $privateWirelessGatewayID
     ): self {
-        $obj = clone $this;
-        $obj->privateWirelessGatewayID = $privateWirelessGatewayID;
+        $self = clone $this;
+        $self['privateWirelessGatewayID'] = $privateWirelessGatewayID;
 
-        return $obj;
+        return $self;
     }
 }

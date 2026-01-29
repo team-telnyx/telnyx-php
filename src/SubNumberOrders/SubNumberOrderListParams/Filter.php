@@ -4,54 +4,54 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders\SubNumberOrderListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count].
  *
- * @phpstan-type filter_alias = array{
- *   countryCode?: string,
- *   orderRequestID?: string,
- *   phoneNumberType?: string,
- *   phoneNumbersCount?: int,
- *   status?: string,
+ * @phpstan-type FilterShape = array{
+ *   countryCode?: string|null,
+ *   orderRequestID?: string|null,
+ *   phoneNumberType?: string|null,
+ *   phoneNumbersCount?: int|null,
+ *   status?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * ISO alpha-2 country code.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * ID of the number order the sub number order belongs to.
      */
-    #[Api('order_request_id', optional: true)]
+    #[Optional('order_request_id')]
     public ?string $orderRequestID;
 
     /**
      * Phone Number Type.
      */
-    #[Api('phone_number_type', optional: true)]
+    #[Optional('phone_number_type')]
     public ?string $phoneNumberType;
 
     /**
      * Amount of numbers in the sub number order.
      */
-    #[Api('phone_numbers_count', optional: true)]
+    #[Optional('phone_numbers_count')]
     public ?int $phoneNumbersCount;
 
     /**
      * Filter sub number orders by status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()
@@ -71,15 +71,15 @@ final class Filter implements BaseModel
         ?int $phoneNumbersCount = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
-        null !== $phoneNumbersCount && $obj->phoneNumbersCount = $phoneNumbersCount;
-        null !== $status && $obj->status = $status;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $orderRequestID && $self['orderRequestID'] = $orderRequestID;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $phoneNumbersCount && $self['phoneNumbersCount'] = $phoneNumbersCount;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Filter implements BaseModel
      */
     public function withOrderRequestID(string $orderRequestID): self
     {
-        $obj = clone $this;
-        $obj->orderRequestID = $orderRequestID;
+        $self = clone $this;
+        $self['orderRequestID'] = $orderRequestID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumberType(string $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbersCount = $phoneNumbersCount;
+        $self = clone $this;
+        $self['phoneNumbersCount'] = $phoneNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +131,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

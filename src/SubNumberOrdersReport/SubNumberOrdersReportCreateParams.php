@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrdersReport;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,51 +13,51 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams\Status;
 /**
  * Create a CSV report for sub number orders. The report will be generated asynchronously and can be downloaded once complete.
  *
- * @see Telnyx\SubNumberOrdersReport->create
+ * @see Telnyx\Services\SubNumberOrdersReportService::create()
  *
- * @phpstan-type sub_number_orders_report_create_params = array{
- *   countryCode?: string,
- *   createdAtGt?: \DateTimeInterface,
- *   createdAtLt?: \DateTimeInterface,
- *   customerReference?: string,
- *   orderRequestID?: string,
- *   status?: Status|value-of<Status>,
+ * @phpstan-type SubNumberOrdersReportCreateParamsShape = array{
+ *   countryCode?: string|null,
+ *   createdAtGt?: \DateTimeInterface|null,
+ *   createdAtLt?: \DateTimeInterface|null,
+ *   customerReference?: string|null,
+ *   orderRequestID?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class SubNumberOrdersReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<sub_number_orders_report_create_params> */
+    /** @use SdkModel<SubNumberOrdersReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Filter by country code.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * Filter for orders created after this date.
      */
-    #[Api('created_at_gt', optional: true)]
+    #[Optional('created_at_gt')]
     public ?\DateTimeInterface $createdAtGt;
 
     /**
      * Filter for orders created before this date.
      */
-    #[Api('created_at_lt', optional: true)]
+    #[Optional('created_at_lt')]
     public ?\DateTimeInterface $createdAtLt;
 
     /**
      * Filter by customer reference.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * Filter by specific order request ID.
      */
-    #[Api('order_request_id', optional: true)]
+    #[Optional('order_request_id')]
     public ?string $orderRequestID;
 
     /**
@@ -65,7 +65,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -78,7 +78,7 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $countryCode = null,
@@ -88,16 +88,16 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
         ?string $orderRequestID = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAtGt && $obj->createdAtGt = $createdAtGt;
-        null !== $createdAtLt && $obj->createdAtLt = $createdAtLt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $orderRequestID && $obj->orderRequestID = $orderRequestID;
-        null !== $status && $obj['status'] = $status;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAtGt && $self['createdAtGt'] = $createdAtGt;
+        null !== $createdAtLt && $self['createdAtLt'] = $createdAtLt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $orderRequestID && $self['orderRequestID'] = $orderRequestID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +105,10 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,10 +116,10 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
      */
     public function withCreatedAtGt(\DateTimeInterface $createdAtGt): self
     {
-        $obj = clone $this;
-        $obj->createdAtGt = $createdAtGt;
+        $self = clone $this;
+        $self['createdAtGt'] = $createdAtGt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
      */
     public function withCreatedAtLt(\DateTimeInterface $createdAtLt): self
     {
-        $obj = clone $this;
-        $obj->createdAtLt = $createdAtLt;
+        $self = clone $this;
+        $self['createdAtLt'] = $createdAtLt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
      */
     public function withOrderRequestID(string $orderRequestID): self
     {
-        $obj = clone $this;
-        $obj->orderRequestID = $orderRequestID;
+        $self = clone $this;
+        $self['orderRequestID'] = $orderRequestID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,9 +162,9 @@ final class SubNumberOrdersReportCreateParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

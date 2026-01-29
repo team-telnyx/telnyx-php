@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\PhoneNumberSlimListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\CountryISOAlpha2;
@@ -17,69 +17,74 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceUsagePaymentMethod
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[phone_number], filter[status], filter[country_iso_alpha2], filter[connection_id], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference], filter[number_type], filter[source].
  *
- * @phpstan-type filter_alias = array{
- *   billingGroupID?: string,
- *   connectionID?: string,
- *   countryISOAlpha2?: string|list<string>,
- *   customerReference?: string,
- *   emergencyAddressID?: string,
- *   numberType?: NumberType,
- *   phoneNumber?: string,
- *   source?: value-of<Source>,
- *   status?: value-of<Status>,
- *   tag?: string,
- *   voiceConnectionName?: VoiceConnectionName,
- *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>,
+ * @phpstan-import-type CountryISOAlpha2Variants from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\CountryISOAlpha2
+ * @phpstan-import-type CountryISOAlpha2Shape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\CountryISOAlpha2
+ * @phpstan-import-type NumberTypeShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\NumberType
+ * @phpstan-import-type VoiceConnectionNameShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\VoiceConnectionName
+ *
+ * @phpstan-type FilterShape = array{
+ *   billingGroupID?: string|null,
+ *   connectionID?: string|null,
+ *   countryISOAlpha2?: CountryISOAlpha2Shape|null,
+ *   customerReference?: string|null,
+ *   emergencyAddressID?: string|null,
+ *   numberType?: null|NumberType|NumberTypeShape,
+ *   phoneNumber?: string|null,
+ *   source?: null|Source|value-of<Source>,
+ *   status?: null|Status|value-of<Status>,
+ *   tag?: string|null,
+ *   voiceConnectionName?: null|VoiceConnectionName|VoiceConnectionNameShape,
+ *   voiceUsagePaymentMethod?: null|VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by the billing_group_id associated with phone numbers. To filter to only phone numbers that have no billing group associated them, set the value of this filter to the string 'null'.
      */
-    #[Api('billing_group_id', optional: true)]
+    #[Optional('billing_group_id')]
     public ?string $billingGroupID;
 
     /**
      * Filter by connection_id.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * Filter by phone number country ISO alpha-2 code. Can be a single value or an array of values.
      *
-     * @var string|list<string>|null $countryISOAlpha2
+     * @var CountryISOAlpha2Variants|null $countryISOAlpha2
      */
-    #[Api('country_iso_alpha2', union: CountryISOAlpha2::class, optional: true)]
+    #[Optional('country_iso_alpha2', union: CountryISOAlpha2::class)]
     public string|array|null $countryISOAlpha2;
 
     /**
      * Filter numbers via the customer_reference set.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * Filter by the emergency_address_id associated with phone numbers. To filter only phone numbers that have no emergency address associated with them, set the value of this filter to the string 'null'.
      */
-    #[Api('emergency_address_id', optional: true)]
+    #[Optional('emergency_address_id')]
     public ?string $emergencyAddressID;
 
     /**
      * Filter phone numbers by phone number type.
      */
-    #[Api('number_type', optional: true)]
+    #[Optional('number_type')]
     public ?NumberType $numberType;
 
     /**
      * Filter by phone number. Requires at least three digits.
      *              Non-numerical characters will result in no values being returned.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
@@ -87,7 +92,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Source>|null $source
      */
-    #[Api(enum: Source::class, optional: true)]
+    #[Optional(enum: Source::class)]
     public ?string $source;
 
     /**
@@ -95,19 +100,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Filter by phone number tags. (This requires the include_tags param).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tag;
 
     /**
      * Filter by voice connection name pattern matching (requires include_connection param).
      */
-    #[Api('voice.connection_name', optional: true)]
+    #[Optional('voice.connection_name')]
     public ?VoiceConnectionName $voiceConnectionName;
 
     /**
@@ -115,10 +120,9 @@ final class Filter implements BaseModel
      *
      * @var value-of<VoiceUsagePaymentMethod>|null $voiceUsagePaymentMethod
      */
-    #[Api(
+    #[Optional(
         'voice.usage_payment_method',
-        enum: VoiceUsagePaymentMethod::class,
-        optional: true,
+        enum: VoiceUsagePaymentMethod::class
     )]
     public ?string $voiceUsagePaymentMethod;
 
@@ -132,10 +136,12 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|list<string> $countryISOAlpha2
-     * @param Source|value-of<Source> $source
-     * @param Status|value-of<Status> $status
-     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
+     * @param CountryISOAlpha2Shape|null $countryISOAlpha2
+     * @param NumberType|NumberTypeShape|null $numberType
+     * @param Source|value-of<Source>|null $source
+     * @param Status|value-of<Status>|null $status
+     * @param VoiceConnectionName|VoiceConnectionNameShape|null $voiceConnectionName
+     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>|null $voiceUsagePaymentMethod
      */
     public static function with(
         ?string $billingGroupID = null,
@@ -143,30 +149,30 @@ final class Filter implements BaseModel
         string|array|null $countryISOAlpha2 = null,
         ?string $customerReference = null,
         ?string $emergencyAddressID = null,
-        ?NumberType $numberType = null,
+        NumberType|array|null $numberType = null,
         ?string $phoneNumber = null,
         Source|string|null $source = null,
         Status|string|null $status = null,
         ?string $tag = null,
-        ?VoiceConnectionName $voiceConnectionName = null,
+        VoiceConnectionName|array|null $voiceConnectionName = null,
         VoiceUsagePaymentMethod|string|null $voiceUsagePaymentMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $countryISOAlpha2 && $obj->countryISOAlpha2 = $countryISOAlpha2;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
-        null !== $numberType && $obj->numberType = $numberType;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $source && $obj['source'] = $source;
-        null !== $status && $obj['status'] = $status;
-        null !== $tag && $obj->tag = $tag;
-        null !== $voiceConnectionName && $obj->voiceConnectionName = $voiceConnectionName;
-        null !== $voiceUsagePaymentMethod && $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $countryISOAlpha2 && $self['countryISOAlpha2'] = $countryISOAlpha2;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        null !== $numberType && $self['numberType'] = $numberType;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $source && $self['source'] = $source;
+        null !== $status && $self['status'] = $status;
+        null !== $tag && $self['tag'] = $tag;
+        null !== $voiceConnectionName && $self['voiceConnectionName'] = $voiceConnectionName;
+        null !== $voiceUsagePaymentMethod && $self['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +180,10 @@ final class Filter implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj->billingGroupID = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,23 +191,23 @@ final class Filter implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by phone number country ISO alpha-2 code. Can be a single value or an array of values.
      *
-     * @param string|list<string> $countryISOAlpha2
+     * @param CountryISOAlpha2Shape $countryISOAlpha2
      */
     public function withCountryISOAlpha2(string|array $countryISOAlpha2): self
     {
-        $obj = clone $this;
-        $obj->countryISOAlpha2 = $countryISOAlpha2;
+        $self = clone $this;
+        $self['countryISOAlpha2'] = $countryISOAlpha2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +215,10 @@ final class Filter implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,21 +226,23 @@ final class Filter implements BaseModel
      */
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj->emergencyAddressID = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter phone numbers by phone number type.
+     *
+     * @param NumberType|NumberTypeShape $numberType
      */
-    public function withNumberType(NumberType $numberType): self
+    public function withNumberType(NumberType|array $numberType): self
     {
-        $obj = clone $this;
-        $obj->numberType = $numberType;
+        $self = clone $this;
+        $self['numberType'] = $numberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +251,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,10 +264,10 @@ final class Filter implements BaseModel
      */
     public function withSource(Source|string $source): self
     {
-        $obj = clone $this;
-        $obj['source'] = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -269,10 +277,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -280,22 +288,24 @@ final class Filter implements BaseModel
      */
     public function withTag(string $tag): self
     {
-        $obj = clone $this;
-        $obj->tag = $tag;
+        $self = clone $this;
+        $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by voice connection name pattern matching (requires include_connection param).
+     *
+     * @param VoiceConnectionName|VoiceConnectionNameShape $voiceConnectionName
      */
     public function withVoiceConnectionName(
-        VoiceConnectionName $voiceConnectionName
+        VoiceConnectionName|array $voiceConnectionName
     ): self {
-        $obj = clone $this;
-        $obj->voiceConnectionName = $voiceConnectionName;
+        $self = clone $this;
+        $self['voiceConnectionName'] = $voiceConnectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -306,9 +316,9 @@ final class Filter implements BaseModel
     public function withVoiceUsagePaymentMethod(
         VoiceUsagePaymentMethod|string $voiceUsagePaymentMethod
     ): self {
-        $obj = clone $this;
-        $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
+        $self = clone $this;
+        $self['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 }

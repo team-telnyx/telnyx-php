@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns the details regarding a specific SIM card group.
  *
- * @see Telnyx\SimCardGroups->retrieve
+ * @see Telnyx\Services\SimCardGroupsService::retrieve()
  *
- * @phpstan-type sim_card_group_retrieve_params = array{includeIccids?: bool}
+ * @phpstan-type SimCardGroupRetrieveParamsShape = array{includeIccids?: bool|null}
  */
 final class SimCardGroupRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_group_retrieve_params> */
+    /** @use SdkModel<SimCardGroupRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * It includes a list of associated ICCIDs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeIccids;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class SimCardGroupRetrieveParams implements BaseModel
      */
     public static function with(?bool $includeIccids = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includeIccids && $obj->includeIccids = $includeIccids;
+        null !== $includeIccids && $self['includeIccids'] = $includeIccids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class SimCardGroupRetrieveParams implements BaseModel
      */
     public function withIncludeIccids(bool $includeIccids): self
     {
-        $obj = clone $this;
-        $obj->includeIccids = $includeIccids;
+        $self = clone $this;
+        $self['includeIccids'] = $includeIccids;
 
-        return $obj;
+        return $self;
     }
 }

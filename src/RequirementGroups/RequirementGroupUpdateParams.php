@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,31 +13,29 @@ use Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement;
 /**
  * Update requirement values in requirement group.
  *
- * @see Telnyx\RequirementGroups->update
+ * @see Telnyx\Services\RequirementGroupsService::update()
  *
- * @phpstan-type requirement_group_update_params = array{
- *   customerReference?: string,
- *   regulatoryRequirements?: list<RegulatoryRequirement>,
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement
+ *
+ * @phpstan-type RequirementGroupUpdateParamsShape = array{
+ *   customerReference?: string|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirement|RegulatoryRequirementShape>|null,
  * }
  */
 final class RequirementGroupUpdateParams implements BaseModel
 {
-    /** @use SdkModel<requirement_group_update_params> */
+    /** @use SdkModel<RequirementGroupUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Reference for the customer.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
-        'regulatory_requirements',
-        list: RegulatoryRequirement::class,
-        optional: true,
-    )]
+    #[Optional('regulatory_requirements', list: RegulatoryRequirement::class)]
     public ?array $regulatoryRequirements;
 
     public function __construct()
@@ -50,18 +48,18 @@ final class RequirementGroupUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         ?string $customerReference = null,
         ?array $regulatoryRequirements = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,21 +67,21 @@ final class RequirementGroupUpdateParams implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 }

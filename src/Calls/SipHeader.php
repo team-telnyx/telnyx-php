@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\Calls;
 
 use Telnyx\Calls\SipHeader\Name;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type sip_header = array{name: value-of<Name>, value: string}
+ * @phpstan-type SipHeaderShape = array{name: Name|value-of<Name>, value: string}
  */
 final class SipHeader implements BaseModel
 {
-    /** @use SdkModel<sip_header> */
+    /** @use SdkModel<SipHeaderShape> */
     use SdkModel;
 
     /**
@@ -22,13 +22,13 @@ final class SipHeader implements BaseModel
      *
      * @var value-of<Name> $name
      */
-    #[Api(enum: Name::class)]
+    #[Required(enum: Name::class)]
     public string $name;
 
     /**
      * The value of the header.
      */
-    #[Api]
+    #[Required]
     public string $value;
 
     /**
@@ -59,12 +59,12 @@ final class SipHeader implements BaseModel
      */
     public static function with(Name|string $name, string $value): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['name'] = $name;
-        $obj->value = $value;
+        $self['name'] = $name;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class SipHeader implements BaseModel
      */
     public function withName(Name|string $name): self
     {
-        $obj = clone $this;
-        $obj['name'] = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +85,9 @@ final class SipHeader implements BaseModel
      */
     public function withValue(string $value): self
     {
-        $obj = clone $this;
-        $obj->value = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

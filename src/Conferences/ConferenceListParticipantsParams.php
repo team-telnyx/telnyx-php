@@ -6,7 +6,8 @@ namespace Telnyx\Conferences;
 
 use Telnyx\Conferences\ConferenceListParticipantsParams\Filter;
 use Telnyx\Conferences\ConferenceListParticipantsParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Conferences\ConferenceListParticipantsParams\Region;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,29 +15,50 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Lists conference participants.
  *
- * @see Telnyx\Conferences->listParticipants
+ * @see Telnyx\Services\ConferencesService::listParticipants()
  *
- * @phpstan-type conference_list_participants_params = array{
- *   filter?: Filter, page?: Page
+ * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Page
+ *
+ * @phpstan-type ConferenceListParticipantsParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ConferenceListParticipantsParams implements BaseModel
 {
-    /** @use SdkModel<conference_list_participants_params> */
+    /** @use SdkModel<ConferenceListParticipantsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
+
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
+
+    /**
+     * Region where the conference data is located.
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     public function __construct()
     {
@@ -47,36 +69,81 @@ final class ConferenceListParticipantsParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Region|value-of<Region>|null $region
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
-        $obj = new self;
+    public static function with(
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        Region|string|null $region = null,
+    ): self {
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $region && $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[muted], filter[on_hold], filter[whispering].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageNumber(int $pageNumber): self
+    {
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    /**
+     * Region where the conference data is located.
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
+
+        return $self;
     }
 }

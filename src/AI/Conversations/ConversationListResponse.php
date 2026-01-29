@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type conversation_list_response = array{data: list<Conversation>}
+ * @phpstan-import-type ConversationShape from \Telnyx\AI\Conversations\Conversation
+ *
+ * @phpstan-type ConversationListResponseShape = array{
+ *   data: list<Conversation|ConversationShape>
+ * }
  */
-final class ConversationListResponse implements BaseModel, ResponseConverter
+final class ConversationListResponse implements BaseModel
 {
-    /** @use SdkModel<conversation_list_response> */
+    /** @use SdkModel<ConversationListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Conversation> $data */
-    #[Api(list: Conversation::class)]
+    #[Required(list: Conversation::class)]
     public array $data;
 
     /**
@@ -48,25 +48,25 @@ final class ConversationListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Conversation> $data
+     * @param list<Conversation|ConversationShape> $data
      */
     public static function with(array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Conversation> $data
+     * @param list<Conversation|ConversationShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

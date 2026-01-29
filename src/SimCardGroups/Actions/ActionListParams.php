@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,26 +14,26 @@ use Telnyx\SimCardGroups\Actions\ActionListParams\FilterType;
 /**
  * This API allows listing a paginated collection a SIM card group actions. It allows to explore a collection of existing asynchronous operation using specific filters.
  *
- * @see Telnyx\SimCardGroups\Actions->list
+ * @see Telnyx\Services\SimCardGroups\ActionsService::list()
  *
- * @phpstan-type action_list_params = array{
- *   filterSimCardGroupID?: string,
- *   filterStatus?: FilterStatus|value-of<FilterStatus>,
- *   filterType?: FilterType|value-of<FilterType>,
- *   pageNumber?: int,
- *   pageSize?: int,
+ * @phpstan-type ActionListParamsShape = array{
+ *   filterSimCardGroupID?: string|null,
+ *   filterStatus?: null|FilterStatus|value-of<FilterStatus>,
+ *   filterType?: null|FilterType|value-of<FilterType>,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class ActionListParams implements BaseModel
 {
-    /** @use SdkModel<action_list_params> */
+    /** @use SdkModel<ActionListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A valid SIM card group ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filterSimCardGroupID;
 
     /**
@@ -41,7 +41,7 @@ final class ActionListParams implements BaseModel
      *
      * @var value-of<FilterStatus>|null $filterStatus
      */
-    #[Api(enum: FilterStatus::class, optional: true)]
+    #[Optional(enum: FilterStatus::class)]
     public ?string $filterStatus;
 
     /**
@@ -49,19 +49,19 @@ final class ActionListParams implements BaseModel
      *
      * @var value-of<FilterType>|null $filterType
      */
-    #[Api(enum: FilterType::class, optional: true)]
+    #[Optional(enum: FilterType::class)]
     public ?string $filterType;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageNumber;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageSize;
 
     public function __construct()
@@ -74,8 +74,8 @@ final class ActionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterStatus|value-of<FilterStatus> $filterStatus
-     * @param FilterType|value-of<FilterType> $filterType
+     * @param FilterStatus|value-of<FilterStatus>|null $filterStatus
+     * @param FilterType|value-of<FilterType>|null $filterType
      */
     public static function with(
         ?string $filterSimCardGroupID = null,
@@ -84,15 +84,15 @@ final class ActionListParams implements BaseModel
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filterSimCardGroupID && $obj->filterSimCardGroupID = $filterSimCardGroupID;
-        null !== $filterStatus && $obj['filterStatus'] = $filterStatus;
-        null !== $filterType && $obj['filterType'] = $filterType;
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
+        null !== $filterSimCardGroupID && $self['filterSimCardGroupID'] = $filterSimCardGroupID;
+        null !== $filterStatus && $self['filterStatus'] = $filterStatus;
+        null !== $filterType && $self['filterType'] = $filterType;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class ActionListParams implements BaseModel
      */
     public function withFilterSimCardGroupID(string $filterSimCardGroupID): self
     {
-        $obj = clone $this;
-        $obj->filterSimCardGroupID = $filterSimCardGroupID;
+        $self = clone $this;
+        $self['filterSimCardGroupID'] = $filterSimCardGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +113,10 @@ final class ActionListParams implements BaseModel
      */
     public function withFilterStatus(FilterStatus|string $filterStatus): self
     {
-        $obj = clone $this;
-        $obj['filterStatus'] = $filterStatus;
+        $self = clone $this;
+        $self['filterStatus'] = $filterStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class ActionListParams implements BaseModel
      */
     public function withFilterType(FilterType|string $filterType): self
     {
-        $obj = clone $this;
-        $obj['filterType'] = $filterType;
+        $self = clone $this;
+        $self['filterType'] = $filterType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class ActionListParams implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,9 +148,9 @@ final class ActionListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 }

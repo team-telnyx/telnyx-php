@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\TextToSpeech;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice;
 
 /**
- * @phpstan-type text_to_speech_list_voices_response = array{voices?: list<Voice>}
+ * @phpstan-import-type VoiceShape from \Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice
+ *
+ * @phpstan-type TextToSpeechListVoicesResponseShape = array{
+ *   voices?: list<Voice|VoiceShape>|null
+ * }
  */
-final class TextToSpeechListVoicesResponse implements BaseModel, ResponseConverter
+final class TextToSpeechListVoicesResponse implements BaseModel
 {
-    /** @use SdkModel<text_to_speech_list_voices_response> */
+    /** @use SdkModel<TextToSpeechListVoicesResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Voice>|null $voices */
-    #[Api(list: Voice::class, optional: true)]
+    #[Optional(list: Voice::class)]
     public ?array $voices;
 
     public function __construct()
@@ -35,25 +35,25 @@ final class TextToSpeechListVoicesResponse implements BaseModel, ResponseConvert
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Voice> $voices
+     * @param list<Voice|VoiceShape>|null $voices
      */
     public static function with(?array $voices = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $voices && $obj->voices = $voices;
+        null !== $voices && $self['voices'] = $voices;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Voice> $voices
+     * @param list<Voice|VoiceShape> $voices
      */
     public function withVoices(array $voices): self
     {
-        $obj = clone $this;
-        $obj->voices = $voices;
+        $self = clone $this;
+        $self['voices'] = $voices;
 
-        return $obj;
+        return $self;
     }
 }

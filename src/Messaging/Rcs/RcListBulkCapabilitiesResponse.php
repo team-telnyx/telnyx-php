@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Messaging\Rcs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type rc_list_bulk_capabilities_response = array{
- *   data?: list<RcsCapabilities>
+ * @phpstan-import-type RcsCapabilitiesShape from \Telnyx\Messaging\Rcs\RcsCapabilities
+ *
+ * @phpstan-type RcListBulkCapabilitiesResponseShape = array{
+ *   data?: list<RcsCapabilities|RcsCapabilitiesShape>|null
  * }
  */
-final class RcListBulkCapabilitiesResponse implements BaseModel, ResponseConverter
+final class RcListBulkCapabilitiesResponse implements BaseModel
 {
-    /** @use SdkModel<rc_list_bulk_capabilities_response> */
+    /** @use SdkModel<RcListBulkCapabilitiesResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<RcsCapabilities>|null $data */
-    #[Api(list: RcsCapabilities::class, optional: true)]
+    #[Optional(list: RcsCapabilities::class)]
     public ?array $data;
 
     public function __construct()
@@ -36,25 +34,25 @@ final class RcListBulkCapabilitiesResponse implements BaseModel, ResponseConvert
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RcsCapabilities> $data
+     * @param list<RcsCapabilities|RcsCapabilitiesShape>|null $data
      */
     public static function with(?array $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<RcsCapabilities> $data
+     * @param list<RcsCapabilities|RcsCapabilitiesShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

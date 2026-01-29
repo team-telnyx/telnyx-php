@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
+use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,10 +38,11 @@ final class ReleasesTest extends TestCase
 
         $result = $this->client->externalConnections->releases->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            'id'
+            id: 'id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReleaseGetResponse::class, $result);
     }
 
     #[Test]
@@ -50,10 +54,11 @@ final class ReleasesTest extends TestCase
 
         $result = $this->client->externalConnections->releases->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            'id'
+            id: 'id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReleaseGetResponse::class, $result);
     }
 
     #[Test]
@@ -63,8 +68,14 @@ final class ReleasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->releases->list('id');
+        $page = $this->client->externalConnections->releases->list('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ReleaseListResponse::class, $item);
+        }
     }
 }

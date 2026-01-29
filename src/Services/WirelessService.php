@@ -6,16 +6,24 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessContract;
 use Telnyx\Services\Wireless\DetailRecordsReportsService;
 use Telnyx\Wireless\WirelessGetRegionsResponse;
-use Telnyx\Wireless\WirelessRetrieveRegionsParams;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WirelessService implements WirelessContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public WirelessRawService $raw;
+
+    /**
+     * @api
      */
     public DetailRecordsReportsService $detailRecordsReports;
 
@@ -24,6 +32,7 @@ final class WirelessService implements WirelessContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new WirelessRawService($client);
         $this->detailRecordsReports = new DetailRecordsReportsService($client);
     }
 
@@ -33,41 +42,19 @@ final class WirelessService implements WirelessContract
      * Retrieve all wireless regions for the given product.
      *
      * @param string $product The product for which to list regions (e.g., 'public_ips', 'private_wireless_gateways').
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveRegions(
-        $product,
-        ?RequestOptions $requestOptions = null
+        string $product,
+        RequestOptions|array|null $requestOptions = null
     ): WirelessGetRegionsResponse {
-        $params = ['product' => $product];
+        $params = Util::removeNulls(['product' => $product]);
 
-        return $this->retrieveRegionsRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveRegions(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRegionsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): WirelessGetRegionsResponse {
-        [$parsed, $options] = WirelessRetrieveRegionsParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'wireless/regions',
-            query: $parsed,
-            options: $options,
-            convert: WirelessGetRegionsResponse::class,
-        );
+        return $response->parse();
     }
 }

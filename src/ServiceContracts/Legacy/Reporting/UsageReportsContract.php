@@ -8,33 +8,21 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportGetSpeechToTextResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface UsageReportsContract
 {
     /**
      * @api
      *
-     * @param \DateTimeInterface $endDate
-     * @param \DateTimeInterface $startDate
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveSpeechToText(
-        $endDate = omit,
-        $startDate = omit,
-        ?RequestOptions $requestOptions = null,
-    ): UsageReportGetSpeechToTextResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveSpeechToTextRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UsageReportGetSpeechToTextResponse;
 }

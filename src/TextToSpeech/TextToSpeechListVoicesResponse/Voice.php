@@ -4,49 +4,49 @@ declare(strict_types=1);
 
 namespace Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type voice_alias = array{
- *   id?: string,
- *   accent?: string,
- *   age?: string,
- *   gender?: string,
- *   label?: string,
- *   language?: string,
- *   name?: string,
- *   provider?: string,
+ * @phpstan-type VoiceShape = array{
+ *   id?: string|null,
+ *   accent?: string|null,
+ *   age?: string|null,
+ *   gender?: string|null,
+ *   label?: string|null,
+ *   language?: string|null,
+ *   name?: string|null,
+ *   provider?: string|null,
  * }
  */
 final class Voice implements BaseModel
 {
-    /** @use SdkModel<voice_alias> */
+    /** @use SdkModel<VoiceShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $accent;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $age;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gender;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $label;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $language;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $provider;
 
     public function __construct()
@@ -69,81 +69,81 @@ final class Voice implements BaseModel
         ?string $name = null,
         ?string $provider = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $accent && $obj->accent = $accent;
-        null !== $age && $obj->age = $age;
-        null !== $gender && $obj->gender = $gender;
-        null !== $label && $obj->label = $label;
-        null !== $language && $obj->language = $language;
-        null !== $name && $obj->name = $name;
-        null !== $provider && $obj->provider = $provider;
+        null !== $id && $self['id'] = $id;
+        null !== $accent && $self['accent'] = $accent;
+        null !== $age && $self['age'] = $age;
+        null !== $gender && $self['gender'] = $gender;
+        null !== $label && $self['label'] = $label;
+        null !== $language && $self['language'] = $language;
+        null !== $name && $self['name'] = $name;
+        null !== $provider && $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccent(string $accent): self
     {
-        $obj = clone $this;
-        $obj->accent = $accent;
+        $self = clone $this;
+        $self['accent'] = $accent;
 
-        return $obj;
+        return $self;
     }
 
     public function withAge(string $age): self
     {
-        $obj = clone $this;
-        $obj->age = $age;
+        $self = clone $this;
+        $self['age'] = $age;
 
-        return $obj;
+        return $self;
     }
 
     public function withGender(string $gender): self
     {
-        $obj = clone $this;
-        $obj->gender = $gender;
+        $self = clone $this;
+        $self['gender'] = $gender;
 
-        return $obj;
+        return $self;
     }
 
     public function withLabel(string $label): self
     {
-        $obj = clone $this;
-        $obj->label = $label;
+        $self = clone $this;
+        $self['label'] = $label;
 
-        return $obj;
+        return $self;
     }
 
     public function withLanguage(string $language): self
     {
-        $obj = clone $this;
-        $obj->language = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withProvider(string $provider): self
     {
-        $obj = clone $this;
-        $obj->provider = $provider;
+        $self = clone $this;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 }

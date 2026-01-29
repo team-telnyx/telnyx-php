@@ -4,38 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * AI Assistant configuration.
  *
- * @phpstan-type assistant_alias = array{
- *   id?: string, instructions?: string, openaiAPIKeyRef?: string
+ * @phpstan-type AssistantShape = array{
+ *   id?: string|null, instructions?: string|null, openaiAPIKeyRef?: string|null
  * }
  */
 final class Assistant implements BaseModel
 {
-    /** @use SdkModel<assistant_alias> */
+    /** @use SdkModel<AssistantShape> */
     use SdkModel;
 
     /**
      * The identifier of the AI assistant to use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The system instructions that the voice assistant uses during the start assistant command. This will overwrite the instructions set in the assistant configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
      * Reference to the OpenAI API key. Required only when using OpenAI models.
      */
-    #[Api('openai_api_key_ref', optional: true)]
+    #[Optional('openai_api_key_ref')]
     public ?string $openaiAPIKeyRef;
 
     public function __construct()
@@ -53,13 +53,13 @@ final class Assistant implements BaseModel
         ?string $instructions = null,
         ?string $openaiAPIKeyRef = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $openaiAPIKeyRef && $obj->openaiAPIKeyRef = $openaiAPIKeyRef;
+        null !== $id && $self['id'] = $id;
+        null !== $instructions && $self['instructions'] = $instructions;
+        null !== $openaiAPIKeyRef && $self['openaiAPIKeyRef'] = $openaiAPIKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Assistant implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class Assistant implements BaseModel
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj->instructions = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class Assistant implements BaseModel
      */
     public function withOpenAIAPIKeyRef(string $openaiAPIKeyRef): self
     {
-        $obj = clone $this;
-        $obj->openaiAPIKeyRef = $openaiAPIKeyRef;
+        $self = clone $this;
+        $self['openaiAPIKeyRef'] = $openaiAPIKeyRef;
 
-        return $obj;
+        return $self;
     }
 }

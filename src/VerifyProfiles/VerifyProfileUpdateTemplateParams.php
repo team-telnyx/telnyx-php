@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an existing Verify profile message template.
  *
- * @see Telnyx\VerifyProfiles->updateTemplate
+ * @see Telnyx\Services\VerifyProfilesService::updateTemplate()
  *
- * @phpstan-type verify_profile_update_template_params = array{text: string}
+ * @phpstan-type VerifyProfileUpdateTemplateParamsShape = array{text: string}
  */
 final class VerifyProfileUpdateTemplateParams implements BaseModel
 {
-    /** @use SdkModel<verify_profile_update_template_params> */
+    /** @use SdkModel<VerifyProfileUpdateTemplateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The text content of the message template.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
@@ -54,11 +54,11 @@ final class VerifyProfileUpdateTemplateParams implements BaseModel
      */
     public static function with(string $text): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->text = $text;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class VerifyProfileUpdateTemplateParams implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

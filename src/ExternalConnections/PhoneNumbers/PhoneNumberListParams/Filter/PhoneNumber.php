@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type phone_number = array{contains?: string, eq?: string}
+ * @phpstan-type PhoneNumberShape = array{contains?: string|null, eq?: string|null}
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     /**
      * The phone number to filter by (partial match).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * The phone number to filter by (exact match).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class PhoneNumber implements BaseModel
         ?string $contains = null,
         ?string $eq = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
-        null !== $eq && $obj->eq = $eq;
+        null !== $contains && $self['contains'] = $contains;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class PhoneNumber implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class PhoneNumber implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj->eq = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

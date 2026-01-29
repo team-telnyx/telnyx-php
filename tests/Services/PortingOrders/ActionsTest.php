@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\PortingOrders\Actions\ActionActivateResponse;
+use Telnyx\PortingOrders\Actions\ActionCancelResponse;
+use Telnyx\PortingOrders\Actions\ActionConfirmResponse;
+use Telnyx\PortingOrders\Actions\ActionShareResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +41,8 @@ final class ActionsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionActivateResponse::class, $result);
     }
 
     #[Test]
@@ -51,7 +56,8 @@ final class ActionsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionCancelResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +71,8 @@ final class ActionsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionConfirmResponse::class, $result);
     }
 
     #[Test]
@@ -79,6 +86,7 @@ final class ActionsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionShareResponse::class, $result);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,26 +12,26 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Fetch all previous requests for cdr usage reports.
  *
- * @see Telnyx\Legacy\Reporting\UsageReports\Voice->list
+ * @see Telnyx\Services\Legacy\Reporting\UsageReports\VoiceService::list()
  *
- * @phpstan-type voice_list_params = array{page?: int, perPage?: int}
+ * @phpstan-type VoiceListParamsShape = array{page?: int|null, perPage?: int|null}
  */
 final class VoiceListParams implements BaseModel
 {
-    /** @use SdkModel<voice_list_params> */
+    /** @use SdkModel<VoiceListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Page number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * Size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $perPage;
 
     public function __construct()
@@ -46,12 +46,12 @@ final class VoiceListParams implements BaseModel
      */
     public static function with(?int $page = null, ?int $perPage = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $perPage && $obj->perPage = $perPage;
+        null !== $page && $self['page'] = $page;
+        null !== $perPage && $self['perPage'] = $perPage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class VoiceListParams implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class VoiceListParams implements BaseModel
      */
     public function withPerPage(int $perPage): self
     {
-        $obj = clone $this;
-        $obj->perPage = $perPage;
+        $self = clone $this;
+        $self['perPage'] = $perPage;
 
-        return $obj;
+        return $self;
     }
 }

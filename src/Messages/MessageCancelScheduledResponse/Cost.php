@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\MessageCancelScheduledResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type cost_alias = array{amount?: string, currency?: string}
+ * @phpstan-type CostShape = array{amount?: string|null, currency?: string|null}
  */
 final class Cost implements BaseModel
 {
-    /** @use SdkModel<cost_alias> */
+    /** @use SdkModel<CostShape> */
     use SdkModel;
 
     /**
      * The amount deducted from your account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /**
      * The ISO 4217 currency identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class Cost implements BaseModel
         ?string $amount = null,
         ?string $currency = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $currency && $obj->currency = $currency;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $currency && $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Cost implements BaseModel
      */
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj->amount = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Cost implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj->currency = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 }

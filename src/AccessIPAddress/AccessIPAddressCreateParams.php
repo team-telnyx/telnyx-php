@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPAddress;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +13,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create new Access IP Address.
  *
- * @see Telnyx\AccessIPAddress->create
+ * @see Telnyx\Services\AccessIPAddressService::create()
  *
- * @phpstan-type access_ip_address_create_params = array{
- *   ipAddress: string, description?: string
+ * @phpstan-type AccessIPAddressCreateParamsShape = array{
+ *   ipAddress: string, description?: string|null
  * }
  */
 final class AccessIPAddressCreateParams implements BaseModel
 {
-    /** @use SdkModel<access_ip_address_create_params> */
+    /** @use SdkModel<AccessIPAddressCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api('ip_address')]
+    #[Required('ip_address')]
     public string $ipAddress;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
@@ -58,28 +59,28 @@ final class AccessIPAddressCreateParams implements BaseModel
         string $ipAddress,
         ?string $description = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->ipAddress = $ipAddress;
+        $self['ipAddress'] = $ipAddress;
 
-        null !== $description && $obj->description = $description;
+        null !== $description && $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 }

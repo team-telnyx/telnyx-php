@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesResponse;
@@ -15,131 +16,102 @@ use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListParams\Page
+ * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListInterfacesParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Networks\NetworkListInterfacesParams\Page as PageShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NetworksContract
 {
     /**
      * @api
      *
      * @param string $name a user specified name for the network
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        ?RequestOptions $requestOptions = null
+        string $name,
+        RequestOptions|array|null $requestOptions = null
     ): NetworkNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NetworkNewResponse;
-
-    /**
-     * @api
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NetworkGetResponse;
 
     /**
      * @api
      *
+     * @param string $networkID identifies the resource
      * @param string $name a user specified name for the network
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        string $id,
-        $name,
-        ?RequestOptions $requestOptions = null
+        string $networkID,
+        string $name,
+        RequestOptions|array|null $requestOptions = null,
     ): NetworkUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NetworkUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @return DefaultPagination<NetworkListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NetworkListResponse;
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NetworkListResponse;
-
-    /**
-     * @api
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NetworkDeleteResponse;
 
     /**
      * @api
      *
-     * @param \Telnyx\Networks\NetworkListInterfacesParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
-     * @param \Telnyx\Networks\NetworkListInterfacesParams\Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param string $id identifies the resource
+     * @param \Telnyx\Networks\NetworkListInterfacesParams\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status]
+     * @param \Telnyx\Networks\NetworkListInterfacesParams\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<NetworkListInterfacesResponse>
      *
      * @throws APIException
      */
     public function listInterfaces(
         string $id,
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null,
-    ): NetworkListInterfacesResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listInterfacesRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NetworkListInterfacesResponse;
+        \Telnyx\Networks\NetworkListInterfacesParams\Filter|array|null $filter = null,
+        \Telnyx\Networks\NetworkListInterfacesParams\Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 }

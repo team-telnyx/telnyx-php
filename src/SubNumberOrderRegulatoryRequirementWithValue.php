@@ -4,41 +4,41 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrderRegulatoryRequirementWithValue\FieldType;
 
 /**
- * @phpstan-type sub_number_order_regulatory_requirement_with_value = array{
- *   fieldType?: value-of<FieldType>,
- *   fieldValue?: string,
- *   recordType?: string,
- *   requirementID?: string,
+ * @phpstan-type SubNumberOrderRegulatoryRequirementWithValueShape = array{
+ *   fieldType?: null|FieldType|value-of<FieldType>,
+ *   fieldValue?: string|null,
+ *   recordType?: string|null,
+ *   requirementID?: string|null,
  * }
  */
 final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
 {
-    /** @use SdkModel<sub_number_order_regulatory_requirement_with_value> */
+    /** @use SdkModel<SubNumberOrderRegulatoryRequirementWithValueShape> */
     use SdkModel;
 
     /** @var value-of<FieldType>|null $fieldType */
-    #[Api('field_type', enum: FieldType::class, optional: true)]
+    #[Optional('field_type', enum: FieldType::class)]
     public ?string $fieldType;
 
     /**
      * The value of the requirement, this could be an id to a resource or a string value.
      */
-    #[Api('field_value', optional: true)]
+    #[Optional('field_value')]
     public ?string $fieldValue;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * Unique id for a requirement.
      */
-    #[Api('requirement_id', optional: true)]
+    #[Optional('requirement_id')]
     public ?string $requirementID;
 
     public function __construct()
@@ -51,7 +51,7 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FieldType|value-of<FieldType> $fieldType
+     * @param FieldType|value-of<FieldType>|null $fieldType
      */
     public static function with(
         FieldType|string|null $fieldType = null,
@@ -59,14 +59,14 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
         ?string $recordType = null,
         ?string $requirementID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fieldType && $obj['fieldType'] = $fieldType;
-        null !== $fieldValue && $obj->fieldValue = $fieldValue;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $requirementID && $obj->requirementID = $requirementID;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $fieldValue && $self['fieldValue'] = $fieldValue;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementID && $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
      */
     public function withFieldType(FieldType|string $fieldType): self
     {
-        $obj = clone $this;
-        $obj['fieldType'] = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,18 +85,18 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
      */
     public function withFieldValue(string $fieldValue): self
     {
-        $obj = clone $this;
-        $obj->fieldValue = $fieldValue;
+        $self = clone $this;
+        $self['fieldValue'] = $fieldValue;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,9 +104,9 @@ final class SubNumberOrderRegulatoryRequirementWithValue implements BaseModel
      */
     public function withRequirementID(string $requirementID): self
     {
-        $obj = clone $this;
-        $obj->requirementID = $requirementID;
+        $self = clone $this;
+        $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 }

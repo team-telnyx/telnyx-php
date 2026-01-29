@@ -10,29 +10,39 @@ use Telnyx\GlobalIPProtocols\GlobalIPProtocolListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPProtocolsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPProtocolsService implements GlobalIPProtocolsContract
 {
     /**
+     * @api
+     */
+    public GlobalIPProtocolsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPProtocolsRawService($client);
+    }
 
     /**
      * @api
      *
      * List all Global IP Protocols
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPProtocolListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'global_ip_protocols',
-            options: $requestOptions,
-            convert: GlobalIPProtocolListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

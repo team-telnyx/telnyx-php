@@ -4,37 +4,37 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type adjustment_alias = array{
- *   amount: string, description: string, eventDate: \DateTimeInterface
+ * @phpstan-type AdjustmentShape = array{
+ *   amount: string, description: string, eventDate: string
  * }
  */
 final class Adjustment implements BaseModel
 {
-    /** @use SdkModel<adjustment_alias> */
+    /** @use SdkModel<AdjustmentShape> */
     use SdkModel;
 
     /**
      * Adjustment amount as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $amount;
 
     /**
      * Description of the adjustment.
      */
-    #[Api]
+    #[Required]
     public string $description;
 
     /**
      * Date when the adjustment occurred.
      */
-    #[Api('event_date')]
-    public \DateTimeInterface $eventDate;
+    #[Required('event_date')]
+    public string $eventDate;
 
     /**
      * `new Adjustment()` is missing required properties by the API.
@@ -63,15 +63,15 @@ final class Adjustment implements BaseModel
     public static function with(
         string $amount,
         string $description,
-        \DateTimeInterface $eventDate
+        string $eventDate
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->amount = $amount;
-        $obj->description = $description;
-        $obj->eventDate = $eventDate;
+        $self['amount'] = $amount;
+        $self['description'] = $description;
+        $self['eventDate'] = $eventDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +79,10 @@ final class Adjustment implements BaseModel
      */
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj->amount = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,20 +90,20 @@ final class Adjustment implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Date when the adjustment occurred.
      */
-    public function withEventDate(\DateTimeInterface $eventDate): self
+    public function withEventDate(string $eventDate): self
     {
-        $obj = clone $this;
-        $obj->eventDate = $eventDate;
+        $self = clone $this;
+        $self['eventDate'] = $eventDate;
 
-        return $obj;
+        return $self;
     }
 }

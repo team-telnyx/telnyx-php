@@ -4,32 +4,74 @@ declare(strict_types=1);
 
 namespace Telnyx\WireguardPeers;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\WireguardPeers\WireguardPeerListResponse\Data;
 
 /**
- * @phpstan-type wireguard_peer_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-type WireguardPeerListResponseShape = array{
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
+ *   publicKey?: string|null,
+ *   lastSeen?: string|null,
+ *   privateKey?: string|null,
+ *   wireguardInterfaceID?: string|null,
  * }
  */
-final class WireguardPeerListResponse implements BaseModel, ResponseConverter
+final class WireguardPeerListResponse implements BaseModel
 {
-    /** @use SdkModel<wireguard_peer_list_response> */
+    /** @use SdkModel<WireguardPeerListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * Identifies the resource.
+     */
+    #[Optional]
+    public ?string $id;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
+
+    /**
+     * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     */
+    #[Optional('public_key')]
+    public ?string $publicKey;
+
+    /**
+     * ISO 8601 formatted date-time indicating when peer sent traffic last time.
+     */
+    #[Optional('last_seen')]
+    public ?string $lastSeen;
+
+    /**
+     * Your WireGuard `Interface.PrivateKey`.<br /><br />This attribute is only ever utlised if, on POST, you do NOT provide your own `public_key`. In which case, a new Public and Private key pair will be generated for you. When your `private_key` is returned, you must save this immediately as we do not save it within Telnyx. If you lose your Private Key, it can not be recovered.
+     */
+    #[Optional('private_key')]
+    public ?string $privateKey;
+
+    /**
+     * The id of the wireguard interface associated with the peer.
+     */
+    #[Optional('wireguard_interface_id')]
+    public ?string $wireguardInterfaceID;
 
     public function __construct()
     {
@@ -40,37 +82,116 @@ final class WireguardPeerListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<Data> $data
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?string $id = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
+        ?string $publicKey = null,
+        ?string $lastSeen = null,
+        ?string $privateKey = null,
+        ?string $wireguardInterfaceID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $publicKey && $self['publicKey'] = $publicKey;
+        null !== $lastSeen && $self['lastSeen'] = $lastSeen;
+        null !== $privateKey && $self['privateKey'] = $privateKey;
+        null !== $wireguardInterfaceID && $self['wireguardInterfaceID'] = $wireguardInterfaceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * Identifies the resource.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    /**
+     * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
+     */
+    public function withPublicKey(string $publicKey): self
+    {
+        $self = clone $this;
+        $self['publicKey'] = $publicKey;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when peer sent traffic last time.
+     */
+    public function withLastSeen(string $lastSeen): self
+    {
+        $self = clone $this;
+        $self['lastSeen'] = $lastSeen;
+
+        return $self;
+    }
+
+    /**
+     * Your WireGuard `Interface.PrivateKey`.<br /><br />This attribute is only ever utlised if, on POST, you do NOT provide your own `public_key`. In which case, a new Public and Private key pair will be generated for you. When your `private_key` is returned, you must save this immediately as we do not save it within Telnyx. If you lose your Private Key, it can not be recovered.
+     */
+    public function withPrivateKey(string $privateKey): self
+    {
+        $self = clone $this;
+        $self['privateKey'] = $privateKey;
+
+        return $self;
+    }
+
+    /**
+     * The id of the wireguard interface associated with the peer.
+     */
+    public function withWireguardInterfaceID(string $wireguardInterfaceID): self
+    {
+        $self = clone $this;
+        $self['wireguardInterfaceID'] = $wireguardInterfaceID;
+
+        return $self;
     }
 }

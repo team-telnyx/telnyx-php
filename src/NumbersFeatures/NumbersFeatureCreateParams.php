@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumbersFeatures;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,18 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve the features for a list of numbers.
  *
- * @see Telnyx\NumbersFeatures->create
+ * @see Telnyx\Services\NumbersFeaturesService::create()
  *
- * @phpstan-type numbers_feature_create_params = array{phoneNumbers: list<string>}
+ * @phpstan-type NumbersFeatureCreateParamsShape = array{
+ *   phoneNumbers: list<string>
+ * }
  */
 final class NumbersFeatureCreateParams implements BaseModel
 {
-    /** @use SdkModel<numbers_feature_create_params> */
+    /** @use SdkModel<NumbersFeatureCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<string> $phoneNumbers */
-    #[Api('phone_numbers', list: 'string')]
+    #[Required('phone_numbers', list: 'string')]
     public array $phoneNumbers;
 
     /**
@@ -54,11 +56,11 @@ final class NumbersFeatureCreateParams implements BaseModel
      */
     public static function with(array $phoneNumbers): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumbers = $phoneNumbers;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class NumbersFeatureCreateParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

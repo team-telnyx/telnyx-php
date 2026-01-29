@@ -4,52 +4,52 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\ReplacedLinkClickWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   messageID?: string,
- *   recordType?: string,
- *   timeClicked?: \DateTimeInterface,
- *   to?: string,
- *   url?: string,
+ * @phpstan-type DataShape = array{
+ *   messageID?: string|null,
+ *   recordType?: string|null,
+ *   timeClicked?: \DateTimeInterface|null,
+ *   to?: string|null,
+ *   url?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The message ID associated with the clicked link.
      */
-    #[Api('message_id', optional: true)]
+    #[Optional('message_id')]
     public ?string $messageID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the message request was received.
      */
-    #[Api('time_clicked', optional: true)]
+    #[Optional('time_clicked')]
     public ?\DateTimeInterface $timeClicked;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
      * The original link that was sent in the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()
@@ -69,15 +69,15 @@ final class Data implements BaseModel
         ?string $to = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $messageID && $obj->messageID = $messageID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $timeClicked && $obj->timeClicked = $timeClicked;
-        null !== $to && $obj->to = $to;
-        null !== $url && $obj->url = $url;
+        null !== $messageID && $self['messageID'] = $messageID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $timeClicked && $self['timeClicked'] = $timeClicked;
+        null !== $to && $self['to'] = $to;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Data implements BaseModel
      */
     public function withMessageID(string $messageID): self
     {
-        $obj = clone $this;
-        $obj->messageID = $messageID;
+        $self = clone $this;
+        $self['messageID'] = $messageID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class Data implements BaseModel
      */
     public function withTimeClicked(\DateTimeInterface $timeClicked): self
     {
-        $obj = clone $this;
-        $obj->timeClicked = $timeClicked;
+        $self = clone $this;
+        $self['timeClicked'] = $timeClicked;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class Data implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Data implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

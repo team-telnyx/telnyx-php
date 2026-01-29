@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Outbound call quality statistics.
  *
- * @phpstan-type outbound_alias = array{
- *   packetCount?: string, skipPacketCount?: string
+ * @phpstan-type OutboundShape = array{
+ *   packetCount?: string|null, skipPacketCount?: string|null
  * }
  */
 final class Outbound implements BaseModel
 {
-    /** @use SdkModel<outbound_alias> */
+    /** @use SdkModel<OutboundShape> */
     use SdkModel;
 
     /**
      * Total number of outbound audio packets.
      */
-    #[Api('packet_count', optional: true)]
+    #[Optional('packet_count')]
     public ?string $packetCount;
 
     /**
      * Number of skipped outbound packets (packet loss).
      */
-    #[Api('skip_packet_count', optional: true)]
+    #[Optional('skip_packet_count')]
     public ?string $skipPacketCount;
 
     public function __construct()
@@ -46,12 +46,12 @@ final class Outbound implements BaseModel
         ?string $packetCount = null,
         ?string $skipPacketCount = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $packetCount && $obj->packetCount = $packetCount;
-        null !== $skipPacketCount && $obj->skipPacketCount = $skipPacketCount;
+        null !== $packetCount && $self['packetCount'] = $packetCount;
+        null !== $skipPacketCount && $self['skipPacketCount'] = $skipPacketCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class Outbound implements BaseModel
      */
     public function withPacketCount(string $packetCount): self
     {
-        $obj = clone $this;
-        $obj->packetCount = $packetCount;
+        $self = clone $this;
+        $self['packetCount'] = $packetCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class Outbound implements BaseModel
      */
     public function withSkipPacketCount(string $skipPacketCount): self
     {
-        $obj = clone $this;
-        $obj->skipPacketCount = $skipPacketCount;
+        $self = clone $this;
+        $self['skipPacketCount'] = $skipPacketCount;
 
-        return $obj;
+        return $self;
     }
 }

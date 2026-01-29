@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\MigrationSources;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type migration_source_get_response = array{
- *   data?: MigrationSourceParams
+ * @phpstan-import-type MigrationSourceParamsShape from \Telnyx\Storage\MigrationSources\MigrationSourceParams
+ *
+ * @phpstan-type MigrationSourceGetResponseShape = array{
+ *   data?: null|MigrationSourceParams|MigrationSourceParamsShape
  * }
  */
-final class MigrationSourceGetResponse implements BaseModel, ResponseConverter
+final class MigrationSourceGetResponse implements BaseModel
 {
-    /** @use SdkModel<migration_source_get_response> */
+    /** @use SdkModel<MigrationSourceGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?MigrationSourceParams $data;
 
     public function __construct()
@@ -34,21 +32,26 @@ final class MigrationSourceGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MigrationSourceParams|MigrationSourceParamsShape|null $data
      */
-    public static function with(?MigrationSourceParams $data = null): self
+    public static function with(MigrationSourceParams|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(MigrationSourceParams $data): self
+    /**
+     * @param MigrationSourceParams|MigrationSourceParamsShape $data
+     */
+    public function withData(MigrationSourceParams|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

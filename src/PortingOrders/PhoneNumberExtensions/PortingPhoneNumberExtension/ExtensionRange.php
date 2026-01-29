@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Specifies the extension range for this porting phone number extension.
  *
- * @phpstan-type extension_range = array{endAt?: int, startAt?: int}
+ * @phpstan-type ExtensionRangeShape = array{endAt?: int|null, startAt?: int|null}
  */
 final class ExtensionRange implements BaseModel
 {
-    /** @use SdkModel<extension_range> */
+    /** @use SdkModel<ExtensionRangeShape> */
     use SdkModel;
 
     /**
      * Specifies the end of the extension range for this porting phone number extension.
      */
-    #[Api('end_at', optional: true)]
+    #[Optional('end_at')]
     public ?int $endAt;
 
     /**
      * Specifies the start of the extension range for this porting phone number extension.
      */
-    #[Api('start_at', optional: true)]
+    #[Optional('start_at')]
     public ?int $startAt;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class ExtensionRange implements BaseModel
      */
     public static function with(?int $endAt = null, ?int $startAt = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $endAt && $obj->endAt = $endAt;
-        null !== $startAt && $obj->startAt = $startAt;
+        null !== $endAt && $self['endAt'] = $endAt;
+        null !== $startAt && $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class ExtensionRange implements BaseModel
      */
     public function withEndAt(int $endAt): self
     {
-        $obj = clone $this;
-        $obj->endAt = $endAt;
+        $self = clone $this;
+        $self['endAt'] = $endAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class ExtensionRange implements BaseModel
      */
     public function withStartAt(int $startAt): self
     {
-        $obj = clone $this;
-        $obj->startAt = $startAt;
+        $self = clone $this;
+        $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 }

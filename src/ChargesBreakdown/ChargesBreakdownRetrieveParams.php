@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ChargesBreakdown;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownRetrieveParams\Format;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,38 +14,38 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a detailed breakdown of monthly charges for phone numbers in a specified date range. The date range cannot exceed 31 days.
  *
- * @see Telnyx\ChargesBreakdown->retrieve
+ * @see Telnyx\Services\ChargesBreakdownService::retrieve()
  *
- * @phpstan-type charges_breakdown_retrieve_params = array{
- *   startDate: \DateTimeInterface,
- *   endDate?: \DateTimeInterface,
- *   format?: Format|value-of<Format>,
+ * @phpstan-type ChargesBreakdownRetrieveParamsShape = array{
+ *   startDate: string,
+ *   endDate?: string|null,
+ *   format?: null|Format|value-of<Format>,
  * }
  */
 final class ChargesBreakdownRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<charges_breakdown_retrieve_params> */
+    /** @use SdkModel<ChargesBreakdownRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Start date for the charges breakdown in ISO date format (YYYY-MM-DD).
      */
-    #[Api]
-    public \DateTimeInterface $startDate;
+    #[Required]
+    public string $startDate;
 
     /**
      * End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $endDate;
+    #[Optional]
+    public ?string $endDate;
 
     /**
      * Response format.
      *
      * @var value-of<Format>|null $format
      */
-    #[Api(enum: Format::class, optional: true)]
+    #[Optional(enum: Format::class)]
     public ?string $format;
 
     /**
@@ -71,43 +72,43 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Format|value-of<Format> $format
+     * @param Format|value-of<Format>|null $format
      */
     public static function with(
-        \DateTimeInterface $startDate,
-        ?\DateTimeInterface $endDate = null,
-        Format|string|null $format = null,
+        string $startDate,
+        ?string $endDate = null,
+        Format|string|null $format = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->startDate = $startDate;
+        $self['startDate'] = $startDate;
 
-        null !== $endDate && $obj->endDate = $endDate;
-        null !== $format && $obj['format'] = $format;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $format && $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Start date for the charges breakdown in ISO date format (YYYY-MM-DD).
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * End date for the charges breakdown in ISO date format (YYYY-MM-DD). If not provided, defaults to start_date + 1 month. The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +118,9 @@ final class ChargesBreakdownRetrieveParams implements BaseModel
      */
     public function withFormat(Format|string $format): self
     {
-        $obj = clone $this;
-        $obj['format'] = $format;
+        $self = clone $this;
+        $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 }

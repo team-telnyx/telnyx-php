@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AvailablePhoneNumbers;
 
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,20 +13,24 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * List available phone numbers.
  *
- * @see Telnyx\AvailablePhoneNumbers->list
+ * @see Telnyx\Services\AvailablePhoneNumbersService::list()
  *
- * @phpstan-type available_phone_number_list_params = array{filter?: Filter}
+ * @phpstan-import-type FilterShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter
+ *
+ * @phpstan-type AvailablePhoneNumberListParamsShape = array{
+ *   filter?: null|Filter|FilterShape
+ * }
  */
 final class AvailablePhoneNumberListParams implements BaseModel
 {
-    /** @use SdkModel<available_phone_number_list_params> */
+    /** @use SdkModel<AvailablePhoneNumberListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()
@@ -38,24 +42,28 @@ final class AvailablePhoneNumberListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
      */
-    public static function with(?Filter $filter = null): self
+    public static function with(Filter|array|null $filter = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
+        null !== $filter && $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[locality], filter[administrative_area], filter[country_code], filter[national_destination_code], filter[rate_center], filter[phone_number_type], filter[features], filter[limit], filter[best_effort], filter[quickship], filter[reservable], filter[exclude_held_numbers].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 }

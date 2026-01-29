@@ -4,23 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardStatus\Value;
 
 /**
- * @phpstan-type sim_card_status = array{reason?: string, value?: value-of<Value>}
+ * @phpstan-type SimCardStatusShape = array{
+ *   reason?: string|null, value?: null|Value|value-of<Value>
+ * }
  */
 final class SimCardStatus implements BaseModel
 {
-    /** @use SdkModel<sim_card_status> */
+    /** @use SdkModel<SimCardStatusShape> */
     use SdkModel;
 
     /**
      * It describes why the SIM card is in the current status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $reason;
 
     /**
@@ -39,7 +41,7 @@ final class SimCardStatus implements BaseModel
      *
      * @var value-of<Value>|null $value
      */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()
@@ -52,18 +54,18 @@ final class SimCardStatus implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Value|value-of<Value> $value
+     * @param Value|value-of<Value>|null $value
      */
     public static function with(
         ?string $reason = null,
         Value|string|null $value = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reason && $obj->reason = $reason;
-        null !== $value && $obj['value'] = $value;
+        null !== $reason && $self['reason'] = $reason;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,10 +73,10 @@ final class SimCardStatus implements BaseModel
      */
     public function withReason(string $reason): self
     {
-        $obj = clone $this;
-        $obj->reason = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,9 +97,9 @@ final class SimCardStatus implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

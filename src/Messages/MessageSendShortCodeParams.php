@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,43 +14,43 @@ use Telnyx\Messages\MessageSendShortCodeParams\Type;
 /**
  * Send a short code message.
  *
- * @see Telnyx\Messages->sendShortCode
+ * @see Telnyx\Services\MessagesService::sendShortCode()
  *
- * @phpstan-type message_send_short_code_params = array{
+ * @phpstan-type MessageSendShortCodeParamsShape = array{
  *   from: string,
  *   to: string,
- *   autoDetect?: bool,
- *   mediaURLs?: list<string>,
- *   subject?: string,
- *   text?: string,
- *   type?: Type|value-of<Type>,
- *   useProfileWebhooks?: bool,
- *   webhookFailoverURL?: string,
- *   webhookURL?: string,
+ *   autoDetect?: bool|null,
+ *   mediaURLs?: list<string>|null,
+ *   subject?: string|null,
+ *   text?: string|null,
+ *   type?: null|Type|value-of<Type>,
+ *   useProfileWebhooks?: bool|null,
+ *   webhookFailoverURL?: string|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class MessageSendShortCodeParams implements BaseModel
 {
-    /** @use SdkModel<message_send_short_code_params> */
+    /** @use SdkModel<MessageSendShortCodeParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Phone number, in +E.164 format, used to send the message.
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
      * Receiving address (+E.164 formatted phone number or short code).
      */
-    #[Api]
+    #[Required]
     public string $to;
 
     /**
      * Automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts.
      */
-    #[Api('auto_detect', optional: true)]
+    #[Optional('auto_detect')]
     public ?bool $autoDetect;
 
     /**
@@ -59,13 +60,13 @@ final class MessageSendShortCodeParams implements BaseModel
      *
      * @var list<string>|null $mediaURLs
      */
-    #[Api('media_urls', list: 'string', optional: true)]
+    #[Optional('media_urls', list: 'string')]
     public ?array $mediaURLs;
 
     /**
      * Subject of multimedia message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $subject;
 
     /**
@@ -73,7 +74,7 @@ final class MessageSendShortCodeParams implements BaseModel
      *
      * **Required for SMS**
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     /**
@@ -81,25 +82,25 @@ final class MessageSendShortCodeParams implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      */
-    #[Api('use_profile_webhooks', optional: true)]
+    #[Optional('use_profile_webhooks')]
     public ?bool $useProfileWebhooks;
 
     /**
      * The failover URL where webhooks related to this message will be sent if sending to the primary URL fails.
      */
-    #[Api('webhook_failover_url', optional: true)]
+    #[Optional('webhook_failover_url')]
     public ?string $webhookFailoverURL;
 
     /**
      * The URL where webhooks related to this message will be sent.
      */
-    #[Api('webhook_url', optional: true)]
+    #[Optional('webhook_url')]
     public ?string $webhookURL;
 
     /**
@@ -126,8 +127,8 @@ final class MessageSendShortCodeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $mediaURLs
-     * @param Type|value-of<Type> $type
+     * @param list<string>|null $mediaURLs
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         string $from,
@@ -141,21 +142,21 @@ final class MessageSendShortCodeParams implements BaseModel
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->from = $from;
-        $obj->to = $to;
+        $self['from'] = $from;
+        $self['to'] = $to;
 
-        null !== $autoDetect && $obj->autoDetect = $autoDetect;
-        null !== $mediaURLs && $obj->mediaURLs = $mediaURLs;
-        null !== $subject && $obj->subject = $subject;
-        null !== $text && $obj->text = $text;
-        null !== $type && $obj['type'] = $type;
-        null !== $useProfileWebhooks && $obj->useProfileWebhooks = $useProfileWebhooks;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $autoDetect && $self['autoDetect'] = $autoDetect;
+        null !== $mediaURLs && $self['mediaURLs'] = $mediaURLs;
+        null !== $subject && $self['subject'] = $subject;
+        null !== $text && $self['text'] = $text;
+        null !== $type && $self['type'] = $type;
+        null !== $useProfileWebhooks && $self['useProfileWebhooks'] = $useProfileWebhooks;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +164,10 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +175,10 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +186,10 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withAutoDetect(bool $autoDetect): self
     {
-        $obj = clone $this;
-        $obj->autoDetect = $autoDetect;
+        $self = clone $this;
+        $self['autoDetect'] = $autoDetect;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +201,10 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withMediaURLs(array $mediaURLs): self
     {
-        $obj = clone $this;
-        $obj->mediaURLs = $mediaURLs;
+        $self = clone $this;
+        $self['mediaURLs'] = $mediaURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +212,10 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withSubject(string $subject): self
     {
-        $obj = clone $this;
-        $obj->subject = $subject;
+        $self = clone $this;
+        $self['subject'] = $subject;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +225,10 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,10 +238,10 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +249,10 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withUseProfileWebhooks(bool $useProfileWebhooks): self
     {
-        $obj = clone $this;
-        $obj->useProfileWebhooks = $useProfileWebhooks;
+        $self = clone $this;
+        $self['useProfileWebhooks'] = $useProfileWebhooks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,10 +260,10 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withWebhookFailoverURL(string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,9 +271,9 @@ final class MessageSendShortCodeParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

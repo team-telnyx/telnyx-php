@@ -4,73 +4,73 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports\MdrUsageReport;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type result_alias = array{
- *   carrierPassthroughFee?: string,
- *   connection?: string,
- *   cost?: string,
- *   currency?: string,
- *   delivered?: string,
- *   direction?: string,
- *   messageType?: string,
- *   parts?: string,
- *   product?: string,
- *   profileID?: string,
- *   received?: string,
- *   sent?: string,
- *   tags?: string,
- *   tnType?: string,
+ * @phpstan-type ResultShape = array{
+ *   carrierPassthroughFee?: string|null,
+ *   connection?: string|null,
+ *   cost?: string|null,
+ *   currency?: string|null,
+ *   delivered?: string|null,
+ *   direction?: string|null,
+ *   messageType?: string|null,
+ *   parts?: string|null,
+ *   product?: string|null,
+ *   profileID?: string|null,
+ *   received?: string|null,
+ *   sent?: string|null,
+ *   tags?: string|null,
+ *   tnType?: string|null,
  * }
  */
 final class Result implements BaseModel
 {
-    /** @use SdkModel<result_alias> */
+    /** @use SdkModel<ResultShape> */
     use SdkModel;
 
-    #[Api('carrier_passthrough_fee', optional: true)]
+    #[Optional('carrier_passthrough_fee')]
     public ?string $carrierPassthroughFee;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $connection;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cost;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $delivered;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $direction;
 
-    #[Api('message_type', optional: true)]
+    #[Optional('message_type')]
     public ?string $messageType;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $parts;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
-    #[Api('profile_id', optional: true)]
+    #[Optional('profile_id')]
     public ?string $profileID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $received;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sent;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tags;
 
-    #[Api('tn_type', optional: true)]
+    #[Optional('tn_type')]
     public ?string $tnType;
 
     public function __construct()
@@ -99,136 +99,136 @@ final class Result implements BaseModel
         ?string $tags = null,
         ?string $tnType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrierPassthroughFee && $obj->carrierPassthroughFee = $carrierPassthroughFee;
-        null !== $connection && $obj->connection = $connection;
-        null !== $cost && $obj->cost = $cost;
-        null !== $currency && $obj->currency = $currency;
-        null !== $delivered && $obj->delivered = $delivered;
-        null !== $direction && $obj->direction = $direction;
-        null !== $messageType && $obj->messageType = $messageType;
-        null !== $parts && $obj->parts = $parts;
-        null !== $product && $obj->product = $product;
-        null !== $profileID && $obj->profileID = $profileID;
-        null !== $received && $obj->received = $received;
-        null !== $sent && $obj->sent = $sent;
-        null !== $tags && $obj->tags = $tags;
-        null !== $tnType && $obj->tnType = $tnType;
+        null !== $carrierPassthroughFee && $self['carrierPassthroughFee'] = $carrierPassthroughFee;
+        null !== $connection && $self['connection'] = $connection;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $delivered && $self['delivered'] = $delivered;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $messageType && $self['messageType'] = $messageType;
+        null !== $parts && $self['parts'] = $parts;
+        null !== $product && $self['product'] = $product;
+        null !== $profileID && $self['profileID'] = $profileID;
+        null !== $received && $self['received'] = $received;
+        null !== $sent && $self['sent'] = $sent;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $tnType && $self['tnType'] = $tnType;
 
-        return $obj;
+        return $self;
     }
 
     public function withCarrierPassthroughFee(
         string $carrierPassthroughFee
     ): self {
-        $obj = clone $this;
-        $obj->carrierPassthroughFee = $carrierPassthroughFee;
+        $self = clone $this;
+        $self['carrierPassthroughFee'] = $carrierPassthroughFee;
 
-        return $obj;
+        return $self;
     }
 
     public function withConnection(string $connection): self
     {
-        $obj = clone $this;
-        $obj->connection = $connection;
+        $self = clone $this;
+        $self['connection'] = $connection;
 
-        return $obj;
+        return $self;
     }
 
     public function withCost(string $cost): self
     {
-        $obj = clone $this;
-        $obj->cost = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj->currency = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     public function withDelivered(string $delivered): self
     {
-        $obj = clone $this;
-        $obj->delivered = $delivered;
+        $self = clone $this;
+        $self['delivered'] = $delivered;
 
-        return $obj;
+        return $self;
     }
 
     public function withDirection(string $direction): self
     {
-        $obj = clone $this;
-        $obj->direction = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     public function withMessageType(string $messageType): self
     {
-        $obj = clone $this;
-        $obj->messageType = $messageType;
+        $self = clone $this;
+        $self['messageType'] = $messageType;
 
-        return $obj;
+        return $self;
     }
 
     public function withParts(string $parts): self
     {
-        $obj = clone $this;
-        $obj->parts = $parts;
+        $self = clone $this;
+        $self['parts'] = $parts;
 
-        return $obj;
+        return $self;
     }
 
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj->product = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     public function withProfileID(string $profileID): self
     {
-        $obj = clone $this;
-        $obj->profileID = $profileID;
+        $self = clone $this;
+        $self['profileID'] = $profileID;
 
-        return $obj;
+        return $self;
     }
 
     public function withReceived(string $received): self
     {
-        $obj = clone $this;
-        $obj->received = $received;
+        $self = clone $this;
+        $self['received'] = $received;
 
-        return $obj;
+        return $self;
     }
 
     public function withSent(string $sent): self
     {
-        $obj = clone $this;
-        $obj->sent = $sent;
+        $self = clone $this;
+        $self['sent'] = $sent;
 
-        return $obj;
+        return $self;
     }
 
     public function withTags(string $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     public function withTnType(string $tnType): self
     {
-        $obj = clone $this;
-        $obj->tnType = $tnType;
+        $self = clone $this;
+        $self['tnType'] = $tnType;
 
-        return $obj;
+        return $self;
     }
 }

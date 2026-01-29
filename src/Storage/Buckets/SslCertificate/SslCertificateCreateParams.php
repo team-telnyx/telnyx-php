@@ -4,36 +4,36 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\SslCertificate;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Uploads an SSL certificate and its matching secret so that you can use Telnyx’s storage as your CDN.
+ * Uploads an SSL certificate and its matching secret so that you can use Telnyx's storage as your CDN.
  *
- * @see Telnyx\Storage\Buckets\SslCertificate->create
+ * @see Telnyx\Services\Storage\Buckets\SslCertificateService::create()
  *
- * @phpstan-type ssl_certificate_create_params = array{
- *   certificate?: string, privateKey?: string
+ * @phpstan-type SslCertificateCreateParamsShape = array{
+ *   certificate?: string|null, privateKey?: string|null
  * }
  */
 final class SslCertificateCreateParams implements BaseModel
 {
-    /** @use SdkModel<ssl_certificate_create_params> */
+    /** @use SdkModel<SslCertificateCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The SSL certificate file.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $certificate;
 
     /**
      * The private key file.
      */
-    #[Api('private_key', optional: true)]
+    #[Optional('private_key')]
     public ?string $privateKey;
 
     public function __construct()
@@ -50,12 +50,12 @@ final class SslCertificateCreateParams implements BaseModel
         ?string $certificate = null,
         ?string $privateKey = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $certificate && $obj->certificate = $certificate;
-        null !== $privateKey && $obj->privateKey = $privateKey;
+        null !== $certificate && $self['certificate'] = $certificate;
+        null !== $privateKey && $self['privateKey'] = $privateKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class SslCertificateCreateParams implements BaseModel
      */
     public function withCertificate(string $certificate): self
     {
-        $obj = clone $this;
-        $obj->certificate = $certificate;
+        $self = clone $this;
+        $self['certificate'] = $certificate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class SslCertificateCreateParams implements BaseModel
      */
     public function withPrivateKey(string $privateKey): self
     {
-        $obj = clone $this;
-        $obj->privateKey = $privateKey;
+        $self = clone $this;
+        $self['privateKey'] = $privateKey;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Events\EventListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Events\EventListParams\Filter\CreatedAt;
@@ -13,19 +13,23 @@ use Telnyx\Portouts\Events\EventListParams\Filter\EventType;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at].
  *
- * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt, eventType?: value-of<EventType>, portoutID?: string
+ * @phpstan-import-type CreatedAtShape from \Telnyx\Portouts\Events\EventListParams\Filter\CreatedAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   portoutID?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by created_at date range using nested operations.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?CreatedAt $createdAt;
 
     /**
@@ -33,13 +37,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<EventType>|null $eventType
      */
-    #[Api('event_type', enum: EventType::class, optional: true)]
+    #[Optional('event_type', enum: EventType::class)]
     public ?string $eventType;
 
     /**
      * Filter by port-out order ID.
      */
-    #[Api('portout_id', optional: true)]
+    #[Optional('portout_id')]
     public ?string $portoutID;
 
     public function __construct()
@@ -52,31 +56,34 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType> $eventType
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param EventType|value-of<EventType>|null $eventType
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
+        CreatedAt|array|null $createdAt = null,
         EventType|string|null $eventType = null,
         ?string $portoutID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $eventType && $obj['eventType'] = $eventType;
-        null !== $portoutID && $obj->portoutID = $portoutID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $eventType && $self['eventType'] = $eventType;
+        null !== $portoutID && $self['portoutID'] = $portoutID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by created_at date range using nested operations.
+     *
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +93,10 @@ final class Filter implements BaseModel
      */
     public function withEventType(EventType|string $eventType): self
     {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,9 +104,9 @@ final class Filter implements BaseModel
      */
     public function withPortoutID(string $portoutID): self
     {
-        $obj = clone $this;
-        $obj->portoutID = $portoutID;
+        $self = clone $this;
+        $self['portoutID'] = $portoutID;
 
-        return $obj;
+        return $self;
     }
 }

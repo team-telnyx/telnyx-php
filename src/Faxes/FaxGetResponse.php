@@ -4,23 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type fax_get_response = array{data?: Fax}
+ * @phpstan-import-type FaxShape from \Telnyx\Faxes\Fax
+ *
+ * @phpstan-type FaxGetResponseShape = array{data?: null|Fax|FaxShape}
  */
-final class FaxGetResponse implements BaseModel, ResponseConverter
+final class FaxGetResponse implements BaseModel
 {
-    /** @use SdkModel<fax_get_response> */
+    /** @use SdkModel<FaxGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Fax $data;
 
     public function __construct()
@@ -32,21 +30,26 @@ final class FaxGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Fax|FaxShape|null $data
      */
-    public static function with(?Fax $data = null): self
+    public static function with(Fax|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Fax $data): self
+    /**
+     * @param Fax|FaxShape $data
+     */
+    public function withData(Fax|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

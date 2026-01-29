@@ -9,8 +9,9 @@ use Telnyx\RequestOptions;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface TextToSpeechContract
 {
     /**
@@ -26,25 +27,14 @@ interface TextToSpeechContract
      * - Telnyx.KokoroTTS.af
      *
      * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function generateSpeech(
-        $text,
-        $voice,
-        ?RequestOptions $requestOptions = null
-    ): string;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function generateSpeechRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $text,
+        string $voice,
+        RequestOptions|array|null $requestOptions = null,
     ): string;
 
     /**
@@ -52,24 +42,13 @@ interface TextToSpeechContract
      *
      * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
      * @param Provider|value-of<Provider> $provider Filter voices by provider
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listVoices(
-        $elevenlabsAPIKeyRef = omit,
-        $provider = omit,
-        ?RequestOptions $requestOptions = null,
-    ): TextToSpeechListVoicesResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listVoicesRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        ?string $elevenlabsAPIKeyRef = null,
+        Provider|string|null $provider = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechListVoicesResponse;
 }

@@ -5,127 +5,96 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Rooms;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\Rooms\Sessions\SessionGetParticipantsResponse;
+use Telnyx\RoomParticipant;
+use Telnyx\Rooms\RoomSession;
 use Telnyx\Rooms\Sessions\SessionGetResponse;
 use Telnyx\Rooms\Sessions\SessionList0Params\Filter;
 use Telnyx\Rooms\Sessions\SessionList0Params\Page;
-use Telnyx\Rooms\Sessions\SessionList0Response;
-use Telnyx\Rooms\Sessions\SessionList1Response;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList0Params\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList0Params\Page
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList1Params\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList1Params\Page as PageShape1
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter as FilterShape2
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page as PageShape2
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SessionsContract
 {
     /**
      * @api
      *
+     * @param string $roomSessionID the unique identifier of a room session
      * @param bool $includeParticipants to decide if room participants should be included in the response
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $roomSessionID,
-        $includeParticipants = omit,
-        ?RequestOptions $requestOptions = null,
+        ?bool $includeParticipants = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SessionGetResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): SessionGetResponse;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[room_id], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<RoomSession>
      *
      * @throws APIException
      */
     public function list0(
-        $filter = omit,
-        $includeParticipants = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SessionList0Response;
+        Filter|array|null $filter = null,
+        ?bool $includeParticipants = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function list0Raw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SessionList0Response;
-
-    /**
-     * @api
-     *
-     * @param \Telnyx\Rooms\Sessions\SessionList1Params\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
+     * @param string $roomID the unique identifier of a room
+     * @param \Telnyx\Rooms\Sessions\SessionList1Params\Filter|FilterShape1 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active]
      * @param bool $includeParticipants to decide if room participants should be included in the response
-     * @param \Telnyx\Rooms\Sessions\SessionList1Params\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param \Telnyx\Rooms\Sessions\SessionList1Params\Page|PageShape1 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<RoomSession>
      *
      * @throws APIException
      */
     public function list1(
         string $roomID,
-        $filter = omit,
-        $includeParticipants = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SessionList1Response;
+        \Telnyx\Rooms\Sessions\SessionList1Params\Filter|array|null $filter = null,
+        ?bool $includeParticipants = null,
+        \Telnyx\Rooms\Sessions\SessionList1Params\Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * @param string $roomSessionID the unique identifier of a room session
+     * @param \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter|FilterShape2 $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]
+     * @param \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page|PageShape2 $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
-     * @throws APIException
-     */
-    public function list1Raw(
-        string $roomID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SessionList1Response;
-
-    /**
-     * @api
-     *
-     * @param \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context]
-     * @param \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @return DefaultPagination<RoomParticipant>
      *
      * @throws APIException
      */
     public function retrieveParticipants(
         string $roomSessionID,
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SessionGetParticipantsResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveParticipantsRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): SessionGetParticipantsResponse;
+        \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter|array|null $filter = null,
+        \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 }

@@ -4,37 +4,39 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\Status;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber;
 
 /**
- * @phpstan-type data_alias = array{
- *   createdAt?: string,
- *   errorMessage?: string,
- *   status?: value-of<Status>,
- *   telephoneNumbers?: list<TelephoneNumber>,
- *   tenantID?: string,
- *   ticketID?: string,
+ * @phpstan-import-type TelephoneNumberShape from \Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber
+ *
+ * @phpstan-type DataShape = array{
+ *   createdAt?: string|null,
+ *   errorMessage?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   telephoneNumbers?: list<TelephoneNumber|TelephoneNumberShape>|null,
+ *   tenantID?: string|null,
+ *   ticketID?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * A message set if there is an error with the upload process.
      */
-    #[Api('error_message', optional: true)]
+    #[Optional('error_message')]
     public ?string $errorMessage;
 
     /**
@@ -42,20 +44,20 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /** @var list<TelephoneNumber>|null $telephoneNumbers */
-    #[Api('telephone_numbers', list: TelephoneNumber::class, optional: true)]
+    #[Optional('telephone_numbers', list: TelephoneNumber::class)]
     public ?array $telephoneNumbers;
 
-    #[Api('tenant_id', optional: true)]
+    #[Optional('tenant_id')]
     public ?string $tenantID;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Api('ticket_id', optional: true)]
+    #[Optional('ticket_id')]
     public ?string $ticketID;
 
     public function __construct()
@@ -68,8 +70,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
-     * @param list<TelephoneNumber> $telephoneNumbers
+     * @param Status|value-of<Status>|null $status
+     * @param list<TelephoneNumber|TelephoneNumberShape>|null $telephoneNumbers
      */
     public static function with(
         ?string $createdAt = null,
@@ -79,16 +81,16 @@ final class Data implements BaseModel
         ?string $tenantID = null,
         ?string $ticketID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $errorMessage && $obj->errorMessage = $errorMessage;
-        null !== $status && $obj['status'] = $status;
-        null !== $telephoneNumbers && $obj->telephoneNumbers = $telephoneNumbers;
-        null !== $tenantID && $obj->tenantID = $tenantID;
-        null !== $ticketID && $obj->ticketID = $ticketID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $errorMessage && $self['errorMessage'] = $errorMessage;
+        null !== $status && $self['status'] = $status;
+        null !== $telephoneNumbers && $self['telephoneNumbers'] = $telephoneNumbers;
+        null !== $tenantID && $self['tenantID'] = $tenantID;
+        null !== $ticketID && $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +98,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +109,10 @@ final class Data implements BaseModel
      */
     public function withErrorMessage(string $errorMessage): self
     {
-        $obj = clone $this;
-        $obj->errorMessage = $errorMessage;
+        $self = clone $this;
+        $self['errorMessage'] = $errorMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,29 +122,29 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<TelephoneNumber> $telephoneNumbers
+     * @param list<TelephoneNumber|TelephoneNumberShape> $telephoneNumbers
      */
     public function withTelephoneNumbers(array $telephoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->telephoneNumbers = $telephoneNumbers;
+        $self = clone $this;
+        $self['telephoneNumbers'] = $telephoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     public function withTenantID(string $tenantID): self
     {
-        $obj = clone $this;
-        $obj->tenantID = $tenantID;
+        $self = clone $this;
+        $self['tenantID'] = $tenantID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,9 +152,9 @@ final class Data implements BaseModel
      */
     public function withTicketID(string $ticketID): self
     {
-        $obj = clone $this;
-        $obj->ticketID = $ticketID;
+        $self = clone $this;
+        $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 }

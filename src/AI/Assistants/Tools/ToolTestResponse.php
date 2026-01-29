@@ -5,28 +5,26 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tools;
 
 use Telnyx\AI\Assistants\Tools\ToolTestResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model for webhook tool test results.
  *
- * @phpstan-type tool_test_response = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Assistants\Tools\ToolTestResponse\Data
+ *
+ * @phpstan-type ToolTestResponseShape = array{data: Data|DataShape}
  */
-final class ToolTestResponse implements BaseModel, ResponseConverter
+final class ToolTestResponse implements BaseModel
 {
-    /** @use SdkModel<tool_test_response> */
+    /** @use SdkModel<ToolTestResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Response model for webhook tool test results.
      */
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**
@@ -52,24 +50,28 @@ final class ToolTestResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|DataShape $data
      */
-    public static function with(Data $data): self
+    public static function with(Data|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Response model for webhook tool test results.
+     *
+     * @param Data|DataShape $data
      */
-    public function withData(Data $data): self
+    public function withData(Data|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\NumberLookup;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,18 +13,18 @@ use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\A
 /**
  * Submit a new telco data usage report.
  *
- * @see Telnyx\Legacy\Reporting\UsageReports\NumberLookup->create
+ * @see Telnyx\Services\Legacy\Reporting\UsageReports\NumberLookupService::create()
  *
- * @phpstan-type number_lookup_create_params = array{
- *   aggregationType?: AggregationType|value-of<AggregationType>,
- *   endDate?: \DateTimeInterface,
- *   managedAccounts?: list<string>,
- *   startDate?: \DateTimeInterface,
+ * @phpstan-type NumberLookupCreateParamsShape = array{
+ *   aggregationType?: null|AggregationType|value-of<AggregationType>,
+ *   endDate?: string|null,
+ *   managedAccounts?: list<string>|null,
+ *   startDate?: string|null,
  * }
  */
 final class NumberLookupCreateParams implements BaseModel
 {
-    /** @use SdkModel<number_lookup_create_params> */
+    /** @use SdkModel<NumberLookupCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -33,28 +33,28 @@ final class NumberLookupCreateParams implements BaseModel
      *
      * @var value-of<AggregationType>|null $aggregationType
      */
-    #[Api(enum: AggregationType::class, optional: true)]
+    #[Optional(enum: AggregationType::class)]
     public ?string $aggregationType;
 
     /**
      * End date for the usage report.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $endDate;
+    #[Optional]
+    public ?string $endDate;
 
     /**
      * List of managed accounts to include in the report.
      *
      * @var list<string>|null $managedAccounts
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $managedAccounts;
 
     /**
      * Start date for the usage report.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $startDate;
+    #[Optional]
+    public ?string $startDate;
 
     public function __construct()
     {
@@ -66,23 +66,23 @@ final class NumberLookupCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AggregationType|value-of<AggregationType> $aggregationType
-     * @param list<string> $managedAccounts
+     * @param AggregationType|value-of<AggregationType>|null $aggregationType
+     * @param list<string>|null $managedAccounts
      */
     public static function with(
         AggregationType|string|null $aggregationType = null,
-        ?\DateTimeInterface $endDate = null,
+        ?string $endDate = null,
         ?array $managedAccounts = null,
-        ?\DateTimeInterface $startDate = null,
+        ?string $startDate = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $aggregationType && $obj['aggregationType'] = $aggregationType;
-        null !== $endDate && $obj->endDate = $endDate;
-        null !== $managedAccounts && $obj->managedAccounts = $managedAccounts;
-        null !== $startDate && $obj->startDate = $startDate;
+        null !== $aggregationType && $self['aggregationType'] = $aggregationType;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
+        null !== $startDate && $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,21 +93,21 @@ final class NumberLookupCreateParams implements BaseModel
     public function withAggregationType(
         AggregationType|string $aggregationType
     ): self {
-        $obj = clone $this;
-        $obj['aggregationType'] = $aggregationType;
+        $self = clone $this;
+        $self['aggregationType'] = $aggregationType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * End date for the usage report.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,20 +117,20 @@ final class NumberLookupCreateParams implements BaseModel
      */
     public function withManagedAccounts(array $managedAccounts): self
     {
-        $obj = clone $this;
-        $obj->managedAccounts = $managedAccounts;
+        $self = clone $this;
+        $self['managedAccounts'] = $managedAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Start date for the usage report.
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 }

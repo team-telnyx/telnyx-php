@@ -4,37 +4,37 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomRecordings\RoomRecordingListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type date_ended_at = array{
- *   eq?: \DateTimeInterface, gte?: \DateTimeInterface, lte?: \DateTimeInterface
+ * @phpstan-type DateEndedAtShape = array{
+ *   eq?: string|null, gte?: string|null, lte?: string|null
  * }
  */
 final class DateEndedAt implements BaseModel
 {
-    /** @use SdkModel<date_ended_at> */
+    /** @use SdkModel<DateEndedAtShape> */
     use SdkModel;
 
     /**
      * ISO 8601 date for filtering room recordings ended on that date.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $eq;
+    #[Optional]
+    public ?string $eq;
 
     /**
      * ISO 8601 date for filtering room recordings ended on or after that date.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $gte;
+    #[Optional]
+    public ?string $gte;
 
     /**
      * ISO 8601 date for filtering room recordings ended on or before that date.
      */
-    #[Api(optional: true)]
-    public ?\DateTimeInterface $lte;
+    #[Optional]
+    public ?string $lte;
 
     public function __construct()
     {
@@ -47,49 +47,49 @@ final class DateEndedAt implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?\DateTimeInterface $eq = null,
-        ?\DateTimeInterface $gte = null,
-        ?\DateTimeInterface $lte = null,
+        ?string $eq = null,
+        ?string $gte = null,
+        ?string $lte = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj->eq = $eq;
-        null !== $gte && $obj->gte = $gte;
-        null !== $lte && $obj->lte = $lte;
+        null !== $eq && $self['eq'] = $eq;
+        null !== $gte && $self['gte'] = $gte;
+        null !== $lte && $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * ISO 8601 date for filtering room recordings ended on that date.
      */
-    public function withEq(\DateTimeInterface $eq): self
+    public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj->eq = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * ISO 8601 date for filtering room recordings ended on or after that date.
      */
-    public function withGte(\DateTimeInterface $gte): self
+    public function withGte(string $gte): self
     {
-        $obj = clone $this;
-        $obj->gte = $gte;
+        $self = clone $this;
+        $self['gte'] = $gte;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * ISO 8601 date for filtering room recordings ended on or before that date.
      */
-    public function withLte(\DateTimeInterface $lte): self
+    public function withLte(string $lte): self
     {
-        $obj = clone $this;
-        $obj->lte = $lte;
+        $self = clone $this;
+        $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 }

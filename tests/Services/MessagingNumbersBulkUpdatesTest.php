@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse;
+use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +40,11 @@ final class MessagingNumbersBulkUpdatesTest extends TestCase
             numbers: ['+18880000000', '+18880000001', '+18880000002'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingNumbersBulkUpdateNewResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -53,7 +59,11 @@ final class MessagingNumbersBulkUpdatesTest extends TestCase
             numbers: ['+18880000000', '+18880000001', '+18880000002'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingNumbersBulkUpdateNewResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -65,6 +75,10 @@ final class MessagingNumbersBulkUpdatesTest extends TestCase
 
         $result = $this->client->messagingNumbersBulkUpdates->retrieve('order_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessagingNumbersBulkUpdateGetResponse::class,
+            $result
+        );
     }
 }

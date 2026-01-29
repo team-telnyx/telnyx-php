@@ -4,63 +4,66 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\PhoneNumber\RegulatoryRequirement;
 
 /**
- * @phpstan-type phone_number = array{
- *   id?: string,
- *   bundleID?: string,
- *   countryCode?: string,
- *   phoneNumber?: string,
- *   phoneNumberType?: string,
- *   recordType?: string,
- *   regulatoryRequirements?: list<RegulatoryRequirement>,
- *   requirementsMet?: bool,
- *   requirementsStatus?: string,
- *   status?: string,
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\PhoneNumber\RegulatoryRequirement
+ *
+ * @phpstan-type PhoneNumberShape = array{
+ *   id?: string|null,
+ *   bundleID?: string|null,
+ *   countryCode?: string|null,
+ *   phoneNumber?: string|null,
+ *   phoneNumberType?: string|null,
+ *   recordType?: string|null,
+ *   regulatoryRequirements?: list<\Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data\PhoneNumber\RegulatoryRequirement|RegulatoryRequirementShape>|null,
+ *   requirementsMet?: bool|null,
+ *   requirementsStatus?: string|null,
+ *   status?: string|null,
  * }
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api('bundle_id', optional: true)]
+    #[Optional('bundle_id', nullable: true)]
     public ?string $bundleID;
 
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
-    #[Api('phone_number_type', optional: true)]
+    #[Optional('phone_number_type')]
     public ?string $phoneNumberType;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
-    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
+    /**
+     * @var list<RegulatoryRequirement>|null $regulatoryRequirements
+     */
+    #[Optional(
         'regulatory_requirements',
         list: RegulatoryRequirement::class,
-        optional: true,
     )]
     public ?array $regulatoryRequirements;
 
-    #[Api('requirements_met', optional: true)]
+    #[Optional('requirements_met')]
     public ?bool $requirementsMet;
 
-    #[Api('requirements_status', optional: true)]
+    #[Optional('requirements_status')]
     public ?string $requirementsStatus;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()
@@ -73,7 +76,7 @@ final class PhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         ?string $id = null,
@@ -87,103 +90,103 @@ final class PhoneNumber implements BaseModel
         ?string $requirementsStatus = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $bundleID && $obj->bundleID = $bundleID;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
-        null !== $requirementsMet && $obj->requirementsMet = $requirementsMet;
-        null !== $requirementsStatus && $obj->requirementsStatus = $requirementsStatus;
-        null !== $status && $obj->status = $status;
+        null !== $id && $self['id'] = $id;
+        null !== $bundleID && $self['bundleID'] = $bundleID;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
+        null !== $requirementsMet && $self['requirementsMet'] = $requirementsMet;
+        null !== $requirementsStatus && $self['requirementsStatus'] = $requirementsStatus;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withBundleID(string $bundleID): self
+    public function withBundleID(?string $bundleID): self
     {
-        $obj = clone $this;
-        $obj->bundleID = $bundleID;
+        $self = clone $this;
+        $self['bundleID'] = $bundleID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumberType(string $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     public function withRequirementsMet(bool $requirementsMet): self
     {
-        $obj = clone $this;
-        $obj->requirementsMet = $requirementsMet;
+        $self = clone $this;
+        $self['requirementsMet'] = $requirementsMet;
 
-        return $obj;
+        return $self;
     }
 
     public function withRequirementsStatus(string $requirementsStatus): self
     {
-        $obj = clone $this;
-        $obj->requirementsStatus = $requirementsStatus;
+        $self = clone $this;
+        $self['requirementsStatus'] = $requirementsStatus;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

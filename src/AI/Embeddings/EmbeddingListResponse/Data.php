@@ -5,27 +5,28 @@ declare(strict_types=1);
 namespace Telnyx\AI\Embeddings\EmbeddingListResponse;
 
 use Telnyx\AI\Embeddings\BackgroundTaskStatus;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   createdAt: \DateTimeInterface,
- *   status: value-of<BackgroundTaskStatus>,
+ *   status: BackgroundTaskStatus|value-of<BackgroundTaskStatus>,
  *   taskID: string,
  *   taskName: string,
  *   userID: string,
- *   bucket?: string,
- *   finishedAt?: \DateTimeInterface,
+ *   bucket?: string|null,
+ *   finishedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('created_at')]
+    #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
     /**
@@ -33,22 +34,22 @@ final class Data implements BaseModel
      *
      * @var value-of<BackgroundTaskStatus> $status
      */
-    #[Api(enum: BackgroundTaskStatus::class)]
+    #[Required(enum: BackgroundTaskStatus::class)]
     public string $status;
 
-    #[Api('task_id')]
+    #[Required('task_id')]
     public string $taskID;
 
-    #[Api('task_name')]
+    #[Required('task_name')]
     public string $taskName;
 
-    #[Api('user_id')]
+    #[Required('user_id')]
     public string $userID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bucket;
 
-    #[Api('finished_at', optional: true)]
+    #[Optional('finished_at')]
     public ?\DateTimeInterface $finishedAt;
 
     /**
@@ -91,26 +92,26 @@ final class Data implements BaseModel
         ?string $bucket = null,
         ?\DateTimeInterface $finishedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->createdAt = $createdAt;
-        $obj['status'] = $status;
-        $obj->taskID = $taskID;
-        $obj->taskName = $taskName;
-        $obj->userID = $userID;
+        $self['createdAt'] = $createdAt;
+        $self['status'] = $status;
+        $self['taskID'] = $taskID;
+        $self['taskName'] = $taskName;
+        $self['userID'] = $userID;
 
-        null !== $bucket && $obj->bucket = $bucket;
-        null !== $finishedAt && $obj->finishedAt = $finishedAt;
+        null !== $bucket && $self['bucket'] = $bucket;
+        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,49 +121,49 @@ final class Data implements BaseModel
      */
     public function withStatus(BackgroundTaskStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaskID(string $taskID): self
     {
-        $obj = clone $this;
-        $obj->taskID = $taskID;
+        $self = clone $this;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaskName(string $taskName): self
     {
-        $obj = clone $this;
-        $obj->taskName = $taskName;
+        $self = clone $this;
+        $self['taskName'] = $taskName;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj->bucket = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
-        $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 }

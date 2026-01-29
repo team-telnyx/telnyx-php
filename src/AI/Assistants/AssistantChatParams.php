@@ -4,42 +4,43 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * This endpoint allows a client to send a chat message to a specific AI Assistant. The assistant processes the message and returns a relevant reply based on the current conversation context. Refer to the Conversation API to [create a conversation](https://developers.telnyx.com/api/inference/inference-embedding/create-new-conversation-public-conversations-post), [filter existing conversations](https://developers.telnyx.com/api/inference/inference-embedding/get-conversations-public-conversations-get), [fetch messages for a conversation](https://developers.telnyx.com/api/inference/inference-embedding/get-conversations-public-conversation-id-messages-get), and [manually add messages to a conversation](https://developers.telnyx.com/api/inference/inference-embedding/add-new-message).
+ * This endpoint allows a client to send a chat message to a specific AI Assistant. The assistant processes the message and returns a relevant reply based on the current conversation context. Refer to the Conversation API to [create a conversation](https://developers.telnyx.com/api-reference/conversations/create-a-conversation), [filter existing conversations](https://developers.telnyx.com/api-reference/conversations/list-conversations), [fetch messages for a conversation](https://developers.telnyx.com/api-reference/conversations/get-conversation-messages), and [manually add messages to a conversation](https://developers.telnyx.com/api-reference/conversations/create-message).
  *
- * @see Telnyx\AI\Assistants->chat
+ * @see Telnyx\Services\AI\AssistantsService::chat()
  *
- * @phpstan-type assistant_chat_params = array{
- *   content: string, conversationID: string, name?: string
+ * @phpstan-type AssistantChatParamsShape = array{
+ *   content: string, conversationID: string, name?: string|null
  * }
  */
 final class AssistantChatParams implements BaseModel
 {
-    /** @use SdkModel<assistant_chat_params> */
+    /** @use SdkModel<AssistantChatParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The message content sent by the client to the assistant.
      */
-    #[Api]
+    #[Required]
     public string $content;
 
     /**
      * A unique identifier for the conversation thread, used to maintain context.
      */
-    #[Api('conversation_id')]
+    #[Required('conversation_id')]
     public string $conversationID;
 
     /**
      * The optional display name of the user sending the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -71,14 +72,14 @@ final class AssistantChatParams implements BaseModel
         string $conversationID,
         ?string $name = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->content = $content;
-        $obj->conversationID = $conversationID;
+        $self['content'] = $content;
+        $self['conversationID'] = $conversationID;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +87,10 @@ final class AssistantChatParams implements BaseModel
      */
     public function withContent(string $content): self
     {
-        $obj = clone $this;
-        $obj->content = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +98,10 @@ final class AssistantChatParams implements BaseModel
      */
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj->conversationID = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +109,9 @@ final class AssistantChatParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

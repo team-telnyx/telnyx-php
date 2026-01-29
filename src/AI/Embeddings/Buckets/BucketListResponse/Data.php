@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings\Buckets\BucketListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{buckets: list<string>}
+ * @phpstan-type DataShape = array{buckets: list<string>}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /** @var list<string> $buckets */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $buckets;
 
     /**
@@ -48,11 +48,11 @@ final class Data implements BaseModel
      */
     public static function with(array $buckets): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->buckets = $buckets;
+        $self['buckets'] = $buckets;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class Data implements BaseModel
      */
     public function withBuckets(array $buckets): self
     {
-        $obj = clone $this;
-        $obj->buckets = $buckets;
+        $self = clone $this;
+        $self['buckets'] = $buckets;
 
-        return $obj;
+        return $self;
     }
 }

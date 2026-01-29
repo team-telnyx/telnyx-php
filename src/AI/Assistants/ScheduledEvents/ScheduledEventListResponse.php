@@ -4,88 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
-use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse\Data;
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
-use Telnyx\Core\Attributes\Api;
-use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
-use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\Core\Concerns\SdkUnion;
+use Telnyx\Core\Conversion\Contracts\Converter;
+use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
- * @phpstan-type scheduled_event_list_response = array{
- *   data: list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse>,
- *   meta: Meta,
- * }
+ * @phpstan-import-type ScheduledPhoneCallEventResponseShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse
+ * @phpstan-import-type ScheduledSMSEventResponseShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse
+ *
+ * @phpstan-type ScheduledEventListResponseVariants = ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse
+ * @phpstan-type ScheduledEventListResponseShape = ScheduledEventListResponseVariants|ScheduledPhoneCallEventResponseShape|ScheduledSMSEventResponseShape
  */
-final class ScheduledEventListResponse implements BaseModel, ResponseConverter
+final class ScheduledEventListResponse implements ConverterSource
 {
-    /** @use SdkModel<scheduled_event_list_response> */
-    use SdkModel;
-
-    use SdkResponse;
+    use SdkUnion;
 
     /**
-     * @var list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse> $data
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
-    #[Api(list: Data::class)]
-    public array $data;
-
-    #[Api]
-    public Meta $meta;
-
-    /**
-     * `new ScheduledEventListResponse()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * ScheduledEventListResponse::with(data: ..., meta: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new ScheduledEventListResponse)->withData(...)->withMeta(...)
-     * ```
-     */
-    public function __construct()
+    public static function variants(): array
     {
-        $this->initialize();
-    }
-
-    /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse> $data
-     */
-    public static function with(array $data, Meta $meta): self
-    {
-        $obj = new self;
-
-        $obj->data = $data;
-        $obj->meta = $meta;
-
-        return $obj;
-    }
-
-    /**
-     * @param list<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse> $data
-     */
-    public function withData(array $data): self
-    {
-        $obj = clone $this;
-        $obj->data = $data;
-
-        return $obj;
-    }
-
-    public function withMeta(Meta $meta): self
-    {
-        $obj = clone $this;
-        $obj->meta = $meta;
-
-        return $obj;
+        return [
+            ScheduledPhoneCallEventResponse::class, ScheduledSMSEventResponse::class,
+        ];
     }
 }

@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecord;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,10 +39,11 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->create(
-            phoneNumber: '+1234567890'
+            phoneNumber: '+13035553000'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomerServiceRecordNewResponse::class, $result);
     }
 
     #[Test]
@@ -48,10 +54,24 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->create(
-            phoneNumber: '+1234567890'
+            phoneNumber: '+13035553000',
+            additionalData: [
+                'accountNumber' => '123456789',
+                'addressLine1' => '123 Main St',
+                'authorizedPersonName' => 'John Doe',
+                'billingPhoneNumber' => '+12065551212',
+                'city' => 'New York',
+                'customerCode' => '123456789',
+                'name' => 'Entity Inc.',
+                'pin' => '1234',
+                'state' => 'NY',
+                'zipCode' => '10001',
+            ],
+            webhookURL: 'https://example.com/webhook',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomerServiceRecordNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +85,8 @@ final class CustomerServiceRecordsTest extends TestCase
             'customer_service_record_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomerServiceRecordGetResponse::class, $result);
     }
 
     #[Test]
@@ -75,9 +96,15 @@ final class CustomerServiceRecordsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->customerServiceRecords->list();
+        $page = $this->client->customerServiceRecords->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CustomerServiceRecord::class, $item);
+        }
     }
 
     #[Test]
@@ -88,10 +115,14 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(
-            ['+1234567890']
+            phoneNumbers: ['+13035553000']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            CustomerServiceRecordVerifyPhoneNumberCoverageResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -102,9 +133,13 @@ final class CustomerServiceRecordsTest extends TestCase
         }
 
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(
-            ['+1234567890']
+            phoneNumbers: ['+13035553000']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            CustomerServiceRecordVerifyPhoneNumberCoverageResponse::class,
+            $result
+        );
     }
 }

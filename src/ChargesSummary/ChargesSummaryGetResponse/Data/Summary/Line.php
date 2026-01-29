@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
 
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Comparative;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Simple;
+use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\ComparativeLine;
+use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\SimpleLine;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
+/**
+ * @phpstan-import-type ComparativeLineShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\ComparativeLine
+ * @phpstan-import-type SimpleLineShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\SimpleLine
+ *
+ * @phpstan-type LineVariants = ComparativeLine|SimpleLine
+ * @phpstan-type LineShape = LineVariants|ComparativeLineShape|SimpleLineShape
+ */
 final class Line implements ConverterSource
 {
     use SdkUnion;
@@ -20,11 +27,12 @@ final class Line implements ConverterSource
     }
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
-        return ['comparative' => Comparative::class, 'simple' => Simple::class];
+        return [
+            'comparative' => ComparativeLine::class, 'simple' => SimpleLine::class,
+        ];
     }
 }

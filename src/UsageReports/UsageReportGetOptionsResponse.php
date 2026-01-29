@@ -4,31 +4,31 @@ declare(strict_types=1);
 
 namespace Telnyx\UsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse\Data;
 
 /**
  * An object following one of the schemas published in https://developers.telnyx.com/docs/api/v2/detail-records.
  *
- * @phpstan-type usage_report_get_options_response = array{data?: list<Data>}
+ * @phpstan-import-type DataShape from \Telnyx\UsageReports\UsageReportGetOptionsResponse\Data
+ *
+ * @phpstan-type UsageReportGetOptionsResponseShape = array{
+ *   data?: list<Data|DataShape>|null
+ * }
  */
-final class UsageReportGetOptionsResponse implements BaseModel, ResponseConverter
+final class UsageReportGetOptionsResponse implements BaseModel
 {
-    /** @use SdkModel<usage_report_get_options_response> */
+    /** @use SdkModel<UsageReportGetOptionsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Collection of product description.
      *
      * @var list<Data>|null $data
      */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
     public function __construct()
@@ -41,27 +41,27 @@ final class UsageReportGetOptionsResponse implements BaseModel, ResponseConverte
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|DataShape>|null $data
      */
     public static function with(?array $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Collection of product description.
      *
-     * @param list<Data> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

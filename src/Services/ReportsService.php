@@ -6,30 +6,35 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Reports\ReportListMdrsParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Reports\ReportListMdrsParams\Direction;
 use Telnyx\Reports\ReportListMdrsParams\MessageType;
 use Telnyx\Reports\ReportListMdrsParams\Status;
 use Telnyx\Reports\ReportListMdrsResponse;
-use Telnyx\Reports\ReportListWdrsParams;
-use Telnyx\Reports\ReportListWdrsParams\Page;
 use Telnyx\Reports\ReportListWdrsResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ReportsContract;
 use Telnyx\Services\Reports\CdrUsageReportsService;
 use Telnyx\Services\Reports\MdrUsageReportsService;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ReportsService implements ReportsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public ReportsRawService $raw;
+
+    /**
+     * @api
      */
     public CdrUsageReportsService $cdrUsageReports;
 
     /**
-     * @@api
+     * @api
      */
     public MdrUsageReportsService $mdrUsageReports;
 
@@ -38,6 +43,7 @@ final class ReportsService implements ReportsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ReportsRawService($client);
         $this->cdrUsageReports = new CdrUsageReportsService($client);
         $this->mdrUsageReports = new MdrUsageReportsService($client);
     }
@@ -56,60 +62,40 @@ final class ReportsService implements ReportsContract
      * @param string $profile Name of the profile
      * @param string $startDate Pagination start date
      * @param Status|value-of<Status> $status Message status
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listMdrs(
-        $id = omit,
-        $cld = omit,
-        $cli = omit,
-        $direction = omit,
-        $endDate = omit,
-        $messageType = omit,
-        $profile = omit,
-        $startDate = omit,
-        $status = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $id = null,
+        ?string $cld = null,
+        ?string $cli = null,
+        Direction|string|null $direction = null,
+        ?string $endDate = null,
+        MessageType|string|null $messageType = null,
+        ?string $profile = null,
+        ?string $startDate = null,
+        Status|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ReportListMdrsResponse {
-        $params = [
-            'id' => $id,
-            'cld' => $cld,
-            'cli' => $cli,
-            'direction' => $direction,
-            'endDate' => $endDate,
-            'messageType' => $messageType,
-            'profile' => $profile,
-            'startDate' => $startDate,
-            'status' => $status,
-        ];
-
-        return $this->listMdrsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listMdrsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ReportListMdrsResponse {
-        [$parsed, $options] = ReportListMdrsParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'id' => $id,
+                'cld' => $cld,
+                'cli' => $cli,
+                'direction' => $direction,
+                'endDate' => $endDate,
+                'messageType' => $messageType,
+                'profile' => $profile,
+                'startDate' => $startDate,
+                'status' => $status,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'reports/mdrs',
-            query: $parsed,
-            options: $options,
-            convert: ReportListMdrsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listMdrs(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -122,72 +108,55 @@ final class ReportsService implements ReportsContract
      * @param string $imsi International mobile subscriber identity
      * @param string $mcc Mobile country code
      * @param string $mnc Mobile network code
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param string $phoneNumber Phone number
      * @param string $simCardID Sim card unique identifier
      * @param string $simGroupID Sim group unique identifier
      * @param string $simGroupName Sim group name
      * @param list<string> $sort Field used to order the data. If no field is specified, default value is 'created_at'
      * @param string $startDate Start date
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<ReportListWdrsResponse>
      *
      * @throws APIException
      */
     public function listWdrs(
-        $id = omit,
-        $endDate = omit,
-        $imsi = omit,
-        $mcc = omit,
-        $mnc = omit,
-        $page = omit,
-        $phoneNumber = omit,
-        $simCardID = omit,
-        $simGroupID = omit,
-        $simGroupName = omit,
-        $sort = omit,
-        $startDate = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ReportListWdrsResponse {
-        $params = [
-            'id' => $id,
-            'endDate' => $endDate,
-            'imsi' => $imsi,
-            'mcc' => $mcc,
-            'mnc' => $mnc,
-            'page' => $page,
-            'phoneNumber' => $phoneNumber,
-            'simCardID' => $simCardID,
-            'simGroupID' => $simGroupID,
-            'simGroupName' => $simGroupName,
-            'sort' => $sort,
-            'startDate' => $startDate,
-        ];
-
-        return $this->listWdrsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listWdrsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ReportListWdrsResponse {
-        [$parsed, $options] = ReportListWdrsParams::parseRequest(
-            $params,
-            $requestOptions
+        ?string $id = null,
+        ?string $endDate = null,
+        ?string $imsi = null,
+        ?string $mcc = null,
+        ?string $mnc = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?string $phoneNumber = null,
+        ?string $simCardID = null,
+        ?string $simGroupID = null,
+        ?string $simGroupName = null,
+        array $sort = ['created_at'],
+        ?string $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'id' => $id,
+                'endDate' => $endDate,
+                'imsi' => $imsi,
+                'mcc' => $mcc,
+                'mnc' => $mnc,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'phoneNumber' => $phoneNumber,
+                'simCardID' => $simCardID,
+                'simGroupID' => $simGroupID,
+                'simGroupName' => $simGroupName,
+                'sort' => $sort,
+                'startDate' => $startDate,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'reports/wdrs',
-            query: $parsed,
-            options: $options,
-            convert: ReportListWdrsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listWdrs(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

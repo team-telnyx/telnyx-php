@@ -5,21 +5,24 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles\UserBundleListUnusedResponse;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   billingBundle: BillingBundleSummary, userBundleIDs: list<string>
+ * @phpstan-import-type BillingBundleSummaryShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleSummary
+ *
+ * @phpstan-type DataShape = array{
+ *   billingBundle: BillingBundleSummary|BillingBundleSummaryShape,
+ *   userBundleIDs: list<string>,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('billing_bundle')]
+    #[Required('billing_bundle')]
     public BillingBundleSummary $billingBundle;
 
     /**
@@ -27,7 +30,7 @@ final class Data implements BaseModel
      *
      * @var list<string> $userBundleIDs
      */
-    #[Api('user_bundle_ids', list: 'string')]
+    #[Required('user_bundle_ids', list: 'string')]
     public array $userBundleIDs;
 
     /**
@@ -54,26 +57,31 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param BillingBundleSummary|BillingBundleSummaryShape $billingBundle
      * @param list<string> $userBundleIDs
      */
     public static function with(
-        BillingBundleSummary $billingBundle,
+        BillingBundleSummary|array $billingBundle,
         array $userBundleIDs
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->billingBundle = $billingBundle;
-        $obj->userBundleIDs = $userBundleIDs;
+        $self['billingBundle'] = $billingBundle;
+        $self['userBundleIDs'] = $userBundleIDs;
 
-        return $obj;
+        return $self;
     }
 
-    public function withBillingBundle(BillingBundleSummary $billingBundle): self
-    {
-        $obj = clone $this;
-        $obj->billingBundle = $billingBundle;
+    /**
+     * @param BillingBundleSummary|BillingBundleSummaryShape $billingBundle
+     */
+    public function withBillingBundle(
+        BillingBundleSummary|array $billingBundle
+    ): self {
+        $self = clone $this;
+        $self['billingBundle'] = $billingBundle;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,9 +91,9 @@ final class Data implements BaseModel
      */
     public function withUserBundleIDs(array $userBundleIDs): self
     {
-        $obj = clone $this;
-        $obj->userBundleIDs = $userBundleIDs;
+        $self = clone $this;
+        $self['userBundleIDs'] = $userBundleIDs;
 
-        return $obj;
+        return $self;
     }
 }

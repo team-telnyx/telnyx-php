@@ -5,6 +5,8 @@ namespace Tests\Services\AI\FineTuning;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\FineTuning\Jobs\FineTuningJob;
+use Telnyx\AI\FineTuning\Jobs\JobListResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -38,7 +40,8 @@ final class JobsTest extends TestCase
             trainingFile: 'training_file'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FineTuningJob::class, $result);
     }
 
     #[Test]
@@ -50,10 +53,13 @@ final class JobsTest extends TestCase
 
         $result = $this->client->ai->fineTuning->jobs->create(
             model: 'model',
-            trainingFile: 'training_file'
+            trainingFile: 'training_file',
+            hyperparameters: ['nEpochs' => 1],
+            suffix: 'suffix',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FineTuningJob::class, $result);
     }
 
     #[Test]
@@ -65,7 +71,8 @@ final class JobsTest extends TestCase
 
         $result = $this->client->ai->fineTuning->jobs->retrieve('job_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FineTuningJob::class, $result);
     }
 
     #[Test]
@@ -77,7 +84,8 @@ final class JobsTest extends TestCase
 
         $result = $this->client->ai->fineTuning->jobs->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobListResponse::class, $result);
     }
 
     #[Test]
@@ -89,6 +97,7 @@ final class JobsTest extends TestCase
 
         $result = $this->client->ai->fineTuning->jobs->cancel('job_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FineTuningJob::class, $result);
     }
 }

@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups\RequirementGroupCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type regulatory_requirement = array{
- *   fieldValue?: string, requirementID?: string
+ * @phpstan-type RegulatoryRequirementShape = array{
+ *   fieldValue?: string|null, requirementID?: string|null
  * }
  */
 final class RegulatoryRequirement implements BaseModel
 {
-    /** @use SdkModel<regulatory_requirement> */
+    /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
-    #[Api('field_value', optional: true)]
+    #[Optional('field_value')]
     public ?string $fieldValue;
 
-    #[Api('requirement_id', optional: true)]
+    #[Optional('requirement_id')]
     public ?string $requirementID;
 
     public function __construct()
@@ -38,27 +38,27 @@ final class RegulatoryRequirement implements BaseModel
         ?string $fieldValue = null,
         ?string $requirementID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fieldValue && $obj->fieldValue = $fieldValue;
-        null !== $requirementID && $obj->requirementID = $requirementID;
+        null !== $fieldValue && $self['fieldValue'] = $fieldValue;
+        null !== $requirementID && $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldValue(string $fieldValue): self
     {
-        $obj = clone $this;
-        $obj->fieldValue = $fieldValue;
+        $self = clone $this;
+        $self['fieldValue'] = $fieldValue;
 
-        return $obj;
+        return $self;
     }
 
     public function withRequirementID(string $requirementID): self
     {
-        $obj = clone $this;
-        $obj->requirementID = $requirementID;
+        $self = clone $this;
+        $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 }

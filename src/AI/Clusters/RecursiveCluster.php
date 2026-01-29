@@ -5,43 +5,46 @@ declare(strict_types=1);
 namespace Telnyx\AI\Clusters;
 
 use Telnyx\AI\Clusters\RecursiveCluster\Node;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type recursive_cluster = array{
+ * @phpstan-import-type NodeShape from \Telnyx\AI\Clusters\RecursiveCluster\Node
+ *
+ * @phpstan-type RecursiveClusterShape = array{
  *   clusterID: string,
  *   clusterSummary: string,
  *   totalNumberOfNodes: int,
- *   clusterHeader?: string,
- *   nodes?: list<Node>,
- *   subclusters?: list<RecursiveCluster>,
+ *   clusterHeader?: string|null,
+ *   nodes?: list<Node|NodeShape>|null,
+ *   subclusters?: list<mixed>|null,
  * }
  */
 final class RecursiveCluster implements BaseModel
 {
-    /** @use SdkModel<recursive_cluster> */
+    /** @use SdkModel<RecursiveClusterShape> */
     use SdkModel;
 
-    #[Api('cluster_id')]
+    #[Required('cluster_id')]
     public string $clusterID;
 
-    #[Api('cluster_summary')]
+    #[Required('cluster_summary')]
     public string $clusterSummary;
 
-    #[Api('total_number_of_nodes')]
+    #[Required('total_number_of_nodes')]
     public int $totalNumberOfNodes;
 
-    #[Api('cluster_header', optional: true)]
+    #[Optional('cluster_header')]
     public ?string $clusterHeader;
 
     /** @var list<Node>|null $nodes */
-    #[Api(list: Node::class, optional: true)]
+    #[Optional(list: Node::class)]
     public ?array $nodes;
 
-    /** @var list<RecursiveCluster>|null $subclusters */
-    #[Api(list: RecursiveCluster::class, optional: true)]
+    /** @var list<mixed>|null $subclusters */
+    #[Optional(list: RecursiveCluster::class)]
     public ?array $subclusters;
 
     /**
@@ -73,8 +76,8 @@ final class RecursiveCluster implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Node> $nodes
-     * @param list<RecursiveCluster> $subclusters
+     * @param list<Node|NodeShape>|null $nodes
+     * @param list<mixed>|null $subclusters
      */
     public static function with(
         string $clusterID,
@@ -84,70 +87,70 @@ final class RecursiveCluster implements BaseModel
         ?array $nodes = null,
         ?array $subclusters = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->clusterID = $clusterID;
-        $obj->clusterSummary = $clusterSummary;
-        $obj->totalNumberOfNodes = $totalNumberOfNodes;
+        $self['clusterID'] = $clusterID;
+        $self['clusterSummary'] = $clusterSummary;
+        $self['totalNumberOfNodes'] = $totalNumberOfNodes;
 
-        null !== $clusterHeader && $obj->clusterHeader = $clusterHeader;
-        null !== $nodes && $obj->nodes = $nodes;
-        null !== $subclusters && $obj->subclusters = $subclusters;
+        null !== $clusterHeader && $self['clusterHeader'] = $clusterHeader;
+        null !== $nodes && $self['nodes'] = $nodes;
+        null !== $subclusters && $self['subclusters'] = $subclusters;
 
-        return $obj;
+        return $self;
     }
 
     public function withClusterID(string $clusterID): self
     {
-        $obj = clone $this;
-        $obj->clusterID = $clusterID;
+        $self = clone $this;
+        $self['clusterID'] = $clusterID;
 
-        return $obj;
+        return $self;
     }
 
     public function withClusterSummary(string $clusterSummary): self
     {
-        $obj = clone $this;
-        $obj->clusterSummary = $clusterSummary;
+        $self = clone $this;
+        $self['clusterSummary'] = $clusterSummary;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalNumberOfNodes(int $totalNumberOfNodes): self
     {
-        $obj = clone $this;
-        $obj->totalNumberOfNodes = $totalNumberOfNodes;
+        $self = clone $this;
+        $self['totalNumberOfNodes'] = $totalNumberOfNodes;
 
-        return $obj;
+        return $self;
     }
 
     public function withClusterHeader(string $clusterHeader): self
     {
-        $obj = clone $this;
-        $obj->clusterHeader = $clusterHeader;
+        $self = clone $this;
+        $self['clusterHeader'] = $clusterHeader;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Node> $nodes
+     * @param list<Node|NodeShape> $nodes
      */
     public function withNodes(array $nodes): self
     {
-        $obj = clone $this;
-        $obj->nodes = $nodes;
+        $self = clone $this;
+        $self['nodes'] = $nodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<RecursiveCluster> $subclusters
+     * @param list<mixed> $subclusters
      */
     public function withSubclusters(array $subclusters): self
     {
-        $obj = clone $this;
-        $obj->subclusters = $subclusters;
+        $self = clone $this;
+        $self['subclusters'] = $subclusters;
 
-        return $obj;
+        return $self;
     }
 }

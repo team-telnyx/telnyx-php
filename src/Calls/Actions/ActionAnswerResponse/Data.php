@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionAnswerResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{recordingID?: string, result?: string}
+ * @phpstan-type DataShape = array{recordingID?: string|null, result?: string|null}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The ID of the recording. Only present when the record parameter is set to record-from-answer.
      */
-    #[Api('recording_id', optional: true)]
+    #[Optional('recording_id')]
     public ?string $recordingID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $result;
 
     public function __construct()
@@ -39,12 +39,12 @@ final class Data implements BaseModel
         ?string $recordingID = null,
         ?string $result = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $recordingID && $obj->recordingID = $recordingID;
-        null !== $result && $obj->result = $result;
+        null !== $recordingID && $self['recordingID'] = $recordingID;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,17 +52,17 @@ final class Data implements BaseModel
      */
     public function withRecordingID(string $recordingID): self
     {
-        $obj = clone $this;
-        $obj->recordingID = $recordingID;
+        $self = clone $this;
+        $self['recordingID'] = $recordingID;
 
-        return $obj;
+        return $self;
     }
 
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj->result = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

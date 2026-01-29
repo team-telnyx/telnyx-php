@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes\FaxListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Faxes\FaxListParams\Filter\CreatedAt;
@@ -15,37 +15,45 @@ use Telnyx\Faxes\FaxListParams\Filter\To;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq].
  *
- * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt, direction?: Direction, from?: From, to?: To
+ * @phpstan-import-type CreatedAtShape from \Telnyx\Faxes\FaxListParams\Filter\CreatedAt
+ * @phpstan-import-type DirectionShape from \Telnyx\Faxes\FaxListParams\Filter\Direction
+ * @phpstan-import-type FromShape from \Telnyx\Faxes\FaxListParams\Filter\From
+ * @phpstan-import-type ToShape from \Telnyx\Faxes\FaxListParams\Filter\To
+ *
+ * @phpstan-type FilterShape = array{
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   direction?: null|Direction|DirectionShape,
+ *   from?: null|From|FromShape,
+ *   to?: null|To|ToShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Date range filtering operations for fax creation timestamp.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?CreatedAt $createdAt;
 
     /**
      * Direction filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Direction $direction;
 
     /**
      * From number filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?From $from;
 
     /**
      * To number filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?To $to;
 
     public function __construct()
@@ -57,64 +65,77 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param Direction|DirectionShape|null $direction
+     * @param From|FromShape|null $from
+     * @param To|ToShape|null $to
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
-        ?Direction $direction = null,
-        ?From $from = null,
-        ?To $to = null,
+        CreatedAt|array|null $createdAt = null,
+        Direction|array|null $direction = null,
+        From|array|null $from = null,
+        To|array|null $to = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $direction && $obj->direction = $direction;
-        null !== $from && $obj->from = $from;
-        null !== $to && $obj->to = $to;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $from && $self['from'] = $from;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Date range filtering operations for fax creation timestamp.
+     *
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Direction filtering operations.
+     *
+     * @param Direction|DirectionShape $direction
      */
-    public function withDirection(Direction $direction): self
+    public function withDirection(Direction|array $direction): self
     {
-        $obj = clone $this;
-        $obj->direction = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * From number filtering operations.
+     *
+     * @param From|FromShape $from
      */
-    public function withFrom(From $from): self
+    public function withFrom(From|array $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * To number filtering operations.
+     *
+     * @param To|ToShape $to
      */
-    public function withTo(To $to): self
+    public function withTo(To|array $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

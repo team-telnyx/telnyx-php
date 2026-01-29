@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{url: string}
+ * @phpstan-type DataShape = array{url: string}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Pre-signed temporary URL for downloading the document.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
@@ -48,11 +48,11 @@ final class Data implements BaseModel
      */
     public static function with(string $url): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->url = $url;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class Data implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

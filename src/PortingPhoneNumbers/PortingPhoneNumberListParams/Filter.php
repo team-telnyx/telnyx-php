@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderStatus;
@@ -12,13 +12,13 @@ use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter\PortingOrderS
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status].
  *
- * @phpstan-type filter_alias = array{
- *   portingOrderStatus?: value-of<PortingOrderStatus>
+ * @phpstan-type FilterShape = array{
+ *   portingOrderStatus?: null|PortingOrderStatus|value-of<PortingOrderStatus>
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -26,11 +26,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<PortingOrderStatus>|null $portingOrderStatus
      */
-    #[Api(
-        'porting_order_status',
-        enum: PortingOrderStatus::class,
-        optional: true
-    )]
+    #[Optional('porting_order_status', enum: PortingOrderStatus::class)]
     public ?string $portingOrderStatus;
 
     public function __construct()
@@ -43,16 +39,16 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderStatus|value-of<PortingOrderStatus> $portingOrderStatus
+     * @param PortingOrderStatus|value-of<PortingOrderStatus>|null $portingOrderStatus
      */
     public static function with(
         PortingOrderStatus|string|null $portingOrderStatus = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $portingOrderStatus && $obj['portingOrderStatus'] = $portingOrderStatus;
+        null !== $portingOrderStatus && $self['portingOrderStatus'] = $portingOrderStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,9 +59,9 @@ final class Filter implements BaseModel
     public function withPortingOrderStatus(
         PortingOrderStatus|string $portingOrderStatus
     ): self {
-        $obj = clone $this;
-        $obj['portingOrderStatus'] = $portingOrderStatus;
+        $self = clone $this;
+        $self['portingOrderStatus'] = $portingOrderStatus;
 
-        return $obj;
+        return $self;
     }
 }

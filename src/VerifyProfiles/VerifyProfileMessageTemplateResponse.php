@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type verify_profile_message_template_response = array{
- *   id?: string, text?: string
+ * @phpstan-type VerifyProfileMessageTemplateResponseShape = array{
+ *   id?: string|null, text?: string|null
  * }
  */
 final class VerifyProfileMessageTemplateResponse implements BaseModel
 {
-    /** @use SdkModel<verify_profile_message_template_response> */
+    /** @use SdkModel<VerifyProfileMessageTemplateResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     public function __construct()
@@ -36,27 +36,27 @@ final class VerifyProfileMessageTemplateResponse implements BaseModel
      */
     public static function with(?string $id = null, ?string $text = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $text && $obj->text = $text;
+        null !== $id && $self['id'] = $id;
+        null !== $text && $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

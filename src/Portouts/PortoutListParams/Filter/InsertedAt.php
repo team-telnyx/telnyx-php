@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\PortoutListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Filter by inserted_at date range using nested operations.
  *
- * @phpstan-type inserted_at = array{
- *   gte?: \DateTimeInterface, lte?: \DateTimeInterface
+ * @phpstan-type InsertedAtShape = array{
+ *   gte?: \DateTimeInterface|null, lte?: \DateTimeInterface|null
  * }
  */
 final class InsertedAt implements BaseModel
 {
-    /** @use SdkModel<inserted_at> */
+    /** @use SdkModel<InsertedAtShape> */
     use SdkModel;
 
     /**
      * Filter by inserted_at date greater than or equal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gte;
 
     /**
      * Filter by inserted_at date less than or equal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lte;
 
     public function __construct()
@@ -46,12 +46,12 @@ final class InsertedAt implements BaseModel
         ?\DateTimeInterface $gte = null,
         ?\DateTimeInterface $lte = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $gte && $obj->gte = $gte;
-        null !== $lte && $obj->lte = $lte;
+        null !== $gte && $self['gte'] = $gte;
+        null !== $lte && $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class InsertedAt implements BaseModel
      */
     public function withGte(\DateTimeInterface $gte): self
     {
-        $obj = clone $this;
-        $obj->gte = $gte;
+        $self = clone $this;
+        $self['gte'] = $gte;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class InsertedAt implements BaseModel
      */
     public function withLte(\DateTimeInterface $lte): self
     {
-        $obj = clone $this;
-        $obj->lte = $lte;
+        $self = clone $this;
+        $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 }

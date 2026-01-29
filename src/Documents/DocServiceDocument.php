@@ -4,77 +4,89 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Documents\DocServiceDocument\AvScanStatus;
 use Telnyx\Documents\DocServiceDocument\Size;
 use Telnyx\Documents\DocServiceDocument\Status;
 
 /**
- * @phpstan-type doc_service_document = array{
- *   id?: string,
- *   contentType?: string,
- *   createdAt?: string,
- *   customerReference?: string,
- *   filename?: string,
- *   recordType?: string,
- *   sha256?: string,
- *   size?: Size,
- *   status?: value-of<Status>,
- *   updatedAt?: string,
+ * @phpstan-import-type SizeShape from \Telnyx\Documents\DocServiceDocument\Size
+ *
+ * @phpstan-type DocServiceDocumentShape = array{
+ *   id?: string|null,
+ *   avScanStatus?: null|AvScanStatus|value-of<AvScanStatus>,
+ *   contentType?: string|null,
+ *   createdAt?: string|null,
+ *   customerReference?: string|null,
+ *   filename?: string|null,
+ *   recordType?: string|null,
+ *   sha256?: string|null,
+ *   size?: null|Size|SizeShape,
+ *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: string|null,
  * }
  */
 final class DocServiceDocument implements BaseModel
 {
-    /** @use SdkModel<doc_service_document> */
+    /** @use SdkModel<DocServiceDocumentShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
+
+    /**
+     * The antivirus scan status of the document.
+     *
+     * @var value-of<AvScanStatus>|null $avScanStatus
+     */
+    #[Optional('av_scan_status', enum: AvScanStatus::class)]
+    public ?string $avScanStatus;
 
     /**
      * The document's content_type.
      */
-    #[Api('content_type', optional: true)]
+    #[Optional('content_type')]
     public ?string $contentType;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * Optional reference string for customer tracking.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * The filename of the document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filename;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The document's SHA256 hash provided for optional verification purposes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sha256;
 
     /**
      * Indicates the document's filesize.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Size $size;
 
     /**
@@ -82,13 +94,13 @@ final class DocServiceDocument implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     public function __construct()
@@ -101,34 +113,38 @@ final class DocServiceDocument implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param AvScanStatus|value-of<AvScanStatus>|null $avScanStatus
+     * @param Size|SizeShape|null $size
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
+        AvScanStatus|string|null $avScanStatus = null,
         ?string $contentType = null,
         ?string $createdAt = null,
         ?string $customerReference = null,
         ?string $filename = null,
         ?string $recordType = null,
         ?string $sha256 = null,
-        ?Size $size = null,
+        Size|array|null $size = null,
         Status|string|null $status = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $contentType && $obj->contentType = $contentType;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $filename && $obj->filename = $filename;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $sha256 && $obj->sha256 = $sha256;
-        null !== $size && $obj->size = $size;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $avScanStatus && $self['avScanStatus'] = $avScanStatus;
+        null !== $contentType && $self['contentType'] = $contentType;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $filename && $self['filename'] = $filename;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sha256 && $self['sha256'] = $sha256;
+        null !== $size && $self['size'] = $size;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +152,23 @@ final class DocServiceDocument implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The antivirus scan status of the document.
+     *
+     * @param AvScanStatus|value-of<AvScanStatus> $avScanStatus
+     */
+    public function withAvScanStatus(AvScanStatus|string $avScanStatus): self
+    {
+        $self = clone $this;
+        $self['avScanStatus'] = $avScanStatus;
+
+        return $self;
     }
 
     /**
@@ -147,10 +176,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withContentType(string $contentType): self
     {
-        $obj = clone $this;
-        $obj->contentType = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,10 +187,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +198,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +209,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj->filename = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +220,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -202,21 +231,23 @@ final class DocServiceDocument implements BaseModel
      */
     public function withSha256(string $sha256): self
     {
-        $obj = clone $this;
-        $obj->sha256 = $sha256;
+        $self = clone $this;
+        $self['sha256'] = $sha256;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Indicates the document's filesize.
+     *
+     * @param Size|SizeShape $size
      */
-    public function withSize(Size $size): self
+    public function withSize(Size|array $size): self
     {
-        $obj = clone $this;
-        $obj->size = $size;
+        $self = clone $this;
+        $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,10 +257,10 @@ final class DocServiceDocument implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,9 +268,9 @@ final class DocServiceDocument implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

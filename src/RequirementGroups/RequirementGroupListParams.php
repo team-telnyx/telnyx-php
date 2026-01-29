@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,20 +13,24 @@ use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
 /**
  * List requirement groups.
  *
- * @see Telnyx\RequirementGroups->list
+ * @see Telnyx\Services\RequirementGroupsService::list()
  *
- * @phpstan-type requirement_group_list_params = array{filter?: Filter}
+ * @phpstan-import-type FilterShape from \Telnyx\RequirementGroups\RequirementGroupListParams\Filter
+ *
+ * @phpstan-type RequirementGroupListParamsShape = array{
+ *   filter?: null|Filter|FilterShape
+ * }
  */
 final class RequirementGroupListParams implements BaseModel
 {
-    /** @use SdkModel<requirement_group_list_params> */
+    /** @use SdkModel<RequirementGroupListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()
@@ -38,24 +42,28 @@ final class RequirementGroupListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
      */
-    public static function with(?Filter $filter = null): self
+    public static function with(Filter|array|null $filter = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
+        null !== $filter && $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 }

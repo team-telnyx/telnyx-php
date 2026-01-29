@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\Runs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves detailed information about a specific test run execution.
  *
- * @see Telnyx\AI\Assistants\Tests\Runs->retrieve
+ * @see Telnyx\Services\AI\Assistants\Tests\RunsService::retrieve()
  *
- * @phpstan-type run_retrieve_params = array{testID: string}
+ * @phpstan-type RunRetrieveParamsShape = array{testID: string}
  */
 final class RunRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<run_retrieve_params> */
+    /** @use SdkModel<RunRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $testID;
 
     /**
@@ -51,18 +51,18 @@ final class RunRetrieveParams implements BaseModel
      */
     public static function with(string $testID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->testID = $testID;
+        $self['testID'] = $testID;
 
-        return $obj;
+        return $self;
     }
 
     public function withTestID(string $testID): self
     {
-        $obj = clone $this;
-        $obj->testID = $testID;
+        $self = clone $this;
+        $self['testID'] = $testID;
 
-        return $obj;
+        return $self;
     }
 }

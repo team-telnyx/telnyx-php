@@ -4,24 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type flashcall_alias = array{
- *   defaultVerificationTimeoutSecs?: int, whitelistedDestinations?: list<string>
+ * @phpstan-type FlashcallShape = array{
+ *   defaultVerificationTimeoutSecs?: int|null,
+ *   whitelistedDestinations?: list<string>|null,
  * }
  */
 final class Flashcall implements BaseModel
 {
-    /** @use SdkModel<flashcall_alias> */
+    /** @use SdkModel<FlashcallShape> */
     use SdkModel;
 
     /**
      * For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
      */
-    #[Api('default_verification_timeout_secs', optional: true)]
+    #[Optional('default_verification_timeout_secs')]
     public ?int $defaultVerificationTimeoutSecs;
 
     /**
@@ -29,7 +30,7 @@ final class Flashcall implements BaseModel
      *
      * @var list<string>|null $whitelistedDestinations
      */
-    #[Api('whitelisted_destinations', list: 'string', optional: true)]
+    #[Optional('whitelisted_destinations', list: 'string')]
     public ?array $whitelistedDestinations;
 
     public function __construct()
@@ -42,18 +43,18 @@ final class Flashcall implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $whitelistedDestinations
+     * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
         ?int $defaultVerificationTimeoutSecs = null,
         ?array $whitelistedDestinations = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $defaultVerificationTimeoutSecs && $obj->defaultVerificationTimeoutSecs = $defaultVerificationTimeoutSecs;
-        null !== $whitelistedDestinations && $obj->whitelistedDestinations = $whitelistedDestinations;
+        null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +63,10 @@ final class Flashcall implements BaseModel
     public function withDefaultVerificationTimeoutSecs(
         int $defaultVerificationTimeoutSecs
     ): self {
-        $obj = clone $this;
-        $obj->defaultVerificationTimeoutSecs = $defaultVerificationTimeoutSecs;
+        $self = clone $this;
+        $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,9 +77,9 @@ final class Flashcall implements BaseModel
     public function withWhitelistedDestinations(
         array $whitelistedDestinations
     ): self {
-        $obj = clone $this;
-        $obj->whitelistedDestinations = $whitelistedDestinations;
+        $self = clone $this;
+        $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 }

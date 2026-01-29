@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnectsCoverage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,34 +15,40 @@ use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\P
 /**
  * List Virtual Cross Connects Cloud Coverage.<br /><br />This endpoint shows which cloud regions are available for the `location_code` your Virtual Cross Connect will be provisioned in.
  *
- * @see Telnyx\VirtualCrossConnectsCoverage->list
+ * @see Telnyx\Services\VirtualCrossConnectsCoverageService::list()
  *
- * @phpstan-type virtual_cross_connects_coverage_list_params = array{
- *   filter?: Filter, filters?: Filters, page?: Page
+ * @phpstan-import-type FilterShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filter
+ * @phpstan-import-type FiltersShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters
+ * @phpstan-import-type PageShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Page
+ *
+ * @phpstan-type VirtualCrossConnectsCoverageListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   filters?: null|Filters|FiltersShape,
+ *   page?: null|Page|PageShape,
  * }
  */
 final class VirtualCrossConnectsCoverageListParams implements BaseModel
 {
-    /** @use SdkModel<virtual_cross_connects_coverage_list_params> */
+    /** @use SdkModel<VirtualCrossConnectsCoverageListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filters $filters;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()
@@ -54,51 +60,61 @@ final class VirtualCrossConnectsCoverageListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
+     * @param Filters|FiltersShape|null $filters
+     * @param Page|PageShape|null $page
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Filters $filters = null,
-        ?Page $page = null
+        Filter|array|null $filter = null,
+        Filters|array|null $filters = null,
+        Page|array|null $page = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $filters && $obj->filters = $filters;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $filters && $self['filters'] = $filters;
+        null !== $page && $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[cloud_provider], filter[cloud_provider_region], filter[location.region], filter[location.site], filter[location.pop], filter[location.code].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filters parameter (deepObject style). Originally: filters[available_bandwidth][contains].
+     *
+     * @param Filters|FiltersShape $filters
      */
-    public function withFilters(Filters $filters): self
+    public function withFilters(Filters|array $filters): self
     {
-        $obj = clone $this;
-        $obj->filters = $filters;
+        $self = clone $this;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 }

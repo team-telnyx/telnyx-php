@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * The contact information of the company.
  *
- * @phpstan-type contact_alias = array{email?: string, phoneNumber?: string}
+ * @phpstan-type ContactShape = array{
+ *   email?: string|null, phoneNumber?: string|null
+ * }
  */
 final class Contact implements BaseModel
 {
-    /** @use SdkModel<contact_alias> */
+    /** @use SdkModel<ContactShape> */
     use SdkModel;
 
     /**
      * The email address of the contact.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $email;
 
     /**
      * The phone number of the contact.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     public function __construct()
@@ -44,12 +46,12 @@ final class Contact implements BaseModel
         ?string $email = null,
         ?string $phoneNumber = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $email && $obj->email = $email;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $email && $self['email'] = $email;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +59,10 @@ final class Contact implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj->email = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +70,9 @@ final class Contact implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

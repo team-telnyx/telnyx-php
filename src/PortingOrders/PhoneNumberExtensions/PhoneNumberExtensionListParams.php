@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberExtensions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,34 +15,40 @@ use Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\So
 /**
  * Returns a list of all phone number extensions of a porting order.
  *
- * @see Telnyx\PortingOrders\PhoneNumberExtensions->list
+ * @see Telnyx\Services\PortingOrders\PhoneNumberExtensionsService::list()
  *
- * @phpstan-type phone_number_extension_list_params = array{
- *   filter?: Filter, page?: Page, sort?: Sort
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams\Sort
+ *
+ * @phpstan-type PhoneNumberExtensionListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|SortShape,
  * }
  */
 final class PhoneNumberExtensionListParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_extension_list_params> */
+    /** @use SdkModel<PhoneNumberExtensionListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_phone_number_id].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Sort $sort;
 
     public function __construct()
@@ -54,51 +60,61 @@ final class PhoneNumberExtensionListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|SortShape|null $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        ?Sort $sort = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|array|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj->sort = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[porting_phone_number_id].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
+     *
+     * @param Sort|SortShape $sort
      */
-    public function withSort(Sort $sort): self
+    public function withSort(Sort|array $sort): self
     {
-        $obj = clone $this;
-        $obj->sort = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

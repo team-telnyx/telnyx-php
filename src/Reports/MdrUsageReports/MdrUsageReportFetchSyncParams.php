@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,33 +14,33 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType
 /**
  * Generate and fetch messaging usage report synchronously. This endpoint will both generate and fetch the messaging report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
  *
- * @see Telnyx\Reports\MdrUsageReports->fetchSync
+ * @see Telnyx\Services\Reports\MdrUsageReportsService::fetchSync()
  *
- * @phpstan-type mdr_usage_report_fetch_sync_params = array{
+ * @phpstan-type MdrUsageReportFetchSyncParamsShape = array{
  *   aggregationType: AggregationType|value-of<AggregationType>,
- *   endDate?: \DateTimeInterface,
- *   profiles?: list<string>,
- *   startDate?: \DateTimeInterface,
+ *   endDate?: \DateTimeInterface|null,
+ *   profiles?: list<string>|null,
+ *   startDate?: \DateTimeInterface|null,
  * }
  */
 final class MdrUsageReportFetchSyncParams implements BaseModel
 {
-    /** @use SdkModel<mdr_usage_report_fetch_sync_params> */
+    /** @use SdkModel<MdrUsageReportFetchSyncParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var value-of<AggregationType> $aggregationType */
-    #[Api(enum: AggregationType::class)]
+    #[Required(enum: AggregationType::class)]
     public string $aggregationType;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $endDate;
 
     /** @var list<string>|null $profiles */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $profiles;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $startDate;
 
     /**
@@ -67,7 +68,7 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param AggregationType|value-of<AggregationType> $aggregationType
-     * @param list<string> $profiles
+     * @param list<string>|null $profiles
      */
     public static function with(
         AggregationType|string $aggregationType,
@@ -75,15 +76,15 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
         ?array $profiles = null,
         ?\DateTimeInterface $startDate = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['aggregationType'] = $aggregationType;
+        $self['aggregationType'] = $aggregationType;
 
-        null !== $endDate && $obj->endDate = $endDate;
-        null !== $profiles && $obj->profiles = $profiles;
-        null !== $startDate && $obj->startDate = $startDate;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $profiles && $self['profiles'] = $profiles;
+        null !== $startDate && $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,18 +93,18 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
     public function withAggregationType(
         AggregationType|string $aggregationType
     ): self {
-        $obj = clone $this;
-        $obj['aggregationType'] = $aggregationType;
+        $self = clone $this;
+        $self['aggregationType'] = $aggregationType;
 
-        return $obj;
+        return $self;
     }
 
     public function withEndDate(\DateTimeInterface $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,17 +112,17 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
      */
     public function withProfiles(array $profiles): self
     {
-        $obj = clone $this;
-        $obj->profiles = $profiles;
+        $self = clone $this;
+        $self['profiles'] = $profiles;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartDate(\DateTimeInterface $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 }

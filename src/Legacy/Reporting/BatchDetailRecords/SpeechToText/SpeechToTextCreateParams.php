@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new Speech to Text batch report request with the specified filters.
  *
- * @see Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText->create
+ * @see Telnyx\Services\Legacy\Reporting\BatchDetailRecords\SpeechToTextService::create()
  *
- * @phpstan-type speech_to_text_create_params = array{
+ * @phpstan-type SpeechToTextCreateParamsShape = array{
  *   endDate: \DateTimeInterface, startDate: \DateTimeInterface
  * }
  */
 final class SpeechToTextCreateParams implements BaseModel
 {
-    /** @use SdkModel<speech_to_text_create_params> */
+    /** @use SdkModel<SpeechToTextCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * End date in ISO format with timezone (date range must be up to one month).
      */
-    #[Api('end_date')]
+    #[Required('end_date')]
     public \DateTimeInterface $endDate;
 
     /**
      * Start date in ISO format with timezone.
      */
-    #[Api('start_date')]
+    #[Required('start_date')]
     public \DateTimeInterface $startDate;
 
     /**
@@ -64,12 +64,12 @@ final class SpeechToTextCreateParams implements BaseModel
         \DateTimeInterface $endDate,
         \DateTimeInterface $startDate
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->endDate = $endDate;
-        $obj->startDate = $startDate;
+        $self['endDate'] = $endDate;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class SpeechToTextCreateParams implements BaseModel
      */
     public function withEndDate(\DateTimeInterface $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,9 +88,9 @@ final class SpeechToTextCreateParams implements BaseModel
      */
     public function withStartDate(\DateTimeInterface $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DialogflowConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,34 +14,34 @@ use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
 /**
  * Save Dialogflow Credentiails to Telnyx, so it can be used with other Telnyx services.
  *
- * @see Telnyx\DialogflowConnections->create
+ * @see Telnyx\Services\DialogflowConnectionsService::create()
  *
- * @phpstan-type dialogflow_connection_create_params = array{
- *   serviceAccount: array<string, mixed>,
- *   conversationProfileID?: string,
- *   dialogflowAPI?: DialogflowAPI|value-of<DialogflowAPI>,
- *   environment?: string,
- *   location?: string,
+ * @phpstan-type DialogflowConnectionCreateParamsShape = array{
+ *   serviceAccount: array<string,mixed>,
+ *   conversationProfileID?: string|null,
+ *   dialogflowAPI?: null|DialogflowAPI|value-of<DialogflowAPI>,
+ *   environment?: string|null,
+ *   location?: string|null,
  * }
  */
 final class DialogflowConnectionCreateParams implements BaseModel
 {
-    /** @use SdkModel<dialogflow_connection_create_params> */
+    /** @use SdkModel<DialogflowConnectionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The JSON map to connect your Dialoglow account.
      *
-     * @var array<string, mixed> $serviceAccount
+     * @var array<string,mixed> $serviceAccount
      */
-    #[Api('service_account', map: 'mixed')]
+    #[Required('service_account', map: 'mixed')]
     public array $serviceAccount;
 
     /**
      * The id of a configured conversation profile on your Dialogflow account. (If you use Dialogflow CX, this param is required).
      */
-    #[Api('conversation_profile_id', optional: true)]
+    #[Optional('conversation_profile_id')]
     public ?string $conversationProfileID;
 
     /**
@@ -48,19 +49,19 @@ final class DialogflowConnectionCreateParams implements BaseModel
      *
      * @var value-of<DialogflowAPI>|null $dialogflowAPI
      */
-    #[Api('dialogflow_api', enum: DialogflowAPI::class, optional: true)]
+    #[Optional('dialogflow_api', enum: DialogflowAPI::class)]
     public ?string $dialogflowAPI;
 
     /**
      * Which Dialogflow environment will be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $environment;
 
     /**
      * The region of your agent is. (If you use Dialogflow CX, this param is required).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $location;
 
     /**
@@ -87,8 +88,8 @@ final class DialogflowConnectionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $serviceAccount
-     * @param DialogflowAPI|value-of<DialogflowAPI> $dialogflowAPI
+     * @param array<string,mixed> $serviceAccount
+     * @param DialogflowAPI|value-of<DialogflowAPI>|null $dialogflowAPI
      */
     public static function with(
         array $serviceAccount,
@@ -97,29 +98,29 @@ final class DialogflowConnectionCreateParams implements BaseModel
         ?string $environment = null,
         ?string $location = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->serviceAccount = $serviceAccount;
+        $self['serviceAccount'] = $serviceAccount;
 
-        null !== $conversationProfileID && $obj->conversationProfileID = $conversationProfileID;
-        null !== $dialogflowAPI && $obj['dialogflowAPI'] = $dialogflowAPI;
-        null !== $environment && $obj->environment = $environment;
-        null !== $location && $obj->location = $location;
+        null !== $conversationProfileID && $self['conversationProfileID'] = $conversationProfileID;
+        null !== $dialogflowAPI && $self['dialogflowAPI'] = $dialogflowAPI;
+        null !== $environment && $self['environment'] = $environment;
+        null !== $location && $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The JSON map to connect your Dialoglow account.
      *
-     * @param array<string, mixed> $serviceAccount
+     * @param array<string,mixed> $serviceAccount
      */
     public function withServiceAccount(array $serviceAccount): self
     {
-        $obj = clone $this;
-        $obj->serviceAccount = $serviceAccount;
+        $self = clone $this;
+        $self['serviceAccount'] = $serviceAccount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +129,10 @@ final class DialogflowConnectionCreateParams implements BaseModel
     public function withConversationProfileID(
         string $conversationProfileID
     ): self {
-        $obj = clone $this;
-        $obj->conversationProfileID = $conversationProfileID;
+        $self = clone $this;
+        $self['conversationProfileID'] = $conversationProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +142,10 @@ final class DialogflowConnectionCreateParams implements BaseModel
      */
     public function withDialogflowAPI(DialogflowAPI|string $dialogflowAPI): self
     {
-        $obj = clone $this;
-        $obj['dialogflowAPI'] = $dialogflowAPI;
+        $self = clone $this;
+        $self['dialogflowAPI'] = $dialogflowAPI;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +153,10 @@ final class DialogflowConnectionCreateParams implements BaseModel
      */
     public function withEnvironment(string $environment): self
     {
-        $obj = clone $this;
-        $obj->environment = $environment;
+        $self = clone $this;
+        $self['environment'] = $environment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,9 +164,9 @@ final class DialogflowConnectionCreateParams implements BaseModel
      */
     public function withLocation(string $location): self
     {
-        $obj = clone $this;
-        $obj->location = $location;
+        $self = clone $this;
+        $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 }

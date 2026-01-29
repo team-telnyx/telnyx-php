@@ -4,36 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\SslCertificate\SslCertificate;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type issued_to = array{
- *   commonName?: string, organization?: string, organizationUnit?: string
+ * @phpstan-type IssuedToShape = array{
+ *   commonName?: string|null,
+ *   organization?: string|null,
+ *   organizationUnit?: string|null,
  * }
  */
 final class IssuedTo implements BaseModel
 {
-    /** @use SdkModel<issued_to> */
+    /** @use SdkModel<IssuedToShape> */
     use SdkModel;
 
     /**
      * The common name of the entity the certificate was issued to.
      */
-    #[Api('common_name', optional: true)]
+    #[Optional('common_name')]
     public ?string $commonName;
 
     /**
      * The organization the certificate was issued to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $organization;
 
     /**
      * The organizational unit the certificate was issued to.
      */
-    #[Api('organization_unit', optional: true)]
+    #[Optional('organization_unit')]
     public ?string $organizationUnit;
 
     public function __construct()
@@ -51,13 +53,13 @@ final class IssuedTo implements BaseModel
         ?string $organization = null,
         ?string $organizationUnit = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $commonName && $obj->commonName = $commonName;
-        null !== $organization && $obj->organization = $organization;
-        null !== $organizationUnit && $obj->organizationUnit = $organizationUnit;
+        null !== $commonName && $self['commonName'] = $commonName;
+        null !== $organization && $self['organization'] = $organization;
+        null !== $organizationUnit && $self['organizationUnit'] = $organizationUnit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -65,10 +67,10 @@ final class IssuedTo implements BaseModel
      */
     public function withCommonName(string $commonName): self
     {
-        $obj = clone $this;
-        $obj->commonName = $commonName;
+        $self = clone $this;
+        $self['commonName'] = $commonName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +78,10 @@ final class IssuedTo implements BaseModel
      */
     public function withOrganization(string $organization): self
     {
-        $obj = clone $this;
-        $obj->organization = $organization;
+        $self = clone $this;
+        $self['organization'] = $organization;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +89,9 @@ final class IssuedTo implements BaseModel
      */
     public function withOrganizationUnit(string $organizationUnit): self
     {
-        $obj = clone $this;
-        $obj->organizationUnit = $organizationUnit;
+        $self = clone $this;
+        $self['organizationUnit'] = $organizationUnit;
 
-        return $obj;
+        return $self;
     }
 }

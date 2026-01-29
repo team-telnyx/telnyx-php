@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,23 +13,24 @@ use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 /**
  * Updates a sub number order.
  *
- * @see Telnyx\SubNumberOrders->update
+ * @see Telnyx\Services\SubNumberOrdersService::update()
  *
- * @phpstan-type sub_number_order_update_params = array{
- *   regulatoryRequirements?: list<UpdateRegulatoryRequirement>
+ * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
+ *
+ * @phpstan-type SubNumberOrderUpdateParamsShape = array{
+ *   regulatoryRequirements?: list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape>|null,
  * }
  */
 final class SubNumberOrderUpdateParams implements BaseModel
 {
-    /** @use SdkModel<sub_number_order_update_params> */
+    /** @use SdkModel<SubNumberOrderUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<UpdateRegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
+    #[Optional(
         'regulatory_requirements',
-        list: UpdateRegulatoryRequirement::class,
-        optional: true,
+        list: UpdateRegulatoryRequirement::class
     )]
     public ?array $regulatoryRequirements;
 
@@ -43,26 +44,26 @@ final class SubNumberOrderUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(?array $regulatoryRequirements = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 }

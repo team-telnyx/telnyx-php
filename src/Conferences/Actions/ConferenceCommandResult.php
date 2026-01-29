@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type conference_command_result = array{result: string}
+ * @phpstan-type ConferenceCommandResultShape = array{result: string}
  */
 final class ConferenceCommandResult implements BaseModel
 {
-    /** @use SdkModel<conference_command_result> */
+    /** @use SdkModel<ConferenceCommandResultShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $result;
 
     /**
@@ -45,18 +45,18 @@ final class ConferenceCommandResult implements BaseModel
      */
     public static function with(string $result): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->result = $result;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj->result = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

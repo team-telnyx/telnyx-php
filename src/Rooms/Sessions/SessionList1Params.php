@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Sessions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,34 +14,39 @@ use Telnyx\Rooms\Sessions\SessionList1Params\Page;
 /**
  * View a list of room sessions.
  *
- * @see Telnyx\Rooms\Sessions->list1
+ * @see Telnyx\Services\Rooms\SessionsService::list1()
  *
- * @phpstan-type session_list_1_params = array{
- *   filter?: Filter, includeParticipants?: bool, page?: Page
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\Sessions\SessionList1Params\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\Sessions\SessionList1Params\Page
+ *
+ * @phpstan-type SessionList1ParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   includeParticipants?: bool|null,
+ *   page?: null|Page|PageShape,
  * }
  */
 final class SessionList1Params implements BaseModel
 {
-    /** @use SdkModel<session_list_1_params> */
+    /** @use SdkModel<SessionList1ParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * To decide if room participants should be included in the response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeParticipants;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()
@@ -53,30 +58,35 @@ final class SessionList1Params implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
     public static function with(
-        ?Filter $filter = null,
+        Filter|array|null $filter = null,
         ?bool $includeParticipants = null,
-        ?Page $page = null
+        Page|array|null $page = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $includeParticipants && $obj->includeParticipants = $includeParticipants;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $includeParticipants && $self['includeParticipants'] = $includeParticipants;
+        null !== $page && $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[active].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,20 +94,22 @@ final class SessionList1Params implements BaseModel
      */
     public function withIncludeParticipants(bool $includeParticipants): self
     {
-        $obj = clone $this;
-        $obj->includeParticipants = $includeParticipants;
+        $self = clone $this;
+        $self['includeParticipants'] = $includeParticipants;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 }

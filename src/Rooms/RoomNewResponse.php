@@ -4,23 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type room_new_response = array{data?: Room}
+ * @phpstan-import-type RoomShape from \Telnyx\Rooms\Room
+ *
+ * @phpstan-type RoomNewResponseShape = array{data?: null|Room|RoomShape}
  */
-final class RoomNewResponse implements BaseModel, ResponseConverter
+final class RoomNewResponse implements BaseModel
 {
-    /** @use SdkModel<room_new_response> */
+    /** @use SdkModel<RoomNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Room $data;
 
     public function __construct()
@@ -32,21 +30,26 @@ final class RoomNewResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Room|RoomShape|null $data
      */
-    public static function with(?Room $data = null): self
+    public static function with(Room|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Room $data): self
+    /**
+     * @param Room|RoomShape $data
+     */
+    public function withData(Room|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Addresses\Address;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressListParams\Filter;
 use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
-use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Addresses\AddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Addresses\AddressListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AddressesContract
 {
     /**
@@ -36,55 +40,47 @@ interface AddressesContract
      * @param string $phoneNumber the phone number associated with the address
      * @param string $postalCode the postal code of the address
      * @param bool $validateAddress Indicates whether or not the address should be validated for emergency use upon creation or not. This should be left with the default value of `true` unless you have used the `/addresses/actions/validate` endpoint to validate the address separately prior to creation. If an address is not validated for emergency use upon creation and it is not valid, it will not be able to be used for emergency services.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $businessName,
-        $countryCode,
-        $firstName,
-        $lastName,
-        $locality,
-        $streetAddress,
-        $addressBook = omit,
-        $administrativeArea = omit,
-        $borough = omit,
-        $customerReference = omit,
-        $extendedAddress = omit,
-        $neighborhood = omit,
-        $phoneNumber = omit,
-        $postalCode = omit,
-        $validateAddress = omit,
-        ?RequestOptions $requestOptions = null,
+        string $businessName,
+        string $countryCode,
+        string $firstName,
+        string $lastName,
+        string $locality,
+        string $streetAddress,
+        bool $addressBook = true,
+        ?string $administrativeArea = null,
+        ?string $borough = null,
+        ?string $customerReference = null,
+        ?string $extendedAddress = null,
+        ?string $neighborhood = null,
+        ?string $phoneNumber = null,
+        ?string $postalCode = null,
+        bool $validateAddress = true,
+        RequestOptions|array|null $requestOptions = null,
     ): AddressNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AddressNewResponse;
-
-    /**
-     * @api
+     * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AddressGetResponse;
 
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -97,35 +93,29 @@ interface AddressesContract
      *     <code>street_address</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<Address>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): AddressListResponse;
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string $sort = 'created_at',
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AddressListResponse;
-
-    /**
-     * @api
+     * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AddressDeleteResponse;
 }

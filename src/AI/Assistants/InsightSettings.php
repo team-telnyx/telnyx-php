@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type insight_settings = array{insightGroupID?: string}
+ * @phpstan-type InsightSettingsShape = array{insightGroupID?: string|null}
  */
 final class InsightSettings implements BaseModel
 {
-    /** @use SdkModel<insight_settings> */
+    /** @use SdkModel<InsightSettingsShape> */
     use SdkModel;
 
     /**
      * Reference to an Insight Group. Insights in this group will be run automatically for all the assistant's conversations.
      */
-    #[Api('insight_group_id', optional: true)]
+    #[Optional('insight_group_id')]
     public ?string $insightGroupID;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class InsightSettings implements BaseModel
      */
     public static function with(?string $insightGroupID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $insightGroupID && $obj->insightGroupID = $insightGroupID;
+        null !== $insightGroupID && $self['insightGroupID'] = $insightGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class InsightSettings implements BaseModel
      */
     public function withInsightGroupID(string $insightGroupID): self
     {
-        $obj = clone $this;
-        $obj->insightGroupID = $insightGroupID;
+        $self = clone $this;
+        $self['insightGroupID'] = $insightGroupID;
 
-        return $obj;
+        return $self;
     }
 }

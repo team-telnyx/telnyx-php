@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberLookup\NumberLookupGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName;
@@ -12,59 +12,63 @@ use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier;
 use Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability;
 
 /**
- * @phpstan-type data_alias = array{
- *   callerName?: CallerName,
- *   carrier?: Carrier,
- *   countryCode?: string,
- *   fraud?: string,
- *   nationalFormat?: string,
- *   phoneNumber?: string,
- *   portability?: Portability,
- *   recordType?: string,
+ * @phpstan-import-type CallerNameShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\CallerName
+ * @phpstan-import-type CarrierShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\Carrier
+ * @phpstan-import-type PortabilityShape from \Telnyx\NumberLookup\NumberLookupGetResponse\Data\Portability
+ *
+ * @phpstan-type DataShape = array{
+ *   callerName?: null|CallerName|CallerNameShape,
+ *   carrier?: null|Carrier|CarrierShape,
+ *   countryCode?: string|null,
+ *   fraud?: string|null,
+ *   nationalFormat?: string|null,
+ *   phoneNumber?: string|null,
+ *   portability?: null|Portability|PortabilityShape,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('caller_name', optional: true)]
+    #[Optional('caller_name')]
     public ?CallerName $callerName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Carrier $carrier;
 
     /**
      * Region code that matches the specific country calling code.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * Unused.
      */
-    #[Api(optional: true)]
+    #[Optional(nullable: true)]
     public ?string $fraud;
 
     /**
      * Hyphen-separated national number, preceded by the national destination code (NDC), with a 0 prefix, if an NDC is found.
      */
-    #[Api('national_format', optional: true)]
+    #[Optional('national_format')]
     public ?string $nationalFormat;
 
     /**
      * E164-formatted phone number.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Portability $portability;
 
     /**
      * Identifies the type of record.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -76,45 +80,55 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CallerName|CallerNameShape|null $callerName
+     * @param Carrier|CarrierShape|null $carrier
+     * @param Portability|PortabilityShape|null $portability
      */
     public static function with(
-        ?CallerName $callerName = null,
-        ?Carrier $carrier = null,
+        CallerName|array|null $callerName = null,
+        Carrier|array|null $carrier = null,
         ?string $countryCode = null,
         ?string $fraud = null,
         ?string $nationalFormat = null,
         ?string $phoneNumber = null,
-        ?Portability $portability = null,
+        Portability|array|null $portability = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callerName && $obj->callerName = $callerName;
-        null !== $carrier && $obj->carrier = $carrier;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $fraud && $obj->fraud = $fraud;
-        null !== $nationalFormat && $obj->nationalFormat = $nationalFormat;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $portability && $obj->portability = $portability;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $callerName && $self['callerName'] = $callerName;
+        null !== $carrier && $self['carrier'] = $carrier;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $fraud && $self['fraud'] = $fraud;
+        null !== $nationalFormat && $self['nationalFormat'] = $nationalFormat;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $portability && $self['portability'] = $portability;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
-    public function withCallerName(CallerName $callerName): self
+    /**
+     * @param CallerName|CallerNameShape $callerName
+     */
+    public function withCallerName(CallerName|array $callerName): self
     {
-        $obj = clone $this;
-        $obj->callerName = $callerName;
+        $self = clone $this;
+        $self['callerName'] = $callerName;
 
-        return $obj;
+        return $self;
     }
 
-    public function withCarrier(Carrier $carrier): self
+    /**
+     * @param Carrier|CarrierShape $carrier
+     */
+    public function withCarrier(Carrier|array $carrier): self
     {
-        $obj = clone $this;
-        $obj->carrier = $carrier;
+        $self = clone $this;
+        $self['carrier'] = $carrier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,21 +136,21 @@ final class Data implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Unused.
      */
-    public function withFraud(string $fraud): self
+    public function withFraud(?string $fraud): self
     {
-        $obj = clone $this;
-        $obj->fraud = $fraud;
+        $self = clone $this;
+        $self['fraud'] = $fraud;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +158,10 @@ final class Data implements BaseModel
      */
     public function withNationalFormat(string $nationalFormat): self
     {
-        $obj = clone $this;
-        $obj->nationalFormat = $nationalFormat;
+        $self = clone $this;
+        $self['nationalFormat'] = $nationalFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,18 +169,21 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPortability(Portability $portability): self
+    /**
+     * @param Portability|PortabilityShape $portability
+     */
+    public function withPortability(Portability|array $portability): self
     {
-        $obj = clone $this;
-        $obj->portability = $portability;
+        $self = clone $this;
+        $self['portability'] = $portability;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,9 +191,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

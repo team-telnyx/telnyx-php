@@ -4,47 +4,72 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomStorageCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\CustomStorageCredentials\S3ConfigurationData\Backend;
 
 /**
- * @phpstan-type s3_configuration_data = array{
- *   awsAccessKeyID?: string,
- *   awsSecretAccessKey?: string,
- *   bucket?: string,
- *   region?: string,
+ * @phpstan-type S3ConfigurationDataShape = array{
+ *   backend: Backend|value-of<Backend>,
+ *   awsAccessKeyID?: string|null,
+ *   awsSecretAccessKey?: string|null,
+ *   bucket?: string|null,
+ *   region?: string|null,
  * }
  */
 final class S3ConfigurationData implements BaseModel
 {
-    /** @use SdkModel<s3_configuration_data> */
+    /** @use SdkModel<S3ConfigurationDataShape> */
     use SdkModel;
+
+    /**
+     * Storage backend type.
+     *
+     * @var value-of<Backend> $backend
+     */
+    #[Required(enum: Backend::class)]
+    public string $backend;
 
     /**
      * AWS credentials access key id.
      */
-    #[Api('aws_access_key_id', optional: true)]
+    #[Optional('aws_access_key_id')]
     public ?string $awsAccessKeyID;
 
     /**
      * AWS secret access key.
      */
-    #[Api('aws_secret_access_key', optional: true)]
+    #[Optional('aws_secret_access_key')]
     public ?string $awsSecretAccessKey;
 
     /**
      * Name of the bucket to be used to store recording files.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bucket;
 
     /**
      * Region where the bucket is located.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region;
 
+    /**
+     * `new S3ConfigurationData()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * S3ConfigurationData::with(backend: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new S3ConfigurationData)->withBackend(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -54,21 +79,39 @@ final class S3ConfigurationData implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Backend|value-of<Backend> $backend
      */
     public static function with(
+        Backend|string $backend,
         ?string $awsAccessKeyID = null,
         ?string $awsSecretAccessKey = null,
         ?string $bucket = null,
         ?string $region = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $awsAccessKeyID && $obj->awsAccessKeyID = $awsAccessKeyID;
-        null !== $awsSecretAccessKey && $obj->awsSecretAccessKey = $awsSecretAccessKey;
-        null !== $bucket && $obj->bucket = $bucket;
-        null !== $region && $obj->region = $region;
+        $self['backend'] = $backend;
 
-        return $obj;
+        null !== $awsAccessKeyID && $self['awsAccessKeyID'] = $awsAccessKeyID;
+        null !== $awsSecretAccessKey && $self['awsSecretAccessKey'] = $awsSecretAccessKey;
+        null !== $bucket && $self['bucket'] = $bucket;
+        null !== $region && $self['region'] = $region;
+
+        return $self;
+    }
+
+    /**
+     * Storage backend type.
+     *
+     * @param Backend|value-of<Backend> $backend
+     */
+    public function withBackend(Backend|string $backend): self
+    {
+        $self = clone $this;
+        $self['backend'] = $backend;
+
+        return $self;
     }
 
     /**
@@ -76,10 +119,10 @@ final class S3ConfigurationData implements BaseModel
      */
     public function withAwsAccessKeyID(string $awsAccessKeyID): self
     {
-        $obj = clone $this;
-        $obj->awsAccessKeyID = $awsAccessKeyID;
+        $self = clone $this;
+        $self['awsAccessKeyID'] = $awsAccessKeyID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +130,10 @@ final class S3ConfigurationData implements BaseModel
      */
     public function withAwsSecretAccessKey(string $awsSecretAccessKey): self
     {
-        $obj = clone $this;
-        $obj->awsSecretAccessKey = $awsSecretAccessKey;
+        $self = clone $this;
+        $self['awsSecretAccessKey'] = $awsSecretAccessKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +141,10 @@ final class S3ConfigurationData implements BaseModel
      */
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj->bucket = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +152,9 @@ final class S3ConfigurationData implements BaseModel
      */
     public function withRegion(string $region): self
     {
-        $obj = clone $this;
-        $obj->region = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 }

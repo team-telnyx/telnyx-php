@@ -6,76 +6,70 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\VerificationMethod;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\VerificationCodesContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort
+ * @phpstan-import-type VerificationCodeShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VerificationCodesService implements VerificationCodesContract
 {
     /**
+     * @api
+     */
+    public VerificationCodesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new VerificationCodesRawService($client);
+    }
 
     /**
      * @api
      *
      * Returns a list of verification codes for a porting order.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[verified]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param string $id Porting Order id
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[verified]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<VerificationCodeListResponse>
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): VerificationCodeListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VerificationCodeListResponse {
-        [$parsed, $options] = VerificationCodeListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|array|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['porting_orders/%1$s/verification_codes', $id],
-            query: $parsed,
-            options: $options,
-            convert: VerificationCodeListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -83,50 +77,30 @@ final class VerificationCodesService implements VerificationCodesContract
      *
      * Send the verification code for all porting phone numbers.
      *
+     * @param string $id Porting Order id
      * @param list<string> $phoneNumbers
      * @param VerificationMethod|value-of<VerificationMethod> $verificationMethod
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function send(
         string $id,
-        $phoneNumbers = omit,
-        $verificationMethod = omit,
-        ?RequestOptions $requestOptions = null,
+        ?array $phoneNumbers = null,
+        VerificationMethod|string|null $verificationMethod = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed {
-        $params = [
-            'phoneNumbers' => $phoneNumbers,
-            'verificationMethod' => $verificationMethod,
-        ];
-
-        return $this->sendRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function sendRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        [$parsed, $options] = VerificationCodeSendParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'phoneNumbers' => $phoneNumbers,
+                'verificationMethod' => $verificationMethod,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['porting_orders/%1$s/verification_codes/send', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->send($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -134,44 +108,22 @@ final class VerificationCodesService implements VerificationCodesContract
      *
      * Verifies the verification code for a list of phone numbers.
      *
-     * @param list<VerificationCode> $verificationCodes
+     * @param string $id Porting Order id
+     * @param list<VerificationCode|VerificationCodeShape> $verificationCodes
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function verify(
         string $id,
-        $verificationCodes = omit,
-        ?RequestOptions $requestOptions = null,
+        ?array $verificationCodes = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VerificationCodeVerifyResponse {
-        $params = ['verificationCodes' => $verificationCodes];
+        $params = Util::removeNulls(['verificationCodes' => $verificationCodes]);
 
-        return $this->verifyRaw($id, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->verify($id, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function verifyRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VerificationCodeVerifyResponse {
-        [$parsed, $options] = VerificationCodeVerifyParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['porting_orders/%1$s/verification_codes/verify', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: VerificationCodeVerifyResponse::class,
-        );
+        return $response->parse();
     }
 }

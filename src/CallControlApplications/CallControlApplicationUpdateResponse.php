@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\CallControlApplications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type call_control_application_update_response = array{
- *   data?: CallControlApplication
+ * @phpstan-import-type CallControlApplicationShape from \Telnyx\CallControlApplications\CallControlApplication
+ *
+ * @phpstan-type CallControlApplicationUpdateResponseShape = array{
+ *   data?: null|CallControlApplication|CallControlApplicationShape
  * }
  */
-final class CallControlApplicationUpdateResponse implements BaseModel, ResponseConverter
+final class CallControlApplicationUpdateResponse implements BaseModel
 {
-    /** @use SdkModel<call_control_application_update_response> */
+    /** @use SdkModel<CallControlApplicationUpdateResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?CallControlApplication $data;
 
     public function __construct()
@@ -34,21 +32,26 @@ final class CallControlApplicationUpdateResponse implements BaseModel, ResponseC
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CallControlApplication|CallControlApplicationShape|null $data
      */
-    public static function with(?CallControlApplication $data = null): self
+    public static function with(CallControlApplication|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(CallControlApplication $data): self
+    /**
+     * @param CallControlApplication|CallControlApplicationShape $data
+     */
+    public function withData(CallControlApplication|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

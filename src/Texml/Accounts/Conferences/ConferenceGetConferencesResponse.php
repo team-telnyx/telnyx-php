@@ -4,76 +4,74 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference;
 
 /**
- * @phpstan-type conference_get_conferences_response = array{
- *   conferences?: list<Conference>,
- *   end?: int,
- *   firstPageUri?: string,
- *   nextPageUri?: string,
- *   page?: int,
- *   pageSize?: int,
- *   start?: int,
- *   uri?: string,
+ * @phpstan-import-type ConferenceShape from \Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference
+ *
+ * @phpstan-type ConferenceGetConferencesResponseShape = array{
+ *   conferences?: list<Conference|ConferenceShape>|null,
+ *   end?: int|null,
+ *   firstPageUri?: string|null,
+ *   nextPageUri?: string|null,
+ *   page?: int|null,
+ *   pageSize?: int|null,
+ *   start?: int|null,
+ *   uri?: string|null,
  * }
  */
-final class ConferenceGetConferencesResponse implements BaseModel, ResponseConverter
+final class ConferenceGetConferencesResponse implements BaseModel
 {
-    /** @use SdkModel<conference_get_conferences_response> */
+    /** @use SdkModel<ConferenceGetConferencesResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Conference>|null $conferences */
-    #[Api(list: Conference::class, optional: true)]
+    #[Optional(list: Conference::class)]
     public ?array $conferences;
 
     /**
      * The number of the last element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $end;
 
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences.json?Page=0&PageSize=1.
      */
-    #[Api('first_page_uri', optional: true)]
+    #[Optional('first_page_uri')]
     public ?string $firstPageUri;
 
     /**
      * /v2/texml/Accounts/61bf923e-5e4d-4595-a110-56190ea18a1b/Conferences.json?Page=1&PageSize=1&PageToken=MTY4AjgyNDkwNzIxMQ.
      */
-    #[Api('next_page_uri', optional: true)]
+    #[Optional('next_page_uri')]
     public ?string $nextPageUri;
 
     /**
      * Current page number, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * The number of items on the page.
      */
-    #[Api('page_size', optional: true)]
+    #[Optional('page_size')]
     public ?int $pageSize;
 
     /**
      * The number of the first element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $start;
 
     /**
      * The URI of the current page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -86,7 +84,7 @@ final class ConferenceGetConferencesResponse implements BaseModel, ResponseConve
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Conference> $conferences
+     * @param list<Conference|ConferenceShape>|null $conferences
      */
     public static function with(
         ?array $conferences = null,
@@ -98,29 +96,29 @@ final class ConferenceGetConferencesResponse implements BaseModel, ResponseConve
         ?int $start = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $conferences && $obj->conferences = $conferences;
-        null !== $end && $obj->end = $end;
-        null !== $firstPageUri && $obj->firstPageUri = $firstPageUri;
-        null !== $nextPageUri && $obj->nextPageUri = $nextPageUri;
-        null !== $page && $obj->page = $page;
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $start && $obj->start = $start;
-        null !== $uri && $obj->uri = $uri;
+        null !== $conferences && $self['conferences'] = $conferences;
+        null !== $end && $self['end'] = $end;
+        null !== $firstPageUri && $self['firstPageUri'] = $firstPageUri;
+        null !== $nextPageUri && $self['nextPageUri'] = $nextPageUri;
+        null !== $page && $self['page'] = $page;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $start && $self['start'] = $start;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Conference> $conferences
+     * @param list<Conference|ConferenceShape> $conferences
      */
     public function withConferences(array $conferences): self
     {
-        $obj = clone $this;
-        $obj->conferences = $conferences;
+        $self = clone $this;
+        $self['conferences'] = $conferences;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +126,10 @@ final class ConferenceGetConferencesResponse implements BaseModel, ResponseConve
      */
     public function withEnd(int $end): self
     {
-        $obj = clone $this;
-        $obj->end = $end;
+        $self = clone $this;
+        $self['end'] = $end;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +137,10 @@ final class ConferenceGetConferencesResponse implements BaseModel, ResponseConve
      */
     public function withFirstPageUri(string $firstPageUri): self
     {
-        $obj = clone $this;
-        $obj->firstPageUri = $firstPageUri;
+        $self = clone $this;
+        $self['firstPageUri'] = $firstPageUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +148,10 @@ final class ConferenceGetConferencesResponse implements BaseModel, ResponseConve
      */
     public function withNextPageUri(string $nextPageUri): self
     {
-        $obj = clone $this;
-        $obj->nextPageUri = $nextPageUri;
+        $self = clone $this;
+        $self['nextPageUri'] = $nextPageUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +159,10 @@ final class ConferenceGetConferencesResponse implements BaseModel, ResponseConve
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +170,10 @@ final class ConferenceGetConferencesResponse implements BaseModel, ResponseConve
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +181,10 @@ final class ConferenceGetConferencesResponse implements BaseModel, ResponseConve
      */
     public function withStart(int $start): self
     {
-        $obj = clone $this;
-        $obj->start = $start;
+        $self = clone $this;
+        $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,9 +192,9 @@ final class ConferenceGetConferencesResponse implements BaseModel, ResponseConve
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

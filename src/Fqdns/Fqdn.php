@@ -4,73 +4,73 @@ declare(strict_types=1);
 
 namespace Telnyx\Fqdns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type fqdn_alias = array{
- *   id?: string,
- *   connectionID?: string,
- *   createdAt?: string,
- *   dnsRecordType?: string,
- *   fqdn?: string,
- *   port?: int,
- *   recordType?: string,
- *   updatedAt?: string,
+ * @phpstan-type FqdnShape = array{
+ *   id?: string|null,
+ *   connectionID?: string|null,
+ *   createdAt?: string|null,
+ *   dnsRecordType?: string|null,
+ *   fqdn?: string|null,
+ *   port?: int|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Fqdn implements BaseModel
 {
-    /** @use SdkModel<fqdn_alias> */
+    /** @use SdkModel<FqdnShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ID of the FQDN connection to which this FQDN is attached.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      */
-    #[Api('dns_record_type', optional: true)]
+    #[Optional('dns_record_type')]
     public ?string $dnsRecordType;
 
     /**
      * FQDN represented by this resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fqdn;
 
     /**
      * Port to use when connecting to this FQDN.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     public function __construct()
@@ -93,18 +93,18 @@ final class Fqdn implements BaseModel
         ?string $recordType = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $dnsRecordType && $obj->dnsRecordType = $dnsRecordType;
-        null !== $fqdn && $obj->fqdn = $fqdn;
-        null !== $port && $obj->port = $port;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $dnsRecordType && $self['dnsRecordType'] = $dnsRecordType;
+        null !== $fqdn && $self['fqdn'] = $fqdn;
+        null !== $port && $self['port'] = $port;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Fqdn implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class Fqdn implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +134,10 @@ final class Fqdn implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +145,10 @@ final class Fqdn implements BaseModel
      */
     public function withDNSRecordType(string $dnsRecordType): self
     {
-        $obj = clone $this;
-        $obj->dnsRecordType = $dnsRecordType;
+        $self = clone $this;
+        $self['dnsRecordType'] = $dnsRecordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +156,10 @@ final class Fqdn implements BaseModel
      */
     public function withFqdn(string $fqdn): self
     {
-        $obj = clone $this;
-        $obj->fqdn = $fqdn;
+        $self = clone $this;
+        $self['fqdn'] = $fqdn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class Fqdn implements BaseModel
      */
     public function withPort(int $port): self
     {
-        $obj = clone $this;
-        $obj->port = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class Fqdn implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,9 +189,9 @@ final class Fqdn implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

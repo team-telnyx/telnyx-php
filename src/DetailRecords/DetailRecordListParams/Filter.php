@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\DetailRecords\DetailRecordListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DetailRecords\DetailRecordListParams\Filter\DateRange;
@@ -13,13 +14,14 @@ use Telnyx\DetailRecords\DetailRecordListParams\Filter\RecordType;
 /**
  * Filter records on a given record attribute and value. <br/>Example: filter[status]=delivered. <br/>Required: filter[record_type] must be specified.
  *
- * @phpstan-type filter_alias = array{
- *   recordType: value-of<RecordType>, dateRange?: value-of<DateRange>
+ * @phpstan-type FilterShape = array{
+ *   recordType: RecordType|value-of<RecordType>,
+ *   dateRange?: null|DateRange|value-of<DateRange>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -27,7 +29,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<RecordType> $recordType
      */
-    #[Api('record_type', enum: RecordType::class)]
+    #[Required('record_type', enum: RecordType::class)]
     public string $recordType;
 
     /**
@@ -35,7 +37,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<DateRange>|null $dateRange
      */
-    #[Api('date_range', enum: DateRange::class, optional: true)]
+    #[Optional('date_range', enum: DateRange::class)]
     public ?string $dateRange;
 
     /**
@@ -63,19 +65,19 @@ final class Filter implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RecordType|value-of<RecordType> $recordType
-     * @param DateRange|value-of<DateRange> $dateRange
+     * @param DateRange|value-of<DateRange>|null $dateRange
      */
     public static function with(
         RecordType|string $recordType,
         DateRange|string|null $dateRange = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['recordType'] = $recordType;
+        $self['recordType'] = $recordType;
 
-        null !== $dateRange && $obj['dateRange'] = $dateRange;
+        null !== $dateRange && $self['dateRange'] = $dateRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +87,10 @@ final class Filter implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,9 +100,9 @@ final class Filter implements BaseModel
      */
     public function withDateRange(DateRange|string $dateRange): self
     {
-        $obj = clone $this;
-        $obj['dateRange'] = $dateRange;
+        $self = clone $this;
+        $self['dateRange'] = $dateRange;
 
-        return $obj;
+        return $self;
     }
 }

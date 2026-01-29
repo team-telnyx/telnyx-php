@@ -1,0 +1,119 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\ServiceContracts\SimCardGroups;
+
+use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\RequestOptions;
+use Telnyx\SimCardGroups\Actions\ActionGetResponse;
+use Telnyx\SimCardGroups\Actions\ActionListParams;
+use Telnyx\SimCardGroups\Actions\ActionRemovePrivateWirelessGatewayResponse;
+use Telnyx\SimCardGroups\Actions\ActionRemoveWirelessBlocklistResponse;
+use Telnyx\SimCardGroups\Actions\ActionSetPrivateWirelessGatewayParams;
+use Telnyx\SimCardGroups\Actions\ActionSetPrivateWirelessGatewayResponse;
+use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistParams;
+use Telnyx\SimCardGroups\Actions\ActionSetWirelessBlocklistResponse;
+use Telnyx\SimCardGroups\Actions\SimCardGroupAction;
+
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
+interface ActionsRawContract
+{
+    /**
+     * @api
+     *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|ActionListParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<DefaultFlatPagination<SimCardGroupAction>>
+     *
+     * @throws APIException
+     */
+    public function list(
+        array|ActionListParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the SIM group
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionRemovePrivateWirelessGatewayResponse>
+     *
+     * @throws APIException
+     */
+    public function removePrivateWirelessGateway(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the SIM group
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionRemoveWirelessBlocklistResponse>
+     *
+     * @throws APIException
+     */
+    public function removeWirelessBlocklist(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the SIM group
+     * @param array<string,mixed>|ActionSetPrivateWirelessGatewayParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionSetPrivateWirelessGatewayResponse>
+     *
+     * @throws APIException
+     */
+    public function setPrivateWirelessGateway(
+        string $id,
+        array|ActionSetPrivateWirelessGatewayParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id identifies the SIM group
+     * @param array<string,mixed>|ActionSetWirelessBlocklistParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionSetWirelessBlocklistResponse>
+     *
+     * @throws APIException
+     */
+    public function setWirelessBlocklist(
+        string $id,
+        array|ActionSetWirelessBlocklistParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+}

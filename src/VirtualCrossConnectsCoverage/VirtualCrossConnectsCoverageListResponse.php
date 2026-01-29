@@ -4,32 +4,58 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnectsCoverage;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Data;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\CloudProvider;
+use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Location;
 
 /**
- * @phpstan-type virtual_cross_connects_coverage_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-import-type LocationShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Location
+ *
+ * @phpstan-type VirtualCrossConnectsCoverageListResponseShape = array{
+ *   availableBandwidth?: list<float>|null,
+ *   cloudProvider?: null|CloudProvider|value-of<CloudProvider>,
+ *   cloudProviderRegion?: string|null,
+ *   location?: null|Location|LocationShape,
+ *   recordType?: string|null,
  * }
  */
-final class VirtualCrossConnectsCoverageListResponse implements BaseModel, ResponseConverter
+final class VirtualCrossConnectsCoverageListResponse implements BaseModel
 {
-    /** @use SdkModel<virtual_cross_connects_coverage_list_response> */
+    /** @use SdkModel<VirtualCrossConnectsCoverageListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * The available throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.
+     *
+     * @var list<float>|null $availableBandwidth
+     */
+    #[Optional('available_bandwidth', list: 'float')]
+    public ?array $availableBandwidth;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * The Virtual Private Cloud with which you would like to establish a cross connect.
+     *
+     * @var value-of<CloudProvider>|null $cloudProvider
+     */
+    #[Optional('cloud_provider', enum: CloudProvider::class)]
+    public ?string $cloudProvider;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * The region where your Virtual Private Cloud hosts are located. Should be identical to how the cloud provider names region, i.e. us-east-1 for AWS but Frankfurt for Azure.
+     */
+    #[Optional('cloud_provider_region')]
+    public ?string $cloudProviderRegion;
+
+    #[Optional]
+    public ?Location $location;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -41,36 +67,84 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel, Respo
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<float>|null $availableBandwidth
+     * @param CloudProvider|value-of<CloudProvider>|null $cloudProvider
+     * @param Location|LocationShape|null $location
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?array $availableBandwidth = null,
+        CloudProvider|string|null $cloudProvider = null,
+        ?string $cloudProviderRegion = null,
+        Location|array|null $location = null,
+        ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $availableBandwidth && $self['availableBandwidth'] = $availableBandwidth;
+        null !== $cloudProvider && $self['cloudProvider'] = $cloudProvider;
+        null !== $cloudProviderRegion && $self['cloudProviderRegion'] = $cloudProviderRegion;
+        null !== $location && $self['location'] = $location;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * The available throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.
+     *
+     * @param list<float> $availableBandwidth
      */
-    public function withData(array $data): self
+    public function withAvailableBandwidth(array $availableBandwidth): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['availableBandwidth'] = $availableBandwidth;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * The Virtual Private Cloud with which you would like to establish a cross connect.
+     *
+     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
+     */
+    public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['cloudProvider'] = $cloudProvider;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The region where your Virtual Private Cloud hosts are located. Should be identical to how the cloud provider names region, i.e. us-east-1 for AWS but Frankfurt for Azure.
+     */
+    public function withCloudProviderRegion(string $cloudProviderRegion): self
+    {
+        $self = clone $this;
+        $self['cloudProviderRegion'] = $cloudProviderRegion;
+
+        return $self;
+    }
+
+    /**
+     * @param Location|LocationShape $location
+     */
+    public function withLocation(Location|array $location): self
+    {
+        $self = clone $this;
+        $self['location'] = $location;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
     }
 }

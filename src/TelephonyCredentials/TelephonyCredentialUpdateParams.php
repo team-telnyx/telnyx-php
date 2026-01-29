@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TelephonyCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,37 +12,40 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an existing credential.
  *
- * @see Telnyx\TelephonyCredentials->update
+ * @see Telnyx\Services\TelephonyCredentialsService::update()
  *
- * @phpstan-type telephony_credential_update_params = array{
- *   connectionID?: string, expiresAt?: string, name?: string, tag?: string
+ * @phpstan-type TelephonyCredentialUpdateParamsShape = array{
+ *   connectionID?: string|null,
+ *   expiresAt?: string|null,
+ *   name?: string|null,
+ *   tag?: string|null,
  * }
  */
 final class TelephonyCredentialUpdateParams implements BaseModel
 {
-    /** @use SdkModel<telephony_credential_update_params> */
+    /** @use SdkModel<TelephonyCredentialUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Identifies the Credential Connection this credential is associated with.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * ISO-8601 formatted date indicating when the credential will expire.
      */
-    #[Api('expires_at', optional: true)]
+    #[Optional('expires_at')]
     public ?string $expiresAt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Tags a credential. A single tag can hold at maximum 1000 credentials.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tag;
 
     public function __construct()
@@ -61,14 +64,14 @@ final class TelephonyCredentialUpdateParams implements BaseModel
         ?string $name = null,
         ?string $tag = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $expiresAt && $obj->expiresAt = $expiresAt;
-        null !== $name && $obj->name = $name;
-        null !== $tag && $obj->tag = $tag;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $expiresAt && $self['expiresAt'] = $expiresAt;
+        null !== $name && $self['name'] = $name;
+        null !== $tag && $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +79,10 @@ final class TelephonyCredentialUpdateParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,18 +90,18 @@ final class TelephonyCredentialUpdateParams implements BaseModel
      */
     public function withExpiresAt(string $expiresAt): self
     {
-        $obj = clone $this;
-        $obj->expiresAt = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +109,9 @@ final class TelephonyCredentialUpdateParams implements BaseModel
      */
     public function withTag(string $tag): self
     {
-        $obj = clone $this;
-        $obj->tag = $tag;
+        $self = clone $this;
+        $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 }

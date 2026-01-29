@@ -6,6 +6,13 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
+use Telnyx\ManagedAccounts\ManagedAccountGetResponse;
+use Telnyx\ManagedAccounts\ManagedAccountListResponse;
+use Telnyx\ManagedAccounts\ManagedAccountNewResponse;
+use Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse;
+use Telnyx\ManagedAccounts\ManagedAccountUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,10 +41,11 @@ final class ManagedAccountsTest extends TestCase
         }
 
         $result = $this->client->managedAccounts->create(
-            businessName: "Larry's Cat Food Inc"
+            businessName: 'Larry\'s Cat Food Inc'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ManagedAccountNewResponse::class, $result);
     }
 
     #[Test]
@@ -48,10 +56,15 @@ final class ManagedAccountsTest extends TestCase
         }
 
         $result = $this->client->managedAccounts->create(
-            businessName: "Larry's Cat Food Inc"
+            businessName: 'Larry\'s Cat Food Inc',
+            email: 'larry_cat_food@customer.org',
+            managedAccountAllowCustomPricing: false,
+            password: '3jVjLq!tMuWKyWx4NN*CvhnB',
+            rollupBilling: false,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ManagedAccountNewResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +76,8 @@ final class ManagedAccountsTest extends TestCase
 
         $result = $this->client->managedAccounts->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ManagedAccountGetResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +89,8 @@ final class ManagedAccountsTest extends TestCase
 
         $result = $this->client->managedAccounts->update('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ManagedAccountUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -85,9 +100,15 @@ final class ManagedAccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->managedAccounts->list();
+        $page = $this->client->managedAccounts->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ManagedAccountListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -103,7 +124,11 @@ final class ManagedAccountsTest extends TestCase
             ->getAllocatableGlobalOutboundChannels()
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ManagedAccountGetAllocatableGlobalOutboundChannelsResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -115,6 +140,10 @@ final class ManagedAccountsTest extends TestCase
 
         $result = $this->client->managedAccounts->updateGlobalChannelLimit('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ManagedAccountUpdateGlobalChannelLimitResponse::class,
+            $result
+        );
     }
 }

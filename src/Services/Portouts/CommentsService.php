@@ -6,65 +6,52 @@ namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Portouts\Comments\CommentCreateParams;
+use Telnyx\Core\Util;
 use Telnyx\Portouts\Comments\CommentListResponse;
 use Telnyx\Portouts\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\CommentsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CommentsService implements CommentsContract
 {
     /**
+     * @api
+     */
+    public CommentsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CommentsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a comment on a portout request.
      *
+     * @param string $id Portout id
      * @param string $body Comment to post on this portout request
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        $body = omit,
-        ?RequestOptions $requestOptions = null
+        ?string $body = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CommentNewResponse {
-        $params = ['body' => $body];
+        $params = Util::removeNulls(['body' => $body]);
 
-        return $this->createRaw($id, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CommentNewResponse {
-        [$parsed, $options] = CommentCreateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['portouts/%1$s/comments', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: CommentNewResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -72,18 +59,18 @@ final class CommentsService implements CommentsContract
      *
      * Returns a list of comments for a portout request.
      *
+     * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CommentListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['portouts/%1$s/comments', $id],
-            options: $requestOptions,
-            convert: CommentListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

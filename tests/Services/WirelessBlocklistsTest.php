@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\WirelessBlocklists\WirelessBlocklist;
+use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
+use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
+use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
+use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +45,8 @@ final class WirelessBlocklistsTest extends TestCase
             values: ['CA', 'US']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WirelessBlocklistNewResponse::class, $result);
     }
 
     #[Test]
@@ -55,7 +62,8 @@ final class WirelessBlocklistsTest extends TestCase
             values: ['CA', 'US']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WirelessBlocklistNewResponse::class, $result);
     }
 
     #[Test]
@@ -69,7 +77,8 @@ final class WirelessBlocklistsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WirelessBlocklistGetResponse::class, $result);
     }
 
     #[Test]
@@ -81,7 +90,8 @@ final class WirelessBlocklistsTest extends TestCase
 
         $result = $this->client->wirelessBlocklists->update();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WirelessBlocklistUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -91,9 +101,15 @@ final class WirelessBlocklistsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklists->list();
+        $page = $this->client->wirelessBlocklists->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(WirelessBlocklist::class, $item);
+        }
     }
 
     #[Test]
@@ -107,6 +123,7 @@ final class WirelessBlocklistsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WirelessBlocklistDeleteResponse::class, $result);
     }
 }

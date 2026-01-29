@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NetworkCoverage\NetworkCoverageListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NetworkCoverage\AvailableService;
@@ -14,21 +14,24 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\C
 /**
  * Consolidated filters parameter (deepObject style). Originally: filters[available_services][contains].
  *
- * @phpstan-type filters_alias = array{
- *   availableServices?: Contains|value-of<AvailableService>
+ * @phpstan-import-type AvailableServicesVariants from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices
+ * @phpstan-import-type AvailableServicesShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices
+ *
+ * @phpstan-type FiltersShape = array{
+ *   availableServices?: AvailableServicesShape|null
  * }
  */
 final class Filters implements BaseModel
 {
-    /** @use SdkModel<filters_alias> */
+    /** @use SdkModel<FiltersShape> */
     use SdkModel;
 
     /**
      * Filter by exact available service match.
      *
-     * @var Contains|value-of<AvailableService>|null $availableServices
+     * @var AvailableServicesVariants|null $availableServices
      */
-    #[Api('available_services', union: AvailableServices::class, optional: true)]
+    #[Optional('available_services', union: AvailableServices::class)]
     public Contains|string|null $availableServices;
 
     public function __construct()
@@ -41,29 +44,29 @@ final class Filters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvailableService|Contains|value-of<AvailableService> $availableServices
+     * @param AvailableServicesShape|null $availableServices
      */
     public static function with(
-        AvailableService|Contains|string|null $availableServices = null
+        AvailableService|Contains|array|string|null $availableServices = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $availableServices && $obj['availableServices'] = $availableServices;
+        null !== $availableServices && $self['availableServices'] = $availableServices;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by exact available service match.
      *
-     * @param AvailableService|Contains|value-of<AvailableService> $availableServices
+     * @param AvailableServicesShape $availableServices
      */
     public function withAvailableServices(
-        AvailableService|Contains|string $availableServices
+        AvailableService|Contains|array|string $availableServices
     ): self {
-        $obj = clone $this;
-        $obj['availableServices'] = $availableServices;
+        $self = clone $this;
+        $self['availableServices'] = $availableServices;
 
-        return $obj;
+        return $self;
     }
 }

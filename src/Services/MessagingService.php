@@ -11,7 +11,12 @@ use Telnyx\Services\Messaging\RcsService;
 final class MessagingService implements MessagingContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public MessagingRawService $raw;
+
+    /**
+     * @api
      */
     public RcsService $rcs;
 
@@ -20,6 +25,7 @@ final class MessagingService implements MessagingContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new MessagingRawService($client);
         $this->rcs = new RcsService($client);
     }
 }

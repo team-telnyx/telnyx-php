@@ -4,32 +4,56 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationEvents;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\NotificationEvents\NotificationEventListResponse\Data;
 
 /**
- * @phpstan-type notification_event_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * An object representing the available notifications.
+ *
+ * @phpstan-type NotificationEventListResponseShape = array{
+ *   id?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   enabled?: bool|null,
+ *   name?: string|null,
+ *   notificationCategory?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
-final class NotificationEventListResponse implements BaseModel, ResponseConverter
+final class NotificationEventListResponse implements BaseModel
 {
-    /** @use SdkModel<notification_event_list_response> */
+    /** @use SdkModel<NotificationEventListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * A UUID.
+     */
+    #[Optional]
+    public ?string $id;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    #[Optional]
+    public ?bool $enabled;
+
+    /**
+     * A human readable name.
+     */
+    #[Optional]
+    public ?string $name;
+
+    #[Optional('notification_category')]
+    public ?string $notificationCategory;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
     {
@@ -40,37 +64,84 @@ final class NotificationEventListResponse implements BaseModel, ResponseConverte
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<Data> $data
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?string $id = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?bool $enabled = null,
+        ?string $name = null,
+        ?string $notificationCategory = null,
+        ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $name && $self['name'] = $name;
+        null !== $notificationCategory && $self['notificationCategory'] = $notificationCategory;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * A UUID.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withEnabled(bool $enabled): self
+    {
+        $self = clone $this;
+        $self['enabled'] = $enabled;
+
+        return $self;
+    }
+
+    /**
+     * A human readable name.
+     */
+    public function withName(string $name): self
+    {
+        $self = clone $this;
+        $self['name'] = $name;
+
+        return $self;
+    }
+
+    public function withNotificationCategory(string $notificationCategory): self
+    {
+        $self = clone $this;
+        $self['notificationCategory'] = $notificationCategory;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
+
+        return $self;
     }
 }

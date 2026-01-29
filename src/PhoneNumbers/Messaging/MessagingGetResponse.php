@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumberWithMessagingSettings;
 
 /**
- * @phpstan-type messaging_get_response = array{
- *   data?: PhoneNumberWithMessagingSettings
+ * @phpstan-import-type PhoneNumberWithMessagingSettingsShape from \Telnyx\PhoneNumberWithMessagingSettings
+ *
+ * @phpstan-type MessagingGetResponseShape = array{
+ *   data?: null|PhoneNumberWithMessagingSettings|PhoneNumberWithMessagingSettingsShape,
  * }
  */
-final class MessagingGetResponse implements BaseModel, ResponseConverter
+final class MessagingGetResponse implements BaseModel
 {
-    /** @use SdkModel<messaging_get_response> */
+    /** @use SdkModel<MessagingGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumberWithMessagingSettings $data;
 
     public function __construct()
@@ -35,22 +33,27 @@ final class MessagingGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PhoneNumberWithMessagingSettings|PhoneNumberWithMessagingSettingsShape|null $data
      */
     public static function with(
-        ?PhoneNumberWithMessagingSettings $data = null
+        PhoneNumberWithMessagingSettings|array|null $data = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(PhoneNumberWithMessagingSettings $data): self
+    /**
+     * @param PhoneNumberWithMessagingSettings|PhoneNumberWithMessagingSettingsShape $data
+     */
+    public function withData(PhoneNumberWithMessagingSettings|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

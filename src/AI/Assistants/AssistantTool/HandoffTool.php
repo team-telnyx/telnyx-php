@@ -5,40 +5,43 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool;
 
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * The handoff tool allows the assistant to hand off control of the conversation to another AI assistant. By default, this will happen transparently to the end user.
  *
- * @phpstan-type handoff_tool = array{handoff: Handoff, type: value-of<Type>}
+ * @phpstan-import-type HandoffShape from \Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff
+ *
+ * @phpstan-type HandoffToolShape = array{
+ *   handoff: Handoff|HandoffShape, type: 'handoff'
+ * }
  */
 final class HandoffTool implements BaseModel
 {
-    /** @use SdkModel<handoff_tool> */
+    /** @use SdkModel<HandoffToolShape> */
     use SdkModel;
 
-    #[Api]
-    public Handoff $handoff;
+    /** @var 'handoff' $type */
+    #[Required]
+    public string $type = 'handoff';
 
-    /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
-    public string $type;
+    #[Required]
+    public Handoff $handoff;
 
     /**
      * `new HandoffTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * HandoffTool::with(handoff: ..., type: ...)
+     * HandoffTool::with(handoff: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new HandoffTool)->withHandoff(...)->withType(...)
+     * (new HandoffTool)->withHandoff(...)
      * ```
      */
     public function __construct()
@@ -51,34 +54,25 @@ final class HandoffTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param Handoff|HandoffShape $handoff
      */
-    public static function with(Handoff $handoff, Type|string $type): self
+    public static function with(Handoff|array $handoff): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->handoff = $handoff;
-        $obj['type'] = $type;
+        $self['handoff'] = $handoff;
 
-        return $obj;
-    }
-
-    public function withHandoff(Handoff $handoff): self
-    {
-        $obj = clone $this;
-        $obj->handoff = $handoff;
-
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param Type|value-of<Type> $type
+     * @param Handoff|HandoffShape $handoff
      */
-    public function withType(Type|string $type): self
+    public function withHandoff(Handoff|array $handoff): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['handoff'] = $handoff;
 
-        return $obj;
+        return $self;
     }
 }

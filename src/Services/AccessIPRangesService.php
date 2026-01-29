@@ -5,69 +5,55 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AccessIPRanges\AccessIPRange;
-use Telnyx\AccessIPRanges\AccessIPRangeCreateParams;
-use Telnyx\AccessIPRanges\AccessIPRangeListParams;
 use Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter;
-use Telnyx\AccessIPRanges\AccessIPRangeListParams\Page;
-use Telnyx\AccessIPRanges\AccessIPRangeListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPRangesContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AccessIPRangesService implements AccessIPRangesContract
 {
     /**
+     * @api
+     */
+    public AccessIPRangesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AccessIPRangesRawService($client);
+    }
 
     /**
      * @api
      *
      * Create new Access IP Range
      *
-     * @param string $cidrBlock
-     * @param string $description
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $cidrBlock,
-        $description = omit,
-        ?RequestOptions $requestOptions = null
+        string $cidrBlock,
+        ?string $description = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AccessIPRange {
-        $params = ['cidrBlock' => $cidrBlock, 'description' => $description];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AccessIPRange {
-        [$parsed, $options] = AccessIPRangeCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['cidrBlock' => $cidrBlock, 'description' => $description]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'access_ip_ranges',
-            body: (object) $parsed,
-            options: $options,
-            convert: AccessIPRange::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -75,45 +61,31 @@ final class AccessIPRangesService implements AccessIPRangesContract
      *
      * List all Access IP Ranges
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[cidr_block], filter[cidr_block][startswith], filter[cidr_block][endswith], filter[cidr_block][contains], filter[created_at]. Supports complex bracket operations for dynamic filtering.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<AccessIPRange>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): AccessIPRangeListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AccessIPRangeListResponse {
-        [$parsed, $options] = AccessIPRangeListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'access_ip_ranges',
-            query: $parsed,
-            options: $options,
-            convert: AccessIPRangeListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -121,18 +93,17 @@ final class AccessIPRangesService implements AccessIPRangesContract
      *
      * Delete access IP ranges
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $accessIPRangeID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AccessIPRange {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['access_ip_ranges/%1$s', $accessIPRangeID],
-            options: $requestOptions,
-            convert: AccessIPRange::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($accessIPRangeID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

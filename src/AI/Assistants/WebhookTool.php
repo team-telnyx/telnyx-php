@@ -5,26 +5,29 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\WebhookTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\AI\Assistants\WebhookTool\Webhook;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type webhook_tool = array{
- *   type: value-of<Type>, webhook: InferenceEmbeddingWebhookToolParams
+ * @phpstan-import-type WebhookShape from \Telnyx\AI\Assistants\WebhookTool\Webhook
+ *
+ * @phpstan-type WebhookToolShape = array{
+ *   type: Type|value-of<Type>, webhook: Webhook|WebhookShape
  * }
  */
 final class WebhookTool implements BaseModel
 {
-    /** @use SdkModel<webhook_tool> */
+    /** @use SdkModel<WebhookToolShape> */
     use SdkModel;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
-    #[Api]
-    public InferenceEmbeddingWebhookToolParams $webhook;
+    #[Required]
+    public Webhook $webhook;
 
     /**
      * `new WebhookTool()` is missing required properties by the API.
@@ -51,17 +54,16 @@ final class WebhookTool implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Type|value-of<Type> $type
+     * @param Webhook|WebhookShape $webhook
      */
-    public static function with(
-        Type|string $type,
-        InferenceEmbeddingWebhookToolParams $webhook
-    ): self {
-        $obj = new self;
+    public static function with(Type|string $type, Webhook|array $webhook): self
+    {
+        $self = new self;
 
-        $obj['type'] = $type;
-        $obj->webhook = $webhook;
+        $self['type'] = $type;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,18 +71,20 @@ final class WebhookTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
-    public function withWebhook(
-        InferenceEmbeddingWebhookToolParams $webhook
-    ): self {
-        $obj = clone $this;
-        $obj->webhook = $webhook;
+    /**
+     * @param Webhook|WebhookShape $webhook
+     */
+    public function withWebhook(Webhook|array $webhook): self
+    {
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

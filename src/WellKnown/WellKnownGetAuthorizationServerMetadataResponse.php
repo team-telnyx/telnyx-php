@@ -4,38 +4,34 @@ declare(strict_types=1);
 
 namespace Telnyx\WellKnown;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type well_known_get_authorization_server_metadata_response = array{
- *   authorizationEndpoint?: string,
- *   codeChallengeMethodsSupported?: list<string>,
- *   grantTypesSupported?: list<string>,
- *   introspectionEndpoint?: string,
- *   issuer?: string,
- *   jwksUri?: string,
- *   registrationEndpoint?: string,
- *   responseTypesSupported?: list<string>,
- *   scopesSupported?: list<string>,
- *   tokenEndpoint?: string,
- *   tokenEndpointAuthMethodsSupported?: list<string>,
+ * @phpstan-type WellKnownGetAuthorizationServerMetadataResponseShape = array{
+ *   authorizationEndpoint?: string|null,
+ *   codeChallengeMethodsSupported?: list<string>|null,
+ *   grantTypesSupported?: list<string>|null,
+ *   introspectionEndpoint?: string|null,
+ *   issuer?: string|null,
+ *   jwksUri?: string|null,
+ *   registrationEndpoint?: string|null,
+ *   responseTypesSupported?: list<string>|null,
+ *   scopesSupported?: list<string>|null,
+ *   tokenEndpoint?: string|null,
+ *   tokenEndpointAuthMethodsSupported?: list<string>|null,
  * }
  */
-final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel, ResponseConverter
+final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
 {
-    /** @use SdkModel<well_known_get_authorization_server_metadata_response> */
+    /** @use SdkModel<WellKnownGetAuthorizationServerMetadataResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Authorization endpoint URL.
      */
-    #[Api('authorization_endpoint', optional: true)]
+    #[Optional('authorization_endpoint')]
     public ?string $authorizationEndpoint;
 
     /**
@@ -43,7 +39,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $codeChallengeMethodsSupported
      */
-    #[Api('code_challenge_methods_supported', list: 'string', optional: true)]
+    #[Optional('code_challenge_methods_supported', list: 'string')]
     public ?array $codeChallengeMethodsSupported;
 
     /**
@@ -51,31 +47,31 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $grantTypesSupported
      */
-    #[Api('grant_types_supported', list: 'string', optional: true)]
+    #[Optional('grant_types_supported', list: 'string')]
     public ?array $grantTypesSupported;
 
     /**
      * Token introspection endpoint URL.
      */
-    #[Api('introspection_endpoint', optional: true)]
+    #[Optional('introspection_endpoint')]
     public ?string $introspectionEndpoint;
 
     /**
      * Authorization server issuer URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $issuer;
 
     /**
      * JWK Set endpoint URL.
      */
-    #[Api('jwks_uri', optional: true)]
+    #[Optional('jwks_uri')]
     public ?string $jwksUri;
 
     /**
      * Dynamic client registration endpoint URL.
      */
-    #[Api('registration_endpoint', optional: true)]
+    #[Optional('registration_endpoint')]
     public ?string $registrationEndpoint;
 
     /**
@@ -83,7 +79,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $responseTypesSupported
      */
-    #[Api('response_types_supported', list: 'string', optional: true)]
+    #[Optional('response_types_supported', list: 'string')]
     public ?array $responseTypesSupported;
 
     /**
@@ -91,13 +87,13 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $scopesSupported
      */
-    #[Api('scopes_supported', list: 'string', optional: true)]
+    #[Optional('scopes_supported', list: 'string')]
     public ?array $scopesSupported;
 
     /**
      * Token endpoint URL.
      */
-    #[Api('token_endpoint', optional: true)]
+    #[Optional('token_endpoint')]
     public ?string $tokenEndpoint;
 
     /**
@@ -105,11 +101,7 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * @var list<string>|null $tokenEndpointAuthMethodsSupported
      */
-    #[Api(
-        'token_endpoint_auth_methods_supported',
-        list: 'string',
-        optional: true
-    )]
+    #[Optional('token_endpoint_auth_methods_supported', list: 'string')]
     public ?array $tokenEndpointAuthMethodsSupported;
 
     public function __construct()
@@ -122,11 +114,11 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $codeChallengeMethodsSupported
-     * @param list<string> $grantTypesSupported
-     * @param list<string> $responseTypesSupported
-     * @param list<string> $scopesSupported
-     * @param list<string> $tokenEndpointAuthMethodsSupported
+     * @param list<string>|null $codeChallengeMethodsSupported
+     * @param list<string>|null $grantTypesSupported
+     * @param list<string>|null $responseTypesSupported
+     * @param list<string>|null $scopesSupported
+     * @param list<string>|null $tokenEndpointAuthMethodsSupported
      */
     public static function with(
         ?string $authorizationEndpoint = null,
@@ -141,21 +133,21 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
         ?string $tokenEndpoint = null,
         ?array $tokenEndpointAuthMethodsSupported = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorizationEndpoint && $obj->authorizationEndpoint = $authorizationEndpoint;
-        null !== $codeChallengeMethodsSupported && $obj->codeChallengeMethodsSupported = $codeChallengeMethodsSupported;
-        null !== $grantTypesSupported && $obj->grantTypesSupported = $grantTypesSupported;
-        null !== $introspectionEndpoint && $obj->introspectionEndpoint = $introspectionEndpoint;
-        null !== $issuer && $obj->issuer = $issuer;
-        null !== $jwksUri && $obj->jwksUri = $jwksUri;
-        null !== $registrationEndpoint && $obj->registrationEndpoint = $registrationEndpoint;
-        null !== $responseTypesSupported && $obj->responseTypesSupported = $responseTypesSupported;
-        null !== $scopesSupported && $obj->scopesSupported = $scopesSupported;
-        null !== $tokenEndpoint && $obj->tokenEndpoint = $tokenEndpoint;
-        null !== $tokenEndpointAuthMethodsSupported && $obj->tokenEndpointAuthMethodsSupported = $tokenEndpointAuthMethodsSupported;
+        null !== $authorizationEndpoint && $self['authorizationEndpoint'] = $authorizationEndpoint;
+        null !== $codeChallengeMethodsSupported && $self['codeChallengeMethodsSupported'] = $codeChallengeMethodsSupported;
+        null !== $grantTypesSupported && $self['grantTypesSupported'] = $grantTypesSupported;
+        null !== $introspectionEndpoint && $self['introspectionEndpoint'] = $introspectionEndpoint;
+        null !== $issuer && $self['issuer'] = $issuer;
+        null !== $jwksUri && $self['jwksUri'] = $jwksUri;
+        null !== $registrationEndpoint && $self['registrationEndpoint'] = $registrationEndpoint;
+        null !== $responseTypesSupported && $self['responseTypesSupported'] = $responseTypesSupported;
+        null !== $scopesSupported && $self['scopesSupported'] = $scopesSupported;
+        null !== $tokenEndpoint && $self['tokenEndpoint'] = $tokenEndpoint;
+        null !== $tokenEndpointAuthMethodsSupported && $self['tokenEndpointAuthMethodsSupported'] = $tokenEndpointAuthMethodsSupported;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +156,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withAuthorizationEndpoint(
         string $authorizationEndpoint
     ): self {
-        $obj = clone $this;
-        $obj->authorizationEndpoint = $authorizationEndpoint;
+        $self = clone $this;
+        $self['authorizationEndpoint'] = $authorizationEndpoint;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +170,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withCodeChallengeMethodsSupported(
         array $codeChallengeMethodsSupported
     ): self {
-        $obj = clone $this;
-        $obj->codeChallengeMethodsSupported = $codeChallengeMethodsSupported;
+        $self = clone $this;
+        $self['codeChallengeMethodsSupported'] = $codeChallengeMethodsSupported;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,10 +183,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      */
     public function withGrantTypesSupported(array $grantTypesSupported): self
     {
-        $obj = clone $this;
-        $obj->grantTypesSupported = $grantTypesSupported;
+        $self = clone $this;
+        $self['grantTypesSupported'] = $grantTypesSupported;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,10 +195,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withIntrospectionEndpoint(
         string $introspectionEndpoint
     ): self {
-        $obj = clone $this;
-        $obj->introspectionEndpoint = $introspectionEndpoint;
+        $self = clone $this;
+        $self['introspectionEndpoint'] = $introspectionEndpoint;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,10 +206,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      */
     public function withIssuer(string $issuer): self
     {
-        $obj = clone $this;
-        $obj->issuer = $issuer;
+        $self = clone $this;
+        $self['issuer'] = $issuer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +217,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      */
     public function withJwksUri(string $jwksUri): self
     {
-        $obj = clone $this;
-        $obj->jwksUri = $jwksUri;
+        $self = clone $this;
+        $self['jwksUri'] = $jwksUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,10 +228,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      */
     public function withRegistrationEndpoint(string $registrationEndpoint): self
     {
-        $obj = clone $this;
-        $obj->registrationEndpoint = $registrationEndpoint;
+        $self = clone $this;
+        $self['registrationEndpoint'] = $registrationEndpoint;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +242,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withResponseTypesSupported(
         array $responseTypesSupported
     ): self {
-        $obj = clone $this;
-        $obj->responseTypesSupported = $responseTypesSupported;
+        $self = clone $this;
+        $self['responseTypesSupported'] = $responseTypesSupported;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -263,10 +255,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      */
     public function withScopesSupported(array $scopesSupported): self
     {
-        $obj = clone $this;
-        $obj->scopesSupported = $scopesSupported;
+        $self = clone $this;
+        $self['scopesSupported'] = $scopesSupported;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +266,10 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
      */
     public function withTokenEndpoint(string $tokenEndpoint): self
     {
-        $obj = clone $this;
-        $obj->tokenEndpoint = $tokenEndpoint;
+        $self = clone $this;
+        $self['tokenEndpoint'] = $tokenEndpoint;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -288,9 +280,9 @@ final class WellKnownGetAuthorizationServerMetadataResponse implements BaseModel
     public function withTokenEndpointAuthMethodsSupported(
         array $tokenEndpointAuthMethodsSupported
     ): self {
-        $obj = clone $this;
-        $obj->tokenEndpointAuthMethodsSupported = $tokenEndpointAuthMethodsSupported;
+        $self = clone $this;
+        $self['tokenEndpointAuthMethodsSupported'] = $tokenEndpointAuthMethodsSupported;
 
-        return $obj;
+        return $self;
     }
 }

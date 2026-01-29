@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocServiceDocument;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Indicates the document's filesize.
  *
- * @phpstan-type size_alias = array{amount?: int, unit?: string}
+ * @phpstan-type SizeShape = array{amount?: int|null, unit?: string|null}
  */
 final class Size implements BaseModel
 {
-    /** @use SdkModel<size_alias> */
+    /** @use SdkModel<SizeShape> */
     use SdkModel;
 
     /**
      * The number of bytes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $amount;
 
     /**
      * Identifies the unit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unit;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class Size implements BaseModel
      */
     public static function with(?int $amount = null, ?string $unit = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $unit && $obj->unit = $unit;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $unit && $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Size implements BaseModel
      */
     public function withAmount(int $amount): self
     {
-        $obj = clone $this;
-        $obj->amount = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Size implements BaseModel
      */
     public function withUnit(string $unit): self
     {
-        $obj = clone $this;
-        $obj->unit = $unit;
+        $self = clone $this;
+        $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 }

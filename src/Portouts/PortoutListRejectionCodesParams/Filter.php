@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\PortoutListRejectionCodesParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter\Code;
@@ -12,19 +12,22 @@ use Telnyx\Portouts\PortoutListRejectionCodesParams\Filter\Code;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[code], filter[code][in].
  *
- * @phpstan-type filter_alias = array{code?: int|list<int>}
+ * @phpstan-import-type CodeVariants from \Telnyx\Portouts\PortoutListRejectionCodesParams\Filter\Code
+ * @phpstan-import-type CodeShape from \Telnyx\Portouts\PortoutListRejectionCodesParams\Filter\Code
+ *
+ * @phpstan-type FilterShape = array{code?: CodeShape|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter rejections of a specific code.
      *
-     * @var int|list<int>|null $code
+     * @var CodeVariants|null $code
      */
-    #[Api(union: Code::class, optional: true)]
+    #[Optional(union: Code::class)]
     public int|array|null $code;
 
     public function __construct()
@@ -37,27 +40,27 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param int|list<int> $code
+     * @param CodeShape|null $code
      */
     public static function with(int|array|null $code = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj->code = $code;
+        null !== $code && $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter rejections of a specific code.
      *
-     * @param int|list<int> $code
+     * @param CodeShape $code
      */
     public function withCode(int|array $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 }

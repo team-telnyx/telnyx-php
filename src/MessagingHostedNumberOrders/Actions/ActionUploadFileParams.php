@@ -4,34 +4,36 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Upload file required for a messaging hosted number order.
+ * Upload hosted number document.
  *
- * @see Telnyx\MessagingHostedNumberOrders\Actions->uploadFile
+ * @see Telnyx\Services\MessagingHostedNumberOrders\ActionsService::uploadFile()
  *
- * @phpstan-type action_upload_file_params = array{bill?: string, loa?: string}
+ * @phpstan-type ActionUploadFileParamsShape = array{
+ *   bill?: string|null, loa?: string|null
+ * }
  */
 final class ActionUploadFileParams implements BaseModel
 {
-    /** @use SdkModel<action_upload_file_params> */
+    /** @use SdkModel<ActionUploadFileParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bill;
 
     /**
      * Must be a signed LOA for the numbers in the order in PDF format.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $loa;
 
     public function __construct()
@@ -46,12 +48,12 @@ final class ActionUploadFileParams implements BaseModel
      */
     public static function with(?string $bill = null, ?string $loa = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bill && $obj->bill = $bill;
-        null !== $loa && $obj->loa = $loa;
+        null !== $bill && $self['bill'] = $bill;
+        null !== $loa && $self['loa'] = $loa;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +61,10 @@ final class ActionUploadFileParams implements BaseModel
      */
     public function withBill(string $bill): self
     {
-        $obj = clone $this;
-        $obj->bill = $bill;
+        $self = clone $this;
+        $self['bill'] = $bill;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +72,9 @@ final class ActionUploadFileParams implements BaseModel
      */
     public function withLoa(string $loa): self
     {
-        $obj = clone $this;
-        $obj->loa = $loa;
+        $self = clone $this;
+        $self['loa'] = $loa;
 
-        return $obj;
+        return $self;
     }
 }

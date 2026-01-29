@@ -6,66 +6,53 @@ namespace Telnyx\Services\Networks;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Networks\DefaultGateway\DefaultGatewayCreateParams;
+use Telnyx\Core\Util;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayDeleteResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse;
 use Telnyx\Networks\DefaultGateway\DefaultGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Networks\DefaultGatewayContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DefaultGatewayService implements DefaultGatewayContract
 {
     /**
+     * @api
+     */
+    public DefaultGatewayRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new DefaultGatewayRawService($client);
+    }
 
     /**
      * @api
      *
      * Create Default Gateway.
      *
+     * @param string $networkIdentifier identifies the resource
      * @param string $wireguardPeerID wireguard peer ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string $id,
-        $wireguardPeerID = omit,
-        ?RequestOptions $requestOptions = null
+        string $networkIdentifier,
+        ?string $wireguardPeerID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DefaultGatewayNewResponse {
-        $params = ['wireguardPeerID' => $wireguardPeerID];
+        $params = Util::removeNulls(['wireguardPeerID' => $wireguardPeerID]);
 
-        return $this->createRaw($id, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($networkIdentifier, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): DefaultGatewayNewResponse {
-        [$parsed, $options] = DefaultGatewayCreateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['networks/%1$s/default_gateway', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: DefaultGatewayNewResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -73,19 +60,19 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * Get Default Gateway status.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DefaultGatewayGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['networks/%1$s/default_gateway', $id],
-            options: $requestOptions,
-            convert: DefaultGatewayGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -93,18 +80,18 @@ final class DefaultGatewayService implements DefaultGatewayContract
      *
      * Delete Default Gateway.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DefaultGatewayDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['networks/%1$s/default_gateway', $id],
-            options: $requestOptions,
-            convert: DefaultGatewayDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

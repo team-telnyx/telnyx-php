@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\IPConnections\IPConnection;
+use Telnyx\IPConnections\IPConnectionDeleteResponse;
+use Telnyx\IPConnections\IPConnectionGetResponse;
+use Telnyx\IPConnections\IPConnectionNewResponse;
+use Telnyx\IPConnections\IPConnectionUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +41,8 @@ final class IPConnectionsTest extends TestCase
 
         $result = $this->client->ipConnections->create();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPConnectionNewResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +54,8 @@ final class IPConnectionsTest extends TestCase
 
         $result = $this->client->ipConnections->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPConnectionGetResponse::class, $result);
     }
 
     #[Test]
@@ -59,7 +67,8 @@ final class IPConnectionsTest extends TestCase
 
         $result = $this->client->ipConnections->update('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPConnectionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -69,9 +78,15 @@ final class IPConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ipConnections->list();
+        $page = $this->client->ipConnections->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(IPConnection::class, $item);
+        }
     }
 
     #[Test]
@@ -83,6 +98,7 @@ final class IPConnectionsTest extends TestCase
 
         $result = $this->client->ipConnections->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IPConnectionDeleteResponse::class, $result);
     }
 }

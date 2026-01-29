@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Comments;
 
 use Telnyx\Comments\CommentCreateParams\CommentRecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,28 +13,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a comment.
  *
- * @see Telnyx\Comments->create
+ * @see Telnyx\Services\CommentsService::create()
  *
- * @phpstan-type comment_create_params = array{
- *   body?: string,
- *   commentRecordID?: string,
- *   commentRecordType?: CommentRecordType|value-of<CommentRecordType>,
+ * @phpstan-type CommentCreateParamsShape = array{
+ *   body?: string|null,
+ *   commentRecordID?: string|null,
+ *   commentRecordType?: null|CommentRecordType|value-of<CommentRecordType>,
  * }
  */
 final class CommentCreateParams implements BaseModel
 {
-    /** @use SdkModel<comment_create_params> */
+    /** @use SdkModel<CommentCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
-    #[Api('comment_record_id', optional: true)]
+    #[Optional('comment_record_id')]
     public ?string $commentRecordID;
 
     /** @var value-of<CommentRecordType>|null $commentRecordType */
-    #[Api('comment_record_type', enum: CommentRecordType::class, optional: true)]
+    #[Optional('comment_record_type', enum: CommentRecordType::class)]
     public ?string $commentRecordType;
 
     public function __construct()
@@ -47,36 +47,36 @@ final class CommentCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
+     * @param CommentRecordType|value-of<CommentRecordType>|null $commentRecordType
      */
     public static function with(
         ?string $body = null,
         ?string $commentRecordID = null,
         CommentRecordType|string|null $commentRecordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $body && $obj->body = $body;
-        null !== $commentRecordID && $obj->commentRecordID = $commentRecordID;
-        null !== $commentRecordType && $obj['commentRecordType'] = $commentRecordType;
+        null !== $body && $self['body'] = $body;
+        null !== $commentRecordID && $self['commentRecordID'] = $commentRecordID;
+        null !== $commentRecordType && $self['commentRecordType'] = $commentRecordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj->body = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     public function withCommentRecordID(string $commentRecordID): self
     {
-        $obj = clone $this;
-        $obj->commentRecordID = $commentRecordID;
+        $self = clone $this;
+        $self['commentRecordID'] = $commentRecordID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +85,9 @@ final class CommentCreateParams implements BaseModel
     public function withCommentRecordType(
         CommentRecordType|string $commentRecordType
     ): self {
-        $obj = clone $this;
-        $obj['commentRecordType'] = $commentRecordType;
+        $self = clone $this;
+        $self['commentRecordType'] = $commentRecordType;
 
-        return $obj;
+        return $self;
     }
 }

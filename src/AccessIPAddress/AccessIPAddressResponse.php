@@ -4,38 +4,35 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPAddress;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type access_ip_address_response = array{
+ * @phpstan-type AccessIPAddressResponseShape = array{
  *   id: string,
  *   ipAddress: string,
  *   source: string,
- *   status: value-of<CloudflareSyncStatus>,
+ *   status: CloudflareSyncStatus|value-of<CloudflareSyncStatus>,
  *   userID: string,
- *   createdAt?: \DateTimeInterface,
- *   description?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   createdAt?: \DateTimeInterface|null,
+ *   description?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
-final class AccessIPAddressResponse implements BaseModel, ResponseConverter
+final class AccessIPAddressResponse implements BaseModel
 {
-    /** @use SdkModel<access_ip_address_response> */
+    /** @use SdkModel<AccessIPAddressResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api('ip_address')]
+    #[Required('ip_address')]
     public string $ipAddress;
 
-    #[Api]
+    #[Required]
     public string $source;
 
     /**
@@ -43,19 +40,19 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
      *
      * @var value-of<CloudflareSyncStatus> $status
      */
-    #[Api(enum: CloudflareSyncStatus::class)]
+    #[Required(enum: CloudflareSyncStatus::class)]
     public string $status;
 
-    #[Api('user_id')]
+    #[Required('user_id')]
     public string $userID;
 
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     /**
@@ -101,43 +98,43 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
         ?string $description = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->ipAddress = $ipAddress;
-        $obj->source = $source;
-        $obj['status'] = $status;
-        $obj->userID = $userID;
+        $self['id'] = $id;
+        $self['ipAddress'] = $ipAddress;
+        $self['source'] = $source;
+        $self['status'] = $status;
+        $self['userID'] = $userID;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $description && $obj->description = $description;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $description && $self['description'] = $description;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     public function withSource(string $source): self
     {
-        $obj = clone $this;
-        $obj->source = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,41 +144,41 @@ final class AccessIPAddressResponse implements BaseModel, ResponseConverter
      */
     public function withStatus(CloudflareSyncStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

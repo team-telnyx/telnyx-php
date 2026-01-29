@@ -10,73 +10,55 @@ use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VoicemailContract
 {
     /**
      * @api
      *
+     * @param string $phoneNumberID the ID of the phone number
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $phoneNumberID,
-        $enabled = omit,
-        $pin = omit,
-        ?RequestOptions $requestOptions = null,
+        ?bool $enabled = null,
+        ?string $pin = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoicemailNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): VoicemailNewResponse;
-
-    /**
-     * @api
+     * @param string $phoneNumberID the ID of the phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoicemailGetResponse;
 
     /**
      * @api
      *
+     * @param string $phoneNumberID the ID of the phone number
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumberID,
-        $enabled = omit,
-        $pin = omit,
-        ?RequestOptions $requestOptions = null,
-    ): VoicemailUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
+        ?bool $enabled = null,
+        ?string $pin = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoicemailUpdateResponse;
 }

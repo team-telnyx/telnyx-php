@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,10 +36,11 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->verifiedNumbers->actions->submitVerificationCode(
             '+15551234567',
-            '123456'
+            verificationCode: '123456'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberDataWrapper::class, $result);
     }
 
     #[Test]
@@ -50,9 +52,10 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->verifiedNumbers->actions->submitVerificationCode(
             '+15551234567',
-            '123456'
+            verificationCode: '123456'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifiedNumberDataWrapper::class, $result);
     }
 }

@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,15 +40,11 @@ final class VirtualCrossConnectsTest extends TestCase
         }
 
         $result = $this->client->virtualCrossConnects->create(
-            bgpAsn: 1234,
-            cloudProvider: 'aws',
-            cloudProviderRegion: 'us-east-1',
-            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            primaryCloudAccountID: '123456789012',
-            regionCode: 'ashburn-va',
+            regionCode: 'ashburn-va'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,15 +55,25 @@ final class VirtualCrossConnectsTest extends TestCase
         }
 
         $result = $this->client->virtualCrossConnects->create(
+            regionCode: 'ashburn-va',
+            bandwidthMbps: 50,
             bgpAsn: 1234,
             cloudProvider: 'aws',
             cloudProviderRegion: 'us-east-1',
+            name: 'test interface',
             networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            primaryBgpKey: 'yFV4wEPtPVPfDUGLWiyQzwga',
             primaryCloudAccountID: '123456789012',
-            regionCode: 'ashburn-va',
+            primaryCloudIP: '169.254.0.2',
+            primaryTelnyxIP: '169.254.0.1',
+            secondaryBgpKey: 'ge1lONeK9RcA83uuWaw9DvZy',
+            secondaryCloudAccountID: '',
+            secondaryCloudIP: '169.254.0.4',
+            secondaryTelnyxIP: '169.254.0.3',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectNewResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +87,8 @@ final class VirtualCrossConnectsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectGetResponse::class, $result);
     }
 
     #[Test]
@@ -89,7 +102,8 @@ final class VirtualCrossConnectsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -99,9 +113,15 @@ final class VirtualCrossConnectsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->virtualCrossConnects->list();
+        $page = $this->client->virtualCrossConnects->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(VirtualCrossConnectListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -115,6 +135,7 @@ final class VirtualCrossConnectsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VirtualCrossConnectDeleteResponse::class, $result);
     }
 }

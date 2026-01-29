@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse\Content;
 
 /**
- * @phpstan-type bucket_new_presigned_url_response = array{content?: Content}
+ * @phpstan-import-type ContentShape from \Telnyx\Storage\Buckets\BucketNewPresignedURLResponse\Content
+ *
+ * @phpstan-type BucketNewPresignedURLResponseShape = array{
+ *   content?: null|Content|ContentShape
+ * }
  */
-final class BucketNewPresignedURLResponse implements BaseModel, ResponseConverter
+final class BucketNewPresignedURLResponse implements BaseModel
 {
-    /** @use SdkModel<bucket_new_presigned_url_response> */
+    /** @use SdkModel<BucketNewPresignedURLResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Content $content;
 
     public function __construct()
@@ -33,21 +33,26 @@ final class BucketNewPresignedURLResponse implements BaseModel, ResponseConverte
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Content|ContentShape|null $content
      */
-    public static function with(?Content $content = null): self
+    public static function with(Content|array|null $content = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $content && $obj->content = $content;
+        null !== $content && $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
-    public function withContent(Content $content): self
+    /**
+     * @param Content|ContentShape $content
+     */
+    public function withContent(Content|array $content): self
     {
-        $obj = clone $this;
-        $obj->content = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 }

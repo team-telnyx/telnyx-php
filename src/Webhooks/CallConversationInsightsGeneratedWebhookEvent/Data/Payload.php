@@ -4,45 +4,47 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\CallingPartyType;
 use Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1 as Result;
 
 /**
- * @phpstan-type payload_alias = array{
- *   callControlID?: string,
- *   callLegID?: string,
- *   callSessionID?: string,
- *   callingPartyType?: value-of<CallingPartyType>,
- *   clientState?: string,
- *   connectionID?: string,
- *   insightGroupID?: string,
- *   results?: list<Result>,
+ * @phpstan-import-type Result1Shape from \Telnyx\Webhooks\CallConversationInsightsGeneratedWebhookEvent\Data\Payload\Result1
+ *
+ * @phpstan-type PayloadShape = array{
+ *   callControlID?: string|null,
+ *   callLegID?: string|null,
+ *   callSessionID?: string|null,
+ *   callingPartyType?: null|CallingPartyType|value-of<CallingPartyType>,
+ *   clientState?: string|null,
+ *   connectionID?: string|null,
+ *   insightGroupID?: string|null,
+ *   results?: list<Result|Result1Shape>|null,
  * }
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**
      * Call ID used to issue commands via Call Control API.
      */
-    #[Api('call_control_id', optional: true)]
+    #[Optional('call_control_id')]
     public ?string $callControlID;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id', optional: true)]
+    #[Optional('call_leg_id')]
     public ?string $callLegID;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id', optional: true)]
+    #[Optional('call_session_id')]
     public ?string $callSessionID;
 
     /**
@@ -50,25 +52,25 @@ final class Payload implements BaseModel
      *
      * @var value-of<CallingPartyType>|null $callingPartyType
      */
-    #[Api('calling_party_type', enum: CallingPartyType::class, optional: true)]
+    #[Optional('calling_party_type', enum: CallingPartyType::class)]
     public ?string $callingPartyType;
 
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * ID that is unique to the insight group being generated for the call.
      */
-    #[Api('insight_group_id', optional: true)]
+    #[Optional('insight_group_id')]
     public ?string $insightGroupID;
 
     /**
@@ -76,7 +78,7 @@ final class Payload implements BaseModel
      *
      * @var list<Result>|null $results
      */
-    #[Api(list: Result::class, optional: true)]
+    #[Optional(list: Result::class)]
     public ?array $results;
 
     public function __construct()
@@ -89,8 +91,8 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallingPartyType|value-of<CallingPartyType> $callingPartyType
-     * @param list<Result> $results
+     * @param CallingPartyType|value-of<CallingPartyType>|null $callingPartyType
+     * @param list<Result|Result1Shape>|null $results
      */
     public static function with(
         ?string $callControlID = null,
@@ -102,18 +104,18 @@ final class Payload implements BaseModel
         ?string $insightGroupID = null,
         ?array $results = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callLegID && $obj->callLegID = $callLegID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
-        null !== $callingPartyType && $obj['callingPartyType'] = $callingPartyType;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $insightGroupID && $obj->insightGroupID = $insightGroupID;
-        null !== $results && $obj->results = $results;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callLegID && $self['callLegID'] = $callLegID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
+        null !== $callingPartyType && $self['callingPartyType'] = $callingPartyType;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $insightGroupID && $self['insightGroupID'] = $insightGroupID;
+        null !== $results && $self['results'] = $results;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +123,10 @@ final class Payload implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +134,10 @@ final class Payload implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +145,10 @@ final class Payload implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +159,10 @@ final class Payload implements BaseModel
     public function withCallingPartyType(
         CallingPartyType|string $callingPartyType
     ): self {
-        $obj = clone $this;
-        $obj['callingPartyType'] = $callingPartyType;
+        $self = clone $this;
+        $self['callingPartyType'] = $callingPartyType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +170,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,10 +181,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,22 +192,22 @@ final class Payload implements BaseModel
      */
     public function withInsightGroupID(string $insightGroupID): self
     {
-        $obj = clone $this;
-        $obj->insightGroupID = $insightGroupID;
+        $self = clone $this;
+        $self['insightGroupID'] = $insightGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Array of insight results being generated for the call.
      *
-     * @param list<Result> $results
+     * @param list<Result|Result1Shape> $results
      */
     public function withResults(array $results): self
     {
-        $obj = clone $this;
-        $obj->results = $results;
+        $self = clone $this;
+        $self['results'] = $results;
 
-        return $obj;
+        return $self;
     }
 }

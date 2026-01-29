@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,20 +14,20 @@ use Telnyx\Core\Contracts\BaseModel;
  * Transitioning to the disabled state may take a period of time.
  * Until the transition is completed, the SIM card status will be disabling <code>disabling</code>.<br />In order to re-enable the SIM card, you will need to re-register it.
  *
- * @see Telnyx\SimCards->delete
+ * @see Telnyx\Services\SimCardsService::delete()
  *
- * @phpstan-type sim_card_delete_params = array{reportLost?: bool}
+ * @phpstan-type SimCardDeleteParamsShape = array{reportLost?: bool|null}
  */
 final class SimCardDeleteParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_delete_params> */
+    /** @use SdkModel<SimCardDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Enables deletion of disabled eSIMs that can't be uninstalled from a device. This is irreversible and the eSIM cannot be re-registered.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $reportLost;
 
     public function __construct()
@@ -42,11 +42,11 @@ final class SimCardDeleteParams implements BaseModel
      */
     public static function with(?bool $reportLost = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reportLost && $obj->reportLost = $reportLost;
+        null !== $reportLost && $self['reportLost'] = $reportLost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class SimCardDeleteParams implements BaseModel
      */
     public function withReportLost(bool $reportLost): self
     {
-        $obj = clone $this;
-        $obj->reportLost = $reportLost;
+        $self = clone $this;
+        $self['reportLost'] = $reportLost;
 
-        return $obj;
+        return $self;
     }
 }

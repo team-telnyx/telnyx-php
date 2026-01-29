@@ -4,108 +4,108 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\PortoutDetails\Status;
 
 /**
- * @phpstan-type portout_details = array{
- *   id?: string,
- *   alreadyPorted?: bool,
- *   authorizedName?: string,
- *   carrierName?: string,
- *   city?: string,
- *   createdAt?: string,
- *   currentCarrier?: string,
- *   endUserName?: string,
- *   focDate?: string,
- *   hostMessaging?: bool,
- *   insertedAt?: string,
- *   lsr?: list<string>,
- *   phoneNumbers?: list<string>,
- *   pon?: string,
- *   reason?: string,
- *   recordType?: string,
- *   rejectionCode?: int,
- *   requestedFocDate?: string,
- *   serviceAddress?: string,
- *   spid?: string,
- *   state?: string,
- *   status?: value-of<Status>,
- *   supportKey?: string,
- *   updatedAt?: string,
- *   userID?: string,
- *   vendor?: string,
- *   zip?: string,
+ * @phpstan-type PortoutDetailsShape = array{
+ *   id?: string|null,
+ *   alreadyPorted?: bool|null,
+ *   authorizedName?: string|null,
+ *   carrierName?: string|null,
+ *   city?: string|null,
+ *   createdAt?: string|null,
+ *   currentCarrier?: string|null,
+ *   endUserName?: string|null,
+ *   focDate?: string|null,
+ *   hostMessaging?: bool|null,
+ *   insertedAt?: string|null,
+ *   lsr?: list<string>|null,
+ *   phoneNumbers?: list<string>|null,
+ *   pon?: string|null,
+ *   reason?: string|null,
+ *   recordType?: string|null,
+ *   rejectionCode?: int|null,
+ *   requestedFocDate?: string|null,
+ *   serviceAddress?: string|null,
+ *   spid?: string|null,
+ *   state?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   supportKey?: string|null,
+ *   updatedAt?: string|null,
+ *   userID?: string|null,
+ *   vendor?: string|null,
+ *   zip?: string|null,
  * }
  */
 final class PortoutDetails implements BaseModel
 {
-    /** @use SdkModel<portout_details> */
+    /** @use SdkModel<PortoutDetailsShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Is true when the number is already ported.
      */
-    #[Api('already_ported', optional: true)]
+    #[Optional('already_ported')]
     public ?bool $alreadyPorted;
 
     /**
      * Name of person authorizing the porting order.
      */
-    #[Api('authorized_name', optional: true)]
+    #[Optional('authorized_name')]
     public ?string $authorizedName;
 
     /**
      * Carrier the number will be ported out to.
      */
-    #[Api('carrier_name', optional: true)]
+    #[Optional('carrier_name')]
     public ?string $carrierName;
 
     /**
      * City or municipality of billing address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city;
 
     /**
      * ISO 8601 formatted date of when the portout was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * The current carrier.
      */
-    #[Api('current_carrier', optional: true)]
+    #[Optional('current_carrier')]
     public ?string $currentCarrier;
 
     /**
      * Person name or company name requesting the port.
      */
-    #[Api('end_user_name', optional: true)]
+    #[Optional('end_user_name')]
     public ?string $endUserName;
 
     /**
      * ISO 8601 formatted Date/Time of the FOC date.
      */
-    #[Api('foc_date', optional: true)]
+    #[Optional('foc_date')]
     public ?string $focDate;
 
     /**
      * Indicates whether messaging services should be maintained with Telnyx after the port out completes.
      */
-    #[Api('host_messaging', optional: true)]
+    #[Optional('host_messaging')]
     public ?bool $hostMessaging;
 
     /**
      * ISO 8601 formatted date of when the portout was created.
      */
-    #[Api('inserted_at', optional: true)]
+    #[Optional('inserted_at')]
     public ?string $insertedAt;
 
     /**
@@ -113,7 +113,7 @@ final class PortoutDetails implements BaseModel
      *
      * @var list<string>|null $lsr
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $lsr;
 
     /**
@@ -121,55 +121,55 @@ final class PortoutDetails implements BaseModel
      *
      * @var list<string>|null $phoneNumbers
      */
-    #[Api('phone_numbers', list: 'string', optional: true)]
+    #[Optional('phone_numbers', list: 'string')]
     public ?array $phoneNumbers;
 
     /**
      * Port order number assigned by the carrier the number will be ported out to.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pon;
 
     /**
      * The reason why the order is being rejected by the user. If the order is authorized, this field can be left null.
      */
-    #[Api(optional: true)]
+    #[Optional(nullable: true)]
     public ?string $reason;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The rejection code for one of the valid rejections to reject a port out order.
      */
-    #[Api('rejection_code', optional: true)]
+    #[Optional('rejection_code')]
     public ?int $rejectionCode;
 
     /**
      * ISO 8601 formatted Date/Time of the user requested FOC date.
      */
-    #[Api('requested_foc_date', optional: true)]
+    #[Optional('requested_foc_date')]
     public ?string $requestedFocDate;
 
     /**
      * First line of billing address (street address).
      */
-    #[Api('service_address', optional: true)]
+    #[Optional('service_address')]
     public ?string $serviceAddress;
 
     /**
      * New service provider spid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $spid;
 
     /**
      * State, province, or similar of billing address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**
@@ -177,37 +177,37 @@ final class PortoutDetails implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * A key to reference this port out request when contacting Telnyx customer support.
      */
-    #[Api('support_key', optional: true)]
+    #[Optional('support_key')]
     public ?string $supportKey;
 
     /**
      * ISO 8601 formatted date of when the portout was last updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     /**
      * Identifies the user (or organization) who requested the port out.
      */
-    #[Api('user_id', optional: true)]
+    #[Optional('user_id')]
     public ?string $userID;
 
     /**
      * Telnyx partner providing network coverage.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $vendor;
 
     /**
      * Postal Code of billing address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $zip;
 
     public function __construct()
@@ -220,9 +220,9 @@ final class PortoutDetails implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $lsr
-     * @param list<string> $phoneNumbers
-     * @param Status|value-of<Status> $status
+     * @param list<string>|null $lsr
+     * @param list<string>|null $phoneNumbers
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -253,45 +253,45 @@ final class PortoutDetails implements BaseModel
         ?string $vendor = null,
         ?string $zip = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $alreadyPorted && $obj->alreadyPorted = $alreadyPorted;
-        null !== $authorizedName && $obj->authorizedName = $authorizedName;
-        null !== $carrierName && $obj->carrierName = $carrierName;
-        null !== $city && $obj->city = $city;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $currentCarrier && $obj->currentCarrier = $currentCarrier;
-        null !== $endUserName && $obj->endUserName = $endUserName;
-        null !== $focDate && $obj->focDate = $focDate;
-        null !== $hostMessaging && $obj->hostMessaging = $hostMessaging;
-        null !== $insertedAt && $obj->insertedAt = $insertedAt;
-        null !== $lsr && $obj->lsr = $lsr;
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
-        null !== $pon && $obj->pon = $pon;
-        null !== $reason && $obj->reason = $reason;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $rejectionCode && $obj->rejectionCode = $rejectionCode;
-        null !== $requestedFocDate && $obj->requestedFocDate = $requestedFocDate;
-        null !== $serviceAddress && $obj->serviceAddress = $serviceAddress;
-        null !== $spid && $obj->spid = $spid;
-        null !== $state && $obj->state = $state;
-        null !== $status && $obj['status'] = $status;
-        null !== $supportKey && $obj->supportKey = $supportKey;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $userID && $obj->userID = $userID;
-        null !== $vendor && $obj->vendor = $vendor;
-        null !== $zip && $obj->zip = $zip;
+        null !== $id && $self['id'] = $id;
+        null !== $alreadyPorted && $self['alreadyPorted'] = $alreadyPorted;
+        null !== $authorizedName && $self['authorizedName'] = $authorizedName;
+        null !== $carrierName && $self['carrierName'] = $carrierName;
+        null !== $city && $self['city'] = $city;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $currentCarrier && $self['currentCarrier'] = $currentCarrier;
+        null !== $endUserName && $self['endUserName'] = $endUserName;
+        null !== $focDate && $self['focDate'] = $focDate;
+        null !== $hostMessaging && $self['hostMessaging'] = $hostMessaging;
+        null !== $insertedAt && $self['insertedAt'] = $insertedAt;
+        null !== $lsr && $self['lsr'] = $lsr;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
+        null !== $pon && $self['pon'] = $pon;
+        null !== $reason && $self['reason'] = $reason;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $rejectionCode && $self['rejectionCode'] = $rejectionCode;
+        null !== $requestedFocDate && $self['requestedFocDate'] = $requestedFocDate;
+        null !== $serviceAddress && $self['serviceAddress'] = $serviceAddress;
+        null !== $spid && $self['spid'] = $spid;
+        null !== $state && $self['state'] = $state;
+        null !== $status && $self['status'] = $status;
+        null !== $supportKey && $self['supportKey'] = $supportKey;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userID && $self['userID'] = $userID;
+        null !== $vendor && $self['vendor'] = $vendor;
+        null !== $zip && $self['zip'] = $zip;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -299,10 +299,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withAlreadyPorted(bool $alreadyPorted): self
     {
-        $obj = clone $this;
-        $obj->alreadyPorted = $alreadyPorted;
+        $self = clone $this;
+        $self['alreadyPorted'] = $alreadyPorted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -310,10 +310,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withAuthorizedName(string $authorizedName): self
     {
-        $obj = clone $this;
-        $obj->authorizedName = $authorizedName;
+        $self = clone $this;
+        $self['authorizedName'] = $authorizedName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -321,10 +321,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withCarrierName(string $carrierName): self
     {
-        $obj = clone $this;
-        $obj->carrierName = $carrierName;
+        $self = clone $this;
+        $self['carrierName'] = $carrierName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -332,10 +332,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withCity(string $city): self
     {
-        $obj = clone $this;
-        $obj->city = $city;
+        $self = clone $this;
+        $self['city'] = $city;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -343,10 +343,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -354,10 +354,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withCurrentCarrier(string $currentCarrier): self
     {
-        $obj = clone $this;
-        $obj->currentCarrier = $currentCarrier;
+        $self = clone $this;
+        $self['currentCarrier'] = $currentCarrier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -365,10 +365,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withEndUserName(string $endUserName): self
     {
-        $obj = clone $this;
-        $obj->endUserName = $endUserName;
+        $self = clone $this;
+        $self['endUserName'] = $endUserName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -376,10 +376,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withFocDate(string $focDate): self
     {
-        $obj = clone $this;
-        $obj->focDate = $focDate;
+        $self = clone $this;
+        $self['focDate'] = $focDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -387,10 +387,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withHostMessaging(bool $hostMessaging): self
     {
-        $obj = clone $this;
-        $obj->hostMessaging = $hostMessaging;
+        $self = clone $this;
+        $self['hostMessaging'] = $hostMessaging;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -398,10 +398,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withInsertedAt(string $insertedAt): self
     {
-        $obj = clone $this;
-        $obj->insertedAt = $insertedAt;
+        $self = clone $this;
+        $self['insertedAt'] = $insertedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -411,10 +411,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withLsr(array $lsr): self
     {
-        $obj = clone $this;
-        $obj->lsr = $lsr;
+        $self = clone $this;
+        $self['lsr'] = $lsr;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -424,10 +424,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -435,21 +435,21 @@ final class PortoutDetails implements BaseModel
      */
     public function withPon(string $pon): self
     {
-        $obj = clone $this;
-        $obj->pon = $pon;
+        $self = clone $this;
+        $self['pon'] = $pon;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The reason why the order is being rejected by the user. If the order is authorized, this field can be left null.
      */
-    public function withReason(string $reason): self
+    public function withReason(?string $reason): self
     {
-        $obj = clone $this;
-        $obj->reason = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -457,10 +457,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -468,10 +468,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withRejectionCode(int $rejectionCode): self
     {
-        $obj = clone $this;
-        $obj->rejectionCode = $rejectionCode;
+        $self = clone $this;
+        $self['rejectionCode'] = $rejectionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -479,10 +479,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withRequestedFocDate(string $requestedFocDate): self
     {
-        $obj = clone $this;
-        $obj->requestedFocDate = $requestedFocDate;
+        $self = clone $this;
+        $self['requestedFocDate'] = $requestedFocDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -490,10 +490,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withServiceAddress(string $serviceAddress): self
     {
-        $obj = clone $this;
-        $obj->serviceAddress = $serviceAddress;
+        $self = clone $this;
+        $self['serviceAddress'] = $serviceAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -501,10 +501,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withSpid(string $spid): self
     {
-        $obj = clone $this;
-        $obj->spid = $spid;
+        $self = clone $this;
+        $self['spid'] = $spid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -512,10 +512,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withState(string $state): self
     {
-        $obj = clone $this;
-        $obj->state = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -525,10 +525,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -536,10 +536,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withSupportKey(string $supportKey): self
     {
-        $obj = clone $this;
-        $obj->supportKey = $supportKey;
+        $self = clone $this;
+        $self['supportKey'] = $supportKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -547,10 +547,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -558,10 +558,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -569,10 +569,10 @@ final class PortoutDetails implements BaseModel
      */
     public function withVendor(string $vendor): self
     {
-        $obj = clone $this;
-        $obj->vendor = $vendor;
+        $self = clone $this;
+        $self['vendor'] = $vendor;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -580,9 +580,9 @@ final class PortoutDetails implements BaseModel
      */
     public function withZip(string $zip): self
     {
-        $obj = clone $this;
-        $obj->zip = $zip;
+        $self = clone $this;
+        $self['zip'] = $zip;
 
-        return $obj;
+        return $self;
     }
 }

@@ -11,7 +11,12 @@ use Telnyx\Services\AI\FineTuning\JobsService;
 final class FineTuningService implements FineTuningContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public FineTuningRawService $raw;
+
+    /**
+     * @api
      */
     public JobsService $jobs;
 
@@ -20,6 +25,7 @@ final class FineTuningService implements FineTuningContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new FineTuningRawService($client);
         $this->jobs = new JobsService($client);
     }
 }

@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\PhoneNumberBlocks\Jobs\Job;
+use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
+use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class JobsTest extends TestCase
 
         $result = $this->client->phoneNumberBlocks->jobs->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobGetResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +50,15 @@ final class JobsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumberBlocks->jobs->list();
+        $page = $this->client->phoneNumberBlocks->jobs->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(Job::class, $item);
+        }
     }
 
     #[Test]
@@ -58,10 +69,11 @@ final class JobsTest extends TestCase
         }
 
         $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(
-            'f3946371-7199-4261-9c3d-81a0d7935146'
+            phoneNumberBlockID: 'f3946371-7199-4261-9c3d-81a0d7935146'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobDeletePhoneNumberBlockResponse::class, $result);
     }
 
     #[Test]
@@ -72,9 +84,10 @@ final class JobsTest extends TestCase
         }
 
         $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(
-            'f3946371-7199-4261-9c3d-81a0d7935146'
+            phoneNumberBlockID: 'f3946371-7199-4261-9c3d-81a0d7935146'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(JobDeletePhoneNumberBlockResponse::class, $result);
     }
 }

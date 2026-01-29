@@ -6,71 +6,63 @@ namespace Telnyx\Services\Porting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
-use Telnyx\Porting\Reports\ReportCreateParams;
+use Telnyx\Porting\Reports\PortingReport;
 use Telnyx\Porting\Reports\ReportCreateParams\ReportType;
 use Telnyx\Porting\Reports\ReportGetResponse;
-use Telnyx\Porting\Reports\ReportListParams;
 use Telnyx\Porting\Reports\ReportListParams\Filter;
 use Telnyx\Porting\Reports\ReportListParams\Page;
-use Telnyx\Porting\Reports\ReportListResponse;
 use Telnyx\Porting\Reports\ReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\ReportsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type ExportPortingOrdersCsvReportShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport
+ * @phpstan-import-type FilterShape from \Telnyx\Porting\Reports\ReportListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Porting\Reports\ReportListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ReportsService implements ReportsContract
 {
     /**
+     * @api
+     */
+    public ReportsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ReportsRawService($client);
+    }
 
     /**
      * @api
      *
      * Generate reports about porting operations.
      *
-     * @param ExportPortingOrdersCsvReport $params the parameters for generating a porting orders CSV report
+     * @param ExportPortingOrdersCsvReport|ExportPortingOrdersCsvReportShape $params the parameters for generating a porting orders CSV report
      * @param ReportType|value-of<ReportType> $reportType Identifies the type of report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $params,
-        $reportType,
-        ?RequestOptions $requestOptions = null
+        ExportPortingOrdersCsvReport|array $params,
+        ReportType|string $reportType,
+        RequestOptions|array|null $requestOptions = null,
     ): ReportNewResponse {
-        $params1 = ['params' => $params, 'reportType' => $reportType];
-
-        return $this->createRaw($params1, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ReportNewResponse {
-        [$parsed, $options] = ReportCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params1 = Util::removeNulls(
+            ['params' => $params, 'reportType' => $reportType]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'porting/reports',
-            body: (object) $parsed,
-            options: $options,
-            convert: ReportNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params1, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -78,19 +70,19 @@ final class ReportsService implements ReportsContract
      *
      * Retrieve a specific report generated.
      *
+     * @param string $id identifies a report
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ReportGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['porting/reports/%1$s', $id],
-            options: $requestOptions,
-            convert: ReportGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -98,44 +90,24 @@ final class ReportsService implements ReportsContract
      *
      * List the reports generated about porting operations.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<PortingReport>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): ReportListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ReportListResponse {
-        [$parsed, $options] = ReportListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'porting/reports',
-            query: $parsed,
-            options: $options,
-            convert: ReportListResponse::class,
-        );
+        return $response->parse();
     }
 }

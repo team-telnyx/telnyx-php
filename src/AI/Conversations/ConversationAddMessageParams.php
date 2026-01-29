@@ -6,7 +6,8 @@ namespace Telnyx\AI\Conversations;
 
 use Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata;
 use Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,51 +16,56 @@ use Telnyx\Core\Conversion\MapOf;
 /**
  * Add a new message to the conversation. Used to insert a new messages to a conversation manually ( without using chat endpoint ).
  *
- * @see Telnyx\AI\Conversations->addMessage
+ * @see Telnyx\Services\AI\ConversationsService::addMessage()
  *
- * @phpstan-type conversation_add_message_params = array{
+ * @phpstan-import-type MetadataVariants from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata
+ * @phpstan-import-type ToolChoiceVariants from \Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice
+ * @phpstan-import-type MetadataShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata
+ * @phpstan-import-type ToolChoiceShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice
+ *
+ * @phpstan-type ConversationAddMessageParamsShape = array{
  *   role: string,
- *   content?: string,
- *   metadata?: array<string, string|int|bool|list<string|int|bool>>,
- *   name?: string,
- *   sentAt?: \DateTimeInterface,
- *   toolCallID?: string,
- *   toolCalls?: list<array<string, mixed>>,
- *   toolChoice?: mixed|string,
+ *   content?: string|null,
+ *   metadata?: array<string,MetadataShape>|null,
+ *   name?: string|null,
+ *   sentAt?: \DateTimeInterface|null,
+ *   toolCallID?: string|null,
+ *   toolCalls?: list<array<string,mixed>>|null,
+ *   toolChoice?: ToolChoiceShape|null,
  * }
  */
 final class ConversationAddMessageParams implements BaseModel
 {
-    /** @use SdkModel<conversation_add_message_params> */
+    /** @use SdkModel<ConversationAddMessageParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $role;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $content;
 
-    /** @var array<string, string|int|bool|list<string|int|bool>>|null $metadata */
-    #[Api(map: Metadata::class, optional: true)]
+    /** @var array<string,MetadataVariants>|null $metadata */
+    #[Optional(map: Metadata::class)]
     public ?array $metadata;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api('sent_at', optional: true)]
+    #[Optional('sent_at')]
     public ?\DateTimeInterface $sentAt;
 
-    #[Api('tool_call_id', optional: true)]
+    #[Optional('tool_call_id')]
     public ?string $toolCallID;
 
-    /** @var list<array<string, mixed>>|null $toolCalls */
-    #[Api('tool_calls', list: new MapOf('mixed'), optional: true)]
+    /** @var list<array<string,mixed>>|null $toolCalls */
+    #[Optional('tool_calls', list: new MapOf('mixed'))]
     public ?array $toolCalls;
 
-    /** @var mixed|string|null $toolChoice */
-    #[Api('tool_choice', union: ToolChoice::class, optional: true)]
-    public mixed $toolChoice;
+    /** @var ToolChoiceVariants|null $toolChoice */
+    #[Optional('tool_choice', union: ToolChoice::class)]
+    public string|array|null $toolChoice;
 
     /**
      * `new ConversationAddMessageParams()` is missing required properties by the API.
@@ -85,9 +91,9 @@ final class ConversationAddMessageParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, string|int|bool|list<string|int|bool>> $metadata
-     * @param list<array<string, mixed>> $toolCalls
-     * @param mixed|string $toolChoice
+     * @param array<string,MetadataShape>|null $metadata
+     * @param list<array<string,mixed>>|null $toolCalls
+     * @param ToolChoiceShape|null $toolChoice
      */
     public static function with(
         string $role,
@@ -97,93 +103,93 @@ final class ConversationAddMessageParams implements BaseModel
         ?\DateTimeInterface $sentAt = null,
         ?string $toolCallID = null,
         ?array $toolCalls = null,
-        mixed $toolChoice = null,
+        string|array|null $toolChoice = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->role = $role;
+        $self['role'] = $role;
 
-        null !== $content && $obj->content = $content;
-        null !== $metadata && $obj->metadata = $metadata;
-        null !== $name && $obj->name = $name;
-        null !== $sentAt && $obj->sentAt = $sentAt;
-        null !== $toolCallID && $obj->toolCallID = $toolCallID;
-        null !== $toolCalls && $obj->toolCalls = $toolCalls;
-        null !== $toolChoice && $obj->toolChoice = $toolChoice;
+        null !== $content && $self['content'] = $content;
+        null !== $metadata && $self['metadata'] = $metadata;
+        null !== $name && $self['name'] = $name;
+        null !== $sentAt && $self['sentAt'] = $sentAt;
+        null !== $toolCallID && $self['toolCallID'] = $toolCallID;
+        null !== $toolCalls && $self['toolCalls'] = $toolCalls;
+        null !== $toolChoice && $self['toolChoice'] = $toolChoice;
 
-        return $obj;
+        return $self;
     }
 
     public function withRole(string $role): self
     {
-        $obj = clone $this;
-        $obj->role = $role;
+        $self = clone $this;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 
     public function withContent(string $content): self
     {
-        $obj = clone $this;
-        $obj->content = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param array<string, string|int|bool|list<string|int|bool>> $metadata
+     * @param array<string,MetadataShape> $metadata
      */
     public function withMetadata(array $metadata): self
     {
-        $obj = clone $this;
-        $obj->metadata = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
-        $obj = clone $this;
-        $obj->sentAt = $sentAt;
+        $self = clone $this;
+        $self['sentAt'] = $sentAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withToolCallID(string $toolCallID): self
     {
-        $obj = clone $this;
-        $obj->toolCallID = $toolCallID;
+        $self = clone $this;
+        $self['toolCallID'] = $toolCallID;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<array<string, mixed>> $toolCalls
+     * @param list<array<string,mixed>> $toolCalls
      */
     public function withToolCalls(array $toolCalls): self
     {
-        $obj = clone $this;
-        $obj->toolCalls = $toolCalls;
+        $self = clone $this;
+        $self['toolCalls'] = $toolCalls;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param mixed|string $toolChoice
+     * @param ToolChoiceShape $toolChoice
      */
-    public function withToolChoice(mixed $toolChoice): self
+    public function withToolChoice(string|array $toolChoice): self
     {
-        $obj = clone $this;
-        $obj->toolChoice = $toolChoice;
+        $self = clone $this;
+        $self['toolChoice'] = $toolChoice;
 
-        return $obj;
+        return $self;
     }
 }

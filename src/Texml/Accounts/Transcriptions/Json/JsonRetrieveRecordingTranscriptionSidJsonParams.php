@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Transcriptions\Json;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,19 +12,19 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns the recording transcription resource identified by its ID.
  *
- * @see Telnyx\Texml\Accounts\Transcriptions\Json->retrieveRecordingTranscriptionSidJson
+ * @see Telnyx\Services\Texml\Accounts\Transcriptions\JsonService::retrieveRecordingTranscriptionSidJson()
  *
- * @phpstan-type json_retrieve_recording_transcription_sid_json_params = array{
+ * @phpstan-type JsonRetrieveRecordingTranscriptionSidJsonParamsShape = array{
  *   accountSid: string
  * }
  */
 final class JsonRetrieveRecordingTranscriptionSidJsonParams implements BaseModel
 {
-    /** @use SdkModel<json_retrieve_recording_transcription_sid_json_params> */
+    /** @use SdkModel<JsonRetrieveRecordingTranscriptionSidJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $accountSid;
 
     /**
@@ -53,18 +53,18 @@ final class JsonRetrieveRecordingTranscriptionSidJsonParams implements BaseModel
      */
     public static function with(string $accountSid): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->accountSid = $accountSid;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 }

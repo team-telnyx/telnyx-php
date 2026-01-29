@@ -4,73 +4,43 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Events;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
-use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
-use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Porting\Events\EventListResponse\Data;
+use Telnyx\Core\Concerns\SdkUnion;
+use Telnyx\Core\Conversion\Contracts\Converter;
+use Telnyx\Core\Conversion\Contracts\ConverterSource;
+use Telnyx\Porting\Events\EventListResponse\PortingEventDeletedPayload;
+use Telnyx\Porting\Events\EventListResponse\PortingEventMessagingChangedPayload;
+use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent;
+use Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent;
+use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent;
+use Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook;
 
 /**
- * @phpstan-type event_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
- * }
+ * @phpstan-import-type PortingEventDeletedPayloadShape from \Telnyx\Porting\Events\EventListResponse\PortingEventDeletedPayload
+ * @phpstan-import-type PortingEventMessagingChangedPayloadShape from \Telnyx\Porting\Events\EventListResponse\PortingEventMessagingChangedPayload
+ * @phpstan-import-type PortingEventStatusChangedEventShape from \Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent
+ * @phpstan-import-type PortingEventNewCommentEventShape from \Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent
+ * @phpstan-import-type PortingEventSplitEventShape from \Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent
+ * @phpstan-import-type PortingEventWithoutWebhookShape from \Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook
+ *
+ * @phpstan-type EventListResponseVariants = PortingEventDeletedPayload|PortingEventMessagingChangedPayload|PortingEventStatusChangedEvent|PortingEventNewCommentEvent|PortingEventSplitEvent|PortingEventWithoutWebhook
+ * @phpstan-type EventListResponseShape = EventListResponseVariants|PortingEventDeletedPayloadShape|PortingEventMessagingChangedPayloadShape|PortingEventStatusChangedEventShape|PortingEventNewCommentEventShape|PortingEventSplitEventShape|PortingEventWithoutWebhookShape
  */
-final class EventListResponse implements BaseModel, ResponseConverter
+final class EventListResponse implements ConverterSource
 {
-    /** @use SdkModel<event_list_response> */
-    use SdkModel;
-
-    use SdkResponse;
-
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
-
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
-
-    public function __construct()
-    {
-        $this->initialize();
-    }
+    use SdkUnion;
 
     /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<Data> $data
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
-    public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
-    ): self {
-        $obj = new self;
-
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
-
-        return $obj;
-    }
-
-    /**
-     * @param list<Data> $data
-     */
-    public function withData(array $data): self
+    public static function variants(): array
     {
-        $obj = clone $this;
-        $obj->data = $data;
-
-        return $obj;
-    }
-
-    public function withMeta(PaginationMeta $meta): self
-    {
-        $obj = clone $this;
-        $obj->meta = $meta;
-
-        return $obj;
+        return [
+            PortingEventDeletedPayload::class,
+            PortingEventMessagingChangedPayload::class,
+            PortingEventStatusChangedEvent::class,
+            PortingEventNewCommentEvent::class,
+            PortingEventSplitEvent::class,
+            PortingEventWithoutWebhook::class,
+        ];
     }
 }

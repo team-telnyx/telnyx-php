@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type finished_at = array{gte?: string, lte?: string}
+ * @phpstan-type FinishedAtShape = array{gte?: string|null, lte?: string|null}
  */
 final class FinishedAt implements BaseModel
 {
-    /** @use SdkModel<finished_at> */
+    /** @use SdkModel<FinishedAtShape> */
     use SdkModel;
 
     /**
      * Return only webhook_deliveries whose delivery finished later than or at given ISO 8601 datetime.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gte;
 
     /**
      * Return only webhook_deliveries whose delivery finished earlier than or at given ISO 8601 datetime.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lte;
 
     public function __construct()
@@ -40,12 +40,12 @@ final class FinishedAt implements BaseModel
      */
     public static function with(?string $gte = null, ?string $lte = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $gte && $obj->gte = $gte;
-        null !== $lte && $obj->lte = $lte;
+        null !== $gte && $self['gte'] = $gte;
+        null !== $lte && $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,10 +53,10 @@ final class FinishedAt implements BaseModel
      */
     public function withGte(string $gte): self
     {
-        $obj = clone $this;
-        $obj->gte = $gte;
+        $self = clone $this;
+        $self['gte'] = $gte;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +64,9 @@ final class FinishedAt implements BaseModel
      */
     public function withLte(string $lte): self
     {
-        $obj = clone $this;
-        $obj->lte = $lte;
+        $self = clone $this;
+        $self['lte'] = $lte;
 
-        return $obj;
+        return $self;
     }
 }

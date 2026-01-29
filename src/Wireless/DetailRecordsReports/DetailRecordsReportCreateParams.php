@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Wireless\DetailRecordsReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Asynchronously create a report containing Wireless Detail Records (WDRs) for the SIM cards that consumed wireless data in the given time period.
  *
- * @see Telnyx\Wireless\DetailRecordsReports->create
+ * @see Telnyx\Services\Wireless\DetailRecordsReportsService::create()
  *
- * @phpstan-type detail_records_report_create_params = array{
- *   endTime?: string, startTime?: string
+ * @phpstan-type DetailRecordsReportCreateParamsShape = array{
+ *   endTime?: string|null, startTime?: string|null
  * }
  */
 final class DetailRecordsReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<detail_records_report_create_params> */
+    /** @use SdkModel<DetailRecordsReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * ISO 8601 formatted date-time indicating the end time.
      */
-    #[Api('end_time', optional: true)]
+    #[Optional('end_time')]
     public ?string $endTime;
 
     /**
      * ISO 8601 formatted date-time indicating the start time.
      */
-    #[Api('start_time', optional: true)]
+    #[Optional('start_time')]
     public ?string $startTime;
 
     public function __construct()
@@ -50,12 +50,12 @@ final class DetailRecordsReportCreateParams implements BaseModel
         ?string $endTime = null,
         ?string $startTime = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $endTime && $obj->endTime = $endTime;
-        null !== $startTime && $obj->startTime = $startTime;
+        null !== $endTime && $self['endTime'] = $endTime;
+        null !== $startTime && $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class DetailRecordsReportCreateParams implements BaseModel
      */
     public function withEndTime(string $endTime): self
     {
-        $obj = clone $this;
-        $obj->endTime = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class DetailRecordsReportCreateParams implements BaseModel
      */
     public function withStartTime(string $startTime): self
     {
-        $obj = clone $this;
-        $obj->startTime = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 }

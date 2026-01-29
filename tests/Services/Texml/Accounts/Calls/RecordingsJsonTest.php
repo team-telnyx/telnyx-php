@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +44,11 @@ final class RecordingsJsonTest extends TestCase
             ->recordingsJson('call_sid', accountSid: 'account_sid')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            RecordingsJsonRecordingsJsonResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -58,10 +64,24 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->recordingsJson('call_sid', accountSid: 'account_sid')
+            ->recordingsJson(
+                'call_sid',
+                accountSid: 'account_sid',
+                playBeep: false,
+                recordingChannels: 'single',
+                recordingStatusCallback: 'http://webhook.com/callback',
+                recordingStatusCallbackEvent: 'in-progress completed absent',
+                recordingStatusCallbackMethod: 'GET',
+                recordingTrack: 'inbound',
+                sendRecordingURL: false,
+            )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            RecordingsJsonRecordingsJsonResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -77,10 +97,14 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->retrieveRecordingsJson('call_sid', 'account_sid')
+            ->retrieveRecordingsJson('call_sid', accountSid: 'account_sid')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            RecordingsJsonGetRecordingsJsonResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -96,9 +120,13 @@ final class RecordingsJsonTest extends TestCase
             ->accounts
             ->calls
             ->recordingsJson
-            ->retrieveRecordingsJson('call_sid', 'account_sid')
+            ->retrieveRecordingsJson('call_sid', accountSid: 'account_sid')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            RecordingsJsonGetRecordingsJsonResponse::class,
+            $result
+        );
     }
 }

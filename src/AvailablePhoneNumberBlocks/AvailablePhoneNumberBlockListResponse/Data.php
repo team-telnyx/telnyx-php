@@ -8,44 +8,48 @@ use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\Feature;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RecordType;
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RegionInformation;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   costInformation?: CostInformation,
- *   features?: list<Feature>,
- *   range?: int,
- *   recordType?: value-of<RecordType>,
- *   regionInformation?: list<RegionInformation>,
- *   startingNumber?: string,
+ * @phpstan-import-type CostInformationShape from \Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\CostInformation
+ * @phpstan-import-type FeatureShape from \Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\Feature
+ * @phpstan-import-type RegionInformationShape from \Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data\RegionInformation
+ *
+ * @phpstan-type DataShape = array{
+ *   costInformation?: null|CostInformation|CostInformationShape,
+ *   features?: list<Feature|FeatureShape>|null,
+ *   range?: int|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   regionInformation?: list<RegionInformation|RegionInformationShape>|null,
+ *   startingNumber?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('cost_information', optional: true)]
+    #[Optional('cost_information')]
     public ?CostInformation $costInformation;
 
     /** @var list<Feature>|null $features */
-    #[Api(list: Feature::class, optional: true)]
+    #[Optional(list: Feature::class)]
     public ?array $features;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $range;
 
     /** @var value-of<RecordType>|null $recordType */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
     /** @var list<RegionInformation>|null $regionInformation */
-    #[Api('region_information', list: RegionInformation::class, optional: true)]
+    #[Optional('region_information', list: RegionInformation::class)]
     public ?array $regionInformation;
 
-    #[Api('starting_number', optional: true)]
+    #[Optional('starting_number')]
     public ?string $startingNumber;
 
     public function __construct()
@@ -58,55 +62,60 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Feature> $features
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<RegionInformation> $regionInformation
+     * @param CostInformation|CostInformationShape|null $costInformation
+     * @param list<Feature|FeatureShape>|null $features
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<RegionInformation|RegionInformationShape>|null $regionInformation
      */
     public static function with(
-        ?CostInformation $costInformation = null,
+        CostInformation|array|null $costInformation = null,
         ?array $features = null,
         ?int $range = null,
         RecordType|string|null $recordType = null,
         ?array $regionInformation = null,
         ?string $startingNumber = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $costInformation && $obj->costInformation = $costInformation;
-        null !== $features && $obj->features = $features;
-        null !== $range && $obj->range = $range;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $regionInformation && $obj->regionInformation = $regionInformation;
-        null !== $startingNumber && $obj->startingNumber = $startingNumber;
+        null !== $costInformation && $self['costInformation'] = $costInformation;
+        null !== $features && $self['features'] = $features;
+        null !== $range && $self['range'] = $range;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regionInformation && $self['regionInformation'] = $regionInformation;
+        null !== $startingNumber && $self['startingNumber'] = $startingNumber;
 
-        return $obj;
-    }
-
-    public function withCostInformation(CostInformation $costInformation): self
-    {
-        $obj = clone $this;
-        $obj->costInformation = $costInformation;
-
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Feature> $features
+     * @param CostInformation|CostInformationShape $costInformation
+     */
+    public function withCostInformation(
+        CostInformation|array $costInformation
+    ): self {
+        $self = clone $this;
+        $self['costInformation'] = $costInformation;
+
+        return $self;
+    }
+
+    /**
+     * @param list<Feature|FeatureShape> $features
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj->features = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     public function withRange(int $range): self
     {
-        $obj = clone $this;
-        $obj->range = $range;
+        $self = clone $this;
+        $self['range'] = $range;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,28 +123,28 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<RegionInformation> $regionInformation
+     * @param list<RegionInformation|RegionInformationShape> $regionInformation
      */
     public function withRegionInformation(array $regionInformation): self
     {
-        $obj = clone $this;
-        $obj->regionInformation = $regionInformation;
+        $self = clone $this;
+        $self['regionInformation'] = $regionInformation;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartingNumber(string $startingNumber): self
     {
-        $obj = clone $this;
-        $obj->startingNumber = $startingNumber;
+        $self = clone $this;
+        $self['startingNumber'] = $startingNumber;
 
-        return $obj;
+        return $self;
     }
 }

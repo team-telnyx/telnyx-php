@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AdditionalDocuments;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deletes an additional document for a porting order.
  *
- * @see Telnyx\PortingOrders\AdditionalDocuments->delete
+ * @see Telnyx\Services\PortingOrders\AdditionalDocumentsService::delete()
  *
- * @phpstan-type additional_document_delete_params = array{id: string}
+ * @phpstan-type AdditionalDocumentDeleteParamsShape = array{id: string}
  */
 final class AdditionalDocumentDeleteParams implements BaseModel
 {
-    /** @use SdkModel<additional_document_delete_params> */
+    /** @use SdkModel<AdditionalDocumentDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -51,18 +51,18 @@ final class AdditionalDocumentDeleteParams implements BaseModel
      */
     public static function with(string $id): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 }

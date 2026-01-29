@@ -6,85 +6,67 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberLookupContract
 {
     /**
      * @api
      *
      * @param AggregationType|value-of<AggregationType> $aggregationType Type of aggregation for the report
-     * @param \DateTimeInterface $endDate End date for the usage report
+     * @param string $endDate End date for the usage report
      * @param list<string> $managedAccounts List of managed accounts to include in the report
-     * @param \DateTimeInterface $startDate Start date for the usage report
+     * @param string $startDate Start date for the usage report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $aggregationType = omit,
-        $endDate = omit,
-        $managedAccounts = omit,
-        $startDate = omit,
-        ?RequestOptions $requestOptions = null,
-    ): mixed;
+        AggregationType|string|null $aggregationType = null,
+        ?string $endDate = null,
+        ?array $managedAccounts = null,
+        ?string $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): NumberLookupNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
+        RequestOptions|array|null $requestOptions = null
+    ): NumberLookupGetResponse;
 
     /**
      * @api
      *
-     * @param int $page
-     * @param int $perPage
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $perPage = omit,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
+        RequestOptions|array|null $requestOptions = null
+    ): NumberLookupListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed;
-
-    /**
-     * @api
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

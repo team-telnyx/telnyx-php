@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,13 +15,17 @@ use Telnyx\Core\Contracts\BaseModel;
  * Creates a new canary deploy configuration with multiple version IDs and their traffic
  * percentages for A/B testing or gradual rollouts of assistant versions.
  *
- * @see Telnyx\AI\Assistants\CanaryDeploys->create
+ * @see Telnyx\Services\AI\Assistants\CanaryDeploysService::create()
  *
- * @phpstan-type canary_deploy_create_params = array{versions: list<VersionConfig>}
+ * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
+ *
+ * @phpstan-type CanaryDeployCreateParamsShape = array{
+ *   versions: list<VersionConfig|VersionConfigShape>
+ * }
  */
 final class CanaryDeployCreateParams implements BaseModel
 {
-    /** @use SdkModel<canary_deploy_create_params> */
+    /** @use SdkModel<CanaryDeployCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -30,7 +34,7 @@ final class CanaryDeployCreateParams implements BaseModel
      *
      * @var list<VersionConfig> $versions
      */
-    #[Api(list: VersionConfig::class)]
+    #[Required(list: VersionConfig::class)]
     public array $versions;
 
     /**
@@ -57,27 +61,27 @@ final class CanaryDeployCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public static function with(array $versions): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->versions = $versions;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of version configurations.
      *
-     * @param list<VersionConfig> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public function withVersions(array $versions): self
     {
-        $obj = clone $this;
-        $obj->versions = $versions;
+        $self = clone $this;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 }

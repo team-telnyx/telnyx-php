@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name;
@@ -12,54 +12,56 @@ use Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name;
 /**
  * Consolidated filter parameter for mobile network operators (deepObject style). Originally: filter[name][starts_with], filter[name][contains], filter[name][ends_with], filter[country_code], filter[mcc], filter[mnc], filter[tadig], filter[network_preferences_enabled].
  *
- * @phpstan-type filter_alias = array{
- *   countryCode?: string,
- *   mcc?: string,
- *   mnc?: string,
- *   name?: Name,
- *   networkPreferencesEnabled?: bool,
- *   tadig?: string,
+ * @phpstan-import-type NameShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter\Name
+ *
+ * @phpstan-type FilterShape = array{
+ *   countryCode?: string|null,
+ *   mcc?: string|null,
+ *   mnc?: string|null,
+ *   name?: null|Name|NameShape,
+ *   networkPreferencesEnabled?: bool|null,
+ *   tadig?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by exact country_code.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * Filter by exact MCC.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mcc;
 
     /**
      * Filter by exact MNC.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mnc;
 
     /**
      * Advanced name filtering operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Name $name;
 
     /**
      * Filter by network_preferences_enabled.
      */
-    #[Api('network_preferences_enabled', optional: true)]
+    #[Optional('network_preferences_enabled')]
     public ?bool $networkPreferencesEnabled;
 
     /**
      * Filter by exact TADIG.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tadig;
 
     public function __construct()
@@ -71,25 +73,27 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Name|NameShape|null $name
      */
     public static function with(
         ?string $countryCode = null,
         ?string $mcc = null,
         ?string $mnc = null,
-        ?Name $name = null,
+        Name|array|null $name = null,
         ?bool $networkPreferencesEnabled = null,
         ?string $tadig = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $mcc && $obj->mcc = $mcc;
-        null !== $mnc && $obj->mnc = $mnc;
-        null !== $name && $obj->name = $name;
-        null !== $networkPreferencesEnabled && $obj->networkPreferencesEnabled = $networkPreferencesEnabled;
-        null !== $tadig && $obj->tadig = $tadig;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $mcc && $self['mcc'] = $mcc;
+        null !== $mnc && $self['mnc'] = $mnc;
+        null !== $name && $self['name'] = $name;
+        null !== $networkPreferencesEnabled && $self['networkPreferencesEnabled'] = $networkPreferencesEnabled;
+        null !== $tadig && $self['tadig'] = $tadig;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +101,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +112,10 @@ final class Filter implements BaseModel
      */
     public function withMcc(string $mcc): self
     {
-        $obj = clone $this;
-        $obj->mcc = $mcc;
+        $self = clone $this;
+        $self['mcc'] = $mcc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,21 +123,23 @@ final class Filter implements BaseModel
      */
     public function withMnc(string $mnc): self
     {
-        $obj = clone $this;
-        $obj->mnc = $mnc;
+        $self = clone $this;
+        $self['mnc'] = $mnc;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Advanced name filtering operations.
+     *
+     * @param Name|NameShape $name
      */
-    public function withName(Name $name): self
+    public function withName(Name|array $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +148,10 @@ final class Filter implements BaseModel
     public function withNetworkPreferencesEnabled(
         bool $networkPreferencesEnabled
     ): self {
-        $obj = clone $this;
-        $obj->networkPreferencesEnabled = $networkPreferencesEnabled;
+        $self = clone $this;
+        $self['networkPreferencesEnabled'] = $networkPreferencesEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,9 +159,9 @@ final class Filter implements BaseModel
      */
     public function withTadig(string $tadig): self
     {
-        $obj = clone $this;
-        $obj->tadig = $tadig;
+        $self = clone $this;
+        $self['tadig'] = $tadig;
 
-        return $obj;
+        return $self;
     }
 }

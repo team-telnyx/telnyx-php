@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\Faxes\Fax;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
 use Telnyx\Faxes\FaxCreateParams\Quality;
 use Telnyx\Faxes\FaxGetResponse;
 use Telnyx\Faxes\FaxListParams\Filter;
-use Telnyx\Faxes\FaxListParams\Page;
-use Telnyx\Faxes\FaxListResponse;
 use Telnyx\Faxes\FaxNewResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Faxes\FaxListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface FaxesContract
 {
     /**
@@ -24,6 +26,7 @@ interface FaxesContract
      * @param string $connectionID the connection ID to send the fax with
      * @param string $from The phone number, in E.164 format, the fax will be sent from.
      * @param string $to The phone number, in E.164 format, the fax will be sent to or SIP URI
+     * @param int $blackThreshold The black threshold percentage for monochrome faxes. Only applicable if `monochrome` is set to `true`.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $fromDisplayName The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      * @param string $mediaName The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
@@ -35,82 +38,69 @@ interface FaxesContract
      * @param bool $storePreview should fax preview be stored on temporary URL
      * @param bool $t38Enabled The flag to disable the T.38 protocol.
      * @param string $webhookURL use this field to override the URL to which Telnyx will send subsequent webhooks for this fax
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $connectionID,
-        $from,
-        $to,
-        $clientState = omit,
-        $fromDisplayName = omit,
-        $mediaName = omit,
-        $mediaURL = omit,
-        $monochrome = omit,
-        $previewFormat = omit,
-        $quality = omit,
-        $storeMedia = omit,
-        $storePreview = omit,
-        $t38Enabled = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
+        string $connectionID,
+        string $from,
+        string $to,
+        int $blackThreshold = 95,
+        ?string $clientState = null,
+        ?string $fromDisplayName = null,
+        ?string $mediaName = null,
+        ?string $mediaURL = null,
+        bool $monochrome = false,
+        PreviewFormat|string $previewFormat = 'tiff',
+        Quality|string $quality = 'high',
+        bool $storeMedia = false,
+        bool $storePreview = false,
+        bool $t38Enabled = true,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): FaxNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): FaxNewResponse;
-
-    /**
-     * @api
+     * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): FaxGetResponse;
 
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq]
-     * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<Fax>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): FaxListResponse;
+        Filter|array|null $filter = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): FaxListResponse;
-
-    /**
-     * @api
+     * @param string $id the unique identifier of a fax
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

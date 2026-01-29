@@ -4,23 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\Fqdns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type fqdn_delete_response = array{data?: Fqdn}
+ * @phpstan-import-type FqdnShape from \Telnyx\Fqdns\Fqdn
+ *
+ * @phpstan-type FqdnDeleteResponseShape = array{data?: null|Fqdn|FqdnShape}
  */
-final class FqdnDeleteResponse implements BaseModel, ResponseConverter
+final class FqdnDeleteResponse implements BaseModel
 {
-    /** @use SdkModel<fqdn_delete_response> */
+    /** @use SdkModel<FqdnDeleteResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Fqdn $data;
 
     public function __construct()
@@ -32,21 +30,26 @@ final class FqdnDeleteResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Fqdn|FqdnShape|null $data
      */
-    public static function with(?Fqdn $data = null): self
+    public static function with(Fqdn|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Fqdn $data): self
+    /**
+     * @param Fqdn|FqdnShape $data
+     */
+    public function withData(Fqdn|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

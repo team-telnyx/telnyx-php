@@ -6,20 +6,22 @@ namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data;
 
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Comparative;
-use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line\Simple;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type summary_alias = array{
- *   adjustments: list<Adjustment>, lines: list<Comparative|Simple>
+ * @phpstan-import-type LineVariants from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line
+ * @phpstan-import-type AdjustmentShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Adjustment
+ * @phpstan-import-type LineShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary\Line
+ *
+ * @phpstan-type SummaryShape = array{
+ *   adjustments: list<Adjustment|AdjustmentShape>, lines: list<LineShape>
  * }
  */
 final class Summary implements BaseModel
 {
-    /** @use SdkModel<summary_alias> */
+    /** @use SdkModel<SummaryShape> */
     use SdkModel;
 
     /**
@@ -27,15 +29,15 @@ final class Summary implements BaseModel
      *
      * @var list<Adjustment> $adjustments
      */
-    #[Api(list: Adjustment::class)]
+    #[Required(list: Adjustment::class)]
     public array $adjustments;
 
     /**
      * List of charge summary lines.
      *
-     * @var list<Comparative|Simple> $lines
+     * @var list<LineVariants> $lines
      */
-    #[Api(list: Line::class)]
+    #[Required(list: Line::class)]
     public array $lines;
 
     /**
@@ -62,42 +64,42 @@ final class Summary implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Adjustment> $adjustments
-     * @param list<Comparative|Simple> $lines
+     * @param list<Adjustment|AdjustmentShape> $adjustments
+     * @param list<LineShape> $lines
      */
     public static function with(array $adjustments, array $lines): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->adjustments = $adjustments;
-        $obj->lines = $lines;
+        $self['adjustments'] = $adjustments;
+        $self['lines'] = $lines;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of billing adjustments.
      *
-     * @param list<Adjustment> $adjustments
+     * @param list<Adjustment|AdjustmentShape> $adjustments
      */
     public function withAdjustments(array $adjustments): self
     {
-        $obj = clone $this;
-        $obj->adjustments = $adjustments;
+        $self = clone $this;
+        $self['adjustments'] = $adjustments;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of charge summary lines.
      *
-     * @param list<Comparative|Simple> $lines
+     * @param list<LineShape> $lines
      */
     public function withLines(array $lines): self
     {
-        $obj = clone $this;
-        $obj->lines = $lines;
+        $self = clone $this;
+        $self['lines'] = $lines;
 
-        return $obj;
+        return $self;
     }
 }

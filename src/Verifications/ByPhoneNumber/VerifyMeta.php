@@ -4,32 +4,52 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\ByPhoneNumber;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type verify_meta = array{
- *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
+ * @phpstan-type VerifyMetaShape = array{
+ *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
  * }
  */
 final class VerifyMeta implements BaseModel
 {
-    /** @use SdkModel<verify_meta> */
+    /** @use SdkModel<VerifyMetaShape> */
     use SdkModel;
 
-    #[Api('page_number', optional: true)]
-    public ?int $pageNumber;
+    #[Required('page_number')]
+    public int $pageNumber;
 
-    #[Api('page_size', optional: true)]
-    public ?int $pageSize;
+    #[Required('page_size')]
+    public int $pageSize;
 
-    #[Api('total_pages', optional: true)]
-    public ?int $totalPages;
+    #[Required('total_pages')]
+    public int $totalPages;
 
-    #[Api('total_results', optional: true)]
-    public ?int $totalResults;
+    #[Required('total_results')]
+    public int $totalResults;
 
+    /**
+     * `new VerifyMeta()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * VerifyMeta::with(
+     *   pageNumber: ..., pageSize: ..., totalPages: ..., totalResults: ...
+     * )
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new VerifyMeta)
+     *   ->withPageNumber(...)
+     *   ->withPageSize(...)
+     *   ->withTotalPages(...)
+     *   ->withTotalResults(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -41,50 +61,50 @@ final class VerifyMeta implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        ?int $totalPages = null,
-        ?int $totalResults = null,
+        int $pageNumber,
+        int $pageSize,
+        int $totalPages,
+        int $totalResults
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $totalPages && $obj->totalPages = $totalPages;
-        null !== $totalResults && $obj->totalResults = $totalResults;
+        $self['pageNumber'] = $pageNumber;
+        $self['pageSize'] = $pageSize;
+        $self['totalPages'] = $totalPages;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalPages(int $totalPages): self
     {
-        $obj = clone $this;
-        $obj->totalPages = $totalPages;
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalResults(int $totalResults): self
     {
-        $obj = clone $this;
-        $obj->totalResults = $totalResults;
+        $self = clone $this;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 }

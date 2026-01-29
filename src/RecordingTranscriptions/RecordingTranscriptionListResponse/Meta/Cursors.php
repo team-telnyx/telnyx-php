@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type cursors_alias = array{after?: string, before?: string}
+ * @phpstan-type CursorsShape = array{after?: string|null, before?: string|null}
  */
 final class Cursors implements BaseModel
 {
-    /** @use SdkModel<cursors_alias> */
+    /** @use SdkModel<CursorsShape> */
     use SdkModel;
 
     /**
      * Opaque identifier of next page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $after;
 
     /**
      * Opaque identifier of previous page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $before;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class Cursors implements BaseModel
         ?string $after = null,
         ?string $before = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $after && $obj->after = $after;
-        null !== $before && $obj->before = $before;
+        null !== $after && $self['after'] = $after;
+        null !== $before && $self['before'] = $before;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Cursors implements BaseModel
      */
     public function withAfter(string $after): self
     {
-        $obj = clone $this;
-        $obj->after = $after;
+        $self = clone $this;
+        $self['after'] = $after;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Cursors implements BaseModel
      */
     public function withBefore(string $before): self
     {
-        $obj = clone $this;
-        $obj->before = $before;
+        $self = clone $this;
+        $self['before'] = $before;
 
-        return $obj;
+        return $self;
     }
 }

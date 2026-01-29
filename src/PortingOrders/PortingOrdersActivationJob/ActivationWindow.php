@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrdersActivationJob;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type activation_window = array{
- *   endAt?: \DateTimeInterface, startAt?: \DateTimeInterface
+ * @phpstan-type ActivationWindowShape = array{
+ *   endAt?: \DateTimeInterface|null, startAt?: \DateTimeInterface|null
  * }
  */
 final class ActivationWindow implements BaseModel
 {
-    /** @use SdkModel<activation_window> */
+    /** @use SdkModel<ActivationWindowShape> */
     use SdkModel;
 
     /**
      * ISO 8601 formatted date indicating when the activation window ends.
      */
-    #[Api('end_at', optional: true)]
+    #[Optional('end_at')]
     public ?\DateTimeInterface $endAt;
 
     /**
      * ISO 8601 formatted date indicating when the activation window starts.
      */
-    #[Api('start_at', optional: true)]
+    #[Optional('start_at')]
     public ?\DateTimeInterface $startAt;
 
     public function __construct()
@@ -44,12 +44,12 @@ final class ActivationWindow implements BaseModel
         ?\DateTimeInterface $endAt = null,
         ?\DateTimeInterface $startAt = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $endAt && $obj->endAt = $endAt;
-        null !== $startAt && $obj->startAt = $startAt;
+        null !== $endAt && $self['endAt'] = $endAt;
+        null !== $startAt && $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class ActivationWindow implements BaseModel
      */
     public function withEndAt(\DateTimeInterface $endAt): self
     {
-        $obj = clone $this;
-        $obj->endAt = $endAt;
+        $self = clone $this;
+        $self['endAt'] = $endAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class ActivationWindow implements BaseModel
      */
     public function withStartAt(\DateTimeInterface $startAt): self
     {
-        $obj = clone $this;
-        $obj->startAt = $startAt;
+        $self = clone $this;
+        $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 }

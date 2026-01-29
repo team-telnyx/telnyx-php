@@ -6,7 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\CustomStorageCredentials\GcsConfigurationData;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,10 +39,11 @@ final class CustomStorageCredentialsTest extends TestCase
         $result = $this->client->customStorageCredentials->create(
             'connection_id',
             backend: 'gcs',
-            configuration: (new GcsConfigurationData)
+            configuration: ['backend' => 'gcs']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomStorageCredentialNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,12 +56,15 @@ final class CustomStorageCredentialsTest extends TestCase
         $result = $this->client->customStorageCredentials->create(
             'connection_id',
             backend: 'gcs',
-            configuration: (new GcsConfigurationData)
-                ->withBucket('example-bucket')
-                ->withCredentials('OPAQUE_CREDENTIALS_TOKEN'),
+            configuration: [
+                'backend' => 'gcs',
+                'bucket' => 'example-bucket',
+                'credentials' => 'OPAQUE_CREDENTIALS_TOKEN',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomStorageCredentialNewResponse::class, $result);
     }
 
     #[Test]
@@ -72,7 +78,8 @@ final class CustomStorageCredentialsTest extends TestCase
             'connection_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CustomStorageCredentialGetResponse::class, $result);
     }
 
     #[Test]
@@ -85,10 +92,14 @@ final class CustomStorageCredentialsTest extends TestCase
         $result = $this->client->customStorageCredentials->update(
             'connection_id',
             backend: 'gcs',
-            configuration: (new GcsConfigurationData)
+            configuration: ['backend' => 'gcs']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            CustomStorageCredentialUpdateResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -101,12 +112,18 @@ final class CustomStorageCredentialsTest extends TestCase
         $result = $this->client->customStorageCredentials->update(
             'connection_id',
             backend: 'gcs',
-            configuration: (new GcsConfigurationData)
-                ->withBucket('example-bucket')
-                ->withCredentials('OPAQUE_CREDENTIALS_TOKEN'),
+            configuration: [
+                'backend' => 'gcs',
+                'bucket' => 'example-bucket',
+                'credentials' => 'OPAQUE_CREDENTIALS_TOKEN',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            CustomStorageCredentialUpdateResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -118,6 +135,7 @@ final class CustomStorageCredentialsTest extends TestCase
 
         $result = $this->client->customStorageCredentials->delete('connection_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

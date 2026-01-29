@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallStreamingStartedWebhookEvent\Data;
 
 /**
- * @phpstan-type call_streaming_started_webhook_event = array{data?: Data}
+ * @phpstan-import-type CallStreamingStartedShape from \Telnyx\Webhooks\CallStreamingStarted
+ *
+ * @phpstan-type CallStreamingStartedWebhookEventShape = array{
+ *   data?: null|CallStreamingStarted|CallStreamingStartedShape
+ * }
  */
 final class CallStreamingStartedWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<call_streaming_started_webhook_event> */
+    /** @use SdkModel<CallStreamingStartedWebhookEventShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
-    public ?Data $data;
+    #[Optional]
+    public ?CallStreamingStarted $data;
 
     public function __construct()
     {
@@ -29,21 +32,26 @@ final class CallStreamingStartedWebhookEvent implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CallStreamingStarted|CallStreamingStartedShape|null $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(CallStreamingStarted|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param CallStreamingStarted|CallStreamingStartedShape $data
+     */
+    public function withData(CallStreamingStarted|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

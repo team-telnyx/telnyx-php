@@ -4,30 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AuthenticationProviders\AuthenticationProviderCreateParams;
+use Telnyx\AuthenticationProviders\AuthenticationProvider;
 use Telnyx\AuthenticationProviders\AuthenticationProviderDeleteResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderGetResponse;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListParams;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Page;
 use Telnyx\AuthenticationProviders\AuthenticationProviderListParams\Sort;
-use Telnyx\AuthenticationProviders\AuthenticationProviderListResponse;
 use Telnyx\AuthenticationProviders\AuthenticationProviderNewResponse;
-use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateParams;
 use Telnyx\AuthenticationProviders\AuthenticationProviderUpdateResponse;
 use Telnyx\AuthenticationProviders\Settings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuthenticationProvidersContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type SettingsShape from \Telnyx\AuthenticationProviders\Settings
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AuthenticationProvidersService implements AuthenticationProvidersContract
 {
     /**
+     * @api
+     */
+    public AuthenticationProvidersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AuthenticationProvidersRawService($client);
+    }
 
     /**
      * @api
@@ -35,56 +43,36 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      * Creates an authentication provider.
      *
      * @param string $name the name associated with the authentication provider
-     * @param Settings $settings the settings associated with the authentication provider
+     * @param Settings|SettingsShape $settings the settings associated with the authentication provider
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
      * @param bool $active The active status of the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        $settings,
-        $shortName,
-        $active = omit,
-        $settingsURL = omit,
-        ?RequestOptions $requestOptions = null,
+        string $name,
+        Settings|array $settings,
+        string $shortName,
+        bool $active = true,
+        ?string $settingsURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AuthenticationProviderNewResponse {
-        $params = [
-            'name' => $name,
-            'settings' => $settings,
-            'shortName' => $shortName,
-            'active' => $active,
-            'settingsURL' => $settingsURL,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AuthenticationProviderNewResponse {
-        [$parsed, $options] = AuthenticationProviderCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'name' => $name,
+                'settings' => $settings,
+                'shortName' => $shortName,
+                'active' => $active,
+                'settingsURL' => $settingsURL,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'authentication_providers',
-            body: (object) $parsed,
-            options: $options,
-            convert: AuthenticationProviderNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -92,19 +80,19 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Retrieves the details of an existing authentication provider.
      *
+     * @param string $id authentication provider ID
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AuthenticationProviderGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['authentication_providers/%1$s', $id],
-            options: $requestOptions,
-            convert: AuthenticationProviderGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -112,59 +100,39 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Updates settings of an existing authentication provider.
      *
+     * @param string $id identifies the resource
      * @param bool $active The active status of the authentication provider
      * @param string $name the name associated with the authentication provider
-     * @param Settings $settings the settings associated with the authentication provider
+     * @param Settings|SettingsShape $settings the settings associated with the authentication provider
      * @param string $settingsURL The URL for the identity provider metadata file to populate the settings automatically. If the settings attribute is provided, that will be used instead.
      * @param string $shortName The short name associated with the authentication provider. This must be unique and URL-friendly, as it's going to be part of the login URL.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $active = omit,
-        $name = omit,
-        $settings = omit,
-        $settingsURL = omit,
-        $shortName = omit,
-        ?RequestOptions $requestOptions = null,
+        bool $active = true,
+        ?string $name = null,
+        Settings|array|null $settings = null,
+        ?string $settingsURL = null,
+        ?string $shortName = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AuthenticationProviderUpdateResponse {
-        $params = [
-            'active' => $active,
-            'name' => $name,
-            'settings' => $settings,
-            'settingsURL' => $settingsURL,
-            'shortName' => $shortName,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AuthenticationProviderUpdateResponse {
-        [$parsed, $options] = AuthenticationProviderUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'active' => $active,
+                'name' => $name,
+                'settings' => $settings,
+                'settingsURL' => $settingsURL,
+                'shortName' => $shortName,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['authentication_providers/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: AuthenticationProviderUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -172,7 +140,6 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Returns a list of your SSO authentication providers.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -184,43 +151,26 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *     <code>name</code> field in descending order.
      *   </li>
      * </ul><br/>If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<AuthenticationProvider>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null
-    ): AuthenticationProviderListResponse {
-        $params = ['page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AuthenticationProviderListResponse {
-        [$parsed, $options] = AuthenticationProviderListParams::parseRequest(
-            $params,
-            $requestOptions
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        Sort|string $sort = '-created_at',
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'authentication_providers',
-            query: $parsed,
-            options: $options,
-            convert: AuthenticationProviderListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -228,18 +178,18 @@ final class AuthenticationProvidersService implements AuthenticationProvidersCon
      *
      * Deletes an existing authentication provider.
      *
+     * @param string $id authentication provider ID
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AuthenticationProviderDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['authentication_providers/%1$s', $id],
-            options: $requestOptions,
-            convert: AuthenticationProviderDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

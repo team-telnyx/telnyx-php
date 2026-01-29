@@ -6,62 +6,50 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse;
-use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams;
 use Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPUsageContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPUsageService implements GlobalIPUsageContract
 {
     /**
+     * @api
+     */
+    public GlobalIPUsageRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPUsageRawService($client);
+    }
 
     /**
      * @api
      *
      * Global IP Usage Metrics
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): GlobalIPUsageGetResponse {
-        $params = ['filter' => $filter];
+        $params = Util::removeNulls(['filter' => $filter]);
 
-        return $this->retrieveRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPUsageGetResponse {
-        [$parsed, $options] = GlobalIPUsageRetrieveParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'global_ip_usage',
-            query: $parsed,
-            options: $options,
-            convert: GlobalIPUsageGetResponse::class,
-        );
+        return $response->parse();
     }
 }

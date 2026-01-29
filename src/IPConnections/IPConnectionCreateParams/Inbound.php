@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections\IPConnectionCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\AniNumberFormat;
@@ -14,27 +14,27 @@ use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipRegion;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound\SipSubdomainReceiveSettings;
 
 /**
- * @phpstan-type inbound_alias = array{
- *   aniNumberFormat?: value-of<AniNumberFormat>,
- *   channelLimit?: int,
- *   codecs?: list<string>,
- *   defaultRoutingMethod?: value-of<DefaultRoutingMethod>,
- *   dnisNumberFormat?: value-of<DnisNumberFormat>,
- *   generateRingbackTone?: bool,
- *   isupHeadersEnabled?: bool,
- *   prackEnabled?: bool,
- *   shakenStirEnabled?: bool,
- *   sipCompactHeadersEnabled?: bool,
- *   sipRegion?: value-of<SipRegion>,
- *   sipSubdomain?: string,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>,
- *   timeout1xxSecs?: int,
- *   timeout2xxSecs?: int,
+ * @phpstan-type InboundShape = array{
+ *   aniNumberFormat?: null|AniNumberFormat|value-of<AniNumberFormat>,
+ *   channelLimit?: int|null,
+ *   codecs?: list<string>|null,
+ *   defaultRoutingMethod?: null|DefaultRoutingMethod|value-of<DefaultRoutingMethod>,
+ *   dnisNumberFormat?: null|DnisNumberFormat|value-of<DnisNumberFormat>,
+ *   generateRingbackTone?: bool|null,
+ *   isupHeadersEnabled?: bool|null,
+ *   prackEnabled?: bool|null,
+ *   shakenStirEnabled?: bool|null,
+ *   sipCompactHeadersEnabled?: bool|null,
+ *   sipRegion?: null|SipRegion|value-of<SipRegion>,
+ *   sipSubdomain?: string|null,
+ *   sipSubdomainReceiveSettings?: null|SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>,
+ *   timeout1xxSecs?: int|null,
+ *   timeout2xxSecs?: int|null,
  * }
  */
 final class Inbound implements BaseModel
 {
-    /** @use SdkModel<inbound_alias> */
+    /** @use SdkModel<InboundShape> */
     use SdkModel;
 
     /**
@@ -42,13 +42,13 @@ final class Inbound implements BaseModel
      *
      * @var value-of<AniNumberFormat>|null $aniNumberFormat
      */
-    #[Api('ani_number_format', enum: AniNumberFormat::class, optional: true)]
+    #[Optional('ani_number_format', enum: AniNumberFormat::class)]
     public ?string $aniNumberFormat;
 
     /**
      * When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
      */
-    #[Api('channel_limit', optional: true)]
+    #[Optional('channel_limit')]
     public ?int $channelLimit;
 
     /**
@@ -56,7 +56,7 @@ final class Inbound implements BaseModel
      *
      * @var list<string>|null $codecs
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $codecs;
 
     /**
@@ -64,45 +64,41 @@ final class Inbound implements BaseModel
      *
      * @var value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
      */
-    #[Api(
-        'default_routing_method',
-        enum: DefaultRoutingMethod::class,
-        optional: true
-    )]
+    #[Optional('default_routing_method', enum: DefaultRoutingMethod::class)]
     public ?string $defaultRoutingMethod;
 
     /** @var value-of<DnisNumberFormat>|null $dnisNumberFormat */
-    #[Api('dnis_number_format', enum: DnisNumberFormat::class, optional: true)]
+    #[Optional('dnis_number_format', enum: DnisNumberFormat::class)]
     public ?string $dnisNumberFormat;
 
     /**
      * Generate ringback tone through 183 session progress message with early media.
      */
-    #[Api('generate_ringback_tone', optional: true)]
+    #[Optional('generate_ringback_tone')]
     public ?bool $generateRingbackTone;
 
     /**
      * When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.).
      */
-    #[Api('isup_headers_enabled', optional: true)]
+    #[Optional('isup_headers_enabled')]
     public ?bool $isupHeadersEnabled;
 
     /**
      * Enable PRACK messages as defined in RFC3262.
      */
-    #[Api('prack_enabled', optional: true)]
+    #[Optional('prack_enabled')]
     public ?bool $prackEnabled;
 
     /**
      * When enabled the SIP Connection will receive the Identity header with Shaken/Stir data in the SIP INVITE message of inbound calls, even when using UDP transport.
      */
-    #[Api('shaken_stir_enabled', optional: true)]
+    #[Optional('shaken_stir_enabled')]
     public ?bool $shakenStirEnabled;
 
     /**
      * Defaults to true.
      */
-    #[Api('sip_compact_headers_enabled', optional: true)]
+    #[Optional('sip_compact_headers_enabled')]
     public ?bool $sipCompactHeadersEnabled;
 
     /**
@@ -110,13 +106,13 @@ final class Inbound implements BaseModel
      *
      * @var value-of<SipRegion>|null $sipRegion
      */
-    #[Api('sip_region', enum: SipRegion::class, optional: true)]
+    #[Optional('sip_region', enum: SipRegion::class)]
     public ?string $sipRegion;
 
     /**
      * Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.
      */
-    #[Api('sip_subdomain', optional: true)]
+    #[Optional('sip_subdomain')]
     public ?string $sipSubdomain;
 
     /**
@@ -124,23 +120,22 @@ final class Inbound implements BaseModel
      *
      * @var value-of<SipSubdomainReceiveSettings>|null $sipSubdomainReceiveSettings
      */
-    #[Api(
+    #[Optional(
         'sip_subdomain_receive_settings',
-        enum: SipSubdomainReceiveSettings::class,
-        optional: true,
+        enum: SipSubdomainReceiveSettings::class
     )]
     public ?string $sipSubdomainReceiveSettings;
 
     /**
      * Time(sec) before aborting if connection is not made.
      */
-    #[Api('timeout_1xx_secs', optional: true)]
+    #[Optional('timeout_1xx_secs')]
     public ?int $timeout1xxSecs;
 
     /**
      * Time(sec) before aborting if call is unanswered (min: 1, max: 600).
      */
-    #[Api('timeout_2xx_secs', optional: true)]
+    #[Optional('timeout_2xx_secs')]
     public ?int $timeout2xxSecs;
 
     public function __construct()
@@ -153,12 +148,12 @@ final class Inbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AniNumberFormat|value-of<AniNumberFormat> $aniNumberFormat
-     * @param list<string> $codecs
-     * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod> $defaultRoutingMethod
-     * @param DnisNumberFormat|value-of<DnisNumberFormat> $dnisNumberFormat
-     * @param SipRegion|value-of<SipRegion> $sipRegion
-     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings> $sipSubdomainReceiveSettings
+     * @param AniNumberFormat|value-of<AniNumberFormat>|null $aniNumberFormat
+     * @param list<string>|null $codecs
+     * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
+     * @param DnisNumberFormat|value-of<DnisNumberFormat>|null $dnisNumberFormat
+     * @param SipRegion|value-of<SipRegion>|null $sipRegion
+     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>|null $sipSubdomainReceiveSettings
      */
     public static function with(
         AniNumberFormat|string|null $aniNumberFormat = null,
@@ -177,25 +172,25 @@ final class Inbound implements BaseModel
         ?int $timeout1xxSecs = null,
         ?int $timeout2xxSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $aniNumberFormat && $obj['aniNumberFormat'] = $aniNumberFormat;
-        null !== $channelLimit && $obj->channelLimit = $channelLimit;
-        null !== $codecs && $obj->codecs = $codecs;
-        null !== $defaultRoutingMethod && $obj['defaultRoutingMethod'] = $defaultRoutingMethod;
-        null !== $dnisNumberFormat && $obj['dnisNumberFormat'] = $dnisNumberFormat;
-        null !== $generateRingbackTone && $obj->generateRingbackTone = $generateRingbackTone;
-        null !== $isupHeadersEnabled && $obj->isupHeadersEnabled = $isupHeadersEnabled;
-        null !== $prackEnabled && $obj->prackEnabled = $prackEnabled;
-        null !== $shakenStirEnabled && $obj->shakenStirEnabled = $shakenStirEnabled;
-        null !== $sipCompactHeadersEnabled && $obj->sipCompactHeadersEnabled = $sipCompactHeadersEnabled;
-        null !== $sipRegion && $obj['sipRegion'] = $sipRegion;
-        null !== $sipSubdomain && $obj->sipSubdomain = $sipSubdomain;
-        null !== $sipSubdomainReceiveSettings && $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
-        null !== $timeout1xxSecs && $obj->timeout1xxSecs = $timeout1xxSecs;
-        null !== $timeout2xxSecs && $obj->timeout2xxSecs = $timeout2xxSecs;
+        null !== $aniNumberFormat && $self['aniNumberFormat'] = $aniNumberFormat;
+        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
+        null !== $codecs && $self['codecs'] = $codecs;
+        null !== $defaultRoutingMethod && $self['defaultRoutingMethod'] = $defaultRoutingMethod;
+        null !== $dnisNumberFormat && $self['dnisNumberFormat'] = $dnisNumberFormat;
+        null !== $generateRingbackTone && $self['generateRingbackTone'] = $generateRingbackTone;
+        null !== $isupHeadersEnabled && $self['isupHeadersEnabled'] = $isupHeadersEnabled;
+        null !== $prackEnabled && $self['prackEnabled'] = $prackEnabled;
+        null !== $shakenStirEnabled && $self['shakenStirEnabled'] = $shakenStirEnabled;
+        null !== $sipCompactHeadersEnabled && $self['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
+        null !== $sipRegion && $self['sipRegion'] = $sipRegion;
+        null !== $sipSubdomain && $self['sipSubdomain'] = $sipSubdomain;
+        null !== $sipSubdomainReceiveSettings && $self['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
+        null !== $timeout1xxSecs && $self['timeout1xxSecs'] = $timeout1xxSecs;
+        null !== $timeout2xxSecs && $self['timeout2xxSecs'] = $timeout2xxSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,10 +201,10 @@ final class Inbound implements BaseModel
     public function withAniNumberFormat(
         AniNumberFormat|string $aniNumberFormat
     ): self {
-        $obj = clone $this;
-        $obj['aniNumberFormat'] = $aniNumberFormat;
+        $self = clone $this;
+        $self['aniNumberFormat'] = $aniNumberFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +212,10 @@ final class Inbound implements BaseModel
      */
     public function withChannelLimit(int $channelLimit): self
     {
-        $obj = clone $this;
-        $obj->channelLimit = $channelLimit;
+        $self = clone $this;
+        $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,10 +225,10 @@ final class Inbound implements BaseModel
      */
     public function withCodecs(array $codecs): self
     {
-        $obj = clone $this;
-        $obj->codecs = $codecs;
+        $self = clone $this;
+        $self['codecs'] = $codecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +239,10 @@ final class Inbound implements BaseModel
     public function withDefaultRoutingMethod(
         DefaultRoutingMethod|string $defaultRoutingMethod
     ): self {
-        $obj = clone $this;
-        $obj['defaultRoutingMethod'] = $defaultRoutingMethod;
+        $self = clone $this;
+        $self['defaultRoutingMethod'] = $defaultRoutingMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,10 +251,10 @@ final class Inbound implements BaseModel
     public function withDnisNumberFormat(
         DnisNumberFormat|string $dnisNumberFormat
     ): self {
-        $obj = clone $this;
-        $obj['dnisNumberFormat'] = $dnisNumberFormat;
+        $self = clone $this;
+        $self['dnisNumberFormat'] = $dnisNumberFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +262,10 @@ final class Inbound implements BaseModel
      */
     public function withGenerateRingbackTone(bool $generateRingbackTone): self
     {
-        $obj = clone $this;
-        $obj->generateRingbackTone = $generateRingbackTone;
+        $self = clone $this;
+        $self['generateRingbackTone'] = $generateRingbackTone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,10 +273,10 @@ final class Inbound implements BaseModel
      */
     public function withIsupHeadersEnabled(bool $isupHeadersEnabled): self
     {
-        $obj = clone $this;
-        $obj->isupHeadersEnabled = $isupHeadersEnabled;
+        $self = clone $this;
+        $self['isupHeadersEnabled'] = $isupHeadersEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,10 +284,10 @@ final class Inbound implements BaseModel
      */
     public function withPrackEnabled(bool $prackEnabled): self
     {
-        $obj = clone $this;
-        $obj->prackEnabled = $prackEnabled;
+        $self = clone $this;
+        $self['prackEnabled'] = $prackEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -300,10 +295,10 @@ final class Inbound implements BaseModel
      */
     public function withShakenStirEnabled(bool $shakenStirEnabled): self
     {
-        $obj = clone $this;
-        $obj->shakenStirEnabled = $shakenStirEnabled;
+        $self = clone $this;
+        $self['shakenStirEnabled'] = $shakenStirEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -312,10 +307,10 @@ final class Inbound implements BaseModel
     public function withSipCompactHeadersEnabled(
         bool $sipCompactHeadersEnabled
     ): self {
-        $obj = clone $this;
-        $obj->sipCompactHeadersEnabled = $sipCompactHeadersEnabled;
+        $self = clone $this;
+        $self['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -325,10 +320,10 @@ final class Inbound implements BaseModel
      */
     public function withSipRegion(SipRegion|string $sipRegion): self
     {
-        $obj = clone $this;
-        $obj['sipRegion'] = $sipRegion;
+        $self = clone $this;
+        $self['sipRegion'] = $sipRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -336,10 +331,10 @@ final class Inbound implements BaseModel
      */
     public function withSipSubdomain(string $sipSubdomain): self
     {
-        $obj = clone $this;
-        $obj->sipSubdomain = $sipSubdomain;
+        $self = clone $this;
+        $self['sipSubdomain'] = $sipSubdomain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -350,10 +345,10 @@ final class Inbound implements BaseModel
     public function withSipSubdomainReceiveSettings(
         SipSubdomainReceiveSettings|string $sipSubdomainReceiveSettings
     ): self {
-        $obj = clone $this;
-        $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
+        $self = clone $this;
+        $self['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -361,10 +356,10 @@ final class Inbound implements BaseModel
      */
     public function withTimeout1xxSecs(int $timeout1xxSecs): self
     {
-        $obj = clone $this;
-        $obj->timeout1xxSecs = $timeout1xxSecs;
+        $self = clone $this;
+        $self['timeout1xxSecs'] = $timeout1xxSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -372,9 +367,9 @@ final class Inbound implements BaseModel
      */
     public function withTimeout2xxSecs(int $timeout2xxSecs): self
     {
-        $obj = clone $this;
-        $obj->timeout2xxSecs = $timeout2xxSecs;
+        $self = clone $this;
+        $self['timeout2xxSecs'] = $timeout2xxSecs;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,35 +5,35 @@ declare(strict_types=1);
 namespace Telnyx\Actions\Purchase;
 
 use Telnyx\Actions\Purchase\PurchaseNewResponse\Error;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\SimpleSimCard;
 
 /**
- * @phpstan-type purchase_new_response = array{
- *   data?: list<SimpleSimCard>, errors?: list<Error>
+ * @phpstan-import-type SimpleSimCardShape from \Telnyx\SimpleSimCard
+ * @phpstan-import-type ErrorShape from \Telnyx\Actions\Purchase\PurchaseNewResponse\Error
+ *
+ * @phpstan-type PurchaseNewResponseShape = array{
+ *   data?: list<SimpleSimCard|SimpleSimCardShape>|null,
+ *   errors?: list<Error|ErrorShape>|null,
  * }
  */
-final class PurchaseNewResponse implements BaseModel, ResponseConverter
+final class PurchaseNewResponse implements BaseModel
 {
-    /** @use SdkModel<purchase_new_response> */
+    /** @use SdkModel<PurchaseNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Successfully registered SIM cards.
      *
      * @var list<SimpleSimCard>|null $data
      */
-    #[Api(list: SimpleSimCard::class, optional: true)]
+    #[Optional(list: SimpleSimCard::class)]
     public ?array $data;
 
     /** @var list<Error>|null $errors */
-    #[Api(list: Error::class, optional: true)]
+    #[Optional(list: Error::class)]
     public ?array $errors;
 
     public function __construct()
@@ -46,40 +46,40 @@ final class PurchaseNewResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SimpleSimCard> $data
-     * @param list<Error> $errors
+     * @param list<SimpleSimCard|SimpleSimCardShape>|null $data
+     * @param list<Error|ErrorShape>|null $errors
      */
     public static function with(?array $data = null, ?array $errors = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $errors && $obj->errors = $errors;
+        null !== $data && $self['data'] = $data;
+        null !== $errors && $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Successfully registered SIM cards.
      *
-     * @param list<SimpleSimCard> $data
+     * @param list<SimpleSimCard|SimpleSimCardShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Error> $errors
+     * @param list<Error|ErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj->errors = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 }

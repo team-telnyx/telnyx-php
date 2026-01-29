@@ -5,29 +5,29 @@ declare(strict_types=1);
 namespace Telnyx\NumberOrderPhoneNumbers;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type number_order_phone_number_list_response = array{
- *   data?: list<NumberOrderPhoneNumber>, meta?: PaginationMeta
+ * @phpstan-import-type NumberOrderPhoneNumberShape from \Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
+ * @phpstan-type NumberOrderPhoneNumberListResponseShape = array{
+ *   data?: list<NumberOrderPhoneNumber|NumberOrderPhoneNumberShape>|null,
+ *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
-final class NumberOrderPhoneNumberListResponse implements BaseModel, ResponseConverter
+final class NumberOrderPhoneNumberListResponse implements BaseModel
 {
-    /** @use SdkModel<number_order_phone_number_list_response> */
+    /** @use SdkModel<NumberOrderPhoneNumberListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<NumberOrderPhoneNumber>|null $data */
-    #[Api(list: NumberOrderPhoneNumber::class, optional: true)]
+    #[Optional(list: NumberOrderPhoneNumber::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()
@@ -40,36 +40,40 @@ final class NumberOrderPhoneNumberListResponse implements BaseModel, ResponseCon
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<NumberOrderPhoneNumber> $data
+     * @param list<NumberOrderPhoneNumber|NumberOrderPhoneNumberShape>|null $data
+     * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<NumberOrderPhoneNumber> $data
+     * @param list<NumberOrderPhoneNumber|NumberOrderPhoneNumberShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|PaginationMetaShape $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

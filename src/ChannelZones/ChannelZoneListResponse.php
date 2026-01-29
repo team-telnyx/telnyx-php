@@ -4,33 +4,82 @@ declare(strict_types=1);
 
 namespace Telnyx\ChannelZones;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\ChannelZones\ChannelZoneListResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\ChannelZones\ChannelZoneListResponse\RecordType;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type channel_zone_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-type ChannelZoneListResponseShape = array{
+ *   id: string,
+ *   channels: int,
+ *   countries: list<string>,
+ *   name: string,
+ *   recordType: RecordType|value-of<RecordType>,
+ *   createdAt?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
-final class ChannelZoneListResponse implements BaseModel, ResponseConverter
+final class ChannelZoneListResponse implements BaseModel
 {
-    /** @use SdkModel<channel_zone_list_response> */
+    /** @use SdkModel<ChannelZoneListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    #[Required]
+    public string $id;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    #[Required]
+    public int $channels;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * List of countries (in ISO 3166-2, capitalized) members of the billing channel zone.
+     *
+     * @var list<string> $countries
+     */
+    #[Required(list: 'string')]
+    public array $countries;
 
+    #[Required]
+    public string $name;
+
+    /** @var value-of<RecordType> $recordType */
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
+
+    /**
+     * ISO 8601 formatted date of when the channel zone was created.
+     */
+    #[Optional('created_at')]
+    public ?string $createdAt;
+
+    /**
+     * ISO 8601 formatted date of when the channel zone was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
+
+    /**
+     * `new ChannelZoneListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * ChannelZoneListResponse::with(
+     *   id: ..., channels: ..., countries: ..., name: ..., recordType: ...
+     * )
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new ChannelZoneListResponse)
+     *   ->withID(...)
+     *   ->withChannels(...)
+     *   ->withCountries(...)
+     *   ->withName(...)
+     *   ->withRecordType(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -41,36 +90,99 @@ final class ChannelZoneListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<string> $countries
+     * @param RecordType|value-of<RecordType> $recordType
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        string $id,
+        int $channels,
+        array $countries,
+        string $name,
+        RecordType|string $recordType,
+        ?string $createdAt = null,
+        ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        $self['id'] = $id;
+        $self['channels'] = $channels;
+        $self['countries'] = $countries;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
+    }
+
+    public function withChannels(int $channels): self
+    {
+        $self = clone $this;
+        $self['channels'] = $channels;
+
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * List of countries (in ISO 3166-2, capitalized) members of the billing channel zone.
+     *
+     * @param list<string> $countries
      */
-    public function withData(array $data): self
+    public function withCountries(array $countries): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['countries'] = $countries;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * @param RecordType|value-of<RecordType> $recordType
+     */
+    public function withRecordType(RecordType|string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date of when the channel zone was created.
+     */
+    public function withCreatedAt(string $createdAt): self
+    {
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date of when the channel zone was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
+
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort\Value;
@@ -12,11 +12,11 @@ use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Sort\Value
 /**
  * Consolidated sort parameter (deepObject style). Originally: sort[value].
  *
- * @phpstan-type sort_alias = array{value?: value-of<Value>}
+ * @phpstan-type SortShape = array{value?: null|Value|value-of<Value>}
  */
 final class Sort implements BaseModel
 {
-    /** @use SdkModel<sort_alias> */
+    /** @use SdkModel<SortShape> */
     use SdkModel;
 
     /**
@@ -24,7 +24,7 @@ final class Sort implements BaseModel
      *
      * @var value-of<Value>|null $value
      */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()
@@ -37,15 +37,15 @@ final class Sort implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Value|value-of<Value> $value
+     * @param Value|value-of<Value>|null $value
      */
     public static function with(Value|string|null $value = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $value && $obj['value'] = $value;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,9 +55,9 @@ final class Sort implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

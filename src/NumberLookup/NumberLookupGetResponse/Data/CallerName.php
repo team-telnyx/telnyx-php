@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberLookup\NumberLookupGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type caller_name = array{callerName?: string, errorCode?: string}
+ * @phpstan-type CallerNameShape = array{
+ *   callerName?: string|null, errorCode?: string|null
+ * }
  */
 final class CallerName implements BaseModel
 {
-    /** @use SdkModel<caller_name> */
+    /** @use SdkModel<CallerNameShape> */
     use SdkModel;
 
     /**
      * The name of the requested phone number's owner as per the CNAM database.
      */
-    #[Api('caller_name', optional: true)]
+    #[Optional('caller_name')]
     public ?string $callerName;
 
     /**
      * A caller-name lookup specific error code, expressed as a stringified 5-digit integer.
      */
-    #[Api('error_code', optional: true)]
+    #[Optional('error_code')]
     public ?string $errorCode;
 
     public function __construct()
@@ -42,12 +44,12 @@ final class CallerName implements BaseModel
         ?string $callerName = null,
         ?string $errorCode = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callerName && $obj->callerName = $callerName;
-        null !== $errorCode && $obj->errorCode = $errorCode;
+        null !== $callerName && $self['callerName'] = $callerName;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +57,10 @@ final class CallerName implements BaseModel
      */
     public function withCallerName(string $callerName): self
     {
-        $obj = clone $this;
-        $obj->callerName = $callerName;
+        $self = clone $this;
+        $self['callerName'] = $callerName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class CallerName implements BaseModel
      */
     public function withErrorCode(string $errorCode): self
     {
-        $obj = clone $this;
-        $obj->errorCode = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 }

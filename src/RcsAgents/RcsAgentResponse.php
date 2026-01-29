@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\RcsAgents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type rcs_agent_response = array{data?: RcsAgent}
+ * @phpstan-import-type RcsAgentShape from \Telnyx\RcsAgents\RcsAgent
+ *
+ * @phpstan-type RcsAgentResponseShape = array{data?: null|RcsAgent|RcsAgentShape}
  */
 final class RcsAgentResponse implements BaseModel
 {
-    /** @use SdkModel<rcs_agent_response> */
+    /** @use SdkModel<RcsAgentResponseShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?RcsAgent $data;
 
     public function __construct()
@@ -28,21 +30,26 @@ final class RcsAgentResponse implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param RcsAgent|RcsAgentShape|null $data
      */
-    public static function with(?RcsAgent $data = null): self
+    public static function with(RcsAgent|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(RcsAgent $data): self
+    /**
+     * @param RcsAgent|RcsAgentShape $data
+     */
+    public function withData(RcsAgent|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberWithMessagingSettings\Features;
@@ -12,43 +12,46 @@ use Telnyx\PhoneNumberWithMessagingSettings\RecordType;
 use Telnyx\PhoneNumberWithMessagingSettings\Type;
 
 /**
- * @phpstan-type phone_number_with_messaging_settings = array{
- *   id?: string,
- *   countryCode?: string,
- *   createdAt?: \DateTimeInterface,
- *   eligibleMessagingProducts?: list<string>,
- *   features?: Features,
- *   health?: NumberHealthMetrics,
- *   messagingProduct?: string,
+ * @phpstan-import-type FeaturesShape from \Telnyx\PhoneNumberWithMessagingSettings\Features
+ * @phpstan-import-type NumberHealthMetricsShape from \Telnyx\NumberHealthMetrics
+ *
+ * @phpstan-type PhoneNumberWithMessagingSettingsShape = array{
+ *   id?: string|null,
+ *   countryCode?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   eligibleMessagingProducts?: list<string>|null,
+ *   features?: null|Features|FeaturesShape,
+ *   health?: null|NumberHealthMetrics|NumberHealthMetricsShape,
+ *   messagingProduct?: string|null,
  *   messagingProfileID?: string|null,
- *   phoneNumber?: string,
- *   recordType?: value-of<RecordType>,
- *   trafficType?: string,
- *   type?: value-of<Type>,
- *   updatedAt?: \DateTimeInterface,
+ *   phoneNumber?: string|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   trafficType?: string|null,
+ *   type?: null|Type|value-of<Type>,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class PhoneNumberWithMessagingSettings implements BaseModel
 {
-    /** @use SdkModel<phone_number_with_messaging_settings> */
+    /** @use SdkModel<PhoneNumberWithMessagingSettingsShape> */
     use SdkModel;
 
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 3166-1 alpha-2 country code.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
@@ -56,34 +59,34 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      *
      * @var list<string>|null $eligibleMessagingProducts
      */
-    #[Api('eligible_messaging_products', list: 'string', optional: true)]
+    #[Optional('eligible_messaging_products', list: 'string')]
     public ?array $eligibleMessagingProducts;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Features $features;
 
     /**
      * High level health metrics about the number and it's messaging sending patterns.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?NumberHealthMetrics $health;
 
     /**
      * The messaging product that the number is registered to use.
      */
-    #[Api('messaging_product', optional: true)]
+    #[Optional('messaging_product')]
     public ?string $messagingProduct;
 
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Api('messaging_profile_id', nullable: true, optional: true)]
+    #[Optional('messaging_profile_id', nullable: true)]
     public ?string $messagingProfileID;
 
     /**
      * +E.164 formatted phone number.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
@@ -91,13 +94,13 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      *
      * @var value-of<RecordType>|null $recordType
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
     /**
      * The messaging traffic or use case for which the number is currently configured.
      */
-    #[Api('traffic_type', optional: true)]
+    #[Optional('traffic_type')]
     public ?string $trafficType;
 
     /**
@@ -105,13 +108,13 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -124,17 +127,19 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $eligibleMessagingProducts
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param Type|value-of<Type> $type
+     * @param list<string>|null $eligibleMessagingProducts
+     * @param Features|FeaturesShape|null $features
+     * @param NumberHealthMetrics|NumberHealthMetricsShape|null $health
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
         ?string $countryCode = null,
         ?\DateTimeInterface $createdAt = null,
         ?array $eligibleMessagingProducts = null,
-        ?Features $features = null,
-        ?NumberHealthMetrics $health = null,
+        Features|array|null $features = null,
+        NumberHealthMetrics|array|null $health = null,
         ?string $messagingProduct = null,
         ?string $messagingProfileID = null,
         ?string $phoneNumber = null,
@@ -143,23 +148,23 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
         Type|string|null $type = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $eligibleMessagingProducts && $obj->eligibleMessagingProducts = $eligibleMessagingProducts;
-        null !== $features && $obj->features = $features;
-        null !== $health && $obj->health = $health;
-        null !== $messagingProduct && $obj->messagingProduct = $messagingProduct;
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $trafficType && $obj->trafficType = $trafficType;
-        null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $eligibleMessagingProducts && $self['eligibleMessagingProducts'] = $eligibleMessagingProducts;
+        null !== $features && $self['features'] = $features;
+        null !== $health && $self['health'] = $health;
+        null !== $messagingProduct && $self['messagingProduct'] = $messagingProduct;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $trafficType && $self['trafficType'] = $trafficType;
+        null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +172,10 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +183,10 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +194,10 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,29 +208,34 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
     public function withEligibleMessagingProducts(
         array $eligibleMessagingProducts
     ): self {
-        $obj = clone $this;
-        $obj->eligibleMessagingProducts = $eligibleMessagingProducts;
+        $self = clone $this;
+        $self['eligibleMessagingProducts'] = $eligibleMessagingProducts;
 
-        return $obj;
+        return $self;
     }
 
-    public function withFeatures(Features $features): self
+    /**
+     * @param Features|FeaturesShape $features
+     */
+    public function withFeatures(Features|array $features): self
     {
-        $obj = clone $this;
-        $obj->features = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * High level health metrics about the number and it's messaging sending patterns.
+     *
+     * @param NumberHealthMetrics|NumberHealthMetricsShape $health
      */
-    public function withHealth(NumberHealthMetrics $health): self
+    public function withHealth(NumberHealthMetrics|array $health): self
     {
-        $obj = clone $this;
-        $obj->health = $health;
+        $self = clone $this;
+        $self['health'] = $health;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +243,10 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withMessagingProduct(string $messagingProduct): self
     {
-        $obj = clone $this;
-        $obj->messagingProduct = $messagingProduct;
+        $self = clone $this;
+        $self['messagingProduct'] = $messagingProduct;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +254,10 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +265,10 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,10 +278,10 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +289,10 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withTrafficType(string $trafficType): self
     {
-        $obj = clone $this;
-        $obj->trafficType = $trafficType;
+        $self = clone $this;
+        $self['trafficType'] = $trafficType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -292,10 +302,10 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -303,9 +313,9 @@ final class PhoneNumberWithMessagingSettings implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

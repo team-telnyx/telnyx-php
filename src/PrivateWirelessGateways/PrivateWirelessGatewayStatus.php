@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
@@ -12,25 +12,27 @@ use Telnyx\PrivateWirelessGateways\PrivateWirelessGatewayStatus\Value;
 /**
  * The current status or failure details of the Private Wireless Gateway.
  *
- * @phpstan-type private_wireless_gateway_status = array{
- *   errorCode?: string, errorDescription?: string, value?: value-of<Value>
+ * @phpstan-type PrivateWirelessGatewayStatusShape = array{
+ *   errorCode?: string|null,
+ *   errorDescription?: string|null,
+ *   value?: null|Value|value-of<Value>,
  * }
  */
 final class PrivateWirelessGatewayStatus implements BaseModel
 {
-    /** @use SdkModel<private_wireless_gateway_status> */
+    /** @use SdkModel<PrivateWirelessGatewayStatusShape> */
     use SdkModel;
 
     /**
-     * This attribute is an [error code](https://developers.telnyx.com/api/errors) related to the failure reason.
+     * This attribute is an [error code](https://developers.telnyx.com/development/api-fundamentals/api-errors) related to the failure reason.
      */
-    #[Api('error_code', optional: true)]
+    #[Optional('error_code', nullable: true)]
     public ?string $errorCode;
 
     /**
      * This attribute provides a human-readable explanation of why a failure happened.
      */
-    #[Api('error_description', optional: true)]
+    #[Optional('error_description', nullable: true)]
     public ?string $errorDescription;
 
     /**
@@ -44,7 +46,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
      *
      * @var value-of<Value>|null $value
      */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()
@@ -57,42 +59,42 @@ final class PrivateWirelessGatewayStatus implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Value|value-of<Value> $value
+     * @param Value|value-of<Value>|null $value
      */
     public static function with(
         ?string $errorCode = null,
         ?string $errorDescription = null,
         Value|string|null $value = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $errorCode && $obj->errorCode = $errorCode;
-        null !== $errorDescription && $obj->errorDescription = $errorDescription;
-        null !== $value && $obj['value'] = $value;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
+        null !== $errorDescription && $self['errorDescription'] = $errorDescription;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * This attribute is an [error code](https://developers.telnyx.com/api/errors) related to the failure reason.
+     * This attribute is an [error code](https://developers.telnyx.com/development/api-fundamentals/api-errors) related to the failure reason.
      */
-    public function withErrorCode(string $errorCode): self
+    public function withErrorCode(?string $errorCode): self
     {
-        $obj = clone $this;
-        $obj->errorCode = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * This attribute provides a human-readable explanation of why a failure happened.
      */
-    public function withErrorDescription(string $errorDescription): self
+    public function withErrorDescription(?string $errorDescription): self
     {
-        $obj = clone $this;
-        $obj->errorDescription = $errorDescription;
+        $self = clone $this;
+        $self['errorDescription'] = $errorDescription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +110,9 @@ final class PrivateWirelessGatewayStatus implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

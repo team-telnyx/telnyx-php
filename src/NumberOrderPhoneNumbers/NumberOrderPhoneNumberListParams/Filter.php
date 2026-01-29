@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[country_code].
  *
- * @phpstan-type filter_alias = array{countryCode?: string}
+ * @phpstan-type FilterShape = array{countryCode?: string|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Country code of the order phone number.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $countryCode = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 }

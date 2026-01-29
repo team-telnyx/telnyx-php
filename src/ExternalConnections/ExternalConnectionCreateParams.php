@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,22 +16,25 @@ use Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound;
 /**
  * Creates a new External Connection based on the parameters sent in the request. The external_sip_connection and outbound voice profile id are required. Once created, you can assign phone numbers to your application using the `/phone_numbers` endpoint.
  *
- * @see Telnyx\ExternalConnections->create
+ * @see Telnyx\Services\ExternalConnectionsService::create()
  *
- * @phpstan-type external_connection_create_params = array{
+ * @phpstan-import-type OutboundShape from \Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound
+ * @phpstan-import-type InboundShape from \Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound
+ *
+ * @phpstan-type ExternalConnectionCreateParamsShape = array{
  *   externalSipConnection: ExternalSipConnection|value-of<ExternalSipConnection>,
- *   outbound: Outbound,
- *   active?: bool,
- *   inbound?: Inbound,
- *   tags?: list<string>,
+ *   outbound: Outbound|OutboundShape,
+ *   active?: bool|null,
+ *   inbound?: null|Inbound|InboundShape,
+ *   tags?: list<string>|null,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class ExternalConnectionCreateParams implements BaseModel
 {
-    /** @use SdkModel<external_connection_create_params> */
+    /** @use SdkModel<ExternalConnectionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -39,19 +43,19 @@ final class ExternalConnectionCreateParams implements BaseModel
      *
      * @var value-of<ExternalSipConnection> $externalSipConnection
      */
-    #[Api('external_sip_connection', enum: ExternalSipConnection::class)]
+    #[Required('external_sip_connection', enum: ExternalSipConnection::class)]
     public string $externalSipConnection;
 
-    #[Api]
+    #[Required]
     public Outbound $outbound;
 
     /**
      * Specifies whether the connection can be used.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
     /**
@@ -59,25 +63,25 @@ final class ExternalConnectionCreateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
+    #[Optional('webhook_event_failover_url', nullable: true)]
     public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
+    #[Optional('webhook_event_url')]
     public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
+    #[Optional('webhook_timeout_secs', nullable: true)]
     public ?int $webhookTimeoutSecs;
 
     /**
@@ -106,32 +110,34 @@ final class ExternalConnectionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Outbound|OutboundShape $outbound
      * @param ExternalSipConnection|value-of<ExternalSipConnection> $externalSipConnection
-     * @param list<string> $tags
+     * @param Inbound|InboundShape|null $inbound
+     * @param list<string>|null $tags
      */
     public static function with(
-        Outbound $outbound,
+        Outbound|array $outbound,
         ExternalSipConnection|string $externalSipConnection = 'zoom',
         ?bool $active = null,
-        ?Inbound $inbound = null,
+        Inbound|array|null $inbound = null,
         ?array $tags = null,
         ?string $webhookEventFailoverURL = null,
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['externalSipConnection'] = $externalSipConnection;
-        $obj->outbound = $outbound;
+        $self['externalSipConnection'] = $externalSipConnection;
+        $self['outbound'] = $outbound;
 
-        null !== $active && $obj->active = $active;
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $tags && $obj->tags = $tags;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $active && $self['active'] = $active;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,18 +148,21 @@ final class ExternalConnectionCreateParams implements BaseModel
     public function withExternalSipConnection(
         ExternalSipConnection|string $externalSipConnection
     ): self {
-        $obj = clone $this;
-        $obj['externalSipConnection'] = $externalSipConnection;
+        $self = clone $this;
+        $self['externalSipConnection'] = $externalSipConnection;
 
-        return $obj;
+        return $self;
     }
 
-    public function withOutbound(Outbound $outbound): self
+    /**
+     * @param Outbound|OutboundShape $outbound
+     */
+    public function withOutbound(Outbound|array $outbound): self
     {
-        $obj = clone $this;
-        $obj->outbound = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,18 +170,21 @@ final class ExternalConnectionCreateParams implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj->active = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
-    public function withInbound(Inbound $inbound): self
+    /**
+     * @param Inbound|InboundShape $inbound
+     */
+    public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj->inbound = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +194,10 @@ final class ExternalConnectionCreateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +206,10 @@ final class ExternalConnectionCreateParams implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -205,10 +217,10 @@ final class ExternalConnectionCreateParams implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -216,9 +228,9 @@ final class ExternalConnectionCreateParams implements BaseModel
      */
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

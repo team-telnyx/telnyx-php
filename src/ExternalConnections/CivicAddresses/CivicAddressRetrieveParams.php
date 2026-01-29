@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\CivicAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Return the details of an existing Civic Address with its Locations inside the 'data' attribute of the response.
  *
- * @see Telnyx\ExternalConnections\CivicAddresses->retrieve
+ * @see Telnyx\Services\ExternalConnections\CivicAddressesService::retrieve()
  *
- * @phpstan-type civic_address_retrieve_params = array{id: string}
+ * @phpstan-type CivicAddressRetrieveParamsShape = array{id: string}
  */
 final class CivicAddressRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<civic_address_retrieve_params> */
+    /** @use SdkModel<CivicAddressRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -51,18 +51,18 @@ final class CivicAddressRetrieveParams implements BaseModel
      */
     public static function with(string $id): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 }

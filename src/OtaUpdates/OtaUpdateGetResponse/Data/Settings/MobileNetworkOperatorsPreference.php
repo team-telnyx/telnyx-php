@@ -4,38 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type mobile_network_operators_preference = array{
- *   mobileNetworkOperatorID?: string,
- *   mobileNetworkOperatorName?: string,
- *   priority?: int,
+ * @phpstan-type MobileNetworkOperatorsPreferenceShape = array{
+ *   mobileNetworkOperatorID?: string|null,
+ *   mobileNetworkOperatorName?: string|null,
+ *   priority?: int|null,
  * }
  */
 final class MobileNetworkOperatorsPreference implements BaseModel
 {
-    /** @use SdkModel<mobile_network_operators_preference> */
+    /** @use SdkModel<MobileNetworkOperatorsPreferenceShape> */
     use SdkModel;
 
     /**
      * The mobile network operator resource identification UUID.
      */
-    #[Api('mobile_network_operator_id', optional: true)]
+    #[Optional('mobile_network_operator_id')]
     public ?string $mobileNetworkOperatorID;
 
     /**
      * The mobile network operator resource name.
      */
-    #[Api('mobile_network_operator_name', optional: true)]
+    #[Optional('mobile_network_operator_name')]
     public ?string $mobileNetworkOperatorName;
 
     /**
      * It determines what is the priority of a specific network operator that should be assumed by a SIM card when connecting to a network. The highest priority is 0, the second highest is 1 and so on.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $priority;
 
     public function __construct()
@@ -53,13 +53,13 @@ final class MobileNetworkOperatorsPreference implements BaseModel
         ?string $mobileNetworkOperatorName = null,
         ?int $priority = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $mobileNetworkOperatorID && $obj->mobileNetworkOperatorID = $mobileNetworkOperatorID;
-        null !== $mobileNetworkOperatorName && $obj->mobileNetworkOperatorName = $mobileNetworkOperatorName;
-        null !== $priority && $obj->priority = $priority;
+        null !== $mobileNetworkOperatorID && $self['mobileNetworkOperatorID'] = $mobileNetworkOperatorID;
+        null !== $mobileNetworkOperatorName && $self['mobileNetworkOperatorName'] = $mobileNetworkOperatorName;
+        null !== $priority && $self['priority'] = $priority;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +68,10 @@ final class MobileNetworkOperatorsPreference implements BaseModel
     public function withMobileNetworkOperatorID(
         string $mobileNetworkOperatorID
     ): self {
-        $obj = clone $this;
-        $obj->mobileNetworkOperatorID = $mobileNetworkOperatorID;
+        $self = clone $this;
+        $self['mobileNetworkOperatorID'] = $mobileNetworkOperatorID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +80,10 @@ final class MobileNetworkOperatorsPreference implements BaseModel
     public function withMobileNetworkOperatorName(
         string $mobileNetworkOperatorName
     ): self {
-        $obj = clone $this;
-        $obj->mobileNetworkOperatorName = $mobileNetworkOperatorName;
+        $self = clone $this;
+        $self['mobileNetworkOperatorName'] = $mobileNetworkOperatorName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +91,9 @@ final class MobileNetworkOperatorsPreference implements BaseModel
      */
     public function withPriority(int $priority): self
     {
-        $obj = clone $this;
-        $obj->priority = $priority;
+        $self = clone $this;
+        $self['priority'] = $priority;
 
-        return $obj;
+        return $self;
     }
 }

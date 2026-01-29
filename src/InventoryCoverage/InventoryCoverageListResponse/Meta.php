@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\InventoryCoverage\InventoryCoverageListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{totalResults?: int}
+ * @phpstan-type MetaShape = array{totalResults?: int|null}
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
-    #[Api('total_results', optional: true)]
+    #[Optional('total_results')]
     public ?int $totalResults;
 
     public function __construct()
@@ -31,18 +31,18 @@ final class Meta implements BaseModel
      */
     public static function with(?int $totalResults = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $totalResults && $obj->totalResults = $totalResults;
+        null !== $totalResults && $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalResults(int $totalResults): self
     {
-        $obj = clone $this;
-        $obj->totalResults = $totalResults;
+        $self = clone $this;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 }

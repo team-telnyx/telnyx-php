@@ -4,22 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifiedNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifiedNumbers\VerifiedNumber\RecordType;
 
 /**
- * @phpstan-type verified_number = array{
- *   phoneNumber?: string, recordType?: value-of<RecordType>, verifiedAt?: string
+ * @phpstan-type VerifiedNumberShape = array{
+ *   phoneNumber?: string|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   verifiedAt?: string|null,
  * }
  */
 final class VerifiedNumber implements BaseModel
 {
-    /** @use SdkModel<verified_number> */
+    /** @use SdkModel<VerifiedNumberShape> */
     use SdkModel;
 
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
@@ -27,10 +29,10 @@ final class VerifiedNumber implements BaseModel
      *
      * @var value-of<RecordType>|null $recordType
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
-    #[Api('verified_at', optional: true)]
+    #[Optional('verified_at')]
     public ?string $verifiedAt;
 
     public function __construct()
@@ -43,28 +45,28 @@ final class VerifiedNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $phoneNumber = null,
         RecordType|string|null $recordType = null,
         ?string $verifiedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $verifiedAt && $obj->verifiedAt = $verifiedAt;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $verifiedAt && $self['verifiedAt'] = $verifiedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,17 +76,17 @@ final class VerifiedNumber implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withVerifiedAt(string $verifiedAt): self
     {
-        $obj = clone $this;
-        $obj->verifiedAt = $verifiedAt;
+        $self = clone $this;
+        $self['verifiedAt'] = $verifiedAt;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,79 +4,65 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Conversations;
 
-use Telnyx\AI\Conversations\Insights\InsightCreateParams;
-use Telnyx\AI\Conversations\Insights\InsightListParams;
-use Telnyx\AI\Conversations\Insights\InsightListParams\Page;
-use Telnyx\AI\Conversations\Insights\InsightListResponse;
+use Telnyx\AI\Conversations\Insights\InsightTemplate;
 use Telnyx\AI\Conversations\Insights\InsightTemplateDetail;
-use Telnyx\AI\Conversations\Insights\InsightUpdateParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightCreateParams\JsonSchema
+ * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightUpdateParams\JsonSchema as JsonSchemaShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InsightsService implements InsightsContract
 {
     /**
+     * @api
+     */
+    public InsightsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new InsightsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a new insight
      *
-     * @param string $instructions
-     * @param string $name
-     * @param mixed|string $jsonSchema if specified, the output will follow the JSON schema
-     * @param string $webhook
+     * @param JsonSchemaShape $jsonSchema if specified, the output will follow the JSON schema
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $instructions,
-        $name,
-        $jsonSchema = omit,
-        $webhook = omit,
-        ?RequestOptions $requestOptions = null,
+        string $instructions,
+        string $name,
+        string|array|null $jsonSchema = null,
+        string $webhook = '',
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateDetail {
-        $params = [
-            'instructions' => $instructions,
-            'name' => $name,
-            'jsonSchema' => $jsonSchema,
-            'webhook' => $webhook,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InsightTemplateDetail {
-        [$parsed, $options] = InsightCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'instructions' => $instructions,
+                'name' => $name,
+                'jsonSchema' => $jsonSchema,
+                'webhook' => $webhook,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'ai/conversations/insights',
-            body: (object) $parsed,
-            options: $options,
-            convert: InsightTemplateDetail::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -84,19 +70,19 @@ final class InsightsService implements InsightsContract
      *
      * Get insight by ID
      *
+     * @param string $insightID The ID of the insight
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $insightID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): InsightTemplateDetail {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['ai/conversations/insights/%1$s', $insightID],
-            options: $requestOptions,
-            convert: InsightTemplateDetail::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($insightID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -104,56 +90,33 @@ final class InsightsService implements InsightsContract
      *
      * Update an insight template
      *
-     * @param string $instructions
-     * @param mixed|string $jsonSchema
-     * @param string $name
-     * @param string $webhook
+     * @param string $insightID The ID of the insight
+     * @param JsonSchemaShape1 $jsonSchema
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $insightID,
-        $instructions = omit,
-        $jsonSchema = omit,
-        $name = omit,
-        $webhook = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $instructions = null,
+        string|array|null $jsonSchema = null,
+        ?string $name = null,
+        ?string $webhook = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateDetail {
-        $params = [
-            'instructions' => $instructions,
-            'jsonSchema' => $jsonSchema,
-            'name' => $name,
-            'webhook' => $webhook,
-        ];
-
-        return $this->updateRaw($insightID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $insightID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InsightTemplateDetail {
-        [$parsed, $options] = InsightUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'instructions' => $instructions,
+                'jsonSchema' => $jsonSchema,
+                'name' => $name,
+                'webhook' => $webhook,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'put',
-            path: ['ai/conversations/insights/%1$s', $insightID],
-            body: (object) $parsed,
-            options: $options,
-            convert: InsightTemplateDetail::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($insightID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -161,43 +124,25 @@ final class InsightsService implements InsightsContract
      *
      * Get all insights
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<InsightTemplate>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): InsightListResponse {
-        $params = ['page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InsightListResponse {
-        [$parsed, $options] = InsightListParams::parseRequest(
-            $params,
-            $requestOptions
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'ai/conversations/insights',
-            query: $parsed,
-            options: $options,
-            convert: InsightListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -205,18 +150,18 @@ final class InsightsService implements InsightsContract
      *
      * Delete insight by ID
      *
+     * @param string $insightID The ID of the insight
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $insightID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['ai/conversations/insights/%1$s', $insightID],
-            options: $requestOptions,
-            convert: 'mixed',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($insightID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

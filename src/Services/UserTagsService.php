@@ -6,62 +6,50 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UserTagsContract;
-use Telnyx\UserTags\UserTagListParams;
 use Telnyx\UserTags\UserTagListParams\Filter;
 use Telnyx\UserTags\UserTagListResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\UserTags\UserTagListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UserTagsService implements UserTagsContract
 {
     /**
+     * @api
+     */
+    public UserTagsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new UserTagsRawService($client);
+    }
 
     /**
      * @api
      *
      * List all user tags.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[starts_with]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UserTagListResponse {
-        $params = ['filter' => $filter];
+        $params = Util::removeNulls(['filter' => $filter]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): UserTagListResponse {
-        [$parsed, $options] = UserTagListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'user_tags',
-            query: $parsed,
-            options: $options,
-            convert: UserTagListResponse::class,
-        );
+        return $response->parse();
     }
 }

@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Media;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type media_upload_response = array{data?: MediaResource}
+ * @phpstan-import-type MediaResourceShape from \Telnyx\Media\MediaResource
+ *
+ * @phpstan-type MediaUploadResponseShape = array{
+ *   data?: null|MediaResource|MediaResourceShape
+ * }
  */
-final class MediaUploadResponse implements BaseModel, ResponseConverter
+final class MediaUploadResponse implements BaseModel
 {
-    /** @use SdkModel<media_upload_response> */
+    /** @use SdkModel<MediaUploadResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?MediaResource $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class MediaUploadResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MediaResource|MediaResourceShape|null $data
      */
-    public static function with(?MediaResource $data = null): self
+    public static function with(MediaResource|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(MediaResource $data): self
+    /**
+     * @param MediaResource|MediaResourceShape $data
+     */
+    public function withData(MediaResource|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,30 +4,29 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\ByPhoneNumber;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Verifications\Verification;
 
 /**
- * @phpstan-type by_phone_number_list_response = array{
- *   data: list<Verification>, meta: VerifyMeta
+ * @phpstan-import-type VerificationShape from \Telnyx\Verifications\Verification
+ * @phpstan-import-type VerifyMetaShape from \Telnyx\Verifications\ByPhoneNumber\VerifyMeta
+ *
+ * @phpstan-type ByPhoneNumberListResponseShape = array{
+ *   data: list<Verification|VerificationShape>, meta: VerifyMeta|VerifyMetaShape
  * }
  */
-final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
+final class ByPhoneNumberListResponse implements BaseModel
 {
-    /** @use SdkModel<by_phone_number_list_response> */
+    /** @use SdkModel<ByPhoneNumberListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Verification> $data */
-    #[Api(list: Verification::class)]
+    #[Required(list: Verification::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public VerifyMeta $meta;
 
     /**
@@ -54,34 +53,38 @@ final class ByPhoneNumberListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Verification> $data
+     * @param list<Verification|VerificationShape> $data
+     * @param VerifyMeta|VerifyMetaShape $meta
      */
-    public static function with(array $data, VerifyMeta $meta): self
+    public static function with(array $data, VerifyMeta|array $meta): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $self['data'] = $data;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Verification> $data
+     * @param list<Verification|VerificationShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(VerifyMeta $meta): self
+    /**
+     * @param VerifyMeta|VerifyMetaShape $meta
+     */
+    public function withMeta(VerifyMeta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

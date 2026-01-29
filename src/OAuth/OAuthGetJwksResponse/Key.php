@@ -4,42 +4,42 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth\OAuthGetJwksResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type key_alias = array{
- *   alg?: string, kid?: string, kty?: string, use?: string
+ * @phpstan-type KeyShape = array{
+ *   alg?: string|null, kid?: string|null, kty?: string|null, use?: string|null
  * }
  */
 final class Key implements BaseModel
 {
-    /** @use SdkModel<key_alias> */
+    /** @use SdkModel<KeyShape> */
     use SdkModel;
 
     /**
      * Algorithm.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $alg;
 
     /**
      * Key ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $kid;
 
     /**
      * Key type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $kty;
 
     /**
      * Key use.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $use;
 
     public function __construct()
@@ -58,14 +58,14 @@ final class Key implements BaseModel
         ?string $kty = null,
         ?string $use = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $alg && $obj->alg = $alg;
-        null !== $kid && $obj->kid = $kid;
-        null !== $kty && $obj->kty = $kty;
-        null !== $use && $obj->use = $use;
+        null !== $alg && $self['alg'] = $alg;
+        null !== $kid && $self['kid'] = $kid;
+        null !== $kty && $self['kty'] = $kty;
+        null !== $use && $self['use'] = $use;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class Key implements BaseModel
      */
     public function withAlg(string $alg): self
     {
-        $obj = clone $this;
-        $obj->alg = $alg;
+        $self = clone $this;
+        $self['alg'] = $alg;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class Key implements BaseModel
      */
     public function withKid(string $kid): self
     {
-        $obj = clone $this;
-        $obj->kid = $kid;
+        $self = clone $this;
+        $self['kid'] = $kid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Key implements BaseModel
      */
     public function withKty(string $kty): self
     {
-        $obj = clone $this;
-        $obj->kty = $kty;
+        $self = clone $this;
+        $self['kty'] = $kty;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class Key implements BaseModel
      */
     public function withUse(string $use): self
     {
-        $obj = clone $this;
-        $obj->use = $use;
+        $self = clone $this;
+        $self['use'] = $use;
 
-        return $obj;
+        return $self;
     }
 }

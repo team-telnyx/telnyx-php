@@ -4,23 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document\Type;
 
 /**
- * @phpstan-type document_alias = array{documentID: string, type: value-of<Type>}
+ * @phpstan-type DocumentShape = array{
+ *   documentID: string, type: Type|value-of<Type>
+ * }
  */
 final class Document implements BaseModel
 {
-    /** @use SdkModel<document_alias> */
+    /** @use SdkModel<DocumentShape> */
     use SdkModel;
 
     /**
      * Identifies the associated document.
      */
-    #[Api('document_id')]
+    #[Required('document_id')]
     public string $documentID;
 
     /**
@@ -28,7 +30,7 @@ final class Document implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -59,12 +61,12 @@ final class Document implements BaseModel
      */
     public static function with(string $documentID, Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->documentID = $documentID;
-        $obj['type'] = $type;
+        $self['documentID'] = $documentID;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,10 +74,10 @@ final class Document implements BaseModel
      */
     public function withDocumentID(string $documentID): self
     {
-        $obj = clone $this;
-        $obj->documentID = $documentID;
+        $self = clone $this;
+        $self['documentID'] = $documentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +87,9 @@ final class Document implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

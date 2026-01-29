@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type cost_information = array{
- *   currency?: string, monthlyCost?: string, upfrontCost?: string
+ * @phpstan-type CostInformationShape = array{
+ *   currency?: string|null, monthlyCost?: string|null, upfrontCost?: string|null
  * }
  */
 final class CostInformation implements BaseModel
 {
-    /** @use SdkModel<cost_information> */
+    /** @use SdkModel<CostInformationShape> */
     use SdkModel;
 
     /**
      * The ISO 4217 code for the currency.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
-    #[Api('monthly_cost', optional: true)]
+    #[Optional('monthly_cost')]
     public ?string $monthlyCost;
 
-    #[Api('upfront_cost', optional: true)]
+    #[Optional('upfront_cost')]
     public ?string $upfrontCost;
 
     public function __construct()
@@ -45,13 +45,13 @@ final class CostInformation implements BaseModel
         ?string $monthlyCost = null,
         ?string $upfrontCost = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $currency && $obj->currency = $currency;
-        null !== $monthlyCost && $obj->monthlyCost = $monthlyCost;
-        null !== $upfrontCost && $obj->upfrontCost = $upfrontCost;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $monthlyCost && $self['monthlyCost'] = $monthlyCost;
+        null !== $upfrontCost && $self['upfrontCost'] = $upfrontCost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,25 +59,25 @@ final class CostInformation implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj->currency = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     public function withMonthlyCost(string $monthlyCost): self
     {
-        $obj = clone $this;
-        $obj->monthlyCost = $monthlyCost;
+        $self = clone $this;
+        $self['monthlyCost'] = $monthlyCost;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpfrontCost(string $upfrontCost): self
     {
-        $obj = clone $this;
-        $obj->upfrontCost = $upfrontCost;
+        $self = clone $this;
+        $self['upfrontCost'] = $upfrontCost;
 
-        return $obj;
+        return $self;
     }
 }

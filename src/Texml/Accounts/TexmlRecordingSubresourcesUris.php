@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Subresources details for a recording if available.
  *
- * @phpstan-type texml_recording_subresources_uris = array{
+ * @phpstan-type TexmlRecordingSubresourcesUrisShape = array{
  *   transcriptions?: string|null
  * }
  */
 final class TexmlRecordingSubresourcesUris implements BaseModel
 {
-    /** @use SdkModel<texml_recording_subresources_uris> */
+    /** @use SdkModel<TexmlRecordingSubresourcesUrisShape> */
     use SdkModel;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $transcriptions;
 
     public function __construct()
@@ -35,18 +35,18 @@ final class TexmlRecordingSubresourcesUris implements BaseModel
      */
     public static function with(?string $transcriptions = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $transcriptions && $obj->transcriptions = $transcriptions;
+        null !== $transcriptions && $self['transcriptions'] = $transcriptions;
 
-        return $obj;
+        return $self;
     }
 
     public function withTranscriptions(?string $transcriptions): self
     {
-        $obj = clone $this;
-        $obj->transcriptions = $transcriptions;
+        $self = clone $this;
+        $self['transcriptions'] = $transcriptions;
 
-        return $obj;
+        return $self;
     }
 }

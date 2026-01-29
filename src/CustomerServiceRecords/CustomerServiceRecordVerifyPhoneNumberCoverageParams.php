@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,15 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Verify the coverage for a list of phone numbers.
  *
- * @see Telnyx\CustomerServiceRecords->verifyPhoneNumberCoverage
+ * @see Telnyx\Services\CustomerServiceRecordsService::verifyPhoneNumberCoverage()
  *
- * @phpstan-type customer_service_record_verify_phone_number_coverage_params = array{
+ * @phpstan-type CustomerServiceRecordVerifyPhoneNumberCoverageParamsShape = array{
  *   phoneNumbers: list<string>
  * }
  */
 final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements BaseModel
 {
-    /**
-     * @use SdkModel<customer_service_record_verify_phone_number_coverage_params>
-     */
+    /** @use SdkModel<CustomerServiceRecordVerifyPhoneNumberCoverageParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -31,7 +29,7 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements Base
      *
      * @var list<string> $phoneNumbers
      */
-    #[Api('phone_numbers', list: 'string')]
+    #[Required('phone_numbers', list: 'string')]
     public array $phoneNumbers;
 
     /**
@@ -63,11 +61,11 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements Base
      */
     public static function with(array $phoneNumbers): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumbers = $phoneNumbers;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +75,9 @@ final class CustomerServiceRecordVerifyPhoneNumberCoverageParams implements Base
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,36 +4,37 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type month_detail = array{
+ * @phpstan-type MonthDetailShape = array{
  *   mrc: string, quantity: int, otc?: string|null
  * }
  */
 final class MonthDetail implements BaseModel
 {
-    /** @use SdkModel<month_detail> */
+    /** @use SdkModel<MonthDetailShape> */
     use SdkModel;
 
     /**
      * Monthly recurring charge amount as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $mrc;
 
     /**
      * Number of items.
      */
-    #[Api]
+    #[Required]
     public int $quantity;
 
     /**
      * One-time charge amount as decimal string.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $otc;
 
     /**
@@ -65,14 +66,14 @@ final class MonthDetail implements BaseModel
         int $quantity,
         ?string $otc = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->mrc = $mrc;
-        $obj->quantity = $quantity;
+        $self['mrc'] = $mrc;
+        $self['quantity'] = $quantity;
 
-        null !== $otc && $obj->otc = $otc;
+        null !== $otc && $self['otc'] = $otc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +81,10 @@ final class MonthDetail implements BaseModel
      */
     public function withMrc(string $mrc): self
     {
-        $obj = clone $this;
-        $obj->mrc = $mrc;
+        $self = clone $this;
+        $self['mrc'] = $mrc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +92,10 @@ final class MonthDetail implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj->quantity = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +103,9 @@ final class MonthDetail implements BaseModel
      */
     public function withOtc(?string $otc): self
     {
-        $obj = clone $this;
-        $obj->otc = $otc;
+        $self = clone $this;
+        $self['otc'] = $otc;
 
-        return $obj;
+        return $self;
     }
 }

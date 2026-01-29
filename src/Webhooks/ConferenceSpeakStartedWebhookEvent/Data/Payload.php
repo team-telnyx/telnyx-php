@@ -4,45 +4,45 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\ConferenceSpeakStartedWebhookEvent\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type payload_alias = array{
- *   conferenceID?: string,
- *   connectionID?: string,
- *   creatorCallSessionID?: string,
- *   occurredAt?: \DateTimeInterface,
+ * @phpstan-type PayloadShape = array{
+ *   conferenceID?: string|null,
+ *   connectionID?: string|null,
+ *   creatorCallSessionID?: string|null,
+ *   occurredAt?: \DateTimeInterface|null,
  * }
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**
      * ID of the conference the text was spoken in.
      */
-    #[Api('conference_id', optional: true)]
+    #[Optional('conference_id')]
     public ?string $conferenceID;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * ID that is unique to the call session that started the conference.
      */
-    #[Api('creator_call_session_id', optional: true)]
+    #[Optional('creator_call_session_id')]
     public ?string $creatorCallSessionID;
 
     /**
      * ISO 8601 datetime of when the event occurred.
      */
-    #[Api('occurred_at', optional: true)]
+    #[Optional('occurred_at')]
     public ?\DateTimeInterface $occurredAt;
 
     public function __construct()
@@ -61,14 +61,14 @@ final class Payload implements BaseModel
         ?string $creatorCallSessionID = null,
         ?\DateTimeInterface $occurredAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $conferenceID && $obj->conferenceID = $conferenceID;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $creatorCallSessionID && $obj->creatorCallSessionID = $creatorCallSessionID;
-        null !== $occurredAt && $obj->occurredAt = $occurredAt;
+        null !== $conferenceID && $self['conferenceID'] = $conferenceID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $creatorCallSessionID && $self['creatorCallSessionID'] = $creatorCallSessionID;
+        null !== $occurredAt && $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Payload implements BaseModel
      */
     public function withConferenceID(string $conferenceID): self
     {
-        $obj = clone $this;
-        $obj->conferenceID = $conferenceID;
+        $self = clone $this;
+        $self['conferenceID'] = $conferenceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Payload implements BaseModel
      */
     public function withCreatorCallSessionID(string $creatorCallSessionID): self
     {
-        $obj = clone $this;
-        $obj->creatorCallSessionID = $creatorCallSessionID;
+        $self = clone $this;
+        $self['creatorCallSessionID'] = $creatorCallSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,9 +109,9 @@ final class Payload implements BaseModel
      */
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
-        $obj = clone $this;
-        $obj->occurredAt = $occurredAt;
+        $self = clone $this;
+        $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 }

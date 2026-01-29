@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters;
@@ -12,17 +12,21 @@ use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters;
 /**
  * The parameters for generating a porting orders CSV report.
  *
- * @phpstan-type export_porting_orders_csv_report = array{filters: Filters}
+ * @phpstan-import-type FiltersShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters
+ *
+ * @phpstan-type ExportPortingOrdersCsvReportShape = array{
+ *   filters: Filters|FiltersShape
+ * }
  */
 final class ExportPortingOrdersCsvReport implements BaseModel
 {
-    /** @use SdkModel<export_porting_orders_csv_report> */
+    /** @use SdkModel<ExportPortingOrdersCsvReportShape> */
     use SdkModel;
 
     /**
      * The filters to apply to the export porting order CSV report.
      */
-    #[Api]
+    #[Required]
     public Filters $filters;
 
     /**
@@ -48,24 +52,28 @@ final class ExportPortingOrdersCsvReport implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filters|FiltersShape $filters
      */
-    public static function with(Filters $filters): self
+    public static function with(Filters|array $filters): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->filters = $filters;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The filters to apply to the export porting order CSV report.
+     *
+     * @param Filters|FiltersShape $filters
      */
-    public function withFilters(Filters $filters): self
+    public function withFilters(Filters|array $filters): self
     {
-        $obj = clone $this;
-        $obj->filters = $filters;
+        $self = clone $this;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 }

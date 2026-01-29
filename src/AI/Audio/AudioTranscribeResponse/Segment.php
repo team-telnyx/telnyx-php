@@ -4,42 +4,42 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Audio\AudioTranscribeResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type segment_alias = array{
+ * @phpstan-type SegmentShape = array{
  *   id: float, end: float, start: float, text: string
  * }
  */
 final class Segment implements BaseModel
 {
-    /** @use SdkModel<segment_alias> */
+    /** @use SdkModel<SegmentShape> */
     use SdkModel;
 
     /**
      * Unique identifier of the segment.
      */
-    #[Api]
+    #[Required]
     public float $id;
 
     /**
      * End time of the segment in seconds.
      */
-    #[Api]
+    #[Required]
     public float $end;
 
     /**
      * Start time of the segment in seconds.
      */
-    #[Api]
+    #[Required]
     public float $start;
 
     /**
      * Text content of the segment.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
@@ -72,14 +72,14 @@ final class Segment implements BaseModel
         float $start,
         string $text
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->end = $end;
-        $obj->start = $start;
-        $obj->text = $text;
+        $self['id'] = $id;
+        $self['end'] = $end;
+        $self['start'] = $start;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Segment implements BaseModel
      */
     public function withID(float $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Segment implements BaseModel
      */
     public function withEnd(float $end): self
     {
-        $obj = clone $this;
-        $obj->end = $end;
+        $self = clone $this;
+        $self['end'] = $end;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Segment implements BaseModel
      */
     public function withStart(float $start): self
     {
-        $obj = clone $this;
-        $obj->start = $start;
+        $self = clone $this;
+        $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,9 +120,9 @@ final class Segment implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrdersExceptionType;
 
 /**
- * @phpstan-type porting_order_get_exception_types_response = array{
- *   data?: list<PortingOrdersExceptionType>
+ * @phpstan-import-type PortingOrdersExceptionTypeShape from \Telnyx\PortingOrdersExceptionType
+ *
+ * @phpstan-type PortingOrderGetExceptionTypesResponseShape = array{
+ *   data?: list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null
  * }
  */
-final class PortingOrderGetExceptionTypesResponse implements BaseModel, ResponseConverter
+final class PortingOrderGetExceptionTypesResponse implements BaseModel
 {
-    /** @use SdkModel<porting_order_get_exception_types_response> */
+    /** @use SdkModel<PortingOrderGetExceptionTypesResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<PortingOrdersExceptionType>|null $data */
-    #[Api(list: PortingOrdersExceptionType::class, optional: true)]
+    #[Optional(list: PortingOrdersExceptionType::class)]
     public ?array $data;
 
     public function __construct()
@@ -37,25 +35,25 @@ final class PortingOrderGetExceptionTypesResponse implements BaseModel, Response
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersExceptionType> $data
+     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null $data
      */
     public static function with(?array $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<PortingOrdersExceptionType> $data
+     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

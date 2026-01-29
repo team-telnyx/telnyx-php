@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\TestSuites;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response containing all available test suite names.
@@ -16,21 +14,19 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * Returns a list of distinct test suite names that can be used for
  * filtering and organizing tests.
  *
- * @phpstan-type test_suite_list_response = array{data: list<string>}
+ * @phpstan-type TestSuiteListResponseShape = array{data: list<string>}
  */
-final class TestSuiteListResponse implements BaseModel, ResponseConverter
+final class TestSuiteListResponse implements BaseModel
 {
-    /** @use SdkModel<test_suite_list_response> */
+    /** @use SdkModel<TestSuiteListResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Array of unique test suite names available to the user.
      *
      * @var list<string> $data
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $data;
 
     /**
@@ -61,11 +57,11 @@ final class TestSuiteListResponse implements BaseModel, ResponseConverter
      */
     public static function with(array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +71,9 @@ final class TestSuiteListResponse implements BaseModel, ResponseConverter
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

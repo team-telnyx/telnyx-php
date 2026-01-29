@@ -4,52 +4,52 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse\Data\Type;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id: string,
  *   createdAt: string,
  *   documentID: string,
  *   portoutID: string,
  *   recordType: string,
- *   type: value-of<Type>,
+ *   type: Type|value-of<Type>,
  *   updatedAt: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Supporting document creation timestamp in ISO 8601 format.
      */
-    #[Api('created_at')]
+    #[Required('created_at')]
     public string $createdAt;
 
     /**
      * Identifies the associated document.
      */
-    #[Api('document_id')]
+    #[Required('document_id')]
     public string $documentID;
 
     /**
      * Identifies the associated port request.
      */
-    #[Api('portout_id')]
+    #[Required('portout_id')]
     public string $portoutID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type')]
+    #[Required('record_type')]
     public string $recordType;
 
     /**
@@ -57,13 +57,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
      * Supporting document last changed timestamp in ISO 8601 format.
      */
-    #[Api('updated_at')]
+    #[Required('updated_at')]
     public string $updatedAt;
 
     /**
@@ -116,25 +116,25 @@ final class Data implements BaseModel
         Type|string $type,
         string $updatedAt,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->documentID = $documentID;
-        $obj->portoutID = $portoutID;
-        $obj->recordType = $recordType;
-        $obj['type'] = $type;
-        $obj->updatedAt = $updatedAt;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['documentID'] = $documentID;
+        $self['portoutID'] = $portoutID;
+        $self['recordType'] = $recordType;
+        $self['type'] = $type;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class Data implements BaseModel
      */
     public function withDocumentID(string $documentID): self
     {
-        $obj = clone $this;
-        $obj->documentID = $documentID;
+        $self = clone $this;
+        $self['documentID'] = $documentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class Data implements BaseModel
      */
     public function withPortoutID(string $portoutID): self
     {
-        $obj = clone $this;
-        $obj->portoutID = $portoutID;
+        $self = clone $this;
+        $self['portoutID'] = $portoutID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class Data implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,9 +199,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

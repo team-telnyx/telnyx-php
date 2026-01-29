@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
 
 /**
- * @phpstan-type log_message_get_response = array{logMessages?: list<LogMessage>}
+ * @phpstan-import-type LogMessageShape from \Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage
+ *
+ * @phpstan-type LogMessageGetResponseShape = array{
+ *   logMessages?: list<LogMessage|LogMessageShape>|null
+ * }
  */
-final class LogMessageGetResponse implements BaseModel, ResponseConverter
+final class LogMessageGetResponse implements BaseModel
 {
-    /** @use SdkModel<log_message_get_response> */
+    /** @use SdkModel<LogMessageGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<LogMessage>|null $logMessages */
-    #[Api('log_messages', list: LogMessage::class, optional: true)]
+    #[Optional('log_messages', list: LogMessage::class)]
     public ?array $logMessages;
 
     public function __construct()
@@ -35,25 +35,25 @@ final class LogMessageGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<LogMessage> $logMessages
+     * @param list<LogMessage|LogMessageShape>|null $logMessages
      */
     public static function with(?array $logMessages = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $logMessages && $obj->logMessages = $logMessages;
+        null !== $logMessages && $self['logMessages'] = $logMessages;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<LogMessage> $logMessages
+     * @param list<LogMessage|LogMessageShape> $logMessages
      */
     public function withLogMessages(array $logMessages): self
     {
-        $obj = clone $this;
-        $obj->logMessages = $logMessages;
+        $self = clone $this;
+        $self['logMessages'] = $logMessages;
 
-        return $obj;
+        return $self;
     }
 }

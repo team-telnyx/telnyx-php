@@ -6,64 +6,54 @@ namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\UsageContract;
-use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse;
 use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse;
 
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UsageService implements UsageContract
 {
     /**
+     * @api
+     */
+    public UsageRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new UsageRawService($client);
+    }
 
     /**
      * @api
      *
      * Returns the detail on API usage on a bucket of a particular time period, group by method category.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time]
+     * @param string $bucketName The name of the bucket
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getAPIUsage(
         string $bucketName,
-        $filter,
-        ?RequestOptions $requestOptions = null
+        Filter|array $filter,
+        RequestOptions|array|null $requestOptions = null,
     ): UsageGetAPIUsageResponse {
-        $params = ['filter' => $filter];
+        $params = Util::removeNulls(['filter' => $filter]);
 
-        return $this->getAPIUsageRaw($bucketName, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getAPIUsage($bucketName, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function getAPIUsageRaw(
-        string $bucketName,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): UsageGetAPIUsageResponse {
-        [$parsed, $options] = UsageGetAPIUsageParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['storage/buckets/%1$s/usage/api', $bucketName],
-            query: $parsed,
-            options: $options,
-            convert: UsageGetAPIUsageResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -71,18 +61,18 @@ final class UsageService implements UsageContract
      *
      * Returns the amount of storage space and number of files a bucket takes up.
      *
+     * @param string $bucketName The name of the bucket
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getBucketUsage(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): UsageGetBucketUsageResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['storage/buckets/%1$s/usage/storage', $bucketName],
-            options: $requestOptions,
-            convert: UsageGetBucketUsageResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getBucketUsage($bucketName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

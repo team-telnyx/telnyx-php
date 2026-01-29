@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold\Unit;
@@ -12,18 +12,20 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold\
 /**
  * Data usage threshold that will trigger the notification.
  *
- * @phpstan-type threshold_alias = array{amount?: string, unit?: value-of<Unit>}
+ * @phpstan-type ThresholdShape = array{
+ *   amount?: string|null, unit?: null|Unit|value-of<Unit>
+ * }
  */
 final class Threshold implements BaseModel
 {
-    /** @use SdkModel<threshold_alias> */
+    /** @use SdkModel<ThresholdShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /** @var value-of<Unit>|null $unit */
-    #[Api(enum: Unit::class, optional: true)]
+    #[Optional(enum: Unit::class)]
     public ?string $unit;
 
     public function __construct()
@@ -36,26 +38,26 @@ final class Threshold implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Unit|value-of<Unit> $unit
+     * @param Unit|value-of<Unit>|null $unit
      */
     public static function with(
         ?string $amount = null,
         Unit|string|null $unit = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $unit && $obj['unit'] = $unit;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $unit && $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj->amount = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,9 +65,9 @@ final class Threshold implements BaseModel
      */
     public function withUnit(Unit|string $unit): self
     {
-        $obj = clone $this;
-        $obj['unit'] = $unit;
+        $self = clone $this;
+        $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 }

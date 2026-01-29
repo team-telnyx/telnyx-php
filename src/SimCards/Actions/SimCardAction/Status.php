@@ -4,23 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions\SimCardAction;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\Actions\SimCardAction\Status\Value;
 
 /**
- * @phpstan-type status_alias = array{reason?: string, value?: value-of<Value>}
+ * @phpstan-type StatusShape = array{
+ *   reason?: string|null, value?: null|Value|value-of<Value>
+ * }
  */
 final class Status implements BaseModel
 {
-    /** @use SdkModel<status_alias> */
+    /** @use SdkModel<StatusShape> */
     use SdkModel;
 
     /**
      * It describes why the SIM card action is in the current status. This will be <code>null</code> for self-explanatory statuses, such as <code>in-progress</code> and <code>completed</code> but will include further information on statuses like <code>interrupted</code> and <code>failed</code>.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $reason;
 
     /**
@@ -28,7 +30,7 @@ final class Status implements BaseModel
      *
      * @var value-of<Value>|null $value
      */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()
@@ -41,18 +43,18 @@ final class Status implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Value|value-of<Value> $value
+     * @param Value|value-of<Value>|null $value
      */
     public static function with(
         ?string $reason = null,
         Value|string|null $value = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reason && $obj->reason = $reason;
-        null !== $value && $obj['value'] = $value;
+        null !== $reason && $self['reason'] = $reason;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,10 +62,10 @@ final class Status implements BaseModel
      */
     public function withReason(string $reason): self
     {
-        $obj = clone $this;
-        $obj->reason = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,9 +75,9 @@ final class Status implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimpleSimCard;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimpleSimCard\DataLimit\Unit;
@@ -12,18 +12,20 @@ use Telnyx\SimpleSimCard\DataLimit\Unit;
 /**
  * The SIM card individual data limit configuration.
  *
- * @phpstan-type data_limit = array{amount?: string, unit?: value-of<Unit>}
+ * @phpstan-type DataLimitShape = array{
+ *   amount?: string|null, unit?: null|Unit|value-of<Unit>
+ * }
  */
 final class DataLimit implements BaseModel
 {
-    /** @use SdkModel<data_limit> */
+    /** @use SdkModel<DataLimitShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /** @var value-of<Unit>|null $unit */
-    #[Api(enum: Unit::class, optional: true)]
+    #[Optional(enum: Unit::class)]
     public ?string $unit;
 
     public function __construct()
@@ -36,26 +38,26 @@ final class DataLimit implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Unit|value-of<Unit> $unit
+     * @param Unit|value-of<Unit>|null $unit
      */
     public static function with(
         ?string $amount = null,
         Unit|string|null $unit = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $unit && $obj['unit'] = $unit;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $unit && $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj->amount = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,9 +65,9 @@ final class DataLimit implements BaseModel
      */
     public function withUnit(Unit|string $unit): self
     {
-        $obj = clone $this;
-        $obj['unit'] = $unit;
+        $self = clone $this;
+        $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 }

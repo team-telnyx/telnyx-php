@@ -6,7 +6,7 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -19,59 +19,65 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.conversation.ended`
  * - `call.conversation_insights.generated`
  *
- * @see Telnyx\Calls\Actions->startAIAssistant
+ * @see Telnyx\Services\Calls\ActionsService::startAIAssistant()
  *
- * @phpstan-type action_start_ai_assistant_params = array{
- *   assistant?: Assistant,
- *   clientState?: string,
- *   commandID?: string,
- *   greeting?: string,
- *   interruptionSettings?: InterruptionSettings,
- *   transcription?: TranscriptionConfig,
- *   voice?: string,
- *   voiceSettings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
+ * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
+ * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
+ *
+ * @phpstan-type ActionStartAIAssistantParamsShape = array{
+ *   assistant?: null|Assistant|AssistantShape,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   greeting?: string|null,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
+ *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
+ *   voice?: string|null,
+ *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class ActionStartAIAssistantParams implements BaseModel
 {
-    /** @use SdkModel<action_start_ai_assistant_params> */
+    /** @use SdkModel<ActionStartAIAssistantParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * AI Assistant configuration.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Assistant $assistant;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
      * Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $greeting;
 
     /**
      * Settings for handling user interruptions during assistant speech.
      */
-    #[Api('interruption_settings', optional: true)]
+    #[Optional('interruption_settings')]
     public ?InterruptionSettings $interruptionSettings;
 
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?TranscriptionConfig $transcription;
 
     /**
@@ -83,16 +89,16 @@ final class ActionStartAIAssistantParams implements BaseModel
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $voice;
 
     /**
      * The settings associated with the voice selected.
      *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voiceSettings
+     * @var VoiceSettingsVariants|null $voiceSettings
      */
-    #[Api('voice_settings', union: VoiceSettings::class, optional: true)]
-    public mixed $voiceSettings;
+    #[Optional('voice_settings', union: VoiceSettings::class)]
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings;
 
     public function __construct()
     {
@@ -104,41 +110,46 @@ final class ActionStartAIAssistantParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param Assistant|AssistantShape|null $assistant
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
+     * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
-        ?Assistant $assistant = null,
+        Assistant|array|null $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,
         ?string $greeting = null,
-        ?InterruptionSettings $interruptionSettings = null,
-        ?TranscriptionConfig $transcription = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
+        TranscriptionConfig|array|null $transcription = null,
         ?string $voice = null,
-        mixed $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $assistant && $obj->assistant = $assistant;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $greeting && $obj->greeting = $greeting;
-        null !== $interruptionSettings && $obj->interruptionSettings = $interruptionSettings;
-        null !== $transcription && $obj->transcription = $transcription;
-        null !== $voice && $obj->voice = $voice;
-        null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
+        null !== $assistant && $self['assistant'] = $assistant;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $greeting && $self['greeting'] = $greeting;
+        null !== $interruptionSettings && $self['interruptionSettings'] = $interruptionSettings;
+        null !== $transcription && $self['transcription'] = $transcription;
+        null !== $voice && $self['voice'] = $voice;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * AI Assistant configuration.
+     *
+     * @param Assistant|AssistantShape $assistant
      */
-    public function withAssistant(Assistant $assistant): self
+    public function withAssistant(Assistant|array $assistant): self
     {
-        $obj = clone $this;
-        $obj->assistant = $assistant;
+        $self = clone $this;
+        $self['assistant'] = $assistant;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +157,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +168,10 @@ final class ActionStartAIAssistantParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,33 +179,38 @@ final class ActionStartAIAssistantParams implements BaseModel
      */
     public function withGreeting(string $greeting): self
     {
-        $obj = clone $this;
-        $obj->greeting = $greeting;
+        $self = clone $this;
+        $self['greeting'] = $greeting;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Settings for handling user interruptions during assistant speech.
+     *
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
-        InterruptionSettings $interruptionSettings
+        InterruptionSettings|array $interruptionSettings
     ): self {
-        $obj = clone $this;
-        $obj->interruptionSettings = $interruptionSettings;
+        $self = clone $this;
+        $self['interruptionSettings'] = $interruptionSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
+     *
+     * @param TranscriptionConfig|TranscriptionConfigShape $transcription
      */
-    public function withTranscription(TranscriptionConfig $transcription): self
-    {
-        $obj = clone $this;
-        $obj->transcription = $transcription;
+    public function withTranscription(
+        TranscriptionConfig|array $transcription
+    ): self {
+        $self = clone $this;
+        $self['transcription'] = $transcription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,22 +224,23 @@ final class ActionStartAIAssistantParams implements BaseModel
      */
     public function withVoice(string $voice): self
     {
-        $obj = clone $this;
-        $obj->voice = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The settings associated with the voice selected.
      *
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
-    public function withVoiceSettings(mixed $voiceSettings): self
-    {
-        $obj = clone $this;
-        $obj->voiceSettings = $voiceSettings;
+    public function withVoiceSettings(
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
+    ): self {
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 }

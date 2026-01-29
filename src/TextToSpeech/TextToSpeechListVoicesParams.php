@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TextToSpeech;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,22 +13,22 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 /**
  * Returns a list of voices that can be used with the text to speech commands.
  *
- * @see Telnyx\TextToSpeech->listVoices
+ * @see Telnyx\Services\TextToSpeechService::listVoices()
  *
- * @phpstan-type text_to_speech_list_voices_params = array{
- *   elevenlabsAPIKeyRef?: string, provider?: Provider|value-of<Provider>
+ * @phpstan-type TextToSpeechListVoicesParamsShape = array{
+ *   elevenlabsAPIKeyRef?: string|null, provider?: null|Provider|value-of<Provider>
  * }
  */
 final class TextToSpeechListVoicesParams implements BaseModel
 {
-    /** @use SdkModel<text_to_speech_list_voices_params> */
+    /** @use SdkModel<TextToSpeechListVoicesParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Reference to your ElevenLabs API key stored in the Telnyx Portal.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $elevenlabsAPIKeyRef;
 
     /**
@@ -36,7 +36,7 @@ final class TextToSpeechListVoicesParams implements BaseModel
      *
      * @var value-of<Provider>|null $provider
      */
-    #[Api(enum: Provider::class, optional: true)]
+    #[Optional(enum: Provider::class)]
     public ?string $provider;
 
     public function __construct()
@@ -49,18 +49,18 @@ final class TextToSpeechListVoicesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Provider|value-of<Provider> $provider
+     * @param Provider|value-of<Provider>|null $provider
      */
     public static function with(
         ?string $elevenlabsAPIKeyRef = null,
         Provider|string|null $provider = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $elevenlabsAPIKeyRef && $obj->elevenlabsAPIKeyRef = $elevenlabsAPIKeyRef;
-        null !== $provider && $obj['provider'] = $provider;
+        null !== $elevenlabsAPIKeyRef && $self['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
+        null !== $provider && $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +68,10 @@ final class TextToSpeechListVoicesParams implements BaseModel
      */
     public function withElevenlabsAPIKeyRef(string $elevenlabsAPIKeyRef): self
     {
-        $obj = clone $this;
-        $obj->elevenlabsAPIKeyRef = $elevenlabsAPIKeyRef;
+        $self = clone $this;
+        $self['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +81,9 @@ final class TextToSpeechListVoicesParams implements BaseModel
      */
     public function withProvider(Provider|string $provider): self
     {
-        $obj = clone $this;
-        $obj['provider'] = $provider;
+        $self = clone $this;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 }

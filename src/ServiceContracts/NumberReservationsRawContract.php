@@ -1,0 +1,66 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\ServiceContracts;
+
+use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\NumberReservations\NumberReservation;
+use Telnyx\NumberReservations\NumberReservationCreateParams;
+use Telnyx\NumberReservations\NumberReservationGetResponse;
+use Telnyx\NumberReservations\NumberReservationListParams;
+use Telnyx\NumberReservations\NumberReservationNewResponse;
+use Telnyx\RequestOptions;
+
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
+interface NumberReservationsRawContract
+{
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|NumberReservationCreateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<NumberReservationNewResponse>
+     *
+     * @throws APIException
+     */
+    public function create(
+        array|NumberReservationCreateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $numberReservationID the number reservation ID
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<NumberReservationGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $numberReservationID,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|NumberReservationListParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<DefaultPagination<NumberReservation>>
+     *
+     * @throws APIException
+     */
+    public function list(
+        array|NumberReservationListParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+}

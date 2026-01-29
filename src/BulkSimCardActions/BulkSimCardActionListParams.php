@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BulkSimCardActions;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,17 +13,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * This API lists a paginated collection of bulk SIM card actions. A bulk SIM card action contains details about a collection of individual SIM card actions.
  *
- * @see Telnyx\BulkSimCardActions->list
+ * @see Telnyx\Services\BulkSimCardActionsService::list()
  *
- * @phpstan-type bulk_sim_card_action_list_params = array{
- *   filterActionType?: FilterActionType|value-of<FilterActionType>,
- *   pageNumber?: int,
- *   pageSize?: int,
+ * @phpstan-type BulkSimCardActionListParamsShape = array{
+ *   filterActionType?: null|FilterActionType|value-of<FilterActionType>,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class BulkSimCardActionListParams implements BaseModel
 {
-    /** @use SdkModel<bulk_sim_card_action_list_params> */
+    /** @use SdkModel<BulkSimCardActionListParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -32,19 +32,19 @@ final class BulkSimCardActionListParams implements BaseModel
      *
      * @var value-of<FilterActionType>|null $filterActionType
      */
-    #[Api(enum: FilterActionType::class, optional: true)]
+    #[Optional(enum: FilterActionType::class)]
     public ?string $filterActionType;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageNumber;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageSize;
 
     public function __construct()
@@ -57,20 +57,20 @@ final class BulkSimCardActionListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterActionType|value-of<FilterActionType> $filterActionType
+     * @param FilterActionType|value-of<FilterActionType>|null $filterActionType
      */
     public static function with(
         FilterActionType|string|null $filterActionType = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filterActionType && $obj['filterActionType'] = $filterActionType;
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
+        null !== $filterActionType && $self['filterActionType'] = $filterActionType;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class BulkSimCardActionListParams implements BaseModel
     public function withFilterActionType(
         FilterActionType|string $filterActionType
     ): self {
-        $obj = clone $this;
-        $obj['filterActionType'] = $filterActionType;
+        $self = clone $this;
+        $self['filterActionType'] = $filterActionType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class BulkSimCardActionListParams implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +103,9 @@ final class BulkSimCardActionListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 }

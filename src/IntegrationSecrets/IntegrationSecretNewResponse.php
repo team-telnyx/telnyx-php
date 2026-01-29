@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\IntegrationSecrets;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type integration_secret_new_response = array{data: IntegrationSecret}
+ * @phpstan-import-type IntegrationSecretShape from \Telnyx\IntegrationSecrets\IntegrationSecret
+ *
+ * @phpstan-type IntegrationSecretNewResponseShape = array{
+ *   data: IntegrationSecret|IntegrationSecretShape
+ * }
  */
-final class IntegrationSecretNewResponse implements BaseModel, ResponseConverter
+final class IntegrationSecretNewResponse implements BaseModel
 {
-    /** @use SdkModel<integration_secret_new_response> */
+    /** @use SdkModel<IntegrationSecretNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public IntegrationSecret $data;
 
     /**
@@ -46,21 +46,26 @@ final class IntegrationSecretNewResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param IntegrationSecret|IntegrationSecretShape $data
      */
-    public static function with(IntegrationSecret $data): self
+    public static function with(IntegrationSecret|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(IntegrationSecret $data): self
+    /**
+     * @param IntegrationSecret|IntegrationSecretShape $data
+     */
+    public function withData(IntegrationSecret|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

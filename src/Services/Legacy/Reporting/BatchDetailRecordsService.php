@@ -13,17 +13,22 @@ use Telnyx\Services\Legacy\Reporting\BatchDetailRecords\VoiceService;
 final class BatchDetailRecordsService implements BatchDetailRecordsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public BatchDetailRecordsRawService $raw;
+
+    /**
+     * @api
      */
     public MessagingService $messaging;
 
     /**
-     * @@api
+     * @api
      */
     public SpeechToTextService $speechToText;
 
     /**
-     * @@api
+     * @api
      */
     public VoiceService $voice;
 
@@ -32,6 +37,7 @@ final class BatchDetailRecordsService implements BatchDetailRecordsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new BatchDetailRecordsRawService($client);
         $this->messaging = new MessagingService($client);
         $this->speechToText = new SpeechToTextService($client);
         $this->voice = new VoiceService($client);

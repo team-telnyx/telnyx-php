@@ -5,175 +5,140 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\Documents\DocServiceDocument;
 use Telnyx\Documents\DocumentDeleteResponse;
 use Telnyx\Documents\DocumentGenerateDownloadLinkResponse;
 use Telnyx\Documents\DocumentGetResponse;
 use Telnyx\Documents\DocumentListParams\Filter;
 use Telnyx\Documents\DocumentListParams\Page;
 use Telnyx\Documents\DocumentListParams\Sort;
-use Telnyx\Documents\DocumentListResponse;
 use Telnyx\Documents\DocumentUpdateResponse;
 use Telnyx\Documents\DocumentUploadJsonResponse;
+use Telnyx\Documents\DocumentUploadParams\Document;
 use Telnyx\Documents\DocumentUploadResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Documents\DocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Documents\DocumentListParams\Page
+ * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadJsonParams\Document as DocumentShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DocumentsContract
 {
     /**
      * @api
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DocumentGetResponse;
 
     /**
      * @api
      *
+     * @param string $documentID identifies the resource
      * @param string $customerReference optional reference string for customer tracking
      * @param string $filename the filename of the document
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        string $id,
-        $customerReference = omit,
-        $filename = omit,
-        ?RequestOptions $requestOptions = null,
+        string $documentID,
+        ?string $customerReference = null,
+        ?string $filename = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DocumentUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): DocumentUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for documents (deepObject style). Originally: sort[]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<DocServiceDocument>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): DocumentListResponse;
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        ?array $sort = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): DocumentListResponse;
-
-    /**
-     * @api
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DocumentDeleteResponse;
 
     /**
      * @api
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function download(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): string;
 
     /**
      * @api
      *
+     * @param string $id Uniquely identifies the document
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function generateDownloadLink(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DocumentGenerateDownloadLinkResponse;
 
     /**
      * @api
      *
-     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
-     * @param string $file the Base64 encoded contents of the file you are uploading
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param string $filename the filename of the document
+     * @param Document|DocumentShape $document
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function upload(
-        $url,
-        $file,
-        $customerReference = omit,
-        $filename = omit,
-        ?RequestOptions $requestOptions = null,
+        Document|array $document,
+        RequestOptions|array|null $requestOptions = null
     ): DocumentUploadResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): DocumentUploadResponse;
-
-    /**
-     * @api
-     *
-     * @param string $url if the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you
-     * @param string $file the Base64 encoded contents of the file you are uploading
-     * @param string $customerReference a customer reference string for customer look ups
-     * @param string $filename the filename of the document
+     * @param \Telnyx\Documents\DocumentUploadJsonParams\Document|DocumentShape1 $document
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function uploadJson(
-        $url,
-        $file,
-        $customerReference = omit,
-        $filename = omit,
-        ?RequestOptions $requestOptions = null,
-    ): DocumentUploadJsonResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadJsonRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        \Telnyx\Documents\DocumentUploadJsonParams\Document|array $document,
+        RequestOptions|array|null $requestOptions = null,
     ): DocumentUploadJsonResponse;
 }

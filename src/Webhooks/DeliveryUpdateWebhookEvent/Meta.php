@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\DeliveryUpdateWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{attempt?: int, deliveredTo?: string}
+ * @phpstan-type MetaShape = array{attempt?: int|null, deliveredTo?: string|null}
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     /**
      * Number of attempts to deliver the webhook event.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $attempt;
 
     /**
      * The webhook URL the event was delivered to.
      */
-    #[Api('delivered_to', optional: true)]
+    #[Optional('delivered_to')]
     public ?string $deliveredTo;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class Meta implements BaseModel
         ?int $attempt = null,
         ?string $deliveredTo = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $attempt && $obj->attempt = $attempt;
-        null !== $deliveredTo && $obj->deliveredTo = $deliveredTo;
+        null !== $attempt && $self['attempt'] = $attempt;
+        null !== $deliveredTo && $self['deliveredTo'] = $deliveredTo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Meta implements BaseModel
      */
     public function withAttempt(int $attempt): self
     {
-        $obj = clone $this;
-        $obj->attempt = $attempt;
+        $self = clone $this;
+        $self['attempt'] = $attempt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Meta implements BaseModel
      */
     public function withDeliveredTo(string $deliveredTo): self
     {
-        $obj = clone $this;
-        $obj->deliveredTo = $deliveredTo;
+        $self = clone $this;
+        $self['deliveredTo'] = $deliveredTo;
 
-        return $obj;
+        return $self;
     }
 }

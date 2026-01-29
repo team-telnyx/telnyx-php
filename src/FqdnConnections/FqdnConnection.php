@@ -4,80 +4,95 @@ declare(strict_types=1);
 
 namespace Telnyx\FqdnConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\ConnectionNoiseSuppressionDetails;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\FqdnConnections\FqdnConnection\JitterBuffer;
+use Telnyx\FqdnConnections\FqdnConnection\NoiseSuppression;
 
 /**
- * @phpstan-type fqdn_connection = array{
+ * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
+ * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnection\JitterBuffer
+ * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
+ * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
+ * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
+ *
+ * @phpstan-type FqdnConnectionShape = array{
  *   connectionName: string,
- *   id?: string,
- *   active?: bool,
- *   adjustDtmfTimestamp?: bool,
- *   anchorsiteOverride?: value-of<AnchorsiteOverride>,
- *   callCostEnabled?: bool,
- *   createdAt?: string,
- *   defaultOnHoldComfortNoiseEnabled?: bool,
- *   dtmfType?: value-of<DtmfType>,
- *   encodeContactHeaderEnabled?: bool,
- *   encryptedMedia?: value-of<EncryptedMedia>|null,
- *   ignoreDtmfDuration?: bool,
- *   ignoreMarkBit?: bool,
- *   inbound?: InboundFqdn,
- *   microsoftTeamsSbc?: bool,
- *   noiseSuppression?: bool,
- *   onnetT38PassthroughEnabled?: bool,
- *   outbound?: OutboundFqdn,
- *   password?: string,
- *   recordType?: string,
- *   rtcpSettings?: ConnectionRtcpSettings,
- *   rtpPassCodecsOnStreamChange?: bool,
- *   sendNormalizedTimestamps?: bool,
- *   tags?: list<string>,
- *   thirdPartyControlEnabled?: bool,
- *   transportProtocol?: value-of<TransportProtocol>,
- *   txtName?: string,
- *   txtTtl?: int,
- *   txtValue?: string,
- *   updatedAt?: string,
- *   userName?: string,
- *   webhookAPIVersion?: value-of<WebhookAPIVersion>,
+ *   id?: string|null,
+ *   active?: bool|null,
+ *   adjustDtmfTimestamp?: bool|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ *   androidPushCredentialID?: string|null,
+ *   callCostEnabled?: bool|null,
+ *   callCostInWebhooks?: bool|null,
+ *   createdAt?: string|null,
+ *   defaultOnHoldComfortNoiseEnabled?: bool|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
+ *   encodeContactHeaderEnabled?: bool|null,
+ *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
+ *   ignoreDtmfDuration?: bool|null,
+ *   ignoreMarkBit?: bool|null,
+ *   inbound?: null|InboundFqdn|InboundFqdnShape,
+ *   iosPushCredentialID?: string|null,
+ *   jitterBuffer?: null|JitterBuffer|JitterBufferShape,
+ *   microsoftTeamsSbc?: bool|null,
+ *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
+ *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
+ *   onnetT38PassthroughEnabled?: bool|null,
+ *   outbound?: null|OutboundFqdn|OutboundFqdnShape,
+ *   password?: string|null,
+ *   recordType?: string|null,
+ *   rtcpSettings?: null|ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
+ *   rtpPassCodecsOnStreamChange?: bool|null,
+ *   sendNormalizedTimestamps?: bool|null,
+ *   tags?: list<string>|null,
+ *   thirdPartyControlEnabled?: bool|null,
+ *   transportProtocol?: null|TransportProtocol|value-of<TransportProtocol>,
+ *   txtName?: string|null,
+ *   txtTtl?: int|null,
+ *   txtValue?: string|null,
+ *   updatedAt?: string|null,
+ *   userName?: string|null,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class FqdnConnection implements BaseModel
 {
-    /** @use SdkModel<fqdn_connection> */
+    /** @use SdkModel<FqdnConnectionShape> */
     use SdkModel;
 
     /**
      * A user-assigned name to help manage the connection.
      */
-    #[Api('connection_name')]
+    #[Required('connection_name')]
     public string $connectionName;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Defaults to true.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
      * Indicates whether DTMF timestamp adjustment is enabled.
      */
-    #[Api('adjust_dtmf_timestamp', optional: true)]
+    #[Optional('adjust_dtmf_timestamp')]
     public ?bool $adjustDtmfTimestamp;
 
     /**
@@ -85,25 +100,37 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
      */
-    #[Api('anchorsite_override', enum: AnchorsiteOverride::class, optional: true)]
+    #[Optional('anchorsite_override', enum: AnchorsiteOverride::class)]
     public ?string $anchorsiteOverride;
+
+    /**
+     * The uuid of the push credential for Android.
+     */
+    #[Optional('android_push_credential_id', nullable: true)]
+    public ?string $androidPushCredentialID;
 
     /**
      * Indicates whether call cost calculation is enabled.
      */
-    #[Api('call_cost_enabled', optional: true)]
+    #[Optional('call_cost_enabled')]
     public ?bool $callCostEnabled;
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    #[Optional('call_cost_in_webhooks')]
+    public ?bool $callCostInWebhooks;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      */
-    #[Api('default_on_hold_comfort_noise_enabled', optional: true)]
+    #[Optional('default_on_hold_comfort_noise_enabled')]
     public ?bool $defaultOnHoldComfortNoiseEnabled;
 
     /**
@@ -111,13 +138,13 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<DtmfType>|null $dtmfType
      */
-    #[Api('dtmf_type', enum: DtmfType::class, optional: true)]
+    #[Optional('dtmf_type', enum: DtmfType::class)]
     public ?string $dtmfType;
 
     /**
      * Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
      */
-    #[Api('encode_contact_header_enabled', optional: true)]
+    #[Optional('encode_contact_header_enabled')]
     public ?bool $encodeContactHeaderEnabled;
 
     /**
@@ -125,75 +152,90 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<EncryptedMedia>|null $encryptedMedia
      */
-    #[Api(
-        'encrypted_media',
-        enum: EncryptedMedia::class,
-        nullable: true,
-        optional: true,
-    )]
+    #[Optional('encrypted_media', enum: EncryptedMedia::class, nullable: true)]
     public ?string $encryptedMedia;
 
     /**
      * Indicates whether DTMF duration should be ignored.
      */
-    #[Api('ignore_dtmf_duration', optional: true)]
+    #[Optional('ignore_dtmf_duration')]
     public ?bool $ignoreDtmfDuration;
 
     /**
      * Indicates whether the mark bit should be ignored.
      */
-    #[Api('ignore_mark_bit', optional: true)]
+    #[Optional('ignore_mark_bit')]
     public ?bool $ignoreMarkBit;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?InboundFqdn $inbound;
+
+    /**
+     * The uuid of the push credential for Ios.
+     */
+    #[Optional('ios_push_credential_id', nullable: true)]
+    public ?string $iosPushCredentialID;
+
+    /**
+     * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     */
+    #[Optional('jitter_buffer')]
+    public ?JitterBuffer $jitterBuffer;
 
     /**
      * The connection is enabled for Microsoft Teams Direct Routing.
      */
-    #[Api('microsoft_teams_sbc', optional: true)]
+    #[Optional('microsoft_teams_sbc')]
     public ?bool $microsoftTeamsSbc;
 
     /**
-     * Indicates whether noise suppression is enabled.
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @var value-of<NoiseSuppression>|null $noiseSuppression
      */
-    #[Api('noise_suppression', optional: true)]
-    public ?bool $noiseSuppression;
+    #[Optional('noise_suppression', enum: NoiseSuppression::class)]
+    public ?string $noiseSuppression;
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     */
+    #[Optional('noise_suppression_details')]
+    public ?ConnectionNoiseSuppressionDetails $noiseSuppressionDetails;
 
     /**
      * Enable on-net T38 if you prefer that the sender and receiver negotiate T38 directly when both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call according to each leg's settings.
      */
-    #[Api('onnet_t38_passthrough_enabled', optional: true)]
+    #[Optional('onnet_t38_passthrough_enabled')]
     public ?bool $onnetT38PassthroughEnabled;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OutboundFqdn $outbound;
 
     /**
      * The password for the FQDN connection.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $password;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
-    #[Api('rtcp_settings', optional: true)]
+    #[Optional('rtcp_settings')]
     public ?ConnectionRtcpSettings $rtcpSettings;
 
     /**
      * Defines if codecs should be passed on stream change.
      */
-    #[Api('rtp_pass_codecs_on_stream_change', optional: true)]
+    #[Optional('rtp_pass_codecs_on_stream_change')]
     public ?bool $rtpPassCodecsOnStreamChange;
 
     /**
      * Indicates whether normalized timestamps should be sent.
      */
-    #[Api('send_normalized_timestamps', optional: true)]
+    #[Optional('send_normalized_timestamps')]
     public ?bool $sendNormalizedTimestamps;
 
     /**
@@ -201,13 +243,13 @@ final class FqdnConnection implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * Indicates whether third-party control is enabled.
      */
-    #[Api('third_party_control_enabled', optional: true)]
+    #[Optional('third_party_control_enabled')]
     public ?bool $thirdPartyControlEnabled;
 
     /**
@@ -215,37 +257,37 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<TransportProtocol>|null $transportProtocol
      */
-    #[Api('transport_protocol', enum: TransportProtocol::class, optional: true)]
+    #[Optional('transport_protocol', enum: TransportProtocol::class)]
     public ?string $transportProtocol;
 
     /**
      * The name for the TXT record associated with the FQDN connection.
      */
-    #[Api('txt_name', optional: true)]
+    #[Optional('txt_name')]
     public ?string $txtName;
 
     /**
      * The time to live for the TXT record associated with the FQDN connection.
      */
-    #[Api('txt_ttl', optional: true)]
+    #[Optional('txt_ttl')]
     public ?int $txtTtl;
 
     /**
      * The value for the TXT record associated with the FQDN connection.
      */
-    #[Api('txt_value', optional: true)]
+    #[Optional('txt_value')]
     public ?string $txtValue;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     /**
      * The username for the FQDN connection.
      */
-    #[Api('user_name', optional: true)]
+    #[Optional('user_name')]
     public ?string $userName;
 
     /**
@@ -253,25 +295,25 @@ final class FqdnConnection implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
-    #[Api('webhook_api_version', enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional('webhook_api_version', enum: WebhookAPIVersion::class)]
     public ?string $webhookAPIVersion;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
+    #[Optional('webhook_event_failover_url', nullable: true)]
     public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
+    #[Optional('webhook_event_url')]
     public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
+    #[Optional('webhook_timeout_secs', nullable: true)]
     public ?int $webhookTimeoutSecs;
 
     /**
@@ -298,12 +340,18 @@ final class FqdnConnection implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param list<string> $tags
-     * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param InboundFqdn|InboundFqdnShape|null $inbound
+     * @param JitterBuffer|JitterBufferShape|null $jitterBuffer
+     * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
+     * @param OutboundFqdn|OutboundFqdnShape|null $outbound
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
+     * @param list<string>|null $tags
+     * @param TransportProtocol|value-of<TransportProtocol>|null $transportProtocol
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         string $connectionName,
@@ -311,7 +359,9 @@ final class FqdnConnection implements BaseModel
         ?bool $active = null,
         ?bool $adjustDtmfTimestamp = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
+        ?string $androidPushCredentialID = null,
         ?bool $callCostEnabled = null,
+        ?bool $callCostInWebhooks = null,
         ?string $createdAt = null,
         ?bool $defaultOnHoldComfortNoiseEnabled = null,
         DtmfType|string|null $dtmfType = null,
@@ -319,14 +369,17 @@ final class FqdnConnection implements BaseModel
         EncryptedMedia|string|null $encryptedMedia = null,
         ?bool $ignoreDtmfDuration = null,
         ?bool $ignoreMarkBit = null,
-        ?InboundFqdn $inbound = null,
+        InboundFqdn|array|null $inbound = null,
+        ?string $iosPushCredentialID = null,
+        JitterBuffer|array|null $jitterBuffer = null,
         ?bool $microsoftTeamsSbc = null,
-        ?bool $noiseSuppression = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
+        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
-        ?OutboundFqdn $outbound = null,
+        OutboundFqdn|array|null $outbound = null,
         ?string $password = null,
         ?string $recordType = null,
-        ?ConnectionRtcpSettings $rtcpSettings = null,
+        ConnectionRtcpSettings|array|null $rtcpSettings = null,
         ?bool $rtpPassCodecsOnStreamChange = null,
         ?bool $sendNormalizedTimestamps = null,
         ?array $tags = null,
@@ -342,46 +395,51 @@ final class FqdnConnection implements BaseModel
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->connectionName = $connectionName;
+        $self['connectionName'] = $connectionName;
 
-        null !== $id && $obj->id = $id;
-        null !== $active && $obj->active = $active;
-        null !== $adjustDtmfTimestamp && $obj->adjustDtmfTimestamp = $adjustDtmfTimestamp;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $callCostEnabled && $obj->callCostEnabled = $callCostEnabled;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $defaultOnHoldComfortNoiseEnabled && $obj->defaultOnHoldComfortNoiseEnabled = $defaultOnHoldComfortNoiseEnabled;
-        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
-        null !== $encodeContactHeaderEnabled && $obj->encodeContactHeaderEnabled = $encodeContactHeaderEnabled;
-        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
-        null !== $ignoreDtmfDuration && $obj->ignoreDtmfDuration = $ignoreDtmfDuration;
-        null !== $ignoreMarkBit && $obj->ignoreMarkBit = $ignoreMarkBit;
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $microsoftTeamsSbc && $obj->microsoftTeamsSbc = $microsoftTeamsSbc;
-        null !== $noiseSuppression && $obj->noiseSuppression = $noiseSuppression;
-        null !== $onnetT38PassthroughEnabled && $obj->onnetT38PassthroughEnabled = $onnetT38PassthroughEnabled;
-        null !== $outbound && $obj->outbound = $outbound;
-        null !== $password && $obj->password = $password;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $rtcpSettings && $obj->rtcpSettings = $rtcpSettings;
-        null !== $rtpPassCodecsOnStreamChange && $obj->rtpPassCodecsOnStreamChange = $rtpPassCodecsOnStreamChange;
-        null !== $sendNormalizedTimestamps && $obj->sendNormalizedTimestamps = $sendNormalizedTimestamps;
-        null !== $tags && $obj->tags = $tags;
-        null !== $thirdPartyControlEnabled && $obj->thirdPartyControlEnabled = $thirdPartyControlEnabled;
-        null !== $transportProtocol && $obj['transportProtocol'] = $transportProtocol;
-        null !== $txtName && $obj->txtName = $txtName;
-        null !== $txtTtl && $obj->txtTtl = $txtTtl;
-        null !== $txtValue && $obj->txtValue = $txtValue;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $userName && $obj->userName = $userName;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $id && $self['id'] = $id;
+        null !== $active && $self['active'] = $active;
+        null !== $adjustDtmfTimestamp && $self['adjustDtmfTimestamp'] = $adjustDtmfTimestamp;
+        null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
+        null !== $callCostEnabled && $self['callCostEnabled'] = $callCostEnabled;
+        null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $defaultOnHoldComfortNoiseEnabled && $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
+        null !== $dtmfType && $self['dtmfType'] = $dtmfType;
+        null !== $encodeContactHeaderEnabled && $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
+        null !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
+        null !== $ignoreDtmfDuration && $self['ignoreDtmfDuration'] = $ignoreDtmfDuration;
+        null !== $ignoreMarkBit && $self['ignoreMarkBit'] = $ignoreMarkBit;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $iosPushCredentialID && $self['iosPushCredentialID'] = $iosPushCredentialID;
+        null !== $jitterBuffer && $self['jitterBuffer'] = $jitterBuffer;
+        null !== $microsoftTeamsSbc && $self['microsoftTeamsSbc'] = $microsoftTeamsSbc;
+        null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
+        null !== $noiseSuppressionDetails && $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
+        null !== $onnetT38PassthroughEnabled && $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $password && $self['password'] = $password;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $rtcpSettings && $self['rtcpSettings'] = $rtcpSettings;
+        null !== $rtpPassCodecsOnStreamChange && $self['rtpPassCodecsOnStreamChange'] = $rtpPassCodecsOnStreamChange;
+        null !== $sendNormalizedTimestamps && $self['sendNormalizedTimestamps'] = $sendNormalizedTimestamps;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $thirdPartyControlEnabled && $self['thirdPartyControlEnabled'] = $thirdPartyControlEnabled;
+        null !== $transportProtocol && $self['transportProtocol'] = $transportProtocol;
+        null !== $txtName && $self['txtName'] = $txtName;
+        null !== $txtTtl && $self['txtTtl'] = $txtTtl;
+        null !== $txtValue && $self['txtValue'] = $txtValue;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userName && $self['userName'] = $userName;
+        null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -389,10 +447,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withConnectionName(string $connectionName): self
     {
-        $obj = clone $this;
-        $obj->connectionName = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -400,10 +458,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -411,10 +469,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj->active = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -422,10 +480,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withAdjustDtmfTimestamp(bool $adjustDtmfTimestamp): self
     {
-        $obj = clone $this;
-        $obj->adjustDtmfTimestamp = $adjustDtmfTimestamp;
+        $self = clone $this;
+        $self['adjustDtmfTimestamp'] = $adjustDtmfTimestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -436,10 +494,22 @@ final class FqdnConnection implements BaseModel
     public function withAnchorsiteOverride(
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
-        $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $self = clone $this;
+        $self['anchorsiteOverride'] = $anchorsiteOverride;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The uuid of the push credential for Android.
+     */
+    public function withAndroidPushCredentialID(
+        ?string $androidPushCredentialID
+    ): self {
+        $self = clone $this;
+        $self['androidPushCredentialID'] = $androidPushCredentialID;
+
+        return $self;
     }
 
     /**
@@ -447,10 +517,21 @@ final class FqdnConnection implements BaseModel
      */
     public function withCallCostEnabled(bool $callCostEnabled): self
     {
-        $obj = clone $this;
-        $obj->callCostEnabled = $callCostEnabled;
+        $self = clone $this;
+        $self['callCostEnabled'] = $callCostEnabled;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $self = clone $this;
+        $self['callCostInWebhooks'] = $callCostInWebhooks;
+
+        return $self;
     }
 
     /**
@@ -458,10 +539,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -470,10 +551,10 @@ final class FqdnConnection implements BaseModel
     public function withDefaultOnHoldComfortNoiseEnabled(
         bool $defaultOnHoldComfortNoiseEnabled
     ): self {
-        $obj = clone $this;
-        $obj->defaultOnHoldComfortNoiseEnabled = $defaultOnHoldComfortNoiseEnabled;
+        $self = clone $this;
+        $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -483,10 +564,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
-        $obj = clone $this;
-        $obj['dtmfType'] = $dtmfType;
+        $self = clone $this;
+        $self['dtmfType'] = $dtmfType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -495,10 +576,10 @@ final class FqdnConnection implements BaseModel
     public function withEncodeContactHeaderEnabled(
         bool $encodeContactHeaderEnabled
     ): self {
-        $obj = clone $this;
-        $obj->encodeContactHeaderEnabled = $encodeContactHeaderEnabled;
+        $self = clone $this;
+        $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -509,10 +590,10 @@ final class FqdnConnection implements BaseModel
     public function withEncryptedMedia(
         EncryptedMedia|string|null $encryptedMedia
     ): self {
-        $obj = clone $this;
-        $obj['encryptedMedia'] = $encryptedMedia;
+        $self = clone $this;
+        $self['encryptedMedia'] = $encryptedMedia;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -520,10 +601,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withIgnoreDtmfDuration(bool $ignoreDtmfDuration): self
     {
-        $obj = clone $this;
-        $obj->ignoreDtmfDuration = $ignoreDtmfDuration;
+        $self = clone $this;
+        $self['ignoreDtmfDuration'] = $ignoreDtmfDuration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -531,18 +612,45 @@ final class FqdnConnection implements BaseModel
      */
     public function withIgnoreMarkBit(bool $ignoreMarkBit): self
     {
-        $obj = clone $this;
-        $obj->ignoreMarkBit = $ignoreMarkBit;
+        $self = clone $this;
+        $self['ignoreMarkBit'] = $ignoreMarkBit;
 
-        return $obj;
+        return $self;
     }
 
-    public function withInbound(InboundFqdn $inbound): self
+    /**
+     * @param InboundFqdn|InboundFqdnShape $inbound
+     */
+    public function withInbound(InboundFqdn|array $inbound): self
     {
-        $obj = clone $this;
-        $obj->inbound = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The uuid of the push credential for Ios.
+     */
+    public function withIosPushCredentialID(?string $iosPushCredentialID): self
+    {
+        $self = clone $this;
+        $self['iosPushCredentialID'] = $iosPushCredentialID;
+
+        return $self;
+    }
+
+    /**
+     * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     *
+     * @param JitterBuffer|JitterBufferShape $jitterBuffer
+     */
+    public function withJitterBuffer(JitterBuffer|array $jitterBuffer): self
+    {
+        $self = clone $this;
+        $self['jitterBuffer'] = $jitterBuffer;
+
+        return $self;
     }
 
     /**
@@ -550,21 +658,38 @@ final class FqdnConnection implements BaseModel
      */
     public function withMicrosoftTeamsSbc(bool $microsoftTeamsSbc): self
     {
-        $obj = clone $this;
-        $obj->microsoftTeamsSbc = $microsoftTeamsSbc;
+        $self = clone $this;
+        $self['microsoftTeamsSbc'] = $microsoftTeamsSbc;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Indicates whether noise suppression is enabled.
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
      */
-    public function withNoiseSuppression(bool $noiseSuppression): self
-    {
-        $obj = clone $this;
-        $obj->noiseSuppression = $noiseSuppression;
+    public function withNoiseSuppression(
+        NoiseSuppression|string $noiseSuppression
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppression'] = $noiseSuppression;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     *
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails
+     */
+    public function withNoiseSuppressionDetails(
+        ConnectionNoiseSuppressionDetails|array $noiseSuppressionDetails
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
+
+        return $self;
     }
 
     /**
@@ -573,18 +698,21 @@ final class FqdnConnection implements BaseModel
     public function withOnnetT38PassthroughEnabled(
         bool $onnetT38PassthroughEnabled
     ): self {
-        $obj = clone $this;
-        $obj->onnetT38PassthroughEnabled = $onnetT38PassthroughEnabled;
+        $self = clone $this;
+        $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
 
-        return $obj;
+        return $self;
     }
 
-    public function withOutbound(OutboundFqdn $outbound): self
+    /**
+     * @param OutboundFqdn|OutboundFqdnShape $outbound
+     */
+    public function withOutbound(OutboundFqdn|array $outbound): self
     {
-        $obj = clone $this;
-        $obj->outbound = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -592,10 +720,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withPassword(string $password): self
     {
-        $obj = clone $this;
-        $obj->password = $password;
+        $self = clone $this;
+        $self['password'] = $password;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -603,18 +731,22 @@ final class FqdnConnection implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
-    public function withRtcpSettings(ConnectionRtcpSettings $rtcpSettings): self
-    {
-        $obj = clone $this;
-        $obj->rtcpSettings = $rtcpSettings;
+    /**
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
+     */
+    public function withRtcpSettings(
+        ConnectionRtcpSettings|array $rtcpSettings
+    ): self {
+        $self = clone $this;
+        $self['rtcpSettings'] = $rtcpSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -623,10 +755,10 @@ final class FqdnConnection implements BaseModel
     public function withRtpPassCodecsOnStreamChange(
         bool $rtpPassCodecsOnStreamChange
     ): self {
-        $obj = clone $this;
-        $obj->rtpPassCodecsOnStreamChange = $rtpPassCodecsOnStreamChange;
+        $self = clone $this;
+        $self['rtpPassCodecsOnStreamChange'] = $rtpPassCodecsOnStreamChange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -635,10 +767,10 @@ final class FqdnConnection implements BaseModel
     public function withSendNormalizedTimestamps(
         bool $sendNormalizedTimestamps
     ): self {
-        $obj = clone $this;
-        $obj->sendNormalizedTimestamps = $sendNormalizedTimestamps;
+        $self = clone $this;
+        $self['sendNormalizedTimestamps'] = $sendNormalizedTimestamps;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -648,10 +780,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -660,10 +792,10 @@ final class FqdnConnection implements BaseModel
     public function withThirdPartyControlEnabled(
         bool $thirdPartyControlEnabled
     ): self {
-        $obj = clone $this;
-        $obj->thirdPartyControlEnabled = $thirdPartyControlEnabled;
+        $self = clone $this;
+        $self['thirdPartyControlEnabled'] = $thirdPartyControlEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -674,10 +806,10 @@ final class FqdnConnection implements BaseModel
     public function withTransportProtocol(
         TransportProtocol|string $transportProtocol
     ): self {
-        $obj = clone $this;
-        $obj['transportProtocol'] = $transportProtocol;
+        $self = clone $this;
+        $self['transportProtocol'] = $transportProtocol;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -685,10 +817,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withTxtName(string $txtName): self
     {
-        $obj = clone $this;
-        $obj->txtName = $txtName;
+        $self = clone $this;
+        $self['txtName'] = $txtName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -696,10 +828,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withTxtTtl(int $txtTtl): self
     {
-        $obj = clone $this;
-        $obj->txtTtl = $txtTtl;
+        $self = clone $this;
+        $self['txtTtl'] = $txtTtl;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -707,10 +839,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withTxtValue(string $txtValue): self
     {
-        $obj = clone $this;
-        $obj->txtValue = $txtValue;
+        $self = clone $this;
+        $self['txtValue'] = $txtValue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -718,10 +850,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -729,10 +861,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withUserName(string $userName): self
     {
-        $obj = clone $this;
-        $obj->userName = $userName;
+        $self = clone $this;
+        $self['userName'] = $userName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -743,10 +875,10 @@ final class FqdnConnection implements BaseModel
     public function withWebhookAPIVersion(
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
-        $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $self = clone $this;
+        $self['webhookAPIVersion'] = $webhookAPIVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -755,10 +887,10 @@ final class FqdnConnection implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -766,10 +898,10 @@ final class FqdnConnection implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -777,9 +909,9 @@ final class FqdnConnection implements BaseModel
      */
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

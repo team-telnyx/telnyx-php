@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * FOC datetime range filtering operations.
  *
- * @phpstan-type foc_datetime_requested = array{gt?: string, lt?: string}
+ * @phpstan-type FocDatetimeRequestedShape = array{
+ *   gt?: string|null, lt?: string|null
+ * }
  */
 final class FocDatetimeRequested implements BaseModel
 {
-    /** @use SdkModel<foc_datetime_requested> */
+    /** @use SdkModel<FocDatetimeRequestedShape> */
     use SdkModel;
 
     /**
      * Filter results by foc date later than this value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gt;
 
     /**
      * Filter results by foc date earlier than this value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lt;
 
     public function __construct()
@@ -42,12 +44,12 @@ final class FocDatetimeRequested implements BaseModel
      */
     public static function with(?string $gt = null, ?string $lt = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $gt && $obj->gt = $gt;
-        null !== $lt && $obj->lt = $lt;
+        null !== $gt && $self['gt'] = $gt;
+        null !== $lt && $self['lt'] = $lt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +57,10 @@ final class FocDatetimeRequested implements BaseModel
      */
     public function withGt(string $gt): self
     {
-        $obj = clone $this;
-        $obj->gt = $gt;
+        $self = clone $this;
+        $self['gt'] = $gt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class FocDatetimeRequested implements BaseModel
      */
     public function withLt(string $lt): self
     {
-        $obj = clone $this;
-        $obj->lt = $lt;
+        $self = clone $this;
+        $self['lt'] = $lt;
 
-        return $obj;
+        return $self;
     }
 }

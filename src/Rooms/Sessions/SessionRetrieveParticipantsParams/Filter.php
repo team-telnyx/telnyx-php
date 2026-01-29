@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter\DateJoinedAt;
@@ -14,31 +14,35 @@ use Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter\DateUpdatedAt
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_joined_at][eq], filter[date_joined_at][gte], filter[date_joined_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[date_left_at][eq], filter[date_left_at][gte], filter[date_left_at][lte], filter[context].
  *
- * @phpstan-type filter_alias = array{
- *   context?: string,
- *   dateJoinedAt?: DateJoinedAt,
- *   dateLeftAt?: DateLeftAt,
- *   dateUpdatedAt?: DateUpdatedAt,
+ * @phpstan-import-type DateJoinedAtShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter\DateJoinedAt
+ * @phpstan-import-type DateLeftAtShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter\DateLeftAt
+ * @phpstan-import-type DateUpdatedAtShape from \Telnyx\Rooms\Sessions\SessionRetrieveParticipantsParams\Filter\DateUpdatedAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   context?: string|null,
+ *   dateJoinedAt?: null|DateJoinedAt|DateJoinedAtShape,
+ *   dateLeftAt?: null|DateLeftAt|DateLeftAtShape,
+ *   dateUpdatedAt?: null|DateUpdatedAt|DateUpdatedAtShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter room participants based on the context.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $context;
 
-    #[Api('date_joined_at', optional: true)]
+    #[Optional('date_joined_at')]
     public ?DateJoinedAt $dateJoinedAt;
 
-    #[Api('date_left_at', optional: true)]
+    #[Optional('date_left_at')]
     public ?DateLeftAt $dateLeftAt;
 
-    #[Api('date_updated_at', optional: true)]
+    #[Optional('date_updated_at')]
     public ?DateUpdatedAt $dateUpdatedAt;
 
     public function __construct()
@@ -50,21 +54,25 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DateJoinedAt|DateJoinedAtShape|null $dateJoinedAt
+     * @param DateLeftAt|DateLeftAtShape|null $dateLeftAt
+     * @param DateUpdatedAt|DateUpdatedAtShape|null $dateUpdatedAt
      */
     public static function with(
         ?string $context = null,
-        ?DateJoinedAt $dateJoinedAt = null,
-        ?DateLeftAt $dateLeftAt = null,
-        ?DateUpdatedAt $dateUpdatedAt = null,
+        DateJoinedAt|array|null $dateJoinedAt = null,
+        DateLeftAt|array|null $dateLeftAt = null,
+        DateUpdatedAt|array|null $dateUpdatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $context && $obj->context = $context;
-        null !== $dateJoinedAt && $obj->dateJoinedAt = $dateJoinedAt;
-        null !== $dateLeftAt && $obj->dateLeftAt = $dateLeftAt;
-        null !== $dateUpdatedAt && $obj->dateUpdatedAt = $dateUpdatedAt;
+        null !== $context && $self['context'] = $context;
+        null !== $dateJoinedAt && $self['dateJoinedAt'] = $dateJoinedAt;
+        null !== $dateLeftAt && $self['dateLeftAt'] = $dateLeftAt;
+        null !== $dateUpdatedAt && $self['dateUpdatedAt'] = $dateUpdatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,33 +80,42 @@ final class Filter implements BaseModel
      */
     public function withContext(string $context): self
     {
-        $obj = clone $this;
-        $obj->context = $context;
+        $self = clone $this;
+        $self['context'] = $context;
 
-        return $obj;
+        return $self;
     }
 
-    public function withDateJoinedAt(DateJoinedAt $dateJoinedAt): self
+    /**
+     * @param DateJoinedAt|DateJoinedAtShape $dateJoinedAt
+     */
+    public function withDateJoinedAt(DateJoinedAt|array $dateJoinedAt): self
     {
-        $obj = clone $this;
-        $obj->dateJoinedAt = $dateJoinedAt;
+        $self = clone $this;
+        $self['dateJoinedAt'] = $dateJoinedAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withDateLeftAt(DateLeftAt $dateLeftAt): self
+    /**
+     * @param DateLeftAt|DateLeftAtShape $dateLeftAt
+     */
+    public function withDateLeftAt(DateLeftAt|array $dateLeftAt): self
     {
-        $obj = clone $this;
-        $obj->dateLeftAt = $dateLeftAt;
+        $self = clone $this;
+        $self['dateLeftAt'] = $dateLeftAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withDateUpdatedAt(DateUpdatedAt $dateUpdatedAt): self
+    /**
+     * @param DateUpdatedAt|DateUpdatedAtShape $dateUpdatedAt
+     */
+    public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {
-        $obj = clone $this;
-        $obj->dateUpdatedAt = $dateUpdatedAt;
+        $self = clone $this;
+        $self['dateUpdatedAt'] = $dateUpdatedAt;
 
-        return $obj;
+        return $self;
     }
 }

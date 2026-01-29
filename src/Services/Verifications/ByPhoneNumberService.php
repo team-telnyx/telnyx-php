@@ -11,10 +11,18 @@ use Telnyx\ServiceContracts\Verifications\ByPhoneNumberContract;
 use Telnyx\Services\Verifications\ByPhoneNumber\ActionsService;
 use Telnyx\Verifications\ByPhoneNumber\ByPhoneNumberListResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ByPhoneNumberService implements ByPhoneNumberContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public ByPhoneNumberRawService $raw;
+
+    /**
+     * @api
      */
     public ActionsService $actions;
 
@@ -23,6 +31,7 @@ final class ByPhoneNumberService implements ByPhoneNumberContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ByPhoneNumberRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -31,18 +40,18 @@ final class ByPhoneNumberService implements ByPhoneNumberContract
      *
      * List verifications by phone number
      *
+     * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
         string $phoneNumber,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ByPhoneNumberListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['verifications/by_phone_number/%1$s', $phoneNumber],
-            options: $requestOptions,
-            convert: ByPhoneNumberListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($phoneNumber, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

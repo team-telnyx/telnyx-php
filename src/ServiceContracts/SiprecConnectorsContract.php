@@ -10,8 +10,9 @@ use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SiprecConnectorsContract
 {
     /**
@@ -21,78 +22,62 @@ interface SiprecConnectorsContract
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $host,
-        $name,
-        $port,
-        $appSubdomain = omit,
-        ?RequestOptions $requestOptions = null,
+        string $host,
+        string $name,
+        int $port,
+        ?string $appSubdomain = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SiprecConnectorNewResponse;
-
-    /**
-     * @api
+     * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SiprecConnectorGetResponse;
 
     /**
      * @api
      *
+     * @param string $connectorName uniquely identifies a SIPREC connector
      * @param string $host hostname/IPv4 address of the SIPREC SRS
      * @param string $name name for the SIPREC connector resource
      * @param int $port port for the SIPREC SRS
      * @param string $appSubdomain subdomain to route the call when using Telnyx SRS (optional for non-Telnyx SRS)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $connectorName,
-        $host,
-        $name,
-        $port,
-        $appSubdomain = omit,
-        ?RequestOptions $requestOptions = null,
+        string $host,
+        string $name,
+        int $port,
+        ?string $appSubdomain = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SiprecConnectorUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $connectorName,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): SiprecConnectorUpdateResponse;
-
-    /**
-     * @api
+     * @param string $connectorName uniquely identifies a SIPREC connector
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $connectorName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

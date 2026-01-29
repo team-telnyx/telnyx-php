@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\AssistantTest;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type rubric_alias = array{criteria: string, name: string}
+ * @phpstan-type RubricShape = array{criteria: string, name: string}
  */
 final class Rubric implements BaseModel
 {
-    /** @use SdkModel<rubric_alias> */
+    /** @use SdkModel<RubricShape> */
     use SdkModel;
 
     /**
      * Specific guidance on how to assess the assistant’s performance for this rubric item.
      */
-    #[Api]
+    #[Required]
     public string $criteria;
 
     /**
      * Label for the evaluation criterion, e.g., Empathy, Accuracy, Clarity.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -54,12 +54,12 @@ final class Rubric implements BaseModel
      */
     public static function with(string $criteria, string $name): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->criteria = $criteria;
-        $obj->name = $name;
+        $self['criteria'] = $criteria;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Rubric implements BaseModel
      */
     public function withCriteria(string $criteria): self
     {
-        $obj = clone $this;
-        $obj->criteria = $criteria;
+        $self = clone $this;
+        $self['criteria'] = $criteria;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Rubric implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

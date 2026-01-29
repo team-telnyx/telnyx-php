@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InventoryCoverage\InventoryCoverageListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\CountryCode;
@@ -15,32 +15,32 @@ use Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter\PhoneNumberType;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[npa], filter[nxx], filter[administrative_area], filter[phone_number_type], filter[country_code], filter[count], filter[features], filter[groupBy].
  *
- * @phpstan-type filter_alias = array{
- *   administrativeArea?: string,
- *   count?: bool,
- *   countryCode?: value-of<CountryCode>,
- *   features?: list<value-of<Feature>>,
- *   groupBy?: value-of<GroupBy>,
- *   npa?: int,
- *   nxx?: int,
- *   phoneNumberType?: value-of<PhoneNumberType>,
+ * @phpstan-type FilterShape = array{
+ *   administrativeArea?: string|null,
+ *   count?: bool|null,
+ *   countryCode?: null|CountryCode|value-of<CountryCode>,
+ *   features?: list<Feature|value-of<Feature>>|null,
+ *   groupBy?: null|GroupBy|value-of<GroupBy>,
+ *   npa?: int|null,
+ *   nxx?: int|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by administrative area.
      */
-    #[Api('administrative_area', optional: true)]
+    #[Optional('administrative_area')]
     public ?string $administrativeArea;
 
     /**
      * Include count in the result.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $count;
 
     /**
@@ -48,7 +48,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<CountryCode>|null $countryCode
      */
-    #[Api('country_code', enum: CountryCode::class, optional: true)]
+    #[Optional('country_code', enum: CountryCode::class)]
     public ?string $countryCode;
 
     /**
@@ -56,7 +56,7 @@ final class Filter implements BaseModel
      *
      * @var list<value-of<Feature>>|null $features
      */
-    #[Api(list: Feature::class, optional: true)]
+    #[Optional(list: Feature::class)]
     public ?array $features;
 
     /**
@@ -64,19 +64,19 @@ final class Filter implements BaseModel
      *
      * @var value-of<GroupBy>|null $groupBy
      */
-    #[Api(enum: GroupBy::class, optional: true)]
+    #[Optional(enum: GroupBy::class)]
     public ?string $groupBy;
 
     /**
      * Filter by npa.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $npa;
 
     /**
      * Filter by nxx.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $nxx;
 
     /**
@@ -84,7 +84,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
     public ?string $phoneNumberType;
 
     public function __construct()
@@ -97,10 +97,10 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CountryCode|value-of<CountryCode> $countryCode
-     * @param list<Feature|value-of<Feature>> $features
-     * @param GroupBy|value-of<GroupBy> $groupBy
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param CountryCode|value-of<CountryCode>|null $countryCode
+     * @param list<Feature|value-of<Feature>>|null $features
+     * @param GroupBy|value-of<GroupBy>|null $groupBy
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
      */
     public static function with(
         ?string $administrativeArea = null,
@@ -112,18 +112,18 @@ final class Filter implements BaseModel
         ?int $nxx = null,
         PhoneNumberType|string|null $phoneNumberType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $administrativeArea && $obj->administrativeArea = $administrativeArea;
-        null !== $count && $obj->count = $count;
-        null !== $countryCode && $obj['countryCode'] = $countryCode;
-        null !== $features && $obj['features'] = $features;
-        null !== $groupBy && $obj['groupBy'] = $groupBy;
-        null !== $npa && $obj->npa = $npa;
-        null !== $nxx && $obj->nxx = $nxx;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $count && $self['count'] = $count;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $features && $self['features'] = $features;
+        null !== $groupBy && $self['groupBy'] = $groupBy;
+        null !== $npa && $self['npa'] = $npa;
+        null !== $nxx && $self['nxx'] = $nxx;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class Filter implements BaseModel
      */
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj->administrativeArea = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class Filter implements BaseModel
      */
     public function withCount(bool $count): self
     {
-        $obj = clone $this;
-        $obj->count = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(CountryCode|string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +168,10 @@ final class Filter implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj['features'] = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +181,10 @@ final class Filter implements BaseModel
      */
     public function withGroupBy(GroupBy|string $groupBy): self
     {
-        $obj = clone $this;
-        $obj['groupBy'] = $groupBy;
+        $self = clone $this;
+        $self['groupBy'] = $groupBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class Filter implements BaseModel
      */
     public function withNpa(int $npa): self
     {
-        $obj = clone $this;
-        $obj->npa = $npa;
+        $self = clone $this;
+        $self['npa'] = $npa;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,10 +203,10 @@ final class Filter implements BaseModel
      */
     public function withNxx(int $nxx): self
     {
-        $obj = clone $this;
-        $obj->nxx = $nxx;
+        $self = clone $this;
+        $self['nxx'] = $nxx;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,9 +217,9 @@ final class Filter implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 }

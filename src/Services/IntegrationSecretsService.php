@@ -6,24 +6,33 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\IntegrationSecrets\IntegrationSecret;
 use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
-use Telnyx\IntegrationSecrets\IntegrationSecretListParams;
 use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter;
-use Telnyx\IntegrationSecrets\IntegrationSecretListParams\Page;
-use Telnyx\IntegrationSecrets\IntegrationSecretListResponse;
 use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IntegrationSecretsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class IntegrationSecretsService implements IntegrationSecretsContract
 {
     /**
+     * @api
+     */
+    public IntegrationSecretsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new IntegrationSecretsRawService($client);
+    }
 
     /**
      * @api
@@ -35,52 +44,32 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      * @param string $token The token for the secret. Required for bearer type secrets, ignored otherwise.
      * @param string $password The password for the secret. Required for basic type secrets, ignored otherwise.
      * @param string $username The username for the secret. Required for basic type secrets, ignored otherwise.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $identifier,
-        $type,
-        $token = omit,
-        $password = omit,
-        $username = omit,
-        ?RequestOptions $requestOptions = null,
+        string $identifier,
+        Type|string $type,
+        ?string $token = null,
+        ?string $password = null,
+        ?string $username = null,
+        RequestOptions|array|null $requestOptions = null,
     ): IntegrationSecretNewResponse {
-        $params = [
-            'identifier' => $identifier,
-            'type' => $type,
-            'token' => $token,
-            'password' => $password,
-            'username' => $username,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): IntegrationSecretNewResponse {
-        [$parsed, $options] = IntegrationSecretCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'identifier' => $identifier,
+                'type' => $type,
+                'token' => $token,
+                'password' => $password,
+                'username' => $username,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'integration_secrets',
-            body: (object) $parsed,
-            options: $options,
-            convert: IntegrationSecretNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -88,45 +77,31 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      *
      * Retrieve a list of all integration secrets configured by the user.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<IntegrationSecret>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): IntegrationSecretListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): IntegrationSecretListResponse {
-        [$parsed, $options] = IntegrationSecretListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'integration_secrets',
-            query: $parsed,
-            options: $options,
-            convert: IntegrationSecretListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -134,18 +109,17 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      *
      * Delete an integration secret given its ID.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['integration_secrets/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingNumbersBulkUpdates\MessagingNumbersBulkUpdateGetResponse\Data\RecordType;
 
 /**
- * @phpstan-type data_alias = array{
- *   failed?: list<string>,
- *   orderID?: string,
- *   pending?: list<string>,
- *   recordType?: value-of<RecordType>,
- *   success?: list<string>,
+ * @phpstan-type DataShape = array{
+ *   failed?: list<string>|null,
+ *   orderID?: string|null,
+ *   pending?: list<string>|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   success?: list<string>|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
@@ -28,13 +28,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $failed
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $failed;
 
     /**
      * Order ID to verify bulk update status.
      */
-    #[Api('order_id', optional: true)]
+    #[Optional('order_id')]
     public ?string $orderID;
 
     /**
@@ -42,7 +42,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $pending
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $pending;
 
     /**
@@ -50,7 +50,7 @@ final class Data implements BaseModel
      *
      * @var value-of<RecordType>|null $recordType
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
     /**
@@ -58,7 +58,7 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $success
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $success;
 
     public function __construct()
@@ -71,10 +71,10 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $failed
-     * @param list<string> $pending
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<string> $success
+     * @param list<string>|null $failed
+     * @param list<string>|null $pending
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<string>|null $success
      */
     public static function with(
         ?array $failed = null,
@@ -83,15 +83,15 @@ final class Data implements BaseModel
         RecordType|string|null $recordType = null,
         ?array $success = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $failed && $obj->failed = $failed;
-        null !== $orderID && $obj->orderID = $orderID;
-        null !== $pending && $obj->pending = $pending;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $success && $obj->success = $success;
+        null !== $failed && $self['failed'] = $failed;
+        null !== $orderID && $self['orderID'] = $orderID;
+        null !== $pending && $self['pending'] = $pending;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $success && $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class Data implements BaseModel
      */
     public function withFailed(array $failed): self
     {
-        $obj = clone $this;
-        $obj->failed = $failed;
+        $self = clone $this;
+        $self['failed'] = $failed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Data implements BaseModel
      */
     public function withOrderID(string $orderID): self
     {
-        $obj = clone $this;
-        $obj->orderID = $orderID;
+        $self = clone $this;
+        $self['orderID'] = $orderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Data implements BaseModel
      */
     public function withPending(array $pending): self
     {
-        $obj = clone $this;
-        $obj->pending = $pending;
+        $self = clone $this;
+        $self['pending'] = $pending;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,9 +151,9 @@ final class Data implements BaseModel
      */
     public function withSuccess(array $success): self
     {
-        $obj = clone $this;
-        $obj->success = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

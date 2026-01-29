@@ -4,110 +4,110 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomRecordings\RoomRecordingGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data\Status;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data\Type;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   codec?: string,
- *   completedAt?: \DateTimeInterface,
- *   createdAt?: \DateTimeInterface,
- *   downloadURL?: string,
- *   durationSecs?: int,
- *   endedAt?: \DateTimeInterface,
- *   participantID?: string,
- *   recordType?: string,
- *   roomID?: string,
- *   sessionID?: string,
- *   sizeMB?: float,
- *   startedAt?: \DateTimeInterface,
- *   status?: value-of<Status>,
- *   type?: value-of<Type>,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   codec?: string|null,
+ *   completedAt?: \DateTimeInterface|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   downloadURL?: string|null,
+ *   durationSecs?: int|null,
+ *   endedAt?: \DateTimeInterface|null,
+ *   participantID?: string|null,
+ *   recordType?: string|null,
+ *   roomID?: string|null,
+ *   sessionID?: string|null,
+ *   sizeMB?: float|null,
+ *   startedAt?: \DateTimeInterface|null,
+ *   status?: null|Status|value-of<Status>,
+ *   type?: null|Type|value-of<Type>,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * A unique identifier for the room recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Shows the codec used for the room recording.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $codec;
 
     /**
      * ISO 8601 timestamp when the room recording has completed.
      */
-    #[Api('completed_at', optional: true)]
+    #[Optional('completed_at')]
     public ?\DateTimeInterface $completedAt;
 
     /**
      * ISO 8601 timestamp when the room recording was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * Url to download the recording.
      */
-    #[Api('download_url', optional: true)]
+    #[Optional('download_url')]
     public ?string $downloadURL;
 
     /**
      * Shows the room recording duration in seconds.
      */
-    #[Api('duration_secs', optional: true)]
+    #[Optional('duration_secs')]
     public ?int $durationSecs;
 
     /**
      * ISO 8601 timestamp when the room recording has ended.
      */
-    #[Api('ended_at', optional: true)]
+    #[Optional('ended_at')]
     public ?\DateTimeInterface $endedAt;
 
     /**
      * Identify the room participant associated with the room recording.
      */
-    #[Api('participant_id', optional: true)]
+    #[Optional('participant_id')]
     public ?string $participantID;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * Identify the room associated with the room recording.
      */
-    #[Api('room_id', optional: true)]
+    #[Optional('room_id')]
     public ?string $roomID;
 
     /**
      * Identify the room session associated with the room recording.
      */
-    #[Api('session_id', optional: true)]
+    #[Optional('session_id')]
     public ?string $sessionID;
 
     /**
      * Shows the room recording size in MB.
      */
-    #[Api('size_mb', optional: true)]
+    #[Optional('size_mb')]
     public ?float $sizeMB;
 
     /**
      * ISO 8601 timestamp when the room recording has stated.
      */
-    #[Api('started_at', optional: true)]
+    #[Optional('started_at')]
     public ?\DateTimeInterface $startedAt;
 
     /**
@@ -115,7 +115,7 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -123,13 +123,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 timestamp when the room recording was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -142,8 +142,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
-     * @param Type|value-of<Type> $type
+     * @param Status|value-of<Status>|null $status
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -163,26 +163,26 @@ final class Data implements BaseModel
         Type|string|null $type = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $codec && $obj->codec = $codec;
-        null !== $completedAt && $obj->completedAt = $completedAt;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $downloadURL && $obj->downloadURL = $downloadURL;
-        null !== $durationSecs && $obj->durationSecs = $durationSecs;
-        null !== $endedAt && $obj->endedAt = $endedAt;
-        null !== $participantID && $obj->participantID = $participantID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $roomID && $obj->roomID = $roomID;
-        null !== $sessionID && $obj->sessionID = $sessionID;
-        null !== $sizeMB && $obj->sizeMB = $sizeMB;
-        null !== $startedAt && $obj->startedAt = $startedAt;
-        null !== $status && $obj['status'] = $status;
-        null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $codec && $self['codec'] = $codec;
+        null !== $completedAt && $self['completedAt'] = $completedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $downloadURL && $self['downloadURL'] = $downloadURL;
+        null !== $durationSecs && $self['durationSecs'] = $durationSecs;
+        null !== $endedAt && $self['endedAt'] = $endedAt;
+        null !== $participantID && $self['participantID'] = $participantID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $roomID && $self['roomID'] = $roomID;
+        null !== $sessionID && $self['sessionID'] = $sessionID;
+        null !== $sizeMB && $self['sizeMB'] = $sizeMB;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
+        null !== $status && $self['status'] = $status;
+        null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -190,10 +190,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +201,10 @@ final class Data implements BaseModel
      */
     public function withCodec(string $codec): self
     {
-        $obj = clone $this;
-        $obj->codec = $codec;
+        $self = clone $this;
+        $self['codec'] = $codec;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +212,10 @@ final class Data implements BaseModel
      */
     public function withCompletedAt(\DateTimeInterface $completedAt): self
     {
-        $obj = clone $this;
-        $obj->completedAt = $completedAt;
+        $self = clone $this;
+        $self['completedAt'] = $completedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +223,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class Data implements BaseModel
      */
     public function withDownloadURL(string $downloadURL): self
     {
-        $obj = clone $this;
-        $obj->downloadURL = $downloadURL;
+        $self = clone $this;
+        $self['downloadURL'] = $downloadURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +245,10 @@ final class Data implements BaseModel
      */
     public function withDurationSecs(int $durationSecs): self
     {
-        $obj = clone $this;
-        $obj->durationSecs = $durationSecs;
+        $self = clone $this;
+        $self['durationSecs'] = $durationSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,10 +256,10 @@ final class Data implements BaseModel
      */
     public function withEndedAt(\DateTimeInterface $endedAt): self
     {
-        $obj = clone $this;
-        $obj->endedAt = $endedAt;
+        $self = clone $this;
+        $self['endedAt'] = $endedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,18 +267,18 @@ final class Data implements BaseModel
      */
     public function withParticipantID(string $participantID): self
     {
-        $obj = clone $this;
-        $obj->participantID = $participantID;
+        $self = clone $this;
+        $self['participantID'] = $participantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -286,10 +286,10 @@ final class Data implements BaseModel
      */
     public function withRoomID(string $roomID): self
     {
-        $obj = clone $this;
-        $obj->roomID = $roomID;
+        $self = clone $this;
+        $self['roomID'] = $roomID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -297,10 +297,10 @@ final class Data implements BaseModel
      */
     public function withSessionID(string $sessionID): self
     {
-        $obj = clone $this;
-        $obj->sessionID = $sessionID;
+        $self = clone $this;
+        $self['sessionID'] = $sessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -308,10 +308,10 @@ final class Data implements BaseModel
      */
     public function withSizeMB(float $sizeMB): self
     {
-        $obj = clone $this;
-        $obj->sizeMB = $sizeMB;
+        $self = clone $this;
+        $self['sizeMB'] = $sizeMB;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -319,10 +319,10 @@ final class Data implements BaseModel
      */
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
-        $obj = clone $this;
-        $obj->startedAt = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -332,10 +332,10 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -345,10 +345,10 @@ final class Data implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -356,9 +356,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

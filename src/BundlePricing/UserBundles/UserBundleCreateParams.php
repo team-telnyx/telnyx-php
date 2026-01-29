@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,32 +13,36 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates multiple user bundles for the user.
  *
- * @see Telnyx\BundlePricing\UserBundles->create
+ * @see Telnyx\Services\BundlePricing\UserBundlesService::create()
  *
- * @phpstan-type user_bundle_create_params = array{
- *   idempotencyKey?: string, items?: list<Item>, authorizationBearer?: string
+ * @phpstan-import-type ItemShape from \Telnyx\BundlePricing\UserBundles\UserBundleCreateParams\Item
+ *
+ * @phpstan-type UserBundleCreateParamsShape = array{
+ *   idempotencyKey?: string|null,
+ *   items?: list<Item|ItemShape>|null,
+ *   authorizationBearer?: string|null,
  * }
  */
 final class UserBundleCreateParams implements BaseModel
 {
-    /** @use SdkModel<user_bundle_create_params> */
+    /** @use SdkModel<UserBundleCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Idempotency key for the request. Can be any UUID, but should always be unique for each request.
      */
-    #[Api('idempotency_key', optional: true)]
+    #[Optional('idempotency_key')]
     public ?string $idempotencyKey;
 
     /** @var list<Item>|null $items */
-    #[Api(list: Item::class, optional: true)]
+    #[Optional(list: Item::class)]
     public ?array $items;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorizationBearer;
 
     public function __construct()
@@ -51,20 +55,20 @@ final class UserBundleCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Item> $items
+     * @param list<Item|ItemShape>|null $items
      */
     public static function with(
         ?string $idempotencyKey = null,
         ?array $items = null,
         ?string $authorizationBearer = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $idempotencyKey && $obj->idempotencyKey = $idempotencyKey;
-        null !== $items && $obj->items = $items;
-        null !== $authorizationBearer && $obj->authorizationBearer = $authorizationBearer;
+        null !== $idempotencyKey && $self['idempotencyKey'] = $idempotencyKey;
+        null !== $items && $self['items'] = $items;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,21 +76,21 @@ final class UserBundleCreateParams implements BaseModel
      */
     public function withIdempotencyKey(string $idempotencyKey): self
     {
-        $obj = clone $this;
-        $obj->idempotencyKey = $idempotencyKey;
+        $self = clone $this;
+        $self['idempotencyKey'] = $idempotencyKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Item> $items
+     * @param list<Item|ItemShape> $items
      */
     public function withItems(array $items): self
     {
-        $obj = clone $this;
-        $obj->items = $items;
+        $self = clone $this;
+        $self['items'] = $items;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +98,9 @@ final class UserBundleCreateParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj->authorizationBearer = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

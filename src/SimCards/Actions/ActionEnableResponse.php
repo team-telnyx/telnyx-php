@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_enable_response = array{data?: SimCardAction}
+ * @phpstan-import-type SimCardActionShape from \Telnyx\SimCards\Actions\SimCardAction
+ *
+ * @phpstan-type ActionEnableResponseShape = array{
+ *   data?: null|SimCardAction|SimCardActionShape
+ * }
  */
-final class ActionEnableResponse implements BaseModel, ResponseConverter
+final class ActionEnableResponse implements BaseModel
 {
-    /** @use SdkModel<action_enable_response> */
+    /** @use SdkModel<ActionEnableResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCardAction $data;
 
     public function __construct()
@@ -35,24 +35,28 @@ final class ActionEnableResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param SimCardAction|SimCardActionShape|null $data
      */
-    public static function with(?SimCardAction $data = null): self
+    public static function with(SimCardAction|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * This object represents a SIM card action. It allows tracking the current status of an operation that impacts the SIM card.
+     *
+     * @param SimCardAction|SimCardActionShape $data
      */
-    public function withData(SimCardAction $data): self
+    public function withData(SimCardAction|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

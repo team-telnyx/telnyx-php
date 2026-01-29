@@ -5,78 +5,79 @@ declare(strict_types=1);
 namespace Telnyx\Calls\CallGetStatusResponse;
 
 use Telnyx\Calls\CallGetStatusResponse\Data\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   callControlID: string,
  *   callLegID: string,
  *   callSessionID: string,
  *   isAlive: bool,
- *   recordType: value-of<RecordType>,
- *   callDuration?: int,
- *   clientState?: string,
- *   endTime?: string,
- *   startTime?: string,
+ *   recordType: RecordType|value-of<RecordType>,
+ *   callDuration?: int|null,
+ *   clientState?: string|null,
+ *   endTime?: string|null,
+ *   startTime?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api('call_control_id')]
+    #[Required('call_control_id')]
     public string $callControlID;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id')]
+    #[Required('call_leg_id')]
     public string $callLegID;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id')]
+    #[Required('call_session_id')]
     public string $callSessionID;
 
     /**
      * Indicates whether the call is alive or not. For Dial command it will always be `false` (dialing is asynchronous).
      */
-    #[Api('is_alive')]
+    #[Required('is_alive')]
     public bool $isAlive;
 
     /** @var value-of<RecordType> $recordType */
-    #[Api('record_type', enum: RecordType::class)]
+    #[Required('record_type', enum: RecordType::class)]
     public string $recordType;
 
     /**
      * Indicates the duration of the call in seconds.
      */
-    #[Api('call_duration', optional: true)]
+    #[Optional('call_duration')]
     public ?int $callDuration;
 
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * ISO 8601 formatted date indicating when the call ended. Only present when the call is not alive.
      */
-    #[Api('end_time', optional: true)]
+    #[Optional('end_time')]
     public ?string $endTime;
 
     /**
      * ISO 8601 formatted date indicating when the call started.
      */
-    #[Api('start_time', optional: true)]
+    #[Optional('start_time')]
     public ?string $startTime;
 
     /**
@@ -127,20 +128,20 @@ final class Data implements BaseModel
         ?string $endTime = null,
         ?string $startTime = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->callControlID = $callControlID;
-        $obj->callLegID = $callLegID;
-        $obj->callSessionID = $callSessionID;
-        $obj->isAlive = $isAlive;
-        $obj['recordType'] = $recordType;
+        $self['callControlID'] = $callControlID;
+        $self['callLegID'] = $callLegID;
+        $self['callSessionID'] = $callSessionID;
+        $self['isAlive'] = $isAlive;
+        $self['recordType'] = $recordType;
 
-        null !== $callDuration && $obj->callDuration = $callDuration;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $endTime && $obj->endTime = $endTime;
-        null !== $startTime && $obj->startTime = $startTime;
+        null !== $callDuration && $self['callDuration'] = $callDuration;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $endTime && $self['endTime'] = $endTime;
+        null !== $startTime && $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +149,10 @@ final class Data implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +160,10 @@ final class Data implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +171,10 @@ final class Data implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +182,10 @@ final class Data implements BaseModel
      */
     public function withIsAlive(bool $isAlive): self
     {
-        $obj = clone $this;
-        $obj->isAlive = $isAlive;
+        $self = clone $this;
+        $self['isAlive'] = $isAlive;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +193,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,10 +204,10 @@ final class Data implements BaseModel
      */
     public function withCallDuration(int $callDuration): self
     {
-        $obj = clone $this;
-        $obj->callDuration = $callDuration;
+        $self = clone $this;
+        $self['callDuration'] = $callDuration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,10 +215,10 @@ final class Data implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +226,10 @@ final class Data implements BaseModel
      */
     public function withEndTime(string $endTime): self
     {
-        $obj = clone $this;
-        $obj->endTime = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,9 +237,9 @@ final class Data implements BaseModel
      */
     public function withStartTime(string $startTime): self
     {
-        $obj = clone $this;
-        $obj->startTime = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 }

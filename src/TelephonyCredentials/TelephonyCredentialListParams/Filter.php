@@ -4,54 +4,54 @@ declare(strict_types=1);
 
 namespace Telnyx\TelephonyCredentials\TelephonyCredentialListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[tag], filter[name], filter[status], filter[resource_id], filter[sip_username].
  *
- * @phpstan-type filter_alias = array{
- *   name?: string,
- *   resourceID?: string,
- *   sipUsername?: string,
- *   status?: string,
- *   tag?: string,
+ * @phpstan-type FilterShape = array{
+ *   name?: string|null,
+ *   resourceID?: string|null,
+ *   sipUsername?: string|null,
+ *   status?: string|null,
+ *   tag?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Filter by resource_id.
      */
-    #[Api('resource_id', optional: true)]
+    #[Optional('resource_id')]
     public ?string $resourceID;
 
     /**
      * Filter by sip_username.
      */
-    #[Api('sip_username', optional: true)]
+    #[Optional('sip_username')]
     public ?string $sipUsername;
 
     /**
      * Filter by status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**
      * Filter by tag.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tag;
 
     public function __construct()
@@ -71,15 +71,15 @@ final class Filter implements BaseModel
         ?string $status = null,
         ?string $tag = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $resourceID && $obj->resourceID = $resourceID;
-        null !== $sipUsername && $obj->sipUsername = $sipUsername;
-        null !== $status && $obj->status = $status;
-        null !== $tag && $obj->tag = $tag;
+        null !== $name && $self['name'] = $name;
+        null !== $resourceID && $self['resourceID'] = $resourceID;
+        null !== $sipUsername && $self['sipUsername'] = $sipUsername;
+        null !== $status && $self['status'] = $status;
+        null !== $tag && $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Filter implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Filter implements BaseModel
      */
     public function withResourceID(string $resourceID): self
     {
-        $obj = clone $this;
-        $obj->resourceID = $resourceID;
+        $self = clone $this;
+        $self['resourceID'] = $resourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Filter implements BaseModel
      */
     public function withSipUsername(string $sipUsername): self
     {
-        $obj = clone $this;
-        $obj->sipUsername = $sipUsername;
+        $self = clone $this;
+        $self['sipUsername'] = $sipUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +131,9 @@ final class Filter implements BaseModel
      */
     public function withTag(string $tag): self
     {
-        $obj = clone $this;
-        $obj->tag = $tag;
+        $self = clone $this;
+        $self['tag'] = $tag;
 
-        return $obj;
+        return $self;
     }
 }

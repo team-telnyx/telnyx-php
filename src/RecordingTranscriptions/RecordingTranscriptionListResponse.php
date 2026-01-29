@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\RecordingTranscriptions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
 
 /**
- * @phpstan-type recording_transcription_list_response = array{
- *   data?: list<RecordingTranscription>, meta?: Meta
+ * @phpstan-import-type RecordingTranscriptionShape from \Telnyx\RecordingTranscriptions\RecordingTranscription
+ * @phpstan-import-type MetaShape from \Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta
+ *
+ * @phpstan-type RecordingTranscriptionListResponseShape = array{
+ *   data?: list<RecordingTranscription|RecordingTranscriptionShape>|null,
+ *   meta?: null|Meta|MetaShape,
  * }
  */
-final class RecordingTranscriptionListResponse implements BaseModel, ResponseConverter
+final class RecordingTranscriptionListResponse implements BaseModel
 {
-    /** @use SdkModel<recording_transcription_list_response> */
+    /** @use SdkModel<RecordingTranscriptionListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<RecordingTranscription>|null $data */
-    #[Api(list: RecordingTranscription::class, optional: true)]
+    #[Optional(list: RecordingTranscription::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
     public function __construct()
@@ -40,34 +40,40 @@ final class RecordingTranscriptionListResponse implements BaseModel, ResponseCon
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RecordingTranscription> $data
+     * @param list<RecordingTranscription|RecordingTranscriptionShape>|null $data
+     * @param Meta|MetaShape|null $meta
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
-        $obj = new self;
+    public static function with(
+        ?array $data = null,
+        Meta|array|null $meta = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<RecordingTranscription> $data
+     * @param list<RecordingTranscription|RecordingTranscriptionShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|MetaShape $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

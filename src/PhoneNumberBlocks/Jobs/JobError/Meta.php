@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberBlocks\Jobs\JobError;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{url?: string}
+ * @phpstan-type MetaShape = array{url?: string|null}
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     /**
      * URL with additional information on the error.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class Meta implements BaseModel
      */
     public static function with(?string $url = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $url && $obj->url = $url;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Meta implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

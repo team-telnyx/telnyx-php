@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update requirement group for a sub number order.
  *
- * @see Telnyx\SubNumberOrders->updateRequirementGroup
+ * @see Telnyx\Services\SubNumberOrdersService::updateRequirementGroup()
  *
- * @phpstan-type sub_number_order_update_requirement_group_params = array{
+ * @phpstan-type SubNumberOrderUpdateRequirementGroupParamsShape = array{
  *   requirementGroupID: string
  * }
  */
 final class SubNumberOrderUpdateRequirementGroupParams implements BaseModel
 {
-    /** @use SdkModel<sub_number_order_update_requirement_group_params> */
+    /** @use SdkModel<SubNumberOrderUpdateRequirementGroupParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The ID of the requirement group to associate.
      */
-    #[Api('requirement_group_id')]
+    #[Required('requirement_group_id')]
     public string $requirementGroupID;
 
     /**
@@ -56,11 +56,11 @@ final class SubNumberOrderUpdateRequirementGroupParams implements BaseModel
      */
     public static function with(string $requirementGroupID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->requirementGroupID = $requirementGroupID;
+        $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class SubNumberOrderUpdateRequirementGroupParams implements BaseModel
      */
     public function withRequirementGroupID(string $requirementGroupID): self
     {
-        $obj = clone $this;
-        $obj->requirementGroupID = $requirementGroupID;
+        $self = clone $this;
+        $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,64 +5,46 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\Comments\CommentListParams\Page;
 use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\Comments\CommentListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CommentsContract
 {
     /**
      * @api
      *
-     * @param string $body
+     * @param string $id Porting Order id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        $body = omit,
-        ?RequestOptions $requestOptions = null
+        ?string $body = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CommentNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * @param string $id Porting Order id
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CommentNewResponse;
-
-    /**
-     * @api
-     *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @return DefaultPagination<CommentListResponse>
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): CommentListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CommentListResponse;
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 }

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\FineTuning\Jobs;
 
 use Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,43 +14,45 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new fine tuning job.
  *
- * @see Telnyx\AI\FineTuning\Jobs->create
+ * @see Telnyx\Services\AI\FineTuning\JobsService::create()
  *
- * @phpstan-type job_create_params = array{
+ * @phpstan-import-type HyperparametersShape from \Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters
+ *
+ * @phpstan-type JobCreateParamsShape = array{
  *   model: string,
  *   trainingFile: string,
- *   hyperparameters?: Hyperparameters,
- *   suffix?: string,
+ *   hyperparameters?: null|Hyperparameters|HyperparametersShape,
+ *   suffix?: string|null,
  * }
  */
 final class JobCreateParams implements BaseModel
 {
-    /** @use SdkModel<job_create_params> */
+    /** @use SdkModel<JobCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The base model that is being fine-tuned.
      */
-    #[Api]
+    #[Required]
     public string $model;
 
     /**
      * The storage bucket or object used for training.
      */
-    #[Api('training_file')]
+    #[Required('training_file')]
     public string $trainingFile;
 
     /**
      * The hyperparameters used for the fine-tuning job.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Hyperparameters $hyperparameters;
 
     /**
      * Optional suffix to append to the fine tuned model's name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $suffix;
 
     /**
@@ -75,22 +78,24 @@ final class JobCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Hyperparameters|HyperparametersShape|null $hyperparameters
      */
     public static function with(
         string $model,
         string $trainingFile,
-        ?Hyperparameters $hyperparameters = null,
+        Hyperparameters|array|null $hyperparameters = null,
         ?string $suffix = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->model = $model;
-        $obj->trainingFile = $trainingFile;
+        $self['model'] = $model;
+        $self['trainingFile'] = $trainingFile;
 
-        null !== $hyperparameters && $obj->hyperparameters = $hyperparameters;
-        null !== $suffix && $obj->suffix = $suffix;
+        null !== $hyperparameters && $self['hyperparameters'] = $hyperparameters;
+        null !== $suffix && $self['suffix'] = $suffix;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +103,10 @@ final class JobCreateParams implements BaseModel
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj->model = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,21 +114,24 @@ final class JobCreateParams implements BaseModel
      */
     public function withTrainingFile(string $trainingFile): self
     {
-        $obj = clone $this;
-        $obj->trainingFile = $trainingFile;
+        $self = clone $this;
+        $self['trainingFile'] = $trainingFile;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The hyperparameters used for the fine-tuning job.
+     *
+     * @param Hyperparameters|HyperparametersShape $hyperparameters
      */
-    public function withHyperparameters(Hyperparameters $hyperparameters): self
-    {
-        $obj = clone $this;
-        $obj->hyperparameters = $hyperparameters;
+    public function withHyperparameters(
+        Hyperparameters|array $hyperparameters
+    ): self {
+        $self = clone $this;
+        $self['hyperparameters'] = $hyperparameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +139,9 @@ final class JobCreateParams implements BaseModel
      */
     public function withSuffix(string $suffix): self
     {
-        $obj = clone $this;
-        $obj->suffix = $suffix;
+        $self = clone $this;
+        $self['suffix'] = $suffix;
 
-        return $obj;
+        return $self;
     }
 }

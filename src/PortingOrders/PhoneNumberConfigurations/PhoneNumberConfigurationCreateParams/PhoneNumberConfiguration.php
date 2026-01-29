@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type phone_number_configuration = array{
+ * @phpstan-type PhoneNumberConfigurationShape = array{
  *   portingPhoneNumberID: string, userBundleID: string
  * }
  */
 final class PhoneNumberConfiguration implements BaseModel
 {
-    /** @use SdkModel<phone_number_configuration> */
+    /** @use SdkModel<PhoneNumberConfigurationShape> */
     use SdkModel;
 
     /**
      * Identifies the porting phone number to be configured.
      */
-    #[Api('porting_phone_number_id')]
+    #[Required('porting_phone_number_id')]
     public string $portingPhoneNumberID;
 
     /**
      * Identifies the user bundle to be associated with the porting phone number.
      */
-    #[Api('user_bundle_id')]
+    #[Required('user_bundle_id')]
     public string $userBundleID;
 
     /**
@@ -60,12 +60,12 @@ final class PhoneNumberConfiguration implements BaseModel
         string $portingPhoneNumberID,
         string $userBundleID
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->portingPhoneNumberID = $portingPhoneNumberID;
-        $obj->userBundleID = $userBundleID;
+        $self['portingPhoneNumberID'] = $portingPhoneNumberID;
+        $self['userBundleID'] = $userBundleID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class PhoneNumberConfiguration implements BaseModel
      */
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
-        $obj = clone $this;
-        $obj->portingPhoneNumberID = $portingPhoneNumberID;
+        $self = clone $this;
+        $self['portingPhoneNumberID'] = $portingPhoneNumberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class PhoneNumberConfiguration implements BaseModel
      */
     public function withUserBundleID(string $userBundleID): self
     {
-        $obj = clone $this;
-        $obj->userBundleID = $userBundleID;
+        $self = clone $this;
+        $self['userBundleID'] = $userBundleID;
 
-        return $obj;
+        return $self;
     }
 }

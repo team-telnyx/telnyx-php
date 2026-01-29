@@ -6,27 +6,28 @@ namespace Telnyx\AI\Conversations\Messages;
 
 use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type message_list_response = array{data: list<Data>, meta: Meta}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\Data
+ * @phpstan-import-type MetaShape from \Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta
+ *
+ * @phpstan-type MessageListResponseShape = array{
+ *   data: list<Data|DataShape>, meta: Meta|MetaShape
+ * }
  */
-final class MessageListResponse implements BaseModel, ResponseConverter
+final class MessageListResponse implements BaseModel
 {
-    /** @use SdkModel<message_list_response> */
+    /** @use SdkModel<MessageListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    #[Required(list: Data::class)]
     public array $data;
 
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**
@@ -53,34 +54,38 @@ final class MessageListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|DataShape> $data
+     * @param Meta|MetaShape $meta
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(array $data, Meta|array $meta): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $self['data'] = $data;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|MetaShape $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

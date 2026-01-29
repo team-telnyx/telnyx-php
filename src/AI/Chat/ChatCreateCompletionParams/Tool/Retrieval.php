@@ -4,41 +4,42 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
 
-use Telnyx\AI\Assistants\InferenceEmbeddingBucketIDs;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool\Retrieval\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\AI\Chat\BucketIDs;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type retrieval_alias = array{
- *   retrieval: InferenceEmbeddingBucketIDs, type: value-of<Type>
+ * @phpstan-import-type BucketIDsShape from \Telnyx\AI\Chat\BucketIDs
+ *
+ * @phpstan-type RetrievalShape = array{
+ *   retrieval: BucketIDs|BucketIDsShape, type: 'retrieval'
  * }
  */
 final class Retrieval implements BaseModel
 {
-    /** @use SdkModel<retrieval_alias> */
+    /** @use SdkModel<RetrievalShape> */
     use SdkModel;
 
-    #[Api]
-    public InferenceEmbeddingBucketIDs $retrieval;
+    /** @var 'retrieval' $type */
+    #[Required]
+    public string $type = 'retrieval';
 
-    /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
-    public string $type;
+    #[Required]
+    public BucketIDs $retrieval;
 
     /**
      * `new Retrieval()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Retrieval::with(retrieval: ..., type: ...)
+     * Retrieval::with(retrieval: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Retrieval)->withRetrieval(...)->withType(...)
+     * (new Retrieval)->withRetrieval(...)
      * ```
      */
     public function __construct()
@@ -51,36 +52,25 @@ final class Retrieval implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param BucketIDs|BucketIDsShape $retrieval
      */
-    public static function with(
-        InferenceEmbeddingBucketIDs $retrieval,
-        Type|string $type
-    ): self {
-        $obj = new self;
-
-        $obj->retrieval = $retrieval;
-        $obj['type'] = $type;
-
-        return $obj;
-    }
-
-    public function withRetrieval(InferenceEmbeddingBucketIDs $retrieval): self
+    public static function with(BucketIDs|array $retrieval): self
     {
-        $obj = clone $this;
-        $obj->retrieval = $retrieval;
+        $self = new self;
 
-        return $obj;
+        $self['retrieval'] = $retrieval;
+
+        return $self;
     }
 
     /**
-     * @param Type|value-of<Type> $type
+     * @param BucketIDs|BucketIDsShape $retrieval
      */
-    public function withType(Type|string $type): self
+    public function withRetrieval(BucketIDs|array $retrieval): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['retrieval'] = $retrieval;
 
-        return $obj;
+        return $self;
     }
 }

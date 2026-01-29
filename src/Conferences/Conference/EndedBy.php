@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Conference;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * IDs related to who ended the conference. It is expected for them to all be there or all be null.
  *
- * @phpstan-type ended_by = array{callControlID?: string, callSessionID?: string}
+ * @phpstan-type EndedByShape = array{
+ *   callControlID?: string|null, callSessionID?: string|null
+ * }
  */
 final class EndedBy implements BaseModel
 {
-    /** @use SdkModel<ended_by> */
+    /** @use SdkModel<EndedByShape> */
     use SdkModel;
 
     /**
      * Call Control ID which ended the conference.
      */
-    #[Api('call_control_id', optional: true)]
+    #[Optional('call_control_id')]
     public ?string $callControlID;
 
     /**
      * Call Session ID which ended the conference.
      */
-    #[Api('call_session_id', optional: true)]
+    #[Optional('call_session_id')]
     public ?string $callSessionID;
 
     public function __construct()
@@ -44,12 +46,12 @@ final class EndedBy implements BaseModel
         ?string $callControlID = null,
         ?string $callSessionID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $callSessionID && $obj->callSessionID = $callSessionID;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $callSessionID && $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +59,10 @@ final class EndedBy implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +70,9 @@ final class EndedBy implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 }

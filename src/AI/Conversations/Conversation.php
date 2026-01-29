@@ -4,52 +4,49 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type conversation_alias = array{
+ * @phpstan-type ConversationShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   lastMessageAt: \DateTimeInterface,
- *   metadata: array<string, string>,
- *   name?: string,
+ *   metadata: array<string,string>,
+ *   name?: string|null,
  * }
  */
-final class Conversation implements BaseModel, ResponseConverter
+final class Conversation implements BaseModel
 {
-    /** @use SdkModel<conversation_alias> */
+    /** @use SdkModel<ConversationShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The datetime the conversation was created.
      */
-    #[Api('created_at')]
+    #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
     /**
      * The datetime of the latest message in the conversation.
      */
-    #[Api('last_message_at')]
+    #[Required('last_message_at')]
     public \DateTimeInterface $lastMessageAt;
 
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      *
-     * @var array<string, string> $metadata
+     * @var array<string,string> $metadata
      */
-    #[Api(map: 'string')]
+    #[Required(map: 'string')]
     public array $metadata;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -80,7 +77,7 @@ final class Conversation implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, string> $metadata
+     * @param array<string,string> $metadata
      */
     public static function with(
         string $id,
@@ -89,24 +86,24 @@ final class Conversation implements BaseModel, ResponseConverter
         array $metadata,
         ?string $name = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->lastMessageAt = $lastMessageAt;
-        $obj->metadata = $metadata;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['lastMessageAt'] = $lastMessageAt;
+        $self['metadata'] = $metadata;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +111,10 @@ final class Conversation implements BaseModel, ResponseConverter
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,30 +122,30 @@ final class Conversation implements BaseModel, ResponseConverter
      */
     public function withLastMessageAt(\DateTimeInterface $lastMessageAt): self
     {
-        $obj = clone $this;
-        $obj->lastMessageAt = $lastMessageAt;
+        $self = clone $this;
+        $self['lastMessageAt'] = $lastMessageAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      *
-     * @param array<string, string> $metadata
+     * @param array<string,string> $metadata
      */
     public function withMetadata(array $metadata): self
     {
-        $obj = clone $this;
-        $obj->metadata = $metadata;
+        $self = clone $this;
+        $self['metadata'] = $metadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

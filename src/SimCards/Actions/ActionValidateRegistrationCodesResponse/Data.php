@@ -4,42 +4,42 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   invalidDetail?: string|null,
- *   recordType?: string,
- *   registrationCode?: string,
- *   valid?: bool,
+ *   recordType?: string|null,
+ *   registrationCode?: string|null,
+ *   valid?: bool|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The validation message.
      */
-    #[Api('invalid_detail', nullable: true, optional: true)]
+    #[Optional('invalid_detail', nullable: true)]
     public ?string $invalidDetail;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The 10-digit SIM card registration code.
      */
-    #[Api('registration_code', optional: true)]
+    #[Optional('registration_code')]
     public ?string $registrationCode;
 
     /**
      * The attribute that denotes whether the code is valid or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $valid;
 
     public function __construct()
@@ -58,14 +58,14 @@ final class Data implements BaseModel
         ?string $registrationCode = null,
         ?bool $valid = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $invalidDetail && $obj->invalidDetail = $invalidDetail;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $registrationCode && $obj->registrationCode = $registrationCode;
-        null !== $valid && $obj->valid = $valid;
+        null !== $invalidDetail && $self['invalidDetail'] = $invalidDetail;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $registrationCode && $self['registrationCode'] = $registrationCode;
+        null !== $valid && $self['valid'] = $valid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,18 +73,18 @@ final class Data implements BaseModel
      */
     public function withInvalidDetail(?string $invalidDetail): self
     {
-        $obj = clone $this;
-        $obj->invalidDetail = $invalidDetail;
+        $self = clone $this;
+        $self['invalidDetail'] = $invalidDetail;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +92,10 @@ final class Data implements BaseModel
      */
     public function withRegistrationCode(string $registrationCode): self
     {
-        $obj = clone $this;
-        $obj->registrationCode = $registrationCode;
+        $self = clone $this;
+        $self['registrationCode'] = $registrationCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +103,9 @@ final class Data implements BaseModel
      */
     public function withValid(bool $valid): self
     {
-        $obj = clone $this;
-        $obj->valid = $valid;
+        $self = clone $this;
+        $self['valid'] = $valid;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,71 +4,74 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Channels;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Source;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
 
 /**
- * @phpstan-type texml_get_call_recording_response_body = array{
- *   accountSid?: string,
- *   callSid?: string,
- *   channels?: 1|2,
+ * @phpstan-import-type TexmlRecordingSubresourcesUrisShape from \Telnyx\Texml\Accounts\TexmlRecordingSubresourcesUris
+ *
+ * @phpstan-type TexmlGetCallRecordingResponseBodyShape = array{
+ *   accountSid?: string|null,
+ *   callSid?: string|null,
+ *   channels?: null|Channels|value-of<Channels>,
  *   conferenceSid?: string|null,
- *   dateCreated?: \DateTimeInterface,
- *   dateUpdated?: \DateTimeInterface,
+ *   dateCreated?: \DateTimeInterface|null,
+ *   dateUpdated?: \DateTimeInterface|null,
  *   duration?: string|null,
  *   errorCode?: string|null,
- *   mediaURL?: string,
- *   sid?: string,
- *   source?: value-of<Source>,
- *   startTime?: \DateTimeInterface,
- *   status?: value-of<Status>,
- *   subresourcesUris?: TexmlRecordingSubresourcesUris,
- *   uri?: string,
+ *   mediaURL?: string|null,
+ *   sid?: string|null,
+ *   source?: null|Source|value-of<Source>,
+ *   startTime?: \DateTimeInterface|null,
+ *   status?: null|Status|value-of<Status>,
+ *   subresourcesUris?: null|TexmlRecordingSubresourcesUris|TexmlRecordingSubresourcesUrisShape,
+ *   uri?: string|null,
  * }
  */
 final class TexmlGetCallRecordingResponseBody implements BaseModel
 {
-    /** @use SdkModel<texml_get_call_recording_response_body> */
+    /** @use SdkModel<TexmlGetCallRecordingResponseBodyShape> */
     use SdkModel;
 
-    #[Api('account_sid', optional: true)]
+    #[Optional('account_sid')]
     public ?string $accountSid;
 
-    #[Api('call_sid', optional: true)]
+    #[Optional('call_sid')]
     public ?string $callSid;
 
-    /** @var 1|2|null $channels */
-    #[Api(optional: true)]
+    /** @var value-of<Channels>|null $channels */
+    #[Optional(enum: Channels::class)]
     public ?int $channels;
 
-    #[Api('conference_sid', nullable: true, optional: true)]
+    #[Optional('conference_sid', nullable: true)]
     public ?string $conferenceSid;
 
-    #[Api('date_created', optional: true)]
+    #[Optional('date_created')]
     public ?\DateTimeInterface $dateCreated;
 
-    #[Api('date_updated', optional: true)]
+    #[Optional('date_updated')]
     public ?\DateTimeInterface $dateUpdated;
 
     /**
      * The duration of this recording, given in seconds.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $duration;
 
-    #[Api('error_code', nullable: true, optional: true)]
+    #[Optional('error_code', nullable: true)]
     public ?string $errorCode;
 
-    #[Api('media_url', optional: true)]
+    #[Optional('media_url')]
     public ?string $mediaURL;
 
     /**
      * Identifier of a resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
@@ -76,26 +79,26 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      *
      * @var value-of<Source>|null $source
      */
-    #[Api(enum: Source::class, optional: true)]
+    #[Optional(enum: Source::class)]
     public ?string $source;
 
-    #[Api('start_time', optional: true)]
+    #[Optional('start_time')]
     public ?\DateTimeInterface $startTime;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Subresources details for a recording if available.
      */
-    #[Api('subresources_uris', optional: true)]
+    #[Optional('subresources_uris')]
     public ?TexmlRecordingSubresourcesUris $subresourcesUris;
 
     /**
      * The relative URI for this recording resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -108,14 +111,15 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param 1|2 $channels
-     * @param Source|value-of<Source> $source
-     * @param Status|value-of<Status> $status
+     * @param Channels|value-of<Channels>|null $channels
+     * @param Source|value-of<Source>|null $source
+     * @param Status|value-of<Status>|null $status
+     * @param TexmlRecordingSubresourcesUris|TexmlRecordingSubresourcesUrisShape|null $subresourcesUris
      */
     public static function with(
         ?string $accountSid = null,
         ?string $callSid = null,
-        ?int $channels = null,
+        Channels|int|null $channels = null,
         ?string $conferenceSid = null,
         ?\DateTimeInterface $dateCreated = null,
         ?\DateTimeInterface $dateUpdated = null,
@@ -126,79 +130,79 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
         Source|string|null $source = null,
         ?\DateTimeInterface $startTime = null,
         Status|string|null $status = null,
-        ?TexmlRecordingSubresourcesUris $subresourcesUris = null,
+        TexmlRecordingSubresourcesUris|array|null $subresourcesUris = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountSid && $obj->accountSid = $accountSid;
-        null !== $callSid && $obj->callSid = $callSid;
-        null !== $channels && $obj->channels = $channels;
-        null !== $conferenceSid && $obj->conferenceSid = $conferenceSid;
-        null !== $dateCreated && $obj->dateCreated = $dateCreated;
-        null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
-        null !== $duration && $obj->duration = $duration;
-        null !== $errorCode && $obj->errorCode = $errorCode;
-        null !== $mediaURL && $obj->mediaURL = $mediaURL;
-        null !== $sid && $obj->sid = $sid;
-        null !== $source && $obj['source'] = $source;
-        null !== $startTime && $obj->startTime = $startTime;
-        null !== $status && $obj['status'] = $status;
-        null !== $subresourcesUris && $obj->subresourcesUris = $subresourcesUris;
-        null !== $uri && $obj->uri = $uri;
+        null !== $accountSid && $self['accountSid'] = $accountSid;
+        null !== $callSid && $self['callSid'] = $callSid;
+        null !== $channels && $self['channels'] = $channels;
+        null !== $conferenceSid && $self['conferenceSid'] = $conferenceSid;
+        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
+        null !== $mediaURL && $self['mediaURL'] = $mediaURL;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $source && $self['source'] = $source;
+        null !== $startTime && $self['startTime'] = $startTime;
+        null !== $status && $self['status'] = $status;
+        null !== $subresourcesUris && $self['subresourcesUris'] = $subresourcesUris;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallSid(string $callSid): self
     {
-        $obj = clone $this;
-        $obj->callSid = $callSid;
+        $self = clone $this;
+        $self['callSid'] = $callSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param 1|2 $channels
+     * @param Channels|value-of<Channels> $channels
      */
-    public function withChannels(int $channels): self
+    public function withChannels(Channels|int $channels): self
     {
-        $obj = clone $this;
-        $obj->channels = $channels;
+        $self = clone $this;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 
     public function withConferenceSid(?string $conferenceSid): self
     {
-        $obj = clone $this;
-        $obj->conferenceSid = $conferenceSid;
+        $self = clone $this;
+        $self['conferenceSid'] = $conferenceSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
-        $obj = clone $this;
-        $obj->dateCreated = $dateCreated;
+        $self = clone $this;
+        $self['dateCreated'] = $dateCreated;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
-        $obj = clone $this;
-        $obj->dateUpdated = $dateUpdated;
+        $self = clone $this;
+        $self['dateUpdated'] = $dateUpdated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,26 +210,26 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      */
     public function withDuration(?string $duration): self
     {
-        $obj = clone $this;
-        $obj->duration = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     public function withErrorCode(?string $errorCode): self
     {
-        $obj = clone $this;
-        $obj->errorCode = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withMediaURL(string $mediaURL): self
     {
-        $obj = clone $this;
-        $obj->mediaURL = $mediaURL;
+        $self = clone $this;
+        $self['mediaURL'] = $mediaURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +237,10 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      */
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj->sid = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,18 +250,18 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      */
     public function withSource(Source|string $source): self
     {
-        $obj = clone $this;
-        $obj['source'] = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartTime(\DateTimeInterface $startTime): self
     {
-        $obj = clone $this;
-        $obj->startTime = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,22 +269,24 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Subresources details for a recording if available.
+     *
+     * @param TexmlRecordingSubresourcesUris|TexmlRecordingSubresourcesUrisShape $subresourcesUris
      */
     public function withSubresourcesUris(
-        TexmlRecordingSubresourcesUris $subresourcesUris
+        TexmlRecordingSubresourcesUris|array $subresourcesUris
     ): self {
-        $obj = clone $this;
-        $obj->subresourcesUris = $subresourcesUris;
+        $self = clone $this;
+        $self['subresourcesUris'] = $subresourcesUris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -288,9 +294,9 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,44 +6,54 @@ namespace Telnyx\Services\Rooms\Sessions;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\Rooms\Sessions\Actions\ActionEndResponse;
-use Telnyx\Rooms\Sessions\Actions\ActionKickParams;
-use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\UnionMember0;
+use Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants\AllParticipants;
 use Telnyx\Rooms\Sessions\Actions\ActionKickResponse;
-use Telnyx\Rooms\Sessions\Actions\ActionMuteParams;
 use Telnyx\Rooms\Sessions\Actions\ActionMuteResponse;
-use Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams;
 use Telnyx\Rooms\Sessions\Actions\ActionUnmuteResponse;
 use Telnyx\ServiceContracts\Rooms\Sessions\ActionsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants
+ * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants as ParticipantsShape1
+ * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants as ParticipantsShape2
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Note: this will also kick all participants currently present in the room
      *
+     * @param string $roomSessionID the unique identifier of a room session
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function end(
         string $roomSessionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ActionEndResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['room_sessions/%1$s/actions/end', $roomSessionID],
-            options: $requestOptions,
-            convert: ActionEndResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->end($roomSessionID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -51,47 +61,27 @@ final class ActionsService implements ActionsContract
      *
      * Kick participants from a room session.
      *
+     * @param string $roomSessionID the unique identifier of a room session
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param UnionMember0|list<string>|value-of<UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param ParticipantsShape $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function kick(
         string $roomSessionID,
-        $exclude = omit,
-        $participants = omit,
-        ?RequestOptions $requestOptions = null,
+        ?array $exclude = null,
+        AllParticipants|array|string|null $participants = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionKickResponse {
-        $params = ['exclude' => $exclude, 'participants' => $participants];
-
-        return $this->kickRaw($roomSessionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function kickRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionKickResponse {
-        [$parsed, $options] = ActionKickParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['exclude' => $exclude, 'participants' => $participants]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['room_sessions/%1$s/actions/kick', $roomSessionID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionKickResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->kick($roomSessionID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -99,47 +89,27 @@ final class ActionsService implements ActionsContract
      *
      * Mute participants in room session.
      *
+     * @param string $roomSessionID the unique identifier of a room session
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param ActionMuteParams\Participants\UnionMember0|list<string>|value-of<ActionMuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param ParticipantsShape1 $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function mute(
         string $roomSessionID,
-        $exclude = omit,
-        $participants = omit,
-        ?RequestOptions $requestOptions = null,
+        ?array $exclude = null,
+        \Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants\AllParticipants|array|string|null $participants = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionMuteResponse {
-        $params = ['exclude' => $exclude, 'participants' => $participants];
-
-        return $this->muteRaw($roomSessionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function muteRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionMuteResponse {
-        [$parsed, $options] = ActionMuteParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['exclude' => $exclude, 'participants' => $participants]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['room_sessions/%1$s/actions/mute', $roomSessionID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionMuteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->mute($roomSessionID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -147,46 +117,26 @@ final class ActionsService implements ActionsContract
      *
      * Unmute participants in room session.
      *
+     * @param string $roomSessionID the unique identifier of a room session
      * @param list<string> $exclude list of participant id to exclude from the action
-     * @param ActionUnmuteParams\Participants\UnionMember0|list<string>|value-of<ActionUnmuteParams\Participants\UnionMember0> $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param ParticipantsShape2 $participants either a list of participant id to perform the action on, or the keyword "all" to perform the action on all participant
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function unmute(
         string $roomSessionID,
-        $exclude = omit,
-        $participants = omit,
-        ?RequestOptions $requestOptions = null,
+        ?array $exclude = null,
+        \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants\AllParticipants|array|string|null $participants = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionUnmuteResponse {
-        $params = ['exclude' => $exclude, 'participants' => $participants];
-
-        return $this->unmuteRaw($roomSessionID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function unmuteRaw(
-        string $roomSessionID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionUnmuteResponse {
-        [$parsed, $options] = ActionUnmuteParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['exclude' => $exclude, 'participants' => $participants]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['room_sessions/%1$s/actions/unmute', $roomSessionID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionUnmuteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->unmute($roomSessionID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\CsvDownloads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type csv_download_get_response = array{data?: list<CsvDownload>}
+ * @phpstan-import-type CsvDownloadShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownload
+ *
+ * @phpstan-type CsvDownloadGetResponseShape = array{
+ *   data?: list<CsvDownload|CsvDownloadShape>|null
+ * }
  */
-final class CsvDownloadGetResponse implements BaseModel, ResponseConverter
+final class CsvDownloadGetResponse implements BaseModel
 {
-    /** @use SdkModel<csv_download_get_response> */
+    /** @use SdkModel<CsvDownloadGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<CsvDownload>|null $data */
-    #[Api(list: CsvDownload::class, optional: true)]
+    #[Optional(list: CsvDownload::class)]
     public ?array $data;
 
     public function __construct()
@@ -34,25 +34,25 @@ final class CsvDownloadGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<CsvDownload> $data
+     * @param list<CsvDownload|CsvDownloadShape>|null $data
      */
     public static function with(?array $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<CsvDownload> $data
+     * @param list<CsvDownload|CsvDownloadShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

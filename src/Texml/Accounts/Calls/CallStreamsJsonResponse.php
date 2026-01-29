@@ -4,50 +4,46 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse\Status;
 
 /**
- * @phpstan-type call_streams_json_response = array{
- *   accountSid?: string,
- *   callSid?: string,
- *   dateUpdated?: \DateTimeInterface,
- *   name?: string,
- *   sid?: string,
- *   status?: value-of<Status>,
- *   uri?: string,
+ * @phpstan-type CallStreamsJsonResponseShape = array{
+ *   accountSid?: string|null,
+ *   callSid?: string|null,
+ *   dateUpdated?: \DateTimeInterface|null,
+ *   name?: string|null,
+ *   sid?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   uri?: string|null,
  * }
  */
-final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
+final class CallStreamsJsonResponse implements BaseModel
 {
-    /** @use SdkModel<call_streams_json_response> */
+    /** @use SdkModel<CallStreamsJsonResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api('account_sid', optional: true)]
+    #[Optional('account_sid')]
     public ?string $accountSid;
 
-    #[Api('call_sid', optional: true)]
+    #[Optional('call_sid')]
     public ?string $callSid;
 
-    #[Api('date_updated', optional: true)]
+    #[Optional('date_updated')]
     public ?\DateTimeInterface $dateUpdated;
 
     /**
      * The user specified name of Stream.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Identifier of a resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
@@ -55,13 +51,13 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The relative URI for this streaming resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -74,7 +70,7 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $accountSid = null,
@@ -85,41 +81,41 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
         Status|string|null $status = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountSid && $obj->accountSid = $accountSid;
-        null !== $callSid && $obj->callSid = $callSid;
-        null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
-        null !== $name && $obj->name = $name;
-        null !== $sid && $obj->sid = $sid;
-        null !== $status && $obj['status'] = $status;
-        null !== $uri && $obj->uri = $uri;
+        null !== $accountSid && $self['accountSid'] = $accountSid;
+        null !== $callSid && $self['callSid'] = $callSid;
+        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
+        null !== $name && $self['name'] = $name;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $status && $self['status'] = $status;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallSid(string $callSid): self
     {
-        $obj = clone $this;
-        $obj->callSid = $callSid;
+        $self = clone $this;
+        $self['callSid'] = $callSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateUpdated(\DateTimeInterface $dateUpdated): self
     {
-        $obj = clone $this;
-        $obj->dateUpdated = $dateUpdated;
+        $self = clone $this;
+        $self['dateUpdated'] = $dateUpdated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +123,10 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +134,10 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
      */
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj->sid = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +147,10 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,9 +158,9 @@ final class CallStreamsJsonResponse implements BaseModel, ResponseConverter
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

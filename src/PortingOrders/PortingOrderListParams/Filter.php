@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings;
@@ -15,49 +15,54 @@ use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
  *
- * @phpstan-type filter_alias = array{
- *   activationSettings?: ActivationSettings,
- *   customerGroupReference?: string,
- *   customerReference?: string,
- *   endUser?: EndUser,
- *   misc?: Misc,
- *   parentSupportKey?: string,
- *   phoneNumbers?: PhoneNumbers,
+ * @phpstan-import-type ActivationSettingsShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\ActivationSettings
+ * @phpstan-import-type EndUserShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser
+ * @phpstan-import-type MiscShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\Misc
+ * @phpstan-import-type PhoneNumbersShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers
+ *
+ * @phpstan-type FilterShape = array{
+ *   activationSettings?: null|ActivationSettings|ActivationSettingsShape,
+ *   customerGroupReference?: string|null,
+ *   customerReference?: string|null,
+ *   endUser?: null|EndUser|EndUserShape,
+ *   misc?: null|Misc|MiscShape,
+ *   parentSupportKey?: string|null,
+ *   phoneNumbers?: null|PhoneNumbers|PhoneNumbersShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('activation_settings', optional: true)]
+    #[Optional('activation_settings')]
     public ?ActivationSettings $activationSettings;
 
     /**
      * Filter results by customer_group_reference.
      */
-    #[Api('customer_group_reference', optional: true)]
+    #[Optional('customer_group_reference')]
     public ?string $customerGroupReference;
 
     /**
      * Filter results by customer_reference.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
-    #[Api('end_user', optional: true)]
+    #[Optional('end_user')]
     public ?EndUser $endUser;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Misc $misc;
 
     /**
      * Filter results by parent_support_key.
      */
-    #[Api('parent_support_key', optional: true)]
+    #[Optional('parent_support_key')]
     public ?string $parentSupportKey;
 
-    #[Api('phone_numbers', optional: true)]
+    #[Optional('phone_numbers')]
     public ?PhoneNumbers $phoneNumbers;
 
     public function __construct()
@@ -69,36 +74,44 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ActivationSettings|ActivationSettingsShape|null $activationSettings
+     * @param EndUser|EndUserShape|null $endUser
+     * @param Misc|MiscShape|null $misc
+     * @param PhoneNumbers|PhoneNumbersShape|null $phoneNumbers
      */
     public static function with(
-        ?ActivationSettings $activationSettings = null,
+        ActivationSettings|array|null $activationSettings = null,
         ?string $customerGroupReference = null,
         ?string $customerReference = null,
-        ?EndUser $endUser = null,
-        ?Misc $misc = null,
+        EndUser|array|null $endUser = null,
+        Misc|array|null $misc = null,
         ?string $parentSupportKey = null,
-        ?PhoneNumbers $phoneNumbers = null,
+        PhoneNumbers|array|null $phoneNumbers = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $activationSettings && $obj->activationSettings = $activationSettings;
-        null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $endUser && $obj->endUser = $endUser;
-        null !== $misc && $obj->misc = $misc;
-        null !== $parentSupportKey && $obj->parentSupportKey = $parentSupportKey;
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
+        null !== $activationSettings && $self['activationSettings'] = $activationSettings;
+        null !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $endUser && $self['endUser'] = $endUser;
+        null !== $misc && $self['misc'] = $misc;
+        null !== $parentSupportKey && $self['parentSupportKey'] = $parentSupportKey;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param ActivationSettings|ActivationSettingsShape $activationSettings
+     */
     public function withActivationSettings(
-        ActivationSettings $activationSettings
+        ActivationSettings|array $activationSettings
     ): self {
-        $obj = clone $this;
-        $obj->activationSettings = $activationSettings;
+        $self = clone $this;
+        $self['activationSettings'] = $activationSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +120,10 @@ final class Filter implements BaseModel
     public function withCustomerGroupReference(
         string $customerGroupReference
     ): self {
-        $obj = clone $this;
-        $obj->customerGroupReference = $customerGroupReference;
+        $self = clone $this;
+        $self['customerGroupReference'] = $customerGroupReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,26 +131,32 @@ final class Filter implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
-    public function withEndUser(EndUser $endUser): self
+    /**
+     * @param EndUser|EndUserShape $endUser
+     */
+    public function withEndUser(EndUser|array $endUser): self
     {
-        $obj = clone $this;
-        $obj->endUser = $endUser;
+        $self = clone $this;
+        $self['endUser'] = $endUser;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMisc(Misc $misc): self
+    /**
+     * @param Misc|MiscShape $misc
+     */
+    public function withMisc(Misc|array $misc): self
     {
-        $obj = clone $this;
-        $obj->misc = $misc;
+        $self = clone $this;
+        $self['misc'] = $misc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,17 +164,20 @@ final class Filter implements BaseModel
      */
     public function withParentSupportKey(string $parentSupportKey): self
     {
-        $obj = clone $this;
-        $obj->parentSupportKey = $parentSupportKey;
+        $self = clone $this;
+        $self['parentSupportKey'] = $parentSupportKey;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPhoneNumbers(PhoneNumbers $phoneNumbers): self
+    /**
+     * @param PhoneNumbers|PhoneNumbersShape $phoneNumbers
+     */
+    public function withPhoneNumbers(PhoneNumbers|array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

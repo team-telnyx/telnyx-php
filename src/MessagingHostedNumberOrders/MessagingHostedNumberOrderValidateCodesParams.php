@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,20 +13,22 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesPa
 /**
  * Validate the verification codes sent to the numbers of the hosted order. The verification codes must be created in the verification codes endpoint.
  *
- * @see Telnyx\MessagingHostedNumberOrders->validateCodes
+ * @see Telnyx\Services\MessagingHostedNumberOrdersService::validateCodes()
  *
- * @phpstan-type messaging_hosted_number_order_validate_codes_params = array{
- *   verificationCodes: list<VerificationCode>
+ * @phpstan-import-type VerificationCodeShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode
+ *
+ * @phpstan-type MessagingHostedNumberOrderValidateCodesParamsShape = array{
+ *   verificationCodes: list<VerificationCode|VerificationCodeShape>
  * }
  */
 final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order_validate_codes_params> */
+    /** @use SdkModel<MessagingHostedNumberOrderValidateCodesParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<VerificationCode> $verificationCodes */
-    #[Api('verification_codes', list: VerificationCode::class)]
+    #[Required('verification_codes', list: VerificationCode::class)]
     public array $verificationCodes;
 
     /**
@@ -53,25 +55,25 @@ final class MessagingHostedNumberOrderValidateCodesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCode> $verificationCodes
+     * @param list<VerificationCode|VerificationCodeShape> $verificationCodes
      */
     public static function with(array $verificationCodes): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->verificationCodes = $verificationCodes;
+        $self['verificationCodes'] = $verificationCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<VerificationCode> $verificationCodes
+     * @param list<VerificationCode|VerificationCodeShape> $verificationCodes
      */
     public function withVerificationCodes(array $verificationCodes): self
     {
-        $obj = clone $this;
-        $obj->verificationCodes = $verificationCodes;
+        $self = clone $this;
+        $self['verificationCodes'] = $verificationCodes;
 
-        return $obj;
+        return $self;
     }
 }

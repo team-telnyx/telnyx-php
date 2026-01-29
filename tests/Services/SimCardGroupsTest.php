@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\SimCardGroups\SimCardGroupDeleteResponse;
+use Telnyx\SimCardGroups\SimCardGroupGetResponse;
+use Telnyx\SimCardGroups\SimCardGroupListResponse;
+use Telnyx\SimCardGroups\SimCardGroupNewResponse;
+use Telnyx\SimCardGroups\SimCardGroupUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +41,8 @@ final class SimCardGroupsTest extends TestCase
 
         $result = $this->client->simCardGroups->create(name: 'My Test Group');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardGroupNewResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +52,13 @@ final class SimCardGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardGroups->create(name: 'My Test Group');
+        $result = $this->client->simCardGroups->create(
+            name: 'My Test Group',
+            dataLimit: ['amount' => '2048.1', 'unit' => 'MB']
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardGroupNewResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +72,8 @@ final class SimCardGroupsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardGroupGetResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +87,8 @@ final class SimCardGroupsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardGroupUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -85,9 +98,15 @@ final class SimCardGroupsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCardGroups->list();
+        $page = $this->client->simCardGroups->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(SimCardGroupListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -101,6 +120,7 @@ final class SimCardGroupsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SimCardGroupDeleteResponse::class, $result);
     }
 }

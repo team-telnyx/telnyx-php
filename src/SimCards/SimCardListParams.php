@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,44 +15,47 @@ use Telnyx\SimCards\SimCardListParams\Sort;
 /**
  * Get all SIM cards belonging to the user that match the given filters.
  *
- * @see Telnyx\SimCards->list
+ * @see Telnyx\Services\SimCardsService::list()
  *
- * @phpstan-type sim_card_list_params = array{
- *   filter?: Filter,
- *   filterSimCardGroupID?: string,
- *   includeSimCardGroup?: bool,
- *   page?: Page,
- *   sort?: Sort|value-of<Sort>,
+ * @phpstan-import-type FilterShape from \Telnyx\SimCards\SimCardListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCards\SimCardListParams\Page
+ *
+ * @phpstan-type SimCardListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   filterSimCardGroupID?: string|null,
+ *   includeSimCardGroup?: bool|null,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class SimCardListParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_list_params> */
+    /** @use SdkModel<SimCardListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
-     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
+     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * A valid SIM card group ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filterSimCardGroupID;
 
     /**
      * It includes the associated SIM card group object in the response when present.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeSimCardGroup;
 
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -60,7 +63,7 @@ final class SimCardListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()
@@ -73,35 +76,39 @@ final class SimCardListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Sort|value-of<Sort> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
-        ?Filter $filter = null,
+        Filter|array|null $filter = null,
         ?string $filterSimCardGroupID = null,
         ?bool $includeSimCardGroup = null,
-        ?Page $page = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $filterSimCardGroupID && $obj->filterSimCardGroupID = $filterSimCardGroupID;
-        null !== $includeSimCardGroup && $obj->includeSimCardGroup = $includeSimCardGroup;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $filterSimCardGroupID && $self['filterSimCardGroupID'] = $filterSimCardGroupID;
+        null !== $includeSimCardGroup && $self['includeSimCardGroup'] = $includeSimCardGroup;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
+     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +116,10 @@ final class SimCardListParams implements BaseModel
      */
     public function withFilterSimCardGroupID(string $filterSimCardGroupID): self
     {
-        $obj = clone $this;
-        $obj->filterSimCardGroupID = $filterSimCardGroupID;
+        $self = clone $this;
+        $self['filterSimCardGroupID'] = $filterSimCardGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,21 +127,23 @@ final class SimCardListParams implements BaseModel
      */
     public function withIncludeSimCardGroup(bool $includeSimCardGroup): self
     {
-        $obj = clone $this;
-        $obj->includeSimCardGroup = $includeSimCardGroup;
+        $self = clone $this;
+        $self['includeSimCardGroup'] = $includeSimCardGroup;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,9 +153,9 @@ final class SimCardListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

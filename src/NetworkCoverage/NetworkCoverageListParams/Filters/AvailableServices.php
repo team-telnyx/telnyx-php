@@ -12,14 +12,18 @@ use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\C
 
 /**
  * Filter by exact available service match.
+ *
+ * @phpstan-import-type ContainsShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices\Contains
+ *
+ * @phpstan-type AvailableServicesVariants = Contains|value-of<AvailableService>
+ * @phpstan-type AvailableServicesShape = AvailableServicesVariants|ContainsShape
  */
 final class AvailableServices implements ConverterSource
 {
     use SdkUnion;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {

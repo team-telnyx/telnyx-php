@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklistValues;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,15 +13,15 @@ use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 /**
  * Retrieve all wireless blocklist values for a given blocklist type.
  *
- * @see Telnyx\WirelessBlocklistValues->list
+ * @see Telnyx\Services\WirelessBlocklistValuesService::list()
  *
- * @phpstan-type wireless_blocklist_value_list_params = array{
+ * @phpstan-type WirelessBlocklistValueListParamsShape = array{
  *   type: Type|value-of<Type>
  * }
  */
 final class WirelessBlocklistValueListParams implements BaseModel
 {
-    /** @use SdkModel<wireless_blocklist_value_list_params> */
+    /** @use SdkModel<WirelessBlocklistValueListParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -30,7 +30,7 @@ final class WirelessBlocklistValueListParams implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -61,11 +61,11 @@ final class WirelessBlocklistValueListParams implements BaseModel
      */
     public static function with(Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class WirelessBlocklistValueListParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

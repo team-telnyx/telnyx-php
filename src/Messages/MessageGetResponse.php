@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Messages\MessageGetResponse\Data\InboundMessagePayload;
+use Telnyx\InboundMessagePayload;
+use Telnyx\Messages\MessageGetResponse\Data;
 
 /**
- * @phpstan-type message_get_response = array{
- *   data?: OutboundMessagePayload|InboundMessagePayload
- * }
+ * @phpstan-import-type DataVariants from \Telnyx\Messages\MessageGetResponse\Data
+ * @phpstan-import-type DataShape from \Telnyx\Messages\MessageGetResponse\Data
+ *
+ * @phpstan-type MessageGetResponseShape = array{data?: DataShape|null}
  */
-final class MessageGetResponse implements BaseModel, ResponseConverter
+final class MessageGetResponse implements BaseModel
 {
-    /** @use SdkModel<message_get_response> */
+    /** @use SdkModel<MessageGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    /** @var DataVariants|null $data */
+    #[Optional(union: Data::class)]
     public OutboundMessagePayload|InboundMessagePayload|null $data;
 
     public function __construct()
@@ -35,23 +34,28 @@ final class MessageGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DataShape|null $data
      */
     public static function with(
-        OutboundMessagePayload|InboundMessagePayload|null $data = null
+        OutboundMessagePayload|array|InboundMessagePayload|null $data = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param DataShape $data
+     */
     public function withData(
-        OutboundMessagePayload|InboundMessagePayload $data
+        OutboundMessagePayload|array|InboundMessagePayload $data
     ): self {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

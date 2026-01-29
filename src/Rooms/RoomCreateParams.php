@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,57 +12,57 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Synchronously create a Room.
  *
- * @see Telnyx\Rooms->create
+ * @see Telnyx\Services\RoomsService::create()
  *
- * @phpstan-type room_create_params = array{
- *   enableRecording?: bool,
- *   maxParticipants?: int,
- *   uniqueName?: string,
+ * @phpstan-type RoomCreateParamsShape = array{
+ *   enableRecording?: bool|null,
+ *   maxParticipants?: int|null,
+ *   uniqueName?: string|null,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class RoomCreateParams implements BaseModel
 {
-    /** @use SdkModel<room_create_params> */
+    /** @use SdkModel<RoomCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Enable or disable recording for that room.
      */
-    #[Api('enable_recording', optional: true)]
+    #[Optional('enable_recording')]
     public ?bool $enableRecording;
 
     /**
      * The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
      */
-    #[Api('max_participants', optional: true)]
+    #[Optional('max_participants')]
     public ?int $maxParticipants;
 
     /**
      * The unique (within the Telnyx account scope) name of the room.
      */
-    #[Api('unique_name', optional: true)]
+    #[Optional('unique_name')]
     public ?string $uniqueName;
 
     /**
      * The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
+    #[Optional('webhook_event_failover_url')]
     public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
+    #[Optional('webhook_event_url')]
     public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
+    #[Optional('webhook_timeout_secs')]
     public ?int $webhookTimeoutSecs;
 
     public function __construct()
@@ -83,16 +83,16 @@ final class RoomCreateParams implements BaseModel
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enableRecording && $obj->enableRecording = $enableRecording;
-        null !== $maxParticipants && $obj->maxParticipants = $maxParticipants;
-        null !== $uniqueName && $obj->uniqueName = $uniqueName;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $enableRecording && $self['enableRecording'] = $enableRecording;
+        null !== $maxParticipants && $self['maxParticipants'] = $maxParticipants;
+        null !== $uniqueName && $self['uniqueName'] = $uniqueName;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class RoomCreateParams implements BaseModel
      */
     public function withEnableRecording(bool $enableRecording): self
     {
-        $obj = clone $this;
-        $obj->enableRecording = $enableRecording;
+        $self = clone $this;
+        $self['enableRecording'] = $enableRecording;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +111,10 @@ final class RoomCreateParams implements BaseModel
      */
     public function withMaxParticipants(int $maxParticipants): self
     {
-        $obj = clone $this;
-        $obj->maxParticipants = $maxParticipants;
+        $self = clone $this;
+        $self['maxParticipants'] = $maxParticipants;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,22 +122,22 @@ final class RoomCreateParams implements BaseModel
      */
     public function withUniqueName(string $uniqueName): self
     {
-        $obj = clone $this;
-        $obj->uniqueName = $uniqueName;
+        $self = clone $this;
+        $self['uniqueName'] = $uniqueName;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
     public function withWebhookEventFailoverURL(
-        ?string $webhookEventFailoverURL
+        string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,20 +145,20 @@ final class RoomCreateParams implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
+    public function withWebhookTimeoutSecs(int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

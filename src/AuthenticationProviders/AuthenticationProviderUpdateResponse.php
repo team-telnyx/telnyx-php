@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\AuthenticationProviders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type authentication_provider_update_response = array{
- *   data?: AuthenticationProvider
+ * @phpstan-import-type AuthenticationProviderShape from \Telnyx\AuthenticationProviders\AuthenticationProvider
+ *
+ * @phpstan-type AuthenticationProviderUpdateResponseShape = array{
+ *   data?: null|AuthenticationProvider|AuthenticationProviderShape
  * }
  */
-final class AuthenticationProviderUpdateResponse implements BaseModel, ResponseConverter
+final class AuthenticationProviderUpdateResponse implements BaseModel
 {
-    /** @use SdkModel<authentication_provider_update_response> */
+    /** @use SdkModel<AuthenticationProviderUpdateResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?AuthenticationProvider $data;
 
     public function __construct()
@@ -34,21 +32,26 @@ final class AuthenticationProviderUpdateResponse implements BaseModel, ResponseC
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AuthenticationProvider|AuthenticationProviderShape|null $data
      */
-    public static function with(?AuthenticationProvider $data = null): self
+    public static function with(AuthenticationProvider|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(AuthenticationProvider $data): self
+    /**
+     * @param AuthenticationProvider|AuthenticationProviderShape $data
+     */
+    public function withData(AuthenticationProvider|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

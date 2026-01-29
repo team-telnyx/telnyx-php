@@ -9,86 +9,89 @@ use Telnyx\Conferences\ConferenceListParams\Filter\OccurredAt;
 use Telnyx\Conferences\ConferenceListParams\Filter\Product;
 use Telnyx\Conferences\ConferenceListParams\Filter\Status;
 use Telnyx\Conferences\ConferenceListParams\Filter\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound.outbound_voice_profile_id], filter[leg_id], filter[application_session_id], filter[connection_id], filter[product], filter[failed], filter[from], filter[to], filter[name], filter[type], filter[occurred_at][eq/gt/gte/lt/lte], filter[status].
  *
- * @phpstan-type filter_alias = array{
- *   applicationName?: ApplicationName,
- *   applicationSessionID?: string,
- *   connectionID?: string,
- *   failed?: bool,
- *   from?: string,
- *   legID?: string,
- *   name?: string,
- *   occurredAt?: OccurredAt,
- *   outboundOutboundVoiceProfileID?: string,
- *   product?: value-of<Product>,
- *   status?: value-of<Status>,
- *   to?: string,
- *   type?: value-of<Type>,
+ * @phpstan-import-type ApplicationNameShape from \Telnyx\Conferences\ConferenceListParams\Filter\ApplicationName
+ * @phpstan-import-type OccurredAtShape from \Telnyx\Conferences\ConferenceListParams\Filter\OccurredAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   applicationName?: null|ApplicationName|ApplicationNameShape,
+ *   applicationSessionID?: string|null,
+ *   connectionID?: string|null,
+ *   failed?: bool|null,
+ *   from?: string|null,
+ *   legID?: string|null,
+ *   name?: string|null,
+ *   occurredAt?: null|OccurredAt|OccurredAtShape,
+ *   outboundOutboundVoiceProfileID?: string|null,
+ *   product?: null|Product|value-of<Product>,
+ *   status?: null|Status|value-of<Status>,
+ *   to?: string|null,
+ *   type?: null|Type|value-of<Type>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Application name filters.
      */
-    #[Api('application_name', optional: true)]
+    #[Optional('application_name')]
     public ?ApplicationName $applicationName;
 
     /**
      * The unique identifier of the call session. A session may include multiple call leg events.
      */
-    #[Api('application_session_id', optional: true)]
+    #[Optional('application_session_id')]
     public ?string $applicationSessionID;
 
     /**
      * The unique identifier of the conection.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * Delivery failed or not.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $failed;
 
     /**
      * Filter by From number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The unique identifier of an individual call leg.
      */
-    #[Api('leg_id', optional: true)]
+    #[Optional('leg_id')]
     public ?string $legID;
 
     /**
      * If present, conferences will be filtered to those with a matching `name` attribute. Matching is case-sensitive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Event occurred_at filters.
      */
-    #[Api('occurred_at', optional: true)]
+    #[Optional('occurred_at')]
     public ?OccurredAt $occurredAt;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api('outbound.outbound_voice_profile_id', optional: true)]
+    #[Optional('outbound.outbound_voice_profile_id')]
     public ?string $outboundOutboundVoiceProfileID;
 
     /**
@@ -96,7 +99,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Product>|null $product
      */
-    #[Api(enum: Product::class, optional: true)]
+    #[Optional(enum: Product::class)]
     public ?string $product;
 
     /**
@@ -104,13 +107,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Filter by To number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
@@ -118,7 +121,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()
@@ -131,53 +134,58 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Product|value-of<Product> $product
-     * @param Status|value-of<Status> $status
-     * @param Type|value-of<Type> $type
+     * @param ApplicationName|ApplicationNameShape|null $applicationName
+     * @param OccurredAt|OccurredAtShape|null $occurredAt
+     * @param Product|value-of<Product>|null $product
+     * @param Status|value-of<Status>|null $status
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
-        ?ApplicationName $applicationName = null,
+        ApplicationName|array|null $applicationName = null,
         ?string $applicationSessionID = null,
         ?string $connectionID = null,
         ?bool $failed = null,
         ?string $from = null,
         ?string $legID = null,
         ?string $name = null,
-        ?OccurredAt $occurredAt = null,
+        OccurredAt|array|null $occurredAt = null,
         ?string $outboundOutboundVoiceProfileID = null,
         Product|string|null $product = null,
         Status|string|null $status = null,
         ?string $to = null,
         Type|string|null $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $applicationName && $obj->applicationName = $applicationName;
-        null !== $applicationSessionID && $obj->applicationSessionID = $applicationSessionID;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $failed && $obj->failed = $failed;
-        null !== $from && $obj->from = $from;
-        null !== $legID && $obj->legID = $legID;
-        null !== $name && $obj->name = $name;
-        null !== $occurredAt && $obj->occurredAt = $occurredAt;
-        null !== $outboundOutboundVoiceProfileID && $obj->outboundOutboundVoiceProfileID = $outboundOutboundVoiceProfileID;
-        null !== $product && $obj['product'] = $product;
-        null !== $status && $obj['status'] = $status;
-        null !== $to && $obj->to = $to;
-        null !== $type && $obj['type'] = $type;
+        null !== $applicationName && $self['applicationName'] = $applicationName;
+        null !== $applicationSessionID && $self['applicationSessionID'] = $applicationSessionID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $failed && $self['failed'] = $failed;
+        null !== $from && $self['from'] = $from;
+        null !== $legID && $self['legID'] = $legID;
+        null !== $name && $self['name'] = $name;
+        null !== $occurredAt && $self['occurredAt'] = $occurredAt;
+        null !== $outboundOutboundVoiceProfileID && $self['outboundOutboundVoiceProfileID'] = $outboundOutboundVoiceProfileID;
+        null !== $product && $self['product'] = $product;
+        null !== $status && $self['status'] = $status;
+        null !== $to && $self['to'] = $to;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Application name filters.
+     *
+     * @param ApplicationName|ApplicationNameShape $applicationName
      */
-    public function withApplicationName(ApplicationName $applicationName): self
-    {
-        $obj = clone $this;
-        $obj->applicationName = $applicationName;
+    public function withApplicationName(
+        ApplicationName|array $applicationName
+    ): self {
+        $self = clone $this;
+        $self['applicationName'] = $applicationName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +193,10 @@ final class Filter implements BaseModel
      */
     public function withApplicationSessionID(string $applicationSessionID): self
     {
-        $obj = clone $this;
-        $obj->applicationSessionID = $applicationSessionID;
+        $self = clone $this;
+        $self['applicationSessionID'] = $applicationSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +204,10 @@ final class Filter implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +215,10 @@ final class Filter implements BaseModel
      */
     public function withFailed(bool $failed): self
     {
-        $obj = clone $this;
-        $obj->failed = $failed;
+        $self = clone $this;
+        $self['failed'] = $failed;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +226,10 @@ final class Filter implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,10 +237,10 @@ final class Filter implements BaseModel
      */
     public function withLegID(string $legID): self
     {
-        $obj = clone $this;
-        $obj->legID = $legID;
+        $self = clone $this;
+        $self['legID'] = $legID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,21 +248,23 @@ final class Filter implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Event occurred_at filters.
+     *
+     * @param OccurredAt|OccurredAtShape $occurredAt
      */
-    public function withOccurredAt(OccurredAt $occurredAt): self
+    public function withOccurredAt(OccurredAt|array $occurredAt): self
     {
-        $obj = clone $this;
-        $obj->occurredAt = $occurredAt;
+        $self = clone $this;
+        $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -263,10 +273,10 @@ final class Filter implements BaseModel
     public function withOutboundOutboundVoiceProfileID(
         string $outboundOutboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj->outboundOutboundVoiceProfileID = $outboundOutboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundOutboundVoiceProfileID'] = $outboundOutboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +286,10 @@ final class Filter implements BaseModel
      */
     public function withProduct(Product|string $product): self
     {
-        $obj = clone $this;
-        $obj['product'] = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,10 +299,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -300,10 +310,10 @@ final class Filter implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -313,9 +323,9 @@ final class Filter implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

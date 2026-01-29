@@ -10,30 +10,41 @@ use Telnyx\NumberReservations\Actions\ActionExtendResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberReservations\ActionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Extends reservation expiry time on all phone numbers.
      *
+     * @param string $numberReservationID the number reservation ID
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function extend(
         string $numberReservationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): ActionExtendResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['number_reservations/%1$s/actions/extend', $numberReservationID],
-            options: $requestOptions,
-            convert: ActionExtendResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->extend($numberReservationID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

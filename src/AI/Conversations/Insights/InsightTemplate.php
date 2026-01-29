@@ -6,51 +6,55 @@ namespace Telnyx\AI\Conversations\Insights;
 
 use Telnyx\AI\Conversations\Insights\InsightTemplate\InsightType;
 use Telnyx\AI\Conversations\Insights\InsightTemplate\JsonSchema;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type insight_template = array{
+ * @phpstan-import-type JsonSchemaVariants from \Telnyx\AI\Conversations\Insights\InsightTemplate\JsonSchema
+ * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightTemplate\JsonSchema
+ *
+ * @phpstan-type InsightTemplateShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   instructions: string,
- *   insightType?: value-of<InsightType>,
- *   jsonSchema?: mixed|string,
- *   name?: string,
- *   webhook?: string,
+ *   insightType?: null|InsightType|value-of<InsightType>,
+ *   jsonSchema?: JsonSchemaShape|null,
+ *   name?: string|null,
+ *   webhook?: string|null,
  * }
  */
 final class InsightTemplate implements BaseModel
 {
-    /** @use SdkModel<insight_template> */
+    /** @use SdkModel<InsightTemplateShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api('created_at')]
+    #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
-    #[Api]
+    #[Required]
     public string $instructions;
 
     /** @var value-of<InsightType>|null $insightType */
-    #[Api('insight_type', enum: InsightType::class, optional: true)]
+    #[Optional('insight_type', enum: InsightType::class)]
     public ?string $insightType;
 
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @var mixed|string|null $jsonSchema
+     * @var JsonSchemaVariants|null $jsonSchema
      */
-    #[Api('json_schema', union: JsonSchema::class, optional: true)]
-    public mixed $jsonSchema;
+    #[Optional('json_schema', union: JsonSchema::class)]
+    public string|array|null $jsonSchema;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook;
 
     /**
@@ -77,54 +81,54 @@ final class InsightTemplate implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InsightType|value-of<InsightType> $insightType
-     * @param mixed|string $jsonSchema
+     * @param InsightType|value-of<InsightType>|null $insightType
+     * @param JsonSchemaShape|null $jsonSchema
      */
     public static function with(
         string $id,
         \DateTimeInterface $createdAt,
         string $instructions,
         InsightType|string|null $insightType = null,
-        mixed $jsonSchema = null,
+        string|array|null $jsonSchema = null,
         ?string $name = null,
         ?string $webhook = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->instructions = $instructions;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['instructions'] = $instructions;
 
-        null !== $insightType && $obj['insightType'] = $insightType;
-        null !== $jsonSchema && $obj->jsonSchema = $jsonSchema;
-        null !== $name && $obj->name = $name;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $insightType && $self['insightType'] = $insightType;
+        null !== $jsonSchema && $self['jsonSchema'] = $jsonSchema;
+        null !== $name && $self['name'] = $name;
+        null !== $webhook && $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj->instructions = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,38 +136,38 @@ final class InsightTemplate implements BaseModel
      */
     public function withInsightType(InsightType|string $insightType): self
     {
-        $obj = clone $this;
-        $obj['insightType'] = $insightType;
+        $self = clone $this;
+        $self['insightType'] = $insightType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * If specified, the output will follow the JSON schema.
      *
-     * @param mixed|string $jsonSchema
+     * @param JsonSchemaShape $jsonSchema
      */
-    public function withJsonSchema(mixed $jsonSchema): self
+    public function withJsonSchema(string|array $jsonSchema): self
     {
-        $obj = clone $this;
-        $obj->jsonSchema = $jsonSchema;
+        $self = clone $this;
+        $self['jsonSchema'] = $jsonSchema;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhook(string $webhook): self
     {
-        $obj = clone $this;
-        $obj->webhook = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

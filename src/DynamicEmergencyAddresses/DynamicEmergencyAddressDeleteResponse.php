@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type dynamic_emergency_address_delete_response = array{
- *   data?: DynamicEmergencyAddress
+ * @phpstan-import-type DynamicEmergencyAddressShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress
+ *
+ * @phpstan-type DynamicEmergencyAddressDeleteResponseShape = array{
+ *   data?: null|DynamicEmergencyAddress|DynamicEmergencyAddressShape
  * }
  */
-final class DynamicEmergencyAddressDeleteResponse implements BaseModel, ResponseConverter
+final class DynamicEmergencyAddressDeleteResponse implements BaseModel
 {
-    /** @use SdkModel<dynamic_emergency_address_delete_response> */
+    /** @use SdkModel<DynamicEmergencyAddressDeleteResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?DynamicEmergencyAddress $data;
 
     public function __construct()
@@ -34,21 +32,27 @@ final class DynamicEmergencyAddressDeleteResponse implements BaseModel, Response
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DynamicEmergencyAddress|DynamicEmergencyAddressShape|null $data
      */
-    public static function with(?DynamicEmergencyAddress $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        DynamicEmergencyAddress|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(DynamicEmergencyAddress $data): self
+    /**
+     * @param DynamicEmergencyAddress|DynamicEmergencyAddressShape $data
+     */
+    public function withData(DynamicEmergencyAddress|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\Verification\RecordType;
@@ -12,40 +12,40 @@ use Telnyx\Verifications\Verification\Status;
 use Telnyx\Verifications\Verification\Type;
 
 /**
- * @phpstan-type verification_alias = array{
- *   id?: string,
- *   createdAt?: string,
+ * @phpstan-type VerificationShape = array{
+ *   id?: string|null,
+ *   createdAt?: string|null,
  *   customCode?: string|null,
- *   phoneNumber?: string,
- *   recordType?: value-of<RecordType>,
- *   status?: value-of<Status>,
- *   timeoutSecs?: int,
- *   type?: value-of<Type>,
- *   updatedAt?: string,
- *   verifyProfileID?: string,
+ *   phoneNumber?: string|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   status?: null|Status|value-of<Status>,
+ *   timeoutSecs?: int|null,
+ *   type?: null|Type|value-of<Type>,
+ *   updatedAt?: string|null,
+ *   verifyProfileID?: string|null,
  * }
  */
 final class Verification implements BaseModel
 {
-    /** @use SdkModel<verification_alias> */
+    /** @use SdkModel<VerificationShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * Send a self-generated numeric code to the end-user.
      */
-    #[Api('custom_code', nullable: true, optional: true)]
+    #[Optional('custom_code', nullable: true)]
     public ?string $customCode;
 
     /**
      * +E164 formatted phone number.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
@@ -53,7 +53,7 @@ final class Verification implements BaseModel
      *
      * @var value-of<RecordType>|null $recordType
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
     /**
@@ -61,13 +61,13 @@ final class Verification implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * This is the number of seconds before the code of the request is expired. Once this request has expired, the code will no longer verify the user. Note: this will override the `default_verification_timeout_secs` on the Verify profile.
      */
-    #[Api('timeout_secs', optional: true)]
+    #[Optional('timeout_secs')]
     public ?int $timeoutSecs;
 
     /**
@@ -75,16 +75,16 @@ final class Verification implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     /**
      * The identifier of the associated Verify profile.
      */
-    #[Api('verify_profile_id', optional: true)]
+    #[Optional('verify_profile_id')]
     public ?string $verifyProfileID;
 
     public function __construct()
@@ -97,9 +97,9 @@ final class Verification implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param Status|value-of<Status> $status
-     * @param Type|value-of<Type> $type
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param Status|value-of<Status>|null $status
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -113,36 +113,36 @@ final class Verification implements BaseModel
         ?string $updatedAt = null,
         ?string $verifyProfileID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customCode && $obj->customCode = $customCode;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
-        null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $verifyProfileID && $obj->verifyProfileID = $verifyProfileID;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customCode && $self['customCode'] = $customCode;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
+        null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $verifyProfileID && $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class Verification implements BaseModel
      */
     public function withCustomCode(?string $customCode): self
     {
-        $obj = clone $this;
-        $obj->customCode = $customCode;
+        $self = clone $this;
+        $self['customCode'] = $customCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class Verification implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class Verification implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class Verification implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +198,10 @@ final class Verification implements BaseModel
      */
     public function withTimeoutSecs(int $timeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->timeoutSecs = $timeoutSecs;
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,18 +211,18 @@ final class Verification implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -230,9 +230,9 @@ final class Verification implements BaseModel
      */
     public function withVerifyProfileID(string $verifyProfileID): self
     {
-        $obj = clone $this;
-        $obj->verifyProfileID = $verifyProfileID;
+        $self = clone $this;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Migrations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,43 +13,43 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Initiate a migration of data from an external provider into Telnyx Cloud Storage. Currently, only S3 is supported.
  *
- * @see Telnyx\Storage\Migrations->create
+ * @see Telnyx\Services\Storage\MigrationsService::create()
  *
- * @phpstan-type migration_create_params = array{
+ * @phpstan-type MigrationCreateParamsShape = array{
  *   sourceID: string,
  *   targetBucketName: string,
  *   targetRegion: string,
- *   refresh?: bool,
+ *   refresh?: bool|null,
  * }
  */
 final class MigrationCreateParams implements BaseModel
 {
-    /** @use SdkModel<migration_create_params> */
+    /** @use SdkModel<MigrationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * ID of the Migration Source from which to migrate data.
      */
-    #[Api('source_id')]
+    #[Required('source_id')]
     public string $sourceID;
 
     /**
      * Bucket name to migrate the data into. Will default to the same name as the `source_bucket_name`.
      */
-    #[Api('target_bucket_name')]
+    #[Required('target_bucket_name')]
     public string $targetBucketName;
 
     /**
      * Telnyx Cloud Storage region to migrate the data to.
      */
-    #[Api('target_region')]
+    #[Required('target_region')]
     public string $targetRegion;
 
     /**
      * If true, will continue to poll the source bucket to ensure new data is continually migrated over.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $refresh;
 
     /**
@@ -86,15 +87,15 @@ final class MigrationCreateParams implements BaseModel
         string $targetRegion,
         ?bool $refresh = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->sourceID = $sourceID;
-        $obj->targetBucketName = $targetBucketName;
-        $obj->targetRegion = $targetRegion;
+        $self['sourceID'] = $sourceID;
+        $self['targetBucketName'] = $targetBucketName;
+        $self['targetRegion'] = $targetRegion;
 
-        null !== $refresh && $obj->refresh = $refresh;
+        null !== $refresh && $self['refresh'] = $refresh;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +103,10 @@ final class MigrationCreateParams implements BaseModel
      */
     public function withSourceID(string $sourceID): self
     {
-        $obj = clone $this;
-        $obj->sourceID = $sourceID;
+        $self = clone $this;
+        $self['sourceID'] = $sourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +114,10 @@ final class MigrationCreateParams implements BaseModel
      */
     public function withTargetBucketName(string $targetBucketName): self
     {
-        $obj = clone $this;
-        $obj->targetBucketName = $targetBucketName;
+        $self = clone $this;
+        $self['targetBucketName'] = $targetBucketName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +125,10 @@ final class MigrationCreateParams implements BaseModel
      */
     public function withTargetRegion(string $targetRegion): self
     {
-        $obj = clone $this;
-        $obj->targetRegion = $targetRegion;
+        $self = clone $this;
+        $self['targetRegion'] = $targetRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,9 +136,9 @@ final class MigrationCreateParams implements BaseModel
      */
     public function withRefresh(bool $refresh): self
     {
-        $obj = clone $this;
-        $obj->refresh = $refresh;
+        $self = clone $this;
+        $self['refresh'] = $refresh;
 
-        return $obj;
+        return $self;
     }
 }

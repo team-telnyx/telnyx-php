@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Phone number pattern filtering operations.
  *
- * @phpstan-type phone_number = array{contains?: string}
+ * @phpstan-type PhoneNumberShape = array{contains?: string|null}
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     /**
      * Filter results by full or partial phone_number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class PhoneNumber implements BaseModel
      */
     public static function with(?string $contains = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
+        null !== $contains && $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class PhoneNumber implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,34 +5,31 @@ declare(strict_types=1);
 namespace Telnyx\ChannelZones;
 
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse\RecordType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type channel_zone_update_response = array{
+ * @phpstan-type ChannelZoneUpdateResponseShape = array{
  *   id: string,
  *   channels: int,
  *   countries: list<string>,
  *   name: string,
- *   recordType: value-of<RecordType>,
- *   createdAt?: string,
- *   updatedAt?: string,
+ *   recordType: RecordType|value-of<RecordType>,
+ *   createdAt?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
-final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
+final class ChannelZoneUpdateResponse implements BaseModel
 {
-    /** @use SdkModel<channel_zone_update_response> */
+    /** @use SdkModel<ChannelZoneUpdateResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public int $channels;
 
     /**
@@ -40,26 +37,26 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
      *
      * @var list<string> $countries
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $countries;
 
-    #[Api]
+    #[Required]
     public string $name;
 
     /** @var value-of<RecordType> $recordType */
-    #[Api('record_type', enum: RecordType::class)]
+    #[Required('record_type', enum: RecordType::class)]
     public string $recordType;
 
     /**
      * ISO 8601 formatted date of when the channel zone was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * ISO 8601 formatted date of when the channel zone was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     /**
@@ -105,34 +102,34 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
         ?string $createdAt = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->channels = $channels;
-        $obj->countries = $countries;
-        $obj->name = $name;
-        $obj['recordType'] = $recordType;
+        $self['id'] = $id;
+        $self['channels'] = $channels;
+        $self['countries'] = $countries;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withChannels(int $channels): self
     {
-        $obj = clone $this;
-        $obj->channels = $channels;
+        $self = clone $this;
+        $self['channels'] = $channels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,18 +139,18 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
      */
     public function withCountries(array $countries): self
     {
-        $obj = clone $this;
-        $obj->countries = $countries;
+        $self = clone $this;
+        $self['countries'] = $countries;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +158,10 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +169,10 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,9 +180,9 @@ final class ChannelZoneUpdateResponse implements BaseModel, ResponseConverter
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

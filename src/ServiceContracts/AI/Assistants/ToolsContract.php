@@ -8,39 +8,27 @@ use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ToolsContract
 {
     /**
      * @api
      *
-     * @param string $assistantID
-     * @param array<string,
-     * mixed,> $arguments Key-value arguments to use for the webhook test
-     * @param array<string,
-     * mixed,> $dynamicVariables Key-value dynamic variables to use for the webhook test
+     * @param string $toolID Path param
+     * @param string $assistantID Path param
+     * @param array<string,mixed> $arguments Body param: Key-value arguments to use for the webhook test
+     * @param array<string,mixed> $dynamicVariables Body param: Key-value dynamic variables to use for the webhook test
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function test(
         string $toolID,
-        $assistantID,
-        $arguments = omit,
-        $dynamicVariables = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ToolTestResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function testRaw(
-        string $toolID,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $assistantID,
+        ?array $arguments = null,
+        ?array $dynamicVariables = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ToolTestResponse;
 }

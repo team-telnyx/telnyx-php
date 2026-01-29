@@ -6,66 +6,54 @@ namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams;
+use Telnyx\Core\Util;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\SupportingDocumentsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type DocumentShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SupportingDocumentsService implements SupportingDocumentsContract
 {
     /**
+     * @api
+     */
+    public SupportingDocumentsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SupportingDocumentsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a list of supporting documents on a portout request.
      *
-     * @param list<Document> $documents List of supporting documents parameters
+     * @param string $id Portout id
+     * @param list<Document|DocumentShape> $documents List of supporting documents parameters
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        $documents = omit,
-        ?RequestOptions $requestOptions = null
+        ?array $documents = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SupportingDocumentNewResponse {
-        $params = ['documents' => $documents];
+        $params = Util::removeNulls(['documents' => $documents]);
 
-        return $this->createRaw($id, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($id, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SupportingDocumentNewResponse {
-        [$parsed, $options] = SupportingDocumentCreateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['portouts/%1$s/supporting_documents', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: SupportingDocumentNewResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -73,18 +61,18 @@ final class SupportingDocumentsService implements SupportingDocumentsContract
      *
      * List every supporting documents for a portout request.
      *
+     * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SupportingDocumentListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['portouts/%1$s/supporting_documents', $id],
-            options: $requestOptions,
-            convert: SupportingDocumentListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

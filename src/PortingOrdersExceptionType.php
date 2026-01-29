@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrdersExceptionType\Code;
 
 /**
- * @phpstan-type porting_orders_exception_type = array{
- *   code?: value-of<Code>, description?: string
+ * @phpstan-type PortingOrdersExceptionTypeShape = array{
+ *   code?: null|Code|value-of<Code>, description?: string|null
  * }
  */
 final class PortingOrdersExceptionType implements BaseModel
 {
-    /** @use SdkModel<porting_orders_exception_type> */
+    /** @use SdkModel<PortingOrdersExceptionTypeShape> */
     use SdkModel;
 
     /**
@@ -24,13 +24,13 @@ final class PortingOrdersExceptionType implements BaseModel
      *
      * @var value-of<Code>|null $code
      */
-    #[Api(enum: Code::class, optional: true)]
+    #[Optional(enum: Code::class)]
     public ?string $code;
 
     /**
      * Description of an exception type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     public function __construct()
@@ -43,18 +43,18 @@ final class PortingOrdersExceptionType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Code|value-of<Code> $code
+     * @param Code|value-of<Code>|null $code
      */
     public static function with(
         Code|string|null $code = null,
         ?string $description = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj['code'] = $code;
-        null !== $description && $obj->description = $description;
+        null !== $code && $self['code'] = $code;
+        null !== $description && $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,10 +64,10 @@ final class PortingOrdersExceptionType implements BaseModel
      */
     public function withCode(Code|string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class PortingOrdersExceptionType implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 }

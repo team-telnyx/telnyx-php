@@ -4,22 +4,31 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Actions;
 
-use Telnyx\Actions\Purchase\PurchaseCreateParams;
 use Telnyx\Actions\Purchase\PurchaseCreateParams\Status;
 use Telnyx\Actions\Purchase\PurchaseNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\PurchaseContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PurchaseService implements PurchaseContract
 {
     /**
+     * @api
+     */
+    public PurchaseRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PurchaseRawService($client);
+    }
 
     /**
      * @api
@@ -33,53 +42,33 @@ final class PurchaseService implements PurchaseContract
      * @param Status|value-of<Status> $status status on which the SIM cards will be set after being successfully registered
      * @param list<string> $tags Searchable tags associated with the SIM cards
      * @param string $whitelabelName Service Provider Name (SPN) for the Whitelabel eSIM product. It will be displayed as the mobile service name by operating systems of smartphones. This parameter must only contain letters, numbers and whitespaces.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $amount,
-        $product = omit,
-        $simCardGroupID = omit,
-        $status = omit,
-        $tags = omit,
-        $whitelabelName = omit,
-        ?RequestOptions $requestOptions = null,
+        int $amount,
+        ?string $product = null,
+        ?string $simCardGroupID = null,
+        Status|string $status = 'enabled',
+        ?array $tags = null,
+        ?string $whitelabelName = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PurchaseNewResponse {
-        $params = [
-            'amount' => $amount,
-            'product' => $product,
-            'simCardGroupID' => $simCardGroupID,
-            'status' => $status,
-            'tags' => $tags,
-            'whitelabelName' => $whitelabelName,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PurchaseNewResponse {
-        [$parsed, $options] = PurchaseCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'amount' => $amount,
+                'product' => $product,
+                'simCardGroupID' => $simCardGroupID,
+                'status' => $status,
+                'tags' => $tags,
+                'whitelabelName' => $whitelabelName,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'actions/purchase/esims',
-            body: (object) $parsed,
-            options: $options,
-            convert: PurchaseNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

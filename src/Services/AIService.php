@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AI\AIGetModelsResponse;
-use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
 use Telnyx\Services\AI\AssistantsService;
@@ -18,51 +18,70 @@ use Telnyx\Services\AI\ClustersService;
 use Telnyx\Services\AI\ConversationsService;
 use Telnyx\Services\AI\EmbeddingsService;
 use Telnyx\Services\AI\FineTuningService;
+use Telnyx\Services\AI\IntegrationsService;
+use Telnyx\Services\AI\McpServersService;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AIService implements AIContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public AIRawService $raw;
+
+    /**
+     * @api
      */
     public AssistantsService $assistants;
 
     /**
-     * @@api
+     * @api
      */
     public AudioService $audio;
 
     /**
-     * @@api
+     * @api
      */
     public ChatService $chat;
 
     /**
-     * @@api
+     * @api
      */
     public ClustersService $clusters;
 
     /**
-     * @@api
+     * @api
      */
     public ConversationsService $conversations;
 
     /**
-     * @@api
+     * @api
      */
     public EmbeddingsService $embeddings;
 
     /**
-     * @@api
+     * @api
      */
     public FineTuningService $fineTuning;
+
+    /**
+     * @api
+     */
+    public IntegrationsService $integrations;
+
+    /**
+     * @api
+     */
+    public McpServersService $mcpServers;
 
     /**
      * @internal
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new AIRawService($client);
         $this->assistants = new AssistantsService($client);
         $this->audio = new AudioService($client);
         $this->chat = new ChatService($client);
@@ -70,6 +89,8 @@ final class AIService implements AIContract
         $this->conversations = new ConversationsService($client);
         $this->embeddings = new EmbeddingsService($client);
         $this->fineTuning = new FineTuningService($client);
+        $this->integrations = new IntegrationsService($client);
+        $this->mcpServers = new McpServersService($client);
     }
 
     /**
@@ -77,18 +98,17 @@ final class AIService implements AIContract
      *
      * This endpoint returns a list of Open Source and OpenAI models that are available for use. <br /><br /> **Note**: Model `id`'s will be in the form `{source}/{model_name}`. For example `openai/gpt-4` or `mistralai/Mistral-7B-Instruct-v0.1` consistent with HuggingFace naming conventions.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieveModels(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AIGetModelsResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'ai/models',
-            options: $requestOptions,
-            convert: AIGetModelsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveModels(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -106,47 +126,27 @@ final class AIService implements AIContract
      * @param string $bucket the name of the bucket that contains the file to be summarized
      * @param string $filename the name of the file to be summarized
      * @param string $systemPrompt a system prompt to guide the summary generation
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function summarize(
-        $bucket,
-        $filename,
-        $systemPrompt = omit,
-        ?RequestOptions $requestOptions = null,
+        string $bucket,
+        string $filename,
+        ?string $systemPrompt = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AISummarizeResponse {
-        $params = [
-            'bucket' => $bucket,
-            'filename' => $filename,
-            'systemPrompt' => $systemPrompt,
-        ];
-
-        return $this->summarizeRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function summarizeRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AISummarizeResponse {
-        [$parsed, $options] = AISummarizeParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'bucket' => $bucket,
+                'filename' => $filename,
+                'systemPrompt' => $systemPrompt,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'ai/summarize',
-            body: (object) $parsed,
-            options: $options,
-            convert: AISummarizeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->summarize(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

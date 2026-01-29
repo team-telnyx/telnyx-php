@@ -4,26 +4,29 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\TransferTool\Transfer;
 use Telnyx\AI\Assistants\TransferTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transfer_tool = array{
- *   transfer: InferenceEmbeddingTransferToolParams, type: value-of<Type>
+ * @phpstan-import-type TransferShape from \Telnyx\AI\Assistants\TransferTool\Transfer
+ *
+ * @phpstan-type TransferToolShape = array{
+ *   transfer: Transfer|TransferShape, type: Type|value-of<Type>
  * }
  */
 final class TransferTool implements BaseModel
 {
-    /** @use SdkModel<transfer_tool> */
+    /** @use SdkModel<TransferToolShape> */
     use SdkModel;
 
-    #[Api]
-    public InferenceEmbeddingTransferToolParams $transfer;
+    #[Required]
+    public Transfer $transfer;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -50,27 +53,30 @@ final class TransferTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Transfer|TransferShape $transfer
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        InferenceEmbeddingTransferToolParams $transfer,
+        Transfer|array $transfer,
         Type|string $type
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->transfer = $transfer;
-        $obj['type'] = $type;
+        $self['transfer'] = $transfer;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
-    public function withTransfer(
-        InferenceEmbeddingTransferToolParams $transfer
-    ): self {
-        $obj = clone $this;
-        $obj->transfer = $transfer;
+    /**
+     * @param Transfer|TransferShape $transfer
+     */
+    public function withTransfer(Transfer|array $transfer): self
+    {
+        $self = clone $this;
+        $self['transfer'] = $transfer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +84,9 @@ final class TransferTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

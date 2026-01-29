@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,48 +14,53 @@ use Telnyx\PhoneNumbers\Voice\VoiceUpdateParams\UsagePaymentMethod;
 /**
  * Update a phone number with voice settings.
  *
- * @see Telnyx\PhoneNumbers\Voice->update
+ * @see Telnyx\Services\PhoneNumbers\VoiceService::update()
  *
- * @phpstan-type voice_update_params = array{
- *   callForwarding?: CallForwarding,
- *   callRecording?: CallRecording,
- *   callerIDNameEnabled?: bool,
- *   cnamListing?: CnamListing,
- *   inboundCallScreening?: InboundCallScreening|value-of<InboundCallScreening>,
- *   mediaFeatures?: MediaFeatures,
- *   techPrefixEnabled?: bool,
- *   translatedNumber?: string,
- *   usagePaymentMethod?: UsagePaymentMethod|value-of<UsagePaymentMethod>,
+ * @phpstan-import-type CallForwardingShape from \Telnyx\PhoneNumbers\Voice\CallForwarding
+ * @phpstan-import-type CallRecordingShape from \Telnyx\PhoneNumbers\Voice\CallRecording
+ * @phpstan-import-type CnamListingShape from \Telnyx\PhoneNumbers\Voice\CnamListing
+ * @phpstan-import-type MediaFeaturesShape from \Telnyx\PhoneNumbers\Voice\MediaFeatures
+ *
+ * @phpstan-type VoiceUpdateParamsShape = array{
+ *   callForwarding?: null|CallForwarding|CallForwardingShape,
+ *   callRecording?: null|CallRecording|CallRecordingShape,
+ *   callerIDNameEnabled?: bool|null,
+ *   cnamListing?: null|CnamListing|CnamListingShape,
+ *   inboundCallScreening?: null|InboundCallScreening|value-of<InboundCallScreening>,
+ *   mediaFeatures?: null|MediaFeatures|MediaFeaturesShape,
+ *   techPrefixEnabled?: bool|null,
+ *   translatedNumber?: string|null,
+ *   usagePaymentMethod?: null|UsagePaymentMethod|value-of<UsagePaymentMethod>,
  * }
  */
 final class VoiceUpdateParams implements BaseModel
 {
-    /** @use SdkModel<voice_update_params> */
+    /** @use SdkModel<VoiceUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The call forwarding settings for a phone number.
      */
-    #[Api('call_forwarding', optional: true)]
+    #[Optional('call_forwarding')]
     public ?CallForwarding $callForwarding;
 
     /**
      * The call recording settings for a phone number.
      */
-    #[Api('call_recording', optional: true)]
+    #[Optional('call_recording')]
     public ?CallRecording $callRecording;
 
     /**
      * Controls whether the caller ID name is enabled for this phone number.
      */
-    #[Api('caller_id_name_enabled', optional: true)]
+    #[Optional('caller_id_name_enabled')]
     public ?bool $callerIDNameEnabled;
 
     /**
      * The CNAM listing settings for a phone number.
      */
-    #[Api('cnam_listing', optional: true)]
+    #[Optional('cnam_listing')]
     public ?CnamListing $cnamListing;
 
     /**
@@ -63,29 +68,25 @@ final class VoiceUpdateParams implements BaseModel
      *
      * @var value-of<InboundCallScreening>|null $inboundCallScreening
      */
-    #[Api(
-        'inbound_call_screening',
-        enum: InboundCallScreening::class,
-        optional: true
-    )]
+    #[Optional('inbound_call_screening', enum: InboundCallScreening::class)]
     public ?string $inboundCallScreening;
 
     /**
      * The media features settings for a phone number.
      */
-    #[Api('media_features', optional: true)]
+    #[Optional('media_features')]
     public ?MediaFeatures $mediaFeatures;
 
     /**
      * Controls whether a tech prefix is enabled for this phone number.
      */
-    #[Api('tech_prefix_enabled', optional: true)]
+    #[Optional('tech_prefix_enabled')]
     public ?bool $techPrefixEnabled;
 
     /**
      * This field allows you to rewrite the destination number of an inbound call before the call is routed to you. The value of this field may be any alphanumeric value, and the value will replace the number originally dialed.
      */
-    #[Api('translated_number', optional: true)]
+    #[Optional('translated_number')]
     public ?string $translatedNumber;
 
     /**
@@ -93,11 +94,7 @@ final class VoiceUpdateParams implements BaseModel
      *
      * @var value-of<UsagePaymentMethod>|null $usagePaymentMethod
      */
-    #[Api(
-        'usage_payment_method',
-        enum: UsagePaymentMethod::class,
-        optional: true
-    )]
+    #[Optional('usage_payment_method', enum: UsagePaymentMethod::class)]
     public ?string $usagePaymentMethod;
 
     public function __construct()
@@ -110,55 +107,64 @@ final class VoiceUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
-     * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod
+     * @param CallForwarding|CallForwardingShape|null $callForwarding
+     * @param CallRecording|CallRecordingShape|null $callRecording
+     * @param CnamListing|CnamListingShape|null $cnamListing
+     * @param InboundCallScreening|value-of<InboundCallScreening>|null $inboundCallScreening
+     * @param MediaFeatures|MediaFeaturesShape|null $mediaFeatures
+     * @param UsagePaymentMethod|value-of<UsagePaymentMethod>|null $usagePaymentMethod
      */
     public static function with(
-        ?CallForwarding $callForwarding = null,
-        ?CallRecording $callRecording = null,
+        CallForwarding|array|null $callForwarding = null,
+        CallRecording|array|null $callRecording = null,
         ?bool $callerIDNameEnabled = null,
-        ?CnamListing $cnamListing = null,
+        CnamListing|array|null $cnamListing = null,
         InboundCallScreening|string|null $inboundCallScreening = null,
-        ?MediaFeatures $mediaFeatures = null,
+        MediaFeatures|array|null $mediaFeatures = null,
         ?bool $techPrefixEnabled = null,
         ?string $translatedNumber = null,
         UsagePaymentMethod|string|null $usagePaymentMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callForwarding && $obj->callForwarding = $callForwarding;
-        null !== $callRecording && $obj->callRecording = $callRecording;
-        null !== $callerIDNameEnabled && $obj->callerIDNameEnabled = $callerIDNameEnabled;
-        null !== $cnamListing && $obj->cnamListing = $cnamListing;
-        null !== $inboundCallScreening && $obj['inboundCallScreening'] = $inboundCallScreening;
-        null !== $mediaFeatures && $obj->mediaFeatures = $mediaFeatures;
-        null !== $techPrefixEnabled && $obj->techPrefixEnabled = $techPrefixEnabled;
-        null !== $translatedNumber && $obj->translatedNumber = $translatedNumber;
-        null !== $usagePaymentMethod && $obj['usagePaymentMethod'] = $usagePaymentMethod;
+        null !== $callForwarding && $self['callForwarding'] = $callForwarding;
+        null !== $callRecording && $self['callRecording'] = $callRecording;
+        null !== $callerIDNameEnabled && $self['callerIDNameEnabled'] = $callerIDNameEnabled;
+        null !== $cnamListing && $self['cnamListing'] = $cnamListing;
+        null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
+        null !== $mediaFeatures && $self['mediaFeatures'] = $mediaFeatures;
+        null !== $techPrefixEnabled && $self['techPrefixEnabled'] = $techPrefixEnabled;
+        null !== $translatedNumber && $self['translatedNumber'] = $translatedNumber;
+        null !== $usagePaymentMethod && $self['usagePaymentMethod'] = $usagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The call forwarding settings for a phone number.
+     *
+     * @param CallForwarding|CallForwardingShape $callForwarding
      */
-    public function withCallForwarding(CallForwarding $callForwarding): self
-    {
-        $obj = clone $this;
-        $obj->callForwarding = $callForwarding;
+    public function withCallForwarding(
+        CallForwarding|array $callForwarding
+    ): self {
+        $self = clone $this;
+        $self['callForwarding'] = $callForwarding;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The call recording settings for a phone number.
+     *
+     * @param CallRecording|CallRecordingShape $callRecording
      */
-    public function withCallRecording(CallRecording $callRecording): self
+    public function withCallRecording(CallRecording|array $callRecording): self
     {
-        $obj = clone $this;
-        $obj->callRecording = $callRecording;
+        $self = clone $this;
+        $self['callRecording'] = $callRecording;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,21 +172,23 @@ final class VoiceUpdateParams implements BaseModel
      */
     public function withCallerIDNameEnabled(bool $callerIDNameEnabled): self
     {
-        $obj = clone $this;
-        $obj->callerIDNameEnabled = $callerIDNameEnabled;
+        $self = clone $this;
+        $self['callerIDNameEnabled'] = $callerIDNameEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The CNAM listing settings for a phone number.
+     *
+     * @param CnamListing|CnamListingShape $cnamListing
      */
-    public function withCnamListing(CnamListing $cnamListing): self
+    public function withCnamListing(CnamListing|array $cnamListing): self
     {
-        $obj = clone $this;
-        $obj->cnamListing = $cnamListing;
+        $self = clone $this;
+        $self['cnamListing'] = $cnamListing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,21 +199,23 @@ final class VoiceUpdateParams implements BaseModel
     public function withInboundCallScreening(
         InboundCallScreening|string $inboundCallScreening
     ): self {
-        $obj = clone $this;
-        $obj['inboundCallScreening'] = $inboundCallScreening;
+        $self = clone $this;
+        $self['inboundCallScreening'] = $inboundCallScreening;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The media features settings for a phone number.
+     *
+     * @param MediaFeatures|MediaFeaturesShape $mediaFeatures
      */
-    public function withMediaFeatures(MediaFeatures $mediaFeatures): self
+    public function withMediaFeatures(MediaFeatures|array $mediaFeatures): self
     {
-        $obj = clone $this;
-        $obj->mediaFeatures = $mediaFeatures;
+        $self = clone $this;
+        $self['mediaFeatures'] = $mediaFeatures;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,10 +223,10 @@ final class VoiceUpdateParams implements BaseModel
      */
     public function withTechPrefixEnabled(bool $techPrefixEnabled): self
     {
-        $obj = clone $this;
-        $obj->techPrefixEnabled = $techPrefixEnabled;
+        $self = clone $this;
+        $self['techPrefixEnabled'] = $techPrefixEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +234,10 @@ final class VoiceUpdateParams implements BaseModel
      */
     public function withTranslatedNumber(string $translatedNumber): self
     {
-        $obj = clone $this;
-        $obj->translatedNumber = $translatedNumber;
+        $self = clone $this;
+        $self['translatedNumber'] = $translatedNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,9 +248,9 @@ final class VoiceUpdateParams implements BaseModel
     public function withUsagePaymentMethod(
         UsagePaymentMethod|string $usagePaymentMethod
     ): self {
-        $obj = clone $this;
-        $obj['usagePaymentMethod'] = $usagePaymentMethod;
+        $self = clone $this;
+        $self['usagePaymentMethod'] = $usagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 }

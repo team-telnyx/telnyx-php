@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,31 +12,31 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve an AI Assistant configuration by `assistant_id`.
  *
- * @see Telnyx\AI\Assistants->retrieve
+ * @see Telnyx\Services\AI\AssistantsService::retrieve()
  *
- * @phpstan-type assistant_retrieve_params = array{
- *   callControlID?: string,
- *   fetchDynamicVariablesFromWebhook?: bool,
- *   from?: string,
- *   to?: string,
+ * @phpstan-type AssistantRetrieveParamsShape = array{
+ *   callControlID?: string|null,
+ *   fetchDynamicVariablesFromWebhook?: bool|null,
+ *   from?: string|null,
+ *   to?: string|null,
  * }
  */
 final class AssistantRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<assistant_retrieve_params> */
+    /** @use SdkModel<AssistantRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $callControlID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $fetchDynamicVariablesFromWebhook;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()
@@ -55,46 +55,46 @@ final class AssistantRetrieveParams implements BaseModel
         ?string $from = null,
         ?string $to = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callControlID && $obj->callControlID = $callControlID;
-        null !== $fetchDynamicVariablesFromWebhook && $obj->fetchDynamicVariablesFromWebhook = $fetchDynamicVariablesFromWebhook;
-        null !== $from && $obj->from = $from;
-        null !== $to && $obj->to = $to;
+        null !== $callControlID && $self['callControlID'] = $callControlID;
+        null !== $fetchDynamicVariablesFromWebhook && $self['fetchDynamicVariablesFromWebhook'] = $fetchDynamicVariablesFromWebhook;
+        null !== $from && $self['from'] = $from;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     public function withFetchDynamicVariablesFromWebhook(
         bool $fetchDynamicVariablesFromWebhook
     ): self {
-        $obj = clone $this;
-        $obj->fetchDynamicVariablesFromWebhook = $fetchDynamicVariablesFromWebhook;
+        $self = clone $this;
+        $self['fetchDynamicVariablesFromWebhook'] = $fetchDynamicVariablesFromWebhook;
 
-        return $obj;
+        return $self;
     }
 
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

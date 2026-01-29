@@ -5,7 +5,6 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -36,12 +35,13 @@ final class ChatTest extends TestCase
 
         $result = $this->client->ai->chat->createCompletion(
             messages: [
-                Message::with(content: 'You are a friendly chatbot.', role: 'system'),
-                Message::with(content: 'Hello, world!', role: 'user'),
+                ['content' => 'You are a friendly chatbot.', 'role' => 'system'],
+                ['content' => 'Hello, world!', 'role' => 'user'],
             ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsArray($result);
     }
 
     #[Test]
@@ -53,11 +53,43 @@ final class ChatTest extends TestCase
 
         $result = $this->client->ai->chat->createCompletion(
             messages: [
-                Message::with(content: 'You are a friendly chatbot.', role: 'system'),
-                Message::with(content: 'Hello, world!', role: 'user'),
+                ['content' => 'You are a friendly chatbot.', 'role' => 'system'],
+                ['content' => 'Hello, world!', 'role' => 'user'],
             ],
+            apiKeyRef: 'api_key_ref',
+            bestOf: 0,
+            earlyStopping: true,
+            frequencyPenalty: 0,
+            guidedChoice: ['string'],
+            guidedJson: ['foo' => 'bar'],
+            guidedRegex: 'guided_regex',
+            lengthPenalty: 0,
+            logprobs: true,
+            maxTokens: 0,
+            minP: 0,
+            model: 'model',
+            n: 0,
+            presencePenalty: 0,
+            responseFormat: ['type' => 'text'],
+            stream: true,
+            temperature: 0,
+            toolChoice: 'none',
+            tools: [
+                [
+                    'function' => [
+                        'name' => 'name',
+                        'description' => 'description',
+                        'parameters' => ['foo' => 'bar'],
+                    ],
+                    'type' => 'function',
+                ],
+            ],
+            topLogprobs: 0,
+            topP: 0,
+            useBeamSearch: true,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsArray($result);
     }
 }

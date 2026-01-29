@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type dialogflow_config = array{
- *   analyzeSentiment?: bool, partialAutomatedAgentReply?: bool
+ * @phpstan-type DialogflowConfigShape = array{
+ *   analyzeSentiment?: bool|null, partialAutomatedAgentReply?: bool|null
  * }
  */
 final class DialogflowConfig implements BaseModel
 {
-    /** @use SdkModel<dialogflow_config> */
+    /** @use SdkModel<DialogflowConfigShape> */
     use SdkModel;
 
     /**
      * Enable sentiment analysis from Dialogflow.
      */
-    #[Api('analyze_sentiment', optional: true)]
+    #[Optional('analyze_sentiment')]
     public ?bool $analyzeSentiment;
 
     /**
      * Enable partial automated agent reply from Dialogflow.
      */
-    #[Api('partial_automated_agent_reply', optional: true)]
+    #[Optional('partial_automated_agent_reply')]
     public ?bool $partialAutomatedAgentReply;
 
     public function __construct()
@@ -44,12 +44,12 @@ final class DialogflowConfig implements BaseModel
         ?bool $analyzeSentiment = null,
         ?bool $partialAutomatedAgentReply = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $analyzeSentiment && $obj->analyzeSentiment = $analyzeSentiment;
-        null !== $partialAutomatedAgentReply && $obj->partialAutomatedAgentReply = $partialAutomatedAgentReply;
+        null !== $analyzeSentiment && $self['analyzeSentiment'] = $analyzeSentiment;
+        null !== $partialAutomatedAgentReply && $self['partialAutomatedAgentReply'] = $partialAutomatedAgentReply;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class DialogflowConfig implements BaseModel
      */
     public function withAnalyzeSentiment(bool $analyzeSentiment): self
     {
-        $obj = clone $this;
-        $obj->analyzeSentiment = $analyzeSentiment;
+        $self = clone $this;
+        $self['analyzeSentiment'] = $analyzeSentiment;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,9 +69,9 @@ final class DialogflowConfig implements BaseModel
     public function withPartialAutomatedAgentReply(
         bool $partialAutomatedAgentReply
     ): self {
-        $obj = clone $this;
-        $obj->partialAutomatedAgentReply = $partialAutomatedAgentReply;
+        $self = clone $this;
+        $self['partialAutomatedAgentReply'] = $partialAutomatedAgentReply;
 
-        return $obj;
+        return $self;
     }
 }

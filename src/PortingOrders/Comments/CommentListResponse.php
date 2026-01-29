@@ -4,32 +4,57 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Comments;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\PortingOrders\Comments\CommentListResponse\Data;
+use Telnyx\PortingOrders\Comments\CommentListResponse\UserType;
 
 /**
- * @phpstan-type comment_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-type CommentListResponseShape = array{
+ *   id?: string|null,
+ *   body?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   portingOrderID?: string|null,
+ *   recordType?: string|null,
+ *   userType?: null|UserType|value-of<UserType>,
  * }
  */
-final class CommentListResponse implements BaseModel, ResponseConverter
+final class CommentListResponse implements BaseModel
 {
-    /** @use SdkModel<comment_list_response> */
+    /** @use SdkModel<CommentListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    #[Optional]
+    public ?string $id;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * Body of comment.
+     */
+    #[Optional]
+    public ?string $body;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?\DateTimeInterface $createdAt;
+
+    #[Optional('porting_order_id')]
+    public ?string $portingOrderID;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * Indicates whether this comment was created by a Telnyx Admin, user, or system.
+     *
+     * @var value-of<UserType>|null $userType
+     */
+    #[Optional('user_type', enum: UserType::class)]
+    public ?string $userType;
 
     public function __construct()
     {
@@ -41,36 +66,87 @@ final class CommentListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param UserType|value-of<UserType>|null $userType
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?string $id = null,
+        ?string $body = null,
+        ?\DateTimeInterface $createdAt = null,
+        ?string $portingOrderID = null,
+        ?string $recordType = null,
+        UserType|string|null $userType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $body && $self['body'] = $body;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $userType && $self['userType'] = $userType;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
+
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * Body of comment.
      */
-    public function withData(array $data): self
+    public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPortingOrderID(string $portingOrderID): self
+    {
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * Indicates whether this comment was created by a Telnyx Admin, user, or system.
+     *
+     * @param UserType|value-of<UserType> $userType
+     */
+    public function withUserType(UserType|string $userType): self
+    {
+        $self = clone $this;
+        $self['userType'] = $userType;
+
+        return $self;
     }
 }

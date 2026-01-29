@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Embeddings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve tasks for the user that are either `queued`, `processing`, `failed`, `success` or `partial_success` based on the query string. Defaults to `queued` and `processing`.
  *
- * @see Telnyx\AI\Embeddings->list
+ * @see Telnyx\Services\AI\EmbeddingsService::list()
  *
- * @phpstan-type embedding_list_params = array{status?: list<string>}
+ * @phpstan-type EmbeddingListParamsShape = array{status?: list<string>|null}
  */
 final class EmbeddingListParams implements BaseModel
 {
-    /** @use SdkModel<embedding_list_params> */
+    /** @use SdkModel<EmbeddingListParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -27,7 +27,7 @@ final class EmbeddingListParams implements BaseModel
      *
      * @var list<string>|null $status
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $status;
 
     public function __construct()
@@ -40,15 +40,15 @@ final class EmbeddingListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $status
+     * @param list<string>|null $status
      */
     public static function with(?array $status = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $status && $obj->status = $status;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -58,9 +58,9 @@ final class EmbeddingListParams implements BaseModel
      */
     public function withStatus(array $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

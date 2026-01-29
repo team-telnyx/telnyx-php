@@ -6,20 +6,31 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListParams;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\NumberLookupContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NumberLookupService implements NumberLookupContract
 {
     /**
+     * @api
+     */
+    public NumberLookupRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NumberLookupRawService($client);
+    }
 
     /**
      * @api
@@ -27,54 +38,33 @@ final class NumberLookupService implements NumberLookupContract
      * Submit a new telco data usage report
      *
      * @param AggregationType|value-of<AggregationType> $aggregationType Type of aggregation for the report
-     * @param \DateTimeInterface $endDate End date for the usage report
+     * @param string $endDate End date for the usage report
      * @param list<string> $managedAccounts List of managed accounts to include in the report
-     * @param \DateTimeInterface $startDate Start date for the usage report
+     * @param string $startDate Start date for the usage report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $aggregationType = omit,
-        $endDate = omit,
-        $managedAccounts = omit,
-        $startDate = omit,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
-        $params = [
-            'aggregationType' => $aggregationType,
-            'endDate' => $endDate,
-            'managedAccounts' => $managedAccounts,
-            'startDate' => $startDate,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        [$parsed, $options] = NumberLookupCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        AggregationType|string|null $aggregationType = null,
+        ?string $endDate = null,
+        ?array $managedAccounts = null,
+        ?string $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): NumberLookupNewResponse {
+        $params = Util::removeNulls(
+            [
+                'aggregationType' => $aggregationType,
+                'endDate' => $endDate,
+                'managedAccounts' => $managedAccounts,
+                'startDate' => $startDate,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'legacy/reporting/usage_reports/number_lookup',
-            headers: ['Content-Type' => '*/*'],
-            body: (object) $parsed,
-            options: $options,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -82,19 +72,18 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Retrieve a specific telco data usage report by its ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['legacy/reporting/usage_reports/number_lookup/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        RequestOptions|array|null $requestOptions = null
+    ): NumberLookupGetResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -102,45 +91,17 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Retrieve a paginated list of telco data usage reports
      *
-     * @param int $page
-     * @param int $perPage
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $perPage = omit,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        $params = ['page' => $page, 'perPage' => $perPage];
+        RequestOptions|array|null $requestOptions = null
+    ): NumberLookupListResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
 
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        [$parsed, $options] = NumberLookupListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'legacy/reporting/usage_reports/number_lookup',
-            query: $parsed,
-            options: $options,
-            convert: null,
-        );
+        return $response->parse();
     }
 
     /**
@@ -148,18 +109,17 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Delete a specific telco data usage report by its ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['legacy/reporting/usage_reports/number_lookup/%1$s', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

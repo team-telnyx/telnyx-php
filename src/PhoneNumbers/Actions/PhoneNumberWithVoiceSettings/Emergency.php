@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency\EmergencyStatus;
@@ -12,27 +12,27 @@ use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings\Emergency\Emergency
 /**
  * The emergency services settings for a phone number.
  *
- * @phpstan-type emergency_alias = array{
- *   emergencyAddressID?: string,
- *   emergencyEnabled?: bool,
- *   emergencyStatus?: value-of<EmergencyStatus>,
+ * @phpstan-type EmergencyShape = array{
+ *   emergencyAddressID?: string|null,
+ *   emergencyEnabled?: bool|null,
+ *   emergencyStatus?: null|EmergencyStatus|value-of<EmergencyStatus>,
  * }
  */
 final class Emergency implements BaseModel
 {
-    /** @use SdkModel<emergency_alias> */
+    /** @use SdkModel<EmergencyShape> */
     use SdkModel;
 
     /**
      * Identifies the address to be used with emergency services.
      */
-    #[Api('emergency_address_id', optional: true)]
+    #[Optional('emergency_address_id')]
     public ?string $emergencyAddressID;
 
     /**
      * Allows you to enable or disable emergency services on the phone number. In order to enable emergency services, you must also set an emergency_address_id.
      */
-    #[Api('emergency_enabled', optional: true)]
+    #[Optional('emergency_enabled')]
     public ?bool $emergencyEnabled;
 
     /**
@@ -40,7 +40,7 @@ final class Emergency implements BaseModel
      *
      * @var value-of<EmergencyStatus>|null $emergencyStatus
      */
-    #[Api('emergency_status', enum: EmergencyStatus::class, optional: true)]
+    #[Optional('emergency_status', enum: EmergencyStatus::class)]
     public ?string $emergencyStatus;
 
     public function __construct()
@@ -53,20 +53,20 @@ final class Emergency implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmergencyStatus|value-of<EmergencyStatus> $emergencyStatus
+     * @param EmergencyStatus|value-of<EmergencyStatus>|null $emergencyStatus
      */
     public static function with(
         ?string $emergencyAddressID = null,
         ?bool $emergencyEnabled = null,
         EmergencyStatus|string|null $emergencyStatus = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
-        null !== $emergencyEnabled && $obj->emergencyEnabled = $emergencyEnabled;
-        null !== $emergencyStatus && $obj['emergencyStatus'] = $emergencyStatus;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        null !== $emergencyEnabled && $self['emergencyEnabled'] = $emergencyEnabled;
+        null !== $emergencyStatus && $self['emergencyStatus'] = $emergencyStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class Emergency implements BaseModel
      */
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj->emergencyAddressID = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Emergency implements BaseModel
      */
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
-        $obj = clone $this;
-        $obj->emergencyEnabled = $emergencyEnabled;
+        $self = clone $this;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,9 +99,9 @@ final class Emergency implements BaseModel
     public function withEmergencyStatus(
         EmergencyStatus|string $emergencyStatus
     ): self {
-        $obj = clone $this;
-        $obj['emergencyStatus'] = $emergencyStatus;
+        $self = clone $this;
+        $self['emergencyStatus'] = $emergencyStatus;
 
-        return $obj;
+        return $self;
     }
 }

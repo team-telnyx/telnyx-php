@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\MessageCancelScheduledResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown\CarrierFee;
@@ -13,17 +13,22 @@ use Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown\Rate;
 /**
  * Detailed breakdown of the message cost components.
  *
- * @phpstan-type cost_breakdown = array{carrierFee?: CarrierFee, rate?: Rate}
+ * @phpstan-import-type CarrierFeeShape from \Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown\CarrierFee
+ * @phpstan-import-type RateShape from \Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown\Rate
+ *
+ * @phpstan-type CostBreakdownShape = array{
+ *   carrierFee?: null|CarrierFee|CarrierFeeShape, rate?: null|Rate|RateShape
+ * }
  */
 final class CostBreakdown implements BaseModel
 {
-    /** @use SdkModel<cost_breakdown> */
+    /** @use SdkModel<CostBreakdownShape> */
     use SdkModel;
 
-    #[Api('carrier_fee', optional: true)]
+    #[Optional('carrier_fee')]
     public ?CarrierFee $carrierFee;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Rate $rate;
 
     public function __construct()
@@ -35,32 +40,41 @@ final class CostBreakdown implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CarrierFee|CarrierFeeShape|null $carrierFee
+     * @param Rate|RateShape|null $rate
      */
     public static function with(
-        ?CarrierFee $carrierFee = null,
-        ?Rate $rate = null
+        CarrierFee|array|null $carrierFee = null,
+        Rate|array|null $rate = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrierFee && $obj->carrierFee = $carrierFee;
-        null !== $rate && $obj->rate = $rate;
+        null !== $carrierFee && $self['carrierFee'] = $carrierFee;
+        null !== $rate && $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 
-    public function withCarrierFee(CarrierFee $carrierFee): self
+    /**
+     * @param CarrierFee|CarrierFeeShape $carrierFee
+     */
+    public function withCarrierFee(CarrierFee|array $carrierFee): self
     {
-        $obj = clone $this;
-        $obj->carrierFee = $carrierFee;
+        $self = clone $this;
+        $self['carrierFee'] = $carrierFee;
 
-        return $obj;
+        return $self;
     }
 
-    public function withRate(Rate $rate): self
+    /**
+     * @param Rate|RateShape $rate
+     */
+    public function withRate(Rate|array $rate): self
     {
-        $obj = clone $this;
-        $obj->rate = $rate;
+        $self = clone $this;
+        $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 }

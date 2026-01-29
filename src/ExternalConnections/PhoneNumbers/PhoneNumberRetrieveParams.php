@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Return the details of a phone number associated with the given external connection.
  *
- * @see Telnyx\ExternalConnections\PhoneNumbers->retrieve
+ * @see Telnyx\Services\ExternalConnections\PhoneNumbersService::retrieve()
  *
- * @phpstan-type phone_number_retrieve_params = array{id: string}
+ * @phpstan-type PhoneNumberRetrieveParamsShape = array{id: string}
  */
 final class PhoneNumberRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_retrieve_params> */
+    /** @use SdkModel<PhoneNumberRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -51,18 +51,18 @@ final class PhoneNumberRetrieveParams implements BaseModel
      */
     public static function with(string $id): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 }

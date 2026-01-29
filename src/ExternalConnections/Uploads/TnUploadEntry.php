@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Uploads\TnUploadEntry\ErrorCode;
@@ -12,26 +12,26 @@ use Telnyx\ExternalConnections\Uploads\TnUploadEntry\InternalStatus;
 use Telnyx\ExternalConnections\Uploads\TnUploadEntry\Status;
 
 /**
- * @phpstan-type tn_upload_entry = array{
- *   civicAddressID?: string,
- *   errorCode?: value-of<ErrorCode>,
- *   errorMessage?: string,
- *   internalStatus?: value-of<InternalStatus>,
- *   locationID?: string,
- *   numberID?: string,
- *   phoneNumber?: string,
- *   status?: value-of<Status>,
+ * @phpstan-type TnUploadEntryShape = array{
+ *   civicAddressID?: string|null,
+ *   errorCode?: null|ErrorCode|value-of<ErrorCode>,
+ *   errorMessage?: string|null,
+ *   internalStatus?: null|InternalStatus|value-of<InternalStatus>,
+ *   locationID?: string|null,
+ *   numberID?: string|null,
+ *   phoneNumber?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class TnUploadEntry implements BaseModel
 {
-    /** @use SdkModel<tn_upload_entry> */
+    /** @use SdkModel<TnUploadEntryShape> */
     use SdkModel;
 
     /**
      * Identifies the civic address assigned to the phone number entry.
      */
-    #[Api('civic_address_id', optional: true)]
+    #[Optional('civic_address_id')]
     public ?string $civicAddressID;
 
     /**
@@ -39,13 +39,13 @@ final class TnUploadEntry implements BaseModel
      *
      * @var value-of<ErrorCode>|null $errorCode
      */
-    #[Api('error_code', enum: ErrorCode::class, optional: true)]
+    #[Optional('error_code', enum: ErrorCode::class)]
     public ?string $errorCode;
 
     /**
      * A message returned by Microsoft Teams if there is an error with the upload process.
      */
-    #[Api('error_message', optional: true)]
+    #[Optional('error_message')]
     public ?string $errorMessage;
 
     /**
@@ -53,25 +53,25 @@ final class TnUploadEntry implements BaseModel
      *
      * @var value-of<InternalStatus>|null $internalStatus
      */
-    #[Api('internal_status', enum: InternalStatus::class, optional: true)]
+    #[Optional('internal_status', enum: InternalStatus::class)]
     public ?string $internalStatus;
 
     /**
      * Identifies the location assigned to the phone number entry.
      */
-    #[Api('location_id', optional: true)]
+    #[Optional('location_id')]
     public ?string $locationID;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Api('number_id', optional: true)]
+    #[Optional('number_id')]
     public ?string $numberID;
 
     /**
      * Phone number in E164 format.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
@@ -79,7 +79,7 @@ final class TnUploadEntry implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -92,9 +92,9 @@ final class TnUploadEntry implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ErrorCode|value-of<ErrorCode> $errorCode
-     * @param InternalStatus|value-of<InternalStatus> $internalStatus
-     * @param Status|value-of<Status> $status
+     * @param ErrorCode|value-of<ErrorCode>|null $errorCode
+     * @param InternalStatus|value-of<InternalStatus>|null $internalStatus
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $civicAddressID = null,
@@ -106,18 +106,18 @@ final class TnUploadEntry implements BaseModel
         ?string $phoneNumber = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $civicAddressID && $obj->civicAddressID = $civicAddressID;
-        null !== $errorCode && $obj['errorCode'] = $errorCode;
-        null !== $errorMessage && $obj->errorMessage = $errorMessage;
-        null !== $internalStatus && $obj['internalStatus'] = $internalStatus;
-        null !== $locationID && $obj->locationID = $locationID;
-        null !== $numberID && $obj->numberID = $numberID;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $status && $obj['status'] = $status;
+        null !== $civicAddressID && $self['civicAddressID'] = $civicAddressID;
+        null !== $errorCode && $self['errorCode'] = $errorCode;
+        null !== $errorMessage && $self['errorMessage'] = $errorMessage;
+        null !== $internalStatus && $self['internalStatus'] = $internalStatus;
+        null !== $locationID && $self['locationID'] = $locationID;
+        null !== $numberID && $self['numberID'] = $numberID;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withCivicAddressID(string $civicAddressID): self
     {
-        $obj = clone $this;
-        $obj->civicAddressID = $civicAddressID;
+        $self = clone $this;
+        $self['civicAddressID'] = $civicAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +138,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withErrorCode(ErrorCode|string $errorCode): self
     {
-        $obj = clone $this;
-        $obj['errorCode'] = $errorCode;
+        $self = clone $this;
+        $self['errorCode'] = $errorCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,10 +149,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withErrorMessage(string $errorMessage): self
     {
-        $obj = clone $this;
-        $obj->errorMessage = $errorMessage;
+        $self = clone $this;
+        $self['errorMessage'] = $errorMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class TnUploadEntry implements BaseModel
     public function withInternalStatus(
         InternalStatus|string $internalStatus
     ): self {
-        $obj = clone $this;
-        $obj['internalStatus'] = $internalStatus;
+        $self = clone $this;
+        $self['internalStatus'] = $internalStatus;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withLocationID(string $locationID): self
     {
-        $obj = clone $this;
-        $obj->locationID = $locationID;
+        $self = clone $this;
+        $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withNumberID(string $numberID): self
     {
-        $obj = clone $this;
-        $obj->numberID = $numberID;
+        $self = clone $this;
+        $self['numberID'] = $numberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class TnUploadEntry implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,9 +209,9 @@ final class TnUploadEntry implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

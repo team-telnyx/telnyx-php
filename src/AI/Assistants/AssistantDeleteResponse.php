@@ -4,42 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Aligns with the OpenAI API:
  * https://platform.openai.com/docs/api-reference/assistants/deleteAssistant
  *
- * @phpstan-type assistant_delete_response = array{
- *   id: string, deleted: bool, object1: string
+ * @phpstan-type AssistantDeleteResponseShape = array{
+ *   id: string, deleted: bool, object: string
  * }
  */
-final class AssistantDeleteResponse implements BaseModel, ResponseConverter
+final class AssistantDeleteResponse implements BaseModel
 {
-    /** @use SdkModel<assistant_delete_response> */
+    /** @use SdkModel<AssistantDeleteResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
+    #[Required]
     public bool $deleted;
 
-    #[Api]
-    public string $object1;
+    #[Required]
+    public string $object;
 
     /**
      * `new AssistantDeleteResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AssistantDeleteResponse::with(id: ..., deleted: ..., object1: ...)
+     * AssistantDeleteResponse::with(id: ..., deleted: ..., object: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -58,41 +54,38 @@ final class AssistantDeleteResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        string $id,
-        bool $deleted,
-        string $object1
-    ): self {
-        $obj = new self;
+    public static function with(string $id, bool $deleted, string $object): self
+    {
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->deleted = $deleted;
-        $obj->object1 = $object1;
+        $self['id'] = $id;
+        $self['deleted'] = $deleted;
+        $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withDeleted(bool $deleted): self
     {
-        $obj = clone $this;
-        $obj->deleted = $deleted;
+        $self = clone $this;
+        $self['deleted'] = $deleted;
 
-        return $obj;
+        return $self;
     }
 
-    public function withObject(string $object1): self
+    public function withObject(string $object): self
     {
-        $obj = clone $this;
-        $obj->object1 = $object1;
+        $self = clone $this;
+        $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberBlocks\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,19 +12,19 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
  *
- * @see Telnyx\PhoneNumberBlocks\Jobs->deletePhoneNumberBlock
+ * @see Telnyx\Services\PhoneNumberBlocks\JobsService::deletePhoneNumberBlock()
  *
- * @phpstan-type job_delete_phone_number_block_params = array{
+ * @phpstan-type JobDeletePhoneNumberBlockParamsShape = array{
  *   phoneNumberBlockID: string
  * }
  */
 final class JobDeletePhoneNumberBlockParams implements BaseModel
 {
-    /** @use SdkModel<job_delete_phone_number_block_params> */
+    /** @use SdkModel<JobDeletePhoneNumberBlockParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api('phone_number_block_id')]
+    #[Required('phone_number_block_id')]
     public string $phoneNumberBlockID;
 
     /**
@@ -53,18 +53,18 @@ final class JobDeletePhoneNumberBlockParams implements BaseModel
      */
     public static function with(string $phoneNumberBlockID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumberBlockID = $phoneNumberBlockID;
+        $self['phoneNumberBlockID'] = $phoneNumberBlockID;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumberBlockID(string $phoneNumberBlockID): self
     {
-        $obj = clone $this;
-        $obj->phoneNumberBlockID = $phoneNumberBlockID;
+        $self = clone $this;
+        $self['phoneNumberBlockID'] = $phoneNumberBlockID;
 
-        return $obj;
+        return $self;
     }
 }

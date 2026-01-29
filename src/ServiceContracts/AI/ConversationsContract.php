@@ -12,72 +12,53 @@ use Telnyx\AI\Conversations\ConversationUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type MetadataShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata
+ * @phpstan-import-type ToolChoiceShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ConversationsContract
 {
     /**
      * @api
      *
-     * @param array<string,
-     * string,> $metadata Metadata associated with the conversation
-     * @param string $name
+     * @param array<string,string> $metadata metadata associated with the conversation
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $metadata = omit,
-        $name = omit,
-        ?RequestOptions $requestOptions = null
+        ?array $metadata = null,
+        ?string $name = null,
+        RequestOptions|array|null $requestOptions = null,
     ): Conversation;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): Conversation;
-
-    /**
-     * @api
+     * @param string $conversationID The ID of the conversation to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ConversationGetResponse;
 
     /**
      * @api
      *
-     * @param array<string,
-     * string,> $metadata Metadata associated with the conversation
+     * @param string $conversationID The ID of the conversation to update
+     * @param array<string,string> $metadata metadata associated with the conversation
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $conversationID,
-        $metadata = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ConversationUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $conversationID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $metadata = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ConversationUpdateResponse;
 
     /**
@@ -95,94 +76,72 @@ interface ConversationsContract
      * @param string $name Filter by conversation Name (e.g. `name=like.Voice%`)
      * @param string $or Apply OR conditions using PostgREST syntax (e.g., `or=(created_at.gte.2025-04-01,last_message_at.gte.2025-04-01)`)
      * @param string $order Order the results by specific fields (e.g., `order=created_at.desc` or `order=last_message_at.asc`)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $id = omit,
-        $createdAt = omit,
-        $lastMessageAt = omit,
-        $limit = omit,
-        $metadataAssistantID = omit,
-        $metadataCallControlID = omit,
-        $metadataTelnyxAgentTarget = omit,
-        $metadataTelnyxConversationChannel = omit,
-        $metadataTelnyxEndUserTarget = omit,
-        $name = omit,
-        $or = omit,
-        $order = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $id = null,
+        ?string $createdAt = null,
+        ?string $lastMessageAt = null,
+        ?int $limit = null,
+        ?string $metadataAssistantID = null,
+        ?string $metadataCallControlID = null,
+        ?string $metadataTelnyxAgentTarget = null,
+        ?string $metadataTelnyxConversationChannel = null,
+        ?string $metadataTelnyxEndUserTarget = null,
+        ?string $name = null,
+        ?string $or = null,
+        ?string $order = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ConversationListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ConversationListResponse;
-
-    /**
-     * @api
+     * @param string $conversationID The ID of the conversation to delete
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
-     * @param string $role
-     * @param string $content
-     * @param array<string, string|int|bool|list<string|int|bool>> $metadata
-     * @param string $name
-     * @param \DateTimeInterface $sentAt
-     * @param string $toolCallID
-     * @param list<array<string, mixed>> $toolCalls
-     * @param mixed|string $toolChoice
+     * @param string $conversationID The ID of the conversation
+     * @param array<string,MetadataShape> $metadata
+     * @param list<array<string,mixed>> $toolCalls
+     * @param ToolChoiceShape $toolChoice
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function addMessage(
         string $conversationID,
-        $role,
-        $content = omit,
-        $metadata = omit,
-        $name = omit,
-        $sentAt = omit,
-        $toolCallID = omit,
-        $toolCalls = omit,
-        $toolChoice = omit,
-        ?RequestOptions $requestOptions = null,
+        string $role,
+        string $content = '',
+        ?array $metadata = null,
+        ?string $name = null,
+        ?\DateTimeInterface $sentAt = null,
+        ?string $toolCallID = null,
+        ?array $toolCalls = null,
+        string|array|null $toolChoice = null,
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function addMessageRaw(
-        string $conversationID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): mixed;
-
-    /**
-     * @api
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveConversationsInsights(
         string $conversationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ConversationGetConversationsInsightsResponse;
 }

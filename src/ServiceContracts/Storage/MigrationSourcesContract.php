@@ -13,8 +13,10 @@ use Telnyx\Storage\MigrationSources\MigrationSourceGetResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceListResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceNewResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type ProviderAuthShape from \Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MigrationSourcesContract
 {
     /**
@@ -22,57 +24,54 @@ interface MigrationSourcesContract
      *
      * @param string $bucketName bucket name to migrate the data from
      * @param Provider|value-of<Provider> $provider Cloud provider from which to migrate data. Use 'telnyx' if you want to migrate data from one Telnyx bucket to another.
-     * @param ProviderAuth $providerAuth
+     * @param ProviderAuth|ProviderAuthShape $providerAuth
      * @param string $sourceRegion for intra-Telnyx buckets migration, specify the source bucket region in this field
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $bucketName,
-        $provider,
-        $providerAuth,
-        $sourceRegion = omit,
-        ?RequestOptions $requestOptions = null,
+        string $bucketName,
+        Provider|string $provider,
+        ProviderAuth|array $providerAuth,
+        ?string $sourceRegion = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MigrationSourceNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MigrationSourceNewResponse;
-
-    /**
-     * @api
+     * @param string $id unique identifier for the data migration source
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MigrationSourceGetResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MigrationSourceListResponse;
 
     /**
      * @api
      *
+     * @param string $id unique identifier for the data migration source
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MigrationSourceDeleteResponse;
 }

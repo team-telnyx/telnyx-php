@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -21,38 +21,38 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.fork.started`
  * - `call.fork.stopped`
  *
- * @see Telnyx\Calls\Actions->startForking
+ * @see Telnyx\Services\Calls\ActionsService::startForking()
  *
- * @phpstan-type action_start_forking_params = array{
- *   clientState?: string,
- *   commandID?: string,
- *   rx?: string,
- *   streamType?: StreamType|value-of<StreamType>,
- *   tx?: string,
+ * @phpstan-type ActionStartForkingParamsShape = array{
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   rx?: string|null,
+ *   streamType?: null|StreamType|value-of<StreamType>,
+ *   tx?: string|null,
  * }
  */
 final class ActionStartForkingParams implements BaseModel
 {
-    /** @use SdkModel<action_start_forking_params> */
+    /** @use SdkModel<ActionStartForkingParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
      * The network target, <udp:ip_address:port>, where the call's incoming RTP media packets should be forwarded.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rx;
 
     /**
@@ -60,13 +60,13 @@ final class ActionStartForkingParams implements BaseModel
      *
      * @var value-of<StreamType>|null $streamType
      */
-    #[Api('stream_type', enum: StreamType::class, optional: true)]
+    #[Optional('stream_type', enum: StreamType::class)]
     public ?string $streamType;
 
     /**
      * The network target, <udp:ip_address:port>, where the call's outgoing RTP media packets should be forwarded.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $tx;
 
     public function __construct()
@@ -79,7 +79,7 @@ final class ActionStartForkingParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param StreamType|value-of<StreamType> $streamType
+     * @param StreamType|value-of<StreamType>|null $streamType
      */
     public static function with(
         ?string $clientState = null,
@@ -88,15 +88,15 @@ final class ActionStartForkingParams implements BaseModel
         StreamType|string|null $streamType = null,
         ?string $tx = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $rx && $obj->rx = $rx;
-        null !== $streamType && $obj['streamType'] = $streamType;
-        null !== $tx && $obj->tx = $tx;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $rx && $self['rx'] = $rx;
+        null !== $streamType && $self['streamType'] = $streamType;
+        null !== $tx && $self['tx'] = $tx;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withRx(string $rx): self
     {
-        $obj = clone $this;
-        $obj->rx = $rx;
+        $self = clone $this;
+        $self['rx'] = $rx;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withStreamType(StreamType|string $streamType): self
     {
-        $obj = clone $this;
-        $obj['streamType'] = $streamType;
+        $self = clone $this;
+        $self['streamType'] = $streamType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,9 +150,9 @@ final class ActionStartForkingParams implements BaseModel
      */
     public function withTx(string $tx): self
     {
-        $obj = clone $this;
-        $obj->tx = $tx;
+        $self = clone $this;
+        $self['tx'] = $tx;
 
-        return $obj;
+        return $self;
     }
 }

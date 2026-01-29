@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActivationJobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns a porting activation job.
  *
- * @see Telnyx\PortingOrders\ActivationJobs->retrieve
+ * @see Telnyx\Services\PortingOrders\ActivationJobsService::retrieve()
  *
- * @phpstan-type activation_job_retrieve_params = array{id: string}
+ * @phpstan-type ActivationJobRetrieveParamsShape = array{id: string}
  */
 final class ActivationJobRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<activation_job_retrieve_params> */
+    /** @use SdkModel<ActivationJobRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
@@ -51,18 +51,18 @@ final class ActivationJobRetrieveParams implements BaseModel
      */
     public static function with(string $id): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 }

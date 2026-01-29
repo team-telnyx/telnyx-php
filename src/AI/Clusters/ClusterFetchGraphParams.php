@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Fetch a cluster visualization.
  *
- * @see Telnyx\AI\Clusters->fetchGraph
+ * @see Telnyx\Services\AI\ClustersService::fetchGraph()
  *
- * @phpstan-type cluster_fetch_graph_params = array{clusterID?: int}
+ * @phpstan-type ClusterFetchGraphParamsShape = array{clusterID?: int|null}
  */
 final class ClusterFetchGraphParams implements BaseModel
 {
-    /** @use SdkModel<cluster_fetch_graph_params> */
+    /** @use SdkModel<ClusterFetchGraphParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $clusterID;
 
     public function __construct()
@@ -37,18 +37,18 @@ final class ClusterFetchGraphParams implements BaseModel
      */
     public static function with(?int $clusterID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clusterID && $obj->clusterID = $clusterID;
+        null !== $clusterID && $self['clusterID'] = $clusterID;
 
-        return $obj;
+        return $self;
     }
 
     public function withClusterID(int $clusterID): self
     {
-        $obj = clone $this;
-        $obj->clusterID = $clusterID;
+        $self = clone $this;
+        $self['clusterID'] = $clusterID;
 
-        return $obj;
+        return $self;
     }
 }

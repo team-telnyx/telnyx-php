@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[product].
  *
- * @phpstan-type filter_alias = array{product?: string}
+ * @phpstan-type FilterShape = array{product?: string|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter results for a specific product.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $product = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $product && $obj->product = $product;
+        null !== $product && $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj->product = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 }

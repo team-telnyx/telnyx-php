@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Releases\ReleaseListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\CivicAddressID;
@@ -15,31 +15,36 @@ use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status;
 /**
  * Filter parameter for releases (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
  *
- * @phpstan-type filter_alias = array{
- *   civicAddressID?: CivicAddressID,
- *   locationID?: LocationID,
- *   phoneNumber?: PhoneNumber,
- *   status?: Status,
+ * @phpstan-import-type CivicAddressIDShape from \Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\CivicAddressID
+ * @phpstan-import-type LocationIDShape from \Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\LocationID
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\PhoneNumber
+ * @phpstan-import-type StatusShape from \Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter\Status
+ *
+ * @phpstan-type FilterShape = array{
+ *   civicAddressID?: null|CivicAddressID|CivicAddressIDShape,
+ *   locationID?: null|LocationID|LocationIDShape,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
+ *   status?: null|Status|StatusShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('civic_address_id', optional: true)]
+    #[Optional('civic_address_id')]
     public ?CivicAddressID $civicAddressID;
 
-    #[Api('location_id', optional: true)]
+    #[Optional('location_id')]
     public ?LocationID $locationID;
 
     /**
      * Phone number filter operations. Use 'eq' for exact matches or 'contains' for partial matches.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?PhoneNumber $phoneNumber;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Status $status;
 
     public function __construct()
@@ -51,55 +56,72 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CivicAddressID|CivicAddressIDShape|null $civicAddressID
+     * @param LocationID|LocationIDShape|null $locationID
+     * @param PhoneNumber|PhoneNumberShape|null $phoneNumber
+     * @param Status|StatusShape|null $status
      */
     public static function with(
-        ?CivicAddressID $civicAddressID = null,
-        ?LocationID $locationID = null,
-        ?PhoneNumber $phoneNumber = null,
-        ?Status $status = null,
+        CivicAddressID|array|null $civicAddressID = null,
+        LocationID|array|null $locationID = null,
+        PhoneNumber|array|null $phoneNumber = null,
+        Status|array|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $civicAddressID && $obj->civicAddressID = $civicAddressID;
-        null !== $locationID && $obj->locationID = $locationID;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $status && $obj->status = $status;
+        null !== $civicAddressID && $self['civicAddressID'] = $civicAddressID;
+        null !== $locationID && $self['locationID'] = $locationID;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
-    public function withCivicAddressID(CivicAddressID $civicAddressID): self
-    {
-        $obj = clone $this;
-        $obj->civicAddressID = $civicAddressID;
+    /**
+     * @param CivicAddressID|CivicAddressIDShape $civicAddressID
+     */
+    public function withCivicAddressID(
+        CivicAddressID|array $civicAddressID
+    ): self {
+        $self = clone $this;
+        $self['civicAddressID'] = $civicAddressID;
 
-        return $obj;
+        return $self;
     }
 
-    public function withLocationID(LocationID $locationID): self
+    /**
+     * @param LocationID|LocationIDShape $locationID
+     */
+    public function withLocationID(LocationID|array $locationID): self
     {
-        $obj = clone $this;
-        $obj->locationID = $locationID;
+        $self = clone $this;
+        $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Phone number filter operations. Use 'eq' for exact matches or 'contains' for partial matches.
+     *
+     * @param PhoneNumber|PhoneNumberShape $phoneNumber
      */
-    public function withPhoneNumber(PhoneNumber $phoneNumber): self
+    public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
-    public function withStatus(Status $status): self
+    /**
+     * @param Status|StatusShape $status
+     */
+    public function withStatus(Status|array $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

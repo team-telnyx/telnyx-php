@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse\Data\AdditionalDataRequired;
 
 /**
- * @phpstan-type data_alias = array{
- *   additionalDataRequired?: list<value-of<AdditionalDataRequired>>,
- *   hasCsrCoverage?: bool,
- *   phoneNumber?: string,
- *   reason?: string,
- *   recordType?: string,
+ * @phpstan-type DataShape = array{
+ *   additionalDataRequired?: list<AdditionalDataRequired|value-of<AdditionalDataRequired>>|null,
+ *   hasCsrCoverage?: bool|null,
+ *   phoneNumber?: string|null,
+ *   reason?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
@@ -28,35 +28,31 @@ final class Data implements BaseModel
      *
      * @var list<value-of<AdditionalDataRequired>>|null $additionalDataRequired
      */
-    #[Api(
-        'additional_data_required',
-        list: AdditionalDataRequired::class,
-        optional: true,
-    )]
+    #[Optional('additional_data_required', list: AdditionalDataRequired::class)]
     public ?array $additionalDataRequired;
 
     /**
      * Indicates whether the phone number is covered or not.
      */
-    #[Api('has_csr_coverage', optional: true)]
+    #[Optional('has_csr_coverage')]
     public ?bool $hasCsrCoverage;
 
     /**
      * The phone number that is being verified.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
      * The reason why the phone number is not covered. Only returned if `has_csr_coverage` is false.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $reason;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -69,7 +65,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AdditionalDataRequired|value-of<AdditionalDataRequired>> $additionalDataRequired
+     * @param list<AdditionalDataRequired|value-of<AdditionalDataRequired>>|null $additionalDataRequired
      */
     public static function with(
         ?array $additionalDataRequired = null,
@@ -78,15 +74,15 @@ final class Data implements BaseModel
         ?string $reason = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $additionalDataRequired && $obj['additionalDataRequired'] = $additionalDataRequired;
-        null !== $hasCsrCoverage && $obj->hasCsrCoverage = $hasCsrCoverage;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $reason && $obj->reason = $reason;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $additionalDataRequired && $self['additionalDataRequired'] = $additionalDataRequired;
+        null !== $hasCsrCoverage && $self['hasCsrCoverage'] = $hasCsrCoverage;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $reason && $self['reason'] = $reason;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +93,10 @@ final class Data implements BaseModel
     public function withAdditionalDataRequired(
         array $additionalDataRequired
     ): self {
-        $obj = clone $this;
-        $obj['additionalDataRequired'] = $additionalDataRequired;
+        $self = clone $this;
+        $self['additionalDataRequired'] = $additionalDataRequired;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +104,10 @@ final class Data implements BaseModel
      */
     public function withHasCsrCoverage(bool $hasCsrCoverage): self
     {
-        $obj = clone $this;
-        $obj->hasCsrCoverage = $hasCsrCoverage;
+        $self = clone $this;
+        $self['hasCsrCoverage'] = $hasCsrCoverage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +115,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +126,10 @@ final class Data implements BaseModel
      */
     public function withReason(string $reason): self
     {
-        $obj = clone $this;
-        $obj->reason = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +137,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

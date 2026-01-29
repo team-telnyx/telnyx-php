@@ -5,39 +5,39 @@ declare(strict_types=1);
 namespace Telnyx\CallControlApplications;
 
 use Telnyx\CallControlApplications\CallControlApplicationInbound\SipSubdomainReceiveSettings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type call_control_application_inbound = array{
- *   channelLimit?: int,
- *   shakenStirEnabled?: bool,
- *   sipSubdomain?: string,
- *   sipSubdomainReceiveSettings?: value-of<SipSubdomainReceiveSettings>,
+ * @phpstan-type CallControlApplicationInboundShape = array{
+ *   channelLimit?: int|null,
+ *   shakenStirEnabled?: bool|null,
+ *   sipSubdomain?: string|null,
+ *   sipSubdomainReceiveSettings?: null|SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>,
  * }
  */
 final class CallControlApplicationInbound implements BaseModel
 {
-    /** @use SdkModel<call_control_application_inbound> */
+    /** @use SdkModel<CallControlApplicationInboundShape> */
     use SdkModel;
 
     /**
      * When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
      */
-    #[Api('channel_limit', optional: true)]
+    #[Optional('channel_limit')]
     public ?int $channelLimit;
 
     /**
      * When enabled Telnyx will include Shaken/Stir data in the Webhook for new inbound calls.
      */
-    #[Api('shaken_stir_enabled', optional: true)]
+    #[Optional('shaken_stir_enabled')]
     public ?bool $shakenStirEnabled;
 
     /**
      * Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.
      */
-    #[Api('sip_subdomain', optional: true)]
+    #[Optional('sip_subdomain')]
     public ?string $sipSubdomain;
 
     /**
@@ -45,10 +45,9 @@ final class CallControlApplicationInbound implements BaseModel
      *
      * @var value-of<SipSubdomainReceiveSettings>|null $sipSubdomainReceiveSettings
      */
-    #[Api(
+    #[Optional(
         'sip_subdomain_receive_settings',
-        enum: SipSubdomainReceiveSettings::class,
-        optional: true,
+        enum: SipSubdomainReceiveSettings::class
     )]
     public ?string $sipSubdomainReceiveSettings;
 
@@ -62,7 +61,7 @@ final class CallControlApplicationInbound implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings> $sipSubdomainReceiveSettings
+     * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>|null $sipSubdomainReceiveSettings
      */
     public static function with(
         ?int $channelLimit = null,
@@ -70,14 +69,14 @@ final class CallControlApplicationInbound implements BaseModel
         ?string $sipSubdomain = null,
         SipSubdomainReceiveSettings|string|null $sipSubdomainReceiveSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $channelLimit && $obj->channelLimit = $channelLimit;
-        null !== $shakenStirEnabled && $obj->shakenStirEnabled = $shakenStirEnabled;
-        null !== $sipSubdomain && $obj->sipSubdomain = $sipSubdomain;
-        null !== $sipSubdomainReceiveSettings && $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
+        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
+        null !== $shakenStirEnabled && $self['shakenStirEnabled'] = $shakenStirEnabled;
+        null !== $sipSubdomain && $self['sipSubdomain'] = $sipSubdomain;
+        null !== $sipSubdomainReceiveSettings && $self['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +84,10 @@ final class CallControlApplicationInbound implements BaseModel
      */
     public function withChannelLimit(int $channelLimit): self
     {
-        $obj = clone $this;
-        $obj->channelLimit = $channelLimit;
+        $self = clone $this;
+        $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +95,10 @@ final class CallControlApplicationInbound implements BaseModel
      */
     public function withShakenStirEnabled(bool $shakenStirEnabled): self
     {
-        $obj = clone $this;
-        $obj->shakenStirEnabled = $shakenStirEnabled;
+        $self = clone $this;
+        $self['shakenStirEnabled'] = $shakenStirEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +106,10 @@ final class CallControlApplicationInbound implements BaseModel
      */
     public function withSipSubdomain(string $sipSubdomain): self
     {
-        $obj = clone $this;
-        $obj->sipSubdomain = $sipSubdomain;
+        $self = clone $this;
+        $self['sipSubdomain'] = $sipSubdomain;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,9 +120,9 @@ final class CallControlApplicationInbound implements BaseModel
     public function withSipSubdomainReceiveSettings(
         SipSubdomainReceiveSettings|string $sipSubdomainReceiveSettings
     ): self {
-        $obj = clone $this;
-        $obj['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
+        $self = clone $this;
+        $self['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPaginationForLogMessages;
+use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
+use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class LogMessagesTest extends TestCase
 
         $result = $this->client->externalConnections->logMessages->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LogMessageGetResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +50,15 @@ final class LogMessagesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->externalConnections->logMessages->list();
+        $page = $this->client->externalConnections->logMessages->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPaginationForLogMessages::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(LogMessageListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -59,6 +70,7 @@ final class LogMessagesTest extends TestCase
 
         $result = $this->client->externalConnections->logMessages->dismiss('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(LogMessageDismissResponse::class, $result);
     }
 }

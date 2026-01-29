@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\BillingGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type billing_group_delete_response = array{data?: BillingGroup}
+ * @phpstan-import-type BillingGroupShape from \Telnyx\BillingGroups\BillingGroup
+ *
+ * @phpstan-type BillingGroupDeleteResponseShape = array{
+ *   data?: null|BillingGroup|BillingGroupShape
+ * }
  */
-final class BillingGroupDeleteResponse implements BaseModel, ResponseConverter
+final class BillingGroupDeleteResponse implements BaseModel
 {
-    /** @use SdkModel<billing_group_delete_response> */
+    /** @use SdkModel<BillingGroupDeleteResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?BillingGroup $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class BillingGroupDeleteResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param BillingGroup|BillingGroupShape|null $data
      */
-    public static function with(?BillingGroup $data = null): self
+    public static function with(BillingGroup|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(BillingGroup $data): self
+    /**
+     * @param BillingGroup|BillingGroupShape $data
+     */
+    public function withData(BillingGroup|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

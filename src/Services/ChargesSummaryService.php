@@ -5,62 +5,53 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse;
-use Telnyx\ChargesSummary\ChargesSummaryRetrieveParams;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChargesSummaryContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ChargesSummaryService implements ChargesSummaryContract
 {
     /**
+     * @api
+     */
+    public ChargesSummaryRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ChargesSummaryRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a summary of monthly charges for a specified date range. The date range cannot exceed 31 days.
      *
-     * @param \DateTimeInterface $endDate End date for the charges summary in ISO date format (YYYY-MM-DD). The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
-     * @param \DateTimeInterface $startDate Start date for the charges summary in ISO date format (YYYY-MM-DD)
+     * @param string $endDate End date for the charges summary in ISO date format (YYYY-MM-DD). The date is exclusive, data for the end_date itself is not included in the report. The interval between start_date and end_date cannot exceed 31 days.
+     * @param string $startDate Start date for the charges summary in ISO date format (YYYY-MM-DD)
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
-        $endDate,
-        $startDate,
-        ?RequestOptions $requestOptions = null
+        string $endDate,
+        string $startDate,
+        RequestOptions|array|null $requestOptions = null,
     ): ChargesSummaryGetResponse {
-        $params = ['endDate' => $endDate, 'startDate' => $startDate];
-
-        return $this->retrieveRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ChargesSummaryGetResponse {
-        [$parsed, $options] = ChargesSummaryRetrieveParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['endDate' => $endDate, 'startDate' => $startDate]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'charges_summary',
-            query: $parsed,
-            options: $options,
-            convert: ChargesSummaryGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

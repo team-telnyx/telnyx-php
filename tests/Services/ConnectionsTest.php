@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Connections\ConnectionGetResponse;
+use Telnyx\Connections\ConnectionListActiveCallsResponse;
+use Telnyx\Connections\ConnectionListResponse;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +40,8 @@ final class ConnectionsTest extends TestCase
 
         $result = $this->client->connections->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConnectionGetResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +51,15 @@ final class ConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->connections->list();
+        $page = $this->client->connections->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ConnectionListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -57,10 +69,14 @@ final class ConnectionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->connections->listActiveCalls(
-            '1293384261075731461'
-        );
+        $page = $this->client->connections->listActiveCalls('1293384261075731461');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ConnectionListActiveCallsResponse::class, $item);
+        }
     }
 }

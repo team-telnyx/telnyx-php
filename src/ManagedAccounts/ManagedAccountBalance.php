@@ -4,47 +4,47 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountBalance\RecordType;
 
 /**
- * @phpstan-type managed_account_balance = array{
- *   availableCredit?: string,
- *   balance?: string,
- *   creditLimit?: string,
- *   currency?: string,
- *   recordType?: value-of<RecordType>,
+ * @phpstan-type ManagedAccountBalanceShape = array{
+ *   availableCredit?: string|null,
+ *   balance?: string|null,
+ *   creditLimit?: string|null,
+ *   currency?: string|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class ManagedAccountBalance implements BaseModel
 {
-    /** @use SdkModel<managed_account_balance> */
+    /** @use SdkModel<ManagedAccountBalanceShape> */
     use SdkModel;
 
     /**
      * Available amount to spend (balance + credit limit).
      */
-    #[Api('available_credit', optional: true)]
+    #[Optional('available_credit')]
     public ?string $availableCredit;
 
     /**
      * The account's current balance.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $balance;
 
     /**
      * The account's credit limit.
      */
-    #[Api('credit_limit', optional: true)]
+    #[Optional('credit_limit')]
     public ?string $creditLimit;
 
     /**
      * The ISO 4217 currency identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
@@ -52,7 +52,7 @@ final class ManagedAccountBalance implements BaseModel
      *
      * @var value-of<RecordType>|null $recordType
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
     public function __construct()
@@ -65,7 +65,7 @@ final class ManagedAccountBalance implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $availableCredit = null,
@@ -74,15 +74,15 @@ final class ManagedAccountBalance implements BaseModel
         ?string $currency = null,
         RecordType|string|null $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $availableCredit && $obj->availableCredit = $availableCredit;
-        null !== $balance && $obj->balance = $balance;
-        null !== $creditLimit && $obj->creditLimit = $creditLimit;
-        null !== $currency && $obj->currency = $currency;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $availableCredit && $self['availableCredit'] = $availableCredit;
+        null !== $balance && $self['balance'] = $balance;
+        null !== $creditLimit && $self['creditLimit'] = $creditLimit;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class ManagedAccountBalance implements BaseModel
      */
     public function withAvailableCredit(string $availableCredit): self
     {
-        $obj = clone $this;
-        $obj->availableCredit = $availableCredit;
+        $self = clone $this;
+        $self['availableCredit'] = $availableCredit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class ManagedAccountBalance implements BaseModel
      */
     public function withBalance(string $balance): self
     {
-        $obj = clone $this;
-        $obj->balance = $balance;
+        $self = clone $this;
+        $self['balance'] = $balance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class ManagedAccountBalance implements BaseModel
      */
     public function withCreditLimit(string $creditLimit): self
     {
-        $obj = clone $this;
-        $obj->creditLimit = $creditLimit;
+        $self = clone $this;
+        $self['creditLimit'] = $creditLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class ManagedAccountBalance implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj->currency = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,9 +136,9 @@ final class ManagedAccountBalance implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

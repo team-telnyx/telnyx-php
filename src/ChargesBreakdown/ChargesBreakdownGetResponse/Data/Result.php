@@ -5,40 +5,42 @@ declare(strict_types=1);
 namespace Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result\Service;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type result_alias = array{
+ * @phpstan-import-type ServiceShape from \Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result\Service
+ *
+ * @phpstan-type ResultShape = array{
  *   chargeType: string,
  *   serviceOwnerEmail: string,
  *   serviceOwnerUserID: string,
- *   services: list<Service>,
+ *   services: list<Service|ServiceShape>,
  *   tn: string,
  * }
  */
 final class Result implements BaseModel
 {
-    /** @use SdkModel<result_alias> */
+    /** @use SdkModel<ResultShape> */
     use SdkModel;
 
     /**
      * Type of charge for the number.
      */
-    #[Api('charge_type')]
+    #[Required('charge_type')]
     public string $chargeType;
 
     /**
      * Email address of the service owner.
      */
-    #[Api('service_owner_email')]
+    #[Required('service_owner_email')]
     public string $serviceOwnerEmail;
 
     /**
      * User ID of the service owner.
      */
-    #[Api('service_owner_user_id')]
+    #[Required('service_owner_user_id')]
     public string $serviceOwnerUserID;
 
     /**
@@ -46,13 +48,13 @@ final class Result implements BaseModel
      *
      * @var list<Service> $services
      */
-    #[Api(list: Service::class)]
+    #[Required(list: Service::class)]
     public array $services;
 
     /**
      * Phone number.
      */
-    #[Api]
+    #[Required]
     public string $tn;
 
     /**
@@ -90,7 +92,7 @@ final class Result implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Service> $services
+     * @param list<Service|ServiceShape> $services
      */
     public static function with(
         string $chargeType,
@@ -99,15 +101,15 @@ final class Result implements BaseModel
         array $services,
         string $tn,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->chargeType = $chargeType;
-        $obj->serviceOwnerEmail = $serviceOwnerEmail;
-        $obj->serviceOwnerUserID = $serviceOwnerUserID;
-        $obj->services = $services;
-        $obj->tn = $tn;
+        $self['chargeType'] = $chargeType;
+        $self['serviceOwnerEmail'] = $serviceOwnerEmail;
+        $self['serviceOwnerUserID'] = $serviceOwnerUserID;
+        $self['services'] = $services;
+        $self['tn'] = $tn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +117,10 @@ final class Result implements BaseModel
      */
     public function withChargeType(string $chargeType): self
     {
-        $obj = clone $this;
-        $obj->chargeType = $chargeType;
+        $self = clone $this;
+        $self['chargeType'] = $chargeType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +128,10 @@ final class Result implements BaseModel
      */
     public function withServiceOwnerEmail(string $serviceOwnerEmail): self
     {
-        $obj = clone $this;
-        $obj->serviceOwnerEmail = $serviceOwnerEmail;
+        $self = clone $this;
+        $self['serviceOwnerEmail'] = $serviceOwnerEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,23 +139,23 @@ final class Result implements BaseModel
      */
     public function withServiceOwnerUserID(string $serviceOwnerUserID): self
     {
-        $obj = clone $this;
-        $obj->serviceOwnerUserID = $serviceOwnerUserID;
+        $self = clone $this;
+        $self['serviceOwnerUserID'] = $serviceOwnerUserID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of services associated with this number.
      *
-     * @param list<Service> $services
+     * @param list<Service|ServiceShape> $services
      */
     public function withServices(array $services): self
     {
-        $obj = clone $this;
-        $obj->services = $services;
+        $self = clone $this;
+        $self['services'] = $services;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,9 +163,9 @@ final class Result implements BaseModel
      */
     public function withTn(string $tn): self
     {
-        $obj = clone $this;
-        $obj->tn = $tn;
+        $self = clone $this;
+        $self['tn'] = $tn;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActivationJobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
 
 /**
- * @phpstan-type activation_job_update_response = array{
- *   data?: PortingOrdersActivationJob
+ * @phpstan-import-type PortingOrdersActivationJobShape from \Telnyx\PortingOrders\PortingOrdersActivationJob
+ *
+ * @phpstan-type ActivationJobUpdateResponseShape = array{
+ *   data?: null|PortingOrdersActivationJob|PortingOrdersActivationJobShape
  * }
  */
-final class ActivationJobUpdateResponse implements BaseModel, ResponseConverter
+final class ActivationJobUpdateResponse implements BaseModel
 {
-    /** @use SdkModel<activation_job_update_response> */
+    /** @use SdkModel<ActivationJobUpdateResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrdersActivationJob $data;
 
     public function __construct()
@@ -35,21 +33,27 @@ final class ActivationJobUpdateResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PortingOrdersActivationJob|PortingOrdersActivationJobShape|null $data
      */
-    public static function with(?PortingOrdersActivationJob $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        PortingOrdersActivationJob|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(PortingOrdersActivationJob $data): self
+    /**
+     * @param PortingOrdersActivationJob|PortingOrdersActivationJobShape $data
+     */
+    public function withData(PortingOrdersActivationJob|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

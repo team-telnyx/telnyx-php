@@ -6,6 +6,16 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
+use Telnyx\SimCards\Actions\ActionDisableResponse;
+use Telnyx\SimCards\Actions\ActionEnableResponse;
+use Telnyx\SimCards\Actions\ActionGetResponse;
+use Telnyx\SimCards\Actions\ActionRemovePublicIPResponse;
+use Telnyx\SimCards\Actions\ActionSetPublicIPResponse;
+use Telnyx\SimCards\Actions\ActionSetStandbyResponse;
+use Telnyx\SimCards\Actions\ActionValidateRegistrationCodesResponse;
+use Telnyx\SimCards\Actions\SimCardAction;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +47,8 @@ final class ActionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionGetResponse::class, $result);
     }
 
     #[Test]
@@ -47,9 +58,15 @@ final class ActionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->simCards->actions->list();
+        $page = $this->client->simCards->actions->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(SimCardAction::class, $item);
+        }
     }
 
     #[Test]
@@ -60,10 +77,11 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->simCards->actions->bulkSetPublicIPs(
-            ['6b14e151-8493-4fa1-8664-1cc4e6d14158']
+            simCardIDs: ['6b14e151-8493-4fa1-8664-1cc4e6d14158']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionBulkSetPublicIPsResponse::class, $result);
     }
 
     #[Test]
@@ -74,10 +92,11 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->simCards->actions->bulkSetPublicIPs(
-            ['6b14e151-8493-4fa1-8664-1cc4e6d14158']
+            simCardIDs: ['6b14e151-8493-4fa1-8664-1cc4e6d14158']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionBulkSetPublicIPsResponse::class, $result);
     }
 
     #[Test]
@@ -91,7 +110,8 @@ final class ActionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionDisableResponse::class, $result);
     }
 
     #[Test]
@@ -105,7 +125,8 @@ final class ActionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionEnableResponse::class, $result);
     }
 
     #[Test]
@@ -119,7 +140,8 @@ final class ActionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionRemovePublicIPResponse::class, $result);
     }
 
     #[Test]
@@ -133,7 +155,8 @@ final class ActionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionSetPublicIPResponse::class, $result);
     }
 
     #[Test]
@@ -147,7 +170,8 @@ final class ActionsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionSetStandbyResponse::class, $result);
     }
 
     #[Test]
@@ -159,6 +183,10 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->simCards->actions->validateRegistrationCodes();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionValidateRegistrationCodesResponse::class,
+            $result
+        );
     }
 }

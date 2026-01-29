@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +42,8 @@ final class SiprecConnectorsTest extends TestCase
             port: 5060
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SiprecConnectorNewResponse::class, $result);
     }
 
     #[Test]
@@ -52,10 +56,12 @@ final class SiprecConnectorsTest extends TestCase
         $result = $this->client->siprecConnectors->create(
             host: 'siprec.telnyx.com',
             name: 'my-siprec-connector',
-            port: 5060
+            port: 5060,
+            appSubdomain: 'my-app',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SiprecConnectorNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +73,8 @@ final class SiprecConnectorsTest extends TestCase
 
         $result = $this->client->siprecConnectors->retrieve('connector_name');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SiprecConnectorGetResponse::class, $result);
     }
 
     #[Test]
@@ -84,7 +91,8 @@ final class SiprecConnectorsTest extends TestCase
             port: 5060,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SiprecConnectorUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -99,9 +107,11 @@ final class SiprecConnectorsTest extends TestCase
             host: 'siprec.telnyx.com',
             name: 'my-siprec-connector',
             port: 5060,
+            appSubdomain: 'my-app',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(SiprecConnectorUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -113,6 +123,7 @@ final class SiprecConnectorsTest extends TestCase
 
         $result = $this->client->siprecConnectors->delete('connector_name');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

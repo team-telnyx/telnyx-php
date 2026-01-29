@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type voice_get_response = array{data?: CdrUsageReportResponseLegacy}
+ * @phpstan-import-type CdrUsageReportResponseLegacyShape from \Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy
+ *
+ * @phpstan-type VoiceGetResponseShape = array{
+ *   data?: null|CdrUsageReportResponseLegacy|CdrUsageReportResponseLegacyShape
+ * }
  */
-final class VoiceGetResponse implements BaseModel, ResponseConverter
+final class VoiceGetResponse implements BaseModel
 {
-    /** @use SdkModel<voice_get_response> */
+    /** @use SdkModel<VoiceGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Legacy V2 CDR usage report response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CdrUsageReportResponseLegacy $data;
 
     public function __construct()
@@ -35,24 +35,29 @@ final class VoiceGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CdrUsageReportResponseLegacy|CdrUsageReportResponseLegacyShape|null $data
      */
-    public static function with(?CdrUsageReportResponseLegacy $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        CdrUsageReportResponseLegacy|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Legacy V2 CDR usage report response.
+     *
+     * @param CdrUsageReportResponseLegacy|CdrUsageReportResponseLegacyShape $data
      */
-    public function withData(CdrUsageReportResponseLegacy $data): self
+    public function withData(CdrUsageReportResponseLegacy|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,26 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data\PhoneNumber;
 
 /**
- * @phpstan-type data_alias = array{
- *   orderID: string, phoneNumbers: list<PhoneNumber>
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesResponse\Data\PhoneNumber
+ *
+ * @phpstan-type DataShape = array{
+ *   orderID: string, phoneNumbers: list<PhoneNumber|PhoneNumberShape>
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('order_id')]
+    #[Required('order_id')]
     public string $orderID;
 
     /** @var list<PhoneNumber> $phoneNumbers */
-    #[Api('phone_numbers', list: PhoneNumber::class)]
+    #[Required('phone_numbers', list: PhoneNumber::class)]
     public array $phoneNumbers;
 
     /**
@@ -50,34 +52,34 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
      */
     public static function with(string $orderID, array $phoneNumbers): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->orderID = $orderID;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self['orderID'] = $orderID;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     public function withOrderID(string $orderID): self
     {
-        $obj = clone $this;
-        $obj->orderID = $orderID;
+        $self = clone $this;
+        $self['orderID'] = $orderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

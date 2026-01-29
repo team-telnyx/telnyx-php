@@ -6,69 +6,55 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PhoneNumbers\Voicemail\VoicemailCreateParams;
+use Telnyx\Core\Util;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailGetResponse;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailNewResponse;
-use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateParams;
 use Telnyx\PhoneNumbers\Voicemail\VoicemailUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\VoicemailContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VoicemailService implements VoicemailContract
 {
     /**
+     * @api
+     */
+    public VoicemailRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new VoicemailRawService($client);
+    }
 
     /**
      * @api
      *
      * Create voicemail settings for a phone number
      *
+     * @param string $phoneNumberID the ID of the phone number
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $phoneNumberID,
-        $enabled = omit,
-        $pin = omit,
-        ?RequestOptions $requestOptions = null,
+        ?bool $enabled = null,
+        ?string $pin = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoicemailNewResponse {
-        $params = ['enabled' => $enabled, 'pin' => $pin];
+        $params = Util::removeNulls(['enabled' => $enabled, 'pin' => $pin]);
 
-        return $this->createRaw($phoneNumberID, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($phoneNumberID, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VoicemailNewResponse {
-        [$parsed, $options] = VoicemailCreateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['phone_numbers/%1$s/voicemail', $phoneNumberID],
-            body: (object) $parsed,
-            options: $options,
-            convert: VoicemailNewResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -76,19 +62,19 @@ final class VoicemailService implements VoicemailContract
      *
      * Returns the voicemail settings for a phone number
      *
+     * @param string $phoneNumberID the ID of the phone number
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $phoneNumberID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoicemailGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['phone_numbers/%1$s/voicemail', $phoneNumberID],
-            options: $requestOptions,
-            convert: VoicemailGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($phoneNumberID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -96,46 +82,24 @@ final class VoicemailService implements VoicemailContract
      *
      * Update voicemail settings for a phone number
      *
+     * @param string $phoneNumberID the ID of the phone number
      * @param bool $enabled whether voicemail is enabled
      * @param string $pin The pin used for voicemail
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $phoneNumberID,
-        $enabled = omit,
-        $pin = omit,
-        ?RequestOptions $requestOptions = null,
+        ?bool $enabled = null,
+        ?string $pin = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoicemailUpdateResponse {
-        $params = ['enabled' => $enabled, 'pin' => $pin];
+        $params = Util::removeNulls(['enabled' => $enabled, 'pin' => $pin]);
 
-        return $this->updateRaw($phoneNumberID, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($phoneNumberID, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $phoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VoicemailUpdateResponse {
-        [$parsed, $options] = VoicemailUpdateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['phone_numbers/%1$s/voicemail', $phoneNumberID],
-            body: (object) $parsed,
-            options: $options,
-            convert: VoicemailUpdateResponse::class,
-        );
+        return $response->parse();
     }
 }

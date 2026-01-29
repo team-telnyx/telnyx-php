@@ -6,44 +6,55 @@ namespace Telnyx\Services\PhoneNumberBlocks;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\PhoneNumberBlocks\Jobs\Job;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
 use Telnyx\PhoneNumberBlocks\Jobs\JobGetResponse;
-use Telnyx\PhoneNumberBlocks\Jobs\JobListParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Page;
 use Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Sort;
-use Telnyx\PhoneNumberBlocks\Jobs\JobListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberBlocks\JobsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class JobsService implements JobsContract
 {
     /**
+     * @api
+     */
+    public JobsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new JobsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieves a phone number blocks job
      *
+     * @param string $id identifies the Phone Number Blocks Job
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): JobGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['phone_number_blocks/jobs/%1$s', $id],
-            options: $requestOptions,
-            convert: JobGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -51,44 +62,29 @@ final class JobsService implements JobsContract
      *
      * Lists the phone number blocks jobs
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[status]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[type], filter[status]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<Job>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): JobListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): JobListResponse {
-        [$parsed, $options] = JobListParams::parseRequest($params, $requestOptions);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'phone_number_blocks/jobs',
-            query: $parsed,
-            options: $options,
-            convert: JobListResponse::class,
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -96,42 +92,19 @@ final class JobsService implements JobsContract
      *
      * Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
      *
-     * @param string $phoneNumberBlockID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function deletePhoneNumberBlock(
-        $phoneNumberBlockID,
-        ?RequestOptions $requestOptions = null
+        string $phoneNumberBlockID,
+        RequestOptions|array|null $requestOptions = null
     ): JobDeletePhoneNumberBlockResponse {
-        $params = ['phoneNumberBlockID' => $phoneNumberBlockID];
+        $params = Util::removeNulls(['phoneNumberBlockID' => $phoneNumberBlockID]);
 
-        return $this->deletePhoneNumberBlockRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->deletePhoneNumberBlock(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function deletePhoneNumberBlockRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): JobDeletePhoneNumberBlockResponse {
-        [$parsed, $options] = JobDeletePhoneNumberBlockParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'phone_number_blocks/jobs/delete_phone_number_block',
-            body: (object) $parsed,
-            options: $options,
-            convert: JobDeletePhoneNumberBlockResponse::class,
-        );
+        return $response->parse();
     }
 }

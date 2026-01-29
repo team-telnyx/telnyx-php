@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,20 +13,24 @@ use Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter;
 /**
  * Get a paginated list of sub number orders.
  *
- * @see Telnyx\SubNumberOrders->list
+ * @see Telnyx\Services\SubNumberOrdersService::list()
  *
- * @phpstan-type sub_number_order_list_params = array{filter?: Filter}
+ * @phpstan-import-type FilterShape from \Telnyx\SubNumberOrders\SubNumberOrderListParams\Filter
+ *
+ * @phpstan-type SubNumberOrderListParamsShape = array{
+ *   filter?: null|Filter|FilterShape
+ * }
  */
 final class SubNumberOrderListParams implements BaseModel
 {
-    /** @use SdkModel<sub_number_order_list_params> */
+    /** @use SdkModel<SubNumberOrderListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()
@@ -38,24 +42,28 @@ final class SubNumberOrderListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
      */
-    public static function with(?Filter $filter = null): self
+    public static function with(Filter|array|null $filter = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
+        null !== $filter && $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[order_request_id], filter[country_code], filter[phone_number_type], filter[phone_numbers_count].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 }

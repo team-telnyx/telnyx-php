@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,20 +13,22 @@ use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
 /**
  * List phone numbers with messaging settings.
  *
- * @see Telnyx\PhoneNumbers\Messaging->list
+ * @see Telnyx\Services\PhoneNumbers\MessagingService::list()
  *
- * @phpstan-type messaging_list_params = array{page?: Page}
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page
+ *
+ * @phpstan-type MessagingListParamsShape = array{page?: null|Page|PageShape}
  */
 final class MessagingListParams implements BaseModel
 {
-    /** @use SdkModel<messaging_list_params> */
+    /** @use SdkModel<MessagingListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()
@@ -38,24 +40,28 @@ final class MessagingListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Page|PageShape|null $page
      */
-    public static function with(?Page $page = null): self
+    public static function with(Page|array|null $page = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $page && $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 }

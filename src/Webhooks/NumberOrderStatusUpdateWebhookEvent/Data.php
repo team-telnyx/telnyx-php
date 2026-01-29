@@ -4,50 +4,52 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-import-type NumberOrderWithPhoneNumbersShape from \Telnyx\NumberOrders\NumberOrderWithPhoneNumbers
+ *
+ * @phpstan-type DataShape = array{
  *   id: string,
  *   eventType: string,
  *   occurredAt: \DateTimeInterface,
- *   payload: NumberOrderWithPhoneNumbers,
+ *   payload: NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape,
  *   recordType: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Unique identifier for the event.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The type of event being sent.
      */
-    #[Api('event_type')]
+    #[Required('event_type')]
     public string $eventType;
 
     /**
      * ISO 8601 timestamp of when the event occurred.
      */
-    #[Api('occurred_at')]
+    #[Required('occurred_at')]
     public \DateTimeInterface $occurredAt;
 
-    #[Api]
+    #[Required]
     public NumberOrderWithPhoneNumbers $payload;
 
     /**
      * Type of record.
      */
-    #[Api('record_type')]
+    #[Required('record_type')]
     public string $recordType;
 
     /**
@@ -80,23 +82,25 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape $payload
      */
     public static function with(
         string $id,
         string $eventType,
         \DateTimeInterface $occurredAt,
-        NumberOrderWithPhoneNumbers $payload,
+        NumberOrderWithPhoneNumbers|array $payload,
         string $recordType,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->eventType = $eventType;
-        $obj->occurredAt = $occurredAt;
-        $obj->payload = $payload;
-        $obj->recordType = $recordType;
+        $self['id'] = $id;
+        $self['eventType'] = $eventType;
+        $self['occurredAt'] = $occurredAt;
+        $self['payload'] = $payload;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +108,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +119,10 @@ final class Data implements BaseModel
      */
     public function withEventType(string $eventType): self
     {
-        $obj = clone $this;
-        $obj->eventType = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,18 +130,22 @@ final class Data implements BaseModel
      */
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
-        $obj = clone $this;
-        $obj->occurredAt = $occurredAt;
+        $self = clone $this;
+        $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPayload(NumberOrderWithPhoneNumbers $payload): self
-    {
-        $obj = clone $this;
-        $obj->payload = $payload;
+    /**
+     * @param NumberOrderWithPhoneNumbers|NumberOrderWithPhoneNumbersShape $payload
+     */
+    public function withPayload(
+        NumberOrderWithPhoneNumbers|array $payload
+    ): self {
+        $self = clone $this;
+        $self['payload'] = $payload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,9 +153,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

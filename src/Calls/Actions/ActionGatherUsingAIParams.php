@@ -7,7 +7,8 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\AI\Assistants\Assistant;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -24,65 +25,74 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.ai_gather.partial_results` (if `send_partial_results` is set to `true`)
  * - `call.ai_gather.message_history_updated` (if `send_message_history_updates` is set to `true`)
  *
- * @see Telnyx\Calls\Actions->gatherUsingAI
+ * @see Telnyx\Services\Calls\ActionsService::gatherUsingAI()
  *
- * @phpstan-type action_gather_using_ai_params = array{
- *   parameters: mixed,
- *   assistant?: Assistant,
- *   clientState?: string,
- *   commandID?: string,
- *   greeting?: string,
- *   interruptionSettings?: InterruptionSettings,
- *   language?: GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
- *   messageHistory?: list<MessageHistory>,
- *   sendMessageHistoryUpdates?: bool,
- *   sendPartialResults?: bool,
- *   transcription?: TranscriptionConfig,
- *   userResponseTimeoutMs?: int,
- *   voice?: string,
- *   voiceSettings?: mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings,
+ * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
+ * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
+ * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
+ *
+ * @phpstan-type ActionGatherUsingAIParamsShape = array{
+ *   parameters: array<string,mixed>,
+ *   assistant?: null|Assistant|AssistantShape,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   greeting?: string|null,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
+ *   language?: null|GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
+ *   messageHistory?: list<MessageHistory|MessageHistoryShape>|null,
+ *   sendMessageHistoryUpdates?: bool|null,
+ *   sendPartialResults?: bool|null,
+ *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
+ *   userResponseTimeoutMs?: int|null,
+ *   voice?: string|null,
+ *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
 final class ActionGatherUsingAIParams implements BaseModel
 {
-    /** @use SdkModel<action_gather_using_ai_params> */
+    /** @use SdkModel<ActionGatherUsingAIParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
+     *
+     * @var array<string,mixed> $parameters
      */
-    #[Api]
-    public mixed $parameters;
+    #[Required(map: 'mixed')]
+    public array $parameters;
 
     /**
      * Assistant configuration including choice of LLM, custom instructions, and tools.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Assistant $assistant;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
      * Text that will be played when the gathering starts, if none then nothing will be played when the gathering starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $greeting;
 
     /**
      * Settings for handling user interruptions during assistant speech.
      */
-    #[Api('interruption_settings', optional: true)]
+    #[Optional('interruption_settings')]
     public ?InterruptionSettings $interruptionSettings;
 
     /**
@@ -90,7 +100,7 @@ final class ActionGatherUsingAIParams implements BaseModel
      *
      * @var value-of<GoogleTranscriptionLanguage>|null $language
      */
-    #[Api(enum: GoogleTranscriptionLanguage::class, optional: true)]
+    #[Optional(enum: GoogleTranscriptionLanguage::class)]
     public ?string $language;
 
     /**
@@ -98,31 +108,31 @@ final class ActionGatherUsingAIParams implements BaseModel
      *
      * @var list<MessageHistory>|null $messageHistory
      */
-    #[Api('message_history', list: MessageHistory::class, optional: true)]
+    #[Optional('message_history', list: MessageHistory::class)]
     public ?array $messageHistory;
 
     /**
      * Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` callback in real time as the message history is updated.
      */
-    #[Api('send_message_history_updates', optional: true)]
+    #[Optional('send_message_history_updates')]
     public ?bool $sendMessageHistoryUpdates;
 
     /**
      * Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` callback in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
      */
-    #[Api('send_partial_results', optional: true)]
+    #[Optional('send_partial_results')]
     public ?bool $sendPartialResults;
 
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?TranscriptionConfig $transcription;
 
     /**
      * The number of milliseconds to wait for a user response before the voice assistant times out and check if the user is still there.
      */
-    #[Api('user_response_timeout_ms', optional: true)]
+    #[Optional('user_response_timeout_ms')]
     public ?int $userResponseTimeoutMs;
 
     /**
@@ -134,16 +144,16 @@ final class ActionGatherUsingAIParams implements BaseModel
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $voice;
 
     /**
      * The settings associated with the voice selected.
      *
-     * @var mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings|null $voiceSettings
+     * @var VoiceSettingsVariants|null $voiceSettings
      */
-    #[Api('voice_settings', union: VoiceSettings::class, optional: true)]
-    public mixed $voiceSettings;
+    #[Optional('voice_settings', union: VoiceSettings::class)]
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings;
 
     /**
      * `new ActionGatherUsingAIParams()` is missing required properties by the API.
@@ -169,67 +179,75 @@ final class ActionGatherUsingAIParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
-     * @param list<MessageHistory> $messageHistory
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param array<string,mixed> $parameters
+     * @param Assistant|AssistantShape|null $assistant
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>|null $language
+     * @param list<MessageHistory|MessageHistoryShape>|null $messageHistory
+     * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
+     * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
-        mixed $parameters,
-        ?Assistant $assistant = null,
+        array $parameters,
+        Assistant|array|null $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,
         ?string $greeting = null,
-        ?InterruptionSettings $interruptionSettings = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
         GoogleTranscriptionLanguage|string|null $language = null,
         ?array $messageHistory = null,
         ?bool $sendMessageHistoryUpdates = null,
         ?bool $sendPartialResults = null,
-        ?TranscriptionConfig $transcription = null,
+        TranscriptionConfig|array|null $transcription = null,
         ?int $userResponseTimeoutMs = null,
         ?string $voice = null,
-        mixed $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->parameters = $parameters;
+        $self['parameters'] = $parameters;
 
-        null !== $assistant && $obj->assistant = $assistant;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $greeting && $obj->greeting = $greeting;
-        null !== $interruptionSettings && $obj->interruptionSettings = $interruptionSettings;
-        null !== $language && $obj['language'] = $language;
-        null !== $messageHistory && $obj->messageHistory = $messageHistory;
-        null !== $sendMessageHistoryUpdates && $obj->sendMessageHistoryUpdates = $sendMessageHistoryUpdates;
-        null !== $sendPartialResults && $obj->sendPartialResults = $sendPartialResults;
-        null !== $transcription && $obj->transcription = $transcription;
-        null !== $userResponseTimeoutMs && $obj->userResponseTimeoutMs = $userResponseTimeoutMs;
-        null !== $voice && $obj->voice = $voice;
-        null !== $voiceSettings && $obj->voiceSettings = $voiceSettings;
+        null !== $assistant && $self['assistant'] = $assistant;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $greeting && $self['greeting'] = $greeting;
+        null !== $interruptionSettings && $self['interruptionSettings'] = $interruptionSettings;
+        null !== $language && $self['language'] = $language;
+        null !== $messageHistory && $self['messageHistory'] = $messageHistory;
+        null !== $sendMessageHistoryUpdates && $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
+        null !== $sendPartialResults && $self['sendPartialResults'] = $sendPartialResults;
+        null !== $transcription && $self['transcription'] = $transcription;
+        null !== $userResponseTimeoutMs && $self['userResponseTimeoutMs'] = $userResponseTimeoutMs;
+        null !== $voice && $self['voice'] = $voice;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
+     *
+     * @param array<string,mixed> $parameters
      */
-    public function withParameters(mixed $parameters): self
+    public function withParameters(array $parameters): self
     {
-        $obj = clone $this;
-        $obj->parameters = $parameters;
+        $self = clone $this;
+        $self['parameters'] = $parameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Assistant configuration including choice of LLM, custom instructions, and tools.
+     *
+     * @param Assistant|AssistantShape $assistant
      */
-    public function withAssistant(Assistant $assistant): self
+    public function withAssistant(Assistant|array $assistant): self
     {
-        $obj = clone $this;
-        $obj->assistant = $assistant;
+        $self = clone $this;
+        $self['assistant'] = $assistant;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -237,10 +255,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +266,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,22 +277,24 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withGreeting(string $greeting): self
     {
-        $obj = clone $this;
-        $obj->greeting = $greeting;
+        $self = clone $this;
+        $self['greeting'] = $greeting;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Settings for handling user interruptions during assistant speech.
+     *
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
-        InterruptionSettings $interruptionSettings
+        InterruptionSettings|array $interruptionSettings
     ): self {
-        $obj = clone $this;
-        $obj->interruptionSettings = $interruptionSettings;
+        $self = clone $this;
+        $self['interruptionSettings'] = $interruptionSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,23 +305,23 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withLanguage(
         GoogleTranscriptionLanguage|string $language
     ): self {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The message history you want the voice assistant to be aware of, this can be useful to keep the context of the conversation, or to pass additional information to the voice assistant.
      *
-     * @param list<MessageHistory> $messageHistory
+     * @param list<MessageHistory|MessageHistoryShape> $messageHistory
      */
     public function withMessageHistory(array $messageHistory): self
     {
-        $obj = clone $this;
-        $obj->messageHistory = $messageHistory;
+        $self = clone $this;
+        $self['messageHistory'] = $messageHistory;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -310,10 +330,10 @@ final class ActionGatherUsingAIParams implements BaseModel
     public function withSendMessageHistoryUpdates(
         bool $sendMessageHistoryUpdates
     ): self {
-        $obj = clone $this;
-        $obj->sendMessageHistoryUpdates = $sendMessageHistoryUpdates;
+        $self = clone $this;
+        $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -321,21 +341,24 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withSendPartialResults(bool $sendPartialResults): self
     {
-        $obj = clone $this;
-        $obj->sendPartialResults = $sendPartialResults;
+        $self = clone $this;
+        $self['sendPartialResults'] = $sendPartialResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
+     *
+     * @param TranscriptionConfig|TranscriptionConfigShape $transcription
      */
-    public function withTranscription(TranscriptionConfig $transcription): self
-    {
-        $obj = clone $this;
-        $obj->transcription = $transcription;
+    public function withTranscription(
+        TranscriptionConfig|array $transcription
+    ): self {
+        $self = clone $this;
+        $self['transcription'] = $transcription;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -343,10 +366,10 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withUserResponseTimeoutMs(int $userResponseTimeoutMs): self
     {
-        $obj = clone $this;
-        $obj->userResponseTimeoutMs = $userResponseTimeoutMs;
+        $self = clone $this;
+        $self['userResponseTimeoutMs'] = $userResponseTimeoutMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -360,22 +383,23 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     public function withVoice(string $voice): self
     {
-        $obj = clone $this;
-        $obj->voice = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The settings associated with the voice selected.
      *
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings
+     * @param VoiceSettingsShape $voiceSettings
      */
-    public function withVoiceSettings(mixed $voiceSettings): self
-    {
-        $obj = clone $this;
-        $obj->voiceSettings = $voiceSettings;
+    public function withVoiceSettings(
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
+    ): self {
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
-        return $obj;
+        return $self;
     }
 }

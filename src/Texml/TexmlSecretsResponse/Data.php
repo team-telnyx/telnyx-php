@@ -4,24 +4,26 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\TexmlSecretsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\TexmlSecretsResponse\Data\Value;
 
 /**
- * @phpstan-type data_alias = array{name?: string, value?: value-of<Value>}
+ * @phpstan-type DataShape = array{
+ *   name?: string|null, value?: null|Value|value-of<Value>
+ * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /** @var value-of<Value>|null $value */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()
@@ -34,26 +36,26 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Value|value-of<Value> $value
+     * @param Value|value-of<Value>|null $value
      */
     public static function with(
         ?string $name = null,
         Value|string|null $value = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $value && $obj['value'] = $value;
+        null !== $name && $self['name'] = $name;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,9 +63,9 @@ final class Data implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

@@ -21,13 +21,15 @@ use Telnyx\Texml\Calls\CallUpdateParams\Method;
 use Telnyx\Texml\Calls\CallUpdateParams\StatusCallbackMethod;
 use Telnyx\Texml\Calls\CallUpdateResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CallsContract
 {
     /**
      * @api
      *
+     * @param string $callSid the CallSid that identifies the call to update
      * @param FallbackMethod|value-of<FallbackMethod> $fallbackMethod HTTP request type used for `FallbackUrl`
      * @param string $fallbackURL a failover URL for which Telnyx will retrieve the TeXML call instructions if the Url is not responding
      * @param Method|value-of<Method> $method HTTP request type used for `Url`
@@ -36,38 +38,27 @@ interface CallsContract
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param string $texml teXML to replace the current one with
      * @param string $url the URL where TeXML will make a request to retrieve a new set of TeXML instructions to continue the call flow
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $callSid,
-        $fallbackMethod = omit,
-        $fallbackURL = omit,
-        $method = omit,
-        $status = omit,
-        $statusCallback = omit,
-        $statusCallbackMethod = omit,
-        $texml = omit,
-        $url = omit,
-        ?RequestOptions $requestOptions = null,
+        FallbackMethod|string|null $fallbackMethod = null,
+        ?string $fallbackURL = null,
+        Method|string|null $method = null,
+        ?string $status = null,
+        ?string $statusCallback = null,
+        StatusCallbackMethod|string|null $statusCallbackMethod = null,
+        ?string $texml = null,
+        ?string $url = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CallUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $callSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CallUpdateResponse;
-
-    /**
-     * @api
-     *
+     * @param string $applicationID the ID of the TeXML application used for the call
      * @param string $from The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
      * @param string $to The phone number of the called party. Phone numbers are formatted with a `+` and country code.
      * @param bool $asyncAmd Select whether to perform answering machine detection in the background. By default execution is blocked until Answering Machine Detection is completed.
@@ -99,55 +90,43 @@ interface CallsContract
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function initiate(
         string $applicationID,
-        $from,
-        $to,
-        $asyncAmd = omit,
-        $asyncAmdStatusCallback = omit,
-        $asyncAmdStatusCallbackMethod = omit,
-        $callerID = omit,
-        $cancelPlaybackOnDetectMessageEnd = omit,
-        $cancelPlaybackOnMachineDetection = omit,
-        $detectionMode = omit,
-        $fallbackURL = omit,
-        $machineDetection = omit,
-        $machineDetectionSilenceTimeout = omit,
-        $machineDetectionSpeechEndThreshold = omit,
-        $machineDetectionSpeechThreshold = omit,
-        $machineDetectionTimeout = omit,
-        $preferredCodecs = omit,
-        $record = omit,
-        $recordingChannels = omit,
-        $recordingStatusCallback = omit,
-        $recordingStatusCallbackEvent = omit,
-        $recordingStatusCallbackMethod = omit,
-        $recordingTimeout = omit,
-        $recordingTrack = omit,
-        $sipAuthPassword = omit,
-        $sipAuthUsername = omit,
-        $statusCallback = omit,
-        $statusCallbackEvent = omit,
-        $statusCallbackMethod = omit,
-        $trim = omit,
-        $url = omit,
-        $urlMethod = omit,
-        ?RequestOptions $requestOptions = null,
-    ): CallInitiateResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function initiateRaw(
-        string $applicationID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
+        string $from,
+        string $to,
+        bool $asyncAmd = false,
+        ?string $asyncAmdStatusCallback = null,
+        AsyncAmdStatusCallbackMethod|string $asyncAmdStatusCallbackMethod = 'POST',
+        ?string $callerID = null,
+        bool $cancelPlaybackOnDetectMessageEnd = true,
+        bool $cancelPlaybackOnMachineDetection = true,
+        DetectionMode|string $detectionMode = 'Regular',
+        ?string $fallbackURL = null,
+        MachineDetection|string $machineDetection = 'Disable',
+        int $machineDetectionSilenceTimeout = 3500,
+        int $machineDetectionSpeechEndThreshold = 800,
+        int $machineDetectionSpeechThreshold = 3500,
+        int $machineDetectionTimeout = 30000,
+        ?string $preferredCodecs = null,
+        ?bool $record = null,
+        RecordingChannels|string|null $recordingChannels = null,
+        ?string $recordingStatusCallback = null,
+        ?string $recordingStatusCallbackEvent = null,
+        RecordingStatusCallbackMethod|string|null $recordingStatusCallbackMethod = null,
+        int $recordingTimeout = 0,
+        RecordingTrack|string|null $recordingTrack = null,
+        ?string $sipAuthPassword = null,
+        ?string $sipAuthUsername = null,
+        ?string $statusCallback = null,
+        StatusCallbackEvent|string $statusCallbackEvent = 'completed',
+        \Telnyx\Texml\Calls\CallInitiateParams\StatusCallbackMethod|string $statusCallbackMethod = 'POST',
+        Trim|string|null $trim = null,
+        ?string $url = null,
+        URLMethod|string $urlMethod = 'POST',
+        RequestOptions|array|null $requestOptions = null,
     ): CallInitiateResponse;
 }

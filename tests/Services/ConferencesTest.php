@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Conferences\Conference;
+use Telnyx\Conferences\ConferenceGetResponse;
+use Telnyx\Conferences\ConferenceListParticipantsResponse;
+use Telnyx\Conferences\ConferenceNewResponse;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +43,8 @@ final class ConferencesTest extends TestCase
             name: 'Business',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,9 +57,20 @@ final class ConferencesTest extends TestCase
         $result = $this->client->conferences->create(
             callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             name: 'Business',
+            beepEnabled: 'always',
+            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            comfortNoise: false,
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            durationMinutes: 5,
+            holdAudioURL: 'http://www.example.com/audio.wav',
+            holdMediaName: 'my_media_uploaded_to_media_storage_api',
+            maxParticipants: 250,
+            region: 'US',
+            startConferenceOnCreate: false,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +82,8 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->conferences->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetResponse::class, $result);
     }
 
     #[Test]
@@ -75,9 +93,15 @@ final class ConferencesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->list();
+        $page = $this->client->conferences->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(Conference::class, $item);
+        }
     }
 
     #[Test]
@@ -87,8 +111,14 @@ final class ConferencesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->conferences->listParticipants('conference_id');
+        $page = $this->client->conferences->listParticipants('conference_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ConferenceListParticipantsResponse::class, $item);
+        }
     }
 }

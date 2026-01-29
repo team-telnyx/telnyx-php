@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Calls;
 
 use Telnyx\AI\Assistants\Assistant;
-use Telnyx\Calls\Actions\ActionAnswerParams;
+use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
@@ -15,110 +15,80 @@ use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
 use Telnyx\Calls\Actions\ActionAnswerResponse;
-use Telnyx\Calls\Actions\ActionBridgeParams;
 use Telnyx\Calls\Actions\ActionBridgeParams\MuteDtmf;
 use Telnyx\Calls\Actions\ActionBridgeParams\Ringtone;
 use Telnyx\Calls\Actions\ActionBridgeResponse;
-use Telnyx\Calls\Actions\ActionEnqueueParams;
 use Telnyx\Calls\Actions\ActionEnqueueResponse;
-use Telnyx\Calls\Actions\ActionGatherParams;
 use Telnyx\Calls\Actions\ActionGatherResponse;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
 use Telnyx\Calls\Actions\ActionGatherUsingAIResponse;
-use Telnyx\Calls\Actions\ActionGatherUsingAudioParams;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioResponse;
-use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakResponse;
-use Telnyx\Calls\Actions\ActionHangupParams;
 use Telnyx\Calls\Actions\ActionHangupResponse;
-use Telnyx\Calls\Actions\ActionLeaveQueueParams;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
-use Telnyx\Calls\Actions\ActionPauseRecordingParams;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
-use Telnyx\Calls\Actions\ActionReferParams;
 use Telnyx\Calls\Actions\ActionReferResponse;
-use Telnyx\Calls\Actions\ActionRejectParams;
 use Telnyx\Calls\Actions\ActionRejectParams\Cause;
 use Telnyx\Calls\Actions\ActionRejectResponse;
-use Telnyx\Calls\Actions\ActionResumeRecordingParams;
 use Telnyx\Calls\Actions\ActionResumeRecordingResponse;
-use Telnyx\Calls\Actions\ActionSendDtmfParams;
 use Telnyx\Calls\Actions\ActionSendDtmfResponse;
-use Telnyx\Calls\Actions\ActionSendSipInfoParams;
 use Telnyx\Calls\Actions\ActionSendSipInfoResponse;
-use Telnyx\Calls\Actions\ActionSpeakParams;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
-use Telnyx\Calls\Actions\ActionStartForkingParams;
 use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
 use Telnyx\Calls\Actions\ActionStartForkingResponse;
-use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\Direction;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngine;
+use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionResponse;
-use Telnyx\Calls\Actions\ActionStartPlaybackParams;
 use Telnyx\Calls\Actions\ActionStartPlaybackParams\AudioType;
 use Telnyx\Calls\Actions\ActionStartPlaybackResponse;
-use Telnyx\Calls\Actions\ActionStartRecordingParams;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Channels;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
 use Telnyx\Calls\Actions\ActionStartRecordingResponse;
-use Telnyx\Calls\Actions\ActionStartSiprecParams;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
-use Telnyx\Calls\Actions\ActionStartStreamingParams;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Deepgram;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Google;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\Telnyx;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
-use Telnyx\Calls\Actions\ActionStopAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
-use Telnyx\Calls\Actions\ActionStopForkingParams;
 use Telnyx\Calls\Actions\ActionStopForkingResponse;
-use Telnyx\Calls\Actions\ActionStopGatherParams;
 use Telnyx\Calls\Actions\ActionStopGatherResponse;
-use Telnyx\Calls\Actions\ActionStopNoiseSuppressionParams;
 use Telnyx\Calls\Actions\ActionStopNoiseSuppressionResponse;
-use Telnyx\Calls\Actions\ActionStopPlaybackParams;
 use Telnyx\Calls\Actions\ActionStopPlaybackResponse;
-use Telnyx\Calls\Actions\ActionStopRecordingParams;
 use Telnyx\Calls\Actions\ActionStopRecordingResponse;
-use Telnyx\Calls\Actions\ActionStopSiprecParams;
 use Telnyx\Calls\Actions\ActionStopSiprecResponse;
-use Telnyx\Calls\Actions\ActionStopStreamingParams;
 use Telnyx\Calls\Actions\ActionStopStreamingResponse;
-use Telnyx\Calls\Actions\ActionStopTranscriptionParams;
 use Telnyx\Calls\Actions\ActionStopTranscriptionResponse;
-use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleParams;
 use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleParams\Role;
 use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleResponse;
-use Telnyx\Calls\Actions\ActionTransferParams;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
+use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferResponse;
-use Telnyx\Calls\Actions\ActionUpdateClientStateParams;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
+use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
 use Telnyx\Calls\Actions\InterruptionSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Calls\Actions\TranscriptionConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\DialogflowConfig;
@@ -126,21 +96,85 @@ use Telnyx\Calls\SipHeader;
 use Telnyx\Calls\SoundModifications;
 use Telnyx\Calls\StreamBidirectionalCodec;
 use Telnyx\Calls\StreamBidirectionalMode;
+use Telnyx\Calls\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Calls\ActionsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
+ * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
+ * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
+ * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
+ * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
+ * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
+ * @phpstan-import-type TranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig
+ * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
+ * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ */
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
+
+    /**
+     * @api
+     *
+     * Add messages to the conversation started by an AI assistant on the call.
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+     * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param list<MessageShape> $messages the messages to add to the conversation
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function addAIAssistantMessages(
+        string $callControlID,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?array $messages = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionAddAIAssistantMessagesResponse {
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'messages' => $messages,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->addAIAssistantMessages($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
 
     /**
      * @api
@@ -154,10 +188,11 @@ final class ActionsService implements ActionsContract
      *
      * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $billingGroupID Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param list<CustomSipHeader> $customHeaders custom headers to be added to the SIP INVITE response
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE response
      * @param PreferredCodecs|value-of<PreferredCodecs> $preferredCodecs the list of comma-separated codecs in a preferred order for the forked media to be received
      * @param Record|value-of<Record> $record Start recording automatically after an event. Disabled by default.
      * @param RecordChannels|value-of<RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
@@ -168,8 +203,8 @@ final class ActionsService implements ActionsContract
      * @param RecordTrack|value-of<RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param RecordTrim|value-of<RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      * @param bool $sendSilenceWhenIdle generate silence RTP packets when no transmission available
-     * @param list<SipHeader> $sipHeaders SIP headers to be added to the SIP INVITE response. Currently only User-to-User header is supported.
-     * @param SoundModifications $soundModifications use this field to modify sound effects, for example adjust the pitch
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders SIP headers to be added to the SIP INVITE response. Currently only User-to-User header is supported.
+     * @param SoundModifications|SoundModificationsShape $soundModifications use this field to modify sound effects, for example adjust the pitch
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs specifies which call legs should receive the bidirectional stream audio
@@ -177,99 +212,78 @@ final class ActionsService implements ActionsContract
      * @param StreamTrack|value-of<StreamTrack> $streamTrack specifies which track should be streamed
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered
      * @param bool $transcription Enable transcription upon call answer. The default value is false.
-     * @param TranscriptionStartRequest $transcriptionConfig
+     * @param TranscriptionStartRequest|TranscriptionStartRequestShape $transcriptionConfig
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function answer(
         string $callControlID,
-        $billingGroupID = omit,
-        $clientState = omit,
-        $commandID = omit,
-        $customHeaders = omit,
-        $preferredCodecs = omit,
-        $record = omit,
-        $recordChannels = omit,
-        $recordCustomFileName = omit,
-        $recordFormat = omit,
-        $recordMaxLength = omit,
-        $recordTimeoutSecs = omit,
-        $recordTrack = omit,
-        $recordTrim = omit,
-        $sendSilenceWhenIdle = omit,
-        $sipHeaders = omit,
-        $soundModifications = omit,
-        $streamBidirectionalCodec = omit,
-        $streamBidirectionalMode = omit,
-        $streamBidirectionalTargetLegs = omit,
-        $streamCodec = omit,
-        $streamTrack = omit,
-        $streamURL = omit,
-        $transcription = omit,
-        $transcriptionConfig = omit,
-        $webhookURL = omit,
-        $webhookURLMethod = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $billingGroupID = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?array $customHeaders = null,
+        PreferredCodecs|string|null $preferredCodecs = null,
+        Record|string|null $record = null,
+        RecordChannels|string $recordChannels = 'dual',
+        ?string $recordCustomFileName = null,
+        RecordFormat|string $recordFormat = 'mp3',
+        int $recordMaxLength = 0,
+        int $recordTimeoutSecs = 0,
+        RecordTrack|string $recordTrack = 'both',
+        RecordTrim|string|null $recordTrim = null,
+        bool $sendSilenceWhenIdle = false,
+        ?array $sipHeaders = null,
+        SoundModifications|array|null $soundModifications = null,
+        StreamBidirectionalCodec|string $streamBidirectionalCodec = 'PCMU',
+        StreamBidirectionalMode|string $streamBidirectionalMode = 'mp3',
+        StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs = 'opposite',
+        StreamCodec|string $streamCodec = 'default',
+        StreamTrack|string $streamTrack = 'inbound_track',
+        ?string $streamURL = null,
+        bool $transcription = false,
+        TranscriptionStartRequest|array|null $transcriptionConfig = null,
+        ?string $webhookURL = null,
+        WebhookURLMethod|string $webhookURLMethod = 'POST',
+        RequestOptions|array|null $requestOptions = null,
     ): ActionAnswerResponse {
-        $params = [
-            'billingGroupID' => $billingGroupID,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'customHeaders' => $customHeaders,
-            'preferredCodecs' => $preferredCodecs,
-            'record' => $record,
-            'recordChannels' => $recordChannels,
-            'recordCustomFileName' => $recordCustomFileName,
-            'recordFormat' => $recordFormat,
-            'recordMaxLength' => $recordMaxLength,
-            'recordTimeoutSecs' => $recordTimeoutSecs,
-            'recordTrack' => $recordTrack,
-            'recordTrim' => $recordTrim,
-            'sendSilenceWhenIdle' => $sendSilenceWhenIdle,
-            'sipHeaders' => $sipHeaders,
-            'soundModifications' => $soundModifications,
-            'streamBidirectionalCodec' => $streamBidirectionalCodec,
-            'streamBidirectionalMode' => $streamBidirectionalMode,
-            'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
-            'streamCodec' => $streamCodec,
-            'streamTrack' => $streamTrack,
-            'streamURL' => $streamURL,
-            'transcription' => $transcription,
-            'transcriptionConfig' => $transcriptionConfig,
-            'webhookURL' => $webhookURL,
-            'webhookURLMethod' => $webhookURLMethod,
-        ];
-
-        return $this->answerRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function answerRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionAnswerResponse {
-        [$parsed, $options] = ActionAnswerParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'billingGroupID' => $billingGroupID,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'customHeaders' => $customHeaders,
+                'preferredCodecs' => $preferredCodecs,
+                'record' => $record,
+                'recordChannels' => $recordChannels,
+                'recordCustomFileName' => $recordCustomFileName,
+                'recordFormat' => $recordFormat,
+                'recordMaxLength' => $recordMaxLength,
+                'recordTimeoutSecs' => $recordTimeoutSecs,
+                'recordTrack' => $recordTrack,
+                'recordTrim' => $recordTrim,
+                'sendSilenceWhenIdle' => $sendSilenceWhenIdle,
+                'sipHeaders' => $sipHeaders,
+                'soundModifications' => $soundModifications,
+                'streamBidirectionalCodec' => $streamBidirectionalCodec,
+                'streamBidirectionalMode' => $streamBidirectionalMode,
+                'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
+                'streamCodec' => $streamCodec,
+                'streamTrack' => $streamTrack,
+                'streamURL' => $streamURL,
+                'transcription' => $transcription,
+                'transcriptionConfig' => $transcriptionConfig,
+                'webhookURL' => $webhookURL,
+                'webhookURLMethod' => $webhookURLMethod,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/answer', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionAnswerResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->answer($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -282,98 +296,78 @@ final class ActionsService implements ActionsContract
      * - `call.bridged` for Leg A
      * - `call.bridged` for Leg B
      *
-     * @param string $callControlID1 the Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter
+     * @param string $callControlIDToBridge Unique identifier and token for controlling the call
+     * @param string $callControlIDToBridgeWith the Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param MuteDtmf|value-of<MuteDtmf> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
      * @param string $parkAfterUnbridge Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
      * @param bool $playRingtone specifies whether to play a ringtone if the call you want to bridge with has not yet been answered
      * @param string $queue The name of the queue you want to bridge with, can't be used together with call_control_id parameter or video_room_id parameter. Bridging with a queue means bridging with the first call in the queue. The call will always be removed from the queue regardless of whether bridging succeeds. Returns an error when the queue is empty.
-     * @param ActionBridgeParams\Record|value-of<ActionBridgeParams\Record> $record Start recording automatically after an event. Disabled by default.
-     * @param ActionBridgeParams\RecordChannels|value-of<ActionBridgeParams\RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
+     * @param \Telnyx\Calls\Actions\ActionBridgeParams\Record|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\Record> $record Start recording automatically after an event. Disabled by default.
+     * @param \Telnyx\Calls\Actions\ActionBridgeParams\RecordChannels|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
-     * @param ActionBridgeParams\RecordFormat|value-of<ActionBridgeParams\RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
+     * @param \Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
      * @param int $recordMaxLength Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
-     * @param ActionBridgeParams\RecordTrack|value-of<ActionBridgeParams\RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
-     * @param ActionBridgeParams\RecordTrim|value-of<ActionBridgeParams\RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
+     * @param \Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
+     * @param \Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      * @param Ringtone|value-of<Ringtone> $ringtone Specifies which country ringtone to play when `play_ringtone` is set to `true`. If not set, the US ringtone will be played.
      * @param string $videoRoomContext The additional parameter that will be passed to the video conference. It is a text field and the user can decide how to use it. For example, you can set the participant name or pass JSON text. It can be used only with video_room_id parameter.
      * @param string $videoRoomID the ID of the video room you want to bridge with, can't be used together with call_control_id parameter or queue parameter
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function bridge(
-        string $callControlID,
-        $callControlID1,
-        $clientState = omit,
-        $commandID = omit,
-        $muteDtmf = omit,
-        $parkAfterUnbridge = omit,
-        $playRingtone = omit,
-        $queue = omit,
-        $record = omit,
-        $recordChannels = omit,
-        $recordCustomFileName = omit,
-        $recordFormat = omit,
-        $recordMaxLength = omit,
-        $recordTimeoutSecs = omit,
-        $recordTrack = omit,
-        $recordTrim = omit,
-        $ringtone = omit,
-        $videoRoomContext = omit,
-        $videoRoomID = omit,
-        ?RequestOptions $requestOptions = null,
+        string $callControlIDToBridge,
+        string $callControlIDToBridgeWith,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        MuteDtmf|string $muteDtmf = 'none',
+        ?string $parkAfterUnbridge = null,
+        bool $playRingtone = false,
+        ?string $queue = null,
+        \Telnyx\Calls\Actions\ActionBridgeParams\Record|string|null $record = null,
+        \Telnyx\Calls\Actions\ActionBridgeParams\RecordChannels|string $recordChannels = 'dual',
+        ?string $recordCustomFileName = null,
+        \Telnyx\Calls\Actions\ActionBridgeParams\RecordFormat|string $recordFormat = 'mp3',
+        int $recordMaxLength = 0,
+        int $recordTimeoutSecs = 0,
+        \Telnyx\Calls\Actions\ActionBridgeParams\RecordTrack|string $recordTrack = 'both',
+        \Telnyx\Calls\Actions\ActionBridgeParams\RecordTrim|string|null $recordTrim = null,
+        Ringtone|string $ringtone = 'us',
+        ?string $videoRoomContext = null,
+        ?string $videoRoomID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionBridgeResponse {
-        $params = [
-            'callControlID' => $callControlID1,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'muteDtmf' => $muteDtmf,
-            'parkAfterUnbridge' => $parkAfterUnbridge,
-            'playRingtone' => $playRingtone,
-            'queue' => $queue,
-            'record' => $record,
-            'recordChannels' => $recordChannels,
-            'recordCustomFileName' => $recordCustomFileName,
-            'recordFormat' => $recordFormat,
-            'recordMaxLength' => $recordMaxLength,
-            'recordTimeoutSecs' => $recordTimeoutSecs,
-            'recordTrack' => $recordTrack,
-            'recordTrim' => $recordTrim,
-            'ringtone' => $ringtone,
-            'videoRoomContext' => $videoRoomContext,
-            'videoRoomID' => $videoRoomID,
-        ];
-
-        return $this->bridgeRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function bridgeRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionBridgeResponse {
-        [$parsed, $options] = ActionBridgeParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'callControlIDToBridgeWith' => $callControlIDToBridgeWith,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'muteDtmf' => $muteDtmf,
+                'parkAfterUnbridge' => $parkAfterUnbridge,
+                'playRingtone' => $playRingtone,
+                'queue' => $queue,
+                'record' => $record,
+                'recordChannels' => $recordChannels,
+                'recordCustomFileName' => $recordCustomFileName,
+                'recordFormat' => $recordFormat,
+                'recordMaxLength' => $recordMaxLength,
+                'recordTimeoutSecs' => $recordTimeoutSecs,
+                'recordTrack' => $recordTrack,
+                'recordTrim' => $recordTrim,
+                'ringtone' => $ringtone,
+                'videoRoomContext' => $videoRoomContext,
+                'videoRoomID' => $videoRoomID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/bridge', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionBridgeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->bridge($callControlIDToBridge, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -381,59 +375,42 @@ final class ActionsService implements ActionsContract
      *
      * Put the call in a queue.
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $queueName The name of the queue the call should be put in. If a queue with a given name doesn't exist yet it will be created.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param bool $keepAfterHangup If set to true, the call will remain in the queue after hangup. In this case bridging to such call will fail with necessary information needed to re-establish the call.
      * @param int $maxSize The maximum number of calls allowed in the queue at a given time. Can't be modified for an existing queue.
      * @param int $maxWaitTimeSecs the number of seconds after which the call will be removed from the queue
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function enqueue(
         string $callControlID,
-        $queueName,
-        $clientState = omit,
-        $commandID = omit,
-        $maxSize = omit,
-        $maxWaitTimeSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        string $queueName,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        bool $keepAfterHangup = false,
+        int $maxSize = 100,
+        ?int $maxWaitTimeSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionEnqueueResponse {
-        $params = [
-            'queueName' => $queueName,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'maxSize' => $maxSize,
-            'maxWaitTimeSecs' => $maxWaitTimeSecs,
-        ];
-
-        return $this->enqueueRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function enqueueRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionEnqueueResponse {
-        [$parsed, $options] = ActionEnqueueParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'queueName' => $queueName,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'keepAfterHangup' => $keepAfterHangup,
+                'maxSize' => $maxSize,
+                'maxWaitTimeSecs' => $maxWaitTimeSecs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/enqueue', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionEnqueueResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->enqueue($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -448,6 +425,7 @@ final class ActionsService implements ActionsContract
      * - `call.dtmf.received` (you may receive many of these webhooks)
      * - `call.gather.ended`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $gatherID An id that will be sent back in the corresponding `call.gather.ended` webhook. Will be randomly generated if not specified.
@@ -458,64 +436,43 @@ final class ActionsService implements ActionsContract
      * @param string $terminatingDigit the digit used to terminate input if fewer than `maximum_digits` digits have been gathered
      * @param int $timeoutMillis the number of milliseconds to wait to complete the request
      * @param string $validDigits a list of all digits accepted as valid
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function gather(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $gatherID = omit,
-        $initialTimeoutMillis = omit,
-        $interDigitTimeoutMillis = omit,
-        $maximumDigits = omit,
-        $minimumDigits = omit,
-        $terminatingDigit = omit,
-        $timeoutMillis = omit,
-        $validDigits = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $gatherID = null,
+        int $initialTimeoutMillis = 5000,
+        int $interDigitTimeoutMillis = 5000,
+        int $maximumDigits = 128,
+        int $minimumDigits = 1,
+        string $terminatingDigit = '#',
+        int $timeoutMillis = 60000,
+        string $validDigits = '0123456789#*',
+        RequestOptions|array|null $requestOptions = null,
     ): ActionGatherResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'gatherID' => $gatherID,
-            'initialTimeoutMillis' => $initialTimeoutMillis,
-            'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
-            'maximumDigits' => $maximumDigits,
-            'minimumDigits' => $minimumDigits,
-            'terminatingDigit' => $terminatingDigit,
-            'timeoutMillis' => $timeoutMillis,
-            'validDigits' => $validDigits,
-        ];
-
-        return $this->gatherRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function gatherRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionGatherResponse {
-        [$parsed, $options] = ActionGatherParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'gatherID' => $gatherID,
+                'initialTimeoutMillis' => $initialTimeoutMillis,
+                'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
+                'maximumDigits' => $maximumDigits,
+                'minimumDigits' => $minimumDigits,
+                'terminatingDigit' => $terminatingDigit,
+                'timeoutMillis' => $timeoutMillis,
+                'validDigits' => $validDigits,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/gather', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionGatherResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->gather($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -532,17 +489,18 @@ final class ActionsService implements ActionsContract
      * - `call.ai_gather.partial_results` (if `send_partial_results` is set to `true`)
      * - `call.ai_gather.message_history_updated` (if `send_message_history_updates` is set to `true`)
      *
-     * @param mixed $parameters The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format
-     * @param Assistant $assistant assistant configuration including choice of LLM, custom instructions, and tools
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array<string,mixed> $parameters The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format
+     * @param Assistant|AssistantShape $assistant assistant configuration including choice of LLM, custom instructions, and tools
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $greeting Text that will be played when the gathering starts, if none then nothing will be played when the gathering starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
-     * @param InterruptionSettings $interruptionSettings Settings for handling user interruptions during assistant speech
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings Settings for handling user interruptions during assistant speech
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language Language to use for speech recognition
-     * @param list<MessageHistory> $messageHistory the message history you want the voice assistant to be aware of, this can be useful to keep the context of the conversation, or to pass additional information to the voice assistant
+     * @param list<MessageHistory|MessageHistoryShape> $messageHistory the message history you want the voice assistant to be aware of, this can be useful to keep the context of the conversation, or to pass additional information to the voice assistant
      * @param bool $sendMessageHistoryUpdates Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` callback in real time as the message history is updated.
      * @param bool $sendPartialResults Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` callback in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
-     * @param TranscriptionConfig $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
+     * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      * @param int $userResponseTimeoutMs the number of milliseconds to wait for a user response before the voice assistant times out and check if the user is still there
      * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
      *
@@ -551,73 +509,52 @@ final class ActionsService implements ActionsContract
      * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
+     * @param VoiceSettingsShape $voiceSettings The settings associated with the voice selected
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function gatherUsingAI(
         string $callControlID,
-        $parameters,
-        $assistant = omit,
-        $clientState = omit,
-        $commandID = omit,
-        $greeting = omit,
-        $interruptionSettings = omit,
-        $language = omit,
-        $messageHistory = omit,
-        $sendMessageHistoryUpdates = omit,
-        $sendPartialResults = omit,
-        $transcription = omit,
-        $userResponseTimeoutMs = omit,
-        $voice = omit,
-        $voiceSettings = omit,
-        ?RequestOptions $requestOptions = null,
+        array $parameters,
+        Assistant|array|null $assistant = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $greeting = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
+        GoogleTranscriptionLanguage|string $language = 'en',
+        ?array $messageHistory = null,
+        ?bool $sendMessageHistoryUpdates = null,
+        ?bool $sendPartialResults = null,
+        TranscriptionConfig|array|null $transcription = null,
+        int $userResponseTimeoutMs = 10000,
+        string $voice = 'Telnyx.KokoroTTS.af',
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingAIResponse {
-        $params = [
-            'parameters' => $parameters,
-            'assistant' => $assistant,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'greeting' => $greeting,
-            'interruptionSettings' => $interruptionSettings,
-            'language' => $language,
-            'messageHistory' => $messageHistory,
-            'sendMessageHistoryUpdates' => $sendMessageHistoryUpdates,
-            'sendPartialResults' => $sendPartialResults,
-            'transcription' => $transcription,
-            'userResponseTimeoutMs' => $userResponseTimeoutMs,
-            'voice' => $voice,
-            'voiceSettings' => $voiceSettings,
-        ];
-
-        return $this->gatherUsingAIRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function gatherUsingAIRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionGatherUsingAIResponse {
-        [$parsed, $options] = ActionGatherUsingAIParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'parameters' => $parameters,
+                'assistant' => $assistant,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'greeting' => $greeting,
+                'interruptionSettings' => $interruptionSettings,
+                'language' => $language,
+                'messageHistory' => $messageHistory,
+                'sendMessageHistoryUpdates' => $sendMessageHistoryUpdates,
+                'sendPartialResults' => $sendPartialResults,
+                'transcription' => $transcription,
+                'userResponseTimeoutMs' => $userResponseTimeoutMs,
+                'voice' => $voice,
+                'voiceSettings' => $voiceSettings,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/gather_using_ai', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionGatherUsingAIResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->gatherUsingAI($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -634,6 +571,7 @@ final class ActionsService implements ActionsContract
      * - `call.dtmf.received` (you may receive many of these webhooks)
      * - `call.gather.ended`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $audioURL The URL of a file to be played back at the beginning of each prompt. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
@@ -647,70 +585,49 @@ final class ActionsService implements ActionsContract
      * @param string $terminatingDigit the digit used to terminate input if fewer than `maximum_digits` digits have been gathered
      * @param int $timeoutMillis the number of milliseconds to wait for a DTMF response after file playback ends before a replaying the sound file
      * @param string $validDigits a list of all digits accepted as valid
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function gatherUsingAudio(
         string $callControlID,
-        $audioURL = omit,
-        $clientState = omit,
-        $commandID = omit,
-        $interDigitTimeoutMillis = omit,
-        $invalidAudioURL = omit,
-        $invalidMediaName = omit,
-        $maximumDigits = omit,
-        $maximumTries = omit,
-        $mediaName = omit,
-        $minimumDigits = omit,
-        $terminatingDigit = omit,
-        $timeoutMillis = omit,
-        $validDigits = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $audioURL = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        int $interDigitTimeoutMillis = 5000,
+        ?string $invalidAudioURL = null,
+        ?string $invalidMediaName = null,
+        int $maximumDigits = 128,
+        int $maximumTries = 3,
+        ?string $mediaName = null,
+        int $minimumDigits = 1,
+        string $terminatingDigit = '#',
+        int $timeoutMillis = 60000,
+        string $validDigits = '0123456789#*',
+        RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingAudioResponse {
-        $params = [
-            'audioURL' => $audioURL,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
-            'invalidAudioURL' => $invalidAudioURL,
-            'invalidMediaName' => $invalidMediaName,
-            'maximumDigits' => $maximumDigits,
-            'maximumTries' => $maximumTries,
-            'mediaName' => $mediaName,
-            'minimumDigits' => $minimumDigits,
-            'terminatingDigit' => $terminatingDigit,
-            'timeoutMillis' => $timeoutMillis,
-            'validDigits' => $validDigits,
-        ];
-
-        return $this->gatherUsingAudioRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function gatherUsingAudioRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionGatherUsingAudioResponse {
-        [$parsed, $options] = ActionGatherUsingAudioParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'audioURL' => $audioURL,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
+                'invalidAudioURL' => $invalidAudioURL,
+                'invalidMediaName' => $invalidMediaName,
+                'maximumDigits' => $maximumDigits,
+                'maximumTries' => $maximumTries,
+                'mediaName' => $mediaName,
+                'minimumDigits' => $minimumDigits,
+                'terminatingDigit' => $terminatingDigit,
+                'timeoutMillis' => $timeoutMillis,
+                'validDigits' => $validDigits,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/gather_using_audio', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionGatherUsingAudioResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->gatherUsingAudio($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -725,6 +642,7 @@ final class ActionsService implements ActionsContract
      * - `call.dtmf.received` (you may receive many of these webhooks)
      * - `call.gather.ended`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $payload The text or SSML to be converted into speech. There is a 3,000 character limit.
      * @param string $voice Specifies the voice used in speech synthesis.
      *
@@ -750,77 +668,56 @@ final class ActionsService implements ActionsContract
      * @param string $terminatingDigit the digit used to terminate input if fewer than `maximum_digits` digits have been gathered
      * @param int $timeoutMillis the number of milliseconds to wait for a DTMF response after speak ends before a replaying the sound file
      * @param string $validDigits a list of all digits accepted as valid
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
+     * @param VoiceSettingsShape1 $voiceSettings The settings associated with the voice selected
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function gatherUsingSpeak(
         string $callControlID,
-        $payload,
-        $voice,
-        $clientState = omit,
-        $commandID = omit,
-        $interDigitTimeoutMillis = omit,
-        $invalidPayload = omit,
-        $language = omit,
-        $maximumDigits = omit,
-        $maximumTries = omit,
-        $minimumDigits = omit,
-        $payloadType = omit,
-        $serviceLevel = omit,
-        $terminatingDigit = omit,
-        $timeoutMillis = omit,
-        $validDigits = omit,
-        $voiceSettings = omit,
-        ?RequestOptions $requestOptions = null,
+        string $payload,
+        string $voice,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        int $interDigitTimeoutMillis = 5000,
+        ?string $invalidPayload = null,
+        Language|string|null $language = null,
+        int $maximumDigits = 128,
+        int $maximumTries = 3,
+        int $minimumDigits = 1,
+        PayloadType|string $payloadType = 'text',
+        ServiceLevel|string $serviceLevel = 'premium',
+        string $terminatingDigit = '#',
+        int $timeoutMillis = 60000,
+        string $validDigits = '0123456789#*',
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse {
-        $params = [
-            'payload' => $payload,
-            'voice' => $voice,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
-            'invalidPayload' => $invalidPayload,
-            'language' => $language,
-            'maximumDigits' => $maximumDigits,
-            'maximumTries' => $maximumTries,
-            'minimumDigits' => $minimumDigits,
-            'payloadType' => $payloadType,
-            'serviceLevel' => $serviceLevel,
-            'terminatingDigit' => $terminatingDigit,
-            'timeoutMillis' => $timeoutMillis,
-            'validDigits' => $validDigits,
-            'voiceSettings' => $voiceSettings,
-        ];
-
-        return $this->gatherUsingSpeakRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function gatherUsingSpeakRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionGatherUsingSpeakResponse {
-        [$parsed, $options] = ActionGatherUsingSpeakParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'payload' => $payload,
+                'voice' => $voice,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
+                'invalidPayload' => $invalidPayload,
+                'language' => $language,
+                'maximumDigits' => $maximumDigits,
+                'maximumTries' => $maximumTries,
+                'minimumDigits' => $minimumDigits,
+                'payloadType' => $payloadType,
+                'serviceLevel' => $serviceLevel,
+                'terminatingDigit' => $terminatingDigit,
+                'timeoutMillis' => $timeoutMillis,
+                'validDigits' => $validDigits,
+                'voiceSettings' => $voiceSettings,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/gather_using_speak', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionGatherUsingSpeakResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->gatherUsingSpeak($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -833,47 +730,27 @@ final class ActionsService implements ActionsContract
      * - `call.hangup`
      * - `call.recording.saved`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function hangup(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionHangupResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-
-        return $this->hangupRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function hangupRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionHangupResponse {
-        [$parsed, $options] = ActionHangupParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/hangup', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionHangupResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->hangup($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -881,47 +758,27 @@ final class ActionsService implements ActionsContract
      *
      * Removes the call from a queue.
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function leaveQueue(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionLeaveQueueResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-
-        return $this->leaveQueueRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function leaveQueueRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionLeaveQueueResponse {
-        [$parsed, $options] = ActionLeaveQueueParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/leave_queue', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionLeaveQueueResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->leaveQueue($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -933,53 +790,33 @@ final class ActionsService implements ActionsContract
      *
      * There are no webhooks associated with this command.
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID uniquely identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function pauseRecording(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $recordingID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $recordingID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionPauseRecordingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'recordingID' => $recordingID,
-        ];
-
-        return $this->pauseRecordingRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function pauseRecordingRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionPauseRecordingResponse {
-        [$parsed, $options] = ActionPauseRecordingParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'recordingID' => $recordingID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/record_pause', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionPauseRecordingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->pauseRecording($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -993,65 +830,45 @@ final class ActionsService implements ActionsContract
      * - `call.refer.completed`
      * - `call.refer.failed`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $sipAddress the SIP URI to which the call will be referred to
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
-     * @param list<CustomSipHeader> $customHeaders custom headers to be added to the SIP INVITE
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE
      * @param string $sipAuthPassword SIP Authentication password used for SIP challenges
      * @param string $sipAuthUsername SIP Authentication username used for SIP challenges
-     * @param list<SipHeader> $sipHeaders SIP headers to be added to the request. Currently only User-to-User header is supported.
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders SIP headers to be added to the request. Currently only User-to-User header is supported.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function refer(
         string $callControlID,
-        $sipAddress,
-        $clientState = omit,
-        $commandID = omit,
-        $customHeaders = omit,
-        $sipAuthPassword = omit,
-        $sipAuthUsername = omit,
-        $sipHeaders = omit,
-        ?RequestOptions $requestOptions = null,
+        string $sipAddress,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?array $customHeaders = null,
+        ?string $sipAuthPassword = null,
+        ?string $sipAuthUsername = null,
+        ?array $sipHeaders = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionReferResponse {
-        $params = [
-            'sipAddress' => $sipAddress,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'customHeaders' => $customHeaders,
-            'sipAuthPassword' => $sipAuthPassword,
-            'sipAuthUsername' => $sipAuthUsername,
-            'sipHeaders' => $sipHeaders,
-        ];
-
-        return $this->referRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function referRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionReferResponse {
-        [$parsed, $options] = ActionReferParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'sipAddress' => $sipAddress,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'customHeaders' => $customHeaders,
+                'sipAuthPassword' => $sipAuthPassword,
+                'sipAuthUsername' => $sipAuthUsername,
+                'sipHeaders' => $sipHeaders,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/refer', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionReferResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->refer($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1063,53 +880,33 @@ final class ActionsService implements ActionsContract
      *
      * - `call.hangup`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param Cause|value-of<Cause> $cause cause for call rejection
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function reject(
         string $callControlID,
-        $cause,
-        $clientState = omit,
-        $commandID = omit,
-        ?RequestOptions $requestOptions = null,
+        Cause|string $cause,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionRejectResponse {
-        $params = [
-            'cause' => $cause,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-        ];
-
-        return $this->rejectRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function rejectRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionRejectResponse {
-        [$parsed, $options] = ActionRejectParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'cause' => $cause,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/reject', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionRejectResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->reject($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1121,53 +918,33 @@ final class ActionsService implements ActionsContract
      *
      * There are no webhooks associated with this command.
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID uniquely identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function resumeRecording(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $recordingID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $recordingID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionResumeRecordingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'recordingID' => $recordingID,
-        ];
-
-        return $this->resumeRecordingRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function resumeRecordingRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionResumeRecordingResponse {
-        [$parsed, $options] = ActionResumeRecordingParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'recordingID' => $recordingID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/record_resume', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionResumeRecordingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->resumeRecording($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1179,56 +956,36 @@ final class ActionsService implements ActionsContract
      *
      * There are no webhooks associated with this command.
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $digits DTMF digits to send. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param int $durationMillis Specifies for how many milliseconds each digit will be played in the audio stream. Ranges from 100 to 500ms
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function sendDtmf(
         string $callControlID,
-        $digits,
-        $clientState = omit,
-        $commandID = omit,
-        $durationMillis = omit,
-        ?RequestOptions $requestOptions = null,
+        string $digits,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        int $durationMillis = 250,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionSendDtmfResponse {
-        $params = [
-            'digits' => $digits,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'durationMillis' => $durationMillis,
-        ];
-
-        return $this->sendDtmfRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function sendDtmfRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionSendDtmfResponse {
-        [$parsed, $options] = ActionSendDtmfParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'digits' => $digits,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'durationMillis' => $durationMillis,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/send_dtmf', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionSendDtmfResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->sendDtmf($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1240,56 +997,36 @@ final class ActionsService implements ActionsContract
      *
      * - `call.sip_info.received` (to be received on the target call leg)
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $body Content of the SIP INFO
      * @param string $contentType Content type of the INFO body. Must be MIME type compliant. There is a 1,400 bytes limit
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function sendSipInfo(
         string $callControlID,
-        $body,
-        $contentType,
-        $clientState = omit,
-        $commandID = omit,
-        ?RequestOptions $requestOptions = null,
+        string $body,
+        string $contentType,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionSendSipInfoResponse {
-        $params = [
-            'body' => $body,
-            'contentType' => $contentType,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-        ];
-
-        return $this->sendSipInfoRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function sendSipInfoRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionSendSipInfoResponse {
-        [$parsed, $options] = ActionSendSipInfoParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'body' => $body,
+                'contentType' => $contentType,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/send_sip_info', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionSendSipInfoResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->sendSipInfo($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1302,6 +1039,7 @@ final class ActionsService implements ActionsContract
      * - `call.speak.started`
      * - `call.speak.ended`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $payload The text or SSML to be converted into speech. There is a 3,000 character limit.
      * @param string $voice Specifies the voice used in speech synthesis.
      *
@@ -1316,67 +1054,46 @@ final class ActionsService implements ActionsContract
      * For service_level basic, you may define the gender of the speaker (male or female).
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param ActionSpeakParams\Language|value-of<ActionSpeakParams\Language> $language The language you want spoken. This parameter is ignored when a `Polly.*` voice is specified.
-     * @param ActionSpeakParams\PayloadType|value-of<ActionSpeakParams\PayloadType> $payloadType The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
-     * @param ActionSpeakParams\ServiceLevel|value-of<ActionSpeakParams\ServiceLevel> $serviceLevel This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
+     * @param \Telnyx\Calls\Actions\ActionSpeakParams\Language|value-of<\Telnyx\Calls\Actions\ActionSpeakParams\Language> $language The language you want spoken. This parameter is ignored when a `Polly.*` voice is specified.
+     * @param \Telnyx\Calls\Actions\ActionSpeakParams\PayloadType|value-of<\Telnyx\Calls\Actions\ActionSpeakParams\PayloadType> $payloadType The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
+     * @param \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|value-of<\Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel> $serviceLevel This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
      * @param string $stop When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
+     * @param VoiceSettingsShape2 $voiceSettings The settings associated with the voice selected
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function speak(
         string $callControlID,
-        $payload,
-        $voice,
-        $clientState = omit,
-        $commandID = omit,
-        $language = omit,
-        $payloadType = omit,
-        $serviceLevel = omit,
-        $stop = omit,
-        $voiceSettings = omit,
-        ?RequestOptions $requestOptions = null,
+        string $payload,
+        string $voice,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        \Telnyx\Calls\Actions\ActionSpeakParams\Language|string|null $language = null,
+        \Telnyx\Calls\Actions\ActionSpeakParams\PayloadType|string $payloadType = 'text',
+        \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
+        ?string $stop = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse {
-        $params = [
-            'payload' => $payload,
-            'voice' => $voice,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'language' => $language,
-            'payloadType' => $payloadType,
-            'serviceLevel' => $serviceLevel,
-            'stop' => $stop,
-            'voiceSettings' => $voiceSettings,
-        ];
-
-        return $this->speakRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function speakRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionSpeakResponse {
-        [$parsed, $options] = ActionSpeakParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'payload' => $payload,
+                'voice' => $voice,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'language' => $language,
+                'payloadType' => $payloadType,
+                'serviceLevel' => $serviceLevel,
+                'stop' => $stop,
+                'voiceSettings' => $voiceSettings,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/speak', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionSpeakResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->speak($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1389,12 +1106,13 @@ final class ActionsService implements ActionsContract
      * - `call.conversation.ended`
      * - `call.conversation_insights.generated`
      *
-     * @param ActionStartAIAssistantParams\Assistant $assistant AI Assistant configuration
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant|AssistantShape1 $assistant AI Assistant configuration
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $greeting Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
-     * @param InterruptionSettings $interruptionSettings Settings for handling user interruptions during assistant speech
-     * @param TranscriptionConfig $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings Settings for handling user interruptions during assistant speech
+     * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
      *
      *  **Supported Providers:**
@@ -1402,61 +1120,40 @@ final class ActionsService implements ActionsContract
      * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
-     * @param mixed|ElevenLabsVoiceSettings|TelnyxVoiceSettings $voiceSettings The settings associated with the voice selected
+     * @param VoiceSettingsShape3 $voiceSettings The settings associated with the voice selected
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function startAIAssistant(
         string $callControlID,
-        $assistant = omit,
-        $clientState = omit,
-        $commandID = omit,
-        $greeting = omit,
-        $interruptionSettings = omit,
-        $transcription = omit,
-        $voice = omit,
-        $voiceSettings = omit,
-        ?RequestOptions $requestOptions = null,
+        \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant|array|null $assistant = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $greeting = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
+        TranscriptionConfig|array|null $transcription = null,
+        string $voice = 'Telnyx.KokoroTTS.af',
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStartAIAssistantResponse {
-        $params = [
-            'assistant' => $assistant,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'greeting' => $greeting,
-            'interruptionSettings' => $interruptionSettings,
-            'transcription' => $transcription,
-            'voice' => $voice,
-            'voiceSettings' => $voiceSettings,
-        ];
-
-        return $this->startAIAssistantRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function startAIAssistantRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStartAIAssistantResponse {
-        [$parsed, $options] = ActionStartAIAssistantParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'assistant' => $assistant,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'greeting' => $greeting,
+                'interruptionSettings' => $interruptionSettings,
+                'transcription' => $transcription,
+                'voice' => $voice,
+                'voiceSettings' => $voiceSettings,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/ai_assistant_start', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStartAIAssistantResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->startAIAssistant($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1472,59 +1169,39 @@ final class ActionsService implements ActionsContract
      * - `call.fork.started`
      * - `call.fork.stopped`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $rx the network target, <udp:ip_address:port>, where the call's incoming RTP media packets should be forwarded
      * @param StreamType|value-of<StreamType> $streamType Optionally specify a media type to stream. If `decrypted` selected, Telnyx will decrypt incoming SIP media before forking to the target. `rx` and `tx` are required fields if `decrypted` selected.
      * @param string $tx the network target, <udp:ip_address:port>, where the call's outgoing RTP media packets should be forwarded
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function startForking(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $rx = omit,
-        $streamType = omit,
-        $tx = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $rx = null,
+        StreamType|string $streamType = 'decrypted',
+        ?string $tx = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStartForkingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'rx' => $rx,
-            'streamType' => $streamType,
-            'tx' => $tx,
-        ];
-
-        return $this->startForkingRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function startForkingRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStartForkingResponse {
-        [$parsed, $options] = ActionStartForkingParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'rx' => $rx,
+                'streamType' => $streamType,
+                'tx' => $tx,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/fork_start', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStartForkingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->startForking($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1532,62 +1209,43 @@ final class ActionsService implements ActionsContract
      *
      * Noise Suppression Start (BETA)
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param Direction|value-of<Direction> $direction the direction of the audio stream to be noise suppressed
      * @param NoiseSuppressionEngine|value-of<NoiseSuppressionEngine> $noiseSuppressionEngine The engine to use for noise suppression.
-     * A - rnnoise engine
-     * B - deepfilter engine.
+     * For backward compatibility, engines A, B, and C are also supported, but are deprecated:
+     *  A - Denoiser
+     *  B - DeepFilterNet
+     *  C - Krisp
+     * @param NoiseSuppressionEngineConfig|NoiseSuppressionEngineConfigShape $noiseSuppressionEngineConfig configuration parameters for noise suppression engines
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function startNoiseSuppression(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $direction = omit,
-        $noiseSuppressionEngine = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        Direction|string $direction = 'inbound',
+        NoiseSuppressionEngine|string $noiseSuppressionEngine = 'Denoiser',
+        NoiseSuppressionEngineConfig|array|null $noiseSuppressionEngineConfig = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStartNoiseSuppressionResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'direction' => $direction,
-            'noiseSuppressionEngine' => $noiseSuppressionEngine,
-        ];
-
-        return $this->startNoiseSuppressionRaw(
-            $callControlID,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function startNoiseSuppressionRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStartNoiseSuppressionResponse {
-        [$parsed, $options] = ActionStartNoiseSuppressionParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'direction' => $direction,
+                'noiseSuppressionEngine' => $noiseSuppressionEngine,
+                'noiseSuppressionEngineConfig' => $noiseSuppressionEngineConfig,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/suppression_start', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStartNoiseSuppressionResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->startNoiseSuppression($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1606,77 +1264,57 @@ final class ActionsService implements ActionsContract
      * - `call.playback.started`
      * - `call.playback.ended`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param AudioType|value-of<AudioType> $audioType specifies the type of audio provided in `audio_url` or `playback_content`
      * @param string $audioURL The URL of a file to be played back on the call. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      * @param bool $cacheAudio Caches the audio file. Useful when playing the same audio file multiple times during the call.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param string|int $loop The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
+     * @param LoopcountShape $loop The number of times the audio file should be played. If supplied, the value must be an integer between 1 and 100, or the special string `infinity` for an endless loop.
      * @param string $mediaName The media_name of a file to be played back on the call. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      * @param bool $overlay When enabled, audio will be mixed on top of any other audio that is actively being played back. Note that `overlay: true` will only work if there is another audio file already being played on the call.
      * @param string $playbackContent Allows a user to provide base64 encoded mp3 or wav. Note: when using this parameter, `media_url` and `media_name` in the `playback_started` and `playback_ended` webhooks will be empty
      * @param string $stop When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
      * @param string $targetLegs Specifies the leg or legs on which audio will be played. If supplied, the value must be either `self`, `opposite` or `both`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function startPlayback(
         string $callControlID,
-        $audioType = omit,
-        $audioURL = omit,
-        $cacheAudio = omit,
-        $clientState = omit,
-        $commandID = omit,
-        $loop = omit,
-        $mediaName = omit,
-        $overlay = omit,
-        $playbackContent = omit,
-        $stop = omit,
-        $targetLegs = omit,
-        ?RequestOptions $requestOptions = null,
+        AudioType|string $audioType = 'mp3',
+        ?string $audioURL = null,
+        bool $cacheAudio = true,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        string|int|null $loop = null,
+        ?string $mediaName = null,
+        bool $overlay = false,
+        ?string $playbackContent = null,
+        ?string $stop = null,
+        string $targetLegs = 'self',
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStartPlaybackResponse {
-        $params = [
-            'audioType' => $audioType,
-            'audioURL' => $audioURL,
-            'cacheAudio' => $cacheAudio,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'loop' => $loop,
-            'mediaName' => $mediaName,
-            'overlay' => $overlay,
-            'playbackContent' => $playbackContent,
-            'stop' => $stop,
-            'targetLegs' => $targetLegs,
-        ];
-
-        return $this->startPlaybackRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function startPlaybackRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStartPlaybackResponse {
-        [$parsed, $options] = ActionStartPlaybackParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'audioType' => $audioType,
+                'audioURL' => $audioURL,
+                'cacheAudio' => $cacheAudio,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'loop' => $loop,
+                'mediaName' => $mediaName,
+                'overlay' => $overlay,
+                'playbackContent' => $playbackContent,
+                'stop' => $stop,
+                'targetLegs' => $targetLegs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/playback_start', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStartPlaybackResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->startPlayback($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1690,6 +1328,7 @@ final class ActionsService implements ActionsContract
      * - `call.recording.transcription.saved`
      * - `call.recording.error`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param Channels|value-of<Channels> $channels when `dual`, final audio file will be stereo recorded with the first leg on channel A, and the rest on channel B
      * @param Format|value-of<Format> $format The audio file format used when storing the call recording. Can be either `mp3` or `wav`.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -1700,85 +1339,64 @@ final class ActionsService implements ActionsContract
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite)
      * @param bool $transcription Enable post recording transcription. The default value is false.
-     * @param string $transcriptionEngine Engine to use for speech recognition. `A` - `Google`
-     * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage Language to use for speech recognition
+     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
+     * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage
      * @param int $transcriptionMaxSpeakerCount Defines maximum number of speakers in the conversation. Applies to `google` engine only.
      * @param int $transcriptionMinSpeakerCount Defines minimum number of speakers in the conversation. Applies to `google` engine only.
      * @param bool $transcriptionProfanityFilter Enables profanity_filter. Applies to `google` engine only.
      * @param bool $transcriptionSpeakerDiarization Enables speaker diarization. Applies to `google` engine only.
      * @param Trim|value-of<Trim> $trim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function startRecording(
         string $callControlID,
-        $channels,
-        $format,
-        $clientState = omit,
-        $commandID = omit,
-        $customFileName = omit,
-        $maxLength = omit,
-        $playBeep = omit,
-        $recordingTrack = omit,
-        $timeoutSecs = omit,
-        $transcription = omit,
-        $transcriptionEngine = omit,
-        $transcriptionLanguage = omit,
-        $transcriptionMaxSpeakerCount = omit,
-        $transcriptionMinSpeakerCount = omit,
-        $transcriptionProfanityFilter = omit,
-        $transcriptionSpeakerDiarization = omit,
-        $trim = omit,
-        ?RequestOptions $requestOptions = null,
+        Channels|string $channels,
+        Format|string $format,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $customFileName = null,
+        int $maxLength = 0,
+        ?bool $playBeep = null,
+        RecordingTrack|string $recordingTrack = 'both',
+        int $timeoutSecs = 0,
+        bool $transcription = false,
+        TranscriptionEngine|string $transcriptionEngine = 'A',
+        TranscriptionLanguage|string|null $transcriptionLanguage = null,
+        int $transcriptionMaxSpeakerCount = 6,
+        int $transcriptionMinSpeakerCount = 2,
+        bool $transcriptionProfanityFilter = false,
+        bool $transcriptionSpeakerDiarization = false,
+        Trim|string|null $trim = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStartRecordingResponse {
-        $params = [
-            'channels' => $channels,
-            'format' => $format,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'customFileName' => $customFileName,
-            'maxLength' => $maxLength,
-            'playBeep' => $playBeep,
-            'recordingTrack' => $recordingTrack,
-            'timeoutSecs' => $timeoutSecs,
-            'transcription' => $transcription,
-            'transcriptionEngine' => $transcriptionEngine,
-            'transcriptionLanguage' => $transcriptionLanguage,
-            'transcriptionMaxSpeakerCount' => $transcriptionMaxSpeakerCount,
-            'transcriptionMinSpeakerCount' => $transcriptionMinSpeakerCount,
-            'transcriptionProfanityFilter' => $transcriptionProfanityFilter,
-            'transcriptionSpeakerDiarization' => $transcriptionSpeakerDiarization,
-            'trim' => $trim,
-        ];
-
-        return $this->startRecordingRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function startRecordingRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStartRecordingResponse {
-        [$parsed, $options] = ActionStartRecordingParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'channels' => $channels,
+                'format' => $format,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'customFileName' => $customFileName,
+                'maxLength' => $maxLength,
+                'playBeep' => $playBeep,
+                'recordingTrack' => $recordingTrack,
+                'timeoutSecs' => $timeoutSecs,
+                'transcription' => $transcription,
+                'transcriptionEngine' => $transcriptionEngine,
+                'transcriptionLanguage' => $transcriptionLanguage,
+                'transcriptionMaxSpeakerCount' => $transcriptionMaxSpeakerCount,
+                'transcriptionMinSpeakerCount' => $transcriptionMinSpeakerCount,
+                'transcriptionProfanityFilter' => $transcriptionProfanityFilter,
+                'transcriptionSpeakerDiarization' => $transcriptionSpeakerDiarization,
+                'trim' => $trim,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/record_start', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStartRecordingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->startRecording($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1792,6 +1410,7 @@ final class ActionsService implements ActionsContract
      * - `siprec.stopped`
      * - `siprec.failed`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $connectorName name of configured SIPREC connector to be used
      * @param bool $includeMetadataCustomHeaders When set, custom parameters will be added as metadata (recording.session.ExtensionParameters). Otherwise, they’ll be added to sip headers.
@@ -1799,58 +1418,37 @@ final class ActionsService implements ActionsContract
      * @param int $sessionTimeoutSecs Sets `Session-Expires` header to the INVITE. A reinvite is sent every half the value set. Usefull for session keep alive. Minimum value is 90, set to 0 to disable.
      * @param SipTransport|value-of<SipTransport> $sipTransport specifies SIP transport protocol
      * @param SiprecTrack|value-of<SiprecTrack> $siprecTrack specifies which track should be sent on siprec session
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function startSiprec(
         string $callControlID,
-        $clientState = omit,
-        $connectorName = omit,
-        $includeMetadataCustomHeaders = omit,
-        $secure = omit,
-        $sessionTimeoutSecs = omit,
-        $sipTransport = omit,
-        $siprecTrack = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $connectorName = null,
+        ?bool $includeMetadataCustomHeaders = null,
+        ?bool $secure = null,
+        int $sessionTimeoutSecs = 1800,
+        SipTransport|string $sipTransport = 'udp',
+        SiprecTrack|string $siprecTrack = 'both_tracks',
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStartSiprecResponse {
-        $params = [
-            'clientState' => $clientState,
-            'connectorName' => $connectorName,
-            'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
-            'secure' => $secure,
-            'sessionTimeoutSecs' => $sessionTimeoutSecs,
-            'sipTransport' => $sipTransport,
-            'siprecTrack' => $siprecTrack,
-        ];
-
-        return $this->startSiprecRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function startSiprecRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStartSiprecResponse {
-        [$parsed, $options] = ActionStartSiprecParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'connectorName' => $connectorName,
+                'includeMetadataCustomHeaders' => $includeMetadataCustomHeaders,
+                'secure' => $secure,
+                'sessionTimeoutSecs' => $sessionTimeoutSecs,
+                'sipTransport' => $sipTransport,
+                'siprecTrack' => $siprecTrack,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/siprec_start', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStartSiprecResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->startSiprec($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1860,77 +1458,57 @@ final class ActionsService implements ActionsContract
      *
      * Please find more details about media streaming messages specification under the [link](https://developers.telnyx.com/docs/voice/programmable-voice/media-streaming).
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param DialogflowConfig $dialogflowConfig
+     * @param DialogflowConfig|DialogflowConfigShape $dialogflowConfig
      * @param bool $enableDialogflow Enables Dialogflow for the current call. The default value is false.
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
-     * @param 8000|16000|22050|24000|48000 $streamBidirectionalSamplingRate audio sampling rate
+     * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate audio sampling rate
      * @param StreamBidirectionalTargetLegs|value-of<StreamBidirectionalTargetLegs> $streamBidirectionalTargetLegs specifies which call legs should receive the bidirectional stream audio
      * @param StreamCodec|value-of<StreamCodec> $streamCodec Specifies the codec to be used for the streamed audio. When set to 'default' or when transcoding is not possible, the codec from the call will be used.
-     * @param ActionStartStreamingParams\StreamTrack|value-of<ActionStartStreamingParams\StreamTrack> $streamTrack specifies which track should be streamed
+     * @param \Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack|value-of<\Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack> $streamTrack specifies which track should be streamed
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function startStreaming(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $dialogflowConfig = omit,
-        $enableDialogflow = omit,
-        $streamBidirectionalCodec = omit,
-        $streamBidirectionalMode = omit,
-        $streamBidirectionalSamplingRate = omit,
-        $streamBidirectionalTargetLegs = omit,
-        $streamCodec = omit,
-        $streamTrack = omit,
-        $streamURL = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        DialogflowConfig|array|null $dialogflowConfig = null,
+        bool $enableDialogflow = false,
+        StreamBidirectionalCodec|string $streamBidirectionalCodec = 'PCMU',
+        StreamBidirectionalMode|string $streamBidirectionalMode = 'mp3',
+        StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate = 8000,
+        StreamBidirectionalTargetLegs|string $streamBidirectionalTargetLegs = 'opposite',
+        StreamCodec|string $streamCodec = 'default',
+        \Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack|string $streamTrack = 'inbound_track',
+        ?string $streamURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStartStreamingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'dialogflowConfig' => $dialogflowConfig,
-            'enableDialogflow' => $enableDialogflow,
-            'streamBidirectionalCodec' => $streamBidirectionalCodec,
-            'streamBidirectionalMode' => $streamBidirectionalMode,
-            'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
-            'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
-            'streamCodec' => $streamCodec,
-            'streamTrack' => $streamTrack,
-            'streamURL' => $streamURL,
-        ];
-
-        return $this->startStreamingRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function startStreamingRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStartStreamingResponse {
-        [$parsed, $options] = ActionStartStreamingParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'dialogflowConfig' => $dialogflowConfig,
+                'enableDialogflow' => $enableDialogflow,
+                'streamBidirectionalCodec' => $streamBidirectionalCodec,
+                'streamBidirectionalMode' => $streamBidirectionalMode,
+                'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
+                'streamBidirectionalTargetLegs' => $streamBidirectionalTargetLegs,
+                'streamCodec' => $streamCodec,
+                'streamTrack' => $streamTrack,
+                'streamURL' => $streamURL,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/streaming_start', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStartStreamingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->startStreaming($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -1942,63 +1520,39 @@ final class ActionsService implements ActionsContract
      *
      * - `call.transcription`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility.
-     * @param Google|Telnyx|Deepgram|TranscriptionEngineAConfig|TranscriptionEngineBConfig $transcriptionEngineConfig
+     * @param \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine|value-of<\Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility.
+     * @param TranscriptionEngineConfigShape $transcriptionEngineConfig
      * @param string $transcriptionTracks Indicates which leg of the call will be transcribed. Use `inbound` for the leg that requested the transcription, `outbound` for the other leg, and `both` for both legs of the call. Will default to `inbound`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function startTranscription(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $transcriptionEngine = omit,
-        $transcriptionEngineConfig = omit,
-        $transcriptionTracks = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine|string $transcriptionEngine = 'Google',
+        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig = null,
+        string $transcriptionTracks = 'inbound',
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStartTranscriptionResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'transcriptionEngine' => $transcriptionEngine,
-            'transcriptionEngineConfig' => $transcriptionEngineConfig,
-            'transcriptionTracks' => $transcriptionTracks,
-        ];
-
-        return $this->startTranscriptionRaw(
-            $callControlID,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function startTranscriptionRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStartTranscriptionResponse {
-        [$parsed, $options] = ActionStartTranscriptionParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'transcriptionEngine' => $transcriptionEngine,
+                'transcriptionEngineConfig' => $transcriptionEngineConfig,
+                'transcriptionTracks' => $transcriptionTracks,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/transcription_start', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStartTranscriptionResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->startTranscription($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2006,47 +1560,27 @@ final class ActionsService implements ActionsContract
      *
      * Stop an AI assistant on the call.
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stopAIAssistant(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStopAIAssistantResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-
-        return $this->stopAIAssistantRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function stopAIAssistantRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopAIAssistantResponse {
-        [$parsed, $options] = ActionStopAIAssistantParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/ai_assistant_stop', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStopAIAssistantResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stopAIAssistant($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2058,53 +1592,33 @@ final class ActionsService implements ActionsContract
      *
      * - `call.fork.stopped`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param ActionStopForkingParams\StreamType|value-of<ActionStopForkingParams\StreamType> $streamType Optionally specify a `stream_type`. This should match the `stream_type` that was used in `fork_start` command to properly stop the fork.
+     * @param \Telnyx\Calls\Actions\ActionStopForkingParams\StreamType|value-of<\Telnyx\Calls\Actions\ActionStopForkingParams\StreamType> $streamType Optionally specify a `stream_type`. This should match the `stream_type` that was used in `fork_start` command to properly stop the fork.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stopForking(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $streamType = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        \Telnyx\Calls\Actions\ActionStopForkingParams\StreamType|string $streamType = 'raw',
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStopForkingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'streamType' => $streamType,
-        ];
-
-        return $this->stopForkingRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function stopForkingRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopForkingResponse {
-        [$parsed, $options] = ActionStopForkingParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'streamType' => $streamType,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/fork_stop', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStopForkingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stopForking($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2116,47 +1630,27 @@ final class ActionsService implements ActionsContract
      *
      * - `call.gather.ended`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stopGather(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStopGatherResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-
-        return $this->stopGatherRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function stopGatherRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopGatherResponse {
-        [$parsed, $options] = ActionStopGatherParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/gather_stop', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStopGatherResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stopGather($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2164,51 +1658,27 @@ final class ActionsService implements ActionsContract
      *
      * Noise Suppression Stop (BETA)
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stopNoiseSuppression(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStopNoiseSuppressionResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-
-        return $this->stopNoiseSuppressionRaw(
-            $callControlID,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function stopNoiseSuppressionRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopNoiseSuppressionResponse {
-        [$parsed, $options] = ActionStopNoiseSuppressionParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/suppression_stop', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStopNoiseSuppressionResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stopNoiseSuppression($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2220,56 +1690,36 @@ final class ActionsService implements ActionsContract
      *
      * - `call.playback.ended` or `call.speak.ended`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param bool $overlay when enabled, it stops the audio being played in the overlay queue
      * @param string $stop Use `current` to stop the current audio being played. Use `all` to stop the current audio file being played and clear all audio files from the queue.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stopPlayback(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $overlay = omit,
-        $stop = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        bool $overlay = false,
+        string $stop = 'all',
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStopPlaybackResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'overlay' => $overlay,
-            'stop' => $stop,
-        ];
-
-        return $this->stopPlaybackRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function stopPlaybackRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopPlaybackResponse {
-        [$parsed, $options] = ActionStopPlaybackParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'overlay' => $overlay,
+                'stop' => $stop,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/playback_stop', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStopPlaybackResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stopPlayback($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2281,53 +1731,33 @@ final class ActionsService implements ActionsContract
      *
      * - `call.recording.saved`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $recordingID uniquely identifies the resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stopRecording(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $recordingID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $recordingID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStopRecordingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'recordingID' => $recordingID,
-        ];
-
-        return $this->stopRecordingRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function stopRecordingRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopRecordingResponse {
-        [$parsed, $options] = ActionStopRecordingParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'recordingID' => $recordingID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/record_stop', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStopRecordingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stopRecording($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2339,47 +1769,27 @@ final class ActionsService implements ActionsContract
      *
      * - `siprec.stopped`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stopSiprec(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStopSiprecResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-
-        return $this->stopSiprecRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function stopSiprecRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopSiprecResponse {
-        [$parsed, $options] = ActionStopSiprecParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/siprec_stop', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStopSiprecResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stopSiprec($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2391,53 +1801,33 @@ final class ActionsService implements ActionsContract
      *
      * - `streaming.stopped`
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $streamID Identifies the stream. If the `stream_id` is not provided the command stops all streams associated with a given `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stopStreaming(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        $streamID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?string $streamID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStopStreamingResponse {
-        $params = [
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'streamID' => $streamID,
-        ];
-
-        return $this->stopStreamingRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function stopStreamingRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopStreamingResponse {
-        [$parsed, $options] = ActionStopStreamingParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'streamID' => $streamID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/streaming_stop', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStopStreamingResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stopStreaming($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2445,51 +1835,27 @@ final class ActionsService implements ActionsContract
      *
      * Stop real-time transcription.
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function stopTranscription(
         string $callControlID,
-        $clientState = omit,
-        $commandID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionStopTranscriptionResponse {
-        $params = ['clientState' => $clientState, 'commandID' => $commandID];
-
-        return $this->stopTranscriptionRaw(
-            $callControlID,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function stopTranscriptionRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionStopTranscriptionResponse {
-        [$parsed, $options] = ActionStopTranscriptionParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['clientState' => $clientState, 'commandID' => $commandID]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/transcription_stop', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionStopTranscriptionResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->stopTranscription($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2497,49 +1863,23 @@ final class ActionsService implements ActionsContract
      *
      * Switch the supervisor role for a bridged call. This allows switching between different supervisor modes during an active call
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param Role|value-of<Role> $role The supervisor role to switch to. 'barge' allows speaking to both parties, 'whisper' allows speaking to caller only, 'monitor' allows listening only.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function switchSupervisorRole(
         string $callControlID,
-        $role,
-        ?RequestOptions $requestOptions = null
+        Role|string $role,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionSwitchSupervisorRoleResponse {
-        $params = ['role' => $role];
+        $params = Util::removeNulls(['role' => $role]);
 
-        return $this->switchSupervisorRoleRaw(
-            $callControlID,
-            $params,
-            $requestOptions
-        );
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->switchSupervisorRole($callControlID, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function switchSupervisorRoleRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionSwitchSupervisorRoleResponse {
-        [$parsed, $options] = ActionSwitchSupervisorRoleParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/switch_supervisor_role', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionSwitchSupervisorRoleResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -2557,140 +1897,123 @@ final class ActionsService implements ActionsContract
      * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
      * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $to the DID or SIP URI to dial out to
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected.
-     * @param AnsweringMachineDetectionConfig $answeringMachineDetectionConfig optional configuration parameters to modify 'answering_machine_detection' performance
+     * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig optional configuration parameters to modify 'answering_machine_detection' performance
      * @param string $audioURL The URL of a file to be played back when the transfer destination answers before bridging the call. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param list<CustomSipHeader> $customHeaders custom headers to be added to the SIP INVITE
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE
      * @param bool $earlyMedia if set to false, early media will not be passed to the originating leg
      * @param string $from The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format. This attribute will default to the `to` number of the original call if omitted.
      * @param string $fromDisplayName The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption defines whether media should be encrypted on the new call leg
      * @param string $mediaName The media_name of a file to be played back when the transfer destination answers before bridging the call. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
-     * @param ActionTransferParams\MuteDtmf|value-of<ActionTransferParams\MuteDtmf> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
+     * @param \Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf|value-of<\Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
      * @param string $parkAfterUnbridge Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
-     * @param ActionTransferParams\Record|value-of<ActionTransferParams\Record> $record Start recording automatically after an event. Disabled by default.
-     * @param ActionTransferParams\RecordChannels|value-of<ActionTransferParams\RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
+     * @param \Telnyx\Calls\Actions\ActionTransferParams\Record|value-of<\Telnyx\Calls\Actions\ActionTransferParams\Record> $record Start recording automatically after an event. Disabled by default.
+     * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordChannels|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
-     * @param ActionTransferParams\RecordFormat|value-of<ActionTransferParams\RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
+     * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordFormat|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordFormat> $recordFormat defines the format of the recording ('wav' or 'mp3') when `record` is specified
      * @param int $recordMaxLength Defines the maximum length for the recording in seconds when `record` is specified. The minimum value is 0. The maximum value is 43200. The default value is 0 (infinite).
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
-     * @param ActionTransferParams\RecordTrack|value-of<ActionTransferParams\RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
-     * @param ActionTransferParams\RecordTrim|value-of<ActionTransferParams\RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
+     * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordTrack|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
+     * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordTrim|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
      * @param string $sipAuthPassword SIP Authentication password used for SIP challenges
      * @param string $sipAuthUsername SIP Authentication username used for SIP challenges
-     * @param list<SipHeader> $sipHeaders SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
+     * @param SipRegion|value-of<SipRegion> $sipRegion defines the SIP region to be used for the call
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol defines SIP transport protocol to be used on the call
-     * @param SoundModifications $soundModifications use this field to modify sound effects, for example adjust the pitch
+     * @param SoundModifications|SoundModificationsShape $soundModifications use this field to modify sound effects, for example adjust the pitch
      * @param string $targetLegClientState Use this field to add state to every subsequent webhook for the new leg. It must be a valid Base-64 encoded string.
      * @param int $timeLimitSecs Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being transferred. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 600 seconds.
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
-     * @param ActionTransferParams\WebhookURLMethod|value-of<ActionTransferParams\WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
+     * @param \Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod|value-of<\Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function transfer(
         string $callControlID,
-        $to,
-        $answeringMachineDetection = omit,
-        $answeringMachineDetectionConfig = omit,
-        $audioURL = omit,
-        $clientState = omit,
-        $commandID = omit,
-        $customHeaders = omit,
-        $earlyMedia = omit,
-        $from = omit,
-        $fromDisplayName = omit,
-        $mediaEncryption = omit,
-        $mediaName = omit,
-        $muteDtmf = omit,
-        $parkAfterUnbridge = omit,
-        $record = omit,
-        $recordChannels = omit,
-        $recordCustomFileName = omit,
-        $recordFormat = omit,
-        $recordMaxLength = omit,
-        $recordTimeoutSecs = omit,
-        $recordTrack = omit,
-        $recordTrim = omit,
-        $sipAuthPassword = omit,
-        $sipAuthUsername = omit,
-        $sipHeaders = omit,
-        $sipTransportProtocol = omit,
-        $soundModifications = omit,
-        $targetLegClientState = omit,
-        $timeLimitSecs = omit,
-        $timeoutSecs = omit,
-        $webhookURL = omit,
-        $webhookURLMethod = omit,
-        ?RequestOptions $requestOptions = null,
+        string $to,
+        AnsweringMachineDetection|string $answeringMachineDetection = 'disabled',
+        AnsweringMachineDetectionConfig|array|null $answeringMachineDetectionConfig = null,
+        ?string $audioURL = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        ?array $customHeaders = null,
+        bool $earlyMedia = true,
+        ?string $from = null,
+        ?string $fromDisplayName = null,
+        MediaEncryption|string $mediaEncryption = 'disabled',
+        ?string $mediaName = null,
+        \Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf|string $muteDtmf = 'none',
+        ?string $parkAfterUnbridge = null,
+        \Telnyx\Calls\Actions\ActionTransferParams\Record|string|null $record = null,
+        \Telnyx\Calls\Actions\ActionTransferParams\RecordChannels|string $recordChannels = 'dual',
+        ?string $recordCustomFileName = null,
+        \Telnyx\Calls\Actions\ActionTransferParams\RecordFormat|string $recordFormat = 'mp3',
+        int $recordMaxLength = 0,
+        int $recordTimeoutSecs = 0,
+        \Telnyx\Calls\Actions\ActionTransferParams\RecordTrack|string $recordTrack = 'both',
+        \Telnyx\Calls\Actions\ActionTransferParams\RecordTrim|string|null $recordTrim = null,
+        ?string $sipAuthPassword = null,
+        ?string $sipAuthUsername = null,
+        ?array $sipHeaders = null,
+        SipRegion|string $sipRegion = 'US',
+        SipTransportProtocol|string $sipTransportProtocol = 'UDP',
+        SoundModifications|array|null $soundModifications = null,
+        ?string $targetLegClientState = null,
+        int $timeLimitSecs = 14400,
+        int $timeoutSecs = 30,
+        ?string $webhookURL = null,
+        \Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod|string $webhookURLMethod = 'POST',
+        RequestOptions|array|null $requestOptions = null,
     ): ActionTransferResponse {
-        $params = [
-            'to' => $to,
-            'answeringMachineDetection' => $answeringMachineDetection,
-            'answeringMachineDetectionConfig' => $answeringMachineDetectionConfig,
-            'audioURL' => $audioURL,
-            'clientState' => $clientState,
-            'commandID' => $commandID,
-            'customHeaders' => $customHeaders,
-            'earlyMedia' => $earlyMedia,
-            'from' => $from,
-            'fromDisplayName' => $fromDisplayName,
-            'mediaEncryption' => $mediaEncryption,
-            'mediaName' => $mediaName,
-            'muteDtmf' => $muteDtmf,
-            'parkAfterUnbridge' => $parkAfterUnbridge,
-            'record' => $record,
-            'recordChannels' => $recordChannels,
-            'recordCustomFileName' => $recordCustomFileName,
-            'recordFormat' => $recordFormat,
-            'recordMaxLength' => $recordMaxLength,
-            'recordTimeoutSecs' => $recordTimeoutSecs,
-            'recordTrack' => $recordTrack,
-            'recordTrim' => $recordTrim,
-            'sipAuthPassword' => $sipAuthPassword,
-            'sipAuthUsername' => $sipAuthUsername,
-            'sipHeaders' => $sipHeaders,
-            'sipTransportProtocol' => $sipTransportProtocol,
-            'soundModifications' => $soundModifications,
-            'targetLegClientState' => $targetLegClientState,
-            'timeLimitSecs' => $timeLimitSecs,
-            'timeoutSecs' => $timeoutSecs,
-            'webhookURL' => $webhookURL,
-            'webhookURLMethod' => $webhookURLMethod,
-        ];
-
-        return $this->transferRaw($callControlID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function transferRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionTransferResponse {
-        [$parsed, $options] = ActionTransferParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'to' => $to,
+                'answeringMachineDetection' => $answeringMachineDetection,
+                'answeringMachineDetectionConfig' => $answeringMachineDetectionConfig,
+                'audioURL' => $audioURL,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'customHeaders' => $customHeaders,
+                'earlyMedia' => $earlyMedia,
+                'from' => $from,
+                'fromDisplayName' => $fromDisplayName,
+                'mediaEncryption' => $mediaEncryption,
+                'mediaName' => $mediaName,
+                'muteDtmf' => $muteDtmf,
+                'parkAfterUnbridge' => $parkAfterUnbridge,
+                'record' => $record,
+                'recordChannels' => $recordChannels,
+                'recordCustomFileName' => $recordCustomFileName,
+                'recordFormat' => $recordFormat,
+                'recordMaxLength' => $recordMaxLength,
+                'recordTimeoutSecs' => $recordTimeoutSecs,
+                'recordTrack' => $recordTrack,
+                'recordTrim' => $recordTrim,
+                'sipAuthPassword' => $sipAuthPassword,
+                'sipAuthUsername' => $sipAuthUsername,
+                'sipHeaders' => $sipHeaders,
+                'sipRegion' => $sipRegion,
+                'sipTransportProtocol' => $sipTransportProtocol,
+                'soundModifications' => $soundModifications,
+                'targetLegClientState' => $targetLegClientState,
+                'timeLimitSecs' => $timeLimitSecs,
+                'timeoutSecs' => $timeoutSecs,
+                'webhookURL' => $webhookURL,
+                'webhookURLMethod' => $webhookURLMethod,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['calls/%1$s/actions/transfer', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionTransferResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->transfer($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -2698,48 +2021,22 @@ final class ActionsService implements ActionsContract
      *
      * Updates client state
      *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function updateClientState(
         string $callControlID,
-        $clientState,
-        ?RequestOptions $requestOptions = null
+        string $clientState,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionUpdateClientStateResponse {
-        $params = ['clientState' => $clientState];
+        $params = Util::removeNulls(['clientState' => $clientState]);
 
-        return $this->updateClientStateRaw(
-            $callControlID,
-            $params,
-            $requestOptions
-        );
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateClientState($callControlID, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateClientStateRaw(
-        string $callControlID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionUpdateClientStateResponse {
-        [$parsed, $options] = ActionUpdateClientStateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'put',
-            path: ['calls/%1$s/actions/client_state_update', $callControlID],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionUpdateClientStateResponse::class,
-        );
+        return $response->parse();
     }
 }

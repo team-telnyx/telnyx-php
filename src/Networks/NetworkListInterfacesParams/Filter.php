@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Networks\NetworkListInterfacesParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
@@ -12,19 +12,21 @@ use Telnyx\Networks\InterfaceStatus;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[name], filter[type], filter[status].
  *
- * @phpstan-type filter_alias = array{
- *   name?: string, status?: value-of<InterfaceStatus>, type?: string
+ * @phpstan-type FilterShape = array{
+ *   name?: string|null,
+ *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
+ *   type?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * The interface name to filter on.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -32,13 +34,13 @@ final class Filter implements BaseModel
      *
      * @var value-of<InterfaceStatus>|null $status
      */
-    #[Api(enum: InterfaceStatus::class, optional: true)]
+    #[Optional(enum: InterfaceStatus::class)]
     public ?string $status;
 
     /**
      * The interface type to filter on.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $type;
 
     public function __construct()
@@ -51,20 +53,20 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InterfaceStatus|value-of<InterfaceStatus> $status
+     * @param InterfaceStatus|value-of<InterfaceStatus>|null $status
      */
     public static function with(
         ?string $name = null,
         InterfaceStatus|string|null $status = null,
         ?string $type = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $status && $obj['status'] = $status;
-        null !== $type && $obj->type = $type;
+        null !== $name && $self['name'] = $name;
+        null !== $status && $self['status'] = $status;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,10 +74,10 @@ final class Filter implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +87,10 @@ final class Filter implements BaseModel
      */
     public function withStatus(InterfaceStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +98,9 @@ final class Filter implements BaseModel
      */
     public function withType(string $type): self
     {
-        $obj = clone $this;
-        $obj->type = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

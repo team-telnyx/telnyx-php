@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a document.
  *
- * @see Telnyx\Documents->update
+ * @see Telnyx\Services\DocumentsService::update()
  *
- * @phpstan-type document_update_params = array{
- *   customerReference?: string, filename?: string
+ * @phpstan-type DocumentUpdateParamsShape = array{
+ *   customerReference?: string|null, filename?: string|null
  * }
  */
 final class DocumentUpdateParams implements BaseModel
 {
-    /** @use SdkModel<document_update_params> */
+    /** @use SdkModel<DocumentUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Optional reference string for customer tracking.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * The filename of the document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filename;
 
     public function __construct()
@@ -50,12 +50,12 @@ final class DocumentUpdateParams implements BaseModel
         ?string $customerReference = null,
         ?string $filename = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $filename && $obj->filename = $filename;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $filename && $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class DocumentUpdateParams implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class DocumentUpdateParams implements BaseModel
      */
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj->filename = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 }

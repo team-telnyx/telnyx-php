@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberReservations\NumberReservationListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt;
@@ -12,40 +12,42 @@ use Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.phone_number], filter[customer_reference].
  *
- * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt,
- *   customerReference?: string,
- *   phoneNumbersPhoneNumber?: string,
- *   status?: string,
+ * @phpstan-import-type CreatedAtShape from \Telnyx\NumberReservations\NumberReservationListParams\Filter\CreatedAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   customerReference?: string|null,
+ *   phoneNumbersPhoneNumber?: string|null,
+ *   status?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter number reservations by date range.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?CreatedAt $createdAt;
 
     /**
      * Filter number reservations via the customer reference set.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * Filter number reservations having these phone numbers.
      */
-    #[Api('phone_numbers.phone_number', optional: true)]
+    #[Optional('phone_numbers.phone_number')]
     public ?string $phoneNumbersPhoneNumber;
 
     /**
      * Filter number reservations by status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()
@@ -57,32 +59,36 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|CreatedAtShape|null $createdAt
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
+        CreatedAt|array|null $createdAt = null,
         ?string $customerReference = null,
         ?string $phoneNumbersPhoneNumber = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $phoneNumbersPhoneNumber && $obj->phoneNumbersPhoneNumber = $phoneNumbersPhoneNumber;
-        null !== $status && $obj->status = $status;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $phoneNumbersPhoneNumber && $self['phoneNumbersPhoneNumber'] = $phoneNumbersPhoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter number reservations by date range.
+     *
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +96,10 @@ final class Filter implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +108,10 @@ final class Filter implements BaseModel
     public function withPhoneNumbersPhoneNumber(
         string $phoneNumbersPhoneNumber
     ): self {
-        $obj = clone $this;
-        $obj->phoneNumbersPhoneNumber = $phoneNumbersPhoneNumber;
+        $self = clone $this;
+        $self['phoneNumbersPhoneNumber'] = $phoneNumbersPhoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,9 +119,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

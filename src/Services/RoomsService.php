@@ -6,32 +6,38 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
-use Telnyx\Rooms\RoomCreateParams;
+use Telnyx\Rooms\Room;
 use Telnyx\Rooms\RoomGetResponse;
-use Telnyx\Rooms\RoomListParams;
 use Telnyx\Rooms\RoomListParams\Filter;
 use Telnyx\Rooms\RoomListParams\Page;
-use Telnyx\Rooms\RoomListResponse;
 use Telnyx\Rooms\RoomNewResponse;
-use Telnyx\Rooms\RoomRetrieveParams;
-use Telnyx\Rooms\RoomUpdateParams;
 use Telnyx\Rooms\RoomUpdateResponse;
 use Telnyx\ServiceContracts\RoomsContract;
 use Telnyx\Services\Rooms\ActionsService;
 use Telnyx\Services\Rooms\SessionsService;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Rooms\RoomListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Rooms\RoomListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RoomsService implements RoomsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public RoomsRawService $raw;
+
+    /**
+     * @api
      */
     public ActionsService $actions;
 
     /**
-     * @@api
+     * @api
      */
     public SessionsService $sessions;
 
@@ -40,6 +46,7 @@ final class RoomsService implements RoomsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new RoomsRawService($client);
         $this->actions = new ActionsService($client);
         $this->sessions = new SessionsService($client);
     }
@@ -52,57 +59,37 @@ final class RoomsService implements RoomsContract
      * @param bool $enableRecording enable or disable recording for that room
      * @param int $maxParticipants The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
      * @param string $uniqueName the unique (within the Telnyx account scope) name of the room
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $enableRecording = omit,
-        $maxParticipants = omit,
-        $uniqueName = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookEventURL = omit,
-        $webhookTimeoutSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        bool $enableRecording = false,
+        int $maxParticipants = 10,
+        ?string $uniqueName = null,
+        string $webhookEventFailoverURL = '',
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RoomNewResponse {
-        $params = [
-            'enableRecording' => $enableRecording,
-            'maxParticipants' => $maxParticipants,
-            'uniqueName' => $uniqueName,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RoomNewResponse {
-        [$parsed, $options] = RoomCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'enableRecording' => $enableRecording,
+                'maxParticipants' => $maxParticipants,
+                'uniqueName' => $uniqueName,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookEventURL' => $webhookEventURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'rooms',
-            body: (object) $parsed,
-            options: $options,
-            convert: RoomNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -110,45 +97,23 @@ final class RoomsService implements RoomsContract
      *
      * View a room.
      *
+     * @param string $roomID the unique identifier of a room
      * @param bool $includeSessions to decide if room sessions should be included in the response
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $roomID,
-        $includeSessions = omit,
-        ?RequestOptions $requestOptions = null,
+        ?bool $includeSessions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RoomGetResponse {
-        $params = ['includeSessions' => $includeSessions];
+        $params = Util::removeNulls(['includeSessions' => $includeSessions]);
 
-        return $this->retrieveRaw($roomID, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($roomID, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $roomID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RoomGetResponse {
-        [$parsed, $options] = RoomRetrieveParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['rooms/%1$s', $roomID],
-            query: $parsed,
-            options: $options,
-            convert: RoomGetResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -156,62 +121,42 @@ final class RoomsService implements RoomsContract
      *
      * Synchronously update a Room.
      *
+     * @param string $roomID the unique identifier of a room
      * @param bool $enableRecording enable or disable recording for that room
      * @param int $maxParticipants The maximum amount of participants allowed in a room. If new participants try to join after that limit is reached, their request will be rejected.
      * @param string $uniqueName the unique (within the Telnyx account scope) name of the room
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $webhookEventFailoverURL The failover URL where webhooks related to this room will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $roomID,
-        $enableRecording = omit,
-        $maxParticipants = omit,
-        $uniqueName = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookEventURL = omit,
-        $webhookTimeoutSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        bool $enableRecording = false,
+        int $maxParticipants = 10,
+        ?string $uniqueName = null,
+        string $webhookEventFailoverURL = '',
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RoomUpdateResponse {
-        $params = [
-            'enableRecording' => $enableRecording,
-            'maxParticipants' => $maxParticipants,
-            'uniqueName' => $uniqueName,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookEventURL' => $webhookEventURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->updateRaw($roomID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $roomID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RoomUpdateResponse {
-        [$parsed, $options] = RoomUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'enableRecording' => $enableRecording,
+                'maxParticipants' => $maxParticipants,
+                'uniqueName' => $uniqueName,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookEventURL' => $webhookEventURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['rooms/%1$s', $roomID],
-            body: (object) $parsed,
-            options: $options,
-            convert: RoomUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($roomID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -219,51 +164,33 @@ final class RoomsService implements RoomsContract
      *
      * View a list of rooms.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name]
      * @param bool $includeSessions to decide if room sessions should be included in the response
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<Room>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $includeSessions = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null,
-    ): RoomListResponse {
-        $params = [
-            'filter' => $filter,
-            'includeSessions' => $includeSessions,
-            'page' => $page,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RoomListResponse {
-        [$parsed, $options] = RoomListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        ?bool $includeSessions = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'includeSessions' => $includeSessions,
+                'page' => $page,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'rooms',
-            query: $parsed,
-            options: $options,
-            convert: RoomListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -271,18 +198,18 @@ final class RoomsService implements RoomsContract
      *
      * Synchronously delete a Room. Participants from that room will be kicked out, they won't be able to join that room anymore, and you won't be charged anymore for that room.
      *
+     * @param string $roomID the unique identifier of a room
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $roomID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['rooms/%1$s', $roomID],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($roomID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

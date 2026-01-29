@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberExtensions\PhoneNumberExtensionListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_phone_number_id].
  *
- * @phpstan-type filter_alias = array{portingPhoneNumberID?: string}
+ * @phpstan-type FilterShape = array{portingPhoneNumberID?: string|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter results by porting phone number id.
      */
-    #[Api('porting_phone_number_id', optional: true)]
+    #[Optional('porting_phone_number_id')]
     public ?string $portingPhoneNumberID;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $portingPhoneNumberID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $portingPhoneNumberID && $obj->portingPhoneNumberID = $portingPhoneNumberID;
+        null !== $portingPhoneNumberID && $self['portingPhoneNumberID'] = $portingPhoneNumberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
-        $obj = clone $this;
-        $obj->portingPhoneNumberID = $portingPhoneNumberID;
+        $self = clone $this;
+        $self['portingPhoneNumberID'] = $portingPhoneNumberID;
 
-        return $obj;
+        return $self;
     }
 }

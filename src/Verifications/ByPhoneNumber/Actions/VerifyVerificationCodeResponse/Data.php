@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Data\ResponseCode;
 
 /**
- * @phpstan-type data_alias = array{
- *   phoneNumber: string, responseCode: value-of<ResponseCode>
+ * @phpstan-type DataShape = array{
+ *   phoneNumber: string, responseCode: ResponseCode|value-of<ResponseCode>
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * +E164 formatted phone number.
      */
-    #[Api('phone_number')]
+    #[Required('phone_number')]
     public string $phoneNumber;
 
     /**
@@ -30,7 +30,7 @@ final class Data implements BaseModel
      *
      * @var value-of<ResponseCode> $responseCode
      */
-    #[Api('response_code', enum: ResponseCode::class)]
+    #[Required('response_code', enum: ResponseCode::class)]
     public string $responseCode;
 
     /**
@@ -63,12 +63,12 @@ final class Data implements BaseModel
         string $phoneNumber,
         ResponseCode|string $responseCode
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumber = $phoneNumber;
-        $obj['responseCode'] = $responseCode;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['responseCode'] = $responseCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +76,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class Data implements BaseModel
      */
     public function withResponseCode(ResponseCode|string $responseCode): self
     {
-        $obj = clone $this;
-        $obj['responseCode'] = $responseCode;
+        $self = clone $this;
+        $self['responseCode'] = $responseCode;
 
-        return $obj;
+        return $self;
     }
 }

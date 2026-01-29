@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * If the event is pending, this will cancel the event. Otherwise, this will simply remove the record of the event.
  *
- * @see Telnyx\AI\Assistants\ScheduledEvents->delete
+ * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::delete()
  *
- * @phpstan-type scheduled_event_delete_params = array{assistantID: string}
+ * @phpstan-type ScheduledEventDeleteParamsShape = array{assistantID: string}
  */
 final class ScheduledEventDeleteParams implements BaseModel
 {
-    /** @use SdkModel<scheduled_event_delete_params> */
+    /** @use SdkModel<ScheduledEventDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $assistantID;
 
     /**
@@ -51,18 +51,18 @@ final class ScheduledEventDeleteParams implements BaseModel
      */
     public static function with(string $assistantID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->assistantID = $assistantID;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withAssistantID(string $assistantID): self
     {
-        $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $self = clone $this;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\OAuth\OAuthGetJwksResponse;
+use Telnyx\OAuth\OAuthGetResponse;
+use Telnyx\OAuth\OAuthGrantsResponse;
+use Telnyx\OAuth\OAuthIntrospectResponse;
+use Telnyx\OAuth\OAuthRegisterResponse;
+use Telnyx\OAuth\OAuthTokenResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +41,8 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->retrieve('consent_token');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthGetResponse::class, $result);
     }
 
     #[Test]
@@ -50,7 +57,8 @@ final class OAuthTest extends TestCase
             consentToken: 'consent_token'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthGrantsResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +73,8 @@ final class OAuthTest extends TestCase
             consentToken: 'consent_token'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthGrantsResponse::class, $result);
     }
 
     #[Test]
@@ -75,9 +84,10 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->introspect('token');
+        $result = $this->client->oauth->introspect(token: 'token');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthIntrospectResponse::class, $result);
     }
 
     #[Test]
@@ -87,9 +97,10 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->introspect('token');
+        $result = $this->client->oauth->introspect(token: 'token');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthIntrospectResponse::class, $result);
     }
 
     #[Test]
@@ -101,14 +112,15 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->register();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthRegisterResponse::class, $result);
     }
 
     #[Test]
     public function testRetrieveAuthorize(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't properly handle redirects");
+            $this->markTestSkipped('Prism tests are disabled');
         }
 
         $result = $this->client->oauth->retrieveAuthorize(
@@ -117,23 +129,29 @@ final class OAuthTest extends TestCase
             responseType: 'code',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
     public function testRetrieveAuthorizeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't properly handle redirects");
+            $this->markTestSkipped('Prism tests are disabled');
         }
 
         $result = $this->client->oauth->retrieveAuthorize(
             clientID: 'client_id',
             redirectUri: 'https://example.com',
             responseType: 'code',
+            codeChallenge: 'code_challenge',
+            codeChallengeMethod: 'plain',
+            scope: 'scope',
+            state: 'state',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -145,7 +163,8 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->retrieveJwks();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthGetJwksResponse::class, $result);
     }
 
     #[Test]
@@ -157,7 +176,8 @@ final class OAuthTest extends TestCase
 
         $result = $this->client->oauth->token(grantType: 'client_credentials');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthTokenResponse::class, $result);
     }
 
     #[Test]
@@ -167,8 +187,18 @@ final class OAuthTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauth->token(grantType: 'client_credentials');
+        $result = $this->client->oauth->token(
+            grantType: 'client_credentials',
+            clientID: 'client_id',
+            clientSecret: 'client_secret',
+            code: 'code',
+            codeVerifier: 'code_verifier',
+            redirectUri: 'https://example.com',
+            refreshToken: 'refresh_token',
+            scope: 'admin',
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthTokenResponse::class, $result);
     }
 }

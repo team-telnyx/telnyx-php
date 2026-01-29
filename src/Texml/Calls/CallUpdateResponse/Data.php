@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Calls\CallUpdateResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{sid?: string, status?: string}
+ * @phpstan-type DataShape = array{sid?: string|null, status?: string|null}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()
@@ -34,27 +34,27 @@ final class Data implements BaseModel
      */
     public static function with(?string $sid = null, ?string $status = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $sid && $obj->sid = $sid;
-        null !== $status && $obj->status = $status;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj->sid = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

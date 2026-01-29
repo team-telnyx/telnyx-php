@@ -4,32 +4,76 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPs;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\GlobalIPs\GlobalIPListResponse\Data;
 
 /**
- * @phpstan-type global_ip_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-type GlobalIPListResponseShape = array{
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
+ *   description?: string|null,
+ *   ipAddress?: string|null,
+ *   name?: string|null,
+ *   ports?: array<string,mixed>|null,
  * }
  */
-final class GlobalIPListResponse implements BaseModel, ResponseConverter
+final class GlobalIPListResponse implements BaseModel
 {
-    /** @use SdkModel<global_ip_list_response> */
+    /** @use SdkModel<GlobalIPListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * Identifies the resource.
+     */
+    #[Optional]
+    public ?string $id;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
+
+    /**
+     * A user specified description for the address.
+     */
+    #[Optional]
+    public ?string $description;
+
+    /**
+     * The Global IP address.
+     */
+    #[Optional('ip_address')]
+    public ?string $ipAddress;
+
+    /**
+     * A user specified name for the address.
+     */
+    #[Optional]
+    public ?string $name;
+
+    /**
+     * A Global IP ports grouped by protocol code.
+     *
+     * @var array<string,mixed>|null $ports
+     */
+    #[Optional(map: 'mixed')]
+    public ?array $ports;
 
     public function __construct()
     {
@@ -41,36 +85,119 @@ final class GlobalIPListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param array<string,mixed>|null $ports
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?string $id = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
+        ?string $description = null,
+        ?string $ipAddress = null,
+        ?string $name = null,
+        ?array $ports = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $description && $self['description'] = $description;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $name && $self['name'] = $name;
+        null !== $ports && $self['ports'] = $ports;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * Identifies the resource.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    /**
+     * A user specified description for the address.
+     */
+    public function withDescription(string $description): self
+    {
+        $self = clone $this;
+        $self['description'] = $description;
+
+        return $self;
+    }
+
+    /**
+     * The Global IP address.
+     */
+    public function withIPAddress(string $ipAddress): self
+    {
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
+
+        return $self;
+    }
+
+    /**
+     * A user specified name for the address.
+     */
+    public function withName(string $name): self
+    {
+        $self = clone $this;
+        $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * A Global IP ports grouped by protocol code.
+     *
+     * @param array<string,mixed> $ports
+     */
+    public function withPorts(array $ports): self
+    {
+        $self = clone $this;
+        $self['ports'] = $ports;
+
+        return $self;
     }
 }

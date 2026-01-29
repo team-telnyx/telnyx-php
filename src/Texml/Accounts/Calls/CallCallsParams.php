@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,87 +16,94 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\SupervisingRole;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
 
 /**
  * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
  *
- * @see Telnyx\Texml\Accounts\Calls->calls
+ * @see Telnyx\Services\Texml\Accounts\CallsService::calls()
  *
- * @phpstan-type call_calls_params = array{
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader
+ *
+ * @phpstan-type CallCallsParamsShape = array{
  *   applicationSid: string,
  *   from: string,
  *   to: string,
- *   asyncAmd?: bool,
- *   asyncAmdStatusCallback?: string,
- *   asyncAmdStatusCallbackMethod?: AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
- *   callerID?: string,
- *   cancelPlaybackOnDetectMessageEnd?: bool,
- *   cancelPlaybackOnMachineDetection?: bool,
- *   customHeaders?: list<CustomHeader>,
- *   detectionMode?: DetectionMode|value-of<DetectionMode>,
- *   fallbackURL?: string,
- *   machineDetection?: MachineDetection|value-of<MachineDetection>,
- *   machineDetectionSilenceTimeout?: int,
- *   machineDetectionSpeechEndThreshold?: int,
- *   machineDetectionSpeechThreshold?: int,
- *   machineDetectionTimeout?: int,
- *   preferredCodecs?: string,
- *   record?: bool,
- *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
- *   recordingStatusCallback?: string,
- *   recordingStatusCallbackEvent?: string,
- *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
- *   recordingTimeout?: int,
- *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
- *   sendRecordingURL?: bool,
- *   sipAuthPassword?: string,
- *   sipAuthUsername?: string,
- *   statusCallback?: string,
- *   statusCallbackEvent?: StatusCallbackEvent|value-of<StatusCallbackEvent>,
- *   statusCallbackMethod?: StatusCallbackMethod|value-of<StatusCallbackMethod>,
- *   trim?: Trim|value-of<Trim>,
- *   url?: string,
- *   urlMethod?: URLMethod|value-of<URLMethod>,
+ *   asyncAmd?: bool|null,
+ *   asyncAmdStatusCallback?: string|null,
+ *   asyncAmdStatusCallbackMethod?: null|AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
+ *   callerID?: string|null,
+ *   cancelPlaybackOnDetectMessageEnd?: bool|null,
+ *   cancelPlaybackOnMachineDetection?: bool|null,
+ *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
+ *   detectionMode?: null|DetectionMode|value-of<DetectionMode>,
+ *   fallbackURL?: string|null,
+ *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
+ *   machineDetectionSilenceTimeout?: int|null,
+ *   machineDetectionSpeechEndThreshold?: int|null,
+ *   machineDetectionSpeechThreshold?: int|null,
+ *   machineDetectionTimeout?: int|null,
+ *   preferredCodecs?: string|null,
+ *   record?: bool|null,
+ *   recordingChannels?: null|RecordingChannels|value-of<RecordingChannels>,
+ *   recordingStatusCallback?: string|null,
+ *   recordingStatusCallbackEvent?: string|null,
+ *   recordingStatusCallbackMethod?: null|RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
+ *   recordingTimeout?: int|null,
+ *   recordingTrack?: null|RecordingTrack|value-of<RecordingTrack>,
+ *   sendRecordingURL?: bool|null,
+ *   sipAuthPassword?: string|null,
+ *   sipAuthUsername?: string|null,
+ *   sipRegion?: null|SipRegion|value-of<SipRegion>,
+ *   statusCallback?: string|null,
+ *   statusCallbackEvent?: null|StatusCallbackEvent|value-of<StatusCallbackEvent>,
+ *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
+ *   superviseCallSid?: string|null,
+ *   supervisingRole?: null|SupervisingRole|value-of<SupervisingRole>,
+ *   trim?: null|Trim|value-of<Trim>,
+ *   url?: string|null,
+ *   urlMethod?: null|URLMethod|value-of<URLMethod>,
  * }
  */
 final class CallCallsParams implements BaseModel
 {
-    /** @use SdkModel<call_calls_params> */
+    /** @use SdkModel<CallCallsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The ID of the TeXML Application.
      */
-    #[Api('ApplicationSid')]
+    #[Required('ApplicationSid')]
     public string $applicationSid;
 
     /**
      * The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
      */
-    #[Api('From')]
+    #[Required('From')]
     public string $from;
 
     /**
      * The phone number of the called party. Phone numbers are formatted with a `+` and country code.
      */
-    #[Api('To')]
+    #[Required('To')]
     public string $to;
 
     /**
      * Select whether to perform answering machine detection in the background. By default execution is blocked until Answering Machine Detection is completed.
      */
-    #[Api('AsyncAmd', optional: true)]
+    #[Optional('AsyncAmd')]
     public ?bool $asyncAmd;
 
     /**
      * URL destination for Telnyx to send AMD callback events to for the call.
      */
-    #[Api('AsyncAmdStatusCallback', optional: true)]
+    #[Optional('AsyncAmdStatusCallback')]
     public ?string $asyncAmdStatusCallback;
 
     /**
@@ -103,29 +111,28 @@ final class CallCallsParams implements BaseModel
      *
      * @var value-of<AsyncAmdStatusCallbackMethod>|null $asyncAmdStatusCallbackMethod
      */
-    #[Api(
+    #[Optional(
         'AsyncAmdStatusCallbackMethod',
-        enum: AsyncAmdStatusCallbackMethod::class,
-        optional: true,
+        enum: AsyncAmdStatusCallbackMethod::class
     )]
     public ?string $asyncAmdStatusCallbackMethod;
 
     /**
      * To be used as the caller id name (SIP From Display Name) presented to the destination (`To` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and `-_~!.+` special characters. If ommited, the display name will be the same as the number in the `From` field.
      */
-    #[Api('CallerId', optional: true)]
+    #[Optional('CallerId')]
     public ?string $callerID;
 
     /**
      * Whether to cancel ongoing playback on `greeting ended` detection. Defaults to `true`.
      */
-    #[Api('CancelPlaybackOnDetectMessageEnd', optional: true)]
+    #[Optional('CancelPlaybackOnDetectMessageEnd')]
     public ?bool $cancelPlaybackOnDetectMessageEnd;
 
     /**
      * Whether to cancel ongoing playback on `machine` detection. Defaults to `true`.
      */
-    #[Api('CancelPlaybackOnMachineDetection', optional: true)]
+    #[Optional('CancelPlaybackOnMachineDetection')]
     public ?bool $cancelPlaybackOnMachineDetection;
 
     /**
@@ -133,7 +140,7 @@ final class CallCallsParams implements BaseModel
      *
      * @var list<CustomHeader>|null $customHeaders
      */
-    #[Api('CustomHeaders', list: CustomHeader::class, optional: true)]
+    #[Optional('CustomHeaders', list: CustomHeader::class)]
     public ?array $customHeaders;
 
     /**
@@ -141,13 +148,13 @@ final class CallCallsParams implements BaseModel
      *
      * @var value-of<DetectionMode>|null $detectionMode
      */
-    #[Api('DetectionMode', enum: DetectionMode::class, optional: true)]
+    #[Optional('DetectionMode', enum: DetectionMode::class)]
     public ?string $detectionMode;
 
     /**
      * A failover URL for which Telnyx will retrieve the TeXML call instructions if the `Url` is not responding.
      */
-    #[Api('FallbackUrl', optional: true)]
+    #[Optional('FallbackUrl')]
     public ?string $fallbackURL;
 
     /**
@@ -155,43 +162,43 @@ final class CallCallsParams implements BaseModel
      *
      * @var value-of<MachineDetection>|null $machineDetection
      */
-    #[Api('MachineDetection', enum: MachineDetection::class, optional: true)]
+    #[Optional('MachineDetection', enum: MachineDetection::class)]
     public ?string $machineDetection;
 
     /**
      * If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      */
-    #[Api('MachineDetectionSilenceTimeout', optional: true)]
+    #[Optional('MachineDetectionSilenceTimeout')]
     public ?int $machineDetectionSilenceTimeout;
 
     /**
      * Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
      */
-    #[Api('MachineDetectionSpeechEndThreshold', optional: true)]
+    #[Optional('MachineDetectionSpeechEndThreshold')]
     public ?int $machineDetectionSpeechEndThreshold;
 
     /**
      * Maximum threshold of a human greeting. If greeting longer than this value, considered machine. Ignored when `premium` detection is used.
      */
-    #[Api('MachineDetectionSpeechThreshold', optional: true)]
+    #[Optional('MachineDetectionSpeechThreshold')]
     public ?int $machineDetectionSpeechThreshold;
 
     /**
      * Maximum timeout threshold in milliseconds for overall detection.
      */
-    #[Api('MachineDetectionTimeout', optional: true)]
+    #[Optional('MachineDetectionTimeout')]
     public ?int $machineDetectionTimeout;
 
     /**
      * The list of comma-separated codecs to be offered on a call.
      */
-    #[Api('PreferredCodecs', optional: true)]
+    #[Optional('PreferredCodecs')]
     public ?string $preferredCodecs;
 
     /**
      * Whether to record the entire participant's call leg. Defaults to `false`.
      */
-    #[Api('Record', optional: true)]
+    #[Optional('Record')]
     public ?bool $record;
 
     /**
@@ -199,19 +206,19 @@ final class CallCallsParams implements BaseModel
      *
      * @var value-of<RecordingChannels>|null $recordingChannels
      */
-    #[Api('RecordingChannels', enum: RecordingChannels::class, optional: true)]
+    #[Optional('RecordingChannels', enum: RecordingChannels::class)]
     public ?string $recordingChannels;
 
     /**
      * The URL the recording callbacks will be sent to.
      */
-    #[Api('RecordingStatusCallback', optional: true)]
+    #[Optional('RecordingStatusCallback')]
     public ?string $recordingStatusCallback;
 
     /**
      * The changes to the recording's state that should generate a call to `RecoridngStatusCallback`. Can be: `in-progress`, `completed` and `absent`. Separate multiple values with a space. Defaults to `completed`.
      */
-    #[Api('RecordingStatusCallbackEvent', optional: true)]
+    #[Optional('RecordingStatusCallbackEvent')]
     public ?string $recordingStatusCallbackEvent;
 
     /**
@@ -219,17 +226,16 @@ final class CallCallsParams implements BaseModel
      *
      * @var value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
      */
-    #[Api(
+    #[Optional(
         'RecordingStatusCallbackMethod',
-        enum: RecordingStatusCallbackMethod::class,
-        optional: true,
+        enum: RecordingStatusCallbackMethod::class
     )]
     public ?string $recordingStatusCallbackMethod;
 
     /**
      * The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that the transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      */
-    #[Api('RecordingTimeout', optional: true)]
+    #[Optional('RecordingTimeout')]
     public ?int $recordingTimeout;
 
     /**
@@ -237,31 +243,39 @@ final class CallCallsParams implements BaseModel
      *
      * @var value-of<RecordingTrack>|null $recordingTrack
      */
-    #[Api('RecordingTrack', enum: RecordingTrack::class, optional: true)]
+    #[Optional('RecordingTrack', enum: RecordingTrack::class)]
     public ?string $recordingTrack;
 
     /**
      * Whether to send RecordingUrl in webhooks.
      */
-    #[Api('SendRecordingUrl', optional: true)]
+    #[Optional('SendRecordingUrl')]
     public ?bool $sendRecordingURL;
 
     /**
      * The password to use for SIP authentication.
      */
-    #[Api('SipAuthPassword', optional: true)]
+    #[Optional('SipAuthPassword')]
     public ?string $sipAuthPassword;
 
     /**
      * The username to use for SIP authentication.
      */
-    #[Api('SipAuthUsername', optional: true)]
+    #[Optional('SipAuthUsername')]
     public ?string $sipAuthUsername;
+
+    /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @var value-of<SipRegion>|null $sipRegion
+     */
+    #[Optional('SipRegion', enum: SipRegion::class)]
+    public ?string $sipRegion;
 
     /**
      * URL destination for Telnyx to send status callback events to for the call.
      */
-    #[Api('StatusCallback', optional: true)]
+    #[Optional('StatusCallback')]
     public ?string $statusCallback;
 
     /**
@@ -269,11 +283,7 @@ final class CallCallsParams implements BaseModel
      *
      * @var value-of<StatusCallbackEvent>|null $statusCallbackEvent
      */
-    #[Api(
-        'StatusCallbackEvent',
-        enum: StatusCallbackEvent::class,
-        optional: true
-    )]
+    #[Optional('StatusCallbackEvent', enum: StatusCallbackEvent::class)]
     public ?string $statusCallbackEvent;
 
     /**
@@ -281,25 +291,35 @@ final class CallCallsParams implements BaseModel
      *
      * @var value-of<StatusCallbackMethod>|null $statusCallbackMethod
      */
-    #[Api(
-        'StatusCallbackMethod',
-        enum: StatusCallbackMethod::class,
-        optional: true
-    )]
+    #[Optional('StatusCallbackMethod', enum: StatusCallbackMethod::class)]
     public ?string $statusCallbackMethod;
+
+    /**
+     * The call control ID of the existing call to supervise. When provided, the created leg will be added to the specified call in supervising mode. Status callbacks and action callbacks will NOT be sent for the supervising leg.
+     */
+    #[Optional('SuperviseCallSid')]
+    public ?string $superviseCallSid;
+
+    /**
+     * The supervising role for the new leg. Determines the audio behavior: barge (hear both sides), whisper (only hear supervisor), monitor (hear both sides but supervisor muted). Default: barge.
+     *
+     * @var value-of<SupervisingRole>|null $supervisingRole
+     */
+    #[Optional('SupervisingRole', enum: SupervisingRole::class)]
+    public ?string $supervisingRole;
 
     /**
      * Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      *
      * @var value-of<Trim>|null $trim
      */
-    #[Api('Trim', enum: Trim::class, optional: true)]
+    #[Optional('Trim', enum: Trim::class)]
     public ?string $trim;
 
     /**
      * The URL from which Telnyx will retrieve the TeXML call instructions.
      */
-    #[Api('Url', optional: true)]
+    #[Optional('Url')]
     public ?string $url;
 
     /**
@@ -307,7 +327,7 @@ final class CallCallsParams implements BaseModel
      *
      * @var value-of<URLMethod>|null $urlMethod
      */
-    #[Api('UrlMethod', enum: URLMethod::class, optional: true)]
+    #[Optional('UrlMethod', enum: URLMethod::class)]
     public ?string $urlMethod;
 
     /**
@@ -334,17 +354,19 @@ final class CallCallsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod> $asyncAmdStatusCallbackMethod
-     * @param list<CustomHeader> $customHeaders
-     * @param DetectionMode|value-of<DetectionMode> $detectionMode
-     * @param MachineDetection|value-of<MachineDetection> $machineDetection
-     * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels
-     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod> $recordingStatusCallbackMethod
-     * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack
-     * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
-     * @param Trim|value-of<Trim> $trim
-     * @param URLMethod|value-of<URLMethod> $urlMethod
+     * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>|null $asyncAmdStatusCallbackMethod
+     * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
+     * @param DetectionMode|value-of<DetectionMode>|null $detectionMode
+     * @param MachineDetection|value-of<MachineDetection>|null $machineDetection
+     * @param RecordingChannels|value-of<RecordingChannels>|null $recordingChannels
+     * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
+     * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
+     * @param SipRegion|value-of<SipRegion>|null $sipRegion
+     * @param StatusCallbackEvent|value-of<StatusCallbackEvent>|null $statusCallbackEvent
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
+     * @param SupervisingRole|value-of<SupervisingRole>|null $supervisingRole
+     * @param Trim|value-of<Trim>|null $trim
+     * @param URLMethod|value-of<URLMethod>|null $urlMethod
      */
     public static function with(
         string $applicationSid,
@@ -375,52 +397,58 @@ final class CallCallsParams implements BaseModel
         ?bool $sendRecordingURL = null,
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
+        SipRegion|string|null $sipRegion = null,
         ?string $statusCallback = null,
         StatusCallbackEvent|string|null $statusCallbackEvent = null,
         StatusCallbackMethod|string|null $statusCallbackMethod = null,
+        ?string $superviseCallSid = null,
+        SupervisingRole|string|null $supervisingRole = null,
         Trim|string|null $trim = null,
         ?string $url = null,
         URLMethod|string|null $urlMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->applicationSid = $applicationSid;
-        $obj->from = $from;
-        $obj->to = $to;
+        $self['applicationSid'] = $applicationSid;
+        $self['from'] = $from;
+        $self['to'] = $to;
 
-        null !== $asyncAmd && $obj->asyncAmd = $asyncAmd;
-        null !== $asyncAmdStatusCallback && $obj->asyncAmdStatusCallback = $asyncAmdStatusCallback;
-        null !== $asyncAmdStatusCallbackMethod && $obj['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
-        null !== $callerID && $obj->callerID = $callerID;
-        null !== $cancelPlaybackOnDetectMessageEnd && $obj->cancelPlaybackOnDetectMessageEnd = $cancelPlaybackOnDetectMessageEnd;
-        null !== $cancelPlaybackOnMachineDetection && $obj->cancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
-        null !== $customHeaders && $obj->customHeaders = $customHeaders;
-        null !== $detectionMode && $obj['detectionMode'] = $detectionMode;
-        null !== $fallbackURL && $obj->fallbackURL = $fallbackURL;
-        null !== $machineDetection && $obj['machineDetection'] = $machineDetection;
-        null !== $machineDetectionSilenceTimeout && $obj->machineDetectionSilenceTimeout = $machineDetectionSilenceTimeout;
-        null !== $machineDetectionSpeechEndThreshold && $obj->machineDetectionSpeechEndThreshold = $machineDetectionSpeechEndThreshold;
-        null !== $machineDetectionSpeechThreshold && $obj->machineDetectionSpeechThreshold = $machineDetectionSpeechThreshold;
-        null !== $machineDetectionTimeout && $obj->machineDetectionTimeout = $machineDetectionTimeout;
-        null !== $preferredCodecs && $obj->preferredCodecs = $preferredCodecs;
-        null !== $record && $obj->record = $record;
-        null !== $recordingChannels && $obj['recordingChannels'] = $recordingChannels;
-        null !== $recordingStatusCallback && $obj->recordingStatusCallback = $recordingStatusCallback;
-        null !== $recordingStatusCallbackEvent && $obj->recordingStatusCallbackEvent = $recordingStatusCallbackEvent;
-        null !== $recordingStatusCallbackMethod && $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
-        null !== $recordingTimeout && $obj->recordingTimeout = $recordingTimeout;
-        null !== $recordingTrack && $obj['recordingTrack'] = $recordingTrack;
-        null !== $sendRecordingURL && $obj->sendRecordingURL = $sendRecordingURL;
-        null !== $sipAuthPassword && $obj->sipAuthPassword = $sipAuthPassword;
-        null !== $sipAuthUsername && $obj->sipAuthUsername = $sipAuthUsername;
-        null !== $statusCallback && $obj->statusCallback = $statusCallback;
-        null !== $statusCallbackEvent && $obj['statusCallbackEvent'] = $statusCallbackEvent;
-        null !== $statusCallbackMethod && $obj['statusCallbackMethod'] = $statusCallbackMethod;
-        null !== $trim && $obj['trim'] = $trim;
-        null !== $url && $obj->url = $url;
-        null !== $urlMethod && $obj['urlMethod'] = $urlMethod;
+        null !== $asyncAmd && $self['asyncAmd'] = $asyncAmd;
+        null !== $asyncAmdStatusCallback && $self['asyncAmdStatusCallback'] = $asyncAmdStatusCallback;
+        null !== $asyncAmdStatusCallbackMethod && $self['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
+        null !== $callerID && $self['callerID'] = $callerID;
+        null !== $cancelPlaybackOnDetectMessageEnd && $self['cancelPlaybackOnDetectMessageEnd'] = $cancelPlaybackOnDetectMessageEnd;
+        null !== $cancelPlaybackOnMachineDetection && $self['cancelPlaybackOnMachineDetection'] = $cancelPlaybackOnMachineDetection;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $detectionMode && $self['detectionMode'] = $detectionMode;
+        null !== $fallbackURL && $self['fallbackURL'] = $fallbackURL;
+        null !== $machineDetection && $self['machineDetection'] = $machineDetection;
+        null !== $machineDetectionSilenceTimeout && $self['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
+        null !== $machineDetectionSpeechEndThreshold && $self['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
+        null !== $machineDetectionSpeechThreshold && $self['machineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
+        null !== $machineDetectionTimeout && $self['machineDetectionTimeout'] = $machineDetectionTimeout;
+        null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
+        null !== $record && $self['record'] = $record;
+        null !== $recordingChannels && $self['recordingChannels'] = $recordingChannels;
+        null !== $recordingStatusCallback && $self['recordingStatusCallback'] = $recordingStatusCallback;
+        null !== $recordingStatusCallbackEvent && $self['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
+        null !== $recordingStatusCallbackMethod && $self['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
+        null !== $recordingTimeout && $self['recordingTimeout'] = $recordingTimeout;
+        null !== $recordingTrack && $self['recordingTrack'] = $recordingTrack;
+        null !== $sendRecordingURL && $self['sendRecordingURL'] = $sendRecordingURL;
+        null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
+        null !== $sipAuthUsername && $self['sipAuthUsername'] = $sipAuthUsername;
+        null !== $sipRegion && $self['sipRegion'] = $sipRegion;
+        null !== $statusCallback && $self['statusCallback'] = $statusCallback;
+        null !== $statusCallbackEvent && $self['statusCallbackEvent'] = $statusCallbackEvent;
+        null !== $statusCallbackMethod && $self['statusCallbackMethod'] = $statusCallbackMethod;
+        null !== $superviseCallSid && $self['superviseCallSid'] = $superviseCallSid;
+        null !== $supervisingRole && $self['supervisingRole'] = $supervisingRole;
+        null !== $trim && $self['trim'] = $trim;
+        null !== $url && $self['url'] = $url;
+        null !== $urlMethod && $self['urlMethod'] = $urlMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -428,10 +456,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withApplicationSid(string $applicationSid): self
     {
-        $obj = clone $this;
-        $obj->applicationSid = $applicationSid;
+        $self = clone $this;
+        $self['applicationSid'] = $applicationSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -439,10 +467,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -450,10 +478,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -461,10 +489,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withAsyncAmd(bool $asyncAmd): self
     {
-        $obj = clone $this;
-        $obj->asyncAmd = $asyncAmd;
+        $self = clone $this;
+        $self['asyncAmd'] = $asyncAmd;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -473,10 +501,10 @@ final class CallCallsParams implements BaseModel
     public function withAsyncAmdStatusCallback(
         string $asyncAmdStatusCallback
     ): self {
-        $obj = clone $this;
-        $obj->asyncAmdStatusCallback = $asyncAmdStatusCallback;
+        $self = clone $this;
+        $self['asyncAmdStatusCallback'] = $asyncAmdStatusCallback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -487,10 +515,10 @@ final class CallCallsParams implements BaseModel
     public function withAsyncAmdStatusCallbackMethod(
         AsyncAmdStatusCallbackMethod|string $asyncAmdStatusCallbackMethod
     ): self {
-        $obj = clone $this;
-        $obj['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
+        $self = clone $this;
+        $self['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -498,10 +526,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withCallerID(string $callerID): self
     {
-        $obj = clone $this;
-        $obj->callerID = $callerID;
+        $self = clone $this;
+        $self['callerID'] = $callerID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -510,10 +538,10 @@ final class CallCallsParams implements BaseModel
     public function withCancelPlaybackOnDetectMessageEnd(
         bool $cancelPlaybackOnDetectMessageEnd
     ): self {
-        $obj = clone $this;
-        $obj->cancelPlaybackOnDetectMessageEnd = $cancelPlaybackOnDetectMessageEnd;
+        $self = clone $this;
+        $self['cancelPlaybackOnDetectMessageEnd'] = $cancelPlaybackOnDetectMessageEnd;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -522,23 +550,23 @@ final class CallCallsParams implements BaseModel
     public function withCancelPlaybackOnMachineDetection(
         bool $cancelPlaybackOnMachineDetection
     ): self {
-        $obj = clone $this;
-        $obj->cancelPlaybackOnMachineDetection = $cancelPlaybackOnMachineDetection;
+        $self = clone $this;
+        $self['cancelPlaybackOnMachineDetection'] = $cancelPlaybackOnMachineDetection;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      *
-     * @param list<CustomHeader> $customHeaders
+     * @param list<CustomHeader|CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj->customHeaders = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -548,10 +576,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withDetectionMode(DetectionMode|string $detectionMode): self
     {
-        $obj = clone $this;
-        $obj['detectionMode'] = $detectionMode;
+        $self = clone $this;
+        $self['detectionMode'] = $detectionMode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -559,10 +587,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withFallbackURL(string $fallbackURL): self
     {
-        $obj = clone $this;
-        $obj->fallbackURL = $fallbackURL;
+        $self = clone $this;
+        $self['fallbackURL'] = $fallbackURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -573,10 +601,10 @@ final class CallCallsParams implements BaseModel
     public function withMachineDetection(
         MachineDetection|string $machineDetection
     ): self {
-        $obj = clone $this;
-        $obj['machineDetection'] = $machineDetection;
+        $self = clone $this;
+        $self['machineDetection'] = $machineDetection;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -585,10 +613,10 @@ final class CallCallsParams implements BaseModel
     public function withMachineDetectionSilenceTimeout(
         int $machineDetectionSilenceTimeout
     ): self {
-        $obj = clone $this;
-        $obj->machineDetectionSilenceTimeout = $machineDetectionSilenceTimeout;
+        $self = clone $this;
+        $self['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -597,10 +625,10 @@ final class CallCallsParams implements BaseModel
     public function withMachineDetectionSpeechEndThreshold(
         int $machineDetectionSpeechEndThreshold
     ): self {
-        $obj = clone $this;
-        $obj->machineDetectionSpeechEndThreshold = $machineDetectionSpeechEndThreshold;
+        $self = clone $this;
+        $self['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -609,10 +637,10 @@ final class CallCallsParams implements BaseModel
     public function withMachineDetectionSpeechThreshold(
         int $machineDetectionSpeechThreshold
     ): self {
-        $obj = clone $this;
-        $obj->machineDetectionSpeechThreshold = $machineDetectionSpeechThreshold;
+        $self = clone $this;
+        $self['machineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -621,10 +649,10 @@ final class CallCallsParams implements BaseModel
     public function withMachineDetectionTimeout(
         int $machineDetectionTimeout
     ): self {
-        $obj = clone $this;
-        $obj->machineDetectionTimeout = $machineDetectionTimeout;
+        $self = clone $this;
+        $self['machineDetectionTimeout'] = $machineDetectionTimeout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -632,10 +660,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withPreferredCodecs(string $preferredCodecs): self
     {
-        $obj = clone $this;
-        $obj->preferredCodecs = $preferredCodecs;
+        $self = clone $this;
+        $self['preferredCodecs'] = $preferredCodecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -643,10 +671,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withRecord(bool $record): self
     {
-        $obj = clone $this;
-        $obj->record = $record;
+        $self = clone $this;
+        $self['record'] = $record;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -657,10 +685,10 @@ final class CallCallsParams implements BaseModel
     public function withRecordingChannels(
         RecordingChannels|string $recordingChannels
     ): self {
-        $obj = clone $this;
-        $obj['recordingChannels'] = $recordingChannels;
+        $self = clone $this;
+        $self['recordingChannels'] = $recordingChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -669,10 +697,10 @@ final class CallCallsParams implements BaseModel
     public function withRecordingStatusCallback(
         string $recordingStatusCallback
     ): self {
-        $obj = clone $this;
-        $obj->recordingStatusCallback = $recordingStatusCallback;
+        $self = clone $this;
+        $self['recordingStatusCallback'] = $recordingStatusCallback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -681,10 +709,10 @@ final class CallCallsParams implements BaseModel
     public function withRecordingStatusCallbackEvent(
         string $recordingStatusCallbackEvent
     ): self {
-        $obj = clone $this;
-        $obj->recordingStatusCallbackEvent = $recordingStatusCallbackEvent;
+        $self = clone $this;
+        $self['recordingStatusCallbackEvent'] = $recordingStatusCallbackEvent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -695,10 +723,10 @@ final class CallCallsParams implements BaseModel
     public function withRecordingStatusCallbackMethod(
         RecordingStatusCallbackMethod|string $recordingStatusCallbackMethod
     ): self {
-        $obj = clone $this;
-        $obj['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
+        $self = clone $this;
+        $self['recordingStatusCallbackMethod'] = $recordingStatusCallbackMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -706,10 +734,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withRecordingTimeout(int $recordingTimeout): self
     {
-        $obj = clone $this;
-        $obj->recordingTimeout = $recordingTimeout;
+        $self = clone $this;
+        $self['recordingTimeout'] = $recordingTimeout;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -720,10 +748,10 @@ final class CallCallsParams implements BaseModel
     public function withRecordingTrack(
         RecordingTrack|string $recordingTrack
     ): self {
-        $obj = clone $this;
-        $obj['recordingTrack'] = $recordingTrack;
+        $self = clone $this;
+        $self['recordingTrack'] = $recordingTrack;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -731,10 +759,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withSendRecordingURL(bool $sendRecordingURL): self
     {
-        $obj = clone $this;
-        $obj->sendRecordingURL = $sendRecordingURL;
+        $self = clone $this;
+        $self['sendRecordingURL'] = $sendRecordingURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -742,10 +770,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withSipAuthPassword(string $sipAuthPassword): self
     {
-        $obj = clone $this;
-        $obj->sipAuthPassword = $sipAuthPassword;
+        $self = clone $this;
+        $self['sipAuthPassword'] = $sipAuthPassword;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -753,10 +781,23 @@ final class CallCallsParams implements BaseModel
      */
     public function withSipAuthUsername(string $sipAuthUsername): self
     {
-        $obj = clone $this;
-        $obj->sipAuthUsername = $sipAuthUsername;
+        $self = clone $this;
+        $self['sipAuthUsername'] = $sipAuthUsername;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Defines the SIP region to be used for the call.
+     *
+     * @param SipRegion|value-of<SipRegion> $sipRegion
+     */
+    public function withSipRegion(SipRegion|string $sipRegion): self
+    {
+        $self = clone $this;
+        $self['sipRegion'] = $sipRegion;
+
+        return $self;
     }
 
     /**
@@ -764,10 +805,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withStatusCallback(string $statusCallback): self
     {
-        $obj = clone $this;
-        $obj->statusCallback = $statusCallback;
+        $self = clone $this;
+        $self['statusCallback'] = $statusCallback;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -778,10 +819,10 @@ final class CallCallsParams implements BaseModel
     public function withStatusCallbackEvent(
         StatusCallbackEvent|string $statusCallbackEvent
     ): self {
-        $obj = clone $this;
-        $obj['statusCallbackEvent'] = $statusCallbackEvent;
+        $self = clone $this;
+        $self['statusCallbackEvent'] = $statusCallbackEvent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -792,10 +833,35 @@ final class CallCallsParams implements BaseModel
     public function withStatusCallbackMethod(
         StatusCallbackMethod|string $statusCallbackMethod
     ): self {
-        $obj = clone $this;
-        $obj['statusCallbackMethod'] = $statusCallbackMethod;
+        $self = clone $this;
+        $self['statusCallbackMethod'] = $statusCallbackMethod;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The call control ID of the existing call to supervise. When provided, the created leg will be added to the specified call in supervising mode. Status callbacks and action callbacks will NOT be sent for the supervising leg.
+     */
+    public function withSuperviseCallSid(string $superviseCallSid): self
+    {
+        $self = clone $this;
+        $self['superviseCallSid'] = $superviseCallSid;
+
+        return $self;
+    }
+
+    /**
+     * The supervising role for the new leg. Determines the audio behavior: barge (hear both sides), whisper (only hear supervisor), monitor (hear both sides but supervisor muted). Default: barge.
+     *
+     * @param SupervisingRole|value-of<SupervisingRole> $supervisingRole
+     */
+    public function withSupervisingRole(
+        SupervisingRole|string $supervisingRole
+    ): self {
+        $self = clone $this;
+        $self['supervisingRole'] = $supervisingRole;
+
+        return $self;
     }
 
     /**
@@ -805,10 +871,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withTrim(Trim|string $trim): self
     {
-        $obj = clone $this;
-        $obj['trim'] = $trim;
+        $self = clone $this;
+        $self['trim'] = $trim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -816,10 +882,10 @@ final class CallCallsParams implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -829,9 +895,9 @@ final class CallCallsParams implements BaseModel
      */
     public function withURLMethod(URLMethod|string $urlMethod): self
     {
-        $obj = clone $this;
-        $obj['urlMethod'] = $urlMethod;
+        $self = clone $this;
+        $self['urlMethod'] = $urlMethod;
 
-        return $obj;
+        return $self;
     }
 }

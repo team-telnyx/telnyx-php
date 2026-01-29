@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters\AvailableServices;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NetworkCoverage\AvailableService;
@@ -12,11 +12,13 @@ use Telnyx\NetworkCoverage\AvailableService;
 /**
  * Available service filtering operations.
  *
- * @phpstan-type contains_alias = array{contains?: value-of<AvailableService>}
+ * @phpstan-type ContainsShape = array{
+ *   contains?: null|AvailableService|value-of<AvailableService>
+ * }
  */
 final class Contains implements BaseModel
 {
-    /** @use SdkModel<contains_alias> */
+    /** @use SdkModel<ContainsShape> */
     use SdkModel;
 
     /**
@@ -24,7 +26,7 @@ final class Contains implements BaseModel
      *
      * @var value-of<AvailableService>|null $contains
      */
-    #[Api(enum: AvailableService::class, optional: true)]
+    #[Optional(enum: AvailableService::class)]
     public ?string $contains;
 
     public function __construct()
@@ -37,15 +39,15 @@ final class Contains implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AvailableService|value-of<AvailableService> $contains
+     * @param AvailableService|value-of<AvailableService>|null $contains
      */
     public static function with(AvailableService|string|null $contains = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj['contains'] = $contains;
+        null !== $contains && $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,9 +57,9 @@ final class Contains implements BaseModel
      */
     public function withContains(AvailableService|string $contains): self
     {
-        $obj = clone $this;
-        $obj['contains'] = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 }

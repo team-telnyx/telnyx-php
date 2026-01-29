@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\UsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get the Usage Reports options for querying usage, including the products available and their respective metrics and dimensions.
  *
- * @see Telnyx\UsageReports->getOptions
+ * @see Telnyx\Services\UsageReportsService::getOptions()
  *
- * @phpstan-type usage_report_get_options_params = array{
- *   product?: string, authorizationBearer?: string
+ * @phpstan-type UsageReportGetOptionsParamsShape = array{
+ *   product?: string|null, authorizationBearer?: string|null
  * }
  */
 final class UsageReportGetOptionsParams implements BaseModel
 {
-    /** @use SdkModel<usage_report_get_options_params> */
+    /** @use SdkModel<UsageReportGetOptionsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Options (dimensions and metrics) for a given product. If none specified, all products will be returned.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorizationBearer;
 
     public function __construct()
@@ -50,12 +50,12 @@ final class UsageReportGetOptionsParams implements BaseModel
         ?string $product = null,
         ?string $authorizationBearer = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $product && $obj->product = $product;
-        null !== $authorizationBearer && $obj->authorizationBearer = $authorizationBearer;
+        null !== $product && $self['product'] = $product;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class UsageReportGetOptionsParams implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj->product = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class UsageReportGetOptionsParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj->authorizationBearer = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

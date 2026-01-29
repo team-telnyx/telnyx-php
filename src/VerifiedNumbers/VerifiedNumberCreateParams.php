@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifiedNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,9 +14,9 @@ use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
 /**
  * Initiates phone number verification procedure. Supports DTMF extension dialing for voice calls to numbers behind IVR systems.
  *
- * @see Telnyx\VerifiedNumbers->create
+ * @see Telnyx\Services\VerifiedNumbersService::create()
  *
- * @phpstan-type verified_number_create_params = array{
+ * @phpstan-type VerifiedNumberCreateParamsShape = array{
  *   phoneNumber: string,
  *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
  *   extension?: string|null,
@@ -23,11 +24,11 @@ use Telnyx\VerifiedNumbers\VerifiedNumberCreateParams\VerificationMethod;
  */
 final class VerifiedNumberCreateParams implements BaseModel
 {
-    /** @use SdkModel<verified_number_create_params> */
+    /** @use SdkModel<VerifiedNumberCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api('phone_number')]
+    #[Required('phone_number')]
     public string $phoneNumber;
 
     /**
@@ -35,13 +36,13 @@ final class VerifiedNumberCreateParams implements BaseModel
      *
      * @var value-of<VerificationMethod> $verificationMethod
      */
-    #[Api('verification_method', enum: VerificationMethod::class)]
+    #[Required('verification_method', enum: VerificationMethod::class)]
     public string $verificationMethod;
 
     /**
      * Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional]
     public ?string $extension;
 
     /**
@@ -77,22 +78,22 @@ final class VerifiedNumberCreateParams implements BaseModel
         VerificationMethod|string $verificationMethod,
         ?string $extension = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumber = $phoneNumber;
-        $obj['verificationMethod'] = $verificationMethod;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['verificationMethod'] = $verificationMethod;
 
-        null !== $extension && $obj->extension = $extension;
+        null !== $extension && $self['extension'] = $extension;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,20 +104,20 @@ final class VerifiedNumberCreateParams implements BaseModel
     public function withVerificationMethod(
         VerificationMethod|string $verificationMethod
     ): self {
-        $obj = clone $this;
-        $obj['verificationMethod'] = $verificationMethod;
+        $self = clone $this;
+        $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Optional DTMF extension sequence to dial after the call is answered. This parameter enables verification of phone numbers behind IVR systems that require extension dialing. Valid characters: digits 0-9, letters A-D, symbols * and #. Pauses: w = 0.5 second pause, W = 1 second pause. Maximum length: 50 characters. Only works with 'call' verification method.
      */
-    public function withExtension(?string $extension): self
+    public function withExtension(string $extension): self
     {
-        $obj = clone $this;
-        $obj->extension = $extension;
+        $self = clone $this;
+        $self['extension'] = $extension;
 
-        return $obj;
+        return $self;
     }
 }

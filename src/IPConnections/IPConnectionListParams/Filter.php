@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections\IPConnectionListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\IPConnections\IPConnectionListParams\Filter\ConnectionName;
@@ -12,33 +12,35 @@ use Telnyx\IPConnections\IPConnectionListParams\Filter\ConnectionName;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[connection_name], filter[fqdn], filter[outbound_voice_profile_id], filter[outbound.outbound_voice_profile_id].
  *
- * @phpstan-type filter_alias = array{
- *   connectionName?: ConnectionName,
- *   fqdn?: string,
- *   outboundVoiceProfileID?: string,
+ * @phpstan-import-type ConnectionNameShape from \Telnyx\IPConnections\IPConnectionListParams\Filter\ConnectionName
+ *
+ * @phpstan-type FilterShape = array{
+ *   connectionName?: null|ConnectionName|ConnectionNameShape,
+ *   fqdn?: string|null,
+ *   outboundVoiceProfileID?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by connection_name using nested operations.
      */
-    #[Api('connection_name', optional: true)]
+    #[Optional('connection_name')]
     public ?ConnectionName $connectionName;
 
     /**
      * If present, connections with an `fqdn` that equals the given value will be returned. Matching is case-sensitive, and the full string must match.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fqdn;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api('outbound_voice_profile_id', optional: true)]
+    #[Optional('outbound_voice_profile_id')]
     public ?string $outboundVoiceProfileID;
 
     public function __construct()
@@ -50,30 +52,35 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ConnectionName|ConnectionNameShape|null $connectionName
      */
     public static function with(
-        ?ConnectionName $connectionName = null,
+        ConnectionName|array|null $connectionName = null,
         ?string $fqdn = null,
         ?string $outboundVoiceProfileID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionName && $obj->connectionName = $connectionName;
-        null !== $fqdn && $obj->fqdn = $fqdn;
-        null !== $outboundVoiceProfileID && $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $fqdn && $self['fqdn'] = $fqdn;
+        null !== $outboundVoiceProfileID && $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by connection_name using nested operations.
+     *
+     * @param ConnectionName|ConnectionNameShape $connectionName
      */
-    public function withConnectionName(ConnectionName $connectionName): self
-    {
-        $obj = clone $this;
-        $obj->connectionName = $connectionName;
+    public function withConnectionName(
+        ConnectionName|array $connectionName
+    ): self {
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +88,10 @@ final class Filter implements BaseModel
      */
     public function withFqdn(string $fqdn): self
     {
-        $obj = clone $this;
-        $obj->fqdn = $fqdn;
+        $self = clone $this;
+        $self['fqdn'] = $fqdn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +100,9 @@ final class Filter implements BaseModel
     public function withOutboundVoiceProfileID(
         string $outboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 }

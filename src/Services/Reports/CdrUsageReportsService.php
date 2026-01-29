@@ -6,21 +6,30 @@ namespace Telnyx\Services\Reports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams;
+use Telnyx\Core\Util;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\AggregationType;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdown;
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\CdrUsageReportsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class CdrUsageReportsService implements CdrUsageReportsContract
 {
     /**
+     * @api
+     */
+    public CdrUsageReportsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new CdrUsageReportsRawService($client);
+    }
 
     /**
      * @api
@@ -30,53 +39,31 @@ final class CdrUsageReportsService implements CdrUsageReportsContract
      * @param AggregationType|value-of<AggregationType> $aggregationType
      * @param ProductBreakdown|value-of<ProductBreakdown> $productBreakdown
      * @param list<float> $connections
-     * @param \DateTimeInterface $endDate
-     * @param \DateTimeInterface $startDate
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function fetchSync(
-        $aggregationType,
-        $productBreakdown,
-        $connections = omit,
-        $endDate = omit,
-        $startDate = omit,
-        ?RequestOptions $requestOptions = null,
+        AggregationType|string $aggregationType,
+        ProductBreakdown|string $productBreakdown,
+        ?array $connections = null,
+        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CdrUsageReportFetchSyncResponse {
-        $params = [
-            'aggregationType' => $aggregationType,
-            'productBreakdown' => $productBreakdown,
-            'connections' => $connections,
-            'endDate' => $endDate,
-            'startDate' => $startDate,
-        ];
-
-        return $this->fetchSyncRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function fetchSyncRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CdrUsageReportFetchSyncResponse {
-        [$parsed, $options] = CdrUsageReportFetchSyncParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'aggregationType' => $aggregationType,
+                'productBreakdown' => $productBreakdown,
+                'connections' => $connections,
+                'endDate' => $endDate,
+                'startDate' => $startDate,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'reports/cdr_usage_reports/sync',
-            query: $parsed,
-            options: $options,
-            convert: CdrUsageReportFetchSyncResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->fetchSync(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

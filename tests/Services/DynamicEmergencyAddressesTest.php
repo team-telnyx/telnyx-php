@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,13 +41,14 @@ final class DynamicEmergencyAddressesTest extends TestCase
         $result = $this->client->dynamicEmergencyAddresses->create(
             administrativeArea: 'TX',
             countryCode: 'US',
-            houseNumber: 'house_number',
+            houseNumber: '600',
             locality: 'Austin',
             postalCode: '78701',
             streetName: 'Congress',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DynamicEmergencyAddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -55,13 +61,19 @@ final class DynamicEmergencyAddressesTest extends TestCase
         $result = $this->client->dynamicEmergencyAddresses->create(
             administrativeArea: 'TX',
             countryCode: 'US',
-            houseNumber: 'house_number',
+            houseNumber: '600',
             locality: 'Austin',
             postalCode: '78701',
             streetName: 'Congress',
+            extendedAddress: 'extended_address',
+            houseSuffix: 'house_suffix',
+            streetPostDirectional: 'street_post_directional',
+            streetPreDirectional: 'street_pre_directional',
+            streetSuffix: 'St',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DynamicEmergencyAddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +87,8 @@ final class DynamicEmergencyAddressesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DynamicEmergencyAddressGetResponse::class, $result);
     }
 
     #[Test]
@@ -85,9 +98,15 @@ final class DynamicEmergencyAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->dynamicEmergencyAddresses->list();
+        $page = $this->client->dynamicEmergencyAddresses->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(DynamicEmergencyAddress::class, $item);
+        }
     }
 
     #[Test]
@@ -101,6 +120,10 @@ final class DynamicEmergencyAddressesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            DynamicEmergencyAddressDeleteResponse::class,
+            $result
+        );
     }
 }

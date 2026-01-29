@@ -4,56 +4,57 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Comments\CommentNewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id: string,
  *   body: string,
  *   createdAt: string,
  *   userID: string,
- *   portoutID?: string,
- *   recordType?: string,
+ *   portoutID?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Comment body.
      */
-    #[Api]
+    #[Required]
     public string $body;
 
     /**
      * Comment creation timestamp in ISO 8601 format.
      */
-    #[Api('created_at')]
+    #[Required('created_at')]
     public string $createdAt;
 
     /**
      * Identifies the user who created the comment. Will be null if created by Telnyx Admin.
      */
-    #[Api('user_id')]
+    #[Required('user_id')]
     public string $userID;
 
     /**
      * Identifies the associated port request.
      */
-    #[Api('portout_id', optional: true)]
+    #[Optional('portout_id')]
     public ?string $portoutID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -88,25 +89,25 @@ final class Data implements BaseModel
         ?string $portoutID = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->body = $body;
-        $obj->createdAt = $createdAt;
-        $obj->userID = $userID;
+        $self['id'] = $id;
+        $self['body'] = $body;
+        $self['createdAt'] = $createdAt;
+        $self['userID'] = $userID;
 
-        null !== $portoutID && $obj->portoutID = $portoutID;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $portoutID && $self['portoutID'] = $portoutID;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +115,10 @@ final class Data implements BaseModel
      */
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj->body = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +126,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +137,10 @@ final class Data implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +148,10 @@ final class Data implements BaseModel
      */
     public function withPortoutID(string $portoutID): self
     {
-        $obj = clone $this;
-        $obj->portoutID = $portoutID;
+        $self = clone $this;
+        $self['portoutID'] = $portoutID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,9 +159,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

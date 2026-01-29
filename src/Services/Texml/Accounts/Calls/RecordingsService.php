@@ -6,83 +6,57 @@ namespace Telnyx\Services\Texml\Accounts\Calls;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsContract;
-use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RecordingsService implements RecordingsContract
 {
     /**
+     * @api
+     */
+    public RecordingsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RecordingsRawService($client);
+    }
 
     /**
      * @api
      *
      * Updates recording resource for particular call.
      *
-     * @param string $accountSid
-     * @param string $callSid
-     * @param Status|value-of<Status> $status
+     * @param string $recordingSid path param: Uniquely identifies the recording by id
+     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $callSid path param: The CallSid that identifies the call to update
+     * @param Status|value-of<Status> $status Body param
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function recordingSidJson(
         string $recordingSid,
-        $accountSid,
-        $callSid,
-        $status = omit,
-        ?RequestOptions $requestOptions = null,
+        string $accountSid,
+        string $callSid,
+        Status|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RecordingRecordingSidJsonResponse {
-        $params = [
-            'accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status,
-        ];
-
-        return $this->recordingSidJsonRaw($recordingSid, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function recordingSidJsonRaw(
-        string $recordingSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RecordingRecordingSidJsonResponse {
-        [$parsed, $options] = RecordingRecordingSidJsonParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status]
         );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
-        $callSid = $parsed['callSid'];
-        unset($parsed['callSid']);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: [
-                'texml/Accounts/%1$s/Calls/%2$s/Recordings/%3$s.json',
-                $accountSid,
-                $callSid,
-                $recordingSid,
-            ],
-            headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key(
-                $parsed,
-                array_flip(['accountSid', 'callSid'])
-            ),
-            options: $options,
-            convert: RecordingRecordingSidJsonResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->recordingSidJson($recordingSid, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

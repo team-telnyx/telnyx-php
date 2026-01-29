@@ -10,55 +10,51 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificateDeleteResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateGetResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateNewResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SslCertificateContract
 {
     /**
      * @api
      *
+     * @param string $bucketName The name of the bucket
      * @param string $certificate The SSL certificate file
      * @param string $privateKey The private key file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $bucketName,
-        $certificate = omit,
-        $privateKey = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $certificate = null,
+        ?string $privateKey = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SslCertificateNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $bucketName,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): SslCertificateNewResponse;
-
-    /**
-     * @api
+     * @param string $bucketName The name of the bucket
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SslCertificateGetResponse;
 
     /**
      * @api
      *
+     * @param string $bucketName Bucket Name
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SslCertificateDeleteResponse;
 }

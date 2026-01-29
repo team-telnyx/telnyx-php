@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters\RecursiveCluster;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type node_alias = array{filename: string, text: string}
+ * @phpstan-type NodeShape = array{filename: string, text: string}
  */
 final class Node implements BaseModel
 {
-    /** @use SdkModel<node_alias> */
+    /** @use SdkModel<NodeShape> */
     use SdkModel;
 
     /**
      * The corresponding source file of your embedded storage bucket that the node is from.
      */
-    #[Api]
+    #[Required]
     public string $filename;
 
     /**
      * The text of the node.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
@@ -54,12 +54,12 @@ final class Node implements BaseModel
      */
     public static function with(string $filename, string $text): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->filename = $filename;
-        $obj->text = $text;
+        $self['filename'] = $filename;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Node implements BaseModel
      */
     public function withFilename(string $filename): self
     {
-        $obj = clone $this;
-        $obj->filename = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Node implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 }

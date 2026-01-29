@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\Media\MediaListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[content_type][].
  *
- * @phpstan-type filter_alias = array{contentType?: list<string>}
+ * @phpstan-type FilterShape = array{contentType?: list<string>|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -23,7 +23,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $contentType
      */
-    #[Api('content_type', list: 'string', optional: true)]
+    #[Optional('content_type', list: 'string')]
     public ?array $contentType;
 
     public function __construct()
@@ -36,15 +36,15 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $contentType
+     * @param list<string>|null $contentType
      */
     public static function with(?array $contentType = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contentType && $obj->contentType = $contentType;
+        null !== $contentType && $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class Filter implements BaseModel
      */
     public function withContentType(array $contentType): self
     {
-        $obj = clone $this;
-        $obj->contentType = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 }

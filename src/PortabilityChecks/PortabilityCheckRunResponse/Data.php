@@ -4,52 +4,52 @@ declare(strict_types=1);
 
 namespace Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   fastPortable?: bool,
- *   notPortableReason?: string,
- *   phoneNumber?: string,
- *   portable?: bool,
- *   recordType?: string,
+ * @phpstan-type DataShape = array{
+ *   fastPortable?: bool|null,
+ *   notPortableReason?: string|null,
+ *   phoneNumber?: string|null,
+ *   portable?: bool|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Indicates whether this phone number is FastPort eligible.
      */
-    #[Api('fast_portable', optional: true)]
+    #[Optional('fast_portable')]
     public ?bool $fastPortable;
 
     /**
      * If this phone number is not portable, explains why. Empty string if the number is portable.
      */
-    #[Api('not_portable_reason', optional: true)]
+    #[Optional('not_portable_reason')]
     public ?string $notPortableReason;
 
     /**
      * The +E.164 formatted phone number this result is about.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
      * Indicates whether this phone number is portable.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $portable;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -69,15 +69,15 @@ final class Data implements BaseModel
         ?bool $portable = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fastPortable && $obj->fastPortable = $fastPortable;
-        null !== $notPortableReason && $obj->notPortableReason = $notPortableReason;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $portable && $obj->portable = $portable;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $fastPortable && $self['fastPortable'] = $fastPortable;
+        null !== $notPortableReason && $self['notPortableReason'] = $notPortableReason;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $portable && $self['portable'] = $portable;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Data implements BaseModel
      */
     public function withFastPortable(bool $fastPortable): self
     {
-        $obj = clone $this;
-        $obj->fastPortable = $fastPortable;
+        $self = clone $this;
+        $self['fastPortable'] = $fastPortable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data implements BaseModel
      */
     public function withNotPortableReason(string $notPortableReason): self
     {
-        $obj = clone $this;
-        $obj->notPortableReason = $notPortableReason;
+        $self = clone $this;
+        $self['notPortableReason'] = $notPortableReason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class Data implements BaseModel
      */
     public function withPortable(bool $portable): self
     {
-        $obj = clone $this;
-        $obj->portable = $portable;
+        $self = clone $this;
+        $self['portable'] = $portable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

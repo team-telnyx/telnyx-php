@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -19,60 +19,69 @@ use Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement;
  *
  * If a request does not include all of the attributes for a resource, the system will interpret the missing attributes as if they were included with their current values. To explicitly set something to null, it must be included in the request with a null value.
  *
- * @see Telnyx\PortingOrders->update
+ * @see Telnyx\Services\PortingOrdersService::update()
  *
- * @phpstan-type porting_order_update_params = array{
- *   activationSettings?: ActivationSettings,
- *   customerGroupReference?: string,
- *   customerReference?: string,
- *   documents?: PortingOrderDocuments,
- *   endUser?: PortingOrderEndUser,
- *   messaging?: Messaging,
- *   misc?: PortingOrderMisc,
- *   phoneNumberConfiguration?: PortingOrderPhoneNumberConfiguration,
- *   requirementGroupID?: string,
- *   requirements?: list<Requirement>,
- *   userFeedback?: PortingOrderUserFeedback,
- *   webhookURL?: string,
+ * @phpstan-import-type ActivationSettingsShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings
+ * @phpstan-import-type PortingOrderDocumentsShape from \Telnyx\PortingOrders\PortingOrderDocuments
+ * @phpstan-import-type PortingOrderEndUserShape from \Telnyx\PortingOrders\PortingOrderEndUser
+ * @phpstan-import-type MessagingShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\Messaging
+ * @phpstan-import-type PortingOrderMiscShape from \Telnyx\PortingOrders\PortingOrderMisc
+ * @phpstan-import-type PortingOrderPhoneNumberConfigurationShape from \Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration
+ * @phpstan-import-type RequirementShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\Requirement
+ * @phpstan-import-type PortingOrderUserFeedbackShape from \Telnyx\PortingOrders\PortingOrderUserFeedback
+ *
+ * @phpstan-type PortingOrderUpdateParamsShape = array{
+ *   activationSettings?: null|ActivationSettings|ActivationSettingsShape,
+ *   customerGroupReference?: string|null,
+ *   customerReference?: string|null,
+ *   documents?: null|PortingOrderDocuments|PortingOrderDocumentsShape,
+ *   endUser?: null|PortingOrderEndUser|PortingOrderEndUserShape,
+ *   messaging?: null|Messaging|MessagingShape,
+ *   misc?: null|PortingOrderMisc|PortingOrderMiscShape,
+ *   phoneNumberConfiguration?: null|PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape,
+ *   requirementGroupID?: string|null,
+ *   requirements?: list<Requirement|RequirementShape>|null,
+ *   userFeedback?: null|PortingOrderUserFeedback|PortingOrderUserFeedbackShape,
+ *   webhookURL?: string|null,
  * }
  */
 final class PortingOrderUpdateParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_update_params> */
+    /** @use SdkModel<PortingOrderUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api('activation_settings', optional: true)]
+    #[Optional('activation_settings')]
     public ?ActivationSettings $activationSettings;
 
-    #[Api('customer_group_reference', optional: true)]
+    #[Optional('customer_group_reference')]
     public ?string $customerGroupReference;
 
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderDocuments $documents;
 
-    #[Api('end_user', optional: true)]
+    #[Optional('end_user')]
     public ?PortingOrderEndUser $endUser;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Messaging $messaging;
 
-    #[Api(optional: true)]
+    #[Optional(nullable: true)]
     public ?PortingOrderMisc $misc;
 
-    #[Api('phone_number_configuration', optional: true)]
+    #[Optional('phone_number_configuration')]
     public ?PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration;
 
     /**
      * If present, we will read the current values from the specified Requirement Group into the Documents and Requirements for this Porting Order. Note that any future changes in the Requirement Group would have no impact on this Porting Order. We will return an error if a specified Requirement Group conflicts with documents or requirements in the same request.
      */
-    #[Api('requirement_group_id', optional: true)]
+    #[Optional('requirement_group_id')]
     public ?string $requirementGroupID;
 
     /**
@@ -80,13 +89,13 @@ final class PortingOrderUpdateParams implements BaseModel
      *
      * @var list<Requirement>|null $requirements
      */
-    #[Api(list: Requirement::class, optional: true)]
+    #[Optional(list: Requirement::class)]
     public ?array $requirements;
 
-    #[Api('user_feedback', optional: true)]
+    #[Optional('user_feedback')]
     public ?PortingOrderUserFeedback $userFeedback;
 
-    #[Api('webhook_url', optional: true)]
+    #[Optional('webhook_url')]
     public ?string $webhookURL;
 
     public function __construct()
@@ -99,108 +108,132 @@ final class PortingOrderUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Requirement> $requirements
+     * @param ActivationSettings|ActivationSettingsShape|null $activationSettings
+     * @param PortingOrderDocuments|PortingOrderDocumentsShape|null $documents
+     * @param PortingOrderEndUser|PortingOrderEndUserShape|null $endUser
+     * @param Messaging|MessagingShape|null $messaging
+     * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
+     * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape|null $phoneNumberConfiguration
+     * @param list<Requirement|RequirementShape>|null $requirements
+     * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape|null $userFeedback
      */
     public static function with(
-        ?ActivationSettings $activationSettings = null,
+        ActivationSettings|array|null $activationSettings = null,
         ?string $customerGroupReference = null,
         ?string $customerReference = null,
-        ?PortingOrderDocuments $documents = null,
-        ?PortingOrderEndUser $endUser = null,
-        ?Messaging $messaging = null,
-        ?PortingOrderMisc $misc = null,
-        ?PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration = null,
+        PortingOrderDocuments|array|null $documents = null,
+        PortingOrderEndUser|array|null $endUser = null,
+        Messaging|array|null $messaging = null,
+        PortingOrderMisc|array|null $misc = null,
+        PortingOrderPhoneNumberConfiguration|array|null $phoneNumberConfiguration = null,
         ?string $requirementGroupID = null,
         ?array $requirements = null,
-        ?PortingOrderUserFeedback $userFeedback = null,
+        PortingOrderUserFeedback|array|null $userFeedback = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $activationSettings && $obj->activationSettings = $activationSettings;
-        null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $documents && $obj->documents = $documents;
-        null !== $endUser && $obj->endUser = $endUser;
-        null !== $messaging && $obj->messaging = $messaging;
-        null !== $misc && $obj->misc = $misc;
-        null !== $phoneNumberConfiguration && $obj->phoneNumberConfiguration = $phoneNumberConfiguration;
-        null !== $requirementGroupID && $obj->requirementGroupID = $requirementGroupID;
-        null !== $requirements && $obj->requirements = $requirements;
-        null !== $userFeedback && $obj->userFeedback = $userFeedback;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $activationSettings && $self['activationSettings'] = $activationSettings;
+        null !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $documents && $self['documents'] = $documents;
+        null !== $endUser && $self['endUser'] = $endUser;
+        null !== $messaging && $self['messaging'] = $messaging;
+        null !== $misc && $self['misc'] = $misc;
+        null !== $phoneNumberConfiguration && $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
+        null !== $requirementGroupID && $self['requirementGroupID'] = $requirementGroupID;
+        null !== $requirements && $self['requirements'] = $requirements;
+        null !== $userFeedback && $self['userFeedback'] = $userFeedback;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param ActivationSettings|ActivationSettingsShape $activationSettings
+     */
     public function withActivationSettings(
-        ActivationSettings $activationSettings
+        ActivationSettings|array $activationSettings
     ): self {
-        $obj = clone $this;
-        $obj->activationSettings = $activationSettings;
+        $self = clone $this;
+        $self['activationSettings'] = $activationSettings;
 
-        return $obj;
+        return $self;
     }
 
     public function withCustomerGroupReference(
         string $customerGroupReference
     ): self {
-        $obj = clone $this;
-        $obj->customerGroupReference = $customerGroupReference;
+        $self = clone $this;
+        $self['customerGroupReference'] = $customerGroupReference;
 
-        return $obj;
+        return $self;
     }
 
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Can be specified directly or via the `requirement_group_id` parameter.
+     *
+     * @param PortingOrderDocuments|PortingOrderDocumentsShape $documents
      */
-    public function withDocuments(PortingOrderDocuments $documents): self
+    public function withDocuments(PortingOrderDocuments|array $documents): self
     {
-        $obj = clone $this;
-        $obj->documents = $documents;
+        $self = clone $this;
+        $self['documents'] = $documents;
 
-        return $obj;
+        return $self;
     }
 
-    public function withEndUser(PortingOrderEndUser $endUser): self
+    /**
+     * @param PortingOrderEndUser|PortingOrderEndUserShape $endUser
+     */
+    public function withEndUser(PortingOrderEndUser|array $endUser): self
     {
-        $obj = clone $this;
-        $obj->endUser = $endUser;
+        $self = clone $this;
+        $self['endUser'] = $endUser;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMessaging(Messaging $messaging): self
+    /**
+     * @param Messaging|MessagingShape $messaging
+     */
+    public function withMessaging(Messaging|array $messaging): self
     {
-        $obj = clone $this;
-        $obj->messaging = $messaging;
+        $self = clone $this;
+        $self['messaging'] = $messaging;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMisc(PortingOrderMisc $misc): self
+    /**
+     * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
+     */
+    public function withMisc(PortingOrderMisc|array|null $misc): self
     {
-        $obj = clone $this;
-        $obj->misc = $misc;
+        $self = clone $this;
+        $self['misc'] = $misc;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape $phoneNumberConfiguration
+     */
     public function withPhoneNumberConfiguration(
-        PortingOrderPhoneNumberConfiguration $phoneNumberConfiguration
+        PortingOrderPhoneNumberConfiguration|array $phoneNumberConfiguration
     ): self {
-        $obj = clone $this;
-        $obj->phoneNumberConfiguration = $phoneNumberConfiguration;
+        $self = clone $this;
+        $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,39 +241,42 @@ final class PortingOrderUpdateParams implements BaseModel
      */
     public function withRequirementGroupID(string $requirementGroupID): self
     {
-        $obj = clone $this;
-        $obj->requirementGroupID = $requirementGroupID;
+        $self = clone $this;
+        $self['requirementGroupID'] = $requirementGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of requirements for porting numbers.
      *
-     * @param list<Requirement> $requirements
+     * @param list<Requirement|RequirementShape> $requirements
      */
     public function withRequirements(array $requirements): self
     {
-        $obj = clone $this;
-        $obj->requirements = $requirements;
+        $self = clone $this;
+        $self['requirements'] = $requirements;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape $userFeedback
+     */
     public function withUserFeedback(
-        PortingOrderUserFeedback $userFeedback
+        PortingOrderUserFeedback|array $userFeedback
     ): self {
-        $obj = clone $this;
-        $obj->userFeedback = $userFeedback;
+        $self = clone $this;
+        $self['userFeedback'] = $userFeedback;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

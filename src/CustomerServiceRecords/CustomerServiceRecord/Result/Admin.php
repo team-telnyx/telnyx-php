@@ -4,47 +4,47 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * The admin of the customer service record.
  *
- * @phpstan-type admin_alias = array{
- *   accountNumber?: string,
- *   authorizedPersonName?: string,
- *   billingPhoneNumber?: string,
- *   name?: string,
+ * @phpstan-type AdminShape = array{
+ *   accountNumber?: string|null,
+ *   authorizedPersonName?: string|null,
+ *   billingPhoneNumber?: string|null,
+ *   name?: string|null,
  * }
  */
 final class Admin implements BaseModel
 {
-    /** @use SdkModel<admin_alias> */
+    /** @use SdkModel<AdminShape> */
     use SdkModel;
 
     /**
      * The account number of the customer service record.
      */
-    #[Api('account_number', optional: true)]
+    #[Optional('account_number')]
     public ?string $accountNumber;
 
     /**
      * The authorized person name of the customer service record.
      */
-    #[Api('authorized_person_name', optional: true)]
+    #[Optional('authorized_person_name')]
     public ?string $authorizedPersonName;
 
     /**
      * The billing phone number of the customer service record.
      */
-    #[Api('billing_phone_number', optional: true)]
+    #[Optional('billing_phone_number')]
     public ?string $billingPhoneNumber;
 
     /**
      * The name of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()
@@ -63,14 +63,14 @@ final class Admin implements BaseModel
         ?string $billingPhoneNumber = null,
         ?string $name = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountNumber && $obj->accountNumber = $accountNumber;
-        null !== $authorizedPersonName && $obj->authorizedPersonName = $authorizedPersonName;
-        null !== $billingPhoneNumber && $obj->billingPhoneNumber = $billingPhoneNumber;
-        null !== $name && $obj->name = $name;
+        null !== $accountNumber && $self['accountNumber'] = $accountNumber;
+        null !== $authorizedPersonName && $self['authorizedPersonName'] = $authorizedPersonName;
+        null !== $billingPhoneNumber && $self['billingPhoneNumber'] = $billingPhoneNumber;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class Admin implements BaseModel
      */
     public function withAccountNumber(string $accountNumber): self
     {
-        $obj = clone $this;
-        $obj->accountNumber = $accountNumber;
+        $self = clone $this;
+        $self['accountNumber'] = $accountNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Admin implements BaseModel
      */
     public function withAuthorizedPersonName(string $authorizedPersonName): self
     {
-        $obj = clone $this;
-        $obj->authorizedPersonName = $authorizedPersonName;
+        $self = clone $this;
+        $self['authorizedPersonName'] = $authorizedPersonName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Admin implements BaseModel
      */
     public function withBillingPhoneNumber(string $billingPhoneNumber): self
     {
-        $obj = clone $this;
-        $obj->billingPhoneNumber = $billingPhoneNumber;
+        $self = clone $this;
+        $self['billingPhoneNumber'] = $billingPhoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,9 +111,9 @@ final class Admin implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

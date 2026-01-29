@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocumentListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Documents\DocumentListParams\Filter\CreatedAt;
@@ -14,24 +14,28 @@ use Telnyx\Documents\DocumentListParams\Filter\Filename;
 /**
  * Consolidated filter parameter for documents (deepObject style). Originally: filter[filename][contains], filter[customer_reference][eq], filter[customer_reference][in][], filter[created_at][gt], filter[created_at][lt].
  *
- * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt,
- *   customerReference?: CustomerReference,
- *   filename?: Filename,
+ * @phpstan-import-type CreatedAtShape from \Telnyx\Documents\DocumentListParams\Filter\CreatedAt
+ * @phpstan-import-type CustomerReferenceShape from \Telnyx\Documents\DocumentListParams\Filter\CustomerReference
+ * @phpstan-import-type FilenameShape from \Telnyx\Documents\DocumentListParams\Filter\Filename
+ *
+ * @phpstan-type FilterShape = array{
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   customerReference?: null|CustomerReference|CustomerReferenceShape,
+ *   filename?: null|Filename|FilenameShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?CreatedAt $createdAt;
 
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?CustomerReference $customerReference;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filename $filename;
 
     public function __construct()
@@ -43,43 +47,56 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param CustomerReference|CustomerReferenceShape|null $customerReference
+     * @param Filename|FilenameShape|null $filename
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
-        ?CustomerReference $customerReference = null,
-        ?Filename $filename = null,
+        CreatedAt|array|null $createdAt = null,
+        CustomerReference|array|null $customerReference = null,
+        Filename|array|null $filename = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $filename && $obj->filename = $filename;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $filename && $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 
-    public function withCreatedAt(CreatedAt $createdAt): self
+    /**
+     * @param CreatedAt|CreatedAtShape $createdAt
+     */
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param CustomerReference|CustomerReferenceShape $customerReference
+     */
     public function withCustomerReference(
-        CustomerReference $customerReference
+        CustomerReference|array $customerReference
     ): self {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
-    public function withFilename(Filename $filename): self
+    /**
+     * @param Filename|FilenameShape $filename
+     */
+    public function withFilename(Filename|array $filename): self
     {
-        $obj = clone $this;
-        $obj->filename = $filename;
+        $self = clone $this;
+        $self['filename'] = $filename;
 
-        return $obj;
+        return $self;
     }
 }

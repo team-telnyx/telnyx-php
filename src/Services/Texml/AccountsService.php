@@ -6,50 +6,63 @@ namespace Telnyx\Services\Texml;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsContract;
 use Telnyx\Services\Texml\Accounts\CallsService;
 use Telnyx\Services\Texml\Accounts\ConferencesService;
+use Telnyx\Services\Texml\Accounts\QueuesService;
 use Telnyx\Services\Texml\Accounts\RecordingsService;
 use Telnyx\Services\Texml\Accounts\TranscriptionsService;
 use Telnyx\Texml\Accounts\AccountGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
-use Telnyx\Texml\Accounts\AccountRetrieveRecordingsJsonParams;
-use Telnyx\Texml\Accounts\AccountRetrieveTranscriptionsJsonParams;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AccountsService implements AccountsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public AccountsRawService $raw;
+
+    /**
+     * @api
      */
     public CallsService $calls;
 
     /**
-     * @@api
+     * @api
      */
     public ConferencesService $conferences;
 
     /**
-     * @@api
+     * @api
      */
     public RecordingsService $recordings;
 
     /**
-     * @@api
+     * @api
      */
     public TranscriptionsService $transcriptions;
+
+    /**
+     * @api
+     */
+    public QueuesService $queues;
 
     /**
      * @internal
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new AccountsRawService($client);
         $this->calls = new CallsService($client);
         $this->conferences = new ConferencesService($client);
         $this->recordings = new RecordingsService($client);
         $this->transcriptions = new TranscriptionsService($client);
+        $this->queues = new QueuesService($client);
     }
 
     /**
@@ -57,55 +70,29 @@ final class AccountsService implements AccountsContract
      *
      * Returns multiple recording resources for an account.
      *
+     * @param string $accountSid the id of the account the resource belongs to
      * @param \DateTimeInterface $dateCreated Filters recording by the creation date. Expected format is ISO8601 date or date-time, ie. {YYYY}-{MM}-{DD} or {YYYY}-{MM}-{DD}T{hh}:{mm}:{ss}Z. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
      * @param int $page the number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken
      * @param int $pageSize The number of records to be displayed on a page
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $accountSid,
-        $dateCreated = omit,
-        $page = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null,
+        ?\DateTimeInterface $dateCreated = null,
+        ?int $page = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AccountGetRecordingsJsonResponse {
-        $params = [
-            'dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize,
-        ];
-
-        return $this->retrieveRecordingsJsonRaw(
-            $accountSid,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordingsJsonRaw(
-        string $accountSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AccountGetRecordingsJsonResponse {
-        [$parsed, $options] = AccountRetrieveRecordingsJsonParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['texml/Accounts/%1$s/Recordings.json', $accountSid],
-            query: $parsed,
-            options: $options,
-            convert: AccountGetRecordingsJsonResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveRecordingsJson($accountSid, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -113,50 +100,26 @@ final class AccountsService implements AccountsContract
      *
      * Returns multiple recording transcription resources for an account.
      *
+     * @param string $accountSid the id of the account the resource belongs to
      * @param int $pageSize The number of records to be displayed on a page
      * @param string $pageToken used to request the next page of results
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveTranscriptionsJson(
         string $accountSid,
-        $pageSize = omit,
-        $pageToken = omit,
-        ?RequestOptions $requestOptions = null,
+        ?int $pageSize = null,
+        ?string $pageToken = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AccountGetTranscriptionsJsonResponse {
-        $params = ['pageSize' => $pageSize, 'pageToken' => $pageToken];
-
-        return $this->retrieveTranscriptionsJsonRaw(
-            $accountSid,
-            $params,
-            $requestOptions
-        );
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveTranscriptionsJsonRaw(
-        string $accountSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AccountGetTranscriptionsJsonResponse {
-        [$parsed, $options] = AccountRetrieveTranscriptionsJsonParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['pageSize' => $pageSize, 'pageToken' => $pageToken]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['texml/Accounts/%1$s/Transcriptions.json', $accountSid],
-            query: $parsed,
-            options: $options,
-            convert: AccountGetTranscriptionsJsonResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveTranscriptionsJson($accountSid, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

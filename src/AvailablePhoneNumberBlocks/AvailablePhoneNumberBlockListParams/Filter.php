@@ -5,41 +5,41 @@ declare(strict_types=1);
 namespace Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams;
 
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListParams\Filter\PhoneNumberType;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[locality], filter[country_code], filter[national_destination_code], filter[phone_number_type].
  *
- * @phpstan-type filter_alias = array{
- *   countryCode?: string,
- *   locality?: string,
- *   nationalDestinationCode?: string,
- *   phoneNumberType?: value-of<PhoneNumberType>,
+ * @phpstan-type FilterShape = array{
+ *   countryCode?: string|null,
+ *   locality?: string|null,
+ *   nationalDestinationCode?: string|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter phone numbers by country.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * Filter phone numbers by city.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
      * Filter by the national destination code of the number.
      */
-    #[Api('national_destination_code', optional: true)]
+    #[Optional('national_destination_code')]
     public ?string $nationalDestinationCode;
 
     /**
@@ -47,7 +47,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
     public ?string $phoneNumberType;
 
     public function __construct()
@@ -60,7 +60,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
      */
     public static function with(
         ?string $countryCode = null,
@@ -68,14 +68,14 @@ final class Filter implements BaseModel
         ?string $nationalDestinationCode = null,
         PhoneNumberType|string|null $phoneNumberType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $locality && $obj->locality = $locality;
-        null !== $nationalDestinationCode && $obj->nationalDestinationCode = $nationalDestinationCode;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $locality && $self['locality'] = $locality;
+        null !== $nationalDestinationCode && $self['nationalDestinationCode'] = $nationalDestinationCode;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class Filter implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +94,10 @@ final class Filter implements BaseModel
      */
     public function withLocality(string $locality): self
     {
-        $obj = clone $this;
-        $obj->locality = $locality;
+        $self = clone $this;
+        $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +106,10 @@ final class Filter implements BaseModel
     public function withNationalDestinationCode(
         string $nationalDestinationCode
     ): self {
-        $obj = clone $this;
-        $obj->nationalDestinationCode = $nationalDestinationCode;
+        $self = clone $this;
+        $self['nationalDestinationCode'] = $nationalDestinationCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,9 +120,9 @@ final class Filter implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 }

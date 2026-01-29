@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ip_connection_get_response = array{data?: IPConnection}
+ * @phpstan-import-type IPConnectionShape from \Telnyx\IPConnections\IPConnection
+ *
+ * @phpstan-type IPConnectionGetResponseShape = array{
+ *   data?: null|IPConnection|IPConnectionShape
+ * }
  */
-final class IPConnectionGetResponse implements BaseModel, ResponseConverter
+final class IPConnectionGetResponse implements BaseModel
 {
-    /** @use SdkModel<ip_connection_get_response> */
+    /** @use SdkModel<IPConnectionGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?IPConnection $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class IPConnectionGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param IPConnection|IPConnectionShape|null $data
      */
-    public static function with(?IPConnection $data = null): self
+    public static function with(IPConnection|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(IPConnection $data): self
+    /**
+     * @param IPConnection|IPConnectionShape $data
+     */
+    public function withData(IPConnection|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

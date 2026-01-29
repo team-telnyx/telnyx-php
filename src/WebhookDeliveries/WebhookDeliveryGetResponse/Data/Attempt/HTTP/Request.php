@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\ListOf;
@@ -12,11 +12,13 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * Request details.
  *
- * @phpstan-type request_alias = array{headers?: list<list<string>>, url?: string}
+ * @phpstan-type RequestShape = array{
+ *   headers?: list<list<string>>|null, url?: string|null
+ * }
  */
 final class Request implements BaseModel
 {
-    /** @use SdkModel<request_alias> */
+    /** @use SdkModel<RequestShape> */
     use SdkModel;
 
     /**
@@ -24,10 +26,10 @@ final class Request implements BaseModel
      *
      * @var list<list<string>>|null $headers
      */
-    #[Api(list: new ListOf('string'), optional: true)]
+    #[Optional(list: new ListOf('string'))]
     public ?array $headers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()
@@ -40,16 +42,16 @@ final class Request implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<list<string>> $headers
+     * @param list<list<string>>|null $headers
      */
     public static function with(?array $headers = null, ?string $url = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $headers && $obj->headers = $headers;
-        null !== $url && $obj->url = $url;
+        null !== $headers && $self['headers'] = $headers;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,17 +61,17 @@ final class Request implements BaseModel
      */
     public function withHeaders(array $headers): self
     {
-        $obj = clone $this;
-        $obj->headers = $headers;
+        $self = clone $this;
+        $self['headers'] = $headers;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

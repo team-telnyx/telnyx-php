@@ -4,28 +4,29 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PortingOrders\Actions\ActionCancelResponse\Meta;
 use Telnyx\PortingOrders\PortingOrder;
 
 /**
- * @phpstan-type action_cancel_response = array{data?: PortingOrder, meta?: Meta}
+ * @phpstan-import-type PortingOrderShape from \Telnyx\PortingOrders\PortingOrder
+ * @phpstan-import-type MetaShape from \Telnyx\PortingOrders\Actions\ActionCancelResponse\Meta
+ *
+ * @phpstan-type ActionCancelResponseShape = array{
+ *   data?: null|PortingOrder|PortingOrderShape, meta?: null|Meta|MetaShape
+ * }
  */
-final class ActionCancelResponse implements BaseModel, ResponseConverter
+final class ActionCancelResponse implements BaseModel
 {
-    /** @use SdkModel<action_cancel_response> */
+    /** @use SdkModel<ActionCancelResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrder $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
     public function __construct()
@@ -37,32 +38,41 @@ final class ActionCancelResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PortingOrder|PortingOrderShape|null $data
+     * @param Meta|MetaShape|null $meta
      */
     public static function with(
-        ?PortingOrder $data = null,
-        ?Meta $meta = null
+        PortingOrder|array|null $data = null,
+        Meta|array|null $meta = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(PortingOrder $data): self
+    /**
+     * @param PortingOrder|PortingOrderShape $data
+     */
+    public function withData(PortingOrder|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|MetaShape $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

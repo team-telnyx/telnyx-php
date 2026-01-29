@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberReservations\NumberReservationListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Filter number reservations by date range.
  *
- * @phpstan-type created_at = array{gt?: string, lt?: string}
+ * @phpstan-type CreatedAtShape = array{gt?: string|null, lt?: string|null}
  */
 final class CreatedAt implements BaseModel
 {
-    /** @use SdkModel<created_at> */
+    /** @use SdkModel<CreatedAtShape> */
     use SdkModel;
 
     /**
      * Filter number reservations later than this value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $gt;
 
     /**
      * Filter number reservations earlier than this value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $lt;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class CreatedAt implements BaseModel
      */
     public static function with(?string $gt = null, ?string $lt = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $gt && $obj->gt = $gt;
-        null !== $lt && $obj->lt = $lt;
+        null !== $gt && $self['gt'] = $gt;
+        null !== $lt && $self['lt'] = $lt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class CreatedAt implements BaseModel
      */
     public function withGt(string $gt): self
     {
-        $obj = clone $this;
-        $obj->gt = $gt;
+        $self = clone $this;
+        $self['gt'] = $gt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class CreatedAt implements BaseModel
      */
     public function withLt(string $lt): self
     {
-        $obj = clone $this;
-        $obj->lt = $lt;
+        $self = clone $this;
+        $self['lt'] = $lt;
 
-        return $obj;
+        return $self;
     }
 }

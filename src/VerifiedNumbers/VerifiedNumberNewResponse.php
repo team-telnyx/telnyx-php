@@ -4,28 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifiedNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type verified_number_new_response = array{
- *   phoneNumber?: string, verificationMethod?: string
+ * @phpstan-type VerifiedNumberNewResponseShape = array{
+ *   phoneNumber?: string|null, verificationMethod?: string|null
  * }
  */
-final class VerifiedNumberNewResponse implements BaseModel, ResponseConverter
+final class VerifiedNumberNewResponse implements BaseModel
 {
-    /** @use SdkModel<verified_number_new_response> */
+    /** @use SdkModel<VerifiedNumberNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
-    #[Api('verification_method', optional: true)]
+    #[Optional('verification_method')]
     public ?string $verificationMethod;
 
     public function __construct()
@@ -42,27 +38,27 @@ final class VerifiedNumberNewResponse implements BaseModel, ResponseConverter
         ?string $phoneNumber = null,
         ?string $verificationMethod = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $verificationMethod && $obj->verificationMethod = $verificationMethod;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $verificationMethod && $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withVerificationMethod(string $verificationMethod): self
     {
-        $obj = clone $this;
-        $obj->verificationMethod = $verificationMethod;
+        $self = clone $this;
+        $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 }

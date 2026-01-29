@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter\TelephoneNumber;
@@ -12,25 +12,28 @@ use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter\Telephone
 /**
  * Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
  *
- * @phpstan-type filter_alias = array{
- *   externalConnectionID?: string, telephoneNumber?: TelephoneNumber
+ * @phpstan-import-type TelephoneNumberShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter\TelephoneNumber
+ *
+ * @phpstan-type FilterShape = array{
+ *   externalConnectionID?: string|null,
+ *   telephoneNumber?: null|TelephoneNumber|TelephoneNumberShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * The external connection ID to filter by or "null" to filter for logs without an external connection ID.
      */
-    #[Api('external_connection_id', optional: true)]
+    #[Optional('external_connection_id')]
     public ?string $externalConnectionID;
 
     /**
      * Telephone number filter operations for log messages. Use 'eq' for exact matches or 'contains' for partial matches.
      */
-    #[Api('telephone_number', optional: true)]
+    #[Optional('telephone_number')]
     public ?TelephoneNumber $telephoneNumber;
 
     public function __construct()
@@ -42,17 +45,19 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param TelephoneNumber|TelephoneNumberShape|null $telephoneNumber
      */
     public static function with(
         ?string $externalConnectionID = null,
-        ?TelephoneNumber $telephoneNumber = null
+        TelephoneNumber|array|null $telephoneNumber = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $externalConnectionID && $obj->externalConnectionID = $externalConnectionID;
-        null !== $telephoneNumber && $obj->telephoneNumber = $telephoneNumber;
+        null !== $externalConnectionID && $self['externalConnectionID'] = $externalConnectionID;
+        null !== $telephoneNumber && $self['telephoneNumber'] = $telephoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,20 +65,23 @@ final class Filter implements BaseModel
      */
     public function withExternalConnectionID(string $externalConnectionID): self
     {
-        $obj = clone $this;
-        $obj->externalConnectionID = $externalConnectionID;
+        $self = clone $this;
+        $self['externalConnectionID'] = $externalConnectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Telephone number filter operations for log messages. Use 'eq' for exact matches or 'contains' for partial matches.
+     *
+     * @param TelephoneNumber|TelephoneNumberShape $telephoneNumber
      */
-    public function withTelephoneNumber(TelephoneNumber $telephoneNumber): self
-    {
-        $obj = clone $this;
-        $obj->telephoneNumber = $telephoneNumber;
+    public function withTelephoneNumber(
+        TelephoneNumber|array $telephoneNumber
+    ): self {
+        $self = clone $this;
+        $self['telephoneNumber'] = $telephoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

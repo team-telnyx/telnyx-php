@@ -6,8 +6,8 @@ namespace Telnyx\Services\Legacy\Reporting\BatchDetailRecords;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
-use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingCreateParams;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingDeleteResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingGetResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingListResponse;
@@ -15,14 +15,24 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords\MessagingContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MessagingService implements MessagingContract
 {
     /**
+     * @api
+     */
+    public MessagingRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MessagingRawService($client);
+    }
 
     /**
      * @api
@@ -33,7 +43,7 @@ final class MessagingService implements MessagingContract
      * @param \DateTimeInterface $startTime Start time in ISO format
      * @param list<int> $connections List of connections to filter by
      * @param list<int> $directions List of directions to filter by (Inbound = 1, Outbound = 2)
-     * @param list<Filter> $filters List of filters to apply
+     * @param list<Filter|FilterShape> $filters List of filters to apply
      * @param bool $includeMessageBody Whether to include message body in the report
      * @param list<string> $managedAccounts List of managed accounts to include
      * @param list<string> $profiles List of messaging profile IDs to filter by
@@ -41,66 +51,46 @@ final class MessagingService implements MessagingContract
      * @param string $reportName Name of the report
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
      * @param string $timezone Timezone for the report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $endTime,
-        $startTime,
-        $connections = omit,
-        $directions = omit,
-        $filters = omit,
-        $includeMessageBody = omit,
-        $managedAccounts = omit,
-        $profiles = omit,
-        $recordTypes = omit,
-        $reportName = omit,
-        $selectAllManagedAccounts = omit,
-        $timezone = omit,
-        ?RequestOptions $requestOptions = null,
+        \DateTimeInterface $endTime,
+        \DateTimeInterface $startTime,
+        ?array $connections = null,
+        ?array $directions = null,
+        ?array $filters = null,
+        ?bool $includeMessageBody = null,
+        ?array $managedAccounts = null,
+        ?array $profiles = null,
+        ?array $recordTypes = null,
+        ?string $reportName = null,
+        ?bool $selectAllManagedAccounts = null,
+        ?string $timezone = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessagingNewResponse {
-        $params = [
-            'endTime' => $endTime,
-            'startTime' => $startTime,
-            'connections' => $connections,
-            'directions' => $directions,
-            'filters' => $filters,
-            'includeMessageBody' => $includeMessageBody,
-            'managedAccounts' => $managedAccounts,
-            'profiles' => $profiles,
-            'recordTypes' => $recordTypes,
-            'reportName' => $reportName,
-            'selectAllManagedAccounts' => $selectAllManagedAccounts,
-            'timezone' => $timezone,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MessagingNewResponse {
-        [$parsed, $options] = MessagingCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'endTime' => $endTime,
+                'startTime' => $startTime,
+                'connections' => $connections,
+                'directions' => $directions,
+                'filters' => $filters,
+                'includeMessageBody' => $includeMessageBody,
+                'managedAccounts' => $managedAccounts,
+                'profiles' => $profiles,
+                'recordTypes' => $recordTypes,
+                'reportName' => $reportName,
+                'selectAllManagedAccounts' => $selectAllManagedAccounts,
+                'timezone' => $timezone,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'legacy/reporting/batch_detail_records/messaging',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessagingNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -108,19 +98,18 @@ final class MessagingService implements MessagingContract
      *
      * Retrieves a specific MDR detailed report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['legacy/reporting/batch_detail_records/messaging/%1$s', $id],
-            options: $requestOptions,
-            convert: MessagingGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -128,18 +117,17 @@ final class MessagingService implements MessagingContract
      *
      * Retrieves all MDR detailed report requests for the authenticated user
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'legacy/reporting/batch_detail_records/messaging',
-            options: $requestOptions,
-            convert: MessagingListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -147,18 +135,17 @@ final class MessagingService implements MessagingContract
      *
      * Deletes a specific MDR detailed report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['legacy/reporting/batch_detail_records/messaging/%1$s', $id],
-            options: $requestOptions,
-            convert: MessagingDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

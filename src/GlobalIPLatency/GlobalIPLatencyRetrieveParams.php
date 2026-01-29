@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPLatency;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,20 +13,24 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter;
 /**
  * Global IP Latency Metrics.
  *
- * @see Telnyx\GlobalIPLatency->retrieve
+ * @see Telnyx\Services\GlobalIPLatencyService::retrieve()
  *
- * @phpstan-type global_ip_latency_retrieve_params = array{filter?: Filter}
+ * @phpstan-import-type FilterShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter
+ *
+ * @phpstan-type GlobalIPLatencyRetrieveParamsShape = array{
+ *   filter?: null|Filter|FilterShape
+ * }
  */
 final class GlobalIPLatencyRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_latency_retrieve_params> */
+    /** @use SdkModel<GlobalIPLatencyRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()
@@ -38,24 +42,28 @@ final class GlobalIPLatencyRetrieveParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
      */
-    public static function with(?Filter $filter = null): self
+    public static function with(Filter|array|null $filter = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
+        null !== $filter && $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[global_ip_id][in].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 }

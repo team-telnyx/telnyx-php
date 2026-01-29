@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Storage\Migrations\MigrationGetResponse;
+use Telnyx\Storage\Migrations\MigrationListResponse;
+use Telnyx\Storage\Migrations\MigrationNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +42,8 @@ final class MigrationsTest extends TestCase
             targetRegion: 'target_region',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MigrationNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,9 +57,11 @@ final class MigrationsTest extends TestCase
             sourceID: 'source_id',
             targetBucketName: 'target_bucket_name',
             targetRegion: 'target_region',
+            refresh: true,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MigrationNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +73,8 @@ final class MigrationsTest extends TestCase
 
         $result = $this->client->storage->migrations->retrieve('');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MigrationGetResponse::class, $result);
     }
 
     #[Test]
@@ -79,6 +86,7 @@ final class MigrationsTest extends TestCase
 
         $result = $this->client->storage->migrations->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MigrationListResponse::class, $result);
     }
 }

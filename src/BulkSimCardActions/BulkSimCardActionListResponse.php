@@ -4,32 +4,73 @@ declare(strict_types=1);
 
 namespace Telnyx\BulkSimCardActions;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\ActionType;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\SimCardActionsSummary;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type bulk_sim_card_action_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-import-type SimCardActionsSummaryShape from \Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\SimCardActionsSummary
+ *
+ * @phpstan-type BulkSimCardActionListResponseShape = array{
+ *   id?: string|null,
+ *   actionType?: null|ActionType|value-of<ActionType>,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   settings?: array<string,mixed>|null,
+ *   simCardActionsSummary?: list<SimCardActionsSummary|SimCardActionsSummaryShape>|null,
+ *   updatedAt?: string|null,
  * }
  */
-final class BulkSimCardActionListResponse implements BaseModel, ResponseConverter
+final class BulkSimCardActionListResponse implements BaseModel
 {
-    /** @use SdkModel<bulk_sim_card_action_list_response> */
+    /** @use SdkModel<BulkSimCardActionListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * Identifies the resource.
+     */
+    #[Optional]
+    public ?string $id;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * The operation type. It can be one of the following: <br/>
+     * <ul>
+     * <li><code>bulk_set_public_ips</code> - set a public IP for each specified SIM card.</li>
+     * </ul>.
+     *
+     * @var value-of<ActionType>|null $actionType
+     */
+    #[Optional('action_type', enum: ActionType::class)]
+    public ?string $actionType;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?string $createdAt;
+
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * A JSON object representation of the bulk action payload.
+     *
+     * @var array<string,mixed>|null $settings
+     */
+    #[Optional(map: 'mixed')]
+    public ?array $settings;
+
+    /** @var list<SimCardActionsSummary>|null $simCardActionsSummary */
+    #[Optional('sim_card_actions_summary', list: SimCardActionsSummary::class)]
+    public ?array $simCardActionsSummary;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -41,36 +82,111 @@ final class BulkSimCardActionListResponse implements BaseModel, ResponseConverte
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param ActionType|value-of<ActionType>|null $actionType
+     * @param array<string,mixed>|null $settings
+     * @param list<SimCardActionsSummary|SimCardActionsSummaryShape>|null $simCardActionsSummary
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?string $id = null,
+        ActionType|string|null $actionType = null,
+        ?string $createdAt = null,
+        ?string $recordType = null,
+        ?array $settings = null,
+        ?array $simCardActionsSummary = null,
+        ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $id && $self['id'] = $id;
+        null !== $actionType && $self['actionType'] = $actionType;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $settings && $self['settings'] = $settings;
+        null !== $simCardActionsSummary && $self['simCardActionsSummary'] = $simCardActionsSummary;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * Identifies the resource.
      */
-    public function withData(array $data): self
+    public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * The operation type. It can be one of the following: <br/>
+     * <ul>
+     * <li><code>bulk_set_public_ips</code> - set a public IP for each specified SIM card.</li>
+     * </ul>.
+     *
+     * @param ActionType|value-of<ActionType> $actionType
+     */
+    public function withActionType(ActionType|string $actionType): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['actionType'] = $actionType;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    public function withCreatedAt(string $createdAt): self
+    {
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * A JSON object representation of the bulk action payload.
+     *
+     * @param array<string,mixed> $settings
+     */
+    public function withSettings(array $settings): self
+    {
+        $self = clone $this;
+        $self['settings'] = $settings;
+
+        return $self;
+    }
+
+    /**
+     * @param list<SimCardActionsSummary|SimCardActionsSummaryShape> $simCardActionsSummary
+     */
+    public function withSimCardActionsSummary(
+        array $simCardActionsSummary
+    ): self {
+        $self = clone $this;
+        $self['simCardActionsSummary'] = $simCardActionsSummary;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
+
+        return $self;
     }
 }

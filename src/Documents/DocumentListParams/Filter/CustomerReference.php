@@ -4,22 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocumentListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type customer_reference = array{eq?: string, in?: list<string>}
+ * @phpstan-type CustomerReferenceShape = array{
+ *   eq?: string|null, in?: list<string>|null
+ * }
  */
 final class CustomerReference implements BaseModel
 {
-    /** @use SdkModel<customer_reference> */
+    /** @use SdkModel<CustomerReferenceShape> */
     use SdkModel;
 
     /**
      * Filter documents by a customer reference.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     /**
@@ -27,7 +29,7 @@ final class CustomerReference implements BaseModel
      *
      * @var list<string>|null $in
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $in;
 
     public function __construct()
@@ -40,16 +42,16 @@ final class CustomerReference implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $in
+     * @param list<string>|null $in
      */
     public static function with(?string $eq = null, ?array $in = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj->eq = $eq;
-        null !== $in && $obj->in = $in;
+        null !== $eq && $self['eq'] = $eq;
+        null !== $in && $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +59,10 @@ final class CustomerReference implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj->eq = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +72,9 @@ final class CustomerReference implements BaseModel
      */
     public function withIn(array $in): self
     {
-        $obj = clone $this;
-        $obj->in = $in;
+        $self = clone $this;
+        $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 }

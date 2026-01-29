@@ -5,42 +5,45 @@ declare(strict_types=1);
 namespace Telnyx\AI\Conversations\InsightGroups;
 
 use Telnyx\AI\Conversations\Insights\InsightTemplate;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type insight_template_group = array{
+ * @phpstan-import-type InsightTemplateShape from \Telnyx\AI\Conversations\Insights\InsightTemplate
+ *
+ * @phpstan-type InsightTemplateGroupShape = array{
  *   id: string,
  *   createdAt: \DateTimeInterface,
  *   name: string,
- *   description?: string,
- *   insights?: list<InsightTemplate>,
- *   webhook?: string,
+ *   description?: string|null,
+ *   insights?: list<InsightTemplate|InsightTemplateShape>|null,
+ *   webhook?: string|null,
  * }
  */
 final class InsightTemplateGroup implements BaseModel
 {
-    /** @use SdkModel<insight_template_group> */
+    /** @use SdkModel<InsightTemplateGroupShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api('created_at')]
+    #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
-    #[Api]
+    #[Required]
     public string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /** @var list<InsightTemplate>|null $insights */
-    #[Api(list: InsightTemplate::class, optional: true)]
+    #[Optional(list: InsightTemplate::class)]
     public ?array $insights;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook;
 
     /**
@@ -67,7 +70,7 @@ final class InsightTemplateGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<InsightTemplate> $insights
+     * @param list<InsightTemplate|InsightTemplateShape>|null $insights
      */
     public static function with(
         string $id,
@@ -77,67 +80,67 @@ final class InsightTemplateGroup implements BaseModel
         ?array $insights = null,
         ?string $webhook = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->name = $name;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['name'] = $name;
 
-        null !== $description && $obj->description = $description;
-        null !== $insights && $obj->insights = $insights;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $description && $self['description'] = $description;
+        null !== $insights && $self['insights'] = $insights;
+        null !== $webhook && $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<InsightTemplate> $insights
+     * @param list<InsightTemplate|InsightTemplateShape> $insights
      */
     public function withInsights(array $insights): self
     {
-        $obj = clone $this;
-        $obj->insights = $insights;
+        $self = clone $this;
+        $self['insights'] = $insights;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhook(string $webhook): self
     {
-        $obj = clone $this;
-        $obj->webhook = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

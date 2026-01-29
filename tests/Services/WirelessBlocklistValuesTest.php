@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -33,9 +34,10 @@ final class WirelessBlocklistValuesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklistValues->list('country');
+        $result = $this->client->wirelessBlocklistValues->list(type: 'country');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WirelessBlocklistValueListResponse::class, $result);
     }
 
     #[Test]
@@ -45,8 +47,9 @@ final class WirelessBlocklistValuesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklistValues->list('country');
+        $result = $this->client->wirelessBlocklistValues->list(type: 'country');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(WirelessBlocklistValueListResponse::class, $result);
     }
 }

@@ -4,32 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type upload_new_response = array{success?: bool, ticketID?: string}
+ * @phpstan-type UploadNewResponseShape = array{
+ *   success?: bool|null, ticketID?: string|null
+ * }
  */
-final class UploadNewResponse implements BaseModel, ResponseConverter
+final class UploadNewResponse implements BaseModel
 {
-    /** @use SdkModel<upload_new_response> */
+    /** @use SdkModel<UploadNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Describes wether or not the operation was successful.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $success;
 
     /**
      * Ticket id of the upload request.
      */
-    #[Api('ticket_id', optional: true)]
+    #[Optional('ticket_id')]
     public ?string $ticketID;
 
     public function __construct()
@@ -46,12 +44,12 @@ final class UploadNewResponse implements BaseModel, ResponseConverter
         ?bool $success = null,
         ?string $ticketID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $success && $obj->success = $success;
-        null !== $ticketID && $obj->ticketID = $ticketID;
+        null !== $success && $self['success'] = $success;
+        null !== $ticketID && $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +57,10 @@ final class UploadNewResponse implements BaseModel, ResponseConverter
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj->success = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +68,9 @@ final class UploadNewResponse implements BaseModel, ResponseConverter
      */
     public function withTicketID(string $ticketID): self
     {
-        $obj = clone $this;
-        $obj->ticketID = $ticketID;
+        $self = clone $this;
+        $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 }

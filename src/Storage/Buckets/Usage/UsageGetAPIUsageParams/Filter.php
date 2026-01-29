@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[start_time], filter[end_time].
  *
- * @phpstan-type filter_alias = array{
+ * @phpstan-type FilterShape = array{
  *   endTime: \DateTimeInterface, startTime: \DateTimeInterface
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * The end time of the period to filter the usage (ISO microsecond format).
      */
-    #[Api('end_time')]
+    #[Required('end_time')]
     public \DateTimeInterface $endTime;
 
     /**
      * The start time of the period to filter the usage (ISO microsecond format).
      */
-    #[Api('start_time')]
+    #[Required('start_time')]
     public \DateTimeInterface $startTime;
 
     /**
@@ -60,12 +60,12 @@ final class Filter implements BaseModel
         \DateTimeInterface $endTime,
         \DateTimeInterface $startTime
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->endTime = $endTime;
-        $obj->startTime = $startTime;
+        $self['endTime'] = $endTime;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class Filter implements BaseModel
      */
     public function withEndTime(\DateTimeInterface $endTime): self
     {
-        $obj = clone $this;
-        $obj->endTime = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class Filter implements BaseModel
      */
     public function withStartTime(\DateTimeInterface $startTime): self
     {
-        $obj = clone $this;
-        $obj->startTime = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 }

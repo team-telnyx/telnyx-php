@@ -6,78 +6,54 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignment;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentDeleteResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentGetResponse;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentListResponse;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentNewResponse;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams;
-use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\Body;
+use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest;
 use Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type GlobalIPAssignmentUpdateRequestShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
 {
     /**
+     * @api
+     */
+    public GlobalIPAssignmentsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPAssignmentsRawService($client);
+    }
 
     /**
      * @api
      *
      * Create a Global IP assignment.
      *
-     * @param string $globalIPID global IP ID
-     * @param bool $isInMaintenance enable/disable BGP announcement
-     * @param string $wireguardPeerID wireguard peer ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $globalIPID = omit,
-        $isInMaintenance = omit,
-        $wireguardPeerID = omit,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPAssignmentNewResponse {
-        $params = [
-            'globalIPID' => $globalIPID,
-            'isInMaintenance' => $isInMaintenance,
-            'wireguardPeerID' => $wireguardPeerID,
-        ];
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(requestOptions: $requestOptions);
 
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentNewResponse {
-        [$parsed, $options] = GlobalIPAssignmentCreateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'global_ip_assignments',
-            body: (object) $parsed,
-            options: $options,
-            convert: GlobalIPAssignmentNewResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -85,19 +61,19 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Retrieve a Global IP assignment.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPAssignmentGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['global_ip_assignments/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPAssignmentGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -105,45 +81,25 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Update a Global IP assignment.
      *
-     * @param Body $body
+     * @param string $globalIPAssignmentID identifies the resource
+     * @param GlobalIPAssignmentUpdateRequest|GlobalIPAssignmentUpdateRequestShape $globalIPAssignmentUpdateRequest
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        string $id,
-        $body,
-        ?RequestOptions $requestOptions = null
+        string $globalIPAssignmentID,
+        GlobalIPAssignmentUpdateRequest|array $globalIPAssignmentUpdateRequest,
+        RequestOptions|array|null $requestOptions = null,
     ): GlobalIPAssignmentUpdateResponse {
-        $params = ['body' => $body];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentUpdateResponse {
-        [$parsed, $options] = GlobalIPAssignmentUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['globalIPAssignmentUpdateRequest' => $globalIPAssignmentUpdateRequest]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['global_ip_assignments/%1$s', $id],
-            body: (object) $parsed['body'],
-            options: $options,
-            convert: GlobalIPAssignmentUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($globalIPAssignmentID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -151,43 +107,23 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * List all Global IP assignments.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<GlobalIPAssignment>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentListResponse {
-        $params = ['page' => $page];
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination {
+        $params = Util::removeNulls(['page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPAssignmentListResponse {
-        [$parsed, $options] = GlobalIPAssignmentListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'global_ip_assignments',
-            query: $parsed,
-            options: $options,
-            convert: GlobalIPAssignmentListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -195,18 +131,18 @@ final class GlobalIPAssignmentsService implements GlobalIPAssignmentsContract
      *
      * Delete a Global IP assignment.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPAssignmentDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['global_ip_assignments/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPAssignmentDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

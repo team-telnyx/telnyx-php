@@ -4,43 +4,76 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters;
 
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\Meta;
-use Telnyx\AI\Clusters\ClusterListResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
- * @phpstan-type cluster_list_response = array{data: list<Data>, meta: Meta}
+ * @phpstan-type ClusterListResponseShape = array{
+ *   bucket: string,
+ *   createdAt: \DateTimeInterface,
+ *   finishedAt: \DateTimeInterface,
+ *   minClusterSize: int,
+ *   minSubclusterSize: int,
+ *   status: TaskStatus|value-of<TaskStatus>,
+ *   taskID: string,
+ * }
  */
-final class ClusterListResponse implements BaseModel, ResponseConverter
+final class ClusterListResponse implements BaseModel
 {
-    /** @use SdkModel<cluster_list_response> */
+    /** @use SdkModel<ClusterListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    #[Required]
+    public string $bucket;
 
-    /** @var list<Data> $data */
-    #[Api(list: Data::class)]
-    public array $data;
+    #[Required('created_at')]
+    public \DateTimeInterface $createdAt;
 
-    #[Api]
-    public Meta $meta;
+    #[Required('finished_at')]
+    public \DateTimeInterface $finishedAt;
+
+    #[Required('min_cluster_size')]
+    public int $minClusterSize;
+
+    #[Required('min_subcluster_size')]
+    public int $minSubclusterSize;
+
+    /** @var value-of<TaskStatus> $status */
+    #[Required(enum: TaskStatus::class)]
+    public string $status;
+
+    #[Required('task_id')]
+    public string $taskID;
 
     /**
      * `new ClusterListResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ClusterListResponse::with(data: ..., meta: ...)
+     * ClusterListResponse::with(
+     *   bucket: ...,
+     *   createdAt: ...,
+     *   finishedAt: ...,
+     *   minClusterSize: ...,
+     *   minSubclusterSize: ...,
+     *   status: ...,
+     *   taskID: ...,
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ClusterListResponse)->withData(...)->withMeta(...)
+     * (new ClusterListResponse)
+     *   ->withBucket(...)
+     *   ->withCreatedAt(...)
+     *   ->withFinishedAt(...)
+     *   ->withMinClusterSize(...)
+     *   ->withMinSubclusterSize(...)
+     *   ->withStatus(...)
+     *   ->withTaskID(...)
      * ```
      */
     public function __construct()
@@ -53,34 +86,86 @@ final class ClusterListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param TaskStatus|value-of<TaskStatus> $status
      */
-    public static function with(array $data, Meta $meta): self
+    public static function with(
+        string $bucket,
+        \DateTimeInterface $createdAt,
+        \DateTimeInterface $finishedAt,
+        int $minClusterSize,
+        int $minSubclusterSize,
+        TaskStatus|string $status,
+        string $taskID,
+    ): self {
+        $self = new self;
+
+        $self['bucket'] = $bucket;
+        $self['createdAt'] = $createdAt;
+        $self['finishedAt'] = $finishedAt;
+        $self['minClusterSize'] = $minClusterSize;
+        $self['minSubclusterSize'] = $minSubclusterSize;
+        $self['status'] = $status;
+        $self['taskID'] = $taskID;
+
+        return $self;
+    }
+
+    public function withBucket(string $bucket): self
     {
-        $obj = new self;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        return $self;
+    }
 
-        return $obj;
+    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    public function withFinishedAt(\DateTimeInterface $finishedAt): self
+    {
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
+
+        return $self;
+    }
+
+    public function withMinClusterSize(int $minClusterSize): self
+    {
+        $self = clone $this;
+        $self['minClusterSize'] = $minClusterSize;
+
+        return $self;
+    }
+
+    public function withMinSubclusterSize(int $minSubclusterSize): self
+    {
+        $self = clone $this;
+        $self['minSubclusterSize'] = $minSubclusterSize;
+
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * @param TaskStatus|value-of<TaskStatus> $status
      */
-    public function withData(array $data): self
+    public function withStatus(TaskStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withTaskID(string $taskID): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 }

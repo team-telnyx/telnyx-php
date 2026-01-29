@@ -7,7 +7,7 @@ namespace Telnyx\AuditEvents;
 use Telnyx\AuditEvents\AuditEventListParams\Filter;
 use Telnyx\AuditEvents\AuditEventListParams\Page;
 use Telnyx\AuditEvents\AuditEventListParams\Sort;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,28 +15,33 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve a list of audit log entries. Audit logs are a best-effort, eventually consistent record of significant account-related changes.
  *
- * @see Telnyx\AuditEvents->list
+ * @see Telnyx\Services\AuditEventsService::list()
  *
- * @phpstan-type audit_event_list_params = array{
- *   filter?: Filter, page?: Page, sort?: Sort|value-of<Sort>
+ * @phpstan-import-type FilterShape from \Telnyx\AuditEvents\AuditEventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\AuditEvents\AuditEventListParams\Page
+ *
+ * @phpstan-type AuditEventListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class AuditEventListParams implements BaseModel
 {
-    /** @use SdkModel<audit_event_list_params> */
+    /** @use SdkModel<AuditEventListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -44,7 +49,7 @@ final class AuditEventListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()
@@ -57,42 +62,48 @@ final class AuditEventListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Sort|value-of<Sort> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
-        ?Filter $filter = null,
-        ?Page $page = null,
-        Sort|string|null $sort = null
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +113,9 @@ final class AuditEventListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

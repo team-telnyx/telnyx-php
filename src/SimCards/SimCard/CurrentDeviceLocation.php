@@ -4,32 +4,35 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\SimCard;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Current physical location data of a given SIM card. Accuracy is given in meters.
  *
- * @phpstan-type current_device_location = array{
- *   accuracy?: int, accuracyUnit?: string, latitude?: string, longitude?: string
+ * @phpstan-type CurrentDeviceLocationShape = array{
+ *   accuracy?: int|null,
+ *   accuracyUnit?: string|null,
+ *   latitude?: string|null,
+ *   longitude?: string|null,
  * }
  */
 final class CurrentDeviceLocation implements BaseModel
 {
-    /** @use SdkModel<current_device_location> */
+    /** @use SdkModel<CurrentDeviceLocationShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $accuracy;
 
-    #[Api('accuracy_unit', optional: true)]
+    #[Optional('accuracy_unit')]
     public ?string $accuracyUnit;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $latitude;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $longitude;
 
     public function __construct()
@@ -48,45 +51,45 @@ final class CurrentDeviceLocation implements BaseModel
         ?string $latitude = null,
         ?string $longitude = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accuracy && $obj->accuracy = $accuracy;
-        null !== $accuracyUnit && $obj->accuracyUnit = $accuracyUnit;
-        null !== $latitude && $obj->latitude = $latitude;
-        null !== $longitude && $obj->longitude = $longitude;
+        null !== $accuracy && $self['accuracy'] = $accuracy;
+        null !== $accuracyUnit && $self['accuracyUnit'] = $accuracyUnit;
+        null !== $latitude && $self['latitude'] = $latitude;
+        null !== $longitude && $self['longitude'] = $longitude;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccuracy(int $accuracy): self
     {
-        $obj = clone $this;
-        $obj->accuracy = $accuracy;
+        $self = clone $this;
+        $self['accuracy'] = $accuracy;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccuracyUnit(string $accuracyUnit): self
     {
-        $obj = clone $this;
-        $obj->accuracyUnit = $accuracyUnit;
+        $self = clone $this;
+        $self['accuracyUnit'] = $accuracyUnit;
 
-        return $obj;
+        return $self;
     }
 
     public function withLatitude(string $latitude): self
     {
-        $obj = clone $this;
-        $obj->latitude = $latitude;
+        $self = clone $this;
+        $self['latitude'] = $latitude;
 
-        return $obj;
+        return $self;
     }
 
     public function withLongitude(string $longitude): self
     {
-        $obj = clone $this;
-        $obj->longitude = $longitude;
+        $self = clone $this;
+        $self['longitude'] = $longitude;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberLookup;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,13 +13,15 @@ use Telnyx\NumberLookup\NumberLookupRetrieveParams\Type;
 /**
  * Returns information about the provided phone number.
  *
- * @see Telnyx\NumberLookup->retrieve
+ * @see Telnyx\Services\NumberLookupService::retrieve()
  *
- * @phpstan-type number_lookup_retrieve_params = array{type?: Type|value-of<Type>}
+ * @phpstan-type NumberLookupRetrieveParamsShape = array{
+ *   type?: null|Type|value-of<Type>
+ * }
  */
 final class NumberLookupRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<number_lookup_retrieve_params> */
+    /** @use SdkModel<NumberLookupRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -28,7 +30,7 @@ final class NumberLookupRetrieveParams implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()
@@ -41,15 +43,15 @@ final class NumberLookupRetrieveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(Type|string|null $type = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $type && $obj['type'] = $type;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,9 +61,9 @@ final class NumberLookupRetrieveParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

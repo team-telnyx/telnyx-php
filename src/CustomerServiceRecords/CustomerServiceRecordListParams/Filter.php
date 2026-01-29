@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\CreatedAt;
@@ -14,22 +14,28 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number][eq], filter[phone_number][in][], filter[status][eq], filter[status][in][], filter[created_at][lt], filter[created_at][gt].
  *
- * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt, phoneNumber?: PhoneNumber, status?: Status
+ * @phpstan-import-type CreatedAtShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\CreatedAt
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\PhoneNumber
+ * @phpstan-import-type StatusShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter\Status
+ *
+ * @phpstan-type FilterShape = array{
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
+ *   status?: null|Status|StatusShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?CreatedAt $createdAt;
 
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?PhoneNumber $phoneNumber;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Status $status;
 
     public function __construct()
@@ -41,42 +47,55 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param PhoneNumber|PhoneNumberShape|null $phoneNumber
+     * @param Status|StatusShape|null $status
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
-        ?PhoneNumber $phoneNumber = null,
-        ?Status $status = null,
+        CreatedAt|array|null $createdAt = null,
+        PhoneNumber|array|null $phoneNumber = null,
+        Status|array|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $status && $obj->status = $status;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
-    public function withCreatedAt(CreatedAt $createdAt): self
+    /**
+     * @param CreatedAt|CreatedAtShape $createdAt
+     */
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPhoneNumber(PhoneNumber $phoneNumber): self
+    /**
+     * @param PhoneNumber|PhoneNumberShape $phoneNumber
+     */
+    public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
-    public function withStatus(Status $status): self
+    /**
+     * @param Status|StatusShape $status
+     */
+    public function withStatus(Status|array $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

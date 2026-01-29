@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +39,8 @@ final class BucketsTest extends TestCase
             bucketName: ''
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BucketNewPresignedURLResponse::class, $result);
     }
 
     #[Test]
@@ -50,9 +52,11 @@ final class BucketsTest extends TestCase
 
         $result = $this->client->storage->buckets->createPresignedURL(
             '',
-            bucketName: ''
+            bucketName: '',
+            ttl: 60
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BucketNewPresignedURLResponse::class, $result);
     }
 }

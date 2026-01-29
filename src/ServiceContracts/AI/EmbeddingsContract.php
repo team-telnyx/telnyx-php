@@ -13,102 +13,66 @@ use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface EmbeddingsContract
 {
     /**
      * @api
      *
-     * @param string $bucketName
-     * @param int $documentChunkOverlapSize
-     * @param int $documentChunkSize
      * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel supported models to vectorize and embed documents
      * @param Loader|value-of<Loader> $loader supported types of custom document loaders for embeddings
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $bucketName,
-        $documentChunkOverlapSize = omit,
-        $documentChunkSize = omit,
-        $embeddingModel = omit,
-        $loader = omit,
-        ?RequestOptions $requestOptions = null,
+        string $bucketName,
+        int $documentChunkOverlapSize = 512,
+        int $documentChunkSize = 1024,
+        EmbeddingModel|string $embeddingModel = 'thenlper/gte-large',
+        Loader|string $loader = 'default',
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): EmbeddingResponse;
-
-    /**
-     * @api
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $taskID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): EmbeddingGetResponse;
 
     /**
      * @api
      *
      * @param list<string> $status List of task statuses i.e. `status=queued&status=processing`
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $status = omit,
-        ?RequestOptions $requestOptions = null
+        array $status = ['processing', 'queued'],
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): EmbeddingListResponse;
-
-    /**
-     * @api
-     *
-     * @param string $bucketName
-     * @param string $query
-     * @param int $numOfDocs
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function similaritySearch(
-        $bucketName,
-        $query,
-        $numOfDocs = omit,
-        ?RequestOptions $requestOptions = null,
-    ): EmbeddingSimilaritySearchResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function similaritySearchRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $bucketName,
+        string $query,
+        int $numOfDocs = 3,
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingSimilaritySearchResponse;
 
     /**
@@ -116,24 +80,13 @@ interface EmbeddingsContract
      *
      * @param string $bucketName Name of the bucket to store the embeddings. This bucket must already exist.
      * @param string $url The URL of the webpage to embed
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function url(
-        $bucketName,
-        $url,
-        ?RequestOptions $requestOptions = null
-    ): EmbeddingResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function urlRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $bucketName,
+        string $url,
+        RequestOptions|array|null $requestOptions = null,
     ): EmbeddingResponse;
 }

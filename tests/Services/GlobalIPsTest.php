@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
+use Telnyx\GlobalIPs\GlobalIPGetResponse;
+use Telnyx\GlobalIPs\GlobalIPListResponse;
+use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +40,8 @@ final class GlobalIPsTest extends TestCase
 
         $result = $this->client->globalIPs->create();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +55,8 @@ final class GlobalIPsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPGetResponse::class, $result);
     }
 
     #[Test]
@@ -59,9 +66,15 @@ final class GlobalIPsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->globalIPs->list();
+        $page = $this->client->globalIPs->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(GlobalIPListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -75,6 +88,7 @@ final class GlobalIPsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(GlobalIPDeleteResponse::class, $result);
     }
 }

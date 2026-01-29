@@ -4,28 +4,26 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * A list of Verify profile message templates.
  *
- * @phpstan-type verify_profile_get_templates_response = array{
- *   data: list<VerifyProfileMessageTemplateResponse>
+ * @phpstan-import-type VerifyProfileMessageTemplateResponseShape from \Telnyx\VerifyProfiles\VerifyProfileMessageTemplateResponse
+ *
+ * @phpstan-type VerifyProfileGetTemplatesResponseShape = array{
+ *   data: list<VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape>,
  * }
  */
-final class VerifyProfileGetTemplatesResponse implements BaseModel, ResponseConverter
+final class VerifyProfileGetTemplatesResponse implements BaseModel
 {
-    /** @use SdkModel<verify_profile_get_templates_response> */
+    /** @use SdkModel<VerifyProfileGetTemplatesResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<VerifyProfileMessageTemplateResponse> $data */
-    #[Api(list: VerifyProfileMessageTemplateResponse::class)]
+    #[Required(list: VerifyProfileMessageTemplateResponse::class)]
     public array $data;
 
     /**
@@ -52,25 +50,25 @@ final class VerifyProfileGetTemplatesResponse implements BaseModel, ResponseConv
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerifyProfileMessageTemplateResponse> $data
+     * @param list<VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape> $data
      */
     public static function with(array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<VerifyProfileMessageTemplateResponse> $data
+     * @param list<VerifyProfileMessageTemplateResponse|VerifyProfileMessageTemplateResponseShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

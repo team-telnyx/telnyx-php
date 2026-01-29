@@ -4,57 +4,54 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_register_response = array{
+ * @phpstan-type OAuthRegisterResponseShape = array{
  *   clientID: string,
  *   clientIDIssuedAt: int,
- *   clientName?: string,
- *   clientSecret?: string,
- *   grantTypes?: list<string>,
- *   logoUri?: string,
- *   policyUri?: string,
- *   redirectUris?: list<string>,
- *   responseTypes?: list<string>,
- *   scope?: string,
- *   tokenEndpointAuthMethod?: string,
- *   tosUri?: string,
+ *   clientName?: string|null,
+ *   clientSecret?: string|null,
+ *   grantTypes?: list<string>|null,
+ *   logoUri?: string|null,
+ *   policyUri?: string|null,
+ *   redirectUris?: list<string>|null,
+ *   responseTypes?: list<string>|null,
+ *   scope?: string|null,
+ *   tokenEndpointAuthMethod?: string|null,
+ *   tosUri?: string|null,
  * }
  */
-final class OAuthRegisterResponse implements BaseModel, ResponseConverter
+final class OAuthRegisterResponse implements BaseModel
 {
-    /** @use SdkModel<oauth_register_response> */
+    /** @use SdkModel<OAuthRegisterResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Unique client identifier.
      */
-    #[Api('client_id')]
+    #[Required('client_id')]
     public string $clientID;
 
     /**
      * Unix timestamp of when the client ID was issued.
      */
-    #[Api('client_id_issued_at')]
+    #[Required('client_id_issued_at')]
     public int $clientIDIssuedAt;
 
     /**
      * Human-readable client name.
      */
-    #[Api('client_name', optional: true)]
+    #[Optional('client_name')]
     public ?string $clientName;
 
     /**
      * Client secret (only for confidential clients).
      */
-    #[Api('client_secret', optional: true)]
+    #[Optional('client_secret')]
     public ?string $clientSecret;
 
     /**
@@ -62,19 +59,19 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      *
      * @var list<string>|null $grantTypes
      */
-    #[Api('grant_types', list: 'string', optional: true)]
+    #[Optional('grant_types', list: 'string')]
     public ?array $grantTypes;
 
     /**
      * URL of the client logo.
      */
-    #[Api('logo_uri', optional: true)]
+    #[Optional('logo_uri')]
     public ?string $logoUri;
 
     /**
      * URL of the client's privacy policy.
      */
-    #[Api('policy_uri', optional: true)]
+    #[Optional('policy_uri')]
     public ?string $policyUri;
 
     /**
@@ -82,7 +79,7 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      *
      * @var list<string>|null $redirectUris
      */
-    #[Api('redirect_uris', list: 'string', optional: true)]
+    #[Optional('redirect_uris', list: 'string')]
     public ?array $redirectUris;
 
     /**
@@ -90,25 +87,25 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      *
      * @var list<string>|null $responseTypes
      */
-    #[Api('response_types', list: 'string', optional: true)]
+    #[Optional('response_types', list: 'string')]
     public ?array $responseTypes;
 
     /**
      * Space-separated scope values.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scope;
 
     /**
      * Token endpoint authentication method.
      */
-    #[Api('token_endpoint_auth_method', optional: true)]
+    #[Optional('token_endpoint_auth_method')]
     public ?string $tokenEndpointAuthMethod;
 
     /**
      * URL of the client's terms of service.
      */
-    #[Api('tos_uri', optional: true)]
+    #[Optional('tos_uri')]
     public ?string $tosUri;
 
     /**
@@ -135,9 +132,9 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $grantTypes
-     * @param list<string> $redirectUris
-     * @param list<string> $responseTypes
+     * @param list<string>|null $grantTypes
+     * @param list<string>|null $redirectUris
+     * @param list<string>|null $responseTypes
      */
     public static function with(
         string $clientID,
@@ -153,23 +150,23 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
         ?string $tokenEndpointAuthMethod = null,
         ?string $tosUri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->clientID = $clientID;
-        $obj->clientIDIssuedAt = $clientIDIssuedAt;
+        $self['clientID'] = $clientID;
+        $self['clientIDIssuedAt'] = $clientIDIssuedAt;
 
-        null !== $clientName && $obj->clientName = $clientName;
-        null !== $clientSecret && $obj->clientSecret = $clientSecret;
-        null !== $grantTypes && $obj->grantTypes = $grantTypes;
-        null !== $logoUri && $obj->logoUri = $logoUri;
-        null !== $policyUri && $obj->policyUri = $policyUri;
-        null !== $redirectUris && $obj->redirectUris = $redirectUris;
-        null !== $responseTypes && $obj->responseTypes = $responseTypes;
-        null !== $scope && $obj->scope = $scope;
-        null !== $tokenEndpointAuthMethod && $obj->tokenEndpointAuthMethod = $tokenEndpointAuthMethod;
-        null !== $tosUri && $obj->tosUri = $tosUri;
+        null !== $clientName && $self['clientName'] = $clientName;
+        null !== $clientSecret && $self['clientSecret'] = $clientSecret;
+        null !== $grantTypes && $self['grantTypes'] = $grantTypes;
+        null !== $logoUri && $self['logoUri'] = $logoUri;
+        null !== $policyUri && $self['policyUri'] = $policyUri;
+        null !== $redirectUris && $self['redirectUris'] = $redirectUris;
+        null !== $responseTypes && $self['responseTypes'] = $responseTypes;
+        null !== $scope && $self['scope'] = $scope;
+        null !== $tokenEndpointAuthMethod && $self['tokenEndpointAuthMethod'] = $tokenEndpointAuthMethod;
+        null !== $tosUri && $self['tosUri'] = $tosUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +174,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withClientID(string $clientID): self
     {
-        $obj = clone $this;
-        $obj->clientID = $clientID;
+        $self = clone $this;
+        $self['clientID'] = $clientID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +185,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withClientIDIssuedAt(int $clientIDIssuedAt): self
     {
-        $obj = clone $this;
-        $obj->clientIDIssuedAt = $clientIDIssuedAt;
+        $self = clone $this;
+        $self['clientIDIssuedAt'] = $clientIDIssuedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +196,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withClientName(string $clientName): self
     {
-        $obj = clone $this;
-        $obj->clientName = $clientName;
+        $self = clone $this;
+        $self['clientName'] = $clientName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +207,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withClientSecret(string $clientSecret): self
     {
-        $obj = clone $this;
-        $obj->clientSecret = $clientSecret;
+        $self = clone $this;
+        $self['clientSecret'] = $clientSecret;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +220,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withGrantTypes(array $grantTypes): self
     {
-        $obj = clone $this;
-        $obj->grantTypes = $grantTypes;
+        $self = clone $this;
+        $self['grantTypes'] = $grantTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +231,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withLogoUri(string $logoUri): self
     {
-        $obj = clone $this;
-        $obj->logoUri = $logoUri;
+        $self = clone $this;
+        $self['logoUri'] = $logoUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +242,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withPolicyUri(string $policyUri): self
     {
-        $obj = clone $this;
-        $obj->policyUri = $policyUri;
+        $self = clone $this;
+        $self['policyUri'] = $policyUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -258,10 +255,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withRedirectUris(array $redirectUris): self
     {
-        $obj = clone $this;
-        $obj->redirectUris = $redirectUris;
+        $self = clone $this;
+        $self['redirectUris'] = $redirectUris;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +268,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withResponseTypes(array $responseTypes): self
     {
-        $obj = clone $this;
-        $obj->responseTypes = $responseTypes;
+        $self = clone $this;
+        $self['responseTypes'] = $responseTypes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +279,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withScope(string $scope): self
     {
-        $obj = clone $this;
-        $obj->scope = $scope;
+        $self = clone $this;
+        $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +291,10 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
     public function withTokenEndpointAuthMethod(
         string $tokenEndpointAuthMethod
     ): self {
-        $obj = clone $this;
-        $obj->tokenEndpointAuthMethod = $tokenEndpointAuthMethod;
+        $self = clone $this;
+        $self['tokenEndpointAuthMethod'] = $tokenEndpointAuthMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -305,9 +302,9 @@ final class OAuthRegisterResponse implements BaseModel, ResponseConverter
      */
     public function withTosUri(string $tosUri): self
     {
-        $obj = clone $this;
-        $obj->tosUri = $tosUri;
+        $self = clone $this;
+        $self['tosUri'] = $tosUri;
 
-        return $obj;
+        return $self;
     }
 }

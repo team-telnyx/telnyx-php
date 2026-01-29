@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,22 +13,23 @@ use Telnyx\PortingOrders\Actions\ActionShareParams\Permissions;
 /**
  * Creates a sharing token for a porting order. The token can be used to share the porting order with non-Telnyx users.
  *
- * @see Telnyx\PortingOrders\Actions->share
+ * @see Telnyx\Services\PortingOrders\ActionsService::share()
  *
- * @phpstan-type action_share_params = array{
- *   expiresInSeconds?: int, permissions?: Permissions|value-of<Permissions>
+ * @phpstan-type ActionShareParamsShape = array{
+ *   expiresInSeconds?: int|null,
+ *   permissions?: null|Permissions|value-of<Permissions>,
  * }
  */
 final class ActionShareParams implements BaseModel
 {
-    /** @use SdkModel<action_share_params> */
+    /** @use SdkModel<ActionShareParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The number of seconds the token will be valid for.
      */
-    #[Api('expires_in_seconds', optional: true)]
+    #[Optional('expires_in_seconds')]
     public ?int $expiresInSeconds;
 
     /**
@@ -36,7 +37,7 @@ final class ActionShareParams implements BaseModel
      *
      * @var value-of<Permissions>|null $permissions
      */
-    #[Api(enum: Permissions::class, optional: true)]
+    #[Optional(enum: Permissions::class)]
     public ?string $permissions;
 
     public function __construct()
@@ -49,18 +50,18 @@ final class ActionShareParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Permissions|value-of<Permissions> $permissions
+     * @param Permissions|value-of<Permissions>|null $permissions
      */
     public static function with(
         ?int $expiresInSeconds = null,
         Permissions|string|null $permissions = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $expiresInSeconds && $obj->expiresInSeconds = $expiresInSeconds;
-        null !== $permissions && $obj['permissions'] = $permissions;
+        null !== $expiresInSeconds && $self['expiresInSeconds'] = $expiresInSeconds;
+        null !== $permissions && $self['permissions'] = $permissions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +69,10 @@ final class ActionShareParams implements BaseModel
      */
     public function withExpiresInSeconds(int $expiresInSeconds): self
     {
-        $obj = clone $this;
-        $obj->expiresInSeconds = $expiresInSeconds;
+        $self = clone $this;
+        $self['expiresInSeconds'] = $expiresInSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +82,9 @@ final class ActionShareParams implements BaseModel
      */
     public function withPermissions(Permissions|string $permissions): self
     {
-        $obj = clone $this;
-        $obj['permissions'] = $permissions;
+        $self = clone $this;
+        $self['permissions'] = $permissions;
 
-        return $obj;
+        return $self;
     }
 }

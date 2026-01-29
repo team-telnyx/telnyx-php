@@ -5,7 +5,7 @@ namespace Tests\Services\AI\Assistants;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Assistants\CanaryDeploys\VersionConfig;
+use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -36,10 +36,11 @@ final class CanaryDeploysTest extends TestCase
 
         $result = $this->client->ai->assistants->canaryDeploys->create(
             'assistant_id',
-            [VersionConfig::with(percentage: 1, versionID: 'version_id')],
+            versions: [['percentage' => 1, 'versionID' => 'version_id']],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CanaryDeployResponse::class, $result);
     }
 
     #[Test]
@@ -51,10 +52,11 @@ final class CanaryDeploysTest extends TestCase
 
         $result = $this->client->ai->assistants->canaryDeploys->create(
             'assistant_id',
-            [VersionConfig::with(percentage: 1, versionID: 'version_id')],
+            versions: [['percentage' => 1, 'versionID' => 'version_id']],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CanaryDeployResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +70,8 @@ final class CanaryDeploysTest extends TestCase
             'assistant_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CanaryDeployResponse::class, $result);
     }
 
     #[Test]
@@ -80,10 +83,11 @@ final class CanaryDeploysTest extends TestCase
 
         $result = $this->client->ai->assistants->canaryDeploys->update(
             'assistant_id',
-            [VersionConfig::with(percentage: 1, versionID: 'version_id')],
+            versions: [['percentage' => 1, 'versionID' => 'version_id']],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CanaryDeployResponse::class, $result);
     }
 
     #[Test]
@@ -95,10 +99,11 @@ final class CanaryDeploysTest extends TestCase
 
         $result = $this->client->ai->assistants->canaryDeploys->update(
             'assistant_id',
-            [VersionConfig::with(percentage: 1, versionID: 'version_id')],
+            versions: [['percentage' => 1, 'versionID' => 'version_id']],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CanaryDeployResponse::class, $result);
     }
 
     #[Test]
@@ -112,6 +117,7 @@ final class CanaryDeploysTest extends TestCase
             'assistant_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

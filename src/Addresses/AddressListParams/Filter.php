@@ -5,43 +5,50 @@ declare(strict_types=1);
 namespace Telnyx\Addresses\AddressListParams;
 
 use Telnyx\Addresses\AddressListParams\Filter\AddressBook;
-use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\UnionMember1;
+use Telnyx\Addresses\AddressListParams\Filter\CustomerReference\CustomerReferenceMatcher;
 use Telnyx\Addresses\AddressListParams\Filter\StreetAddress;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq].
  *
- * @phpstan-type filter_alias = array{
- *   addressBook?: AddressBook,
- *   customerReference?: string|UnionMember1,
- *   streetAddress?: StreetAddress,
- *   usedAsEmergency?: string,
+ * @phpstan-import-type CustomerReferenceVariants from \Telnyx\Addresses\AddressListParams\Filter\CustomerReference
+ * @phpstan-import-type AddressBookShape from \Telnyx\Addresses\AddressListParams\Filter\AddressBook
+ * @phpstan-import-type CustomerReferenceShape from \Telnyx\Addresses\AddressListParams\Filter\CustomerReference
+ * @phpstan-import-type StreetAddressShape from \Telnyx\Addresses\AddressListParams\Filter\StreetAddress
+ *
+ * @phpstan-type FilterShape = array{
+ *   addressBook?: null|AddressBook|AddressBookShape,
+ *   customerReference?: CustomerReferenceShape|null,
+ *   streetAddress?: null|StreetAddress|StreetAddressShape,
+ *   usedAsEmergency?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('address_book', optional: true)]
+    #[Optional('address_book')]
     public ?AddressBook $addressBook;
 
     /**
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
+     *
+     * @var CustomerReferenceVariants|null $customerReference
      */
-    #[Api('customer_reference', optional: true)]
-    public string|UnionMember1|null $customerReference;
+    #[Optional('customer_reference')]
+    public string|CustomerReferenceMatcher|null $customerReference;
 
-    #[Api('street_address', optional: true)]
+    #[Optional('street_address')]
     public ?StreetAddress $streetAddress;
 
     /**
      * If set as 'true', only addresses used as the emergency address for at least one active phone-number will be returned. When set to 'false', the opposite happens: only addresses not used as the emergency address from phone-numbers will be returned.
      */
-    #[Api('used_as_emergency', optional: true)]
+    #[Optional('used_as_emergency')]
     public ?string $usedAsEmergency;
 
     public function __construct()
@@ -53,49 +60,61 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AddressBook|AddressBookShape|null $addressBook
+     * @param CustomerReferenceShape|null $customerReference
+     * @param StreetAddress|StreetAddressShape|null $streetAddress
      */
     public static function with(
-        ?AddressBook $addressBook = null,
-        string|UnionMember1|null $customerReference = null,
-        ?StreetAddress $streetAddress = null,
+        AddressBook|array|null $addressBook = null,
+        string|CustomerReferenceMatcher|array|null $customerReference = null,
+        StreetAddress|array|null $streetAddress = null,
         ?string $usedAsEmergency = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $addressBook && $obj->addressBook = $addressBook;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $streetAddress && $obj->streetAddress = $streetAddress;
-        null !== $usedAsEmergency && $obj->usedAsEmergency = $usedAsEmergency;
+        null !== $addressBook && $self['addressBook'] = $addressBook;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $streetAddress && $self['streetAddress'] = $streetAddress;
+        null !== $usedAsEmergency && $self['usedAsEmergency'] = $usedAsEmergency;
 
-        return $obj;
+        return $self;
     }
 
-    public function withAddressBook(AddressBook $addressBook): self
+    /**
+     * @param AddressBook|AddressBookShape $addressBook
+     */
+    public function withAddressBook(AddressBook|array $addressBook): self
     {
-        $obj = clone $this;
-        $obj->addressBook = $addressBook;
+        $self = clone $this;
+        $self['addressBook'] = $addressBook;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
+     *
+     * @param CustomerReferenceShape $customerReference
      */
     public function withCustomerReference(
-        string|UnionMember1 $customerReference
+        string|CustomerReferenceMatcher|array $customerReference
     ): self {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
-    public function withStreetAddress(StreetAddress $streetAddress): self
+    /**
+     * @param StreetAddress|StreetAddressShape $streetAddress
+     */
+    public function withStreetAddress(StreetAddress|array $streetAddress): self
     {
-        $obj = clone $this;
-        $obj->streetAddress = $streetAddress;
+        $self = clone $this;
+        $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +122,9 @@ final class Filter implements BaseModel
      */
     public function withUsedAsEmergency(string $usedAsEmergency): self
     {
-        $obj = clone $this;
-        $obj->usedAsEmergency = $usedAsEmergency;
+        $self = clone $this;
+        $self['usedAsEmergency'] = $usedAsEmergency;
 
-        return $obj;
+        return $self;
     }
 }

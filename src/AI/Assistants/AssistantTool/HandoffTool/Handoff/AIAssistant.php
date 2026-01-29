@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantTool\HandoffTool\Handoff;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ai_assistant = array{id: string, name: string}
+ * @phpstan-type AIAssistantShape = array{id: string, name: string}
  */
 final class AIAssistant implements BaseModel
 {
-    /** @use SdkModel<ai_assistant> */
+    /** @use SdkModel<AIAssistantShape> */
     use SdkModel;
 
     /**
      * The ID of the assistant to hand off to.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Helpful name for giving context on when to handoff to the assistant.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -54,12 +54,12 @@ final class AIAssistant implements BaseModel
      */
     public static function with(string $id, string $name): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->name = $name;
+        $self['id'] = $id;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class AIAssistant implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class AIAssistant implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

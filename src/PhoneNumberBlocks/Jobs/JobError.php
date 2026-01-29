@@ -4,51 +4,44 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberBlocks\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError\Meta;
 use Telnyx\PhoneNumberBlocks\Jobs\JobError\Source;
 
 /**
- * @phpstan-type job_error = array{
- *   code: string, title: string, detail?: string, meta?: Meta, source?: Source
+ * @phpstan-import-type MetaShape from \Telnyx\PhoneNumberBlocks\Jobs\JobError\Meta
+ * @phpstan-import-type SourceShape from \Telnyx\PhoneNumberBlocks\Jobs\JobError\Source
+ *
+ * @phpstan-type JobErrorShape = array{
+ *   code?: string|null,
+ *   detail?: string|null,
+ *   meta?: null|Meta|MetaShape,
+ *   source?: null|Source|SourceShape,
+ *   title?: string|null,
  * }
  */
 final class JobError implements BaseModel
 {
-    /** @use SdkModel<job_error> */
+    /** @use SdkModel<JobErrorShape> */
     use SdkModel;
 
-    #[Api]
-    public string $code;
+    #[Optional]
+    public ?string $code;
 
-    #[Api]
-    public string $title;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $detail;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Source $source;
 
-    /**
-     * `new JobError()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * JobError::with(code: ..., title: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new JobError)->withCode(...)->withTitle(...)
-     * ```
-     */
+    #[Optional]
+    public ?string $title;
+
     public function __construct()
     {
         $this->initialize();
@@ -58,63 +51,71 @@ final class JobError implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Meta|MetaShape|null $meta
+     * @param Source|SourceShape|null $source
      */
     public static function with(
-        string $code,
-        string $title,
+        ?string $code = null,
         ?string $detail = null,
-        ?Meta $meta = null,
-        ?Source $source = null,
+        Meta|array|null $meta = null,
+        Source|array|null $source = null,
+        ?string $title = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->code = $code;
-        $obj->title = $title;
+        null !== $code && $self['code'] = $code;
+        null !== $detail && $self['detail'] = $detail;
+        null !== $meta && $self['meta'] = $meta;
+        null !== $source && $self['source'] = $source;
+        null !== $title && $self['title'] = $title;
 
-        null !== $detail && $obj->detail = $detail;
-        null !== $meta && $obj->meta = $meta;
-        null !== $source && $obj->source = $source;
-
-        return $obj;
+        return $self;
     }
 
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
-    }
-
-    public function withTitle(string $title): self
-    {
-        $obj = clone $this;
-        $obj->title = $title;
-
-        return $obj;
+        return $self;
     }
 
     public function withDetail(string $detail): self
     {
-        $obj = clone $this;
-        $obj->detail = $detail;
+        $self = clone $this;
+        $self['detail'] = $detail;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|MetaShape $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
-    public function withSource(Source $source): self
+    /**
+     * @param Source|SourceShape $source
+     */
+    public function withSource(Source|array $source): self
     {
-        $obj = clone $this;
-        $obj->source = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withTitle(string $title): self
+    {
+        $self = clone $this;
+        $self['title'] = $title;
+
+        return $self;
     }
 }

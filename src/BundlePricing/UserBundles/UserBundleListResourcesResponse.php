@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type user_bundle_list_resources_response = array{
- *   data: list<UserBundleResource>
+ * @phpstan-import-type UserBundleResourceShape from \Telnyx\BundlePricing\UserBundles\UserBundleResource
+ *
+ * @phpstan-type UserBundleListResourcesResponseShape = array{
+ *   data: list<UserBundleResource|UserBundleResourceShape>
  * }
  */
-final class UserBundleListResourcesResponse implements BaseModel, ResponseConverter
+final class UserBundleListResourcesResponse implements BaseModel
 {
-    /** @use SdkModel<user_bundle_list_resources_response> */
+    /** @use SdkModel<UserBundleListResourcesResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<UserBundleResource> $data */
-    #[Api(list: UserBundleResource::class)]
+    #[Required(list: UserBundleResource::class)]
     public array $data;
 
     /**
@@ -50,25 +48,25 @@ final class UserBundleListResourcesResponse implements BaseModel, ResponseConver
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UserBundleResource> $data
+     * @param list<UserBundleResource|UserBundleResourceShape> $data
      */
     public static function with(array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<UserBundleResource> $data
+     * @param list<UserBundleResource|UserBundleResourceShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

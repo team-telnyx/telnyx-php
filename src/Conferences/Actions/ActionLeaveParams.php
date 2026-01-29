@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionLeaveParams\BeepEnabled;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Conferences\Actions\ActionLeaveParams\Region;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -17,24 +19,25 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `conference.participant.left`
  *
- * @see Telnyx\Conferences\Actions->leave
+ * @see Telnyx\Services\Conferences\ActionsService::leave()
  *
- * @phpstan-type action_leave_params = array{
+ * @phpstan-type ActionLeaveParamsShape = array{
  *   callControlID: string,
- *   beepEnabled?: BeepEnabled|value-of<BeepEnabled>,
- *   commandID?: string,
+ *   beepEnabled?: null|BeepEnabled|value-of<BeepEnabled>,
+ *   commandID?: string|null,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ActionLeaveParams implements BaseModel
 {
-    /** @use SdkModel<action_leave_params> */
+    /** @use SdkModel<ActionLeaveParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api('call_control_id')]
+    #[Required('call_control_id')]
     public string $callControlID;
 
     /**
@@ -42,14 +45,22 @@ final class ActionLeaveParams implements BaseModel
      *
      * @var value-of<BeepEnabled>|null $beepEnabled
      */
-    #[Api('beep_enabled', enum: BeepEnabled::class, optional: true)]
+    #[Optional('beep_enabled', enum: BeepEnabled::class)]
     public ?string $beepEnabled;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     /**
      * `new ActionLeaveParams()` is missing required properties by the API.
@@ -75,21 +86,24 @@ final class ActionLeaveParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BeepEnabled|value-of<BeepEnabled> $beepEnabled
+     * @param BeepEnabled|value-of<BeepEnabled>|null $beepEnabled
+     * @param Region|value-of<Region>|null $region
      */
     public static function with(
         string $callControlID,
         BeepEnabled|string|null $beepEnabled = null,
         ?string $commandID = null,
+        Region|string|null $region = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->callControlID = $callControlID;
+        $self['callControlID'] = $callControlID;
 
-        null !== $beepEnabled && $obj['beepEnabled'] = $beepEnabled;
-        null !== $commandID && $obj->commandID = $commandID;
+        null !== $beepEnabled && $self['beepEnabled'] = $beepEnabled;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $region && $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +111,10 @@ final class ActionLeaveParams implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +124,10 @@ final class ActionLeaveParams implements BaseModel
      */
     public function withBeepEnabled(BeepEnabled|string $beepEnabled): self
     {
-        $obj = clone $this;
-        $obj['beepEnabled'] = $beepEnabled;
+        $self = clone $this;
+        $self['beepEnabled'] = $beepEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,9 +135,22 @@ final class ActionLeaveParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
+
+        return $self;
     }
 }

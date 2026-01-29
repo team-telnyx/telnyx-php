@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklists;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,22 +13,24 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type;
 /**
  * Update a Wireless Blocklist.
  *
- * @see Telnyx\WirelessBlocklists->update
+ * @see Telnyx\Services\WirelessBlocklistsService::update()
  *
- * @phpstan-type wireless_blocklist_update_params = array{
- *   name?: string, type?: Type|value-of<Type>, values?: list<string>
+ * @phpstan-type WirelessBlocklistUpdateParamsShape = array{
+ *   name?: string|null,
+ *   type?: null|Type|value-of<Type>,
+ *   values?: list<string>|null,
  * }
  */
 final class WirelessBlocklistUpdateParams implements BaseModel
 {
-    /** @use SdkModel<wireless_blocklist_update_params> */
+    /** @use SdkModel<WirelessBlocklistUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The name of the Wireless Blocklist.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -36,7 +38,7 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
@@ -44,7 +46,7 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      *
      * @var list<string>|null $values
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $values;
 
     public function __construct()
@@ -57,21 +59,21 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
-     * @param list<string> $values
+     * @param Type|value-of<Type>|null $type
+     * @param list<string>|null $values
      */
     public static function with(
         ?string $name = null,
         Type|string|null $type = null,
         ?array $values = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $type && $obj['type'] = $type;
-        null !== $values && $obj->values = $values;
+        null !== $name && $self['name'] = $name;
+        null !== $type && $self['type'] = $type;
+        null !== $values && $self['values'] = $values;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +81,10 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +94,10 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,9 +107,9 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      */
     public function withValues(array $values): self
     {
-        $obj = clone $this;
-        $obj->values = $values;
+        $self = clone $this;
+        $self['values'] = $values;
 
-        return $obj;
+        return $self;
     }
 }

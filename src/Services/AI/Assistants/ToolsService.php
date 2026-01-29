@@ -4,77 +4,62 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants;
 
-use Telnyx\AI\Assistants\Tools\ToolTestParams;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ToolsService implements ToolsContract
 {
     /**
+     * @api
+     */
+    public ToolsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ToolsRawService($client);
+    }
 
     /**
      * @api
      *
      * Test a webhook tool for an assistant
      *
-     * @param string $assistantID
-     * @param array<string,
-     * mixed,> $arguments Key-value arguments to use for the webhook test
-     * @param array<string,
-     * mixed,> $dynamicVariables Key-value dynamic variables to use for the webhook test
+     * @param string $toolID Path param
+     * @param string $assistantID Path param
+     * @param array<string,mixed> $arguments Body param: Key-value arguments to use for the webhook test
+     * @param array<string,mixed> $dynamicVariables Body param: Key-value dynamic variables to use for the webhook test
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function test(
         string $toolID,
-        $assistantID,
-        $arguments = omit,
-        $dynamicVariables = omit,
-        ?RequestOptions $requestOptions = null,
+        string $assistantID,
+        ?array $arguments = null,
+        ?array $dynamicVariables = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ToolTestResponse {
-        $params = [
-            'assistantID' => $assistantID,
-            'arguments' => $arguments,
-            'dynamicVariables' => $dynamicVariables,
-        ];
-
-        return $this->testRaw($toolID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function testRaw(
-        string $toolID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ToolTestResponse {
-        [$parsed, $options] = ToolTestParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'assistantID' => $assistantID,
+                'arguments' => $arguments,
+                'dynamicVariables' => $dynamicVariables,
+            ],
         );
-        $assistantID = $parsed['assistantID'];
-        unset($parsed['assistantID']);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/%1$s/tools/%2$s/test', $assistantID, $toolID],
-            body: (object) array_diff_key($parsed, ['assistantID']),
-            options: $options,
-            convert: ToolTestResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->test($toolID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

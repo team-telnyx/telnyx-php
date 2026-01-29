@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Inbound;
@@ -13,23 +13,28 @@ use Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Outboun
 /**
  * Call quality statistics aggregated from the CHANNEL_HANGUP_COMPLETE event. Only includes metrics that are available (filters out nil values). Returns nil if no metrics are available.
  *
- * @phpstan-type call_quality_stats = array{inbound?: Inbound, outbound?: Outbound}
+ * @phpstan-import-type InboundShape from \Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats\Outbound
+ *
+ * @phpstan-type CallQualityStatsShape = array{
+ *   inbound?: null|Inbound|InboundShape, outbound?: null|Outbound|OutboundShape
+ * }
  */
 final class CallQualityStats implements BaseModel
 {
-    /** @use SdkModel<call_quality_stats> */
+    /** @use SdkModel<CallQualityStatsShape> */
     use SdkModel;
 
     /**
      * Inbound call quality statistics.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
     /**
      * Outbound call quality statistics.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Outbound $outbound;
 
     public function __construct()
@@ -41,38 +46,45 @@ final class CallQualityStats implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Inbound|InboundShape|null $inbound
+     * @param Outbound|OutboundShape|null $outbound
      */
     public static function with(
-        ?Inbound $inbound = null,
-        ?Outbound $outbound = null
+        Inbound|array|null $inbound = null,
+        Outbound|array|null $outbound = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $outbound && $obj->outbound = $outbound;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $outbound && $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Inbound call quality statistics.
+     *
+     * @param Inbound|InboundShape $inbound
      */
-    public function withInbound(Inbound $inbound): self
+    public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj->inbound = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Outbound call quality statistics.
+     *
+     * @param Outbound|OutboundShape $outbound
      */
-    public function withOutbound(Outbound $outbound): self
+    public function withOutbound(Outbound|array $outbound): self
     {
-        $obj = clone $this;
-        $obj->outbound = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 }

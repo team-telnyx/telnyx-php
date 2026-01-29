@@ -5,98 +5,88 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
+use Telnyx\RoomCompositions\RoomComposition;
 use Telnyx\RoomCompositions\RoomCompositionGetResponse;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Filter;
 use Telnyx\RoomCompositions\RoomCompositionListParams\Page;
-use Telnyx\RoomCompositions\RoomCompositionListResponse;
 use Telnyx\RoomCompositions\RoomCompositionNewResponse;
 use Telnyx\RoomCompositions\VideoRegion;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type VideoRegionShape from \Telnyx\RoomCompositions\VideoRegion
+ * @phpstan-import-type FilterShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RoomCompositionsContract
 {
     /**
      * @api
      *
-     * @param string|null $format the desired format of the room composition
-     * @param string|null $resolution The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720
-     * @param string|null $sessionID id of the room session associated with the room composition
-     * @param array<string,
-     * VideoRegion,> $videoLayout Describes the video layout of the room composition in terms of regions
-     * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+     * @param string $format the desired format of the room composition
+     * @param string $resolution The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720
+     * @param string $sessionID id of the room session associated with the room composition
+     * @param array<string,VideoRegion|VideoRegionShape> $videoLayout describes the video layout of the room composition in terms of regions
+     * @param string $webhookEventFailoverURL The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param string $webhookEventURL The URL where webhooks related to this room composition will be sent. Must include a scheme, such as 'https'.
-     * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param int $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $format = omit,
-        $resolution = omit,
-        $sessionID = omit,
-        $videoLayout = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookEventURL = omit,
-        $webhookTimeoutSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        string $format = 'mp4',
+        string $resolution = '1280x720',
+        ?string $sessionID = null,
+        ?array $videoLayout = null,
+        string $webhookEventFailoverURL = '',
+        ?string $webhookEventURL = null,
+        ?int $webhookTimeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RoomCompositionNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RoomCompositionNewResponse;
-
-    /**
-     * @api
+     * @param string $roomCompositionID the unique identifier of a room composition
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $roomCompositionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): RoomCompositionGetResponse;
 
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[session_id], filter[status]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<RoomComposition>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): RoomCompositionListResponse;
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RoomCompositionListResponse;
-
-    /**
-     * @api
+     * @param string $roomCompositionID the unique identifier of a room composition
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $roomCompositionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): mixed;
 }

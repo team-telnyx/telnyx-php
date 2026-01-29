@@ -4,242 +4,34 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\Events\EventGetResponse;
 
-use Telnyx\Core\Attributes\Api;
-use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Portouts\Events\EventGetResponse\Data\AvailableNotificationMethod;
-use Telnyx\Portouts\Events\EventGetResponse\Data\EventType;
-use Telnyx\Portouts\Events\EventGetResponse\Data\Payload\WebhookPortoutFocDateChangedPayload;
-use Telnyx\Portouts\Events\EventGetResponse\Data\Payload\WebhookPortoutNewCommentPayload;
-use Telnyx\Portouts\Events\EventGetResponse\Data\Payload\WebhookPortoutStatusChangedPayload;
-use Telnyx\Portouts\Events\EventGetResponse\Data\PayloadStatus;
+use Telnyx\Core\Concerns\SdkUnion;
+use Telnyx\Core\Conversion\Contracts\Converter;
+use Telnyx\Core\Conversion\Contracts\ConverterSource;
+use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutFocDateChanged;
+use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutNewComment;
+use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   availableNotificationMethods?: list<value-of<AvailableNotificationMethod>>,
- *   createdAt?: \DateTimeInterface,
- *   eventType?: value-of<EventType>,
- *   payload?: WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload,
- *   payloadStatus?: value-of<PayloadStatus>,
- *   portoutID?: string,
- *   recordType?: string,
- *   updatedAt?: \DateTimeInterface,
- * }
+ * @phpstan-import-type WebhookPortoutStatusChangedShape from \Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged
+ * @phpstan-import-type WebhookPortoutNewCommentShape from \Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutNewComment
+ * @phpstan-import-type WebhookPortoutFocDateChangedShape from \Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutFocDateChanged
+ *
+ * @phpstan-type DataVariants = WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged
+ * @phpstan-type DataShape = DataVariants|WebhookPortoutStatusChangedShape|WebhookPortoutNewCommentShape|WebhookPortoutFocDateChangedShape
  */
-final class Data implements BaseModel
+final class Data implements ConverterSource
 {
-    /** @use SdkModel<data_alias> */
-    use SdkModel;
+    use SdkUnion;
 
     /**
-     * Uniquely identifies the event.
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
-    #[Api(optional: true)]
-    public ?string $id;
-
-    /**
-     * Indicates the notification methods used.
-     *
-     * @var list<value-of<AvailableNotificationMethod>>|null $availableNotificationMethods
-     */
-    #[Api(
-        'available_notification_methods',
-        list: AvailableNotificationMethod::class,
-        optional: true,
-    )]
-    public ?array $availableNotificationMethods;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    #[Api('created_at', optional: true)]
-    public ?\DateTimeInterface $createdAt;
-
-    /**
-     * Identifies the event type.
-     *
-     * @var value-of<EventType>|null $eventType
-     */
-    #[Api('event_type', enum: EventType::class, optional: true)]
-    public ?string $eventType;
-
-    /**
-     * The webhook payload for the portout.status_changed event.
-     */
-    #[Api(optional: true)]
-    public WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null $payload;
-
-    /**
-     * The status of the payload generation.
-     *
-     * @var value-of<PayloadStatus>|null $payloadStatus
-     */
-    #[Api('payload_status', enum: PayloadStatus::class, optional: true)]
-    public ?string $payloadStatus;
-
-    /**
-     * Identifies the port-out order associated with the event.
-     */
-    #[Api('portout_id', optional: true)]
-    public ?string $portoutID;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Api('record_type', optional: true)]
-    public ?string $recordType;
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    #[Api('updated_at', optional: true)]
-    public ?\DateTimeInterface $updatedAt;
-
-    public function __construct()
+    public static function variants(): array
     {
-        $this->initialize();
-    }
-
-    /**
-     * Construct an instance from the required parameters.
-     *
-     * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
-     * @param EventType|value-of<EventType> $eventType
-     * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
-     */
-    public static function with(
-        ?string $id = null,
-        ?array $availableNotificationMethods = null,
-        ?\DateTimeInterface $createdAt = null,
-        EventType|string|null $eventType = null,
-        WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload|null $payload = null,
-        PayloadStatus|string|null $payloadStatus = null,
-        ?string $portoutID = null,
-        ?string $recordType = null,
-        ?\DateTimeInterface $updatedAt = null,
-    ): self {
-        $obj = new self;
-
-        null !== $id && $obj->id = $id;
-        null !== $availableNotificationMethods && $obj['availableNotificationMethods'] = $availableNotificationMethods;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $eventType && $obj['eventType'] = $eventType;
-        null !== $payload && $obj->payload = $payload;
-        null !== $payloadStatus && $obj['payloadStatus'] = $payloadStatus;
-        null !== $portoutID && $obj->portoutID = $portoutID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-
-        return $obj;
-    }
-
-    /**
-     * Uniquely identifies the event.
-     */
-    public function withID(string $id): self
-    {
-        $obj = clone $this;
-        $obj->id = $id;
-
-        return $obj;
-    }
-
-    /**
-     * Indicates the notification methods used.
-     *
-     * @param list<AvailableNotificationMethod|value-of<AvailableNotificationMethod>> $availableNotificationMethods
-     */
-    public function withAvailableNotificationMethods(
-        array $availableNotificationMethods
-    ): self {
-        $obj = clone $this;
-        $obj['availableNotificationMethods'] = $availableNotificationMethods;
-
-        return $obj;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was created.
-     */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the event type.
-     *
-     * @param EventType|value-of<EventType> $eventType
-     */
-    public function withEventType(EventType|string $eventType): self
-    {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
-
-        return $obj;
-    }
-
-    /**
-     * The webhook payload for the portout.status_changed event.
-     */
-    public function withPayload(
-        WebhookPortoutStatusChangedPayload|WebhookPortoutNewCommentPayload|WebhookPortoutFocDateChangedPayload $payload,
-    ): self {
-        $obj = clone $this;
-        $obj->payload = $payload;
-
-        return $obj;
-    }
-
-    /**
-     * The status of the payload generation.
-     *
-     * @param PayloadStatus|value-of<PayloadStatus> $payloadStatus
-     */
-    public function withPayloadStatus(PayloadStatus|string $payloadStatus): self
-    {
-        $obj = clone $this;
-        $obj['payloadStatus'] = $payloadStatus;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the port-out order associated with the event.
-     */
-    public function withPortoutID(string $portoutID): self
-    {
-        $obj = clone $this;
-        $obj->portoutID = $portoutID;
-
-        return $obj;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
-
-        return $obj;
-    }
-
-    /**
-     * ISO 8601 formatted date indicating when the resource was updated.
-     */
-    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
-
-        return $obj;
+        return [
+            WebhookPortoutStatusChanged::class,
+            WebhookPortoutNewComment::class,
+            WebhookPortoutFocDateChanged::class,
+        ];
     }
 }

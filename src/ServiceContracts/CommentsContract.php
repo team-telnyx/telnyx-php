@@ -13,79 +13,63 @@ use Telnyx\Comments\CommentNewResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Comments\CommentListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CommentsContract
 {
     /**
      * @api
      *
-     * @param string $body
-     * @param string $commentRecordID
      * @param CommentRecordType|value-of<CommentRecordType> $commentRecordType
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $body = omit,
-        $commentRecordID = omit,
-        $commentRecordType = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $body = null,
+        ?string $commentRecordID = null,
+        CommentRecordType|string|null $commentRecordType = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CommentNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CommentNewResponse;
-
-    /**
-     * @api
+     * @param string $id the comment ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CommentGetResponse;
 
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[comment_record_type], filter[comment_record_id]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CommentListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CommentListResponse;
-
-    /**
-     * @api
+     * @param string $id the comment ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function markAsRead(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CommentMarkAsReadResponse;
 }

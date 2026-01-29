@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\FineTuning\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type job_list_response = array{data: list<FineTuningJob>}
+ * @phpstan-import-type FineTuningJobShape from \Telnyx\AI\FineTuning\Jobs\FineTuningJob
+ *
+ * @phpstan-type JobListResponseShape = array{
+ *   data: list<FineTuningJob|FineTuningJobShape>
+ * }
  */
-final class JobListResponse implements BaseModel, ResponseConverter
+final class JobListResponse implements BaseModel
 {
-    /** @use SdkModel<job_list_response> */
+    /** @use SdkModel<JobListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<FineTuningJob> $data */
-    #[Api(list: FineTuningJob::class)]
+    #[Required(list: FineTuningJob::class)]
     public array $data;
 
     /**
@@ -48,25 +48,25 @@ final class JobListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FineTuningJob> $data
+     * @param list<FineTuningJob|FineTuningJobShape> $data
      */
     public static function with(array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<FineTuningJob> $data
+     * @param list<FineTuningJob|FineTuningJobShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,82 +4,83 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress\Status;
 
 /**
- * @phpstan-type dynamic_emergency_address = array{
+ * @phpstan-type DynamicEmergencyAddressShape = array{
  *   administrativeArea: string,
- *   countryCode: value-of<CountryCode>,
+ *   countryCode: CountryCode|value-of<CountryCode>,
  *   houseNumber: string,
  *   locality: string,
  *   postalCode: string,
  *   streetName: string,
- *   id?: string,
- *   createdAt?: string,
- *   extendedAddress?: string,
- *   houseSuffix?: string,
- *   recordType?: string,
- *   sipGeolocationID?: string,
- *   status?: value-of<Status>,
- *   streetPostDirectional?: string,
- *   streetPreDirectional?: string,
- *   streetSuffix?: string,
- *   updatedAt?: string,
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   extendedAddress?: string|null,
+ *   houseSuffix?: string|null,
+ *   recordType?: string|null,
+ *   sipGeolocationID?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   streetPostDirectional?: string|null,
+ *   streetPreDirectional?: string|null,
+ *   streetSuffix?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class DynamicEmergencyAddress implements BaseModel
 {
-    /** @use SdkModel<dynamic_emergency_address> */
+    /** @use SdkModel<DynamicEmergencyAddressShape> */
     use SdkModel;
 
-    #[Api('administrative_area')]
+    #[Required('administrative_area')]
     public string $administrativeArea;
 
     /** @var value-of<CountryCode> $countryCode */
-    #[Api('country_code', enum: CountryCode::class)]
+    #[Required('country_code', enum: CountryCode::class)]
     public string $countryCode;
 
-    #[Api('house_number')]
+    #[Required('house_number')]
     public string $houseNumber;
 
-    #[Api]
+    #[Required]
     public string $locality;
 
-    #[Api('postal_code')]
+    #[Required('postal_code')]
     public string $postalCode;
 
-    #[Api('street_name')]
+    #[Required('street_name')]
     public string $streetName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date of when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
-    #[Api('extended_address', optional: true)]
+    #[Optional('extended_address')]
     public ?string $extendedAddress;
 
-    #[Api('house_suffix', optional: true)]
+    #[Optional('house_suffix')]
     public ?string $houseSuffix;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * Unique location reference string to be used in SIP INVITE from / p-asserted headers.
      */
-    #[Api('sip_geolocation_id', optional: true)]
+    #[Optional('sip_geolocation_id')]
     public ?string $sipGeolocationID;
 
     /**
@@ -87,22 +88,22 @@ final class DynamicEmergencyAddress implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Api('street_post_directional', optional: true)]
+    #[Optional('street_post_directional')]
     public ?string $streetPostDirectional;
 
-    #[Api('street_pre_directional', optional: true)]
+    #[Optional('street_pre_directional')]
     public ?string $streetPreDirectional;
 
-    #[Api('street_suffix', optional: true)]
+    #[Optional('street_suffix')]
     public ?string $streetSuffix;
 
     /**
      * ISO 8601 formatted date of when the resource was last updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     /**
@@ -143,7 +144,7 @@ final class DynamicEmergencyAddress implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CountryCode|value-of<CountryCode> $countryCode
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         string $administrativeArea,
@@ -164,36 +165,36 @@ final class DynamicEmergencyAddress implements BaseModel
         ?string $streetSuffix = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->administrativeArea = $administrativeArea;
-        $obj['countryCode'] = $countryCode;
-        $obj->houseNumber = $houseNumber;
-        $obj->locality = $locality;
-        $obj->postalCode = $postalCode;
-        $obj->streetName = $streetName;
+        $self['administrativeArea'] = $administrativeArea;
+        $self['countryCode'] = $countryCode;
+        $self['houseNumber'] = $houseNumber;
+        $self['locality'] = $locality;
+        $self['postalCode'] = $postalCode;
+        $self['streetName'] = $streetName;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $extendedAddress && $obj->extendedAddress = $extendedAddress;
-        null !== $houseSuffix && $obj->houseSuffix = $houseSuffix;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $sipGeolocationID && $obj->sipGeolocationID = $sipGeolocationID;
-        null !== $status && $obj['status'] = $status;
-        null !== $streetPostDirectional && $obj->streetPostDirectional = $streetPostDirectional;
-        null !== $streetPreDirectional && $obj->streetPreDirectional = $streetPreDirectional;
-        null !== $streetSuffix && $obj->streetSuffix = $streetSuffix;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
+        null !== $houseSuffix && $self['houseSuffix'] = $houseSuffix;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sipGeolocationID && $self['sipGeolocationID'] = $sipGeolocationID;
+        null !== $status && $self['status'] = $status;
+        null !== $streetPostDirectional && $self['streetPostDirectional'] = $streetPostDirectional;
+        null !== $streetPreDirectional && $self['streetPreDirectional'] = $streetPreDirectional;
+        null !== $streetSuffix && $self['streetSuffix'] = $streetSuffix;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj->administrativeArea = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,50 +202,50 @@ final class DynamicEmergencyAddress implements BaseModel
      */
     public function withCountryCode(CountryCode|string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withHouseNumber(string $houseNumber): self
     {
-        $obj = clone $this;
-        $obj->houseNumber = $houseNumber;
+        $self = clone $this;
+        $self['houseNumber'] = $houseNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocality(string $locality): self
     {
-        $obj = clone $this;
-        $obj->locality = $locality;
+        $self = clone $this;
+        $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 
     public function withPostalCode(string $postalCode): self
     {
-        $obj = clone $this;
-        $obj->postalCode = $postalCode;
+        $self = clone $this;
+        $self['postalCode'] = $postalCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetName(string $streetName): self
     {
-        $obj = clone $this;
-        $obj->streetName = $streetName;
+        $self = clone $this;
+        $self['streetName'] = $streetName;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -252,26 +253,26 @@ final class DynamicEmergencyAddress implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withExtendedAddress(string $extendedAddress): self
     {
-        $obj = clone $this;
-        $obj->extendedAddress = $extendedAddress;
+        $self = clone $this;
+        $self['extendedAddress'] = $extendedAddress;
 
-        return $obj;
+        return $self;
     }
 
     public function withHouseSuffix(string $houseSuffix): self
     {
-        $obj = clone $this;
-        $obj->houseSuffix = $houseSuffix;
+        $self = clone $this;
+        $self['houseSuffix'] = $houseSuffix;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +280,10 @@ final class DynamicEmergencyAddress implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -290,10 +291,10 @@ final class DynamicEmergencyAddress implements BaseModel
      */
     public function withSipGeolocationID(string $sipGeolocationID): self
     {
-        $obj = clone $this;
-        $obj->sipGeolocationID = $sipGeolocationID;
+        $self = clone $this;
+        $self['sipGeolocationID'] = $sipGeolocationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -303,35 +304,35 @@ final class DynamicEmergencyAddress implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetPostDirectional(
         string $streetPostDirectional
     ): self {
-        $obj = clone $this;
-        $obj->streetPostDirectional = $streetPostDirectional;
+        $self = clone $this;
+        $self['streetPostDirectional'] = $streetPostDirectional;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetPreDirectional(string $streetPreDirectional): self
     {
-        $obj = clone $this;
-        $obj->streetPreDirectional = $streetPreDirectional;
+        $self = clone $this;
+        $self['streetPreDirectional'] = $streetPreDirectional;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetSuffix(string $streetSuffix): self
     {
-        $obj = clone $this;
-        $obj->streetSuffix = $streetSuffix;
+        $self = clone $this;
+        $self['streetSuffix'] = $streetSuffix;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -339,9 +340,9 @@ final class DynamicEmergencyAddress implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

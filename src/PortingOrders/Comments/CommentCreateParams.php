@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Comments;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new comment for a porting order.
  *
- * @see Telnyx\PortingOrders\Comments->create
+ * @see Telnyx\Services\PortingOrders\CommentsService::create()
  *
- * @phpstan-type comment_create_params = array{body?: string}
+ * @phpstan-type CommentCreateParamsShape = array{body?: string|null}
  */
 final class CommentCreateParams implements BaseModel
 {
-    /** @use SdkModel<comment_create_params> */
+    /** @use SdkModel<CommentCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
     public function __construct()
@@ -37,18 +37,18 @@ final class CommentCreateParams implements BaseModel
      */
     public static function with(?string $body = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $body && $obj->body = $body;
+        null !== $body && $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj->body = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 }

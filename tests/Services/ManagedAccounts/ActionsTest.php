@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\ManagedAccounts\Actions\ActionDisableResponse;
+use Telnyx\ManagedAccounts\Actions\ActionEnableResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->managedAccounts->actions->disable('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionDisableResponse::class, $result);
     }
 
     #[Test]
@@ -47,6 +50,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->managedAccounts->actions->enable('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionEnableResponse::class, $result);
     }
 }

@@ -6,22 +6,30 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlContract;
 use Telnyx\Services\Texml\AccountsService;
 use Telnyx\Services\Texml\CallsService;
-use Telnyx\Texml\TexmlSecretsParams;
 use Telnyx\Texml\TexmlSecretsResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TexmlService implements TexmlContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public TexmlRawService $raw;
+
+    /**
+     * @api
      */
     public AccountsService $accounts;
 
     /**
-     * @@api
+     * @api
      */
     public CallsService $calls;
 
@@ -30,6 +38,7 @@ final class TexmlService implements TexmlContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new TexmlRawService($client);
         $this->accounts = new AccountsService($client);
         $this->calls = new CallsService($client);
     }
@@ -41,42 +50,20 @@ final class TexmlService implements TexmlContract
      *
      * @param string $name Name used as a reference for the secret, if the name already exists within the account its value will be replaced
      * @param string $value Secret value which will be used when rendering the TeXML template
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function secrets(
-        $name,
-        $value,
-        ?RequestOptions $requestOptions = null
+        string $name,
+        string $value,
+        RequestOptions|array|null $requestOptions = null,
     ): TexmlSecretsResponse {
-        $params = ['name' => $name, 'value' => $value];
+        $params = Util::removeNulls(['name' => $name, 'value' => $value]);
 
-        return $this->secretsRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->secrets(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function secretsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): TexmlSecretsResponse {
-        [$parsed, $options] = TexmlSecretsParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'texml/secrets',
-            body: (object) $parsed,
-            options: $options,
-            convert: TexmlSecretsResponse::class,
-        );
+        return $response->parse();
     }
 }

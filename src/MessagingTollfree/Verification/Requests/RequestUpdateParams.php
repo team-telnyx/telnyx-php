@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,9 +13,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an existing tollfree verification request. This is particularly useful when there are pending customer actions to be taken.
  *
- * @see Telnyx\MessagingTollfree\Verification\Requests->update
+ * @see Telnyx\Services\MessagingTollfree\Verification\RequestsService::update()
  *
- * @phpstan-type request_update_params = array{
+ * @phpstan-import-type URLShape from \Telnyx\MessagingTollfree\Verification\Requests\URL
+ * @phpstan-import-type TfPhoneNumberShape from \Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber
+ *
+ * @phpstan-type RequestUpdateParamsShape = array{
  *   additionalInformation: string,
  *   businessAddr1: string,
  *   businessCity: string,
@@ -29,16 +33,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *   isvReseller: string,
  *   messageVolume: Volume|value-of<Volume>,
  *   optInWorkflow: string,
- *   optInWorkflowImageURLs: list<URL>,
- *   phoneNumbers: list<TfPhoneNumber>,
+ *   optInWorkflowImageURLs: list<URL|URLShape>,
+ *   phoneNumbers: list<TfPhoneNumber|TfPhoneNumberShape>,
  *   productionMessageContent: string,
  *   useCase: UseCaseCategories|value-of<UseCaseCategories>,
  *   useCaseSummary: string,
- *   ageGatedContent?: bool,
- *   businessAddr2?: string,
+ *   ageGatedContent?: bool|null,
+ *   businessAddr2?: string|null,
  *   businessRegistrationCountry?: string|null,
  *   businessRegistrationNumber?: string|null,
  *   businessRegistrationType?: string|null,
+ *   campaignVerifyAuthorizationToken?: string|null,
  *   doingBusinessAs?: string|null,
  *   entityType?: null|TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>,
  *   helpMessageResponse?: string|null,
@@ -46,85 +51,85 @@ use Telnyx\Core\Contracts\BaseModel;
  *   optInKeywords?: string|null,
  *   privacyPolicyURL?: string|null,
  *   termsAndConditionURL?: string|null,
- *   webhookURL?: string,
+ *   webhookURL?: string|null,
  * }
  */
 final class RequestUpdateParams implements BaseModel
 {
-    /** @use SdkModel<request_update_params> */
+    /** @use SdkModel<RequestUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Any additional information.
      */
-    #[Api]
+    #[Required]
     public string $additionalInformation;
 
     /**
      * Line 1 of the business address.
      */
-    #[Api]
+    #[Required]
     public string $businessAddr1;
 
     /**
      * The city of the business address; the first letter should be capitalized.
      */
-    #[Api]
+    #[Required]
     public string $businessCity;
 
     /**
      * The email address of the business contact.
      */
-    #[Api]
+    #[Required]
     public string $businessContactEmail;
 
     /**
      * First name of the business contact; there are no specific requirements on formatting.
      */
-    #[Api]
+    #[Required]
     public string $businessContactFirstName;
 
     /**
      * Last name of the business contact; there are no specific requirements on formatting.
      */
-    #[Api]
+    #[Required]
     public string $businessContactLastName;
 
     /**
      * The phone number of the business contact in E.164 format.
      */
-    #[Api]
+    #[Required]
     public string $businessContactPhone;
 
     /**
      * Name of the business; there are no specific formatting requirements.
      */
-    #[Api]
+    #[Required]
     public string $businessName;
 
     /**
      * The full name of the state (not the 2 letter code) of the business address; the first letter should be capitalized.
      */
-    #[Api]
+    #[Required]
     public string $businessState;
 
     /**
      * The ZIP code of the business address.
      */
-    #[Api]
+    #[Required]
     public string $businessZip;
 
     /**
      * A URL, including the scheme, pointing to the corporate website.
      */
-    #[Api]
+    #[Required]
     public string $corporateWebsite;
 
     /**
      * ISV name.
      */
-    #[Api]
+    #[Required]
     public string $isvReseller;
 
     /**
@@ -132,13 +137,13 @@ final class RequestUpdateParams implements BaseModel
      *
      * @var value-of<Volume> $messageVolume
      */
-    #[Api(enum: Volume::class)]
+    #[Required(enum: Volume::class)]
     public string $messageVolume;
 
     /**
      * Human-readable description of how end users will opt into receiving messages from the given phone numbers.
      */
-    #[Api]
+    #[Required]
     public string $optInWorkflow;
 
     /**
@@ -146,7 +151,7 @@ final class RequestUpdateParams implements BaseModel
      *
      * @var list<URL> $optInWorkflowImageURLs
      */
-    #[Api(list: URL::class)]
+    #[Required(list: URL::class)]
     public array $optInWorkflowImageURLs;
 
     /**
@@ -154,13 +159,13 @@ final class RequestUpdateParams implements BaseModel
      *
      * @var list<TfPhoneNumber> $phoneNumbers
      */
-    #[Api(list: TfPhoneNumber::class)]
+    #[Required(list: TfPhoneNumber::class)]
     public array $phoneNumbers;
 
     /**
      * An example of a message that will be sent from the given phone numbers.
      */
-    #[Api]
+    #[Required]
     public string $productionMessageContent;
 
     /**
@@ -168,49 +173,55 @@ final class RequestUpdateParams implements BaseModel
      *
      * @var value-of<UseCaseCategories> $useCase
      */
-    #[Api(enum: UseCaseCategories::class)]
+    #[Required(enum: UseCaseCategories::class)]
     public string $useCase;
 
     /**
      * Human-readable summary of the desired use-case.
      */
-    #[Api]
+    #[Required]
     public string $useCaseSummary;
 
     /**
      * Indicates if messaging content requires age gating (e.g., 18+). Defaults to false if not provided.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $ageGatedContent;
 
     /**
      * Line 2 of the business address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $businessAddr2;
 
     /**
      * ISO 3166-1 alpha-2 country code of the issuing business authority. Must be exactly 2 letters. Automatically converted to uppercase. Required from January 2026.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $businessRegistrationCountry;
 
     /**
      * Official business registration number (e.g., Employer Identification Number (EIN) in the U.S.). Required from January 2026.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $businessRegistrationNumber;
 
     /**
      * Type of business registration being provided. Required from January 2026.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $businessRegistrationType;
+
+    /**
+     * Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
+     */
+    #[Optional(nullable: true)]
+    public ?string $campaignVerifyAuthorizationToken;
 
     /**
      * Doing Business As (DBA) name if different from legal name.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $doingBusinessAs;
 
     /**
@@ -218,47 +229,43 @@ final class RequestUpdateParams implements BaseModel
      *
      * @var value-of<TollFreeVerificationEntityType>|null $entityType
      */
-    #[Api(
-        enum: TollFreeVerificationEntityType::class,
-        nullable: true,
-        optional: true
-    )]
+    #[Optional(enum: TollFreeVerificationEntityType::class, nullable: true)]
     public ?string $entityType;
 
     /**
      * The message returned when users text 'HELP'.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $helpMessageResponse;
 
     /**
      * Message sent to users confirming their opt-in to receive messages.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $optInConfirmationResponse;
 
     /**
      * Keywords used to collect and process consumer opt-ins.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $optInKeywords;
 
     /**
      * URL pointing to the business's privacy policy. Plain string, no URL format validation.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $privacyPolicyURL;
 
     /**
      * URL pointing to the business's terms and conditions. Plain string, no URL format validation.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $termsAndConditionURL;
 
     /**
      * URL that should receive webhooks relating to this verification request.
      */
-    #[Api('webhookUrl', optional: true)]
+    #[Optional('webhookUrl')]
     public ?string $webhookURL;
 
     /**
@@ -325,8 +332,8 @@ final class RequestUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Volume|value-of<Volume> $messageVolume
-     * @param list<URL> $optInWorkflowImageURLs
-     * @param list<TfPhoneNumber> $phoneNumbers
+     * @param list<URL|URLShape> $optInWorkflowImageURLs
+     * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers
      * @param UseCaseCategories|value-of<UseCaseCategories> $useCase
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType
      */
@@ -355,6 +362,7 @@ final class RequestUpdateParams implements BaseModel
         ?string $businessRegistrationCountry = null,
         ?string $businessRegistrationNumber = null,
         ?string $businessRegistrationType = null,
+        ?string $campaignVerifyAuthorizationToken = null,
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
@@ -364,43 +372,44 @@ final class RequestUpdateParams implements BaseModel
         ?string $termsAndConditionURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->additionalInformation = $additionalInformation;
-        $obj->businessAddr1 = $businessAddr1;
-        $obj->businessCity = $businessCity;
-        $obj->businessContactEmail = $businessContactEmail;
-        $obj->businessContactFirstName = $businessContactFirstName;
-        $obj->businessContactLastName = $businessContactLastName;
-        $obj->businessContactPhone = $businessContactPhone;
-        $obj->businessName = $businessName;
-        $obj->businessState = $businessState;
-        $obj->businessZip = $businessZip;
-        $obj->corporateWebsite = $corporateWebsite;
-        $obj->isvReseller = $isvReseller;
-        $obj['messageVolume'] = $messageVolume;
-        $obj->optInWorkflow = $optInWorkflow;
-        $obj->optInWorkflowImageURLs = $optInWorkflowImageURLs;
-        $obj->phoneNumbers = $phoneNumbers;
-        $obj->productionMessageContent = $productionMessageContent;
-        $obj['useCase'] = $useCase;
-        $obj->useCaseSummary = $useCaseSummary;
+        $self['additionalInformation'] = $additionalInformation;
+        $self['businessAddr1'] = $businessAddr1;
+        $self['businessCity'] = $businessCity;
+        $self['businessContactEmail'] = $businessContactEmail;
+        $self['businessContactFirstName'] = $businessContactFirstName;
+        $self['businessContactLastName'] = $businessContactLastName;
+        $self['businessContactPhone'] = $businessContactPhone;
+        $self['businessName'] = $businessName;
+        $self['businessState'] = $businessState;
+        $self['businessZip'] = $businessZip;
+        $self['corporateWebsite'] = $corporateWebsite;
+        $self['isvReseller'] = $isvReseller;
+        $self['messageVolume'] = $messageVolume;
+        $self['optInWorkflow'] = $optInWorkflow;
+        $self['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
+        $self['phoneNumbers'] = $phoneNumbers;
+        $self['productionMessageContent'] = $productionMessageContent;
+        $self['useCase'] = $useCase;
+        $self['useCaseSummary'] = $useCaseSummary;
 
-        null !== $ageGatedContent && $obj->ageGatedContent = $ageGatedContent;
-        null !== $businessAddr2 && $obj->businessAddr2 = $businessAddr2;
-        null !== $businessRegistrationCountry && $obj->businessRegistrationCountry = $businessRegistrationCountry;
-        null !== $businessRegistrationNumber && $obj->businessRegistrationNumber = $businessRegistrationNumber;
-        null !== $businessRegistrationType && $obj->businessRegistrationType = $businessRegistrationType;
-        null !== $doingBusinessAs && $obj->doingBusinessAs = $doingBusinessAs;
-        null !== $entityType && $obj['entityType'] = $entityType;
-        null !== $helpMessageResponse && $obj->helpMessageResponse = $helpMessageResponse;
-        null !== $optInConfirmationResponse && $obj->optInConfirmationResponse = $optInConfirmationResponse;
-        null !== $optInKeywords && $obj->optInKeywords = $optInKeywords;
-        null !== $privacyPolicyURL && $obj->privacyPolicyURL = $privacyPolicyURL;
-        null !== $termsAndConditionURL && $obj->termsAndConditionURL = $termsAndConditionURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $ageGatedContent && $self['ageGatedContent'] = $ageGatedContent;
+        null !== $businessAddr2 && $self['businessAddr2'] = $businessAddr2;
+        null !== $businessRegistrationCountry && $self['businessRegistrationCountry'] = $businessRegistrationCountry;
+        null !== $businessRegistrationNumber && $self['businessRegistrationNumber'] = $businessRegistrationNumber;
+        null !== $businessRegistrationType && $self['businessRegistrationType'] = $businessRegistrationType;
+        null !== $campaignVerifyAuthorizationToken && $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
+        null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
+        null !== $entityType && $self['entityType'] = $entityType;
+        null !== $helpMessageResponse && $self['helpMessageResponse'] = $helpMessageResponse;
+        null !== $optInConfirmationResponse && $self['optInConfirmationResponse'] = $optInConfirmationResponse;
+        null !== $optInKeywords && $self['optInKeywords'] = $optInKeywords;
+        null !== $privacyPolicyURL && $self['privacyPolicyURL'] = $privacyPolicyURL;
+        null !== $termsAndConditionURL && $self['termsAndConditionURL'] = $termsAndConditionURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -409,10 +418,10 @@ final class RequestUpdateParams implements BaseModel
     public function withAdditionalInformation(
         string $additionalInformation
     ): self {
-        $obj = clone $this;
-        $obj->additionalInformation = $additionalInformation;
+        $self = clone $this;
+        $self['additionalInformation'] = $additionalInformation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -420,10 +429,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessAddr1(string $businessAddr1): self
     {
-        $obj = clone $this;
-        $obj->businessAddr1 = $businessAddr1;
+        $self = clone $this;
+        $self['businessAddr1'] = $businessAddr1;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -431,10 +440,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessCity(string $businessCity): self
     {
-        $obj = clone $this;
-        $obj->businessCity = $businessCity;
+        $self = clone $this;
+        $self['businessCity'] = $businessCity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -442,10 +451,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessContactEmail(string $businessContactEmail): self
     {
-        $obj = clone $this;
-        $obj->businessContactEmail = $businessContactEmail;
+        $self = clone $this;
+        $self['businessContactEmail'] = $businessContactEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -454,10 +463,10 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessContactFirstName(
         string $businessContactFirstName
     ): self {
-        $obj = clone $this;
-        $obj->businessContactFirstName = $businessContactFirstName;
+        $self = clone $this;
+        $self['businessContactFirstName'] = $businessContactFirstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -466,10 +475,10 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessContactLastName(
         string $businessContactLastName
     ): self {
-        $obj = clone $this;
-        $obj->businessContactLastName = $businessContactLastName;
+        $self = clone $this;
+        $self['businessContactLastName'] = $businessContactLastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -477,10 +486,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessContactPhone(string $businessContactPhone): self
     {
-        $obj = clone $this;
-        $obj->businessContactPhone = $businessContactPhone;
+        $self = clone $this;
+        $self['businessContactPhone'] = $businessContactPhone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -488,10 +497,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessName(string $businessName): self
     {
-        $obj = clone $this;
-        $obj->businessName = $businessName;
+        $self = clone $this;
+        $self['businessName'] = $businessName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -499,10 +508,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessState(string $businessState): self
     {
-        $obj = clone $this;
-        $obj->businessState = $businessState;
+        $self = clone $this;
+        $self['businessState'] = $businessState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -510,10 +519,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessZip(string $businessZip): self
     {
-        $obj = clone $this;
-        $obj->businessZip = $businessZip;
+        $self = clone $this;
+        $self['businessZip'] = $businessZip;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -521,10 +530,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withCorporateWebsite(string $corporateWebsite): self
     {
-        $obj = clone $this;
-        $obj->corporateWebsite = $corporateWebsite;
+        $self = clone $this;
+        $self['corporateWebsite'] = $corporateWebsite;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -532,10 +541,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withIsvReseller(string $isvReseller): self
     {
-        $obj = clone $this;
-        $obj->isvReseller = $isvReseller;
+        $self = clone $this;
+        $self['isvReseller'] = $isvReseller;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -545,10 +554,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withMessageVolume(Volume|string $messageVolume): self
     {
-        $obj = clone $this;
-        $obj['messageVolume'] = $messageVolume;
+        $self = clone $this;
+        $self['messageVolume'] = $messageVolume;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -556,37 +565,37 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withOptInWorkflow(string $optInWorkflow): self
     {
-        $obj = clone $this;
-        $obj->optInWorkflow = $optInWorkflow;
+        $self = clone $this;
+        $self['optInWorkflow'] = $optInWorkflow;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Images showing the opt-in workflow.
      *
-     * @param list<URL> $optInWorkflowImageURLs
+     * @param list<URL|URLShape> $optInWorkflowImageURLs
      */
     public function withOptInWorkflowImageURLs(
         array $optInWorkflowImageURLs
     ): self {
-        $obj = clone $this;
-        $obj->optInWorkflowImageURLs = $optInWorkflowImageURLs;
+        $self = clone $this;
+        $self['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The phone numbers to request the verification of.
      *
-     * @param list<TfPhoneNumber> $phoneNumbers
+     * @param list<TfPhoneNumber|TfPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -595,10 +604,10 @@ final class RequestUpdateParams implements BaseModel
     public function withProductionMessageContent(
         string $productionMessageContent
     ): self {
-        $obj = clone $this;
-        $obj->productionMessageContent = $productionMessageContent;
+        $self = clone $this;
+        $self['productionMessageContent'] = $productionMessageContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -608,10 +617,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withUseCase(UseCaseCategories|string $useCase): self
     {
-        $obj = clone $this;
-        $obj['useCase'] = $useCase;
+        $self = clone $this;
+        $self['useCase'] = $useCase;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -619,10 +628,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withUseCaseSummary(string $useCaseSummary): self
     {
-        $obj = clone $this;
-        $obj->useCaseSummary = $useCaseSummary;
+        $self = clone $this;
+        $self['useCaseSummary'] = $useCaseSummary;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -630,10 +639,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withAgeGatedContent(bool $ageGatedContent): self
     {
-        $obj = clone $this;
-        $obj->ageGatedContent = $ageGatedContent;
+        $self = clone $this;
+        $self['ageGatedContent'] = $ageGatedContent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -641,10 +650,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withBusinessAddr2(string $businessAddr2): self
     {
-        $obj = clone $this;
-        $obj->businessAddr2 = $businessAddr2;
+        $self = clone $this;
+        $self['businessAddr2'] = $businessAddr2;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -653,10 +662,10 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessRegistrationCountry(
         ?string $businessRegistrationCountry
     ): self {
-        $obj = clone $this;
-        $obj->businessRegistrationCountry = $businessRegistrationCountry;
+        $self = clone $this;
+        $self['businessRegistrationCountry'] = $businessRegistrationCountry;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -665,10 +674,10 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessRegistrationNumber(
         ?string $businessRegistrationNumber
     ): self {
-        $obj = clone $this;
-        $obj->businessRegistrationNumber = $businessRegistrationNumber;
+        $self = clone $this;
+        $self['businessRegistrationNumber'] = $businessRegistrationNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -677,10 +686,22 @@ final class RequestUpdateParams implements BaseModel
     public function withBusinessRegistrationType(
         ?string $businessRegistrationType
     ): self {
-        $obj = clone $this;
-        $obj->businessRegistrationType = $businessRegistrationType;
+        $self = clone $this;
+        $self['businessRegistrationType'] = $businessRegistrationType;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Campaign Verify Authorization Token required for Political use case submissions starting February 17, 2026. This token is validated by Zipwhip and must be provided for all Political use case verifications after the deadline.
+     */
+    public function withCampaignVerifyAuthorizationToken(
+        ?string $campaignVerifyAuthorizationToken
+    ): self {
+        $self = clone $this;
+        $self['campaignVerifyAuthorizationToken'] = $campaignVerifyAuthorizationToken;
+
+        return $self;
     }
 
     /**
@@ -688,10 +709,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withDoingBusinessAs(?string $doingBusinessAs): self
     {
-        $obj = clone $this;
-        $obj->doingBusinessAs = $doingBusinessAs;
+        $self = clone $this;
+        $self['doingBusinessAs'] = $doingBusinessAs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -702,10 +723,10 @@ final class RequestUpdateParams implements BaseModel
     public function withEntityType(
         TollFreeVerificationEntityType|string|null $entityType
     ): self {
-        $obj = clone $this;
-        $obj['entityType'] = $entityType;
+        $self = clone $this;
+        $self['entityType'] = $entityType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -713,10 +734,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withHelpMessageResponse(?string $helpMessageResponse): self
     {
-        $obj = clone $this;
-        $obj->helpMessageResponse = $helpMessageResponse;
+        $self = clone $this;
+        $self['helpMessageResponse'] = $helpMessageResponse;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -725,10 +746,10 @@ final class RequestUpdateParams implements BaseModel
     public function withOptInConfirmationResponse(
         ?string $optInConfirmationResponse
     ): self {
-        $obj = clone $this;
-        $obj->optInConfirmationResponse = $optInConfirmationResponse;
+        $self = clone $this;
+        $self['optInConfirmationResponse'] = $optInConfirmationResponse;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -736,10 +757,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withOptInKeywords(?string $optInKeywords): self
     {
-        $obj = clone $this;
-        $obj->optInKeywords = $optInKeywords;
+        $self = clone $this;
+        $self['optInKeywords'] = $optInKeywords;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -747,10 +768,10 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withPrivacyPolicyURL(?string $privacyPolicyURL): self
     {
-        $obj = clone $this;
-        $obj->privacyPolicyURL = $privacyPolicyURL;
+        $self = clone $this;
+        $self['privacyPolicyURL'] = $privacyPolicyURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -759,10 +780,10 @@ final class RequestUpdateParams implements BaseModel
     public function withTermsAndConditionURL(
         ?string $termsAndConditionURL
     ): self {
-        $obj = clone $this;
-        $obj->termsAndConditionURL = $termsAndConditionURL;
+        $self = clone $this;
+        $self['termsAndConditionURL'] = $termsAndConditionURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -770,9 +791,9 @@ final class RequestUpdateParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,38 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Filter phone numbers by pattern matching.
  *
- * @phpstan-type phone_number = array{
- *   contains?: string, endsWith?: string, startsWith?: string
+ * @phpstan-type PhoneNumberShape = array{
+ *   contains?: string|null, endsWith?: string|null, startsWith?: string|null
  * }
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     /**
      * Filter numbers containing a pattern (excludes NDC if used with `national_destination_code` filter).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * Filter numbers ending with a pattern (excludes NDC if used with `national_destination_code` filter).
      */
-    #[Api('ends_with', optional: true)]
+    #[Optional('ends_with')]
     public ?string $endsWith;
 
     /**
      * Filter numbers starting with a pattern (excludes NDC if used with `national_destination_code` filter).
      */
-    #[Api('starts_with', optional: true)]
+    #[Optional('starts_with')]
     public ?string $startsWith;
 
     public function __construct()
@@ -53,13 +53,13 @@ final class PhoneNumber implements BaseModel
         ?string $endsWith = null,
         ?string $startsWith = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
-        null !== $endsWith && $obj->endsWith = $endsWith;
-        null !== $startsWith && $obj->startsWith = $startsWith;
+        null !== $contains && $self['contains'] = $contains;
+        null !== $endsWith && $self['endsWith'] = $endsWith;
+        null !== $startsWith && $self['startsWith'] = $startsWith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class PhoneNumber implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class PhoneNumber implements BaseModel
      */
     public function withEndsWith(string $endsWith): self
     {
-        $obj = clone $this;
-        $obj->endsWith = $endsWith;
+        $self = clone $this;
+        $self['endsWith'] = $endsWith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class PhoneNumber implements BaseModel
      */
     public function withStartsWith(string $startsWith): self
     {
-        $obj = clone $this;
-        $obj->startsWith = $startsWith;
+        $self = clone $this;
+        $self['startsWith'] = $startsWith;
 
-        return $obj;
+        return $self;
     }
 }

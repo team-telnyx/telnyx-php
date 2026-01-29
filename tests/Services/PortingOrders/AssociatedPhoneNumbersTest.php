@@ -6,7 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange;
+use Telnyx\DefaultPagination;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberDeleteResponse;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberNewResponse;
+use Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,10 +40,11 @@ final class AssociatedPhoneNumbersTest extends TestCase
         $result = $this->client->portingOrders->associatedPhoneNumbers->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             action: 'keep',
-            phoneNumberRange: (new PhoneNumberRange),
+            phoneNumberRange: [],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssociatedPhoneNumberNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,12 +57,13 @@ final class AssociatedPhoneNumbersTest extends TestCase
         $result = $this->client->portingOrders->associatedPhoneNumbers->create(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             action: 'keep',
-            phoneNumberRange: (new PhoneNumberRange)
-                ->withEndAt('+441234567899')
-                ->withStartAt('+441234567890'),
+            phoneNumberRange: [
+                'endAt' => '+441234567899', 'startAt' => '+441234567890',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AssociatedPhoneNumberNewResponse::class, $result);
     }
 
     #[Test]
@@ -68,11 +73,17 @@ final class AssociatedPhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portingOrders->associatedPhoneNumbers->list(
+        $page = $this->client->portingOrders->associatedPhoneNumbers->list(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PortingAssociatedPhoneNumber::class, $item);
+        }
     }
 
     #[Test]
@@ -84,10 +95,14 @@ final class AssociatedPhoneNumbersTest extends TestCase
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            portingOrderID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AssociatedPhoneNumberDeleteResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -99,9 +114,13 @@ final class AssociatedPhoneNumbersTest extends TestCase
 
         $result = $this->client->portingOrders->associatedPhoneNumbers->delete(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            portingOrderID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AssociatedPhoneNumberDeleteResponse::class,
+            $result
+        );
     }
 }

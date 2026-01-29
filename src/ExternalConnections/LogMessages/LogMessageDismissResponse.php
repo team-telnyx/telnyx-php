@@ -4,26 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type log_message_dismiss_response = array{success?: bool}
+ * @phpstan-type LogMessageDismissResponseShape = array{success?: bool|null}
  */
-final class LogMessageDismissResponse implements BaseModel, ResponseConverter
+final class LogMessageDismissResponse implements BaseModel
 {
-    /** @use SdkModel<log_message_dismiss_response> */
+    /** @use SdkModel<LogMessageDismissResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Describes wether or not the operation was successful.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $success;
 
     public function __construct()
@@ -38,11 +34,11 @@ final class LogMessageDismissResponse implements BaseModel, ResponseConverter
      */
     public static function with(?bool $success = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $success && $obj->success = $success;
+        null !== $success && $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -50,9 +46,9 @@ final class LogMessageDismissResponse implements BaseModel, ResponseConverter
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj->success = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

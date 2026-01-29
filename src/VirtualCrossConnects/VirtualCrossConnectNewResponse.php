@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnects;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse\Data;
 
 /**
- * @phpstan-type virtual_cross_connect_new_response = array{data?: Data}
+ * @phpstan-import-type DataShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse\Data
+ *
+ * @phpstan-type VirtualCrossConnectNewResponseShape = array{
+ *   data?: null|Data|DataShape
+ * }
  */
-final class VirtualCrossConnectNewResponse implements BaseModel, ResponseConverter
+final class VirtualCrossConnectNewResponse implements BaseModel
 {
-    /** @use SdkModel<virtual_cross_connect_new_response> */
+    /** @use SdkModel<VirtualCrossConnectNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Data $data;
 
     public function __construct()
@@ -33,21 +33,26 @@ final class VirtualCrossConnectNewResponse implements BaseModel, ResponseConvert
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|DataShape|null $data
      */
-    public static function with(?Data $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|DataShape $data
+     */
+    public function withData(Data|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

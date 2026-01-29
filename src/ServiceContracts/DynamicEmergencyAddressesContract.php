@@ -5,106 +5,86 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
+use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddress;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressCreateParams\CountryCode;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressDeleteResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressGetResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page;
-use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListResponse;
 use Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressNewResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface DynamicEmergencyAddressesContract
 {
     /**
      * @api
      *
-     * @param string $administrativeArea
      * @param CountryCode|value-of<CountryCode> $countryCode
-     * @param string $houseNumber
-     * @param string $locality
-     * @param string $postalCode
-     * @param string $streetName
-     * @param string $extendedAddress
-     * @param string $houseSuffix
-     * @param string $streetPostDirectional
-     * @param string $streetPreDirectional
-     * @param string $streetSuffix
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $administrativeArea,
-        $countryCode,
-        $houseNumber,
-        $locality,
-        $postalCode,
-        $streetName,
-        $extendedAddress = omit,
-        $houseSuffix = omit,
-        $streetPostDirectional = omit,
-        $streetPreDirectional = omit,
-        $streetSuffix = omit,
-        ?RequestOptions $requestOptions = null,
+        string $administrativeArea,
+        CountryCode|string $countryCode,
+        string $houseNumber,
+        string $locality,
+        string $postalCode,
+        string $streetName,
+        ?string $extendedAddress = null,
+        ?string $houseSuffix = null,
+        ?string $streetPostDirectional = null,
+        ?string $streetPreDirectional = null,
+        ?string $streetSuffix = null,
+        RequestOptions|array|null $requestOptions = null,
     ): DynamicEmergencyAddressNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): DynamicEmergencyAddressNewResponse;
-
-    /**
-     * @api
+     * @param string $id Dynamic Emergency Address id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DynamicEmergencyAddressGetResponse;
 
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<DynamicEmergencyAddress>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): DynamicEmergencyAddressListResponse;
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): DynamicEmergencyAddressListResponse;
-
-    /**
-     * @api
+     * @param string $id Dynamic Emergency Address id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DynamicEmergencyAddressDeleteResponse;
 }

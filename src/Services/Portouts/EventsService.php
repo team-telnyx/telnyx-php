@@ -6,41 +6,55 @@ namespace Telnyx\Services\Portouts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
-use Telnyx\Portouts\Events\EventListParams;
 use Telnyx\Portouts\Events\EventListParams\Filter;
 use Telnyx\Portouts\Events\EventListParams\Page;
-use Telnyx\Portouts\Events\EventListResponse;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment;
+use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\EventsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Portouts\Events\EventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Portouts\Events\EventListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class EventsService implements EventsContract
 {
     /**
+     * @api
+     */
+    public EventsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new EventsRawService($client);
+    }
 
     /**
      * @api
      *
      * Show a specific port-out event.
      *
+     * @param string $id identifies the port-out event
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): EventGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['portouts/events/%1$s', $id],
-            options: $requestOptions,
-            convert: EventGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -48,45 +62,25 @@ final class EventsService implements EventsContract
      *
      * Returns a list of all port-out events.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): EventListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): EventListResponse {
-        [$parsed, $options] = EventListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'portouts/events',
-            query: $parsed,
-            options: $options,
-            convert: EventListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -94,18 +88,18 @@ final class EventsService implements EventsContract
      *
      * Republish a specific port-out event.
      *
+     * @param string $id identifies the port-out event
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function republish(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['portouts/events/%1$s/republish', $id],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->republish($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

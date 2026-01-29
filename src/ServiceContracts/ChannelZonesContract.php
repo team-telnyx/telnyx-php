@@ -8,59 +8,42 @@ use Telnyx\ChannelZones\ChannelZoneListParams\Page;
 use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type PageShape from \Telnyx\ChannelZones\ChannelZoneListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ChannelZonesContract
 {
     /**
      * @api
      *
+     * @param string $channelZoneID Channel zone identifier
      * @param int $channels The number of reserved channels
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $channelZoneID,
-        $channels,
-        ?RequestOptions $requestOptions = null
+        int $channels,
+        RequestOptions|array|null $requestOptions = null,
     ): ChannelZoneUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
      *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $channelZoneID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): ChannelZoneUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @return DefaultPagination<ChannelZoneListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): ChannelZoneListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ChannelZoneListResponse;
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination;
 }

@@ -6,27 +6,31 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerificationsContract;
 use Telnyx\Services\Verifications\ActionsService;
 use Telnyx\Services\Verifications\ByPhoneNumberService;
 use Telnyx\Verifications\CreateVerificationResponse;
 use Telnyx\Verifications\VerificationGetResponse;
-use Telnyx\Verifications\VerificationTriggerCallParams;
-use Telnyx\Verifications\VerificationTriggerFlashcallParams;
-use Telnyx\Verifications\VerificationTriggerSMSParams;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VerificationsService implements VerificationsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public VerificationsRawService $raw;
+
+    /**
+     * @api
      */
     public ByPhoneNumberService $byPhoneNumber;
 
     /**
-     * @@api
+     * @api
      */
     public ActionsService $actions;
 
@@ -35,6 +39,7 @@ final class VerificationsService implements VerificationsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new VerificationsRawService($client);
         $this->byPhoneNumber = new ByPhoneNumberService($client);
         $this->actions = new ActionsService($client);
     }
@@ -44,19 +49,19 @@ final class VerificationsService implements VerificationsContract
      *
      * Retrieve verification
      *
+     * @param string $verificationID the identifier of the verification to retrieve
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $verificationID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VerificationGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['verifications/%1$s', $verificationID],
-            options: $requestOptions,
-            convert: VerificationGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($verificationID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -69,52 +74,32 @@ final class VerificationsService implements VerificationsContract
      * @param string|null $customCode Send a self-generated numeric code to the end-user
      * @param string|null $extension Optional extension to dial after call is answered using DTMF digits. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
      * @param int $timeoutSecs the number of seconds the verification code is valid for
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function triggerCall(
-        $phoneNumber,
-        $verifyProfileID,
-        $customCode = omit,
-        $extension = omit,
-        $timeoutSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        string $phoneNumber,
+        string $verifyProfileID,
+        ?string $customCode = null,
+        ?string $extension = null,
+        ?int $timeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = [
-            'phoneNumber' => $phoneNumber,
-            'verifyProfileID' => $verifyProfileID,
-            'customCode' => $customCode,
-            'extension' => $extension,
-            'timeoutSecs' => $timeoutSecs,
-        ];
-
-        return $this->triggerCallRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function triggerCallRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CreateVerificationResponse {
-        [$parsed, $options] = VerificationTriggerCallParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'phoneNumber' => $phoneNumber,
+                'verifyProfileID' => $verifyProfileID,
+                'customCode' => $customCode,
+                'extension' => $extension,
+                'timeoutSecs' => $timeoutSecs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'verifications/call',
-            body: (object) $parsed,
-            options: $options,
-            convert: CreateVerificationResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->triggerCall(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -125,48 +110,28 @@ final class VerificationsService implements VerificationsContract
      * @param string $phoneNumber +E164 formatted phone number
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param int $timeoutSecs the number of seconds the verification code is valid for
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function triggerFlashcall(
-        $phoneNumber,
-        $verifyProfileID,
-        $timeoutSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        string $phoneNumber,
+        string $verifyProfileID,
+        ?int $timeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = [
-            'phoneNumber' => $phoneNumber,
-            'verifyProfileID' => $verifyProfileID,
-            'timeoutSecs' => $timeoutSecs,
-        ];
-
-        return $this->triggerFlashcallRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function triggerFlashcallRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CreateVerificationResponse {
-        [$parsed, $options] = VerificationTriggerFlashcallParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'phoneNumber' => $phoneNumber,
+                'verifyProfileID' => $verifyProfileID,
+                'timeoutSecs' => $timeoutSecs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'verifications/flashcall',
-            body: (object) $parsed,
-            options: $options,
-            convert: CreateVerificationResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->triggerFlashcall(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -178,49 +143,29 @@ final class VerificationsService implements VerificationsContract
      * @param string $verifyProfileID the identifier of the associated Verify profile
      * @param string|null $customCode Send a self-generated numeric code to the end-user
      * @param int $timeoutSecs the number of seconds the verification code is valid for
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function triggerSMS(
-        $phoneNumber,
-        $verifyProfileID,
-        $customCode = omit,
-        $timeoutSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        string $phoneNumber,
+        string $verifyProfileID,
+        ?string $customCode = null,
+        ?int $timeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CreateVerificationResponse {
-        $params = [
-            'phoneNumber' => $phoneNumber,
-            'verifyProfileID' => $verifyProfileID,
-            'customCode' => $customCode,
-            'timeoutSecs' => $timeoutSecs,
-        ];
-
-        return $this->triggerSMSRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function triggerSMSRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): CreateVerificationResponse {
-        [$parsed, $options] = VerificationTriggerSMSParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'phoneNumber' => $phoneNumber,
+                'verifyProfileID' => $verifyProfileID,
+                'customCode' => $customCode,
+                'timeoutSecs' => $timeoutSecs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'verifications/sms',
-            body: (object) $parsed,
-            options: $options,
-            convert: CreateVerificationResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->triggerSMS(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

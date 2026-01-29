@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns multiple recording transcription resources for an account.
  *
- * @see Telnyx\Texml\Accounts->retrieveTranscriptionsJson
+ * @see Telnyx\Services\Texml\AccountsService::retrieveTranscriptionsJson()
  *
- * @phpstan-type account_retrieve_transcriptions_json_params = array{
- *   pageSize?: int, pageToken?: string
+ * @phpstan-type AccountRetrieveTranscriptionsJsonParamsShape = array{
+ *   pageSize?: int|null, pageToken?: string|null
  * }
  */
 final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
 {
-    /** @use SdkModel<account_retrieve_transcriptions_json_params> */
+    /** @use SdkModel<AccountRetrieveTranscriptionsJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The number of records to be displayed on a page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageSize;
 
     /**
      * Used to request the next page of results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pageToken;
 
     public function __construct()
@@ -50,12 +50,12 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
         ?int $pageSize = null,
         ?string $pageToken = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $pageToken && $obj->pageToken = $pageToken;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $pageToken && $self['pageToken'] = $pageToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class AccountRetrieveTranscriptionsJsonParams implements BaseModel
      */
     public function withPageToken(string $pageToken): self
     {
-        $obj = clone $this;
-        $obj->pageToken = $pageToken;
+        $self = clone $this;
+        $self['pageToken'] = $pageToken;
 
-        return $obj;
+        return $self;
     }
 }

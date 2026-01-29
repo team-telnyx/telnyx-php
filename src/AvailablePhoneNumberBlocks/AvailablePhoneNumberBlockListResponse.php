@@ -5,31 +5,31 @@ declare(strict_types=1);
 namespace Telnyx\AvailablePhoneNumberBlocks;
 
 use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data;
-use Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Meta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\AvailablePhoneNumbersMetadata;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type available_phone_number_block_list_response = array{
- *   data?: list<Data>, meta?: Meta
+ * @phpstan-import-type DataShape from \Telnyx\AvailablePhoneNumberBlocks\AvailablePhoneNumberBlockListResponse\Data
+ * @phpstan-import-type AvailablePhoneNumbersMetadataShape from \Telnyx\AvailablePhoneNumbersMetadata
+ *
+ * @phpstan-type AvailablePhoneNumberBlockListResponseShape = array{
+ *   data?: list<Data|DataShape>|null,
+ *   meta?: null|AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape,
  * }
  */
-final class AvailablePhoneNumberBlockListResponse implements BaseModel, ResponseConverter
+final class AvailablePhoneNumberBlockListResponse implements BaseModel
 {
-    /** @use SdkModel<available_phone_number_block_list_response> */
+    /** @use SdkModel<AvailablePhoneNumberBlockListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    #[Optional(list: Data::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
-    public ?Meta $meta;
+    #[Optional]
+    public ?AvailablePhoneNumbersMetadata $meta;
 
     public function __construct()
     {
@@ -41,34 +41,40 @@ final class AvailablePhoneNumberBlockListResponse implements BaseModel, Response
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|DataShape>|null $data
+     * @param AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape|null $meta
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
-        $obj = new self;
+    public static function with(
+        ?array $data = null,
+        AvailablePhoneNumbersMetadata|array|null $meta = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param AvailablePhoneNumbersMetadata|AvailablePhoneNumbersMetadataShape $meta
+     */
+    public function withMeta(AvailablePhoneNumbersMetadata|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,8 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport;
-use Telnyx\Porting\Reports\ExportPortingOrdersCsvReport\Filters;
+use Telnyx\DefaultPagination;
+use Telnyx\Porting\Reports\PortingReport;
+use Telnyx\Porting\Reports\ReportGetResponse;
+use Telnyx\Porting\Reports\ReportNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -36,11 +38,12 @@ final class ReportsTest extends TestCase
         }
 
         $result = $this->client->porting->reports->create(
-            params: ExportPortingOrdersCsvReport::with(filters: (new Filters)),
-            reportType: 'export_porting_orders_csv',
+            params: ['filters' => []],
+            reportType: 'export_porting_orders_csv'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,17 +54,19 @@ final class ReportsTest extends TestCase
         }
 
         $result = $this->client->porting->reports->create(
-            params: ExportPortingOrdersCsvReport::with(
-                filters: (new Filters)
-                    ->withCreatedAtGt(new \DateTimeImmutable('2019-12-27T18:11:19.117Z'))
-                    ->withCreatedAtLt(new \DateTimeImmutable('2019-12-27T18:11:19.117Z'))
-                    ->withCustomerReferenceIn(['my-customer-reference'])
-                    ->withStatusIn(['draft']),
-            ),
+            params: [
+                'filters' => [
+                    'createdAtGt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'createdAtLt' => new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+                    'customerReferenceIn' => ['my-customer-reference'],
+                    'statusIn' => ['draft'],
+                ],
+            ],
             reportType: 'export_porting_orders_csv',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +80,8 @@ final class ReportsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReportGetResponse::class, $result);
     }
 
     #[Test]
@@ -85,8 +91,14 @@ final class ReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->porting->reports->list();
+        $page = $this->client->porting->reports->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PortingReport::class, $item);
+        }
     }
 }

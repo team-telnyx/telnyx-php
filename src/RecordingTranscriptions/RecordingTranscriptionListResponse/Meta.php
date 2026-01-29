@@ -4,34 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Cursors;
 
 /**
- * @phpstan-type meta_alias = array{
- *   cursors?: Cursors, next?: string, previous?: string
+ * @phpstan-import-type CursorsShape from \Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Cursors
+ *
+ * @phpstan-type MetaShape = array{
+ *   cursors?: null|Cursors|CursorsShape,
+ *   next?: string|null,
+ *   previous?: string|null,
  * }
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Cursors $cursors;
 
     /**
      * Path to next page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $next;
 
     /**
      * Path to previous page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $previous;
 
     public function __construct()
@@ -43,27 +47,32 @@ final class Meta implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Cursors|CursorsShape|null $cursors
      */
     public static function with(
-        ?Cursors $cursors = null,
+        Cursors|array|null $cursors = null,
         ?string $next = null,
         ?string $previous = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $cursors && $obj->cursors = $cursors;
-        null !== $next && $obj->next = $next;
-        null !== $previous && $obj->previous = $previous;
+        null !== $cursors && $self['cursors'] = $cursors;
+        null !== $next && $self['next'] = $next;
+        null !== $previous && $self['previous'] = $previous;
 
-        return $obj;
+        return $self;
     }
 
-    public function withCursors(Cursors $cursors): self
+    /**
+     * @param Cursors|CursorsShape $cursors
+     */
+    public function withCursors(Cursors|array $cursors): self
     {
-        $obj = clone $this;
-        $obj->cursors = $cursors;
+        $self = clone $this;
+        $self['cursors'] = $cursors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,10 +80,10 @@ final class Meta implements BaseModel
      */
     public function withNext(string $next): self
     {
-        $obj = clone $this;
-        $obj->next = $next;
+        $self = clone $this;
+        $self['next'] = $next;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,9 +91,9 @@ final class Meta implements BaseModel
      */
     public function withPrevious(string $previous): self
     {
-        $obj = clone $this;
-        $obj->previous = $previous;
+        $self = clone $this;
+        $self['previous'] = $previous;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,31 +13,31 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Authorize or reject portout request.
  *
- * @see Telnyx\Portouts->updateStatus
+ * @see Telnyx\Services\PortoutsService::updateStatus()
  *
- * @phpstan-type portout_update_status_params = array{
- *   id: string, reason: string, hostMessaging?: bool
+ * @phpstan-type PortoutUpdateStatusParamsShape = array{
+ *   id: string, reason: string, hostMessaging?: bool|null
  * }
  */
 final class PortoutUpdateStatusParams implements BaseModel
 {
-    /** @use SdkModel<portout_update_status_params> */
+    /** @use SdkModel<PortoutUpdateStatusParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Provide a reason if rejecting the port out request.
      */
-    #[Api]
+    #[Required]
     public string $reason;
 
     /**
      * Indicates whether messaging services should be maintained with Telnyx after the port out completes.
      */
-    #[Api('host_messaging', optional: true)]
+    #[Optional('host_messaging')]
     public ?bool $hostMessaging;
 
     /**
@@ -68,22 +69,22 @@ final class PortoutUpdateStatusParams implements BaseModel
         string $reason,
         ?bool $hostMessaging = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->reason = $reason;
+        $self['id'] = $id;
+        $self['reason'] = $reason;
 
-        null !== $hostMessaging && $obj->hostMessaging = $hostMessaging;
+        null !== $hostMessaging && $self['hostMessaging'] = $hostMessaging;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +92,10 @@ final class PortoutUpdateStatusParams implements BaseModel
      */
     public function withReason(string $reason): self
     {
-        $obj = clone $this;
-        $obj->reason = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +103,9 @@ final class PortoutUpdateStatusParams implements BaseModel
      */
     public function withHostMessaging(bool $hostMessaging): self
     {
-        $obj = clone $this;
-        $obj->hostMessaging = $hostMessaging;
+        $self = clone $this;
+        $self['hostMessaging'] = $hostMessaging;
 
-        return $obj;
+        return $self;
     }
 }

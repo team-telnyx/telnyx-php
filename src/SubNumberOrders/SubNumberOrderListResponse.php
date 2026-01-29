@@ -5,29 +5,29 @@ declare(strict_types=1);
 namespace Telnyx\SubNumberOrders;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type sub_number_order_list_response = array{
- *   data?: list<SubNumberOrder>, meta?: PaginationMeta
+ * @phpstan-import-type SubNumberOrderShape from \Telnyx\SubNumberOrders\SubNumberOrder
+ * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
+ *
+ * @phpstan-type SubNumberOrderListResponseShape = array{
+ *   data?: list<SubNumberOrder|SubNumberOrderShape>|null,
+ *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
-final class SubNumberOrderListResponse implements BaseModel, ResponseConverter
+final class SubNumberOrderListResponse implements BaseModel
 {
-    /** @use SdkModel<sub_number_order_list_response> */
+    /** @use SdkModel<SubNumberOrderListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<SubNumberOrder>|null $data */
-    #[Api(list: SubNumberOrder::class, optional: true)]
+    #[Optional(list: SubNumberOrder::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PaginationMeta $meta;
 
     public function __construct()
@@ -40,36 +40,40 @@ final class SubNumberOrderListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SubNumberOrder> $data
+     * @param list<SubNumberOrder|SubNumberOrderShape>|null $data
+     * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
-        ?PaginationMeta $meta = null
+        PaginationMeta|array|null $meta = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<SubNumberOrder> $data
+     * @param list<SubNumberOrder|SubNumberOrderShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param PaginationMeta|PaginationMetaShape $meta
+     */
+    public function withMeta(PaginationMeta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,33 +4,101 @@ declare(strict_types=1);
 
 namespace Telnyx\CallEvents;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\CallEvents\CallEventListResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\CallEvents\CallEventListResponse\RecordType;
+use Telnyx\CallEvents\CallEventListResponse\Type;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type call_event_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-type CallEventListResponseShape = array{
+ *   callLegID: string,
+ *   callSessionID: string,
+ *   eventTimestamp: string,
+ *   metadata: array<string,mixed>,
+ *   name: string,
+ *   recordType: RecordType|value-of<RecordType>,
+ *   type: Type|value-of<Type>,
  * }
  */
-final class CallEventListResponse implements BaseModel, ResponseConverter
+final class CallEventListResponse implements BaseModel
 {
-    /** @use SdkModel<call_event_list_response> */
+    /** @use SdkModel<CallEventListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * Uniquely identifies an individual call leg.
+     */
+    #[Required('call_leg_id')]
+    public string $callLegID;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * Uniquely identifies the call control session. A session may include multiple call leg events.
+     */
+    #[Required('call_session_id')]
+    public string $callSessionID;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * Event timestamp.
+     */
+    #[Required('event_timestamp')]
+    public string $eventTimestamp;
 
+    /**
+     * Event metadata, which includes raw event, and extra information based on event type.
+     *
+     * @var array<string,mixed> $metadata
+     */
+    #[Required(map: 'mixed')]
+    public array $metadata;
+
+    /**
+     * Event name.
+     */
+    #[Required]
+    public string $name;
+
+    /** @var value-of<RecordType> $recordType */
+    #[Required('record_type', enum: RecordType::class)]
+    public string $recordType;
+
+    /**
+     * Event type.
+     *
+     * @var value-of<Type> $type
+     */
+    #[Required(enum: Type::class)]
+    public string $type;
+
+    /**
+     * `new CallEventListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * CallEventListResponse::with(
+     *   callLegID: ...,
+     *   callSessionID: ...,
+     *   eventTimestamp: ...,
+     *   metadata: ...,
+     *   name: ...,
+     *   recordType: ...,
+     *   type: ...,
+     * )
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new CallEventListResponse)
+     *   ->withCallLegID(...)
+     *   ->withCallSessionID(...)
+     *   ->withEventTimestamp(...)
+     *   ->withMetadata(...)
+     *   ->withName(...)
+     *   ->withRecordType(...)
+     *   ->withType(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -41,36 +109,110 @@ final class CallEventListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param array<string,mixed> $metadata
+     * @param RecordType|value-of<RecordType> $recordType
+     * @param Type|value-of<Type> $type
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        string $callLegID,
+        string $callSessionID,
+        string $eventTimestamp,
+        array $metadata,
+        string $name,
+        RecordType|string $recordType,
+        Type|string $type,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        $self['callLegID'] = $callLegID;
+        $self['callSessionID'] = $callSessionID;
+        $self['eventTimestamp'] = $eventTimestamp;
+        $self['metadata'] = $metadata;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * Uniquely identifies an individual call leg.
      */
-    public function withData(array $data): self
+    public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * Uniquely identifies the call control session. A session may include multiple call leg events.
+     */
+    public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Event timestamp.
+     */
+    public function withEventTimestamp(string $eventTimestamp): self
+    {
+        $self = clone $this;
+        $self['eventTimestamp'] = $eventTimestamp;
+
+        return $self;
+    }
+
+    /**
+     * Event metadata, which includes raw event, and extra information based on event type.
+     *
+     * @param array<string,mixed> $metadata
+     */
+    public function withMetadata(array $metadata): self
+    {
+        $self = clone $this;
+        $self['metadata'] = $metadata;
+
+        return $self;
+    }
+
+    /**
+     * Event name.
+     */
+    public function withName(string $name): self
+    {
+        $self = clone $this;
+        $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * @param RecordType|value-of<RecordType> $recordType
+     */
+    public function withRecordType(RecordType|string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * Event type.
+     *
+     * @param Type|value-of<Type> $type
+     */
+    public function withType(Type|string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
     }
 }

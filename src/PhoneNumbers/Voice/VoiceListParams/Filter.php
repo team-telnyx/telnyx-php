@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voice\VoiceListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\ConnectionName;
@@ -13,35 +13,37 @@ use Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\VoiceUsagePaymentMethod;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[phone_number], filter[connection_name], filter[customer_reference], filter[voice.usage_payment_method].
  *
- * @phpstan-type filter_alias = array{
- *   connectionName?: ConnectionName,
- *   customerReference?: string,
- *   phoneNumber?: string,
- *   voiceUsagePaymentMethod?: value-of<VoiceUsagePaymentMethod>,
+ * @phpstan-import-type ConnectionNameShape from \Telnyx\PhoneNumbers\Voice\VoiceListParams\Filter\ConnectionName
+ *
+ * @phpstan-type FilterShape = array{
+ *   connectionName?: null|ConnectionName|ConnectionNameShape,
+ *   customerReference?: string|null,
+ *   phoneNumber?: string|null,
+ *   voiceUsagePaymentMethod?: null|VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter by connection name pattern matching.
      */
-    #[Api('connection_name', optional: true)]
+    #[Optional('connection_name')]
     public ?ConnectionName $connectionName;
 
     /**
      * Filter numbers via the customer_reference set.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * Filter by phone number. Requires at least three digits.
      *              Non-numerical characters will result in no values being returned.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
@@ -49,10 +51,9 @@ final class Filter implements BaseModel
      *
      * @var value-of<VoiceUsagePaymentMethod>|null $voiceUsagePaymentMethod
      */
-    #[Api(
+    #[Optional(
         'voice.usage_payment_method',
-        enum: VoiceUsagePaymentMethod::class,
-        optional: true,
+        enum: VoiceUsagePaymentMethod::class
     )]
     public ?string $voiceUsagePaymentMethod;
 
@@ -66,33 +67,37 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod> $voiceUsagePaymentMethod
+     * @param ConnectionName|ConnectionNameShape|null $connectionName
+     * @param VoiceUsagePaymentMethod|value-of<VoiceUsagePaymentMethod>|null $voiceUsagePaymentMethod
      */
     public static function with(
-        ?ConnectionName $connectionName = null,
+        ConnectionName|array|null $connectionName = null,
         ?string $customerReference = null,
         ?string $phoneNumber = null,
         VoiceUsagePaymentMethod|string|null $voiceUsagePaymentMethod = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionName && $obj->connectionName = $connectionName;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $voiceUsagePaymentMethod && $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $voiceUsagePaymentMethod && $self['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter by connection name pattern matching.
+     *
+     * @param ConnectionName|ConnectionNameShape $connectionName
      */
-    public function withConnectionName(ConnectionName $connectionName): self
-    {
-        $obj = clone $this;
-        $obj->connectionName = $connectionName;
+    public function withConnectionName(
+        ConnectionName|array $connectionName
+    ): self {
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +105,10 @@ final class Filter implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +117,10 @@ final class Filter implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,9 +131,9 @@ final class Filter implements BaseModel
     public function withVoiceUsagePaymentMethod(
         VoiceUsagePaymentMethod|string $voiceUsagePaymentMethod
     ): self {
-        $obj = clone $this;
-        $obj['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
+        $self = clone $this;
+        $self['voiceUsagePaymentMethod'] = $voiceUsagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 }

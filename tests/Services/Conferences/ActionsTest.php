@@ -6,6 +6,20 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Conferences\Actions\ActionHoldResponse;
+use Telnyx\Conferences\Actions\ActionJoinResponse;
+use Telnyx\Conferences\Actions\ActionLeaveResponse;
+use Telnyx\Conferences\Actions\ActionMuteResponse;
+use Telnyx\Conferences\Actions\ActionPlayResponse;
+use Telnyx\Conferences\Actions\ActionRecordPauseResponse;
+use Telnyx\Conferences\Actions\ActionRecordResumeResponse;
+use Telnyx\Conferences\Actions\ActionRecordStartResponse;
+use Telnyx\Conferences\Actions\ActionRecordStopResponse;
+use Telnyx\Conferences\Actions\ActionSpeakResponse;
+use Telnyx\Conferences\Actions\ActionStopResponse;
+use Telnyx\Conferences\Actions\ActionUnholdResponse;
+use Telnyx\Conferences\Actions\ActionUnmuteResponse;
+use Telnyx\Conferences\Actions\ActionUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +53,8 @@ final class ActionsTest extends TestCase
             supervisorRole: 'whisper',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -53,9 +68,16 @@ final class ActionsTest extends TestCase
             'id',
             callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             supervisorRole: 'whisper',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            region: 'US',
+            whisperCallControlIDs: [
+                'v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ',
+                'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +89,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->hold('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionHoldResponse::class, $result);
     }
 
     #[Test]
@@ -82,7 +105,8 @@ final class ActionsTest extends TestCase
             callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionJoinResponse::class, $result);
     }
 
     #[Test]
@@ -95,9 +119,26 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->join(
             'id',
             callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            beepEnabled: 'always',
+            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            endConferenceOnExit: true,
+            hold: true,
+            holdAudioURL: 'http://www.example.com/audio.wav',
+            holdMediaName: 'my_media_uploaded_to_media_storage_api',
+            mute: true,
+            region: 'US',
+            softEndConferenceOnExit: true,
+            startConferenceOnEnter: true,
+            supervisorRole: 'whisper',
+            whisperCallControlIDs: [
+                'v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ',
+                'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionJoinResponse::class, $result);
     }
 
     #[Test]
@@ -112,7 +153,8 @@ final class ActionsTest extends TestCase
             callControlID: 'c46e06d7-b78f-4b13-96b6-c576af9640ff'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionLeaveResponse::class, $result);
     }
 
     #[Test]
@@ -124,10 +166,14 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->leave(
             'id',
-            callControlID: 'c46e06d7-b78f-4b13-96b6-c576af9640ff'
+            callControlID: 'c46e06d7-b78f-4b13-96b6-c576af9640ff',
+            beepEnabled: 'never',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            region: 'US',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionLeaveResponse::class, $result);
     }
 
     #[Test]
@@ -139,7 +185,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->mute('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionMuteResponse::class, $result);
     }
 
     #[Test]
@@ -151,7 +198,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->play('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionPlayResponse::class, $result);
     }
 
     #[Test]
@@ -163,7 +211,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->recordPause('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionRecordPauseResponse::class, $result);
     }
 
     #[Test]
@@ -175,7 +224,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->recordResume('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionRecordResumeResponse::class, $result);
     }
 
     #[Test]
@@ -190,7 +240,8 @@ final class ActionsTest extends TestCase
             format: 'wav'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionRecordStartResponse::class, $result);
     }
 
     #[Test]
@@ -202,10 +253,16 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->recordStart(
             'id',
-            format: 'wav'
+            format: 'wav',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            customFileName: 'my_recording_file_name',
+            playBeep: true,
+            region: 'US',
+            trim: 'trim-silence',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionRecordStartResponse::class, $result);
     }
 
     #[Test]
@@ -217,7 +274,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->recordStop('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionRecordStopResponse::class, $result);
     }
 
     #[Test]
@@ -233,7 +291,8 @@ final class ActionsTest extends TestCase
             voice: 'female'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionSpeakResponse::class, $result);
     }
 
     #[Test]
@@ -246,10 +305,21 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->speak(
             'id',
             payload: 'Say this to participants',
-            voice: 'female'
+            voice: 'female',
+            callControlIDs: [
+                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            ],
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            language: 'en-US',
+            payloadType: 'text',
+            region: 'US',
+            voiceSettings: [
+                'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionSpeakResponse::class, $result);
     }
 
     #[Test]
@@ -261,7 +331,8 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->stop('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionStopResponse::class, $result);
     }
 
     #[Test]
@@ -273,10 +344,13 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->unhold(
             'id',
-            ['v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg']
+            callControlIDs: [
+                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionUnholdResponse::class, $result);
     }
 
     #[Test]
@@ -288,10 +362,14 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->unhold(
             'id',
-            ['v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg']
+            callControlIDs: [
+                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            ],
+            region: 'US',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionUnholdResponse::class, $result);
     }
 
     #[Test]
@@ -303,6 +381,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->conferences->actions->unmute('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionUnmuteResponse::class, $result);
     }
 }

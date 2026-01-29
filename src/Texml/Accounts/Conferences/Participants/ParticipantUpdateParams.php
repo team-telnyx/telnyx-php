@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Conferences\Participants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,34 +15,34 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldM
 /**
  * Updates a conference participant.
  *
- * @see Telnyx\Texml\Accounts\Conferences\Participants->update
+ * @see Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService::update()
  *
- * @phpstan-type participant_update_params = array{
+ * @phpstan-type ParticipantUpdateParamsShape = array{
  *   accountSid: string,
  *   conferenceSid: string,
- *   announceMethod?: AnnounceMethod|value-of<AnnounceMethod>,
- *   announceURL?: string,
- *   beepOnExit?: bool,
- *   callSidToCoach?: string,
- *   coaching?: bool,
- *   endConferenceOnExit?: bool,
- *   hold?: bool,
- *   holdMethod?: HoldMethod|value-of<HoldMethod>,
- *   holdURL?: string,
- *   muted?: bool,
- *   waitURL?: string,
+ *   announceMethod?: null|AnnounceMethod|value-of<AnnounceMethod>,
+ *   announceURL?: string|null,
+ *   beepOnExit?: bool|null,
+ *   callSidToCoach?: string|null,
+ *   coaching?: bool|null,
+ *   endConferenceOnExit?: bool|null,
+ *   hold?: bool|null,
+ *   holdMethod?: null|HoldMethod|value-of<HoldMethod>,
+ *   holdURL?: string|null,
+ *   muted?: bool|null,
+ *   waitURL?: string|null,
  * }
  */
 final class ParticipantUpdateParams implements BaseModel
 {
-    /** @use SdkModel<participant_update_params> */
+    /** @use SdkModel<ParticipantUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $accountSid;
 
-    #[Api]
+    #[Required]
     public string $conferenceSid;
 
     /**
@@ -49,43 +50,43 @@ final class ParticipantUpdateParams implements BaseModel
      *
      * @var value-of<AnnounceMethod>|null $announceMethod
      */
-    #[Api('AnnounceMethod', enum: AnnounceMethod::class, optional: true)]
+    #[Optional('AnnounceMethod', enum: AnnounceMethod::class)]
     public ?string $announceMethod;
 
     /**
      * The URL to call to announce something to the participant. The URL may return an MP3 fileo a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      */
-    #[Api('AnnounceUrl', optional: true)]
+    #[Optional('AnnounceUrl')]
     public ?string $announceURL;
 
     /**
      * Whether to play a notification beep to the conference when the participant exits.
      */
-    #[Api('BeepOnExit', optional: true)]
+    #[Optional('BeepOnExit')]
     public ?bool $beepOnExit;
 
     /**
      * The SID of the participant who is being coached. The participant being coached is the only participant who can hear the participant who is coaching.
      */
-    #[Api('CallSidToCoach', optional: true)]
+    #[Optional('CallSidToCoach')]
     public ?string $callSidToCoach;
 
     /**
      * Whether the participant is coaching another call. When `true`, `CallSidToCoach` has to be given.
      */
-    #[Api('Coaching', optional: true)]
+    #[Optional('Coaching')]
     public ?bool $coaching;
 
     /**
      * Whether to end the conference when the participant leaves.
      */
-    #[Api('EndConferenceOnExit', optional: true)]
+    #[Optional('EndConferenceOnExit')]
     public ?bool $endConferenceOnExit;
 
     /**
      * Whether the participant should be on hold.
      */
-    #[Api('Hold', optional: true)]
+    #[Optional('Hold')]
     public ?bool $hold;
 
     /**
@@ -93,25 +94,25 @@ final class ParticipantUpdateParams implements BaseModel
      *
      * @var value-of<HoldMethod>|null $holdMethod
      */
-    #[Api('HoldMethod', enum: HoldMethod::class, optional: true)]
+    #[Optional('HoldMethod', enum: HoldMethod::class)]
     public ?string $holdMethod;
 
     /**
      * The URL to be called using the `HoldMethod` for music that plays when the participant is on hold. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
      */
-    #[Api('HoldUrl', optional: true)]
+    #[Optional('HoldUrl')]
     public ?string $holdURL;
 
     /**
      * Whether the participant should be muted.
      */
-    #[Api('Muted', optional: true)]
+    #[Optional('Muted')]
     public ?bool $muted;
 
     /**
      * The URL to call for an audio file to play while the participant is waiting for the conference to start.
      */
-    #[Api('WaitUrl', optional: true)]
+    #[Optional('WaitUrl')]
     public ?string $waitURL;
 
     /**
@@ -138,8 +139,8 @@ final class ParticipantUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod
-     * @param HoldMethod|value-of<HoldMethod> $holdMethod
+     * @param AnnounceMethod|value-of<AnnounceMethod>|null $announceMethod
+     * @param HoldMethod|value-of<HoldMethod>|null $holdMethod
      */
     public static function with(
         string $accountSid,
@@ -156,40 +157,40 @@ final class ParticipantUpdateParams implements BaseModel
         ?bool $muted = null,
         ?string $waitURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->accountSid = $accountSid;
-        $obj->conferenceSid = $conferenceSid;
+        $self['accountSid'] = $accountSid;
+        $self['conferenceSid'] = $conferenceSid;
 
-        null !== $announceMethod && $obj['announceMethod'] = $announceMethod;
-        null !== $announceURL && $obj->announceURL = $announceURL;
-        null !== $beepOnExit && $obj->beepOnExit = $beepOnExit;
-        null !== $callSidToCoach && $obj->callSidToCoach = $callSidToCoach;
-        null !== $coaching && $obj->coaching = $coaching;
-        null !== $endConferenceOnExit && $obj->endConferenceOnExit = $endConferenceOnExit;
-        null !== $hold && $obj->hold = $hold;
-        null !== $holdMethod && $obj['holdMethod'] = $holdMethod;
-        null !== $holdURL && $obj->holdURL = $holdURL;
-        null !== $muted && $obj->muted = $muted;
-        null !== $waitURL && $obj->waitURL = $waitURL;
+        null !== $announceMethod && $self['announceMethod'] = $announceMethod;
+        null !== $announceURL && $self['announceURL'] = $announceURL;
+        null !== $beepOnExit && $self['beepOnExit'] = $beepOnExit;
+        null !== $callSidToCoach && $self['callSidToCoach'] = $callSidToCoach;
+        null !== $coaching && $self['coaching'] = $coaching;
+        null !== $endConferenceOnExit && $self['endConferenceOnExit'] = $endConferenceOnExit;
+        null !== $hold && $self['hold'] = $hold;
+        null !== $holdMethod && $self['holdMethod'] = $holdMethod;
+        null !== $holdURL && $self['holdURL'] = $holdURL;
+        null !== $muted && $self['muted'] = $muted;
+        null !== $waitURL && $self['waitURL'] = $waitURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withConferenceSid(string $conferenceSid): self
     {
-        $obj = clone $this;
-        $obj->conferenceSid = $conferenceSid;
+        $self = clone $this;
+        $self['conferenceSid'] = $conferenceSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +201,10 @@ final class ParticipantUpdateParams implements BaseModel
     public function withAnnounceMethod(
         AnnounceMethod|string $announceMethod
     ): self {
-        $obj = clone $this;
-        $obj['announceMethod'] = $announceMethod;
+        $self = clone $this;
+        $self['announceMethod'] = $announceMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +212,10 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withAnnounceURL(string $announceURL): self
     {
-        $obj = clone $this;
-        $obj->announceURL = $announceURL;
+        $self = clone $this;
+        $self['announceURL'] = $announceURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +223,10 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withBeepOnExit(bool $beepOnExit): self
     {
-        $obj = clone $this;
-        $obj->beepOnExit = $beepOnExit;
+        $self = clone $this;
+        $self['beepOnExit'] = $beepOnExit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +234,10 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withCallSidToCoach(string $callSidToCoach): self
     {
-        $obj = clone $this;
-        $obj->callSidToCoach = $callSidToCoach;
+        $self = clone $this;
+        $self['callSidToCoach'] = $callSidToCoach;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +245,10 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withCoaching(bool $coaching): self
     {
-        $obj = clone $this;
-        $obj->coaching = $coaching;
+        $self = clone $this;
+        $self['coaching'] = $coaching;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +256,10 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withEndConferenceOnExit(bool $endConferenceOnExit): self
     {
-        $obj = clone $this;
-        $obj->endConferenceOnExit = $endConferenceOnExit;
+        $self = clone $this;
+        $self['endConferenceOnExit'] = $endConferenceOnExit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -266,10 +267,10 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withHold(bool $hold): self
     {
-        $obj = clone $this;
-        $obj->hold = $hold;
+        $self = clone $this;
+        $self['hold'] = $hold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +280,10 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withHoldMethod(HoldMethod|string $holdMethod): self
     {
-        $obj = clone $this;
-        $obj['holdMethod'] = $holdMethod;
+        $self = clone $this;
+        $self['holdMethod'] = $holdMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -290,10 +291,10 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withHoldURL(string $holdURL): self
     {
-        $obj = clone $this;
-        $obj->holdURL = $holdURL;
+        $self = clone $this;
+        $self['holdURL'] = $holdURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -301,10 +302,10 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withMuted(bool $muted): self
     {
-        $obj = clone $this;
-        $obj->muted = $muted;
+        $self = clone $this;
+        $self['muted'] = $muted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -312,9 +313,9 @@ final class ParticipantUpdateParams implements BaseModel
      */
     public function withWaitURL(string $waitURL): self
     {
-        $obj = clone $this;
-        $obj->waitURL = $waitURL;
+        $self = clone $this;
+        $self['waitURL'] = $waitURL;
 
-        return $obj;
+        return $self;
     }
 }

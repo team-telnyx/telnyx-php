@@ -13,93 +13,66 @@ use Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberUpdateRequirementsRespo
 use Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumberListParams\Filter
+ * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface NumberOrderPhoneNumbersContract
 {
     /**
      * @api
      *
+     * @param string $numberOrderPhoneNumberID the number order phone number ID
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $numberOrderPhoneNumberID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): NumberOrderPhoneNumberGetResponse;
 
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberOrderPhoneNumberListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderPhoneNumberListResponse;
-
-    /**
-     * @api
-     *
+     * @param string $id The unique identifier of the number order phone number
      * @param string $requirementGroupID The ID of the requirement group to associate
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function updateRequirementGroup(
         string $id,
-        $requirementGroupID,
-        ?RequestOptions $requestOptions = null
+        string $requirementGroupID,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementGroupResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRequirementGroupRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NumberOrderPhoneNumberUpdateRequirementGroupResponse;
-
-    /**
-     * @api
-     *
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param string $numberOrderPhoneNumberID the number order phone number ID
+     * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape> $regulatoryRequirements
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function updateRequirements(
         string $numberOrderPhoneNumberID,
-        $regulatoryRequirements = omit,
-        ?RequestOptions $requestOptions = null,
-    ): NumberOrderPhoneNumberUpdateRequirementsResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRequirementsRaw(
-        string $numberOrderPhoneNumberID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
+        ?array $regulatoryRequirements = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NumberOrderPhoneNumberUpdateRequirementsResponse;
 }

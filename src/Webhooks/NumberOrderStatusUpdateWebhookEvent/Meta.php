@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{attempt: int, deliveredTo: string}
+ * @phpstan-type MetaShape = array{attempt: int, deliveredTo: string}
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     /**
      * Webhook delivery attempt number.
      */
-    #[Api]
+    #[Required]
     public int $attempt;
 
     /**
      * URL where the webhook was delivered.
      */
-    #[Api('delivered_to')]
+    #[Required('delivered_to')]
     public string $deliveredTo;
 
     /**
@@ -54,12 +54,12 @@ final class Meta implements BaseModel
      */
     public static function with(int $attempt, string $deliveredTo): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->attempt = $attempt;
-        $obj->deliveredTo = $deliveredTo;
+        $self['attempt'] = $attempt;
+        $self['deliveredTo'] = $deliveredTo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Meta implements BaseModel
      */
     public function withAttempt(int $attempt): self
     {
-        $obj = clone $this;
-        $obj->attempt = $attempt;
+        $self = clone $this;
+        $self['attempt'] = $attempt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Meta implements BaseModel
      */
     public function withDeliveredTo(string $deliveredTo): self
     {
-        $obj = clone $this;
-        $obj->deliveredTo = $deliveredTo;
+        $self = clone $this;
+        $self['deliveredTo'] = $deliveredTo;
 
-        return $obj;
+        return $self;
     }
 }

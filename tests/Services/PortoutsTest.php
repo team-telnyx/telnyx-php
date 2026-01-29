@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\Portouts\PortoutDetails;
+use Telnyx\Portouts\PortoutGetResponse;
+use Telnyx\Portouts\PortoutListRejectionCodesResponse;
+use Telnyx\Portouts\PortoutUpdateStatusResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +42,8 @@ final class PortoutsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortoutGetResponse::class, $result);
     }
 
     #[Test]
@@ -47,9 +53,15 @@ final class PortoutsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->portouts->list();
+        $page = $this->client->portouts->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PortoutDetails::class, $item);
+        }
     }
 
     #[Test]
@@ -63,7 +75,8 @@ final class PortoutsTest extends TestCase
             '329d6658-8f93-405d-862f-648776e8afd7'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortoutListRejectionCodesResponse::class, $result);
     }
 
     #[Test]
@@ -79,7 +92,8 @@ final class PortoutsTest extends TestCase
             reason: 'I do not recognize this transaction',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortoutUpdateStatusResponse::class, $result);
     }
 
     #[Test]
@@ -93,8 +107,10 @@ final class PortoutsTest extends TestCase
             'authorized',
             id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             reason: 'I do not recognize this transaction',
+            hostMessaging: false,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PortoutUpdateStatusResponse::class, $result);
     }
 }

@@ -4,55 +4,58 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\SslCertificate;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedBy;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedTo;
 
 /**
- * @phpstan-type ssl_certificate = array{
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   issuedBy?: IssuedBy,
- *   issuedTo?: IssuedTo,
- *   validFrom?: \DateTimeInterface,
- *   validTo?: \DateTimeInterface,
+ * @phpstan-import-type IssuedByShape from \Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedBy
+ * @phpstan-import-type IssuedToShape from \Telnyx\Storage\Buckets\SslCertificate\SslCertificate\IssuedTo
+ *
+ * @phpstan-type SslCertificateShape = array{
+ *   id?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   issuedBy?: null|IssuedBy|IssuedByShape,
+ *   issuedTo?: null|IssuedTo|IssuedToShape,
+ *   validFrom?: \DateTimeInterface|null,
+ *   validTo?: \DateTimeInterface|null,
  * }
  */
 final class SslCertificate implements BaseModel
 {
-    /** @use SdkModel<ssl_certificate> */
+    /** @use SdkModel<SslCertificateShape> */
     use SdkModel;
 
     /**
      * Unique identifier for the SSL certificate.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Time when SSL certificate was uploaded.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
-    #[Api('issued_by', optional: true)]
+    #[Optional('issued_by')]
     public ?IssuedBy $issuedBy;
 
-    #[Api('issued_to', optional: true)]
+    #[Optional('issued_to')]
     public ?IssuedTo $issuedTo;
 
     /**
      * The time the certificate is valid from.
      */
-    #[Api('valid_from', optional: true)]
+    #[Optional('valid_from')]
     public ?\DateTimeInterface $validFrom;
 
     /**
      * The time the certificate is valid to.
      */
-    #[Api('valid_to', optional: true)]
+    #[Optional('valid_to')]
     public ?\DateTimeInterface $validTo;
 
     public function __construct()
@@ -64,25 +67,28 @@ final class SslCertificate implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param IssuedBy|IssuedByShape|null $issuedBy
+     * @param IssuedTo|IssuedToShape|null $issuedTo
      */
     public static function with(
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
-        ?IssuedBy $issuedBy = null,
-        ?IssuedTo $issuedTo = null,
+        IssuedBy|array|null $issuedBy = null,
+        IssuedTo|array|null $issuedTo = null,
         ?\DateTimeInterface $validFrom = null,
         ?\DateTimeInterface $validTo = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $issuedBy && $obj->issuedBy = $issuedBy;
-        null !== $issuedTo && $obj->issuedTo = $issuedTo;
-        null !== $validFrom && $obj->validFrom = $validFrom;
-        null !== $validTo && $obj->validTo = $validTo;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $issuedBy && $self['issuedBy'] = $issuedBy;
+        null !== $issuedTo && $self['issuedTo'] = $issuedTo;
+        null !== $validFrom && $self['validFrom'] = $validFrom;
+        null !== $validTo && $self['validTo'] = $validTo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +96,10 @@ final class SslCertificate implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,26 +107,32 @@ final class SslCertificate implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withIssuedBy(IssuedBy $issuedBy): self
+    /**
+     * @param IssuedBy|IssuedByShape $issuedBy
+     */
+    public function withIssuedBy(IssuedBy|array $issuedBy): self
     {
-        $obj = clone $this;
-        $obj->issuedBy = $issuedBy;
+        $self = clone $this;
+        $self['issuedBy'] = $issuedBy;
 
-        return $obj;
+        return $self;
     }
 
-    public function withIssuedTo(IssuedTo $issuedTo): self
+    /**
+     * @param IssuedTo|IssuedToShape $issuedTo
+     */
+    public function withIssuedTo(IssuedTo|array $issuedTo): self
     {
-        $obj = clone $this;
-        $obj->issuedTo = $issuedTo;
+        $self = clone $this;
+        $self['issuedTo'] = $issuedTo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +140,10 @@ final class SslCertificate implements BaseModel
      */
     public function withValidFrom(\DateTimeInterface $validFrom): self
     {
-        $obj = clone $this;
-        $obj->validFrom = $validFrom;
+        $self = clone $this;
+        $self['validFrom'] = $validFrom;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,9 +151,9 @@ final class SslCertificate implements BaseModel
      */
     public function withValidTo(\DateTimeInterface $validTo): self
     {
-        $obj = clone $this;
-        $obj->validTo = $validTo;
+        $self = clone $this;
+        $self['validTo'] = $validTo;
 
-        return $obj;
+        return $self;
     }
 }

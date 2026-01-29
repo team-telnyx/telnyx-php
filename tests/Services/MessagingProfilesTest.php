@@ -6,6 +6,14 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\MessagingProfiles\MessagingProfile;
+use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
+use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
+use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
+use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
+use Telnyx\PhoneNumberWithMessagingSettings;
+use Telnyx\ShortCode;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +46,8 @@ final class MessagingProfilesTest extends TestCase
             whitelistedDestinations: ['US']
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingProfileNewResponse::class, $result);
     }
 
     #[Test]
@@ -50,10 +59,35 @@ final class MessagingProfilesTest extends TestCase
 
         $result = $this->client->messagingProfiles->create(
             name: 'My name',
-            whitelistedDestinations: ['US']
+            whitelistedDestinations: ['US'],
+            alphaSender: 'sqF',
+            dailySpendLimit: '269125115713',
+            dailySpendLimitEnabled: true,
+            enabled: true,
+            mmsFallBackToSMS: true,
+            mmsTranscoding: true,
+            mobileOnly: true,
+            numberPoolSettings: [
+                'longCodeWeight' => 1,
+                'skipUnhealthy' => true,
+                'tollFreeWeight' => 10,
+                'geomatch' => false,
+                'stickySender' => false,
+            ],
+            smartEncoding: true,
+            urlShortenerSettings: [
+                'domain' => 'example.ex',
+                'prefix' => '',
+                'replaceBlacklistOnly' => true,
+                'sendWebhooks' => false,
+            ],
+            webhookAPIVersion: '2',
+            webhookFailoverURL: 'https://backup.example.com/hooks',
+            webhookURL: 'https://www.example.com/hooks',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingProfileNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +101,8 @@ final class MessagingProfilesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingProfileGetResponse::class, $result);
     }
 
     #[Test]
@@ -81,7 +116,8 @@ final class MessagingProfilesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingProfileUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -91,9 +127,15 @@ final class MessagingProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingProfiles->list();
+        $page = $this->client->messagingProfiles->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(MessagingProfile::class, $item);
+        }
     }
 
     #[Test]
@@ -107,7 +149,8 @@ final class MessagingProfilesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingProfileDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -117,11 +160,17 @@ final class MessagingProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingProfiles->listPhoneNumbers(
+        $page = $this->client->messagingProfiles->listPhoneNumbers(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PhoneNumberWithMessagingSettings::class, $item);
+        }
     }
 
     #[Test]
@@ -131,10 +180,16 @@ final class MessagingProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->messagingProfiles->listShortCodes(
+        $page = $this->client->messagingProfiles->listShortCodes(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ShortCode::class, $item);
+        }
     }
 }

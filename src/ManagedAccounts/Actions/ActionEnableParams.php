@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Enables a managed account and its sub-users to use Telnyx services.
  *
- * @see Telnyx\ManagedAccounts\Actions->enable
+ * @see Telnyx\Services\ManagedAccounts\ActionsService::enable()
  *
- * @phpstan-type action_enable_params = array{reenableAllConnections?: bool}
+ * @phpstan-type ActionEnableParamsShape = array{
+ *   reenableAllConnections?: bool|null
+ * }
  */
 final class ActionEnableParams implements BaseModel
 {
-    /** @use SdkModel<action_enable_params> */
+    /** @use SdkModel<ActionEnableParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * When true, all connections owned by this managed account will automatically be re-enabled. Note: Any connections that do not pass validations will not be re-enabled.
      */
-    #[Api('reenable_all_connections', optional: true)]
+    #[Optional('reenable_all_connections')]
     public ?bool $reenableAllConnections;
 
     public function __construct()
@@ -40,11 +42,11 @@ final class ActionEnableParams implements BaseModel
      */
     public static function with(?bool $reenableAllConnections = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reenableAllConnections && $obj->reenableAllConnections = $reenableAllConnections;
+        null !== $reenableAllConnections && $self['reenableAllConnections'] = $reenableAllConnections;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,9 +55,9 @@ final class ActionEnableParams implements BaseModel
     public function withReenableAllConnections(
         bool $reenableAllConnections
     ): self {
-        $obj = clone $this;
-        $obj->reenableAllConnections = $reenableAllConnections;
+        $self = clone $this;
+        $self['reenableAllConnections'] = $reenableAllConnections;
 
-        return $obj;
+        return $self;
     }
 }

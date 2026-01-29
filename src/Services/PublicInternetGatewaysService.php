@@ -6,10 +6,10 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
@@ -17,14 +17,25 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PublicInternetGatewaysContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PublicInternetGatewaysService implements PublicInternetGatewaysContract
 {
     /**
+     * @api
+     */
+    public PublicInternetGatewaysRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PublicInternetGatewaysRawService($client);
+    }
 
     /**
      * @api
@@ -33,47 +44,25 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *
      * @param string $name a user specified name for the interface
      * @param string $networkID the id of the network associated with the interface
-     * @param string $regionCode the region the interface should be deployed to
+     * @param string $regionCode the region interface is deployed to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $name = omit,
-        $networkID = omit,
-        $regionCode = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $name = null,
+        ?string $networkID = null,
+        ?string $regionCode = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PublicInternetGatewayNewResponse {
-        $params = [
-            'name' => $name, 'networkID' => $networkID, 'regionCode' => $regionCode,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PublicInternetGatewayNewResponse {
-        [$parsed, $options] = PublicInternetGatewayCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['name' => $name, 'networkID' => $networkID, 'regionCode' => $regionCode]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'public_internet_gateways',
-            body: (object) $parsed,
-            options: $options,
-            convert: PublicInternetGatewayNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -81,19 +70,19 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *
      * Retrieve a Public Internet Gateway.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PublicInternetGatewayGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['public_internet_gateways/%1$s', $id],
-            options: $requestOptions,
-            convert: PublicInternetGatewayGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -101,45 +90,25 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *
      * List all Public Internet Gateways.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<PublicInternetGatewayListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): PublicInternetGatewayListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PublicInternetGatewayListResponse {
-        [$parsed, $options] = PublicInternetGatewayListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'public_internet_gateways',
-            query: $parsed,
-            options: $options,
-            convert: PublicInternetGatewayListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -147,18 +116,18 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *
      * Delete a Public Internet Gateway.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PublicInternetGatewayDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['public_internet_gateways/%1$s', $id],
-            options: $requestOptions,
-            convert: PublicInternetGatewayDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

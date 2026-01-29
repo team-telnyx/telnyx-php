@@ -5,7 +5,10 @@ namespace Tests\Services\BundlePricing;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +40,8 @@ final class BillingBundlesTest extends TestCase
             '8661948c-a386-4385-837f-af00f40f111a'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BillingBundleGetResponse::class, $result);
     }
 
     #[Test]
@@ -47,8 +51,14 @@ final class BillingBundlesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->bundlePricing->billingBundles->list();
+        $page = $this->client->bundlePricing->billingBundles->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(BillingBundleSummary::class, $item);
+        }
     }
 }

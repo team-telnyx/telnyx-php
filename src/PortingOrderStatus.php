@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrderStatus\Value;
@@ -12,13 +12,16 @@ use Telnyx\PortingOrderStatus\Value;
 /**
  * Porting order status.
  *
- * @phpstan-type porting_order_status = array{
- *   details?: list<PortingOrdersExceptionType>, value?: value-of<Value>
+ * @phpstan-import-type PortingOrdersExceptionTypeShape from \Telnyx\PortingOrdersExceptionType
+ *
+ * @phpstan-type PortingOrderStatusShape = array{
+ *   details?: list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null,
+ *   value?: null|Value|value-of<Value>,
  * }
  */
 final class PortingOrderStatus implements BaseModel
 {
-    /** @use SdkModel<porting_order_status> */
+    /** @use SdkModel<PortingOrderStatusShape> */
     use SdkModel;
 
     /**
@@ -26,7 +29,7 @@ final class PortingOrderStatus implements BaseModel
      *
      * @var list<PortingOrdersExceptionType>|null $details
      */
-    #[Api(list: PortingOrdersExceptionType::class, optional: true)]
+    #[Optional(list: PortingOrdersExceptionType::class)]
     public ?array $details;
 
     /**
@@ -34,7 +37,7 @@ final class PortingOrderStatus implements BaseModel
      *
      * @var value-of<Value>|null $value
      */
-    #[Api(enum: Value::class, optional: true)]
+    #[Optional(enum: Value::class)]
     public ?string $value;
 
     public function __construct()
@@ -47,32 +50,32 @@ final class PortingOrderStatus implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrdersExceptionType> $details
-     * @param Value|value-of<Value> $value
+     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape>|null $details
+     * @param Value|value-of<Value>|null $value
      */
     public static function with(
         ?array $details = null,
         Value|string|null $value = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $details && $obj->details = $details;
-        null !== $value && $obj['value'] = $value;
+        null !== $details && $self['details'] = $details;
+        null !== $value && $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A list of 0 or more details about this porting order's status.
      *
-     * @param list<PortingOrdersExceptionType> $details
+     * @param list<PortingOrdersExceptionType|PortingOrdersExceptionTypeShape> $details
      */
     public function withDetails(array $details): self
     {
-        $obj = clone $this;
-        $obj->details = $details;
+        $self = clone $this;
+        $self['details'] = $details;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,9 +85,9 @@ final class PortingOrderStatus implements BaseModel
      */
     public function withValue(Value|string $value): self
     {
-        $obj = clone $this;
-        $obj['value'] = $value;
+        $self = clone $this;
+        $self['value'] = $value;
 
-        return $obj;
+        return $self;
     }
 }

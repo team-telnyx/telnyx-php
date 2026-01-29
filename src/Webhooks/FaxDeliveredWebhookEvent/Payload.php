@@ -4,49 +4,49 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\FaxDeliveredWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Direction;
 use Telnyx\Webhooks\FaxDeliveredWebhookEvent\Payload\Status;
 
 /**
- * @phpstan-type payload_alias = array{
- *   callDurationSecs?: int,
- *   clientState?: string,
- *   connectionID?: string,
- *   direction?: value-of<Direction>,
- *   faxID?: string,
- *   from?: string,
- *   mediaName?: string,
- *   originalMediaURL?: string,
- *   pageCount?: int,
- *   status?: value-of<Status>,
- *   to?: string,
- *   userID?: string,
+ * @phpstan-type PayloadShape = array{
+ *   callDurationSecs?: int|null,
+ *   clientState?: string|null,
+ *   connectionID?: string|null,
+ *   direction?: null|Direction|value-of<Direction>,
+ *   faxID?: string|null,
+ *   from?: string|null,
+ *   mediaName?: string|null,
+ *   originalMediaURL?: string|null,
+ *   pageCount?: int|null,
+ *   status?: null|Status|value-of<Status>,
+ *   to?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class Payload implements BaseModel
 {
-    /** @use SdkModel<payload_alias> */
+    /** @use SdkModel<PayloadShape> */
     use SdkModel;
 
     /**
      * The duration of the call in seconds.
      */
-    #[Api('call_duration_secs', optional: true)]
+    #[Optional('call_duration_secs')]
     public ?int $callDurationSecs;
 
     /**
      * State received from a command.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * The ID of the connection used to send the fax.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
@@ -54,37 +54,37 @@ final class Payload implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
      * Identifies the fax.
      */
-    #[Api('fax_id', optional: true)]
+    #[Optional('fax_id')]
     public ?string $faxID;
 
     /**
      * The phone number, in E.164 format, the fax will be sent from.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
      */
-    #[Api('media_name', optional: true)]
+    #[Optional('media_name')]
     public ?string $mediaName;
 
     /**
      * The original URL to the PDF used for the fax's media. If media_name was supplied, this is omitted.
      */
-    #[Api('original_media_url', optional: true)]
+    #[Optional('original_media_url')]
     public ?string $originalMediaURL;
 
     /**
      * Number of transferred pages.
      */
-    #[Api('page_count', optional: true)]
+    #[Optional('page_count')]
     public ?int $pageCount;
 
     /**
@@ -92,19 +92,19 @@ final class Payload implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The phone number, in E.164 format, the fax will be sent to or SIP URI.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
      * Identifier of the user to whom the fax belongs.
      */
-    #[Api('user_id', optional: true)]
+    #[Optional('user_id')]
     public ?string $userID;
 
     public function __construct()
@@ -117,8 +117,8 @@ final class Payload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Direction|value-of<Direction> $direction
-     * @param Status|value-of<Status> $status
+     * @param Direction|value-of<Direction>|null $direction
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?int $callDurationSecs = null,
@@ -134,22 +134,22 @@ final class Payload implements BaseModel
         ?string $to = null,
         ?string $userID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callDurationSecs && $obj->callDurationSecs = $callDurationSecs;
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $faxID && $obj->faxID = $faxID;
-        null !== $from && $obj->from = $from;
-        null !== $mediaName && $obj->mediaName = $mediaName;
-        null !== $originalMediaURL && $obj->originalMediaURL = $originalMediaURL;
-        null !== $pageCount && $obj->pageCount = $pageCount;
-        null !== $status && $obj['status'] = $status;
-        null !== $to && $obj->to = $to;
-        null !== $userID && $obj->userID = $userID;
+        null !== $callDurationSecs && $self['callDurationSecs'] = $callDurationSecs;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $faxID && $self['faxID'] = $faxID;
+        null !== $from && $self['from'] = $from;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $originalMediaURL && $self['originalMediaURL'] = $originalMediaURL;
+        null !== $pageCount && $self['pageCount'] = $pageCount;
+        null !== $status && $self['status'] = $status;
+        null !== $to && $self['to'] = $to;
+        null !== $userID && $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,10 +157,10 @@ final class Payload implements BaseModel
      */
     public function withCallDurationSecs(int $callDurationSecs): self
     {
-        $obj = clone $this;
-        $obj->callDurationSecs = $callDurationSecs;
+        $self = clone $this;
+        $self['callDurationSecs'] = $callDurationSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -168,10 +168,10 @@ final class Payload implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -179,10 +179,10 @@ final class Payload implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,10 +192,10 @@ final class Payload implements BaseModel
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -203,10 +203,10 @@ final class Payload implements BaseModel
      */
     public function withFaxID(string $faxID): self
     {
-        $obj = clone $this;
-        $obj->faxID = $faxID;
+        $self = clone $this;
+        $self['faxID'] = $faxID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,10 +214,10 @@ final class Payload implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -225,10 +225,10 @@ final class Payload implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,10 +236,10 @@ final class Payload implements BaseModel
      */
     public function withOriginalMediaURL(string $originalMediaURL): self
     {
-        $obj = clone $this;
-        $obj->originalMediaURL = $originalMediaURL;
+        $self = clone $this;
+        $self['originalMediaURL'] = $originalMediaURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -247,10 +247,10 @@ final class Payload implements BaseModel
      */
     public function withPageCount(int $pageCount): self
     {
-        $obj = clone $this;
-        $obj->pageCount = $pageCount;
+        $self = clone $this;
+        $self['pageCount'] = $pageCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,10 +260,10 @@ final class Payload implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +271,10 @@ final class Payload implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,9 +282,9 @@ final class Payload implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,6 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\IntegrationSecrets\IntegrationSecret;
+use Telnyx\IntegrationSecrets\IntegrationSecretNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +41,8 @@ final class IntegrationSecretsTest extends TestCase
             type: 'bearer'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IntegrationSecretNewResponse::class, $result);
     }
 
     #[Test]
@@ -50,10 +54,14 @@ final class IntegrationSecretsTest extends TestCase
 
         $result = $this->client->integrationSecrets->create(
             identifier: 'my_secret',
-            type: 'bearer'
+            type: 'bearer',
+            token: 'my_secret_value',
+            password: 'password',
+            username: 'username',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(IntegrationSecretNewResponse::class, $result);
     }
 
     #[Test]
@@ -63,9 +71,15 @@ final class IntegrationSecretsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->integrationSecrets->list();
+        $page = $this->client->integrationSecrets->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(IntegrationSecret::class, $item);
+        }
     }
 
     #[Test]
@@ -77,6 +91,7 @@ final class IntegrationSecretsTest extends TestCase
 
         $result = $this->client->integrationSecrets->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

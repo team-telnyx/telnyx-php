@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * A phone number.
  *
- * @phpstan-type tf_phone_number = array{phoneNumber: string}
+ * @phpstan-type TfPhoneNumberShape = array{phoneNumber: string}
  */
 final class TfPhoneNumber implements BaseModel
 {
-    /** @use SdkModel<tf_phone_number> */
+    /** @use SdkModel<TfPhoneNumberShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $phoneNumber;
 
     /**
@@ -47,18 +47,18 @@ final class TfPhoneNumber implements BaseModel
      */
     public static function with(string $phoneNumber): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumber = $phoneNumber;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

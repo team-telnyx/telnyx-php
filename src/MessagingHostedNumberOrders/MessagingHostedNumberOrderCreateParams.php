@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a messaging hosted number order.
  *
- * @see Telnyx\MessagingHostedNumberOrders->create
+ * @see Telnyx\Services\MessagingHostedNumberOrdersService::create()
  *
- * @phpstan-type messaging_hosted_number_order_create_params = array{
- *   messagingProfileID?: string, phoneNumbers?: list<string>
+ * @phpstan-type MessagingHostedNumberOrderCreateParamsShape = array{
+ *   messagingProfileID?: string|null, phoneNumbers?: list<string>|null
  * }
  */
 final class MessagingHostedNumberOrderCreateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order_create_params> */
+    /** @use SdkModel<MessagingHostedNumberOrderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Automatically associate the number with this messaging profile ID when the order is complete.
      */
-    #[Api('messaging_profile_id', optional: true)]
+    #[Optional('messaging_profile_id')]
     public ?string $messagingProfileID;
 
     /**
@@ -35,7 +35,7 @@ final class MessagingHostedNumberOrderCreateParams implements BaseModel
      *
      * @var list<string>|null $phoneNumbers
      */
-    #[Api('phone_numbers', list: 'string', optional: true)]
+    #[Optional('phone_numbers', list: 'string')]
     public ?array $phoneNumbers;
 
     public function __construct()
@@ -48,18 +48,18 @@ final class MessagingHostedNumberOrderCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
+     * @param list<string>|null $phoneNumbers
      */
     public static function with(
         ?string $messagingProfileID = null,
         ?array $phoneNumbers = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class MessagingHostedNumberOrderCreateParams implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class MessagingHostedNumberOrderCreateParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

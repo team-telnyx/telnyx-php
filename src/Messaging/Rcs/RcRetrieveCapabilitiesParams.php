@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\Messaging\Rcs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List RCS capabilities of a phone number.
+ * Check RCS capabilities.
  *
- * @see Telnyx\Messaging\Rcs->retrieveCapabilities
+ * @see Telnyx\Services\Messaging\RcsService::retrieveCapabilities()
  *
- * @phpstan-type rc_retrieve_capabilities_params = array{agentID: string}
+ * @phpstan-type RcRetrieveCapabilitiesParamsShape = array{agentID: string}
  */
 final class RcRetrieveCapabilitiesParams implements BaseModel
 {
-    /** @use SdkModel<rc_retrieve_capabilities_params> */
+    /** @use SdkModel<RcRetrieveCapabilitiesParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $agentID;
 
     /**
@@ -51,18 +51,18 @@ final class RcRetrieveCapabilitiesParams implements BaseModel
      */
     public static function with(string $agentID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->agentID = $agentID;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 
     public function withAgentID(string $agentID): self
     {
-        $obj = clone $this;
-        $obj->agentID = $agentID;
+        $self = clone $this;
+        $self['agentID'] = $agentID;
 
-        return $obj;
+        return $self;
     }
 }

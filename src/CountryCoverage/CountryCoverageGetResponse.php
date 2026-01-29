@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\CountryCoverage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\CountryCoverage\CountryCoverageGetResponse\Data;
 
 /**
- * @phpstan-type country_coverage_get_response = array{data?: list<Data>}
+ * @phpstan-import-type DataShape from \Telnyx\CountryCoverage\CountryCoverageGetResponse\Data
+ *
+ * @phpstan-type CountryCoverageGetResponseShape = array{
+ *   data?: array<string,Data|DataShape>|null
+ * }
  */
-final class CountryCoverageGetResponse implements BaseModel, ResponseConverter
+final class CountryCoverageGetResponse implements BaseModel
 {
-    /** @use SdkModel<country_coverage_get_response> */
+    /** @use SdkModel<CountryCoverageGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
+    /** @var array<string,Data>|null $data */
+    #[Optional(map: Data::class)]
     public ?array $data;
 
     public function __construct()
@@ -35,25 +35,25 @@ final class CountryCoverageGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param array<string,Data|DataShape>|null $data
      */
     public static function with(?array $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * @param array<string,Data|DataShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

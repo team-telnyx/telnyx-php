@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Configuration for a single version in canary deploy.
  *
- * @phpstan-type version_config = array{percentage: float, versionID: string}
+ * @phpstan-type VersionConfigShape = array{percentage: float, versionID: string}
  */
 final class VersionConfig implements BaseModel
 {
-    /** @use SdkModel<version_config> */
+    /** @use SdkModel<VersionConfigShape> */
     use SdkModel;
 
     /**
      * Percentage of traffic for this version [1-99].
      */
-    #[Api]
+    #[Required]
     public float $percentage;
 
     /**
      * Version ID string that references assistant_versions.version_id.
      */
-    #[Api('version_id')]
+    #[Required('version_id')]
     public string $versionID;
 
     /**
@@ -56,12 +56,12 @@ final class VersionConfig implements BaseModel
      */
     public static function with(float $percentage, string $versionID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->percentage = $percentage;
-        $obj->versionID = $versionID;
+        $self['percentage'] = $percentage;
+        $self['versionID'] = $versionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class VersionConfig implements BaseModel
      */
     public function withPercentage(float $percentage): self
     {
-        $obj = clone $this;
-        $obj->percentage = $percentage;
+        $self = clone $this;
+        $self['percentage'] = $percentage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class VersionConfig implements BaseModel
      */
     public function withVersionID(string $versionID): self
     {
-        $obj = clone $this;
-        $obj->versionID = $versionID;
+        $self = clone $this;
+        $self['versionID'] = $versionID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortabilityChecks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,13 +12,15 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Runs a portability check, returning the results immediately.
  *
- * @see Telnyx\PortabilityChecks->run
+ * @see Telnyx\Services\PortabilityChecksService::run()
  *
- * @phpstan-type portability_check_run_params = array{phoneNumbers?: list<string>}
+ * @phpstan-type PortabilityCheckRunParamsShape = array{
+ *   phoneNumbers?: list<string>|null
+ * }
  */
 final class PortabilityCheckRunParams implements BaseModel
 {
-    /** @use SdkModel<portability_check_run_params> */
+    /** @use SdkModel<PortabilityCheckRunParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -27,7 +29,7 @@ final class PortabilityCheckRunParams implements BaseModel
      *
      * @var list<string>|null $phoneNumbers
      */
-    #[Api('phone_numbers', list: 'string', optional: true)]
+    #[Optional('phone_numbers', list: 'string')]
     public ?array $phoneNumbers;
 
     public function __construct()
@@ -40,15 +42,15 @@ final class PortabilityCheckRunParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phoneNumbers
+     * @param list<string>|null $phoneNumbers
      */
     public static function with(?array $phoneNumbers = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -58,9 +60,9 @@ final class PortabilityCheckRunParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

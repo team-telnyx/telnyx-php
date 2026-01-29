@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions\ActionGatherUsingAIParams;
 
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory\Role;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type message_history = array{content?: string, role?: value-of<Role>}
+ * @phpstan-type MessageHistoryShape = array{
+ *   content?: string|null, role?: null|Role|value-of<Role>
+ * }
  */
 final class MessageHistory implements BaseModel
 {
-    /** @use SdkModel<message_history> */
+    /** @use SdkModel<MessageHistoryShape> */
     use SdkModel;
 
     /**
      * The content of the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $content;
 
     /**
@@ -28,7 +30,7 @@ final class MessageHistory implements BaseModel
      *
      * @var value-of<Role>|null $role
      */
-    #[Api(enum: Role::class, optional: true)]
+    #[Optional(enum: Role::class)]
     public ?string $role;
 
     public function __construct()
@@ -41,18 +43,18 @@ final class MessageHistory implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Role|value-of<Role> $role
+     * @param Role|value-of<Role>|null $role
      */
     public static function with(
         ?string $content = null,
         Role|string|null $role = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $content && $obj->content = $content;
-        null !== $role && $obj['role'] = $role;
+        null !== $content && $self['content'] = $content;
+        null !== $role && $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,10 +62,10 @@ final class MessageHistory implements BaseModel
      */
     public function withContent(string $content): self
     {
-        $obj = clone $this;
-        $obj->content = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,9 +75,9 @@ final class MessageHistory implements BaseModel
      */
     public function withRole(Role|string $role): self
     {
-        $obj = clone $this;
-        $obj['role'] = $role;
+        $self = clone $this;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 }

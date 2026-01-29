@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\UserAddresses\UserAddress;
+use Telnyx\UserAddresses\UserAddressGetResponse;
+use Telnyx\UserAddresses\UserAddressNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -34,7 +38,7 @@ final class UserAddressesTest extends TestCase
         }
 
         $result = $this->client->userAddresses->create(
-            businessName: "Toy-O'Kon",
+            businessName: 'Toy-O\'Kon',
             countryCode: 'US',
             firstName: 'Alfred',
             lastName: 'Foster',
@@ -42,7 +46,8 @@ final class UserAddressesTest extends TestCase
             streetAddress: '600 Congress Avenue',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserAddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,15 +58,24 @@ final class UserAddressesTest extends TestCase
         }
 
         $result = $this->client->userAddresses->create(
-            businessName: "Toy-O'Kon",
+            businessName: 'Toy-O\'Kon',
             countryCode: 'US',
             firstName: 'Alfred',
             lastName: 'Foster',
             locality: 'Austin',
             streetAddress: '600 Congress Avenue',
+            administrativeArea: 'TX',
+            borough: 'Guadalajara',
+            customerReference: 'MY REF 001',
+            extendedAddress: '14th Floor',
+            neighborhood: 'Ciudad de los deportes',
+            phoneNumber: '+12125559000',
+            postalCode: '78701',
+            skipAddressVerification: true,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserAddressNewResponse::class, $result);
     }
 
     #[Test]
@@ -73,7 +87,8 @@ final class UserAddressesTest extends TestCase
 
         $result = $this->client->userAddresses->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(UserAddressGetResponse::class, $result);
     }
 
     #[Test]
@@ -83,8 +98,14 @@ final class UserAddressesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->userAddresses->list();
+        $page = $this->client->userAddresses->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(UserAddress::class, $item);
+        }
     }
 }

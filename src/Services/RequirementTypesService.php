@@ -6,41 +6,51 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\RequirementTypes\RequirementTypeGetResponse;
-use Telnyx\RequirementTypes\RequirementTypeListParams;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Filter;
 use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 use Telnyx\RequirementTypes\RequirementTypeListResponse;
 use Telnyx\ServiceContracts\RequirementTypesContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\RequirementTypes\RequirementTypeListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class RequirementTypesService implements RequirementTypesContract
 {
     /**
+     * @api
+     */
+    public RequirementTypesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new RequirementTypesRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a requirement type by id
      *
+     * @param string $id Uniquely identifies the requirement_type record
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): RequirementTypeGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['requirement_types/%1$s', $id],
-            options: $requestOptions,
-            convert: RequirementTypeGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -48,44 +58,22 @@ final class RequirementTypesService implements RequirementTypesContract
      *
      * List all requirement types ordered by created_at descending
      *
-     * @param Filter $filter Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name]
+     * @param Filter|FilterShape $filter Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirement types (deepObject style). Originally: sort[]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        ?array $sort = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RequirementTypeListResponse {
-        $params = ['filter' => $filter, 'sort' => $sort];
+        $params = Util::removeNulls(['filter' => $filter, 'sort' => $sort]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RequirementTypeListResponse {
-        [$parsed, $options] = RequirementTypeListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'requirement_types',
-            query: $parsed,
-            options: $options,
-            convert: RequirementTypeListResponse::class,
-        );
+        return $response->parse();
     }
 }

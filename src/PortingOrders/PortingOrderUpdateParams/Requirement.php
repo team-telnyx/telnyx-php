@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Specifies a value for a requirement on the Porting Order.
  *
- * @phpstan-type requirement_alias = array{
+ * @phpstan-type RequirementShape = array{
  *   fieldValue: string, requirementTypeID: string
  * }
  */
 final class Requirement implements BaseModel
 {
-    /** @use SdkModel<requirement_alias> */
+    /** @use SdkModel<RequirementShape> */
     use SdkModel;
 
     /**
      * identifies the document or provides the text value that satisfies this requirement.
      */
-    #[Api('field_value')]
+    #[Required('field_value')]
     public string $fieldValue;
 
     /**
      * Identifies the requirement type that the `field_value` fulfills.
      */
-    #[Api('requirement_type_id')]
+    #[Required('requirement_type_id')]
     public string $requirementTypeID;
 
     /**
@@ -60,12 +60,12 @@ final class Requirement implements BaseModel
         string $fieldValue,
         string $requirementTypeID
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->fieldValue = $fieldValue;
-        $obj->requirementTypeID = $requirementTypeID;
+        $self['fieldValue'] = $fieldValue;
+        $self['requirementTypeID'] = $requirementTypeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class Requirement implements BaseModel
      */
     public function withFieldValue(string $fieldValue): self
     {
-        $obj = clone $this;
-        $obj->fieldValue = $fieldValue;
+        $self = clone $this;
+        $self['fieldValue'] = $fieldValue;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class Requirement implements BaseModel
      */
     public function withRequirementTypeID(string $requirementTypeID): self
     {
-        $obj = clone $this;
-        $obj->requirementTypeID = $requirementTypeID;
+        $self = clone $this;
+        $self['requirementTypeID'] = $requirementTypeID;
 
-        return $obj;
+        return $self;
     }
 }

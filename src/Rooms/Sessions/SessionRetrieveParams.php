@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Sessions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * View a room session.
  *
- * @see Telnyx\Rooms\Sessions->retrieve
+ * @see Telnyx\Services\Rooms\SessionsService::retrieve()
  *
- * @phpstan-type session_retrieve_params = array{includeParticipants?: bool}
+ * @phpstan-type SessionRetrieveParamsShape = array{
+ *   includeParticipants?: bool|null
+ * }
  */
 final class SessionRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<session_retrieve_params> */
+    /** @use SdkModel<SessionRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * To decide if room participants should be included in the response.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeParticipants;
 
     public function __construct()
@@ -40,11 +42,11 @@ final class SessionRetrieveParams implements BaseModel
      */
     public static function with(?bool $includeParticipants = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includeParticipants && $obj->includeParticipants = $includeParticipants;
+        null !== $includeParticipants && $self['includeParticipants'] = $includeParticipants;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +54,9 @@ final class SessionRetrieveParams implements BaseModel
      */
     public function withIncludeParticipants(bool $includeParticipants): self
     {
-        $obj = clone $this;
-        $obj->includeParticipants = $includeParticipants;
+        $self = clone $this;
+        $self['includeParticipants'] = $includeParticipants;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data\GlobalIPAssignment;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type wireguard_peer = array{ipAddress?: string, name?: string}
+ * @phpstan-type WireguardPeerShape = array{
+ *   ipAddress?: string|null, name?: string|null
+ * }
  */
 final class WireguardPeer implements BaseModel
 {
-    /** @use SdkModel<wireguard_peer> */
+    /** @use SdkModel<WireguardPeerShape> */
     use SdkModel;
 
     /**
      * The IP address of the interface.
      */
-    #[Api('ip_address', optional: true)]
+    #[Optional('ip_address')]
     public ?string $ipAddress;
 
     /**
      * A user specified name for the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()
@@ -42,12 +44,12 @@ final class WireguardPeer implements BaseModel
         ?string $ipAddress = null,
         ?string $name = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $ipAddress && $obj->ipAddress = $ipAddress;
-        null !== $name && $obj->name = $name;
+        null !== $ipAddress && $self['ipAddress'] = $ipAddress;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +57,10 @@ final class WireguardPeer implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class WireguardPeer implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

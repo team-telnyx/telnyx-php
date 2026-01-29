@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,37 +15,40 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Sort;
 /**
  * Lists the accounts managed by the current user. Users need to be explictly approved by Telnyx in order to become manager accounts.
  *
- * @see Telnyx\ManagedAccounts->list
+ * @see Telnyx\Services\ManagedAccountsService::list()
  *
- * @phpstan-type managed_account_list_params = array{
- *   filter?: Filter,
- *   includeCancelledAccounts?: bool,
- *   page?: Page,
- *   sort?: Sort|value-of<Sort>,
+ * @phpstan-import-type FilterShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Page
+ *
+ * @phpstan-type ManagedAccountListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   includeCancelledAccounts?: bool|null,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class ManagedAccountListParams implements BaseModel
 {
-    /** @use SdkModel<managed_account_list_params> */
+    /** @use SdkModel<ManagedAccountListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Specifies if cancelled accounts should be included in the results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includeCancelledAccounts;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
@@ -64,7 +67,7 @@ final class ManagedAccountListParams implements BaseModel
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()
@@ -77,33 +80,37 @@ final class ManagedAccountListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Sort|value-of<Sort> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
-        ?Filter $filter = null,
+        Filter|array|null $filter = null,
         ?bool $includeCancelledAccounts = null,
-        ?Page $page = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $includeCancelledAccounts && $obj->includeCancelledAccounts = $includeCancelledAccounts;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $includeCancelledAccounts && $self['includeCancelledAccounts'] = $includeCancelledAccounts;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,21 +119,23 @@ final class ManagedAccountListParams implements BaseModel
     public function withIncludeCancelledAccounts(
         bool $includeCancelledAccounts
     ): self {
-        $obj = clone $this;
-        $obj->includeCancelledAccounts = $includeCancelledAccounts;
+        $self = clone $this;
+        $self['includeCancelledAccounts'] = $includeCancelledAccounts;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,9 +156,9 @@ final class ManagedAccountListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

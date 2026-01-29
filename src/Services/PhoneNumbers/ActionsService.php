@@ -6,66 +6,53 @@ namespace Telnyx\Services\PhoneNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusParams;
+use Telnyx\Core\Util;
 use Telnyx\PhoneNumbers\Actions\ActionChangeBundleStatusResponse;
-use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyParams;
 use Telnyx\PhoneNumbers\Actions\ActionEnableEmergencyResponse;
-use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipParams;
 use Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\ActionsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Change the bundle status for a phone number (set to being in a bundle or remove from a bundle)
      *
+     * @param string $id identifies the resource
      * @param string $bundleID The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function changeBundleStatus(
         string $id,
-        $bundleID,
-        ?RequestOptions $requestOptions = null
+        string $bundleID,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionChangeBundleStatusResponse {
-        $params = ['bundleID' => $bundleID];
+        $params = Util::removeNulls(['bundleID' => $bundleID]);
 
-        return $this->changeBundleStatusRaw($id, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->changeBundleStatus($id, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function changeBundleStatusRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionChangeBundleStatusResponse {
-        [$parsed, $options] = ActionChangeBundleStatusParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['phone_numbers/%1$s/actions/bundle_status_change', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionChangeBundleStatusResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -73,50 +60,30 @@ final class ActionsService implements ActionsContract
      *
      * Enable emergency for a phone number
      *
+     * @param string $id identifies the resource
      * @param string $emergencyAddressID identifies the address to be used with emergency services
      * @param bool $emergencyEnabled indicates whether to enable emergency services on this number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function enableEmergency(
         string $id,
-        $emergencyAddressID,
-        $emergencyEnabled,
-        ?RequestOptions $requestOptions = null,
+        string $emergencyAddressID,
+        bool $emergencyEnabled,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionEnableEmergencyResponse {
-        $params = [
-            'emergencyAddressID' => $emergencyAddressID,
-            'emergencyEnabled' => $emergencyEnabled,
-        ];
-
-        return $this->enableEmergencyRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function enableEmergencyRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionEnableEmergencyResponse {
-        [$parsed, $options] = ActionEnableEmergencyParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'emergencyAddressID' => $emergencyAddressID,
+                'emergencyEnabled' => $emergencyEnabled,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['phone_numbers/%1$s/actions/enable_emergency', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionEnableEmergencyResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->enableEmergency($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -125,41 +92,19 @@ final class ActionsService implements ActionsContract
      * Verifies ownership of the provided phone numbers and returns a mapping of numbers to their IDs, plus a list of numbers not found in the account.
      *
      * @param list<string> $phoneNumbers Array of phone numbers to verify ownership for
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function verifyOwnership(
-        $phoneNumbers,
-        ?RequestOptions $requestOptions = null
+        array $phoneNumbers,
+        RequestOptions|array|null $requestOptions = null
     ): ActionVerifyOwnershipResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
 
-        return $this->verifyOwnershipRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->verifyOwnership(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function verifyOwnershipRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionVerifyOwnershipResponse {
-        [$parsed, $options] = ActionVerifyOwnershipParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'phone_numbers/actions/verify_ownership',
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionVerifyOwnershipResponse::class,
-        );
+        return $response->parse();
     }
 }

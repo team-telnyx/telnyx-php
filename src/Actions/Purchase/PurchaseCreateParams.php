@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Actions\Purchase;
 
 use Telnyx\Actions\Purchase\PurchaseCreateParams\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,39 +15,39 @@ use Telnyx\Core\Contracts\BaseModel;
  * Purchases and registers the specified amount of eSIMs to the current user's account.<br/><br/>
  * If <code>sim_card_group_id</code> is provided, the eSIMs will be associated with that group. Otherwise, the default group for the current user will be used.<br/><br/>.
  *
- * @see Telnyx\Actions\Purchase->create
+ * @see Telnyx\Services\Actions\PurchaseService::create()
  *
- * @phpstan-type purchase_create_params = array{
+ * @phpstan-type PurchaseCreateParamsShape = array{
  *   amount: int,
- *   product?: string,
- *   simCardGroupID?: string,
- *   status?: Status|value-of<Status>,
- *   tags?: list<string>,
- *   whitelabelName?: string,
+ *   product?: string|null,
+ *   simCardGroupID?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   tags?: list<string>|null,
+ *   whitelabelName?: string|null,
  * }
  */
 final class PurchaseCreateParams implements BaseModel
 {
-    /** @use SdkModel<purchase_create_params> */
+    /** @use SdkModel<PurchaseCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The amount of eSIMs to be purchased.
      */
-    #[Api]
+    #[Required]
     public int $amount;
 
     /**
      * Type of product to be purchased, specify "whitelabel" to use a custom SPN.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $product;
 
     /**
      * The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      */
-    #[Api('sim_card_group_id', optional: true)]
+    #[Optional('sim_card_group_id')]
     public ?string $simCardGroupID;
 
     /**
@@ -54,7 +55,7 @@ final class PurchaseCreateParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -62,13 +63,13 @@ final class PurchaseCreateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * Service Provider Name (SPN) for the Whitelabel eSIM product. It will be displayed as the mobile service name by operating systems of smartphones. This parameter must only contain letters, numbers and whitespaces.
      */
-    #[Api('whitelabel_name', optional: true)]
+    #[Optional('whitelabel_name')]
     public ?string $whitelabelName;
 
     /**
@@ -95,8 +96,8 @@ final class PurchaseCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
-     * @param list<string> $tags
+     * @param Status|value-of<Status>|null $status
+     * @param list<string>|null $tags
      */
     public static function with(
         int $amount,
@@ -106,17 +107,17 @@ final class PurchaseCreateParams implements BaseModel
         ?array $tags = null,
         ?string $whitelabelName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->amount = $amount;
+        $self['amount'] = $amount;
 
-        null !== $product && $obj->product = $product;
-        null !== $simCardGroupID && $obj->simCardGroupID = $simCardGroupID;
-        null !== $status && $obj['status'] = $status;
-        null !== $tags && $obj->tags = $tags;
-        null !== $whitelabelName && $obj->whitelabelName = $whitelabelName;
+        null !== $product && $self['product'] = $product;
+        null !== $simCardGroupID && $self['simCardGroupID'] = $simCardGroupID;
+        null !== $status && $self['status'] = $status;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $whitelabelName && $self['whitelabelName'] = $whitelabelName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +125,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withAmount(int $amount): self
     {
-        $obj = clone $this;
-        $obj->amount = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +136,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj->product = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +147,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withSimCardGroupID(string $simCardGroupID): self
     {
-        $obj = clone $this;
-        $obj->simCardGroupID = $simCardGroupID;
+        $self = clone $this;
+        $self['simCardGroupID'] = $simCardGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +160,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +173,10 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,9 +184,9 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withWhitelabelName(string $whitelabelName): self
     {
-        $obj = clone $this;
-        $obj->whitelabelName = $whitelabelName;
+        $self = clone $this;
+        $self['whitelabelName'] = $whitelabelName;
 
-        return $obj;
+        return $self;
     }
 }

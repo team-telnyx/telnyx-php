@@ -6,44 +6,52 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Media\MediaGetResponse;
-use Telnyx\Media\MediaListParams;
 use Telnyx\Media\MediaListParams\Filter;
 use Telnyx\Media\MediaListResponse;
-use Telnyx\Media\MediaUpdateParams;
 use Telnyx\Media\MediaUpdateResponse;
-use Telnyx\Media\MediaUploadParams;
 use Telnyx\Media\MediaUploadResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MediaContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Media\MediaListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MediaService implements MediaContract
 {
     /**
+     * @api
+     */
+    public MediaRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new MediaRawService($client);
+    }
 
     /**
      * @api
      *
      * Returns the information about a stored media file.
      *
+     * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MediaGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['media/%1$s', $mediaName],
-            options: $requestOptions,
-            convert: MediaGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($mediaName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -51,47 +59,27 @@ final class MediaService implements MediaContract
      *
      * Updates a stored media file.
      *
+     * @param string $mediaName uniquely identifies a media resource
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $mediaName,
-        $mediaURL = omit,
-        $ttlSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $mediaURL = null,
+        ?int $ttlSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MediaUpdateResponse {
-        $params = ['mediaURL' => $mediaURL, 'ttlSecs' => $ttlSecs];
-
-        return $this->updateRaw($mediaName, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $mediaName,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MediaUpdateResponse {
-        [$parsed, $options] = MediaUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['mediaURL' => $mediaURL, 'ttlSecs' => $ttlSecs]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'put',
-            path: ['media/%1$s', $mediaName],
-            body: (object) $parsed,
-            options: $options,
-            convert: MediaUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($mediaName, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -99,43 +87,21 @@ final class MediaService implements MediaContract
      *
      * Returns a list of stored media files.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MediaListResponse {
-        $params = ['filter' => $filter];
+        $params = Util::removeNulls(['filter' => $filter]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MediaListResponse {
-        [$parsed, $options] = MediaListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'media',
-            query: $parsed,
-            options: $options,
-            convert: MediaListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -143,19 +109,19 @@ final class MediaService implements MediaContract
      *
      * Deletes a stored media file.
      *
+     * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['media/%1$s', $mediaName],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($mediaName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -163,20 +129,19 @@ final class MediaService implements MediaContract
      *
      * Downloads a stored media file.
      *
+     * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function download(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['media/%1$s/download', $mediaName],
-            headers: ['Accept' => 'application/octet-stream'],
-            options: $requestOptions,
-            convert: 'string',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->download($mediaName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -187,45 +152,27 @@ final class MediaService implements MediaContract
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      * @param string $mediaName the unique identifier of a file
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function upload(
-        $mediaURL,
-        $mediaName = omit,
-        $ttlSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        string $mediaURL,
+        ?string $mediaName = null,
+        ?int $ttlSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MediaUploadResponse {
-        $params = [
-            'mediaURL' => $mediaURL, 'mediaName' => $mediaName, 'ttlSecs' => $ttlSecs,
-        ];
-
-        return $this->uploadRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MediaUploadResponse {
-        [$parsed, $options] = MediaUploadParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'mediaURL' => $mediaURL,
+                'mediaName' => $mediaName,
+                'ttlSecs' => $ttlSecs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'media',
-            body: (object) $parsed,
-            options: $options,
-            convert: MediaUploadResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->upload(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

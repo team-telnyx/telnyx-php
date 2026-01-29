@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\RequirementGroups\RequirementGroup;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +40,8 @@ final class RequirementGroupsTest extends TestCase
             phoneNumberType: 'local'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequirementGroup::class, $result);
     }
 
     #[Test]
@@ -52,10 +54,15 @@ final class RequirementGroupsTest extends TestCase
         $result = $this->client->requirementGroups->create(
             action: 'ordering',
             countryCode: 'US',
-            phoneNumberType: 'local'
+            phoneNumberType: 'local',
+            customerReference: 'My Requirement Group',
+            regulatoryRequirements: [
+                ['fieldValue' => 'field_value', 'requirementID' => 'requirement_id'],
+            ],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequirementGroup::class, $result);
     }
 
     #[Test]
@@ -67,7 +74,8 @@ final class RequirementGroupsTest extends TestCase
 
         $result = $this->client->requirementGroups->retrieve('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequirementGroup::class, $result);
     }
 
     #[Test]
@@ -79,7 +87,8 @@ final class RequirementGroupsTest extends TestCase
 
         $result = $this->client->requirementGroups->update('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequirementGroup::class, $result);
     }
 
     #[Test]
@@ -91,7 +100,8 @@ final class RequirementGroupsTest extends TestCase
 
         $result = $this->client->requirementGroups->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsList($result);
     }
 
     #[Test]
@@ -103,7 +113,8 @@ final class RequirementGroupsTest extends TestCase
 
         $result = $this->client->requirementGroups->delete('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequirementGroup::class, $result);
     }
 
     #[Test]
@@ -115,6 +126,7 @@ final class RequirementGroupsTest extends TestCase
 
         $result = $this->client->requirementGroups->submitForApproval('id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequirementGroup::class, $result);
     }
 }

@@ -10,8 +10,9 @@ use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams\ProductBreakdow
 use Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CdrUsageReportsContract
 {
     /**
@@ -20,29 +21,16 @@ interface CdrUsageReportsContract
      * @param AggregationType|value-of<AggregationType> $aggregationType
      * @param ProductBreakdown|value-of<ProductBreakdown> $productBreakdown
      * @param list<float> $connections
-     * @param \DateTimeInterface $endDate
-     * @param \DateTimeInterface $startDate
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function fetchSync(
-        $aggregationType,
-        $productBreakdown,
-        $connections = omit,
-        $endDate = omit,
-        $startDate = omit,
-        ?RequestOptions $requestOptions = null,
-    ): CdrUsageReportFetchSyncResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function fetchSyncRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        AggregationType|string $aggregationType,
+        ProductBreakdown|string $productBreakdown,
+        ?array $connections = null,
+        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): CdrUsageReportFetchSyncResponse;
 }

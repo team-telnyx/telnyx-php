@@ -6,10 +6,10 @@ namespace Telnyx\Services\PortingOrders;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Page;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort;
@@ -17,63 +17,58 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActionRequirementsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort
+ * @phpstan-import-type ParamsShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Params
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionRequirementsService implements ActionRequirementsContract
 {
     /**
+     * @api
+     */
+    public ActionRequirementsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionRequirementsRawService($client);
+    }
 
     /**
      * @api
      *
      * Returns a list of action requirements for a specific porting order.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[id][in][], filter[requirement_type_id], filter[action_type], filter[status]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
-     * @param Sort $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param string $portingOrderID The ID of the porting order
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[id][in][], filter[requirement_type_id], filter[action_type], filter[status]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<ActionRequirementListResponse>
      *
      * @throws APIException
      */
     public function list(
         string $portingOrderID,
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ActionRequirementListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($portingOrderID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        string $portingOrderID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): ActionRequirementListResponse {
-        [$parsed, $options] = ActionRequirementListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|array|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['porting_orders/%1$s/action_requirements', $portingOrderID],
-            query: $parsed,
-            options: $options,
-            convert: ActionRequirementListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list($portingOrderID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -81,52 +76,26 @@ final class ActionRequirementsService implements ActionRequirementsContract
      *
      * Initiates a specific action requirement for a porting order.
      *
-     * @param string $portingOrderID
-     * @param Params $params required information for initiating the action requirement for AU ID verification
+     * @param string $id Path param: The ID of the action requirement
+     * @param string $portingOrderID Path param: The ID of the porting order
+     * @param Params|ParamsShape $params body param: Required information for initiating the action requirement for AU ID verification
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function initiate(
         string $id,
-        $portingOrderID,
-        $params,
-        ?RequestOptions $requestOptions = null
+        string $portingOrderID,
+        Params|array $params,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionRequirementInitiateResponse {
-        $params1 = ['portingOrderID' => $portingOrderID, 'params' => $params];
-
-        return $this->initiateRaw($id, $params1, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function initiateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionRequirementInitiateResponse {
-        [$parsed, $options] = ActionRequirementInitiateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params1 = Util::removeNulls(
+            ['portingOrderID' => $portingOrderID, 'params' => $params]
         );
-        $portingOrderID = $parsed['portingOrderID'];
-        unset($parsed['portingOrderID']);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: [
-                'porting_orders/%1$s/action_requirements/%2$s/initiate',
-                $portingOrderID,
-                $id,
-            ],
-            body: (object) array_diff_key($parsed, ['portingOrderID']),
-            options: $options,
-            convert: ActionRequirementInitiateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->initiate($id, params: $params1, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

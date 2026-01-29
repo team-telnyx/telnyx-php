@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves the details of an existing porting order.
  *
- * @see Telnyx\PortingOrders->retrieve
+ * @see Telnyx\Services\PortingOrdersService::retrieve()
  *
- * @phpstan-type porting_order_retrieve_params = array{includePhoneNumbers?: bool}
+ * @phpstan-type PortingOrderRetrieveParamsShape = array{
+ *   includePhoneNumbers?: bool|null
+ * }
  */
 final class PortingOrderRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_retrieve_params> */
+    /** @use SdkModel<PortingOrderRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Include the first 50 phone number objects in the results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includePhoneNumbers;
 
     public function __construct()
@@ -40,11 +42,11 @@ final class PortingOrderRetrieveParams implements BaseModel
      */
     public static function with(?bool $includePhoneNumbers = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includePhoneNumbers && $obj->includePhoneNumbers = $includePhoneNumbers;
+        null !== $includePhoneNumbers && $self['includePhoneNumbers'] = $includePhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +54,9 @@ final class PortingOrderRetrieveParams implements BaseModel
      */
     public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->includePhoneNumbers = $includePhoneNumbers;
+        $self = clone $this;
+        $self['includePhoneNumbers'] = $includePhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

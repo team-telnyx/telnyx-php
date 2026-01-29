@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklists;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type wireless_blocklist_new_response = array{data?: WirelessBlocklist}
+ * @phpstan-import-type WirelessBlocklistShape from \Telnyx\WirelessBlocklists\WirelessBlocklist
+ *
+ * @phpstan-type WirelessBlocklistNewResponseShape = array{
+ *   data?: null|WirelessBlocklist|WirelessBlocklistShape
+ * }
  */
-final class WirelessBlocklistNewResponse implements BaseModel, ResponseConverter
+final class WirelessBlocklistNewResponse implements BaseModel
 {
-    /** @use SdkModel<wireless_blocklist_new_response> */
+    /** @use SdkModel<WirelessBlocklistNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?WirelessBlocklist $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class WirelessBlocklistNewResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param WirelessBlocklist|WirelessBlocklistShape|null $data
      */
-    public static function with(?WirelessBlocklist $data = null): self
+    public static function with(WirelessBlocklist|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(WirelessBlocklist $data): self
+    /**
+     * @param WirelessBlocklist|WirelessBlocklistShape $data
+     */
+    public function withData(WirelessBlocklist|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

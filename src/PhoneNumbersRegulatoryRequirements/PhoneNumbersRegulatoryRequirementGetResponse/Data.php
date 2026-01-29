@@ -4,45 +4,44 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegionInformation;
 use Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
 
 /**
- * @phpstan-type data_alias = array{
- *   phoneNumber?: string,
- *   phoneNumberType?: string,
- *   recordType?: string,
- *   regionInformation?: list<RegionInformation>,
- *   regulatoryRequirements?: list<RegulatoryRequirement>,
+ * @phpstan-import-type RegionInformationShape from \Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegionInformation
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement
+ *
+ * @phpstan-type DataShape = array{
+ *   phoneNumber?: string|null,
+ *   phoneNumberType?: string|null,
+ *   recordType?: string|null,
+ *   regionInformation?: list<RegionInformation|RegionInformationShape>|null,
+ *   regulatoryRequirements?: list<RegulatoryRequirement|RegulatoryRequirementShape>|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
-    #[Api('phone_number_type', optional: true)]
+    #[Optional('phone_number_type')]
     public ?string $phoneNumberType;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /** @var list<RegionInformation>|null $regionInformation */
-    #[Api('region_information', list: RegionInformation::class, optional: true)]
+    #[Optional('region_information', list: RegionInformation::class)]
     public ?array $regionInformation;
 
     /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
-        'regulatory_requirements',
-        list: RegulatoryRequirement::class,
-        optional: true,
-    )]
+    #[Optional('regulatory_requirements', list: RegulatoryRequirement::class)]
     public ?array $regulatoryRequirements;
 
     public function __construct()
@@ -55,8 +54,8 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegionInformation> $regionInformation
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegionInformation|RegionInformationShape>|null $regionInformation
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(
         ?string $phoneNumber = null,
@@ -65,61 +64,61 @@ final class Data implements BaseModel
         ?array $regionInformation = null,
         ?array $regulatoryRequirements = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj->phoneNumberType = $phoneNumberType;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $regionInformation && $obj->regionInformation = $regionInformation;
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $regionInformation && $self['regionInformation'] = $regionInformation;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumberType(string $phoneNumberType): self
     {
-        $obj = clone $this;
-        $obj->phoneNumberType = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<RegionInformation> $regionInformation
+     * @param list<RegionInformation|RegionInformationShape> $regionInformation
      */
     public function withRegionInformation(array $regionInformation): self
     {
-        $obj = clone $this;
-        $obj->regionInformation = $regionInformation;
+        $self = clone $this;
+        $self['regionInformation'] = $regionInformation;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 }

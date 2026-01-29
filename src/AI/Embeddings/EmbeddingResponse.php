@@ -5,23 +5,21 @@ declare(strict_types=1);
 namespace Telnyx\AI\Embeddings;
 
 use Telnyx\AI\Embeddings\EmbeddingResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type embedding_response = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\AI\Embeddings\EmbeddingResponse\Data
+ *
+ * @phpstan-type EmbeddingResponseShape = array{data: Data|DataShape}
  */
-final class EmbeddingResponse implements BaseModel, ResponseConverter
+final class EmbeddingResponse implements BaseModel
 {
-    /** @use SdkModel<embedding_response> */
+    /** @use SdkModel<EmbeddingResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**
@@ -47,21 +45,26 @@ final class EmbeddingResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|DataShape $data
      */
-    public static function with(Data $data): self
+    public static function with(Data|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|DataShape $data
+     */
+    public function withData(Data|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

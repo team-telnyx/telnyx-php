@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Payment\AutoRechargePrefs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,29 +13,29 @@ use Telnyx\Payment\AutoRechargePrefs\AutoRechargePrefUpdateParams\Preference;
 /**
  * Update payment auto recharge preferences.
  *
- * @see Telnyx\Payment\AutoRechargePrefs->update
+ * @see Telnyx\Services\Payment\AutoRechargePrefsService::update()
  *
- * @phpstan-type auto_recharge_pref_update_params = array{
- *   enabled?: bool,
- *   invoiceEnabled?: bool,
- *   preference?: Preference|value-of<Preference>,
- *   rechargeAmount?: string,
- *   thresholdAmount?: string,
+ * @phpstan-type AutoRechargePrefUpdateParamsShape = array{
+ *   enabled?: bool|null,
+ *   invoiceEnabled?: bool|null,
+ *   preference?: null|Preference|value-of<Preference>,
+ *   rechargeAmount?: string|null,
+ *   thresholdAmount?: string|null,
  * }
  */
 final class AutoRechargePrefUpdateParams implements BaseModel
 {
-    /** @use SdkModel<auto_recharge_pref_update_params> */
+    /** @use SdkModel<AutoRechargePrefUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Whether auto recharge is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
-    #[Api('invoice_enabled', optional: true)]
+    #[Optional('invoice_enabled')]
     public ?bool $invoiceEnabled;
 
     /**
@@ -43,19 +43,19 @@ final class AutoRechargePrefUpdateParams implements BaseModel
      *
      * @var value-of<Preference>|null $preference
      */
-    #[Api(enum: Preference::class, optional: true)]
+    #[Optional(enum: Preference::class)]
     public ?string $preference;
 
     /**
      * The amount to recharge the account, the actual recharge amount will be the amount necessary to reach the threshold amount plus the recharge amount.
      */
-    #[Api('recharge_amount', optional: true)]
+    #[Optional('recharge_amount')]
     public ?string $rechargeAmount;
 
     /**
      * The threshold amount at which the account will be recharged.
      */
-    #[Api('threshold_amount', optional: true)]
+    #[Optional('threshold_amount')]
     public ?string $thresholdAmount;
 
     public function __construct()
@@ -68,7 +68,7 @@ final class AutoRechargePrefUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Preference|value-of<Preference> $preference
+     * @param Preference|value-of<Preference>|null $preference
      */
     public static function with(
         ?bool $enabled = null,
@@ -77,15 +77,15 @@ final class AutoRechargePrefUpdateParams implements BaseModel
         ?string $rechargeAmount = null,
         ?string $thresholdAmount = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $invoiceEnabled && $obj->invoiceEnabled = $invoiceEnabled;
-        null !== $preference && $obj['preference'] = $preference;
-        null !== $rechargeAmount && $obj->rechargeAmount = $rechargeAmount;
-        null !== $thresholdAmount && $obj->thresholdAmount = $thresholdAmount;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $invoiceEnabled && $self['invoiceEnabled'] = $invoiceEnabled;
+        null !== $preference && $self['preference'] = $preference;
+        null !== $rechargeAmount && $self['rechargeAmount'] = $rechargeAmount;
+        null !== $thresholdAmount && $self['thresholdAmount'] = $thresholdAmount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,18 +93,18 @@ final class AutoRechargePrefUpdateParams implements BaseModel
      */
     public function withEnabled(bool $enabled): self
     {
-        $obj = clone $this;
-        $obj->enabled = $enabled;
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
-        return $obj;
+        return $self;
     }
 
     public function withInvoiceEnabled(bool $invoiceEnabled): self
     {
-        $obj = clone $this;
-        $obj->invoiceEnabled = $invoiceEnabled;
+        $self = clone $this;
+        $self['invoiceEnabled'] = $invoiceEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class AutoRechargePrefUpdateParams implements BaseModel
      */
     public function withPreference(Preference|string $preference): self
     {
-        $obj = clone $this;
-        $obj['preference'] = $preference;
+        $self = clone $this;
+        $self['preference'] = $preference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class AutoRechargePrefUpdateParams implements BaseModel
      */
     public function withRechargeAmount(string $rechargeAmount): self
     {
-        $obj = clone $this;
-        $obj->rechargeAmount = $rechargeAmount;
+        $self = clone $this;
+        $self['rechargeAmount'] = $rechargeAmount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,9 +136,9 @@ final class AutoRechargePrefUpdateParams implements BaseModel
      */
     public function withThresholdAmount(string $thresholdAmount): self
     {
-        $obj = clone $this;
-        $obj->thresholdAmount = $thresholdAmount;
+        $self = clone $this;
+        $self['thresholdAmount'] = $thresholdAmount;
 
-        return $obj;
+        return $self;
     }
 }

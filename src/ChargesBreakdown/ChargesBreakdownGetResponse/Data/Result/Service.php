@@ -4,36 +4,34 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type service_alias = array{
- *   cost: string, costType: string, name: string
- * }
+ * @phpstan-type ServiceShape = array{cost: string, costType: string, name: string}
  */
 final class Service implements BaseModel
 {
-    /** @use SdkModel<service_alias> */
+    /** @use SdkModel<ServiceShape> */
     use SdkModel;
 
     /**
      * Cost per unit as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $cost;
 
     /**
      * Type of cost (MRC or OTC).
      */
-    #[Api('cost_type')]
+    #[Required('cost_type')]
     public string $costType;
 
     /**
      * Service name.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -65,13 +63,13 @@ final class Service implements BaseModel
         string $costType,
         string $name
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->cost = $cost;
-        $obj->costType = $costType;
-        $obj->name = $name;
+        $self['cost'] = $cost;
+        $self['costType'] = $costType;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +77,10 @@ final class Service implements BaseModel
      */
     public function withCost(string $cost): self
     {
-        $obj = clone $this;
-        $obj->cost = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +88,10 @@ final class Service implements BaseModel
      */
     public function withCostType(string $costType): self
     {
-        $obj = clone $this;
-        $obj->costType = $costType;
+        $self = clone $this;
+        $self['costType'] = $costType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,9 +99,9 @@ final class Service implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

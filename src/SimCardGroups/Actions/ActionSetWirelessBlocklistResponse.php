@@ -4,28 +4,26 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type action_set_wireless_blocklist_response = array{
- *   data?: SimCardGroupAction
+ * @phpstan-import-type SimCardGroupActionShape from \Telnyx\SimCardGroups\Actions\SimCardGroupAction
+ *
+ * @phpstan-type ActionSetWirelessBlocklistResponseShape = array{
+ *   data?: null|SimCardGroupAction|SimCardGroupActionShape
  * }
  */
-final class ActionSetWirelessBlocklistResponse implements BaseModel, ResponseConverter
+final class ActionSetWirelessBlocklistResponse implements BaseModel
 {
-    /** @use SdkModel<action_set_wireless_blocklist_response> */
+    /** @use SdkModel<ActionSetWirelessBlocklistResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * This object represents a SIM card group action request. It allows tracking the current status of an operation that impacts the SIM card group and SIM card in it.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCardGroupAction $data;
 
     public function __construct()
@@ -37,24 +35,28 @@ final class ActionSetWirelessBlocklistResponse implements BaseModel, ResponseCon
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param SimCardGroupAction|SimCardGroupActionShape|null $data
      */
-    public static function with(?SimCardGroupAction $data = null): self
+    public static function with(SimCardGroupAction|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * This object represents a SIM card group action request. It allows tracking the current status of an operation that impacts the SIM card group and SIM card in it.
+     *
+     * @param SimCardGroupAction|SimCardGroupActionShape $data
      */
-    public function withData(SimCardGroupAction $data): self
+    public function withData(SimCardGroupAction|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

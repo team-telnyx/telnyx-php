@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\NumberType\Eq;
@@ -12,11 +12,11 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter\NumberType\Eq;
 /**
  * Filter phone numbers by phone number type.
  *
- * @phpstan-type number_type = array{eq?: value-of<Eq>}
+ * @phpstan-type NumberTypeShape = array{eq?: null|Eq|value-of<Eq>}
  */
 final class NumberType implements BaseModel
 {
-    /** @use SdkModel<number_type> */
+    /** @use SdkModel<NumberTypeShape> */
     use SdkModel;
 
     /**
@@ -24,7 +24,7 @@ final class NumberType implements BaseModel
      *
      * @var value-of<Eq>|null $eq
      */
-    #[Api(enum: Eq::class, optional: true)]
+    #[Optional(enum: Eq::class)]
     public ?string $eq;
 
     public function __construct()
@@ -37,15 +37,15 @@ final class NumberType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Eq|value-of<Eq> $eq
+     * @param Eq|value-of<Eq>|null $eq
      */
     public static function with(Eq|string|null $eq = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj['eq'] = $eq;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,9 +55,9 @@ final class NumberType implements BaseModel
      */
     public function withEq(Eq|string $eq): self
     {
-        $obj = clone $this;
-        $obj['eq'] = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

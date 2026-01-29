@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\AccountGetRecordingsJsonResponse;
+use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +39,8 @@ final class AccountsTest extends TestCase
             'account_sid'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccountGetRecordingsJsonResponse::class, $result);
     }
 
     #[Test]
@@ -51,6 +54,10 @@ final class AccountsTest extends TestCase
             'account_sid'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AccountGetTranscriptionsJsonResponse::class,
+            $result
+        );
     }
 }

@@ -4,52 +4,52 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts\ManagedAccountUpdateGlobalChannelLimitResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   channelLimit?: int,
- *   email?: string,
- *   managerAccountID?: string,
- *   recordType?: string,
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   channelLimit?: int|null,
+ *   email?: string|null,
+ *   managerAccountID?: string|null,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The user ID of the managed account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Integer value that indicates the number of allocatable global outbound channels that are allocated to the managed account. If the value is 0 then the account will have no usable channels and will not be able to perform outbound calling.
      */
-    #[Api('channel_limit', optional: true)]
+    #[Optional('channel_limit')]
     public ?int $channelLimit;
 
     /**
      * The email of the managed account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $email;
 
     /**
      * The user ID of the manager of the account.
      */
-    #[Api('manager_account_id', optional: true)]
+    #[Optional('manager_account_id')]
     public ?string $managerAccountID;
 
     /**
      * The name of the type of data in the response.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -69,15 +69,15 @@ final class Data implements BaseModel
         ?string $managerAccountID = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $channelLimit && $obj->channelLimit = $channelLimit;
-        null !== $email && $obj->email = $email;
-        null !== $managerAccountID && $obj->managerAccountID = $managerAccountID;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
+        null !== $email && $self['email'] = $email;
+        null !== $managerAccountID && $self['managerAccountID'] = $managerAccountID;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +85,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class Data implements BaseModel
      */
     public function withChannelLimit(int $channelLimit): self
     {
-        $obj = clone $this;
-        $obj->channelLimit = $channelLimit;
+        $self = clone $this;
+        $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +107,10 @@ final class Data implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj->email = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +118,10 @@ final class Data implements BaseModel
      */
     public function withManagerAccountID(string $managerAccountID): self
     {
-        $obj = clone $this;
-        $obj->managerAccountID = $managerAccountID;
+        $self = clone $this;
+        $self['managerAccountID'] = $managerAccountID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +129,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

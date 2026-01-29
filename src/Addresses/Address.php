@@ -4,150 +4,150 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type address_alias = array{
- *   id?: string,
- *   addressBook?: bool,
- *   administrativeArea?: string,
- *   borough?: string,
- *   businessName?: string,
- *   countryCode?: string,
- *   createdAt?: string,
- *   customerReference?: string,
- *   extendedAddress?: string,
- *   firstName?: string,
- *   lastName?: string,
- *   locality?: string,
- *   neighborhood?: string,
- *   phoneNumber?: string,
- *   postalCode?: string,
- *   recordType?: string,
- *   streetAddress?: string,
- *   updatedAt?: string,
- *   validateAddress?: bool,
+ * @phpstan-type AddressShape = array{
+ *   id?: string|null,
+ *   addressBook?: bool|null,
+ *   administrativeArea?: string|null,
+ *   borough?: string|null,
+ *   businessName?: string|null,
+ *   countryCode?: string|null,
+ *   createdAt?: string|null,
+ *   customerReference?: string|null,
+ *   extendedAddress?: string|null,
+ *   firstName?: string|null,
+ *   lastName?: string|null,
+ *   locality?: string|null,
+ *   neighborhood?: string|null,
+ *   phoneNumber?: string|null,
+ *   postalCode?: string|null,
+ *   recordType?: string|null,
+ *   streetAddress?: string|null,
+ *   updatedAt?: string|null,
+ *   validateAddress?: bool|null,
  * }
  */
 final class Address implements BaseModel
 {
-    /** @use SdkModel<address_alias> */
+    /** @use SdkModel<AddressShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Indicates whether or not the address should be considered part of your list of addresses that appear for regular use.
      */
-    #[Api('address_book', optional: true)]
+    #[Optional('address_book')]
     public ?bool $addressBook;
 
     /**
      * The locality of the address. For US addresses, this corresponds to the state of the address.
      */
-    #[Api('administrative_area', optional: true)]
+    #[Optional('administrative_area')]
     public ?string $administrativeArea;
 
     /**
      * The borough of the address. This field is not used for addresses in the US but is used for some international addresses.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $borough;
 
     /**
      * The business name associated with the address. An address must have either a first last name or a business name.
      */
-    #[Api('business_name', optional: true)]
+    #[Optional('business_name')]
     public ?string $businessName;
 
     /**
      * The two-character (ISO 3166-1 alpha-2) country code of the address.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * Additional street address information about the address such as, but not limited to, unit number or apartment number.
      */
-    #[Api('extended_address', optional: true)]
+    #[Optional('extended_address')]
     public ?string $extendedAddress;
 
     /**
      * The first name associated with the address. An address must have either a first last name or a business name.
      */
-    #[Api('first_name', optional: true)]
+    #[Optional('first_name')]
     public ?string $firstName;
 
     /**
      * The last name associated with the address. An address must have either a first last name or a business name.
      */
-    #[Api('last_name', optional: true)]
+    #[Optional('last_name')]
     public ?string $lastName;
 
     /**
      * The locality of the address. For US addresses, this corresponds to the city of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $locality;
 
     /**
      * The neighborhood of the address. This field is not used for addresses in the US but is used for some international addresses.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $neighborhood;
 
     /**
      * The phone number associated with the address.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
      * The postal code of the address.
      */
-    #[Api('postal_code', optional: true)]
+    #[Optional('postal_code')]
     public ?string $postalCode;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The primary street address information about the address.
      */
-    #[Api('street_address', optional: true)]
+    #[Optional('street_address')]
     public ?string $streetAddress;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     /**
      * Indicates whether or not the address should be validated for emergency use upon creation or not. This should be left with the default value of `true` unless you have used the `/addresses/actions/validate` endpoint to validate the address separately prior to creation. If an address is not validated for emergency use upon creation and it is not valid, it will not be able to be used for emergency services.
      */
-    #[Api('validate_address', optional: true)]
+    #[Optional('validate_address')]
     public ?bool $validateAddress;
 
     public function __construct()
@@ -181,29 +181,29 @@ final class Address implements BaseModel
         ?string $updatedAt = null,
         ?bool $validateAddress = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $addressBook && $obj->addressBook = $addressBook;
-        null !== $administrativeArea && $obj->administrativeArea = $administrativeArea;
-        null !== $borough && $obj->borough = $borough;
-        null !== $businessName && $obj->businessName = $businessName;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $extendedAddress && $obj->extendedAddress = $extendedAddress;
-        null !== $firstName && $obj->firstName = $firstName;
-        null !== $lastName && $obj->lastName = $lastName;
-        null !== $locality && $obj->locality = $locality;
-        null !== $neighborhood && $obj->neighborhood = $neighborhood;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $postalCode && $obj->postalCode = $postalCode;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $streetAddress && $obj->streetAddress = $streetAddress;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
-        null !== $validateAddress && $obj->validateAddress = $validateAddress;
+        null !== $id && $self['id'] = $id;
+        null !== $addressBook && $self['addressBook'] = $addressBook;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $borough && $self['borough'] = $borough;
+        null !== $businessName && $self['businessName'] = $businessName;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $extendedAddress && $self['extendedAddress'] = $extendedAddress;
+        null !== $firstName && $self['firstName'] = $firstName;
+        null !== $lastName && $self['lastName'] = $lastName;
+        null !== $locality && $self['locality'] = $locality;
+        null !== $neighborhood && $self['neighborhood'] = $neighborhood;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $postalCode && $self['postalCode'] = $postalCode;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $streetAddress && $self['streetAddress'] = $streetAddress;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $validateAddress && $self['validateAddress'] = $validateAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class Address implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -222,10 +222,10 @@ final class Address implements BaseModel
      */
     public function withAddressBook(bool $addressBook): self
     {
-        $obj = clone $this;
-        $obj->addressBook = $addressBook;
+        $self = clone $this;
+        $self['addressBook'] = $addressBook;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -233,10 +233,10 @@ final class Address implements BaseModel
      */
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj->administrativeArea = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -244,10 +244,10 @@ final class Address implements BaseModel
      */
     public function withBorough(string $borough): self
     {
-        $obj = clone $this;
-        $obj->borough = $borough;
+        $self = clone $this;
+        $self['borough'] = $borough;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +255,10 @@ final class Address implements BaseModel
      */
     public function withBusinessName(string $businessName): self
     {
-        $obj = clone $this;
-        $obj->businessName = $businessName;
+        $self = clone $this;
+        $self['businessName'] = $businessName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -266,10 +266,10 @@ final class Address implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -277,10 +277,10 @@ final class Address implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -288,10 +288,10 @@ final class Address implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -299,10 +299,10 @@ final class Address implements BaseModel
      */
     public function withExtendedAddress(string $extendedAddress): self
     {
-        $obj = clone $this;
-        $obj->extendedAddress = $extendedAddress;
+        $self = clone $this;
+        $self['extendedAddress'] = $extendedAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -310,10 +310,10 @@ final class Address implements BaseModel
      */
     public function withFirstName(string $firstName): self
     {
-        $obj = clone $this;
-        $obj->firstName = $firstName;
+        $self = clone $this;
+        $self['firstName'] = $firstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -321,10 +321,10 @@ final class Address implements BaseModel
      */
     public function withLastName(string $lastName): self
     {
-        $obj = clone $this;
-        $obj->lastName = $lastName;
+        $self = clone $this;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -332,10 +332,10 @@ final class Address implements BaseModel
      */
     public function withLocality(string $locality): self
     {
-        $obj = clone $this;
-        $obj->locality = $locality;
+        $self = clone $this;
+        $self['locality'] = $locality;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -343,10 +343,10 @@ final class Address implements BaseModel
      */
     public function withNeighborhood(string $neighborhood): self
     {
-        $obj = clone $this;
-        $obj->neighborhood = $neighborhood;
+        $self = clone $this;
+        $self['neighborhood'] = $neighborhood;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -354,10 +354,10 @@ final class Address implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -365,10 +365,10 @@ final class Address implements BaseModel
      */
     public function withPostalCode(string $postalCode): self
     {
-        $obj = clone $this;
-        $obj->postalCode = $postalCode;
+        $self = clone $this;
+        $self['postalCode'] = $postalCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -376,10 +376,10 @@ final class Address implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -387,10 +387,10 @@ final class Address implements BaseModel
      */
     public function withStreetAddress(string $streetAddress): self
     {
-        $obj = clone $this;
-        $obj->streetAddress = $streetAddress;
+        $self = clone $this;
+        $self['streetAddress'] = $streetAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -398,10 +398,10 @@ final class Address implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -409,9 +409,9 @@ final class Address implements BaseModel
      */
     public function withValidateAddress(bool $validateAddress): self
     {
-        $obj = clone $this;
-        $obj->validateAddress = $validateAddress;
+        $self = clone $this;
+        $self['validateAddress'] = $validateAddress;
 
-        return $obj;
+        return $self;
     }
 }

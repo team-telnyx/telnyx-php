@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Change the bundle status for a phone number (set to being in a bundle or remove from a bundle).
  *
- * @see Telnyx\PhoneNumbers\Actions->changeBundleStatus
+ * @see Telnyx\Services\PhoneNumbers\ActionsService::changeBundleStatus()
  *
- * @phpstan-type action_change_bundle_status_params = array{bundleID: string}
+ * @phpstan-type ActionChangeBundleStatusParamsShape = array{bundleID: string}
  */
 final class ActionChangeBundleStatusParams implements BaseModel
 {
-    /** @use SdkModel<action_change_bundle_status_params> */
+    /** @use SdkModel<ActionChangeBundleStatusParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
      */
-    #[Api('bundle_id')]
+    #[Required('bundle_id')]
     public string $bundleID;
 
     /**
@@ -54,11 +54,11 @@ final class ActionChangeBundleStatusParams implements BaseModel
      */
     public static function with(string $bundleID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->bundleID = $bundleID;
+        $self['bundleID'] = $bundleID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class ActionChangeBundleStatusParams implements BaseModel
      */
     public function withBundleID(string $bundleID): self
     {
-        $obj = clone $this;
-        $obj->bundleID = $bundleID;
+        $self = clone $this;
+        $self['bundleID'] = $bundleID;
 
-        return $obj;
+        return $self;
     }
 }

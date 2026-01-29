@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voice;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings;
 
 /**
- * @phpstan-type voice_update_response = array{data?: PhoneNumberWithVoiceSettings}
+ * @phpstan-import-type PhoneNumberWithVoiceSettingsShape from \Telnyx\PhoneNumbers\Actions\PhoneNumberWithVoiceSettings
+ *
+ * @phpstan-type VoiceUpdateResponseShape = array{
+ *   data?: null|PhoneNumberWithVoiceSettings|PhoneNumberWithVoiceSettingsShape
+ * }
  */
-final class VoiceUpdateResponse implements BaseModel, ResponseConverter
+final class VoiceUpdateResponse implements BaseModel
 {
-    /** @use SdkModel<voice_update_response> */
+    /** @use SdkModel<VoiceUpdateResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?PhoneNumberWithVoiceSettings $data;
 
     public function __construct()
@@ -33,21 +33,27 @@ final class VoiceUpdateResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PhoneNumberWithVoiceSettings|PhoneNumberWithVoiceSettingsShape|null $data
      */
-    public static function with(?PhoneNumberWithVoiceSettings $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        PhoneNumberWithVoiceSettings|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(PhoneNumberWithVoiceSettings $data): self
+    /**
+     * @param PhoneNumberWithVoiceSettings|PhoneNumberWithVoiceSettingsShape $data
+     */
+    public function withData(PhoneNumberWithVoiceSettings|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

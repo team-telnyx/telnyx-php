@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\TestSuites\Runs;
 
-use Telnyx\AI\Assistants\Tests\TestSuites\Runs\RunListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,34 +12,37 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves paginated history of test runs for a specific test suite with filtering options.
  *
- * @see Telnyx\AI\Assistants\Tests\TestSuites\Runs->list
+ * @see Telnyx\Services\AI\Assistants\Tests\TestSuites\RunsService::list()
  *
- * @phpstan-type run_list_params = array{
- *   page?: Page, status?: string, testSuiteRunID?: string
+ * @phpstan-type RunListParamsShape = array{
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   status?: string|null,
+ *   testSuiteRunID?: string|null,
  * }
  */
 final class RunListParams implements BaseModel
 {
-    /** @use SdkModel<run_list_params> */
+    /** @use SdkModel<RunListParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Filter runs by execution status (pending, running, completed, failed, timeout).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     /**
      * Filter runs by specific suite execution batch ID.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $testSuiteRunID;
 
     public function __construct()
@@ -54,28 +56,35 @@ final class RunListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?Page $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $status = null,
-        ?string $testSuiteRunID = null
+        ?string $testSuiteRunID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $status && $obj->status = $status;
-        null !== $testSuiteRunID && $obj->testSuiteRunID = $testSuiteRunID;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $status && $self['status'] = $status;
+        null !== $testSuiteRunID && $self['testSuiteRunID'] = $testSuiteRunID;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 
     /**
@@ -83,10 +92,10 @@ final class RunListParams implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +103,9 @@ final class RunListParams implements BaseModel
      */
     public function withTestSuiteRunID(string $testSuiteRunID): self
     {
-        $obj = clone $this;
-        $obj->testSuiteRunID = $testSuiteRunID;
+        $self = clone $this;
+        $self['testSuiteRunID'] = $testSuiteRunID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -22,77 +23,84 @@ use Telnyx\Faxes\FaxCreateParams\Quality;
  * - `fax.delivered`
  * - `fax.failed`
  *
- * @see Telnyx\Faxes->create
+ * @see Telnyx\Services\FaxesService::create()
  *
- * @phpstan-type fax_create_params = array{
+ * @phpstan-type FaxCreateParamsShape = array{
  *   connectionID: string,
  *   from: string,
  *   to: string,
- *   clientState?: string,
- *   fromDisplayName?: string,
- *   mediaName?: string,
- *   mediaURL?: string,
- *   monochrome?: bool,
- *   previewFormat?: PreviewFormat|value-of<PreviewFormat>,
- *   quality?: Quality|value-of<Quality>,
- *   storeMedia?: bool,
- *   storePreview?: bool,
- *   t38Enabled?: bool,
- *   webhookURL?: string,
+ *   blackThreshold?: int|null,
+ *   clientState?: string|null,
+ *   fromDisplayName?: string|null,
+ *   mediaName?: string|null,
+ *   mediaURL?: string|null,
+ *   monochrome?: bool|null,
+ *   previewFormat?: null|PreviewFormat|value-of<PreviewFormat>,
+ *   quality?: null|Quality|value-of<Quality>,
+ *   storeMedia?: bool|null,
+ *   storePreview?: bool|null,
+ *   t38Enabled?: bool|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class FaxCreateParams implements BaseModel
 {
-    /** @use SdkModel<fax_create_params> */
+    /** @use SdkModel<FaxCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The connection ID to send the fax with.
      */
-    #[Api('connection_id')]
+    #[Required('connection_id')]
     public string $connectionID;
 
     /**
      * The phone number, in E.164 format, the fax will be sent from.
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
      * The phone number, in E.164 format, the fax will be sent to or SIP URI.
      */
-    #[Api]
+    #[Required]
     public string $to;
+
+    /**
+     * The black threshold percentage for monochrome faxes. Only applicable if `monochrome` is set to `true`.
+     */
+    #[Optional('black_threshold')]
+    public ?int $blackThreshold;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
      */
-    #[Api('from_display_name', optional: true)]
+    #[Optional('from_display_name')]
     public ?string $fromDisplayName;
 
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
      */
-    #[Api('media_name', optional: true)]
+    #[Optional('media_name')]
     public ?string $mediaName;
 
     /**
      * The URL (or list of URLs) to the PDF used for the fax's media. media_url and media_name/contents can't be submitted together.
      */
-    #[Api('media_url', optional: true)]
+    #[Optional('media_url')]
     public ?string $mediaURL;
 
     /**
      * The flag to enable monochrome, true black and white fax results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $monochrome;
 
     /**
@@ -100,7 +108,7 @@ final class FaxCreateParams implements BaseModel
      *
      * @var value-of<PreviewFormat>|null $previewFormat
      */
-    #[Api('preview_format', enum: PreviewFormat::class, optional: true)]
+    #[Optional('preview_format', enum: PreviewFormat::class)]
     public ?string $previewFormat;
 
     /**
@@ -108,31 +116,31 @@ final class FaxCreateParams implements BaseModel
      *
      * @var value-of<Quality>|null $quality
      */
-    #[Api(enum: Quality::class, optional: true)]
+    #[Optional(enum: Quality::class)]
     public ?string $quality;
 
     /**
      * Should fax media be stored on temporary URL. It does not support media_name, they can't be submitted together.
      */
-    #[Api('store_media', optional: true)]
+    #[Optional('store_media')]
     public ?bool $storeMedia;
 
     /**
      * Should fax preview be stored on temporary URL.
      */
-    #[Api('store_preview', optional: true)]
+    #[Optional('store_preview')]
     public ?bool $storePreview;
 
     /**
      * The flag to disable the T.38 protocol.
      */
-    #[Api('t38_enabled', optional: true)]
+    #[Optional('t38_enabled')]
     public ?bool $t38Enabled;
 
     /**
      * Use this field to override the URL to which Telnyx will send subsequent webhooks for this fax.
      */
-    #[Api('webhook_url', optional: true)]
+    #[Optional('webhook_url')]
     public ?string $webhookURL;
 
     /**
@@ -159,13 +167,14 @@ final class FaxCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PreviewFormat|value-of<PreviewFormat> $previewFormat
-     * @param Quality|value-of<Quality> $quality
+     * @param PreviewFormat|value-of<PreviewFormat>|null $previewFormat
+     * @param Quality|value-of<Quality>|null $quality
      */
     public static function with(
         string $connectionID,
         string $from,
         string $to,
+        ?int $blackThreshold = null,
         ?string $clientState = null,
         ?string $fromDisplayName = null,
         ?string $mediaName = null,
@@ -178,25 +187,26 @@ final class FaxCreateParams implements BaseModel
         ?bool $t38Enabled = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->connectionID = $connectionID;
-        $obj->from = $from;
-        $obj->to = $to;
+        $self['connectionID'] = $connectionID;
+        $self['from'] = $from;
+        $self['to'] = $to;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $fromDisplayName && $obj->fromDisplayName = $fromDisplayName;
-        null !== $mediaName && $obj->mediaName = $mediaName;
-        null !== $mediaURL && $obj->mediaURL = $mediaURL;
-        null !== $monochrome && $obj->monochrome = $monochrome;
-        null !== $previewFormat && $obj['previewFormat'] = $previewFormat;
-        null !== $quality && $obj['quality'] = $quality;
-        null !== $storeMedia && $obj->storeMedia = $storeMedia;
-        null !== $storePreview && $obj->storePreview = $storePreview;
-        null !== $t38Enabled && $obj->t38Enabled = $t38Enabled;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $blackThreshold && $self['blackThreshold'] = $blackThreshold;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
+        null !== $mediaName && $self['mediaName'] = $mediaName;
+        null !== $mediaURL && $self['mediaURL'] = $mediaURL;
+        null !== $monochrome && $self['monochrome'] = $monochrome;
+        null !== $previewFormat && $self['previewFormat'] = $previewFormat;
+        null !== $quality && $self['quality'] = $quality;
+        null !== $storeMedia && $self['storeMedia'] = $storeMedia;
+        null !== $storePreview && $self['storePreview'] = $storePreview;
+        null !== $t38Enabled && $self['t38Enabled'] = $t38Enabled;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -204,10 +214,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -215,10 +225,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,10 +236,21 @@ final class FaxCreateParams implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The black threshold percentage for monochrome faxes. Only applicable if `monochrome` is set to `true`.
+     */
+    public function withBlackThreshold(int $blackThreshold): self
+    {
+        $self = clone $this;
+        $self['blackThreshold'] = $blackThreshold;
+
+        return $self;
     }
 
     /**
@@ -237,10 +258,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +269,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withFromDisplayName(string $fromDisplayName): self
     {
-        $obj = clone $this;
-        $obj->fromDisplayName = $fromDisplayName;
+        $self = clone $this;
+        $self['fromDisplayName'] = $fromDisplayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,10 +280,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withMediaName(string $mediaName): self
     {
-        $obj = clone $this;
-        $obj->mediaName = $mediaName;
+        $self = clone $this;
+        $self['mediaName'] = $mediaName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,10 +291,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withMediaURL(string $mediaURL): self
     {
-        $obj = clone $this;
-        $obj->mediaURL = $mediaURL;
+        $self = clone $this;
+        $self['mediaURL'] = $mediaURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,10 +302,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withMonochrome(bool $monochrome): self
     {
-        $obj = clone $this;
-        $obj->monochrome = $monochrome;
+        $self = clone $this;
+        $self['monochrome'] = $monochrome;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -294,10 +315,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withPreviewFormat(PreviewFormat|string $previewFormat): self
     {
-        $obj = clone $this;
-        $obj['previewFormat'] = $previewFormat;
+        $self = clone $this;
+        $self['previewFormat'] = $previewFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -307,10 +328,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withQuality(Quality|string $quality): self
     {
-        $obj = clone $this;
-        $obj['quality'] = $quality;
+        $self = clone $this;
+        $self['quality'] = $quality;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -318,10 +339,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withStoreMedia(bool $storeMedia): self
     {
-        $obj = clone $this;
-        $obj->storeMedia = $storeMedia;
+        $self = clone $this;
+        $self['storeMedia'] = $storeMedia;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -329,10 +350,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withStorePreview(bool $storePreview): self
     {
-        $obj = clone $this;
-        $obj->storePreview = $storePreview;
+        $self = clone $this;
+        $self['storePreview'] = $storePreview;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -340,10 +361,10 @@ final class FaxCreateParams implements BaseModel
      */
     public function withT38Enabled(bool $t38Enabled): self
     {
-        $obj = clone $this;
-        $obj->t38Enabled = $t38Enabled;
+        $self = clone $this;
+        $self['t38Enabled'] = $t38Enabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -351,9 +372,9 @@ final class FaxCreateParams implements BaseModel
      */
     public function withWebhookURL(string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

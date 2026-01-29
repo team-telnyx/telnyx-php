@@ -6,65 +6,49 @@ namespace Telnyx\Services\VerifiedNumbers;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VerifiedNumbers\ActionsContract;
-use Telnyx\VerifiedNumbers\Actions\ActionSubmitVerificationCodeParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Submit verification code
      *
-     * @param string $verificationCode
+     * @param string $phoneNumber +E164 formatted phone number
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function submitVerificationCode(
         string $phoneNumber,
-        $verificationCode,
-        ?RequestOptions $requestOptions = null,
+        string $verificationCode,
+        RequestOptions|array|null $requestOptions = null,
     ): VerifiedNumberDataWrapper {
-        $params = ['verificationCode' => $verificationCode];
+        $params = Util::removeNulls(['verificationCode' => $verificationCode]);
 
-        return $this->submitVerificationCodeRaw(
-            $phoneNumber,
-            $params,
-            $requestOptions
-        );
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->submitVerificationCode($phoneNumber, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function submitVerificationCodeRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VerifiedNumberDataWrapper {
-        [$parsed, $options] = ActionSubmitVerificationCodeParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['verified_numbers/%1$s/actions/verify', $phoneNumber],
-            body: (object) $parsed,
-            options: $options,
-            convert: VerifiedNumberDataWrapper::class,
-        );
+        return $response->parse();
     }
 }

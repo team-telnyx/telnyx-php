@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders\SubNumberOrderUpdateRequirementGroupResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type regulatory_requirement = array{
- *   fieldType?: string, recordType?: string, requirementID?: string
+ * @phpstan-type RegulatoryRequirementShape = array{
+ *   fieldType?: string|null, recordType?: string|null, requirementID?: string|null
  * }
  */
 final class RegulatoryRequirement implements BaseModel
 {
-    /** @use SdkModel<regulatory_requirement> */
+    /** @use SdkModel<RegulatoryRequirementShape> */
     use SdkModel;
 
-    #[Api('field_type', optional: true)]
+    #[Optional('field_type')]
     public ?string $fieldType;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
-    #[Api('requirement_id', optional: true)]
+    #[Optional('requirement_id')]
     public ?string $requirementID;
 
     public function __construct()
@@ -42,36 +42,36 @@ final class RegulatoryRequirement implements BaseModel
         ?string $recordType = null,
         ?string $requirementID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fieldType && $obj->fieldType = $fieldType;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $requirementID && $obj->requirementID = $requirementID;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementID && $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldType(string $fieldType): self
     {
-        $obj = clone $this;
-        $obj->fieldType = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRequirementID(string $requirementID): self
     {
-        $obj = clone $this;
-        $obj->requirementID = $requirementID;
+        $self = clone $this;
+        $self['requirementID'] = $requirementID;
 
-        return $obj;
+        return $self;
     }
 }

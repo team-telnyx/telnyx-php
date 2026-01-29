@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Recordings\Json;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deletes recording resource identified by recording id.
  *
- * @see Telnyx\Texml\Accounts\Recordings\Json->deleteRecordingSidJson
+ * @see Telnyx\Services\Texml\Accounts\Recordings\JsonService::deleteRecordingSidJson()
  *
- * @phpstan-type json_delete_recording_sid_json_params = array{accountSid: string}
+ * @phpstan-type JsonDeleteRecordingSidJsonParamsShape = array{accountSid: string}
  */
 final class JsonDeleteRecordingSidJsonParams implements BaseModel
 {
-    /** @use SdkModel<json_delete_recording_sid_json_params> */
+    /** @use SdkModel<JsonDeleteRecordingSidJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $accountSid;
 
     /**
@@ -51,18 +51,18 @@ final class JsonDeleteRecordingSidJsonParams implements BaseModel
      */
     public static function with(string $accountSid): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->accountSid = $accountSid;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 }

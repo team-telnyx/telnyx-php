@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type hangup_tool_params = array{description?: string}
+ * @phpstan-type HangupToolParamsShape = array{description?: string|null}
  */
 final class HangupToolParams implements BaseModel
 {
-    /** @use SdkModel<hangup_tool_params> */
+    /** @use SdkModel<HangupToolParamsShape> */
     use SdkModel;
 
     /**
      * The description of the function that will be passed to the assistant.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class HangupToolParams implements BaseModel
      */
     public static function with(?string $description = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $description && $obj->description = $description;
+        null !== $description && $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class HangupToolParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 }

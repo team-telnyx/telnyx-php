@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPHealthChecks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,20 +13,24 @@ use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
 /**
  * List all Global IP health checks.
  *
- * @see Telnyx\GlobalIPHealthChecks->list
+ * @see Telnyx\Services\GlobalIPHealthChecksService::list()
  *
- * @phpstan-type global_ip_health_check_list_params = array{page?: Page}
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page
+ *
+ * @phpstan-type GlobalIPHealthCheckListParamsShape = array{
+ *   page?: null|Page|PageShape
+ * }
  */
 final class GlobalIPHealthCheckListParams implements BaseModel
 {
-    /** @use SdkModel<global_ip_health_check_list_params> */
+    /** @use SdkModel<GlobalIPHealthCheckListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()
@@ -38,24 +42,28 @@ final class GlobalIPHealthCheckListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Page|PageShape|null $page
      */
-    public static function with(?Page $page = null): self
+    public static function with(Page|array|null $page = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $page && $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter\EndUser;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type admin_alias = array{authPersonName?: string, entityName?: string}
+ * @phpstan-type AdminShape = array{
+ *   authPersonName?: string|null, entityName?: string|null
+ * }
  */
 final class Admin implements BaseModel
 {
-    /** @use SdkModel<admin_alias> */
+    /** @use SdkModel<AdminShape> */
     use SdkModel;
 
     /**
      * Filter results by authorized person.
      */
-    #[Api('auth_person_name', optional: true)]
+    #[Optional('auth_person_name')]
     public ?string $authPersonName;
 
     /**
      * Filter results by person or company name.
      */
-    #[Api('entity_name', optional: true)]
+    #[Optional('entity_name')]
     public ?string $entityName;
 
     public function __construct()
@@ -42,12 +44,12 @@ final class Admin implements BaseModel
         ?string $authPersonName = null,
         ?string $entityName = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authPersonName && $obj->authPersonName = $authPersonName;
-        null !== $entityName && $obj->entityName = $entityName;
+        null !== $authPersonName && $self['authPersonName'] = $authPersonName;
+        null !== $entityName && $self['entityName'] = $entityName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +57,10 @@ final class Admin implements BaseModel
      */
     public function withAuthPersonName(string $authPersonName): self
     {
-        $obj = clone $this;
-        $obj->authPersonName = $authPersonName;
+        $self = clone $this;
+        $self['authPersonName'] = $authPersonName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class Admin implements BaseModel
      */
     public function withEntityName(string $entityName): self
     {
-        $obj = clone $this;
-        $obj->entityName = $entityName;
+        $self = clone $this;
+        $self['entityName'] = $entityName;
 
-        return $obj;
+        return $self;
     }
 }

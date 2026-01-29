@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\OAuthClients\OAuthClient;
+use Telnyx\OAuthClients\OAuthClientGetResponse;
+use Telnyx\OAuthClients\OAuthClientNewResponse;
+use Telnyx\OAuthClients\OAuthClientUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -40,7 +45,8 @@ final class OAuthClientsTest extends TestCase
             name: 'My OAuth client',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthClientNewResponse::class, $result);
     }
 
     #[Test]
@@ -55,9 +61,15 @@ final class OAuthClientsTest extends TestCase
             allowedScopes: ['admin'],
             clientType: 'public',
             name: 'My OAuth client',
+            logoUri: 'https://example.com',
+            policyUri: 'https://example.com',
+            redirectUris: ['https://example.com'],
+            requirePkce: true,
+            tosUri: 'https://example.com',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthClientNewResponse::class, $result);
     }
 
     #[Test]
@@ -71,7 +83,8 @@ final class OAuthClientsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthClientGetResponse::class, $result);
     }
 
     #[Test]
@@ -85,7 +98,8 @@ final class OAuthClientsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OAuthClientUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -95,9 +109,15 @@ final class OAuthClientsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->oauthClients->list();
+        $page = $this->client->oauthClients->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(OAuthClient::class, $item);
+        }
     }
 
     #[Test]
@@ -111,6 +131,7 @@ final class OAuthClientsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

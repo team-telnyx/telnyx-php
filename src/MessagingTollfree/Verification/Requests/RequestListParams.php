@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,24 +13,24 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get a list of previously-submitted tollfree verification requests.
  *
- * @see Telnyx\MessagingTollfree\Verification\Requests->list
+ * @see Telnyx\Services\MessagingTollfree\Verification\RequestsService::list()
  *
- * @phpstan-type request_list_params = array{
+ * @phpstan-type RequestListParamsShape = array{
  *   page: int,
  *   pageSize: int,
- *   dateEnd?: \DateTimeInterface,
- *   dateStart?: \DateTimeInterface,
- *   phoneNumber?: string,
- *   status?: TfVerificationStatus|value-of<TfVerificationStatus>,
+ *   dateEnd?: \DateTimeInterface|null,
+ *   dateStart?: \DateTimeInterface|null,
+ *   phoneNumber?: string|null,
+ *   status?: null|TfVerificationStatus|value-of<TfVerificationStatus>,
  * }
  */
 final class RequestListParams implements BaseModel
 {
-    /** @use SdkModel<request_list_params> */
+    /** @use SdkModel<RequestListParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public int $page;
 
     /**
@@ -37,16 +38,16 @@ final class RequestListParams implements BaseModel
      *
      *         This value is automatically clamped if the provided value is too large.
      */
-    #[Api]
+    #[Required]
     public int $pageSize;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $dateEnd;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $dateStart;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phoneNumber;
 
     /**
@@ -54,7 +55,7 @@ final class RequestListParams implements BaseModel
      *
      * @var value-of<TfVerificationStatus>|null $status
      */
-    #[Api(enum: TfVerificationStatus::class, optional: true)]
+    #[Optional(enum: TfVerificationStatus::class)]
     public ?string $status;
 
     /**
@@ -81,7 +82,7 @@ final class RequestListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TfVerificationStatus|value-of<TfVerificationStatus> $status
+     * @param TfVerificationStatus|value-of<TfVerificationStatus>|null $status
      */
     public static function with(
         int $page,
@@ -91,25 +92,25 @@ final class RequestListParams implements BaseModel
         ?string $phoneNumber = null,
         TfVerificationStatus|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->page = $page;
-        $obj->pageSize = $pageSize;
+        $self['page'] = $page;
+        $self['pageSize'] = $pageSize;
 
-        null !== $dateEnd && $obj->dateEnd = $dateEnd;
-        null !== $dateStart && $obj->dateStart = $dateStart;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $status && $obj['status'] = $status;
+        null !== $dateEnd && $self['dateEnd'] = $dateEnd;
+        null !== $dateStart && $self['dateStart'] = $dateStart;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,34 +120,34 @@ final class RequestListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateEnd(\DateTimeInterface $dateEnd): self
     {
-        $obj = clone $this;
-        $obj->dateEnd = $dateEnd;
+        $self = clone $this;
+        $self['dateEnd'] = $dateEnd;
 
-        return $obj;
+        return $self;
     }
 
     public function withDateStart(\DateTimeInterface $dateStart): self
     {
-        $obj = clone $this;
-        $obj->dateStart = $dateStart;
+        $self = clone $this;
+        $self['dateStart'] = $dateStart;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,9 +157,9 @@ final class RequestListParams implements BaseModel
      */
     public function withStatus(TfVerificationStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

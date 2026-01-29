@@ -11,31 +11,41 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Embeddings\BucketsContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class BucketsService implements BucketsContract
 {
     /**
+     * @api
+     */
+    public BucketsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new BucketsRawService($client);
+    }
 
     /**
      * @api
      *
      * Get all embedded files for a given user bucket, including their processing status.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BucketGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['ai/embeddings/buckets/%1$s', $bucketName],
-            options: $requestOptions,
-            convert: BucketGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($bucketName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -43,18 +53,17 @@ final class BucketsService implements BucketsContract
      *
      * Get all embedding buckets for a user.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BucketListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'ai/embeddings/buckets',
-            options: $requestOptions,
-            convert: BucketListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -62,18 +71,17 @@ final class BucketsService implements BucketsContract
      *
      * Deletes an entire bucket's embeddings and disables the bucket for AI-use, returning it to normal storage pricing.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['ai/embeddings/buckets/%1$s', $bucketName],
-            options: $requestOptions,
-            convert: null,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($bucketName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

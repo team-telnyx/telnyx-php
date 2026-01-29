@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\LedgerBillingGroupReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a ledger billing group report.
  *
- * @see Telnyx\LedgerBillingGroupReports->create
+ * @see Telnyx\Services\LedgerBillingGroupReportsService::create()
  *
- * @phpstan-type ledger_billing_group_report_create_params = array{
- *   month?: int, year?: int
+ * @phpstan-type LedgerBillingGroupReportCreateParamsShape = array{
+ *   month?: int|null, year?: int|null
  * }
  */
 final class LedgerBillingGroupReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<ledger_billing_group_report_create_params> */
+    /** @use SdkModel<LedgerBillingGroupReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Month of the ledger billing group report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $month;
 
     /**
      * Year of the ledger billing group report.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $year;
 
     public function __construct()
@@ -48,12 +48,12 @@ final class LedgerBillingGroupReportCreateParams implements BaseModel
      */
     public static function with(?int $month = null, ?int $year = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $month && $obj->month = $month;
-        null !== $year && $obj->year = $year;
+        null !== $month && $self['month'] = $month;
+        null !== $year && $self['year'] = $year;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -61,10 +61,10 @@ final class LedgerBillingGroupReportCreateParams implements BaseModel
      */
     public function withMonth(int $month): self
     {
-        $obj = clone $this;
-        $obj->month = $month;
+        $self = clone $this;
+        $self['month'] = $month;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,9 +72,9 @@ final class LedgerBillingGroupReportCreateParams implements BaseModel
      */
     public function withYear(int $year): self
     {
-        $obj = clone $this;
-        $obj->year = $year;
+        $self = clone $this;
+        $self['year'] = $year;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,15 +12,15 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the messaging profile and/or messaging product of a phone number.
  *
- * @see Telnyx\PhoneNumbers\Messaging->update
+ * @see Telnyx\Services\PhoneNumbers\MessagingService::update()
  *
- * @phpstan-type messaging_update_params = array{
- *   messagingProduct?: string, messagingProfileID?: string
+ * @phpstan-type MessagingUpdateParamsShape = array{
+ *   messagingProduct?: string|null, messagingProfileID?: string|null
  * }
  */
 final class MessagingUpdateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_update_params> */
+    /** @use SdkModel<MessagingUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -30,7 +30,7 @@ final class MessagingUpdateParams implements BaseModel
      * * Omit this field or set its value to `null` to keep the current value.
      * * Set this field to a quoted product ID to set this phone number to that product
      */
-    #[Api('messaging_product', optional: true)]
+    #[Optional('messaging_product')]
     public ?string $messagingProduct;
 
     /**
@@ -40,7 +40,7 @@ final class MessagingUpdateParams implements BaseModel
      * * Set this field to `""` to unassign the number from its messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign this number to that messaging profile
      */
-    #[Api('messaging_profile_id', optional: true)]
+    #[Optional('messaging_profile_id')]
     public ?string $messagingProfileID;
 
     public function __construct()
@@ -57,12 +57,12 @@ final class MessagingUpdateParams implements BaseModel
         ?string $messagingProduct = null,
         ?string $messagingProfileID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $messagingProduct && $obj->messagingProduct = $messagingProduct;
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
+        null !== $messagingProduct && $self['messagingProduct'] = $messagingProduct;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class MessagingUpdateParams implements BaseModel
      */
     public function withMessagingProduct(string $messagingProduct): self
     {
-        $obj = clone $this;
-        $obj->messagingProduct = $messagingProduct;
+        $self = clone $this;
+        $self['messagingProduct'] = $messagingProduct;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,9 +88,9 @@ final class MessagingUpdateParams implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 }

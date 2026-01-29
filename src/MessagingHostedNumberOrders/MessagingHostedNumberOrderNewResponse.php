@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrder;
 
 /**
- * @phpstan-type messaging_hosted_number_order_new_response = array{
- *   data?: MessagingHostedNumberOrder
+ * @phpstan-import-type MessagingHostedNumberOrderShape from \Telnyx\MessagingHostedNumberOrder
+ *
+ * @phpstan-type MessagingHostedNumberOrderNewResponseShape = array{
+ *   data?: null|MessagingHostedNumberOrder|MessagingHostedNumberOrderShape
  * }
  */
-final class MessagingHostedNumberOrderNewResponse implements BaseModel, ResponseConverter
+final class MessagingHostedNumberOrderNewResponse implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order_new_response> */
+    /** @use SdkModel<MessagingHostedNumberOrderNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?MessagingHostedNumberOrder $data;
 
     public function __construct()
@@ -35,21 +33,27 @@ final class MessagingHostedNumberOrderNewResponse implements BaseModel, Response
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param MessagingHostedNumberOrder|MessagingHostedNumberOrderShape|null $data
      */
-    public static function with(?MessagingHostedNumberOrder $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        MessagingHostedNumberOrder|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(MessagingHostedNumberOrder $data): self
+    /**
+     * @param MessagingHostedNumberOrder|MessagingHostedNumberOrderShape $data
+     */
+    public function withData(MessagingHostedNumberOrder|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

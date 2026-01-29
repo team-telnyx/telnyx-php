@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -30,7 +31,7 @@ final class TextToSpeechTest extends TestCase
     public function testGenerateSpeech(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support audio/mpeg responses");
+            $this->markTestSkipped('Prism doesn\'t support audio/mpeg responses');
         }
 
         $result = $this->client->textToSpeech->generateSpeech(
@@ -38,14 +39,15 @@ final class TextToSpeechTest extends TestCase
             voice: 'voice'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
     public function testGenerateSpeechWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped("Prism doesn't support audio/mpeg responses");
+            $this->markTestSkipped('Prism doesn\'t support audio/mpeg responses');
         }
 
         $result = $this->client->textToSpeech->generateSpeech(
@@ -53,7 +55,8 @@ final class TextToSpeechTest extends TestCase
             voice: 'voice'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -65,6 +68,7 @@ final class TextToSpeechTest extends TestCase
 
         $result = $this->client->textToSpeech->listVoices();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TextToSpeechListVoicesResponse::class, $result);
     }
 }

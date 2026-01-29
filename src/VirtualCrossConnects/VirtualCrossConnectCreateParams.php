@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnects;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,122 +14,122 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
 /**
  * Create a new Virtual Cross Connect.<br /><br />For AWS and GCE, you have the option of creating the primary connection first and the secondary connection later. You also have the option of disabling the primary and/or secondary connections at any time and later re-enabling them. With Azure, you do not have this option. Azure requires both the primary and secondary connections to be created at the same time and they can not be independantly disabled.
  *
- * @see Telnyx\VirtualCrossConnects->create
+ * @see Telnyx\Services\VirtualCrossConnectsService::create()
  *
- * @phpstan-type virtual_cross_connect_create_params = array{
- *   bgpAsn: float,
- *   cloudProvider: CloudProvider|value-of<CloudProvider>,
- *   cloudProviderRegion: string,
- *   networkID: string,
- *   primaryCloudAccountID: string,
+ * @phpstan-type VirtualCrossConnectCreateParamsShape = array{
  *   regionCode: string,
- *   bandwidthMbps?: float,
- *   name?: string,
- *   primaryBgpKey?: string,
- *   primaryCloudIP?: string,
- *   primaryTelnyxIP?: string,
- *   secondaryBgpKey?: string,
- *   secondaryCloudAccountID?: string,
- *   secondaryCloudIP?: string,
- *   secondaryTelnyxIP?: string,
+ *   bandwidthMbps?: float|null,
+ *   bgpAsn?: float|null,
+ *   cloudProvider?: null|CloudProvider|value-of<CloudProvider>,
+ *   cloudProviderRegion?: string|null,
+ *   name?: string|null,
+ *   networkID?: string|null,
+ *   primaryBgpKey?: string|null,
+ *   primaryCloudAccountID?: string|null,
+ *   primaryCloudIP?: string|null,
+ *   primaryTelnyxIP?: string|null,
+ *   secondaryBgpKey?: string|null,
+ *   secondaryCloudAccountID?: string|null,
+ *   secondaryCloudIP?: string|null,
+ *   secondaryTelnyxIP?: string|null,
  * }
  */
 final class VirtualCrossConnectCreateParams implements BaseModel
 {
-    /** @use SdkModel<virtual_cross_connect_create_params> */
+    /** @use SdkModel<VirtualCrossConnectCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
-     * The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
-     */
-    #[Api('bgp_asn')]
-    public float $bgpAsn;
-
-    /**
-     * The Virtual Private Cloud with which you would like to establish a cross connect.
-     *
-     * @var value-of<CloudProvider> $cloudProvider
-     */
-    #[Api('cloud_provider', enum: CloudProvider::class)]
-    public string $cloudProvider;
-
-    /**
-     * The region where your Virtual Private Cloud hosts are located.<br /><br />The available regions can be found using the /virtual_cross_connect_regions endpoint.
-     */
-    #[Api('cloud_provider_region')]
-    public string $cloudProviderRegion;
-
-    /**
-     * The id of the network associated with the interface.
-     */
-    #[Api('network_id')]
-    public string $networkID;
-
-    /**
-     * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.
-     */
-    #[Api('primary_cloud_account_id')]
-    public string $primaryCloudAccountID;
-
-    /**
      * The region the interface should be deployed to.
      */
-    #[Api('region_code')]
+    #[Required('region_code')]
     public string $regionCode;
 
     /**
      * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
      */
-    #[Api('bandwidth_mbps', optional: true)]
+    #[Optional('bandwidth_mbps')]
     public ?float $bandwidthMbps;
+
+    /**
+     * The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
+     */
+    #[Optional('bgp_asn')]
+    public ?float $bgpAsn;
+
+    /**
+     * The Virtual Private Cloud with which you would like to establish a cross connect.
+     *
+     * @var value-of<CloudProvider>|null $cloudProvider
+     */
+    #[Optional('cloud_provider', enum: CloudProvider::class)]
+    public ?string $cloudProvider;
+
+    /**
+     * The region where your Virtual Private Cloud hosts are located.<br /><br />The available regions can be found using the /virtual_cross_connect_regions endpoint.
+     */
+    #[Optional('cloud_provider_region')]
+    public ?string $cloudProviderRegion;
 
     /**
      * A user specified name for the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
+
+    /**
+     * The id of the network associated with the interface.
+     */
+    #[Optional('network_id')]
+    public ?string $networkID;
 
     /**
      * The authentication key for BGP peer configuration.
      */
-    #[Api('primary_bgp_key', optional: true)]
+    #[Optional('primary_bgp_key')]
     public ?string $primaryBgpKey;
+
+    /**
+     * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.
+     */
+    #[Optional('primary_cloud_account_id')]
+    public ?string $primaryCloudAccountID;
 
     /**
      * The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api('primary_cloud_ip', optional: true)]
+    #[Optional('primary_cloud_ip')]
     public ?string $primaryCloudIP;
 
     /**
      * The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api('primary_telnyx_ip', optional: true)]
+    #[Optional('primary_telnyx_ip')]
     public ?string $primaryTelnyxIP;
 
     /**
      * The authentication key for BGP peer configuration.
      */
-    #[Api('secondary_bgp_key', optional: true)]
+    #[Optional('secondary_bgp_key')]
     public ?string $secondaryBgpKey;
 
     /**
      * The identifier for your Virtual Private Cloud. The number will be different based upon your Cloud provider.<br /><br />This attribute is only necessary for GCE.
      */
-    #[Api('secondary_cloud_account_id', optional: true)]
+    #[Optional('secondary_cloud_account_id')]
     public ?string $secondaryCloudAccountID;
 
     /**
      * The IP address assigned for your side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api('secondary_cloud_ip', optional: true)]
+    #[Optional('secondary_cloud_ip')]
     public ?string $secondaryCloudIP;
 
     /**
      * The IP address assigned to the Telnyx side of the Virtual Cross Connect.<br /><br />If none is provided, one will be generated for you.<br /><br />This value should be null for GCE as Google will only inform you of your assigned IP once the connection has been accepted.
      */
-    #[Api('secondary_telnyx_ip', optional: true)]
+    #[Optional('secondary_telnyx_ip')]
     public ?string $secondaryTelnyxIP;
 
     /**
@@ -136,26 +137,13 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * VirtualCrossConnectCreateParams::with(
-     *   bgpAsn: ...,
-     *   cloudProvider: ...,
-     *   cloudProviderRegion: ...,
-     *   networkID: ...,
-     *   primaryCloudAccountID: ...,
-     *   regionCode: ...,
-     * )
+     * VirtualCrossConnectCreateParams::with(regionCode: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new VirtualCrossConnectCreateParams)
-     *   ->withBgpAsn(...)
-     *   ->withCloudProvider(...)
-     *   ->withCloudProviderRegion(...)
-     *   ->withNetworkID(...)
-     *   ->withPrimaryCloudAccountID(...)
-     *   ->withRegionCode(...)
+     * (new VirtualCrossConnectCreateParams)->withRegionCode(...)
      * ```
      */
     public function __construct()
@@ -168,18 +156,18 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CloudProvider|value-of<CloudProvider> $cloudProvider
+     * @param CloudProvider|value-of<CloudProvider>|null $cloudProvider
      */
     public static function with(
-        float $bgpAsn,
-        CloudProvider|string $cloudProvider,
-        string $cloudProviderRegion,
-        string $networkID,
-        string $primaryCloudAccountID,
         string $regionCode,
         ?float $bandwidthMbps = null,
+        ?float $bgpAsn = null,
+        CloudProvider|string|null $cloudProvider = null,
+        ?string $cloudProviderRegion = null,
         ?string $name = null,
+        ?string $networkID = null,
         ?string $primaryBgpKey = null,
+        ?string $primaryCloudAccountID = null,
         ?string $primaryCloudIP = null,
         ?string $primaryTelnyxIP = null,
         ?string $secondaryBgpKey = null,
@@ -187,26 +175,48 @@ final class VirtualCrossConnectCreateParams implements BaseModel
         ?string $secondaryCloudIP = null,
         ?string $secondaryTelnyxIP = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->bgpAsn = $bgpAsn;
-        $obj['cloudProvider'] = $cloudProvider;
-        $obj->cloudProviderRegion = $cloudProviderRegion;
-        $obj->networkID = $networkID;
-        $obj->primaryCloudAccountID = $primaryCloudAccountID;
-        $obj->regionCode = $regionCode;
+        $self['regionCode'] = $regionCode;
 
-        null !== $bandwidthMbps && $obj->bandwidthMbps = $bandwidthMbps;
-        null !== $name && $obj->name = $name;
-        null !== $primaryBgpKey && $obj->primaryBgpKey = $primaryBgpKey;
-        null !== $primaryCloudIP && $obj->primaryCloudIP = $primaryCloudIP;
-        null !== $primaryTelnyxIP && $obj->primaryTelnyxIP = $primaryTelnyxIP;
-        null !== $secondaryBgpKey && $obj->secondaryBgpKey = $secondaryBgpKey;
-        null !== $secondaryCloudAccountID && $obj->secondaryCloudAccountID = $secondaryCloudAccountID;
-        null !== $secondaryCloudIP && $obj->secondaryCloudIP = $secondaryCloudIP;
-        null !== $secondaryTelnyxIP && $obj->secondaryTelnyxIP = $secondaryTelnyxIP;
+        null !== $bandwidthMbps && $self['bandwidthMbps'] = $bandwidthMbps;
+        null !== $bgpAsn && $self['bgpAsn'] = $bgpAsn;
+        null !== $cloudProvider && $self['cloudProvider'] = $cloudProvider;
+        null !== $cloudProviderRegion && $self['cloudProviderRegion'] = $cloudProviderRegion;
+        null !== $name && $self['name'] = $name;
+        null !== $networkID && $self['networkID'] = $networkID;
+        null !== $primaryBgpKey && $self['primaryBgpKey'] = $primaryBgpKey;
+        null !== $primaryCloudAccountID && $self['primaryCloudAccountID'] = $primaryCloudAccountID;
+        null !== $primaryCloudIP && $self['primaryCloudIP'] = $primaryCloudIP;
+        null !== $primaryTelnyxIP && $self['primaryTelnyxIP'] = $primaryTelnyxIP;
+        null !== $secondaryBgpKey && $self['secondaryBgpKey'] = $secondaryBgpKey;
+        null !== $secondaryCloudAccountID && $self['secondaryCloudAccountID'] = $secondaryCloudAccountID;
+        null !== $secondaryCloudIP && $self['secondaryCloudIP'] = $secondaryCloudIP;
+        null !== $secondaryTelnyxIP && $self['secondaryTelnyxIP'] = $secondaryTelnyxIP;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The region the interface should be deployed to.
+     */
+    public function withRegionCode(string $regionCode): self
+    {
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
+
+        return $self;
+    }
+
+    /**
+     * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
+     */
+    public function withBandwidthMbps(float $bandwidthMbps): self
+    {
+        $self = clone $this;
+        $self['bandwidthMbps'] = $bandwidthMbps;
+
+        return $self;
     }
 
     /**
@@ -214,10 +224,10 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      */
     public function withBgpAsn(float $bgpAsn): self
     {
-        $obj = clone $this;
-        $obj->bgpAsn = $bgpAsn;
+        $self = clone $this;
+        $self['bgpAsn'] = $bgpAsn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -227,10 +237,10 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      */
     public function withCloudProvider(CloudProvider|string $cloudProvider): self
     {
-        $obj = clone $this;
-        $obj['cloudProvider'] = $cloudProvider;
+        $self = clone $this;
+        $self['cloudProvider'] = $cloudProvider;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -238,10 +248,21 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      */
     public function withCloudProviderRegion(string $cloudProviderRegion): self
     {
-        $obj = clone $this;
-        $obj->cloudProviderRegion = $cloudProviderRegion;
+        $self = clone $this;
+        $self['cloudProviderRegion'] = $cloudProviderRegion;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * A user specified name for the interface.
+     */
+    public function withName(string $name): self
+    {
+        $self = clone $this;
+        $self['name'] = $name;
+
+        return $self;
     }
 
     /**
@@ -249,10 +270,21 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      */
     public function withNetworkID(string $networkID): self
     {
-        $obj = clone $this;
-        $obj->networkID = $networkID;
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * The authentication key for BGP peer configuration.
+     */
+    public function withPrimaryBgpKey(string $primaryBgpKey): self
+    {
+        $self = clone $this;
+        $self['primaryBgpKey'] = $primaryBgpKey;
+
+        return $self;
     }
 
     /**
@@ -261,54 +293,10 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withPrimaryCloudAccountID(
         string $primaryCloudAccountID
     ): self {
-        $obj = clone $this;
-        $obj->primaryCloudAccountID = $primaryCloudAccountID;
+        $self = clone $this;
+        $self['primaryCloudAccountID'] = $primaryCloudAccountID;
 
-        return $obj;
-    }
-
-    /**
-     * The region the interface should be deployed to.
-     */
-    public function withRegionCode(string $regionCode): self
-    {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
-
-        return $obj;
-    }
-
-    /**
-     * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
-     */
-    public function withBandwidthMbps(float $bandwidthMbps): self
-    {
-        $obj = clone $this;
-        $obj->bandwidthMbps = $bandwidthMbps;
-
-        return $obj;
-    }
-
-    /**
-     * A user specified name for the interface.
-     */
-    public function withName(string $name): self
-    {
-        $obj = clone $this;
-        $obj->name = $name;
-
-        return $obj;
-    }
-
-    /**
-     * The authentication key for BGP peer configuration.
-     */
-    public function withPrimaryBgpKey(string $primaryBgpKey): self
-    {
-        $obj = clone $this;
-        $obj->primaryBgpKey = $primaryBgpKey;
-
-        return $obj;
+        return $self;
     }
 
     /**
@@ -316,10 +304,10 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      */
     public function withPrimaryCloudIP(string $primaryCloudIP): self
     {
-        $obj = clone $this;
-        $obj->primaryCloudIP = $primaryCloudIP;
+        $self = clone $this;
+        $self['primaryCloudIP'] = $primaryCloudIP;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -327,10 +315,10 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      */
     public function withPrimaryTelnyxIP(string $primaryTelnyxIP): self
     {
-        $obj = clone $this;
-        $obj->primaryTelnyxIP = $primaryTelnyxIP;
+        $self = clone $this;
+        $self['primaryTelnyxIP'] = $primaryTelnyxIP;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -338,10 +326,10 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      */
     public function withSecondaryBgpKey(string $secondaryBgpKey): self
     {
-        $obj = clone $this;
-        $obj->secondaryBgpKey = $secondaryBgpKey;
+        $self = clone $this;
+        $self['secondaryBgpKey'] = $secondaryBgpKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -350,10 +338,10 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     public function withSecondaryCloudAccountID(
         string $secondaryCloudAccountID
     ): self {
-        $obj = clone $this;
-        $obj->secondaryCloudAccountID = $secondaryCloudAccountID;
+        $self = clone $this;
+        $self['secondaryCloudAccountID'] = $secondaryCloudAccountID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -361,10 +349,10 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      */
     public function withSecondaryCloudIP(string $secondaryCloudIP): self
     {
-        $obj = clone $this;
-        $obj->secondaryCloudIP = $secondaryCloudIP;
+        $self = clone $this;
+        $self['secondaryCloudIP'] = $secondaryCloudIP;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -372,9 +360,9 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      */
     public function withSecondaryTelnyxIP(string $secondaryTelnyxIP): self
     {
-        $obj = clone $this;
-        $obj->secondaryTelnyxIP = $secondaryTelnyxIP;
+        $self = clone $this;
+        $self['secondaryTelnyxIP'] = $secondaryTelnyxIP;
 
-        return $obj;
+        return $self;
     }
 }

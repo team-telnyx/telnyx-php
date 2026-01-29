@@ -4,23 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type upload_get_response = array{data?: Upload}
+ * @phpstan-import-type UploadShape from \Telnyx\ExternalConnections\Uploads\Upload
+ *
+ * @phpstan-type UploadGetResponseShape = array{data?: null|Upload|UploadShape}
  */
-final class UploadGetResponse implements BaseModel, ResponseConverter
+final class UploadGetResponse implements BaseModel
 {
-    /** @use SdkModel<upload_get_response> */
+    /** @use SdkModel<UploadGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?Upload $data;
 
     public function __construct()
@@ -32,21 +30,26 @@ final class UploadGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Upload|UploadShape|null $data
      */
-    public static function with(?Upload $data = null): self
+    public static function with(Upload|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Upload $data): self
+    /**
+     * @param Upload|UploadShape $data
+     */
+    public function withData(Upload|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

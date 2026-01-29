@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\ByPhoneNumber\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Verify verification code by phone number.
  *
- * @see Telnyx\Verifications\ByPhoneNumber\Actions->verify
+ * @see Telnyx\Services\Verifications\ByPhoneNumber\ActionsService::verify()
  *
- * @phpstan-type action_verify_params = array{
+ * @phpstan-type ActionVerifyParamsShape = array{
  *   code: string, verifyProfileID: string
  * }
  */
 final class ActionVerifyParams implements BaseModel
 {
-    /** @use SdkModel<action_verify_params> */
+    /** @use SdkModel<ActionVerifyParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * This is the code the user submits for verification.
      */
-    #[Api]
+    #[Required]
     public string $code;
 
     /**
      * The identifier of the associated Verify profile.
      */
-    #[Api('verify_profile_id')]
+    #[Required('verify_profile_id')]
     public string $verifyProfileID;
 
     /**
@@ -62,12 +62,12 @@ final class ActionVerifyParams implements BaseModel
      */
     public static function with(string $code, string $verifyProfileID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->code = $code;
-        $obj->verifyProfileID = $verifyProfileID;
+        $self['code'] = $code;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class ActionVerifyParams implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class ActionVerifyParams implements BaseModel
      */
     public function withVerifyProfileID(string $verifyProfileID): self
     {
-        $obj = clone $this;
-        $obj->verifyProfileID = $verifyProfileID;
+        $self = clone $this;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 }

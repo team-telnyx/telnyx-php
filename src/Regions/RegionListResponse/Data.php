@@ -4,47 +4,47 @@ declare(strict_types=1);
 
 namespace Telnyx\Regions\RegionListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   code?: string,
- *   createdAt?: string,
- *   name?: string,
- *   recordType?: string,
- *   supportedInterfaces?: list<string>,
- *   updatedAt?: string,
+ * @phpstan-type DataShape = array{
+ *   code?: string|null,
+ *   createdAt?: string|null,
+ *   name?: string|null,
+ *   recordType?: string|null,
+ *   supportedInterfaces?: list<string>|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * A code for the region.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * A name for the region.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -52,13 +52,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $supportedInterfaces
      */
-    #[Api('supported_interfaces', list: 'string', optional: true)]
+    #[Optional('supported_interfaces', list: 'string')]
     public ?array $supportedInterfaces;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     public function __construct()
@@ -71,7 +71,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $supportedInterfaces
+     * @param list<string>|null $supportedInterfaces
      */
     public static function with(
         ?string $code = null,
@@ -81,16 +81,16 @@ final class Data implements BaseModel
         ?array $supportedInterfaces = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $name && $obj->name = $name;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $supportedInterfaces && $obj->supportedInterfaces = $supportedInterfaces;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $code && $self['code'] = $code;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $name && $self['name'] = $name;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $supportedInterfaces && $self['supportedInterfaces'] = $supportedInterfaces;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Data implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class Data implements BaseModel
      */
     public function withSupportedInterfaces(array $supportedInterfaces): self
     {
-        $obj = clone $this;
-        $obj->supportedInterfaces = $supportedInterfaces;
+        $self = clone $this;
+        $self['supportedInterfaces'] = $supportedInterfaces;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,9 +155,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

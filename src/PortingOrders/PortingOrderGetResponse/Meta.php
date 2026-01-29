@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{phoneNumbersURL?: string}
+ * @phpstan-type MetaShape = array{phoneNumbersURL?: string|null}
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
     /**
      * Link to list all phone numbers.
      */
-    #[Api('phone_numbers_url', optional: true)]
+    #[Optional('phone_numbers_url')]
     public ?string $phoneNumbersURL;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class Meta implements BaseModel
      */
     public static function with(?string $phoneNumbersURL = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $phoneNumbersURL && $obj->phoneNumbersURL = $phoneNumbersURL;
+        null !== $phoneNumbersURL && $self['phoneNumbersURL'] = $phoneNumbersURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Meta implements BaseModel
      */
     public function withPhoneNumbersURL(string $phoneNumbersURL): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbersURL = $phoneNumbersURL;
+        $self = clone $this;
+        $self['phoneNumbersURL'] = $phoneNumbersURL;
 
-        return $obj;
+        return $self;
     }
 }

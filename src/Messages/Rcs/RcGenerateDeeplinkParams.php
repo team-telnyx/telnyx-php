@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\Rcs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Generate a deeplink URL that can be used to start an RCS conversation with a specific agent.
  *
- * @see Telnyx\Messages\Rcs->generateDeeplink
+ * @see Telnyx\Services\Messages\RcsService::generateDeeplink()
  *
- * @phpstan-type rc_generate_deeplink_params = array{
- *   body?: string, phoneNumber?: string
+ * @phpstan-type RcGenerateDeeplinkParamsShape = array{
+ *   body?: string|null, phoneNumber?: string|null
  * }
  */
 final class RcGenerateDeeplinkParams implements BaseModel
 {
-    /** @use SdkModel<rc_generate_deeplink_params> */
+    /** @use SdkModel<RcGenerateDeeplinkParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Pre-filled message body (URL encoded).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
     /**
      * Phone number in E164 format (URL encoded).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $phoneNumber;
 
     public function __construct()
@@ -50,12 +50,12 @@ final class RcGenerateDeeplinkParams implements BaseModel
         ?string $body = null,
         ?string $phoneNumber = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $body && $obj->body = $body;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $body && $self['body'] = $body;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,10 +63,10 @@ final class RcGenerateDeeplinkParams implements BaseModel
      */
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj->body = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class RcGenerateDeeplinkParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

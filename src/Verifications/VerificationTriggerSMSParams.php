@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,43 +13,43 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Trigger SMS verification.
  *
- * @see Telnyx\Verifications->triggerSMS
+ * @see Telnyx\Services\VerificationsService::triggerSMS()
  *
- * @phpstan-type verification_trigger_sms_params = array{
+ * @phpstan-type VerificationTriggerSMSParamsShape = array{
  *   phoneNumber: string,
  *   verifyProfileID: string,
  *   customCode?: string|null,
- *   timeoutSecs?: int,
+ *   timeoutSecs?: int|null,
  * }
  */
 final class VerificationTriggerSMSParams implements BaseModel
 {
-    /** @use SdkModel<verification_trigger_sms_params> */
+    /** @use SdkModel<VerificationTriggerSMSParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * +E164 formatted phone number.
      */
-    #[Api('phone_number')]
+    #[Required('phone_number')]
     public string $phoneNumber;
 
     /**
      * The identifier of the associated Verify profile.
      */
-    #[Api('verify_profile_id')]
+    #[Required('verify_profile_id')]
     public string $verifyProfileID;
 
     /**
      * Send a self-generated numeric code to the end-user.
      */
-    #[Api('custom_code', nullable: true, optional: true)]
+    #[Optional('custom_code', nullable: true)]
     public ?string $customCode;
 
     /**
      * The number of seconds the verification code is valid for.
      */
-    #[Api('timeout_secs', optional: true)]
+    #[Optional('timeout_secs')]
     public ?int $timeoutSecs;
 
     /**
@@ -83,15 +84,15 @@ final class VerificationTriggerSMSParams implements BaseModel
         ?string $customCode = null,
         ?int $timeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumber = $phoneNumber;
-        $obj->verifyProfileID = $verifyProfileID;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        null !== $customCode && $obj->customCode = $customCode;
-        null !== $timeoutSecs && $obj->timeoutSecs = $timeoutSecs;
+        null !== $customCode && $self['customCode'] = $customCode;
+        null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +100,10 @@ final class VerificationTriggerSMSParams implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +111,10 @@ final class VerificationTriggerSMSParams implements BaseModel
      */
     public function withVerifyProfileID(string $verifyProfileID): self
     {
-        $obj = clone $this;
-        $obj->verifyProfileID = $verifyProfileID;
+        $self = clone $this;
+        $self['verifyProfileID'] = $verifyProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +122,10 @@ final class VerificationTriggerSMSParams implements BaseModel
      */
     public function withCustomCode(?string $customCode): self
     {
-        $obj = clone $this;
-        $obj->customCode = $customCode;
+        $self = clone $this;
+        $self['customCode'] = $customCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,9 +133,9 @@ final class VerificationTriggerSMSParams implements BaseModel
      */
     public function withTimeoutSecs(int $timeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->timeoutSecs = $timeoutSecs;
+        $self = clone $this;
+        $self['timeoutSecs'] = $timeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

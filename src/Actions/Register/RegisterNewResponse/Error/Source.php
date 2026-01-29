@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\Actions\Register\RegisterNewResponse\Error;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type source_alias = array{parameter?: string, pointer?: string}
+ * @phpstan-type SourceShape = array{
+ *   parameter?: string|null, pointer?: string|null
+ * }
  */
 final class Source implements BaseModel
 {
-    /** @use SdkModel<source_alias> */
+    /** @use SdkModel<SourceShape> */
     use SdkModel;
 
     /**
      * Indicates which query parameter caused the error.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $parameter;
 
     /**
      * JSON pointer (RFC6901) to the offending entity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pointer;
 
     public function __construct()
@@ -42,12 +44,12 @@ final class Source implements BaseModel
         ?string $parameter = null,
         ?string $pointer = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $parameter && $obj->parameter = $parameter;
-        null !== $pointer && $obj->pointer = $pointer;
+        null !== $parameter && $self['parameter'] = $parameter;
+        null !== $pointer && $self['pointer'] = $pointer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +57,10 @@ final class Source implements BaseModel
      */
     public function withParameter(string $parameter): self
     {
-        $obj = clone $this;
-        $obj->parameter = $parameter;
+        $self = clone $this;
+        $self['parameter'] = $parameter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class Source implements BaseModel
      */
     public function withPointer(string $pointer): self
     {
-        $obj = clone $this;
-        $obj->pointer = $pointer;
+        $self = clone $this;
+        $self['pointer'] = $pointer;
 
-        return $obj;
+        return $self;
     }
 }

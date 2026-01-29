@@ -14,30 +14,40 @@ use Telnyx\Messages\MessageSendLongCodeResponse;
 use Telnyx\Messages\MessageSendNumberPoolResponse;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
+use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
+use Telnyx\Messages\MessageSendWhatsappResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type WhatsappMessageShape from \Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagesContract
 {
     /**
      * @api
      *
+     * @param string $id The id of the message
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessageGetResponse;
 
     /**
      * @api
      *
+     * @param string $id The id of the message to cancel
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function cancelScheduled(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessageCancelScheduledResponse;
 
     /**
@@ -63,35 +73,24 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function schedule(
-        $to,
-        $autoDetect = omit,
-        $from = omit,
-        $mediaURLs = omit,
-        $messagingProfileID = omit,
-        $sendAt = omit,
-        $subject = omit,
-        $text = omit,
-        $type = omit,
-        $useProfileWebhooks = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MessageScheduleResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function scheduleRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $to,
+        bool $autoDetect = false,
+        ?string $from = null,
+        ?array $mediaURLs = null,
+        ?string $messagingProfileID = null,
+        ?\DateTimeInterface $sendAt = null,
+        ?string $subject = null,
+        ?string $text = null,
+        Type|string|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessageScheduleResponse;
 
     /**
@@ -117,35 +116,24 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function send(
-        $to,
-        $autoDetect = omit,
-        $from = omit,
-        $mediaURLs = omit,
-        $messagingProfileID = omit,
-        $sendAt = omit,
-        $subject = omit,
-        $text = omit,
-        $type = omit,
-        $useProfileWebhooks = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MessageSendResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function sendRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $to,
+        bool $autoDetect = false,
+        ?string $from = null,
+        ?array $mediaURLs = null,
+        ?string $messagingProfileID = null,
+        ?\DateTimeInterface $sendAt = null,
+        ?string $subject = null,
+        ?string $text = null,
+        \Telnyx\Messages\MessageSendParams\Type|string|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessageSendResponse;
 
     /**
@@ -159,31 +147,20 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function sendGroupMms(
-        $from,
-        $to,
-        $mediaURLs = omit,
-        $subject = omit,
-        $text = omit,
-        $useProfileWebhooks = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MessageSendGroupMmsResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function sendGroupMmsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $from,
+        array $to,
+        ?array $mediaURLs = null,
+        ?string $subject = null,
+        ?string $text = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessageSendGroupMmsResponse;
 
     /**
@@ -203,33 +180,22 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function sendLongCode(
-        $from,
-        $to,
-        $autoDetect = omit,
-        $mediaURLs = omit,
-        $subject = omit,
-        $text = omit,
-        $type = omit,
-        $useProfileWebhooks = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MessageSendLongCodeResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function sendLongCodeRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $from,
+        string $to,
+        bool $autoDetect = false,
+        ?array $mediaURLs = null,
+        ?string $subject = null,
+        ?string $text = null,
+        \Telnyx\Messages\MessageSendLongCodeParams\Type|string|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessageSendLongCodeResponse;
 
     /**
@@ -249,33 +215,22 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function sendNumberPool(
-        $messagingProfileID,
-        $to,
-        $autoDetect = omit,
-        $mediaURLs = omit,
-        $subject = omit,
-        $text = omit,
-        $type = omit,
-        $useProfileWebhooks = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MessageSendNumberPoolResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function sendNumberPoolRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $messagingProfileID,
+        string $to,
+        bool $autoDetect = false,
+        ?array $mediaURLs = null,
+        ?string $subject = null,
+        ?string $text = null,
+        \Telnyx\Messages\MessageSendNumberPoolParams\Type|string|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessageSendNumberPoolResponse;
 
     /**
@@ -295,32 +250,42 @@ interface MessagesContract
      * @param bool $useProfileWebhooks If the profile this number is associated with has webhooks, use them for delivery notifications. If webhooks are also specified on the message itself, they will be attempted first, then those on the profile.
      * @param string $webhookFailoverURL the failover URL where webhooks related to this message will be sent if sending to the primary URL fails
      * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function sendShortCode(
-        $from,
-        $to,
-        $autoDetect = omit,
-        $mediaURLs = omit,
-        $subject = omit,
-        $text = omit,
-        $type = omit,
-        $useProfileWebhooks = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
+        string $from,
+        string $to,
+        bool $autoDetect = false,
+        ?array $mediaURLs = null,
+        ?string $subject = null,
+        ?string $text = null,
+        \Telnyx\Messages\MessageSendShortCodeParams\Type|string|null $type = null,
+        bool $useProfileWebhooks = true,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessageSendShortCodeResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * @param string $from Phone number in +E.164 format associated with Whatsapp account
+     * @param string $to Phone number in +E.164 format
+     * @param WhatsappMessage|WhatsappMessageShape $whatsappMessage
+     * @param \Telnyx\Messages\MessageSendWhatsappParams\Type|value-of<\Telnyx\Messages\MessageSendWhatsappParams\Type> $type Message type - must be set to "WHATSAPP"
+     * @param string $webhookURL the URL where webhooks related to this message will be sent
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function sendShortCodeRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MessageSendShortCodeResponse;
+    public function sendWhatsapp(
+        string $from,
+        string $to,
+        WhatsappMessage|array $whatsappMessage,
+        \Telnyx\Messages\MessageSendWhatsappParams\Type|string|null $type = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): MessageSendWhatsappResponse;
 }

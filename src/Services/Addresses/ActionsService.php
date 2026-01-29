@@ -4,68 +4,54 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Addresses;
 
-use Telnyx\Addresses\Actions\ActionAcceptSuggestionsParams;
 use Telnyx\Addresses\Actions\ActionAcceptSuggestionsResponse;
-use Telnyx\Addresses\Actions\ActionValidateParams;
 use Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Addresses\ActionsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Accepts this address suggestion as a new emergency address for Operator Connect and finishes the uploads of the numbers associated with it to Microsoft.
      *
-     * @param string $id1 the ID of the address
+     * @param string $addressUuid the UUID of the address that should be accepted
+     * @param string $id the ID of the address
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function acceptSuggestions(
-        string $id,
-        $id1 = omit,
-        ?RequestOptions $requestOptions = null
+        string $addressUuid,
+        ?string $id = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionAcceptSuggestionsResponse {
-        $params = ['id' => $id1];
+        $params = Util::removeNulls(['id' => $id]);
 
-        return $this->acceptSuggestionsRaw($id, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->acceptSuggestions($addressUuid, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function acceptSuggestionsRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionAcceptSuggestionsResponse {
-        [$parsed, $options] = ActionAcceptSuggestionsParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['addresses/%1$s/actions/accept_suggestions', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionAcceptSuggestionsResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -79,53 +65,33 @@ final class ActionsService implements ActionsContract
      * @param string $administrativeArea The locality of the address. For US addresses, this corresponds to the state of the address.
      * @param string $extendedAddress additional street address information about the address such as, but not limited to, unit number or apartment number
      * @param string $locality The locality of the address. For US addresses, this corresponds to the city of the address.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function validate(
-        $countryCode,
-        $postalCode,
-        $streetAddress,
-        $administrativeArea = omit,
-        $extendedAddress = omit,
-        $locality = omit,
-        ?RequestOptions $requestOptions = null,
+        string $countryCode,
+        string $postalCode,
+        string $streetAddress,
+        ?string $administrativeArea = null,
+        ?string $extendedAddress = null,
+        ?string $locality = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionValidateResponse {
-        $params = [
-            'countryCode' => $countryCode,
-            'postalCode' => $postalCode,
-            'streetAddress' => $streetAddress,
-            'administrativeArea' => $administrativeArea,
-            'extendedAddress' => $extendedAddress,
-            'locality' => $locality,
-        ];
-
-        return $this->validateRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function validateRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ActionValidateResponse {
-        [$parsed, $options] = ActionValidateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'countryCode' => $countryCode,
+                'postalCode' => $postalCode,
+                'streetAddress' => $streetAddress,
+                'administrativeArea' => $administrativeArea,
+                'extendedAddress' => $extendedAddress,
+                'locality' => $locality,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'addresses/actions/validate',
-            body: (object) $parsed,
-            options: $options,
-            convert: ActionValidateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->validate(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

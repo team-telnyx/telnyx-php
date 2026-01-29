@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingNumbersBulkUpdates;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Update the messaging profile of multiple phone numbers.
+ * Bulk update phone number profiles.
  *
- * @see Telnyx\MessagingNumbersBulkUpdates->create
+ * @see Telnyx\Services\MessagingNumbersBulkUpdatesService::create()
  *
- * @phpstan-type messaging_numbers_bulk_update_create_params = array{
+ * @phpstan-type MessagingNumbersBulkUpdateCreateParamsShape = array{
  *   messagingProfileID: string, numbers: list<string>
  * }
  */
 final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
 {
-    /** @use SdkModel<messaging_numbers_bulk_update_create_params> */
+    /** @use SdkModel<MessagingNumbersBulkUpdateCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -30,7 +30,7 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      * * Set this field to `""` to unassign each number from their respective messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign these numbers to that messaging profile
      */
-    #[Api('messaging_profile_id')]
+    #[Required('messaging_profile_id')]
     public string $messagingProfileID;
 
     /**
@@ -38,7 +38,7 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      *
      * @var list<string> $numbers
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $numbers;
 
     /**
@@ -75,12 +75,12 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
         string $messagingProfileID,
         array $numbers
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->messagingProfileID = $messagingProfileID;
-        $obj->numbers = $numbers;
+        $self['messagingProfileID'] = $messagingProfileID;
+        $self['numbers'] = $numbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,9 +104,9 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      */
     public function withNumbers(array $numbers): self
     {
-        $obj = clone $this;
-        $obj->numbers = $numbers;
+        $self = clone $this;
+        $self['numbers'] = $numbers;
 
-        return $obj;
+        return $self;
     }
 }

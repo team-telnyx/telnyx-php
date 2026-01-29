@@ -5,38 +5,39 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool;
 
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type sip_refer_tool = array{refer: Refer, type: value-of<Type>}
+ * @phpstan-import-type ReferShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer
+ *
+ * @phpstan-type SipReferToolShape = array{refer: Refer|ReferShape, type: 'refer'}
  */
 final class SipReferTool implements BaseModel
 {
-    /** @use SdkModel<sip_refer_tool> */
+    /** @use SdkModel<SipReferToolShape> */
     use SdkModel;
 
-    #[Api]
-    public Refer $refer;
+    /** @var 'refer' $type */
+    #[Required]
+    public string $type = 'refer';
 
-    /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
-    public string $type;
+    #[Required]
+    public Refer $refer;
 
     /**
      * `new SipReferTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * SipReferTool::with(refer: ..., type: ...)
+     * SipReferTool::with(refer: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new SipReferTool)->withRefer(...)->withType(...)
+     * (new SipReferTool)->withRefer(...)
      * ```
      */
     public function __construct()
@@ -49,34 +50,25 @@ final class SipReferTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param Refer|ReferShape $refer
      */
-    public static function with(Refer $refer, Type|string $type): self
+    public static function with(Refer|array $refer): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->refer = $refer;
-        $obj['type'] = $type;
+        $self['refer'] = $refer;
 
-        return $obj;
-    }
-
-    public function withRefer(Refer $refer): self
-    {
-        $obj = clone $this;
-        $obj->refer = $refer;
-
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param Type|value-of<Type> $type
+     * @param Refer|ReferShape $refer
      */
-    public function withType(Type|string $type): self
+    public function withRefer(Refer|array $refer): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['refer'] = $refer;
 
-        return $obj;
+        return $self;
     }
 }

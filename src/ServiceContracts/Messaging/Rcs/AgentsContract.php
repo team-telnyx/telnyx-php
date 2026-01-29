@@ -5,76 +5,62 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Messaging\Rcs;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultPagination;
 use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
-use Telnyx\Messaging\Rcs\Agents\AgentListResponse;
+use Telnyx\RcsAgents\RcsAgent;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type PageShape from \Telnyx\Messaging\Rcs\Agents\AgentListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface AgentsContract
 {
     /**
      * @api
      *
+     * @param string $id RCS agent ID
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): RcsAgentResponse;
 
     /**
      * @api
      *
+     * @param string $id RCS agent ID
      * @param string|null $profileID Messaging profile ID associated with the RCS Agent
      * @param string|null $webhookFailoverURL Failover URL to receive RCS events
      * @param string|null $webhookURL URL to receive RCS events
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $profileID = omit,
-        $webhookFailoverURL = omit,
-        $webhookURL = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $profileID = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RcsAgentResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
      *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RcsAgentResponse;
-
-    /**
-     * @api
-     *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @return DefaultPagination<RcsAgent>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): AgentListResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AgentListResponse;
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination;
 }

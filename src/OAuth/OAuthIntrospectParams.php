@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Introspect an OAuth access token to check its validity and metadata.
  *
- * @see Telnyx\OAuth->introspect
+ * @see Telnyx\Services\OAuthService::introspect()
  *
- * @phpstan-type oauth_introspect_params = array{token: string}
+ * @phpstan-type OAuthIntrospectParamsShape = array{token: string}
  */
 final class OAuthIntrospectParams implements BaseModel
 {
-    /** @use SdkModel<oauth_introspect_params> */
+    /** @use SdkModel<OAuthIntrospectParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The token to introspect.
      */
-    #[Api]
+    #[Required]
     public string $token;
 
     /**
@@ -54,11 +54,11 @@ final class OAuthIntrospectParams implements BaseModel
      */
     public static function with(string $token): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->token = $token;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class OAuthIntrospectParams implements BaseModel
      */
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj->token = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 }

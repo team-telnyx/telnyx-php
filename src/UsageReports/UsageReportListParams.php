@@ -4,36 +4,37 @@ declare(strict_types=1);
 
 namespace Telnyx\UsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\UsageReports\UsageReportListParams\Format;
-use Telnyx\UsageReports\UsageReportListParams\Page;
 
 /**
  * Get Telnyx usage data by product, broken out by the specified dimensions.
  *
- * @see Telnyx\UsageReports->list
+ * @see Telnyx\Services\UsageReportsService::list()
  *
- * @phpstan-type usage_report_list_params = array{
+ * @phpstan-type UsageReportListParamsShape = array{
  *   dimensions: list<string>,
  *   metrics: list<string>,
  *   product: string,
- *   dateRange?: string,
- *   endDate?: string,
- *   filter?: string,
- *   format?: Format|value-of<Format>,
- *   managedAccounts?: bool,
- *   page?: Page,
- *   sort?: list<string>,
- *   startDate?: string,
- *   authorizationBearer?: string,
+ *   dateRange?: string|null,
+ *   endDate?: string|null,
+ *   filter?: string|null,
+ *   format?: null|Format|value-of<Format>,
+ *   managedAccounts?: bool|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   sort?: list<string>|null,
+ *   startDate?: string|null,
+ *   authorizationBearer?: string|null,
  * }
  */
 final class UsageReportListParams implements BaseModel
 {
-    /** @use SdkModel<usage_report_list_params> */
+    /** @use SdkModel<UsageReportListParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -42,7 +43,7 @@ final class UsageReportListParams implements BaseModel
      *
      * @var list<string> $dimensions
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $dimensions;
 
     /**
@@ -50,31 +51,31 @@ final class UsageReportListParams implements BaseModel
      *
      * @var list<string> $metrics
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $metrics;
 
     /**
      * Telnyx product.
      */
-    #[Api]
+    #[Required]
     public string $product;
 
     /**
      * A more user-friendly way to specify the timespan you want to filter by. More options can be found in the Telnyx API Reference docs.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $dateRange;
 
     /**
      * The end date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $endDate;
 
     /**
      * Filter records on dimensions.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filter;
 
     /**
@@ -82,39 +83,39 @@ final class UsageReportListParams implements BaseModel
      *
      * @var value-of<Format>|null $format
      */
-    #[Api(enum: Format::class, optional: true)]
+    #[Optional(enum: Format::class)]
     public ?string $format;
 
     /**
      * Return the aggregations for all Managed Accounts under the user making the request.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $managedAccounts;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Specifies the sort order for results.
      *
      * @var list<string>|null $sort
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $sort;
 
     /**
      * The start date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $startDate;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorizationBearer;
 
     /**
@@ -146,8 +147,8 @@ final class UsageReportListParams implements BaseModel
      *
      * @param list<string> $dimensions
      * @param list<string> $metrics
-     * @param Format|value-of<Format> $format
-     * @param list<string> $sort
+     * @param Format|value-of<Format>|null $format
+     * @param list<string>|null $sort
      */
     public static function with(
         array $dimensions,
@@ -158,28 +159,30 @@ final class UsageReportListParams implements BaseModel
         ?string $filter = null,
         Format|string|null $format = null,
         ?bool $managedAccounts = null,
-        ?Page $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?array $sort = null,
         ?string $startDate = null,
         ?string $authorizationBearer = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->dimensions = $dimensions;
-        $obj->metrics = $metrics;
-        $obj->product = $product;
+        $self['dimensions'] = $dimensions;
+        $self['metrics'] = $metrics;
+        $self['product'] = $product;
 
-        null !== $dateRange && $obj->dateRange = $dateRange;
-        null !== $endDate && $obj->endDate = $endDate;
-        null !== $filter && $obj->filter = $filter;
-        null !== $format && $obj['format'] = $format;
-        null !== $managedAccounts && $obj->managedAccounts = $managedAccounts;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj->sort = $sort;
-        null !== $startDate && $obj->startDate = $startDate;
-        null !== $authorizationBearer && $obj->authorizationBearer = $authorizationBearer;
+        null !== $dateRange && $self['dateRange'] = $dateRange;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $format && $self['format'] = $format;
+        null !== $managedAccounts && $self['managedAccounts'] = $managedAccounts;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $sort && $self['sort'] = $sort;
+        null !== $startDate && $self['startDate'] = $startDate;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +192,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withDimensions(array $dimensions): self
     {
-        $obj = clone $this;
-        $obj->dimensions = $dimensions;
+        $self = clone $this;
+        $self['dimensions'] = $dimensions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -202,10 +205,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withMetrics(array $metrics): self
     {
-        $obj = clone $this;
-        $obj->metrics = $metrics;
+        $self = clone $this;
+        $self['metrics'] = $metrics;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,10 +216,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withProduct(string $product): self
     {
-        $obj = clone $this;
-        $obj->product = $product;
+        $self = clone $this;
+        $self['product'] = $product;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +227,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withDateRange(string $dateRange): self
     {
-        $obj = clone $this;
-        $obj->dateRange = $dateRange;
+        $self = clone $this;
+        $self['dateRange'] = $dateRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,10 +238,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withEndDate(string $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -246,10 +249,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withFilter(string $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,10 +262,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withFormat(Format|string $format): self
     {
-        $obj = clone $this;
-        $obj['format'] = $format;
+        $self = clone $this;
+        $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,21 +273,26 @@ final class UsageReportListParams implements BaseModel
      */
     public function withManagedAccounts(bool $managedAccounts): self
     {
-        $obj = clone $this;
-        $obj->managedAccounts = $managedAccounts;
+        $self = clone $this;
+        $self['managedAccounts'] = $managedAccounts;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 
     /**
@@ -294,10 +302,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withSort(array $sort): self
     {
-        $obj = clone $this;
-        $obj->sort = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -305,10 +313,10 @@ final class UsageReportListParams implements BaseModel
      */
     public function withStartDate(string $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -316,9 +324,9 @@ final class UsageReportListParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj->authorizationBearer = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

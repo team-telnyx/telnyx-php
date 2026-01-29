@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\ConversationGetConversationsInsightsResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type conversation_insight = array{insightID: string, result: string}
+ * @phpstan-type ConversationInsightShape = array{
+ *   insightID: string, result: string
+ * }
  */
 final class ConversationInsight implements BaseModel
 {
-    /** @use SdkModel<conversation_insight> */
+    /** @use SdkModel<ConversationInsightShape> */
     use SdkModel;
 
     /**
      * Unique identifier for the insight configuration.
      */
-    #[Api('insight_id')]
+    #[Required('insight_id')]
     public string $insightID;
 
     /**
      * Insight result from the conversation. If the insight has a JSON schema, this will be stringified JSON object.
      */
-    #[Api]
+    #[Required]
     public string $result;
 
     /**
@@ -54,12 +56,12 @@ final class ConversationInsight implements BaseModel
      */
     public static function with(string $insightID, string $result): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->insightID = $insightID;
-        $obj->result = $result;
+        $self['insightID'] = $insightID;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +69,10 @@ final class ConversationInsight implements BaseModel
      */
     public function withInsightID(string $insightID): self
     {
-        $obj = clone $this;
-        $obj->insightID = $insightID;
+        $self = clone $this;
+        $self['insightID'] = $insightID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +80,9 @@ final class ConversationInsight implements BaseModel
      */
     public function withResult(string $result): self
     {
-        $obj = clone $this;
-        $obj->result = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

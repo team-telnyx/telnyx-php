@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\InsightGroups\Insights;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Remove an insight from a group.
  *
- * @see Telnyx\AI\Conversations\InsightGroups\Insights->deleteUnassign
+ * @see Telnyx\Services\AI\Conversations\InsightGroups\InsightsService::deleteUnassign()
  *
- * @phpstan-type insight_delete_unassign_params = array{groupID: string}
+ * @phpstan-type InsightDeleteUnassignParamsShape = array{groupID: string}
  */
 final class InsightDeleteUnassignParams implements BaseModel
 {
-    /** @use SdkModel<insight_delete_unassign_params> */
+    /** @use SdkModel<InsightDeleteUnassignParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The ID of the insight group.
      */
-    #[Api]
+    #[Required]
     public string $groupID;
 
     /**
@@ -54,11 +54,11 @@ final class InsightDeleteUnassignParams implements BaseModel
      */
     public static function with(string $groupID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->groupID = $groupID;
+        $self['groupID'] = $groupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class InsightDeleteUnassignParams implements BaseModel
      */
     public function withGroupID(string $groupID): self
     {
-        $obj = clone $this;
-        $obj->groupID = $groupID;
+        $self = clone $this;
+        $self['groupID'] = $groupID;
 
-        return $obj;
+        return $self;
     }
 }

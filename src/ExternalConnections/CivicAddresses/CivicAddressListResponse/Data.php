@@ -4,92 +4,94 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse\Data\Location;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   cityOrTown?: string,
- *   cityOrTownAlias?: string,
- *   companyName?: string,
- *   country?: string,
- *   countryOrDistrict?: string,
- *   defaultLocationID?: string,
- *   description?: string,
- *   houseNumber?: string,
- *   houseNumberSuffix?: string,
- *   locations?: list<Location>,
- *   postalOrZipCode?: string,
- *   recordType?: string,
- *   stateOrProvince?: string,
- *   streetName?: string,
- *   streetSuffix?: string,
+ * @phpstan-import-type LocationShape from \Telnyx\ExternalConnections\CivicAddresses\CivicAddressListResponse\Data\Location
+ *
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   cityOrTown?: string|null,
+ *   cityOrTownAlias?: string|null,
+ *   companyName?: string|null,
+ *   country?: string|null,
+ *   countryOrDistrict?: string|null,
+ *   defaultLocationID?: string|null,
+ *   description?: string|null,
+ *   houseNumber?: string|null,
+ *   houseNumberSuffix?: string|null,
+ *   locations?: list<Location|LocationShape>|null,
+ *   postalOrZipCode?: string|null,
+ *   recordType?: string|null,
+ *   stateOrProvince?: string|null,
+ *   streetName?: string|null,
+ *   streetSuffix?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api('city_or_town', optional: true)]
+    #[Optional('city_or_town')]
     public ?string $cityOrTown;
 
-    #[Api('city_or_town_alias', optional: true)]
+    #[Optional('city_or_town_alias')]
     public ?string $cityOrTownAlias;
 
-    #[Api('company_name', optional: true)]
+    #[Optional('company_name')]
     public ?string $companyName;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country;
 
-    #[Api('country_or_district', optional: true)]
+    #[Optional('country_or_district')]
     public ?string $countryOrDistrict;
 
     /**
      * Identifies what is the default location in the list of locations.
      */
-    #[Api('default_location_id', optional: true)]
+    #[Optional('default_location_id')]
     public ?string $defaultLocationID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api('house_number', optional: true)]
+    #[Optional('house_number')]
     public ?string $houseNumber;
 
-    #[Api('house_number_suffix', optional: true)]
+    #[Optional('house_number_suffix')]
     public ?string $houseNumberSuffix;
 
     /** @var list<Location>|null $locations */
-    #[Api(list: Location::class, optional: true)]
+    #[Optional(list: Location::class)]
     public ?array $locations;
 
-    #[Api('postal_or_zip_code', optional: true)]
+    #[Optional('postal_or_zip_code')]
     public ?string $postalOrZipCode;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
-    #[Api('state_or_province', optional: true)]
+    #[Optional('state_or_province')]
     public ?string $stateOrProvince;
 
-    #[Api('street_name', optional: true)]
+    #[Optional('street_name')]
     public ?string $streetName;
 
-    #[Api('street_suffix', optional: true)]
+    #[Optional('street_suffix')]
     public ?string $streetSuffix;
 
     public function __construct()
@@ -102,7 +104,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Location> $locations
+     * @param list<Location|LocationShape>|null $locations
      */
     public static function with(
         ?string $id = null,
@@ -122,26 +124,26 @@ final class Data implements BaseModel
         ?string $streetName = null,
         ?string $streetSuffix = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $cityOrTown && $obj->cityOrTown = $cityOrTown;
-        null !== $cityOrTownAlias && $obj->cityOrTownAlias = $cityOrTownAlias;
-        null !== $companyName && $obj->companyName = $companyName;
-        null !== $country && $obj->country = $country;
-        null !== $countryOrDistrict && $obj->countryOrDistrict = $countryOrDistrict;
-        null !== $defaultLocationID && $obj->defaultLocationID = $defaultLocationID;
-        null !== $description && $obj->description = $description;
-        null !== $houseNumber && $obj->houseNumber = $houseNumber;
-        null !== $houseNumberSuffix && $obj->houseNumberSuffix = $houseNumberSuffix;
-        null !== $locations && $obj->locations = $locations;
-        null !== $postalOrZipCode && $obj->postalOrZipCode = $postalOrZipCode;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $stateOrProvince && $obj->stateOrProvince = $stateOrProvince;
-        null !== $streetName && $obj->streetName = $streetName;
-        null !== $streetSuffix && $obj->streetSuffix = $streetSuffix;
+        null !== $id && $self['id'] = $id;
+        null !== $cityOrTown && $self['cityOrTown'] = $cityOrTown;
+        null !== $cityOrTownAlias && $self['cityOrTownAlias'] = $cityOrTownAlias;
+        null !== $companyName && $self['companyName'] = $companyName;
+        null !== $country && $self['country'] = $country;
+        null !== $countryOrDistrict && $self['countryOrDistrict'] = $countryOrDistrict;
+        null !== $defaultLocationID && $self['defaultLocationID'] = $defaultLocationID;
+        null !== $description && $self['description'] = $description;
+        null !== $houseNumber && $self['houseNumber'] = $houseNumber;
+        null !== $houseNumberSuffix && $self['houseNumberSuffix'] = $houseNumberSuffix;
+        null !== $locations && $self['locations'] = $locations;
+        null !== $postalOrZipCode && $self['postalOrZipCode'] = $postalOrZipCode;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $stateOrProvince && $self['stateOrProvince'] = $stateOrProvince;
+        null !== $streetName && $self['streetName'] = $streetName;
+        null !== $streetSuffix && $self['streetSuffix'] = $streetSuffix;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,50 +151,50 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withCityOrTown(string $cityOrTown): self
     {
-        $obj = clone $this;
-        $obj->cityOrTown = $cityOrTown;
+        $self = clone $this;
+        $self['cityOrTown'] = $cityOrTown;
 
-        return $obj;
+        return $self;
     }
 
     public function withCityOrTownAlias(string $cityOrTownAlias): self
     {
-        $obj = clone $this;
-        $obj->cityOrTownAlias = $cityOrTownAlias;
+        $self = clone $this;
+        $self['cityOrTownAlias'] = $cityOrTownAlias;
 
-        return $obj;
+        return $self;
     }
 
     public function withCompanyName(string $companyName): self
     {
-        $obj = clone $this;
-        $obj->companyName = $companyName;
+        $self = clone $this;
+        $self['companyName'] = $companyName;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountry(string $country): self
     {
-        $obj = clone $this;
-        $obj->country = $country;
+        $self = clone $this;
+        $self['country'] = $country;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryOrDistrict(string $countryOrDistrict): self
     {
-        $obj = clone $this;
-        $obj->countryOrDistrict = $countryOrDistrict;
+        $self = clone $this;
+        $self['countryOrDistrict'] = $countryOrDistrict;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,53 +202,53 @@ final class Data implements BaseModel
      */
     public function withDefaultLocationID(string $defaultLocationID): self
     {
-        $obj = clone $this;
-        $obj->defaultLocationID = $defaultLocationID;
+        $self = clone $this;
+        $self['defaultLocationID'] = $defaultLocationID;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withHouseNumber(string $houseNumber): self
     {
-        $obj = clone $this;
-        $obj->houseNumber = $houseNumber;
+        $self = clone $this;
+        $self['houseNumber'] = $houseNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withHouseNumberSuffix(string $houseNumberSuffix): self
     {
-        $obj = clone $this;
-        $obj->houseNumberSuffix = $houseNumberSuffix;
+        $self = clone $this;
+        $self['houseNumberSuffix'] = $houseNumberSuffix;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Location> $locations
+     * @param list<Location|LocationShape> $locations
      */
     public function withLocations(array $locations): self
     {
-        $obj = clone $this;
-        $obj->locations = $locations;
+        $self = clone $this;
+        $self['locations'] = $locations;
 
-        return $obj;
+        return $self;
     }
 
     public function withPostalOrZipCode(string $postalOrZipCode): self
     {
-        $obj = clone $this;
-        $obj->postalOrZipCode = $postalOrZipCode;
+        $self = clone $this;
+        $self['postalOrZipCode'] = $postalOrZipCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,33 +256,33 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withStateOrProvince(string $stateOrProvince): self
     {
-        $obj = clone $this;
-        $obj->stateOrProvince = $stateOrProvince;
+        $self = clone $this;
+        $self['stateOrProvince'] = $stateOrProvince;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetName(string $streetName): self
     {
-        $obj = clone $this;
-        $obj->streetName = $streetName;
+        $self = clone $this;
+        $self['streetName'] = $streetName;
 
-        return $obj;
+        return $self;
     }
 
     public function withStreetSuffix(string $streetSuffix): self
     {
-        $obj = clone $this;
-        $obj->streetSuffix = $streetSuffix;
+        $self = clone $this;
+        $self['streetSuffix'] = $streetSuffix;
 
-        return $obj;
+        return $self;
     }
 }

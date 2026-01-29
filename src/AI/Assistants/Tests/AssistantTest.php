@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\AssistantTest\Rubric;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model containing complete assistant test information.
@@ -18,36 +17,36 @@ use Telnyx\Core\Conversion\Contracts\ResponseConverter;
  * scheduling, and metadata. Used when retrieving individual tests or
  * after creating/updating tests.
  *
- * @phpstan-type assistant_test = array{
+ * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\AssistantTest\Rubric
+ *
+ * @phpstan-type AssistantTestShape = array{
  *   createdAt: \DateTimeInterface,
  *   name: string,
- *   rubric: list<Rubric>,
- *   telnyxConversationChannel: value-of<TelnyxConversationChannel>,
+ *   rubric: list<Rubric|RubricShape>,
+ *   telnyxConversationChannel: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
  *   testID: string,
- *   description?: string,
- *   destination?: string,
- *   instructions?: string,
- *   maxDurationSeconds?: int,
- *   testSuite?: string,
+ *   description?: string|null,
+ *   destination?: string|null,
+ *   instructions?: string|null,
+ *   maxDurationSeconds?: int|null,
+ *   testSuite?: string|null,
  * }
  */
-final class AssistantTest implements BaseModel, ResponseConverter
+final class AssistantTest implements BaseModel
 {
-    /** @use SdkModel<assistant_test> */
+    /** @use SdkModel<AssistantTestShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Timestamp when the test was created.
      */
-    #[Api('created_at')]
+    #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
     /**
      * Human-readable name of the test.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -55,7 +54,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
      *
      * @var list<Rubric> $rubric
      */
-    #[Api(list: Rubric::class)]
+    #[Required(list: Rubric::class)]
     public array $rubric;
 
     /**
@@ -63,43 +62,46 @@ final class AssistantTest implements BaseModel, ResponseConverter
      *
      * @var value-of<TelnyxConversationChannel> $telnyxConversationChannel
      */
-    #[Api('telnyx_conversation_channel', enum: TelnyxConversationChannel::class)]
+    #[Required(
+        'telnyx_conversation_channel',
+        enum: TelnyxConversationChannel::class
+    )]
     public string $telnyxConversationChannel;
 
     /**
      * Unique identifier for the assistant test.
      */
-    #[Api('test_id')]
+    #[Required('test_id')]
     public string $testID;
 
     /**
      * Detailed description of the test's purpose and scope.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Target destination for test conversations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination;
 
     /**
      * Detailed test scenario instructions and objectives.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
      * Maximum allowed duration for test execution in seconds.
      */
-    #[Api('max_duration_seconds', optional: true)]
+    #[Optional('max_duration_seconds')]
     public ?int $maxDurationSeconds;
 
     /**
      * Test suite grouping for organizational purposes.
      */
-    #[Api('test_suite', optional: true)]
+    #[Optional('test_suite')]
     public ?string $testSuite;
 
     /**
@@ -137,7 +139,7 @@ final class AssistantTest implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Rubric> $rubric
+     * @param list<Rubric|RubricShape> $rubric
      * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
      */
     public static function with(
@@ -152,21 +154,21 @@ final class AssistantTest implements BaseModel, ResponseConverter
         ?int $maxDurationSeconds = null,
         ?string $testSuite = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->createdAt = $createdAt;
-        $obj->name = $name;
-        $obj->rubric = $rubric;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        $obj->testID = $testID;
+        $self['createdAt'] = $createdAt;
+        $self['name'] = $name;
+        $self['rubric'] = $rubric;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self['testID'] = $testID;
 
-        null !== $description && $obj->description = $description;
-        null !== $destination && $obj->destination = $destination;
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $maxDurationSeconds && $obj->maxDurationSeconds = $maxDurationSeconds;
-        null !== $testSuite && $obj->testSuite = $testSuite;
+        null !== $description && $self['description'] = $description;
+        null !== $destination && $self['destination'] = $destination;
+        null !== $instructions && $self['instructions'] = $instructions;
+        null !== $maxDurationSeconds && $self['maxDurationSeconds'] = $maxDurationSeconds;
+        null !== $testSuite && $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +176,10 @@ final class AssistantTest implements BaseModel, ResponseConverter
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,23 +187,23 @@ final class AssistantTest implements BaseModel, ResponseConverter
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Evaluation criteria used to assess test performance.
      *
-     * @param list<Rubric> $rubric
+     * @param list<Rubric|RubricShape> $rubric
      */
     public function withRubric(array $rubric): self
     {
-        $obj = clone $this;
-        $obj->rubric = $rubric;
+        $self = clone $this;
+        $self['rubric'] = $rubric;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +214,10 @@ final class AssistantTest implements BaseModel, ResponseConverter
     public function withTelnyxConversationChannel(
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +225,10 @@ final class AssistantTest implements BaseModel, ResponseConverter
      */
     public function withTestID(string $testID): self
     {
-        $obj = clone $this;
-        $obj->testID = $testID;
+        $self = clone $this;
+        $self['testID'] = $testID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +236,10 @@ final class AssistantTest implements BaseModel, ResponseConverter
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +247,10 @@ final class AssistantTest implements BaseModel, ResponseConverter
      */
     public function withDestination(string $destination): self
     {
-        $obj = clone $this;
-        $obj->destination = $destination;
+        $self = clone $this;
+        $self['destination'] = $destination;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,10 +258,10 @@ final class AssistantTest implements BaseModel, ResponseConverter
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj->instructions = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,10 +269,10 @@ final class AssistantTest implements BaseModel, ResponseConverter
      */
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
-        $obj = clone $this;
-        $obj->maxDurationSeconds = $maxDurationSeconds;
+        $self = clone $this;
+        $self['maxDurationSeconds'] = $maxDurationSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,9 +280,9 @@ final class AssistantTest implements BaseModel, ResponseConverter
      */
     public function withTestSuite(string $testSuite): self
     {
-        $obj = clone $this;
-        $obj->testSuite = $testSuite;
+        $self = clone $this;
+        $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 }

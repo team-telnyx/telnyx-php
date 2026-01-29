@@ -4,30 +4,33 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\MigrationSources;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\MigrationSources\MigrationSourceParams\Provider;
 use Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth;
 
 /**
- * @phpstan-type migration_source_params = array{
+ * @phpstan-import-type ProviderAuthShape from \Telnyx\Storage\MigrationSources\MigrationSourceParams\ProviderAuth
+ *
+ * @phpstan-type MigrationSourceParamsShape = array{
  *   bucketName: string,
- *   provider: value-of<Provider>,
- *   providerAuth: ProviderAuth,
- *   id?: string,
- *   sourceRegion?: string,
+ *   provider: Provider|value-of<Provider>,
+ *   providerAuth: ProviderAuth|ProviderAuthShape,
+ *   id?: string|null,
+ *   sourceRegion?: string|null,
  * }
  */
 final class MigrationSourceParams implements BaseModel
 {
-    /** @use SdkModel<migration_source_params> */
+    /** @use SdkModel<MigrationSourceParamsShape> */
     use SdkModel;
 
     /**
      * Bucket name to migrate the data from.
      */
-    #[Api('bucket_name')]
+    #[Required('bucket_name')]
     public string $bucketName;
 
     /**
@@ -35,22 +38,22 @@ final class MigrationSourceParams implements BaseModel
      *
      * @var value-of<Provider> $provider
      */
-    #[Api(enum: Provider::class)]
+    #[Required(enum: Provider::class)]
     public string $provider;
 
-    #[Api('provider_auth')]
+    #[Required('provider_auth')]
     public ProviderAuth $providerAuth;
 
     /**
      * Unique identifier for the data migration source.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * For intra-Telnyx buckets migration, specify the source bucket region in this field.
      */
-    #[Api('source_region', optional: true)]
+    #[Optional('source_region')]
     public ?string $sourceRegion;
 
     /**
@@ -81,24 +84,25 @@ final class MigrationSourceParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Provider|value-of<Provider> $provider
+     * @param ProviderAuth|ProviderAuthShape $providerAuth
      */
     public static function with(
         string $bucketName,
         Provider|string $provider,
-        ProviderAuth $providerAuth,
+        ProviderAuth|array $providerAuth,
         ?string $id = null,
         ?string $sourceRegion = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->bucketName = $bucketName;
-        $obj['provider'] = $provider;
-        $obj->providerAuth = $providerAuth;
+        $self['bucketName'] = $bucketName;
+        $self['provider'] = $provider;
+        $self['providerAuth'] = $providerAuth;
 
-        null !== $id && $obj->id = $id;
-        null !== $sourceRegion && $obj->sourceRegion = $sourceRegion;
+        null !== $id && $self['id'] = $id;
+        null !== $sourceRegion && $self['sourceRegion'] = $sourceRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +110,10 @@ final class MigrationSourceParams implements BaseModel
      */
     public function withBucketName(string $bucketName): self
     {
-        $obj = clone $this;
-        $obj->bucketName = $bucketName;
+        $self = clone $this;
+        $self['bucketName'] = $bucketName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,18 +123,21 @@ final class MigrationSourceParams implements BaseModel
      */
     public function withProvider(Provider|string $provider): self
     {
-        $obj = clone $this;
-        $obj['provider'] = $provider;
+        $self = clone $this;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 
-    public function withProviderAuth(ProviderAuth $providerAuth): self
+    /**
+     * @param ProviderAuth|ProviderAuthShape $providerAuth
+     */
+    public function withProviderAuth(ProviderAuth|array $providerAuth): self
     {
-        $obj = clone $this;
-        $obj->providerAuth = $providerAuth;
+        $self = clone $this;
+        $self['providerAuth'] = $providerAuth;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,10 +145,10 @@ final class MigrationSourceParams implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -149,9 +156,9 @@ final class MigrationSourceParams implements BaseModel
      */
     public function withSourceRegion(string $sourceRegion): self
     {
-        $obj = clone $this;
-        $obj->sourceRegion = $sourceRegion;
+        $self = clone $this;
+        $self['sourceRegion'] = $sourceRegion;
 
-        return $obj;
+        return $self;
     }
 }

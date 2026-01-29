@@ -4,54 +4,54 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\CallHangupWebhookEvent\Data\Payload\CallQualityStats;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Inbound call quality statistics.
  *
- * @phpstan-type inbound_alias = array{
- *   jitterMaxVariance?: string,
- *   jitterPacketCount?: string,
- *   mos?: string,
- *   packetCount?: string,
- *   skipPacketCount?: string,
+ * @phpstan-type InboundShape = array{
+ *   jitterMaxVariance?: string|null,
+ *   jitterPacketCount?: string|null,
+ *   mos?: string|null,
+ *   packetCount?: string|null,
+ *   skipPacketCount?: string|null,
  * }
  */
 final class Inbound implements BaseModel
 {
-    /** @use SdkModel<inbound_alias> */
+    /** @use SdkModel<InboundShape> */
     use SdkModel;
 
     /**
      * Maximum jitter variance for inbound audio.
      */
-    #[Api('jitter_max_variance', optional: true)]
+    #[Optional('jitter_max_variance')]
     public ?string $jitterMaxVariance;
 
     /**
      * Number of packets used for jitter calculation on inbound audio.
      */
-    #[Api('jitter_packet_count', optional: true)]
+    #[Optional('jitter_packet_count')]
     public ?string $jitterPacketCount;
 
     /**
      * Mean Opinion Score (MOS) for inbound audio quality.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $mos;
 
     /**
      * Total number of inbound audio packets.
      */
-    #[Api('packet_count', optional: true)]
+    #[Optional('packet_count')]
     public ?string $packetCount;
 
     /**
      * Number of skipped inbound packets (packet loss).
      */
-    #[Api('skip_packet_count', optional: true)]
+    #[Optional('skip_packet_count')]
     public ?string $skipPacketCount;
 
     public function __construct()
@@ -71,15 +71,15 @@ final class Inbound implements BaseModel
         ?string $packetCount = null,
         ?string $skipPacketCount = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $jitterMaxVariance && $obj->jitterMaxVariance = $jitterMaxVariance;
-        null !== $jitterPacketCount && $obj->jitterPacketCount = $jitterPacketCount;
-        null !== $mos && $obj->mos = $mos;
-        null !== $packetCount && $obj->packetCount = $packetCount;
-        null !== $skipPacketCount && $obj->skipPacketCount = $skipPacketCount;
+        null !== $jitterMaxVariance && $self['jitterMaxVariance'] = $jitterMaxVariance;
+        null !== $jitterPacketCount && $self['jitterPacketCount'] = $jitterPacketCount;
+        null !== $mos && $self['mos'] = $mos;
+        null !== $packetCount && $self['packetCount'] = $packetCount;
+        null !== $skipPacketCount && $self['skipPacketCount'] = $skipPacketCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,10 +87,10 @@ final class Inbound implements BaseModel
      */
     public function withJitterMaxVariance(string $jitterMaxVariance): self
     {
-        $obj = clone $this;
-        $obj->jitterMaxVariance = $jitterMaxVariance;
+        $self = clone $this;
+        $self['jitterMaxVariance'] = $jitterMaxVariance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +98,10 @@ final class Inbound implements BaseModel
      */
     public function withJitterPacketCount(string $jitterPacketCount): self
     {
-        $obj = clone $this;
-        $obj->jitterPacketCount = $jitterPacketCount;
+        $self = clone $this;
+        $self['jitterPacketCount'] = $jitterPacketCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class Inbound implements BaseModel
      */
     public function withMos(string $mos): self
     {
-        $obj = clone $this;
-        $obj->mos = $mos;
+        $self = clone $this;
+        $self['mos'] = $mos;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class Inbound implements BaseModel
      */
     public function withPacketCount(string $packetCount): self
     {
-        $obj = clone $this;
-        $obj->packetCount = $packetCount;
+        $self = clone $this;
+        $self['packetCount'] = $packetCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +131,9 @@ final class Inbound implements BaseModel
      */
     public function withSkipPacketCount(string $skipPacketCount): self
     {
-        $obj = clone $this;
-        $obj->skipPacketCount = $skipPacketCount;
+        $self = clone $this;
+        $self['skipPacketCount'] = $skipPacketCount;
 
-        return $obj;
+        return $self;
     }
 }

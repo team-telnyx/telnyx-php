@@ -4,63 +4,65 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
 
 /**
- * @phpstan-type customer_service_record = array{
- *   id?: string,
- *   createdAt?: \DateTimeInterface,
- *   errorMessage?: string,
- *   phoneNumber?: string,
- *   recordType?: string,
- *   result?: Result,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-import-type ResultShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecord\Result
+ *
+ * @phpstan-type CustomerServiceRecordShape = array{
+ *   id?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   errorMessage?: string|null,
+ *   phoneNumber?: string|null,
+ *   recordType?: string|null,
+ *   result?: null|Result|ResultShape,
+ *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class CustomerServiceRecord implements BaseModel
 {
-    /** @use SdkModel<customer_service_record> */
+    /** @use SdkModel<CustomerServiceRecordShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies this customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * The error message in case status is `failed`. This field would be null in case of `pending` or `completed` status.
      */
-    #[Api('error_message', optional: true)]
+    #[Optional('error_message', nullable: true)]
     public ?string $errorMessage;
 
     /**
      * The phone number of the customer service record.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
      */
-    #[Api(optional: true)]
+    #[Optional(nullable: true)]
     public ?Result $result;
 
     /**
@@ -68,13 +70,13 @@ final class CustomerServiceRecord implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -87,7 +89,8 @@ final class CustomerServiceRecord implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Result|ResultShape|null $result
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -95,22 +98,22 @@ final class CustomerServiceRecord implements BaseModel
         ?string $errorMessage = null,
         ?string $phoneNumber = null,
         ?string $recordType = null,
-        ?Result $result = null,
+        Result|array|null $result = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $errorMessage && $obj->errorMessage = $errorMessage;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $result && $obj->result = $result;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $errorMessage && $self['errorMessage'] = $errorMessage;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $result && $self['result'] = $result;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +121,10 @@ final class CustomerServiceRecord implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,21 +132,21 @@ final class CustomerServiceRecord implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The error message in case status is `failed`. This field would be null in case of `pending` or `completed` status.
      */
-    public function withErrorMessage(string $errorMessage): self
+    public function withErrorMessage(?string $errorMessage): self
     {
-        $obj = clone $this;
-        $obj->errorMessage = $errorMessage;
+        $self = clone $this;
+        $self['errorMessage'] = $errorMessage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +154,10 @@ final class CustomerServiceRecord implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,21 +165,23 @@ final class CustomerServiceRecord implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The result of the CSR request. This field would be null in case of `pending` or `failed` status.
+     *
+     * @param Result|ResultShape|null $result
      */
-    public function withResult(Result $result): self
+    public function withResult(Result|array|null $result): self
     {
-        $obj = clone $this;
-        $obj->result = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +191,10 @@ final class CustomerServiceRecord implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,9 +202,9 @@ final class CustomerServiceRecord implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

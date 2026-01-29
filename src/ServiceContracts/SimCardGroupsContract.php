@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit;
 use Telnyx\SimCardGroups\SimCardGroupDeleteResponse;
@@ -13,88 +14,58 @@ use Telnyx\SimCardGroups\SimCardGroupListResponse;
 use Telnyx\SimCardGroups\SimCardGroupNewResponse;
 use Telnyx\SimCardGroups\SimCardGroupUpdateResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit as DataLimitShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SimCardGroupsContract
 {
     /**
      * @api
      *
      * @param string $name a user friendly name for the SIM card group
-     * @param DataLimit $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
+     * @param DataLimit|DataLimitShape $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        $dataLimit = omit,
-        ?RequestOptions $requestOptions = null
+        string $name,
+        DataLimit|array|null $dataLimit = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SimCardGroupNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardGroupNewResponse;
-
-    /**
-     * @api
-     *
+     * @param string $id identifies the SIM group
      * @param bool $includeIccids it includes a list of associated ICCIDs
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        $includeIccids = omit,
-        ?RequestOptions $requestOptions = null,
+        bool $includeIccids = false,
+        RequestOptions|array|null $requestOptions = null,
     ): SimCardGroupGetResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardGroupGetResponse;
-
-    /**
-     * @api
-     *
-     * @param \Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
+     * @param string $id identifies the SIM group
+     * @param \Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit|DataLimitShape1 $dataLimit upper limit on the amount of data the SIM cards, within the group, can use
      * @param string $name a user friendly name for the SIM card group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $dataLimit = omit,
-        $name = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SimCardGroupUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        \Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit|array|null $dataLimit = null,
+        ?string $name = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SimCardGroupUpdateResponse;
 
     /**
@@ -105,37 +76,31 @@ interface SimCardGroupsContract
      * @param string $filterWirelessBlocklistID a Wireless Blocklist ID associated with the group
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<SimCardGroupListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $filterName = omit,
-        $filterPrivateWirelessGatewayID = omit,
-        $filterWirelessBlocklistID = omit,
-        $pageNumber = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SimCardGroupListResponse;
+        ?string $filterName = null,
+        ?string $filterPrivateWirelessGatewayID = null,
+        ?string $filterWirelessBlocklistID = null,
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardGroupListResponse;
-
-    /**
-     * @api
+     * @param string $id identifies the SIM group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SimCardGroupDeleteResponse;
 }

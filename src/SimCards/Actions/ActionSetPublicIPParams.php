@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * This API makes a SIM card reachable on the public internet by mapping a random public IP to the SIM card. <br/><br/>
- *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API. <br/><br/>
+ *  The API will trigger an asynchronous operation called a SIM Card Action. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API. <br/><br/>
  *  Setting a Public IP to a SIM Card incurs a charge and will only succeed if the account has sufficient funds.
  *
- * @see Telnyx\SimCards\Actions->setPublicIP
+ * @see Telnyx\Services\SimCards\ActionsService::setPublicIP()
  *
- * @phpstan-type action_set_public_ip_params = array{regionCode?: string}
+ * @phpstan-type ActionSetPublicIPParamsShape = array{regionCode?: string|null}
  */
 final class ActionSetPublicIPParams implements BaseModel
 {
-    /** @use SdkModel<action_set_public_ip_params> */
+    /** @use SdkModel<ActionSetPublicIPParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The code of the region where the public IP should be assigned. A list of available regions can be found at the regions endpoint.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $regionCode;
 
     public function __construct()
@@ -42,11 +42,11 @@ final class ActionSetPublicIPParams implements BaseModel
      */
     public static function with(?string $regionCode = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $regionCode && $obj->regionCode = $regionCode;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -54,9 +54,9 @@ final class ActionSetPublicIPParams implements BaseModel
      */
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 }

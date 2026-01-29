@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AssociatedPhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,15 +14,18 @@ use Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParam
 /**
  * Creates a new associated phone number for a porting order. This is used for partial porting in GB to specify which phone numbers should be kept or disconnected.
  *
- * @see Telnyx\PortingOrders\AssociatedPhoneNumbers->create
+ * @see Telnyx\Services\PortingOrders\AssociatedPhoneNumbersService::create()
  *
- * @phpstan-type associated_phone_number_create_params = array{
- *   action: Action|value-of<Action>, phoneNumberRange: PhoneNumberRange
+ * @phpstan-import-type PhoneNumberRangeShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\AssociatedPhoneNumberCreateParams\PhoneNumberRange
+ *
+ * @phpstan-type AssociatedPhoneNumberCreateParamsShape = array{
+ *   action: Action|value-of<Action>,
+ *   phoneNumberRange: PhoneNumberRange|PhoneNumberRangeShape,
  * }
  */
 final class AssociatedPhoneNumberCreateParams implements BaseModel
 {
-    /** @use SdkModel<associated_phone_number_create_params> */
+    /** @use SdkModel<AssociatedPhoneNumberCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -31,10 +34,10 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
      *
      * @var value-of<Action> $action
      */
-    #[Api(enum: Action::class)]
+    #[Required(enum: Action::class)]
     public string $action;
 
-    #[Api('phone_number_range')]
+    #[Required('phone_number_range')]
     public PhoneNumberRange $phoneNumberRange;
 
     /**
@@ -64,17 +67,18 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Action|value-of<Action> $action
+     * @param PhoneNumberRange|PhoneNumberRangeShape $phoneNumberRange
      */
     public static function with(
         Action|string $action,
-        PhoneNumberRange $phoneNumberRange
+        PhoneNumberRange|array $phoneNumberRange
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['action'] = $action;
-        $obj->phoneNumberRange = $phoneNumberRange;
+        $self['action'] = $action;
+        $self['phoneNumberRange'] = $phoneNumberRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,18 +88,21 @@ final class AssociatedPhoneNumberCreateParams implements BaseModel
      */
     public function withAction(Action|string $action): self
     {
-        $obj = clone $this;
-        $obj['action'] = $action;
+        $self = clone $this;
+        $self['action'] = $action;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param PhoneNumberRange|PhoneNumberRangeShape $phoneNumberRange
+     */
     public function withPhoneNumberRange(
-        PhoneNumberRange $phoneNumberRange
+        PhoneNumberRange|array $phoneNumberRange
     ): self {
-        $obj = clone $this;
-        $obj->phoneNumberRange = $phoneNumberRange;
+        $self = clone $this;
+        $self['phoneNumberRange'] = $phoneNumberRange;
 
-        return $obj;
+        return $self;
     }
 }

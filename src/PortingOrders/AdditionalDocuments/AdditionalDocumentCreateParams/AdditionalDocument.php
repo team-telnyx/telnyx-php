@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument\DocumentType;
 
 /**
- * @phpstan-type additional_document = array{
- *   documentID?: string, documentType?: value-of<DocumentType>
+ * @phpstan-type AdditionalDocumentShape = array{
+ *   documentID?: string|null,
+ *   documentType?: null|DocumentType|value-of<DocumentType>,
  * }
  */
 final class AdditionalDocument implements BaseModel
 {
-    /** @use SdkModel<additional_document> */
+    /** @use SdkModel<AdditionalDocumentShape> */
     use SdkModel;
 
     /**
      * The document identification.
      */
-    #[Api('document_id', optional: true)]
+    #[Optional('document_id')]
     public ?string $documentID;
 
     /**
@@ -30,7 +31,7 @@ final class AdditionalDocument implements BaseModel
      *
      * @var value-of<DocumentType>|null $documentType
      */
-    #[Api('document_type', enum: DocumentType::class, optional: true)]
+    #[Optional('document_type', enum: DocumentType::class)]
     public ?string $documentType;
 
     public function __construct()
@@ -43,18 +44,18 @@ final class AdditionalDocument implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocumentType|value-of<DocumentType> $documentType
+     * @param DocumentType|value-of<DocumentType>|null $documentType
      */
     public static function with(
         ?string $documentID = null,
         DocumentType|string|null $documentType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $documentID && $obj->documentID = $documentID;
-        null !== $documentType && $obj['documentType'] = $documentType;
+        null !== $documentID && $self['documentID'] = $documentID;
+        null !== $documentType && $self['documentType'] = $documentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +63,10 @@ final class AdditionalDocument implements BaseModel
      */
     public function withDocumentID(string $documentID): self
     {
-        $obj = clone $this;
-        $obj->documentID = $documentID;
+        $self = clone $this;
+        $self['documentID'] = $documentID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +76,9 @@ final class AdditionalDocument implements BaseModel
      */
     public function withDocumentType(DocumentType|string $documentType): self
     {
-        $obj = clone $this;
-        $obj['documentType'] = $documentType;
+        $self = clone $this;
+        $self['documentType'] = $documentType;
 
-        return $obj;
+        return $self;
     }
 }

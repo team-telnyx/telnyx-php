@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,18 +12,18 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new background job to delete a batch of numbers. At most one thousand numbers can be updated per API call.
  *
- * @see Telnyx\PhoneNumbers\Jobs->deleteBatch
+ * @see Telnyx\Services\PhoneNumbers\JobsService::deleteBatch()
  *
- * @phpstan-type job_delete_batch_params = array{phoneNumbers: list<string>}
+ * @phpstan-type JobDeleteBatchParamsShape = array{phoneNumbers: list<string>}
  */
 final class JobDeleteBatchParams implements BaseModel
 {
-    /** @use SdkModel<job_delete_batch_params> */
+    /** @use SdkModel<JobDeleteBatchParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<string> $phoneNumbers */
-    #[Api('phone_numbers', list: 'string')]
+    #[Required('phone_numbers', list: 'string')]
     public array $phoneNumbers;
 
     /**
@@ -54,11 +54,11 @@ final class JobDeleteBatchParams implements BaseModel
      */
     public static function with(array $phoneNumbers): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumbers = $phoneNumbers;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class JobDeleteBatchParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

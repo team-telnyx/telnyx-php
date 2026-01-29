@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementGetResponse\Data\RegulatoryRequirement;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type acceptance_criteria = array{
- *   fieldType?: string, fieldValue?: string, localityLimit?: string
+ * @phpstan-type AcceptanceCriteriaShape = array{
+ *   fieldType?: string|null, fieldValue?: string|null, localityLimit?: string|null
  * }
  */
 final class AcceptanceCriteria implements BaseModel
 {
-    /** @use SdkModel<acceptance_criteria> */
+    /** @use SdkModel<AcceptanceCriteriaShape> */
     use SdkModel;
 
-    #[Api('field_type', optional: true)]
+    #[Optional('field_type')]
     public ?string $fieldType;
 
-    #[Api('field_value', optional: true)]
+    #[Optional('field_value')]
     public ?string $fieldValue;
 
-    #[Api('locality_limit', optional: true)]
+    #[Optional('locality_limit')]
     public ?string $localityLimit;
 
     public function __construct()
@@ -42,36 +42,36 @@ final class AcceptanceCriteria implements BaseModel
         ?string $fieldValue = null,
         ?string $localityLimit = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fieldType && $obj->fieldType = $fieldType;
-        null !== $fieldValue && $obj->fieldValue = $fieldValue;
-        null !== $localityLimit && $obj->localityLimit = $localityLimit;
+        null !== $fieldType && $self['fieldType'] = $fieldType;
+        null !== $fieldValue && $self['fieldValue'] = $fieldValue;
+        null !== $localityLimit && $self['localityLimit'] = $localityLimit;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldType(string $fieldType): self
     {
-        $obj = clone $this;
-        $obj->fieldType = $fieldType;
+        $self = clone $this;
+        $self['fieldType'] = $fieldType;
 
-        return $obj;
+        return $self;
     }
 
     public function withFieldValue(string $fieldValue): self
     {
-        $obj = clone $this;
-        $obj->fieldValue = $fieldValue;
+        $self = clone $this;
+        $self['fieldValue'] = $fieldValue;
 
-        return $obj;
+        return $self;
     }
 
     public function withLocalityLimit(string $localityLimit): self
     {
-        $obj = clone $this;
-        $obj->localityLimit = $localityLimit;
+        $self = clone $this;
+        $self['localityLimit'] = $localityLimit;
 
-        return $obj;
+        return $self;
     }
 }

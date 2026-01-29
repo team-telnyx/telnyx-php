@@ -6,26 +6,36 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardDataUsageNotificationsContract;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams;
+use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationDeleteResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationGetResponse;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListParams;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationListResponse;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse;
-use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold
+ * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold as ThresholdShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SimCardDataUsageNotificationsService implements SimCardDataUsageNotificationsContract
 {
     /**
+     * @api
+     */
+    public SimCardDataUsageNotificationsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SimCardDataUsageNotificationsRawService($client);
+    }
 
     /**
      * @api
@@ -33,46 +43,24 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * Creates a new SIM card data usage notification.
      *
      * @param string $simCardID the identification UUID of the related SIM card resource
-     * @param Threshold $threshold data usage threshold that will trigger the notification
+     * @param Threshold|ThresholdShape $threshold data usage threshold that will trigger the notification
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $simCardID,
-        $threshold,
-        ?RequestOptions $requestOptions = null
+        string $simCardID,
+        Threshold|array $threshold,
+        RequestOptions|array|null $requestOptions = null,
     ): SimCardDataUsageNotificationNewResponse {
-        $params = ['simCardID' => $simCardID, 'threshold' => $threshold];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardDataUsageNotificationNewResponse {
-        [
-            $parsed, $options,
-        ] = SimCardDataUsageNotificationCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['simCardID' => $simCardID, 'threshold' => $threshold]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'sim_card_data_usage_notifications',
-            body: (object) $parsed,
-            options: $options,
-            convert: SimCardDataUsageNotificationNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -80,19 +68,19 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      *
      * Get a single SIM Card Data Usage Notification.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SimCardDataUsageNotificationGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['sim_card_data_usage_notifications/%1$s', $id],
-            options: $requestOptions,
-            convert: SimCardDataUsageNotificationGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -100,49 +88,27 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      *
      * Updates information for a SIM Card Data Usage Notification.
      *
+     * @param string $simCardDataUsageNotificationID identifies the resource
      * @param string $simCardID the identification UUID of the related SIM card resource
-     * @param SimCardDataUsageNotificationUpdateParams\Threshold $threshold data usage threshold that will trigger the notification
+     * @param \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold|ThresholdShape1 $threshold data usage threshold that will trigger the notification
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        string $id,
-        $simCardID = omit,
-        $threshold = omit,
-        ?RequestOptions $requestOptions = null,
+        string $simCardDataUsageNotificationID,
+        ?string $simCardID = null,
+        \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold|array|null $threshold = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SimCardDataUsageNotificationUpdateResponse {
-        $params = ['simCardID' => $simCardID, 'threshold' => $threshold];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardDataUsageNotificationUpdateResponse {
-        [
-            $parsed, $options,
-        ] = SimCardDataUsageNotificationUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['simCardID' => $simCardID, 'threshold' => $threshold]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['sim_card_data_usage_notifications/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: SimCardDataUsageNotificationUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($simCardDataUsageNotificationID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -153,48 +119,30 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      * @param string $filterSimCardID a valid SIM card ID
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<SimCardDataUsageNotification>
      *
      * @throws APIException
      */
     public function list(
-        $filterSimCardID = omit,
-        $pageNumber = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SimCardDataUsageNotificationListResponse {
-        $params = [
-            'filterSimCardID' => $filterSimCardID,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardDataUsageNotificationListResponse {
-        [$parsed, $options] = SimCardDataUsageNotificationListParams::parseRequest(
-            $params,
-            $requestOptions
+        ?string $filterSimCardID = null,
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filterSimCardID' => $filterSimCardID,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'sim_card_data_usage_notifications',
-            query: $parsed,
-            options: $options,
-            convert: SimCardDataUsageNotificationListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -202,18 +150,18 @@ final class SimCardDataUsageNotificationsService implements SimCardDataUsageNoti
      *
      * Delete the SIM Card Data Usage Notification.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SimCardDataUsageNotificationDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['sim_card_data_usage_notifications/%1$s', $id],
-            options: $requestOptions,
-            convert: SimCardDataUsageNotificationDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

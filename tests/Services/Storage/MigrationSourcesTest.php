@@ -6,7 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth;
+use Telnyx\Storage\MigrationSources\MigrationSourceDeleteResponse;
+use Telnyx\Storage\MigrationSources\MigrationSourceGetResponse;
+use Telnyx\Storage\MigrationSources\MigrationSourceListResponse;
+use Telnyx\Storage\MigrationSources\MigrationSourceNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,10 +40,11 @@ final class MigrationSourcesTest extends TestCase
         $result = $this->client->storage->migrationSources->create(
             bucketName: 'bucket_name',
             provider: 'aws',
-            providerAuth: (new ProviderAuth),
+            providerAuth: []
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MigrationSourceNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,12 +57,14 @@ final class MigrationSourcesTest extends TestCase
         $result = $this->client->storage->migrationSources->create(
             bucketName: 'bucket_name',
             provider: 'aws',
-            providerAuth: (new ProviderAuth)
-                ->withAccessKey('access_key')
-                ->withSecretAccessKey('secret_access_key'),
+            providerAuth: [
+                'accessKey' => 'access_key', 'secretAccessKey' => 'secret_access_key',
+            ],
+            sourceRegion: 'source_region',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MigrationSourceNewResponse::class, $result);
     }
 
     #[Test]
@@ -70,7 +76,8 @@ final class MigrationSourcesTest extends TestCase
 
         $result = $this->client->storage->migrationSources->retrieve('');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MigrationSourceGetResponse::class, $result);
     }
 
     #[Test]
@@ -82,7 +89,8 @@ final class MigrationSourcesTest extends TestCase
 
         $result = $this->client->storage->migrationSources->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MigrationSourceListResponse::class, $result);
     }
 
     #[Test]
@@ -94,6 +102,7 @@ final class MigrationSourcesTest extends TestCase
 
         $result = $this->client->storage->migrationSources->delete('');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MigrationSourceDeleteResponse::class, $result);
     }
 }

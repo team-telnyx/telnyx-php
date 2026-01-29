@@ -4,44 +4,47 @@ declare(strict_types=1);
 
 namespace Telnyx\Fqdns\FqdnListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[fqdn], filter[port], filter[dns_record_type].
  *
- * @phpstan-type filter_alias = array{
- *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int
+ * @phpstan-type FilterShape = array{
+ *   connectionID?: string|null,
+ *   dnsRecordType?: string|null,
+ *   fqdn?: string|null,
+ *   port?: int|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * ID of the FQDN connection to which the FQDN belongs.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * DNS record type used by the FQDN.
      */
-    #[Api('dns_record_type', optional: true)]
+    #[Optional('dns_record_type')]
     public ?string $dnsRecordType;
 
     /**
      * FQDN represented by the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fqdn;
 
     /**
      * Port to use when connecting to the FQDN.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     public function __construct()
@@ -60,14 +63,14 @@ final class Filter implements BaseModel
         ?string $fqdn = null,
         ?int $port = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $dnsRecordType && $obj->dnsRecordType = $dnsRecordType;
-        null !== $fqdn && $obj->fqdn = $fqdn;
-        null !== $port && $obj->port = $port;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $dnsRecordType && $self['dnsRecordType'] = $dnsRecordType;
+        null !== $fqdn && $self['fqdn'] = $fqdn;
+        null !== $port && $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +78,10 @@ final class Filter implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +89,10 @@ final class Filter implements BaseModel
      */
     public function withDNSRecordType(string $dnsRecordType): self
     {
-        $obj = clone $this;
-        $obj->dnsRecordType = $dnsRecordType;
+        $self = clone $this;
+        $self['dnsRecordType'] = $dnsRecordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +100,10 @@ final class Filter implements BaseModel
      */
     public function withFqdn(string $fqdn): self
     {
-        $obj = clone $this;
-        $obj->fqdn = $fqdn;
+        $self = clone $this;
+        $self['fqdn'] = $fqdn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +111,9 @@ final class Filter implements BaseModel
      */
     public function withPort(int $port): self
     {
-        $obj = clone $this;
-        $obj->port = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 }

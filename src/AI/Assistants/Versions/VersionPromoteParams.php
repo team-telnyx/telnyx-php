@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Versions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Promotes a specific version to be the main/current version of the assistant. This will delete any existing canary deploy configuration and send all live production traffic to this version.
  *
- * @see Telnyx\AI\Assistants\Versions->promote
+ * @see Telnyx\Services\AI\Assistants\VersionsService::promote()
  *
- * @phpstan-type version_promote_params = array{assistantID: string}
+ * @phpstan-type VersionPromoteParamsShape = array{assistantID: string}
  */
 final class VersionPromoteParams implements BaseModel
 {
-    /** @use SdkModel<version_promote_params> */
+    /** @use SdkModel<VersionPromoteParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $assistantID;
 
     /**
@@ -51,18 +51,18 @@ final class VersionPromoteParams implements BaseModel
      */
     public static function with(string $assistantID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->assistantID = $assistantID;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withAssistantID(string $assistantID): self
     {
-        $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $self = clone $this;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,22 +6,25 @@ namespace Telnyx\AI\Conversations\Messages\MessageListResponse;
 
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\Role;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   role: value-of<Role>,
+ * @phpstan-import-type ToolCallShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall
+ *
+ * @phpstan-type DataShape = array{
+ *   role: Role|value-of<Role>,
  *   text: string,
- *   createdAt?: \DateTimeInterface,
- *   sentAt?: \DateTimeInterface,
- *   toolCalls?: list<ToolCall>,
+ *   createdAt?: \DateTimeInterface|null,
+ *   sentAt?: \DateTimeInterface|null,
+ *   toolCalls?: list<ToolCall|ToolCallShape>|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
@@ -29,25 +32,25 @@ final class Data implements BaseModel
      *
      * @var value-of<Role> $role
      */
-    #[Api(enum: Role::class)]
+    #[Required(enum: Role::class)]
     public string $role;
 
     /**
      * The message content. Can be null for tool calls.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
      * The datetime the message was created on the conversation. This does not necesarily correspond to the time the message was sent. The best field to use to determine the time the end user experienced the message is `sent_at`.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * The datetime the message was sent to the end user.
      */
-    #[Api('sent_at', optional: true)]
+    #[Optional('sent_at')]
     public ?\DateTimeInterface $sentAt;
 
     /**
@@ -55,7 +58,7 @@ final class Data implements BaseModel
      *
      * @var list<ToolCall>|null $toolCalls
      */
-    #[Api('tool_calls', list: ToolCall::class, optional: true)]
+    #[Optional('tool_calls', list: ToolCall::class)]
     public ?array $toolCalls;
 
     /**
@@ -83,7 +86,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Role|value-of<Role> $role
-     * @param list<ToolCall> $toolCalls
+     * @param list<ToolCall|ToolCallShape>|null $toolCalls
      */
     public static function with(
         Role|string $role,
@@ -92,16 +95,16 @@ final class Data implements BaseModel
         ?\DateTimeInterface $sentAt = null,
         ?array $toolCalls = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['role'] = $role;
-        $obj->text = $text;
+        $self['role'] = $role;
+        $self['text'] = $text;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $sentAt && $obj->sentAt = $sentAt;
-        null !== $toolCalls && $obj->toolCalls = $toolCalls;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $sentAt && $self['sentAt'] = $sentAt;
+        null !== $toolCalls && $self['toolCalls'] = $toolCalls;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +114,10 @@ final class Data implements BaseModel
      */
     public function withRole(Role|string $role): self
     {
-        $obj = clone $this;
-        $obj['role'] = $role;
+        $self = clone $this;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +125,10 @@ final class Data implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,10 +136,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,22 +147,22 @@ final class Data implements BaseModel
      */
     public function withSentAt(\DateTimeInterface $sentAt): self
     {
-        $obj = clone $this;
-        $obj->sentAt = $sentAt;
+        $self = clone $this;
+        $self['sentAt'] = $sentAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Optional tool calls made by the assistant.
      *
-     * @param list<ToolCall> $toolCalls
+     * @param list<ToolCall|ToolCallShape> $toolCalls
      */
     public function withToolCalls(array $toolCalls): self
     {
-        $obj = clone $this;
-        $obj->toolCalls = $toolCalls;
+        $self = clone $this;
+        $self['toolCalls'] = $toolCalls;
 
-        return $obj;
+        return $self;
     }
 }

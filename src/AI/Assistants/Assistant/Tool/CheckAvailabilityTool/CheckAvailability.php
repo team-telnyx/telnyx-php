@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Assistant\Tool\CheckAvailabilityTool;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type check_availability = array{apiKeyRef: string, eventTypeID: int}
+ * @phpstan-type CheckAvailabilityShape = array{
+ *   apiKeyRef: string, eventTypeID: int
+ * }
  */
 final class CheckAvailability implements BaseModel
 {
-    /** @use SdkModel<check_availability> */
+    /** @use SdkModel<CheckAvailabilityShape> */
     use SdkModel;
 
     /**
      * Reference to an integration secret that contains your Cal.com API key. You would pass the `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your Cal.com API key.
      */
-    #[Api('api_key_ref')]
+    #[Required('api_key_ref')]
     public string $apiKeyRef;
 
     /**
      * Event Type ID for which slots are being fetched. [cal.com](https://cal.com/docs/api-reference/v2/slots/get-available-slots#parameter-event-type-id).
      */
-    #[Api('event_type_id')]
+    #[Required('event_type_id')]
     public int $eventTypeID;
 
     /**
@@ -54,12 +56,12 @@ final class CheckAvailability implements BaseModel
      */
     public static function with(string $apiKeyRef, int $eventTypeID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->apiKeyRef = $apiKeyRef;
-        $obj->eventTypeID = $eventTypeID;
+        $self['apiKeyRef'] = $apiKeyRef;
+        $self['eventTypeID'] = $eventTypeID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +69,10 @@ final class CheckAvailability implements BaseModel
      */
     public function withAPIKeyRef(string $apiKeyRef): self
     {
-        $obj = clone $this;
-        $obj->apiKeyRef = $apiKeyRef;
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +80,9 @@ final class CheckAvailability implements BaseModel
      */
     public function withEventTypeID(int $eventTypeID): self
     {
-        $obj = clone $this;
-        $obj->eventTypeID = $eventTypeID;
+        $self = clone $this;
+        $self['eventTypeID'] = $eventTypeID;
 
-        return $obj;
+        return $self;
     }
 }

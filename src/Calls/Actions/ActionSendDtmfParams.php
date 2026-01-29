@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -16,40 +17,43 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * There are no webhooks associated with this command.
  *
- * @see Telnyx\Calls\Actions->sendDtmf
+ * @see Telnyx\Services\Calls\ActionsService::sendDtmf()
  *
- * @phpstan-type action_send_dtmf_params = array{
- *   digits: string, clientState?: string, commandID?: string, durationMillis?: int
+ * @phpstan-type ActionSendDtmfParamsShape = array{
+ *   digits: string,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   durationMillis?: int|null,
  * }
  */
 final class ActionSendDtmfParams implements BaseModel
 {
-    /** @use SdkModel<action_send_dtmf_params> */
+    /** @use SdkModel<ActionSendDtmfParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * DTMF digits to send. Valid digits are 0-9, A-D, *, and #. Pauses can be added using w (0.5s) and W (1s).
      */
-    #[Api]
+    #[Required]
     public string $digits;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
      * Specifies for how many milliseconds each digit will be played in the audio stream. Ranges from 100 to 500ms.
      */
-    #[Api('duration_millis', optional: true)]
+    #[Optional('duration_millis')]
     public ?int $durationMillis;
 
     /**
@@ -82,15 +86,15 @@ final class ActionSendDtmfParams implements BaseModel
         ?string $commandID = null,
         ?int $durationMillis = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->digits = $digits;
+        $self['digits'] = $digits;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $durationMillis && $obj->durationMillis = $durationMillis;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $durationMillis && $self['durationMillis'] = $durationMillis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -98,10 +102,10 @@ final class ActionSendDtmfParams implements BaseModel
      */
     public function withDigits(string $digits): self
     {
-        $obj = clone $this;
-        $obj->digits = $digits;
+        $self = clone $this;
+        $self['digits'] = $digits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +113,10 @@ final class ActionSendDtmfParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +124,10 @@ final class ActionSendDtmfParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,9 +135,9 @@ final class ActionSendDtmfParams implements BaseModel
      */
     public function withDurationMillis(int $durationMillis): self
     {
-        $obj = clone $this;
-        $obj->durationMillis = $durationMillis;
+        $self = clone $this;
+        $self['durationMillis'] = $durationMillis;
 
-        return $obj;
+        return $self;
     }
 }

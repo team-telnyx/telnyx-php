@@ -4,38 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\AccessIPRanges\AccessIPRangeListParams\Filter\CidrBlock;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * CIDR block pattern matching operations.
  *
- * @phpstan-type cidr_block_pattern_filter = array{
- *   contains?: string, endswith?: string, startswith?: string
+ * @phpstan-type CidrBlockPatternFilterShape = array{
+ *   contains?: string|null, endswith?: string|null, startswith?: string|null
  * }
  */
 final class CidrBlockPatternFilter implements BaseModel
 {
-    /** @use SdkModel<cidr_block_pattern_filter> */
+    /** @use SdkModel<CidrBlockPatternFilterShape> */
     use SdkModel;
 
     /**
      * Filter CIDR blocks containing the specified string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     /**
      * Filter CIDR blocks ending with the specified string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $endswith;
 
     /**
      * Filter CIDR blocks starting with the specified string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $startswith;
 
     public function __construct()
@@ -53,13 +53,13 @@ final class CidrBlockPatternFilter implements BaseModel
         ?string $endswith = null,
         ?string $startswith = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
-        null !== $endswith && $obj->endswith = $endswith;
-        null !== $startswith && $obj->startswith = $startswith;
+        null !== $contains && $self['contains'] = $contains;
+        null !== $endswith && $self['endswith'] = $endswith;
+        null !== $startswith && $self['startswith'] = $startswith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class CidrBlockPatternFilter implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +78,10 @@ final class CidrBlockPatternFilter implements BaseModel
      */
     public function withEndswith(string $endswith): self
     {
-        $obj = clone $this;
-        $obj->endswith = $endswith;
+        $self = clone $this;
+        $self['endswith'] = $endswith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +89,9 @@ final class CidrBlockPatternFilter implements BaseModel
      */
     public function withStartswith(string $startswith): self
     {
-        $obj = clone $this;
-        $obj->startswith = $startswith;
+        $self = clone $this;
+        $self['startswith'] = $startswith;
 
-        return $obj;
+        return $self;
     }
 }

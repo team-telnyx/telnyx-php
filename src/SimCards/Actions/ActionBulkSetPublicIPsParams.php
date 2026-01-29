@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * This API triggers an asynchronous operation to set a public IP for each of the specified SIM cards.<br/>
- * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api/wireless/list-sim-card-actions) API.
+ * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Action can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
  *
- * @see Telnyx\SimCards\Actions->bulkSetPublicIPs
+ * @see Telnyx\Services\SimCards\ActionsService::bulkSetPublicIPs()
  *
- * @phpstan-type action_bulk_set_public_ips_params = array{
+ * @phpstan-type ActionBulkSetPublicIPsParamsShape = array{
  *   simCardIDs: list<string>
  * }
  */
 final class ActionBulkSetPublicIPsParams implements BaseModel
 {
-    /** @use SdkModel<action_bulk_set_public_ips_params> */
+    /** @use SdkModel<ActionBulkSetPublicIPsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<string> $simCardIDs */
-    #[Api('sim_card_ids', list: 'string')]
+    #[Required('sim_card_ids', list: 'string')]
     public array $simCardIDs;
 
     /**
@@ -57,11 +57,11 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
      */
     public static function with(array $simCardIDs): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->simCardIDs = $simCardIDs;
+        $self['simCardIDs'] = $simCardIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,9 +69,9 @@ final class ActionBulkSetPublicIPsParams implements BaseModel
      */
     public function withSimCardIDs(array $simCardIDs): self
     {
-        $obj = clone $this;
-        $obj->simCardIDs = $simCardIDs;
+        $self = clone $this;
+        $self['simCardIDs'] = $simCardIDs;
 
-        return $obj;
+        return $self;
     }
 }

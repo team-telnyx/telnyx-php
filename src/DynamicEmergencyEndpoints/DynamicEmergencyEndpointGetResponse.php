@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyEndpoints;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type dynamic_emergency_endpoint_get_response = array{
- *   data?: DynamicEmergencyEndpoint
+ * @phpstan-import-type DynamicEmergencyEndpointShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint
+ *
+ * @phpstan-type DynamicEmergencyEndpointGetResponseShape = array{
+ *   data?: null|DynamicEmergencyEndpoint|DynamicEmergencyEndpointShape
  * }
  */
-final class DynamicEmergencyEndpointGetResponse implements BaseModel, ResponseConverter
+final class DynamicEmergencyEndpointGetResponse implements BaseModel
 {
-    /** @use SdkModel<dynamic_emergency_endpoint_get_response> */
+    /** @use SdkModel<DynamicEmergencyEndpointGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?DynamicEmergencyEndpoint $data;
 
     public function __construct()
@@ -34,21 +32,27 @@ final class DynamicEmergencyEndpointGetResponse implements BaseModel, ResponseCo
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DynamicEmergencyEndpoint|DynamicEmergencyEndpointShape|null $data
      */
-    public static function with(?DynamicEmergencyEndpoint $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        DynamicEmergencyEndpoint|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(DynamicEmergencyEndpoint $data): self
+    /**
+     * @param DynamicEmergencyEndpoint|DynamicEmergencyEndpointShape $data
+     */
+    public function withData(DynamicEmergencyEndpoint|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

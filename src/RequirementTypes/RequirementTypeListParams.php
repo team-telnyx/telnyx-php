@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RequirementTypes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,22 +14,24 @@ use Telnyx\RequirementTypes\RequirementTypeListParams\Sort;
 /**
  * List all requirement types ordered by created_at descending.
  *
- * @see Telnyx\RequirementTypes->list
+ * @see Telnyx\Services\RequirementTypesService::list()
  *
- * @phpstan-type requirement_type_list_params = array{
- *   filter?: Filter, sort?: list<Sort|value-of<Sort>>
+ * @phpstan-import-type FilterShape from \Telnyx\RequirementTypes\RequirementTypeListParams\Filter
+ *
+ * @phpstan-type RequirementTypeListParamsShape = array{
+ *   filter?: null|Filter|FilterShape, sort?: list<Sort|value-of<Sort>>|null
  * }
  */
 final class RequirementTypeListParams implements BaseModel
 {
-    /** @use SdkModel<requirement_type_list_params> */
+    /** @use SdkModel<RequirementTypeListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
@@ -37,7 +39,7 @@ final class RequirementTypeListParams implements BaseModel
      *
      * @var list<value-of<Sort>>|null $sort
      */
-    #[Api(list: Sort::class, optional: true)]
+    #[Optional(list: Sort::class)]
     public ?array $sort;
 
     public function __construct()
@@ -50,27 +52,32 @@ final class RequirementTypeListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Sort|value-of<Sort>> $sort
+     * @param Filter|FilterShape|null $filter
+     * @param list<Sort|value-of<Sort>>|null $sort
      */
-    public static function with(?Filter $filter = null, ?array $sort = null): self
-    {
-        $obj = new self;
+    public static function with(
+        Filter|array|null $filter = null,
+        ?array $sort = null
+    ): self {
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter for requirement types (deepObject style). Originally: filter[name].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +87,9 @@ final class RequirementTypeListParams implements BaseModel
      */
     public function withSort(array $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,50 +15,54 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo;
 /**
  * Preview the LOA template that would be generated without need to create LOA configuration.
  *
- * @see Telnyx\Porting\LoaConfigurations->preview0
+ * @see Telnyx\Services\Porting\LoaConfigurationsService::preview0()
  *
- * @phpstan-type loa_configuration_preview_0_params = array{
- *   address: Address,
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo
+ *
+ * @phpstan-type LoaConfigurationPreview0ParamsShape = array{
+ *   address: Address|AddressShape,
  *   companyName: string,
- *   contact: Contact,
- *   logo: Logo,
+ *   contact: Contact|ContactShape,
+ *   logo: Logo|LogoShape,
  *   name: string,
  * }
  */
 final class LoaConfigurationPreview0Params implements BaseModel
 {
-    /** @use SdkModel<loa_configuration_preview_0_params> */
+    /** @use SdkModel<LoaConfigurationPreview0ParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The address of the company.
      */
-    #[Api]
+    #[Required]
     public Address $address;
 
     /**
      * The name of the company.
      */
-    #[Api('company_name')]
+    #[Required('company_name')]
     public string $companyName;
 
     /**
      * The contact information of the company.
      */
-    #[Api]
+    #[Required]
     public Contact $contact;
 
     /**
      * The logo of the LOA configuration.
      */
-    #[Api]
+    #[Required]
     public Logo $logo;
 
     /**
      * The name of the LOA configuration.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -91,34 +95,40 @@ final class LoaConfigurationPreview0Params implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Address|AddressShape $address
+     * @param Contact|ContactShape $contact
+     * @param Logo|LogoShape $logo
      */
     public static function with(
-        Address $address,
+        Address|array $address,
         string $companyName,
-        Contact $contact,
-        Logo $logo,
+        Contact|array $contact,
+        Logo|array $logo,
         string $name,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->address = $address;
-        $obj->companyName = $companyName;
-        $obj->contact = $contact;
-        $obj->logo = $logo;
-        $obj->name = $name;
+        $self['address'] = $address;
+        $self['companyName'] = $companyName;
+        $self['contact'] = $contact;
+        $self['logo'] = $logo;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The address of the company.
+     *
+     * @param Address|AddressShape $address
      */
-    public function withAddress(Address $address): self
+    public function withAddress(Address|array $address): self
     {
-        $obj = clone $this;
-        $obj->address = $address;
+        $self = clone $this;
+        $self['address'] = $address;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,32 +136,36 @@ final class LoaConfigurationPreview0Params implements BaseModel
      */
     public function withCompanyName(string $companyName): self
     {
-        $obj = clone $this;
-        $obj->companyName = $companyName;
+        $self = clone $this;
+        $self['companyName'] = $companyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The contact information of the company.
+     *
+     * @param Contact|ContactShape $contact
      */
-    public function withContact(Contact $contact): self
+    public function withContact(Contact|array $contact): self
     {
-        $obj = clone $this;
-        $obj->contact = $contact;
+        $self = clone $this;
+        $self['contact'] = $contact;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The logo of the LOA configuration.
+     *
+     * @param Logo|LogoShape $logo
      */
-    public function withLogo(Logo $logo): self
+    public function withLogo(Logo|array $logo): self
     {
-        $obj = clone $this;
-        $obj->logo = $logo;
+        $self = clone $this;
+        $self['logo'] = $logo;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,9 +173,9 @@ final class LoaConfigurationPreview0Params implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

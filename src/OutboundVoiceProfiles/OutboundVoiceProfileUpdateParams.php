@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\OutboundVoiceProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,80 +14,83 @@ use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow;
 /**
  * Updates an existing outbound voice profile.
  *
- * @see Telnyx\OutboundVoiceProfiles->update
+ * @see Telnyx\Services\OutboundVoiceProfilesService::update()
  *
- * @phpstan-type outbound_voice_profile_update_params = array{
+ * @phpstan-import-type OutboundCallRecordingShape from \Telnyx\OutboundVoiceProfiles\OutboundCallRecording
+ * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow
+ *
+ * @phpstan-type OutboundVoiceProfileUpdateParamsShape = array{
  *   name: string,
  *   billingGroupID?: string|null,
- *   callRecording?: OutboundCallRecording,
- *   callingWindow?: CallingWindow,
+ *   callRecording?: null|OutboundCallRecording|OutboundCallRecordingShape,
+ *   callingWindow?: null|CallingWindow|CallingWindowShape,
  *   concurrentCallLimit?: int|null,
- *   dailySpendLimit?: string,
- *   dailySpendLimitEnabled?: bool,
- *   enabled?: bool,
- *   maxDestinationRate?: float,
- *   servicePlan?: ServicePlan|value-of<ServicePlan>,
- *   tags?: list<string>,
- *   trafficType?: TrafficType|value-of<TrafficType>,
- *   usagePaymentMethod?: UsagePaymentMethod|value-of<UsagePaymentMethod>,
- *   whitelistedDestinations?: list<string>,
+ *   dailySpendLimit?: string|null,
+ *   dailySpendLimitEnabled?: bool|null,
+ *   enabled?: bool|null,
+ *   maxDestinationRate?: float|null,
+ *   servicePlan?: null|ServicePlan|value-of<ServicePlan>,
+ *   tags?: list<string>|null,
+ *   trafficType?: null|TrafficType|value-of<TrafficType>,
+ *   usagePaymentMethod?: null|UsagePaymentMethod|value-of<UsagePaymentMethod>,
+ *   whitelistedDestinations?: list<string>|null,
  * }
  */
 final class OutboundVoiceProfileUpdateParams implements BaseModel
 {
-    /** @use SdkModel<outbound_voice_profile_update_params> */
+    /** @use SdkModel<OutboundVoiceProfileUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A user-supplied name to help with organization.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
      */
-    #[Api('billing_group_id', nullable: true, optional: true)]
+    #[Optional('billing_group_id', nullable: true)]
     public ?string $billingGroupID;
 
-    #[Api('call_recording', optional: true)]
+    #[Optional('call_recording')]
     public ?OutboundCallRecording $callRecording;
 
     /**
      * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile.
      */
-    #[Api('calling_window', optional: true)]
+    #[Optional('calling_window')]
     public ?CallingWindow $callingWindow;
 
     /**
      * Must be no more than your global concurrent call limit. Null means no limit.
      */
-    #[Api('concurrent_call_limit', nullable: true, optional: true)]
+    #[Optional('concurrent_call_limit', nullable: true)]
     public ?int $concurrentCallLimit;
 
     /**
      * The maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls.
      */
-    #[Api('daily_spend_limit', optional: true)]
+    #[Optional('daily_spend_limit')]
     public ?string $dailySpendLimit;
 
     /**
      * Specifies whether to enforce the daily_spend_limit on this outbound voice profile.
      */
-    #[Api('daily_spend_limit_enabled', optional: true)]
+    #[Optional('daily_spend_limit_enabled')]
     public ?bool $dailySpendLimitEnabled;
 
     /**
      * Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
     /**
      * Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
      */
-    #[Api('max_destination_rate', optional: true)]
+    #[Optional('max_destination_rate')]
     public ?float $maxDestinationRate;
 
     /**
@@ -94,11 +98,11 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      *
      * @var value-of<ServicePlan>|null $servicePlan
      */
-    #[Api('service_plan', enum: ServicePlan::class, optional: true)]
+    #[Optional('service_plan', enum: ServicePlan::class)]
     public ?string $servicePlan;
 
     /** @var list<string>|null $tags */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
@@ -106,7 +110,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      *
      * @var value-of<TrafficType>|null $trafficType
      */
-    #[Api('traffic_type', enum: TrafficType::class, optional: true)]
+    #[Optional('traffic_type', enum: TrafficType::class)]
     public ?string $trafficType;
 
     /**
@@ -114,11 +118,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      *
      * @var value-of<UsagePaymentMethod>|null $usagePaymentMethod
      */
-    #[Api(
-        'usage_payment_method',
-        enum: UsagePaymentMethod::class,
-        optional: true
-    )]
+    #[Optional('usage_payment_method', enum: UsagePaymentMethod::class)]
     public ?string $usagePaymentMethod;
 
     /**
@@ -126,7 +126,7 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      *
      * @var list<string>|null $whitelistedDestinations
      */
-    #[Api('whitelisted_destinations', list: 'string', optional: true)]
+    #[Optional('whitelisted_destinations', list: 'string')]
     public ?array $whitelistedDestinations;
 
     /**
@@ -153,17 +153,19 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ServicePlan|value-of<ServicePlan> $servicePlan
-     * @param list<string> $tags
-     * @param TrafficType|value-of<TrafficType> $trafficType
-     * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod
-     * @param list<string> $whitelistedDestinations
+     * @param OutboundCallRecording|OutboundCallRecordingShape|null $callRecording
+     * @param CallingWindow|CallingWindowShape|null $callingWindow
+     * @param ServicePlan|value-of<ServicePlan>|null $servicePlan
+     * @param list<string>|null $tags
+     * @param TrafficType|value-of<TrafficType>|null $trafficType
+     * @param UsagePaymentMethod|value-of<UsagePaymentMethod>|null $usagePaymentMethod
+     * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
         string $name,
         ?string $billingGroupID = null,
-        ?OutboundCallRecording $callRecording = null,
-        ?CallingWindow $callingWindow = null,
+        OutboundCallRecording|array|null $callRecording = null,
+        CallingWindow|array|null $callingWindow = null,
         ?int $concurrentCallLimit = null,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
@@ -175,25 +177,25 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
         UsagePaymentMethod|string|null $usagePaymentMethod = null,
         ?array $whitelistedDestinations = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->name = $name;
+        $self['name'] = $name;
 
-        null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
-        null !== $callRecording && $obj->callRecording = $callRecording;
-        null !== $callingWindow && $obj->callingWindow = $callingWindow;
-        null !== $concurrentCallLimit && $obj->concurrentCallLimit = $concurrentCallLimit;
-        null !== $dailySpendLimit && $obj->dailySpendLimit = $dailySpendLimit;
-        null !== $dailySpendLimitEnabled && $obj->dailySpendLimitEnabled = $dailySpendLimitEnabled;
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $maxDestinationRate && $obj->maxDestinationRate = $maxDestinationRate;
-        null !== $servicePlan && $obj['servicePlan'] = $servicePlan;
-        null !== $tags && $obj->tags = $tags;
-        null !== $trafficType && $obj['trafficType'] = $trafficType;
-        null !== $usagePaymentMethod && $obj['usagePaymentMethod'] = $usagePaymentMethod;
-        null !== $whitelistedDestinations && $obj->whitelistedDestinations = $whitelistedDestinations;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $callRecording && $self['callRecording'] = $callRecording;
+        null !== $callingWindow && $self['callingWindow'] = $callingWindow;
+        null !== $concurrentCallLimit && $self['concurrentCallLimit'] = $concurrentCallLimit;
+        null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
+        null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $maxDestinationRate && $self['maxDestinationRate'] = $maxDestinationRate;
+        null !== $servicePlan && $self['servicePlan'] = $servicePlan;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $trafficType && $self['trafficType'] = $trafficType;
+        null !== $usagePaymentMethod && $self['usagePaymentMethod'] = $usagePaymentMethod;
+        null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +203,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,30 +214,35 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withBillingGroupID(?string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj->billingGroupID = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
+     */
     public function withCallRecording(
-        OutboundCallRecording $callRecording
+        OutboundCallRecording|array $callRecording
     ): self {
-        $obj = clone $this;
-        $obj->callRecording = $callRecording;
+        $self = clone $this;
+        $self['callRecording'] = $callRecording;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * (BETA) Specifies the time window and call limits for calls made using this outbound voice profile.
+     *
+     * @param CallingWindow|CallingWindowShape $callingWindow
      */
-    public function withCallingWindow(CallingWindow $callingWindow): self
+    public function withCallingWindow(CallingWindow|array $callingWindow): self
     {
-        $obj = clone $this;
-        $obj->callingWindow = $callingWindow;
+        $self = clone $this;
+        $self['callingWindow'] = $callingWindow;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +250,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withConcurrentCallLimit(?int $concurrentCallLimit): self
     {
-        $obj = clone $this;
-        $obj->concurrentCallLimit = $concurrentCallLimit;
+        $self = clone $this;
+        $self['concurrentCallLimit'] = $concurrentCallLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +261,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withDailySpendLimit(string $dailySpendLimit): self
     {
-        $obj = clone $this;
-        $obj->dailySpendLimit = $dailySpendLimit;
+        $self = clone $this;
+        $self['dailySpendLimit'] = $dailySpendLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -266,10 +273,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     public function withDailySpendLimitEnabled(
         bool $dailySpendLimitEnabled
     ): self {
-        $obj = clone $this;
-        $obj->dailySpendLimitEnabled = $dailySpendLimitEnabled;
+        $self = clone $this;
+        $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -277,10 +284,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withEnabled(bool $enabled): self
     {
-        $obj = clone $this;
-        $obj->enabled = $enabled;
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -288,10 +295,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withMaxDestinationRate(float $maxDestinationRate): self
     {
-        $obj = clone $this;
-        $obj->maxDestinationRate = $maxDestinationRate;
+        $self = clone $this;
+        $self['maxDestinationRate'] = $maxDestinationRate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -301,10 +308,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withServicePlan(ServicePlan|string $servicePlan): self
     {
-        $obj = clone $this;
-        $obj['servicePlan'] = $servicePlan;
+        $self = clone $this;
+        $self['servicePlan'] = $servicePlan;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -312,10 +319,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -325,10 +332,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
      */
     public function withTrafficType(TrafficType|string $trafficType): self
     {
-        $obj = clone $this;
-        $obj['trafficType'] = $trafficType;
+        $self = clone $this;
+        $self['trafficType'] = $trafficType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -339,10 +346,10 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     public function withUsagePaymentMethod(
         UsagePaymentMethod|string $usagePaymentMethod
     ): self {
-        $obj = clone $this;
-        $obj['usagePaymentMethod'] = $usagePaymentMethod;
+        $self = clone $this;
+        $self['usagePaymentMethod'] = $usagePaymentMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -353,9 +360,9 @@ final class OutboundVoiceProfileUpdateParams implements BaseModel
     public function withWhitelistedDestinations(
         array $whitelistedDestinations
     ): self {
-        $obj = clone $this;
-        $obj->whitelistedDestinations = $whitelistedDestinations;
+        $self = clone $this;
+        $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\IntegrationSecrets;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,26 +14,26 @@ use Telnyx\IntegrationSecrets\IntegrationSecretCreateParams\Type;
 /**
  * Create a new secret with an associated identifier that can be used to securely integrate with other services.
  *
- * @see Telnyx\IntegrationSecrets->create
+ * @see Telnyx\Services\IntegrationSecretsService::create()
  *
- * @phpstan-type integration_secret_create_params = array{
+ * @phpstan-type IntegrationSecretCreateParamsShape = array{
  *   identifier: string,
  *   type: Type|value-of<Type>,
- *   token?: string,
- *   password?: string,
- *   username?: string,
+ *   token?: string|null,
+ *   password?: string|null,
+ *   username?: string|null,
  * }
  */
 final class IntegrationSecretCreateParams implements BaseModel
 {
-    /** @use SdkModel<integration_secret_create_params> */
+    /** @use SdkModel<IntegrationSecretCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The unique identifier of the secret.
      */
-    #[Api]
+    #[Required]
     public string $identifier;
 
     /**
@@ -40,25 +41,25 @@ final class IntegrationSecretCreateParams implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
      * The token for the secret. Required for bearer type secrets, ignored otherwise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $token;
 
     /**
      * The password for the secret. Required for basic type secrets, ignored otherwise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $password;
 
     /**
      * The username for the secret. Required for basic type secrets, ignored otherwise.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $username;
 
     /**
@@ -94,16 +95,16 @@ final class IntegrationSecretCreateParams implements BaseModel
         ?string $password = null,
         ?string $username = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->identifier = $identifier;
-        $obj['type'] = $type;
+        $self['identifier'] = $identifier;
+        $self['type'] = $type;
 
-        null !== $token && $obj->token = $token;
-        null !== $password && $obj->password = $password;
-        null !== $username && $obj->username = $username;
+        null !== $token && $self['token'] = $token;
+        null !== $password && $self['password'] = $password;
+        null !== $username && $self['username'] = $username;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -111,10 +112,10 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withIdentifier(string $identifier): self
     {
-        $obj = clone $this;
-        $obj->identifier = $identifier;
+        $self = clone $this;
+        $self['identifier'] = $identifier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +125,10 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +136,10 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withToken(string $token): self
     {
-        $obj = clone $this;
-        $obj->token = $token;
+        $self = clone $this;
+        $self['token'] = $token;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +147,10 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withPassword(string $password): self
     {
-        $obj = clone $this;
-        $obj->password = $password;
+        $self = clone $this;
+        $self['password'] = $password;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -157,9 +158,9 @@ final class IntegrationSecretCreateParams implements BaseModel
      */
     public function withUsername(string $username): self
     {
-        $obj = clone $this;
-        $obj->username = $username;
+        $self = clone $this;
+        $self['username'] = $username;
 
-        return $obj;
+        return $self;
     }
 }

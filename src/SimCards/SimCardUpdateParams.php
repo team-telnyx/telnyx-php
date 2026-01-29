@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCards;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,19 +14,22 @@ use Telnyx\SimCardStatus;
 /**
  * Updates SIM card data.
  *
- * @see Telnyx\SimCards->update
+ * @see Telnyx\Services\SimCardsService::update()
  *
- * @phpstan-type sim_card_update_params = array{
+ * @phpstan-import-type DataLimitShape from \Telnyx\SimCards\SimCardUpdateParams\DataLimit
+ * @phpstan-import-type SimCardStatusShape from \Telnyx\SimCardStatus
+ *
+ * @phpstan-type SimCardUpdateParamsShape = array{
  *   authorizedImeis?: list<string>|null,
- *   dataLimit?: DataLimit,
- *   simCardGroupID?: string,
- *   status?: SimCardStatus,
- *   tags?: list<string>,
+ *   dataLimit?: null|DataLimit|DataLimitShape,
+ *   simCardGroupID?: string|null,
+ *   status?: null|SimCardStatus|SimCardStatusShape,
+ *   tags?: list<string>|null,
  * }
  */
 final class SimCardUpdateParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_update_params> */
+    /** @use SdkModel<SimCardUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -35,22 +38,22 @@ final class SimCardUpdateParams implements BaseModel
      *
      * @var list<string>|null $authorizedImeis
      */
-    #[Api('authorized_imeis', list: 'string', nullable: true, optional: true)]
+    #[Optional('authorized_imeis', list: 'string', nullable: true)]
     public ?array $authorizedImeis;
 
     /**
      * The SIM card individual data limit configuration.
      */
-    #[Api('data_limit', optional: true)]
+    #[Optional('data_limit')]
     public ?DataLimit $dataLimit;
 
     /**
      * The group SIMCardGroup identification. This attribute can be <code>null</code> when it's present in an associated resource.
      */
-    #[Api('sim_card_group_id', optional: true)]
+    #[Optional('sim_card_group_id')]
     public ?string $simCardGroupID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCardStatus $status;
 
     /**
@@ -58,7 +61,7 @@ final class SimCardUpdateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     public function __construct()
@@ -72,24 +75,26 @@ final class SimCardUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string>|null $authorizedImeis
-     * @param list<string> $tags
+     * @param DataLimit|DataLimitShape|null $dataLimit
+     * @param SimCardStatus|SimCardStatusShape|null $status
+     * @param list<string>|null $tags
      */
     public static function with(
         ?array $authorizedImeis = null,
-        ?DataLimit $dataLimit = null,
+        DataLimit|array|null $dataLimit = null,
         ?string $simCardGroupID = null,
-        ?SimCardStatus $status = null,
+        SimCardStatus|array|null $status = null,
         ?array $tags = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorizedImeis && $obj->authorizedImeis = $authorizedImeis;
-        null !== $dataLimit && $obj->dataLimit = $dataLimit;
-        null !== $simCardGroupID && $obj->simCardGroupID = $simCardGroupID;
-        null !== $status && $obj->status = $status;
-        null !== $tags && $obj->tags = $tags;
+        null !== $authorizedImeis && $self['authorizedImeis'] = $authorizedImeis;
+        null !== $dataLimit && $self['dataLimit'] = $dataLimit;
+        null !== $simCardGroupID && $self['simCardGroupID'] = $simCardGroupID;
+        null !== $status && $self['status'] = $status;
+        null !== $tags && $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,21 +104,23 @@ final class SimCardUpdateParams implements BaseModel
      */
     public function withAuthorizedImeis(?array $authorizedImeis): self
     {
-        $obj = clone $this;
-        $obj->authorizedImeis = $authorizedImeis;
+        $self = clone $this;
+        $self['authorizedImeis'] = $authorizedImeis;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The SIM card individual data limit configuration.
+     *
+     * @param DataLimit|DataLimitShape $dataLimit
      */
-    public function withDataLimit(DataLimit $dataLimit): self
+    public function withDataLimit(DataLimit|array $dataLimit): self
     {
-        $obj = clone $this;
-        $obj->dataLimit = $dataLimit;
+        $self = clone $this;
+        $self['dataLimit'] = $dataLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,18 +128,21 @@ final class SimCardUpdateParams implements BaseModel
      */
     public function withSimCardGroupID(string $simCardGroupID): self
     {
-        $obj = clone $this;
-        $obj->simCardGroupID = $simCardGroupID;
+        $self = clone $this;
+        $self['simCardGroupID'] = $simCardGroupID;
 
-        return $obj;
+        return $self;
     }
 
-    public function withStatus(SimCardStatus $status): self
+    /**
+     * @param SimCardStatus|SimCardStatusShape $status
+     */
+    public function withStatus(SimCardStatus|array $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,9 +152,9 @@ final class SimCardUpdateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,57 +4,58 @@ declare(strict_types=1);
 
 namespace Telnyx\DynamicEmergencyEndpoints;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint\Status;
 
 /**
- * @phpstan-type dynamic_emergency_endpoint = array{
+ * @phpstan-type DynamicEmergencyEndpointShape = array{
  *   callbackNumber: string,
  *   callerName: string,
  *   dynamicEmergencyAddressID: string,
- *   id?: string,
- *   createdAt?: string,
- *   recordType?: string,
- *   sipFromID?: string,
- *   status?: value-of<Status>,
- *   updatedAt?: string,
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   sipFromID?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: string|null,
  * }
  */
 final class DynamicEmergencyEndpoint implements BaseModel
 {
-    /** @use SdkModel<dynamic_emergency_endpoint> */
+    /** @use SdkModel<DynamicEmergencyEndpointShape> */
     use SdkModel;
 
-    #[Api('callback_number')]
+    #[Required('callback_number')]
     public string $callbackNumber;
 
-    #[Api('caller_name')]
+    #[Required('caller_name')]
     public string $callerName;
 
     /**
      * An id of a currently active dynamic emergency location.
      */
-    #[Api('dynamic_emergency_address_id')]
+    #[Required('dynamic_emergency_address_id')]
     public string $dynamicEmergencyAddressID;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date of when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
-    #[Api('sip_from_id', optional: true)]
+    #[Optional('sip_from_id')]
     public ?string $sipFromID;
 
     /**
@@ -62,13 +63,13 @@ final class DynamicEmergencyEndpoint implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date of when the resource was last updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     /**
@@ -100,7 +101,7 @@ final class DynamicEmergencyEndpoint implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         string $callbackNumber,
@@ -113,36 +114,36 @@ final class DynamicEmergencyEndpoint implements BaseModel
         Status|string|null $status = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->callbackNumber = $callbackNumber;
-        $obj->callerName = $callerName;
-        $obj->dynamicEmergencyAddressID = $dynamicEmergencyAddressID;
+        $self['callbackNumber'] = $callbackNumber;
+        $self['callerName'] = $callerName;
+        $self['dynamicEmergencyAddressID'] = $dynamicEmergencyAddressID;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $sipFromID && $obj->sipFromID = $sipFromID;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sipFromID && $self['sipFromID'] = $sipFromID;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallbackNumber(string $callbackNumber): self
     {
-        $obj = clone $this;
-        $obj->callbackNumber = $callbackNumber;
+        $self = clone $this;
+        $self['callbackNumber'] = $callbackNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withCallerName(string $callerName): self
     {
-        $obj = clone $this;
-        $obj->callerName = $callerName;
+        $self = clone $this;
+        $self['callerName'] = $callerName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,18 +152,18 @@ final class DynamicEmergencyEndpoint implements BaseModel
     public function withDynamicEmergencyAddressID(
         string $dynamicEmergencyAddressID
     ): self {
-        $obj = clone $this;
-        $obj->dynamicEmergencyAddressID = $dynamicEmergencyAddressID;
+        $self = clone $this;
+        $self['dynamicEmergencyAddressID'] = $dynamicEmergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +171,10 @@ final class DynamicEmergencyEndpoint implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,18 +182,18 @@ final class DynamicEmergencyEndpoint implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withSipFromID(string $sipFromID): self
     {
-        $obj = clone $this;
-        $obj->sipFromID = $sipFromID;
+        $self = clone $this;
+        $self['sipFromID'] = $sipFromID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -202,10 +203,10 @@ final class DynamicEmergencyEndpoint implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -213,9 +214,9 @@ final class DynamicEmergencyEndpoint implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

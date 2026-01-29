@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingDeleteResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingGetResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingListResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +49,8 @@ final class MessagingTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingNewResponse::class, $result);
     }
 
     #[Test]
@@ -64,10 +69,37 @@ final class MessagingTest extends TestCase
             ->create(
                 endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
                 startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+                connections: [123, 456],
+                directions: [1, 2],
+                filters: [
+                    [
+                        'billingGroup' => 'adfaa016-f921-4b6c-97bb-e4c1dad231c5',
+                        'cld' => '+13129457420',
+                        'cldFilter' => 'contains',
+                        'cli' => '+13129457420',
+                        'cliFilter' => 'contains',
+                        'filterType' => 'and',
+                        'tagsList' => 'tag1',
+                    ],
+                ],
+                includeMessageBody: true,
+                managedAccounts: [
+                    'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                    '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+                ],
+                profiles: [
+                    '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+                    '7d4e3f8a-9b2c-4e1d-8f5a-1a2b3c4d5e6f',
+                ],
+                recordTypes: [1, 2],
+                reportName: 'My MDR Report',
+                selectAllManagedAccounts: false,
+                timezone: 'UTC',
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingNewResponse::class, $result);
     }
 
     #[Test]
@@ -86,7 +118,8 @@ final class MessagingTest extends TestCase
             ->retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingGetResponse::class, $result);
     }
 
     #[Test]
@@ -105,7 +138,8 @@ final class MessagingTest extends TestCase
             ->list()
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingListResponse::class, $result);
     }
 
     #[Test]
@@ -124,6 +158,7 @@ final class MessagingTest extends TestCase
             ->delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingDeleteResponse::class, $result);
     }
 }

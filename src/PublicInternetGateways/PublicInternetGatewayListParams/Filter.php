@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PublicInternetGateways\PublicInternetGatewayListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[network_id].
  *
- * @phpstan-type filter_alias = array{networkID?: string}
+ * @phpstan-type FilterShape = array{networkID?: string|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * The associated network id to filter on.
      */
-    #[Api('network_id', optional: true)]
+    #[Optional('network_id')]
     public ?string $networkID;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $networkID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $networkID && $obj->networkID = $networkID;
+        null !== $networkID && $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withNetworkID(string $networkID): self
     {
-        $obj = clone $this;
-        $obj->networkID = $networkID;
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 }

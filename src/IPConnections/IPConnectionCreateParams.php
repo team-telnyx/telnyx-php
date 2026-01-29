@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\IPConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\ConnectionNoiseSuppressionDetails;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,46 +14,58 @@ use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
+use Telnyx\IPConnections\IPConnectionCreateParams\JitterBuffer;
+use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 
 /**
  * Creates an IP connection.
  *
- * @see Telnyx\IPConnections->create
+ * @see Telnyx\Services\IPConnectionsService::create()
  *
- * @phpstan-type ip_connection_create_params = array{
- *   active?: bool,
- *   anchorsiteOverride?: AnchorsiteOverride|value-of<AnchorsiteOverride>,
+ * @phpstan-import-type InboundShape from \Telnyx\IPConnections\IPConnectionCreateParams\Inbound
+ * @phpstan-import-type JitterBufferShape from \Telnyx\IPConnections\IPConnectionCreateParams\JitterBuffer
+ * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
+ * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
+ * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
+ *
+ * @phpstan-type IPConnectionCreateParamsShape = array{
+ *   active?: bool|null,
+ *   anchorsiteOverride?: null|AnchorsiteOverride|value-of<AnchorsiteOverride>,
  *   androidPushCredentialID?: string|null,
- *   connectionName?: string,
- *   defaultOnHoldComfortNoiseEnabled?: bool,
- *   dtmfType?: DtmfType|value-of<DtmfType>,
- *   encodeContactHeaderEnabled?: bool,
+ *   callCostInWebhooks?: bool|null,
+ *   connectionName?: string|null,
+ *   defaultOnHoldComfortNoiseEnabled?: bool|null,
+ *   dtmfType?: null|DtmfType|value-of<DtmfType>,
+ *   encodeContactHeaderEnabled?: bool|null,
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
- *   inbound?: Inbound,
+ *   inbound?: null|Inbound|InboundShape,
  *   iosPushCredentialID?: string|null,
- *   onnetT38PassthroughEnabled?: bool,
- *   outbound?: OutboundIP,
- *   rtcpSettings?: ConnectionRtcpSettings,
- *   tags?: list<string>,
- *   transportProtocol?: TransportProtocol|value-of<TransportProtocol>,
- *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
+ *   jitterBuffer?: null|JitterBuffer|JitterBufferShape,
+ *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
+ *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
+ *   onnetT38PassthroughEnabled?: bool|null,
+ *   outbound?: null|OutboundIP|OutboundIPShape,
+ *   rtcpSettings?: null|ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
+ *   tags?: list<string>|null,
+ *   transportProtocol?: null|TransportProtocol|value-of<TransportProtocol>,
+ *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class IPConnectionCreateParams implements BaseModel
 {
-    /** @use SdkModel<ip_connection_create_params> */
+    /** @use SdkModel<IPConnectionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Defaults to true.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $active;
 
     /**
@@ -60,22 +73,28 @@ final class IPConnectionCreateParams implements BaseModel
      *
      * @var value-of<AnchorsiteOverride>|null $anchorsiteOverride
      */
-    #[Api('anchorsite_override', enum: AnchorsiteOverride::class, optional: true)]
+    #[Optional('anchorsite_override', enum: AnchorsiteOverride::class)]
     public ?string $anchorsiteOverride;
 
     /**
      * The uuid of the push credential for Android.
      */
-    #[Api('android_push_credential_id', nullable: true, optional: true)]
+    #[Optional('android_push_credential_id', nullable: true)]
     public ?string $androidPushCredentialID;
 
-    #[Api('connection_name', optional: true)]
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    #[Optional('call_cost_in_webhooks')]
+    public ?bool $callCostInWebhooks;
+
+    #[Optional('connection_name')]
     public ?string $connectionName;
 
     /**
      * When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
      */
-    #[Api('default_on_hold_comfort_noise_enabled', optional: true)]
+    #[Optional('default_on_hold_comfort_noise_enabled')]
     public ?bool $defaultOnHoldComfortNoiseEnabled;
 
     /**
@@ -83,13 +102,13 @@ final class IPConnectionCreateParams implements BaseModel
      *
      * @var value-of<DtmfType>|null $dtmfType
      */
-    #[Api('dtmf_type', enum: DtmfType::class, optional: true)]
+    #[Optional('dtmf_type', enum: DtmfType::class)]
     public ?string $dtmfType;
 
     /**
      * Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
      */
-    #[Api('encode_contact_header_enabled', optional: true)]
+    #[Optional('encode_contact_header_enabled')]
     public ?bool $encodeContactHeaderEnabled;
 
     /**
@@ -97,33 +116,48 @@ final class IPConnectionCreateParams implements BaseModel
      *
      * @var value-of<EncryptedMedia>|null $encryptedMedia
      */
-    #[Api(
-        'encrypted_media',
-        enum: EncryptedMedia::class,
-        nullable: true,
-        optional: true,
-    )]
+    #[Optional('encrypted_media', enum: EncryptedMedia::class, nullable: true)]
     public ?string $encryptedMedia;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Inbound $inbound;
 
     /**
      * The uuid of the push credential for Ios.
      */
-    #[Api('ios_push_credential_id', nullable: true, optional: true)]
+    #[Optional('ios_push_credential_id', nullable: true)]
     public ?string $iosPushCredentialID;
+
+    /**
+     * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     */
+    #[Optional('jitter_buffer')]
+    public ?JitterBuffer $jitterBuffer;
+
+    /**
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @var value-of<NoiseSuppression>|null $noiseSuppression
+     */
+    #[Optional('noise_suppression', enum: NoiseSuppression::class)]
+    public ?string $noiseSuppression;
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     */
+    #[Optional('noise_suppression_details')]
+    public ?ConnectionNoiseSuppressionDetails $noiseSuppressionDetails;
 
     /**
      * Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      */
-    #[Api('onnet_t38_passthrough_enabled', optional: true)]
+    #[Optional('onnet_t38_passthrough_enabled')]
     public ?bool $onnetT38PassthroughEnabled;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?OutboundIP $outbound;
 
-    #[Api('rtcp_settings', optional: true)]
+    #[Optional('rtcp_settings')]
     public ?ConnectionRtcpSettings $rtcpSettings;
 
     /**
@@ -131,7 +165,7 @@ final class IPConnectionCreateParams implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
@@ -139,7 +173,7 @@ final class IPConnectionCreateParams implements BaseModel
      *
      * @var value-of<TransportProtocol>|null $transportProtocol
      */
-    #[Api('transport_protocol', enum: TransportProtocol::class, optional: true)]
+    #[Optional('transport_protocol', enum: TransportProtocol::class)]
     public ?string $transportProtocol;
 
     /**
@@ -147,25 +181,25 @@ final class IPConnectionCreateParams implements BaseModel
      *
      * @var value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
-    #[Api('webhook_api_version', enum: WebhookAPIVersion::class, optional: true)]
+    #[Optional('webhook_api_version', enum: WebhookAPIVersion::class)]
     public ?string $webhookAPIVersion;
 
     /**
      * The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
+    #[Optional('webhook_event_failover_url', nullable: true)]
     public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
+    #[Optional('webhook_event_url')]
     public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
+    #[Optional('webhook_timeout_secs', nullable: true)]
     public ?int $webhookTimeoutSecs;
 
     public function __construct()
@@ -178,27 +212,37 @@ final class IPConnectionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride
-     * @param DtmfType|value-of<DtmfType> $dtmfType
+     * @param AnchorsiteOverride|value-of<AnchorsiteOverride>|null $anchorsiteOverride
+     * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
-     * @param list<string> $tags
-     * @param TransportProtocol|value-of<TransportProtocol> $transportProtocol
-     * @param WebhookAPIVersion|value-of<WebhookAPIVersion> $webhookAPIVersion
+     * @param Inbound|InboundShape|null $inbound
+     * @param JitterBuffer|JitterBufferShape|null $jitterBuffer
+     * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
+     * @param OutboundIP|OutboundIPShape|null $outbound
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
+     * @param list<string>|null $tags
+     * @param TransportProtocol|value-of<TransportProtocol>|null $transportProtocol
+     * @param WebhookAPIVersion|value-of<WebhookAPIVersion>|null $webhookAPIVersion
      */
     public static function with(
         ?bool $active = null,
         AnchorsiteOverride|string|null $anchorsiteOverride = null,
         ?string $androidPushCredentialID = null,
+        ?bool $callCostInWebhooks = null,
         ?string $connectionName = null,
         ?bool $defaultOnHoldComfortNoiseEnabled = null,
         DtmfType|string|null $dtmfType = null,
         ?bool $encodeContactHeaderEnabled = null,
         EncryptedMedia|string|null $encryptedMedia = null,
-        ?Inbound $inbound = null,
+        Inbound|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
+        JitterBuffer|array|null $jitterBuffer = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
+        ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
-        ?OutboundIP $outbound = null,
-        ?ConnectionRtcpSettings $rtcpSettings = null,
+        OutboundIP|array|null $outbound = null,
+        ConnectionRtcpSettings|array|null $rtcpSettings = null,
         ?array $tags = null,
         TransportProtocol|string|null $transportProtocol = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
@@ -206,29 +250,33 @@ final class IPConnectionCreateParams implements BaseModel
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $active && $obj->active = $active;
-        null !== $anchorsiteOverride && $obj['anchorsiteOverride'] = $anchorsiteOverride;
-        null !== $androidPushCredentialID && $obj->androidPushCredentialID = $androidPushCredentialID;
-        null !== $connectionName && $obj->connectionName = $connectionName;
-        null !== $defaultOnHoldComfortNoiseEnabled && $obj->defaultOnHoldComfortNoiseEnabled = $defaultOnHoldComfortNoiseEnabled;
-        null !== $dtmfType && $obj['dtmfType'] = $dtmfType;
-        null !== $encodeContactHeaderEnabled && $obj->encodeContactHeaderEnabled = $encodeContactHeaderEnabled;
-        null !== $encryptedMedia && $obj['encryptedMedia'] = $encryptedMedia;
-        null !== $inbound && $obj->inbound = $inbound;
-        null !== $iosPushCredentialID && $obj->iosPushCredentialID = $iosPushCredentialID;
-        null !== $onnetT38PassthroughEnabled && $obj->onnetT38PassthroughEnabled = $onnetT38PassthroughEnabled;
-        null !== $outbound && $obj->outbound = $outbound;
-        null !== $rtcpSettings && $obj->rtcpSettings = $rtcpSettings;
-        null !== $tags && $obj->tags = $tags;
-        null !== $transportProtocol && $obj['transportProtocol'] = $transportProtocol;
-        null !== $webhookAPIVersion && $obj['webhookAPIVersion'] = $webhookAPIVersion;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $active && $self['active'] = $active;
+        null !== $anchorsiteOverride && $self['anchorsiteOverride'] = $anchorsiteOverride;
+        null !== $androidPushCredentialID && $self['androidPushCredentialID'] = $androidPushCredentialID;
+        null !== $callCostInWebhooks && $self['callCostInWebhooks'] = $callCostInWebhooks;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $defaultOnHoldComfortNoiseEnabled && $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
+        null !== $dtmfType && $self['dtmfType'] = $dtmfType;
+        null !== $encodeContactHeaderEnabled && $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
+        null !== $encryptedMedia && $self['encryptedMedia'] = $encryptedMedia;
+        null !== $inbound && $self['inbound'] = $inbound;
+        null !== $iosPushCredentialID && $self['iosPushCredentialID'] = $iosPushCredentialID;
+        null !== $jitterBuffer && $self['jitterBuffer'] = $jitterBuffer;
+        null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
+        null !== $noiseSuppressionDetails && $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
+        null !== $onnetT38PassthroughEnabled && $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
+        null !== $outbound && $self['outbound'] = $outbound;
+        null !== $rtcpSettings && $self['rtcpSettings'] = $rtcpSettings;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $transportProtocol && $self['transportProtocol'] = $transportProtocol;
+        null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,10 +284,10 @@ final class IPConnectionCreateParams implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj->active = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -250,10 +298,10 @@ final class IPConnectionCreateParams implements BaseModel
     public function withAnchorsiteOverride(
         AnchorsiteOverride|string $anchorsiteOverride
     ): self {
-        $obj = clone $this;
-        $obj['anchorsiteOverride'] = $anchorsiteOverride;
+        $self = clone $this;
+        $self['anchorsiteOverride'] = $anchorsiteOverride;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -262,18 +310,29 @@ final class IPConnectionCreateParams implements BaseModel
     public function withAndroidPushCredentialID(
         ?string $androidPushCredentialID
     ): self {
-        $obj = clone $this;
-        $obj->androidPushCredentialID = $androidPushCredentialID;
+        $self = clone $this;
+        $self['androidPushCredentialID'] = $androidPushCredentialID;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Specifies if call cost webhooks should be sent for this connection.
+     */
+    public function withCallCostInWebhooks(bool $callCostInWebhooks): self
+    {
+        $self = clone $this;
+        $self['callCostInWebhooks'] = $callCostInWebhooks;
+
+        return $self;
     }
 
     public function withConnectionName(string $connectionName): self
     {
-        $obj = clone $this;
-        $obj->connectionName = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,10 +341,10 @@ final class IPConnectionCreateParams implements BaseModel
     public function withDefaultOnHoldComfortNoiseEnabled(
         bool $defaultOnHoldComfortNoiseEnabled
     ): self {
-        $obj = clone $this;
-        $obj->defaultOnHoldComfortNoiseEnabled = $defaultOnHoldComfortNoiseEnabled;
+        $self = clone $this;
+        $self['defaultOnHoldComfortNoiseEnabled'] = $defaultOnHoldComfortNoiseEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -295,10 +354,10 @@ final class IPConnectionCreateParams implements BaseModel
      */
     public function withDtmfType(DtmfType|string $dtmfType): self
     {
-        $obj = clone $this;
-        $obj['dtmfType'] = $dtmfType;
+        $self = clone $this;
+        $self['dtmfType'] = $dtmfType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -307,10 +366,10 @@ final class IPConnectionCreateParams implements BaseModel
     public function withEncodeContactHeaderEnabled(
         bool $encodeContactHeaderEnabled
     ): self {
-        $obj = clone $this;
-        $obj->encodeContactHeaderEnabled = $encodeContactHeaderEnabled;
+        $self = clone $this;
+        $self['encodeContactHeaderEnabled'] = $encodeContactHeaderEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -321,18 +380,21 @@ final class IPConnectionCreateParams implements BaseModel
     public function withEncryptedMedia(
         EncryptedMedia|string|null $encryptedMedia
     ): self {
-        $obj = clone $this;
-        $obj['encryptedMedia'] = $encryptedMedia;
+        $self = clone $this;
+        $self['encryptedMedia'] = $encryptedMedia;
 
-        return $obj;
+        return $self;
     }
 
-    public function withInbound(Inbound $inbound): self
+    /**
+     * @param Inbound|InboundShape $inbound
+     */
+    public function withInbound(Inbound|array $inbound): self
     {
-        $obj = clone $this;
-        $obj->inbound = $inbound;
+        $self = clone $this;
+        $self['inbound'] = $inbound;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -340,10 +402,51 @@ final class IPConnectionCreateParams implements BaseModel
      */
     public function withIosPushCredentialID(?string $iosPushCredentialID): self
     {
-        $obj = clone $this;
-        $obj->iosPushCredentialID = $iosPushCredentialID;
+        $self = clone $this;
+        $self['iosPushCredentialID'] = $iosPushCredentialID;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     *
+     * @param JitterBuffer|JitterBufferShape $jitterBuffer
+     */
+    public function withJitterBuffer(JitterBuffer|array $jitterBuffer): self
+    {
+        $self = clone $this;
+        $self['jitterBuffer'] = $jitterBuffer;
+
+        return $self;
+    }
+
+    /**
+     * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     *
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
+     */
+    public function withNoiseSuppression(
+        NoiseSuppression|string $noiseSuppression
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppression'] = $noiseSuppression;
+
+        return $self;
+    }
+
+    /**
+     * Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
+     *
+     * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails
+     */
+    public function withNoiseSuppressionDetails(
+        ConnectionNoiseSuppressionDetails|array $noiseSuppressionDetails
+    ): self {
+        $self = clone $this;
+        $self['noiseSuppressionDetails'] = $noiseSuppressionDetails;
+
+        return $self;
     }
 
     /**
@@ -352,26 +455,33 @@ final class IPConnectionCreateParams implements BaseModel
     public function withOnnetT38PassthroughEnabled(
         bool $onnetT38PassthroughEnabled
     ): self {
-        $obj = clone $this;
-        $obj->onnetT38PassthroughEnabled = $onnetT38PassthroughEnabled;
+        $self = clone $this;
+        $self['onnetT38PassthroughEnabled'] = $onnetT38PassthroughEnabled;
 
-        return $obj;
+        return $self;
     }
 
-    public function withOutbound(OutboundIP $outbound): self
+    /**
+     * @param OutboundIP|OutboundIPShape $outbound
+     */
+    public function withOutbound(OutboundIP|array $outbound): self
     {
-        $obj = clone $this;
-        $obj->outbound = $outbound;
+        $self = clone $this;
+        $self['outbound'] = $outbound;
 
-        return $obj;
+        return $self;
     }
 
-    public function withRtcpSettings(ConnectionRtcpSettings $rtcpSettings): self
-    {
-        $obj = clone $this;
-        $obj->rtcpSettings = $rtcpSettings;
+    /**
+     * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape $rtcpSettings
+     */
+    public function withRtcpSettings(
+        ConnectionRtcpSettings|array $rtcpSettings
+    ): self {
+        $self = clone $this;
+        $self['rtcpSettings'] = $rtcpSettings;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -381,10 +491,10 @@ final class IPConnectionCreateParams implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -395,10 +505,10 @@ final class IPConnectionCreateParams implements BaseModel
     public function withTransportProtocol(
         TransportProtocol|string $transportProtocol
     ): self {
-        $obj = clone $this;
-        $obj['transportProtocol'] = $transportProtocol;
+        $self = clone $this;
+        $self['transportProtocol'] = $transportProtocol;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -409,10 +519,10 @@ final class IPConnectionCreateParams implements BaseModel
     public function withWebhookAPIVersion(
         WebhookAPIVersion|string $webhookAPIVersion
     ): self {
-        $obj = clone $this;
-        $obj['webhookAPIVersion'] = $webhookAPIVersion;
+        $self = clone $this;
+        $self['webhookAPIVersion'] = $webhookAPIVersion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -421,10 +531,10 @@ final class IPConnectionCreateParams implements BaseModel
     public function withWebhookEventFailoverURL(
         ?string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -432,10 +542,10 @@ final class IPConnectionCreateParams implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -443,9 +553,9 @@ final class IPConnectionCreateParams implements BaseModel
      */
     public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

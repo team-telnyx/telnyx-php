@@ -4,35 +4,35 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse\Data\Category1\Category;
 
 /**
- * @phpstan-type category1_alias = array{
- *   bytesReceived?: int,
- *   bytesSent?: int,
- *   category?: value-of<Category>,
- *   ops?: int,
- *   successfulOps?: int,
+ * @phpstan-type Category1Shape = array{
+ *   bytesReceived?: int|null,
+ *   bytesSent?: int|null,
+ *   category?: null|Category|value-of<Category>,
+ *   ops?: int|null,
+ *   successfulOps?: int|null,
  * }
  */
 final class Category1 implements BaseModel
 {
-    /** @use SdkModel<category1_alias> */
+    /** @use SdkModel<Category1Shape> */
     use SdkModel;
 
     /**
      * The number of bytes received.
      */
-    #[Api('bytes_received', optional: true)]
+    #[Optional('bytes_received')]
     public ?int $bytesReceived;
 
     /**
      * The number of bytes sent.
      */
-    #[Api('bytes_sent', optional: true)]
+    #[Optional('bytes_sent')]
     public ?int $bytesSent;
 
     /**
@@ -40,19 +40,19 @@ final class Category1 implements BaseModel
      *
      * @var value-of<Category>|null $category
      */
-    #[Api(enum: Category::class, optional: true)]
+    #[Optional(enum: Category::class)]
     public ?string $category;
 
     /**
      * The number of operations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $ops;
 
     /**
      * The number of successful operations.
      */
-    #[Api('successful_ops', optional: true)]
+    #[Optional('successful_ops')]
     public ?int $successfulOps;
 
     public function __construct()
@@ -65,7 +65,7 @@ final class Category1 implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Category|value-of<Category> $category
+     * @param Category|value-of<Category>|null $category
      */
     public static function with(
         ?int $bytesReceived = null,
@@ -74,15 +74,15 @@ final class Category1 implements BaseModel
         ?int $ops = null,
         ?int $successfulOps = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $bytesReceived && $obj->bytesReceived = $bytesReceived;
-        null !== $bytesSent && $obj->bytesSent = $bytesSent;
-        null !== $category && $obj['category'] = $category;
-        null !== $ops && $obj->ops = $ops;
-        null !== $successfulOps && $obj->successfulOps = $successfulOps;
+        null !== $bytesReceived && $self['bytesReceived'] = $bytesReceived;
+        null !== $bytesSent && $self['bytesSent'] = $bytesSent;
+        null !== $category && $self['category'] = $category;
+        null !== $ops && $self['ops'] = $ops;
+        null !== $successfulOps && $self['successfulOps'] = $successfulOps;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +90,10 @@ final class Category1 implements BaseModel
      */
     public function withBytesReceived(int $bytesReceived): self
     {
-        $obj = clone $this;
-        $obj->bytesReceived = $bytesReceived;
+        $self = clone $this;
+        $self['bytesReceived'] = $bytesReceived;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class Category1 implements BaseModel
      */
     public function withBytesSent(int $bytesSent): self
     {
-        $obj = clone $this;
-        $obj->bytesSent = $bytesSent;
+        $self = clone $this;
+        $self['bytesSent'] = $bytesSent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class Category1 implements BaseModel
      */
     public function withCategory(Category|string $category): self
     {
-        $obj = clone $this;
-        $obj['category'] = $category;
+        $self = clone $this;
+        $self['category'] = $category;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class Category1 implements BaseModel
      */
     public function withOps(int $ops): self
     {
-        $obj = clone $this;
-        $obj->ops = $ops;
+        $self = clone $this;
+        $self['ops'] = $ops;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,9 +136,9 @@ final class Category1 implements BaseModel
      */
     public function withSuccessfulOps(int $successfulOps): self
     {
-        $obj = clone $this;
-        $obj->successfulOps = $successfulOps;
+        $self = clone $this;
+        $self['successfulOps'] = $successfulOps;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,27 +6,37 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\IPs\IPCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\IPs\IP;
 use Telnyx\IPs\IPDeleteResponse;
 use Telnyx\IPs\IPGetResponse;
-use Telnyx\IPs\IPListParams;
 use Telnyx\IPs\IPListParams\Filter;
 use Telnyx\IPs\IPListParams\Page;
-use Telnyx\IPs\IPListResponse;
 use Telnyx\IPs\IPNewResponse;
-use Telnyx\IPs\IPUpdateParams;
 use Telnyx\IPs\IPUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IPsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\IPs\IPListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\IPs\IPListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class IPsService implements IPsContract
 {
     /**
+     * @api
+     */
+    public IPsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new IPsRawService($client);
+    }
 
     /**
      * @api
@@ -36,48 +46,28 @@ final class IPsService implements IPsContract
      * @param string $ipAddress IP adddress represented by this resource
      * @param string $connectionID ID of the IP Connection to which this IP should be attached
      * @param int $port port to use when connecting to this IP
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $ipAddress,
-        $connectionID = omit,
-        $port = omit,
-        ?RequestOptions $requestOptions = null,
+        string $ipAddress,
+        ?string $connectionID = null,
+        int $port = 5060,
+        RequestOptions|array|null $requestOptions = null,
     ): IPNewResponse {
-        $params = [
-            'ipAddress' => $ipAddress,
-            'connectionID' => $connectionID,
-            'port' => $port,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): IPNewResponse {
-        [$parsed, $options] = IPCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'ipAddress' => $ipAddress,
+                'connectionID' => $connectionID,
+                'port' => $port,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'ips',
-            body: (object) $parsed,
-            options: $options,
-            convert: IPNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -85,19 +75,19 @@ final class IPsService implements IPsContract
      *
      * Return the details regarding a specific IP.
      *
+     * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): IPGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['ips/%1$s', $id],
-            options: $requestOptions,
-            convert: IPGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -105,53 +95,33 @@ final class IPsService implements IPsContract
      *
      * Update the details of a specific IP.
      *
+     * @param string $id identifies the type of resource
      * @param string $ipAddress IP adddress represented by this resource
      * @param string $connectionID ID of the IP Connection to which this IP should be attached
      * @param int $port port to use when connecting to this IP
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $ipAddress,
-        $connectionID = omit,
-        $port = omit,
-        ?RequestOptions $requestOptions = null,
+        string $ipAddress,
+        ?string $connectionID = null,
+        int $port = 5060,
+        RequestOptions|array|null $requestOptions = null,
     ): IPUpdateResponse {
-        $params = [
-            'ipAddress' => $ipAddress,
-            'connectionID' => $connectionID,
-            'port' => $port,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): IPUpdateResponse {
-        [$parsed, $options] = IPUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'ipAddress' => $ipAddress,
+                'connectionID' => $connectionID,
+                'port' => $port,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['ips/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: IPUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -159,42 +129,25 @@ final class IPsService implements IPsContract
      *
      * Get all IPs belonging to the user that match the given filters.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[connection_id], filter[ip_address], filter[port]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<IP>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): IPListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): IPListResponse {
-        [$parsed, $options] = IPListParams::parseRequest($params, $requestOptions);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'ips',
-            query: $parsed,
-            options: $options,
-            convert: IPListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -202,18 +155,18 @@ final class IPsService implements IPsContract
      *
      * Delete an IP.
      *
+     * @param string $id identifies the type of resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): IPDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['ips/%1$s', $id],
-            options: $requestOptions,
-            convert: IPDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

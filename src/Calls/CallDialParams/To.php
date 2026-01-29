@@ -11,14 +11,16 @@ use Telnyx\Core\Conversion\ListOf;
 
 /**
  * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings.
+ *
+ * @phpstan-type ToVariants = string|list<string>
+ * @phpstan-type ToShape = ToVariants
  */
 final class To implements ConverterSource
 {
     use SdkUnion;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {

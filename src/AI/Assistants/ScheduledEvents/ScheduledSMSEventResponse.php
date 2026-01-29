@@ -5,77 +5,80 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse\ConversationMetadata;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type scheduled_sms_event_response = array{
+ * @phpstan-import-type ConversationMetadataVariants from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse\ConversationMetadata
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledSMSEventResponse\ConversationMetadata
+ *
+ * @phpstan-type ScheduledSMSEventResponseShape = array{
  *   assistantID: string,
  *   scheduledAtFixedDatetime: \DateTimeInterface,
  *   telnyxAgentTarget: string,
- *   telnyxConversationChannel: value-of<ConversationChannelType>,
+ *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
  *   telnyxEndUserTarget: string,
  *   text: string,
- *   conversationID?: string,
- *   conversationMetadata?: array<string, string|int|bool>,
- *   createdAt?: \DateTimeInterface,
- *   errors?: list<string>,
- *   retryCount?: int,
- *   scheduledEventID?: string,
- *   status?: value-of<EventStatus>,
+ *   conversationID?: string|null,
+ *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   errors?: list<string>|null,
+ *   retryCount?: int|null,
+ *   scheduledEventID?: string|null,
+ *   status?: null|EventStatus|value-of<EventStatus>,
  * }
  */
 final class ScheduledSMSEventResponse implements BaseModel
 {
-    /** @use SdkModel<scheduled_sms_event_response> */
+    /** @use SdkModel<ScheduledSMSEventResponseShape> */
     use SdkModel;
 
-    #[Api('assistant_id')]
+    #[Required('assistant_id')]
     public string $assistantID;
 
-    #[Api('scheduled_at_fixed_datetime')]
+    #[Required('scheduled_at_fixed_datetime')]
     public \DateTimeInterface $scheduledAtFixedDatetime;
 
-    #[Api('telnyx_agent_target')]
+    #[Required('telnyx_agent_target')]
     public string $telnyxAgentTarget;
 
     /** @var value-of<ConversationChannelType> $telnyxConversationChannel */
-    #[Api('telnyx_conversation_channel', enum: ConversationChannelType::class)]
+    #[Required(
+        'telnyx_conversation_channel',
+        enum: ConversationChannelType::class
+    )]
     public string $telnyxConversationChannel;
 
-    #[Api('telnyx_end_user_target')]
+    #[Required('telnyx_end_user_target')]
     public string $telnyxEndUserTarget;
 
-    #[Api]
+    #[Required]
     public string $text;
 
-    #[Api('conversation_id', optional: true)]
+    #[Optional('conversation_id')]
     public ?string $conversationID;
 
-    /** @var array<string, string|int|bool>|null $conversationMetadata */
-    #[Api(
-        'conversation_metadata',
-        map: ConversationMetadata::class,
-        optional: true
-    )]
+    /** @var array<string,ConversationMetadataVariants>|null $conversationMetadata */
+    #[Optional('conversation_metadata', map: ConversationMetadata::class)]
     public ?array $conversationMetadata;
 
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /** @var list<string>|null $errors */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $errors;
 
-    #[Api('retry_count', optional: true)]
+    #[Optional('retry_count')]
     public ?int $retryCount;
 
-    #[Api('scheduled_event_id', optional: true)]
+    #[Optional('scheduled_event_id')]
     public ?string $scheduledEventID;
 
     /** @var value-of<EventStatus>|null $status */
-    #[Api(enum: EventStatus::class, optional: true)]
+    #[Optional(enum: EventStatus::class)]
     public ?string $status;
 
     /**
@@ -116,9 +119,9 @@ final class ScheduledSMSEventResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
-     * @param array<string, string|int|bool> $conversationMetadata
-     * @param list<string> $errors
-     * @param EventStatus|value-of<EventStatus> $status
+     * @param array<string,ConversationMetadataShape>|null $conversationMetadata
+     * @param list<string>|null $errors
+     * @param EventStatus|value-of<EventStatus>|null $status
      */
     public static function with(
         string $assistantID,
@@ -135,49 +138,49 @@ final class ScheduledSMSEventResponse implements BaseModel
         ?string $scheduledEventID = null,
         EventStatus|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->assistantID = $assistantID;
-        $obj->scheduledAtFixedDatetime = $scheduledAtFixedDatetime;
-        $obj->telnyxAgentTarget = $telnyxAgentTarget;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        $obj->telnyxEndUserTarget = $telnyxEndUserTarget;
-        $obj->text = $text;
+        $self['assistantID'] = $assistantID;
+        $self['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
+        $self['telnyxAgentTarget'] = $telnyxAgentTarget;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self['telnyxEndUserTarget'] = $telnyxEndUserTarget;
+        $self['text'] = $text;
 
-        null !== $conversationID && $obj->conversationID = $conversationID;
-        null !== $conversationMetadata && $obj->conversationMetadata = $conversationMetadata;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $errors && $obj->errors = $errors;
-        null !== $retryCount && $obj->retryCount = $retryCount;
-        null !== $scheduledEventID && $obj->scheduledEventID = $scheduledEventID;
-        null !== $status && $obj['status'] = $status;
+        null !== $conversationID && $self['conversationID'] = $conversationID;
+        null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $errors && $self['errors'] = $errors;
+        null !== $retryCount && $self['retryCount'] = $retryCount;
+        null !== $scheduledEventID && $self['scheduledEventID'] = $scheduledEventID;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withAssistantID(string $assistantID): self
     {
-        $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $self = clone $this;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withScheduledAtFixedDatetime(
         \DateTimeInterface $scheduledAtFixedDatetime
     ): self {
-        $obj = clone $this;
-        $obj->scheduledAtFixedDatetime = $scheduledAtFixedDatetime;
+        $self = clone $this;
+        $self['scheduledAtFixedDatetime'] = $scheduledAtFixedDatetime;
 
-        return $obj;
+        return $self;
     }
 
     public function withTelnyxAgentTarget(string $telnyxAgentTarget): self
     {
-        $obj = clone $this;
-        $obj->telnyxAgentTarget = $telnyxAgentTarget;
+        $self = clone $this;
+        $self['telnyxAgentTarget'] = $telnyxAgentTarget;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,53 +189,53 @@ final class ScheduledSMSEventResponse implements BaseModel
     public function withTelnyxConversationChannel(
         ConversationChannelType|string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     public function withTelnyxEndUserTarget(string $telnyxEndUserTarget): self
     {
-        $obj = clone $this;
-        $obj->telnyxEndUserTarget = $telnyxEndUserTarget;
+        $self = clone $this;
+        $self['telnyxEndUserTarget'] = $telnyxEndUserTarget;
 
-        return $obj;
+        return $self;
     }
 
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     public function withConversationID(string $conversationID): self
     {
-        $obj = clone $this;
-        $obj->conversationID = $conversationID;
+        $self = clone $this;
+        $self['conversationID'] = $conversationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param array<string, string|int|bool> $conversationMetadata
+     * @param array<string,ConversationMetadataShape> $conversationMetadata
      */
     public function withConversationMetadata(array $conversationMetadata): self
     {
-        $obj = clone $this;
-        $obj->conversationMetadata = $conversationMetadata;
+        $self = clone $this;
+        $self['conversationMetadata'] = $conversationMetadata;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -240,26 +243,26 @@ final class ScheduledSMSEventResponse implements BaseModel
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj->errors = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     public function withRetryCount(int $retryCount): self
     {
-        $obj = clone $this;
-        $obj->retryCount = $retryCount;
+        $self = clone $this;
+        $self['retryCount'] = $retryCount;
 
-        return $obj;
+        return $self;
     }
 
     public function withScheduledEventID(string $scheduledEventID): self
     {
-        $obj = clone $this;
-        $obj->scheduledEventID = $scheduledEventID;
+        $self = clone $this;
+        $self['scheduledEventID'] = $scheduledEventID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -267,9 +270,9 @@ final class ScheduledSMSEventResponse implements BaseModel
      */
     public function withStatus(EventStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

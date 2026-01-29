@@ -6,60 +6,63 @@ namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse;
 
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary;
 use Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Total;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-import-type SummaryShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Summary
+ * @phpstan-import-type TotalShape from \Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data\Total
+ *
+ * @phpstan-type DataShape = array{
  *   currency: string,
- *   endDate: \DateTimeInterface,
- *   startDate: \DateTimeInterface,
- *   summary: Summary,
- *   total: Total,
+ *   endDate: string,
+ *   startDate: string,
+ *   summary: Summary|SummaryShape,
+ *   total: Total|TotalShape,
  *   userEmail: string,
  *   userID: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Currency code.
      */
-    #[Api]
+    #[Required]
     public string $currency;
 
     /**
      * End date of the summary period.
      */
-    #[Api('end_date')]
-    public \DateTimeInterface $endDate;
+    #[Required('end_date')]
+    public string $endDate;
 
     /**
      * Start date of the summary period.
      */
-    #[Api('start_date')]
-    public \DateTimeInterface $startDate;
+    #[Required('start_date')]
+    public string $startDate;
 
-    #[Api]
+    #[Required]
     public Summary $summary;
 
-    #[Api]
+    #[Required]
     public Total $total;
 
     /**
      * User email address.
      */
-    #[Api('user_email')]
+    #[Required('user_email')]
     public string $userEmail;
 
     /**
      * User identifier.
      */
-    #[Api('user_id')]
+    #[Required('user_id')]
     public string $userID;
 
     /**
@@ -100,27 +103,30 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Summary|SummaryShape $summary
+     * @param Total|TotalShape $total
      */
     public static function with(
         string $currency,
-        \DateTimeInterface $endDate,
-        \DateTimeInterface $startDate,
-        Summary $summary,
-        Total $total,
+        string $endDate,
+        string $startDate,
+        Summary|array $summary,
+        Total|array $total,
         string $userEmail,
         string $userID,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->currency = $currency;
-        $obj->endDate = $endDate;
-        $obj->startDate = $startDate;
-        $obj->summary = $summary;
-        $obj->total = $total;
-        $obj->userEmail = $userEmail;
-        $obj->userID = $userID;
+        $self['currency'] = $currency;
+        $self['endDate'] = $endDate;
+        $self['startDate'] = $startDate;
+        $self['summary'] = $summary;
+        $self['total'] = $total;
+        $self['userEmail'] = $userEmail;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,48 +134,54 @@ final class Data implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj->currency = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * End date of the summary period.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Start date of the summary period.
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
-    public function withSummary(Summary $summary): self
+    /**
+     * @param Summary|SummaryShape $summary
+     */
+    public function withSummary(Summary|array $summary): self
     {
-        $obj = clone $this;
-        $obj->summary = $summary;
+        $self = clone $this;
+        $self['summary'] = $summary;
 
-        return $obj;
+        return $self;
     }
 
-    public function withTotal(Total $total): self
+    /**
+     * @param Total|TotalShape $total
+     */
+    public function withTotal(Total|array $total): self
     {
-        $obj = clone $this;
-        $obj->total = $total;
+        $self = clone $this;
+        $self['total'] = $total;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +189,10 @@ final class Data implements BaseModel
      */
     public function withUserEmail(string $userEmail): self
     {
-        $obj = clone $this;
-        $obj->userEmail = $userEmail;
+        $self = clone $this;
+        $self['userEmail'] = $userEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,9 +200,9 @@ final class Data implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

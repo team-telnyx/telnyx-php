@@ -12,90 +12,79 @@ use Telnyx\Media\MediaUpdateResponse;
 use Telnyx\Media\MediaUploadResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Media\MediaListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MediaContract
 {
     /**
      * @api
      *
+     * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MediaGetResponse;
 
     /**
      * @api
      *
+     * @param string $mediaName uniquely identifies a media resource
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $mediaName,
-        $mediaURL = omit,
-        $ttlSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $mediaURL = null,
+        ?int $ttlSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MediaUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $mediaName,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MediaUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[content_type][]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MediaListResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MediaListResponse;
-
-    /**
-     * @api
+     * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 
     /**
      * @api
      *
+     * @param string $mediaName uniquely identifies a media resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function download(
         string $mediaName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): string;
 
     /**
@@ -104,25 +93,14 @@ interface MediaContract
      * @param string $mediaURL The URL where the media to be stored in Telnyx network is currently hosted. The maximum allowed size is 20 MB.
      * @param string $mediaName the unique identifier of a file
      * @param int $ttlSecs The number of seconds after which the media resource will be deleted, defaults to 2 days. The maximum allowed vale is 630720000, which translates to 20 years.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function upload(
-        $mediaURL,
-        $mediaName = omit,
-        $ttlSecs = omit,
-        ?RequestOptions $requestOptions = null,
-    ): MediaUploadResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function uploadRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $mediaURL,
+        ?string $mediaName = null,
+        ?int $ttlSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MediaUploadResponse;
 }

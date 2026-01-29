@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,25 +12,25 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a location's static emergency address.
  *
- * @see Telnyx\ExternalConnections->updateLocation
+ * @see Telnyx\Services\ExternalConnectionsService::updateLocation()
  *
- * @phpstan-type external_connection_update_location_params = array{
+ * @phpstan-type ExternalConnectionUpdateLocationParamsShape = array{
  *   id: string, staticEmergencyAddressID: string
  * }
  */
 final class ExternalConnectionUpdateLocationParams implements BaseModel
 {
-    /** @use SdkModel<external_connection_update_location_params> */
+    /** @use SdkModel<ExternalConnectionUpdateLocationParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * A new static emergency address ID to update the location with.
      */
-    #[Api('static_emergency_address_id')]
+    #[Required('static_emergency_address_id')]
     public string $staticEmergencyAddressID;
 
     /**
@@ -65,20 +65,20 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
         string $id,
         string $staticEmergencyAddressID
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->staticEmergencyAddressID = $staticEmergencyAddressID;
+        $self['id'] = $id;
+        $self['staticEmergencyAddressID'] = $staticEmergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +87,9 @@ final class ExternalConnectionUpdateLocationParams implements BaseModel
     public function withStaticEmergencyAddressID(
         string $staticEmergencyAddressID
     ): self {
-        $obj = clone $this;
-        $obj->staticEmergencyAddressID = $staticEmergencyAddressID;
+        $self = clone $this;
+        $self['staticEmergencyAddressID'] = $staticEmergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,39 +4,36 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\OAuth\OAuthTokenResponse\TokenType;
 
 /**
- * @phpstan-type oauth_token_response = array{
+ * @phpstan-type OAuthTokenResponseShape = array{
  *   accessToken: string,
  *   expiresIn: int,
- *   tokenType: value-of<TokenType>,
- *   refreshToken?: string,
- *   scope?: string,
+ *   tokenType: TokenType|value-of<TokenType>,
+ *   refreshToken?: string|null,
+ *   scope?: string|null,
  * }
  */
-final class OAuthTokenResponse implements BaseModel, ResponseConverter
+final class OAuthTokenResponse implements BaseModel
 {
-    /** @use SdkModel<oauth_token_response> */
+    /** @use SdkModel<OAuthTokenResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The access token.
      */
-    #[Api('access_token')]
+    #[Required('access_token')]
     public string $accessToken;
 
     /**
      * Token lifetime in seconds.
      */
-    #[Api('expires_in')]
+    #[Required('expires_in')]
     public int $expiresIn;
 
     /**
@@ -44,19 +41,19 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
      *
      * @var value-of<TokenType> $tokenType
      */
-    #[Api('token_type', enum: TokenType::class)]
+    #[Required('token_type', enum: TokenType::class)]
     public string $tokenType;
 
     /**
      * Refresh token (if applicable).
      */
-    #[Api('refresh_token', optional: true)]
+    #[Optional('refresh_token')]
     public ?string $refreshToken;
 
     /**
      * Space-separated list of granted scopes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $scope;
 
     /**
@@ -95,16 +92,16 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
         ?string $refreshToken = null,
         ?string $scope = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->accessToken = $accessToken;
-        $obj->expiresIn = $expiresIn;
-        $obj['tokenType'] = $tokenType;
+        $self['accessToken'] = $accessToken;
+        $self['expiresIn'] = $expiresIn;
+        $self['tokenType'] = $tokenType;
 
-        null !== $refreshToken && $obj->refreshToken = $refreshToken;
-        null !== $scope && $obj->scope = $scope;
+        null !== $refreshToken && $self['refreshToken'] = $refreshToken;
+        null !== $scope && $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +109,10 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
      */
     public function withAccessToken(string $accessToken): self
     {
-        $obj = clone $this;
-        $obj->accessToken = $accessToken;
+        $self = clone $this;
+        $self['accessToken'] = $accessToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +120,10 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
      */
     public function withExpiresIn(int $expiresIn): self
     {
-        $obj = clone $this;
-        $obj->expiresIn = $expiresIn;
+        $self = clone $this;
+        $self['expiresIn'] = $expiresIn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +133,10 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
      */
     public function withTokenType(TokenType|string $tokenType): self
     {
-        $obj = clone $this;
-        $obj['tokenType'] = $tokenType;
+        $self = clone $this;
+        $self['tokenType'] = $tokenType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,10 +144,10 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
      */
     public function withRefreshToken(string $refreshToken): self
     {
-        $obj = clone $this;
-        $obj->refreshToken = $refreshToken;
+        $self = clone $this;
+        $self['refreshToken'] = $refreshToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -158,9 +155,9 @@ final class OAuthTokenResponse implements BaseModel, ResponseConverter
      */
     public function withScope(string $scope): self
     {
-        $obj = clone $this;
-        $obj->scope = $scope;
+        $self = clone $this;
+        $self['scope'] = $scope;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,31 +4,34 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\CsvDownloads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload\Status;
 
 /**
- * @phpstan-type csv_download = array{
- *   id?: string, recordType?: string, status?: value-of<Status>, url?: string
+ * @phpstan-type CsvDownloadShape = array{
+ *   id?: string|null,
+ *   recordType?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   url?: string|null,
  * }
  */
 final class CsvDownload implements BaseModel
 {
-    /** @use SdkModel<csv_download> */
+    /** @use SdkModel<CsvDownloadShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -36,13 +39,13 @@ final class CsvDownload implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The URL at which the CSV file can be retrieved.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $url;
 
     public function __construct()
@@ -55,7 +58,7 @@ final class CsvDownload implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -63,14 +66,14 @@ final class CsvDownload implements BaseModel
         Status|string|null $status = null,
         ?string $url = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $url && $obj->url = $url;
+        null !== $id && $self['id'] = $id;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +81,10 @@ final class CsvDownload implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +92,10 @@ final class CsvDownload implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +105,10 @@ final class CsvDownload implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,9 +116,9 @@ final class CsvDownload implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

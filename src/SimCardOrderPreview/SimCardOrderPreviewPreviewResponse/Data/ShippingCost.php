@@ -4,28 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type shipping_cost = array{amount?: string, currency?: string}
+ * @phpstan-type ShippingCostShape = array{
+ *   amount?: string|null, currency?: string|null
+ * }
  */
 final class ShippingCost implements BaseModel
 {
-    /** @use SdkModel<shipping_cost> */
+    /** @use SdkModel<ShippingCostShape> */
     use SdkModel;
 
     /**
      * A string representing the cost amount.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $amount;
 
     /**
      * ISO 4217 currency string.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     public function __construct()
@@ -42,12 +44,12 @@ final class ShippingCost implements BaseModel
         ?string $amount = null,
         ?string $currency = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $currency && $obj->currency = $currency;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $currency && $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +57,10 @@ final class ShippingCost implements BaseModel
      */
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj->amount = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class ShippingCost implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj->currency = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 }

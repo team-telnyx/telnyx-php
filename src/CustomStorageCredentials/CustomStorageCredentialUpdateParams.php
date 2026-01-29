@@ -4,33 +4,37 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomStorageCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration;
 
 /**
  * Updates a stored custom credentials configuration.
  *
- * @see Telnyx\CustomStorageCredentials->update
+ * @see Telnyx\Services\CustomStorageCredentialsService::update()
  *
- * @phpstan-type custom_storage_credential_update_params = array{
- *   backend: Backend|value-of<Backend>,
- *   configuration: GcsConfigurationData|S3ConfigurationData|AzureConfigurationData,
+ * @phpstan-import-type ConfigurationVariants from \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration
+ * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration
+ *
+ * @phpstan-type CustomStorageCredentialUpdateParamsShape = array{
+ *   backend: Backend|value-of<Backend>, configuration: ConfigurationShape
  * }
  */
 final class CustomStorageCredentialUpdateParams implements BaseModel
 {
-    /** @use SdkModel<custom_storage_credential_update_params> */
+    /** @use SdkModel<CustomStorageCredentialUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var value-of<Backend> $backend */
-    #[Api(enum: Backend::class)]
+    #[Required(enum: Backend::class)]
     public string $backend;
 
-    #[Api]
+    /** @var ConfigurationVariants $configuration */
+    #[Required(union: Configuration::class)]
     public GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration;
 
     /**
@@ -60,17 +64,18 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Backend|value-of<Backend> $backend
+     * @param ConfigurationShape $configuration
      */
     public static function with(
         Backend|string $backend,
-        GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration,
+        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['backend'] = $backend;
-        $obj->configuration = $configuration;
+        $self['backend'] = $backend;
+        $self['configuration'] = $configuration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,18 +83,21 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
      */
     public function withBackend(Backend|string $backend): self
     {
-        $obj = clone $this;
-        $obj['backend'] = $backend;
+        $self = clone $this;
+        $self['backend'] = $backend;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param ConfigurationShape $configuration
+     */
     public function withConfiguration(
-        GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration,
+        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
     ): self {
-        $obj = clone $this;
-        $obj->configuration = $configuration;
+        $self = clone $this;
+        $self['configuration'] = $configuration;
 
-        return $obj;
+        return $self;
     }
 }

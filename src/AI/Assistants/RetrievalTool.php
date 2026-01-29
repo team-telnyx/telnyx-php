@@ -5,25 +5,28 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\RetrievalTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\AI\Chat\BucketIDs;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type retrieval_tool = array{
- *   retrieval: InferenceEmbeddingBucketIDs, type: value-of<Type>
+ * @phpstan-import-type BucketIDsShape from \Telnyx\AI\Chat\BucketIDs
+ *
+ * @phpstan-type RetrievalToolShape = array{
+ *   retrieval: BucketIDs|BucketIDsShape, type: Type|value-of<Type>
  * }
  */
 final class RetrievalTool implements BaseModel
 {
-    /** @use SdkModel<retrieval_tool> */
+    /** @use SdkModel<RetrievalToolShape> */
     use SdkModel;
 
-    #[Api]
-    public InferenceEmbeddingBucketIDs $retrieval;
+    #[Required]
+    public BucketIDs $retrieval;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -50,26 +53,30 @@ final class RetrievalTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param BucketIDs|BucketIDsShape $retrieval
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        InferenceEmbeddingBucketIDs $retrieval,
+        BucketIDs|array $retrieval,
         Type|string $type
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->retrieval = $retrieval;
-        $obj['type'] = $type;
+        $self['retrieval'] = $retrieval;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
-    public function withRetrieval(InferenceEmbeddingBucketIDs $retrieval): self
+    /**
+     * @param BucketIDs|BucketIDsShape $retrieval
+     */
+    public function withRetrieval(BucketIDs|array $retrieval): self
     {
-        $obj = clone $this;
-        $obj->retrieval = $retrieval;
+        $self = clone $this;
+        $self['retrieval'] = $retrieval;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +84,9 @@ final class RetrievalTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

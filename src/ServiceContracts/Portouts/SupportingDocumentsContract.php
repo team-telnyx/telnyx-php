@@ -10,43 +10,37 @@ use Telnyx\Portouts\SupportingDocuments\SupportingDocumentListResponse;
 use Telnyx\Portouts\SupportingDocuments\SupportingDocumentNewResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type DocumentShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SupportingDocumentsContract
 {
     /**
      * @api
      *
-     * @param list<Document> $documents List of supporting documents parameters
+     * @param string $id Portout id
+     * @param list<Document|DocumentShape> $documents List of supporting documents parameters
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $id,
-        $documents = omit,
-        ?RequestOptions $requestOptions = null
+        ?array $documents = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SupportingDocumentNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SupportingDocumentNewResponse;
-
-    /**
-     * @api
+     * @param string $id Portout id
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SupportingDocumentListResponse;
 }

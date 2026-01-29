@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +40,8 @@ final class StreamsTest extends TestCase
             callSid: 'call_sid',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(StreamStreamingSidJsonResponse::class, $result);
     }
 
     #[Test]
@@ -53,8 +55,10 @@ final class StreamsTest extends TestCase
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             accountSid: 'account_sid',
             callSid: 'call_sid',
+            status: 'stopped',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(StreamStreamingSidJsonResponse::class, $result);
     }
 }

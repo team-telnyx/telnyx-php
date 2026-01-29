@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
+use Telnyx\PerPagePagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +43,8 @@ final class VoiceTest extends TestCase
             startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceNewResponse::class, $result);
     }
 
     #[Test]
@@ -51,9 +57,18 @@ final class VoiceTest extends TestCase
         $result = $this->client->legacy->reporting->usageReports->voice->create(
             endTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
             startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+            aggregationType: 0,
+            connections: [123, 456],
+            managedAccounts: [
+                'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+            ],
+            productBreakdown: 0,
+            selectAllManagedAccounts: false,
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceNewResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +82,8 @@ final class VoiceTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceGetResponse::class, $result);
     }
 
     #[Test]
@@ -77,9 +93,15 @@ final class VoiceTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->usageReports->voice->list();
+        $page = $this->client->legacy->reporting->usageReports->voice->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PerPagePagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(CdrUsageReportResponseLegacy::class, $item);
+        }
     }
 
     #[Test]
@@ -93,6 +115,7 @@ final class VoiceTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceDeleteResponse::class, $result);
     }
 }

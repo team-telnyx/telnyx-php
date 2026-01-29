@@ -11,14 +11,18 @@ use Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filte
 
 /**
  * Filter by exact Global IP Assignment ID.
+ *
+ * @phpstan-import-type InShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter\GlobalIPAssignmentID\In
+ *
+ * @phpstan-type GlobalIPAssignmentIDVariants = string|In
+ * @phpstan-type GlobalIPAssignmentIDShape = GlobalIPAssignmentIDVariants|InShape
  */
 final class GlobalIPAssignmentID implements ConverterSource
 {
     use SdkUnion;
 
     /**
-     * @return list<string|Converter|ConverterSource>|array<string,
-     * string|Converter|ConverterSource,>
+     * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {

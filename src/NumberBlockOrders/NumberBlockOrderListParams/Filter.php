@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter\CreatedAt;
@@ -12,31 +12,35 @@ use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter\CreatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[status], filter[created_at], filter[phone_numbers.starting_number].
  *
- * @phpstan-type filter_alias = array{
- *   createdAt?: CreatedAt, phoneNumbersStartingNumber?: string, status?: string
+ * @phpstan-import-type CreatedAtShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter\CreatedAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   phoneNumbersStartingNumber?: string|null,
+ *   status?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter number block orders by date range.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?CreatedAt $createdAt;
 
     /**
      * Filter number block  orders having these phone numbers.
      */
-    #[Api('phone_numbers.starting_number', optional: true)]
+    #[Optional('phone_numbers.starting_number')]
     public ?string $phoneNumbersStartingNumber;
 
     /**
      * Filter number block orders by status.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
     public function __construct()
@@ -48,30 +52,34 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|CreatedAtShape|null $createdAt
      */
     public static function with(
-        ?CreatedAt $createdAt = null,
+        CreatedAt|array|null $createdAt = null,
         ?string $phoneNumbersStartingNumber = null,
         ?string $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $phoneNumbersStartingNumber && $obj->phoneNumbersStartingNumber = $phoneNumbersStartingNumber;
-        null !== $status && $obj->status = $status;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $phoneNumbersStartingNumber && $self['phoneNumbersStartingNumber'] = $phoneNumbersStartingNumber;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter number block orders by date range.
+     *
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,10 +88,10 @@ final class Filter implements BaseModel
     public function withPhoneNumbersStartingNumber(
         string $phoneNumbersStartingNumber
     ): self {
-        $obj = clone $this;
-        $obj->phoneNumbersStartingNumber = $phoneNumbersStartingNumber;
+        $self = clone $this;
+        $self['phoneNumbersStartingNumber'] = $phoneNumbersStartingNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +99,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

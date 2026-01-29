@@ -9,8 +9,9 @@ use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface LedgerBillingGroupReportsContract
 {
     /**
@@ -18,34 +19,26 @@ interface LedgerBillingGroupReportsContract
      *
      * @param int $month Month of the ledger billing group report
      * @param int $year Year of the ledger billing group report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $month = omit,
-        $year = omit,
-        ?RequestOptions $requestOptions = null
+        ?int $month = null,
+        ?int $year = null,
+        RequestOptions|array|null $requestOptions = null,
     ): LedgerBillingGroupReportNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): LedgerBillingGroupReportNewResponse;
-
-    /**
-     * @api
+     * @param string $id The id of the ledger billing group report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): LedgerBillingGroupReportGetResponse;
 }

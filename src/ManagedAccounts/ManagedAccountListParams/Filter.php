@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts\ManagedAccountListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\Email;
@@ -13,19 +13,23 @@ use Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\OrganizationName;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
  *
- * @phpstan-type filter_alias = array{
- *   email?: Email, organizationName?: OrganizationName
+ * @phpstan-import-type EmailShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\Email
+ * @phpstan-import-type OrganizationNameShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter\OrganizationName
+ *
+ * @phpstan-type FilterShape = array{
+ *   email?: null|Email|EmailShape,
+ *   organizationName?: null|OrganizationName|OrganizationNameShape,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Email $email;
 
-    #[Api('organization_name', optional: true)]
+    #[Optional('organization_name')]
     public ?OrganizationName $organizationName;
 
     public function __construct()
@@ -37,33 +41,42 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Email|EmailShape|null $email
+     * @param OrganizationName|OrganizationNameShape|null $organizationName
      */
     public static function with(
-        ?Email $email = null,
-        ?OrganizationName $organizationName = null
+        Email|array|null $email = null,
+        OrganizationName|array|null $organizationName = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $email && $obj->email = $email;
-        null !== $organizationName && $obj->organizationName = $organizationName;
+        null !== $email && $self['email'] = $email;
+        null !== $organizationName && $self['organizationName'] = $organizationName;
 
-        return $obj;
+        return $self;
     }
 
-    public function withEmail(Email $email): self
+    /**
+     * @param Email|EmailShape $email
+     */
+    public function withEmail(Email|array $email): self
     {
-        $obj = clone $this;
-        $obj->email = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param OrganizationName|OrganizationNameShape $organizationName
+     */
     public function withOrganizationName(
-        OrganizationName $organizationName
+        OrganizationName|array $organizationName
     ): self {
-        $obj = clone $this;
-        $obj->organizationName = $organizationName;
+        $self = clone $this;
+        $self['organizationName'] = $organizationName;
 
-        return $obj;
+        return $self;
     }
 }

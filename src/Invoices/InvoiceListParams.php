@@ -4,40 +4,39 @@ declare(strict_types=1);
 
 namespace Telnyx\Invoices;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Invoices\InvoiceListParams\Page;
 use Telnyx\Invoices\InvoiceListParams\Sort;
 
 /**
  * Retrieve a paginated list of invoices.
  *
- * @see Telnyx\Invoices->list
+ * @see Telnyx\Services\InvoicesService::list()
  *
- * @phpstan-type invoice_list_params = array{
- *   page?: Page, sort?: Sort|value-of<Sort>
+ * @phpstan-type InvoiceListParamsShape = array{
+ *   pageNumber?: int|null, pageSize?: int|null, sort?: null|Sort|value-of<Sort>
  * }
  */
 final class InvoiceListParams implements BaseModel
 {
-    /** @use SdkModel<invoice_list_params> */
+    /** @use SdkModel<InvoiceListParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Specifies the sort order for results.
      *
      * @var value-of<Sort>|null $sort
      */
-    #[Api(enum: Sort::class, optional: true)]
+    #[Optional(enum: Sort::class)]
     public ?string $sort;
 
     public function __construct()
@@ -50,29 +49,36 @@ final class InvoiceListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Sort|value-of<Sort> $sort
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
-        ?Page $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Sort|string|null $sort = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj['sort'] = $sort;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 
     /**
@@ -82,9 +88,9 @@ final class InvoiceListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

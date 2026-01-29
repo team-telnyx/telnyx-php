@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\TestSuites\Runs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type meta_alias = array{
+ * @phpstan-type MetaShape = array{
  *   pageNumber: int, pageSize: int, totalPages: int, totalResults: int
  * }
  */
 final class Meta implements BaseModel
 {
-    /** @use SdkModel<meta_alias> */
+    /** @use SdkModel<MetaShape> */
     use SdkModel;
 
-    #[Api('page_number')]
+    #[Required('page_number')]
     public int $pageNumber;
 
-    #[Api('page_size')]
+    #[Required('page_size')]
     public int $pageSize;
 
-    #[Api('total_pages')]
+    #[Required('total_pages')]
     public int $totalPages;
 
-    #[Api('total_results')]
+    #[Required('total_results')]
     public int $totalResults;
 
     /**
@@ -64,45 +64,45 @@ final class Meta implements BaseModel
         int $totalPages,
         int $totalResults
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->pageNumber = $pageNumber;
-        $obj->pageSize = $pageSize;
-        $obj->totalPages = $totalPages;
-        $obj->totalResults = $totalResults;
+        $self['pageNumber'] = $pageNumber;
+        $self['pageSize'] = $pageSize;
+        $self['totalPages'] = $totalPages;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalPages(int $totalPages): self
     {
-        $obj = clone $this;
-        $obj->totalPages = $totalPages;
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalResults(int $totalResults): self
     {
-        $obj = clone $this;
-        $obj->totalResults = $totalResults;
+        $self = clone $this;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 }

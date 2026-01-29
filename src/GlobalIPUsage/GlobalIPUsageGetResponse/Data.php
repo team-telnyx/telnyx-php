@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\GlobalIP;
@@ -12,31 +12,35 @@ use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Received;
 use Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted;
 
 /**
- * @phpstan-type data_alias = array{
- *   globalIP?: GlobalIP,
- *   received?: Received,
- *   timestamp?: \DateTimeInterface,
- *   transmitted?: Transmitted,
+ * @phpstan-import-type GlobalIPShape from \Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\GlobalIP
+ * @phpstan-import-type ReceivedShape from \Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Received
+ * @phpstan-import-type TransmittedShape from \Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data\Transmitted
+ *
+ * @phpstan-type DataShape = array{
+ *   globalIP?: null|GlobalIP|GlobalIPShape,
+ *   received?: null|Received|ReceivedShape,
+ *   timestamp?: \DateTimeInterface|null,
+ *   transmitted?: null|Transmitted|TransmittedShape,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('global_ip', optional: true)]
+    #[Optional('global_ip')]
     public ?GlobalIP $globalIP;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Received $received;
 
     /**
      * The timestamp of the metric.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $timestamp;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Transmitted $transmitted;
 
     public function __construct()
@@ -48,37 +52,47 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param GlobalIP|GlobalIPShape|null $globalIP
+     * @param Received|ReceivedShape|null $received
+     * @param Transmitted|TransmittedShape|null $transmitted
      */
     public static function with(
-        ?GlobalIP $globalIP = null,
-        ?Received $received = null,
+        GlobalIP|array|null $globalIP = null,
+        Received|array|null $received = null,
         ?\DateTimeInterface $timestamp = null,
-        ?Transmitted $transmitted = null,
+        Transmitted|array|null $transmitted = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIP && $obj->globalIP = $globalIP;
-        null !== $received && $obj->received = $received;
-        null !== $timestamp && $obj->timestamp = $timestamp;
-        null !== $transmitted && $obj->transmitted = $transmitted;
+        null !== $globalIP && $self['globalIP'] = $globalIP;
+        null !== $received && $self['received'] = $received;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
+        null !== $transmitted && $self['transmitted'] = $transmitted;
 
-        return $obj;
+        return $self;
     }
 
-    public function withGlobalIP(GlobalIP $globalIP): self
+    /**
+     * @param GlobalIP|GlobalIPShape $globalIP
+     */
+    public function withGlobalIP(GlobalIP|array $globalIP): self
     {
-        $obj = clone $this;
-        $obj->globalIP = $globalIP;
+        $self = clone $this;
+        $self['globalIP'] = $globalIP;
 
-        return $obj;
+        return $self;
     }
 
-    public function withReceived(Received $received): self
+    /**
+     * @param Received|ReceivedShape $received
+     */
+    public function withReceived(Received|array $received): self
     {
-        $obj = clone $this;
-        $obj->received = $received;
+        $self = clone $this;
+        $self['received'] = $received;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,17 +100,20 @@ final class Data implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
-    public function withTransmitted(Transmitted $transmitted): self
+    /**
+     * @param Transmitted|TransmittedShape $transmitted
+     */
+    public function withTransmitted(Transmitted|array $transmitted): self
     {
-        $obj = clone $this;
-        $obj->transmitted = $transmitted;
+        $self = clone $this;
+        $self['transmitted'] = $transmitted;
 
-        return $obj;
+        return $self;
     }
 }

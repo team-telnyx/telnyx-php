@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPUsage\GlobalIPUsageGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transmitted_alias = array{amount?: float, unit?: string}
+ * @phpstan-type TransmittedShape = array{amount?: float|null, unit?: string|null}
  */
 final class Transmitted implements BaseModel
 {
-    /** @use SdkModel<transmitted_alias> */
+    /** @use SdkModel<TransmittedShape> */
     use SdkModel;
 
     /**
      * The amount of data transmitted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $amount;
 
     /**
      * The unit of the amount of data transmitted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $unit;
 
     public function __construct()
@@ -40,12 +40,12 @@ final class Transmitted implements BaseModel
      */
     public static function with(?float $amount = null, ?string $unit = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $amount && $obj->amount = $amount;
-        null !== $unit && $obj->unit = $unit;
+        null !== $amount && $self['amount'] = $amount;
+        null !== $unit && $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,10 +53,10 @@ final class Transmitted implements BaseModel
      */
     public function withAmount(float $amount): self
     {
-        $obj = clone $this;
-        $obj->amount = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +64,9 @@ final class Transmitted implements BaseModel
      */
     public function withUnit(string $unit): self
     {
-        $obj = clone $this;
-        $obj->unit = $unit;
+        $self = clone $this;
+        $self['unit'] = $unit;
 
-        return $obj;
+        return $self;
     }
 }

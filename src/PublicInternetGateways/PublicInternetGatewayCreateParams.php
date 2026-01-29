@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PublicInternetGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,34 +12,34 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new Public Internet Gateway.
  *
- * @see Telnyx\PublicInternetGateways->create
+ * @see Telnyx\Services\PublicInternetGatewaysService::create()
  *
- * @phpstan-type public_internet_gateway_create_params = array{
- *   name?: string, networkID?: string, regionCode?: string
+ * @phpstan-type PublicInternetGatewayCreateParamsShape = array{
+ *   name?: string|null, networkID?: string|null, regionCode?: string|null
  * }
  */
 final class PublicInternetGatewayCreateParams implements BaseModel
 {
-    /** @use SdkModel<public_internet_gateway_create_params> */
+    /** @use SdkModel<PublicInternetGatewayCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A user specified name for the interface.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The id of the network associated with the interface.
      */
-    #[Api('network_id', optional: true)]
+    #[Optional('network_id')]
     public ?string $networkID;
 
     /**
-     * The region the interface should be deployed to.
+     * The region interface is deployed to.
      */
-    #[Api('region_code', optional: true)]
+    #[Optional('region_code')]
     public ?string $regionCode;
 
     public function __construct()
@@ -57,13 +57,13 @@ final class PublicInternetGatewayCreateParams implements BaseModel
         ?string $networkID = null,
         ?string $regionCode = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
-        null !== $networkID && $obj->networkID = $networkID;
-        null !== $regionCode && $obj->regionCode = $regionCode;
+        null !== $name && $self['name'] = $name;
+        null !== $networkID && $self['networkID'] = $networkID;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,10 +71,10 @@ final class PublicInternetGatewayCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,20 +82,20 @@ final class PublicInternetGatewayCreateParams implements BaseModel
      */
     public function withNetworkID(string $networkID): self
     {
-        $obj = clone $this;
-        $obj->networkID = $networkID;
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * The region the interface should be deployed to.
+     * The region interface is deployed to.
      */
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 }

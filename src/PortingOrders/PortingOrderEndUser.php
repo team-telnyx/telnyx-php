@@ -4,24 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type porting_order_end_user = array{
- *   admin?: PortingOrderEndUserAdmin, location?: PortingOrderEndUserLocation
+ * @phpstan-import-type PortingOrderEndUserAdminShape from \Telnyx\PortingOrders\PortingOrderEndUserAdmin
+ * @phpstan-import-type PortingOrderEndUserLocationShape from \Telnyx\PortingOrders\PortingOrderEndUserLocation
+ *
+ * @phpstan-type PortingOrderEndUserShape = array{
+ *   admin?: null|PortingOrderEndUserAdmin|PortingOrderEndUserAdminShape,
+ *   location?: null|PortingOrderEndUserLocation|PortingOrderEndUserLocationShape,
  * }
  */
 final class PortingOrderEndUser implements BaseModel
 {
-    /** @use SdkModel<porting_order_end_user> */
+    /** @use SdkModel<PortingOrderEndUserShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderEndUserAdmin $admin;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingOrderEndUserLocation $location;
 
     public function __construct()
@@ -33,32 +37,42 @@ final class PortingOrderEndUser implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PortingOrderEndUserAdmin|PortingOrderEndUserAdminShape|null $admin
+     * @param PortingOrderEndUserLocation|PortingOrderEndUserLocationShape|null $location
      */
     public static function with(
-        ?PortingOrderEndUserAdmin $admin = null,
-        ?PortingOrderEndUserLocation $location = null,
+        PortingOrderEndUserAdmin|array|null $admin = null,
+        PortingOrderEndUserLocation|array|null $location = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $admin && $obj->admin = $admin;
-        null !== $location && $obj->location = $location;
+        null !== $admin && $self['admin'] = $admin;
+        null !== $location && $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 
-    public function withAdmin(PortingOrderEndUserAdmin $admin): self
+    /**
+     * @param PortingOrderEndUserAdmin|PortingOrderEndUserAdminShape $admin
+     */
+    public function withAdmin(PortingOrderEndUserAdmin|array $admin): self
     {
-        $obj = clone $this;
-        $obj->admin = $admin;
+        $self = clone $this;
+        $self['admin'] = $admin;
 
-        return $obj;
+        return $self;
     }
 
-    public function withLocation(PortingOrderEndUserLocation $location): self
-    {
-        $obj = clone $this;
-        $obj->location = $location;
+    /**
+     * @param PortingOrderEndUserLocation|PortingOrderEndUserLocationShape $location
+     */
+    public function withLocation(
+        PortingOrderEndUserLocation|array $location
+    ): self {
+        $self = clone $this;
+        $self['location'] = $location;
 
-        return $obj;
+        return $self;
     }
 }

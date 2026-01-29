@@ -12,8 +12,10 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingListResponse;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MessagingNewResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface MessagingContract
 {
     /**
@@ -23,7 +25,7 @@ interface MessagingContract
      * @param \DateTimeInterface $startTime Start time in ISO format
      * @param list<int> $connections List of connections to filter by
      * @param list<int> $directions List of directions to filter by (Inbound = 1, Outbound = 2)
-     * @param list<Filter> $filters List of filters to apply
+     * @param list<Filter|FilterShape> $filters List of filters to apply
      * @param bool $includeMessageBody Whether to include message body in the report
      * @param list<string> $managedAccounts List of managed accounts to include
      * @param list<string> $profiles List of messaging profile IDs to filter by
@@ -31,63 +33,58 @@ interface MessagingContract
      * @param string $reportName Name of the report
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
      * @param string $timezone Timezone for the report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $endTime,
-        $startTime,
-        $connections = omit,
-        $directions = omit,
-        $filters = omit,
-        $includeMessageBody = omit,
-        $managedAccounts = omit,
-        $profiles = omit,
-        $recordTypes = omit,
-        $reportName = omit,
-        $selectAllManagedAccounts = omit,
-        $timezone = omit,
-        ?RequestOptions $requestOptions = null,
+        \DateTimeInterface $endTime,
+        \DateTimeInterface $startTime,
+        ?array $connections = null,
+        ?array $directions = null,
+        ?array $filters = null,
+        ?bool $includeMessageBody = null,
+        ?array $managedAccounts = null,
+        ?array $profiles = null,
+        ?array $recordTypes = null,
+        ?string $reportName = null,
+        ?bool $selectAllManagedAccounts = null,
+        ?string $timezone = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MessagingNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MessagingNewResponse;
-
-    /**
-     * @api
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingGetResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingListResponse;
 
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MessagingDeleteResponse;
 }

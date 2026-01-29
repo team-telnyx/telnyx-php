@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MdrUsageReportResponseLegacy;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingDeleteResponse;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingGetResponse;
+use Telnyx\Legacy\Reporting\UsageReports\Messaging\MessagingNewResponse;
+use Telnyx\PerPagePagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +42,8 @@ final class MessagingTest extends TestCase
             aggregationType: 0
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingNewResponse::class, $result);
     }
 
     #[Test]
@@ -48,10 +54,22 @@ final class MessagingTest extends TestCase
         }
 
         $result = $this->client->legacy->reporting->usageReports->messaging->create(
-            aggregationType: 0
+            aggregationType: 0,
+            endTime: new \DateTimeImmutable('2020-01-02T00:00:00Z'),
+            managedAccounts: [
+                'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+            ],
+            profiles: [
+                '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+                '7d4e3f8a-9b2c-4e1d-8f5a-1a2b3c4d5e6f',
+            ],
+            selectAllManagedAccounts: true,
+            startTime: new \DateTimeImmutable('2020-01-01T00:00:00Z'),
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingNewResponse::class, $result);
     }
 
     #[Test]
@@ -70,7 +88,8 @@ final class MessagingTest extends TestCase
             ->retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingGetResponse::class, $result);
     }
 
     #[Test]
@@ -80,9 +99,15 @@ final class MessagingTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->legacy->reporting->usageReports->messaging->list();
+        $page = $this->client->legacy->reporting->usageReports->messaging->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PerPagePagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(MdrUsageReportResponseLegacy::class, $item);
+        }
     }
 
     #[Test]
@@ -96,6 +121,7 @@ final class MessagingTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingDeleteResponse::class, $result);
     }
 }

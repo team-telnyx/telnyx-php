@@ -4,72 +4,72 @@ declare(strict_types=1);
 
 namespace Telnyx\Queues\QueueGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Queues\QueueGetResponse\Data\RecordType;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   id: string,
  *   averageWaitTimeSecs: int,
  *   createdAt: string,
  *   currentSize: int,
  *   maxSize: int,
  *   name: string,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   updatedAt: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies the queue.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The average time that the calls currently in the queue have spent waiting, given in seconds.
      */
-    #[Api('average_wait_time_secs')]
+    #[Required('average_wait_time_secs')]
     public int $averageWaitTimeSecs;
 
     /**
      * ISO 8601 formatted date of when the queue was created.
      */
-    #[Api('created_at')]
+    #[Required('created_at')]
     public string $createdAt;
 
     /**
      * The number of calls currently in the queue.
      */
-    #[Api('current_size')]
+    #[Required('current_size')]
     public int $currentSize;
 
     /**
      * The maximum number of calls allowed in the queue.
      */
-    #[Api('max_size')]
+    #[Required('max_size')]
     public int $maxSize;
 
     /**
      * Name of the queue.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /** @var value-of<RecordType> $recordType */
-    #[Api('record_type', enum: RecordType::class)]
+    #[Required('record_type', enum: RecordType::class)]
     public string $recordType;
 
     /**
      * ISO 8601 formatted date of when the queue was last updated.
      */
-    #[Api('updated_at')]
+    #[Required('updated_at')]
     public string $updatedAt;
 
     /**
@@ -125,18 +125,18 @@ final class Data implements BaseModel
         RecordType|string $recordType,
         string $updatedAt,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->averageWaitTimeSecs = $averageWaitTimeSecs;
-        $obj->createdAt = $createdAt;
-        $obj->currentSize = $currentSize;
-        $obj->maxSize = $maxSize;
-        $obj->name = $name;
-        $obj['recordType'] = $recordType;
-        $obj->updatedAt = $updatedAt;
+        $self['id'] = $id;
+        $self['averageWaitTimeSecs'] = $averageWaitTimeSecs;
+        $self['createdAt'] = $createdAt;
+        $self['currentSize'] = $currentSize;
+        $self['maxSize'] = $maxSize;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,10 +144,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +155,10 @@ final class Data implements BaseModel
      */
     public function withAverageWaitTimeSecs(int $averageWaitTimeSecs): self
     {
-        $obj = clone $this;
-        $obj->averageWaitTimeSecs = $averageWaitTimeSecs;
+        $self = clone $this;
+        $self['averageWaitTimeSecs'] = $averageWaitTimeSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +166,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +177,10 @@ final class Data implements BaseModel
      */
     public function withCurrentSize(int $currentSize): self
     {
-        $obj = clone $this;
-        $obj->currentSize = $currentSize;
+        $self = clone $this;
+        $self['currentSize'] = $currentSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +188,10 @@ final class Data implements BaseModel
      */
     public function withMaxSize(int $maxSize): self
     {
-        $obj = clone $this;
-        $obj->maxSize = $maxSize;
+        $self = clone $this;
+        $self['maxSize'] = $maxSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,9 +221,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

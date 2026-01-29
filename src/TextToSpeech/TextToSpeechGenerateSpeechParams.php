@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\TextToSpeech;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Converts the provided text to speech using the specified voice and returns audio data.
  *
- * @see Telnyx\TextToSpeech->generateSpeech
+ * @see Telnyx\Services\TextToSpeechService::generateSpeech()
  *
- * @phpstan-type text_to_speech_generate_speech_params = array{
+ * @phpstan-type TextToSpeechGenerateSpeechParamsShape = array{
  *   text: string, voice: string
  * }
  */
 final class TextToSpeechGenerateSpeechParams implements BaseModel
 {
-    /** @use SdkModel<text_to_speech_generate_speech_params> */
+    /** @use SdkModel<TextToSpeechGenerateSpeechParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The text to convert to speech.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
@@ -41,7 +41,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      *
      * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
      */
-    #[Api]
+    #[Required]
     public string $voice;
 
     /**
@@ -70,12 +70,12 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      */
     public static function with(string $text, string $voice): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->text = $text;
-        $obj->voice = $voice;
+        $self['text'] = $text;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +83,10 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,9 +102,9 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      */
     public function withVoice(string $voice): self
     {
-        $obj = clone $this;
-        $obj->voice = $voice;
+        $self = clone $this;
+        $self['voice'] = $voice;
 
-        return $obj;
+        return $self;
     }
 }

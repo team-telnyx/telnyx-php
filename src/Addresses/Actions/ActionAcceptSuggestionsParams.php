@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Accepts this address suggestion as a new emergency address for Operator Connect and finishes the uploads of the numbers associated with it to Microsoft.
  *
- * @see Telnyx\Addresses\Actions->acceptSuggestions
+ * @see Telnyx\Services\Addresses\ActionsService::acceptSuggestions()
  *
- * @phpstan-type action_accept_suggestions_params = array{id?: string}
+ * @phpstan-type ActionAcceptSuggestionsParamsShape = array{id?: string|null}
  */
 final class ActionAcceptSuggestionsParams implements BaseModel
 {
-    /** @use SdkModel<action_accept_suggestions_params> */
+    /** @use SdkModel<ActionAcceptSuggestionsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The ID of the address.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class ActionAcceptSuggestionsParams implements BaseModel
      */
     public static function with(?string $id = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
+        null !== $id && $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class ActionAcceptSuggestionsParams implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 }

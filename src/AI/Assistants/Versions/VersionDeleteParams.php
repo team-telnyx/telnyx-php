@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Versions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Permanently removes a specific version of an assistant. Can not delete main version.
  *
- * @see Telnyx\AI\Assistants\Versions->delete
+ * @see Telnyx\Services\AI\Assistants\VersionsService::delete()
  *
- * @phpstan-type version_delete_params = array{assistantID: string}
+ * @phpstan-type VersionDeleteParamsShape = array{assistantID: string}
  */
 final class VersionDeleteParams implements BaseModel
 {
-    /** @use SdkModel<version_delete_params> */
+    /** @use SdkModel<VersionDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $assistantID;
 
     /**
@@ -51,18 +51,18 @@ final class VersionDeleteParams implements BaseModel
      */
     public static function with(string $assistantID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->assistantID = $assistantID;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withAssistantID(string $assistantID): self
     {
-        $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $self = clone $this;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 }

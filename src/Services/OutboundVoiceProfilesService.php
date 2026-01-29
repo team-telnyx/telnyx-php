@@ -6,18 +6,17 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\OutboundVoiceProfiles\OutboundCallRecording;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Sort;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListResponse;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
-use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams;
 use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateResponse;
 use Telnyx\OutboundVoiceProfiles\ServicePlan;
 use Telnyx\OutboundVoiceProfiles\TrafficType;
@@ -25,14 +24,28 @@ use Telnyx\OutboundVoiceProfiles\UsagePaymentMethod;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OutboundVoiceProfilesContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow
+ * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow as CallingWindowShape1
+ * @phpstan-import-type FilterShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Page
+ * @phpstan-import-type OutboundCallRecordingShape from \Telnyx\OutboundVoiceProfiles\OutboundCallRecording
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContract
 {
     /**
+     * @api
+     */
+    public OutboundVoiceProfilesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new OutboundVoiceProfilesRawService($client);
+    }
 
     /**
      * @api
@@ -41,8 +54,8 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * @param string $name a user-supplied name to help with organization
      * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
-     * @param OutboundCallRecording $callRecording
-     * @param CallingWindow $callingWindow (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
+     * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
+     * @param CallingWindow|CallingWindowShape $callingWindow (BETA) Specifies the time window and call limits for calls made using this outbound voice profile. Note that all times are UTC in 24-hour clock time.
      * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile
@@ -53,70 +66,50 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @param TrafficType|value-of<TrafficType> $trafficType specifies the type of traffic allowed in this profile
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod setting for how costs for outbound profile are calculated
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        $billingGroupID = omit,
-        $callRecording = omit,
-        $callingWindow = omit,
-        $concurrentCallLimit = omit,
-        $dailySpendLimit = omit,
-        $dailySpendLimitEnabled = omit,
-        $enabled = omit,
-        $maxDestinationRate = omit,
-        $servicePlan = omit,
-        $tags = omit,
-        $trafficType = omit,
-        $usagePaymentMethod = omit,
-        $whitelistedDestinations = omit,
-        ?RequestOptions $requestOptions = null,
+        string $name,
+        ?string $billingGroupID = null,
+        OutboundCallRecording|array|null $callRecording = null,
+        CallingWindow|array|null $callingWindow = null,
+        ?int $concurrentCallLimit = null,
+        ?string $dailySpendLimit = null,
+        bool $dailySpendLimitEnabled = false,
+        bool $enabled = true,
+        ?float $maxDestinationRate = null,
+        ServicePlan|string $servicePlan = 'global',
+        ?array $tags = null,
+        TrafficType|string $trafficType = 'conversational',
+        UsagePaymentMethod|string $usagePaymentMethod = 'rate-deck',
+        array $whitelistedDestinations = ['US', 'CA'],
+        RequestOptions|array|null $requestOptions = null,
     ): OutboundVoiceProfileNewResponse {
-        $params = [
-            'name' => $name,
-            'billingGroupID' => $billingGroupID,
-            'callRecording' => $callRecording,
-            'callingWindow' => $callingWindow,
-            'concurrentCallLimit' => $concurrentCallLimit,
-            'dailySpendLimit' => $dailySpendLimit,
-            'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
-            'enabled' => $enabled,
-            'maxDestinationRate' => $maxDestinationRate,
-            'servicePlan' => $servicePlan,
-            'tags' => $tags,
-            'trafficType' => $trafficType,
-            'usagePaymentMethod' => $usagePaymentMethod,
-            'whitelistedDestinations' => $whitelistedDestinations,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OutboundVoiceProfileNewResponse {
-        [$parsed, $options] = OutboundVoiceProfileCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'name' => $name,
+                'billingGroupID' => $billingGroupID,
+                'callRecording' => $callRecording,
+                'callingWindow' => $callingWindow,
+                'concurrentCallLimit' => $concurrentCallLimit,
+                'dailySpendLimit' => $dailySpendLimit,
+                'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
+                'enabled' => $enabled,
+                'maxDestinationRate' => $maxDestinationRate,
+                'servicePlan' => $servicePlan,
+                'tags' => $tags,
+                'trafficType' => $trafficType,
+                'usagePaymentMethod' => $usagePaymentMethod,
+                'whitelistedDestinations' => $whitelistedDestinations,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'outbound_voice_profiles',
-            body: (object) $parsed,
-            options: $options,
-            convert: OutboundVoiceProfileNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -124,19 +117,19 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * Retrieves the details of an existing outbound voice profile.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OutboundVoiceProfileGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['outbound_voice_profiles/%1$s', $id],
-            options: $requestOptions,
-            convert: OutboundVoiceProfileGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -144,10 +137,11 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * Updates an existing outbound voice profile.
      *
+     * @param string $id identifies the resource
      * @param string $name a user-supplied name to help with organization
      * @param string|null $billingGroupID The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
-     * @param OutboundCallRecording $callRecording
-     * @param OutboundVoiceProfileUpdateParams\CallingWindow $callingWindow (BETA) Specifies the time window and call limits for calls made using this outbound voice profile
+     * @param OutboundCallRecording|OutboundCallRecordingShape $callRecording
+     * @param \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow|CallingWindowShape1 $callingWindow (BETA) Specifies the time window and call limits for calls made using this outbound voice profile
      * @param int|null $concurrentCallLimit Must be no more than your global concurrent call limit. Null means no limit.
      * @param string $dailySpendLimit the maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls
      * @param bool $dailySpendLimitEnabled specifies whether to enforce the daily_spend_limit on this outbound voice profile
@@ -158,72 +152,51 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      * @param TrafficType|value-of<TrafficType> $trafficType specifies the type of traffic allowed in this profile
      * @param UsagePaymentMethod|value-of<UsagePaymentMethod> $usagePaymentMethod setting for how costs for outbound profile are calculated
      * @param list<string> $whitelistedDestinations the list of destinations you want to be able to call using this outbound voice profile formatted in alpha2
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $name,
-        $billingGroupID = omit,
-        $callRecording = omit,
-        $callingWindow = omit,
-        $concurrentCallLimit = omit,
-        $dailySpendLimit = omit,
-        $dailySpendLimitEnabled = omit,
-        $enabled = omit,
-        $maxDestinationRate = omit,
-        $servicePlan = omit,
-        $tags = omit,
-        $trafficType = omit,
-        $usagePaymentMethod = omit,
-        $whitelistedDestinations = omit,
-        ?RequestOptions $requestOptions = null,
+        string $name,
+        ?string $billingGroupID = null,
+        OutboundCallRecording|array|null $callRecording = null,
+        \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow|array|null $callingWindow = null,
+        ?int $concurrentCallLimit = null,
+        ?string $dailySpendLimit = null,
+        bool $dailySpendLimitEnabled = false,
+        bool $enabled = true,
+        ?float $maxDestinationRate = null,
+        ServicePlan|string $servicePlan = 'global',
+        ?array $tags = null,
+        TrafficType|string $trafficType = 'conversational',
+        UsagePaymentMethod|string $usagePaymentMethod = 'rate-deck',
+        array $whitelistedDestinations = ['US', 'CA'],
+        RequestOptions|array|null $requestOptions = null,
     ): OutboundVoiceProfileUpdateResponse {
-        $params = [
-            'name' => $name,
-            'billingGroupID' => $billingGroupID,
-            'callRecording' => $callRecording,
-            'callingWindow' => $callingWindow,
-            'concurrentCallLimit' => $concurrentCallLimit,
-            'dailySpendLimit' => $dailySpendLimit,
-            'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
-            'enabled' => $enabled,
-            'maxDestinationRate' => $maxDestinationRate,
-            'servicePlan' => $servicePlan,
-            'tags' => $tags,
-            'trafficType' => $trafficType,
-            'usagePaymentMethod' => $usagePaymentMethod,
-            'whitelistedDestinations' => $whitelistedDestinations,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OutboundVoiceProfileUpdateResponse {
-        [$parsed, $options] = OutboundVoiceProfileUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'name' => $name,
+                'billingGroupID' => $billingGroupID,
+                'callRecording' => $callRecording,
+                'callingWindow' => $callingWindow,
+                'concurrentCallLimit' => $concurrentCallLimit,
+                'dailySpendLimit' => $dailySpendLimit,
+                'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
+                'enabled' => $enabled,
+                'maxDestinationRate' => $maxDestinationRate,
+                'servicePlan' => $servicePlan,
+                'tags' => $tags,
+                'trafficType' => $trafficType,
+                'usagePaymentMethod' => $usagePaymentMethod,
+                'whitelistedDestinations' => $whitelistedDestinations,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['outbound_voice_profiles/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: OutboundVoiceProfileUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -231,8 +204,8 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * Get all outbound voice profiles belonging to the user that match the given filters.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[name][contains]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name][contains]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code>-</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -245,44 +218,26 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *     <code>name</code> field in descending order.
      *   </li>
      * </ul> <br/>
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<OutboundVoiceProfile>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): OutboundVoiceProfileListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OutboundVoiceProfileListResponse {
-        [$parsed, $options] = OutboundVoiceProfileListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string $sort = '-created_at',
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'outbound_voice_profiles',
-            query: $parsed,
-            options: $options,
-            convert: OutboundVoiceProfileListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -290,18 +245,18 @@ final class OutboundVoiceProfilesService implements OutboundVoiceProfilesContrac
      *
      * Deletes an existing outbound voice profile.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OutboundVoiceProfileDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['outbound_voice_profiles/%1$s', $id],
-            options: $requestOptions,
-            convert: OutboundVoiceProfileDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

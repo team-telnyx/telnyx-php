@@ -4,53 +4,54 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type user_bundle_resource = array{
+ * @phpstan-type UserBundleResourceShape = array{
  *   id: string,
- *   createdAt: \DateTimeInterface,
+ *   createdAt: string,
  *   resource: string,
  *   resourceType: string,
- *   updatedAt?: \DateTimeInterface|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class UserBundleResource implements BaseModel
 {
-    /** @use SdkModel<user_bundle_resource> */
+    /** @use SdkModel<UserBundleResourceShape> */
     use SdkModel;
 
     /**
      * Resource's ID.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Date the resource was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Required('created_at')]
+    public string $createdAt;
 
     /**
      * The resource itself (usually a phone number).
      */
-    #[Api]
+    #[Required]
     public string $resource;
 
     /**
      * The type of the resource (usually 'number').
      */
-    #[Api('resource_type')]
+    #[Required('resource_type')]
     public string $resourceType;
 
     /**
      * Date the resource was last updated.
      */
-    #[Api('updated_at', nullable: true, optional: true)]
-    public ?\DateTimeInterface $updatedAt;
+    #[Optional('updated_at', nullable: true)]
+    public ?string $updatedAt;
 
     /**
      * `new UserBundleResource()` is missing required properties by the API.
@@ -84,21 +85,21 @@ final class UserBundleResource implements BaseModel
      */
     public static function with(
         string $id,
-        \DateTimeInterface $createdAt,
+        string $createdAt,
         string $resource,
         string $resourceType,
-        ?\DateTimeInterface $updatedAt = null,
+        ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->resource = $resource;
-        $obj->resourceType = $resourceType;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['resource'] = $resource;
+        $self['resourceType'] = $resourceType;
 
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,21 +107,21 @@ final class UserBundleResource implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Date the resource was created.
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +129,10 @@ final class UserBundleResource implements BaseModel
      */
     public function withResource(string $resource): self
     {
-        $obj = clone $this;
-        $obj->resource = $resource;
+        $self = clone $this;
+        $self['resource'] = $resource;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,20 +140,20 @@ final class UserBundleResource implements BaseModel
      */
     public function withResourceType(string $resourceType): self
     {
-        $obj = clone $this;
-        $obj->resourceType = $resourceType;
+        $self = clone $this;
+        $self['resourceType'] = $resourceType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Date the resource was last updated.
      */
-    public function withUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function withUpdatedAt(?string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

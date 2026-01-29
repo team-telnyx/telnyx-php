@@ -5,7 +5,9 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AccessIPRanges\AccessIPRange;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class AccessIPRangesTest extends TestCase
 
         $result = $this->client->accessIPRanges->create(cidrBlock: 'cidr_block');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPRange::class, $result);
     }
 
     #[Test]
@@ -45,9 +48,13 @@ final class AccessIPRangesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPRanges->create(cidrBlock: 'cidr_block');
+        $result = $this->client->accessIPRanges->create(
+            cidrBlock: 'cidr_block',
+            description: 'description'
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPRange::class, $result);
     }
 
     #[Test]
@@ -57,9 +64,15 @@ final class AccessIPRangesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accessIPRanges->list();
+        $page = $this->client->accessIPRanges->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AccessIPRange::class, $item);
+        }
     }
 
     #[Test]
@@ -71,6 +84,7 @@ final class AccessIPRangesTest extends TestCase
 
         $result = $this->client->accessIPRanges->delete('access_ip_range_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AccessIPRange::class, $result);
     }
 }

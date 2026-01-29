@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Recordings\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Permanently deletes a list of call recordings.
  *
- * @see Telnyx\Recordings\Actions->delete
+ * @see Telnyx\Services\Recordings\ActionsService::delete()
  *
- * @phpstan-type action_delete_params = array{ids: list<string>}
+ * @phpstan-type ActionDeleteParamsShape = array{ids: list<string>}
  */
 final class ActionDeleteParams implements BaseModel
 {
-    /** @use SdkModel<action_delete_params> */
+    /** @use SdkModel<ActionDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -27,7 +27,7 @@ final class ActionDeleteParams implements BaseModel
      *
      * @var list<string> $ids
      */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $ids;
 
     /**
@@ -58,11 +58,11 @@ final class ActionDeleteParams implements BaseModel
      */
     public static function with(array $ids): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->ids = $ids;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -72,9 +72,9 @@ final class ActionDeleteParams implements BaseModel
      */
     public function withIDs(array $ids): self
     {
-        $obj = clone $this;
-        $obj->ids = $ids;
+        $self = clone $this;
+        $self['ids'] = $ids;
 
-        return $obj;
+        return $self;
     }
 }

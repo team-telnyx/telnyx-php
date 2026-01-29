@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type auto_resp_config_response = array{data: AutoRespConfig}
+ * @phpstan-import-type AutoRespConfigShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig
+ *
+ * @phpstan-type AutoRespConfigResponseShape = array{
+ *   data: AutoRespConfig|AutoRespConfigShape
+ * }
  */
-final class AutoRespConfigResponse implements BaseModel, ResponseConverter
+final class AutoRespConfigResponse implements BaseModel
 {
-    /** @use SdkModel<auto_resp_config_response> */
+    /** @use SdkModel<AutoRespConfigResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public AutoRespConfig $data;
 
     /**
@@ -46,21 +46,26 @@ final class AutoRespConfigResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param AutoRespConfig|AutoRespConfigShape $data
      */
-    public static function with(AutoRespConfig $data): self
+    public static function with(AutoRespConfig|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(AutoRespConfig $data): self
+    /**
+     * @param AutoRespConfig|AutoRespConfigShape $data
+     */
+    public function withData(AutoRespConfig|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

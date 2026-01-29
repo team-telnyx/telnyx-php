@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\LedgerBillingGroupReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ledger_billing_group_report_get_response = array{
- *   data?: LedgerBillingGroupReport
+ * @phpstan-import-type LedgerBillingGroupReportShape from \Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReport
+ *
+ * @phpstan-type LedgerBillingGroupReportGetResponseShape = array{
+ *   data?: null|LedgerBillingGroupReport|LedgerBillingGroupReportShape
  * }
  */
-final class LedgerBillingGroupReportGetResponse implements BaseModel, ResponseConverter
+final class LedgerBillingGroupReportGetResponse implements BaseModel
 {
-    /** @use SdkModel<ledger_billing_group_report_get_response> */
+    /** @use SdkModel<LedgerBillingGroupReportGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?LedgerBillingGroupReport $data;
 
     public function __construct()
@@ -34,21 +32,27 @@ final class LedgerBillingGroupReportGetResponse implements BaseModel, ResponseCo
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param LedgerBillingGroupReport|LedgerBillingGroupReportShape|null $data
      */
-    public static function with(?LedgerBillingGroupReport $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        LedgerBillingGroupReport|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(LedgerBillingGroupReport $data): self
+    /**
+     * @param LedgerBillingGroupReport|LedgerBillingGroupReportShape $data
+     */
+    public function withData(LedgerBillingGroupReport|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,34 +5,35 @@ declare(strict_types=1);
 namespace Telnyx\AI\Audio;
 
 use Telnyx\AI\Audio\AudioTranscribeResponse\Segment;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type audio_transcribe_response = array{
- *   text: string, duration?: float, segments?: list<Segment>
+ * @phpstan-import-type SegmentShape from \Telnyx\AI\Audio\AudioTranscribeResponse\Segment
+ *
+ * @phpstan-type AudioTranscribeResponseShape = array{
+ *   text: string,
+ *   duration?: float|null,
+ *   segments?: list<Segment|SegmentShape>|null,
  * }
  */
-final class AudioTranscribeResponse implements BaseModel, ResponseConverter
+final class AudioTranscribeResponse implements BaseModel
 {
-    /** @use SdkModel<audio_transcribe_response> */
+    /** @use SdkModel<AudioTranscribeResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The transcribed text for the audio file.
      */
-    #[Api]
+    #[Required]
     public string $text;
 
     /**
      * The duration of the audio file in seconds. This is only included if `response_format` is set to `verbose_json`.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $duration;
 
     /**
@@ -40,7 +41,7 @@ final class AudioTranscribeResponse implements BaseModel, ResponseConverter
      *
      * @var list<Segment>|null $segments
      */
-    #[Api(list: Segment::class, optional: true)]
+    #[Optional(list: Segment::class)]
     public ?array $segments;
 
     /**
@@ -67,21 +68,21 @@ final class AudioTranscribeResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Segment> $segments
+     * @param list<Segment|SegmentShape>|null $segments
      */
     public static function with(
         string $text,
         ?float $duration = null,
         ?array $segments = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->text = $text;
+        $self['text'] = $text;
 
-        null !== $duration && $obj->duration = $duration;
-        null !== $segments && $obj->segments = $segments;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $segments && $self['segments'] = $segments;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +90,10 @@ final class AudioTranscribeResponse implements BaseModel, ResponseConverter
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,22 +101,22 @@ final class AudioTranscribeResponse implements BaseModel, ResponseConverter
      */
     public function withDuration(float $duration): self
     {
-        $obj = clone $this;
-        $obj->duration = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Segments of the transcribed text and their corresponding details. This is only included if `response_format` is set to `verbose_json`.
      *
-     * @param list<Segment> $segments
+     * @param list<Segment|SegmentShape> $segments
      */
     public function withSegments(array $segments): self
     {
-        $obj = clone $this;
-        $obj->segments = $segments;
+        $self = clone $this;
+        $self['segments'] = $segments;
 
-        return $obj;
+        return $self;
     }
 }

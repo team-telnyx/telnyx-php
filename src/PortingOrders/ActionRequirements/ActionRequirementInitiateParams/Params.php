@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Required information for initiating the action requirement for AU ID verification.
  *
- * @phpstan-type params_alias = array{firstName: string, lastName: string}
+ * @phpstan-type ParamsShape = array{firstName: string, lastName: string}
  */
 final class Params implements BaseModel
 {
-    /** @use SdkModel<params_alias> */
+    /** @use SdkModel<ParamsShape> */
     use SdkModel;
 
     /**
      * The first name of the person that will perform the verification flow.
      */
-    #[Api('first_name')]
+    #[Required('first_name')]
     public string $firstName;
 
     /**
      * The last name of the person that will perform the verification flow.
      */
-    #[Api('last_name')]
+    #[Required('last_name')]
     public string $lastName;
 
     /**
@@ -56,12 +56,12 @@ final class Params implements BaseModel
      */
     public static function with(string $firstName, string $lastName): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->firstName = $firstName;
-        $obj->lastName = $lastName;
+        $self['firstName'] = $firstName;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class Params implements BaseModel
      */
     public function withFirstName(string $firstName): self
     {
-        $obj = clone $this;
-        $obj->firstName = $firstName;
+        $self = clone $this;
+        $self['firstName'] = $firstName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class Params implements BaseModel
      */
     public function withLastName(string $lastName): self
     {
-        $obj = clone $this;
-        $obj->lastName = $lastName;
+        $self = clone $this;
+        $self['lastName'] = $lastName;
 
-        return $obj;
+        return $self;
     }
 }

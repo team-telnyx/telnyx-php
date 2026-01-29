@@ -5,38 +5,41 @@ declare(strict_types=1);
 namespace Telnyx;
 
 use Telnyx\APIError\Source;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type api_error = array{
+ * @phpstan-import-type SourceShape from \Telnyx\APIError\Source
+ *
+ * @phpstan-type APIErrorShape = array{
  *   code: string,
  *   title: string,
- *   detail?: string,
- *   meta?: array<string, mixed>,
- *   source?: Source,
+ *   detail?: string|null,
+ *   meta?: array<string,mixed>|null,
+ *   source?: null|Source|SourceShape,
  * }
  */
 final class APIError implements BaseModel
 {
-    /** @use SdkModel<api_error> */
+    /** @use SdkModel<APIErrorShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $code;
 
-    #[Api]
+    #[Required]
     public string $title;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $detail;
 
-    /** @var array<string, mixed>|null $meta */
-    #[Api(map: 'mixed', optional: true)]
+    /** @var array<string,mixed>|null $meta */
+    #[Optional(map: 'mixed')]
     public ?array $meta;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Source $source;
 
     /**
@@ -63,67 +66,71 @@ final class APIError implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $meta
+     * @param array<string,mixed>|null $meta
+     * @param Source|SourceShape|null $source
      */
     public static function with(
         string $code,
         string $title,
         ?string $detail = null,
         ?array $meta = null,
-        ?Source $source = null,
+        Source|array|null $source = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->code = $code;
-        $obj->title = $title;
+        $self['code'] = $code;
+        $self['title'] = $title;
 
-        null !== $detail && $obj->detail = $detail;
-        null !== $meta && $obj->meta = $meta;
-        null !== $source && $obj->source = $source;
+        null !== $detail && $self['detail'] = $detail;
+        null !== $meta && $self['meta'] = $meta;
+        null !== $source && $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     public function withTitle(string $title): self
     {
-        $obj = clone $this;
-        $obj->title = $title;
+        $self = clone $this;
+        $self['title'] = $title;
 
-        return $obj;
+        return $self;
     }
 
     public function withDetail(string $detail): self
     {
-        $obj = clone $this;
-        $obj->detail = $detail;
+        $self = clone $this;
+        $self['detail'] = $detail;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param array<string, mixed> $meta
+     * @param array<string,mixed> $meta
      */
     public function withMeta(array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
-    public function withSource(Source $source): self
+    /**
+     * @param Source|SourceShape $source
+     */
+    public function withSource(Source|array $source): self
     {
-        $obj = clone $this;
-        $obj->source = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 }

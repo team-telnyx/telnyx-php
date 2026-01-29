@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\InventoryCoverage\InventoryCoverageListResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\CoverageType;
@@ -12,58 +12,58 @@ use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\NumberType;
 use Telnyx\InventoryCoverage\InventoryCoverageListResponse\Data\PhoneNumberType;
 
 /**
- * @phpstan-type data_alias = array{
- *   administrativeArea?: string,
- *   advanceRequirements?: bool,
- *   count?: int,
- *   coverageType?: value-of<CoverageType>,
- *   group?: string,
- *   groupType?: string,
- *   numberRange?: int,
- *   numberType?: value-of<NumberType>,
- *   phoneNumberType?: value-of<PhoneNumberType>,
- *   recordType?: string,
+ * @phpstan-type DataShape = array{
+ *   administrativeArea?: string|null,
+ *   advanceRequirements?: bool|null,
+ *   count?: int|null,
+ *   coverageType?: null|CoverageType|value-of<CoverageType>,
+ *   group?: string|null,
+ *   groupType?: string|null,
+ *   numberRange?: int|null,
+ *   numberType?: null|NumberType|value-of<NumberType>,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
+ *   recordType?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('administrative_area', optional: true)]
+    #[Optional('administrative_area')]
     public ?string $administrativeArea;
 
     /**
      * Indicates if the phone number requires advance requirements.
      */
-    #[Api('advance_requirements', optional: true)]
+    #[Optional('advance_requirements')]
     public ?bool $advanceRequirements;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $count;
 
     /** @var value-of<CoverageType>|null $coverageType */
-    #[Api('coverage_type', enum: CoverageType::class, optional: true)]
+    #[Optional('coverage_type', enum: CoverageType::class)]
     public ?string $coverageType;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $group;
 
-    #[Api('group_type', optional: true)]
+    #[Optional('group_type')]
     public ?string $groupType;
 
-    #[Api('number_range', optional: true)]
+    #[Optional('number_range')]
     public ?int $numberRange;
 
     /** @var value-of<NumberType>|null $numberType */
-    #[Api('number_type', enum: NumberType::class, optional: true)]
+    #[Optional('number_type', enum: NumberType::class)]
     public ?string $numberType;
 
     /** @var value-of<PhoneNumberType>|null $phoneNumberType */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
     public ?string $phoneNumberType;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -76,9 +76,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CoverageType|value-of<CoverageType> $coverageType
-     * @param NumberType|value-of<NumberType> $numberType
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
+     * @param CoverageType|value-of<CoverageType>|null $coverageType
+     * @param NumberType|value-of<NumberType>|null $numberType
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
      */
     public static function with(
         ?string $administrativeArea = null,
@@ -92,28 +92,28 @@ final class Data implements BaseModel
         PhoneNumberType|string|null $phoneNumberType = null,
         ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $administrativeArea && $obj->administrativeArea = $administrativeArea;
-        null !== $advanceRequirements && $obj->advanceRequirements = $advanceRequirements;
-        null !== $count && $obj->count = $count;
-        null !== $coverageType && $obj['coverageType'] = $coverageType;
-        null !== $group && $obj->group = $group;
-        null !== $groupType && $obj->groupType = $groupType;
-        null !== $numberRange && $obj->numberRange = $numberRange;
-        null !== $numberType && $obj['numberType'] = $numberType;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $administrativeArea && $self['administrativeArea'] = $administrativeArea;
+        null !== $advanceRequirements && $self['advanceRequirements'] = $advanceRequirements;
+        null !== $count && $self['count'] = $count;
+        null !== $coverageType && $self['coverageType'] = $coverageType;
+        null !== $group && $self['group'] = $group;
+        null !== $groupType && $self['groupType'] = $groupType;
+        null !== $numberRange && $self['numberRange'] = $numberRange;
+        null !== $numberType && $self['numberType'] = $numberType;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     public function withAdministrativeArea(string $administrativeArea): self
     {
-        $obj = clone $this;
-        $obj->administrativeArea = $administrativeArea;
+        $self = clone $this;
+        $self['administrativeArea'] = $administrativeArea;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,18 +121,18 @@ final class Data implements BaseModel
      */
     public function withAdvanceRequirements(bool $advanceRequirements): self
     {
-        $obj = clone $this;
-        $obj->advanceRequirements = $advanceRequirements;
+        $self = clone $this;
+        $self['advanceRequirements'] = $advanceRequirements;
 
-        return $obj;
+        return $self;
     }
 
     public function withCount(int $count): self
     {
-        $obj = clone $this;
-        $obj->count = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,34 +140,34 @@ final class Data implements BaseModel
      */
     public function withCoverageType(CoverageType|string $coverageType): self
     {
-        $obj = clone $this;
-        $obj['coverageType'] = $coverageType;
+        $self = clone $this;
+        $self['coverageType'] = $coverageType;
 
-        return $obj;
+        return $self;
     }
 
     public function withGroup(string $group): self
     {
-        $obj = clone $this;
-        $obj->group = $group;
+        $self = clone $this;
+        $self['group'] = $group;
 
-        return $obj;
+        return $self;
     }
 
     public function withGroupType(string $groupType): self
     {
-        $obj = clone $this;
-        $obj->groupType = $groupType;
+        $self = clone $this;
+        $self['groupType'] = $groupType;
 
-        return $obj;
+        return $self;
     }
 
     public function withNumberRange(int $numberRange): self
     {
-        $obj = clone $this;
-        $obj->numberRange = $numberRange;
+        $self = clone $this;
+        $self['numberRange'] = $numberRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class Data implements BaseModel
      */
     public function withNumberType(NumberType|string $numberType): self
     {
-        $obj = clone $this;
-        $obj['numberType'] = $numberType;
+        $self = clone $this;
+        $self['numberType'] = $numberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,17 +187,17 @@ final class Data implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

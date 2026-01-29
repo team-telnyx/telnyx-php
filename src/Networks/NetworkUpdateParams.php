@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Networks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a Network.
  *
- * @see Telnyx\Networks->update
+ * @see Telnyx\Services\NetworksService::update()
  *
- * @phpstan-type network_update_params = array{name: string}
+ * @phpstan-type NetworkUpdateParamsShape = array{name: string}
  */
 final class NetworkUpdateParams implements BaseModel
 {
-    /** @use SdkModel<network_update_params> */
+    /** @use SdkModel<NetworkUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A user specified name for the network.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -54,11 +54,11 @@ final class NetworkUpdateParams implements BaseModel
      */
     public static function with(string $name): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->name = $name;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class NetworkUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\RoomCompositions\RoomComposition;
+use Telnyx\RoomCompositions\RoomCompositionGetResponse;
+use Telnyx\RoomCompositions\RoomCompositionNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class RoomCompositionsTest extends TestCase
 
         $result = $this->client->roomCompositions->create();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomCompositionNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +54,8 @@ final class RoomCompositionsTest extends TestCase
             '5219b3af-87c6-4c08-9b58-5a533d893e21'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomCompositionGetResponse::class, $result);
     }
 
     #[Test]
@@ -59,9 +65,15 @@ final class RoomCompositionsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->roomCompositions->list();
+        $page = $this->client->roomCompositions->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(RoomComposition::class, $item);
+        }
     }
 
     #[Test]
@@ -75,6 +87,7 @@ final class RoomCompositionsTest extends TestCase
             '5219b3af-87c6-4c08-9b58-5a533d893e21'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

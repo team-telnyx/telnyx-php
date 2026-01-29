@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberBlocks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Deletes a phone number block.
  *
- * @see Telnyx\PortingOrders\PhoneNumberBlocks->delete
+ * @see Telnyx\Services\PortingOrders\PhoneNumberBlocksService::delete()
  *
- * @phpstan-type phone_number_block_delete_params = array{portingOrderID: string}
+ * @phpstan-type PhoneNumberBlockDeleteParamsShape = array{portingOrderID: string}
  */
 final class PhoneNumberBlockDeleteParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_block_delete_params> */
+    /** @use SdkModel<PhoneNumberBlockDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $portingOrderID;
 
     /**
@@ -51,18 +51,18 @@ final class PhoneNumberBlockDeleteParams implements BaseModel
      */
     public static function with(string $portingOrderID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->portingOrderID = $portingOrderID;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 }

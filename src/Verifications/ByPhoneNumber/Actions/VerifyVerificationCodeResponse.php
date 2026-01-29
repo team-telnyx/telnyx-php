@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\ByPhoneNumber\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Data;
 
 /**
- * @phpstan-type verify_verification_code_response = array{data: Data}
+ * @phpstan-import-type DataShape from \Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse\Data
+ *
+ * @phpstan-type VerifyVerificationCodeResponseShape = array{data: Data|DataShape}
  */
-final class VerifyVerificationCodeResponse implements BaseModel, ResponseConverter
+final class VerifyVerificationCodeResponse implements BaseModel
 {
-    /** @use SdkModel<verify_verification_code_response> */
+    /** @use SdkModel<VerifyVerificationCodeResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public Data $data;
 
     /**
@@ -47,21 +45,26 @@ final class VerifyVerificationCodeResponse implements BaseModel, ResponseConvert
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|DataShape $data
      */
-    public static function with(Data $data): self
+    public static function with(Data|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|DataShape $data
+     */
+    public function withData(Data|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

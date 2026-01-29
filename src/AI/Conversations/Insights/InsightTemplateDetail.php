@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\Insights;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type insight_template_detail = array{data: InsightTemplate}
+ * @phpstan-import-type InsightTemplateShape from \Telnyx\AI\Conversations\Insights\InsightTemplate
+ *
+ * @phpstan-type InsightTemplateDetailShape = array{
+ *   data: InsightTemplate|InsightTemplateShape
+ * }
  */
-final class InsightTemplateDetail implements BaseModel, ResponseConverter
+final class InsightTemplateDetail implements BaseModel
 {
-    /** @use SdkModel<insight_template_detail> */
+    /** @use SdkModel<InsightTemplateDetailShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public InsightTemplate $data;
 
     /**
@@ -46,21 +46,26 @@ final class InsightTemplateDetail implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param InsightTemplate|InsightTemplateShape $data
      */
-    public static function with(InsightTemplate $data): self
+    public static function with(InsightTemplate|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(InsightTemplate $data): self
+    /**
+     * @param InsightTemplate|InsightTemplateShape $data
+     */
+    public function withData(InsightTemplate|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP;
@@ -13,17 +13,19 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\Status;
 /**
  * Webhook delivery attempt details.
  *
- * @phpstan-type attempt_alias = array{
- *   errors?: list<int>,
- *   finishedAt?: \DateTimeInterface,
- *   http?: HTTP,
- *   startedAt?: \DateTimeInterface,
- *   status?: value-of<Status>,
+ * @phpstan-import-type HTTPShape from \Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP
+ *
+ * @phpstan-type AttemptShape = array{
+ *   errors?: list<int>|null,
+ *   finishedAt?: \DateTimeInterface|null,
+ *   http?: null|HTTP|HTTPShape,
+ *   startedAt?: \DateTimeInterface|null,
+ *   status?: null|\Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\Status|value-of<\Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\Status>,
  * }
  */
 final class Attempt implements BaseModel
 {
-    /** @use SdkModel<attempt_alias> */
+    /** @use SdkModel<AttemptShape> */
     use SdkModel;
 
     /**
@@ -31,29 +33,33 @@ final class Attempt implements BaseModel
      *
      * @var list<int>|null $errors
      */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $errors;
 
     /**
      * ISO 8601 timestamp indicating when the attempt has finished.
      */
-    #[Api('finished_at', optional: true)]
+    #[Optional('finished_at')]
     public ?\DateTimeInterface $finishedAt;
 
     /**
      * HTTP request and response information.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?HTTP $http;
 
     /**
      * ISO 8601 timestamp indicating when the attempt was initiated.
      */
-    #[Api('started_at', optional: true)]
+    #[Optional('started_at')]
     public ?\DateTimeInterface $startedAt;
 
-    /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    /**
+     * @var value-of<Status>|null $status
+     */
+    #[Optional(
+        enum: Status::class,
+    )]
     public ?string $status;
 
     public function __construct()
@@ -66,25 +72,26 @@ final class Attempt implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $errors
-     * @param Status|value-of<Status> $status
+     * @param list<int>|null $errors
+     * @param HTTP|HTTPShape|null $http
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?array $errors = null,
         ?\DateTimeInterface $finishedAt = null,
-        ?HTTP $http = null,
+        HTTP|array|null $http = null,
         ?\DateTimeInterface $startedAt = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $errors && $obj->errors = $errors;
-        null !== $finishedAt && $obj->finishedAt = $finishedAt;
-        null !== $http && $obj->http = $http;
-        null !== $startedAt && $obj->startedAt = $startedAt;
-        null !== $status && $obj['status'] = $status;
+        null !== $errors && $self['errors'] = $errors;
+        null !== $finishedAt && $self['finishedAt'] = $finishedAt;
+        null !== $http && $self['http'] = $http;
+        null !== $startedAt && $self['startedAt'] = $startedAt;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +101,10 @@ final class Attempt implements BaseModel
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj->errors = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,21 +112,23 @@ final class Attempt implements BaseModel
      */
     public function withFinishedAt(\DateTimeInterface $finishedAt): self
     {
-        $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * HTTP request and response information.
+     *
+     * @param HTTP|HTTPShape $http
      */
-    public function withHTTP(HTTP $http): self
+    public function withHTTP(HTTP|array $http): self
     {
-        $obj = clone $this;
-        $obj->http = $http;
+        $self = clone $this;
+        $self['http'] = $http;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,20 +136,21 @@ final class Attempt implements BaseModel
      */
     public function withStartedAt(\DateTimeInterface $startedAt): self
     {
-        $obj = clone $this;
-        $obj->startedAt = $startedAt;
+        $self = clone $this;
+        $self['startedAt'] = $startedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * @param Status|value-of<Status> $status
      */
-    public function withStatus(Status|string $status): self
-    {
-        $obj = clone $this;
-        $obj['status'] = $status;
+    public function withStatus(
+        Status|string $status,
+    ): self {
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

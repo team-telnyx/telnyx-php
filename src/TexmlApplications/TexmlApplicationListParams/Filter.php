@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\TexmlApplications\TexmlApplicationListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[outbound_voice_profile_id], filter[friendly_name].
  *
- * @phpstan-type filter_alias = array{
- *   friendlyName?: string, outboundVoiceProfileID?: string
+ * @phpstan-type FilterShape = array{
+ *   friendlyName?: string|null, outboundVoiceProfileID?: string|null
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * If present, applications with <code>friendly_name</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
      */
-    #[Api('friendly_name', optional: true)]
+    #[Optional('friendly_name')]
     public ?string $friendlyName;
 
     /**
      * Identifies the associated outbound voice profile.
      */
-    #[Api('outbound_voice_profile_id', optional: true)]
+    #[Optional('outbound_voice_profile_id')]
     public ?string $outboundVoiceProfileID;
 
     public function __construct()
@@ -46,12 +46,12 @@ final class Filter implements BaseModel
         ?string $friendlyName = null,
         ?string $outboundVoiceProfileID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $friendlyName && $obj->friendlyName = $friendlyName;
-        null !== $outboundVoiceProfileID && $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        null !== $friendlyName && $self['friendlyName'] = $friendlyName;
+        null !== $outboundVoiceProfileID && $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class Filter implements BaseModel
      */
     public function withFriendlyName(string $friendlyName): self
     {
-        $obj = clone $this;
-        $obj->friendlyName = $friendlyName;
+        $self = clone $this;
+        $self['friendlyName'] = $friendlyName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,9 +71,9 @@ final class Filter implements BaseModel
     public function withOutboundVoiceProfileID(
         string $outboundVoiceProfileID
     ): self {
-        $obj = clone $this;
-        $obj->outboundVoiceProfileID = $outboundVoiceProfileID;
+        $self = clone $this;
+        $self['outboundVoiceProfileID'] = $outboundVoiceProfileID;
 
-        return $obj;
+        return $self;
     }
 }

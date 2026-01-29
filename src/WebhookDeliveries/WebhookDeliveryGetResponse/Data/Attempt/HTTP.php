@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Request;
@@ -13,23 +13,28 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Respon
 /**
  * HTTP request and response information.
  *
- * @phpstan-type http_alias = array{request?: Request, response?: Response|null}
+ * @phpstan-import-type RequestShape from \Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Request
+ * @phpstan-import-type ResponseShape from \Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP\Response
+ *
+ * @phpstan-type HTTPShape = array{
+ *   request?: null|Request|RequestShape, response?: null|Response|ResponseShape
+ * }
  */
 final class HTTP implements BaseModel
 {
-    /** @use SdkModel<http_alias> */
+    /** @use SdkModel<HTTPShape> */
     use SdkModel;
 
     /**
      * Request details.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Request $request;
 
     /**
      * Response details, optional.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional]
     public ?Response $response;
 
     public function __construct()
@@ -41,38 +46,45 @@ final class HTTP implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Request|RequestShape|null $request
+     * @param Response|ResponseShape|null $response
      */
     public static function with(
-        ?Request $request = null,
-        ?Response $response = null
+        Request|array|null $request = null,
+        Response|array|null $response = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $request && $obj->request = $request;
-        null !== $response && $obj->response = $response;
+        null !== $request && $self['request'] = $request;
+        null !== $response && $self['response'] = $response;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Request details.
+     *
+     * @param Request|RequestShape $request
      */
-    public function withRequest(Request $request): self
+    public function withRequest(Request|array $request): self
     {
-        $obj = clone $this;
-        $obj->request = $request;
+        $self = clone $this;
+        $self['request'] = $request;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Response details, optional.
+     *
+     * @param Response|ResponseShape $response
      */
-    public function withResponse(?Response $response): self
+    public function withResponse(Response|array $response): self
     {
-        $obj = clone $this;
-        $obj->response = $response;
+        $self = clone $this;
+        $self['response'] = $response;
 
-        return $obj;
+        return $self;
     }
 }

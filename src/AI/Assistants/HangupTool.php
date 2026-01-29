@@ -5,25 +5,27 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\HangupTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type hangup_tool = array{
- *   hangup: HangupToolParams, type: value-of<Type>
+ * @phpstan-import-type HangupToolParamsShape from \Telnyx\AI\Assistants\HangupToolParams
+ *
+ * @phpstan-type HangupToolShape = array{
+ *   hangup: HangupToolParams|HangupToolParamsShape, type: Type|value-of<Type>
  * }
  */
 final class HangupTool implements BaseModel
 {
-    /** @use SdkModel<hangup_tool> */
+    /** @use SdkModel<HangupToolShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public HangupToolParams $hangup;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -50,26 +52,30 @@ final class HangupTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param HangupToolParams|HangupToolParamsShape $hangup
      * @param Type|value-of<Type> $type
      */
     public static function with(
-        HangupToolParams $hangup,
+        HangupToolParams|array $hangup,
         Type|string $type
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->hangup = $hangup;
-        $obj['type'] = $type;
+        $self['hangup'] = $hangup;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
-    public function withHangup(HangupToolParams $hangup): self
+    /**
+     * @param HangupToolParams|HangupToolParamsShape $hangup
+     */
+    public function withHangup(HangupToolParams|array $hangup): self
     {
-        $obj = clone $this;
-        $obj->hangup = $hangup;
+        $self = clone $this;
+        $self['hangup'] = $hangup;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,9 +83,9 @@ final class HangupTool implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

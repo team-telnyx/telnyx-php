@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\StorageListMigrationSourceCoverageResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse\Data\Provider;
 
 /**
- * @phpstan-type data_alias = array{
- *   provider?: value-of<Provider>, sourceRegion?: string
+ * @phpstan-type DataShape = array{
+ *   provider?: null|Provider|value-of<Provider>, sourceRegion?: string|null
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
@@ -24,13 +24,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Provider>|null $provider
      */
-    #[Api(enum: Provider::class, optional: true)]
+    #[Optional(enum: Provider::class)]
     public ?string $provider;
 
     /**
      * Provider region from which to migrate data.
      */
-    #[Api('source_region', optional: true)]
+    #[Optional('source_region')]
     public ?string $sourceRegion;
 
     public function __construct()
@@ -43,18 +43,18 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Provider|value-of<Provider> $provider
+     * @param Provider|value-of<Provider>|null $provider
      */
     public static function with(
         Provider|string|null $provider = null,
         ?string $sourceRegion = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $provider && $obj['provider'] = $provider;
-        null !== $sourceRegion && $obj->sourceRegion = $sourceRegion;
+        null !== $provider && $self['provider'] = $provider;
+        null !== $sourceRegion && $self['sourceRegion'] = $sourceRegion;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,10 +64,10 @@ final class Data implements BaseModel
      */
     public function withProvider(Provider|string $provider): self
     {
-        $obj = clone $this;
-        $obj['provider'] = $provider;
+        $self = clone $this;
+        $self['provider'] = $provider;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class Data implements BaseModel
      */
     public function withSourceRegion(string $sourceRegion): self
     {
-        $obj = clone $this;
-        $obj->sourceRegion = $sourceRegion;
+        $self = clone $this;
+        $self['sourceRegion'] = $sourceRegion;
 
-        return $obj;
+        return $self;
     }
 }

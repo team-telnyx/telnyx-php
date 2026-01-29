@@ -6,69 +6,55 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Invoices\InvoiceGetResponse;
-use Telnyx\Invoices\InvoiceListParams;
-use Telnyx\Invoices\InvoiceListParams\Page;
 use Telnyx\Invoices\InvoiceListParams\Sort;
 use Telnyx\Invoices\InvoiceListResponse;
-use Telnyx\Invoices\InvoiceRetrieveParams;
 use Telnyx\Invoices\InvoiceRetrieveParams\Action;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InvoicesContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InvoicesService implements InvoicesContract
 {
     /**
+     * @api
+     */
+    public InvoicesRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new InvoicesRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a single invoice by its unique identifier.
      *
+     * @param string $id Invoice UUID
      * @param Action|value-of<Action> $action Invoice action
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        $action = omit,
-        ?RequestOptions $requestOptions = null
+        Action|string|null $action = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InvoiceGetResponse {
-        $params = ['action' => $action];
+        $params = Util::removeNulls(['action' => $action]);
 
-        return $this->retrieveRaw($id, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InvoiceGetResponse {
-        [$parsed, $options] = InvoiceRetrieveParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['invoices/%1$s', $id],
-            query: $parsed,
-            options: $options,
-            convert: InvoiceGetResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -76,44 +62,26 @@ final class InvoicesService implements InvoicesContract
      *
      * Retrieve a paginated list of invoices.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort specifies the sort order for results
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<InvoiceListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null
-    ): InvoiceListResponse {
-        $params = ['page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InvoiceListResponse {
-        [$parsed, $options] = InvoiceListParams::parseRequest(
-            $params,
-            $requestOptions
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        Sort|string|null $sort = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize, 'sort' => $sort]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'invoices',
-            query: $parsed,
-            options: $options,
-            convert: InvoiceListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

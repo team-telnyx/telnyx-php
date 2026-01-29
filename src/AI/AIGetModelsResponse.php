@@ -5,28 +5,29 @@ declare(strict_types=1);
 namespace Telnyx\AI;
 
 use Telnyx\AI\AIGetModelsResponse\Data;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type ai_get_models_response = array{data: list<Data>, object1?: string}
+ * @phpstan-import-type DataShape from \Telnyx\AI\AIGetModelsResponse\Data
+ *
+ * @phpstan-type AIGetModelsResponseShape = array{
+ *   data: list<Data|DataShape>, object?: string|null
+ * }
  */
-final class AIGetModelsResponse implements BaseModel, ResponseConverter
+final class AIGetModelsResponse implements BaseModel
 {
-    /** @use SdkModel<ai_get_models_response> */
+    /** @use SdkModel<AIGetModelsResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<Data> $data */
-    #[Api(list: Data::class)]
+    #[Required(list: Data::class)]
     public array $data;
 
-    #[Api(optional: true)]
-    public ?string $object1;
+    #[Optional]
+    public ?string $object;
 
     /**
      * `new AIGetModelsResponse()` is missing required properties by the API.
@@ -52,35 +53,35 @@ final class AIGetModelsResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<Data|DataShape> $data
      */
-    public static function with(array $data, ?string $object1 = null): self
+    public static function with(array $data, ?string $object = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        null !== $object1 && $obj->object1 = $object1;
+        null !== $object && $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withObject(string $object1): self
+    public function withObject(string $object): self
     {
-        $obj = clone $this;
-        $obj->object1 = $object1;
+        $self = clone $this;
+        $self['object'] = $object;
 
-        return $obj;
+        return $self;
     }
 }

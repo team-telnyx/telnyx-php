@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AssociatedPhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type associated_phone_number_new_response = array{
- *   data?: PortingAssociatedPhoneNumber
+ * @phpstan-import-type PortingAssociatedPhoneNumberShape from \Telnyx\PortingOrders\AssociatedPhoneNumbers\PortingAssociatedPhoneNumber
+ *
+ * @phpstan-type AssociatedPhoneNumberNewResponseShape = array{
+ *   data?: null|PortingAssociatedPhoneNumber|PortingAssociatedPhoneNumberShape
  * }
  */
-final class AssociatedPhoneNumberNewResponse implements BaseModel, ResponseConverter
+final class AssociatedPhoneNumberNewResponse implements BaseModel
 {
-    /** @use SdkModel<associated_phone_number_new_response> */
+    /** @use SdkModel<AssociatedPhoneNumberNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?PortingAssociatedPhoneNumber $data;
 
     public function __construct()
@@ -34,21 +32,27 @@ final class AssociatedPhoneNumberNewResponse implements BaseModel, ResponseConve
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PortingAssociatedPhoneNumber|PortingAssociatedPhoneNumberShape|null $data
      */
-    public static function with(?PortingAssociatedPhoneNumber $data = null): self
-    {
-        $obj = new self;
+    public static function with(
+        PortingAssociatedPhoneNumber|array|null $data = null
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(PortingAssociatedPhoneNumber $data): self
+    /**
+     * @param PortingAssociatedPhoneNumber|PortingAssociatedPhoneNumberShape $data
+     */
+    public function withData(PortingAssociatedPhoneNumber|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

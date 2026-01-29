@@ -4,28 +4,26 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationChannels;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type notification_channel_update_response = array{
- *   data?: NotificationChannel
+ * @phpstan-import-type NotificationChannelShape from \Telnyx\NotificationChannels\NotificationChannel
+ *
+ * @phpstan-type NotificationChannelUpdateResponseShape = array{
+ *   data?: null|NotificationChannel|NotificationChannelShape
  * }
  */
-final class NotificationChannelUpdateResponse implements BaseModel, ResponseConverter
+final class NotificationChannelUpdateResponse implements BaseModel
 {
-    /** @use SdkModel<notification_channel_update_response> */
+    /** @use SdkModel<NotificationChannelUpdateResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * A Notification Channel.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?NotificationChannel $data;
 
     public function __construct()
@@ -37,24 +35,28 @@ final class NotificationChannelUpdateResponse implements BaseModel, ResponseConv
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param NotificationChannel|NotificationChannelShape|null $data
      */
-    public static function with(?NotificationChannel $data = null): self
+    public static function with(NotificationChannel|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A Notification Channel.
+     *
+     * @param NotificationChannel|NotificationChannelShape $data
      */
-    public function withData(NotificationChannel $data): self
+    public function withData(NotificationChannel|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

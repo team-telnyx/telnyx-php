@@ -4,26 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\OAuth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type oauth_grants_response = array{redirectUri: string}
+ * @phpstan-type OAuthGrantsResponseShape = array{redirectUri: string}
  */
-final class OAuthGrantsResponse implements BaseModel, ResponseConverter
+final class OAuthGrantsResponse implements BaseModel
 {
-    /** @use SdkModel<oauth_grants_response> */
+    /** @use SdkModel<OAuthGrantsResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Redirect URI with authorization code or error.
      */
-    #[Api('redirect_uri')]
+    #[Required('redirect_uri')]
     public string $redirectUri;
 
     /**
@@ -52,11 +48,11 @@ final class OAuthGrantsResponse implements BaseModel, ResponseConverter
      */
     public static function with(string $redirectUri): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->redirectUri = $redirectUri;
+        $self['redirectUri'] = $redirectUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +60,9 @@ final class OAuthGrantsResponse implements BaseModel, ResponseConverter
      */
     public function withRedirectUri(string $redirectUri): self
     {
-        $obj = clone $this;
-        $obj->redirectUri = $redirectUri;
+        $self = clone $this;
+        $self['redirectUri'] = $redirectUri;
 
-        return $obj;
+        return $self;
     }
 }

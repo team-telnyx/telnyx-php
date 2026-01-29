@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionRejectParams\Cause;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -17,15 +18,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.hangup`
  *
- * @see Telnyx\Calls\Actions->reject
+ * @see Telnyx\Services\Calls\ActionsService::reject()
  *
- * @phpstan-type action_reject_params = array{
- *   cause: Cause|value-of<Cause>, clientState?: string, commandID?: string
+ * @phpstan-type ActionRejectParamsShape = array{
+ *   cause: Cause|value-of<Cause>,
+ *   clientState?: string|null,
+ *   commandID?: string|null,
  * }
  */
 final class ActionRejectParams implements BaseModel
 {
-    /** @use SdkModel<action_reject_params> */
+    /** @use SdkModel<ActionRejectParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -34,19 +37,19 @@ final class ActionRejectParams implements BaseModel
      *
      * @var value-of<Cause> $cause
      */
-    #[Api(enum: Cause::class)]
+    #[Required(enum: Cause::class)]
     public string $cause;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
@@ -80,14 +83,14 @@ final class ActionRejectParams implements BaseModel
         ?string $clientState = null,
         ?string $commandID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['cause'] = $cause;
+        $self['cause'] = $cause;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +100,10 @@ final class ActionRejectParams implements BaseModel
      */
     public function withCause(Cause|string $cause): self
     {
-        $obj = clone $this;
-        $obj['cause'] = $cause;
+        $self = clone $this;
+        $self['cause'] = $cause;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +111,10 @@ final class ActionRejectParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,9 +122,9 @@ final class ActionRejectParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 }

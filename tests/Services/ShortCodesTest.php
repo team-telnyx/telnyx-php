@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\ShortCode;
+use Telnyx\ShortCodes\ShortCodeGetResponse;
+use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -37,7 +41,8 @@ final class ShortCodesTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ShortCodeGetResponse::class, $result);
     }
 
     #[Test]
@@ -49,10 +54,11 @@ final class ShortCodesTest extends TestCase
 
         $result = $this->client->shortCodes->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            'abc85f64-5717-4562-b3fc-2c9600000000',
+            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ShortCodeUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -64,10 +70,12 @@ final class ShortCodesTest extends TestCase
 
         $result = $this->client->shortCodes->update(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            'abc85f64-5717-4562-b3fc-2c9600000000',
+            messagingProfileID: 'abc85f64-5717-4562-b3fc-2c9600000000',
+            tags: ['test_customer'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ShortCodeUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -77,8 +85,14 @@ final class ShortCodesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->shortCodes->list();
+        $page = $this->client->shortCodes->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ShortCode::class, $item);
+        }
     }
 }

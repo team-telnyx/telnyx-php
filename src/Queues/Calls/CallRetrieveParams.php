@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Queues\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieve an existing call from an existing queue.
  *
- * @see Telnyx\Queues\Calls->retrieve
+ * @see Telnyx\Services\Queues\CallsService::retrieve()
  *
- * @phpstan-type call_retrieve_params = array{queueName: string}
+ * @phpstan-type CallRetrieveParamsShape = array{queueName: string}
  */
 final class CallRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<call_retrieve_params> */
+    /** @use SdkModel<CallRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $queueName;
 
     /**
@@ -51,18 +51,18 @@ final class CallRetrieveParams implements BaseModel
      */
     public static function with(string $queueName): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->queueName = $queueName;
+        $self['queueName'] = $queueName;
 
-        return $obj;
+        return $self;
     }
 
     public function withQueueName(string $queueName): self
     {
-        $obj = clone $this;
-        $obj->queueName = $queueName;
+        $self = clone $this;
+        $self['queueName'] = $queueName;
 
-        return $obj;
+        return $self;
     }
 }

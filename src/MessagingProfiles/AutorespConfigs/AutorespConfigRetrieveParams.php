@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get Auto-Response Setting.
  *
- * @see Telnyx\MessagingProfiles\AutorespConfigs->retrieve
+ * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::retrieve()
  *
- * @phpstan-type autoresp_config_retrieve_params = array{profileID: string}
+ * @phpstan-type AutorespConfigRetrieveParamsShape = array{profileID: string}
  */
 final class AutorespConfigRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<autoresp_config_retrieve_params> */
+    /** @use SdkModel<AutorespConfigRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $profileID;
 
     /**
@@ -51,18 +51,18 @@ final class AutorespConfigRetrieveParams implements BaseModel
      */
     public static function with(string $profileID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->profileID = $profileID;
+        $self['profileID'] = $profileID;
 
-        return $obj;
+        return $self;
     }
 
     public function withProfileID(string $profileID): self
     {
-        $obj = clone $this;
-        $obj->profileID = $profileID;
+        $self = clone $this;
+        $self['profileID'] = $profileID;
 
-        return $obj;
+        return $self;
     }
 }

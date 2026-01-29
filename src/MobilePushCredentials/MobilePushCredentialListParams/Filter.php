@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
@@ -12,17 +12,19 @@ use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter\Type;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[type], filter[alias].
  *
- * @phpstan-type filter_alias = array{alias?: string, type?: value-of<Type>}
+ * @phpstan-type FilterShape = array{
+ *   alias?: string|null, type?: null|Type|value-of<Type>
+ * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Unique mobile push credential alias.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $alias;
 
     /**
@@ -30,7 +32,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     public function __construct()
@@ -43,18 +45,18 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $alias = null,
         Type|string|null $type = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $alias && $obj->alias = $alias;
-        null !== $type && $obj['type'] = $type;
+        null !== $alias && $self['alias'] = $alias;
+        null !== $type && $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,10 +64,10 @@ final class Filter implements BaseModel
      */
     public function withAlias(string $alias): self
     {
-        $obj = clone $this;
-        $obj->alias = $alias;
+        $self = clone $this;
+        $self['alias'] = $alias;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +77,9 @@ final class Filter implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

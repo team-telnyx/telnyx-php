@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,31 +14,36 @@ use Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt;
 /**
  * List Auto-Response Settings.
  *
- * @see Telnyx\MessagingProfiles\AutorespConfigs->list
+ * @see Telnyx\Services\MessagingProfiles\AutorespConfigsService::list()
  *
- * @phpstan-type autoresp_config_list_params = array{
- *   countryCode?: string, createdAt?: CreatedAt, updatedAt?: UpdatedAt
+ * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt
+ * @phpstan-import-type UpdatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt
+ *
+ * @phpstan-type AutorespConfigListParamsShape = array{
+ *   countryCode?: string|null,
+ *   createdAt?: null|CreatedAt|CreatedAtShape,
+ *   updatedAt?: null|UpdatedAt|UpdatedAtShape,
  * }
  */
 final class AutorespConfigListParams implements BaseModel
 {
-    /** @use SdkModel<autoresp_config_list_params> */
+    /** @use SdkModel<AutorespConfigListParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $countryCode;
 
     /**
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?CreatedAt $createdAt;
 
     /**
      * Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?UpdatedAt $updatedAt;
 
     public function __construct()
@@ -50,48 +55,55 @@ final class AutorespConfigListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param CreatedAt|CreatedAtShape|null $createdAt
+     * @param UpdatedAt|UpdatedAtShape|null $updatedAt
      */
     public static function with(
         ?string $countryCode = null,
-        ?CreatedAt $createdAt = null,
-        ?UpdatedAt $updatedAt = null,
+        CreatedAt|array|null $createdAt = null,
+        UpdatedAt|array|null $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte].
+     *
+     * @param CreatedAt|CreatedAtShape $createdAt
      */
-    public function withCreatedAt(CreatedAt $createdAt): self
+    public function withCreatedAt(CreatedAt|array $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte].
+     *
+     * @param UpdatedAt|UpdatedAtShape $updatedAt
      */
-    public function withUpdatedAt(UpdatedAt $updatedAt): self
+    public function withUpdatedAt(UpdatedAt|array $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

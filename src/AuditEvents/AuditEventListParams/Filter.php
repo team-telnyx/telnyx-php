@@ -4,32 +4,33 @@ declare(strict_types=1);
 
 namespace Telnyx\AuditEvents\AuditEventListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[created_before], filter[created_after].
  *
- * @phpstan-type filter_alias = array{
- *   createdAfter?: \DateTimeInterface, createdBefore?: \DateTimeInterface
+ * @phpstan-type FilterShape = array{
+ *   createdAfter?: \DateTimeInterface|null,
+ *   createdBefore?: \DateTimeInterface|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter for audit events created after a specific date.
      */
-    #[Api('created_after', optional: true)]
+    #[Optional('created_after')]
     public ?\DateTimeInterface $createdAfter;
 
     /**
      * Filter for audit events created before a specific date.
      */
-    #[Api('created_before', optional: true)]
+    #[Optional('created_before')]
     public ?\DateTimeInterface $createdBefore;
 
     public function __construct()
@@ -46,12 +47,12 @@ final class Filter implements BaseModel
         ?\DateTimeInterface $createdAfter = null,
         ?\DateTimeInterface $createdBefore = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $createdAfter && $obj->createdAfter = $createdAfter;
-        null !== $createdBefore && $obj->createdBefore = $createdBefore;
+        null !== $createdAfter && $self['createdAfter'] = $createdAfter;
+        null !== $createdBefore && $self['createdBefore'] = $createdBefore;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +60,10 @@ final class Filter implements BaseModel
      */
     public function withCreatedAfter(\DateTimeInterface $createdAfter): self
     {
-        $obj = clone $this;
-        $obj->createdAfter = $createdAfter;
+        $self = clone $this;
+        $self['createdAfter'] = $createdAfter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +71,9 @@ final class Filter implements BaseModel
      */
     public function withCreatedBefore(\DateTimeInterface $createdBefore): self
     {
-        $obj = clone $this;
-        $obj->createdBefore = $createdBefore;
+        $self = clone $this;
+        $self['createdBefore'] = $createdBefore;
 
-        return $obj;
+        return $self;
     }
 }

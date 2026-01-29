@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Check eligibility of phone numbers for hosted messaging.
+ * Check hosted messaging eligibility.
  *
- * @see Telnyx\MessagingHostedNumberOrders->checkEligibility
+ * @see Telnyx\Services\MessagingHostedNumberOrdersService::checkEligibility()
  *
- * @phpstan-type messaging_hosted_number_order_check_eligibility_params = array{
+ * @phpstan-type MessagingHostedNumberOrderCheckEligibilityParamsShape = array{
  *   phoneNumbers: list<string>
  * }
  */
 final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order_check_eligibility_params> */
+    /** @use SdkModel<MessagingHostedNumberOrderCheckEligibilityParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -29,7 +29,7 @@ final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseMode
      *
      * @var list<string> $phoneNumbers
      */
-    #[Api('phone_numbers', list: 'string')]
+    #[Required('phone_numbers', list: 'string')]
     public array $phoneNumbers;
 
     /**
@@ -60,11 +60,11 @@ final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseMode
      */
     public static function with(array $phoneNumbers): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumbers = $phoneNumbers;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,9 +74,9 @@ final class MessagingHostedNumberOrderCheckEligibilityParams implements BaseMode
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

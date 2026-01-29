@@ -4,48 +4,48 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\Comments\CommentNewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\Comments\CommentNewResponse\Data\UserType;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   body?: string,
- *   createdAt?: \DateTimeInterface,
- *   portingOrderID?: string,
- *   recordType?: string,
- *   userType?: value-of<UserType>,
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   body?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   portingOrderID?: string|null,
+ *   recordType?: string|null,
+ *   userType?: null|UserType|value-of<UserType>,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Body of comment.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
-    #[Api('porting_order_id', optional: true)]
+    #[Optional('porting_order_id')]
     public ?string $portingOrderID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -53,7 +53,7 @@ final class Data implements BaseModel
      *
      * @var value-of<UserType>|null $userType
      */
-    #[Api('user_type', enum: UserType::class, optional: true)]
+    #[Optional('user_type', enum: UserType::class)]
     public ?string $userType;
 
     public function __construct()
@@ -66,7 +66,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param UserType|value-of<UserType> $userType
+     * @param UserType|value-of<UserType>|null $userType
      */
     public static function with(
         ?string $id = null,
@@ -76,24 +76,24 @@ final class Data implements BaseModel
         ?string $recordType = null,
         UserType|string|null $userType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $body && $obj->body = $body;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $portingOrderID && $obj->portingOrderID = $portingOrderID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $userType && $obj['userType'] = $userType;
+        null !== $id && $self['id'] = $id;
+        null !== $body && $self['body'] = $body;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $portingOrderID && $self['portingOrderID'] = $portingOrderID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $userType && $self['userType'] = $userType;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +101,10 @@ final class Data implements BaseModel
      */
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj->body = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,18 +112,18 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withPortingOrderID(string $portingOrderID): self
     {
-        $obj = clone $this;
-        $obj->portingOrderID = $portingOrderID;
+        $self = clone $this;
+        $self['portingOrderID'] = $portingOrderID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,9 +144,9 @@ final class Data implements BaseModel
      */
     public function withUserType(UserType|string $userType): self
     {
-        $obj = clone $this;
-        $obj['userType'] = $userType;
+        $self = clone $this;
+        $self['userType'] = $userType;
 
-        return $obj;
+        return $self;
     }
 }

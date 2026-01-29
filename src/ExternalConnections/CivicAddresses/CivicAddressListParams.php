@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\CivicAddresses;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,20 +13,24 @@ use Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter;
 /**
  * Returns the civic addresses and locations from Microsoft Teams.
  *
- * @see Telnyx\ExternalConnections\CivicAddresses->list
+ * @see Telnyx\Services\ExternalConnections\CivicAddressesService::list()
  *
- * @phpstan-type civic_address_list_params = array{filter?: Filter}
+ * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter
+ *
+ * @phpstan-type CivicAddressListParamsShape = array{
+ *   filter?: null|Filter|FilterShape
+ * }
  */
 final class CivicAddressListParams implements BaseModel
 {
-    /** @use SdkModel<civic_address_list_params> */
+    /** @use SdkModel<CivicAddressListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Filter parameter for civic addresses (deepObject style). Supports filtering by country.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()
@@ -38,24 +42,28 @@ final class CivicAddressListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
      */
-    public static function with(?Filter $filter = null): self
+    public static function with(Filter|array|null $filter = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
+        null !== $filter && $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Filter parameter for civic addresses (deepObject style). Supports filtering by country.
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 }

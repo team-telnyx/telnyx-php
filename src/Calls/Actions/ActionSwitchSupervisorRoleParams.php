@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleParams\Role;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,15 +13,15 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Switch the supervisor role for a bridged call. This allows switching between different supervisor modes during an active call.
  *
- * @see Telnyx\Calls\Actions->switchSupervisorRole
+ * @see Telnyx\Services\Calls\ActionsService::switchSupervisorRole()
  *
- * @phpstan-type action_switch_supervisor_role_params = array{
+ * @phpstan-type ActionSwitchSupervisorRoleParamsShape = array{
  *   role: Role|value-of<Role>
  * }
  */
 final class ActionSwitchSupervisorRoleParams implements BaseModel
 {
-    /** @use SdkModel<action_switch_supervisor_role_params> */
+    /** @use SdkModel<ActionSwitchSupervisorRoleParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -30,7 +30,7 @@ final class ActionSwitchSupervisorRoleParams implements BaseModel
      *
      * @var value-of<Role> $role
      */
-    #[Api(enum: Role::class)]
+    #[Required(enum: Role::class)]
     public string $role;
 
     /**
@@ -61,11 +61,11 @@ final class ActionSwitchSupervisorRoleParams implements BaseModel
      */
     public static function with(Role|string $role): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['role'] = $role;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +75,9 @@ final class ActionSwitchSupervisorRoleParams implements BaseModel
      */
     public function withRole(Role|string $role): self
     {
-        $obj = clone $this;
-        $obj['role'] = $role;
+        $self = clone $this;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 }

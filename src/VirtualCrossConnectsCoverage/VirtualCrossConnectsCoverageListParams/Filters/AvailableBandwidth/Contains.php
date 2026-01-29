@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListParams\Filters\AvailableBandwidth;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Available bandwidth filtering operations.
  *
- * @phpstan-type contains_alias = array{contains?: int}
+ * @phpstan-type ContainsShape = array{contains?: int|null}
  */
 final class Contains implements BaseModel
 {
-    /** @use SdkModel<contains_alias> */
+    /** @use SdkModel<ContainsShape> */
     use SdkModel;
 
     /**
      * Filter by available bandwidth containing the specified value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $contains;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Contains implements BaseModel
      */
     public static function with(?int $contains = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
+        null !== $contains && $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Contains implements BaseModel
      */
     public function withContains(int $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 }

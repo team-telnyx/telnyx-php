@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\List_\ListGetAllResponse;
+use Telnyx\List_\ListGetByZoneResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +37,8 @@ final class ListTest extends TestCase
 
         $result = $this->client->list->retrieveAll();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ListGetAllResponse::class, $result);
     }
 
     #[Test]
@@ -47,6 +50,7 @@ final class ListTest extends TestCase
 
         $result = $this->client->list->retrieveByZone('channel_zone_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ListGetByZoneResponse::class, $result);
     }
 }

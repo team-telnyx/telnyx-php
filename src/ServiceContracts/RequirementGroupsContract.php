@@ -12,8 +12,12 @@ use Telnyx\RequirementGroups\RequirementGroupCreateParams\PhoneNumberType;
 use Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement;
 use Telnyx\RequirementGroups\RequirementGroupListParams\Filter;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement
+ * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement as RegulatoryRequirementShape1
+ * @phpstan-import-type FilterShape from \Telnyx\RequirementGroups\RequirementGroupListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RequirementGroupsContract
 {
     /**
@@ -22,115 +26,88 @@ interface RequirementGroupsContract
      * @param Action|value-of<Action> $action
      * @param string $countryCode ISO alpha 2 country code
      * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param string $customerReference
-     * @param list<RegulatoryRequirement> $regulatoryRequirements
+     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $action,
-        $countryCode,
-        $phoneNumberType,
-        $customerReference = omit,
-        $regulatoryRequirements = omit,
-        ?RequestOptions $requestOptions = null,
+        Action|string $action,
+        string $countryCode,
+        PhoneNumberType|string $phoneNumberType,
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RequirementGroup;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RequirementGroup;
-
-    /**
-     * @api
+     * @param string $id ID of the requirement group to retrieve
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): RequirementGroup;
 
     /**
      * @api
      *
+     * @param string $id ID of the requirement group
      * @param string $customerReference Reference for the customer
-     * @param list<\Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement> $regulatoryRequirements
+     * @param list<\Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement|RegulatoryRequirementShape1> $regulatoryRequirements
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $customerReference = omit,
-        $regulatoryRequirements = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $customerReference = null,
+        ?array $regulatoryRequirements = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RequirementGroup;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): RequirementGroup;
-
-    /**
-     * @api
-     *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action], filter[status], filter[customer_reference]
+     * @param RequestOpts|null $requestOptions
      *
      * @return list<RequirementGroup>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): array;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @return list<RequirementGroup>
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): array;
-
-    /**
-     * @api
+     * @param string $id ID of the requirement group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): RequirementGroup;
 
     /**
      * @api
      *
+     * @param string $id ID of the requirement group to submit
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function submitForApproval(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): RequirementGroup;
 }

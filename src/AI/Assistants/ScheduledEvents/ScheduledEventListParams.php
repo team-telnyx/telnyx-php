@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
-use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,35 +12,36 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get scheduled events for an assistant with pagination and filtering.
  *
- * @see Telnyx\AI\Assistants\ScheduledEvents->list
+ * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::list()
  *
- * @phpstan-type scheduled_event_list_params = array{
- *   conversationChannel?: ConversationChannelType|value-of<ConversationChannelType>,
- *   fromDate?: \DateTimeInterface,
- *   page?: Page,
- *   toDate?: \DateTimeInterface,
+ * @phpstan-type ScheduledEventListParamsShape = array{
+ *   conversationChannel?: null|ConversationChannelType|value-of<ConversationChannelType>,
+ *   fromDate?: \DateTimeInterface|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   toDate?: \DateTimeInterface|null,
  * }
  */
 final class ScheduledEventListParams implements BaseModel
 {
-    /** @use SdkModel<scheduled_event_list_params> */
+    /** @use SdkModel<ScheduledEventListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var value-of<ConversationChannelType>|null $conversationChannel */
-    #[Api(enum: ConversationChannelType::class, optional: true)]
+    #[Optional(enum: ConversationChannelType::class)]
     public ?string $conversationChannel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $fromDate;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
 
-    #[Api(optional: true)]
+    #[Optional]
+    public ?int $pageSize;
+
+    #[Optional]
     public ?\DateTimeInterface $toDate;
 
     public function __construct()
@@ -54,22 +54,24 @@ final class ScheduledEventListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConversationChannelType|value-of<ConversationChannelType> $conversationChannel
+     * @param ConversationChannelType|value-of<ConversationChannelType>|null $conversationChannel
      */
     public static function with(
         ConversationChannelType|string|null $conversationChannel = null,
         ?\DateTimeInterface $fromDate = null,
-        ?Page $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?\DateTimeInterface $toDate = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $conversationChannel && $obj['conversationChannel'] = $conversationChannel;
-        null !== $fromDate && $obj->fromDate = $fromDate;
-        null !== $page && $obj->page = $page;
-        null !== $toDate && $obj->toDate = $toDate;
+        null !== $conversationChannel && $self['conversationChannel'] = $conversationChannel;
+        null !== $fromDate && $self['fromDate'] = $fromDate;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $toDate && $self['toDate'] = $toDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,36 +80,41 @@ final class ScheduledEventListParams implements BaseModel
     public function withConversationChannel(
         ConversationChannelType|string $conversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['conversationChannel'] = $conversationChannel;
+        $self = clone $this;
+        $self['conversationChannel'] = $conversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     public function withFromDate(\DateTimeInterface $fromDate): self
     {
-        $obj = clone $this;
-        $obj->fromDate = $fromDate;
+        $self = clone $this;
+        $self['fromDate'] = $fromDate;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 
     public function withToDate(\DateTimeInterface $toDate): self
     {
-        $obj = clone $this;
-        $obj->toDate = $toDate;
+        $self = clone $this;
+        $self['toDate'] = $toDate;
 
-        return $obj;
+        return $self;
     }
 }

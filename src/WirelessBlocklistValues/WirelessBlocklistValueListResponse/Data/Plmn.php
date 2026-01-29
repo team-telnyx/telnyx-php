@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type plmn_alias = array{code: string, name: string}
+ * @phpstan-type PlmnShape = array{code: string, name: string}
  */
 final class Plmn implements BaseModel
 {
-    /** @use SdkModel<plmn_alias> */
+    /** @use SdkModel<PlmnShape> */
     use SdkModel;
 
     /**
      * Public land mobile network code (MCC + MNC).
      */
-    #[Api]
+    #[Required]
     public string $code;
 
     /**
      * The name of the network.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -54,12 +54,12 @@ final class Plmn implements BaseModel
      */
     public static function with(string $code, string $name): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->code = $code;
-        $obj->name = $name;
+        $self['code'] = $code;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Plmn implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Plmn implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

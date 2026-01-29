@@ -4,26 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\TranscriptionEngineAConfig;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type speech_context = array{boost?: float, phrases?: list<string>}
+ * @phpstan-type SpeechContextShape = array{
+ *   boost?: float|null, phrases?: list<string>|null
+ * }
  */
 final class SpeechContext implements BaseModel
 {
-    /** @use SdkModel<speech_context> */
+    /** @use SdkModel<SpeechContextShape> */
     use SdkModel;
 
     /**
      * Boost factor for the speech context.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $boost;
 
     /** @var list<string>|null $phrases */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $phrases;
 
     public function __construct()
@@ -36,18 +38,18 @@ final class SpeechContext implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $phrases
+     * @param list<string>|null $phrases
      */
     public static function with(
         ?float $boost = null,
         ?array $phrases = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $boost && $obj->boost = $boost;
-        null !== $phrases && $obj->phrases = $phrases;
+        null !== $boost && $self['boost'] = $boost;
+        null !== $phrases && $self['phrases'] = $phrases;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +57,10 @@ final class SpeechContext implements BaseModel
      */
     public function withBoost(float $boost): self
     {
-        $obj = clone $this;
-        $obj->boost = $boost;
+        $self = clone $this;
+        $self['boost'] = $boost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +68,9 @@ final class SpeechContext implements BaseModel
      */
     public function withPhrases(array $phrases): self
     {
-        $obj = clone $this;
-        $obj->phrases = $phrases;
+        $self = clone $this;
+        $self['phrases'] = $phrases;
 
-        return $obj;
+        return $self;
     }
 }

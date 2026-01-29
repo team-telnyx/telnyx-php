@@ -4,70 +4,72 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\DocReqsRequirementType\AcceptanceCriteria;
 use Telnyx\DocReqsRequirementType\Type;
 
 /**
- * @phpstan-type doc_reqs_requirement_type = array{
- *   id?: string,
- *   acceptanceCriteria?: AcceptanceCriteria,
- *   createdAt?: string,
- *   description?: string,
- *   example?: string,
- *   name?: string,
- *   recordType?: string,
- *   type?: value-of<Type>,
- *   updatedAt?: string,
+ * @phpstan-import-type AcceptanceCriteriaShape from \Telnyx\DocReqsRequirementType\AcceptanceCriteria
+ *
+ * @phpstan-type DocReqsRequirementTypeShape = array{
+ *   id?: string|null,
+ *   acceptanceCriteria?: null|AcceptanceCriteria|AcceptanceCriteriaShape,
+ *   createdAt?: string|null,
+ *   description?: string|null,
+ *   example?: string|null,
+ *   name?: string|null,
+ *   recordType?: string|null,
+ *   type?: null|Type|value-of<Type>,
+ *   updatedAt?: string|null,
  * }
  */
 final class DocReqsRequirementType implements BaseModel
 {
-    /** @use SdkModel<doc_reqs_requirement_type> */
+    /** @use SdkModel<DocReqsRequirementTypeShape> */
     use SdkModel;
 
     /**
      * Identifies the associated document.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Specifies objective criteria for acceptance.
      */
-    #[Api('acceptance_criteria', optional: true)]
+    #[Optional('acceptance_criteria')]
     public ?AcceptanceCriteria $acceptanceCriteria;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * Describes the requirement type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Provides one or more examples of acceptable documents.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $example;
 
     /**
      * A short descriptive name for this requirement_type.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -75,13 +77,13 @@ final class DocReqsRequirementType implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was last updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     public function __construct()
@@ -94,11 +96,12 @@ final class DocReqsRequirementType implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param AcceptanceCriteria|AcceptanceCriteriaShape|null $acceptanceCriteria
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
-        ?AcceptanceCriteria $acceptanceCriteria = null,
+        AcceptanceCriteria|array|null $acceptanceCriteria = null,
         ?string $createdAt = null,
         ?string $description = null,
         ?string $example = null,
@@ -107,19 +110,19 @@ final class DocReqsRequirementType implements BaseModel
         Type|string|null $type = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $acceptanceCriteria && $obj->acceptanceCriteria = $acceptanceCriteria;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $description && $obj->description = $description;
-        null !== $example && $obj->example = $example;
-        null !== $name && $obj->name = $name;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $acceptanceCriteria && $self['acceptanceCriteria'] = $acceptanceCriteria;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $description && $self['description'] = $description;
+        null !== $example && $self['example'] = $example;
+        null !== $name && $self['name'] = $name;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,22 +130,24 @@ final class DocReqsRequirementType implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Specifies objective criteria for acceptance.
+     *
+     * @param AcceptanceCriteria|AcceptanceCriteriaShape $acceptanceCriteria
      */
     public function withAcceptanceCriteria(
-        AcceptanceCriteria $acceptanceCriteria
+        AcceptanceCriteria|array $acceptanceCriteria
     ): self {
-        $obj = clone $this;
-        $obj->acceptanceCriteria = $acceptanceCriteria;
+        $self = clone $this;
+        $self['acceptanceCriteria'] = $acceptanceCriteria;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +155,10 @@ final class DocReqsRequirementType implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +166,10 @@ final class DocReqsRequirementType implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +177,10 @@ final class DocReqsRequirementType implements BaseModel
      */
     public function withExample(string $example): self
     {
-        $obj = clone $this;
-        $obj->example = $example;
+        $self = clone $this;
+        $self['example'] = $example;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,10 +188,10 @@ final class DocReqsRequirementType implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -194,10 +199,10 @@ final class DocReqsRequirementType implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +212,10 @@ final class DocReqsRequirementType implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,9 +223,9 @@ final class DocReqsRequirementType implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

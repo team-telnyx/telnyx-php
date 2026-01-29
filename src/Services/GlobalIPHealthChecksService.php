@@ -6,24 +6,34 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPHealthChecksContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type PageShape from \Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
 {
     /**
+     * @api
+     */
+    public GlobalIPHealthChecksRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new GlobalIPHealthChecksRawService($client);
+    }
 
     /**
      * @api
@@ -31,50 +41,30 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      * Create a Global IP health check.
      *
      * @param string $globalIPID global IP ID
-     * @param array<string, mixed> $healthCheckParams a Global IP health check params
+     * @param array<string,mixed> $healthCheckParams a Global IP health check params
      * @param string $healthCheckType the Global IP health check type
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $globalIPID = omit,
-        $healthCheckParams = omit,
-        $healthCheckType = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $globalIPID = null,
+        ?array $healthCheckParams = null,
+        ?string $healthCheckType = null,
+        RequestOptions|array|null $requestOptions = null,
     ): GlobalIPHealthCheckNewResponse {
-        $params = [
-            'globalIPID' => $globalIPID,
-            'healthCheckParams' => $healthCheckParams,
-            'healthCheckType' => $healthCheckType,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPHealthCheckNewResponse {
-        [$parsed, $options] = GlobalIPHealthCheckCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'globalIPID' => $globalIPID,
+                'healthCheckParams' => $healthCheckParams,
+                'healthCheckType' => $healthCheckType,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'global_ip_health_checks',
-            body: (object) $parsed,
-            options: $options,
-            convert: GlobalIPHealthCheckNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -82,19 +72,19 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *
      * Retrieve a Global IP health check.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPHealthCheckGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['global_ip_health_checks/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPHealthCheckGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -102,43 +92,23 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *
      * List all Global IP health checks.
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<GlobalIPHealthCheckListResponse>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPHealthCheckListResponse {
-        $params = ['page' => $page];
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination {
+        $params = Util::removeNulls(['page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): GlobalIPHealthCheckListResponse {
-        [$parsed, $options] = GlobalIPHealthCheckListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'global_ip_health_checks',
-            query: $parsed,
-            options: $options,
-            convert: GlobalIPHealthCheckListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -146,18 +116,18 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *
      * Delete a Global IP health check.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): GlobalIPHealthCheckDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['global_ip_health_checks/%1$s', $id],
-            options: $requestOptions,
-            convert: GlobalIPHealthCheckDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

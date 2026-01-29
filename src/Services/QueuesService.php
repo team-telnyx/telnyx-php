@@ -11,10 +11,18 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\QueuesContract;
 use Telnyx\Services\Queues\CallsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class QueuesService implements QueuesContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public QueuesRawService $raw;
+
+    /**
+     * @api
      */
     public CallsService $calls;
 
@@ -23,6 +31,7 @@ final class QueuesService implements QueuesContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new QueuesRawService($client);
         $this->calls = new CallsService($client);
     }
 
@@ -31,18 +40,18 @@ final class QueuesService implements QueuesContract
      *
      * Retrieve an existing call queue
      *
+     * @param string $queueName Uniquely identifies the queue by name
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $queueName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): QueueGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['queues/%1$s', $queueName],
-            options: $requestOptions,
-            convert: QueueGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($queueName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

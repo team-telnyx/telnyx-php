@@ -4,87 +4,87 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type additional_data = array{
- *   accountNumber?: string,
- *   addressLine1?: string,
- *   authorizedPersonName?: string,
- *   billingPhoneNumber?: string,
- *   city?: string,
- *   customerCode?: string,
- *   name?: string,
- *   pin?: string,
- *   state?: string,
- *   zipCode?: string,
+ * @phpstan-type AdditionalDataShape = array{
+ *   accountNumber?: string|null,
+ *   addressLine1?: string|null,
+ *   authorizedPersonName?: string|null,
+ *   billingPhoneNumber?: string|null,
+ *   city?: string|null,
+ *   customerCode?: string|null,
+ *   name?: string|null,
+ *   pin?: string|null,
+ *   state?: string|null,
+ *   zipCode?: string|null,
  * }
  */
 final class AdditionalData implements BaseModel
 {
-    /** @use SdkModel<additional_data> */
+    /** @use SdkModel<AdditionalDataShape> */
     use SdkModel;
 
     /**
      * The account number of the customer service record.
      */
-    #[Api('account_number', optional: true)]
+    #[Optional('account_number')]
     public ?string $accountNumber;
 
     /**
      * The first line of the address of the customer service record.
      */
-    #[Api('address_line_1', optional: true)]
+    #[Optional('address_line_1')]
     public ?string $addressLine1;
 
     /**
      * The name of the authorized person.
      */
-    #[Api('authorized_person_name', optional: true)]
+    #[Optional('authorized_person_name')]
     public ?string $authorizedPersonName;
 
     /**
      * The billing phone number of the customer service record.
      */
-    #[Api('billing_phone_number', optional: true)]
+    #[Optional('billing_phone_number')]
     public ?string $billingPhoneNumber;
 
     /**
      * The city of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $city;
 
     /**
      * The customer code of the customer service record.
      */
-    #[Api('customer_code', optional: true)]
+    #[Optional('customer_code')]
     public ?string $customerCode;
 
     /**
      * The name of the administrator of CSR.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
      * The PIN of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pin;
 
     /**
      * The state of the customer service record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $state;
 
     /**
      * The zip code of the customer service record.
      */
-    #[Api('zip_code', optional: true)]
+    #[Optional('zip_code')]
     public ?string $zipCode;
 
     public function __construct()
@@ -109,20 +109,20 @@ final class AdditionalData implements BaseModel
         ?string $state = null,
         ?string $zipCode = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountNumber && $obj->accountNumber = $accountNumber;
-        null !== $addressLine1 && $obj->addressLine1 = $addressLine1;
-        null !== $authorizedPersonName && $obj->authorizedPersonName = $authorizedPersonName;
-        null !== $billingPhoneNumber && $obj->billingPhoneNumber = $billingPhoneNumber;
-        null !== $city && $obj->city = $city;
-        null !== $customerCode && $obj->customerCode = $customerCode;
-        null !== $name && $obj->name = $name;
-        null !== $pin && $obj->pin = $pin;
-        null !== $state && $obj->state = $state;
-        null !== $zipCode && $obj->zipCode = $zipCode;
+        null !== $accountNumber && $self['accountNumber'] = $accountNumber;
+        null !== $addressLine1 && $self['addressLine1'] = $addressLine1;
+        null !== $authorizedPersonName && $self['authorizedPersonName'] = $authorizedPersonName;
+        null !== $billingPhoneNumber && $self['billingPhoneNumber'] = $billingPhoneNumber;
+        null !== $city && $self['city'] = $city;
+        null !== $customerCode && $self['customerCode'] = $customerCode;
+        null !== $name && $self['name'] = $name;
+        null !== $pin && $self['pin'] = $pin;
+        null !== $state && $self['state'] = $state;
+        null !== $zipCode && $self['zipCode'] = $zipCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +130,10 @@ final class AdditionalData implements BaseModel
      */
     public function withAccountNumber(string $accountNumber): self
     {
-        $obj = clone $this;
-        $obj->accountNumber = $accountNumber;
+        $self = clone $this;
+        $self['accountNumber'] = $accountNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +141,10 @@ final class AdditionalData implements BaseModel
      */
     public function withAddressLine1(string $addressLine1): self
     {
-        $obj = clone $this;
-        $obj->addressLine1 = $addressLine1;
+        $self = clone $this;
+        $self['addressLine1'] = $addressLine1;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +152,10 @@ final class AdditionalData implements BaseModel
      */
     public function withAuthorizedPersonName(string $authorizedPersonName): self
     {
-        $obj = clone $this;
-        $obj->authorizedPersonName = $authorizedPersonName;
+        $self = clone $this;
+        $self['authorizedPersonName'] = $authorizedPersonName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +163,10 @@ final class AdditionalData implements BaseModel
      */
     public function withBillingPhoneNumber(string $billingPhoneNumber): self
     {
-        $obj = clone $this;
-        $obj->billingPhoneNumber = $billingPhoneNumber;
+        $self = clone $this;
+        $self['billingPhoneNumber'] = $billingPhoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +174,10 @@ final class AdditionalData implements BaseModel
      */
     public function withCity(string $city): self
     {
-        $obj = clone $this;
-        $obj->city = $city;
+        $self = clone $this;
+        $self['city'] = $city;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +185,10 @@ final class AdditionalData implements BaseModel
      */
     public function withCustomerCode(string $customerCode): self
     {
-        $obj = clone $this;
-        $obj->customerCode = $customerCode;
+        $self = clone $this;
+        $self['customerCode'] = $customerCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -196,10 +196,10 @@ final class AdditionalData implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -207,10 +207,10 @@ final class AdditionalData implements BaseModel
      */
     public function withPin(string $pin): self
     {
-        $obj = clone $this;
-        $obj->pin = $pin;
+        $self = clone $this;
+        $self['pin'] = $pin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -218,10 +218,10 @@ final class AdditionalData implements BaseModel
      */
     public function withState(string $state): self
     {
-        $obj = clone $this;
-        $obj->state = $state;
+        $self = clone $this;
+        $self['state'] = $state;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,9 +229,9 @@ final class AdditionalData implements BaseModel
      */
     public function withZipCode(string $zipCode): self
     {
-        $obj = clone $this;
-        $obj->zipCode = $zipCode;
+        $self = clone $this;
+        $self['zipCode'] = $zipCode;
 
-        return $obj;
+        return $self;
     }
 }

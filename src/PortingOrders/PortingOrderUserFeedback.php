@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type porting_order_user_feedback = array{
- *   userComment?: string, userRating?: int
+ * @phpstan-type PortingOrderUserFeedbackShape = array{
+ *   userComment?: string|null, userRating?: int|null
  * }
  */
 final class PortingOrderUserFeedback implements BaseModel
 {
-    /** @use SdkModel<porting_order_user_feedback> */
+    /** @use SdkModel<PortingOrderUserFeedbackShape> */
     use SdkModel;
 
     /**
      * A comment related to the customer rating.
      */
-    #[Api('user_comment', optional: true)]
+    #[Optional('user_comment', nullable: true)]
     public ?string $userComment;
 
     /**
      * Once an order is ported, cancellation is requested or the request is cancelled, the user may rate their experience.
      */
-    #[Api('user_rating', optional: true)]
+    #[Optional('user_rating', nullable: true)]
     public ?int $userRating;
 
     public function __construct()
@@ -44,33 +44,33 @@ final class PortingOrderUserFeedback implements BaseModel
         ?string $userComment = null,
         ?int $userRating = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $userComment && $obj->userComment = $userComment;
-        null !== $userRating && $obj->userRating = $userRating;
+        null !== $userComment && $self['userComment'] = $userComment;
+        null !== $userRating && $self['userRating'] = $userRating;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A comment related to the customer rating.
      */
-    public function withUserComment(string $userComment): self
+    public function withUserComment(?string $userComment): self
     {
-        $obj = clone $this;
-        $obj->userComment = $userComment;
+        $self = clone $this;
+        $self['userComment'] = $userComment;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Once an order is ported, cancellation is requested or the request is cancelled, the user may rate their experience.
      */
-    public function withUserRating(int $userRating): self
+    public function withUserRating(?int $userRating): self
     {
-        $obj = clone $this;
-        $obj->userRating = $userRating;
+        $self = clone $this;
+        $self['userRating'] = $userRating;
 
-        return $obj;
+        return $self;
     }
 }

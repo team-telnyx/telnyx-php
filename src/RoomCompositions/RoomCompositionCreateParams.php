@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\RoomCompositions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,66 +12,68 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Asynchronously create a room composition.
  *
- * @see Telnyx\RoomCompositions->create
+ * @see Telnyx\Services\RoomCompositionsService::create()
  *
- * @phpstan-type room_composition_create_params = array{
+ * @phpstan-import-type VideoRegionShape from \Telnyx\RoomCompositions\VideoRegion
+ *
+ * @phpstan-type RoomCompositionCreateParamsShape = array{
  *   format?: string|null,
  *   resolution?: string|null,
  *   sessionID?: string|null,
- *   videoLayout?: array<string, VideoRegion>,
+ *   videoLayout?: array<string,VideoRegion|VideoRegionShape>|null,
  *   webhookEventFailoverURL?: string|null,
- *   webhookEventURL?: string,
+ *   webhookEventURL?: string|null,
  *   webhookTimeoutSecs?: int|null,
  * }
  */
 final class RoomCompositionCreateParams implements BaseModel
 {
-    /** @use SdkModel<room_composition_create_params> */
+    /** @use SdkModel<RoomCompositionCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The desired format of the room composition.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional]
     public ?string $format;
 
     /**
      * The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional]
     public ?string $resolution;
 
     /**
      * id of the room session associated with the room composition.
      */
-    #[Api('session_id', nullable: true, optional: true)]
+    #[Optional('session_id')]
     public ?string $sessionID;
 
     /**
      * Describes the video layout of the room composition in terms of regions.
      *
-     * @var array<string, VideoRegion>|null $videoLayout
+     * @var array<string,VideoRegion>|null $videoLayout
      */
-    #[Api('video_layout', map: VideoRegion::class, optional: true)]
+    #[Optional('video_layout', map: VideoRegion::class)]
     public ?array $videoLayout;
 
     /**
      * The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_failover_url', nullable: true, optional: true)]
+    #[Optional('webhook_event_failover_url')]
     public ?string $webhookEventFailoverURL;
 
     /**
      * The URL where webhooks related to this room composition will be sent. Must include a scheme, such as 'https'.
      */
-    #[Api('webhook_event_url', optional: true)]
+    #[Optional('webhook_event_url')]
     public ?string $webhookEventURL;
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    #[Api('webhook_timeout_secs', nullable: true, optional: true)]
+    #[Optional('webhook_timeout_secs')]
     public ?int $webhookTimeoutSecs;
 
     public function __construct()
@@ -84,7 +86,7 @@ final class RoomCompositionCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, VideoRegion> $videoLayout
+     * @param array<string,VideoRegion|VideoRegionShape>|null $videoLayout
      */
     public static function with(
         ?string $format = null,
@@ -95,75 +97,75 @@ final class RoomCompositionCreateParams implements BaseModel
         ?string $webhookEventURL = null,
         ?int $webhookTimeoutSecs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $format && $obj->format = $format;
-        null !== $resolution && $obj->resolution = $resolution;
-        null !== $sessionID && $obj->sessionID = $sessionID;
-        null !== $videoLayout && $obj->videoLayout = $videoLayout;
-        null !== $webhookEventFailoverURL && $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
-        null !== $webhookEventURL && $obj->webhookEventURL = $webhookEventURL;
-        null !== $webhookTimeoutSecs && $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        null !== $format && $self['format'] = $format;
+        null !== $resolution && $self['resolution'] = $resolution;
+        null !== $sessionID && $self['sessionID'] = $sessionID;
+        null !== $videoLayout && $self['videoLayout'] = $videoLayout;
+        null !== $webhookEventFailoverURL && $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
+        null !== $webhookEventURL && $self['webhookEventURL'] = $webhookEventURL;
+        null !== $webhookTimeoutSecs && $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The desired format of the room composition.
      */
-    public function withFormat(?string $format): self
+    public function withFormat(string $format): self
     {
-        $obj = clone $this;
-        $obj->format = $format;
+        $self = clone $this;
+        $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The desired resolution (width/height in pixels) of the resulting video of the room composition. Both width and height are required to be between 16 and 1280; and width * height should not exceed 1280 * 720.
      */
-    public function withResolution(?string $resolution): self
+    public function withResolution(string $resolution): self
     {
-        $obj = clone $this;
-        $obj->resolution = $resolution;
+        $self = clone $this;
+        $self['resolution'] = $resolution;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * id of the room session associated with the room composition.
      */
-    public function withSessionID(?string $sessionID): self
+    public function withSessionID(string $sessionID): self
     {
-        $obj = clone $this;
-        $obj->sessionID = $sessionID;
+        $self = clone $this;
+        $self['sessionID'] = $sessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Describes the video layout of the room composition in terms of regions.
      *
-     * @param array<string, VideoRegion> $videoLayout
+     * @param array<string,VideoRegion|VideoRegionShape> $videoLayout
      */
     public function withVideoLayout(array $videoLayout): self
     {
-        $obj = clone $this;
-        $obj->videoLayout = $videoLayout;
+        $self = clone $this;
+        $self['videoLayout'] = $videoLayout;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The failover URL where webhooks related to this room composition will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      */
     public function withWebhookEventFailoverURL(
-        ?string $webhookEventFailoverURL
+        string $webhookEventFailoverURL
     ): self {
-        $obj = clone $this;
-        $obj->webhookEventFailoverURL = $webhookEventFailoverURL;
+        $self = clone $this;
+        $self['webhookEventFailoverURL'] = $webhookEventFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,20 +173,20 @@ final class RoomCompositionCreateParams implements BaseModel
      */
     public function withWebhookEventURL(string $webhookEventURL): self
     {
-        $obj = clone $this;
-        $obj->webhookEventURL = $webhookEventURL;
+        $self = clone $this;
+        $self['webhookEventURL'] = $webhookEventURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Specifies how many seconds to wait before timing out a webhook.
      */
-    public function withWebhookTimeoutSecs(?int $webhookTimeoutSecs): self
+    public function withWebhookTimeoutSecs(int $webhookTimeoutSecs): self
     {
-        $obj = clone $this;
-        $obj->webhookTimeoutSecs = $webhookTimeoutSecs;
+        $self = clone $this;
+        $self['webhookTimeoutSecs'] = $webhookTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 }

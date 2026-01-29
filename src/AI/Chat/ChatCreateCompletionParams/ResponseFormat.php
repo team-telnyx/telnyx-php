@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
  *
- * @phpstan-type response_format = array{type: value-of<Type>}
+ * @phpstan-type ResponseFormatShape = array{type: Type|value-of<Type>}
  */
 final class ResponseFormat implements BaseModel
 {
-    /** @use SdkModel<response_format> */
+    /** @use SdkModel<ResponseFormatShape> */
     use SdkModel;
 
     /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -51,11 +51,11 @@ final class ResponseFormat implements BaseModel
      */
     public static function with(Type|string $type): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,9 +63,9 @@ final class ResponseFormat implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

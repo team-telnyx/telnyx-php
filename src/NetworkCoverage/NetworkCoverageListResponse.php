@@ -4,32 +4,41 @@ declare(strict_types=1);
 
 namespace Telnyx\NetworkCoverage;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Data;
+use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Location;
 
 /**
- * @phpstan-type network_coverage_list_response = array{
- *   data?: list<Data>, meta?: PaginationMeta
+ * @phpstan-import-type LocationShape from \Telnyx\NetworkCoverage\NetworkCoverageListResponse\Location
+ *
+ * @phpstan-type NetworkCoverageListResponseShape = array{
+ *   availableServices?: list<AvailableService|value-of<AvailableService>>|null,
+ *   location?: null|Location|LocationShape,
+ *   recordType?: string|null,
  * }
  */
-final class NetworkCoverageListResponse implements BaseModel, ResponseConverter
+final class NetworkCoverageListResponse implements BaseModel
 {
-    /** @use SdkModel<network_coverage_list_response> */
+    /** @use SdkModel<NetworkCoverageListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * List of interface types supported in this region.
+     *
+     * @var list<value-of<AvailableService>>|null $availableServices
+     */
+    #[Optional('available_services', list: AvailableService::class)]
+    public ?array $availableServices;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    #[Optional]
+    public ?Location $location;
 
-    #[Api(optional: true)]
-    public ?PaginationMeta $meta;
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     public function __construct()
     {
@@ -41,36 +50,55 @@ final class NetworkCoverageListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param list<AvailableService|value-of<AvailableService>>|null $availableServices
+     * @param Location|LocationShape|null $location
      */
     public static function with(
-        ?array $data = null,
-        ?PaginationMeta $meta = null
+        ?array $availableServices = null,
+        Location|array|null $location = null,
+        ?string $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $availableServices && $self['availableServices'] = $availableServices;
+        null !== $location && $self['location'] = $location;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * List of interface types supported in this region.
+     *
+     * @param list<AvailableService|value-of<AvailableService>> $availableServices
      */
-    public function withData(array $data): self
+    public function withAvailableServices(array $availableServices): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['availableServices'] = $availableServices;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param Location|LocationShape $location
+     */
+    public function withLocation(Location|array $location): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['location'] = $location;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
     }
 }

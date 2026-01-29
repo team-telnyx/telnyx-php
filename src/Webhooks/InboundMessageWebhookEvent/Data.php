@@ -4,31 +4,33 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\InboundMessageWebhookEvent;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\InboundMessagePayload;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\EventType;
-use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\Payload;
 use Telnyx\Webhooks\InboundMessageWebhookEvent\Data\RecordType;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   eventType?: value-of<EventType>,
- *   occurredAt?: \DateTimeInterface,
- *   payload?: Payload,
- *   recordType?: value-of<RecordType>,
+ * @phpstan-import-type InboundMessagePayloadShape from \Telnyx\InboundMessagePayload
+ *
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   eventType?: null|EventType|value-of<EventType>,
+ *   occurredAt?: \DateTimeInterface|null,
+ *   payload?: null|InboundMessagePayload|InboundMessagePayloadShape,
+ *   recordType?: null|RecordType|value-of<RecordType>,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -36,24 +38,24 @@ final class Data implements BaseModel
      *
      * @var value-of<EventType>|null $eventType
      */
-    #[Api('event_type', enum: EventType::class, optional: true)]
+    #[Optional('event_type', enum: EventType::class)]
     public ?string $eventType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('occurred_at', optional: true)]
+    #[Optional('occurred_at')]
     public ?\DateTimeInterface $occurredAt;
 
-    #[Api(optional: true)]
-    public ?Payload $payload;
+    #[Optional]
+    public ?InboundMessagePayload $payload;
 
     /**
      * Identifies the type of the resource.
      *
      * @var value-of<RecordType>|null $recordType
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
     public function __construct()
@@ -66,25 +68,26 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType> $eventType
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param EventType|value-of<EventType>|null $eventType
+     * @param InboundMessagePayload|InboundMessagePayloadShape|null $payload
+     * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $id = null,
         EventType|string|null $eventType = null,
         ?\DateTimeInterface $occurredAt = null,
-        ?Payload $payload = null,
+        InboundMessagePayload|array|null $payload = null,
         RecordType|string|null $recordType = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $eventType && $obj['eventType'] = $eventType;
-        null !== $occurredAt && $obj->occurredAt = $occurredAt;
-        null !== $payload && $obj->payload = $payload;
-        null !== $recordType && $obj['recordType'] = $recordType;
+        null !== $id && $self['id'] = $id;
+        null !== $eventType && $self['eventType'] = $eventType;
+        null !== $occurredAt && $self['occurredAt'] = $occurredAt;
+        null !== $payload && $self['payload'] = $payload;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +95,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +108,10 @@ final class Data implements BaseModel
      */
     public function withEventType(EventType|string $eventType): self
     {
-        $obj = clone $this;
-        $obj['eventType'] = $eventType;
+        $self = clone $this;
+        $self['eventType'] = $eventType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,18 +119,21 @@ final class Data implements BaseModel
      */
     public function withOccurredAt(\DateTimeInterface $occurredAt): self
     {
-        $obj = clone $this;
-        $obj->occurredAt = $occurredAt;
+        $self = clone $this;
+        $self['occurredAt'] = $occurredAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withPayload(Payload $payload): self
+    /**
+     * @param InboundMessagePayload|InboundMessagePayloadShape $payload
+     */
+    public function withPayload(InboundMessagePayload|array $payload): self
     {
-        $obj = clone $this;
-        $obj->payload = $payload;
+        $self = clone $this;
+        $self['payload'] = $payload;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,9 +143,9 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
+use Telnyx\Conferences\Actions\ActionRecordStartParams\Region;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -18,19 +20,20 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `conference.recording.saved`
  *
- * @see Telnyx\Conferences\Actions->recordStart
+ * @see Telnyx\Services\Conferences\ActionsService::recordStart()
  *
- * @phpstan-type action_record_start_params = array{
+ * @phpstan-type ActionRecordStartParamsShape = array{
  *   format: Format|value-of<Format>,
- *   commandID?: string,
- *   customFileName?: string,
- *   playBeep?: bool,
- *   trim?: Trim|value-of<Trim>,
+ *   commandID?: string|null,
+ *   customFileName?: string|null,
+ *   playBeep?: bool|null,
+ *   region?: null|Region|value-of<Region>,
+ *   trim?: null|Trim|value-of<Trim>,
  * }
  */
 final class ActionRecordStartParams implements BaseModel
 {
-    /** @use SdkModel<action_record_start_params> */
+    /** @use SdkModel<ActionRecordStartParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -39,33 +42,41 @@ final class ActionRecordStartParams implements BaseModel
      *
      * @var value-of<Format> $format
      */
-    #[Api(enum: Format::class)]
+    #[Required(enum: Format::class)]
     public string $format;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `conference_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
      * The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      */
-    #[Api('custom_file_name', optional: true)]
+    #[Optional('custom_file_name')]
     public ?string $customFileName;
 
     /**
      * If enabled, a beep sound will be played at the start of a recording.
      */
-    #[Api('play_beep', optional: true)]
+    #[Optional('play_beep')]
     public ?bool $playBeep;
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     /**
      * When set to `trim-silence`, silence will be removed from the beginning and end of the recording.
      *
      * @var value-of<Trim>|null $trim
      */
-    #[Api(enum: Trim::class, optional: true)]
+    #[Optional(enum: Trim::class)]
     public ?string $trim;
 
     /**
@@ -93,25 +104,28 @@ final class ActionRecordStartParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Format|value-of<Format> $format
-     * @param Trim|value-of<Trim> $trim
+     * @param Region|value-of<Region>|null $region
+     * @param Trim|value-of<Trim>|null $trim
      */
     public static function with(
         Format|string $format,
         ?string $commandID = null,
         ?string $customFileName = null,
         ?bool $playBeep = null,
+        Region|string|null $region = null,
         Trim|string|null $trim = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['format'] = $format;
+        $self['format'] = $format;
 
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $customFileName && $obj->customFileName = $customFileName;
-        null !== $playBeep && $obj->playBeep = $playBeep;
-        null !== $trim && $obj['trim'] = $trim;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $customFileName && $self['customFileName'] = $customFileName;
+        null !== $playBeep && $self['playBeep'] = $playBeep;
+        null !== $region && $self['region'] = $region;
+        null !== $trim && $self['trim'] = $trim;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -121,10 +135,10 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withFormat(Format|string $format): self
     {
-        $obj = clone $this;
-        $obj['format'] = $format;
+        $self = clone $this;
+        $self['format'] = $format;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +146,10 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +157,10 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withCustomFileName(string $customFileName): self
     {
-        $obj = clone $this;
-        $obj->customFileName = $customFileName;
+        $self = clone $this;
+        $self['customFileName'] = $customFileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +168,23 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withPlayBeep(bool $playBeep): self
     {
-        $obj = clone $this;
-        $obj->playBeep = $playBeep;
+        $self = clone $this;
+        $self['playBeep'] = $playBeep;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
+
+        return $self;
     }
 
     /**
@@ -167,9 +194,9 @@ final class ActionRecordStartParams implements BaseModel
      */
     public function withTrim(Trim|string $trim): self
     {
-        $obj = clone $this;
-        $obj['trim'] = $trim;
+        $self = clone $this;
+        $self['trim'] = $trim;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,25 +4,27 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Calls\CallInitiateResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{from?: string, status?: string, to?: string}
+ * @phpstan-type DataShape = array{
+ *   from?: string|null, status?: string|null, to?: string|null
+ * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $status;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     public function __construct()
@@ -40,36 +42,36 @@ final class Data implements BaseModel
         ?string $status = null,
         ?string $to = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $from && $obj->from = $from;
-        null !== $status && $obj->status = $status;
-        null !== $to && $obj->to = $to;
+        null !== $from && $self['from'] = $from;
+        null !== $status && $self['status'] = $status;
+        null !== $to && $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(string $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 }

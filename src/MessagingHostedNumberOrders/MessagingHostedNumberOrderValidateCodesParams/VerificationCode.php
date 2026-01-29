@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type verification_code = array{code: string, phoneNumber: string}
+ * @phpstan-type VerificationCodeShape = array{code: string, phoneNumber: string}
  */
 final class VerificationCode implements BaseModel
 {
-    /** @use SdkModel<verification_code> */
+    /** @use SdkModel<VerificationCodeShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $code;
 
-    #[Api('phone_number')]
+    #[Required('phone_number')]
     public string $phoneNumber;
 
     /**
@@ -48,27 +48,27 @@ final class VerificationCode implements BaseModel
      */
     public static function with(string $code, string $phoneNumber): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->code = $code;
-        $obj->phoneNumber = $phoneNumber;
+        $self['code'] = $code;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

@@ -11,7 +11,12 @@ use Telnyx\Services\OperatorConnect\ActionsService;
 final class OperatorConnectService implements OperatorConnectContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public OperatorConnectRawService $raw;
+
+    /**
+     * @api
      */
     public ActionsService $actions;
 
@@ -20,6 +25,7 @@ final class OperatorConnectService implements OperatorConnectContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new OperatorConnectRawService($client);
         $this->actions = new ActionsService($client);
     }
 }

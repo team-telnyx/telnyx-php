@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Filter;
@@ -13,50 +13,52 @@ use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
 use Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse\Status;
 
 /**
- * @phpstan-type mdr_detail_report_response = array{
- *   id?: string,
- *   connections?: list<int>,
- *   createdAt?: \DateTimeInterface,
- *   directions?: list<value-of<Direction>>,
- *   endDate?: \DateTimeInterface,
- *   filters?: list<Filter>,
- *   profiles?: list<string>,
- *   recordType?: string,
- *   recordTypes?: list<value-of<RecordType>>,
- *   reportName?: string,
- *   reportURL?: string,
- *   startDate?: \DateTimeInterface,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-import-type FilterShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Filter
+ *
+ * @phpstan-type MdrDetailReportResponseShape = array{
+ *   id?: string|null,
+ *   connections?: list<int>|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   directions?: list<Direction|value-of<Direction>>|null,
+ *   endDate?: \DateTimeInterface|null,
+ *   filters?: list<Filter|FilterShape>|null,
+ *   profiles?: list<string>|null,
+ *   recordType?: string|null,
+ *   recordTypes?: list<RecordType|value-of<RecordType>>|null,
+ *   reportName?: string|null,
+ *   reportURL?: string|null,
+ *   startDate?: \DateTimeInterface|null,
+ *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class MdrDetailReportResponse implements BaseModel
 {
-    /** @use SdkModel<mdr_detail_report_response> */
+    /** @use SdkModel<MdrDetailReportResponseShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /** @var list<int>|null $connections */
-    #[Api(list: 'int', optional: true)]
+    #[Optional(list: 'int')]
     public ?array $connections;
 
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /** @var list<value-of<Direction>>|null $directions */
-    #[Api(list: Direction::class, optional: true)]
+    #[Optional(list: Direction::class)]
     public ?array $directions;
 
-    #[Api('end_date', optional: true)]
+    #[Optional('end_date')]
     public ?\DateTimeInterface $endDate;
 
     /** @var list<Filter>|null $filters */
-    #[Api(list: Filter::class, optional: true)]
+    #[Optional(list: Filter::class)]
     public ?array $filters;
 
     /**
@@ -64,30 +66,30 @@ final class MdrDetailReportResponse implements BaseModel
      *
      * @var list<string>|null $profiles
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $profiles;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /** @var list<value-of<RecordType>>|null $recordTypes */
-    #[Api('record_types', list: RecordType::class, optional: true)]
+    #[Optional('record_types', list: RecordType::class)]
     public ?array $recordTypes;
 
-    #[Api('report_name', optional: true)]
+    #[Optional('report_name')]
     public ?string $reportName;
 
-    #[Api('report_url', optional: true)]
+    #[Optional('report_url')]
     public ?string $reportURL;
 
-    #[Api('start_date', optional: true)]
+    #[Optional('start_date')]
     public ?\DateTimeInterface $startDate;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -100,12 +102,12 @@ final class MdrDetailReportResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<int> $connections
-     * @param list<Direction|value-of<Direction>> $directions
-     * @param list<Filter> $filters
-     * @param list<string> $profiles
-     * @param list<RecordType|value-of<RecordType>> $recordTypes
-     * @param Status|value-of<Status> $status
+     * @param list<int>|null $connections
+     * @param list<Direction|value-of<Direction>>|null $directions
+     * @param list<Filter|FilterShape>|null $filters
+     * @param list<string>|null $profiles
+     * @param list<RecordType|value-of<RecordType>>|null $recordTypes
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -123,24 +125,24 @@ final class MdrDetailReportResponse implements BaseModel
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $connections && $obj->connections = $connections;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $directions && $obj['directions'] = $directions;
-        null !== $endDate && $obj->endDate = $endDate;
-        null !== $filters && $obj->filters = $filters;
-        null !== $profiles && $obj->profiles = $profiles;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $recordTypes && $obj['recordTypes'] = $recordTypes;
-        null !== $reportName && $obj->reportName = $reportName;
-        null !== $reportURL && $obj->reportURL = $reportURL;
-        null !== $startDate && $obj->startDate = $startDate;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $connections && $self['connections'] = $connections;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $directions && $self['directions'] = $directions;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $filters && $self['filters'] = $filters;
+        null !== $profiles && $self['profiles'] = $profiles;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $recordTypes && $self['recordTypes'] = $recordTypes;
+        null !== $reportName && $self['reportName'] = $reportName;
+        null !== $reportURL && $self['reportURL'] = $reportURL;
+        null !== $startDate && $self['startDate'] = $startDate;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +150,10 @@ final class MdrDetailReportResponse implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,18 +161,18 @@ final class MdrDetailReportResponse implements BaseModel
      */
     public function withConnections(array $connections): self
     {
-        $obj = clone $this;
-        $obj->connections = $connections;
+        $self = clone $this;
+        $self['connections'] = $connections;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,29 +180,29 @@ final class MdrDetailReportResponse implements BaseModel
      */
     public function withDirections(array $directions): self
     {
-        $obj = clone $this;
-        $obj['directions'] = $directions;
+        $self = clone $this;
+        $self['directions'] = $directions;
 
-        return $obj;
+        return $self;
     }
 
     public function withEndDate(\DateTimeInterface $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Filter> $filters
+     * @param list<Filter|FilterShape> $filters
      */
     public function withFilters(array $filters): self
     {
-        $obj = clone $this;
-        $obj->filters = $filters;
+        $self = clone $this;
+        $self['filters'] = $filters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,18 +212,18 @@ final class MdrDetailReportResponse implements BaseModel
      */
     public function withProfiles(array $profiles): self
     {
-        $obj = clone $this;
-        $obj->profiles = $profiles;
+        $self = clone $this;
+        $self['profiles'] = $profiles;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -229,34 +231,34 @@ final class MdrDetailReportResponse implements BaseModel
      */
     public function withRecordTypes(array $recordTypes): self
     {
-        $obj = clone $this;
-        $obj['recordTypes'] = $recordTypes;
+        $self = clone $this;
+        $self['recordTypes'] = $recordTypes;
 
-        return $obj;
+        return $self;
     }
 
     public function withReportName(string $reportName): self
     {
-        $obj = clone $this;
-        $obj->reportName = $reportName;
+        $self = clone $this;
+        $self['reportName'] = $reportName;
 
-        return $obj;
+        return $self;
     }
 
     public function withReportURL(string $reportURL): self
     {
-        $obj = clone $this;
-        $obj->reportURL = $reportURL;
+        $self = clone $this;
+        $self['reportURL'] = $reportURL;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartDate(\DateTimeInterface $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -264,17 +266,17 @@ final class MdrDetailReportResponse implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

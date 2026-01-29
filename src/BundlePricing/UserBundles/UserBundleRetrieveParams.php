@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves a user bundle by its ID.
  *
- * @see Telnyx\BundlePricing\UserBundles->retrieve
+ * @see Telnyx\Services\BundlePricing\UserBundlesService::retrieve()
  *
- * @phpstan-type user_bundle_retrieve_params = array{authorizationBearer?: string}
+ * @phpstan-type UserBundleRetrieveParamsShape = array{
+ *   authorizationBearer?: string|null
+ * }
  */
 final class UserBundleRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<user_bundle_retrieve_params> */
+    /** @use SdkModel<UserBundleRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorizationBearer;
 
     public function __construct()
@@ -40,11 +42,11 @@ final class UserBundleRetrieveParams implements BaseModel
      */
     public static function with(?string $authorizationBearer = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorizationBearer && $obj->authorizationBearer = $authorizationBearer;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +54,9 @@ final class UserBundleRetrieveParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj->authorizationBearer = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests;
 
-use Telnyx\AI\Assistants\Tests\TestListParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,43 +12,44 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Retrieves a paginated list of assistant tests with optional filtering capabilities.
  *
- * @see Telnyx\AI\Assistants\Tests->list
+ * @see Telnyx\Services\AI\Assistants\TestsService::list()
  *
- * @phpstan-type test_list_params = array{
- *   destination?: string,
- *   page?: Page,
- *   telnyxConversationChannel?: string,
- *   testSuite?: string,
+ * @phpstan-type TestListParamsShape = array{
+ *   destination?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   telnyxConversationChannel?: string|null,
+ *   testSuite?: string|null,
  * }
  */
 final class TestListParams implements BaseModel
 {
-    /** @use SdkModel<test_list_params> */
+    /** @use SdkModel<TestListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Filter tests by destination (phone number, webhook URL, etc.).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     /**
      * Filter tests by communication channel (e.g., 'web_chat', 'sms').
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $telnyxConversationChannel;
 
     /**
      * Filter tests by test suite name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $testSuite;
 
     public function __construct()
@@ -64,18 +64,20 @@ final class TestListParams implements BaseModel
      */
     public static function with(
         ?string $destination = null,
-        ?Page $page = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         ?string $telnyxConversationChannel = null,
         ?string $testSuite = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $destination && $obj->destination = $destination;
-        null !== $page && $obj->page = $page;
-        null !== $telnyxConversationChannel && $obj->telnyxConversationChannel = $telnyxConversationChannel;
-        null !== $testSuite && $obj->testSuite = $testSuite;
+        null !== $destination && $self['destination'] = $destination;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $telnyxConversationChannel && $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        null !== $testSuite && $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,21 +85,26 @@ final class TestListParams implements BaseModel
      */
     public function withDestination(string $destination): self
     {
-        $obj = clone $this;
-        $obj->destination = $destination;
+        $self = clone $this;
+        $self['destination'] = $destination;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 
     /**
@@ -106,10 +113,10 @@ final class TestListParams implements BaseModel
     public function withTelnyxConversationChannel(
         string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj->telnyxConversationChannel = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +124,9 @@ final class TestListParams implements BaseModel
      */
     public function withTestSuite(string $testSuite): self
     {
-        $obj = clone $this;
-        $obj->testSuite = $testSuite;
+        $self = clone $this;
+        $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 }

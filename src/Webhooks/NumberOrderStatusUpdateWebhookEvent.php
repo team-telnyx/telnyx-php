@@ -4,26 +4,29 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Data;
 use Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Meta;
 
 /**
- * @phpstan-type number_order_status_update_webhook_event = array{
- *   data: Data, meta: Meta
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Data
+ * @phpstan-import-type MetaShape from \Telnyx\Webhooks\NumberOrderStatusUpdateWebhookEvent\Meta
+ *
+ * @phpstan-type NumberOrderStatusUpdateWebhookEventShape = array{
+ *   data: Data|DataShape, meta: Meta|MetaShape
  * }
  */
 final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
 {
-    /** @use SdkModel<number_order_status_update_webhook_event> */
+    /** @use SdkModel<NumberOrderStatusUpdateWebhookEventShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Data $data;
 
-    #[Api]
+    #[Required]
     public Meta $meta;
 
     /**
@@ -49,30 +52,39 @@ final class NumberOrderStatusUpdateWebhookEvent implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Data|DataShape $data
+     * @param Meta|MetaShape $meta
      */
-    public static function with(Data $data, Meta $meta): self
+    public static function with(Data|array $data, Meta|array $meta): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $self['data'] = $data;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(Data $data): self
+    /**
+     * @param Data|DataShape $data
+     */
+    public function withData(Data|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|MetaShape $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

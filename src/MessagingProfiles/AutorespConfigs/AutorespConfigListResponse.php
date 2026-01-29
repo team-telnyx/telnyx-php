@@ -4,33 +4,33 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingProfiles\AutorespConfigs;
 
-use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\MessagingPaginationMeta;
 
 /**
  * List of Auto-Response Settings.
  *
- * @phpstan-type autoresp_config_list_response = array{
- *   data: list<AutoRespConfig>, meta: PaginationMeta
+ * @phpstan-import-type AutoRespConfigShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutoRespConfig
+ * @phpstan-import-type MessagingPaginationMetaShape from \Telnyx\MessagingPaginationMeta
+ *
+ * @phpstan-type AutorespConfigListResponseShape = array{
+ *   data: list<AutoRespConfig|AutoRespConfigShape>,
+ *   meta: MessagingPaginationMeta|MessagingPaginationMetaShape,
  * }
  */
-final class AutorespConfigListResponse implements BaseModel, ResponseConverter
+final class AutorespConfigListResponse implements BaseModel
 {
-    /** @use SdkModel<autoresp_config_list_response> */
+    /** @use SdkModel<AutorespConfigListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<AutoRespConfig> $data */
-    #[Api(list: AutoRespConfig::class)]
+    #[Required(list: AutoRespConfig::class)]
     public array $data;
 
-    #[Api]
-    public PaginationMeta $meta;
+    #[Required]
+    public MessagingPaginationMeta $meta;
 
     /**
      * `new AutorespConfigListResponse()` is missing required properties by the API.
@@ -56,34 +56,40 @@ final class AutorespConfigListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<AutoRespConfig> $data
+     * @param list<AutoRespConfig|AutoRespConfigShape> $data
+     * @param MessagingPaginationMeta|MessagingPaginationMetaShape $meta
      */
-    public static function with(array $data, PaginationMeta $meta): self
-    {
-        $obj = new self;
+    public static function with(
+        array $data,
+        MessagingPaginationMeta|array $meta
+    ): self {
+        $self = new self;
 
-        $obj->data = $data;
-        $obj->meta = $meta;
+        $self['data'] = $data;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<AutoRespConfig> $data
+     * @param list<AutoRespConfig|AutoRespConfigShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(PaginationMeta $meta): self
+    /**
+     * @param MessagingPaginationMeta|MessagingPaginationMetaShape $meta
+     */
+    public function withMeta(MessagingPaginationMeta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

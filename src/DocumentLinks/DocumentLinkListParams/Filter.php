@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\DocumentLinks\DocumentLinkListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter for document links (deepObject style). Originally: filter[linked_record_type], filter[linked_resource_id].
  *
- * @phpstan-type filter_alias = array{
- *   linkedRecordType?: string, linkedResourceID?: string
+ * @phpstan-type FilterShape = array{
+ *   linkedRecordType?: string|null, linkedResourceID?: string|null
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * The linked_record_type of the document to filter on.
      */
-    #[Api('linked_record_type', optional: true)]
+    #[Optional('linked_record_type')]
     public ?string $linkedRecordType;
 
     /**
      * The linked_resource_id of the document to filter on.
      */
-    #[Api('linked_resource_id', optional: true)]
+    #[Optional('linked_resource_id')]
     public ?string $linkedResourceID;
 
     public function __construct()
@@ -46,12 +46,12 @@ final class Filter implements BaseModel
         ?string $linkedRecordType = null,
         ?string $linkedResourceID = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $linkedRecordType && $obj->linkedRecordType = $linkedRecordType;
-        null !== $linkedResourceID && $obj->linkedResourceID = $linkedResourceID;
+        null !== $linkedRecordType && $self['linkedRecordType'] = $linkedRecordType;
+        null !== $linkedResourceID && $self['linkedResourceID'] = $linkedResourceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class Filter implements BaseModel
      */
     public function withLinkedRecordType(string $linkedRecordType): self
     {
-        $obj = clone $this;
-        $obj->linkedRecordType = $linkedRecordType;
+        $self = clone $this;
+        $self['linkedRecordType'] = $linkedRecordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class Filter implements BaseModel
      */
     public function withLinkedResourceID(string $linkedResourceID): self
     {
-        $obj = clone $this;
-        $obj->linkedResourceID = $linkedResourceID;
+        $self = clone $this;
+        $self['linkedResourceID'] = $linkedResourceID;
 
-        return $obj;
+        return $self;
     }
 }

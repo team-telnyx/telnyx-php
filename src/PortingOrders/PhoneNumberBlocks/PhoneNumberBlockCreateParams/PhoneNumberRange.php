@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type phone_number_range = array{endAt: string, startAt: string}
+ * @phpstan-type PhoneNumberRangeShape = array{endAt: string, startAt: string}
  */
 final class PhoneNumberRange implements BaseModel
 {
-    /** @use SdkModel<phone_number_range> */
+    /** @use SdkModel<PhoneNumberRangeShape> */
     use SdkModel;
 
     /**
      * Specifies the end of the phone number range for this porting phone number block.
      */
-    #[Api('end_at')]
+    #[Required('end_at')]
     public string $endAt;
 
     /**
      * Specifies the start of the phone number range for this porting phone number block.
      */
-    #[Api('start_at')]
+    #[Required('start_at')]
     public string $startAt;
 
     /**
@@ -54,12 +54,12 @@ final class PhoneNumberRange implements BaseModel
      */
     public static function with(string $endAt, string $startAt): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->endAt = $endAt;
-        $obj->startAt = $startAt;
+        $self['endAt'] = $endAt;
+        $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class PhoneNumberRange implements BaseModel
      */
     public function withEndAt(string $endAt): self
     {
-        $obj = clone $this;
-        $obj->endAt = $endAt;
+        $self = clone $this;
+        $self['endAt'] = $endAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class PhoneNumberRange implements BaseModel
      */
     public function withStartAt(string $startAt): self
     {
-        $obj = clone $this;
-        $obj->startAt = $startAt;
+        $self = clone $this;
+        $self['startAt'] = $startAt;
 
-        return $obj;
+        return $self;
     }
 }

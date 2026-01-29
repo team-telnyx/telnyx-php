@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a background job to update the emergency settings of a collection of phone numbers. At most one thousand numbers can be updated per API call.
  *
- * @see Telnyx\PhoneNumbers\Jobs->updateEmergencySettingsBatch
+ * @see Telnyx\Services\PhoneNumbers\JobsService::updateEmergencySettingsBatch()
  *
- * @phpstan-type job_update_emergency_settings_batch_params = array{
+ * @phpstan-type JobUpdateEmergencySettingsBatchParamsShape = array{
  *   emergencyEnabled: bool,
  *   phoneNumbers: list<string>,
  *   emergencyAddressID?: string|null,
@@ -22,24 +23,24 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class JobUpdateEmergencySettingsBatchParams implements BaseModel
 {
-    /** @use SdkModel<job_update_emergency_settings_batch_params> */
+    /** @use SdkModel<JobUpdateEmergencySettingsBatchParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Indicates whether to enable or disable emergency services on the numbers.
      */
-    #[Api('emergency_enabled')]
+    #[Required('emergency_enabled')]
     public bool $emergencyEnabled;
 
     /** @var list<string> $phoneNumbers */
-    #[Api('phone_numbers', list: 'string')]
+    #[Required('phone_numbers', list: 'string')]
     public array $phoneNumbers;
 
     /**
      * Identifies the address to be used with emergency services. Required if emergency_enabled is true, must be null or omitted if emergency_enabled is false.
      */
-    #[Api('emergency_address_id', nullable: true, optional: true)]
+    #[Optional('emergency_address_id', nullable: true)]
     public ?string $emergencyAddressID;
 
     /**
@@ -77,14 +78,14 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
         array $phoneNumbers,
         ?string $emergencyAddressID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->emergencyEnabled = $emergencyEnabled;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self['emergencyEnabled'] = $emergencyEnabled;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,10 +93,10 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
      */
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
-        $obj = clone $this;
-        $obj->emergencyEnabled = $emergencyEnabled;
+        $self = clone $this;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +104,10 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,9 +115,9 @@ final class JobUpdateEmergencySettingsBatchParams implements BaseModel
      */
     public function withEmergencyAddressID(?string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj->emergencyAddressID = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 }

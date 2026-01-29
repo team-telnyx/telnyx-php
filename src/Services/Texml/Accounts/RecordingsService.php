@@ -11,7 +11,12 @@ use Telnyx\Services\Texml\Accounts\Recordings\JsonService;
 final class RecordingsService implements RecordingsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public RecordingsRawService $raw;
+
+    /**
+     * @api
      */
     public JsonService $json;
 
@@ -20,6 +25,7 @@ final class RecordingsService implements RecordingsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new RecordingsRawService($client);
         $this->json = new JsonService($client);
     }
 }

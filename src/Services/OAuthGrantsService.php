@@ -6,40 +6,50 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\OAuthGrants\OAuthGrant;
 use Telnyx\OAuthGrants\OAuthGrantDeleteResponse;
 use Telnyx\OAuthGrants\OAuthGrantGetResponse;
-use Telnyx\OAuthGrants\OAuthGrantListParams;
-use Telnyx\OAuthGrants\OAuthGrantListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OAuthGrantsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class OAuthGrantsService implements OAuthGrantsContract
 {
     /**
+     * @api
+     */
+    public OAuthGrantsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new OAuthGrantsRawService($client);
+    }
 
     /**
      * @api
      *
      * Retrieve a single OAuth grant by ID
      *
+     * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OAuthGrantGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['oauth_grants/%1$s', $id],
-            options: $requestOptions,
-            convert: OAuthGrantGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -49,43 +59,25 @@ final class OAuthGrantsService implements OAuthGrantsContract
      *
      * @param int $pageNumber Page number
      * @param int $pageSize Number of results per page
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<OAuthGrant>
      *
      * @throws APIException
      */
     public function list(
-        $pageNumber = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null
-    ): OAuthGrantListResponse {
-        $params = ['pageNumber' => $pageNumber, 'pageSize' => $pageSize];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OAuthGrantListResponse {
-        [$parsed, $options] = OAuthGrantListParams::parseRequest(
-            $params,
-            $requestOptions
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'oauth_grants',
-            query: $parsed,
-            options: $options,
-            convert: OAuthGrantListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -93,18 +85,18 @@ final class OAuthGrantsService implements OAuthGrantsContract
      *
      * Revoke an OAuth grant
      *
+     * @param string $id OAuth grant ID
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OAuthGrantDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['oauth_grants/%1$s', $id],
-            options: $requestOptions,
-            convert: OAuthGrantDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

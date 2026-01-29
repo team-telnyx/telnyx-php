@@ -4,78 +4,79 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\BillingBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type billing_bundle_summary = array{
+ * @phpstan-type BillingBundleSummaryShape = array{
  *   id: string,
  *   costCode: string,
- *   createdAt: \DateTimeInterface,
+ *   createdAt: string,
  *   isPublic: bool,
  *   name: string,
- *   currency?: string,
- *   mrcPrice?: float,
- *   slug?: string,
- *   specs?: list<string>,
+ *   currency?: string|null,
+ *   mrcPrice?: float|null,
+ *   slug?: string|null,
+ *   specs?: list<string>|null,
  * }
  */
 final class BillingBundleSummary implements BaseModel
 {
-    /** @use SdkModel<billing_bundle_summary> */
+    /** @use SdkModel<BillingBundleSummaryShape> */
     use SdkModel;
 
     /**
      * Bundle's ID, this is used to identify the bundle in the API.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Bundle's cost code, this is used to identify the bundle in the billing system.
      */
-    #[Api('cost_code')]
+    #[Required('cost_code')]
     public string $costCode;
 
     /**
      * Date the bundle was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Required('created_at')]
+    public string $createdAt;
 
     /**
      * Available to all customers or only to specific customers.
      */
-    #[Api('is_public')]
+    #[Required('is_public')]
     public bool $isPublic;
 
     /**
      * Bundle's name, this is used to identify the bundle in the UI.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Bundle's currency code.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $currency;
 
     /**
      * Monthly recurring charge price.
      */
-    #[Api('mrc_price', optional: true)]
+    #[Optional('mrc_price')]
     public ?float $mrcPrice;
 
     /**
      * Slugified version of the bundle's name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $slug;
 
     /** @var list<string>|null $specs */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $specs;
 
     /**
@@ -109,12 +110,12 @@ final class BillingBundleSummary implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $specs
+     * @param list<string>|null $specs
      */
     public static function with(
         string $id,
         string $costCode,
-        \DateTimeInterface $createdAt,
+        string $createdAt,
         bool $isPublic,
         string $name,
         ?string $currency = null,
@@ -122,20 +123,20 @@ final class BillingBundleSummary implements BaseModel
         ?string $slug = null,
         ?array $specs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->costCode = $costCode;
-        $obj->createdAt = $createdAt;
-        $obj->isPublic = $isPublic;
-        $obj->name = $name;
+        $self['id'] = $id;
+        $self['costCode'] = $costCode;
+        $self['createdAt'] = $createdAt;
+        $self['isPublic'] = $isPublic;
+        $self['name'] = $name;
 
-        null !== $currency && $obj->currency = $currency;
-        null !== $mrcPrice && $obj->mrcPrice = $mrcPrice;
-        null !== $slug && $obj->slug = $slug;
-        null !== $specs && $obj->specs = $specs;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $mrcPrice && $self['mrcPrice'] = $mrcPrice;
+        null !== $slug && $self['slug'] = $slug;
+        null !== $specs && $self['specs'] = $specs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +144,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,21 +155,21 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withCostCode(string $costCode): self
     {
-        $obj = clone $this;
-        $obj->costCode = $costCode;
+        $self = clone $this;
+        $self['costCode'] = $costCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Date the bundle was created.
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +177,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withIsPublic(bool $isPublic): self
     {
-        $obj = clone $this;
-        $obj->isPublic = $isPublic;
+        $self = clone $this;
+        $self['isPublic'] = $isPublic;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +188,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +199,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj->currency = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +210,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withMrcPrice(float $mrcPrice): self
     {
-        $obj = clone $this;
-        $obj->mrcPrice = $mrcPrice;
+        $self = clone $this;
+        $self['mrcPrice'] = $mrcPrice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,10 +221,10 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withSlug(string $slug): self
     {
-        $obj = clone $this;
-        $obj->slug = $slug;
+        $self = clone $this;
+        $self['slug'] = $slug;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -231,9 +232,9 @@ final class BillingBundleSummary implements BaseModel
      */
     public function withSpecs(array $specs): self
     {
-        $obj = clone $this;
-        $obj->specs = $specs;
+        $self = clone $this;
+        $self['specs'] = $specs;
 
-        return $obj;
+        return $self;
     }
 }

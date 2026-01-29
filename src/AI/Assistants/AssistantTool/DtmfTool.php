@@ -4,41 +4,40 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantTool;
 
-use Telnyx\AI\Assistants\AssistantTool\DtmfTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type dtmf_tool = array{
- *   sendDtmf: array<string, mixed>, type: value-of<Type>
+ * @phpstan-type DtmfToolShape = array{
+ *   sendDtmf: array<string,mixed>, type: 'send_dtmf'
  * }
  */
 final class DtmfTool implements BaseModel
 {
-    /** @use SdkModel<dtmf_tool> */
+    /** @use SdkModel<DtmfToolShape> */
     use SdkModel;
 
-    /** @var array<string, mixed> $sendDtmf */
-    #[Api('send_dtmf', map: 'mixed')]
-    public array $sendDtmf;
+    /** @var 'send_dtmf' $type */
+    #[Required]
+    public string $type = 'send_dtmf';
 
-    /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
-    public string $type;
+    /** @var array<string,mixed> $sendDtmf */
+    #[Required('send_dtmf', map: 'mixed')]
+    public array $sendDtmf;
 
     /**
      * `new DtmfTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * DtmfTool::with(sendDtmf: ..., type: ...)
+     * DtmfTool::with(sendDtmf: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new DtmfTool)->withSendDtmf(...)->withType(...)
+     * (new DtmfTool)->withSendDtmf(...)
      * ```
      */
     public function __construct()
@@ -51,38 +50,25 @@ final class DtmfTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $sendDtmf
-     * @param Type|value-of<Type> $type
+     * @param array<string,mixed> $sendDtmf
      */
-    public static function with(array $sendDtmf, Type|string $type): self
+    public static function with(array $sendDtmf): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->sendDtmf = $sendDtmf;
-        $obj['type'] = $type;
+        $self['sendDtmf'] = $sendDtmf;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param array<string, mixed> $sendDtmf
+     * @param array<string,mixed> $sendDtmf
      */
     public function withSendDtmf(array $sendDtmf): self
     {
-        $obj = clone $this;
-        $obj->sendDtmf = $sendDtmf;
+        $self = clone $this;
+        $self['sendDtmf'] = $sendDtmf;
 
-        return $obj;
-    }
-
-    /**
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
-
-        return $obj;
+        return $self;
     }
 }

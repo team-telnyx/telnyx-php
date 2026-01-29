@@ -6,19 +6,28 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\PortabilityChecks\PortabilityCheckRunParams;
+use Telnyx\Core\Util;
 use Telnyx\PortabilityChecks\PortabilityCheckRunResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortabilityChecksContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class PortabilityChecksService implements PortabilityChecksContract
 {
     /**
+     * @api
+     */
+    public PortabilityChecksRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new PortabilityChecksRawService($client);
+    }
 
     /**
      * @api
@@ -26,41 +35,19 @@ final class PortabilityChecksService implements PortabilityChecksContract
      * Runs a portability check, returning the results immediately.
      *
      * @param list<string> $phoneNumbers The list of +E.164 formatted phone numbers to check for portability
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function run(
-        $phoneNumbers = omit,
-        ?RequestOptions $requestOptions = null
+        ?array $phoneNumbers = null,
+        RequestOptions|array|null $requestOptions = null
     ): PortabilityCheckRunResponse {
-        $params = ['phoneNumbers' => $phoneNumbers];
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
 
-        return $this->runRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->run(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function runRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): PortabilityCheckRunResponse {
-        [$parsed, $options] = PortabilityCheckRunParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'portability_checks',
-            body: (object) $parsed,
-            options: $options,
-            convert: PortabilityCheckRunResponse::class,
-        );
+        return $response->parse();
     }
 }

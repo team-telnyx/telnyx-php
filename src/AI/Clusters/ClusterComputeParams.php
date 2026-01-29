@@ -4,34 +4,35 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Starts a background task to compute how the data in an [embedded storage bucket](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding) is clustered. This helps identify common themes and patterns in the data.
+ * Starts a background task to compute how the data in an [embedded storage bucket](https://developers.telnyx.com/api-reference/embeddings/embed-documents) is clustered. This helps identify common themes and patterns in the data.
  *
- * @see Telnyx\AI\Clusters->compute
+ * @see Telnyx\Services\AI\ClustersService::compute()
  *
- * @phpstan-type cluster_compute_params = array{
+ * @phpstan-type ClusterComputeParamsShape = array{
  *   bucket: string,
- *   files?: list<string>,
- *   minClusterSize?: int,
- *   minSubclusterSize?: int,
- *   prefix?: string,
+ *   files?: list<string>|null,
+ *   minClusterSize?: int|null,
+ *   minSubclusterSize?: int|null,
+ *   prefix?: string|null,
  * }
  */
 final class ClusterComputeParams implements BaseModel
 {
-    /** @use SdkModel<cluster_compute_params> */
+    /** @use SdkModel<ClusterComputeParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
-     * The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding).
+     * The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api-reference/embeddings/embed-documents).
      */
-    #[Api]
+    #[Required]
     public string $bucket;
 
     /**
@@ -39,25 +40,25 @@ final class ClusterComputeParams implements BaseModel
      *
      * @var list<string>|null $files
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $files;
 
     /**
      * Smallest number of related text chunks to qualify as a cluster. Top-level clusters should be thought of as identifying broad themes in your data.
      */
-    #[Api('min_cluster_size', optional: true)]
+    #[Optional('min_cluster_size')]
     public ?int $minClusterSize;
 
     /**
      * Smallest number of related text chunks to qualify as a sub-cluster. Sub-clusters should be thought of as identifying more specific topics within a broader theme.
      */
-    #[Api('min_subcluster_size', optional: true)]
+    #[Optional('min_subcluster_size')]
     public ?int $minSubclusterSize;
 
     /**
      * Prefix to filter whcih files in the buckets are included.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $prefix;
 
     /**
@@ -84,7 +85,7 @@ final class ClusterComputeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $files
+     * @param list<string>|null $files
      */
     public static function with(
         string $bucket,
@@ -93,27 +94,27 @@ final class ClusterComputeParams implements BaseModel
         ?int $minSubclusterSize = null,
         ?string $prefix = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->bucket = $bucket;
+        $self['bucket'] = $bucket;
 
-        null !== $files && $obj->files = $files;
-        null !== $minClusterSize && $obj->minClusterSize = $minClusterSize;
-        null !== $minSubclusterSize && $obj->minSubclusterSize = $minSubclusterSize;
-        null !== $prefix && $obj->prefix = $prefix;
+        null !== $files && $self['files'] = $files;
+        null !== $minClusterSize && $self['minClusterSize'] = $minClusterSize;
+        null !== $minSubclusterSize && $self['minSubclusterSize'] = $minSubclusterSize;
+        null !== $prefix && $self['prefix'] = $prefix;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api/inference/inference-embedding/post-embedding).
+     * The embedded storage bucket to compute the clusters from. The bucket must already be [embedded](https://developers.telnyx.com/api-reference/embeddings/embed-documents).
      */
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj->bucket = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +124,10 @@ final class ClusterComputeParams implements BaseModel
      */
     public function withFiles(array $files): self
     {
-        $obj = clone $this;
-        $obj->files = $files;
+        $self = clone $this;
+        $self['files'] = $files;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +135,10 @@ final class ClusterComputeParams implements BaseModel
      */
     public function withMinClusterSize(int $minClusterSize): self
     {
-        $obj = clone $this;
-        $obj->minClusterSize = $minClusterSize;
+        $self = clone $this;
+        $self['minClusterSize'] = $minClusterSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +146,10 @@ final class ClusterComputeParams implements BaseModel
      */
     public function withMinSubclusterSize(int $minSubclusterSize): self
     {
-        $obj = clone $this;
-        $obj->minSubclusterSize = $minSubclusterSize;
+        $self = clone $this;
+        $self['minSubclusterSize'] = $minSubclusterSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,9 +157,9 @@ final class ClusterComputeParams implements BaseModel
      */
     public function withPrefix(string $prefix): self
     {
-        $obj = clone $this;
-        $obj->prefix = $prefix;
+        $self = clone $this;
+        $self['prefix'] = $prefix;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,27 +4,35 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\Addresses\AddressCreateParams;
+use Telnyx\Addresses\Address;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
-use Telnyx\Addresses\AddressListParams;
 use Telnyx\Addresses\AddressListParams\Filter;
 use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
-use Telnyx\Addresses\AddressListResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesContract;
 use Telnyx\Services\Addresses\ActionsService;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Addresses\AddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Addresses\AddressListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AddressesService implements AddressesContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public AddressesRawService $raw;
+
+    /**
+     * @api
      */
     public ActionsService $actions;
 
@@ -33,6 +41,7 @@ final class AddressesService implements AddressesContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new AddressesRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -56,72 +65,52 @@ final class AddressesService implements AddressesContract
      * @param string $phoneNumber the phone number associated with the address
      * @param string $postalCode the postal code of the address
      * @param bool $validateAddress Indicates whether or not the address should be validated for emergency use upon creation or not. This should be left with the default value of `true` unless you have used the `/addresses/actions/validate` endpoint to validate the address separately prior to creation. If an address is not validated for emergency use upon creation and it is not valid, it will not be able to be used for emergency services.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $businessName,
-        $countryCode,
-        $firstName,
-        $lastName,
-        $locality,
-        $streetAddress,
-        $addressBook = omit,
-        $administrativeArea = omit,
-        $borough = omit,
-        $customerReference = omit,
-        $extendedAddress = omit,
-        $neighborhood = omit,
-        $phoneNumber = omit,
-        $postalCode = omit,
-        $validateAddress = omit,
-        ?RequestOptions $requestOptions = null,
+        string $businessName,
+        string $countryCode,
+        string $firstName,
+        string $lastName,
+        string $locality,
+        string $streetAddress,
+        bool $addressBook = true,
+        ?string $administrativeArea = null,
+        ?string $borough = null,
+        ?string $customerReference = null,
+        ?string $extendedAddress = null,
+        ?string $neighborhood = null,
+        ?string $phoneNumber = null,
+        ?string $postalCode = null,
+        bool $validateAddress = true,
+        RequestOptions|array|null $requestOptions = null,
     ): AddressNewResponse {
-        $params = [
-            'businessName' => $businessName,
-            'countryCode' => $countryCode,
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'locality' => $locality,
-            'streetAddress' => $streetAddress,
-            'addressBook' => $addressBook,
-            'administrativeArea' => $administrativeArea,
-            'borough' => $borough,
-            'customerReference' => $customerReference,
-            'extendedAddress' => $extendedAddress,
-            'neighborhood' => $neighborhood,
-            'phoneNumber' => $phoneNumber,
-            'postalCode' => $postalCode,
-            'validateAddress' => $validateAddress,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AddressNewResponse {
-        [$parsed, $options] = AddressCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'businessName' => $businessName,
+                'countryCode' => $countryCode,
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'locality' => $locality,
+                'streetAddress' => $streetAddress,
+                'addressBook' => $addressBook,
+                'administrativeArea' => $administrativeArea,
+                'borough' => $borough,
+                'customerReference' => $customerReference,
+                'extendedAddress' => $extendedAddress,
+                'neighborhood' => $neighborhood,
+                'phoneNumber' => $phoneNumber,
+                'postalCode' => $postalCode,
+                'validateAddress' => $validateAddress,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'addresses',
-            body: (object) $parsed,
-            options: $options,
-            convert: AddressNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -129,19 +118,19 @@ final class AddressesService implements AddressesContract
      *
      * Retrieves the details of an existing address.
      *
+     * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AddressGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['addresses/%1$s', $id],
-            options: $requestOptions,
-            convert: AddressGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -149,8 +138,8 @@ final class AddressesService implements AddressesContract
      *
      * Returns a list of your addresses.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -163,44 +152,26 @@ final class AddressesService implements AddressesContract
      *     <code>street_address</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<Address>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): AddressListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AddressListResponse {
-        [$parsed, $options] = AddressListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string $sort = 'created_at',
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'addresses',
-            query: $parsed,
-            options: $options,
-            convert: AddressListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -208,18 +179,18 @@ final class AddressesService implements AddressesContract
      *
      * Deletes an existing address.
      *
+     * @param string $id address ID
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AddressDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['addresses/%1$s', $id],
-            options: $requestOptions,
-            convert: AddressDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

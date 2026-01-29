@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * The summary of the resource that have been assigned to the Private Wireless Gateway.
  *
- * @phpstan-type pwg_assigned_resources_summary = array{
- *   count?: int, recordType?: string
+ * @phpstan-type PwgAssignedResourcesSummaryShape = array{
+ *   count?: int|null, recordType?: string|null
  * }
  */
 final class PwgAssignedResourcesSummary implements BaseModel
 {
-    /** @use SdkModel<pwg_assigned_resources_summary> */
+    /** @use SdkModel<PwgAssignedResourcesSummaryShape> */
     use SdkModel;
 
     /**
      * The current count of a resource type assigned to the Private Wireless Gateway.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $count;
 
     /**
      * The type of the resource assigned to the Private Wireless Gateway.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     public function __construct()
@@ -46,12 +46,12 @@ final class PwgAssignedResourcesSummary implements BaseModel
         ?int $count = null,
         ?string $recordType = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $count && $obj->count = $count;
-        null !== $recordType && $obj->recordType = $recordType;
+        null !== $count && $self['count'] = $count;
+        null !== $recordType && $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +59,10 @@ final class PwgAssignedResourcesSummary implements BaseModel
      */
     public function withCount(int $count): self
     {
-        $obj = clone $this;
-        $obj->count = $count;
+        $self = clone $this;
+        $self['count'] = $count;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class PwgAssignedResourcesSummary implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\IPs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,34 +13,34 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the details of a specific IP.
  *
- * @see Telnyx\IPs->update
+ * @see Telnyx\Services\IPsService::update()
  *
- * @phpstan-type ip_update_params = array{
- *   ipAddress: string, connectionID?: string, port?: int
+ * @phpstan-type IPUpdateParamsShape = array{
+ *   ipAddress: string, connectionID?: string|null, port?: int|null
  * }
  */
 final class IPUpdateParams implements BaseModel
 {
-    /** @use SdkModel<ip_update_params> */
+    /** @use SdkModel<IPUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * IP adddress represented by this resource.
      */
-    #[Api('ip_address')]
+    #[Required('ip_address')]
     public string $ipAddress;
 
     /**
      * ID of the IP Connection to which this IP should be attached.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * Port to use when connecting to this IP.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $port;
 
     /**
@@ -71,14 +72,14 @@ final class IPUpdateParams implements BaseModel
         ?string $connectionID = null,
         ?int $port = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->ipAddress = $ipAddress;
+        $self['ipAddress'] = $ipAddress;
 
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $port && $obj->port = $port;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $port && $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +87,10 @@ final class IPUpdateParams implements BaseModel
      */
     public function withIPAddress(string $ipAddress): self
     {
-        $obj = clone $this;
-        $obj->ipAddress = $ipAddress;
+        $self = clone $this;
+        $self['ipAddress'] = $ipAddress;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +98,10 @@ final class IPUpdateParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +109,9 @@ final class IPUpdateParams implements BaseModel
      */
     public function withPort(int $port): self
     {
-        $obj = clone $this;
-        $obj->port = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 }

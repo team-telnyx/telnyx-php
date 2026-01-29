@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\GlobalIP;
@@ -13,35 +13,40 @@ use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency;
 use Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation;
 
 /**
- * @phpstan-type data_alias = array{
- *   globalIP?: GlobalIP,
- *   meanLatency?: MeanLatency,
- *   percentileLatency?: PercentileLatency,
- *   proberLocation?: ProberLocation,
- *   timestamp?: \DateTimeInterface,
+ * @phpstan-import-type GlobalIPShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\GlobalIP
+ * @phpstan-import-type MeanLatencyShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\MeanLatency
+ * @phpstan-import-type PercentileLatencyShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\PercentileLatency
+ * @phpstan-import-type ProberLocationShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyGetResponse\Data\ProberLocation
+ *
+ * @phpstan-type DataShape = array{
+ *   globalIP?: null|GlobalIP|GlobalIPShape,
+ *   meanLatency?: null|MeanLatency|MeanLatencyShape,
+ *   percentileLatency?: null|PercentileLatency|PercentileLatencyShape,
+ *   proberLocation?: null|ProberLocation|ProberLocationShape,
+ *   timestamp?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('global_ip', optional: true)]
+    #[Optional('global_ip')]
     public ?GlobalIP $globalIP;
 
-    #[Api('mean_latency', optional: true)]
+    #[Optional('mean_latency')]
     public ?MeanLatency $meanLatency;
 
-    #[Api('percentile_latency', optional: true)]
+    #[Optional('percentile_latency')]
     public ?PercentileLatency $percentileLatency;
 
-    #[Api('prober_location', optional: true)]
+    #[Optional('prober_location')]
     public ?ProberLocation $proberLocation;
 
     /**
      * The timestamp of the metric.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $timestamp;
 
     public function __construct()
@@ -53,56 +58,74 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param GlobalIP|GlobalIPShape|null $globalIP
+     * @param MeanLatency|MeanLatencyShape|null $meanLatency
+     * @param PercentileLatency|PercentileLatencyShape|null $percentileLatency
+     * @param ProberLocation|ProberLocationShape|null $proberLocation
      */
     public static function with(
-        ?GlobalIP $globalIP = null,
-        ?MeanLatency $meanLatency = null,
-        ?PercentileLatency $percentileLatency = null,
-        ?ProberLocation $proberLocation = null,
+        GlobalIP|array|null $globalIP = null,
+        MeanLatency|array|null $meanLatency = null,
+        PercentileLatency|array|null $percentileLatency = null,
+        ProberLocation|array|null $proberLocation = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $globalIP && $obj->globalIP = $globalIP;
-        null !== $meanLatency && $obj->meanLatency = $meanLatency;
-        null !== $percentileLatency && $obj->percentileLatency = $percentileLatency;
-        null !== $proberLocation && $obj->proberLocation = $proberLocation;
-        null !== $timestamp && $obj->timestamp = $timestamp;
+        null !== $globalIP && $self['globalIP'] = $globalIP;
+        null !== $meanLatency && $self['meanLatency'] = $meanLatency;
+        null !== $percentileLatency && $self['percentileLatency'] = $percentileLatency;
+        null !== $proberLocation && $self['proberLocation'] = $proberLocation;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
-    public function withGlobalIP(GlobalIP $globalIP): self
+    /**
+     * @param GlobalIP|GlobalIPShape $globalIP
+     */
+    public function withGlobalIP(GlobalIP|array $globalIP): self
     {
-        $obj = clone $this;
-        $obj->globalIP = $globalIP;
+        $self = clone $this;
+        $self['globalIP'] = $globalIP;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeanLatency(MeanLatency $meanLatency): self
+    /**
+     * @param MeanLatency|MeanLatencyShape $meanLatency
+     */
+    public function withMeanLatency(MeanLatency|array $meanLatency): self
     {
-        $obj = clone $this;
-        $obj->meanLatency = $meanLatency;
+        $self = clone $this;
+        $self['meanLatency'] = $meanLatency;
 
-        return $obj;
+        return $self;
     }
 
+    /**
+     * @param PercentileLatency|PercentileLatencyShape $percentileLatency
+     */
     public function withPercentileLatency(
-        PercentileLatency $percentileLatency
+        PercentileLatency|array $percentileLatency
     ): self {
-        $obj = clone $this;
-        $obj->percentileLatency = $percentileLatency;
+        $self = clone $this;
+        $self['percentileLatency'] = $percentileLatency;
 
-        return $obj;
+        return $self;
     }
 
-    public function withProberLocation(ProberLocation $proberLocation): self
-    {
-        $obj = clone $this;
-        $obj->proberLocation = $proberLocation;
+    /**
+     * @param ProberLocation|ProberLocationShape $proberLocation
+     */
+    public function withProberLocation(
+        ProberLocation|array $proberLocation
+    ): self {
+        $self = clone $this;
+        $self['proberLocation'] = $proberLocation;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +133,9 @@ final class Data implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

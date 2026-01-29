@@ -6,20 +6,20 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig\TranscriptionEngine;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig\TranscriptionModel;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transcription_engine_b_config = array{
- *   language?: value-of<TelnyxTranscriptionLanguage>,
- *   transcriptionEngine?: value-of<TranscriptionEngine>,
- *   transcriptionModel?: value-of<TranscriptionModel>,
+ * @phpstan-type TranscriptionEngineBConfigShape = array{
+ *   language?: null|TelnyxTranscriptionLanguage|value-of<TelnyxTranscriptionLanguage>,
+ *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
+ *   transcriptionModel?: null|TranscriptionModel|value-of<TranscriptionModel>,
  * }
  */
 final class TranscriptionEngineBConfig implements BaseModel
 {
-    /** @use SdkModel<transcription_engine_b_config> */
+    /** @use SdkModel<TranscriptionEngineBConfigShape> */
     use SdkModel;
 
     /**
@@ -27,7 +27,7 @@ final class TranscriptionEngineBConfig implements BaseModel
      *
      * @var value-of<TelnyxTranscriptionLanguage>|null $language
      */
-    #[Api(enum: TelnyxTranscriptionLanguage::class, optional: true)]
+    #[Optional(enum: TelnyxTranscriptionLanguage::class)]
     public ?string $language;
 
     /**
@@ -35,11 +35,7 @@ final class TranscriptionEngineBConfig implements BaseModel
      *
      * @var value-of<TranscriptionEngine>|null $transcriptionEngine
      */
-    #[Api(
-        'transcription_engine',
-        enum: TranscriptionEngine::class,
-        optional: true
-    )]
+    #[Optional('transcription_engine', enum: TranscriptionEngine::class)]
     public ?string $transcriptionEngine;
 
     /**
@@ -47,7 +43,7 @@ final class TranscriptionEngineBConfig implements BaseModel
      *
      * @var value-of<TranscriptionModel>|null $transcriptionModel
      */
-    #[Api('transcription_model', enum: TranscriptionModel::class, optional: true)]
+    #[Optional('transcription_model', enum: TranscriptionModel::class)]
     public ?string $transcriptionModel;
 
     public function __construct()
@@ -60,22 +56,22 @@ final class TranscriptionEngineBConfig implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TelnyxTranscriptionLanguage|value-of<TelnyxTranscriptionLanguage> $language
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
-     * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
+     * @param TelnyxTranscriptionLanguage|value-of<TelnyxTranscriptionLanguage>|null $language
+     * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
+     * @param TranscriptionModel|value-of<TranscriptionModel>|null $transcriptionModel
      */
     public static function with(
         TelnyxTranscriptionLanguage|string|null $language = null,
         TranscriptionEngine|string|null $transcriptionEngine = null,
         TranscriptionModel|string|null $transcriptionModel = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $language && $obj['language'] = $language;
-        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
-        null !== $transcriptionModel && $obj['transcriptionModel'] = $transcriptionModel;
+        null !== $language && $self['language'] = $language;
+        null !== $transcriptionEngine && $self['transcriptionEngine'] = $transcriptionEngine;
+        null !== $transcriptionModel && $self['transcriptionModel'] = $transcriptionModel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +82,10 @@ final class TranscriptionEngineBConfig implements BaseModel
     public function withLanguage(
         TelnyxTranscriptionLanguage|string $language
     ): self {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +96,10 @@ final class TranscriptionEngineBConfig implements BaseModel
     public function withTranscriptionEngine(
         TranscriptionEngine|string $transcriptionEngine
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionEngine'] = $transcriptionEngine;
+        $self = clone $this;
+        $self['transcriptionEngine'] = $transcriptionEngine;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,9 +110,9 @@ final class TranscriptionEngineBConfig implements BaseModel
     public function withTranscriptionModel(
         TranscriptionModel|string $transcriptionModel
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionModel'] = $transcriptionModel;
+        $self = clone $this;
+        $self['transcriptionModel'] = $transcriptionModel;
 
-        return $obj;
+        return $self;
     }
 }

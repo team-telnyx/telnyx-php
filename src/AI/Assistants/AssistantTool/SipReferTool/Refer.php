@@ -7,20 +7,25 @@ namespace Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type refer_alias = array{
- *   targets: list<Target>,
- *   customHeaders?: list<CustomHeader>,
- *   sipHeaders?: list<SipHeader>,
+ * @phpstan-import-type TargetShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\Target
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\CustomHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool\Refer\SipHeader
+ *
+ * @phpstan-type ReferShape = array{
+ *   targets: list<Target|TargetShape>,
+ *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
+ *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
  * }
  */
 final class Refer implements BaseModel
 {
-    /** @use SdkModel<refer_alias> */
+    /** @use SdkModel<ReferShape> */
     use SdkModel;
 
     /**
@@ -28,7 +33,7 @@ final class Refer implements BaseModel
      *
      * @var list<Target> $targets
      */
-    #[Api(list: Target::class)]
+    #[Required(list: Target::class)]
     public array $targets;
 
     /**
@@ -36,7 +41,7 @@ final class Refer implements BaseModel
      *
      * @var list<CustomHeader>|null $customHeaders
      */
-    #[Api('custom_headers', list: CustomHeader::class, optional: true)]
+    #[Optional('custom_headers', list: CustomHeader::class)]
     public ?array $customHeaders;
 
     /**
@@ -44,7 +49,7 @@ final class Refer implements BaseModel
      *
      * @var list<SipHeader>|null $sipHeaders
      */
-    #[Api('sip_headers', list: SipHeader::class, optional: true)]
+    #[Optional('sip_headers', list: SipHeader::class)]
     public ?array $sipHeaders;
 
     /**
@@ -71,61 +76,61 @@ final class Refer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Target> $targets
-     * @param list<CustomHeader> $customHeaders
-     * @param list<SipHeader> $sipHeaders
+     * @param list<Target|TargetShape> $targets
+     * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
+     * @param list<SipHeader|SipHeaderShape>|null $sipHeaders
      */
     public static function with(
         array $targets,
         ?array $customHeaders = null,
         ?array $sipHeaders = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->targets = $targets;
+        $self['targets'] = $targets;
 
-        null !== $customHeaders && $obj->customHeaders = $customHeaders;
-        null !== $sipHeaders && $obj->sipHeaders = $sipHeaders;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The different possible targets of the SIP refer. The assistant will be able to choose one of the targets to refer the call to.
      *
-     * @param list<Target> $targets
+     * @param list<Target|TargetShape> $targets
      */
     public function withTargets(array $targets): self
     {
-        $obj = clone $this;
-        $obj->targets = $targets;
+        $self = clone $this;
+        $self['targets'] = $targets;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Custom headers to be added to the SIP REFER.
      *
-     * @param list<CustomHeader> $customHeaders
+     * @param list<CustomHeader|CustomHeaderShape> $customHeaders
      */
     public function withCustomHeaders(array $customHeaders): self
     {
-        $obj = clone $this;
-        $obj->customHeaders = $customHeaders;
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * SIP headers to be added to the SIP REFER. Currently only User-to-User and Diversion headers are supported.
      *
-     * @param list<SipHeader> $sipHeaders
+     * @param list<SipHeader|SipHeaderShape> $sipHeaders
      */
     public function withSipHeaders(array $sipHeaders): self
     {
-        $obj = clone $this;
-        $obj->sipHeaders = $sipHeaders;
+        $self = clone $this;
+        $self['sipHeaders'] = $sipHeaders;
 
-        return $obj;
+        return $self;
     }
 }

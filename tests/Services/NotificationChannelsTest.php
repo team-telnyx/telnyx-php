@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\NotificationChannels\NotificationChannel;
+use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
+use Telnyx\NotificationChannels\NotificationChannelGetResponse;
+use Telnyx\NotificationChannels\NotificationChannelNewResponse;
+use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +41,8 @@ final class NotificationChannelsTest extends TestCase
 
         $result = $this->client->notificationChannels->create();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NotificationChannelNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +56,8 @@ final class NotificationChannelsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NotificationChannelGetResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +71,8 @@ final class NotificationChannelsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NotificationChannelUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -73,9 +82,15 @@ final class NotificationChannelsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->notificationChannels->list();
+        $page = $this->client->notificationChannels->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(NotificationChannel::class, $item);
+        }
     }
 
     #[Test]
@@ -89,6 +104,7 @@ final class NotificationChannelsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NotificationChannelDeleteResponse::class, $result);
     }
 }

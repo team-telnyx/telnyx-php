@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type messaging_list_response = array{
- *   data?: list<MdrDetailReportResponse>, meta?: BatchCsvPaginationMeta
+ * @phpstan-import-type MdrDetailReportResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\MdrDetailReportResponse
+ * @phpstan-import-type BatchCsvPaginationMetaShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging\BatchCsvPaginationMeta
+ *
+ * @phpstan-type MessagingListResponseShape = array{
+ *   data?: list<MdrDetailReportResponse|MdrDetailReportResponseShape>|null,
+ *   meta?: null|BatchCsvPaginationMeta|BatchCsvPaginationMetaShape,
  * }
  */
-final class MessagingListResponse implements BaseModel, ResponseConverter
+final class MessagingListResponse implements BaseModel
 {
-    /** @use SdkModel<messaging_list_response> */
+    /** @use SdkModel<MessagingListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<MdrDetailReportResponse>|null $data */
-    #[Api(list: MdrDetailReportResponse::class, optional: true)]
+    #[Optional(list: MdrDetailReportResponse::class)]
     public ?array $data;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?BatchCsvPaginationMeta $meta;
 
     public function __construct()
@@ -39,36 +39,40 @@ final class MessagingListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MdrDetailReportResponse> $data
+     * @param list<MdrDetailReportResponse|MdrDetailReportResponseShape>|null $data
+     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape|null $meta
      */
     public static function with(
         ?array $data = null,
-        ?BatchCsvPaginationMeta $meta = null
+        BatchCsvPaginationMeta|array|null $meta = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<MdrDetailReportResponse> $data
+     * @param list<MdrDetailReportResponse|MdrDetailReportResponseShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(BatchCsvPaginationMeta $meta): self
+    /**
+     * @param BatchCsvPaginationMeta|BatchCsvPaginationMetaShape $meta
+     */
+    public function withMeta(BatchCsvPaginationMeta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 }

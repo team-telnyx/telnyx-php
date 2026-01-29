@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\InsightGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type insight_template_group_detail = array{data: InsightTemplateGroup}
+ * @phpstan-import-type InsightTemplateGroupShape from \Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroup
+ *
+ * @phpstan-type InsightTemplateGroupDetailShape = array{
+ *   data: InsightTemplateGroup|InsightTemplateGroupShape
+ * }
  */
-final class InsightTemplateGroupDetail implements BaseModel, ResponseConverter
+final class InsightTemplateGroupDetail implements BaseModel
 {
-    /** @use SdkModel<insight_template_group_detail> */
+    /** @use SdkModel<InsightTemplateGroupDetailShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public InsightTemplateGroup $data;
 
     /**
@@ -46,21 +46,26 @@ final class InsightTemplateGroupDetail implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param InsightTemplateGroup|InsightTemplateGroupShape $data
      */
-    public static function with(InsightTemplateGroup $data): self
+    public static function with(InsightTemplateGroup|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(InsightTemplateGroup $data): self
+    /**
+     * @param InsightTemplateGroup|InsightTemplateGroupShape $data
+     */
+    public function withData(InsightTemplateGroup|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

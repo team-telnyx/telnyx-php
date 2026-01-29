@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Uploads\UploadPendingCountResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   pendingNumbersCount?: int, pendingOrdersCount?: int
+ * @phpstan-type DataShape = array{
+ *   pendingNumbersCount?: int|null, pendingOrdersCount?: int|null
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The count of phone numbers that are pending assignment to the external connection.
      */
-    #[Api('pending_numbers_count', optional: true)]
+    #[Optional('pending_numbers_count')]
     public ?int $pendingNumbersCount;
 
     /**
      * The count of number uploads that have not yet been uploaded to Microsoft.
      */
-    #[Api('pending_orders_count', optional: true)]
+    #[Optional('pending_orders_count')]
     public ?int $pendingOrdersCount;
 
     public function __construct()
@@ -44,12 +44,12 @@ final class Data implements BaseModel
         ?int $pendingNumbersCount = null,
         ?int $pendingOrdersCount = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pendingNumbersCount && $obj->pendingNumbersCount = $pendingNumbersCount;
-        null !== $pendingOrdersCount && $obj->pendingOrdersCount = $pendingOrdersCount;
+        null !== $pendingNumbersCount && $self['pendingNumbersCount'] = $pendingNumbersCount;
+        null !== $pendingOrdersCount && $self['pendingOrdersCount'] = $pendingOrdersCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class Data implements BaseModel
      */
     public function withPendingNumbersCount(int $pendingNumbersCount): self
     {
-        $obj = clone $this;
-        $obj->pendingNumbersCount = $pendingNumbersCount;
+        $self = clone $this;
+        $self['pendingNumbersCount'] = $pendingNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class Data implements BaseModel
      */
     public function withPendingOrdersCount(int $pendingOrdersCount): self
     {
-        $obj = clone $this;
-        $obj->pendingOrdersCount = $pendingOrdersCount;
+        $self = clone $this;
+        $self['pendingOrdersCount'] = $pendingOrdersCount;
 
-        return $obj;
+        return $self;
     }
 }

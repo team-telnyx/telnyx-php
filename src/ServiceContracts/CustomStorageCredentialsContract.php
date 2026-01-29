@@ -14,81 +14,70 @@ use Telnyx\CustomStorageCredentials\GcsConfigurationData;
 use Telnyx\CustomStorageCredentials\S3ConfigurationData;
 use Telnyx\RequestOptions;
 
+/**
+ * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration
+ * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration as ConfigurationShape1
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface CustomStorageCredentialsContract
 {
     /**
      * @api
      *
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      * @param Backend|value-of<Backend> $backend
-     * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
+     * @param ConfigurationShape $configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $connectionID,
-        $backend,
-        $configuration,
-        ?RequestOptions $requestOptions = null,
+        Backend|string $backend,
+        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
+        RequestOptions|array|null $requestOptions = null,
     ): CustomStorageCredentialNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        string $connectionID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): CustomStorageCredentialNewResponse;
-
-    /**
-     * @api
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): CustomStorageCredentialGetResponse;
 
     /**
      * @api
      *
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      * @param \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|value-of<\Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend> $backend
-     * @param GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration
+     * @param ConfigurationShape1 $configuration
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $connectionID,
-        $backend,
-        $configuration,
-        ?RequestOptions $requestOptions = null,
+        \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|string $backend,
+        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
+        RequestOptions|array|null $requestOptions = null,
     ): CustomStorageCredentialUpdateResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $connectionID,
-        array $params,
-        ?RequestOptions $requestOptions = null,
-    ): CustomStorageCredentialUpdateResponse;
-
-    /**
-     * @api
+     * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $connectionID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\ChargesSummary\ChargesSummaryGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type total_alias = array{
+ * @phpstan-type TotalShape = array{
  *   credits: string,
  *   existingMrc: string,
  *   grandTotal: string,
@@ -21,49 +21,49 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Total implements BaseModel
 {
-    /** @use SdkModel<total_alias> */
+    /** @use SdkModel<TotalShape> */
     use SdkModel;
 
     /**
      * Total credits as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $credits;
 
     /**
      * Total existing monthly recurring charges as decimal string.
      */
-    #[Api('existing_mrc')]
+    #[Required('existing_mrc')]
     public string $existingMrc;
 
     /**
      * Grand total of all charges as decimal string.
      */
-    #[Api('grand_total')]
+    #[Required('grand_total')]
     public string $grandTotal;
 
     /**
      * Ledger adjustments as decimal string.
      */
-    #[Api('ledger_adjustments')]
+    #[Required('ledger_adjustments')]
     public string $ledgerAdjustments;
 
     /**
      * Total new monthly recurring charges as decimal string.
      */
-    #[Api('new_mrc')]
+    #[Required('new_mrc')]
     public string $newMrc;
 
     /**
      * Total new one-time charges as decimal string.
      */
-    #[Api('new_otc')]
+    #[Required('new_otc')]
     public string $newOtc;
 
     /**
      * Other charges as decimal string.
      */
-    #[Api]
+    #[Required]
     public string $other;
 
     /**
@@ -114,17 +114,17 @@ final class Total implements BaseModel
         string $newOtc,
         string $other,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->credits = $credits;
-        $obj->existingMrc = $existingMrc;
-        $obj->grandTotal = $grandTotal;
-        $obj->ledgerAdjustments = $ledgerAdjustments;
-        $obj->newMrc = $newMrc;
-        $obj->newOtc = $newOtc;
-        $obj->other = $other;
+        $self['credits'] = $credits;
+        $self['existingMrc'] = $existingMrc;
+        $self['grandTotal'] = $grandTotal;
+        $self['ledgerAdjustments'] = $ledgerAdjustments;
+        $self['newMrc'] = $newMrc;
+        $self['newOtc'] = $newOtc;
+        $self['other'] = $other;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -132,10 +132,10 @@ final class Total implements BaseModel
      */
     public function withCredits(string $credits): self
     {
-        $obj = clone $this;
-        $obj->credits = $credits;
+        $self = clone $this;
+        $self['credits'] = $credits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +143,10 @@ final class Total implements BaseModel
      */
     public function withExistingMrc(string $existingMrc): self
     {
-        $obj = clone $this;
-        $obj->existingMrc = $existingMrc;
+        $self = clone $this;
+        $self['existingMrc'] = $existingMrc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,10 +154,10 @@ final class Total implements BaseModel
      */
     public function withGrandTotal(string $grandTotal): self
     {
-        $obj = clone $this;
-        $obj->grandTotal = $grandTotal;
+        $self = clone $this;
+        $self['grandTotal'] = $grandTotal;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -165,10 +165,10 @@ final class Total implements BaseModel
      */
     public function withLedgerAdjustments(string $ledgerAdjustments): self
     {
-        $obj = clone $this;
-        $obj->ledgerAdjustments = $ledgerAdjustments;
+        $self = clone $this;
+        $self['ledgerAdjustments'] = $ledgerAdjustments;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +176,10 @@ final class Total implements BaseModel
      */
     public function withNewMrc(string $newMrc): self
     {
-        $obj = clone $this;
-        $obj->newMrc = $newMrc;
+        $self = clone $this;
+        $self['newMrc'] = $newMrc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +187,10 @@ final class Total implements BaseModel
      */
     public function withNewOtc(string $newOtc): self
     {
-        $obj = clone $this;
-        $obj->newOtc = $newOtc;
+        $self = clone $this;
+        $self['newOtc'] = $newOtc;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,9 +198,9 @@ final class Total implements BaseModel
      */
     public function withOther(string $other): self
     {
-        $obj = clone $this;
-        $obj->other = $other;
+        $self = clone $this;
+        $self['other'] = $other;
 
-        return $obj;
+        return $self;
     }
 }

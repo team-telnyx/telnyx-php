@@ -5,71 +5,74 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-import-type BundleLimitShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse\Data\BundleLimit
+ *
+ * @phpstan-type DataShape = array{
  *   id: string,
  *   active: bool,
- *   bundleLimits: list<BundleLimit>,
+ *   bundleLimits: list<BundleLimit|BundleLimitShape>,
  *   costCode: string,
- *   createdAt: \DateTimeInterface,
+ *   createdAt: string,
  *   isPublic: bool,
  *   name: string,
- *   slug?: string,
+ *   slug?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Bundle's ID, this is used to identify the bundle in the API.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * If that bundle is active or not.
      */
-    #[Api]
+    #[Required]
     public bool $active;
 
     /** @var list<BundleLimit> $bundleLimits */
-    #[Api('bundle_limits', list: BundleLimit::class)]
+    #[Required('bundle_limits', list: BundleLimit::class)]
     public array $bundleLimits;
 
     /**
      * Bundle's cost code, this is used to identify the bundle in the billing system.
      */
-    #[Api('cost_code')]
+    #[Required('cost_code')]
     public string $costCode;
 
     /**
      * Date the bundle was created.
      */
-    #[Api('created_at')]
-    public \DateTimeInterface $createdAt;
+    #[Required('created_at')]
+    public string $createdAt;
 
     /**
      * Available to all customers or only to specific customers.
      */
-    #[Api('is_public')]
+    #[Required('is_public')]
     public bool $isPublic;
 
     /**
      * Bundle's name, this is used to identify the bundle in the UI.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Slugified version of the bundle's name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $slug;
 
     /**
@@ -111,31 +114,31 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<BundleLimit> $bundleLimits
+     * @param list<BundleLimit|BundleLimitShape> $bundleLimits
      */
     public static function with(
         string $id,
         bool $active,
         array $bundleLimits,
         string $costCode,
-        \DateTimeInterface $createdAt,
+        string $createdAt,
         bool $isPublic,
         string $name,
         ?string $slug = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->active = $active;
-        $obj->bundleLimits = $bundleLimits;
-        $obj->costCode = $costCode;
-        $obj->createdAt = $createdAt;
-        $obj->isPublic = $isPublic;
-        $obj->name = $name;
+        $self['id'] = $id;
+        $self['active'] = $active;
+        $self['bundleLimits'] = $bundleLimits;
+        $self['costCode'] = $costCode;
+        $self['createdAt'] = $createdAt;
+        $self['isPublic'] = $isPublic;
+        $self['name'] = $name;
 
-        null !== $slug && $obj->slug = $slug;
+        null !== $slug && $self['slug'] = $slug;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -143,10 +146,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -154,21 +157,21 @@ final class Data implements BaseModel
      */
     public function withActive(bool $active): self
     {
-        $obj = clone $this;
-        $obj->active = $active;
+        $self = clone $this;
+        $self['active'] = $active;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<BundleLimit> $bundleLimits
+     * @param list<BundleLimit|BundleLimitShape> $bundleLimits
      */
     public function withBundleLimits(array $bundleLimits): self
     {
-        $obj = clone $this;
-        $obj->bundleLimits = $bundleLimits;
+        $self = clone $this;
+        $self['bundleLimits'] = $bundleLimits;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,21 +179,21 @@ final class Data implements BaseModel
      */
     public function withCostCode(string $costCode): self
     {
-        $obj = clone $this;
-        $obj->costCode = $costCode;
+        $self = clone $this;
+        $self['costCode'] = $costCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Date the bundle was created.
      */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
+    public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +201,10 @@ final class Data implements BaseModel
      */
     public function withIsPublic(bool $isPublic): self
     {
-        $obj = clone $this;
-        $obj->isPublic = $isPublic;
+        $self = clone $this;
+        $self['isPublic'] = $isPublic;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,10 +212,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -220,9 +223,9 @@ final class Data implements BaseModel
      */
     public function withSlug(string $slug): self
     {
-        $obj = clone $this;
-        $obj->slug = $slug;
+        $self = clone $this;
+        $self['slug'] = $slug;
 
-        return $obj;
+        return $self;
     }
 }

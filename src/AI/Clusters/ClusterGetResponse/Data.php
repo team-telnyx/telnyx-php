@@ -5,30 +5,30 @@ declare(strict_types=1);
 namespace Telnyx\AI\Clusters\ClusterGetResponse;
 
 use Telnyx\AI\Clusters\RecursiveCluster;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PhoneNumberAssignmentByProfile\TaskStatus;
+use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\TaskStatus;
 
 /**
- * @phpstan-type data_alias = array{
- *   bucket: string, clusters: list<RecursiveCluster>, status: value-of<TaskStatus>
+ * @phpstan-type DataShape = array{
+ *   bucket: string, clusters: list<mixed>, status: TaskStatus|value-of<TaskStatus>
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $bucket;
 
-    /** @var list<RecursiveCluster> $clusters */
-    #[Api(list: RecursiveCluster::class)]
+    /** @var list<mixed> $clusters */
+    #[Required(list: RecursiveCluster::class)]
     public array $clusters;
 
     /** @var value-of<TaskStatus> $status */
-    #[Api(enum: TaskStatus::class)]
+    #[Required(enum: TaskStatus::class)]
     public string $status;
 
     /**
@@ -55,7 +55,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RecursiveCluster> $clusters
+     * @param list<mixed> $clusters
      * @param TaskStatus|value-of<TaskStatus> $status
      */
     public static function with(
@@ -63,32 +63,32 @@ final class Data implements BaseModel
         array $clusters,
         TaskStatus|string $status
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->bucket = $bucket;
-        $obj->clusters = $clusters;
-        $obj['status'] = $status;
+        $self['bucket'] = $bucket;
+        $self['clusters'] = $clusters;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj->bucket = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<RecursiveCluster> $clusters
+     * @param list<mixed> $clusters
      */
     public function withClusters(array $clusters): self
     {
-        $obj = clone $this;
-        $obj->clusters = $clusters;
+        $self = clone $this;
+        $self['clusters'] = $clusters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +96,9 @@ final class Data implements BaseModel
      */
     public function withStatus(TaskStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

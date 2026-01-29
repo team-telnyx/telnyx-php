@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type phone_number = array{eq?: string, in?: list<string>}
+ * @phpstan-type PhoneNumberShape = array{eq?: string|null, in?: list<string>|null}
  */
 final class PhoneNumber implements BaseModel
 {
-    /** @use SdkModel<phone_number> */
+    /** @use SdkModel<PhoneNumberShape> */
     use SdkModel;
 
     /**
      * Filters records to those with a specified number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     /**
@@ -27,7 +27,7 @@ final class PhoneNumber implements BaseModel
      *
      * @var list<string>|null $in
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $in;
 
     public function __construct()
@@ -40,16 +40,16 @@ final class PhoneNumber implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $in
+     * @param list<string>|null $in
      */
     public static function with(?string $eq = null, ?array $in = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj->eq = $eq;
-        null !== $in && $obj->in = $in;
+        null !== $eq && $self['eq'] = $eq;
+        null !== $in && $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class PhoneNumber implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj->eq = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +70,9 @@ final class PhoneNumber implements BaseModel
      */
     public function withIn(array $in): self
     {
-        $obj = clone $this;
-        $obj->in = $in;
+        $self = clone $this;
+        $self['in'] = $in;
 
-        return $obj;
+        return $self;
     }
 }

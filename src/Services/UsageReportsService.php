@@ -6,120 +6,93 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UsageReportsContract;
-use Telnyx\UsageReports\UsageReportGetOptionsParams;
 use Telnyx\UsageReports\UsageReportGetOptionsResponse;
-use Telnyx\UsageReports\UsageReportListParams;
 use Telnyx\UsageReports\UsageReportListParams\Format;
-use Telnyx\UsageReports\UsageReportListParams\Page;
-use Telnyx\UsageReports\UsageReportListResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UsageReportsService implements UsageReportsContract
 {
     /**
+     * @api
+     */
+    public UsageReportsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new UsageReportsRawService($client);
+    }
 
     /**
      * @api
      *
      * Get Telnyx usage data by product, broken out by the specified dimensions
      *
-     * @param list<string> $dimensions Breakout by specified product dimensions
-     * @param list<string> $metrics Specified product usage values
-     * @param string $product Telnyx product
-     * @param string $dateRange A more user-friendly way to specify the timespan you want to filter by. More options can be found in the Telnyx API Reference docs.
-     * @param string $endDate The end date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ
-     * @param string $filter Filter records on dimensions
-     * @param Format|value-of<Format> $format Specify the response format (csv or json). JSON is returned by default, even if not specified.
-     * @param bool $managedAccounts return the aggregations for all Managed Accounts under the user making the request
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
-     * @param list<string> $sort Specifies the sort order for results
-     * @param string $startDate The start date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param list<string> $dimensions Query param: Breakout by specified product dimensions
+     * @param list<string> $metrics Query param: Specified product usage values
+     * @param string $product Query param: Telnyx product
+     * @param string $dateRange Query param: A more user-friendly way to specify the timespan you want to filter by. More options can be found in the Telnyx API Reference docs.
+     * @param string $endDate Query param: The end date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ
+     * @param string $filter Query param: Filter records on dimensions
+     * @param Format|value-of<Format> $format Query param: Specify the response format (csv or json). JSON is returned by default, even if not specified.
+     * @param bool $managedAccounts query param: Return the aggregations for all Managed Accounts under the user making the request
+     * @param int $pageNumber Query param
+     * @param int $pageSize Query param
+     * @param list<string> $sort Query param: Specifies the sort order for results
+     * @param string $startDate Query param: The start date for the time range you are interested in. The maximum time range is 31 days. Format: YYYY-MM-DDTHH:mm:ssZ
+     * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<array<string,mixed>>
      *
      * @throws APIException
      */
     public function list(
-        $dimensions,
-        $metrics,
-        $product,
-        $dateRange = omit,
-        $endDate = omit,
-        $filter = omit,
-        $format = omit,
-        $managedAccounts = omit,
-        $page = omit,
-        $sort = omit,
-        $startDate = omit,
-        $authorizationBearer = omit,
-        ?RequestOptions $requestOptions = null,
-    ): UsageReportListResponse {
-        $params = [
-            'dimensions' => $dimensions,
-            'metrics' => $metrics,
-            'product' => $product,
-            'dateRange' => $dateRange,
-            'endDate' => $endDate,
-            'filter' => $filter,
-            'format' => $format,
-            'managedAccounts' => $managedAccounts,
-            'page' => $page,
-            'sort' => $sort,
-            'startDate' => $startDate,
-            'authorizationBearer' => $authorizationBearer,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): UsageReportListResponse {
-        [$parsed, $options] = UsageReportListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $query_params = array_flip(
+        array $dimensions,
+        array $metrics,
+        string $product,
+        ?string $dateRange = null,
+        ?string $endDate = null,
+        ?string $filter = null,
+        Format|string|null $format = null,
+        ?bool $managedAccounts = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        ?array $sort = null,
+        ?string $startDate = null,
+        ?string $authorizationBearer = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
             [
-                'dimensions',
-                'metrics',
-                'product',
-                'date_range',
-                'end_date',
-                'filter',
-                'format',
-                'managed_accounts',
-                'page',
-                'sort',
-                'start_date',
+                'dimensions' => $dimensions,
+                'metrics' => $metrics,
+                'product' => $product,
+                'dateRange' => $dateRange,
+                'endDate' => $endDate,
+                'filter' => $filter,
+                'format' => $format,
+                'managedAccounts' => $managedAccounts,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'sort' => $sort,
+                'startDate' => $startDate,
+                'authorizationBearer' => $authorizationBearer,
             ],
         );
 
-        /** @var array<string, string> */
-        $header_params = array_diff_key($parsed, $query_params);
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'usage_reports',
-            query: array_intersect_key($parsed, $query_params),
-            headers: $header_params,
-            options: $options,
-            convert: UsageReportListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -127,51 +100,24 @@ final class UsageReportsService implements UsageReportsContract
      *
      * Get the Usage Reports options for querying usage, including the products available and their respective metrics and dimensions
      *
-     * @param string $product Options (dimensions and metrics) for a given product. If none specified, all products will be returned.
-     * @param string $authorizationBearer Authenticates the request with your Telnyx API V2 KEY
+     * @param string $product Query param: Options (dimensions and metrics) for a given product. If none specified, all products will be returned.
+     * @param string $authorizationBearer Header param: Authenticates the request with your Telnyx API V2 KEY
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function getOptions(
-        $product = omit,
-        $authorizationBearer = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $product = null,
+        ?string $authorizationBearer = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UsageReportGetOptionsResponse {
-        $params = [
-            'product' => $product, 'authorizationBearer' => $authorizationBearer,
-        ];
-
-        return $this->getOptionsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function getOptionsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): UsageReportGetOptionsResponse {
-        [$parsed, $options] = UsageReportGetOptionsParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['product' => $product, 'authorizationBearer' => $authorizationBearer]
         );
-        $query_params = ['product'];
 
-        /** @var array<string, string> */
-        $header_params = array_diff_key($parsed, $query_params);
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getOptions(params: $params, requestOptions: $requestOptions);
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'usage_reports/options',
-            query: array_intersect_key($parsed, $query_params),
-            headers: $header_params,
-            options: $options,
-            convert: UsageReportGetOptionsResponse::class,
-        );
+        return $response->parse();
     }
 }

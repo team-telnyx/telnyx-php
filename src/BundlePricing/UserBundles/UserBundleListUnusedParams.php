@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\BundlePricing\UserBundles;
 
 use Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,28 +13,30 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns all user bundles that aren't in use.
  *
- * @see Telnyx\BundlePricing\UserBundles->listUnused
+ * @see Telnyx\Services\BundlePricing\UserBundlesService::listUnused()
  *
- * @phpstan-type user_bundle_list_unused_params = array{
- *   filter?: Filter, authorizationBearer?: string
+ * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\UserBundles\UserBundleListUnusedParams\Filter
+ *
+ * @phpstan-type UserBundleListUnusedParamsShape = array{
+ *   filter?: null|Filter|FilterShape, authorizationBearer?: string|null
  * }
  */
 final class UserBundleListUnusedParams implements BaseModel
 {
-    /** @use SdkModel<user_bundle_list_unused_params> */
+    /** @use SdkModel<UserBundleListUnusedParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Authenticates the request with your Telnyx API V2 KEY.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $authorizationBearer;
 
     public function __construct()
@@ -46,28 +48,32 @@ final class UserBundleListUnusedParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(
-        ?Filter $filter = null,
+        Filter|array|null $filter = null,
         ?string $authorizationBearer = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $authorizationBearer && $obj->authorizationBearer = $authorizationBearer;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $authorizationBearer && $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,9 +81,9 @@ final class UserBundleListUnusedParams implements BaseModel
      */
     public function withAuthorizationBearer(string $authorizationBearer): self
     {
-        $obj = clone $this;
-        $obj->authorizationBearer = $authorizationBearer;
+        $self = clone $this;
+        $self['authorizationBearer'] = $authorizationBearer;
 
-        return $obj;
+        return $self;
     }
 }

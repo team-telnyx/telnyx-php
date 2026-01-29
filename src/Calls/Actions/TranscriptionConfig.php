@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
  *
- * @phpstan-type transcription_config = array{model?: string}
+ * @phpstan-type TranscriptionConfigShape = array{model?: string|null}
  */
 final class TranscriptionConfig implements BaseModel
 {
-    /** @use SdkModel<transcription_config> */
+    /** @use SdkModel<TranscriptionConfigShape> */
     use SdkModel;
 
     /**
@@ -25,7 +25,7 @@ final class TranscriptionConfig implements BaseModel
      * - `openai/whisper-large-v3-turbo` is multi-lingual with automatic language detection but slightly higher latency.
      * - `google` is a multi-lingual option, please describe the language in the `language` field.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $model;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class TranscriptionConfig implements BaseModel
      */
     public static function with(?string $model = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $model && $obj->model = $model;
+        null !== $model && $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -56,9 +56,9 @@ final class TranscriptionConfig implements BaseModel
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj->model = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 }

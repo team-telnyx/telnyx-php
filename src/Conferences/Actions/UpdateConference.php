@@ -4,28 +4,31 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
+use Telnyx\Conferences\Actions\UpdateConference\Region;
 use Telnyx\Conferences\Actions\UpdateConference\SupervisorRole;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type update_conference = array{
+ * @phpstan-type UpdateConferenceShape = array{
  *   callControlID: string,
- *   supervisorRole: value-of<SupervisorRole>,
- *   commandID?: string,
- *   whisperCallControlIDs?: list<string>,
+ *   supervisorRole: SupervisorRole|value-of<SupervisorRole>,
+ *   commandID?: string|null,
+ *   region?: null|Region|value-of<Region>,
+ *   whisperCallControlIDs?: list<string>|null,
  * }
  */
 final class UpdateConference implements BaseModel
 {
-    /** @use SdkModel<update_conference> */
+    /** @use SdkModel<UpdateConferenceShape> */
     use SdkModel;
 
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api('call_control_id')]
+    #[Required('call_control_id')]
     public string $callControlID;
 
     /**
@@ -33,21 +36,29 @@ final class UpdateConference implements BaseModel
      *
      * @var value-of<SupervisorRole> $supervisorRole
      */
-    #[Api('supervisor_role', enum: SupervisorRole::class)]
+    #[Required('supervisor_role', enum: SupervisorRole::class)]
     public string $supervisorRole;
 
     /**
      * Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @var value-of<Region>|null $region
+     */
+    #[Optional(enum: Region::class)]
+    public ?string $region;
 
     /**
      * Array of unique call_control_ids the supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
      *
      * @var list<string>|null $whisperCallControlIDs
      */
-    #[Api('whisper_call_control_ids', list: 'string', optional: true)]
+    #[Optional('whisper_call_control_ids', list: 'string')]
     public ?array $whisperCallControlIDs;
 
     /**
@@ -75,23 +86,26 @@ final class UpdateConference implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
-     * @param list<string> $whisperCallControlIDs
+     * @param Region|value-of<Region>|null $region
+     * @param list<string>|null $whisperCallControlIDs
      */
     public static function with(
         string $callControlID,
         SupervisorRole|string $supervisorRole,
         ?string $commandID = null,
+        Region|string|null $region = null,
         ?array $whisperCallControlIDs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->callControlID = $callControlID;
-        $obj['supervisorRole'] = $supervisorRole;
+        $self['callControlID'] = $callControlID;
+        $self['supervisorRole'] = $supervisorRole;
 
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $whisperCallControlIDs && $obj->whisperCallControlIDs = $whisperCallControlIDs;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $region && $self['region'] = $region;
+        null !== $whisperCallControlIDs && $self['whisperCallControlIDs'] = $whisperCallControlIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +113,10 @@ final class UpdateConference implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +127,10 @@ final class UpdateConference implements BaseModel
     public function withSupervisorRole(
         SupervisorRole|string $supervisorRole
     ): self {
-        $obj = clone $this;
-        $obj['supervisorRole'] = $supervisorRole;
+        $self = clone $this;
+        $self['supervisorRole'] = $supervisorRole;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,10 +138,23 @@ final class UpdateConference implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
+     *
+     * @param Region|value-of<Region> $region
+     */
+    public function withRegion(Region|string $region): self
+    {
+        $self = clone $this;
+        $self['region'] = $region;
+
+        return $self;
     }
 
     /**
@@ -138,9 +165,9 @@ final class UpdateConference implements BaseModel
     public function withWhisperCallControlIDs(
         array $whisperCallControlIDs
     ): self {
-        $obj = clone $this;
-        $obj->whisperCallControlIDs = $whisperCallControlIDs;
+        $self = clone $this;
+        $self['whisperCallControlIDs'] = $whisperCallControlIDs;
 
-        return $obj;
+        return $self;
     }
 }

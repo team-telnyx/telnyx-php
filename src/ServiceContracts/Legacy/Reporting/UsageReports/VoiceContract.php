@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface VoiceContract
 {
     /**
@@ -25,40 +27,31 @@ interface VoiceContract
      * @param list<string> $managedAccounts List of managed accounts to include
      * @param int $productBreakdown Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $endTime,
-        $startTime,
-        $aggregationType = omit,
-        $connections = omit,
-        $managedAccounts = omit,
-        $productBreakdown = omit,
-        $selectAllManagedAccounts = omit,
-        ?RequestOptions $requestOptions = null,
+        \DateTimeInterface $endTime,
+        \DateTimeInterface $startTime,
+        ?int $aggregationType = null,
+        ?array $connections = null,
+        ?array $managedAccounts = null,
+        ?int $productBreakdown = null,
+        ?bool $selectAllManagedAccounts = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoiceNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VoiceNewResponse;
-
-    /**
-     * @api
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoiceGetResponse;
 
     /**
@@ -66,34 +59,27 @@ interface VoiceContract
      *
      * @param int $page Page number
      * @param int $perPage Size of the page
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return PerPagePagination<CdrUsageReportResponseLegacy>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $perPage = omit,
-        ?RequestOptions $requestOptions = null
-    ): VoiceListResponse;
+        int $page = 1,
+        int $perPage = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): PerPagePagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VoiceListResponse;
-
-    /**
-     * @api
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoiceDeleteResponse;
 }

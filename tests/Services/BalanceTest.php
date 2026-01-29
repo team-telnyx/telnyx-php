@@ -5,6 +5,7 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Balance\BalanceGetResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,6 +36,7 @@ final class BalanceTest extends TestCase
 
         $result = $this->client->balance->retrieve();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BalanceGetResponse::class, $result);
     }
 }

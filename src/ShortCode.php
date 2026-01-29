@@ -4,49 +4,51 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ShortCode\RecordType;
 
 /**
- * @phpstan-type short_code = array{
+ * @phpstan-type ShortCodeShape = array{
  *   messagingProfileID: string|null,
- *   id?: string,
- *   countryCode?: string,
- *   createdAt?: \DateTimeInterface,
- *   recordType?: value-of<RecordType>,
- *   shortCode?: string,
- *   updatedAt?: \DateTimeInterface,
+ *   id?: string|null,
+ *   countryCode?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   shortCode?: string|null,
+ *   tags?: list<string>|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class ShortCode implements BaseModel
 {
-    /** @use SdkModel<short_code> */
+    /** @use SdkModel<ShortCodeShape> */
     use SdkModel;
 
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Api('messaging_profile_id')]
+    #[Required('messaging_profile_id')]
     public ?string $messagingProfileID;
 
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 3166-1 alpha-2 country code.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
@@ -54,19 +56,23 @@ final class ShortCode implements BaseModel
      *
      * @var value-of<RecordType>|null $recordType
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
     /**
      * Short digit sequence used to address messages.
      */
-    #[Api('short_code', optional: true)]
+    #[Optional('short_code')]
     public ?string $shortCode;
+
+    /** @var list<string>|null $tags */
+    #[Optional(list: 'string')]
+    public ?array $tags;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     /**
@@ -93,7 +99,8 @@ final class ShortCode implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $messagingProfileID,
@@ -102,20 +109,22 @@ final class ShortCode implements BaseModel
         ?\DateTimeInterface $createdAt = null,
         RecordType|string|null $recordType = null,
         ?string $shortCode = null,
+        ?array $tags = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->messagingProfileID = $messagingProfileID;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        null !== $id && $obj->id = $id;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $shortCode && $obj->shortCode = $shortCode;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $shortCode && $self['shortCode'] = $shortCode;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +132,10 @@ final class ShortCode implements BaseModel
      */
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +143,10 @@ final class ShortCode implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +154,10 @@ final class ShortCode implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,10 +165,10 @@ final class ShortCode implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -169,10 +178,10 @@ final class ShortCode implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -180,10 +189,21 @@ final class ShortCode implements BaseModel
      */
     public function withShortCode(string $shortCode): self
     {
-        $obj = clone $this;
-        $obj->shortCode = $shortCode;
+        $self = clone $this;
+        $self['shortCode'] = $shortCode;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
+
+        return $self;
     }
 
     /**
@@ -191,9 +211,9 @@ final class ShortCode implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

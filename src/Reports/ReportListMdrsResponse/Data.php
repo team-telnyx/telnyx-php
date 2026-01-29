@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\ReportListMdrsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Reports\ReportListMdrsResponse\Data\Currency;
@@ -12,55 +12,55 @@ use Telnyx\Reports\ReportListMdrsResponse\Data\MessageType;
 use Telnyx\Reports\ReportListMdrsResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   cld?: string,
- *   cli?: string,
- *   cost?: string,
- *   createdAt?: \DateTimeInterface,
- *   currency?: value-of<Currency>,
- *   direction?: string,
- *   messageType?: value-of<MessageType>,
- *   parts?: float,
- *   profileName?: string,
- *   rate?: string,
- *   recordType?: string,
- *   status?: value-of<Status>,
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   cld?: string|null,
+ *   cli?: string|null,
+ *   cost?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   currency?: null|Currency|value-of<Currency>,
+ *   direction?: string|null,
+ *   messageType?: null|MessageType|value-of<MessageType>,
+ *   parts?: float|null,
+ *   profileName?: string|null,
+ *   rate?: string|null,
+ *   recordType?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Id of message detail record.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The destination number for a call, or the callee.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cld;
 
     /**
      * The number associated with the person initiating the call, or the caller.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cli;
 
     /**
      * Final cost. Cost is calculated as rate * parts.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cost;
 
     /**
      * Message sent time.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
@@ -68,13 +68,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Currency>|null $currency
      */
-    #[Api(enum: Currency::class, optional: true)]
+    #[Optional(enum: Currency::class)]
     public ?string $currency;
 
     /**
      * Direction of message - inbound or outbound.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $direction;
 
     /**
@@ -82,28 +82,28 @@ final class Data implements BaseModel
      *
      * @var value-of<MessageType>|null $messageType
      */
-    #[Api('message_type', enum: MessageType::class, optional: true)]
+    #[Optional('message_type', enum: MessageType::class)]
     public ?string $messageType;
 
     /**
      * Number of parts this message has. Max number of character is 160. If message contains more characters then that it will be broken down in multiple parts.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $parts;
 
     /**
      * Configured profile name. New profiles can be created and configured on Telnyx portal.
      */
-    #[Api('profile_name', optional: true)]
+    #[Optional('profile_name')]
     public ?string $profileName;
 
     /**
      * Rate applied to the message.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $rate;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -111,7 +111,7 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -124,9 +124,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Currency|value-of<Currency> $currency
-     * @param MessageType|value-of<MessageType> $messageType
-     * @param Status|value-of<Status> $status
+     * @param Currency|value-of<Currency>|null $currency
+     * @param MessageType|value-of<MessageType>|null $messageType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -143,23 +143,23 @@ final class Data implements BaseModel
         ?string $recordType = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $cld && $obj->cld = $cld;
-        null !== $cli && $obj->cli = $cli;
-        null !== $cost && $obj->cost = $cost;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $currency && $obj['currency'] = $currency;
-        null !== $direction && $obj->direction = $direction;
-        null !== $messageType && $obj['messageType'] = $messageType;
-        null !== $parts && $obj->parts = $parts;
-        null !== $profileName && $obj->profileName = $profileName;
-        null !== $rate && $obj->rate = $rate;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj['status'] = $status;
+        null !== $id && $self['id'] = $id;
+        null !== $cld && $self['cld'] = $cld;
+        null !== $cli && $self['cli'] = $cli;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $currency && $self['currency'] = $currency;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $messageType && $self['messageType'] = $messageType;
+        null !== $parts && $self['parts'] = $parts;
+        null !== $profileName && $self['profileName'] = $profileName;
+        null !== $rate && $self['rate'] = $rate;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -167,10 +167,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class Data implements BaseModel
      */
     public function withCld(string $cld): self
     {
-        $obj = clone $this;
-        $obj->cld = $cld;
+        $self = clone $this;
+        $self['cld'] = $cld;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +189,10 @@ final class Data implements BaseModel
      */
     public function withCli(string $cli): self
     {
-        $obj = clone $this;
-        $obj->cli = $cli;
+        $self = clone $this;
+        $self['cli'] = $cli;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class Data implements BaseModel
      */
     public function withCost(string $cost): self
     {
-        $obj = clone $this;
-        $obj->cost = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,10 +211,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -224,10 +224,10 @@ final class Data implements BaseModel
      */
     public function withCurrency(Currency|string $currency): self
     {
-        $obj = clone $this;
-        $obj['currency'] = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -235,10 +235,10 @@ final class Data implements BaseModel
      */
     public function withDirection(string $direction): self
     {
-        $obj = clone $this;
-        $obj->direction = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -248,10 +248,10 @@ final class Data implements BaseModel
      */
     public function withMessageType(MessageType|string $messageType): self
     {
-        $obj = clone $this;
-        $obj['messageType'] = $messageType;
+        $self = clone $this;
+        $self['messageType'] = $messageType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,10 +259,10 @@ final class Data implements BaseModel
      */
     public function withParts(float $parts): self
     {
-        $obj = clone $this;
-        $obj->parts = $parts;
+        $self = clone $this;
+        $self['parts'] = $parts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -270,10 +270,10 @@ final class Data implements BaseModel
      */
     public function withProfileName(string $profileName): self
     {
-        $obj = clone $this;
-        $obj->profileName = $profileName;
+        $self = clone $this;
+        $self['profileName'] = $profileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -281,18 +281,18 @@ final class Data implements BaseModel
      */
     public function withRate(string $rate): self
     {
-        $obj = clone $this;
-        $obj->rate = $rate;
+        $self = clone $this;
+        $self['rate'] = $rate;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -302,9 +302,9 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

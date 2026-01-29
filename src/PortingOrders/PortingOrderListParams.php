@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,40 +15,47 @@ use Telnyx\PortingOrders\PortingOrderListParams\Sort;
 /**
  * Returns a list of your porting order.
  *
- * @see Telnyx\PortingOrders->list
+ * @see Telnyx\Services\PortingOrdersService::list()
  *
- * @phpstan-type porting_order_list_params = array{
- *   filter?: Filter, includePhoneNumbers?: bool, page?: Page, sort?: Sort
+ * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\PortingOrderListParams\Page
+ * @phpstan-import-type SortShape from \Telnyx\PortingOrders\PortingOrderListParams\Sort
+ *
+ * @phpstan-type PortingOrderListParamsShape = array{
+ *   filter?: null|Filter|FilterShape,
+ *   includePhoneNumbers?: bool|null,
+ *   page?: null|Page|PageShape,
+ *   sort?: null|Sort|SortShape,
  * }
  */
 final class PortingOrderListParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_list_params> */
+    /** @use SdkModel<PortingOrderListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Include the first 50 phone number objects in the results.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $includePhoneNumbers;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Sort $sort;
 
     public function __construct()
@@ -60,32 +67,38 @@ final class PortingOrderListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
+     * @param Sort|SortShape|null $sort
      */
     public static function with(
-        ?Filter $filter = null,
+        Filter|array|null $filter = null,
         ?bool $includePhoneNumbers = null,
-        ?Page $page = null,
-        ?Sort $sort = null,
+        Page|array|null $page = null,
+        Sort|array|null $sort = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $includePhoneNumbers && $obj->includePhoneNumbers = $includePhoneNumbers;
-        null !== $page && $obj->page = $page;
-        null !== $sort && $obj->sort = $sort;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $includePhoneNumbers && $self['includePhoneNumbers'] = $includePhoneNumbers;
+        null !== $page && $self['page'] = $page;
+        null !== $sort && $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[customer_reference], filter[customer_group_reference], filter[parent_support_key], filter[phone_numbers.country_code], filter[phone_numbers.carrier_name], filter[misc.type], filter[end_user.admin.entity_name], filter[end_user.admin.auth_person_name], filter[activation_settings.fast_port_eligible], filter[activation_settings.foc_datetime_requested][gt], filter[activation_settings.foc_datetime_requested][lt], filter[phone_numbers.phone_number][contains].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,31 +106,35 @@ final class PortingOrderListParams implements BaseModel
      */
     public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->includePhoneNumbers = $includePhoneNumbers;
+        $self = clone $this;
+        $self['includePhoneNumbers'] = $includePhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated sort parameter (deepObject style). Originally: sort[value].
+     *
+     * @param Sort|SortShape $sort
      */
-    public function withSort(Sort $sort): self
+    public function withSort(Sort|array $sort): self
     {
-        $obj = clone $this;
-        $obj->sort = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 }

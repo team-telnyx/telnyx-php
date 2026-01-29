@@ -4,38 +4,65 @@ declare(strict_types=1);
 
 namespace Telnyx\CustomStorageCredentials;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\CustomStorageCredentials\AzureConfigurationData\Backend;
 
 /**
- * @phpstan-type azure_configuration_data = array{
- *   accountKey?: string, accountName?: string, bucket?: string
+ * @phpstan-type AzureConfigurationDataShape = array{
+ *   backend: Backend|value-of<Backend>,
+ *   accountKey?: string|null,
+ *   accountName?: string|null,
+ *   bucket?: string|null,
  * }
  */
 final class AzureConfigurationData implements BaseModel
 {
-    /** @use SdkModel<azure_configuration_data> */
+    /** @use SdkModel<AzureConfigurationDataShape> */
     use SdkModel;
+
+    /**
+     * Storage backend type.
+     *
+     * @var value-of<Backend> $backend
+     */
+    #[Required(enum: Backend::class)]
+    public string $backend;
 
     /**
      * Azure Blob Storage account key.
      */
-    #[Api('account_key', optional: true)]
+    #[Optional('account_key')]
     public ?string $accountKey;
 
     /**
      * Azure Blob Storage account name.
      */
-    #[Api('account_name', optional: true)]
+    #[Optional('account_name')]
     public ?string $accountName;
 
     /**
      * Name of the bucket to be used to store recording files.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $bucket;
 
+    /**
+     * `new AzureConfigurationData()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * AzureConfigurationData::with(backend: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new AzureConfigurationData)->withBackend(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -45,19 +72,37 @@ final class AzureConfigurationData implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Backend|value-of<Backend> $backend
      */
     public static function with(
+        Backend|string $backend,
         ?string $accountKey = null,
         ?string $accountName = null,
-        ?string $bucket = null
+        ?string $bucket = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountKey && $obj->accountKey = $accountKey;
-        null !== $accountName && $obj->accountName = $accountName;
-        null !== $bucket && $obj->bucket = $bucket;
+        $self['backend'] = $backend;
 
-        return $obj;
+        null !== $accountKey && $self['accountKey'] = $accountKey;
+        null !== $accountName && $self['accountName'] = $accountName;
+        null !== $bucket && $self['bucket'] = $bucket;
+
+        return $self;
+    }
+
+    /**
+     * Storage backend type.
+     *
+     * @param Backend|value-of<Backend> $backend
+     */
+    public function withBackend(Backend|string $backend): self
+    {
+        $self = clone $this;
+        $self['backend'] = $backend;
+
+        return $self;
     }
 
     /**
@@ -65,10 +110,10 @@ final class AzureConfigurationData implements BaseModel
      */
     public function withAccountKey(string $accountKey): self
     {
-        $obj = clone $this;
-        $obj->accountKey = $accountKey;
+        $self = clone $this;
+        $self['accountKey'] = $accountKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,10 +121,10 @@ final class AzureConfigurationData implements BaseModel
      */
     public function withAccountName(string $accountName): self
     {
-        $obj = clone $this;
-        $obj->accountName = $accountName;
+        $self = clone $this;
+        $self['accountName'] = $accountName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -87,9 +132,9 @@ final class AzureConfigurationData implements BaseModel
      */
     public function withBucket(string $bucket): self
     {
-        $obj = clone $this;
-        $obj->bucket = $bucket;
+        $self = clone $this;
+        $self['bucket'] = $bucket;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type porting_order_new_response = array{data?: list<PortingOrder>}
+ * @phpstan-import-type PortingOrderShape from \Telnyx\PortingOrders\PortingOrder
+ *
+ * @phpstan-type PortingOrderNewResponseShape = array{
+ *   data?: list<PortingOrder|PortingOrderShape>|null
+ * }
  */
-final class PortingOrderNewResponse implements BaseModel, ResponseConverter
+final class PortingOrderNewResponse implements BaseModel
 {
-    /** @use SdkModel<porting_order_new_response> */
+    /** @use SdkModel<PortingOrderNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<PortingOrder>|null $data */
-    #[Api(list: PortingOrder::class, optional: true)]
+    #[Optional(list: PortingOrder::class)]
     public ?array $data;
 
     public function __construct()
@@ -34,25 +34,25 @@ final class PortingOrderNewResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingOrder> $data
+     * @param list<PortingOrder|PortingOrderShape>|null $data
      */
     public static function with(?array $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<PortingOrder> $data
+     * @param list<PortingOrder|PortingOrderShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

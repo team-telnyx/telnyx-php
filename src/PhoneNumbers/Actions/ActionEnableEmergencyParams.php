@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Enable emergency for a phone number.
  *
- * @see Telnyx\PhoneNumbers\Actions->enableEmergency
+ * @see Telnyx\Services\PhoneNumbers\ActionsService::enableEmergency()
  *
- * @phpstan-type action_enable_emergency_params = array{
+ * @phpstan-type ActionEnableEmergencyParamsShape = array{
  *   emergencyAddressID: string, emergencyEnabled: bool
  * }
  */
 final class ActionEnableEmergencyParams implements BaseModel
 {
-    /** @use SdkModel<action_enable_emergency_params> */
+    /** @use SdkModel<ActionEnableEmergencyParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Identifies the address to be used with emergency services.
      */
-    #[Api('emergency_address_id')]
+    #[Required('emergency_address_id')]
     public string $emergencyAddressID;
 
     /**
      * Indicates whether to enable emergency services on this number.
      */
-    #[Api('emergency_enabled')]
+    #[Required('emergency_enabled')]
     public bool $emergencyEnabled;
 
     /**
@@ -68,12 +68,12 @@ final class ActionEnableEmergencyParams implements BaseModel
         string $emergencyAddressID,
         bool $emergencyEnabled
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->emergencyAddressID = $emergencyAddressID;
-        $obj->emergencyEnabled = $emergencyEnabled;
+        $self['emergencyAddressID'] = $emergencyAddressID;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,10 +81,10 @@ final class ActionEnableEmergencyParams implements BaseModel
      */
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj->emergencyAddressID = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -92,9 +92,9 @@ final class ActionEnableEmergencyParams implements BaseModel
      */
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
-        $obj = clone $this;
-        $obj->emergencyEnabled = $emergencyEnabled;
+        $self = clone $this;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 }

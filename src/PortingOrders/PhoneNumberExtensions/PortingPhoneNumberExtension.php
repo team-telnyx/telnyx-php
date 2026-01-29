@@ -4,32 +4,35 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberExtensions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ActivationRange;
 use Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ExtensionRange;
 
 /**
- * @phpstan-type porting_phone_number_extension = array{
- *   id?: string,
- *   activationRanges?: list<ActivationRange>,
- *   createdAt?: \DateTimeInterface,
- *   extensionRange?: ExtensionRange,
- *   portingPhoneNumberID?: string,
- *   recordType?: string,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-import-type ActivationRangeShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ActivationRange
+ * @phpstan-import-type ExtensionRangeShape from \Telnyx\PortingOrders\PhoneNumberExtensions\PortingPhoneNumberExtension\ExtensionRange
+ *
+ * @phpstan-type PortingPhoneNumberExtensionShape = array{
+ *   id?: string|null,
+ *   activationRanges?: list<ActivationRange|ActivationRangeShape>|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   extensionRange?: null|ExtensionRange|ExtensionRangeShape,
+ *   portingPhoneNumberID?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class PortingPhoneNumberExtension implements BaseModel
 {
-    /** @use SdkModel<porting_phone_number_extension> */
+    /** @use SdkModel<PortingPhoneNumberExtensionShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies this porting phone number extension.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
@@ -37,37 +40,37 @@ final class PortingPhoneNumberExtension implements BaseModel
      *
      * @var list<ActivationRange>|null $activationRanges
      */
-    #[Api('activation_ranges', list: ActivationRange::class, optional: true)]
+    #[Optional('activation_ranges', list: ActivationRange::class)]
     public ?array $activationRanges;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * Specifies the extension range for this porting phone number extension.
      */
-    #[Api('extension_range', optional: true)]
+    #[Optional('extension_range')]
     public ?ExtensionRange $extensionRange;
 
     /**
      * Identifies the porting phone number associated with this porting phone number extension.
      */
-    #[Api('porting_phone_number_id', optional: true)]
+    #[Optional('porting_phone_number_id')]
     public ?string $portingPhoneNumberID;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the resource was last updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -80,28 +83,29 @@ final class PortingPhoneNumberExtension implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ActivationRange> $activationRanges
+     * @param list<ActivationRange|ActivationRangeShape>|null $activationRanges
+     * @param ExtensionRange|ExtensionRangeShape|null $extensionRange
      */
     public static function with(
         ?string $id = null,
         ?array $activationRanges = null,
         ?\DateTimeInterface $createdAt = null,
-        ?ExtensionRange $extensionRange = null,
+        ExtensionRange|array|null $extensionRange = null,
         ?string $portingPhoneNumberID = null,
         ?string $recordType = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $activationRanges && $obj->activationRanges = $activationRanges;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $extensionRange && $obj->extensionRange = $extensionRange;
-        null !== $portingPhoneNumberID && $obj->portingPhoneNumberID = $portingPhoneNumberID;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $activationRanges && $self['activationRanges'] = $activationRanges;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $extensionRange && $self['extensionRange'] = $extensionRange;
+        null !== $portingPhoneNumberID && $self['portingPhoneNumberID'] = $portingPhoneNumberID;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,23 +113,23 @@ final class PortingPhoneNumberExtension implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Specifies the activation ranges for this porting phone number extension. The activation range must be within the extension range and should not overlap with other activation ranges.
      *
-     * @param list<ActivationRange> $activationRanges
+     * @param list<ActivationRange|ActivationRangeShape> $activationRanges
      */
     public function withActivationRanges(array $activationRanges): self
     {
-        $obj = clone $this;
-        $obj->activationRanges = $activationRanges;
+        $self = clone $this;
+        $self['activationRanges'] = $activationRanges;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -133,21 +137,24 @@ final class PortingPhoneNumberExtension implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Specifies the extension range for this porting phone number extension.
+     *
+     * @param ExtensionRange|ExtensionRangeShape $extensionRange
      */
-    public function withExtensionRange(ExtensionRange $extensionRange): self
-    {
-        $obj = clone $this;
-        $obj->extensionRange = $extensionRange;
+    public function withExtensionRange(
+        ExtensionRange|array $extensionRange
+    ): self {
+        $self = clone $this;
+        $self['extensionRange'] = $extensionRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,10 +162,10 @@ final class PortingPhoneNumberExtension implements BaseModel
      */
     public function withPortingPhoneNumberID(string $portingPhoneNumberID): self
     {
-        $obj = clone $this;
-        $obj->portingPhoneNumberID = $portingPhoneNumberID;
+        $self = clone $this;
+        $self['portingPhoneNumberID'] = $portingPhoneNumberID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +173,10 @@ final class PortingPhoneNumberExtension implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,9 +184,9 @@ final class PortingPhoneNumberExtension implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

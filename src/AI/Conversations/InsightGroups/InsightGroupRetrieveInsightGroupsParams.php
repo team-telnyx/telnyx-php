@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\InsightGroups;
 
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams\Page;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,21 +12,23 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get all insight groups.
  *
- * @see Telnyx\AI\Conversations\InsightGroups->retrieveInsightGroups
+ * @see Telnyx\Services\AI\Conversations\InsightGroupsService::retrieveInsightGroups()
  *
- * @phpstan-type insight_group_retrieve_insight_groups_params = array{page?: Page}
+ * @phpstan-type InsightGroupRetrieveInsightGroupsParamsShape = array{
+ *   pageNumber?: int|null, pageSize?: int|null
+ * }
  */
 final class InsightGroupRetrieveInsightGroupsParams implements BaseModel
 {
-    /** @use SdkModel<insight_group_retrieve_insight_groups_params> */
+    /** @use SdkModel<InsightGroupRetrieveInsightGroupsParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -39,23 +40,31 @@ final class InsightGroupRetrieveInsightGroupsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?Page $page = null): self
-    {
-        $obj = new self;
+    public static function with(
+        ?int $pageNumber = null,
+        ?int $pageSize = null
+    ): self {
+        $self = new self;
 
-        null !== $page && $obj->page = $page;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 }

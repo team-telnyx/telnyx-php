@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\NumbersFeatures\NumbersFeatureNewResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{features: list<string>, phoneNumber: string}
+ * @phpstan-type DataShape = array{features: list<string>, phoneNumber: string}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /** @var list<string> $features */
-    #[Api(list: 'string')]
+    #[Required(list: 'string')]
     public array $features;
 
-    #[Api('phone_number')]
+    #[Required('phone_number')]
     public string $phoneNumber;
 
     /**
@@ -51,12 +51,12 @@ final class Data implements BaseModel
      */
     public static function with(array $features, string $phoneNumber): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->features = $features;
-        $obj->phoneNumber = $phoneNumber;
+        $self['features'] = $features;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,17 +64,17 @@ final class Data implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj->features = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

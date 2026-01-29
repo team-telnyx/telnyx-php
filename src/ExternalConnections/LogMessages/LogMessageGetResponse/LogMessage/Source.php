@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type source_alias = array{pointer?: string}
+ * @phpstan-type SourceShape = array{pointer?: string|null}
  */
 final class Source implements BaseModel
 {
-    /** @use SdkModel<source_alias> */
+    /** @use SdkModel<SourceShape> */
     use SdkModel;
 
     /**
      * JSON pointer (RFC6901) to the offending entity.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pointer;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class Source implements BaseModel
      */
     public static function with(?string $pointer = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pointer && $obj->pointer = $pointer;
+        null !== $pointer && $self['pointer'] = $pointer;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Source implements BaseModel
      */
     public function withPointer(string $pointer): self
     {
-        $obj = clone $this;
-        $obj->pointer = $pointer;
+        $self = clone $this;
+        $self['pointer'] = $pointer;
 
-        return $obj;
+        return $self;
     }
 }

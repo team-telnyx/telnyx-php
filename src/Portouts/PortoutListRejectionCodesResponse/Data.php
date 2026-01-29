@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace Telnyx\Portouts\PortoutListRejectionCodesResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   code?: int, description?: string, reasonRequired?: bool
+ * @phpstan-type DataShape = array{
+ *   code?: int|null, description?: string|null, reasonRequired?: bool|null
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $code;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
-    #[Api('reason_required', optional: true)]
+    #[Optional('reason_required')]
     public ?bool $reasonRequired;
 
     public function __construct()
@@ -42,36 +42,36 @@ final class Data implements BaseModel
         ?string $description = null,
         ?bool $reasonRequired = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $description && $obj->description = $description;
-        null !== $reasonRequired && $obj->reasonRequired = $reasonRequired;
+        null !== $code && $self['code'] = $code;
+        null !== $description && $self['description'] = $description;
+        null !== $reasonRequired && $self['reasonRequired'] = $reasonRequired;
 
-        return $obj;
+        return $self;
     }
 
     public function withCode(int $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     public function withReasonRequired(bool $reasonRequired): self
     {
-        $obj = clone $this;
-        $obj->reasonRequired = $reasonRequired;
+        $self = clone $this;
+        $self['reasonRequired'] = $reasonRequired;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,28 +6,38 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\NotificationChannels\NotificationChannelCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\NotificationChannels\NotificationChannel;
 use Telnyx\NotificationChannels\NotificationChannelCreateParams\ChannelTypeID;
 use Telnyx\NotificationChannels\NotificationChannelDeleteResponse;
 use Telnyx\NotificationChannels\NotificationChannelGetResponse;
-use Telnyx\NotificationChannels\NotificationChannelListParams;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Filter;
 use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
-use Telnyx\NotificationChannels\NotificationChannelListResponse;
 use Telnyx\NotificationChannels\NotificationChannelNewResponse;
-use Telnyx\NotificationChannels\NotificationChannelUpdateParams;
 use Telnyx\NotificationChannels\NotificationChannelUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationChannelsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class NotificationChannelsService implements NotificationChannelsContract
 {
     /**
+     * @api
+     */
+    public NotificationChannelsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new NotificationChannelsRawService($client);
+    }
 
     /**
      * @api
@@ -37,48 +47,28 @@ final class NotificationChannelsService implements NotificationChannelsContract
      * @param string $channelDestination the destination associated with the channel type
      * @param ChannelTypeID|value-of<ChannelTypeID> $channelTypeID A Channel Type ID
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $channelDestination = omit,
-        $channelTypeID = omit,
-        $notificationProfileID = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $channelDestination = null,
+        ChannelTypeID|string|null $channelTypeID = null,
+        ?string $notificationProfileID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NotificationChannelNewResponse {
-        $params = [
-            'channelDestination' => $channelDestination,
-            'channelTypeID' => $channelTypeID,
-            'notificationProfileID' => $notificationProfileID,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NotificationChannelNewResponse {
-        [$parsed, $options] = NotificationChannelCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'channelDestination' => $channelDestination,
+                'channelTypeID' => $channelTypeID,
+                'notificationProfileID' => $notificationProfileID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'notification_channels',
-            body: (object) $parsed,
-            options: $options,
-            convert: NotificationChannelNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -86,19 +76,19 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * Get a notification channel.
      *
+     * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NotificationChannelGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['notification_channels/%1$s', $id],
-            options: $requestOptions,
-            convert: NotificationChannelGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -106,53 +96,33 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * Update a notification channel.
      *
+     * @param string $notificationChannelID the id of the resource
      * @param string $channelDestination the destination associated with the channel type
-     * @param NotificationChannelUpdateParams\ChannelTypeID|value-of<NotificationChannelUpdateParams\ChannelTypeID> $channelTypeID A Channel Type ID
+     * @param \Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID|value-of<\Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID> $channelTypeID A Channel Type ID
      * @param string $notificationProfileID a UUID reference to the associated Notification Profile
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        string $id,
-        $channelDestination = omit,
-        $channelTypeID = omit,
-        $notificationProfileID = omit,
-        ?RequestOptions $requestOptions = null,
+        string $notificationChannelID,
+        ?string $channelDestination = null,
+        \Telnyx\NotificationChannels\NotificationChannelUpdateParams\ChannelTypeID|string|null $channelTypeID = null,
+        ?string $notificationProfileID = null,
+        RequestOptions|array|null $requestOptions = null,
     ): NotificationChannelUpdateResponse {
-        $params = [
-            'channelDestination' => $channelDestination,
-            'channelTypeID' => $channelTypeID,
-            'notificationProfileID' => $notificationProfileID,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NotificationChannelUpdateResponse {
-        [$parsed, $options] = NotificationChannelUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'channelDestination' => $channelDestination,
+                'channelTypeID' => $channelTypeID,
+                'notificationProfileID' => $notificationProfileID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['notification_channels/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: NotificationChannelUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($notificationChannelID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -160,45 +130,25 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * List notification channels.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<NotificationChannel>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): NotificationChannelListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): NotificationChannelListResponse {
-        [$parsed, $options] = NotificationChannelListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'notification_channels',
-            query: $parsed,
-            options: $options,
-            convert: NotificationChannelListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -206,18 +156,18 @@ final class NotificationChannelsService implements NotificationChannelsContract
      *
      * Delete a notification channel.
      *
+     * @param string $id the id of the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): NotificationChannelDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['notification_channels/%1$s', $id],
-            options: $requestOptions,
-            convert: NotificationChannelDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

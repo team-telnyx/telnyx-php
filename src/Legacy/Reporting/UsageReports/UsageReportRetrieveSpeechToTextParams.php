@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,22 +12,22 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Generate and fetch speech to text usage report synchronously. This endpoint will both generate and fetch the speech to text report over a specified time period.
  *
- * @see Telnyx\Legacy\Reporting\UsageReports->retrieveSpeechToText
+ * @see Telnyx\Services\Legacy\Reporting\UsageReportsService::retrieveSpeechToText()
  *
- * @phpstan-type usage_report_retrieve_speech_to_text_params = array{
- *   endDate?: \DateTimeInterface, startDate?: \DateTimeInterface
+ * @phpstan-type UsageReportRetrieveSpeechToTextParamsShape = array{
+ *   endDate?: \DateTimeInterface|null, startDate?: \DateTimeInterface|null
  * }
  */
 final class UsageReportRetrieveSpeechToTextParams implements BaseModel
 {
-    /** @use SdkModel<usage_report_retrieve_speech_to_text_params> */
+    /** @use SdkModel<UsageReportRetrieveSpeechToTextParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $endDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $startDate;
 
     public function __construct()
@@ -44,27 +44,27 @@ final class UsageReportRetrieveSpeechToTextParams implements BaseModel
         ?\DateTimeInterface $endDate = null,
         ?\DateTimeInterface $startDate = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $endDate && $obj->endDate = $endDate;
-        null !== $startDate && $obj->startDate = $startDate;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $startDate && $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withEndDate(\DateTimeInterface $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartDate(\DateTimeInterface $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 }

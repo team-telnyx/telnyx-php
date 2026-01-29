@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +13,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a new porting order object.
  *
- * @see Telnyx\PortingOrders->create
+ * @see Telnyx\Services\PortingOrdersService::create()
  *
- * @phpstan-type porting_order_create_params = array{
+ * @phpstan-type PortingOrderCreateParamsShape = array{
  *   phoneNumbers: list<string>,
- *   customerGroupReference?: string,
- *   customerReference?: string,
+ *   customerGroupReference?: string|null,
+ *   customerReference?: string|null,
  * }
  */
 final class PortingOrderCreateParams implements BaseModel
 {
-    /** @use SdkModel<porting_order_create_params> */
+    /** @use SdkModel<PortingOrderCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -31,19 +32,19 @@ final class PortingOrderCreateParams implements BaseModel
      *
      * @var list<string> $phoneNumbers
      */
-    #[Api('phone_numbers', list: 'string')]
+    #[Required('phone_numbers', list: 'string')]
     public array $phoneNumbers;
 
     /**
      * A customer-specified group reference for customer bookkeeping purposes.
      */
-    #[Api('customer_group_reference', optional: true)]
+    #[Optional('customer_group_reference')]
     public ?string $customerGroupReference;
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference', nullable: true)]
     public ?string $customerReference;
 
     /**
@@ -77,14 +78,14 @@ final class PortingOrderCreateParams implements BaseModel
         ?string $customerGroupReference = null,
         ?string $customerReference = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumbers = $phoneNumbers;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        null !== $customerGroupReference && $obj->customerGroupReference = $customerGroupReference;
-        null !== $customerReference && $obj->customerReference = $customerReference;
+        null !== $customerGroupReference && $self['customerGroupReference'] = $customerGroupReference;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +95,10 @@ final class PortingOrderCreateParams implements BaseModel
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,20 +107,20 @@ final class PortingOrderCreateParams implements BaseModel
     public function withCustomerGroupReference(
         string $customerGroupReference
     ): self {
-        $obj = clone $this;
-        $obj->customerGroupReference = $customerGroupReference;
+        $self = clone $this;
+        $self['customerGroupReference'] = $customerGroupReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A customer-specified reference number for customer bookkeeping purposes.
      */
-    public function withCustomerReference(string $customerReference): self
+    public function withCustomerReference(?string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 }

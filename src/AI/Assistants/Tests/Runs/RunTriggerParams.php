@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\Runs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Initiates immediate execution of a specific assistant test.
  *
- * @see Telnyx\AI\Assistants\Tests\Runs->trigger
+ * @see Telnyx\Services\AI\Assistants\Tests\RunsService::trigger()
  *
- * @phpstan-type run_trigger_params = array{destinationVersionID?: string}
+ * @phpstan-type RunTriggerParamsShape = array{destinationVersionID?: string|null}
  */
 final class RunTriggerParams implements BaseModel
 {
-    /** @use SdkModel<run_trigger_params> */
+    /** @use SdkModel<RunTriggerParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Optional assistant version ID to use for this test run. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version.
      */
-    #[Api('destination_version_id', optional: true)]
+    #[Optional('destination_version_id')]
     public ?string $destinationVersionID;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class RunTriggerParams implements BaseModel
      */
     public static function with(?string $destinationVersionID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $destinationVersionID && $obj->destinationVersionID = $destinationVersionID;
+        null !== $destinationVersionID && $self['destinationVersionID'] = $destinationVersionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class RunTriggerParams implements BaseModel
      */
     public function withDestinationVersionID(string $destinationVersionID): self
     {
-        $obj = clone $this;
-        $obj->destinationVersionID = $destinationVersionID;
+        $self = clone $this;
+        $self['destinationVersionID'] = $destinationVersionID;
 
-        return $obj;
+        return $self;
     }
 }

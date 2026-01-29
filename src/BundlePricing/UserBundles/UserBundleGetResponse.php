@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\UserBundles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type user_bundle_get_response = array{data: UserBundle}
+ * @phpstan-import-type UserBundleShape from \Telnyx\BundlePricing\UserBundles\UserBundle
+ *
+ * @phpstan-type UserBundleGetResponseShape = array{
+ *   data: UserBundle|UserBundleShape
+ * }
  */
-final class UserBundleGetResponse implements BaseModel, ResponseConverter
+final class UserBundleGetResponse implements BaseModel
 {
-    /** @use SdkModel<user_bundle_get_response> */
+    /** @use SdkModel<UserBundleGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public UserBundle $data;
 
     /**
@@ -46,21 +46,26 @@ final class UserBundleGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param UserBundle|UserBundleShape $data
      */
-    public static function with(UserBundle $data): self
+    public static function with(UserBundle|array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(UserBundle $data): self
+    /**
+     * @param UserBundle|UserBundleShape $data
+     */
+    public function withData(UserBundle|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

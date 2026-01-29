@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Telnyx\BundlePricing\BillingBundles\BillingBundleListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Supports filtering by country_iso and resource. Examples: filter[country_iso]=US or filter[resource]=+15617819942.
  *
- * @phpstan-type filter_alias = array{
- *   countryISO?: list<string>, resource?: list<string>
+ * @phpstan-type FilterShape = array{
+ *   countryISO?: list<string>|null, resource?: list<string>|null
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -25,7 +25,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $countryISO
      */
-    #[Api('country_iso', list: 'string', optional: true)]
+    #[Optional('country_iso', list: 'string')]
     public ?array $countryISO;
 
     /**
@@ -33,7 +33,7 @@ final class Filter implements BaseModel
      *
      * @var list<string>|null $resource
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $resource;
 
     public function __construct()
@@ -46,19 +46,19 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $countryISO
-     * @param list<string> $resource
+     * @param list<string>|null $countryISO
+     * @param list<string>|null $resource
      */
     public static function with(
         ?array $countryISO = null,
         ?array $resource = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $countryISO && $obj->countryISO = $countryISO;
-        null !== $resource && $obj->resource = $resource;
+        null !== $countryISO && $self['countryISO'] = $countryISO;
+        null !== $resource && $self['resource'] = $resource;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +68,10 @@ final class Filter implements BaseModel
      */
     public function withCountryISO(array $countryISO): self
     {
-        $obj = clone $this;
-        $obj->countryISO = $countryISO;
+        $self = clone $this;
+        $self['countryISO'] = $countryISO;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +81,9 @@ final class Filter implements BaseModel
      */
     public function withResource(array $resource): self
     {
-        $obj = clone $this;
-        $obj->resource = $resource;
+        $self = clone $this;
+        $self['resource'] = $resource;
 
-        return $obj;
+        return $self;
     }
 }

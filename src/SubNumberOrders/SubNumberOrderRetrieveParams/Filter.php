@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\SubNumberOrders\SubNumberOrderRetrieveParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[include_phone_numbers].
  *
- * @phpstan-type filter_alias = array{includePhoneNumbers?: bool}
+ * @phpstan-type FilterShape = array{includePhoneNumbers?: bool|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Include the first 50 phone number objects in the results.
      */
-    #[Api('include_phone_numbers', optional: true)]
+    #[Optional('include_phone_numbers')]
     public ?bool $includePhoneNumbers;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?bool $includePhoneNumbers = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $includePhoneNumbers && $obj->includePhoneNumbers = $includePhoneNumbers;
+        null !== $includePhoneNumbers && $self['includePhoneNumbers'] = $includePhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withIncludePhoneNumbers(bool $includePhoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->includePhoneNumbers = $includePhoneNumbers;
+        $self = clone $this;
+        $self['includePhoneNumbers'] = $includePhoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

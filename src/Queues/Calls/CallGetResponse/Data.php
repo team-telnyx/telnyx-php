@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\Queues\Calls\CallGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Queues\Calls\CallGetResponse\Data\RecordType;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   callControlID: string,
  *   callLegID: string,
  *   callSessionID: string,
@@ -19,79 +20,86 @@ use Telnyx\Queues\Calls\CallGetResponse\Data\RecordType;
  *   from: string,
  *   queueID: string,
  *   queuePosition: int,
- *   recordType: value-of<RecordType>,
+ *   recordType: RecordType|value-of<RecordType>,
  *   to: string,
  *   waitTimeSecs: int,
+ *   isAlive?: bool|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Unique identifier and token for controlling the call.
      */
-    #[Api('call_control_id')]
+    #[Required('call_control_id')]
     public string $callControlID;
 
     /**
      * ID that is unique to the call and can be used to correlate webhook events.
      */
-    #[Api('call_leg_id')]
+    #[Required('call_leg_id')]
     public string $callLegID;
 
     /**
      * ID that is unique to the call session and can be used to correlate webhook events. Call session is a group of related call legs that logically belong to the same phone call, e.g. an inbound and outbound leg of a transferred call.
      */
-    #[Api('call_session_id')]
+    #[Required('call_session_id')]
     public string $callSessionID;
 
     /**
      * Call Control App ID (formerly Telnyx connection ID) used in the call.
      */
-    #[Api('connection_id')]
+    #[Required('connection_id')]
     public string $connectionID;
 
     /**
      * ISO 8601 formatted date of when the call was put in the queue.
      */
-    #[Api('enqueued_at')]
+    #[Required('enqueued_at')]
     public string $enqueuedAt;
 
     /**
      * Number or SIP URI placing the call.
      */
-    #[Api]
+    #[Required]
     public string $from;
 
     /**
      * Unique identifier of the queue the call is in.
      */
-    #[Api('queue_id')]
+    #[Required('queue_id')]
     public string $queueID;
 
     /**
      * Current position of the call in the queue.
      */
-    #[Api('queue_position')]
+    #[Required('queue_position')]
     public int $queuePosition;
 
     /** @var value-of<RecordType> $recordType */
-    #[Api('record_type', enum: RecordType::class)]
+    #[Required('record_type', enum: RecordType::class)]
     public string $recordType;
 
     /**
      * Destination number or SIP URI of the call.
      */
-    #[Api]
+    #[Required]
     public string $to;
 
     /**
      * The time the call has been waiting in the queue, given in seconds.
      */
-    #[Api('wait_time_secs')]
+    #[Required('wait_time_secs')]
     public int $waitTimeSecs;
+
+    /**
+     * Indicates whether the call is still active in the queue.
+     */
+    #[Optional('is_alive')]
+    public ?bool $isAlive;
 
     /**
      * `new Data()` is missing required properties by the API.
@@ -154,22 +162,25 @@ final class Data implements BaseModel
         RecordType|string $recordType,
         string $to,
         int $waitTimeSecs,
+        ?bool $isAlive = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->callControlID = $callControlID;
-        $obj->callLegID = $callLegID;
-        $obj->callSessionID = $callSessionID;
-        $obj->connectionID = $connectionID;
-        $obj->enqueuedAt = $enqueuedAt;
-        $obj->from = $from;
-        $obj->queueID = $queueID;
-        $obj->queuePosition = $queuePosition;
-        $obj['recordType'] = $recordType;
-        $obj->to = $to;
-        $obj->waitTimeSecs = $waitTimeSecs;
+        $self['callControlID'] = $callControlID;
+        $self['callLegID'] = $callLegID;
+        $self['callSessionID'] = $callSessionID;
+        $self['connectionID'] = $connectionID;
+        $self['enqueuedAt'] = $enqueuedAt;
+        $self['from'] = $from;
+        $self['queueID'] = $queueID;
+        $self['queuePosition'] = $queuePosition;
+        $self['recordType'] = $recordType;
+        $self['to'] = $to;
+        $self['waitTimeSecs'] = $waitTimeSecs;
 
-        return $obj;
+        null !== $isAlive && $self['isAlive'] = $isAlive;
+
+        return $self;
     }
 
     /**
@@ -177,10 +188,10 @@ final class Data implements BaseModel
      */
     public function withCallControlID(string $callControlID): self
     {
-        $obj = clone $this;
-        $obj->callControlID = $callControlID;
+        $self = clone $this;
+        $self['callControlID'] = $callControlID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,10 +199,10 @@ final class Data implements BaseModel
      */
     public function withCallLegID(string $callLegID): self
     {
-        $obj = clone $this;
-        $obj->callLegID = $callLegID;
+        $self = clone $this;
+        $self['callLegID'] = $callLegID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +210,10 @@ final class Data implements BaseModel
      */
     public function withCallSessionID(string $callSessionID): self
     {
-        $obj = clone $this;
-        $obj->callSessionID = $callSessionID;
+        $self = clone $this;
+        $self['callSessionID'] = $callSessionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +221,10 @@ final class Data implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +232,10 @@ final class Data implements BaseModel
      */
     public function withEnqueuedAt(string $enqueuedAt): self
     {
-        $obj = clone $this;
-        $obj->enqueuedAt = $enqueuedAt;
+        $self = clone $this;
+        $self['enqueuedAt'] = $enqueuedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +243,10 @@ final class Data implements BaseModel
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +254,10 @@ final class Data implements BaseModel
      */
     public function withQueueID(string $queueID): self
     {
-        $obj = clone $this;
-        $obj->queueID = $queueID;
+        $self = clone $this;
+        $self['queueID'] = $queueID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +265,10 @@ final class Data implements BaseModel
      */
     public function withQueuePosition(int $queuePosition): self
     {
-        $obj = clone $this;
-        $obj->queuePosition = $queuePosition;
+        $self = clone $this;
+        $self['queuePosition'] = $queuePosition;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +276,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -276,10 +287,10 @@ final class Data implements BaseModel
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -287,9 +298,20 @@ final class Data implements BaseModel
      */
     public function withWaitTimeSecs(int $waitTimeSecs): self
     {
-        $obj = clone $this;
-        $obj->waitTimeSecs = $waitTimeSecs;
+        $self = clone $this;
+        $self['waitTimeSecs'] = $waitTimeSecs;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Indicates whether the call is still active in the queue.
+     */
+    public function withIsAlive(bool $isAlive): self
+    {
+        $self = clone $this;
+        $self['isAlive'] = $isAlive;
+
+        return $self;
     }
 }

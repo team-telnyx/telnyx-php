@@ -6,30 +6,36 @@ namespace Telnyx\Services\Legacy\Reporting;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\UsageReportGetSpeechToTextResponse;
-use Telnyx\Legacy\Reporting\UsageReports\UsageReportRetrieveSpeechToTextParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReportsContract;
 use Telnyx\Services\Legacy\Reporting\UsageReports\MessagingService;
 use Telnyx\Services\Legacy\Reporting\UsageReports\NumberLookupService;
 use Telnyx\Services\Legacy\Reporting\UsageReports\VoiceService;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class UsageReportsService implements UsageReportsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public UsageReportsRawService $raw;
+
+    /**
+     * @api
      */
     public MessagingService $messaging;
 
     /**
-     * @@api
+     * @api
      */
     public NumberLookupService $numberLookup;
 
     /**
-     * @@api
+     * @api
      */
     public VoiceService $voice;
 
@@ -38,6 +44,7 @@ final class UsageReportsService implements UsageReportsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new UsageReportsRawService($client);
         $this->messaging = new MessagingService($client);
         $this->numberLookup = new NumberLookupService($client);
         $this->voice = new VoiceService($client);
@@ -48,44 +55,22 @@ final class UsageReportsService implements UsageReportsContract
      *
      * Generate and fetch speech to text usage report synchronously. This endpoint will both generate and fetch the speech to text report over a specified time period.
      *
-     * @param \DateTimeInterface $endDate
-     * @param \DateTimeInterface $startDate
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveSpeechToText(
-        $endDate = omit,
-        $startDate = omit,
-        ?RequestOptions $requestOptions = null
+        ?\DateTimeInterface $endDate = null,
+        ?\DateTimeInterface $startDate = null,
+        RequestOptions|array|null $requestOptions = null,
     ): UsageReportGetSpeechToTextResponse {
-        $params = ['endDate' => $endDate, 'startDate' => $startDate];
-
-        return $this->retrieveSpeechToTextRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveSpeechToTextRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): UsageReportGetSpeechToTextResponse {
-        [$parsed, $options] = UsageReportRetrieveSpeechToTextParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['endDate' => $endDate, 'startDate' => $startDate]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'legacy/reporting/usage_reports/speech_to_text',
-            query: $parsed,
-            options: $options,
-            convert: UsageReportGetSpeechToTextResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveSpeechToText(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -4,49 +4,51 @@ declare(strict_types=1);
 
 namespace Telnyx;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MessagingHostedNumberOrder\Status;
 
 /**
- * @phpstan-type messaging_hosted_number_order = array{
- *   id?: string,
+ * @phpstan-import-type HostedNumberShape from \Telnyx\HostedNumber
+ *
+ * @phpstan-type MessagingHostedNumberOrderShape = array{
+ *   id?: string|null,
  *   messagingProfileID?: string|null,
- *   phoneNumbers?: list<HostedNumber>,
- *   recordType?: string,
- *   status?: value-of<Status>,
+ *   phoneNumbers?: list<HostedNumber|HostedNumberShape>|null,
+ *   recordType?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class MessagingHostedNumberOrder implements BaseModel
 {
-    /** @use SdkModel<messaging_hosted_number_order> */
+    /** @use SdkModel<MessagingHostedNumberOrderShape> */
     use SdkModel;
 
     /**
      * Resource unique identifier.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Automatically associate the number with this messaging profile ID when the order is complete.
      */
-    #[Api('messaging_profile_id', nullable: true, optional: true)]
+    #[Optional('messaging_profile_id', nullable: true)]
     public ?string $messagingProfileID;
 
     /** @var list<HostedNumber>|null $phoneNumbers */
-    #[Api('phone_numbers', list: HostedNumber::class, optional: true)]
+    #[Optional('phone_numbers', list: HostedNumber::class)]
     public ?array $phoneNumbers;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /** @var value-of<Status>|null $status */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -59,8 +61,8 @@ final class MessagingHostedNumberOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<HostedNumber> $phoneNumbers
-     * @param Status|value-of<Status> $status
+     * @param list<HostedNumber|HostedNumberShape>|null $phoneNumbers
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -69,15 +71,15 @@ final class MessagingHostedNumberOrder implements BaseModel
         ?string $recordType = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj['status'] = $status;
+        null !== $id && $self['id'] = $id;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,10 +87,10 @@ final class MessagingHostedNumberOrder implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,21 +98,21 @@ final class MessagingHostedNumberOrder implements BaseModel
      */
     public function withMessagingProfileID(?string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<HostedNumber> $phoneNumbers
+     * @param list<HostedNumber|HostedNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -118,10 +120,10 @@ final class MessagingHostedNumberOrder implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -129,9 +131,9 @@ final class MessagingHostedNumberOrder implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

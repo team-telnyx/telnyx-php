@@ -9,31 +9,22 @@ use Telnyx\RequestOptions;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
 use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface SetiContract
 {
     /**
      * @api
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveBlackBoxTestResults(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
-    ): SetiGetBlackBoxTestResultsResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveBlackBoxTestResultsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SetiGetBlackBoxTestResultsResponse;
 }

@@ -5,6 +5,7 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -34,10 +35,11 @@ final class ChargesBreakdownTest extends TestCase
         }
 
         $result = $this->client->chargesBreakdown->retrieve(
-            startDate: new \DateTimeImmutable('2025-05-01')
+            startDate: '2025-05-01'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChargesBreakdownGetResponse::class, $result);
     }
 
     #[Test]
@@ -48,9 +50,12 @@ final class ChargesBreakdownTest extends TestCase
         }
 
         $result = $this->client->chargesBreakdown->retrieve(
-            startDate: new \DateTimeImmutable('2025-05-01')
+            startDate: '2025-05-01',
+            endDate: '2025-06-01',
+            format: 'json'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ChargesBreakdownGetResponse::class, $result);
     }
 }

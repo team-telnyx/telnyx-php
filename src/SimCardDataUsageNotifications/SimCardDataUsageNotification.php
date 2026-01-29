@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardDataUsageNotifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
@@ -12,51 +12,53 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold;
 /**
  * The SIM card individual data usage notification information.
  *
- * @phpstan-type sim_card_data_usage_notification = array{
- *   id?: string,
- *   createdAt?: string,
- *   recordType?: string,
- *   simCardID?: string,
- *   threshold?: Threshold,
- *   updatedAt?: string,
+ * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotification\Threshold
+ *
+ * @phpstan-type SimCardDataUsageNotificationShape = array{
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   simCardID?: string|null,
+ *   threshold?: null|Threshold|ThresholdShape,
+ *   updatedAt?: string|null,
  * }
  */
 final class SimCardDataUsageNotification implements BaseModel
 {
-    /** @use SdkModel<sim_card_data_usage_notification> */
+    /** @use SdkModel<SimCardDataUsageNotificationShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The identification UUID of the related SIM card resource.
      */
-    #[Api('sim_card_id', optional: true)]
+    #[Optional('sim_card_id')]
     public ?string $simCardID;
 
     /**
      * Data usage threshold that will trigger the notification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Threshold $threshold;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     public function __construct()
@@ -68,25 +70,27 @@ final class SimCardDataUsageNotification implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Threshold|ThresholdShape|null $threshold
      */
     public static function with(
         ?string $id = null,
         ?string $createdAt = null,
         ?string $recordType = null,
         ?string $simCardID = null,
-        ?Threshold $threshold = null,
+        Threshold|array|null $threshold = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $simCardID && $obj->simCardID = $simCardID;
-        null !== $threshold && $obj->threshold = $threshold;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $simCardID && $self['simCardID'] = $simCardID;
+        null !== $threshold && $self['threshold'] = $threshold;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +98,10 @@ final class SimCardDataUsageNotification implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,18 +109,18 @@ final class SimCardDataUsageNotification implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,21 +128,23 @@ final class SimCardDataUsageNotification implements BaseModel
      */
     public function withSimCardID(string $simCardID): self
     {
-        $obj = clone $this;
-        $obj->simCardID = $simCardID;
+        $self = clone $this;
+        $self['simCardID'] = $simCardID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Data usage threshold that will trigger the notification.
+     *
+     * @param Threshold|ThresholdShape $threshold
      */
-    public function withThreshold(Threshold $threshold): self
+    public function withThreshold(Threshold|array $threshold): self
     {
-        $obj = clone $this;
-        $obj->threshold = $threshold;
+        $self = clone $this;
+        $self['threshold'] = $threshold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,9 +152,9 @@ final class SimCardDataUsageNotification implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

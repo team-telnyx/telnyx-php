@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\MdrUsageReports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,32 +14,32 @@ use Telnyx\Reports\MdrUsageReports\MdrUsageReportCreateParams\AggregationType;
 /**
  * Submit request for new new messaging usage report. This endpoint will pull and aggregate messaging data in specified time period.
  *
- * @see Telnyx\Reports\MdrUsageReports->create
+ * @see Telnyx\Services\Reports\MdrUsageReportsService::create()
  *
- * @phpstan-type mdr_usage_report_create_params = array{
+ * @phpstan-type MdrUsageReportCreateParamsShape = array{
  *   aggregationType: AggregationType|value-of<AggregationType>,
  *   endDate: \DateTimeInterface,
  *   startDate: \DateTimeInterface,
- *   profiles?: string,
+ *   profiles?: string|null,
  * }
  */
 final class MdrUsageReportCreateParams implements BaseModel
 {
-    /** @use SdkModel<mdr_usage_report_create_params> */
+    /** @use SdkModel<MdrUsageReportCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var value-of<AggregationType> $aggregationType */
-    #[Api('aggregation_type', enum: AggregationType::class)]
+    #[Required('aggregation_type', enum: AggregationType::class)]
     public string $aggregationType;
 
-    #[Api('end_date')]
+    #[Required('end_date')]
     public \DateTimeInterface $endDate;
 
-    #[Api('start_date')]
+    #[Required('start_date')]
     public \DateTimeInterface $startDate;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profiles;
 
     /**
@@ -78,15 +79,15 @@ final class MdrUsageReportCreateParams implements BaseModel
         \DateTimeInterface $startDate,
         ?string $profiles = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['aggregationType'] = $aggregationType;
-        $obj->endDate = $endDate;
-        $obj->startDate = $startDate;
+        $self['aggregationType'] = $aggregationType;
+        $self['endDate'] = $endDate;
+        $self['startDate'] = $startDate;
 
-        null !== $profiles && $obj->profiles = $profiles;
+        null !== $profiles && $self['profiles'] = $profiles;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,33 +96,33 @@ final class MdrUsageReportCreateParams implements BaseModel
     public function withAggregationType(
         AggregationType|string $aggregationType
     ): self {
-        $obj = clone $this;
-        $obj['aggregationType'] = $aggregationType;
+        $self = clone $this;
+        $self['aggregationType'] = $aggregationType;
 
-        return $obj;
+        return $self;
     }
 
     public function withEndDate(\DateTimeInterface $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withStartDate(\DateTimeInterface $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     public function withProfiles(string $profiles): self
     {
-        $obj = clone $this;
-        $obj->profiles = $profiles;
+        $self = clone $this;
+        $self['profiles'] = $profiles;
 
-        return $obj;
+        return $self;
     }
 }

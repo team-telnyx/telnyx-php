@@ -6,6 +6,15 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfile;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileDeleteResponse;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileGetResponse;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileNewResponse;
+use Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateResponse;
+use Telnyx\OutboundVoiceProfiles\ServicePlan;
+use Telnyx\OutboundVoiceProfiles\TrafficType;
+use Telnyx\OutboundVoiceProfiles\UsagePaymentMethod;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +44,8 @@ final class OutboundVoiceProfilesTest extends TestCase
 
         $result = $this->client->outboundVoiceProfiles->create(name: 'office');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OutboundVoiceProfileNewResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +55,34 @@ final class OutboundVoiceProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->outboundVoiceProfiles->create(name: 'office');
+        $result = $this->client->outboundVoiceProfiles->create(
+            name: 'office',
+            billingGroupID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            callRecording: [
+                'callRecordingCallerPhoneNumbers' => ['+19705555098'],
+                'callRecordingChannels' => 'dual',
+                'callRecordingFormat' => 'mp3',
+                'callRecordingType' => 'by_caller_phone_number',
+            ],
+            callingWindow: [
+                'callsPerCld' => 5,
+                'endTime' => '20:00:00.00Z',
+                'startTime' => '08:00:00.00Z',
+            ],
+            concurrentCallLimit: 10,
+            dailySpendLimit: '100.00',
+            dailySpendLimitEnabled: true,
+            enabled: true,
+            maxDestinationRate: 10,
+            servicePlan: ServicePlan::GLOBAL,
+            tags: ['office-profile'],
+            trafficType: TrafficType::CONVERSATIONAL,
+            usagePaymentMethod: UsagePaymentMethod::RATE_DECK,
+            whitelistedDestinations: ['US', 'BR', 'AU'],
+        );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OutboundVoiceProfileNewResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +96,8 @@ final class OutboundVoiceProfilesTest extends TestCase
             '1293384261075731499'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OutboundVoiceProfileGetResponse::class, $result);
     }
 
     #[Test]
@@ -76,7 +112,8 @@ final class OutboundVoiceProfilesTest extends TestCase
             name: 'office'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OutboundVoiceProfileUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -88,10 +125,33 @@ final class OutboundVoiceProfilesTest extends TestCase
 
         $result = $this->client->outboundVoiceProfiles->update(
             '1293384261075731499',
-            name: 'office'
+            name: 'office',
+            billingGroupID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            callRecording: [
+                'callRecordingCallerPhoneNumbers' => ['+19705555098'],
+                'callRecordingChannels' => 'dual',
+                'callRecordingFormat' => 'mp3',
+                'callRecordingType' => 'by_caller_phone_number',
+            ],
+            callingWindow: [
+                'callsPerCld' => 5,
+                'endTime' => '20:00:00.00Z',
+                'startTime' => '08:00:00.00Z',
+            ],
+            concurrentCallLimit: 10,
+            dailySpendLimit: '100.00',
+            dailySpendLimitEnabled: true,
+            enabled: true,
+            maxDestinationRate: 10,
+            servicePlan: ServicePlan::GLOBAL,
+            tags: ['office-profile'],
+            trafficType: TrafficType::CONVERSATIONAL,
+            usagePaymentMethod: UsagePaymentMethod::RATE_DECK,
+            whitelistedDestinations: ['US', 'BR', 'AU'],
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OutboundVoiceProfileUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -101,9 +161,15 @@ final class OutboundVoiceProfilesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->outboundVoiceProfiles->list();
+        $page = $this->client->outboundVoiceProfiles->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(OutboundVoiceProfile::class, $item);
+        }
     }
 
     #[Test]
@@ -117,6 +183,7 @@ final class OutboundVoiceProfilesTest extends TestCase
             '1293384261075731499'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(OutboundVoiceProfileDeleteResponse::class, $result);
     }
 }

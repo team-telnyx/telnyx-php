@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\UserTags\UserTagListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[starts_with].
  *
- * @phpstan-type filter_alias = array{startsWith?: string}
+ * @phpstan-type FilterShape = array{startsWith?: string|null}
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
      * Filter tags by prefix.
      */
-    #[Api('starts_with', optional: true)]
+    #[Optional('starts_with')]
     public ?string $startsWith;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class Filter implements BaseModel
      */
     public static function with(?string $startsWith = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $startsWith && $obj->startsWith = $startsWith;
+        null !== $startsWith && $self['startsWith'] = $startsWith;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class Filter implements BaseModel
      */
     public function withStartsWith(string $startsWith): self
     {
-        $obj = clone $this;
-        $obj->startsWith = $startsWith;
+        $self = clone $this;
+        $self['startsWith'] = $startsWith;
 
-        return $obj;
+        return $self;
     }
 }

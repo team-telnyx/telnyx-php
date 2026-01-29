@@ -8,62 +8,65 @@ use Telnyx\Conferences\Conference\EndedBy;
 use Telnyx\Conferences\Conference\EndReason;
 use Telnyx\Conferences\Conference\RecordType;
 use Telnyx\Conferences\Conference\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type conference_alias = array{
+ * @phpstan-import-type EndedByShape from \Telnyx\Conferences\Conference\EndedBy
+ *
+ * @phpstan-type ConferenceShape = array{
  *   id: string,
  *   createdAt: string,
  *   expiresAt: string,
  *   name: string,
- *   recordType: value-of<RecordType>,
- *   connectionID?: string,
- *   endReason?: value-of<EndReason>,
- *   endedBy?: EndedBy,
- *   region?: string,
- *   status?: value-of<Status>,
- *   updatedAt?: string,
+ *   recordType: RecordType|value-of<RecordType>,
+ *   connectionID?: string|null,
+ *   endReason?: null|EndReason|value-of<EndReason>,
+ *   endedBy?: null|EndedBy|EndedByShape,
+ *   region?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: string|null,
  * }
  */
 final class Conference implements BaseModel
 {
-    /** @use SdkModel<conference_alias> */
+    /** @use SdkModel<ConferenceShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies the conference.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * ISO 8601 formatted date of when the conference was created.
      */
-    #[Api('created_at')]
+    #[Required('created_at')]
     public string $createdAt;
 
     /**
      * ISO 8601 formatted date of when the conference will expire.
      */
-    #[Api('expires_at')]
+    #[Required('expires_at')]
     public string $expiresAt;
 
     /**
      * Name of the conference.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /** @var value-of<RecordType> $recordType */
-    #[Api('record_type', enum: RecordType::class)]
+    #[Required('record_type', enum: RecordType::class)]
     public string $recordType;
 
     /**
      * Identifies the connection associated with the conference.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
@@ -71,19 +74,19 @@ final class Conference implements BaseModel
      *
      * @var value-of<EndReason>|null $endReason
      */
-    #[Api('end_reason', enum: EndReason::class, optional: true)]
+    #[Optional('end_reason', enum: EndReason::class)]
     public ?string $endReason;
 
     /**
      * IDs related to who ended the conference. It is expected for them to all be there or all be null.
      */
-    #[Api('ended_by', optional: true)]
+    #[Optional('ended_by')]
     public ?EndedBy $endedBy;
 
     /**
      * Region where the conference is hosted.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $region;
 
     /**
@@ -91,13 +94,13 @@ final class Conference implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date of when the conference was last updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     /**
@@ -132,8 +135,9 @@ final class Conference implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param RecordType|value-of<RecordType> $recordType
-     * @param EndReason|value-of<EndReason> $endReason
-     * @param Status|value-of<Status> $status
+     * @param EndReason|value-of<EndReason>|null $endReason
+     * @param EndedBy|EndedByShape|null $endedBy
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         string $id,
@@ -143,27 +147,27 @@ final class Conference implements BaseModel
         RecordType|string $recordType,
         ?string $connectionID = null,
         EndReason|string|null $endReason = null,
-        ?EndedBy $endedBy = null,
+        EndedBy|array|null $endedBy = null,
         ?string $region = null,
         Status|string|null $status = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->expiresAt = $expiresAt;
-        $obj->name = $name;
-        $obj['recordType'] = $recordType;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['expiresAt'] = $expiresAt;
+        $self['name'] = $name;
+        $self['recordType'] = $recordType;
 
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $endReason && $obj['endReason'] = $endReason;
-        null !== $endedBy && $obj->endedBy = $endedBy;
-        null !== $region && $obj->region = $region;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $endReason && $self['endReason'] = $endReason;
+        null !== $endedBy && $self['endedBy'] = $endedBy;
+        null !== $region && $self['region'] = $region;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,10 +175,10 @@ final class Conference implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +186,10 @@ final class Conference implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -193,10 +197,10 @@ final class Conference implements BaseModel
      */
     public function withExpiresAt(string $expiresAt): self
     {
-        $obj = clone $this;
-        $obj->expiresAt = $expiresAt;
+        $self = clone $this;
+        $self['expiresAt'] = $expiresAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -204,10 +208,10 @@ final class Conference implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -215,10 +219,10 @@ final class Conference implements BaseModel
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,10 +230,10 @@ final class Conference implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -239,21 +243,23 @@ final class Conference implements BaseModel
      */
     public function withEndReason(EndReason|string $endReason): self
     {
-        $obj = clone $this;
-        $obj['endReason'] = $endReason;
+        $self = clone $this;
+        $self['endReason'] = $endReason;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * IDs related to who ended the conference. It is expected for them to all be there or all be null.
+     *
+     * @param EndedBy|EndedByShape $endedBy
      */
-    public function withEndedBy(EndedBy $endedBy): self
+    public function withEndedBy(EndedBy|array $endedBy): self
     {
-        $obj = clone $this;
-        $obj->endedBy = $endedBy;
+        $self = clone $this;
+        $self['endedBy'] = $endedBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -261,10 +267,10 @@ final class Conference implements BaseModel
      */
     public function withRegion(string $region): self
     {
-        $obj = clone $this;
-        $obj->region = $region;
+        $self = clone $this;
+        $self['region'] = $region;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +280,10 @@ final class Conference implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,9 +291,9 @@ final class Conference implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

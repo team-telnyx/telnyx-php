@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrderPhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,23 +12,24 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates requirements for a single phone number within a number order.
  *
- * @see Telnyx\NumberOrderPhoneNumbers->updateRequirements
+ * @see Telnyx\Services\NumberOrderPhoneNumbersService::updateRequirements()
  *
- * @phpstan-type number_order_phone_number_update_requirements_params = array{
- *   regulatoryRequirements?: list<UpdateRegulatoryRequirement>
+ * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
+ *
+ * @phpstan-type NumberOrderPhoneNumberUpdateRequirementsParamsShape = array{
+ *   regulatoryRequirements?: list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape>|null,
  * }
  */
 final class NumberOrderPhoneNumberUpdateRequirementsParams implements BaseModel
 {
-    /** @use SdkModel<number_order_phone_number_update_requirements_params> */
+    /** @use SdkModel<NumberOrderPhoneNumberUpdateRequirementsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<UpdateRegulatoryRequirement>|null $regulatoryRequirements */
-    #[Api(
+    #[Optional(
         'regulatory_requirements',
-        list: UpdateRegulatoryRequirement::class,
-        optional: true,
+        list: UpdateRegulatoryRequirement::class
     )]
     public ?array $regulatoryRequirements;
 
@@ -42,26 +43,26 @@ final class NumberOrderPhoneNumberUpdateRequirementsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape>|null $regulatoryRequirements
      */
     public static function with(?array $regulatoryRequirements = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $regulatoryRequirements && $obj->regulatoryRequirements = $regulatoryRequirements;
+        null !== $regulatoryRequirements && $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<UpdateRegulatoryRequirement> $regulatoryRequirements
+     * @param list<UpdateRegulatoryRequirement|UpdateRegulatoryRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements
     ): self {
-        $obj = clone $this;
-        $obj->regulatoryRequirements = $regulatoryRequirements;
+        $self = clone $this;
+        $self['regulatoryRequirements'] = $regulatoryRequirements;
 
-        return $obj;
+        return $self;
     }
 }

@@ -9,37 +9,27 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface RecordingsContract
 {
     /**
      * @api
      *
-     * @param string $accountSid
-     * @param string $callSid
-     * @param Status|value-of<Status> $status
+     * @param string $recordingSid path param: Uniquely identifies the recording by id
+     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param string $callSid path param: The CallSid that identifies the call to update
+     * @param Status|value-of<Status> $status Body param
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function recordingSidJson(
         string $recordingSid,
-        $accountSid,
-        $callSid,
-        $status = omit,
-        ?RequestOptions $requestOptions = null,
-    ): RecordingRecordingSidJsonResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function recordingSidJsonRaw(
-        string $recordingSid,
-        array $params,
-        ?RequestOptions $requestOptions = null,
+        string $accountSid,
+        string $callSid,
+        Status|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RecordingRecordingSidJsonResponse;
 }

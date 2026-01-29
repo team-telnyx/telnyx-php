@@ -5,61 +5,63 @@ declare(strict_types=1);
 namespace Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse;
 
 use Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-import-type ResultShape from \Telnyx\ChargesBreakdown\ChargesBreakdownGetResponse\Data\Result
+ *
+ * @phpstan-type DataShape = array{
  *   currency: string,
- *   endDate: \DateTimeInterface,
- *   results: list<Result>,
- *   startDate: \DateTimeInterface,
+ *   endDate: string,
+ *   results: list<Result|ResultShape>,
+ *   startDate: string,
  *   userEmail: string,
  *   userID: string,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Currency code.
      */
-    #[Api]
+    #[Required]
     public string $currency;
 
     /**
      * End date of the breakdown period.
      */
-    #[Api('end_date')]
-    public \DateTimeInterface $endDate;
+    #[Required('end_date')]
+    public string $endDate;
 
     /**
      * List of phone number charge breakdowns.
      *
      * @var list<Result> $results
      */
-    #[Api(list: Result::class)]
+    #[Required(list: Result::class)]
     public array $results;
 
     /**
      * Start date of the breakdown period.
      */
-    #[Api('start_date')]
-    public \DateTimeInterface $startDate;
+    #[Required('start_date')]
+    public string $startDate;
 
     /**
      * User email address.
      */
-    #[Api('user_email')]
+    #[Required('user_email')]
     public string $userEmail;
 
     /**
      * User identifier.
      */
-    #[Api('user_id')]
+    #[Required('user_id')]
     public string $userID;
 
     /**
@@ -99,26 +101,26 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Result> $results
+     * @param list<Result|ResultShape> $results
      */
     public static function with(
         string $currency,
-        \DateTimeInterface $endDate,
+        string $endDate,
         array $results,
-        \DateTimeInterface $startDate,
+        string $startDate,
         string $userEmail,
         string $userID,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->currency = $currency;
-        $obj->endDate = $endDate;
-        $obj->results = $results;
-        $obj->startDate = $startDate;
-        $obj->userEmail = $userEmail;
-        $obj->userID = $userID;
+        $self['currency'] = $currency;
+        $self['endDate'] = $endDate;
+        $self['results'] = $results;
+        $self['startDate'] = $startDate;
+        $self['userEmail'] = $userEmail;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,45 +128,45 @@ final class Data implements BaseModel
      */
     public function withCurrency(string $currency): self
     {
-        $obj = clone $this;
-        $obj->currency = $currency;
+        $self = clone $this;
+        $self['currency'] = $currency;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * End date of the breakdown period.
      */
-    public function withEndDate(\DateTimeInterface $endDate): self
+    public function withEndDate(string $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of phone number charge breakdowns.
      *
-     * @param list<Result> $results
+     * @param list<Result|ResultShape> $results
      */
     public function withResults(array $results): self
     {
-        $obj = clone $this;
-        $obj->results = $results;
+        $self = clone $this;
+        $self['results'] = $results;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Start date of the breakdown period.
      */
-    public function withStartDate(\DateTimeInterface $startDate): self
+    public function withStartDate(string $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -172,10 +174,10 @@ final class Data implements BaseModel
      */
     public function withUserEmail(string $userEmail): self
     {
-        $obj = clone $this;
-        $obj->userEmail = $userEmail;
+        $self = clone $this;
+        $self['userEmail'] = $userEmail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -183,9 +185,9 @@ final class Data implements BaseModel
      */
     public function withUserID(string $userID): self
     {
-        $obj = clone $this;
-        $obj->userID = $userID;
+        $self = clone $this;
+        $self['userID'] = $userID;
 
-        return $obj;
+        return $self;
     }
 }

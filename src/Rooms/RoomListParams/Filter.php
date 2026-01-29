@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\RoomListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Rooms\RoomListParams\Filter\DateCreatedAt;
@@ -13,27 +13,30 @@ use Telnyx\Rooms\RoomListParams\Filter\DateUpdatedAt;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[date_created_at][eq], filter[date_created_at][gte], filter[date_created_at][lte], filter[date_updated_at][eq], filter[date_updated_at][gte], filter[date_updated_at][lte], filter[unique_name].
  *
- * @phpstan-type filter_alias = array{
- *   dateCreatedAt?: DateCreatedAt,
- *   dateUpdatedAt?: DateUpdatedAt,
- *   uniqueName?: string,
+ * @phpstan-import-type DateCreatedAtShape from \Telnyx\Rooms\RoomListParams\Filter\DateCreatedAt
+ * @phpstan-import-type DateUpdatedAtShape from \Telnyx\Rooms\RoomListParams\Filter\DateUpdatedAt
+ *
+ * @phpstan-type FilterShape = array{
+ *   dateCreatedAt?: null|DateCreatedAt|DateCreatedAtShape,
+ *   dateUpdatedAt?: null|DateUpdatedAt|DateUpdatedAtShape,
+ *   uniqueName?: string|null,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
-    #[Api('date_created_at', optional: true)]
+    #[Optional('date_created_at')]
     public ?DateCreatedAt $dateCreatedAt;
 
-    #[Api('date_updated_at', optional: true)]
+    #[Optional('date_updated_at')]
     public ?DateUpdatedAt $dateUpdatedAt;
 
     /**
      * Unique_name for filtering rooms.
      */
-    #[Api('unique_name', optional: true)]
+    #[Optional('unique_name')]
     public ?string $uniqueName;
 
     public function __construct()
@@ -45,35 +48,44 @@ final class Filter implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DateCreatedAt|DateCreatedAtShape|null $dateCreatedAt
+     * @param DateUpdatedAt|DateUpdatedAtShape|null $dateUpdatedAt
      */
     public static function with(
-        ?DateCreatedAt $dateCreatedAt = null,
-        ?DateUpdatedAt $dateUpdatedAt = null,
+        DateCreatedAt|array|null $dateCreatedAt = null,
+        DateUpdatedAt|array|null $dateUpdatedAt = null,
         ?string $uniqueName = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dateCreatedAt && $obj->dateCreatedAt = $dateCreatedAt;
-        null !== $dateUpdatedAt && $obj->dateUpdatedAt = $dateUpdatedAt;
-        null !== $uniqueName && $obj->uniqueName = $uniqueName;
+        null !== $dateCreatedAt && $self['dateCreatedAt'] = $dateCreatedAt;
+        null !== $dateUpdatedAt && $self['dateUpdatedAt'] = $dateUpdatedAt;
+        null !== $uniqueName && $self['uniqueName'] = $uniqueName;
 
-        return $obj;
+        return $self;
     }
 
-    public function withDateCreatedAt(DateCreatedAt $dateCreatedAt): self
+    /**
+     * @param DateCreatedAt|DateCreatedAtShape $dateCreatedAt
+     */
+    public function withDateCreatedAt(DateCreatedAt|array $dateCreatedAt): self
     {
-        $obj = clone $this;
-        $obj->dateCreatedAt = $dateCreatedAt;
+        $self = clone $this;
+        $self['dateCreatedAt'] = $dateCreatedAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withDateUpdatedAt(DateUpdatedAt $dateUpdatedAt): self
+    /**
+     * @param DateUpdatedAt|DateUpdatedAtShape $dateUpdatedAt
+     */
+    public function withDateUpdatedAt(DateUpdatedAt|array $dateUpdatedAt): self
     {
-        $obj = clone $this;
-        $obj->dateUpdatedAt = $dateUpdatedAt;
+        $self = clone $this;
+        $self['dateUpdatedAt'] = $dateUpdatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +93,9 @@ final class Filter implements BaseModel
      */
     public function withUniqueName(string $uniqueName): self
     {
-        $obj = clone $this;
-        $obj->uniqueName = $uniqueName;
+        $self = clone $this;
+        $self['uniqueName'] = $uniqueName;
 
-        return $obj;
+        return $self;
     }
 }

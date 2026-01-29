@@ -4,42 +4,42 @@ declare(strict_types=1);
 
 namespace Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type toll_free = array{
- *   features?: list<string>,
- *   fullPstnReplacement?: bool,
- *   internationalSMS?: bool,
- *   p2p?: bool,
- *   quickship?: bool,
- *   reservable?: bool,
+ * @phpstan-type TollFreeShape = array{
+ *   features?: list<string>|null,
+ *   fullPstnReplacement?: bool|null,
+ *   internationalSMS?: bool|null,
+ *   p2p?: bool|null,
+ *   quickship?: bool|null,
+ *   reservable?: bool|null,
  * }
  */
 final class TollFree implements BaseModel
 {
-    /** @use SdkModel<toll_free> */
+    /** @use SdkModel<TollFreeShape> */
     use SdkModel;
 
     /** @var list<string>|null $features */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $features;
 
-    #[Api('full_pstn_replacement', optional: true)]
+    #[Optional('full_pstn_replacement')]
     public ?bool $fullPstnReplacement;
 
-    #[Api('international_sms', optional: true)]
+    #[Optional('international_sms')]
     public ?bool $internationalSMS;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $p2p;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $quickship;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $reservable;
 
     public function __construct()
@@ -52,7 +52,7 @@ final class TollFree implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $features
+     * @param list<string>|null $features
      */
     public static function with(
         ?array $features = null,
@@ -62,16 +62,16 @@ final class TollFree implements BaseModel
         ?bool $quickship = null,
         ?bool $reservable = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $features && $obj->features = $features;
-        null !== $fullPstnReplacement && $obj->fullPstnReplacement = $fullPstnReplacement;
-        null !== $internationalSMS && $obj->internationalSMS = $internationalSMS;
-        null !== $p2p && $obj->p2p = $p2p;
-        null !== $quickship && $obj->quickship = $quickship;
-        null !== $reservable && $obj->reservable = $reservable;
+        null !== $features && $self['features'] = $features;
+        null !== $fullPstnReplacement && $self['fullPstnReplacement'] = $fullPstnReplacement;
+        null !== $internationalSMS && $self['internationalSMS'] = $internationalSMS;
+        null !== $p2p && $self['p2p'] = $p2p;
+        null !== $quickship && $self['quickship'] = $quickship;
+        null !== $reservable && $self['reservable'] = $reservable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,49 +79,49 @@ final class TollFree implements BaseModel
      */
     public function withFeatures(array $features): self
     {
-        $obj = clone $this;
-        $obj->features = $features;
+        $self = clone $this;
+        $self['features'] = $features;
 
-        return $obj;
+        return $self;
     }
 
     public function withFullPstnReplacement(bool $fullPstnReplacement): self
     {
-        $obj = clone $this;
-        $obj->fullPstnReplacement = $fullPstnReplacement;
+        $self = clone $this;
+        $self['fullPstnReplacement'] = $fullPstnReplacement;
 
-        return $obj;
+        return $self;
     }
 
     public function withInternationalSMS(bool $internationalSMS): self
     {
-        $obj = clone $this;
-        $obj->internationalSMS = $internationalSMS;
+        $self = clone $this;
+        $self['internationalSMS'] = $internationalSMS;
 
-        return $obj;
+        return $self;
     }
 
     public function withP2p(bool $p2p): self
     {
-        $obj = clone $this;
-        $obj->p2p = $p2p;
+        $self = clone $this;
+        $self['p2p'] = $p2p;
 
-        return $obj;
+        return $self;
     }
 
     public function withQuickship(bool $quickship): self
     {
-        $obj = clone $this;
-        $obj->quickship = $quickship;
+        $self = clone $this;
+        $self['quickship'] = $quickship;
 
-        return $obj;
+        return $self;
     }
 
     public function withReservable(bool $reservable): self
     {
-        $obj = clone $this;
-        $obj->reservable = $reservable;
+        $self = clone $this;
+        $self['reservable'] = $reservable;
 
-        return $obj;
+        return $self;
     }
 }

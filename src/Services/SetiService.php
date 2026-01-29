@@ -6,62 +6,50 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SetiContract;
 use Telnyx\Seti\SetiGetBlackBoxTestResultsResponse;
-use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams;
 use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SetiService implements SetiContract
 {
     /**
+     * @api
+     */
+    public SetiRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SetiRawService($client);
+    }
 
     /**
      * @api
      *
      * Returns the results of the various black box tests
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[product]
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveBlackBoxTestResults(
-        $filter = omit,
-        ?RequestOptions $requestOptions = null
+        Filter|array|null $filter = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SetiGetBlackBoxTestResultsResponse {
-        $params = ['filter' => $filter];
+        $params = Util::removeNulls(['filter' => $filter]);
 
-        return $this->retrieveBlackBoxTestResultsRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveBlackBoxTestResults(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveBlackBoxTestResultsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SetiGetBlackBoxTestResultsResponse {
-        [$parsed, $options] = SetiRetrieveBlackBoxTestResultsParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'seti/black_box_test_results',
-            query: $parsed,
-            options: $options,
-            convert: SetiGetBlackBoxTestResultsResponse::class,
-        );
+        return $response->parse();
     }
 }

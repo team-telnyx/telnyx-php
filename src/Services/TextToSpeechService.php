@@ -6,21 +6,29 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechContract;
-use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
-use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TextToSpeechService implements TextToSpeechContract
 {
     /**
+     * @api
+     */
+    public TextToSpeechRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new TextToSpeechRawService($client);
+    }
 
     /**
      * @api
@@ -37,44 +45,21 @@ final class TextToSpeechService implements TextToSpeechContract
      * - Telnyx.KokoroTTS.af
      *
      * Use the `GET /text-to-speech/voices` endpoint to get a complete list of available voices.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function generateSpeech(
-        $text,
-        $voice,
-        ?RequestOptions $requestOptions = null
+        string $text,
+        string $voice,
+        RequestOptions|array|null $requestOptions = null,
     ): string {
-        $params = ['text' => $text, 'voice' => $voice];
+        $params = Util::removeNulls(['text' => $text, 'voice' => $voice]);
 
-        return $this->generateSpeechRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->generateSpeech(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function generateSpeechRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): string {
-        [$parsed, $options] = TextToSpeechGenerateSpeechParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'text-to-speech/speech',
-            headers: ['Accept' => 'audio/mpeg'],
-            body: (object) $parsed,
-            options: $options,
-            convert: 'string',
-        );
+        return $response->parse();
     }
 
     /**
@@ -84,44 +69,22 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
      * @param Provider|value-of<Provider> $provider Filter voices by provider
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listVoices(
-        $elevenlabsAPIKeyRef = omit,
-        $provider = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $elevenlabsAPIKeyRef = null,
+        Provider|string|null $provider = null,
+        RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechListVoicesResponse {
-        $params = [
-            'elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider,
-        ];
-
-        return $this->listVoicesRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listVoicesRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): TextToSpeechListVoicesResponse {
-        [$parsed, $options] = TextToSpeechListVoicesParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'text-to-speech/voices',
-            query: $parsed,
-            options: $options,
-            convert: TextToSpeechListVoicesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listVoices(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

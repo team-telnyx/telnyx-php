@@ -13,20 +13,28 @@ use Telnyx\Services\Storage\MigrationSourcesService;
 use Telnyx\Services\Storage\MigrationsService;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class StorageService implements StorageContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public StorageRawService $raw;
+
+    /**
+     * @api
      */
     public BucketsService $buckets;
 
     /**
-     * @@api
+     * @api
      */
     public MigrationSourcesService $migrationSources;
 
     /**
-     * @@api
+     * @api
      */
     public MigrationsService $migrations;
 
@@ -35,6 +43,7 @@ final class StorageService implements StorageContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new StorageRawService($client);
         $this->buckets = new BucketsService($client);
         $this->migrationSources = new MigrationSourcesService($client);
         $this->migrations = new MigrationsService($client);
@@ -45,17 +54,16 @@ final class StorageService implements StorageContract
      *
      * List Migration Source coverage
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function listMigrationSourceCoverage(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): StorageListMigrationSourceCoverageResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'storage/migration_source_coverage',
-            options: $requestOptions,
-            convert: StorageListMigrationSourceCoverageResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listMigrationSourceCoverage(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

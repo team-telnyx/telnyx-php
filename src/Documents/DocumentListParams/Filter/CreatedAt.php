@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents\DocumentListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type created_at = array{
- *   gt?: \DateTimeInterface, lt?: \DateTimeInterface
+ * @phpstan-type CreatedAtShape = array{
+ *   gt?: \DateTimeInterface|null, lt?: \DateTimeInterface|null
  * }
  */
 final class CreatedAt implements BaseModel
 {
-    /** @use SdkModel<created_at> */
+    /** @use SdkModel<CreatedAtShape> */
     use SdkModel;
 
     /**
      * Filter by created at greater than provided value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $gt;
 
     /**
      * Filter by created at less than provided value.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $lt;
 
     public function __construct()
@@ -44,12 +44,12 @@ final class CreatedAt implements BaseModel
         ?\DateTimeInterface $gt = null,
         ?\DateTimeInterface $lt = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $gt && $obj->gt = $gt;
-        null !== $lt && $obj->lt = $lt;
+        null !== $gt && $self['gt'] = $gt;
+        null !== $lt && $self['lt'] = $lt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class CreatedAt implements BaseModel
      */
     public function withGt(\DateTimeInterface $gt): self
     {
-        $obj = clone $this;
-        $obj->gt = $gt;
+        $self = clone $this;
+        $self['gt'] = $gt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class CreatedAt implements BaseModel
      */
     public function withLt(\DateTimeInterface $lt): self
     {
-        $obj = clone $this;
-        $obj->lt = $lt;
+        $self = clone $this;
+        $self['lt'] = $lt;
 
-        return $obj;
+        return $self;
     }
 }

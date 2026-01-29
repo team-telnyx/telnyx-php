@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\OtaUpdates\OtaUpdateGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsPreference;
@@ -12,13 +12,15 @@ use Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsP
 /**
  * A JSON object representation of the operation. The information present here will relate directly to the source of the OTA request.
  *
- * @phpstan-type settings_alias = array{
- *   mobileNetworkOperatorsPreferences?: list<MobileNetworkOperatorsPreference>
+ * @phpstan-import-type MobileNetworkOperatorsPreferenceShape from \Telnyx\OtaUpdates\OtaUpdateGetResponse\Data\Settings\MobileNetworkOperatorsPreference
+ *
+ * @phpstan-type SettingsShape = array{
+ *   mobileNetworkOperatorsPreferences?: list<MobileNetworkOperatorsPreference|MobileNetworkOperatorsPreferenceShape>|null,
  * }
  */
 final class Settings implements BaseModel
 {
-    /** @use SdkModel<settings_alias> */
+    /** @use SdkModel<SettingsShape> */
     use SdkModel;
 
     /**
@@ -26,10 +28,9 @@ final class Settings implements BaseModel
      *
      * @var list<MobileNetworkOperatorsPreference>|null $mobileNetworkOperatorsPreferences
      */
-    #[Api(
+    #[Optional(
         'mobile_network_operators_preferences',
         list: MobileNetworkOperatorsPreference::class,
-        optional: true,
     )]
     public ?array $mobileNetworkOperatorsPreferences;
 
@@ -43,29 +44,29 @@ final class Settings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<MobileNetworkOperatorsPreference> $mobileNetworkOperatorsPreferences
+     * @param list<MobileNetworkOperatorsPreference|MobileNetworkOperatorsPreferenceShape>|null $mobileNetworkOperatorsPreferences
      */
     public static function with(
         ?array $mobileNetworkOperatorsPreferences = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $mobileNetworkOperatorsPreferences && $obj->mobileNetworkOperatorsPreferences = $mobileNetworkOperatorsPreferences;
+        null !== $mobileNetworkOperatorsPreferences && $self['mobileNetworkOperatorsPreferences'] = $mobileNetworkOperatorsPreferences;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * A list of mobile network operators and the priority that should be applied when the SIM is connecting to the network.
      *
-     * @param list<MobileNetworkOperatorsPreference> $mobileNetworkOperatorsPreferences
+     * @param list<MobileNetworkOperatorsPreference|MobileNetworkOperatorsPreferenceShape> $mobileNetworkOperatorsPreferences
      */
     public function withMobileNetworkOperatorsPreferences(
         array $mobileNetworkOperatorsPreferences
     ): self {
-        $obj = clone $this;
-        $obj->mobileNetworkOperatorsPreferences = $mobileNetworkOperatorsPreferences;
+        $self = clone $this;
+        $self['mobileNetworkOperatorsPreferences'] = $mobileNetworkOperatorsPreferences;
 
-        return $obj;
+        return $self;
     }
 }

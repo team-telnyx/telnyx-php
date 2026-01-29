@@ -6,69 +6,57 @@ namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\SslCertificateContract;
-use Telnyx\Storage\Buckets\SslCertificate\SslCertificateCreateParams;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateDeleteResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateGetResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateNewResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SslCertificateService implements SslCertificateContract
 {
     /**
-     * @internal
+     * @api
      */
-    public function __construct(private Client $client) {}
+    public SslCertificateRawService $raw;
 
     /**
-     * @api
-     *
-     * Uploads an SSL certificate and its matching secret so that you can use Telnyx’s storage as your CDN.
-     *
-     * @param string $certificate The SSL certificate file
-     * @param string $privateKey The private key file
-     *
-     * @throws APIException
+     * @internal
      */
-    public function create(
-        string $bucketName,
-        $certificate = omit,
-        $privateKey = omit,
-        ?RequestOptions $requestOptions = null,
-    ): SslCertificateNewResponse {
-        $params = ['certificate' => $certificate, 'privateKey' => $privateKey];
-
-        return $this->createRaw($bucketName, $params, $requestOptions);
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SslCertificateRawService($client);
     }
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * Uploads an SSL certificate and its matching secret so that you can use Telnyx's storage as your CDN.
+     *
+     * @param string $bucketName The name of the bucket
+     * @param string $certificate The SSL certificate file
+     * @param string $privateKey The private key file
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function createRaw(
+    public function create(
         string $bucketName,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        ?string $certificate = null,
+        ?string $privateKey = null,
+        RequestOptions|array|null $requestOptions = null,
     ): SslCertificateNewResponse {
-        [$parsed, $options] = SslCertificateCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['certificate' => $certificate, 'privateKey' => $privateKey]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'put',
-            path: ['storage/buckets/%1$s/ssl_certificate', $bucketName],
-            headers: ['Content-Type' => 'multipart/form-data'],
-            body: (object) $parsed,
-            options: $options,
-            convert: SslCertificateNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create($bucketName, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -76,19 +64,19 @@ final class SslCertificateService implements SslCertificateContract
      *
      * Returns the stored certificate detail of a bucket, if applicable.
      *
+     * @param string $bucketName The name of the bucket
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SslCertificateGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['storage/buckets/%1$s/ssl_certificate', $bucketName],
-            options: $requestOptions,
-            convert: SslCertificateGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($bucketName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -96,18 +84,18 @@ final class SslCertificateService implements SslCertificateContract
      *
      * Deletes an SSL certificate and its matching secret.
      *
+     * @param string $bucketName Bucket Name
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $bucketName,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SslCertificateDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['storage/buckets/%1$s/ssl_certificate', $bucketName],
-            options: $requestOptions,
-            convert: SslCertificateDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($bucketName, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

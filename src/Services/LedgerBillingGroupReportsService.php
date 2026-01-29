@@ -6,20 +6,29 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportCreateParams;
+use Telnyx\Core\Util;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportGetResponse;
 use Telnyx\LedgerBillingGroupReports\LedgerBillingGroupReportNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\LedgerBillingGroupReportsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class LedgerBillingGroupReportsService implements LedgerBillingGroupReportsContract
 {
     /**
+     * @api
+     */
+    public LedgerBillingGroupReportsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new LedgerBillingGroupReportsRawService($client);
+    }
 
     /**
      * @api
@@ -28,43 +37,21 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
      *
      * @param int $month Month of the ledger billing group report
      * @param int $year Year of the ledger billing group report
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $month = omit,
-        $year = omit,
-        ?RequestOptions $requestOptions = null
+        ?int $month = null,
+        ?int $year = null,
+        RequestOptions|array|null $requestOptions = null,
     ): LedgerBillingGroupReportNewResponse {
-        $params = ['month' => $month, 'year' => $year];
+        $params = Util::removeNulls(['month' => $month, 'year' => $year]);
 
-        return $this->createRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): LedgerBillingGroupReportNewResponse {
-        [$parsed, $options] = LedgerBillingGroupReportCreateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'ledger_billing_group_reports',
-            body: (object) $parsed,
-            options: $options,
-            convert: LedgerBillingGroupReportNewResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -72,18 +59,18 @@ final class LedgerBillingGroupReportsService implements LedgerBillingGroupReport
      *
      * Get a ledger billing group report
      *
+     * @param string $id The id of the ledger billing group report
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): LedgerBillingGroupReportGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['ledger_billing_group_reports/%1$s', $id],
-            options: $requestOptions,
-            convert: LedgerBillingGroupReportGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

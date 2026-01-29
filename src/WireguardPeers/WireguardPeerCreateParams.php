@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\WireguardPeers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +13,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Create a new WireGuard Peer. Current limitation of 5 peers per interface can be created.
  *
- * @see Telnyx\WireguardPeers->create
+ * @see Telnyx\Services\WireguardPeersService::create()
  *
- * @phpstan-type wireguard_peer_create_params = array{
- *   wireguardInterfaceID: string, publicKey?: string
+ * @phpstan-type WireguardPeerCreateParamsShape = array{
+ *   wireguardInterfaceID: string, publicKey?: string|null
  * }
  */
 final class WireguardPeerCreateParams implements BaseModel
 {
-    /** @use SdkModel<wireguard_peer_create_params> */
+    /** @use SdkModel<WireguardPeerCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The id of the wireguard interface associated with the peer.
      */
-    #[Api('wireguard_interface_id')]
+    #[Required('wireguard_interface_id')]
     public string $wireguardInterfaceID;
 
     /**
      * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      */
-    #[Api('public_key', optional: true)]
+    #[Optional('public_key')]
     public ?string $publicKey;
 
     /**
@@ -64,13 +65,13 @@ final class WireguardPeerCreateParams implements BaseModel
         string $wireguardInterfaceID,
         ?string $publicKey = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->wireguardInterfaceID = $wireguardInterfaceID;
+        $self['wireguardInterfaceID'] = $wireguardInterfaceID;
 
-        null !== $publicKey && $obj->publicKey = $publicKey;
+        null !== $publicKey && $self['publicKey'] = $publicKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,10 +79,10 @@ final class WireguardPeerCreateParams implements BaseModel
      */
     public function withWireguardInterfaceID(string $wireguardInterfaceID): self
     {
-        $obj = clone $this;
-        $obj->wireguardInterfaceID = $wireguardInterfaceID;
+        $self = clone $this;
+        $self['wireguardInterfaceID'] = $wireguardInterfaceID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,9 +90,9 @@ final class WireguardPeerCreateParams implements BaseModel
      */
     public function withPublicKey(string $publicKey): self
     {
-        $obj = clone $this;
-        $obj->publicKey = $publicKey;
+        $self = clone $this;
+        $self['publicKey'] = $publicKey;
 
-        return $obj;
+        return $self;
     }
 }

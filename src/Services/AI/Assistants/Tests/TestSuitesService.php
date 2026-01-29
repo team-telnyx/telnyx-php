@@ -11,10 +11,18 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuitesContract;
 use Telnyx\Services\AI\Assistants\Tests\TestSuites\RunsService;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class TestSuitesService implements TestSuitesContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public TestSuitesRawService $raw;
+
+    /**
+     * @api
      */
     public RunsService $runs;
 
@@ -23,6 +31,7 @@ final class TestSuitesService implements TestSuitesContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new TestSuitesRawService($client);
         $this->runs = new RunsService($client);
     }
 
@@ -31,17 +40,16 @@ final class TestSuitesService implements TestSuitesContract
      *
      * Retrieves a list of all distinct test suite names available to the current user
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): TestSuiteListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'ai/assistants/tests/test-suites',
-            options: $requestOptions,
-            convert: TestSuiteListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

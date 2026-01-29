@@ -5,28 +5,30 @@ declare(strict_types=1);
 namespace Telnyx\AI\Chat\ChatCreateCompletionParams;
 
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content\TextAndImageArray;
 use Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Role;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type message_alias = array{
- *   content: string|list<TextAndImageArray>, role: value-of<Role>
+ * @phpstan-import-type ContentVariants from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content
+ * @phpstan-import-type ContentShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message\Content
+ *
+ * @phpstan-type MessageShape = array{
+ *   content: ContentShape, role: Role|value-of<Role>
  * }
  */
 final class Message implements BaseModel
 {
-    /** @use SdkModel<message_alias> */
+    /** @use SdkModel<MessageShape> */
     use SdkModel;
 
-    /** @var string|list<TextAndImageArray> $content */
-    #[Api(union: Content::class)]
+    /** @var ContentVariants $content */
+    #[Required(union: Content::class)]
     public string|array $content;
 
     /** @var value-of<Role> $role */
-    #[Api(enum: Role::class)]
+    #[Required(enum: Role::class)]
     public string $role;
 
     /**
@@ -53,28 +55,28 @@ final class Message implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param string|list<TextAndImageArray> $content
+     * @param ContentShape $content
      * @param Role|value-of<Role> $role
      */
     public static function with(string|array $content, Role|string $role): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->content = $content;
-        $obj['role'] = $role;
+        $self['content'] = $content;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param string|list<TextAndImageArray> $content
+     * @param ContentShape $content
      */
     public function withContent(string|array $content): self
     {
-        $obj = clone $this;
-        $obj->content = $content;
+        $self = clone $this;
+        $self['content'] = $content;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,9 +84,9 @@ final class Message implements BaseModel
      */
     public function withRole(Role|string $role): self
     {
-        $obj = clone $this;
-        $obj['role'] = $role;
+        $self = clone $this;
+        $self['role'] = $role;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -41,11 +42,12 @@ final class JsonTest extends TestCase
             ->json
             ->deleteRecordingTranscriptionSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                'account_sid'
+                accountSid: 'account_sid'
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -63,11 +65,12 @@ final class JsonTest extends TestCase
             ->json
             ->deleteRecordingTranscriptionSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                'account_sid'
+                accountSid: 'account_sid'
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -85,11 +88,15 @@ final class JsonTest extends TestCase
             ->json
             ->retrieveRecordingTranscriptionSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                'account_sid'
+                accountSid: 'account_sid'
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            JsonGetRecordingTranscriptionSidJsonResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -107,10 +114,14 @@ final class JsonTest extends TestCase
             ->json
             ->retrieveRecordingTranscriptionSidJson(
                 '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-                'account_sid'
+                accountSid: 'account_sid'
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            JsonGetRecordingTranscriptionSidJsonResponse::class,
+            $result
+        );
     }
 }

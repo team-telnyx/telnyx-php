@@ -6,6 +6,10 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\Recordings\RecordingDeleteResponse;
+use Telnyx\Recordings\RecordingGetResponse;
+use Telnyx\Recordings\RecordingResponseData;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +39,8 @@ final class RecordingsTest extends TestCase
 
         $result = $this->client->recordings->retrieve('recording_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RecordingGetResponse::class, $result);
     }
 
     #[Test]
@@ -45,9 +50,15 @@ final class RecordingsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->recordings->list();
+        $page = $this->client->recordings->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(RecordingResponseData::class, $item);
+        }
     }
 
     #[Test]
@@ -59,6 +70,7 @@ final class RecordingsTest extends TestCase
 
         $result = $this->client->recordings->delete('recording_id');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RecordingDeleteResponse::class, $result);
     }
 }

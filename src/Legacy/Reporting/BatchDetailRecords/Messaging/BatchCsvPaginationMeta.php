@@ -4,32 +4,47 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type batch_csv_pagination_meta = array{
- *   pageNumber?: int, pageSize?: int, totalPages?: int, totalResults?: int
+ * @phpstan-type BatchCsvPaginationMetaShape = array{
+ *   pageNumber: int, totalPages: int, pageSize?: int|null, totalResults?: int|null
  * }
  */
 final class BatchCsvPaginationMeta implements BaseModel
 {
-    /** @use SdkModel<batch_csv_pagination_meta> */
+    /** @use SdkModel<BatchCsvPaginationMetaShape> */
     use SdkModel;
 
-    #[Api('page_number', optional: true)]
-    public ?int $pageNumber;
+    #[Required('page_number')]
+    public int $pageNumber;
 
-    #[Api('page_size', optional: true)]
+    #[Required('total_pages')]
+    public int $totalPages;
+
+    #[Optional('page_size')]
     public ?int $pageSize;
 
-    #[Api('total_pages', optional: true)]
-    public ?int $totalPages;
-
-    #[Api('total_results', optional: true)]
+    #[Optional('total_results')]
     public ?int $totalResults;
 
+    /**
+     * `new BatchCsvPaginationMeta()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * BatchCsvPaginationMeta::with(pageNumber: ..., totalPages: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new BatchCsvPaginationMeta)->withPageNumber(...)->withTotalPages(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -41,50 +56,51 @@ final class BatchCsvPaginationMeta implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?int $pageNumber = null,
+        int $pageNumber,
+        int $totalPages,
         ?int $pageSize = null,
-        ?int $totalPages = null,
         ?int $totalResults = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $totalPages && $obj->totalPages = $totalPages;
-        null !== $totalResults && $obj->totalResults = $totalResults;
+        $self['pageNumber'] = $pageNumber;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $totalResults && $self['totalResults'] = $totalResults;
+
+        return $self;
     }
 
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
-
-        return $obj;
+        return $self;
     }
 
     public function withTotalPages(int $totalPages): self
     {
-        $obj = clone $this;
-        $obj->totalPages = $totalPages;
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 
     public function withTotalResults(int $totalResults): self
     {
-        $obj = clone $this;
-        $obj->totalResults = $totalResults;
+        $self = clone $this;
+        $self['totalResults'] = $totalResults;
 
-        return $obj;
+        return $self;
     }
 }

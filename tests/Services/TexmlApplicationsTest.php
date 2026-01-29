@@ -6,6 +6,14 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\CredentialConnections\AnchorsiteOverride;
+use Telnyx\CredentialConnections\DtmfType;
+use Telnyx\DefaultPagination;
+use Telnyx\TexmlApplications\TexmlApplication;
+use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
+use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
+use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
+use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,7 +46,8 @@ final class TexmlApplicationsTest extends TestCase
             voiceURL: 'https://example.com'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TexmlApplicationNewResponse::class, $result);
     }
 
     #[Test]
@@ -50,10 +59,31 @@ final class TexmlApplicationsTest extends TestCase
 
         $result = $this->client->texmlApplications->create(
             friendlyName: 'call-router',
-            voiceURL: 'https://example.com'
+            voiceURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            callCostInWebhooks: false,
+            dtmfType: DtmfType::INBAND,
+            firstCommandTimeout: true,
+            firstCommandTimeoutSecs: 10,
+            inbound: [
+                'channelLimit' => 10,
+                'shakenStirEnabled' => true,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
+            ],
+            outbound: [
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
+            ],
+            statusCallback: 'https://example.com',
+            statusCallbackMethod: 'get',
+            tags: ['tag1', 'tag2'],
+            voiceFallbackURL: 'https://fallback.example.com',
+            voiceMethod: 'get',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TexmlApplicationNewResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +95,8 @@ final class TexmlApplicationsTest extends TestCase
 
         $result = $this->client->texmlApplications->retrieve('1293384261075731499');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TexmlApplicationGetResponse::class, $result);
     }
 
     #[Test]
@@ -81,7 +112,8 @@ final class TexmlApplicationsTest extends TestCase
             voiceURL: 'https://example.com',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TexmlApplicationUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -95,9 +127,30 @@ final class TexmlApplicationsTest extends TestCase
             '1293384261075731499',
             friendlyName: 'call-router',
             voiceURL: 'https://example.com',
+            active: false,
+            anchorsiteOverride: AnchorsiteOverride::AMSTERDAM_NETHERLANDS,
+            callCostInWebhooks: false,
+            dtmfType: DtmfType::INBAND,
+            firstCommandTimeout: true,
+            firstCommandTimeoutSecs: 10,
+            inbound: [
+                'channelLimit' => 10,
+                'shakenStirEnabled' => true,
+                'sipSubdomain' => 'example',
+                'sipSubdomainReceiveSettings' => 'only_my_connections',
+            ],
+            outbound: [
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
+            ],
+            statusCallback: 'https://example.com',
+            statusCallbackMethod: 'get',
+            tags: ['tag1', 'tag2'],
+            voiceFallbackURL: 'https://fallback.example.com',
+            voiceMethod: 'get',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TexmlApplicationUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -107,9 +160,15 @@ final class TexmlApplicationsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->texmlApplications->list();
+        $page = $this->client->texmlApplications->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(TexmlApplication::class, $item);
+        }
     }
 
     #[Test]
@@ -121,6 +180,7 @@ final class TexmlApplicationsTest extends TestCase
 
         $result = $this->client->texmlApplications->delete('1293384261075731499');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TexmlApplicationDeleteResponse::class, $result);
     }
 }

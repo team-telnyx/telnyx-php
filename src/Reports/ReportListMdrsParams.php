@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -15,42 +15,42 @@ use Telnyx\Reports\ReportListMdrsParams\Status;
 /**
  * Fetch all Mdr records.
  *
- * @see Telnyx\Reports->listMdrs
+ * @see Telnyx\Services\ReportsService::listMdrs()
  *
- * @phpstan-type report_list_mdrs_params = array{
- *   id?: string,
- *   cld?: string,
- *   cli?: string,
- *   direction?: Direction|value-of<Direction>,
- *   endDate?: string,
- *   messageType?: MessageType|value-of<MessageType>,
- *   profile?: string,
- *   startDate?: string,
- *   status?: Status|value-of<Status>,
+ * @phpstan-type ReportListMdrsParamsShape = array{
+ *   id?: string|null,
+ *   cld?: string|null,
+ *   cli?: string|null,
+ *   direction?: null|Direction|value-of<Direction>,
+ *   endDate?: string|null,
+ *   messageType?: null|MessageType|value-of<MessageType>,
+ *   profile?: string|null,
+ *   startDate?: string|null,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class ReportListMdrsParams implements BaseModel
 {
-    /** @use SdkModel<report_list_mdrs_params> */
+    /** @use SdkModel<ReportListMdrsParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Message uuid.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Destination number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cld;
 
     /**
      * Origination number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $cli;
 
     /**
@@ -58,13 +58,13 @@ final class ReportListMdrsParams implements BaseModel
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
      * Pagination end date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $endDate;
 
     /**
@@ -72,19 +72,19 @@ final class ReportListMdrsParams implements BaseModel
      *
      * @var value-of<MessageType>|null $messageType
      */
-    #[Api(enum: MessageType::class, optional: true)]
+    #[Optional(enum: MessageType::class)]
     public ?string $messageType;
 
     /**
      * Name of the profile.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $profile;
 
     /**
      * Pagination start date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $startDate;
 
     /**
@@ -92,7 +92,7 @@ final class ReportListMdrsParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -105,9 +105,9 @@ final class ReportListMdrsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Direction|value-of<Direction> $direction
-     * @param MessageType|value-of<MessageType> $messageType
-     * @param Status|value-of<Status> $status
+     * @param Direction|value-of<Direction>|null $direction
+     * @param MessageType|value-of<MessageType>|null $messageType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -120,19 +120,19 @@ final class ReportListMdrsParams implements BaseModel
         ?string $startDate = null,
         Status|string|null $status = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $cld && $obj->cld = $cld;
-        null !== $cli && $obj->cli = $cli;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $endDate && $obj->endDate = $endDate;
-        null !== $messageType && $obj['messageType'] = $messageType;
-        null !== $profile && $obj->profile = $profile;
-        null !== $startDate && $obj->startDate = $startDate;
-        null !== $status && $obj['status'] = $status;
+        null !== $id && $self['id'] = $id;
+        null !== $cld && $self['cld'] = $cld;
+        null !== $cli && $self['cli'] = $cli;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $endDate && $self['endDate'] = $endDate;
+        null !== $messageType && $self['messageType'] = $messageType;
+        null !== $profile && $self['profile'] = $profile;
+        null !== $startDate && $self['startDate'] = $startDate;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,10 +140,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -151,10 +151,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withCld(string $cld): self
     {
-        $obj = clone $this;
-        $obj->cld = $cld;
+        $self = clone $this;
+        $self['cld'] = $cld;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +162,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withCli(string $cli): self
     {
-        $obj = clone $this;
-        $obj->cli = $cli;
+        $self = clone $this;
+        $self['cli'] = $cli;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +175,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +186,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withEndDate(string $endDate): self
     {
-        $obj = clone $this;
-        $obj->endDate = $endDate;
+        $self = clone $this;
+        $self['endDate'] = $endDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -199,10 +199,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withMessageType(MessageType|string $messageType): self
     {
-        $obj = clone $this;
-        $obj['messageType'] = $messageType;
+        $self = clone $this;
+        $self['messageType'] = $messageType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +210,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withProfile(string $profile): self
     {
-        $obj = clone $this;
-        $obj->profile = $profile;
+        $self = clone $this;
+        $self['profile'] = $profile;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +221,10 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withStartDate(string $startDate): self
     {
-        $obj = clone $this;
-        $obj->startDate = $startDate;
+        $self = clone $this;
+        $self['startDate'] = $startDate;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,9 +234,9 @@ final class ReportListMdrsParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

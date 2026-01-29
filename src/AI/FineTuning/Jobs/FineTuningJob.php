@@ -6,68 +6,66 @@ namespace Telnyx\AI\FineTuning\Jobs;
 
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters;
 use Telnyx\AI\FineTuning\Jobs\FineTuningJob\Status;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * The `fine_tuning.job` object represents a fine-tuning job that has been created through the API.
  *
- * @phpstan-type fine_tuning_job = array{
+ * @phpstan-import-type HyperparametersShape from \Telnyx\AI\FineTuning\Jobs\FineTuningJob\Hyperparameters
+ *
+ * @phpstan-type FineTuningJobShape = array{
  *   id: string,
  *   createdAt: int,
  *   finishedAt: int|null,
- *   hyperparameters: Hyperparameters,
+ *   hyperparameters: Hyperparameters|HyperparametersShape,
  *   model: string,
  *   organizationID: string,
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  *   trainedTokens: int|null,
  *   trainingFile: string,
  * }
  */
-final class FineTuningJob implements BaseModel, ResponseConverter
+final class FineTuningJob implements BaseModel
 {
-    /** @use SdkModel<fine_tuning_job> */
+    /** @use SdkModel<FineTuningJobShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The name of the fine-tuned model that is being created.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * The Unix timestamp (in seconds) for when the fine-tuning job was created.
      */
-    #[Api('created_at')]
+    #[Required('created_at')]
     public int $createdAt;
 
     /**
      * The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be null if the fine-tuning job is still running.
      */
-    #[Api('finished_at')]
+    #[Required('finished_at')]
     public ?int $finishedAt;
 
     /**
      * The hyperparameters used for the fine-tuning job.
      */
-    #[Api]
+    #[Required]
     public Hyperparameters $hyperparameters;
 
     /**
      * The base model that is being fine-tuned.
      */
-    #[Api]
+    #[Required]
     public string $model;
 
     /**
      * The organization that owns the fine-tuning job.
      */
-    #[Api('organization_id')]
+    #[Required('organization_id')]
     public string $organizationID;
 
     /**
@@ -75,19 +73,19 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * The total number of billable tokens processed by this fine-tuning job. The value will be null if the fine-tuning job is still running.
      */
-    #[Api('trained_tokens')]
+    #[Required('trained_tokens')]
     public ?int $trainedTokens;
 
     /**
      * The storage bucket or object used for training.
      */
-    #[Api('training_file')]
+    #[Required('training_file')]
     public string $trainingFile;
 
     /**
@@ -133,32 +131,33 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Hyperparameters|HyperparametersShape $hyperparameters
      * @param Status|value-of<Status> $status
      */
     public static function with(
         string $id,
         int $createdAt,
         ?int $finishedAt,
-        Hyperparameters $hyperparameters,
+        Hyperparameters|array $hyperparameters,
         string $model,
         string $organizationID,
         Status|string $status,
         ?int $trainedTokens,
         string $trainingFile,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->createdAt = $createdAt;
-        $obj->finishedAt = $finishedAt;
-        $obj->hyperparameters = $hyperparameters;
-        $obj->model = $model;
-        $obj->organizationID = $organizationID;
-        $obj['status'] = $status;
-        $obj->trainedTokens = $trainedTokens;
-        $obj->trainingFile = $trainingFile;
+        $self['id'] = $id;
+        $self['createdAt'] = $createdAt;
+        $self['finishedAt'] = $finishedAt;
+        $self['hyperparameters'] = $hyperparameters;
+        $self['model'] = $model;
+        $self['organizationID'] = $organizationID;
+        $self['status'] = $status;
+        $self['trainedTokens'] = $trainedTokens;
+        $self['trainingFile'] = $trainingFile;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,10 +165,10 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -177,10 +176,10 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      */
     public function withCreatedAt(int $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -188,21 +187,24 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      */
     public function withFinishedAt(?int $finishedAt): self
     {
-        $obj = clone $this;
-        $obj->finishedAt = $finishedAt;
+        $self = clone $this;
+        $self['finishedAt'] = $finishedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * The hyperparameters used for the fine-tuning job.
+     *
+     * @param Hyperparameters|HyperparametersShape $hyperparameters
      */
-    public function withHyperparameters(Hyperparameters $hyperparameters): self
-    {
-        $obj = clone $this;
-        $obj->hyperparameters = $hyperparameters;
+    public function withHyperparameters(
+        Hyperparameters|array $hyperparameters
+    ): self {
+        $self = clone $this;
+        $self['hyperparameters'] = $hyperparameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -210,10 +212,10 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      */
     public function withModel(string $model): self
     {
-        $obj = clone $this;
-        $obj->model = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +223,10 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj->organizationID = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +236,10 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -245,10 +247,10 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      */
     public function withTrainedTokens(?int $trainedTokens): self
     {
-        $obj = clone $this;
-        $obj->trainedTokens = $trainedTokens;
+        $self = clone $this;
+        $self['trainedTokens'] = $trainedTokens;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -256,9 +258,9 @@ final class FineTuningJob implements BaseModel, ResponseConverter
      */
     public function withTrainingFile(string $trainingFile): self
     {
-        $obj = clone $this;
-        $obj->trainingFile = $trainingFile;
+        $self = clone $this;
+        $self['trainingFile'] = $trainingFile;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,37 +4,41 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PortingOrderListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers\PhoneNumber;
 
 /**
- * @phpstan-type phone_numbers = array{
- *   carrierName?: string, countryCode?: string, phoneNumber?: PhoneNumber
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\PortingOrders\PortingOrderListParams\Filter\PhoneNumbers\PhoneNumber
+ *
+ * @phpstan-type PhoneNumbersShape = array{
+ *   carrierName?: string|null,
+ *   countryCode?: string|null,
+ *   phoneNumber?: null|PhoneNumber|PhoneNumberShape,
  * }
  */
 final class PhoneNumbers implements BaseModel
 {
-    /** @use SdkModel<phone_numbers> */
+    /** @use SdkModel<PhoneNumbersShape> */
     use SdkModel;
 
     /**
      * Filter results by old service provider.
      */
-    #[Api('carrier_name', optional: true)]
+    #[Optional('carrier_name')]
     public ?string $carrierName;
 
     /**
      * Filter results by country ISO 3166-1 alpha-2 code.
      */
-    #[Api('country_code', optional: true)]
+    #[Optional('country_code')]
     public ?string $countryCode;
 
     /**
      * Phone number pattern filtering operations.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?PhoneNumber $phoneNumber;
 
     public function __construct()
@@ -46,19 +50,21 @@ final class PhoneNumbers implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param PhoneNumber|PhoneNumberShape|null $phoneNumber
      */
     public static function with(
         ?string $carrierName = null,
         ?string $countryCode = null,
-        ?PhoneNumber $phoneNumber = null,
+        PhoneNumber|array|null $phoneNumber = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrierName && $obj->carrierName = $carrierName;
-        null !== $countryCode && $obj->countryCode = $countryCode;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $carrierName && $self['carrierName'] = $carrierName;
+        null !== $countryCode && $self['countryCode'] = $countryCode;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,10 +72,10 @@ final class PhoneNumbers implements BaseModel
      */
     public function withCarrierName(string $carrierName): self
     {
-        $obj = clone $this;
-        $obj->carrierName = $carrierName;
+        $self = clone $this;
+        $self['carrierName'] = $carrierName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,20 +83,22 @@ final class PhoneNumbers implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj->countryCode = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Phone number pattern filtering operations.
+     *
+     * @param PhoneNumber|PhoneNumberShape $phoneNumber
      */
-    public function withPhoneNumber(PhoneNumber $phoneNumber): self
+    public function withPhoneNumber(PhoneNumber|array $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

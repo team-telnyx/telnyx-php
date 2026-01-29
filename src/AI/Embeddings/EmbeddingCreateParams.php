@@ -6,7 +6,8 @@ namespace Telnyx\AI\Embeddings;
 
 use Telnyx\AI\Embeddings\EmbeddingCreateParams\EmbeddingModel;
 use Telnyx\AI\Embeddings\EmbeddingCreateParams\Loader;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -33,29 +34,29 @@ use Telnyx\Core\Contracts\BaseModel;
  * This loader will split each article into paragraphs and save additional parameters relevant to Intercom docs, such as
  * `article_url` and `heading`. These values will be returned by the `/v2/ai/embeddings/similarity-search` endpoint in the `loader_metadata` field.
  *
- * @see Telnyx\AI\Embeddings->create
+ * @see Telnyx\Services\AI\EmbeddingsService::create()
  *
- * @phpstan-type embedding_create_params = array{
+ * @phpstan-type EmbeddingCreateParamsShape = array{
  *   bucketName: string,
- *   documentChunkOverlapSize?: int,
- *   documentChunkSize?: int,
- *   embeddingModel?: EmbeddingModel|value-of<EmbeddingModel>,
- *   loader?: Loader|value-of<Loader>,
+ *   documentChunkOverlapSize?: int|null,
+ *   documentChunkSize?: int|null,
+ *   embeddingModel?: null|EmbeddingModel|value-of<EmbeddingModel>,
+ *   loader?: null|Loader|value-of<Loader>,
  * }
  */
 final class EmbeddingCreateParams implements BaseModel
 {
-    /** @use SdkModel<embedding_create_params> */
+    /** @use SdkModel<EmbeddingCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api('bucket_name')]
+    #[Required('bucket_name')]
     public string $bucketName;
 
-    #[Api('document_chunk_overlap_size', optional: true)]
+    #[Optional('document_chunk_overlap_size')]
     public ?int $documentChunkOverlapSize;
 
-    #[Api('document_chunk_size', optional: true)]
+    #[Optional('document_chunk_size')]
     public ?int $documentChunkSize;
 
     /**
@@ -63,7 +64,7 @@ final class EmbeddingCreateParams implements BaseModel
      *
      * @var value-of<EmbeddingModel>|null $embeddingModel
      */
-    #[Api('embedding_model', enum: EmbeddingModel::class, optional: true)]
+    #[Optional('embedding_model', enum: EmbeddingModel::class)]
     public ?string $embeddingModel;
 
     /**
@@ -71,7 +72,7 @@ final class EmbeddingCreateParams implements BaseModel
      *
      * @var value-of<Loader>|null $loader
      */
-    #[Api(enum: Loader::class, optional: true)]
+    #[Optional(enum: Loader::class)]
     public ?string $loader;
 
     /**
@@ -98,8 +99,8 @@ final class EmbeddingCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EmbeddingModel|value-of<EmbeddingModel> $embeddingModel
-     * @param Loader|value-of<Loader> $loader
+     * @param EmbeddingModel|value-of<EmbeddingModel>|null $embeddingModel
+     * @param Loader|value-of<Loader>|null $loader
      */
     public static function with(
         string $bucketName,
@@ -108,41 +109,41 @@ final class EmbeddingCreateParams implements BaseModel
         EmbeddingModel|string|null $embeddingModel = null,
         Loader|string|null $loader = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->bucketName = $bucketName;
+        $self['bucketName'] = $bucketName;
 
-        null !== $documentChunkOverlapSize && $obj->documentChunkOverlapSize = $documentChunkOverlapSize;
-        null !== $documentChunkSize && $obj->documentChunkSize = $documentChunkSize;
-        null !== $embeddingModel && $obj['embeddingModel'] = $embeddingModel;
-        null !== $loader && $obj['loader'] = $loader;
+        null !== $documentChunkOverlapSize && $self['documentChunkOverlapSize'] = $documentChunkOverlapSize;
+        null !== $documentChunkSize && $self['documentChunkSize'] = $documentChunkSize;
+        null !== $embeddingModel && $self['embeddingModel'] = $embeddingModel;
+        null !== $loader && $self['loader'] = $loader;
 
-        return $obj;
+        return $self;
     }
 
     public function withBucketName(string $bucketName): self
     {
-        $obj = clone $this;
-        $obj->bucketName = $bucketName;
+        $self = clone $this;
+        $self['bucketName'] = $bucketName;
 
-        return $obj;
+        return $self;
     }
 
     public function withDocumentChunkOverlapSize(
         int $documentChunkOverlapSize
     ): self {
-        $obj = clone $this;
-        $obj->documentChunkOverlapSize = $documentChunkOverlapSize;
+        $self = clone $this;
+        $self['documentChunkOverlapSize'] = $documentChunkOverlapSize;
 
-        return $obj;
+        return $self;
     }
 
     public function withDocumentChunkSize(int $documentChunkSize): self
     {
-        $obj = clone $this;
-        $obj->documentChunkSize = $documentChunkSize;
+        $self = clone $this;
+        $self['documentChunkSize'] = $documentChunkSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +154,10 @@ final class EmbeddingCreateParams implements BaseModel
     public function withEmbeddingModel(
         EmbeddingModel|string $embeddingModel
     ): self {
-        $obj = clone $this;
-        $obj['embeddingModel'] = $embeddingModel;
+        $self = clone $this;
+        $self['embeddingModel'] = $embeddingModel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -166,9 +167,9 @@ final class EmbeddingCreateParams implements BaseModel
      */
     public function withLoader(Loader|string $loader): self
     {
-        $obj = clone $this;
-        $obj['loader'] = $loader;
+        $self = clone $this;
+        $self['loader'] = $loader;
 
-        return $obj;
+        return $self;
     }
 }

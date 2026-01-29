@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Voicemail;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,26 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update voicemail settings for a phone number.
  *
- * @see Telnyx\PhoneNumbers\Voicemail->update
+ * @see Telnyx\Services\PhoneNumbers\VoicemailService::update()
  *
- * @phpstan-type voicemail_update_params = array{enabled?: bool, pin?: string}
+ * @phpstan-type VoicemailUpdateParamsShape = array{
+ *   enabled?: bool|null, pin?: string|null
+ * }
  */
 final class VoicemailUpdateParams implements BaseModel
 {
-    /** @use SdkModel<voicemail_update_params> */
+    /** @use SdkModel<VoicemailUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Whether voicemail is enabled.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $enabled;
 
     /**
      * The pin used for voicemail.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $pin;
 
     public function __construct()
@@ -46,12 +48,12 @@ final class VoicemailUpdateParams implements BaseModel
      */
     public static function with(?bool $enabled = null, ?string $pin = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enabled && $obj->enabled = $enabled;
-        null !== $pin && $obj->pin = $pin;
+        null !== $enabled && $self['enabled'] = $enabled;
+        null !== $pin && $self['pin'] = $pin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +61,10 @@ final class VoicemailUpdateParams implements BaseModel
      */
     public function withEnabled(bool $enabled): self
     {
-        $obj = clone $this;
-        $obj->enabled = $enabled;
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +72,9 @@ final class VoicemailUpdateParams implements BaseModel
      */
     public function withPin(string $pin): self
     {
-        $obj = clone $this;
-        $obj->pin = $pin;
+        $self = clone $this;
+        $self['pin'] = $pin;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tools\ToolTestResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Response model for webhook tool test results.
  *
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   contentType: string,
- *   request: array<string, mixed>,
+ *   request: array<string,mixed>,
  *   response: string,
  *   statusCode: int,
  *   success: bool,
@@ -21,23 +21,23 @@ use Telnyx\Core\Contracts\BaseModel;
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('content_type')]
+    #[Required('content_type')]
     public string $contentType;
 
-    /** @var array<string, mixed> $request */
-    #[Api(map: 'mixed')]
+    /** @var array<string,mixed> $request */
+    #[Required(map: 'mixed')]
     public array $request;
 
-    #[Api]
+    #[Required]
     public string $response;
 
-    #[Api('status_code')]
+    #[Required('status_code')]
     public int $statusCode;
 
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
@@ -71,7 +71,7 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string, mixed> $request
+     * @param array<string,mixed> $request
      */
     public static function with(
         string $contentType,
@@ -80,57 +80,57 @@ final class Data implements BaseModel
         int $statusCode,
         bool $success,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->contentType = $contentType;
-        $obj->request = $request;
-        $obj->response = $response;
-        $obj->statusCode = $statusCode;
-        $obj->success = $success;
+        $self['contentType'] = $contentType;
+        $self['request'] = $request;
+        $self['response'] = $response;
+        $self['statusCode'] = $statusCode;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     public function withContentType(string $contentType): self
     {
-        $obj = clone $this;
-        $obj->contentType = $contentType;
+        $self = clone $this;
+        $self['contentType'] = $contentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param array<string, mixed> $request
+     * @param array<string,mixed> $request
      */
     public function withRequest(array $request): self
     {
-        $obj = clone $this;
-        $obj->request = $request;
+        $self = clone $this;
+        $self['request'] = $request;
 
-        return $obj;
+        return $self;
     }
 
     public function withResponse(string $response): self
     {
-        $obj = clone $this;
-        $obj->response = $response;
+        $self = clone $this;
+        $self['response'] = $response;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatusCode(int $statusCode): self
     {
-        $obj = clone $this;
-        $obj->statusCode = $statusCode;
+        $self = clone $this;
+        $self['statusCode'] = $statusCode;
 
-        return $obj;
+        return $self;
     }
 
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj->success = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 }

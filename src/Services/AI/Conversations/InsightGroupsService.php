@@ -4,24 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Conversations;
 
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupGetInsightGroupsResponse;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupInsightGroupsParams;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupRetrieveInsightGroupsParams\Page;
-use Telnyx\AI\Conversations\InsightGroups\InsightGroupUpdateParams;
+use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroup;
 use Telnyx\AI\Conversations\InsightGroups\InsightTemplateGroupDetail;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
 use Telnyx\Services\AI\Conversations\InsightGroups\InsightsService;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class InsightGroupsService implements InsightGroupsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public InsightGroupsRawService $raw;
+
+    /**
+     * @api
      */
     public InsightsService $insights;
 
@@ -30,6 +34,7 @@ final class InsightGroupsService implements InsightGroupsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new InsightGroupsRawService($client);
         $this->insights = new InsightsService($client);
     }
 
@@ -38,19 +43,19 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Get insight group by ID
      *
+     * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): InsightTemplateGroupDetail {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['ai/conversations/insight-groups/%1$s', $groupID],
-            options: $requestOptions,
-            convert: InsightTemplateGroupDetail::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($groupID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -58,51 +63,26 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Update an insight template group
      *
-     * @param string $description
-     * @param string $name
-     * @param string $webhook
+     * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $groupID,
-        $description = omit,
-        $name = omit,
-        $webhook = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $description = null,
+        ?string $name = null,
+        ?string $webhook = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateGroupDetail {
-        $params = [
-            'description' => $description, 'name' => $name, 'webhook' => $webhook,
-        ];
-
-        return $this->updateRaw($groupID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $groupID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InsightTemplateGroupDetail {
-        [$parsed, $options] = InsightGroupUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['description' => $description, 'name' => $name, 'webhook' => $webhook]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'put',
-            path: ['ai/conversations/insight-groups/%1$s', $groupID],
-            body: (object) $parsed,
-            options: $options,
-            convert: InsightTemplateGroupDetail::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($groupID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -110,19 +90,19 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Delete insight group by ID
      *
+     * @param string $groupID The ID of the insight group
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $groupID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['ai/conversations/insight-groups/%1$s', $groupID],
-            options: $requestOptions,
-            convert: 'mixed',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($groupID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -130,49 +110,24 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Create a new insight group
      *
-     * @param string $name
-     * @param string $description
-     * @param string $webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function insightGroups(
-        $name,
-        $description = omit,
-        $webhook = omit,
-        ?RequestOptions $requestOptions = null,
+        string $name,
+        ?string $description = null,
+        string $webhook = '',
+        RequestOptions|array|null $requestOptions = null,
     ): InsightTemplateGroupDetail {
-        $params = [
-            'name' => $name, 'description' => $description, 'webhook' => $webhook,
-        ];
-
-        return $this->insightGroupsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function insightGroupsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InsightTemplateGroupDetail {
-        [$parsed, $options] = InsightGroupInsightGroupsParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['name' => $name, 'description' => $description, 'webhook' => $webhook]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'ai/conversations/insight-groups',
-            body: (object) $parsed,
-            options: $options,
-            convert: InsightTemplateGroupDetail::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->insightGroups(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -180,42 +135,24 @@ final class InsightGroupsService implements InsightGroupsContract
      *
      * Get all insight groups
      *
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<InsightTemplateGroup>
      *
      * @throws APIException
      */
     public function retrieveInsightGroups(
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): InsightGroupGetInsightGroupsResponse {
-        $params = ['page' => $page];
-
-        return $this->retrieveInsightGroupsRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveInsightGroupsRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InsightGroupGetInsightGroupsResponse {
-        [$parsed, $options] = InsightGroupRetrieveInsightGroupsParams::parseRequest(
-            $params,
-            $requestOptions
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'ai/conversations/insight-groups',
-            query: $parsed,
-            options: $options,
-            convert: InsightGroupGetInsightGroupsResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveInsightGroups(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

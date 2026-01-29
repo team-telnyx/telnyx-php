@@ -7,6 +7,7 @@ namespace Telnyx;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 use Telnyx\Core\BaseClient;
+use Telnyx\Core\Util;
 use Telnyx\Services\AccessIPAddressService;
 use Telnyx\Services\AccessIPRangesService;
 use Telnyx\Services\ActionsService;
@@ -19,14 +20,11 @@ use Telnyx\Services\AvailablePhoneNumberBlocksService;
 use Telnyx\Services\AvailablePhoneNumbersService;
 use Telnyx\Services\BalanceService;
 use Telnyx\Services\BillingGroupsService;
-use Telnyx\Services\BrandService;
 use Telnyx\Services\BulkSimCardActionsService;
 use Telnyx\Services\BundlePricingService;
 use Telnyx\Services\CallControlApplicationsService;
 use Telnyx\Services\CallEventsService;
 use Telnyx\Services\CallsService;
-use Telnyx\Services\CampaignBuilderService;
-use Telnyx\Services\CampaignService;
 use Telnyx\Services\ChannelZonesService;
 use Telnyx\Services\ChargesBreakdownService;
 use Telnyx\Services\ChargesSummaryService;
@@ -43,7 +41,6 @@ use Telnyx\Services\DocumentLinksService;
 use Telnyx\Services\DocumentsService;
 use Telnyx\Services\DynamicEmergencyAddressesService;
 use Telnyx\Services\DynamicEmergencyEndpointsService;
-use Telnyx\Services\EnumService;
 use Telnyx\Services\ExternalConnectionsService;
 use Telnyx\Services\FaxApplicationsService;
 use Telnyx\Services\FaxesService;
@@ -60,6 +57,7 @@ use Telnyx\Services\GlobalIPProtocolsService;
 use Telnyx\Services\GlobalIPsService;
 use Telnyx\Services\GlobalIPUsageService;
 use Telnyx\Services\InboundChannelsService;
+use Telnyx\Services\InexplicitNumberOrdersService;
 use Telnyx\Services\IntegrationSecretsService;
 use Telnyx\Services\InventoryCoverageService;
 use Telnyx\Services\InvoicesService;
@@ -71,6 +69,7 @@ use Telnyx\Services\ListService;
 use Telnyx\Services\ManagedAccountsService;
 use Telnyx\Services\MediaService;
 use Telnyx\Services\MessagesService;
+use Telnyx\Services\Messaging10dlcService;
 use Telnyx\Services\MessagingHostedNumberOrdersService;
 use Telnyx\Services\MessagingHostedNumbersService;
 use Telnyx\Services\MessagingNumbersBulkUpdatesService;
@@ -79,9 +78,10 @@ use Telnyx\Services\MessagingProfilesService;
 use Telnyx\Services\MessagingService;
 use Telnyx\Services\MessagingTollfreeService;
 use Telnyx\Services\MessagingURLDomainsService;
-use Telnyx\Services\MesssagesService;
 use Telnyx\Services\MobileNetworkOperatorsService;
+use Telnyx\Services\MobilePhoneNumbersService;
 use Telnyx\Services\MobilePushCredentialsService;
+use Telnyx\Services\MobileVoiceConnectionsService;
 use Telnyx\Services\NetworkCoverageService;
 use Telnyx\Services\NetworksService;
 use Telnyx\Services\NotificationChannelsService;
@@ -99,13 +99,11 @@ use Telnyx\Services\OAuthClientsService;
 use Telnyx\Services\OAuthGrantsService;
 use Telnyx\Services\OAuthService;
 use Telnyx\Services\OperatorConnectService;
+use Telnyx\Services\OrganizationsService;
 use Telnyx\Services\OtaUpdatesService;
 use Telnyx\Services\OutboundVoiceProfilesService;
-use Telnyx\Services\PartnerCampaignsService;
 use Telnyx\Services\PaymentService;
-use Telnyx\Services\PhoneNumberAssignmentByProfileService;
 use Telnyx\Services\PhoneNumberBlocksService;
-use Telnyx\Services\PhoneNumberCampaignsService;
 use Telnyx\Services\PhoneNumbersRegulatoryRequirementsService;
 use Telnyx\Services\PhoneNumbersService;
 use Telnyx\Services\PortabilityChecksService;
@@ -137,6 +135,7 @@ use Telnyx\Services\SimCardOrderPreviewService;
 use Telnyx\Services\SimCardOrdersService;
 use Telnyx\Services\SimCardsService;
 use Telnyx\Services\SiprecConnectorsService;
+use Telnyx\Services\SpeechToTextService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
 use Telnyx\Services\SubNumberOrdersService;
@@ -161,9 +160,17 @@ use Telnyx\Services\WirelessBlocklistsService;
 use Telnyx\Services\WirelessBlocklistValuesService;
 use Telnyx\Services\WirelessService;
 
+/**
+ * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 class Client extends BaseClient
 {
     public string $apiKey;
+
+    public string $clientID;
+
+    public string $clientSecret;
 
     public string $publicKey;
 
@@ -257,11 +264,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public BrandService $brand;
-
-    /**
-     * @api
-     */
     public BulkSimCardActionsService $bulkSimCardActions;
 
     /**
@@ -283,16 +285,6 @@ class Client extends BaseClient
      * @api
      */
     public CallsService $calls;
-
-    /**
-     * @api
-     */
-    public CampaignService $campaign;
-
-    /**
-     * @api
-     */
-    public CampaignBuilderService $campaignBuilder;
 
     /**
      * @api
@@ -373,11 +365,6 @@ class Client extends BaseClient
      * @api
      */
     public DynamicEmergencyEndpointsService $dynamicEmergencyEndpoints;
-
-    /**
-     * @api
-     */
-    public EnumService $enum;
 
     /**
      * @api
@@ -552,11 +539,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public MesssagesService $messsages;
-
-    /**
-     * @api
-     */
     public MobileNetworkOperatorsService $mobileNetworkOperators;
 
     /**
@@ -652,17 +634,7 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public PhoneNumberAssignmentByProfileService $phoneNumberAssignmentByProfile;
-
-    /**
-     * @api
-     */
     public PhoneNumberBlocksService $phoneNumberBlocks;
-
-    /**
-     * @api
-     */
-    public PhoneNumberCampaignsService $phoneNumberCampaigns;
 
     /**
      * @api
@@ -927,38 +899,86 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public PartnerCampaignsService $partnerCampaigns;
+    public WellKnownService $wellKnown;
 
     /**
      * @api
      */
-    public WellKnownService $wellKnown;
+    public InexplicitNumberOrdersService $inexplicitNumberOrders;
 
+    /**
+     * @api
+     */
+    public MobilePhoneNumbersService $mobilePhoneNumbers;
+
+    /**
+     * @api
+     */
+    public MobileVoiceConnectionsService $mobileVoiceConnections;
+
+    /**
+     * @api
+     */
+    public Messaging10dlcService $messaging10dlc;
+
+    /**
+     * @api
+     */
+    public SpeechToTextService $speechToText;
+
+    /**
+     * @api
+     */
+    public OrganizationsService $organizations;
+
+    private ?string $oauthAccessToken = null;
+
+    private ?int $oauthTokenExpiresAt = null;
+
+    /**
+     * @param RequestOpts|null $requestOptions
+     */
     public function __construct(
         ?string $apiKey = null,
+        ?string $clientID = null,
+        ?string $clientSecret = null,
         ?string $publicKey = null,
-        ?string $baseUrl = null
+        ?string $baseUrl = null,
+        RequestOptions|array|null $requestOptions = null,
     ) {
         $this->apiKey = (string) ($apiKey ?? getenv('TELNYX_API_KEY'));
+        $this->clientID = (string) ($clientID ?? getenv('TELNYX_CLIENT_ID'));
+        $this->clientSecret = (string) ($clientSecret ?? getenv('TELNYX_CLIENT_SECRET'));
         $this->publicKey = (string) ($publicKey ?? getenv('TELNYX_PUBLIC_KEY'));
 
         $this->baseUrlOverridden = !is_null($baseUrl);
 
         $baseUrl ??= getenv('TELNYX_BASE_URL') ?: 'https://api.telnyx.com/v2';
 
-        $options = RequestOptions::with(
-            uriFactory: Psr17FactoryDiscovery::findUriFactory(),
-            streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
-            requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
-            transporter: Psr18ClientDiscovery::find(),
+        $options = RequestOptions::parse(
+            RequestOptions::with(
+                uriFactory: Psr17FactoryDiscovery::findUriFactory(),
+                streamFactory: Psr17FactoryDiscovery::findStreamFactory(),
+                requestFactory: Psr17FactoryDiscovery::findRequestFactory(),
+                transporter: Psr18ClientDiscovery::find(),
+            ),
+            $requestOptions,
         );
 
         parent::__construct(
             headers: [
-                'Content-Type' => 'application/json', 'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+                'User-Agent' => sprintf('telnyx/PHP %s', VERSION),
+                'X-Stainless-Lang' => 'php',
+                'X-Stainless-Package-Version' => '0.0.1',
+                'X-Stainless-Arch' => Util::machtype(),
+                'X-Stainless-OS' => Util::ostype(),
+                'X-Stainless-Runtime' => php_sapi_name(),
+                'X-Stainless-Runtime-Version' => phpversion(),
             ],
             baseUrl: $baseUrl,
-            options: $options,
+            options: $options
         );
 
         $this->legacy = new LegacyService($this);
@@ -978,14 +998,11 @@ class Client extends BaseClient
         $this->availablePhoneNumbers = new AvailablePhoneNumbersService($this);
         $this->balance = new BalanceService($this);
         $this->billingGroups = new BillingGroupsService($this);
-        $this->brand = new BrandService($this);
         $this->bulkSimCardActions = new BulkSimCardActionsService($this);
         $this->bundlePricing = new BundlePricingService($this);
         $this->callControlApplications = new CallControlApplicationsService($this);
         $this->callEvents = new CallEventsService($this);
         $this->calls = new CallsService($this);
-        $this->campaign = new CampaignService($this);
-        $this->campaignBuilder = new CampaignBuilderService($this);
         $this->channelZones = new ChannelZonesService($this);
         $this->chargesBreakdown = new ChargesBreakdownService($this);
         $this->chargesSummary = new ChargesSummaryService($this);
@@ -1002,7 +1019,6 @@ class Client extends BaseClient
         $this->documents = new DocumentsService($this);
         $this->dynamicEmergencyAddresses = new DynamicEmergencyAddressesService($this);
         $this->dynamicEmergencyEndpoints = new DynamicEmergencyEndpointsService($this);
-        $this->enum = new EnumService($this);
         $this->externalConnections = new ExternalConnectionsService($this);
         $this->faxApplications = new FaxApplicationsService($this);
         $this->faxes = new FaxesService($this);
@@ -1037,7 +1053,6 @@ class Client extends BaseClient
         $this->messagingProfiles = new MessagingProfilesService($this);
         $this->messagingTollfree = new MessagingTollfreeService($this);
         $this->messagingURLDomains = new MessagingURLDomainsService($this);
-        $this->messsages = new MesssagesService($this);
         $this->mobileNetworkOperators = new MobileNetworkOperatorsService($this);
         $this->mobilePushCredentials = new MobilePushCredentialsService($this);
         $this->networkCoverage = new NetworkCoverageService($this);
@@ -1057,9 +1072,7 @@ class Client extends BaseClient
         $this->otaUpdates = new OtaUpdatesService($this);
         $this->outboundVoiceProfiles = new OutboundVoiceProfilesService($this);
         $this->payment = new PaymentService($this);
-        $this->phoneNumberAssignmentByProfile = new PhoneNumberAssignmentByProfileService($this);
         $this->phoneNumberBlocks = new PhoneNumberBlocksService($this);
-        $this->phoneNumberCampaigns = new PhoneNumberCampaignsService($this);
         $this->phoneNumbers = new PhoneNumbersService($this);
         $this->phoneNumbersRegulatoryRequirements = new PhoneNumbersRegulatoryRequirementsService($this);
         $this->portabilityChecks = new PortabilityChecksService($this);
@@ -1112,17 +1125,112 @@ class Client extends BaseClient
         $this->wireless = new WirelessService($this);
         $this->wirelessBlocklistValues = new WirelessBlocklistValuesService($this);
         $this->wirelessBlocklists = new WirelessBlocklistsService($this);
-        $this->partnerCampaigns = new PartnerCampaignsService($this);
         $this->wellKnown = new WellKnownService($this);
+        $this->inexplicitNumberOrders = new InexplicitNumberOrdersService($this);
+        $this->mobilePhoneNumbers = new MobilePhoneNumbersService($this);
+        $this->mobileVoiceConnections = new MobileVoiceConnectionsService($this);
+        $this->messaging10dlc = new Messaging10dlcService($this);
+        $this->speechToText = new SpeechToTextService($this);
+        $this->organizations = new OrganizationsService($this);
     }
 
-    /** @return array<string, string> */
+    /** @return array<string,string> */
     protected function authHeaders(): array
     {
-        if (!$this->apiKey) {
+        return [...$this->bearerAuth(), ...$this->oauthClientAuth()];
+    }
+
+    /** @return array<string,string> */
+    protected function bearerAuth(): array
+    {
+        return $this->apiKey ? ['Authorization' => "Bearer {$this->apiKey}"] : [];
+    }
+
+    /** @return array<string,string> */
+    protected function oauthClientAuth(): array
+    {
+        if (!$this->clientID || !$this->clientSecret) {
             return [];
         }
 
-        return ['Authorization' => "Bearer {$this->apiKey}"];
+        $token = $this->getOAuthAccessToken();
+
+        return ['Authorization' => "Bearer {$token}"];
+    }
+
+    /**
+     * @internal
+     *
+     * @param string|list<string> $path
+     * @param array<string,mixed> $query
+     * @param array<string,string|int|list<string|int>|null> $headers
+     * @param RequestOpts|null $opts
+     *
+     * @return array{NormalizedRequest, RequestOptions}
+     */
+    protected function buildRequest(
+        string $method,
+        string|array $path,
+        array $query,
+        array $headers,
+        mixed $body,
+        RequestOptions|array|null $opts,
+    ): array {
+        return parent::buildRequest(
+            method: $method,
+            path: $path,
+            query: $query,
+            headers: [...$this->authHeaders(), ...$headers],
+            body: $body,
+            opts: $opts,
+        );
+    }
+
+    private function getOAuthAccessToken(): string
+    {
+        // Check if we have a valid cached token (with 10 second buffer before expiry)
+        if (null !== $this->oauthAccessToken && null !== $this->oauthTokenExpiresAt) {
+            if (time() < ($this->oauthTokenExpiresAt - 10)) {
+                return $this->oauthAccessToken;
+            }
+        }
+
+        // Fetch new token
+        $this->refreshOAuthToken();
+
+        assert(null !== $this->oauthAccessToken);
+
+        return $this->oauthAccessToken;
+    }
+
+    private function refreshOAuthToken(): void
+    {
+        assert(null !== $this->options->requestFactory && null !== $this->options->streamFactory && null !== $this->options->transporter);
+
+        $credentials = base64_encode("{$this->clientID}:{$this->clientSecret}");
+        $tokenUrl = rtrim($this->baseUrl->__toString(), '/').'/oauth/token';
+
+        $request = $this->options->requestFactory->createRequest('POST', $tokenUrl);
+        $request = $request->withHeader('Authorization', "Basic {$credentials}");
+        $request = $request->withHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        $body = $this->options->streamFactory->createStream('grant_type=client_credentials');
+        $request = $request->withBody($body);
+
+        $response = $this->options->transporter->sendRequest($request);
+
+        if ($response->getStatusCode() >= 400) {
+            throw Core\Exceptions\APIStatusException::from(request: $request, response: $response, message: 'OAuth token request failed');
+        }
+
+        /** @var array{access_token?: string, expires_in?: int} */
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        if (!isset($data['access_token'])) {
+            throw new Core\Exceptions\APIConnectionException($request, message: 'OAuth token response missing access_token');
+        }
+
+        $this->oauthAccessToken = $data['access_token'];
+        $this->oauthTokenExpiresAt = time() + ($data['expires_in'] ?? 3600);
     }
 }

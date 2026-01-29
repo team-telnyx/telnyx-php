@@ -6,24 +6,35 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCardOrdersContract;
-use Telnyx\SimCardOrders\SimCardOrderCreateParams;
+use Telnyx\SimCardOrders\SimCardOrder;
 use Telnyx\SimCardOrders\SimCardOrderGetResponse;
-use Telnyx\SimCardOrders\SimCardOrderListParams;
 use Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
 use Telnyx\SimCardOrders\SimCardOrderListParams\Page;
-use Telnyx\SimCardOrders\SimCardOrderListResponse;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class SimCardOrdersService implements SimCardOrdersContract
 {
     /**
+     * @api
+     */
+    public SimCardOrdersRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new SimCardOrdersRawService($client);
+    }
 
     /**
      * @api
@@ -32,43 +43,23 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *
      * @param string $addressID uniquely identifies the address for the order
      * @param int $quantity the amount of SIM cards to order
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $addressID,
-        $quantity,
-        ?RequestOptions $requestOptions = null
+        string $addressID,
+        int $quantity,
+        RequestOptions|array|null $requestOptions = null,
     ): SimCardOrderNewResponse {
-        $params = ['addressID' => $addressID, 'quantity' => $quantity];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardOrderNewResponse {
-        [$parsed, $options] = SimCardOrderCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['addressID' => $addressID, 'quantity' => $quantity]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'sim_card_orders',
-            body: (object) $parsed,
-            options: $options,
-            convert: SimCardOrderNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -76,19 +67,19 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *
      * Get a single SIM card order by its ID.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): SimCardOrderGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['sim_card_orders/%1$s', $id],
-            options: $requestOptions,
-            convert: SimCardOrderGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -96,44 +87,24 @@ final class SimCardOrdersService implements SimCardOrdersContract
      *
      * Get all SIM card orders according to filters.
      *
-     * @param Filter $filter Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code]
-     * @param Page $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter for SIM card orders (deepObject style). Originally: filter[created_at], filter[updated_at], filter[quantity], filter[cost.amount], filter[cost.currency], filter[address.id], filter[address.street_address], filter[address.extended_address], filter[address.locality], filter[address.administrative_area], filter[address.country_code], filter[address.postal_code]
+     * @param Page|PageShape $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<SimCardOrder>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): SimCardOrderListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): SimCardOrderListResponse {
-        [$parsed, $options] = SimCardOrderListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'sim_card_orders',
-            query: $parsed,
-            options: $options,
-            convert: SimCardOrderListResponse::class,
-        );
+        return $response->parse();
     }
 }

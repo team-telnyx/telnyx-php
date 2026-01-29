@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthGetResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type health_alias = array{fail?: float, pass?: float}
+ * @phpstan-type HealthShape = array{fail?: float|null, pass?: float|null}
  */
 final class Health implements BaseModel
 {
-    /** @use SdkModel<health_alias> */
+    /** @use SdkModel<HealthShape> */
     use SdkModel;
 
     /**
      * The number of failed health checks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $fail;
 
     /**
      * The number of successful health checks.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $pass;
 
     public function __construct()
@@ -40,12 +40,12 @@ final class Health implements BaseModel
      */
     public static function with(?float $fail = null, ?float $pass = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $fail && $obj->fail = $fail;
-        null !== $pass && $obj->pass = $pass;
+        null !== $fail && $self['fail'] = $fail;
+        null !== $pass && $self['pass'] = $pass;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,10 +53,10 @@ final class Health implements BaseModel
      */
     public function withFail(float $fail): self
     {
-        $obj = clone $this;
-        $obj->fail = $fail;
+        $self = clone $this;
+        $self['fail'] = $fail;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -64,9 +64,9 @@ final class Health implements BaseModel
      */
     public function withPass(float $pass): self
     {
-        $obj = clone $this;
-        $obj->pass = $pass;
+        $self = clone $this;
+        $self['pass'] = $pass;
 
-        return $obj;
+        return $self;
     }
 }

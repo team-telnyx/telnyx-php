@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Verifications\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,22 +13,22 @@ use Telnyx\Verifications\Actions\ActionVerifyParams\Status;
 /**
  * Verify verification code by ID.
  *
- * @see Telnyx\Verifications\Actions->verify
+ * @see Telnyx\Services\Verifications\ActionsService::verify()
  *
- * @phpstan-type action_verify_params = array{
- *   code?: string, status?: Status|value-of<Status>
+ * @phpstan-type ActionVerifyParamsShape = array{
+ *   code?: string|null, status?: null|Status|value-of<Status>
  * }
  */
 final class ActionVerifyParams implements BaseModel
 {
-    /** @use SdkModel<action_verify_params> */
+    /** @use SdkModel<ActionVerifyParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * This is the code the user submits for verification.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $code;
 
     /**
@@ -36,7 +36,7 @@ final class ActionVerifyParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -49,18 +49,18 @@ final class ActionVerifyParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $code = null,
         Status|string|null $status = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $code && $obj->code = $code;
-        null !== $status && $obj['status'] = $status;
+        null !== $code && $self['code'] = $code;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,10 +68,10 @@ final class ActionVerifyParams implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +81,9 @@ final class ActionVerifyParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

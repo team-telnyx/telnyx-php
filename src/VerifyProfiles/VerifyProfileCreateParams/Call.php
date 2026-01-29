@@ -4,46 +4,46 @@ declare(strict_types=1);
 
 namespace Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type call_alias = array{
- *   appName?: string,
- *   codeLength?: int,
- *   defaultVerificationTimeoutSecs?: int,
- *   messagingTemplateID?: string,
- *   whitelistedDestinations?: list<string>,
+ * @phpstan-type CallShape = array{
+ *   appName?: string|null,
+ *   codeLength?: int|null,
+ *   defaultVerificationTimeoutSecs?: int|null,
+ *   messagingTemplateID?: string|null,
+ *   whitelistedDestinations?: list<string>|null,
  * }
  */
 final class Call implements BaseModel
 {
-    /** @use SdkModel<call_alias> */
+    /** @use SdkModel<CallShape> */
     use SdkModel;
 
     /**
      * The name that identifies the application requesting 2fa in the verification message.
      */
-    #[Api('app_name', optional: true)]
+    #[Optional('app_name')]
     public ?string $appName;
 
     /**
      * The length of the verify code to generate.
      */
-    #[Api('code_length', optional: true)]
+    #[Optional('code_length')]
     public ?int $codeLength;
 
     /**
      * For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
      */
-    #[Api('default_verification_timeout_secs', optional: true)]
+    #[Optional('default_verification_timeout_secs')]
     public ?int $defaultVerificationTimeoutSecs;
 
     /**
      * The message template identifier selected from /verify_profiles/templates.
      */
-    #[Api('messaging_template_id', optional: true)]
+    #[Optional('messaging_template_id')]
     public ?string $messagingTemplateID;
 
     /**
@@ -51,7 +51,7 @@ final class Call implements BaseModel
      *
      * @var list<string>|null $whitelistedDestinations
      */
-    #[Api('whitelisted_destinations', list: 'string', optional: true)]
+    #[Optional('whitelisted_destinations', list: 'string')]
     public ?array $whitelistedDestinations;
 
     public function __construct()
@@ -64,7 +64,7 @@ final class Call implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $whitelistedDestinations
+     * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
         ?string $appName = null,
@@ -73,15 +73,15 @@ final class Call implements BaseModel
         ?string $messagingTemplateID = null,
         ?array $whitelistedDestinations = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $appName && $obj->appName = $appName;
-        null !== $codeLength && $obj->codeLength = $codeLength;
-        null !== $defaultVerificationTimeoutSecs && $obj->defaultVerificationTimeoutSecs = $defaultVerificationTimeoutSecs;
-        null !== $messagingTemplateID && $obj->messagingTemplateID = $messagingTemplateID;
-        null !== $whitelistedDestinations && $obj->whitelistedDestinations = $whitelistedDestinations;
+        null !== $appName && $self['appName'] = $appName;
+        null !== $codeLength && $self['codeLength'] = $codeLength;
+        null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        null !== $messagingTemplateID && $self['messagingTemplateID'] = $messagingTemplateID;
+        null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Call implements BaseModel
      */
     public function withAppName(string $appName): self
     {
-        $obj = clone $this;
-        $obj->appName = $appName;
+        $self = clone $this;
+        $self['appName'] = $appName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Call implements BaseModel
      */
     public function withCodeLength(int $codeLength): self
     {
-        $obj = clone $this;
-        $obj->codeLength = $codeLength;
+        $self = clone $this;
+        $self['codeLength'] = $codeLength;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,10 +112,10 @@ final class Call implements BaseModel
     public function withDefaultVerificationTimeoutSecs(
         int $defaultVerificationTimeoutSecs
     ): self {
-        $obj = clone $this;
-        $obj->defaultVerificationTimeoutSecs = $defaultVerificationTimeoutSecs;
+        $self = clone $this;
+        $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +123,10 @@ final class Call implements BaseModel
      */
     public function withMessagingTemplateID(string $messagingTemplateID): self
     {
-        $obj = clone $this;
-        $obj->messagingTemplateID = $messagingTemplateID;
+        $self = clone $this;
+        $self['messagingTemplateID'] = $messagingTemplateID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,9 +137,9 @@ final class Call implements BaseModel
     public function withWhitelistedDestinations(
         array $whitelistedDestinations
     ): self {
-        $obj = clone $this;
-        $obj->whitelistedDestinations = $whitelistedDestinations;
+        $self = clone $this;
+        $self['whitelistedDestinations'] = $whitelistedDestinations;
 
-        return $obj;
+        return $self;
     }
 }

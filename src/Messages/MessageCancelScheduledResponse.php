@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
+use Telnyx\Messages\MessageCancelScheduledResponse\Cc;
 use Telnyx\Messages\MessageCancelScheduledResponse\Cost;
 use Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown;
 use Telnyx\Messages\MessageCancelScheduledResponse\Direction;
@@ -19,61 +18,72 @@ use Telnyx\Messages\MessageCancelScheduledResponse\To;
 use Telnyx\Messages\MessageCancelScheduledResponse\Type;
 
 /**
- * @phpstan-type message_cancel_scheduled_response = array{
- *   id?: string,
- *   completedAt?: \DateTimeInterface,
- *   cost?: Cost|null,
- *   costBreakdown?: CostBreakdown|null,
- *   direction?: value-of<Direction>,
- *   encoding?: string,
- *   errors?: list<MessagingError>,
- *   from?: From,
- *   media?: list<Media>,
- *   messagingProfileID?: string,
- *   organizationID?: string,
- *   parts?: int,
- *   receivedAt?: \DateTimeInterface,
- *   recordType?: value-of<RecordType>,
- *   sentAt?: \DateTimeInterface,
+ * @phpstan-import-type CcShape from \Telnyx\Messages\MessageCancelScheduledResponse\Cc
+ * @phpstan-import-type CostShape from \Telnyx\Messages\MessageCancelScheduledResponse\Cost
+ * @phpstan-import-type CostBreakdownShape from \Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown
+ * @phpstan-import-type MessagingErrorShape from \Telnyx\Messages\MessagingError
+ * @phpstan-import-type FromShape from \Telnyx\Messages\MessageCancelScheduledResponse\From
+ * @phpstan-import-type MediaShape from \Telnyx\Messages\MessageCancelScheduledResponse\Media
+ * @phpstan-import-type ToShape from \Telnyx\Messages\MessageCancelScheduledResponse\To
+ *
+ * @phpstan-type MessageCancelScheduledResponseShape = array{
+ *   id?: string|null,
+ *   cc?: list<Cc|CcShape>|null,
+ *   completedAt?: \DateTimeInterface|null,
+ *   cost?: null|Cost|CostShape,
+ *   costBreakdown?: null|CostBreakdown|CostBreakdownShape,
+ *   direction?: null|Direction|value-of<Direction>,
+ *   encoding?: string|null,
+ *   errors?: list<MessagingError|MessagingErrorShape>|null,
+ *   from?: null|From|FromShape,
+ *   media?: list<Media|MediaShape>|null,
+ *   messagingProfileID?: string|null,
+ *   organizationID?: string|null,
+ *   parts?: int|null,
+ *   receivedAt?: \DateTimeInterface|null,
+ *   recordType?: null|RecordType|value-of<RecordType>,
+ *   sentAt?: \DateTimeInterface|null,
  *   subject?: string|null,
- *   tags?: list<string>,
- *   tcrCampaignBillable?: bool,
+ *   tags?: list<string>|null,
+ *   tcrCampaignBillable?: bool|null,
  *   tcrCampaignID?: string|null,
  *   tcrCampaignRegistered?: string|null,
- *   text?: string,
- *   to?: list<To>,
- *   type?: value-of<Type>,
+ *   text?: string|null,
+ *   to?: list<To|ToShape>|null,
+ *   type?: null|Type|value-of<Type>,
  *   validUntil?: \DateTimeInterface|null,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
  * }
  */
-final class MessageCancelScheduledResponse implements BaseModel, ResponseConverter
+final class MessageCancelScheduledResponse implements BaseModel
 {
-    /** @use SdkModel<message_cancel_scheduled_response> */
+    /** @use SdkModel<MessageCancelScheduledResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Identifies the type of resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
+
+    /** @var list<Cc>|null $cc */
+    #[Optional(list: Cc::class)]
+    public ?array $cc;
 
     /**
      * ISO 8601 formatted date indicating when the message was finalized.
      */
-    #[Api('completed_at', optional: true)]
+    #[Optional('completed_at', nullable: true)]
     public ?\DateTimeInterface $completedAt;
 
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?Cost $cost;
 
     /**
      * Detailed breakdown of the message cost components.
      */
-    #[Api('cost_breakdown', nullable: true, optional: true)]
+    #[Optional('cost_breakdown', nullable: true)]
     public ?CostBreakdown $costBreakdown;
 
     /**
@@ -81,13 +91,13 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
      * Encoding scheme used for the message body.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $encoding;
 
     /**
@@ -95,38 +105,38 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      *
      * @var list<MessagingError>|null $errors
      */
-    #[Api(list: MessagingError::class, optional: true)]
+    #[Optional(list: MessagingError::class)]
     public ?array $errors;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?From $from;
 
     /** @var list<Media>|null $media */
-    #[Api(list: Media::class, optional: true)]
+    #[Optional(list: Media::class)]
     public ?array $media;
 
     /**
      * Unique identifier for a messaging profile.
      */
-    #[Api('messaging_profile_id', optional: true)]
+    #[Optional('messaging_profile_id')]
     public ?string $messagingProfileID;
 
     /**
      * The id of the organization the messaging profile belongs to.
      */
-    #[Api('organization_id', optional: true)]
+    #[Optional('organization_id')]
     public ?string $organizationID;
 
     /**
      * Number of parts into which the message's body must be split.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $parts;
 
     /**
      * ISO 8601 formatted date indicating when the message request was received.
      */
-    #[Api('received_at', optional: true)]
+    #[Optional('received_at')]
     public ?\DateTimeInterface $receivedAt;
 
     /**
@@ -134,19 +144,19 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      *
      * @var value-of<RecordType>|null $recordType
      */
-    #[Api('record_type', enum: RecordType::class, optional: true)]
+    #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
 
     /**
      * ISO 8601 formatted date indicating when the message was sent.
      */
-    #[Api('sent_at', optional: true)]
+    #[Optional('sent_at', nullable: true)]
     public ?\DateTimeInterface $sentAt;
 
     /**
      * Subject of multimedia message.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?string $subject;
 
     /**
@@ -154,25 +164,25 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * Indicates whether the TCR campaign is billable.
      */
-    #[Api('tcr_campaign_billable', optional: true)]
+    #[Optional('tcr_campaign_billable')]
     public ?bool $tcrCampaignBillable;
 
     /**
      * The Campaign Registry (TCR) campaign ID associated with the message.
      */
-    #[Api('tcr_campaign_id', nullable: true, optional: true)]
+    #[Optional('tcr_campaign_id', nullable: true)]
     public ?string $tcrCampaignID;
 
     /**
      * The registration status of the TCR campaign.
      */
-    #[Api('tcr_campaign_registered', nullable: true, optional: true)]
+    #[Optional('tcr_campaign_registered', nullable: true)]
     public ?string $tcrCampaignRegistered;
 
     /**
@@ -180,11 +190,11 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      *
      * **Required for SMS**
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $text;
 
     /** @var list<To>|null $to */
-    #[Api(list: To::class, optional: true)]
+    #[Optional(list: To::class)]
     public ?array $to;
 
     /**
@@ -192,25 +202,25 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * Message must be out of the queue by this time or else it will be discarded and marked as 'sending_failed'. Once the message moves out of the queue, this field will be nulled.
      */
-    #[Api('valid_until', nullable: true, optional: true)]
+    #[Optional('valid_until', nullable: true)]
     public ?\DateTimeInterface $validUntil;
 
     /**
      * The failover URL where webhooks related to this message will be sent if sending to the primary URL fails.
      */
-    #[Api('webhook_failover_url', nullable: true, optional: true)]
+    #[Optional('webhook_failover_url', nullable: true)]
     public ?string $webhookFailoverURL;
 
     /**
      * The URL where webhooks related to this message will be sent.
      */
-    #[Api('webhook_url', nullable: true, optional: true)]
+    #[Optional('webhook_url', nullable: true)]
     public ?string $webhookURL;
 
     public function __construct()
@@ -223,23 +233,28 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Direction|value-of<Direction> $direction
-     * @param list<MessagingError> $errors
-     * @param list<Media> $media
-     * @param RecordType|value-of<RecordType> $recordType
-     * @param list<string> $tags
-     * @param list<To> $to
-     * @param Type|value-of<Type> $type
+     * @param list<Cc|CcShape>|null $cc
+     * @param Cost|CostShape|null $cost
+     * @param CostBreakdown|CostBreakdownShape|null $costBreakdown
+     * @param Direction|value-of<Direction>|null $direction
+     * @param list<MessagingError|MessagingErrorShape>|null $errors
+     * @param From|FromShape|null $from
+     * @param list<Media|MediaShape>|null $media
+     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<string>|null $tags
+     * @param list<To|ToShape>|null $to
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
+        ?array $cc = null,
         ?\DateTimeInterface $completedAt = null,
-        ?Cost $cost = null,
-        ?CostBreakdown $costBreakdown = null,
+        Cost|array|null $cost = null,
+        CostBreakdown|array|null $costBreakdown = null,
         Direction|string|null $direction = null,
         ?string $encoding = null,
         ?array $errors = null,
-        ?From $from = null,
+        From|array|null $from = null,
         ?array $media = null,
         ?string $messagingProfileID = null,
         ?string $organizationID = null,
@@ -259,36 +274,37 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $completedAt && $obj->completedAt = $completedAt;
-        null !== $cost && $obj->cost = $cost;
-        null !== $costBreakdown && $obj->costBreakdown = $costBreakdown;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $encoding && $obj->encoding = $encoding;
-        null !== $errors && $obj->errors = $errors;
-        null !== $from && $obj->from = $from;
-        null !== $media && $obj->media = $media;
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
-        null !== $organizationID && $obj->organizationID = $organizationID;
-        null !== $parts && $obj->parts = $parts;
-        null !== $receivedAt && $obj->receivedAt = $receivedAt;
-        null !== $recordType && $obj['recordType'] = $recordType;
-        null !== $sentAt && $obj->sentAt = $sentAt;
-        null !== $subject && $obj->subject = $subject;
-        null !== $tags && $obj->tags = $tags;
-        null !== $tcrCampaignBillable && $obj->tcrCampaignBillable = $tcrCampaignBillable;
-        null !== $tcrCampaignID && $obj->tcrCampaignID = $tcrCampaignID;
-        null !== $tcrCampaignRegistered && $obj->tcrCampaignRegistered = $tcrCampaignRegistered;
-        null !== $text && $obj->text = $text;
-        null !== $to && $obj->to = $to;
-        null !== $type && $obj['type'] = $type;
-        null !== $validUntil && $obj->validUntil = $validUntil;
-        null !== $webhookFailoverURL && $obj->webhookFailoverURL = $webhookFailoverURL;
-        null !== $webhookURL && $obj->webhookURL = $webhookURL;
+        null !== $id && $self['id'] = $id;
+        null !== $cc && $self['cc'] = $cc;
+        null !== $completedAt && $self['completedAt'] = $completedAt;
+        null !== $cost && $self['cost'] = $cost;
+        null !== $costBreakdown && $self['costBreakdown'] = $costBreakdown;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $encoding && $self['encoding'] = $encoding;
+        null !== $errors && $self['errors'] = $errors;
+        null !== $from && $self['from'] = $from;
+        null !== $media && $self['media'] = $media;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
+        null !== $parts && $self['parts'] = $parts;
+        null !== $receivedAt && $self['receivedAt'] = $receivedAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $sentAt && $self['sentAt'] = $sentAt;
+        null !== $subject && $self['subject'] = $subject;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $tcrCampaignBillable && $self['tcrCampaignBillable'] = $tcrCampaignBillable;
+        null !== $tcrCampaignID && $self['tcrCampaignID'] = $tcrCampaignID;
+        null !== $tcrCampaignRegistered && $self['tcrCampaignRegistered'] = $tcrCampaignRegistered;
+        null !== $text && $self['text'] = $text;
+        null !== $to && $self['to'] = $to;
+        null !== $type && $self['type'] = $type;
+        null !== $validUntil && $self['validUntil'] = $validUntil;
+        null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -296,40 +312,57 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * @param list<Cc|CcShape> $cc
+     */
+    public function withCc(array $cc): self
+    {
+        $self = clone $this;
+        $self['cc'] = $cc;
+
+        return $self;
     }
 
     /**
      * ISO 8601 formatted date indicating when the message was finalized.
      */
-    public function withCompletedAt(\DateTimeInterface $completedAt): self
+    public function withCompletedAt(?\DateTimeInterface $completedAt): self
     {
-        $obj = clone $this;
-        $obj->completedAt = $completedAt;
+        $self = clone $this;
+        $self['completedAt'] = $completedAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withCost(?Cost $cost): self
+    /**
+     * @param Cost|CostShape|null $cost
+     */
+    public function withCost(Cost|array|null $cost): self
     {
-        $obj = clone $this;
-        $obj->cost = $cost;
+        $self = clone $this;
+        $self['cost'] = $cost;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Detailed breakdown of the message cost components.
+     *
+     * @param CostBreakdown|CostBreakdownShape|null $costBreakdown
      */
-    public function withCostBreakdown(?CostBreakdown $costBreakdown): self
-    {
-        $obj = clone $this;
-        $obj->costBreakdown = $costBreakdown;
+    public function withCostBreakdown(
+        CostBreakdown|array|null $costBreakdown
+    ): self {
+        $self = clone $this;
+        $self['costBreakdown'] = $costBreakdown;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -339,10 +372,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -350,42 +383,45 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withEncoding(string $encoding): self
     {
-        $obj = clone $this;
-        $obj->encoding = $encoding;
+        $self = clone $this;
+        $self['encoding'] = $encoding;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * These errors may point at addressees when referring to unsuccessful/unconfirmed delivery statuses.
      *
-     * @param list<MessagingError> $errors
+     * @param list<MessagingError|MessagingErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {
-        $obj = clone $this;
-        $obj->errors = $errors;
+        $self = clone $this;
+        $self['errors'] = $errors;
 
-        return $obj;
-    }
-
-    public function withFrom(From $from): self
-    {
-        $obj = clone $this;
-        $obj->from = $from;
-
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Media> $media
+     * @param From|FromShape $from
+     */
+    public function withFrom(From|array $from): self
+    {
+        $self = clone $this;
+        $self['from'] = $from;
+
+        return $self;
+    }
+
+    /**
+     * @param list<Media|MediaShape> $media
      */
     public function withMedia(array $media): self
     {
-        $obj = clone $this;
-        $obj->media = $media;
+        $self = clone $this;
+        $self['media'] = $media;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -393,10 +429,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -404,10 +440,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withOrganizationID(string $organizationID): self
     {
-        $obj = clone $this;
-        $obj->organizationID = $organizationID;
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -415,10 +451,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withParts(int $parts): self
     {
-        $obj = clone $this;
-        $obj->parts = $parts;
+        $self = clone $this;
+        $self['parts'] = $parts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -426,10 +462,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withReceivedAt(\DateTimeInterface $receivedAt): self
     {
-        $obj = clone $this;
-        $obj->receivedAt = $receivedAt;
+        $self = clone $this;
+        $self['receivedAt'] = $receivedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -439,21 +475,21 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withRecordType(RecordType|string $recordType): self
     {
-        $obj = clone $this;
-        $obj['recordType'] = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * ISO 8601 formatted date indicating when the message was sent.
      */
-    public function withSentAt(\DateTimeInterface $sentAt): self
+    public function withSentAt(?\DateTimeInterface $sentAt): self
     {
-        $obj = clone $this;
-        $obj->sentAt = $sentAt;
+        $self = clone $this;
+        $self['sentAt'] = $sentAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -461,10 +497,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withSubject(?string $subject): self
     {
-        $obj = clone $this;
-        $obj->subject = $subject;
+        $self = clone $this;
+        $self['subject'] = $subject;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -474,10 +510,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -485,10 +521,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withTcrCampaignBillable(bool $tcrCampaignBillable): self
     {
-        $obj = clone $this;
-        $obj->tcrCampaignBillable = $tcrCampaignBillable;
+        $self = clone $this;
+        $self['tcrCampaignBillable'] = $tcrCampaignBillable;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -496,10 +532,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withTcrCampaignID(?string $tcrCampaignID): self
     {
-        $obj = clone $this;
-        $obj->tcrCampaignID = $tcrCampaignID;
+        $self = clone $this;
+        $self['tcrCampaignID'] = $tcrCampaignID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -508,10 +544,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
     public function withTcrCampaignRegistered(
         ?string $tcrCampaignRegistered
     ): self {
-        $obj = clone $this;
-        $obj->tcrCampaignRegistered = $tcrCampaignRegistered;
+        $self = clone $this;
+        $self['tcrCampaignRegistered'] = $tcrCampaignRegistered;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -521,21 +557,21 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withText(string $text): self
     {
-        $obj = clone $this;
-        $obj->text = $text;
+        $self = clone $this;
+        $self['text'] = $text;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<To> $to
+     * @param list<To|ToShape> $to
      */
     public function withTo(array $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -545,10 +581,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -556,10 +592,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withValidUntil(?\DateTimeInterface $validUntil): self
     {
-        $obj = clone $this;
-        $obj->validUntil = $validUntil;
+        $self = clone $this;
+        $self['validUntil'] = $validUntil;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -567,10 +603,10 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withWebhookFailoverURL(?string $webhookFailoverURL): self
     {
-        $obj = clone $this;
-        $obj->webhookFailoverURL = $webhookFailoverURL;
+        $self = clone $this;
+        $self['webhookFailoverURL'] = $webhookFailoverURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -578,9 +614,9 @@ final class MessageCancelScheduledResponse implements BaseModel, ResponseConvert
      */
     public function withWebhookURL(?string $webhookURL): self
     {
-        $obj = clone $this;
-        $obj->webhookURL = $webhookURL;
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
-        return $obj;
+        return $self;
     }
 }

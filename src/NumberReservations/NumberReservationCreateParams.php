@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberReservations;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,26 +12,29 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Creates a Phone Number Reservation for multiple numbers.
  *
- * @see Telnyx\NumberReservations->create
+ * @see Telnyx\Services\NumberReservationsService::create()
  *
- * @phpstan-type number_reservation_create_params = array{
- *   customerReference?: string, phoneNumbers?: list<ReservedPhoneNumber>
+ * @phpstan-import-type ReservedPhoneNumberShape from \Telnyx\NumberReservations\ReservedPhoneNumber
+ *
+ * @phpstan-type NumberReservationCreateParamsShape = array{
+ *   customerReference?: string|null,
+ *   phoneNumbers?: list<ReservedPhoneNumber|ReservedPhoneNumberShape>|null,
  * }
  */
 final class NumberReservationCreateParams implements BaseModel
 {
-    /** @use SdkModel<number_reservation_create_params> */
+    /** @use SdkModel<NumberReservationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /** @var list<ReservedPhoneNumber>|null $phoneNumbers */
-    #[Api('phone_numbers', list: ReservedPhoneNumber::class, optional: true)]
+    #[Optional('phone_numbers', list: ReservedPhoneNumber::class)]
     public ?array $phoneNumbers;
 
     public function __construct()
@@ -44,18 +47,18 @@ final class NumberReservationCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ReservedPhoneNumber> $phoneNumbers
+     * @param list<ReservedPhoneNumber|ReservedPhoneNumberShape>|null $phoneNumbers
      */
     public static function with(
         ?string $customerReference = null,
         ?array $phoneNumbers = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -63,20 +66,20 @@ final class NumberReservationCreateParams implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<ReservedPhoneNumber> $phoneNumbers
+     * @param list<ReservedPhoneNumber|ReservedPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 }

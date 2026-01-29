@@ -4,30 +4,42 @@ declare(strict_types=1);
 
 namespace Telnyx\Invoices;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\Invoices\InvoiceListResponse\Data;
-use Telnyx\Invoices\InvoiceListResponse\Meta;
 
 /**
- * @phpstan-type invoice_list_response = array{data?: list<Data>, meta?: Meta}
+ * @phpstan-type InvoiceListResponseShape = array{
+ *   fileID?: string|null,
+ *   invoiceID?: string|null,
+ *   paid?: bool|null,
+ *   periodEnd?: string|null,
+ *   periodStart?: string|null,
+ *   url?: string|null,
+ * }
  */
-final class InvoiceListResponse implements BaseModel, ResponseConverter
+final class InvoiceListResponse implements BaseModel
 {
-    /** @use SdkModel<invoice_list_response> */
+    /** @use SdkModel<InvoiceListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    #[Optional('file_id')]
+    public ?string $fileID;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    #[Optional('invoice_id')]
+    public ?string $invoiceID;
 
-    #[Api(optional: true)]
-    public ?Meta $meta;
+    #[Optional]
+    public ?bool $paid;
+
+    #[Optional('period_end')]
+    public ?string $periodEnd;
+
+    #[Optional('period_start')]
+    public ?string $periodStart;
+
+    #[Optional]
+    public ?string $url;
 
     public function __construct()
     {
@@ -38,35 +50,72 @@ final class InvoiceListResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param list<Data> $data
      */
-    public static function with(?array $data = null, ?Meta $meta = null): self
-    {
-        $obj = new self;
+    public static function with(
+        ?string $fileID = null,
+        ?string $invoiceID = null,
+        ?bool $paid = null,
+        ?string $periodEnd = null,
+        ?string $periodStart = null,
+        ?string $url = null,
+    ): self {
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $fileID && $self['fileID'] = $fileID;
+        null !== $invoiceID && $self['invoiceID'] = $invoiceID;
+        null !== $paid && $self['paid'] = $paid;
+        null !== $periodEnd && $self['periodEnd'] = $periodEnd;
+        null !== $periodStart && $self['periodStart'] = $periodStart;
+        null !== $url && $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * @param list<Data> $data
-     */
-    public function withData(array $data): self
+    public function withFileID(string $fileID): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['fileID'] = $fileID;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    public function withInvoiceID(string $invoiceID): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['invoiceID'] = $invoiceID;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPaid(bool $paid): self
+    {
+        $self = clone $this;
+        $self['paid'] = $paid;
+
+        return $self;
+    }
+
+    public function withPeriodEnd(string $periodEnd): self
+    {
+        $self = clone $this;
+        $self['periodEnd'] = $periodEnd;
+
+        return $self;
+    }
+
+    public function withPeriodStart(string $periodStart): self
+    {
+        $self = clone $this;
+        $self['periodStart'] = $periodStart;
+
+        return $self;
+    }
+
+    public function withURL(string $url): self
+    {
+        $self = clone $this;
+        $self['url'] = $url;
+
+        return $self;
     }
 }

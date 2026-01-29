@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests;
 
 use Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,53 +13,55 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Updates an existing assistant test configuration with new settings.
  *
- * @see Telnyx\AI\Assistants\Tests->update
+ * @see Telnyx\Services\AI\Assistants\TestsService::update()
  *
- * @phpstan-type test_update_params = array{
- *   description?: string,
- *   destination?: string,
- *   instructions?: string,
- *   maxDurationSeconds?: int,
- *   name?: string,
- *   rubric?: list<Rubric>,
- *   telnyxConversationChannel?: TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
- *   testSuite?: string,
+ * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric
+ *
+ * @phpstan-type TestUpdateParamsShape = array{
+ *   description?: string|null,
+ *   destination?: string|null,
+ *   instructions?: string|null,
+ *   maxDurationSeconds?: int|null,
+ *   name?: string|null,
+ *   rubric?: list<Rubric|RubricShape>|null,
+ *   telnyxConversationChannel?: null|TelnyxConversationChannel|value-of<TelnyxConversationChannel>,
+ *   testSuite?: string|null,
  * }
  */
 final class TestUpdateParams implements BaseModel
 {
-    /** @use SdkModel<test_update_params> */
+    /** @use SdkModel<TestUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Updated description of the test's purpose and evaluation criteria.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $description;
 
     /**
      * Updated target destination for test conversations.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $destination;
 
     /**
      * Updated test scenario instructions and objectives.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
     /**
      * Updated maximum test duration in seconds.
      */
-    #[Api('max_duration_seconds', optional: true)]
+    #[Optional('max_duration_seconds')]
     public ?int $maxDurationSeconds;
 
     /**
      * Updated name for the assistant test. Must be unique and descriptive.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     /**
@@ -67,7 +69,7 @@ final class TestUpdateParams implements BaseModel
      *
      * @var list<Rubric>|null $rubric
      */
-    #[Api(list: Rubric::class, optional: true)]
+    #[Optional(list: Rubric::class)]
     public ?array $rubric;
 
     /**
@@ -75,17 +77,16 @@ final class TestUpdateParams implements BaseModel
      *
      * @var value-of<TelnyxConversationChannel>|null $telnyxConversationChannel
      */
-    #[Api(
+    #[Optional(
         'telnyx_conversation_channel',
-        enum: TelnyxConversationChannel::class,
-        optional: true,
+        enum: TelnyxConversationChannel::class
     )]
     public ?string $telnyxConversationChannel;
 
     /**
      * Updated test suite assignment for better organization.
      */
-    #[Api('test_suite', optional: true)]
+    #[Optional('test_suite')]
     public ?string $testSuite;
 
     public function __construct()
@@ -98,8 +99,8 @@ final class TestUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Rubric> $rubric
-     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel> $telnyxConversationChannel
+     * @param list<Rubric|RubricShape>|null $rubric
+     * @param TelnyxConversationChannel|value-of<TelnyxConversationChannel>|null $telnyxConversationChannel
      */
     public static function with(
         ?string $description = null,
@@ -111,18 +112,18 @@ final class TestUpdateParams implements BaseModel
         TelnyxConversationChannel|string|null $telnyxConversationChannel = null,
         ?string $testSuite = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $description && $obj->description = $description;
-        null !== $destination && $obj->destination = $destination;
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $maxDurationSeconds && $obj->maxDurationSeconds = $maxDurationSeconds;
-        null !== $name && $obj->name = $name;
-        null !== $rubric && $obj->rubric = $rubric;
-        null !== $telnyxConversationChannel && $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
-        null !== $testSuite && $obj->testSuite = $testSuite;
+        null !== $description && $self['description'] = $description;
+        null !== $destination && $self['destination'] = $destination;
+        null !== $instructions && $self['instructions'] = $instructions;
+        null !== $maxDurationSeconds && $self['maxDurationSeconds'] = $maxDurationSeconds;
+        null !== $name && $self['name'] = $name;
+        null !== $rubric && $self['rubric'] = $rubric;
+        null !== $telnyxConversationChannel && $self['telnyxConversationChannel'] = $telnyxConversationChannel;
+        null !== $testSuite && $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -130,10 +131,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withDescription(string $description): self
     {
-        $obj = clone $this;
-        $obj->description = $description;
+        $self = clone $this;
+        $self['description'] = $description;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,10 +142,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withDestination(string $destination): self
     {
-        $obj = clone $this;
-        $obj->destination = $destination;
+        $self = clone $this;
+        $self['destination'] = $destination;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -152,10 +153,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj->instructions = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +164,10 @@ final class TestUpdateParams implements BaseModel
      */
     public function withMaxDurationSeconds(int $maxDurationSeconds): self
     {
-        $obj = clone $this;
-        $obj->maxDurationSeconds = $maxDurationSeconds;
+        $self = clone $this;
+        $self['maxDurationSeconds'] = $maxDurationSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,23 +175,23 @@ final class TestUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Updated evaluation criteria for assessing assistant performance.
      *
-     * @param list<Rubric> $rubric
+     * @param list<Rubric|RubricShape> $rubric
      */
     public function withRubric(array $rubric): self
     {
-        $obj = clone $this;
-        $obj->rubric = $rubric;
+        $self = clone $this;
+        $self['rubric'] = $rubric;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +202,10 @@ final class TestUpdateParams implements BaseModel
     public function withTelnyxConversationChannel(
         TelnyxConversationChannel|string $telnyxConversationChannel
     ): self {
-        $obj = clone $this;
-        $obj['telnyxConversationChannel'] = $telnyxConversationChannel;
+        $self = clone $this;
+        $self['telnyxConversationChannel'] = $telnyxConversationChannel;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,9 +213,9 @@ final class TestUpdateParams implements BaseModel
      */
     public function withTestSuite(string $testSuite): self
     {
-        $obj = clone $this;
-        $obj->testSuite = $testSuite;
+        $self = clone $this;
+        $self['testSuite'] = $testSuite;
 
-        return $obj;
+        return $self;
     }
 }

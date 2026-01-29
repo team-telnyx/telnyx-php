@@ -4,70 +4,56 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AccessIPAddress\AccessIPAddressCreateParams;
-use Telnyx\AccessIPAddress\AccessIPAddressListParams;
 use Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter;
-use Telnyx\AccessIPAddress\AccessIPAddressListParams\Page;
-use Telnyx\AccessIPAddress\AccessIPAddressListResponse;
 use Telnyx\AccessIPAddress\AccessIPAddressResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AccessIPAddressService implements AccessIPAddressContract
 {
     /**
+     * @api
+     */
+    public AccessIPAddressRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AccessIPAddressRawService($client);
+    }
 
     /**
      * @api
      *
      * Create new Access IP Address
      *
-     * @param string $ipAddress
-     * @param string $description
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $ipAddress,
-        $description = omit,
-        ?RequestOptions $requestOptions = null
+        string $ipAddress,
+        ?string $description = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AccessIPAddressResponse {
-        $params = ['ipAddress' => $ipAddress, 'description' => $description];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AccessIPAddressResponse {
-        [$parsed, $options] = AccessIPAddressCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['ipAddress' => $ipAddress, 'description' => $description]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'access_ip_address',
-            body: (object) $parsed,
-            options: $options,
-            convert: AccessIPAddressResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -75,19 +61,18 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * Retrieve an access IP address
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $accessIPAddressID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AccessIPAddressResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['access_ip_address/%1$s', $accessIPAddressID],
-            options: $requestOptions,
-            convert: AccessIPAddressResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($accessIPAddressID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -95,45 +80,31 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * List all Access IP Addresses
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[ip_source], filter[ip_address], filter[created_at]. Supports complex bracket operations for dynamic filtering.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<AccessIPAddressResponse>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): AccessIPAddressListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AccessIPAddressListResponse {
-        [$parsed, $options] = AccessIPAddressListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filter' => $filter,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'access_ip_address',
-            query: $parsed,
-            options: $options,
-            convert: AccessIPAddressListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -141,18 +112,17 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * Delete access IP address
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $accessIPAddressID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AccessIPAddressResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['access_ip_address/%1$s', $accessIPAddressID],
-            options: $requestOptions,
-            convert: AccessIPAddressResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($accessIPAddressID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

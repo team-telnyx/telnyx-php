@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReport;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportDeleteResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportGetResponse;
+use Telnyx\Reports\MdrUsageReports\MdrUsageReportNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +45,8 @@ final class MdrUsageReportsTest extends TestCase
             startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -53,9 +60,11 @@ final class MdrUsageReportsTest extends TestCase
             aggregationType: 'NO_AGGREGATION',
             endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
             startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            profiles: 'My profile',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportNewResponse::class, $result);
     }
 
     #[Test]
@@ -69,7 +78,8 @@ final class MdrUsageReportsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportGetResponse::class, $result);
     }
 
     #[Test]
@@ -79,9 +89,15 @@ final class MdrUsageReportsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->reports->mdrUsageReports->list();
+        $page = $this->client->reports->mdrUsageReports->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(MdrUsageReport::class, $item);
+        }
     }
 
     #[Test]
@@ -95,7 +111,8 @@ final class MdrUsageReportsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -106,10 +123,11 @@ final class MdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->mdrUsageReports->fetchSync(
-            aggregationType: 'NO_AGGREGATION'
+            aggregationType: 'PROFILE'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportFetchSyncResponse::class, $result);
     }
 
     #[Test]
@@ -120,9 +138,13 @@ final class MdrUsageReportsTest extends TestCase
         }
 
         $result = $this->client->reports->mdrUsageReports->fetchSync(
-            aggregationType: 'NO_AGGREGATION'
+            aggregationType: 'PROFILE',
+            endDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
+            profiles: ['My profile'],
+            startDate: new \DateTimeImmutable('2020-07-01T00:00:00-06:00'),
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MdrUsageReportFetchSyncResponse::class, $result);
     }
 }

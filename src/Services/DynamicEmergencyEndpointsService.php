@@ -6,76 +6,65 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\DefaultPagination;
+use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpoint;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointDeleteResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointGetResponse;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page;
-use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListResponse;
 use Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyEndpointsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpointsContract
 {
     /**
+     * @api
+     */
+    public DynamicEmergencyEndpointsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new DynamicEmergencyEndpointsRawService($client);
+    }
 
     /**
      * @api
      *
      * Creates a dynamic emergency endpoints.
      *
-     * @param string $callbackNumber
-     * @param string $callerName
      * @param string $dynamicEmergencyAddressID an id of a currently active dynamic emergency location
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $callbackNumber,
-        $callerName,
-        $dynamicEmergencyAddressID,
-        ?RequestOptions $requestOptions = null,
+        string $callbackNumber,
+        string $callerName,
+        string $dynamicEmergencyAddressID,
+        RequestOptions|array|null $requestOptions = null,
     ): DynamicEmergencyEndpointNewResponse {
-        $params = [
-            'callbackNumber' => $callbackNumber,
-            'callerName' => $callerName,
-            'dynamicEmergencyAddressID' => $dynamicEmergencyAddressID,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): DynamicEmergencyEndpointNewResponse {
-        [$parsed, $options] = DynamicEmergencyEndpointCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'callbackNumber' => $callbackNumber,
+                'callerName' => $callerName,
+                'dynamicEmergencyAddressID' => $dynamicEmergencyAddressID,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'dynamic_emergency_endpoints',
-            body: (object) $parsed,
-            options: $options,
-            convert: DynamicEmergencyEndpointNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -83,19 +72,19 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * Returns the dynamic emergency endpoint based on the ID provided
      *
+     * @param string $id Dynamic Emergency Endpoint id
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DynamicEmergencyEndpointGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['dynamic_emergency_endpoints/%1$s', $id],
-            options: $requestOptions,
-            convert: DynamicEmergencyEndpointGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -103,45 +92,25 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * Returns the dynamic emergency endpoints according to filters
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[status], filter[country_code]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<DynamicEmergencyEndpoint>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        ?RequestOptions $requestOptions = null
-    ): DynamicEmergencyEndpointListResponse {
-        $params = ['filter' => $filter, 'page' => $page];
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): DynamicEmergencyEndpointListResponse {
-        [$parsed, $options] = DynamicEmergencyEndpointListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'dynamic_emergency_endpoints',
-            query: $parsed,
-            options: $options,
-            convert: DynamicEmergencyEndpointListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -149,18 +118,18 @@ final class DynamicEmergencyEndpointsService implements DynamicEmergencyEndpoint
      *
      * Deletes the dynamic emergency endpoint based on the ID provided
      *
+     * @param string $id Dynamic Emergency Endpoint id
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): DynamicEmergencyEndpointDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['dynamic_emergency_endpoints/%1$s', $id],
-            options: $requestOptions,
-            convert: DynamicEmergencyEndpointDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -6,26 +6,34 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WirelessBlocklistsContract;
-use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams;
+use Telnyx\WirelessBlocklists\WirelessBlocklist;
 use Telnyx\WirelessBlocklists\WirelessBlocklistCreateParams\Type;
 use Telnyx\WirelessBlocklists\WirelessBlocklistDeleteResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistGetResponse;
-use Telnyx\WirelessBlocklists\WirelessBlocklistListParams;
-use Telnyx\WirelessBlocklists\WirelessBlocklistListResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
-use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class WirelessBlocklistsService implements WirelessBlocklistsContract
 {
     /**
+     * @api
+     */
+    public WirelessBlocklistsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new WirelessBlocklistsRawService($client);
+    }
 
     /**
      * @api
@@ -35,44 +43,24 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @param string $name the name of the Wireless Blocklist
      * @param Type|value-of<Type> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $name,
-        $type,
-        $values,
-        ?RequestOptions $requestOptions = null
+        string $name,
+        Type|string $type,
+        array $values,
+        RequestOptions|array|null $requestOptions = null,
     ): WirelessBlocklistNewResponse {
-        $params = ['name' => $name, 'type' => $type, 'values' => $values];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): WirelessBlocklistNewResponse {
-        [$parsed, $options] = WirelessBlocklistCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['name' => $name, 'type' => $type, 'values' => $values]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'wireless_blocklists',
-            body: (object) $parsed,
-            options: $options,
-            convert: WirelessBlocklistNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -80,19 +68,19 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * Retrieve information about a Wireless Blocklist.
      *
+     * @param string $id identifies the wireless blocklist
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): WirelessBlocklistGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['wireless_blocklists/%1$s', $id],
-            options: $requestOptions,
-            convert: WirelessBlocklistGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -101,46 +89,26 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * Update a Wireless Blocklist.
      *
      * @param string $name the name of the Wireless Blocklist
-     * @param WirelessBlocklistUpdateParams\Type|value-of<WirelessBlocklistUpdateParams\Type> $type the type of wireless blocklist
+     * @param \Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type|value-of<\Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
-        $name = omit,
-        $type = omit,
-        $values = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $name = null,
+        \Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type|string|null $type = null,
+        ?array $values = null,
+        RequestOptions|array|null $requestOptions = null,
     ): WirelessBlocklistUpdateResponse {
-        $params = ['name' => $name, 'type' => $type, 'values' => $values];
-
-        return $this->updateRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): WirelessBlocklistUpdateResponse {
-        [$parsed, $options] = WirelessBlocklistUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['name' => $name, 'type' => $type, 'values' => $values]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: 'wireless_blocklists',
-            body: (object) $parsed,
-            options: $options,
-            convert: WirelessBlocklistUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -153,52 +121,34 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      * @param string $filterValues values to filter on (inclusive)
      * @param int $pageNumber the page number to load
      * @param int $pageSize the size of the page
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<WirelessBlocklist>
      *
      * @throws APIException
      */
     public function list(
-        $filterName = omit,
-        $filterType = omit,
-        $filterValues = omit,
-        $pageNumber = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null,
-    ): WirelessBlocklistListResponse {
-        $params = [
-            'filterName' => $filterName,
-            'filterType' => $filterType,
-            'filterValues' => $filterValues,
-            'pageNumber' => $pageNumber,
-            'pageSize' => $pageSize,
-        ];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): WirelessBlocklistListResponse {
-        [$parsed, $options] = WirelessBlocklistListParams::parseRequest(
-            $params,
-            $requestOptions
+        ?string $filterName = null,
+        ?string $filterType = null,
+        ?string $filterValues = null,
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            [
+                'filterName' => $filterName,
+                'filterType' => $filterType,
+                'filterValues' => $filterValues,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'wireless_blocklists',
-            query: $parsed,
-            options: $options,
-            convert: WirelessBlocklistListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -206,18 +156,18 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * Deletes the Wireless Blocklist.
      *
+     * @param string $id identifies the wireless blocklist
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): WirelessBlocklistDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['wireless_blocklists/%1$s', $id],
-            options: $requestOptions,
-            convert: WirelessBlocklistDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

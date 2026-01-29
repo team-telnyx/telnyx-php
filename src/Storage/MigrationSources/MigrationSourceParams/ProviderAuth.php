@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\MigrationSources\MigrationSourceParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type provider_auth = array{
- *   accessKey?: string, secretAccessKey?: string
+ * @phpstan-type ProviderAuthShape = array{
+ *   accessKey?: string|null, secretAccessKey?: string|null
  * }
  */
 final class ProviderAuth implements BaseModel
 {
-    /** @use SdkModel<provider_auth> */
+    /** @use SdkModel<ProviderAuthShape> */
     use SdkModel;
 
     /**
      * AWS Access Key. For Telnyx-to-Telnyx migrations, use your Telnyx API key here.
      */
-    #[Api('access_key', optional: true)]
+    #[Optional('access_key')]
     public ?string $accessKey;
 
     /**
      * AWS Secret Access Key. For Telnyx-to-Telnyx migrations, use your Telnyx API key here as well.
      */
-    #[Api('secret_access_key', optional: true)]
+    #[Optional('secret_access_key')]
     public ?string $secretAccessKey;
 
     public function __construct()
@@ -44,12 +44,12 @@ final class ProviderAuth implements BaseModel
         ?string $accessKey = null,
         ?string $secretAccessKey = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accessKey && $obj->accessKey = $accessKey;
-        null !== $secretAccessKey && $obj->secretAccessKey = $secretAccessKey;
+        null !== $accessKey && $self['accessKey'] = $accessKey;
+        null !== $secretAccessKey && $self['secretAccessKey'] = $secretAccessKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -57,10 +57,10 @@ final class ProviderAuth implements BaseModel
      */
     public function withAccessKey(string $accessKey): self
     {
-        $obj = clone $this;
-        $obj->accessKey = $accessKey;
+        $self = clone $this;
+        $self['accessKey'] = $accessKey;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class ProviderAuth implements BaseModel
      */
     public function withSecretAccessKey(string $secretAccessKey): self
     {
-        $obj = clone $this;
-        $obj->secretAccessKey = $secretAccessKey;
+        $self = clone $this;
+        $self['secretAccessKey'] = $secretAccessKey;
 
-        return $obj;
+        return $self;
     }
 }

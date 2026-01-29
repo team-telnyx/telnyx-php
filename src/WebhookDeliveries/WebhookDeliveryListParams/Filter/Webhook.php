@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type webhook_alias = array{contains?: string}
+ * @phpstan-type WebhookShape = array{contains?: string|null}
  */
 final class Webhook implements BaseModel
 {
-    /** @use SdkModel<webhook_alias> */
+    /** @use SdkModel<WebhookShape> */
     use SdkModel;
 
     /**
      * Return only webhook deliveries whose `webhook` component contains the given text.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class Webhook implements BaseModel
      */
     public static function with(?string $contains = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
+        null !== $contains && $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Webhook implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 }

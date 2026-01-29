@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter\PortingOrder\Status;
 
 /**
- * @phpstan-type porting_order = array{status?: list<value-of<Status>>}
+ * @phpstan-type PortingOrderShape = array{
+ *   status?: list<Status|value-of<Status>>|null
+ * }
  */
 final class PortingOrder implements BaseModel
 {
-    /** @use SdkModel<porting_order> */
+    /** @use SdkModel<PortingOrderShape> */
     use SdkModel;
 
     /**
@@ -22,7 +24,7 @@ final class PortingOrder implements BaseModel
      *
      * @var list<value-of<Status>>|null $status
      */
-    #[Api(list: Status::class, optional: true)]
+    #[Optional(list: Status::class)]
     public ?array $status;
 
     public function __construct()
@@ -35,15 +37,15 @@ final class PortingOrder implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Status|value-of<Status>> $status
+     * @param list<Status|value-of<Status>>|null $status
      */
     public static function with(?array $status = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $status && $obj['status'] = $status;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -53,9 +55,9 @@ final class PortingOrder implements BaseModel
      */
     public function withStatus(array $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardOrderPreview;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,28 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Preview SIM card order purchases.
  *
- * @see Telnyx\SimCardOrderPreview->preview
+ * @see Telnyx\Services\SimCardOrderPreviewService::preview()
  *
- * @phpstan-type sim_card_order_preview_preview_params = array{
+ * @phpstan-type SimCardOrderPreviewPreviewParamsShape = array{
  *   addressID: string, quantity: int
  * }
  */
 final class SimCardOrderPreviewPreviewParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_order_preview_preview_params> */
+    /** @use SdkModel<SimCardOrderPreviewPreviewParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Uniquely identifies the address for the order.
      */
-    #[Api('address_id')]
+    #[Required('address_id')]
     public string $addressID;
 
     /**
      * The amount of SIM cards that the user would like to purchase in the SIM card order.
      */
-    #[Api]
+    #[Required]
     public int $quantity;
 
     /**
@@ -62,12 +62,12 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
      */
     public static function with(string $addressID, int $quantity): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->addressID = $addressID;
-        $obj->quantity = $quantity;
+        $self['addressID'] = $addressID;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -75,10 +75,10 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
      */
     public function withAddressID(string $addressID): self
     {
-        $obj = clone $this;
-        $obj->addressID = $addressID;
+        $self = clone $this;
+        $self['addressID'] = $addressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,9 +86,9 @@ final class SimCardOrderPreviewPreviewParams implements BaseModel
      */
     public function withQuantity(int $quantity): self
     {
-        $obj = clone $this;
-        $obj->quantity = $quantity;
+        $self = clone $this;
+        $self['quantity'] = $quantity;
 
-        return $obj;
+        return $self;
     }
 }

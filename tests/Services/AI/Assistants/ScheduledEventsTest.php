@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Assistants\ScheduledEvents\ConversationChannelType;
 use Telnyx\Client;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -44,7 +45,8 @@ final class ScheduledEventsTest extends TestCase
             telnyxEndUserTarget: 'telnyx_end_user_target',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -62,9 +64,12 @@ final class ScheduledEventsTest extends TestCase
             telnyxAgentTarget: 'telnyx_agent_target',
             telnyxConversationChannel: ConversationChannelType::PHONE_CALL,
             telnyxEndUserTarget: 'telnyx_end_user_target',
+            conversationMetadata: ['foo' => 'string'],
+            text: 'text',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -76,10 +81,11 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->retrieve(
             'event_id',
-            'assistant_id'
+            assistantID: 'assistant_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -91,10 +97,11 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->retrieve(
             'event_id',
-            'assistant_id'
+            assistantID: 'assistant_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNotNull($result);
     }
 
     #[Test]
@@ -104,11 +111,17 @@ final class ScheduledEventsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->scheduledEvents->list(
+        $page = $this->client->ai->assistants->scheduledEvents->list(
             'assistant_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertNotNull($item);
+        }
     }
 
     #[Test]
@@ -120,10 +133,11 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->delete(
             'event_id',
-            'assistant_id'
+            assistantID: 'assistant_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 
     #[Test]
@@ -135,9 +149,10 @@ final class ScheduledEventsTest extends TestCase
 
         $result = $this->client->ai->assistants->scheduledEvents->delete(
             'event_id',
-            'assistant_id'
+            assistantID: 'assistant_id'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

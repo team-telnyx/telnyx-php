@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationProfiles;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,20 +12,20 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update a notification profile.
  *
- * @see Telnyx\NotificationProfiles->update
+ * @see Telnyx\Services\NotificationProfilesService::update()
  *
- * @phpstan-type notification_profile_update_params = array{name?: string}
+ * @phpstan-type NotificationProfileUpdateParamsShape = array{name?: string|null}
  */
 final class NotificationProfileUpdateParams implements BaseModel
 {
-    /** @use SdkModel<notification_profile_update_params> */
+    /** @use SdkModel<NotificationProfileUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A human readable name.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
     public function __construct()
@@ -40,11 +40,11 @@ final class NotificationProfileUpdateParams implements BaseModel
      */
     public static function with(?string $name = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $name && $obj->name = $name;
+        null !== $name && $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -52,9 +52,9 @@ final class NotificationProfileUpdateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 }

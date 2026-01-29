@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationSettings;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,41 +13,43 @@ use Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter;
 /**
  * Add a notification setting.
  *
- * @see Telnyx\NotificationSettings->create
+ * @see Telnyx\Services\NotificationSettingsService::create()
  *
- * @phpstan-type notification_setting_create_params = array{
- *   notificationChannelID?: string,
- *   notificationEventConditionID?: string,
- *   notificationProfileID?: string,
- *   parameters?: list<Parameter>,
+ * @phpstan-import-type ParameterShape from \Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter
+ *
+ * @phpstan-type NotificationSettingCreateParamsShape = array{
+ *   notificationChannelID?: string|null,
+ *   notificationEventConditionID?: string|null,
+ *   notificationProfileID?: string|null,
+ *   parameters?: list<Parameter|ParameterShape>|null,
  * }
  */
 final class NotificationSettingCreateParams implements BaseModel
 {
-    /** @use SdkModel<notification_setting_create_params> */
+    /** @use SdkModel<NotificationSettingCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * A UUID reference to the associated Notification Channel.
      */
-    #[Api('notification_channel_id', optional: true)]
+    #[Optional('notification_channel_id')]
     public ?string $notificationChannelID;
 
     /**
      * A UUID reference to the associated Notification Event Condition.
      */
-    #[Api('notification_event_condition_id', optional: true)]
+    #[Optional('notification_event_condition_id')]
     public ?string $notificationEventConditionID;
 
     /**
      * A UUID reference to the associated Notification Profile.
      */
-    #[Api('notification_profile_id', optional: true)]
+    #[Optional('notification_profile_id')]
     public ?string $notificationProfileID;
 
     /** @var list<Parameter>|null $parameters */
-    #[Api(list: Parameter::class, optional: true)]
+    #[Optional(list: Parameter::class)]
     public ?array $parameters;
 
     public function __construct()
@@ -60,7 +62,7 @@ final class NotificationSettingCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Parameter> $parameters
+     * @param list<Parameter|ParameterShape>|null $parameters
      */
     public static function with(
         ?string $notificationChannelID = null,
@@ -68,14 +70,14 @@ final class NotificationSettingCreateParams implements BaseModel
         ?string $notificationProfileID = null,
         ?array $parameters = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $notificationChannelID && $obj->notificationChannelID = $notificationChannelID;
-        null !== $notificationEventConditionID && $obj->notificationEventConditionID = $notificationEventConditionID;
-        null !== $notificationProfileID && $obj->notificationProfileID = $notificationProfileID;
-        null !== $parameters && $obj->parameters = $parameters;
+        null !== $notificationChannelID && $self['notificationChannelID'] = $notificationChannelID;
+        null !== $notificationEventConditionID && $self['notificationEventConditionID'] = $notificationEventConditionID;
+        null !== $notificationProfileID && $self['notificationProfileID'] = $notificationProfileID;
+        null !== $parameters && $self['parameters'] = $parameters;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +86,10 @@ final class NotificationSettingCreateParams implements BaseModel
     public function withNotificationChannelID(
         string $notificationChannelID
     ): self {
-        $obj = clone $this;
-        $obj->notificationChannelID = $notificationChannelID;
+        $self = clone $this;
+        $self['notificationChannelID'] = $notificationChannelID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +98,10 @@ final class NotificationSettingCreateParams implements BaseModel
     public function withNotificationEventConditionID(
         string $notificationEventConditionID
     ): self {
-        $obj = clone $this;
-        $obj->notificationEventConditionID = $notificationEventConditionID;
+        $self = clone $this;
+        $self['notificationEventConditionID'] = $notificationEventConditionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,20 +110,20 @@ final class NotificationSettingCreateParams implements BaseModel
     public function withNotificationProfileID(
         string $notificationProfileID
     ): self {
-        $obj = clone $this;
-        $obj->notificationProfileID = $notificationProfileID;
+        $self = clone $this;
+        $self['notificationProfileID'] = $notificationProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Parameter> $parameters
+     * @param list<Parameter|ParameterShape> $parameters
      */
     public function withParameters(array $parameters): self
     {
-        $obj = clone $this;
-        $obj->parameters = $parameters;
+        $self = clone $this;
+        $self['parameters'] = $parameters;
 
-        return $obj;
+        return $self;
     }
 }

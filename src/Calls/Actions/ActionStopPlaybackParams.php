@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -16,40 +16,43 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * - `call.playback.ended` or `call.speak.ended`
  *
- * @see Telnyx\Calls\Actions->stopPlayback
+ * @see Telnyx\Services\Calls\ActionsService::stopPlayback()
  *
- * @phpstan-type action_stop_playback_params = array{
- *   clientState?: string, commandID?: string, overlay?: bool, stop?: string
+ * @phpstan-type ActionStopPlaybackParamsShape = array{
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   overlay?: bool|null,
+ *   stop?: string|null,
  * }
  */
 final class ActionStopPlaybackParams implements BaseModel
 {
-    /** @use SdkModel<action_stop_playback_params> */
+    /** @use SdkModel<ActionStopPlaybackParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      */
-    #[Api('client_state', optional: true)]
+    #[Optional('client_state')]
     public ?string $clientState;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      */
-    #[Api('command_id', optional: true)]
+    #[Optional('command_id')]
     public ?string $commandID;
 
     /**
      * When enabled, it stops the audio being played in the overlay queue.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?bool $overlay;
 
     /**
      * Use `current` to stop the current audio being played. Use `all` to stop the current audio file being played and clear all audio files from the queue.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $stop;
 
     public function __construct()
@@ -68,14 +71,14 @@ final class ActionStopPlaybackParams implements BaseModel
         ?bool $overlay = null,
         ?string $stop = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $clientState && $obj->clientState = $clientState;
-        null !== $commandID && $obj->commandID = $commandID;
-        null !== $overlay && $obj->overlay = $overlay;
-        null !== $stop && $obj->stop = $stop;
+        null !== $clientState && $self['clientState'] = $clientState;
+        null !== $commandID && $self['commandID'] = $commandID;
+        null !== $overlay && $self['overlay'] = $overlay;
+        null !== $stop && $self['stop'] = $stop;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +86,10 @@ final class ActionStopPlaybackParams implements BaseModel
      */
     public function withClientState(string $clientState): self
     {
-        $obj = clone $this;
-        $obj->clientState = $clientState;
+        $self = clone $this;
+        $self['clientState'] = $clientState;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,10 +97,10 @@ final class ActionStopPlaybackParams implements BaseModel
      */
     public function withCommandID(string $commandID): self
     {
-        $obj = clone $this;
-        $obj->commandID = $commandID;
+        $self = clone $this;
+        $self['commandID'] = $commandID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -105,10 +108,10 @@ final class ActionStopPlaybackParams implements BaseModel
      */
     public function withOverlay(bool $overlay): self
     {
-        $obj = clone $this;
-        $obj->overlay = $overlay;
+        $self = clone $this;
+        $self['overlay'] = $overlay;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -116,9 +119,9 @@ final class ActionStopPlaybackParams implements BaseModel
      */
     public function withStop(string $stop): self
     {
-        $obj = clone $this;
-        $obj->stop = $stop;
+        $self = clone $this;
+        $self['stop'] = $stop;
 
-        return $obj;
+        return $self;
     }
 }

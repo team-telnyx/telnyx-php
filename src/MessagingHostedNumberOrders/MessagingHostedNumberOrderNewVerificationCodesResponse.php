@@ -4,31 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeError;
-use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data\VerificationCodeSuccess;
 
 /**
- * @phpstan-type messaging_hosted_number_order_new_verification_codes_response = array{
- *   data: list<VerificationCodeSuccess|VerificationCodeError>
+ * @phpstan-import-type DataShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderNewVerificationCodesResponse\Data
+ *
+ * @phpstan-type MessagingHostedNumberOrderNewVerificationCodesResponseShape = array{
+ *   data: list<Data|DataShape>
  * }
  */
-final class MessagingHostedNumberOrderNewVerificationCodesResponse implements BaseModel, ResponseConverter
+final class MessagingHostedNumberOrderNewVerificationCodesResponse implements BaseModel
 {
-    /**
-     * @use SdkModel<messaging_hosted_number_order_new_verification_codes_response>
-     */
+    /** @use SdkModel<MessagingHostedNumberOrderNewVerificationCodesResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    /** @var list<VerificationCodeSuccess|VerificationCodeError> $data */
-    #[Api(list: Data::class)]
+    /** @var list<Data> $data */
+    #[Required(list: Data::class)]
     public array $data;
 
     /**
@@ -55,25 +49,25 @@ final class MessagingHostedNumberOrderNewVerificationCodesResponse implements Ba
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VerificationCodeSuccess|VerificationCodeError> $data
+     * @param list<Data|DataShape> $data
      */
     public static function with(array $data): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->data = $data;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<VerificationCodeSuccess|VerificationCodeError> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

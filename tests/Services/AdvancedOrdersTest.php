@@ -5,6 +5,10 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Client;
 use Tests\UnsupportedMockTests;
 
@@ -35,7 +39,8 @@ final class AdvancedOrdersTest extends TestCase
 
         $result = $this->client->advancedOrders->create();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AdvancedOrderNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +54,8 @@ final class AdvancedOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AdvancedOrderGetResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +67,8 @@ final class AdvancedOrdersTest extends TestCase
 
         $result = $this->client->advancedOrders->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(AdvancedOrderListResponse::class, $result);
     }
 
     #[Test]
@@ -75,6 +82,10 @@ final class AdvancedOrdersTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AdvancedOrderUpdateRequirementGroupResponse::class,
+            $result
+        );
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,34 +13,34 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Asynchronously create a Private Wireless Gateway for SIM cards for a previously created network. This operation may take several minutes so you can check the Private Wireless Gateway status at the section Get a Private Wireless Gateway.
  *
- * @see Telnyx\PrivateWirelessGateways->create
+ * @see Telnyx\Services\PrivateWirelessGatewaysService::create()
  *
- * @phpstan-type private_wireless_gateway_create_params = array{
- *   name: string, networkID: string, regionCode?: string
+ * @phpstan-type PrivateWirelessGatewayCreateParamsShape = array{
+ *   name: string, networkID: string, regionCode?: string|null
  * }
  */
 final class PrivateWirelessGatewayCreateParams implements BaseModel
 {
-    /** @use SdkModel<private_wireless_gateway_create_params> */
+    /** @use SdkModel<PrivateWirelessGatewayCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The private wireless gateway name.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * The identification of the related network resource.
      */
-    #[Api('network_id')]
+    #[Required('network_id')]
     public string $networkID;
 
     /**
      * The code of the region where the private wireless gateway will be assigned. A list of available regions can be found at the regions endpoint.
      */
-    #[Api('region_code', optional: true)]
+    #[Optional('region_code')]
     public ?string $regionCode;
 
     /**
@@ -71,14 +72,14 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
         string $networkID,
         ?string $regionCode = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->name = $name;
-        $obj->networkID = $networkID;
+        $self['name'] = $name;
+        $self['networkID'] = $networkID;
 
-        null !== $regionCode && $obj->regionCode = $regionCode;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -86,10 +87,10 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +98,10 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
      */
     public function withNetworkID(string $networkID): self
     {
-        $obj = clone $this;
-        $obj->networkID = $networkID;
+        $self = clone $this;
+        $self['networkID'] = $networkID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,9 +109,9 @@ final class PrivateWirelessGatewayCreateParams implements BaseModel
      */
     public function withRegionCode(string $regionCode): self
     {
-        $obj = clone $this;
-        $obj->regionCode = $regionCode;
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationChannels\NotificationChannelListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type notification_event_condition_id = array{eq?: string}
+ * @phpstan-type NotificationEventConditionIDShape = array{eq?: string|null}
  */
 final class NotificationEventConditionID implements BaseModel
 {
-    /** @use SdkModel<notification_event_condition_id> */
+    /** @use SdkModel<NotificationEventConditionIDShape> */
     use SdkModel;
 
     /**
      * Filter by the id of a notification channel.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $eq;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class NotificationEventConditionID implements BaseModel
      */
     public static function with(?string $eq = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $eq && $obj->eq = $eq;
+        null !== $eq && $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class NotificationEventConditionID implements BaseModel
      */
     public function withEq(string $eq): self
     {
-        $obj = clone $this;
-        $obj->eq = $eq;
+        $self = clone $this;
+        $self['eq'] = $eq;
 
-        return $obj;
+        return $self;
     }
 }

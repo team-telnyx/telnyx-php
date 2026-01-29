@@ -4,83 +4,81 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
 
 /**
- * @phpstan-type account_get_transcriptions_json_response = array{
- *   end?: int,
- *   firstPageUri?: string,
- *   nextPageUri?: string,
- *   page?: int,
- *   pageSize?: int,
- *   previousPageUri?: string,
- *   start?: int,
- *   transcriptions?: list<Transcription>,
- *   uri?: string,
+ * @phpstan-import-type TranscriptionShape from \Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription
+ *
+ * @phpstan-type AccountGetTranscriptionsJsonResponseShape = array{
+ *   end?: int|null,
+ *   firstPageUri?: string|null,
+ *   nextPageUri?: string|null,
+ *   page?: int|null,
+ *   pageSize?: int|null,
+ *   previousPageUri?: string|null,
+ *   start?: int|null,
+ *   transcriptions?: list<Transcription|TranscriptionShape>|null,
+ *   uri?: string|null,
  * }
  */
-final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseConverter
+final class AccountGetTranscriptionsJsonResponse implements BaseModel
 {
-    /** @use SdkModel<account_get_transcriptions_json_response> */
+    /** @use SdkModel<AccountGetTranscriptionsJsonResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The number of the last element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $end;
 
     /**
      * Relative uri to the first page of the query results.
      */
-    #[Api('first_page_uri', optional: true)]
+    #[Optional('first_page_uri')]
     public ?string $firstPageUri;
 
     /**
      * Relative uri to the next page of the query results.
      */
-    #[Api('next_page_uri', optional: true)]
+    #[Optional('next_page_uri')]
     public ?string $nextPageUri;
 
     /**
      * Current page number, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * The number of items on the page.
      */
-    #[Api('page_size', optional: true)]
+    #[Optional('page_size')]
     public ?int $pageSize;
 
     /**
      * Relative uri to the previous page of the query results.
      */
-    #[Api('previous_page_uri', optional: true)]
+    #[Optional('previous_page_uri')]
     public ?string $previousPageUri;
 
     /**
      * The number of the first element on the page, zero-indexed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $start;
 
     /** @var list<Transcription>|null $transcriptions */
-    #[Api(list: Transcription::class, optional: true)]
+    #[Optional(list: Transcription::class)]
     public ?array $transcriptions;
 
     /**
      * The URI of the current page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -93,7 +91,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Transcription> $transcriptions
+     * @param list<Transcription|TranscriptionShape>|null $transcriptions
      */
     public static function with(
         ?int $end = null,
@@ -106,19 +104,19 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
         ?array $transcriptions = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $end && $obj->end = $end;
-        null !== $firstPageUri && $obj->firstPageUri = $firstPageUri;
-        null !== $nextPageUri && $obj->nextPageUri = $nextPageUri;
-        null !== $page && $obj->page = $page;
-        null !== $pageSize && $obj->pageSize = $pageSize;
-        null !== $previousPageUri && $obj->previousPageUri = $previousPageUri;
-        null !== $start && $obj->start = $start;
-        null !== $transcriptions && $obj->transcriptions = $transcriptions;
-        null !== $uri && $obj->uri = $uri;
+        null !== $end && $self['end'] = $end;
+        null !== $firstPageUri && $self['firstPageUri'] = $firstPageUri;
+        null !== $nextPageUri && $self['nextPageUri'] = $nextPageUri;
+        null !== $page && $self['page'] = $page;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $previousPageUri && $self['previousPageUri'] = $previousPageUri;
+        null !== $start && $self['start'] = $start;
+        null !== $transcriptions && $self['transcriptions'] = $transcriptions;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +124,10 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
      */
     public function withEnd(int $end): self
     {
-        $obj = clone $this;
-        $obj->end = $end;
+        $self = clone $this;
+        $self['end'] = $end;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +135,10 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
      */
     public function withFirstPageUri(string $firstPageUri): self
     {
-        $obj = clone $this;
-        $obj->firstPageUri = $firstPageUri;
+        $self = clone $this;
+        $self['firstPageUri'] = $firstPageUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +146,10 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
      */
     public function withNextPageUri(string $nextPageUri): self
     {
-        $obj = clone $this;
-        $obj->nextPageUri = $nextPageUri;
+        $self = clone $this;
+        $self['nextPageUri'] = $nextPageUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +157,10 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,10 +168,10 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -181,10 +179,10 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
      */
     public function withPreviousPageUri(string $previousPageUri): self
     {
-        $obj = clone $this;
-        $obj->previousPageUri = $previousPageUri;
+        $self = clone $this;
+        $self['previousPageUri'] = $previousPageUri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -192,21 +190,21 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
      */
     public function withStart(int $start): self
     {
-        $obj = clone $this;
-        $obj->start = $start;
+        $self = clone $this;
+        $self['start'] = $start;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Transcription> $transcriptions
+     * @param list<Transcription|TranscriptionShape> $transcriptions
      */
     public function withTranscriptions(array $transcriptions): self
     {
-        $obj = clone $this;
-        $obj->transcriptions = $transcriptions;
+        $self = clone $this;
+        $self['transcriptions'] = $transcriptions;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -214,9 +212,9 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel, ResponseC
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

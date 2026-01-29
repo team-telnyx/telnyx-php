@@ -6,63 +6,54 @@ namespace Telnyx\Services\Verifications\ByPhoneNumber;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Verifications\ByPhoneNumber\ActionsContract;
-use Telnyx\Verifications\ByPhoneNumber\Actions\ActionVerifyParams;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ActionsService implements ActionsContract
 {
     /**
+     * @api
+     */
+    public ActionsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ActionsRawService($client);
+    }
 
     /**
      * @api
      *
      * Verify verification code by phone number
      *
+     * @param string $phoneNumber +E164 formatted phone number
      * @param string $code this is the code the user submits for verification
      * @param string $verifyProfileID the identifier of the associated Verify profile
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function verify(
         string $phoneNumber,
-        $code,
-        $verifyProfileID,
-        ?RequestOptions $requestOptions = null,
+        string $code,
+        string $verifyProfileID,
+        RequestOptions|array|null $requestOptions = null,
     ): VerifyVerificationCodeResponse {
-        $params = ['code' => $code, 'verifyProfileID' => $verifyProfileID];
-
-        return $this->verifyRaw($phoneNumber, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function verifyRaw(
-        string $phoneNumber,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VerifyVerificationCodeResponse {
-        [$parsed, $options] = ActionVerifyParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            ['code' => $code, 'verifyProfileID' => $verifyProfileID]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['verifications/by_phone_number/%1$s/actions/verify', $phoneNumber],
-            body: (object) $parsed,
-            options: $options,
-            convert: VerifyVerificationCodeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->verify($phoneNumber, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

@@ -5,18 +5,20 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\OAuthClients\OAuthClient;
 use Telnyx\OAuthClients\OAuthClientCreateParams\AllowedGrantType;
 use Telnyx\OAuthClients\OAuthClientCreateParams\ClientType;
 use Telnyx\OAuthClients\OAuthClientGetResponse;
 use Telnyx\OAuthClients\OAuthClientListParams\FilterAllowedGrantTypesContains;
 use Telnyx\OAuthClients\OAuthClientListParams\FilterClientType;
-use Telnyx\OAuthClients\OAuthClientListResponse;
 use Telnyx\OAuthClients\OAuthClientNewResponse;
 use Telnyx\OAuthClients\OAuthClientUpdateResponse;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface OAuthClientsContract
 {
     /**
@@ -31,47 +33,40 @@ interface OAuthClientsContract
      * @param list<string> $redirectUris List of redirect URIs (required for authorization_code flow)
      * @param bool $requirePkce Whether PKCE (Proof Key for Code Exchange) is required for this client
      * @param string $tosUri URL of the client's terms of service
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $allowedGrantTypes,
-        $allowedScopes,
-        $clientType,
-        $name,
-        $logoUri = omit,
-        $policyUri = omit,
-        $redirectUris = omit,
-        $requirePkce = omit,
-        $tosUri = omit,
-        ?RequestOptions $requestOptions = null,
+        array $allowedGrantTypes,
+        array $allowedScopes,
+        ClientType|string $clientType,
+        string $name,
+        ?string $logoUri = null,
+        ?string $policyUri = null,
+        array $redirectUris = [],
+        bool $requirePkce = false,
+        ?string $tosUri = null,
+        RequestOptions|array|null $requestOptions = null,
     ): OAuthClientNewResponse;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OAuthClientNewResponse;
-
-    /**
-     * @api
+     * @param string $id OAuth client ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): OAuthClientGetResponse;
 
     /**
      * @api
      *
+     * @param string $id OAuth client ID
      * @param list<\Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType|value-of<\Telnyx\OAuthClients\OAuthClientUpdateParams\AllowedGrantType>> $allowedGrantTypes List of allowed OAuth grant types
      * @param list<string> $allowedScopes List of allowed OAuth scopes
      * @param string $logoUri URL of the client logo
@@ -80,33 +75,21 @@ interface OAuthClientsContract
      * @param list<string> $redirectUris List of redirect URIs
      * @param bool $requirePkce Whether PKCE (Proof Key for Code Exchange) is required for this client
      * @param string $tosUri URL of the client's terms of service
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $allowedGrantTypes = omit,
-        $allowedScopes = omit,
-        $logoUri = omit,
-        $name = omit,
-        $policyUri = omit,
-        $redirectUris = omit,
-        $requirePkce = omit,
-        $tosUri = omit,
-        ?RequestOptions $requestOptions = null,
-    ): OAuthClientUpdateResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        ?array $allowedGrantTypes = null,
+        ?array $allowedScopes = null,
+        ?string $logoUri = null,
+        ?string $name = null,
+        ?string $policyUri = null,
+        ?array $redirectUris = null,
+        ?bool $requirePkce = null,
+        ?string $tosUri = null,
+        RequestOptions|array|null $requestOptions = null,
     ): OAuthClientUpdateResponse;
 
     /**
@@ -120,40 +103,34 @@ interface OAuthClientsContract
      * @param bool $filterVerified Filter by verification status
      * @param int $pageNumber Page number
      * @param int $pageSize Number of results per page
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<OAuthClient>
      *
      * @throws APIException
      */
     public function list(
-        $filterAllowedGrantTypesContains = omit,
-        $filterClientID = omit,
-        $filterClientType = omit,
-        $filterName = omit,
-        $filterNameContains = omit,
-        $filterVerified = omit,
-        $pageNumber = omit,
-        $pageSize = omit,
-        ?RequestOptions $requestOptions = null,
-    ): OAuthClientListResponse;
+        FilterAllowedGrantTypesContains|string|null $filterAllowedGrantTypesContains = null,
+        ?string $filterClientID = null,
+        FilterClientType|string|null $filterClientType = null,
+        ?string $filterName = null,
+        ?string $filterNameContains = null,
+        ?bool $filterVerified = null,
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): OAuthClientListResponse;
-
-    /**
-     * @api
+     * @param string $id OAuth client ID
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): mixed;
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data\Attempt\HTTP;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\Conversion\ListOf;
@@ -12,19 +12,19 @@ use Telnyx\Core\Conversion\ListOf;
 /**
  * Response details, optional.
  *
- * @phpstan-type response_alias = array{
- *   body?: string, headers?: list<list<string>>, status?: int
+ * @phpstan-type ResponseShape = array{
+ *   body?: string|null, headers?: list<list<string>>|null, status?: int|null
  * }
  */
 final class Response implements BaseModel
 {
-    /** @use SdkModel<response_alias> */
+    /** @use SdkModel<ResponseShape> */
     use SdkModel;
 
     /**
      * Raw response body, limited to 10kB.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $body;
 
     /**
@@ -32,10 +32,10 @@ final class Response implements BaseModel
      *
      * @var list<list<string>>|null $headers
      */
-    #[Api(list: new ListOf('string'), optional: true)]
+    #[Optional(list: new ListOf('string'))]
     public ?array $headers;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $status;
 
     public function __construct()
@@ -48,20 +48,20 @@ final class Response implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<list<string>> $headers
+     * @param list<list<string>>|null $headers
      */
     public static function with(
         ?string $body = null,
         ?array $headers = null,
         ?int $status = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $body && $obj->body = $body;
-        null !== $headers && $obj->headers = $headers;
-        null !== $status && $obj->status = $status;
+        null !== $body && $self['body'] = $body;
+        null !== $headers && $self['headers'] = $headers;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class Response implements BaseModel
      */
     public function withBody(string $body): self
     {
-        $obj = clone $this;
-        $obj->body = $body;
+        $self = clone $this;
+        $self['body'] = $body;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,17 +82,17 @@ final class Response implements BaseModel
      */
     public function withHeaders(array $headers): self
     {
-        $obj = clone $this;
-        $obj->headers = $headers;
+        $self = clone $this;
+        $self['headers'] = $headers;
 
-        return $obj;
+        return $self;
     }
 
     public function withStatus(int $status): self
     {
-        $obj = clone $this;
-        $obj->status = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

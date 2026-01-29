@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\Addresses\AddressListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type street_address = array{contains?: string}
+ * @phpstan-type StreetAddressShape = array{contains?: string|null}
  */
 final class StreetAddress implements BaseModel
 {
-    /** @use SdkModel<street_address> */
+    /** @use SdkModel<StreetAddressShape> */
     use SdkModel;
 
     /**
      * If present, addresses with <code>street_address</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class StreetAddress implements BaseModel
      */
     public static function with(?string $contains = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
+        null !== $contains && $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class StreetAddress implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 }

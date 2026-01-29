@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,10 +40,11 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieve(
             'conference_sid',
-            'account_sid'
+            accountSid: 'account_sid'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetResponse::class, $result);
     }
 
     #[Test]
@@ -50,10 +56,11 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieve(
             'conference_sid',
-            'account_sid'
+            accountSid: 'account_sid'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetResponse::class, $result);
     }
 
     #[Test]
@@ -68,7 +75,8 @@ final class ConferencesTest extends TestCase
             accountSid: 'account_sid'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -80,10 +88,14 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->update(
             'conference_sid',
-            accountSid: 'account_sid'
+            accountSid: 'account_sid',
+            announceMethod: 'GET',
+            announceURL: 'https://www.example.com/announce.xml',
+            status: 'completed',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -97,7 +109,8 @@ final class ConferencesTest extends TestCase
             'account_sid'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetConferencesResponse::class, $result);
     }
 
     #[Test]
@@ -109,10 +122,11 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieveRecordings(
             'conference_sid',
-            'account_sid'
+            accountSid: 'account_sid'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetRecordingsResponse::class, $result);
     }
 
     #[Test]
@@ -124,10 +138,11 @@ final class ConferencesTest extends TestCase
 
         $result = $this->client->texml->accounts->conferences->retrieveRecordings(
             'conference_sid',
-            'account_sid'
+            accountSid: 'account_sid'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetRecordingsResponse::class, $result);
     }
 
     #[Test]
@@ -142,10 +157,14 @@ final class ConferencesTest extends TestCase
             ->texml
             ->accounts
             ->conferences
-            ->retrieveRecordingsJson('conference_sid', 'account_sid')
+            ->retrieveRecordingsJson('conference_sid', accountSid: 'account_sid')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ConferenceGetRecordingsJsonResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -160,9 +179,13 @@ final class ConferencesTest extends TestCase
             ->texml
             ->accounts
             ->conferences
-            ->retrieveRecordingsJson('conference_sid', 'account_sid')
+            ->retrieveRecordingsJson('conference_sid', accountSid: 'account_sid')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ConferenceGetRecordingsJsonResponse::class,
+            $result
+        );
     }
 }

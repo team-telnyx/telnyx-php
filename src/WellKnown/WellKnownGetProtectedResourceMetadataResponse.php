@@ -4,36 +4,32 @@ declare(strict_types=1);
 
 namespace Telnyx\WellKnown;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type well_known_get_protected_resource_metadata_response = array{
- *   authorizationServers?: list<string>, resource?: string
+ * @phpstan-type WellKnownGetProtectedResourceMetadataResponseShape = array{
+ *   authorizationServers?: list<string>|null, resource?: string|null
  * }
  */
-final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, ResponseConverter
+final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel
 {
-    /** @use SdkModel<well_known_get_protected_resource_metadata_response> */
+    /** @use SdkModel<WellKnownGetProtectedResourceMetadataResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * List of authorization server URLs.
      *
      * @var list<string>|null $authorizationServers
      */
-    #[Api('authorization_servers', list: 'string', optional: true)]
+    #[Optional('authorization_servers', list: 'string')]
     public ?array $authorizationServers;
 
     /**
      * Protected resource URL.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $resource;
 
     public function __construct()
@@ -46,18 +42,18 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, 
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $authorizationServers
+     * @param list<string>|null $authorizationServers
      */
     public static function with(
         ?array $authorizationServers = null,
         ?string $resource = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $authorizationServers && $obj->authorizationServers = $authorizationServers;
-        null !== $resource && $obj->resource = $resource;
+        null !== $authorizationServers && $self['authorizationServers'] = $authorizationServers;
+        null !== $resource && $self['resource'] = $resource;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +63,10 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, 
      */
     public function withAuthorizationServers(array $authorizationServers): self
     {
-        $obj = clone $this;
-        $obj->authorizationServers = $authorizationServers;
+        $self = clone $this;
+        $self['authorizationServers'] = $authorizationServers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +74,9 @@ final class WellKnownGetProtectedResourceMetadataResponse implements BaseModel, 
      */
     public function withResource(string $resource): self
     {
-        $obj = clone $this;
-        $obj->resource = $resource;
+        $self = clone $this;
+        $self['resource'] = $resource;
 
-        return $obj;
+        return $self;
     }
 }

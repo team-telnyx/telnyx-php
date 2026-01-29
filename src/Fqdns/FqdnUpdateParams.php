@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Fqdns;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,40 +12,43 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update the details of a specific FQDN.
  *
- * @see Telnyx\Fqdns->update
+ * @see Telnyx\Services\FqdnsService::update()
  *
- * @phpstan-type fqdn_update_params = array{
- *   connectionID?: string, dnsRecordType?: string, fqdn?: string, port?: int|null
+ * @phpstan-type FqdnUpdateParamsShape = array{
+ *   connectionID?: string|null,
+ *   dnsRecordType?: string|null,
+ *   fqdn?: string|null,
+ *   port?: int|null,
  * }
  */
 final class FqdnUpdateParams implements BaseModel
 {
-    /** @use SdkModel<fqdn_update_params> */
+    /** @use SdkModel<FqdnUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * ID of the FQDN connection to which this IP should be attached.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * The DNS record type for the FQDN. For cases where a port is not set, the DNS record type must be 'srv'. For cases where a port is set, the DNS record type must be 'a'. If the DNS record type is 'a' and a port is not specified, 5060 will be used.
      */
-    #[Api('dns_record_type', optional: true)]
+    #[Optional('dns_record_type')]
     public ?string $dnsRecordType;
 
     /**
      * FQDN represented by this resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $fqdn;
 
     /**
      * Port to use when connecting to this FQDN.
      */
-    #[Api(nullable: true, optional: true)]
+    #[Optional(nullable: true)]
     public ?int $port;
 
     public function __construct()
@@ -64,14 +67,14 @@ final class FqdnUpdateParams implements BaseModel
         ?string $fqdn = null,
         ?int $port = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $dnsRecordType && $obj->dnsRecordType = $dnsRecordType;
-        null !== $fqdn && $obj->fqdn = $fqdn;
-        null !== $port && $obj->port = $port;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $dnsRecordType && $self['dnsRecordType'] = $dnsRecordType;
+        null !== $fqdn && $self['fqdn'] = $fqdn;
+        null !== $port && $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -79,10 +82,10 @@ final class FqdnUpdateParams implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -90,10 +93,10 @@ final class FqdnUpdateParams implements BaseModel
      */
     public function withDNSRecordType(string $dnsRecordType): self
     {
-        $obj = clone $this;
-        $obj->dnsRecordType = $dnsRecordType;
+        $self = clone $this;
+        $self['dnsRecordType'] = $dnsRecordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -101,10 +104,10 @@ final class FqdnUpdateParams implements BaseModel
      */
     public function withFqdn(string $fqdn): self
     {
-        $obj = clone $this;
-        $obj->fqdn = $fqdn;
+        $self = clone $this;
+        $self['fqdn'] = $fqdn;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,9 +115,9 @@ final class FqdnUpdateParams implements BaseModel
      */
     public function withPort(?int $port): self
     {
-        $obj = clone $this;
-        $obj->port = $port;
+        $self = clone $this;
+        $self['port'] = $port;
 
-        return $obj;
+        return $self;
     }
 }

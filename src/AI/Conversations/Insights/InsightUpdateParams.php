@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Conversations\Insights;
 
 use Telnyx\AI\Conversations\Insights\InsightUpdateParams\JsonSchema;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,32 +13,35 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Update an insight template.
  *
- * @see Telnyx\AI\Conversations\Insights->update
+ * @see Telnyx\Services\AI\Conversations\InsightsService::update()
  *
- * @phpstan-type insight_update_params = array{
- *   instructions?: string,
- *   jsonSchema?: mixed|string,
- *   name?: string,
- *   webhook?: string,
+ * @phpstan-import-type JsonSchemaVariants from \Telnyx\AI\Conversations\Insights\InsightUpdateParams\JsonSchema
+ * @phpstan-import-type JsonSchemaShape from \Telnyx\AI\Conversations\Insights\InsightUpdateParams\JsonSchema
+ *
+ * @phpstan-type InsightUpdateParamsShape = array{
+ *   instructions?: string|null,
+ *   jsonSchema?: JsonSchemaShape|null,
+ *   name?: string|null,
+ *   webhook?: string|null,
  * }
  */
 final class InsightUpdateParams implements BaseModel
 {
-    /** @use SdkModel<insight_update_params> */
+    /** @use SdkModel<InsightUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $instructions;
 
-    /** @var mixed|string|null $jsonSchema */
-    #[Api('json_schema', union: JsonSchema::class, optional: true)]
-    public mixed $jsonSchema;
+    /** @var JsonSchemaVariants|null $jsonSchema */
+    #[Optional('json_schema', union: JsonSchema::class)]
+    public string|array|null $jsonSchema;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $name;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $webhook;
 
     public function __construct()
@@ -51,56 +54,56 @@ final class InsightUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param mixed|string $jsonSchema
+     * @param JsonSchemaShape|null $jsonSchema
      */
     public static function with(
         ?string $instructions = null,
-        mixed $jsonSchema = null,
+        string|array|null $jsonSchema = null,
         ?string $name = null,
         ?string $webhook = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $instructions && $obj->instructions = $instructions;
-        null !== $jsonSchema && $obj->jsonSchema = $jsonSchema;
-        null !== $name && $obj->name = $name;
-        null !== $webhook && $obj->webhook = $webhook;
+        null !== $instructions && $self['instructions'] = $instructions;
+        null !== $jsonSchema && $self['jsonSchema'] = $jsonSchema;
+        null !== $name && $self['name'] = $name;
+        null !== $webhook && $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 
     public function withInstructions(string $instructions): self
     {
-        $obj = clone $this;
-        $obj->instructions = $instructions;
+        $self = clone $this;
+        $self['instructions'] = $instructions;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param mixed|string $jsonSchema
+     * @param JsonSchemaShape $jsonSchema
      */
-    public function withJsonSchema(mixed $jsonSchema): self
+    public function withJsonSchema(string|array $jsonSchema): self
     {
-        $obj = clone $this;
-        $obj->jsonSchema = $jsonSchema;
+        $self = clone $this;
+        $self['jsonSchema'] = $jsonSchema;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     public function withWebhook(string $webhook): self
     {
-        $obj = clone $this;
-        $obj->webhook = $webhook;
+        $self = clone $this;
+        $self['webhook'] = $webhook;
 
-        return $obj;
+        return $self;
     }
 }

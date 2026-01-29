@@ -4,40 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Response model for canary deploy operations.
  *
- * @phpstan-type canary_deploy_response = array{
+ * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
+ *
+ * @phpstan-type CanaryDeployResponseShape = array{
  *   assistantID: string,
  *   createdAt: \DateTimeInterface,
  *   updatedAt: \DateTimeInterface,
- *   versions: list<VersionConfig>,
+ *   versions: list<VersionConfig|VersionConfigShape>,
  * }
  */
-final class CanaryDeployResponse implements BaseModel, ResponseConverter
+final class CanaryDeployResponse implements BaseModel
 {
-    /** @use SdkModel<canary_deploy_response> */
+    /** @use SdkModel<CanaryDeployResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api('assistant_id')]
+    #[Required('assistant_id')]
     public string $assistantID;
 
-    #[Api('created_at')]
+    #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
-    #[Api('updated_at')]
+    #[Required('updated_at')]
     public \DateTimeInterface $updatedAt;
 
     /** @var list<VersionConfig> $versions */
-    #[Api(list: VersionConfig::class)]
+    #[Required(list: VersionConfig::class)]
     public array $versions;
 
     /**
@@ -70,7 +68,7 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public static function with(
         string $assistantID,
@@ -78,48 +76,48 @@ final class CanaryDeployResponse implements BaseModel, ResponseConverter
         \DateTimeInterface $updatedAt,
         array $versions,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->assistantID = $assistantID;
-        $obj->createdAt = $createdAt;
-        $obj->updatedAt = $updatedAt;
-        $obj->versions = $versions;
+        $self['assistantID'] = $assistantID;
+        $self['createdAt'] = $createdAt;
+        $self['updatedAt'] = $updatedAt;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 
     public function withAssistantID(string $assistantID): self
     {
-        $obj = clone $this;
-        $obj->assistantID = $assistantID;
+        $self = clone $this;
+        $self['assistantID'] = $assistantID;
 
-        return $obj;
+        return $self;
     }
 
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<VersionConfig> $versions
+     * @param list<VersionConfig|VersionConfigShape> $versions
      */
     public function withVersions(array $versions): self
     {
-        $obj = clone $this;
-        $obj->versions = $versions;
+        $self = clone $this;
+        $self['versions'] = $versions;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PrivateWirelessGateways;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,64 +12,64 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Get all Private Wireless Gateways belonging to the user.
  *
- * @see Telnyx\PrivateWirelessGateways->list
+ * @see Telnyx\Services\PrivateWirelessGatewaysService::list()
  *
- * @phpstan-type private_wireless_gateway_list_params = array{
- *   filterCreatedAt?: string,
- *   filterIPRange?: string,
- *   filterName?: string,
- *   filterRegionCode?: string,
- *   filterUpdatedAt?: string,
- *   pageNumber?: int,
- *   pageSize?: int,
+ * @phpstan-type PrivateWirelessGatewayListParamsShape = array{
+ *   filterCreatedAt?: string|null,
+ *   filterIPRange?: string|null,
+ *   filterName?: string|null,
+ *   filterRegionCode?: string|null,
+ *   filterUpdatedAt?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class PrivateWirelessGatewayListParams implements BaseModel
 {
-    /** @use SdkModel<private_wireless_gateway_list_params> */
+    /** @use SdkModel<PrivateWirelessGatewayListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Private Wireless Gateway resource creation date.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filterCreatedAt;
 
     /**
      * The IP address range of the Private Wireless Gateway.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filterIPRange;
 
     /**
      * The name of the Private Wireless Gateway.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filterName;
 
     /**
      * The name of the region where the Private Wireless Gateway is deployed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filterRegionCode;
 
     /**
      * When the Private Wireless Gateway was last updated.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $filterUpdatedAt;
 
     /**
      * The page number to load.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageNumber;
 
     /**
      * The size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageSize;
 
     public function __construct()
@@ -91,17 +91,17 @@ final class PrivateWirelessGatewayListParams implements BaseModel
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $filterCreatedAt && $obj->filterCreatedAt = $filterCreatedAt;
-        null !== $filterIPRange && $obj->filterIPRange = $filterIPRange;
-        null !== $filterName && $obj->filterName = $filterName;
-        null !== $filterRegionCode && $obj->filterRegionCode = $filterRegionCode;
-        null !== $filterUpdatedAt && $obj->filterUpdatedAt = $filterUpdatedAt;
-        null !== $pageNumber && $obj->pageNumber = $pageNumber;
-        null !== $pageSize && $obj->pageSize = $pageSize;
+        null !== $filterCreatedAt && $self['filterCreatedAt'] = $filterCreatedAt;
+        null !== $filterIPRange && $self['filterIPRange'] = $filterIPRange;
+        null !== $filterName && $self['filterName'] = $filterName;
+        null !== $filterRegionCode && $self['filterRegionCode'] = $filterRegionCode;
+        null !== $filterUpdatedAt && $self['filterUpdatedAt'] = $filterUpdatedAt;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class PrivateWirelessGatewayListParams implements BaseModel
      */
     public function withFilterCreatedAt(string $filterCreatedAt): self
     {
-        $obj = clone $this;
-        $obj->filterCreatedAt = $filterCreatedAt;
+        $self = clone $this;
+        $self['filterCreatedAt'] = $filterCreatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class PrivateWirelessGatewayListParams implements BaseModel
      */
     public function withFilterIPRange(string $filterIPRange): self
     {
-        $obj = clone $this;
-        $obj->filterIPRange = $filterIPRange;
+        $self = clone $this;
+        $self['filterIPRange'] = $filterIPRange;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class PrivateWirelessGatewayListParams implements BaseModel
      */
     public function withFilterName(string $filterName): self
     {
-        $obj = clone $this;
-        $obj->filterName = $filterName;
+        $self = clone $this;
+        $self['filterName'] = $filterName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class PrivateWirelessGatewayListParams implements BaseModel
      */
     public function withFilterRegionCode(string $filterRegionCode): self
     {
-        $obj = clone $this;
-        $obj->filterRegionCode = $filterRegionCode;
+        $self = clone $this;
+        $self['filterRegionCode'] = $filterRegionCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -153,10 +153,10 @@ final class PrivateWirelessGatewayListParams implements BaseModel
      */
     public function withFilterUpdatedAt(string $filterUpdatedAt): self
     {
-        $obj = clone $this;
-        $obj->filterUpdatedAt = $filterUpdatedAt;
+        $self = clone $this;
+        $self['filterUpdatedAt'] = $filterUpdatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -164,10 +164,10 @@ final class PrivateWirelessGatewayListParams implements BaseModel
      */
     public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->pageNumber = $pageNumber;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,9 +175,9 @@ final class PrivateWirelessGatewayListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 }

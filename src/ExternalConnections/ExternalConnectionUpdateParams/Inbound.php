@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\ExternalConnectionUpdateParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type inbound_alias = array{channelLimit?: int}
+ * @phpstan-type InboundShape = array{channelLimit?: int|null}
  */
 final class Inbound implements BaseModel
 {
-    /** @use SdkModel<inbound_alias> */
+    /** @use SdkModel<InboundShape> */
     use SdkModel;
 
     /**
      * When set, this will limit the number of concurrent inbound calls to phone numbers associated with this connection.
      */
-    #[Api('channel_limit', optional: true)]
+    #[Optional('channel_limit')]
     public ?int $channelLimit;
 
     public function __construct()
@@ -34,11 +34,11 @@ final class Inbound implements BaseModel
      */
     public static function with(?int $channelLimit = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $channelLimit && $obj->channelLimit = $channelLimit;
+        null !== $channelLimit && $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -46,9 +46,9 @@ final class Inbound implements BaseModel
      */
     public function withChannelLimit(int $channelLimit): self
     {
-        $obj = clone $this;
-        $obj->channelLimit = $channelLimit;
+        $self = clone $this;
+        $self['channelLimit'] = $channelLimit;
 
-        return $obj;
+        return $self;
     }
 }

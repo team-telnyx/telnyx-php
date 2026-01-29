@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +40,8 @@ final class ActionsTest extends TestCase
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifyVerificationCodeResponse::class, $result);
     }
 
     #[Test]
@@ -55,6 +57,7 @@ final class ActionsTest extends TestCase
             verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VerifyVerificationCodeResponse::class, $result);
     }
 }

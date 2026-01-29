@@ -7,34 +7,36 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig\Model;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig\SpeechContext;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig\TranscriptionEngine;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type transcription_engine_a_config = array{
- *   enableSpeakerDiarization?: bool,
- *   hints?: list<string>,
- *   interimResults?: bool,
- *   language?: value-of<GoogleTranscriptionLanguage>,
- *   maxSpeakerCount?: int,
- *   minSpeakerCount?: int,
- *   model?: value-of<Model>,
- *   profanityFilter?: bool,
- *   speechContext?: list<SpeechContext>,
- *   transcriptionEngine?: value-of<TranscriptionEngine>,
- *   useEnhanced?: bool,
+ * @phpstan-import-type SpeechContextShape from \Telnyx\Calls\Actions\TranscriptionEngineAConfig\SpeechContext
+ *
+ * @phpstan-type TranscriptionEngineAConfigShape = array{
+ *   enableSpeakerDiarization?: bool|null,
+ *   hints?: list<string>|null,
+ *   interimResults?: bool|null,
+ *   language?: null|GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
+ *   maxSpeakerCount?: int|null,
+ *   minSpeakerCount?: int|null,
+ *   model?: null|Model|value-of<Model>,
+ *   profanityFilter?: bool|null,
+ *   speechContext?: list<SpeechContext|SpeechContextShape>|null,
+ *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
+ *   useEnhanced?: bool|null,
  * }
  */
 final class TranscriptionEngineAConfig implements BaseModel
 {
-    /** @use SdkModel<transcription_engine_a_config> */
+    /** @use SdkModel<TranscriptionEngineAConfigShape> */
     use SdkModel;
 
     /**
      * Enables speaker diarization.
      */
-    #[Api('enable_speaker_diarization', optional: true)]
+    #[Optional('enable_speaker_diarization')]
     public ?bool $enableSpeakerDiarization;
 
     /**
@@ -42,13 +44,13 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var list<string>|null $hints
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $hints;
 
     /**
      * Whether to send also interim results. If set to false, only final results will be sent.
      */
-    #[Api('interim_results', optional: true)]
+    #[Optional('interim_results')]
     public ?bool $interimResults;
 
     /**
@@ -56,19 +58,19 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var value-of<GoogleTranscriptionLanguage>|null $language
      */
-    #[Api(enum: GoogleTranscriptionLanguage::class, optional: true)]
+    #[Optional(enum: GoogleTranscriptionLanguage::class)]
     public ?string $language;
 
     /**
      * Defines maximum number of speakers in the conversation.
      */
-    #[Api('max_speaker_count', optional: true)]
+    #[Optional('max_speaker_count')]
     public ?int $maxSpeakerCount;
 
     /**
      * Defines minimum number of speakers in the conversation.
      */
-    #[Api('min_speaker_count', optional: true)]
+    #[Optional('min_speaker_count')]
     public ?int $minSpeakerCount;
 
     /**
@@ -76,13 +78,13 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var value-of<Model>|null $model
      */
-    #[Api(enum: Model::class, optional: true)]
+    #[Optional(enum: Model::class)]
     public ?string $model;
 
     /**
      * Enables profanity_filter.
      */
-    #[Api('profanity_filter', optional: true)]
+    #[Optional('profanity_filter')]
     public ?bool $profanityFilter;
 
     /**
@@ -90,7 +92,7 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var list<SpeechContext>|null $speechContext
      */
-    #[Api('speech_context', list: SpeechContext::class, optional: true)]
+    #[Optional('speech_context', list: SpeechContext::class)]
     public ?array $speechContext;
 
     /**
@@ -98,17 +100,13 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * @var value-of<TranscriptionEngine>|null $transcriptionEngine
      */
-    #[Api(
-        'transcription_engine',
-        enum: TranscriptionEngine::class,
-        optional: true
-    )]
+    #[Optional('transcription_engine', enum: TranscriptionEngine::class)]
     public ?string $transcriptionEngine;
 
     /**
      * Enables enhanced transcription, this works for models `phone_call` and `video`.
      */
-    #[Api('use_enhanced', optional: true)]
+    #[Optional('use_enhanced')]
     public ?bool $useEnhanced;
 
     public function __construct()
@@ -121,11 +119,11 @@ final class TranscriptionEngineAConfig implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $hints
-     * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language
-     * @param Model|value-of<Model> $model
-     * @param list<SpeechContext> $speechContext
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
+     * @param list<string>|null $hints
+     * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>|null $language
+     * @param Model|value-of<Model>|null $model
+     * @param list<SpeechContext|SpeechContextShape>|null $speechContext
+     * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
      */
     public static function with(
         ?bool $enableSpeakerDiarization = null,
@@ -140,21 +138,21 @@ final class TranscriptionEngineAConfig implements BaseModel
         TranscriptionEngine|string|null $transcriptionEngine = null,
         ?bool $useEnhanced = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $enableSpeakerDiarization && $obj->enableSpeakerDiarization = $enableSpeakerDiarization;
-        null !== $hints && $obj->hints = $hints;
-        null !== $interimResults && $obj->interimResults = $interimResults;
-        null !== $language && $obj['language'] = $language;
-        null !== $maxSpeakerCount && $obj->maxSpeakerCount = $maxSpeakerCount;
-        null !== $minSpeakerCount && $obj->minSpeakerCount = $minSpeakerCount;
-        null !== $model && $obj['model'] = $model;
-        null !== $profanityFilter && $obj->profanityFilter = $profanityFilter;
-        null !== $speechContext && $obj->speechContext = $speechContext;
-        null !== $transcriptionEngine && $obj['transcriptionEngine'] = $transcriptionEngine;
-        null !== $useEnhanced && $obj->useEnhanced = $useEnhanced;
+        null !== $enableSpeakerDiarization && $self['enableSpeakerDiarization'] = $enableSpeakerDiarization;
+        null !== $hints && $self['hints'] = $hints;
+        null !== $interimResults && $self['interimResults'] = $interimResults;
+        null !== $language && $self['language'] = $language;
+        null !== $maxSpeakerCount && $self['maxSpeakerCount'] = $maxSpeakerCount;
+        null !== $minSpeakerCount && $self['minSpeakerCount'] = $minSpeakerCount;
+        null !== $model && $self['model'] = $model;
+        null !== $profanityFilter && $self['profanityFilter'] = $profanityFilter;
+        null !== $speechContext && $self['speechContext'] = $speechContext;
+        null !== $transcriptionEngine && $self['transcriptionEngine'] = $transcriptionEngine;
+        null !== $useEnhanced && $self['useEnhanced'] = $useEnhanced;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -163,10 +161,10 @@ final class TranscriptionEngineAConfig implements BaseModel
     public function withEnableSpeakerDiarization(
         bool $enableSpeakerDiarization
     ): self {
-        $obj = clone $this;
-        $obj->enableSpeakerDiarization = $enableSpeakerDiarization;
+        $self = clone $this;
+        $self['enableSpeakerDiarization'] = $enableSpeakerDiarization;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -176,10 +174,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withHints(array $hints): self
     {
-        $obj = clone $this;
-        $obj->hints = $hints;
+        $self = clone $this;
+        $self['hints'] = $hints;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -187,10 +185,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withInterimResults(bool $interimResults): self
     {
-        $obj = clone $this;
-        $obj->interimResults = $interimResults;
+        $self = clone $this;
+        $self['interimResults'] = $interimResults;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -201,10 +199,10 @@ final class TranscriptionEngineAConfig implements BaseModel
     public function withLanguage(
         GoogleTranscriptionLanguage|string $language
     ): self {
-        $obj = clone $this;
-        $obj['language'] = $language;
+        $self = clone $this;
+        $self['language'] = $language;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -212,10 +210,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withMaxSpeakerCount(int $maxSpeakerCount): self
     {
-        $obj = clone $this;
-        $obj->maxSpeakerCount = $maxSpeakerCount;
+        $self = clone $this;
+        $self['maxSpeakerCount'] = $maxSpeakerCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -223,10 +221,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withMinSpeakerCount(int $minSpeakerCount): self
     {
-        $obj = clone $this;
-        $obj->minSpeakerCount = $minSpeakerCount;
+        $self = clone $this;
+        $self['minSpeakerCount'] = $minSpeakerCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -236,10 +234,10 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withModel(Model|string $model): self
     {
-        $obj = clone $this;
-        $obj['model'] = $model;
+        $self = clone $this;
+        $self['model'] = $model;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -247,23 +245,23 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withProfanityFilter(bool $profanityFilter): self
     {
-        $obj = clone $this;
-        $obj->profanityFilter = $profanityFilter;
+        $self = clone $this;
+        $self['profanityFilter'] = $profanityFilter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Speech context to improve transcription accuracy.
      *
-     * @param list<SpeechContext> $speechContext
+     * @param list<SpeechContext|SpeechContextShape> $speechContext
      */
     public function withSpeechContext(array $speechContext): self
     {
-        $obj = clone $this;
-        $obj->speechContext = $speechContext;
+        $self = clone $this;
+        $self['speechContext'] = $speechContext;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -274,10 +272,10 @@ final class TranscriptionEngineAConfig implements BaseModel
     public function withTranscriptionEngine(
         TranscriptionEngine|string $transcriptionEngine
     ): self {
-        $obj = clone $this;
-        $obj['transcriptionEngine'] = $transcriptionEngine;
+        $self = clone $this;
+        $self['transcriptionEngine'] = $transcriptionEngine;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -285,9 +283,9 @@ final class TranscriptionEngineAConfig implements BaseModel
      */
     public function withUseEnhanced(bool $useEnhanced): self
     {
-        $obj = clone $this;
-        $obj->useEnhanced = $useEnhanced;
+        $self = clone $this;
+        $self['useEnhanced'] = $useEnhanced;
 
-        return $obj;
+        return $self;
     }
 }

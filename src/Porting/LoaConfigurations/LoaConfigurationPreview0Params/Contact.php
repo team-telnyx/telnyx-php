@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * The contact information of the company.
  *
- * @phpstan-type contact_alias = array{email: string, phoneNumber: string}
+ * @phpstan-type ContactShape = array{email: string, phoneNumber: string}
  */
 final class Contact implements BaseModel
 {
-    /** @use SdkModel<contact_alias> */
+    /** @use SdkModel<ContactShape> */
     use SdkModel;
 
     /**
      * The email address of the contact.
      */
-    #[Api]
+    #[Required]
     public string $email;
 
     /**
      * The phone number of the contact.
      */
-    #[Api('phone_number')]
+    #[Required('phone_number')]
     public string $phoneNumber;
 
     /**
@@ -56,12 +56,12 @@ final class Contact implements BaseModel
      */
     public static function with(string $email, string $phoneNumber): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->email = $email;
-        $obj->phoneNumber = $phoneNumber;
+        $self['email'] = $email;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class Contact implements BaseModel
      */
     public function withEmail(string $email): self
     {
-        $obj = clone $this;
-        $obj->email = $email;
+        $self = clone $this;
+        $self['email'] = $email;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class Contact implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

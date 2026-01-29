@@ -4,35 +4,43 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Meta;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Source;
 
 /**
- * @phpstan-type log_message = array{
- *   code: string, title: string, detail?: string, meta?: Meta, source?: Source
+ * @phpstan-import-type MetaShape from \Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Meta
+ * @phpstan-import-type SourceShape from \Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage\Source
+ *
+ * @phpstan-type LogMessageShape = array{
+ *   code: string,
+ *   title: string,
+ *   detail?: string|null,
+ *   meta?: null|Meta|MetaShape,
+ *   source?: null|Source|SourceShape,
  * }
  */
 final class LogMessage implements BaseModel
 {
-    /** @use SdkModel<log_message> */
+    /** @use SdkModel<LogMessageShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $code;
 
-    #[Api]
+    #[Required]
     public string $title;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $detail;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Meta $meta;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Source $source;
 
     /**
@@ -58,63 +66,72 @@ final class LogMessage implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Meta|MetaShape|null $meta
+     * @param Source|SourceShape|null $source
      */
     public static function with(
         string $code,
         string $title,
         ?string $detail = null,
-        ?Meta $meta = null,
-        ?Source $source = null,
+        Meta|array|null $meta = null,
+        Source|array|null $source = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->code = $code;
-        $obj->title = $title;
+        $self['code'] = $code;
+        $self['title'] = $title;
 
-        null !== $detail && $obj->detail = $detail;
-        null !== $meta && $obj->meta = $meta;
-        null !== $source && $obj->source = $source;
+        null !== $detail && $self['detail'] = $detail;
+        null !== $meta && $self['meta'] = $meta;
+        null !== $source && $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     public function withTitle(string $title): self
     {
-        $obj = clone $this;
-        $obj->title = $title;
+        $self = clone $this;
+        $self['title'] = $title;
 
-        return $obj;
+        return $self;
     }
 
     public function withDetail(string $detail): self
     {
-        $obj = clone $this;
-        $obj->detail = $detail;
+        $self = clone $this;
+        $self['detail'] = $detail;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(Meta $meta): self
+    /**
+     * @param Meta|MetaShape $meta
+     */
+    public function withMeta(Meta|array $meta): self
     {
-        $obj = clone $this;
-        $obj->meta = $meta;
+        $self = clone $this;
+        $self['meta'] = $meta;
 
-        return $obj;
+        return $self;
     }
 
-    public function withSource(Source $source): self
+    /**
+     * @param Source|SourceShape $source
+     */
+    public function withSource(Source|array $source): self
     {
-        $obj = clone $this;
-        $obj->source = $source;
+        $self = clone $this;
+        $self['source'] = $source;
 
-        return $obj;
+        return $self;
     }
 }

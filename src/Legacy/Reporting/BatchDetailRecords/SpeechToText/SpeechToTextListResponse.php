@@ -4,26 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type speech_to_text_list_response = array{
- *   data?: list<SttDetailReportResponse>
+ * @phpstan-import-type SttDetailReportResponseShape from \Telnyx\Legacy\Reporting\BatchDetailRecords\SpeechToText\SttDetailReportResponse
+ *
+ * @phpstan-type SpeechToTextListResponseShape = array{
+ *   data?: list<SttDetailReportResponse|SttDetailReportResponseShape>|null
  * }
  */
-final class SpeechToTextListResponse implements BaseModel, ResponseConverter
+final class SpeechToTextListResponse implements BaseModel
 {
-    /** @use SdkModel<speech_to_text_list_response> */
+    /** @use SdkModel<SpeechToTextListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /** @var list<SttDetailReportResponse>|null $data */
-    #[Api(list: SttDetailReportResponse::class, optional: true)]
+    #[Optional(list: SttDetailReportResponse::class)]
     public ?array $data;
 
     public function __construct()
@@ -36,25 +34,25 @@ final class SpeechToTextListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<SttDetailReportResponse> $data
+     * @param list<SttDetailReportResponse|SttDetailReportResponseShape>|null $data
      */
     public static function with(?array $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<SttDetailReportResponse> $data
+     * @param list<SttDetailReportResponse|SttDetailReportResponseShape> $data
      */
     public function withData(array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

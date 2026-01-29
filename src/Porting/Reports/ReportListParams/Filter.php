@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Porting\Reports\ReportListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Reports\ReportListParams\Filter\ReportType;
@@ -13,13 +13,14 @@ use Telnyx\Porting\Reports\ReportListParams\Filter\Status;
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[report_type], filter[status].
  *
- * @phpstan-type filter_alias = array{
- *   reportType?: value-of<ReportType>, status?: value-of<Status>
+ * @phpstan-type FilterShape = array{
+ *   reportType?: null|ReportType|value-of<ReportType>,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -27,7 +28,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<ReportType>|null $reportType
      */
-    #[Api('report_type', enum: ReportType::class, optional: true)]
+    #[Optional('report_type', enum: ReportType::class)]
     public ?string $reportType;
 
     /**
@@ -35,7 +36,7 @@ final class Filter implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -48,19 +49,19 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReportType|value-of<ReportType> $reportType
-     * @param Status|value-of<Status> $status
+     * @param ReportType|value-of<ReportType>|null $reportType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ReportType|string|null $reportType = null,
         Status|string|null $status = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $reportType && $obj['reportType'] = $reportType;
-        null !== $status && $obj['status'] = $status;
+        null !== $reportType && $self['reportType'] = $reportType;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,10 +71,10 @@ final class Filter implements BaseModel
      */
     public function withReportType(ReportType|string $reportType): self
     {
-        $obj = clone $this;
-        $obj['reportType'] = $reportType;
+        $self = clone $this;
+        $self['reportType'] = $reportType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,9 +84,9 @@ final class Filter implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

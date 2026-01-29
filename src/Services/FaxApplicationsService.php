@@ -6,31 +6,45 @@ namespace Telnyx\Services;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\FaxApplications\FaxApplicationCreateParams;
+use Telnyx\DefaultPagination;
+use Telnyx\FaxApplications\FaxApplication;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound;
 use Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound;
 use Telnyx\FaxApplications\FaxApplicationDeleteResponse;
 use Telnyx\FaxApplications\FaxApplicationGetResponse;
-use Telnyx\FaxApplications\FaxApplicationListParams;
 use Telnyx\FaxApplications\FaxApplicationListParams\Filter;
 use Telnyx\FaxApplications\FaxApplicationListParams\Page;
 use Telnyx\FaxApplications\FaxApplicationListParams\Sort;
-use Telnyx\FaxApplications\FaxApplicationListResponse;
 use Telnyx\FaxApplications\FaxApplicationNewResponse;
-use Telnyx\FaxApplications\FaxApplicationUpdateParams;
 use Telnyx\FaxApplications\FaxApplicationUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FaxApplicationsContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type InboundShape from \Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound
+ * @phpstan-import-type OutboundShape from \Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound
+ * @phpstan-import-type InboundShape from \Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound as InboundShape1
+ * @phpstan-import-type OutboundShape from \Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound as OutboundShape1
+ * @phpstan-import-type FilterShape from \Telnyx\FaxApplications\FaxApplicationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\FaxApplications\FaxApplicationListParams\Page
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class FaxApplicationsService implements FaxApplicationsContract
 {
     /**
+     * @api
+     */
+    public FaxApplicationsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new FaxApplicationsRawService($client);
+    }
 
     /**
      * @api
@@ -41,65 +55,45 @@ final class FaxApplicationsService implements FaxApplicationsContract
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param bool $active specifies whether the connection can be used
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
-     * @param Inbound $inbound
-     * @param Outbound $outbound
+     * @param Inbound|InboundShape $inbound
+     * @param Outbound|OutboundShape $outbound
      * @param list<string> $tags tags associated with the Fax Application
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $applicationName,
-        $webhookEventURL,
-        $active = omit,
-        $anchorsiteOverride = omit,
-        $inbound = omit,
-        $outbound = omit,
-        $tags = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookTimeoutSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        string $applicationName,
+        string $webhookEventURL,
+        bool $active = true,
+        AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
+        Inbound|array|null $inbound = null,
+        Outbound|array|null $outbound = null,
+        array $tags = [],
+        ?string $webhookEventFailoverURL = '',
+        ?int $webhookTimeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): FaxApplicationNewResponse {
-        $params = [
-            'applicationName' => $applicationName,
-            'webhookEventURL' => $webhookEventURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): FaxApplicationNewResponse {
-        [$parsed, $options] = FaxApplicationCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'applicationName' => $applicationName,
+                'webhookEventURL' => $webhookEventURL,
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'inbound' => $inbound,
+                'outbound' => $outbound,
+                'tags' => $tags,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'fax_applications',
-            body: (object) $parsed,
-            options: $options,
-            convert: FaxApplicationNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -107,19 +101,19 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * Return the details of an existing Fax Application inside the 'data' attribute of the response.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): FaxApplicationGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['fax_applications/%1$s', $id],
-            options: $requestOptions,
-            convert: FaxApplicationGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -127,74 +121,54 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * Updates settings of an existing Fax Application based on the parameters of the request.
      *
+     * @param string $id identifies the resource
      * @param string $applicationName a user-assigned name to help manage the application
      * @param string $webhookEventURL The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
      * @param bool $active specifies whether the connection can be used
      * @param AnchorsiteOverride|value-of<AnchorsiteOverride> $anchorsiteOverride `Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media.
      * @param string|null $faxEmailRecipient Specifies an email address where faxes sent to this application will be forwarded to (as pdf or tiff attachments)
-     * @param FaxApplicationUpdateParams\Inbound $inbound
-     * @param FaxApplicationUpdateParams\Outbound $outbound
+     * @param \Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound|InboundShape1 $inbound
+     * @param \Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound|OutboundShape1 $outbound
      * @param list<string> $tags tags associated with the Fax Application
      * @param string|null $webhookEventFailoverURL The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
      * @param int|null $webhookTimeoutSecs specifies how many seconds to wait before timing out a webhook
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $id,
-        $applicationName,
-        $webhookEventURL,
-        $active = omit,
-        $anchorsiteOverride = omit,
-        $faxEmailRecipient = omit,
-        $inbound = omit,
-        $outbound = omit,
-        $tags = omit,
-        $webhookEventFailoverURL = omit,
-        $webhookTimeoutSecs = omit,
-        ?RequestOptions $requestOptions = null,
+        string $applicationName,
+        string $webhookEventURL,
+        bool $active = true,
+        AnchorsiteOverride|string $anchorsiteOverride = 'Latency',
+        ?string $faxEmailRecipient = null,
+        \Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound|array|null $inbound = null,
+        \Telnyx\FaxApplications\FaxApplicationUpdateParams\Outbound|array|null $outbound = null,
+        ?array $tags = null,
+        ?string $webhookEventFailoverURL = '',
+        ?int $webhookTimeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): FaxApplicationUpdateResponse {
-        $params = [
-            'applicationName' => $applicationName,
-            'webhookEventURL' => $webhookEventURL,
-            'active' => $active,
-            'anchorsiteOverride' => $anchorsiteOverride,
-            'faxEmailRecipient' => $faxEmailRecipient,
-            'inbound' => $inbound,
-            'outbound' => $outbound,
-            'tags' => $tags,
-            'webhookEventFailoverURL' => $webhookEventFailoverURL,
-            'webhookTimeoutSecs' => $webhookTimeoutSecs,
-        ];
-
-        return $this->updateRaw($id, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): FaxApplicationUpdateResponse {
-        [$parsed, $options] = FaxApplicationUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'applicationName' => $applicationName,
+                'webhookEventURL' => $webhookEventURL,
+                'active' => $active,
+                'anchorsiteOverride' => $anchorsiteOverride,
+                'faxEmailRecipient' => $faxEmailRecipient,
+                'inbound' => $inbound,
+                'outbound' => $outbound,
+                'tags' => $tags,
+                'webhookEventFailoverURL' => $webhookEventFailoverURL,
+                'webhookTimeoutSecs' => $webhookTimeoutSecs,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'patch',
-            path: ['fax_applications/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: FaxApplicationUpdateResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -202,8 +176,8 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * This endpoint returns a list of your Fax Applications inside the 'data' attribute of the response. You can adjust which applications are listed by using filters. Fax Applications are used to configure how you send and receive faxes using the Programmable Fax API with Telnyx.
      *
-     * @param Filter $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id]
-     * @param Page $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[application_name][contains], filter[outbound_voice_profile_id]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -216,44 +190,26 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *     <code>application_name</code> field in descending order.
      *   </li>
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultPagination<FaxApplication>
      *
      * @throws APIException
      */
     public function list(
-        $filter = omit,
-        $page = omit,
-        $sort = omit,
-        ?RequestOptions $requestOptions = null,
-    ): FaxApplicationListResponse {
-        $params = ['filter' => $filter, 'page' => $page, 'sort' => $sort];
-
-        return $this->listRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): FaxApplicationListResponse {
-        [$parsed, $options] = FaxApplicationListParams::parseRequest(
-            $params,
-            $requestOptions
+        Filter|array|null $filter = null,
+        Page|array|null $page = null,
+        Sort|string $sort = 'created_at',
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultPagination {
+        $params = Util::removeNulls(
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'fax_applications',
-            query: $parsed,
-            options: $options,
-            convert: FaxApplicationListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -261,18 +217,18 @@ final class FaxApplicationsService implements FaxApplicationsContract
      *
      * Permanently deletes a Fax Application. Deletion may be prevented if the application is in use by phone numbers.
      *
+     * @param string $id identifies the resource
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): FaxApplicationDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['fax_applications/%1$s', $id],
-            options: $requestOptions,
-            convert: FaxApplicationDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

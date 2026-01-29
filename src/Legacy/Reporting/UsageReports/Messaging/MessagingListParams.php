@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Legacy\Reporting\UsageReports\Messaging;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,26 +12,28 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Fetch all previous requests for MDR usage reports.
  *
- * @see Telnyx\Legacy\Reporting\UsageReports\Messaging->list
+ * @see Telnyx\Services\Legacy\Reporting\UsageReports\MessagingService::list()
  *
- * @phpstan-type messaging_list_params = array{page?: int, perPage?: int}
+ * @phpstan-type MessagingListParamsShape = array{
+ *   page?: int|null, perPage?: int|null
+ * }
  */
 final class MessagingListParams implements BaseModel
 {
-    /** @use SdkModel<messaging_list_params> */
+    /** @use SdkModel<MessagingListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Page number.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * Size of the page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $perPage;
 
     public function __construct()
@@ -46,12 +48,12 @@ final class MessagingListParams implements BaseModel
      */
     public static function with(?int $page = null, ?int $perPage = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $page && $obj->page = $page;
-        null !== $perPage && $obj->perPage = $perPage;
+        null !== $page && $self['page'] = $page;
+        null !== $perPage && $self['perPage'] = $perPage;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -59,10 +61,10 @@ final class MessagingListParams implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +72,9 @@ final class MessagingListParams implements BaseModel
      */
     public function withPerPage(int $perPage): self
     {
-        $obj = clone $this;
-        $obj->perPage = $perPage;
+        $self = clone $this;
+        $self['perPage'] = $perPage;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\Rooms\Room;
+use Telnyx\Rooms\RoomGetResponse;
+use Telnyx\Rooms\RoomNewResponse;
+use Telnyx\Rooms\RoomUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +40,8 @@ final class RoomsTest extends TestCase
 
         $result = $this->client->rooms->create();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomNewResponse::class, $result);
     }
 
     #[Test]
@@ -49,7 +55,8 @@ final class RoomsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomGetResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +70,8 @@ final class RoomsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RoomUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -73,9 +81,15 @@ final class RoomsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->rooms->list();
+        $page = $this->client->rooms->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(Room::class, $item);
+        }
     }
 
     #[Test]
@@ -89,6 +103,7 @@ final class RoomsTest extends TestCase
             '0ccc7b54-4df3-4bca-a65a-3da1ecc777f0'
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }

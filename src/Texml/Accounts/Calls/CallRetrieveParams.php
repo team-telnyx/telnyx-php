@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,17 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns an individual call identified by its CallSid. This endpoint is eventually consistent.
  *
- * @see Telnyx\Texml\Accounts\Calls->retrieve
+ * @see Telnyx\Services\Texml\Accounts\CallsService::retrieve()
  *
- * @phpstan-type call_retrieve_params = array{accountSid: string}
+ * @phpstan-type CallRetrieveParamsShape = array{accountSid: string}
  */
 final class CallRetrieveParams implements BaseModel
 {
-    /** @use SdkModel<call_retrieve_params> */
+    /** @use SdkModel<CallRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $accountSid;
 
     /**
@@ -51,18 +51,18 @@ final class CallRetrieveParams implements BaseModel
      */
     public static function with(string $accountSid): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->accountSid = $accountSid;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 }

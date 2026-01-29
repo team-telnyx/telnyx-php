@@ -4,45 +4,46 @@ declare(strict_types=1);
 
 namespace Telnyx\Wireless\WirelessGetRegionsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
+ * @phpstan-type DataShape = array{
  *   code: string,
  *   name: string,
- *   insertedAt?: \DateTimeInterface,
- *   updatedAt?: \DateTimeInterface,
+ *   insertedAt?: \DateTimeInterface|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The unique code of the region.
      */
-    #[Api]
+    #[Required]
     public string $code;
 
     /**
      * The name of the region.
      */
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
      * Timestamp when the region was inserted.
      */
-    #[Api('inserted_at', optional: true)]
+    #[Optional('inserted_at')]
     public ?\DateTimeInterface $insertedAt;
 
     /**
      * Timestamp when the region was last updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     /**
@@ -75,15 +76,15 @@ final class Data implements BaseModel
         ?\DateTimeInterface $insertedAt = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->code = $code;
-        $obj->name = $name;
+        $self['code'] = $code;
+        $self['name'] = $name;
 
-        null !== $insertedAt && $obj->insertedAt = $insertedAt;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $insertedAt && $self['insertedAt'] = $insertedAt;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +92,10 @@ final class Data implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj->code = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +103,10 @@ final class Data implements BaseModel
      */
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -113,10 +114,10 @@ final class Data implements BaseModel
      */
     public function withInsertedAt(\DateTimeInterface $insertedAt): self
     {
-        $obj = clone $this;
-        $obj->insertedAt = $insertedAt;
+        $self = clone $this;
+        $self['insertedAt'] = $insertedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -124,9 +125,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

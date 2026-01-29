@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,34 +12,34 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Returns multiple recording resources for an account.
  *
- * @see Telnyx\Texml\Accounts->retrieveRecordingsJson
+ * @see Telnyx\Services\Texml\AccountsService::retrieveRecordingsJson()
  *
- * @phpstan-type account_retrieve_recordings_json_params = array{
- *   dateCreated?: \DateTimeInterface, page?: int, pageSize?: int
+ * @phpstan-type AccountRetrieveRecordingsJsonParamsShape = array{
+ *   dateCreated?: \DateTimeInterface|null, page?: int|null, pageSize?: int|null
  * }
  */
 final class AccountRetrieveRecordingsJsonParams implements BaseModel
 {
-    /** @use SdkModel<account_retrieve_recordings_json_params> */
+    /** @use SdkModel<AccountRetrieveRecordingsJsonParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Filters recording by the creation date. Expected format is ISO8601 date or date-time, ie. {YYYY}-{MM}-{DD} or {YYYY}-{MM}-{DD}T{hh}:{mm}:{ss}Z. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $dateCreated;
 
     /**
      * The number of the page to be displayed, zero-indexed, should be used in conjuction with PageToken.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $page;
 
     /**
      * The number of records to be displayed on a page.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $pageSize;
 
     public function __construct()
@@ -57,13 +57,13 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
         ?int $page = null,
         ?int $pageSize = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $dateCreated && $obj->dateCreated = $dateCreated;
-        null !== $page && $obj->page = $page;
-        null !== $pageSize && $obj->pageSize = $pageSize;
+        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
+        null !== $page && $self['page'] = $page;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,10 +71,10 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
      */
     public function withDateCreated(\DateTimeInterface $dateCreated): self
     {
-        $obj = clone $this;
-        $obj->dateCreated = $dateCreated;
+        $self = clone $this;
+        $self['dateCreated'] = $dateCreated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,10 +82,10 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,9 +93,9 @@ final class AccountRetrieveRecordingsJsonParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj->pageSize = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 }

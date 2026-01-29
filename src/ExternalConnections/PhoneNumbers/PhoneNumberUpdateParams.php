@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,25 +13,25 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Asynchronously update settings of the phone number associated with the given external connection.
  *
- * @see Telnyx\ExternalConnections\PhoneNumbers->update
+ * @see Telnyx\Services\ExternalConnections\PhoneNumbersService::update()
  *
- * @phpstan-type phone_number_update_params = array{
- *   id: string, locationID?: string
+ * @phpstan-type PhoneNumberUpdateParamsShape = array{
+ *   id: string, locationID?: string|null
  * }
  */
 final class PhoneNumberUpdateParams implements BaseModel
 {
-    /** @use SdkModel<phone_number_update_params> */
+    /** @use SdkModel<PhoneNumberUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api]
+    #[Required]
     public string $id;
 
     /**
      * Identifies the location to assign the phone number to.
      */
-    #[Api('location_id', optional: true)]
+    #[Optional('location_id')]
     public ?string $locationID;
 
     /**
@@ -59,21 +60,21 @@ final class PhoneNumberUpdateParams implements BaseModel
      */
     public static function with(string $id, ?string $locationID = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
+        $self['id'] = $id;
 
-        null !== $locationID && $obj->locationID = $locationID;
+        null !== $locationID && $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +82,9 @@ final class PhoneNumberUpdateParams implements BaseModel
      */
     public function withLocationID(string $locationID): self
     {
-        $obj = clone $this;
-        $obj->locationID = $locationID;
+        $self = clone $this;
+        $self['locationID'] = $locationID;
 
-        return $obj;
+        return $self;
     }
 }

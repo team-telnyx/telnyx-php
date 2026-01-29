@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\ShortCodes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\ShortCode;
 
 /**
- * @phpstan-type short_code_get_response = array{data?: ShortCode}
+ * @phpstan-import-type ShortCodeShape from \Telnyx\ShortCode
+ *
+ * @phpstan-type ShortCodeGetResponseShape = array{
+ *   data?: null|ShortCode|ShortCodeShape
+ * }
  */
-final class ShortCodeGetResponse implements BaseModel, ResponseConverter
+final class ShortCodeGetResponse implements BaseModel
 {
-    /** @use SdkModel<short_code_get_response> */
+    /** @use SdkModel<ShortCodeGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?ShortCode $data;
 
     public function __construct()
@@ -33,21 +33,26 @@ final class ShortCodeGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ShortCode|ShortCodeShape|null $data
      */
-    public static function with(?ShortCode $data = null): self
+    public static function with(ShortCode|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(ShortCode $data): self
+    /**
+     * @param ShortCode|ShortCodeShape $data
+     */
+    public function withData(ShortCode|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

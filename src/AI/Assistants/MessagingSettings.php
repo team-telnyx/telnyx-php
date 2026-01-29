@@ -4,30 +4,38 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type messaging_settings = array{
- *   defaultMessagingProfileID?: string, deliveryStatusWebhookURL?: string
+ * @phpstan-type MessagingSettingsShape = array{
+ *   conversationInactivityMinutes?: int|null,
+ *   defaultMessagingProfileID?: string|null,
+ *   deliveryStatusWebhookURL?: string|null,
  * }
  */
 final class MessagingSettings implements BaseModel
 {
-    /** @use SdkModel<messaging_settings> */
+    /** @use SdkModel<MessagingSettingsShape> */
     use SdkModel;
+
+    /**
+     * If more than this many minutes have passed since the last message, the assistant will start a new conversation instead of continuing the existing one.
+     */
+    #[Optional('conversation_inactivity_minutes')]
+    public ?int $conversationInactivityMinutes;
 
     /**
      * Default Messaging Profile used for messaging exchanges with your assistant. This will be created automatically on assistant creation.
      */
-    #[Api('default_messaging_profile_id', optional: true)]
+    #[Optional('default_messaging_profile_id')]
     public ?string $defaultMessagingProfileID;
 
     /**
      * The URL where webhooks related to delivery statused for assistant messages will be sent.
      */
-    #[Api('delivery_status_webhook_url', optional: true)]
+    #[Optional('delivery_status_webhook_url')]
     public ?string $deliveryStatusWebhookURL;
 
     public function __construct()
@@ -41,15 +49,29 @@ final class MessagingSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        ?int $conversationInactivityMinutes = null,
         ?string $defaultMessagingProfileID = null,
         ?string $deliveryStatusWebhookURL = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $defaultMessagingProfileID && $obj->defaultMessagingProfileID = $defaultMessagingProfileID;
-        null !== $deliveryStatusWebhookURL && $obj->deliveryStatusWebhookURL = $deliveryStatusWebhookURL;
+        null !== $conversationInactivityMinutes && $self['conversationInactivityMinutes'] = $conversationInactivityMinutes;
+        null !== $defaultMessagingProfileID && $self['defaultMessagingProfileID'] = $defaultMessagingProfileID;
+        null !== $deliveryStatusWebhookURL && $self['deliveryStatusWebhookURL'] = $deliveryStatusWebhookURL;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * If more than this many minutes have passed since the last message, the assistant will start a new conversation instead of continuing the existing one.
+     */
+    public function withConversationInactivityMinutes(
+        int $conversationInactivityMinutes
+    ): self {
+        $self = clone $this;
+        $self['conversationInactivityMinutes'] = $conversationInactivityMinutes;
+
+        return $self;
     }
 
     /**
@@ -58,10 +80,10 @@ final class MessagingSettings implements BaseModel
     public function withDefaultMessagingProfileID(
         string $defaultMessagingProfileID
     ): self {
-        $obj = clone $this;
-        $obj->defaultMessagingProfileID = $defaultMessagingProfileID;
+        $self = clone $this;
+        $self['defaultMessagingProfileID'] = $defaultMessagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,9 +92,9 @@ final class MessagingSettings implements BaseModel
     public function withDeliveryStatusWebhookURL(
         string $deliveryStatusWebhookURL
     ): self {
-        $obj = clone $this;
-        $obj->deliveryStatusWebhookURL = $deliveryStatusWebhookURL;
+        $self = clone $this;
+        $self['deliveryStatusWebhookURL'] = $deliveryStatusWebhookURL;
 
-        return $obj;
+        return $self;
     }
 }

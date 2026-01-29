@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingTollfree\Verification\Requests;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type url_alias = array{url: string}
+ * @phpstan-type URLShape = array{url: string}
  */
 final class URL implements BaseModel
 {
-    /** @use SdkModel<url_alias> */
+    /** @use SdkModel<URLShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
@@ -45,18 +45,18 @@ final class URL implements BaseModel
      */
     public static function with(string $url): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->url = $url;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

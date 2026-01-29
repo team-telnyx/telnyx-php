@@ -4,32 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
-use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
-use Telnyx\AI\Assistants\AssistantImportParams;
-use Telnyx\AI\Assistants\AssistantImportParams\Provider;
-use Telnyx\AI\Assistants\AssistantRetrieveParams;
+use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
+use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
-use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
-use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
-use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
-use Telnyx\AI\Assistants\AssistantUpdateParams;
 use Telnyx\AI\Assistants\EnabledFeatures;
-use Telnyx\AI\Assistants\HangupTool;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
-use Telnyx\AI\Assistants\RetrievalTool;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\TransferTool;
 use Telnyx\AI\Assistants\VoiceSettings;
-use Telnyx\AI\Assistants\WebhookTool;
+use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
@@ -38,32 +29,47 @@ use Telnyx\Services\AI\Assistants\TestsService;
 use Telnyx\Services\AI\Assistants\ToolsService;
 use Telnyx\Services\AI\Assistants\VersionsService;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
+ * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
+ * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
+ * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
+ * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
+ * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AssistantsService implements AssistantsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public AssistantsRawService $raw;
+
+    /**
+     * @api
      */
     public TestsService $tests;
 
     /**
-     * @@api
+     * @api
      */
     public CanaryDeploysService $canaryDeploys;
 
     /**
-     * @@api
+     * @api
      */
     public ScheduledEventsService $scheduledEvents;
 
     /**
-     * @@api
+     * @api
      */
     public ToolsService $tools;
 
     /**
-     * @@api
+     * @api
      */
     public VersionsService $versions;
 
@@ -72,6 +78,7 @@ final class AssistantsService implements AssistantsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new AssistantsRawService($client);
         $this->tests = new TestsService($client);
         $this->canaryDeploys = new CanaryDeploysService($client);
         $this->scheduledEvents = new ScheduledEventsService($client);
@@ -85,90 +92,70 @@ final class AssistantsService implements AssistantsContract
      * Create a new AI Assistant.
      *
      * @param string $instructions System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param string $model ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api/inference/inference-embedding/get-models-public-models-get) to see all of your available models,
-     * @param string $name
-     * @param string $description
-     * @param array<string,
-     * mixed,> $dynamicVariables Map of dynamic variables and their default values
+     * @param string $model ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,
+     * @param array<string,mixed> $dynamicVariables Map of dynamic variables and their default values
      * @param string $dynamicVariablesWebhookURL If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
-     * @param string $greeting Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param InsightSettings $insightSettings
-     * @param string $llmAPIKeyRef This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
-     * @param MessagingSettings $messagingSettings
-     * @param PrivacySettings $privacySettings
-     * @param TelephonySettings $telephonySettings
-     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param TranscriptionSettings $transcription
-     * @param VoiceSettings $voiceSettings
+     * @param string $greeting Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
+     * @param InsightSettings|InsightSettingsShape $insightSettings
+     * @param string $llmAPIKeyRef This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * @param MessagingSettings|MessagingSettingsShape $messagingSettings
+     * @param PrivacySettings|PrivacySettingsShape $privacySettings
+     * @param TelephonySettings|TelephonySettingsShape $telephonySettings
+     * @param list<AssistantToolShape> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
+     * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
+     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
+     * @param WidgetSettings|WidgetSettingsShape $widgetSettings configuration settings for the assistant's web widget
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $instructions,
-        $model,
-        $name,
-        $description = omit,
-        $dynamicVariables = omit,
-        $dynamicVariablesWebhookURL = omit,
-        $enabledFeatures = omit,
-        $greeting = omit,
-        $insightSettings = omit,
-        $llmAPIKeyRef = omit,
-        $messagingSettings = omit,
-        $privacySettings = omit,
-        $telephonySettings = omit,
-        $tools = omit,
-        $transcription = omit,
-        $voiceSettings = omit,
-        ?RequestOptions $requestOptions = null,
+        string $instructions,
+        string $model,
+        string $name,
+        ?string $description = null,
+        ?array $dynamicVariables = null,
+        ?string $dynamicVariablesWebhookURL = null,
+        ?array $enabledFeatures = null,
+        ?string $greeting = null,
+        InsightSettings|array|null $insightSettings = null,
+        ?string $llmAPIKeyRef = null,
+        MessagingSettings|array|null $messagingSettings = null,
+        PrivacySettings|array|null $privacySettings = null,
+        TelephonySettings|array|null $telephonySettings = null,
+        ?array $tools = null,
+        TranscriptionSettings|array|null $transcription = null,
+        VoiceSettings|array|null $voiceSettings = null,
+        WidgetSettings|array|null $widgetSettings = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = [
-            'instructions' => $instructions,
-            'model' => $model,
-            'name' => $name,
-            'description' => $description,
-            'dynamicVariables' => $dynamicVariables,
-            'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-            'enabledFeatures' => $enabledFeatures,
-            'greeting' => $greeting,
-            'insightSettings' => $insightSettings,
-            'llmAPIKeyRef' => $llmAPIKeyRef,
-            'messagingSettings' => $messagingSettings,
-            'privacySettings' => $privacySettings,
-            'telephonySettings' => $telephonySettings,
-            'tools' => $tools,
-            'transcription' => $transcription,
-            'voiceSettings' => $voiceSettings,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InferenceEmbedding {
-        [$parsed, $options] = AssistantCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'instructions' => $instructions,
+                'model' => $model,
+                'name' => $name,
+                'description' => $description,
+                'dynamicVariables' => $dynamicVariables,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
+                'enabledFeatures' => $enabledFeatures,
+                'greeting' => $greeting,
+                'insightSettings' => $insightSettings,
+                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'messagingSettings' => $messagingSettings,
+                'privacySettings' => $privacySettings,
+                'telephonySettings' => $telephonySettings,
+                'tools' => $tools,
+                'transcription' => $transcription,
+                'voiceSettings' => $voiceSettings,
+                'widgetSettings' => $widgetSettings,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'ai/assistants',
-            body: (object) $parsed,
-            options: $options,
-            convert: InferenceEmbedding::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -176,56 +163,31 @@ final class AssistantsService implements AssistantsContract
      *
      * Retrieve an AI Assistant configuration by `assistant_id`.
      *
-     * @param string $callControlID
-     * @param bool $fetchDynamicVariablesFromWebhook
-     * @param string $from
-     * @param string $to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $assistantID,
-        $callControlID = omit,
-        $fetchDynamicVariablesFromWebhook = omit,
-        $from = omit,
-        $to = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $callControlID = null,
+        bool $fetchDynamicVariablesFromWebhook = false,
+        ?string $from = null,
+        ?string $to = null,
+        RequestOptions|array|null $requestOptions = null,
     ): InferenceEmbedding {
-        $params = [
-            'callControlID' => $callControlID,
-            'fetchDynamicVariablesFromWebhook' => $fetchDynamicVariablesFromWebhook,
-            'from' => $from,
-            'to' => $to,
-        ];
-
-        return $this->retrieveRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $assistantID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): InferenceEmbedding {
-        [$parsed, $options] = AssistantRetrieveParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'callControlID' => $callControlID,
+                'fetchDynamicVariablesFromWebhook' => $fetchDynamicVariablesFromWebhook,
+                'from' => $from,
+                'to' => $to,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['ai/assistants/%1$s', $assistantID],
-            query: $parsed,
-            options: $options,
-            convert: InferenceEmbedding::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($assistantID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -233,96 +195,75 @@ final class AssistantsService implements AssistantsContract
      *
      * Update an AI Assistant's attributes.
      *
-     * @param string $description
-     * @param array<string,
-     * mixed,> $dynamicVariables Map of dynamic variables and their default values
+     * @param array<string,mixed> $dynamicVariables Map of dynamic variables and their default values
      * @param string $dynamicVariablesWebhookURL If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
-     * @param string $greeting Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param InsightSettings $insightSettings
+     * @param string $greeting Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
+     * @param InsightSettings|InsightSettingsShape $insightSettings
      * @param string $instructions System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param string $llmAPIKeyRef This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
-     * @param MessagingSettings $messagingSettings
-     * @param string $model ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api/inference/inference-embedding/get-models-public-models-get) to see all of your available models,
-     * @param string $name
-     * @param PrivacySettings $privacySettings
+     * @param string $llmAPIKeyRef This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * @param MessagingSettings|MessagingSettingsShape $messagingSettings
+     * @param string $model ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,
+     * @param PrivacySettings|PrivacySettingsShape $privacySettings
      * @param bool $promoteToMain Indicates whether the assistant should be promoted to the main version. Defaults to true.
-     * @param TelephonySettings $telephonySettings
-     * @param list<WebhookTool|RetrievalTool|HandoffTool|HangupTool|TransferTool|SipReferTool|DtmfTool> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param TranscriptionSettings $transcription
-     * @param VoiceSettings $voiceSettings
+     * @param TelephonySettings|TelephonySettingsShape $telephonySettings
+     * @param list<AssistantToolShape> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
+     * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
+     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
+     * @param WidgetSettings|WidgetSettingsShape $widgetSettings configuration settings for the assistant's web widget
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $assistantID,
-        $description = omit,
-        $dynamicVariables = omit,
-        $dynamicVariablesWebhookURL = omit,
-        $enabledFeatures = omit,
-        $greeting = omit,
-        $insightSettings = omit,
-        $instructions = omit,
-        $llmAPIKeyRef = omit,
-        $messagingSettings = omit,
-        $model = omit,
-        $name = omit,
-        $privacySettings = omit,
-        $promoteToMain = omit,
-        $telephonySettings = omit,
-        $tools = omit,
-        $transcription = omit,
-        $voiceSettings = omit,
-        ?RequestOptions $requestOptions = null,
-    ): mixed {
-        $params = [
-            'description' => $description,
-            'dynamicVariables' => $dynamicVariables,
-            'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
-            'enabledFeatures' => $enabledFeatures,
-            'greeting' => $greeting,
-            'insightSettings' => $insightSettings,
-            'instructions' => $instructions,
-            'llmAPIKeyRef' => $llmAPIKeyRef,
-            'messagingSettings' => $messagingSettings,
-            'model' => $model,
-            'name' => $name,
-            'privacySettings' => $privacySettings,
-            'promoteToMain' => $promoteToMain,
-            'telephonySettings' => $telephonySettings,
-            'tools' => $tools,
-            'transcription' => $transcription,
-            'voiceSettings' => $voiceSettings,
-        ];
-
-        return $this->updateRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $assistantID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): mixed {
-        [$parsed, $options] = AssistantUpdateParams::parseRequest(
-            $params,
-            $requestOptions
+        ?string $description = null,
+        ?array $dynamicVariables = null,
+        ?string $dynamicVariablesWebhookURL = null,
+        ?array $enabledFeatures = null,
+        ?string $greeting = null,
+        InsightSettings|array|null $insightSettings = null,
+        ?string $instructions = null,
+        ?string $llmAPIKeyRef = null,
+        MessagingSettings|array|null $messagingSettings = null,
+        ?string $model = null,
+        ?string $name = null,
+        PrivacySettings|array|null $privacySettings = null,
+        bool $promoteToMain = true,
+        TelephonySettings|array|null $telephonySettings = null,
+        ?array $tools = null,
+        TranscriptionSettings|array|null $transcription = null,
+        VoiceSettings|array|null $voiceSettings = null,
+        WidgetSettings|array|null $widgetSettings = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): InferenceEmbedding {
+        $params = Util::removeNulls(
+            [
+                'description' => $description,
+                'dynamicVariables' => $dynamicVariables,
+                'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
+                'enabledFeatures' => $enabledFeatures,
+                'greeting' => $greeting,
+                'insightSettings' => $insightSettings,
+                'instructions' => $instructions,
+                'llmAPIKeyRef' => $llmAPIKeyRef,
+                'messagingSettings' => $messagingSettings,
+                'model' => $model,
+                'name' => $name,
+                'privacySettings' => $privacySettings,
+                'promoteToMain' => $promoteToMain,
+                'telephonySettings' => $telephonySettings,
+                'tools' => $tools,
+                'transcription' => $transcription,
+                'voiceSettings' => $voiceSettings,
+                'widgetSettings' => $widgetSettings,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/%1$s', $assistantID],
-            body: (object) $parsed,
-            options: $options,
-            convert: 'mixed',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($assistantID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -330,17 +271,17 @@ final class AssistantsService implements AssistantsContract
      *
      * Retrieve a list of all AI Assistants configured by the user.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
-    public function list(?RequestOptions $requestOptions = null): AssistantsList
-    {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'ai/assistants',
-            options: $requestOptions,
-            convert: AssistantsList::class,
-        );
+    public function list(
+        RequestOptions|array|null $requestOptions = null
+    ): AssistantsList {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -348,73 +289,51 @@ final class AssistantsService implements AssistantsContract
      *
      * Delete an AI Assistant by `assistant_id`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): AssistantDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['ai/assistants/%1$s', $assistantID],
-            options: $requestOptions,
-            convert: AssistantDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($assistantID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
      * @api
      *
-     * This endpoint allows a client to send a chat message to a specific AI Assistant. The assistant processes the message and returns a relevant reply based on the current conversation context. Refer to the Conversation API to [create a conversation](https://developers.telnyx.com/api/inference/inference-embedding/create-new-conversation-public-conversations-post), [filter existing conversations](https://developers.telnyx.com/api/inference/inference-embedding/get-conversations-public-conversations-get), [fetch messages for a conversation](https://developers.telnyx.com/api/inference/inference-embedding/get-conversations-public-conversation-id-messages-get), and [manually add messages to a conversation](https://developers.telnyx.com/api/inference/inference-embedding/add-new-message).
+     * This endpoint allows a client to send a chat message to a specific AI Assistant. The assistant processes the message and returns a relevant reply based on the current conversation context. Refer to the Conversation API to [create a conversation](https://developers.telnyx.com/api-reference/conversations/create-a-conversation), [filter existing conversations](https://developers.telnyx.com/api-reference/conversations/list-conversations), [fetch messages for a conversation](https://developers.telnyx.com/api-reference/conversations/get-conversation-messages), and [manually add messages to a conversation](https://developers.telnyx.com/api-reference/conversations/create-message).
      *
      * @param string $content The message content sent by the client to the assistant
      * @param string $conversationID A unique identifier for the conversation thread, used to maintain context
      * @param string $name The optional display name of the user sending the message
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function chat(
         string $assistantID,
-        $content,
-        $conversationID,
-        $name = omit,
-        ?RequestOptions $requestOptions = null,
+        string $content,
+        string $conversationID,
+        ?string $name = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AssistantChatResponse {
-        $params = [
-            'content' => $content,
-            'conversationID' => $conversationID,
-            'name' => $name,
-        ];
-
-        return $this->chatRaw($assistantID, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function chatRaw(
-        string $assistantID,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AssistantChatResponse {
-        [$parsed, $options] = AssistantChatParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'content' => $content,
+                'conversationID' => $conversationID,
+                'name' => $name,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/%1$s/chat', $assistantID],
-            body: (object) $parsed,
-            options: $options,
-            convert: AssistantChatResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->chat($assistantID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -422,19 +341,18 @@ final class AssistantsService implements AssistantsContract
      *
      * Clone an existing assistant, excluding telephony and messaging settings.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function clone(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): InferenceEmbedding {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/%1$s/clone', $assistantID],
-            options: $requestOptions,
-            convert: InferenceEmbedding::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->clone($assistantID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -442,19 +360,18 @@ final class AssistantsService implements AssistantsContract
      *
      * Get an assistant texml by `assistant_id`.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getTexml(
         string $assistantID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): string {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['ai/assistants/%1$s/texml', $assistantID],
-            options: $requestOptions,
-            convert: 'string',
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getTexml($assistantID, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -464,42 +381,68 @@ final class AssistantsService implements AssistantsContract
      *
      * @param string $apiKeyRef Integration secret pointer that refers to the API key for the external provider. This should be an identifier for an integration secret created via /v2/integration_secrets.
      * @param Provider|value-of<Provider> $provider the external provider to import assistants from
+     * @param list<string> $importIDs Optional list of assistant IDs to import from the external provider. If not provided, all assistants will be imported.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function import(
-        $apiKeyRef,
-        $provider,
-        ?RequestOptions $requestOptions = null
+    public function imports(
+        string $apiKeyRef,
+        Provider|string $provider,
+        ?array $importIDs = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AssistantsList {
-        $params = ['apiKeyRef' => $apiKeyRef, 'provider' => $provider];
+        $params = Util::removeNulls(
+            [
+                'apiKeyRef' => $apiKeyRef,
+                'provider' => $provider,
+                'importIDs' => $importIDs,
+            ],
+        );
 
-        return $this->importRaw($params, $requestOptions);
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->imports(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
      * @api
      *
-     * @param array<string, mixed> $params
+     * Send an SMS message for an assistant. This endpoint:
+     * 1. Validates the assistant exists and has messaging profile configured
+     * 2. If should_create_conversation is true, creates a new conversation with metadata
+     * 3. Sends the SMS message (If `text` is set, this will be sent. Otherwise, if this is the first message in the conversation and the assistant has a `greeting` configured, this will be sent. Otherwise the assistant will generate the text to send.)
+     * 4. Updates conversation metadata if provided
+     * 5. Returns the conversation ID
+     *
+     * @param array<string,ConversationMetadataShape> $conversationMetadata
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function importRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AssistantsList {
-        [$parsed, $options] = AssistantImportParams::parseRequest(
-            $params,
-            $requestOptions
+    public function sendSMS(
+        string $assistantID,
+        string $from,
+        string $to,
+        ?array $conversationMetadata = null,
+        ?bool $shouldCreateConversation = null,
+        ?string $text = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): AssistantSendSMSResponse {
+        $params = Util::removeNulls(
+            [
+                'from' => $from,
+                'to' => $to,
+                'conversationMetadata' => $conversationMetadata,
+                'shouldCreateConversation' => $shouldCreateConversation,
+                'text' => $text,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'ai/assistants/import',
-            body: (object) $parsed,
-            options: $options,
-            convert: AssistantsList::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->sendSMS($assistantID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

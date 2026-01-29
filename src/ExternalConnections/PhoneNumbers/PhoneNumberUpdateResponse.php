@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\PhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type phone_number_update_response = array{
- *   data?: ExternalConnectionPhoneNumber
+ * @phpstan-import-type ExternalConnectionPhoneNumberShape from \Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber
+ *
+ * @phpstan-type PhoneNumberUpdateResponseShape = array{
+ *   data?: null|ExternalConnectionPhoneNumber|ExternalConnectionPhoneNumberShape
  * }
  */
-final class PhoneNumberUpdateResponse implements BaseModel, ResponseConverter
+final class PhoneNumberUpdateResponse implements BaseModel
 {
-    /** @use SdkModel<phone_number_update_response> */
+    /** @use SdkModel<PhoneNumberUpdateResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?ExternalConnectionPhoneNumber $data;
 
     public function __construct()
@@ -34,22 +32,27 @@ final class PhoneNumberUpdateResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ExternalConnectionPhoneNumber|ExternalConnectionPhoneNumberShape|null $data
      */
     public static function with(
-        ?ExternalConnectionPhoneNumber $data = null
+        ExternalConnectionPhoneNumber|array|null $data = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(ExternalConnectionPhoneNumber $data): self
+    /**
+     * @param ExternalConnectionPhoneNumber|ExternalConnectionPhoneNumberShape $data
+     */
+    public function withData(ExternalConnectionPhoneNumber|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

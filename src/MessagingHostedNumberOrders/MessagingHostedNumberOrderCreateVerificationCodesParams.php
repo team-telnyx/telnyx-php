@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingHostedNumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,27 +13,25 @@ use Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderCreateVerificat
 /**
  * Create verification codes to validate numbers of the hosted order. The verification codes will be sent to the numbers of the hosted order.
  *
- * @see Telnyx\MessagingHostedNumberOrders->createVerificationCodes
+ * @see Telnyx\Services\MessagingHostedNumberOrdersService::createVerificationCodes()
  *
- * @phpstan-type messaging_hosted_number_order_create_verification_codes_params = array{
+ * @phpstan-type MessagingHostedNumberOrderCreateVerificationCodesParamsShape = array{
  *   phoneNumbers: list<string>,
  *   verificationMethod: VerificationMethod|value-of<VerificationMethod>,
  * }
  */
 final class MessagingHostedNumberOrderCreateVerificationCodesParams implements BaseModel
 {
-    /**
-     * @use SdkModel<messaging_hosted_number_order_create_verification_codes_params>
-     */
+    /** @use SdkModel<MessagingHostedNumberOrderCreateVerificationCodesParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /** @var list<string> $phoneNumbers */
-    #[Api('phone_numbers', list: 'string')]
+    #[Required('phone_numbers', list: 'string')]
     public array $phoneNumbers;
 
     /** @var value-of<VerificationMethod> $verificationMethod */
-    #[Api('verification_method', enum: VerificationMethod::class)]
+    #[Required('verification_method', enum: VerificationMethod::class)]
     public string $verificationMethod;
 
     /**
@@ -71,12 +69,12 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
         array $phoneNumbers,
         VerificationMethod|string $verificationMethod
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->phoneNumbers = $phoneNumbers;
-        $obj['verificationMethod'] = $verificationMethod;
+        $self['phoneNumbers'] = $phoneNumbers;
+        $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +82,10 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,9 +94,9 @@ final class MessagingHostedNumberOrderCreateVerificationCodesParams implements B
     public function withVerificationMethod(
         VerificationMethod|string $verificationMethod
     ): self {
-        $obj = clone $this;
-        $obj['verificationMethod'] = $verificationMethod;
+        $self = clone $this;
+        $self['verificationMethod'] = $verificationMethod;
 
-        return $obj;
+        return $self;
     }
 }

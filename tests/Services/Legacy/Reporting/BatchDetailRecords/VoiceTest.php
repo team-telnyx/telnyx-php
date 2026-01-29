@@ -6,6 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceDeleteResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetFieldsResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceGetResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceListResponse;
+use Telnyx\Legacy\Reporting\BatchDetailRecords\Voice\VoiceNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +50,8 @@ final class VoiceTest extends TestCase
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceNewResponse::class, $result);
     }
 
     #[Test]
@@ -64,10 +70,35 @@ final class VoiceTest extends TestCase
             ->create(
                 endTime: new \DateTimeImmutable('2024-02-12T23:59:59Z'),
                 startTime: new \DateTimeImmutable('2024-02-01T00:00:00Z'),
+                callTypes: [1, 2],
+                connections: [123, 456],
+                fields: ['call_leg_id', 'start_time', 'end_time'],
+                filters: [
+                    [
+                        'billingGroup' => 'adfaa016-f921-4b6c-97bb-e4c1dad231c5',
+                        'cld' => '+13129457420',
+                        'cldFilter' => 'contains',
+                        'cli' => '+13129457420',
+                        'cliFilter' => 'contains',
+                        'filterType' => 'and',
+                        'tagsList' => 'tag1',
+                    ],
+                ],
+                includeAllMetadata: true,
+                managedAccounts: [
+                    'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+                    '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+                ],
+                recordTypes: [1, 2],
+                reportName: 'My CDR Report',
+                selectAllManagedAccounts: false,
+                source: 'calls',
+                timezone: 'UTC',
             )
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceNewResponse::class, $result);
     }
 
     #[Test]
@@ -86,7 +117,8 @@ final class VoiceTest extends TestCase
             ->retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceGetResponse::class, $result);
     }
 
     #[Test]
@@ -99,7 +131,8 @@ final class VoiceTest extends TestCase
         $result = $this->client->legacy->reporting->batchDetailRecords->voice->list(
         );
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceListResponse::class, $result);
     }
 
     #[Test]
@@ -118,7 +151,8 @@ final class VoiceTest extends TestCase
             ->delete('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e')
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -137,6 +171,7 @@ final class VoiceTest extends TestCase
             ->retrieveFields()
         ;
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceGetFieldsResponse::class, $result);
     }
 }

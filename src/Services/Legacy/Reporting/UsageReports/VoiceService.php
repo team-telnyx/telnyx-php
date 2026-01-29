@@ -6,23 +6,32 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceCreateParams;
+use Telnyx\Core\Util;
+use Telnyx\Legacy\Reporting\UsageReports\Voice\CdrUsageReportResponseLegacy;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceDeleteResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListParams;
-use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\Voice\VoiceNewResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\VoiceContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class VoiceService implements VoiceContract
 {
     /**
+     * @api
+     */
+    public VoiceRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new VoiceRawService($client);
+    }
 
     /**
      * @api
@@ -36,57 +45,36 @@ final class VoiceService implements VoiceContract
      * @param list<string> $managedAccounts List of managed accounts to include
      * @param int $productBreakdown Product breakdown type: No breakdown = 0, DID vs Toll-free = 1, Country = 2, DID vs Toll-free per Country = 3
      * @param bool $selectAllManagedAccounts Whether to select all managed accounts
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $endTime,
-        $startTime,
-        $aggregationType = omit,
-        $connections = omit,
-        $managedAccounts = omit,
-        $productBreakdown = omit,
-        $selectAllManagedAccounts = omit,
-        ?RequestOptions $requestOptions = null,
+        \DateTimeInterface $endTime,
+        \DateTimeInterface $startTime,
+        ?int $aggregationType = null,
+        ?array $connections = null,
+        ?array $managedAccounts = null,
+        ?int $productBreakdown = null,
+        ?bool $selectAllManagedAccounts = null,
+        RequestOptions|array|null $requestOptions = null,
     ): VoiceNewResponse {
-        $params = [
-            'endTime' => $endTime,
-            'startTime' => $startTime,
-            'aggregationType' => $aggregationType,
-            'connections' => $connections,
-            'managedAccounts' => $managedAccounts,
-            'productBreakdown' => $productBreakdown,
-            'selectAllManagedAccounts' => $selectAllManagedAccounts,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VoiceNewResponse {
-        [$parsed, $options] = VoiceCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'endTime' => $endTime,
+                'startTime' => $startTime,
+                'aggregationType' => $aggregationType,
+                'connections' => $connections,
+                'managedAccounts' => $managedAccounts,
+                'productBreakdown' => $productBreakdown,
+                'selectAllManagedAccounts' => $selectAllManagedAccounts,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'legacy/reporting/usage_reports/voice',
-            headers: ['Content-Type' => '*/*'],
-            body: (object) $parsed,
-            options: $options,
-            convert: VoiceNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -94,19 +82,18 @@ final class VoiceService implements VoiceContract
      *
      * Fetch single cdr usage report by id.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoiceGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['legacy/reporting/usage_reports/voice/%1$s', $id],
-            options: $requestOptions,
-            convert: VoiceGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -116,43 +103,23 @@ final class VoiceService implements VoiceContract
      *
      * @param int $page Page number
      * @param int $perPage Size of the page
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return PerPagePagination<CdrUsageReportResponseLegacy>
      *
      * @throws APIException
      */
     public function list(
-        $page = omit,
-        $perPage = omit,
-        ?RequestOptions $requestOptions = null
-    ): VoiceListResponse {
-        $params = ['page' => $page, 'perPage' => $perPage];
+        int $page = 1,
+        int $perPage = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): PerPagePagination {
+        $params = Util::removeNulls(['page' => $page, 'perPage' => $perPage]);
 
-        return $this->listRaw($params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function listRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): VoiceListResponse {
-        [$parsed, $options] = VoiceListParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'legacy/reporting/usage_reports/voice',
-            query: $parsed,
-            options: $options,
-            convert: VoiceListResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -160,18 +127,17 @@ final class VoiceService implements VoiceContract
      *
      * Deletes a specific V2 legacy usage CDR report request by ID
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function delete(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): VoiceDeleteResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'delete',
-            path: ['legacy/reporting/usage_reports/voice/%1$s', $id],
-            options: $requestOptions,
-            convert: VoiceDeleteResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

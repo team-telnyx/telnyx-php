@@ -4,48 +4,44 @@ declare(strict_types=1);
 
 namespace Telnyx\Texml\Accounts\Calls;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse\AnsweredBy;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse\Direction;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse\Status;
 
 /**
- * @phpstan-type call_get_response = array{
- *   accountSid?: string,
- *   answeredBy?: value-of<AnsweredBy>,
- *   callerName?: string,
- *   dateCreated?: string,
- *   dateUpdated?: string,
- *   direction?: value-of<Direction>,
- *   duration?: string,
- *   endTime?: string,
- *   from?: string,
- *   fromFormatted?: string,
- *   price?: string,
- *   priceUnit?: string,
- *   sid?: string,
- *   startTime?: string,
- *   status?: value-of<Status>,
- *   to?: string,
- *   toFormatted?: string,
- *   uri?: string,
+ * @phpstan-type CallGetResponseShape = array{
+ *   accountSid?: string|null,
+ *   answeredBy?: null|AnsweredBy|value-of<AnsweredBy>,
+ *   callerName?: string|null,
+ *   dateCreated?: string|null,
+ *   dateUpdated?: string|null,
+ *   direction?: null|Direction|value-of<Direction>,
+ *   duration?: string|null,
+ *   endTime?: string|null,
+ *   from?: string|null,
+ *   fromFormatted?: string|null,
+ *   price?: string|null,
+ *   priceUnit?: string|null,
+ *   sid?: string|null,
+ *   startTime?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   to?: string|null,
+ *   toFormatted?: string|null,
+ *   uri?: string|null,
  * }
  */
-final class CallGetResponse implements BaseModel, ResponseConverter
+final class CallGetResponse implements BaseModel
 {
-    /** @use SdkModel<call_get_response> */
+    /** @use SdkModel<CallGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * The id of the account the resource belongs to.
      */
-    #[Api('account_sid', optional: true)]
+    #[Optional('account_sid')]
     public ?string $accountSid;
 
     /**
@@ -53,25 +49,25 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      *
      * @var value-of<AnsweredBy>|null $answeredBy
      */
-    #[Api('answered_by', enum: AnsweredBy::class, optional: true)]
+    #[Optional('answered_by', enum: AnsweredBy::class)]
     public ?string $answeredBy;
 
     /**
      * Caller ID, if present.
      */
-    #[Api('caller_name', optional: true)]
+    #[Optional('caller_name')]
     public ?string $callerName;
 
     /**
      * The timestamp of when the resource was created.
      */
-    #[Api('date_created', optional: true)]
+    #[Optional('date_created')]
     public ?string $dateCreated;
 
     /**
      * The timestamp of when the resource was last updated.
      */
-    #[Api('date_updated', optional: true)]
+    #[Optional('date_updated')]
     public ?string $dateUpdated;
 
     /**
@@ -79,55 +75,55 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      *
      * @var value-of<Direction>|null $direction
      */
-    #[Api(enum: Direction::class, optional: true)]
+    #[Optional(enum: Direction::class)]
     public ?string $direction;
 
     /**
      * The duration of this call, given in seconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $duration;
 
     /**
      * The end time of this call.
      */
-    #[Api('end_time', optional: true)]
+    #[Optional('end_time')]
     public ?string $endTime;
 
     /**
      * The phone number or SIP address that made this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $from;
 
     /**
      * The from number formatted for display.
      */
-    #[Api('from_formatted', optional: true)]
+    #[Optional('from_formatted')]
     public ?string $fromFormatted;
 
     /**
      * The price of this call, the currency is specified in the price_unit field. Only populated when the call cost feature is enabled for the account.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $price;
 
     /**
      * The unit in which the price is given.
      */
-    #[Api('price_unit', optional: true)]
+    #[Optional('price_unit')]
     public ?string $priceUnit;
 
     /**
      * The identifier of this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $sid;
 
     /**
      * The start time of this call.
      */
-    #[Api('start_time', optional: true)]
+    #[Optional('start_time')]
     public ?string $startTime;
 
     /**
@@ -135,25 +131,25 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * The phone number or SIP address that received this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $to;
 
     /**
      * The to number formatted for display.
      */
-    #[Api('to_formatted', optional: true)]
+    #[Optional('to_formatted')]
     public ?string $toFormatted;
 
     /**
      * The relative URI for this call.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $uri;
 
     public function __construct()
@@ -166,9 +162,9 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AnsweredBy|value-of<AnsweredBy> $answeredBy
-     * @param Direction|value-of<Direction> $direction
-     * @param Status|value-of<Status> $status
+     * @param AnsweredBy|value-of<AnsweredBy>|null $answeredBy
+     * @param Direction|value-of<Direction>|null $direction
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $accountSid = null,
@@ -190,28 +186,28 @@ final class CallGetResponse implements BaseModel, ResponseConverter
         ?string $toFormatted = null,
         ?string $uri = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $accountSid && $obj->accountSid = $accountSid;
-        null !== $answeredBy && $obj['answeredBy'] = $answeredBy;
-        null !== $callerName && $obj->callerName = $callerName;
-        null !== $dateCreated && $obj->dateCreated = $dateCreated;
-        null !== $dateUpdated && $obj->dateUpdated = $dateUpdated;
-        null !== $direction && $obj['direction'] = $direction;
-        null !== $duration && $obj->duration = $duration;
-        null !== $endTime && $obj->endTime = $endTime;
-        null !== $from && $obj->from = $from;
-        null !== $fromFormatted && $obj->fromFormatted = $fromFormatted;
-        null !== $price && $obj->price = $price;
-        null !== $priceUnit && $obj->priceUnit = $priceUnit;
-        null !== $sid && $obj->sid = $sid;
-        null !== $startTime && $obj->startTime = $startTime;
-        null !== $status && $obj['status'] = $status;
-        null !== $to && $obj->to = $to;
-        null !== $toFormatted && $obj->toFormatted = $toFormatted;
-        null !== $uri && $obj->uri = $uri;
+        null !== $accountSid && $self['accountSid'] = $accountSid;
+        null !== $answeredBy && $self['answeredBy'] = $answeredBy;
+        null !== $callerName && $self['callerName'] = $callerName;
+        null !== $dateCreated && $self['dateCreated'] = $dateCreated;
+        null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
+        null !== $direction && $self['direction'] = $direction;
+        null !== $duration && $self['duration'] = $duration;
+        null !== $endTime && $self['endTime'] = $endTime;
+        null !== $from && $self['from'] = $from;
+        null !== $fromFormatted && $self['fromFormatted'] = $fromFormatted;
+        null !== $price && $self['price'] = $price;
+        null !== $priceUnit && $self['priceUnit'] = $priceUnit;
+        null !== $sid && $self['sid'] = $sid;
+        null !== $startTime && $self['startTime'] = $startTime;
+        null !== $status && $self['status'] = $status;
+        null !== $to && $self['to'] = $to;
+        null !== $toFormatted && $self['toFormatted'] = $toFormatted;
+        null !== $uri && $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -219,10 +215,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withAccountSid(string $accountSid): self
     {
-        $obj = clone $this;
-        $obj->accountSid = $accountSid;
+        $self = clone $this;
+        $self['accountSid'] = $accountSid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -232,10 +228,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withAnsweredBy(AnsweredBy|string $answeredBy): self
     {
-        $obj = clone $this;
-        $obj['answeredBy'] = $answeredBy;
+        $self = clone $this;
+        $self['answeredBy'] = $answeredBy;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -243,10 +239,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withCallerName(string $callerName): self
     {
-        $obj = clone $this;
-        $obj->callerName = $callerName;
+        $self = clone $this;
+        $self['callerName'] = $callerName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -254,10 +250,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withDateCreated(string $dateCreated): self
     {
-        $obj = clone $this;
-        $obj->dateCreated = $dateCreated;
+        $self = clone $this;
+        $self['dateCreated'] = $dateCreated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -265,10 +261,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withDateUpdated(string $dateUpdated): self
     {
-        $obj = clone $this;
-        $obj->dateUpdated = $dateUpdated;
+        $self = clone $this;
+        $self['dateUpdated'] = $dateUpdated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -278,10 +274,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withDirection(Direction|string $direction): self
     {
-        $obj = clone $this;
-        $obj['direction'] = $direction;
+        $self = clone $this;
+        $self['direction'] = $direction;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -289,10 +285,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withDuration(string $duration): self
     {
-        $obj = clone $this;
-        $obj->duration = $duration;
+        $self = clone $this;
+        $self['duration'] = $duration;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -300,10 +296,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withEndTime(string $endTime): self
     {
-        $obj = clone $this;
-        $obj->endTime = $endTime;
+        $self = clone $this;
+        $self['endTime'] = $endTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -311,10 +307,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withFrom(string $from): self
     {
-        $obj = clone $this;
-        $obj->from = $from;
+        $self = clone $this;
+        $self['from'] = $from;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -322,10 +318,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withFromFormatted(string $fromFormatted): self
     {
-        $obj = clone $this;
-        $obj->fromFormatted = $fromFormatted;
+        $self = clone $this;
+        $self['fromFormatted'] = $fromFormatted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -333,10 +329,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withPrice(string $price): self
     {
-        $obj = clone $this;
-        $obj->price = $price;
+        $self = clone $this;
+        $self['price'] = $price;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -344,10 +340,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withPriceUnit(string $priceUnit): self
     {
-        $obj = clone $this;
-        $obj->priceUnit = $priceUnit;
+        $self = clone $this;
+        $self['priceUnit'] = $priceUnit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -355,10 +351,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withSid(string $sid): self
     {
-        $obj = clone $this;
-        $obj->sid = $sid;
+        $self = clone $this;
+        $self['sid'] = $sid;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -366,10 +362,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withStartTime(string $startTime): self
     {
-        $obj = clone $this;
-        $obj->startTime = $startTime;
+        $self = clone $this;
+        $self['startTime'] = $startTime;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -379,10 +375,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -390,10 +386,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withTo(string $to): self
     {
-        $obj = clone $this;
-        $obj->to = $to;
+        $self = clone $this;
+        $self['to'] = $to;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -401,10 +397,10 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withToFormatted(string $toFormatted): self
     {
-        $obj = clone $this;
-        $obj->toFormatted = $toFormatted;
+        $self = clone $this;
+        $self['toFormatted'] = $toFormatted;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -412,9 +408,9 @@ final class CallGetResponse implements BaseModel, ResponseConverter
      */
     public function withUri(string $uri): self
     {
-        $obj = clone $this;
-        $obj->uri = $uri;
+        $self = clone $this;
+        $self['uri'] = $uri;
 
-        return $obj;
+        return $self;
     }
 }

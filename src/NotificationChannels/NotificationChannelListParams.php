@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\NotificationChannels;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,28 +14,31 @@ use Telnyx\NotificationChannels\NotificationChannelListParams\Page;
 /**
  * List notification channels.
  *
- * @see Telnyx\NotificationChannels->list
+ * @see Telnyx\Services\NotificationChannelsService::list()
  *
- * @phpstan-type notification_channel_list_params = array{
- *   filter?: Filter, page?: Page
+ * @phpstan-import-type FilterShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Page
+ *
+ * @phpstan-type NotificationChannelListParamsShape = array{
+ *   filter?: null|Filter|FilterShape, page?: null|Page|PageShape
  * }
  */
 final class NotificationChannelListParams implements BaseModel
 {
-    /** @use SdkModel<notification_channel_list_params> */
+    /** @use SdkModel<NotificationChannelListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Page $page;
 
     public function __construct()
@@ -47,36 +50,45 @@ final class NotificationChannelListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
-        $obj = new self;
+    public static function with(
+        Filter|array|null $filter = null,
+        Page|array|null $page = null
+    ): self {
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[associated_record_type][eq], filter[channel_type_id][eq], filter[notification_profile_id][eq], filter[notification_channel][eq], filter[notification_event_condition_id][eq], filter[status][eq].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated page parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
      */
-    public function withPage(Page $page): self
+    public function withPage(Page|array $page): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 }

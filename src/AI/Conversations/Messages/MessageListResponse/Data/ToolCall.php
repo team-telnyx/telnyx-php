@@ -4,37 +4,41 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Conversations\Messages\MessageListResponse\Data;
 
-use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Function1;
+use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\CallFunction;
 use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type tool_call = array{
- *   id: string, function1: Function1, type: value-of<Type>
+ * @phpstan-import-type CallFunctionShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\CallFunction
+ *
+ * @phpstan-type ToolCallShape = array{
+ *   id: string,
+ *   function: CallFunction|CallFunctionShape,
+ *   type: Type|value-of<Type>,
  * }
  */
 final class ToolCall implements BaseModel
 {
-    /** @use SdkModel<tool_call> */
+    /** @use SdkModel<ToolCallShape> */
     use SdkModel;
 
     /**
      * Unique identifier for the tool call.
      */
-    #[Api]
+    #[Required]
     public string $id;
 
-    #[Api]
-    public Function1 $function1;
+    #[Required]
+    public CallFunction $function;
 
     /**
      * Type of the tool call.
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
@@ -42,7 +46,7 @@ final class ToolCall implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * ToolCall::with(id: ..., function1: ..., type: ...)
+     * ToolCall::with(id: ..., function: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -61,20 +65,21 @@ final class ToolCall implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param CallFunction|CallFunctionShape $function
      * @param Type|value-of<Type> $type
      */
     public static function with(
         string $id,
-        Function1 $function1,
+        CallFunction|array $function,
         Type|string $type
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->id = $id;
-        $obj->function1 = $function1;
-        $obj['type'] = $type;
+        $self['id'] = $id;
+        $self['function'] = $function;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -82,18 +87,21 @@ final class ToolCall implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
-    public function withFunction(Function1 $function1): self
+    /**
+     * @param CallFunction|CallFunctionShape $function
+     */
+    public function withFunction(CallFunction|array $function): self
     {
-        $obj = clone $this;
-        $obj->function1 = $function1;
+        $self = clone $this;
+        $self['function'] = $function;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,9 +111,9 @@ final class ToolCall implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 }

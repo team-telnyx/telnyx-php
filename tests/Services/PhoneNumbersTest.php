@@ -6,6 +6,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\DefaultPagination;
+use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
+use Telnyx\PhoneNumbers\PhoneNumberDetailed;
+use Telnyx\PhoneNumbers\PhoneNumberGetResponse;
+use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse;
+use Telnyx\PhoneNumbers\PhoneNumberUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -35,7 +41,8 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->phoneNumbers->retrieve('1293384261075731499');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberGetResponse::class, $result);
     }
 
     #[Test]
@@ -47,7 +54,8 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->phoneNumbers->update('1293384261075731499');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -57,9 +65,15 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->list();
+        $page = $this->client->phoneNumbers->list();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PhoneNumberDetailed::class, $item);
+        }
     }
 
     #[Test]
@@ -71,7 +85,8 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->phoneNumbers->delete('1293384261075731499');
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhoneNumberDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -81,8 +96,14 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->phoneNumbers->slimList();
+        $page = $this->client->phoneNumbers->slimList();
 
-        $this->assertTrue(true); // @phpstan-ignore method.alreadyNarrowedType
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PhoneNumberSlimListResponse::class, $item);
+        }
     }
 }

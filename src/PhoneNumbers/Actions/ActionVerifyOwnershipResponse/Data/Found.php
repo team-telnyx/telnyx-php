@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\Actions\ActionVerifyOwnershipResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type found_alias = array{id?: string, numberValE164?: string}
+ * @phpstan-type FoundShape = array{id?: string|null, numberValE164?: string|null}
  */
 final class Found implements BaseModel
 {
-    /** @use SdkModel<found_alias> */
+    /** @use SdkModel<FoundShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * The phone number in E.164 format.
      */
-    #[Api('number_val_e164', optional: true)]
+    #[Optional('number_val_e164')]
     public ?string $numberValE164;
 
     public function __construct()
@@ -42,12 +42,12 @@ final class Found implements BaseModel
         ?string $id = null,
         ?string $numberValE164 = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $numberValE164 && $obj->numberValE164 = $numberValE164;
+        null !== $id && $self['id'] = $id;
+        null !== $numberValE164 && $self['numberValE164'] = $numberValE164;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,10 +55,10 @@ final class Found implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -66,9 +66,9 @@ final class Found implements BaseModel
      */
     public function withNumberValE164(string $numberValE164): self
     {
-        $obj = clone $this;
-        $obj->numberValE164 = $numberValE164;
+        $self = clone $this;
+        $self['numberValE164'] = $numberValE164;
 
-        return $obj;
+        return $self;
     }
 }

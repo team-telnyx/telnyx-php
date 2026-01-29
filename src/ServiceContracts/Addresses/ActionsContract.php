@@ -9,34 +9,24 @@ use Telnyx\Addresses\Actions\ActionValidateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 interface ActionsContract
 {
     /**
      * @api
      *
-     * @param string $id1 the ID of the address
+     * @param string $addressUuid the UUID of the address that should be accepted
+     * @param string $id the ID of the address
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function acceptSuggestions(
-        string $id,
-        $id1 = omit,
-        ?RequestOptions $requestOptions = null
-    ): ActionAcceptSuggestionsResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function acceptSuggestionsRaw(
-        string $id,
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $addressUuid,
+        ?string $id = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionAcceptSuggestionsResponse;
 
     /**
@@ -48,28 +38,17 @@ interface ActionsContract
      * @param string $administrativeArea The locality of the address. For US addresses, this corresponds to the state of the address.
      * @param string $extendedAddress additional street address information about the address such as, but not limited to, unit number or apartment number
      * @param string $locality The locality of the address. For US addresses, this corresponds to the city of the address.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function validate(
-        $countryCode,
-        $postalCode,
-        $streetAddress,
-        $administrativeArea = omit,
-        $extendedAddress = omit,
-        $locality = omit,
-        ?RequestOptions $requestOptions = null,
-    ): ActionValidateResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function validateRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
+        string $countryCode,
+        string $postalCode,
+        string $streetAddress,
+        ?string $administrativeArea = null,
+        ?string $extendedAddress = null,
+        ?string $locality = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ActionValidateResponse;
 }

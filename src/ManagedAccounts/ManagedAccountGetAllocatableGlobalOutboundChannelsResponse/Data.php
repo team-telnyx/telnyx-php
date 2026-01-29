@@ -4,45 +4,45 @@ declare(strict_types=1);
 
 namespace Telnyx\ManagedAccounts\ManagedAccountGetAllocatableGlobalOutboundChannelsResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   allocatableGlobalOutboundChannels?: int,
- *   managedAccountAllowCustomPricing?: bool,
- *   recordType?: string,
- *   totalGlobalChannelsAllocated?: int,
+ * @phpstan-type DataShape = array{
+ *   allocatableGlobalOutboundChannels?: int|null,
+ *   managedAccountAllowCustomPricing?: bool|null,
+ *   recordType?: string|null,
+ *   totalGlobalChannelsAllocated?: int|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The total amount of allocatable global outbound channels available to the authenticated manager. Will be 0 if the feature is not enabled for their account.
      */
-    #[Api('allocatable_global_outbound_channels', optional: true)]
+    #[Optional('allocatable_global_outbound_channels')]
     public ?int $allocatableGlobalOutboundChannels;
 
     /**
      * Boolean value that indicates if the managed account is able to have custom pricing set for it or not. If false, uses the pricing of the manager account. Defaults to false. This value may be changed, but there may be time lag between when the value is changed and pricing changes take effect.
      */
-    #[Api('managed_account_allow_custom_pricing', optional: true)]
+    #[Optional('managed_account_allow_custom_pricing')]
     public ?bool $managedAccountAllowCustomPricing;
 
     /**
      * The type of the data contained in this record.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The total number of allocatable global outbound channels currently allocated across all managed accounts for the authenticated user. This includes any amount of channels allocated by default at managed account creation time. Will be 0 if the feature is not enabled for their account.
      */
-    #[Api('total_global_channels_allocated', optional: true)]
+    #[Optional('total_global_channels_allocated')]
     public ?int $totalGlobalChannelsAllocated;
 
     public function __construct()
@@ -61,14 +61,14 @@ final class Data implements BaseModel
         ?string $recordType = null,
         ?int $totalGlobalChannelsAllocated = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $allocatableGlobalOutboundChannels && $obj->allocatableGlobalOutboundChannels = $allocatableGlobalOutboundChannels;
-        null !== $managedAccountAllowCustomPricing && $obj->managedAccountAllowCustomPricing = $managedAccountAllowCustomPricing;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $totalGlobalChannelsAllocated && $obj->totalGlobalChannelsAllocated = $totalGlobalChannelsAllocated;
+        null !== $allocatableGlobalOutboundChannels && $self['allocatableGlobalOutboundChannels'] = $allocatableGlobalOutboundChannels;
+        null !== $managedAccountAllowCustomPricing && $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $totalGlobalChannelsAllocated && $self['totalGlobalChannelsAllocated'] = $totalGlobalChannelsAllocated;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -77,10 +77,10 @@ final class Data implements BaseModel
     public function withAllocatableGlobalOutboundChannels(
         int $allocatableGlobalOutboundChannels
     ): self {
-        $obj = clone $this;
-        $obj->allocatableGlobalOutboundChannels = $allocatableGlobalOutboundChannels;
+        $self = clone $this;
+        $self['allocatableGlobalOutboundChannels'] = $allocatableGlobalOutboundChannels;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -89,10 +89,10 @@ final class Data implements BaseModel
     public function withManagedAccountAllowCustomPricing(
         bool $managedAccountAllowCustomPricing
     ): self {
-        $obj = clone $this;
-        $obj->managedAccountAllowCustomPricing = $managedAccountAllowCustomPricing;
+        $self = clone $this;
+        $self['managedAccountAllowCustomPricing'] = $managedAccountAllowCustomPricing;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -100,10 +100,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -112,9 +112,9 @@ final class Data implements BaseModel
     public function withTotalGlobalChannelsAllocated(
         int $totalGlobalChannelsAllocated
     ): self {
-        $obj = clone $this;
-        $obj->totalGlobalChannelsAllocated = $totalGlobalChannelsAllocated;
+        $self = clone $this;
+        $self['totalGlobalChannelsAllocated'] = $totalGlobalChannelsAllocated;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter\DocumentType;
@@ -12,11 +12,13 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[document_type].
  *
- * @phpstan-type filter_alias = array{documentType?: list<value-of<DocumentType>>}
+ * @phpstan-type FilterShape = array{
+ *   documentType?: list<DocumentType|value-of<DocumentType>>|null
+ * }
  */
 final class Filter implements BaseModel
 {
-    /** @use SdkModel<filter_alias> */
+    /** @use SdkModel<FilterShape> */
     use SdkModel;
 
     /**
@@ -24,7 +26,7 @@ final class Filter implements BaseModel
      *
      * @var list<value-of<DocumentType>>|null $documentType
      */
-    #[Api('document_type', list: DocumentType::class, optional: true)]
+    #[Optional('document_type', list: DocumentType::class)]
     public ?array $documentType;
 
     public function __construct()
@@ -37,15 +39,15 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DocumentType|value-of<DocumentType>> $documentType
+     * @param list<DocumentType|value-of<DocumentType>>|null $documentType
      */
     public static function with(?array $documentType = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $documentType && $obj['documentType'] = $documentType;
+        null !== $documentType && $self['documentType'] = $documentType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -55,9 +57,9 @@ final class Filter implements BaseModel
      */
     public function withDocumentType(array $documentType): self
     {
-        $obj = clone $this;
-        $obj['documentType'] = $documentType;
+        $self = clone $this;
+        $self['documentType'] = $documentType;
 
-        return $obj;
+        return $self;
     }
 }

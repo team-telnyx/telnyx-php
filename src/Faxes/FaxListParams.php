@@ -4,37 +4,40 @@ declare(strict_types=1);
 
 namespace Telnyx\Faxes;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Faxes\FaxListParams\Filter;
-use Telnyx\Faxes\FaxListParams\Page;
 
 /**
  * View a list of faxes.
  *
- * @see Telnyx\Faxes->list
+ * @see Telnyx\Services\FaxesService::list()
  *
- * @phpstan-type fax_list_params = array{filter?: Filter, page?: Page}
+ * @phpstan-import-type FilterShape from \Telnyx\Faxes\FaxListParams\Filter
+ *
+ * @phpstan-type FaxListParamsShape = array{
+ *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
+ * }
  */
 final class FaxListParams implements BaseModel
 {
-    /** @use SdkModel<fax_list_params> */
+    /** @use SdkModel<FaxListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
-    /**
-     * Consolidated pagination parameter (deepObject style). Originally: page[size], page[number].
-     */
-    #[Api(optional: true)]
-    public ?Page $page;
+    #[Optional]
+    public ?int $pageNumber;
+
+    #[Optional]
+    public ?int $pageSize;
 
     public function __construct()
     {
@@ -45,36 +48,49 @@ final class FaxListParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Filter|FilterShape|null $filter
      */
-    public static function with(?Filter $filter = null, ?Page $page = null): self
-    {
-        $obj = new self;
+    public static function with(
+        Filter|array|null $filter = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null
+    ): self {
+        $self = new self;
 
-        null !== $filter && $obj->filter = $filter;
-        null !== $page && $obj->page = $page;
+        null !== $filter && $self['filter'] = $filter;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[created_at][gte], filter[created_at][gt], filter[created_at][lte], filter[created_at][lt], filter[direction][eq], filter[from][eq], filter[to][eq].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
-    /**
-     * Consolidated pagination parameter (deepObject style). Originally: page[size], page[number].
-     */
-    public function withPage(Page $page): self
+    public function withPageNumber(int $pageNumber): self
     {
-        $obj = clone $this;
-        $obj->page = $page;
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
 
-        return $obj;
+        return $self;
+    }
+
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
     }
 }

@@ -4,33 +4,33 @@ declare(strict_types=1);
 
 namespace Telnyx\Seti\SetiGetBlackBoxTestResultsResponse\Data;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type black_box_test = array{
- *   id?: string, recordType?: string, result?: float
+ * @phpstan-type BlackBoxTestShape = array{
+ *   id?: string|null, recordType?: string|null, result?: float|null
  * }
  */
 final class BlackBoxTest implements BaseModel
 {
-    /** @use SdkModel<black_box_test> */
+    /** @use SdkModel<BlackBoxTestShape> */
     use SdkModel;
 
     /**
      * The name of the black box test.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * The average result of the black box test over the last hour.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?float $result;
 
     public function __construct()
@@ -48,13 +48,13 @@ final class BlackBoxTest implements BaseModel
         ?string $recordType = null,
         ?float $result = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $result && $obj->result = $result;
+        null !== $id && $self['id'] = $id;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $result && $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -62,18 +62,18 @@ final class BlackBoxTest implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -81,9 +81,9 @@ final class BlackBoxTest implements BaseModel
      */
     public function withResult(float $result): self
     {
-        $obj = clone $this;
-        $obj->result = $result;
+        $self = clone $this;
+        $self['result'] = $result;
 
-        return $obj;
+        return $self;
     }
 }

@@ -6,20 +6,26 @@ namespace Telnyx\Services\Storage;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\MigrationsContract;
 use Telnyx\Services\Storage\Migrations\ActionsService;
-use Telnyx\Storage\Migrations\MigrationCreateParams;
 use Telnyx\Storage\Migrations\MigrationGetResponse;
 use Telnyx\Storage\Migrations\MigrationListResponse;
 use Telnyx\Storage\Migrations\MigrationNewResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class MigrationsService implements MigrationsContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public MigrationsRawService $raw;
+
+    /**
+     * @api
      */
     public ActionsService $actions;
 
@@ -28,6 +34,7 @@ final class MigrationsService implements MigrationsContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new MigrationsRawService($client);
         $this->actions = new ActionsService($client);
     }
 
@@ -40,50 +47,30 @@ final class MigrationsService implements MigrationsContract
      * @param string $targetBucketName Bucket name to migrate the data into. Will default to the same name as the `source_bucket_name`.
      * @param string $targetRegion telnyx Cloud Storage region to migrate the data to
      * @param bool $refresh if true, will continue to poll the source bucket to ensure new data is continually migrated over
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        $sourceID,
-        $targetBucketName,
-        $targetRegion,
-        $refresh = omit,
-        ?RequestOptions $requestOptions = null,
+        string $sourceID,
+        string $targetBucketName,
+        string $targetRegion,
+        ?bool $refresh = null,
+        RequestOptions|array|null $requestOptions = null,
     ): MigrationNewResponse {
-        $params = [
-            'sourceID' => $sourceID,
-            'targetBucketName' => $targetBucketName,
-            'targetRegion' => $targetRegion,
-            'refresh' => $refresh,
-        ];
-
-        return $this->createRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function createRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): MigrationNewResponse {
-        [$parsed, $options] = MigrationCreateParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'sourceID' => $sourceID,
+                'targetBucketName' => $targetBucketName,
+                'targetRegion' => $targetRegion,
+                'refresh' => $refresh,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'storage/migrations',
-            body: (object) $parsed,
-            options: $options,
-            convert: MigrationNewResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -91,19 +78,19 @@ final class MigrationsService implements MigrationsContract
      *
      * Get a Migration
      *
+     * @param string $id unique identifier for the data migration
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MigrationGetResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['storage/migrations/%1$s', $id],
-            options: $requestOptions,
-            convert: MigrationGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -111,17 +98,16 @@ final class MigrationsService implements MigrationsContract
      *
      * List all Migrations
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function list(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): MigrationListResponse {
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: 'storage/migrations',
-            options: $requestOptions,
-            convert: MigrationListResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

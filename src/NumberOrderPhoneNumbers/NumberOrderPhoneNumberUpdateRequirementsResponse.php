@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrderPhoneNumbers;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type number_order_phone_number_update_requirements_response = array{
- *   data?: NumberOrderPhoneNumber
+ * @phpstan-import-type NumberOrderPhoneNumberShape from \Telnyx\NumberOrderPhoneNumbers\NumberOrderPhoneNumber
+ *
+ * @phpstan-type NumberOrderPhoneNumberUpdateRequirementsResponseShape = array{
+ *   data?: null|NumberOrderPhoneNumber|NumberOrderPhoneNumberShape
  * }
  */
-final class NumberOrderPhoneNumberUpdateRequirementsResponse implements BaseModel, ResponseConverter
+final class NumberOrderPhoneNumberUpdateRequirementsResponse implements BaseModel
 {
-    /** @use SdkModel<number_order_phone_number_update_requirements_response> */
+    /** @use SdkModel<NumberOrderPhoneNumberUpdateRequirementsResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?NumberOrderPhoneNumber $data;
 
     public function __construct()
@@ -34,21 +32,26 @@ final class NumberOrderPhoneNumberUpdateRequirementsResponse implements BaseMode
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param NumberOrderPhoneNumber|NumberOrderPhoneNumberShape|null $data
      */
-    public static function with(?NumberOrderPhoneNumber $data = null): self
+    public static function with(NumberOrderPhoneNumber|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(NumberOrderPhoneNumber $data): self
+    /**
+     * @param NumberOrderPhoneNumber|NumberOrderPhoneNumberShape $data
+     */
+    public function withData(NumberOrderPhoneNumber|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

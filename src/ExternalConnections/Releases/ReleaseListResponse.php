@@ -4,32 +4,61 @@ declare(strict_types=1);
 
 namespace Telnyx\ExternalConnections\Releases;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
-use Telnyx\ExternalConnections\ExternalVoiceIntegrationsPaginationMeta;
-use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Data;
+use Telnyx\ExternalConnections\Releases\ReleaseListResponse\Status;
+use Telnyx\ExternalConnections\Releases\ReleaseListResponse\TelephoneNumber;
 
 /**
- * @phpstan-type release_list_response = array{
- *   data?: list<Data>, meta?: ExternalVoiceIntegrationsPaginationMeta
+ * @phpstan-import-type TelephoneNumberShape from \Telnyx\ExternalConnections\Releases\ReleaseListResponse\TelephoneNumber
+ *
+ * @phpstan-type ReleaseListResponseShape = array{
+ *   createdAt?: string|null,
+ *   errorMessage?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   telephoneNumbers?: list<TelephoneNumber|TelephoneNumberShape>|null,
+ *   tenantID?: string|null,
+ *   ticketID?: string|null,
  * }
  */
-final class ReleaseListResponse implements BaseModel, ResponseConverter
+final class ReleaseListResponse implements BaseModel
 {
-    /** @use SdkModel<release_list_response> */
+    /** @use SdkModel<ReleaseListResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    /**
+     * ISO 8601 formatted date indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?string $createdAt;
 
-    /** @var list<Data>|null $data */
-    #[Api(list: Data::class, optional: true)]
-    public ?array $data;
+    /**
+     * A message set if there is an error with the upload process.
+     */
+    #[Optional('error_message')]
+    public ?string $errorMessage;
 
-    #[Api(optional: true)]
-    public ?ExternalVoiceIntegrationsPaginationMeta $meta;
+    /**
+     * Represents the status of the release on Microsoft Teams.
+     *
+     * @var value-of<Status>|null $status
+     */
+    #[Optional(enum: Status::class)]
+    public ?string $status;
+
+    /** @var list<TelephoneNumber>|null $telephoneNumbers */
+    #[Optional('telephone_numbers', list: TelephoneNumber::class)]
+    public ?array $telephoneNumbers;
+
+    #[Optional('tenant_id')]
+    public ?string $tenantID;
+
+    /**
+     * Uniquely identifies the resource.
+     */
+    #[Optional('ticket_id')]
+    public ?string $ticketID;
 
     public function __construct()
     {
@@ -41,37 +70,91 @@ final class ReleaseListResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data> $data
+     * @param Status|value-of<Status>|null $status
+     * @param list<TelephoneNumber|TelephoneNumberShape>|null $telephoneNumbers
      */
     public static function with(
-        ?array $data = null,
-        ?ExternalVoiceIntegrationsPaginationMeta $meta = null
+        ?string $createdAt = null,
+        ?string $errorMessage = null,
+        Status|string|null $status = null,
+        ?array $telephoneNumbers = null,
+        ?string $tenantID = null,
+        ?string $ticketID = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
-        null !== $meta && $obj->meta = $meta;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $errorMessage && $self['errorMessage'] = $errorMessage;
+        null !== $status && $self['status'] = $status;
+        null !== $telephoneNumbers && $self['telephoneNumbers'] = $telephoneNumbers;
+        null !== $tenantID && $self['tenantID'] = $tenantID;
+        null !== $ticketID && $self['ticketID'] = $ticketID;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<Data> $data
+     * ISO 8601 formatted date indicating when the resource was created.
      */
-    public function withData(array $data): self
+    public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
-    public function withMeta(
-        ExternalVoiceIntegrationsPaginationMeta $meta
-    ): self {
-        $obj = clone $this;
-        $obj->meta = $meta;
+    /**
+     * A message set if there is an error with the upload process.
+     */
+    public function withErrorMessage(string $errorMessage): self
+    {
+        $self = clone $this;
+        $self['errorMessage'] = $errorMessage;
 
-        return $obj;
+        return $self;
+    }
+
+    /**
+     * Represents the status of the release on Microsoft Teams.
+     *
+     * @param Status|value-of<Status> $status
+     */
+    public function withStatus(Status|string $status): self
+    {
+        $self = clone $this;
+        $self['status'] = $status;
+
+        return $self;
+    }
+
+    /**
+     * @param list<TelephoneNumber|TelephoneNumberShape> $telephoneNumbers
+     */
+    public function withTelephoneNumbers(array $telephoneNumbers): self
+    {
+        $self = clone $this;
+        $self['telephoneNumbers'] = $telephoneNumbers;
+
+        return $self;
+    }
+
+    public function withTenantID(string $tenantID): self
+    {
+        $self = clone $this;
+        $self['tenantID'] = $tenantID;
+
+        return $self;
+    }
+
+    /**
+     * Uniquely identifies the resource.
+     */
+    public function withTicketID(string $ticketID): self
+    {
+        $self = clone $this;
+        $self['ticketID'] = $ticketID;
+
+        return $self;
     }
 }

@@ -4,42 +4,45 @@ declare(strict_types=1);
 
 namespace Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{
- *   numObjects?: int, size?: int, sizeKB?: int, timestamp?: \DateTimeInterface
+ * @phpstan-type DataShape = array{
+ *   numObjects?: int|null,
+ *   size?: int|null,
+ *   sizeKB?: int|null,
+ *   timestamp?: \DateTimeInterface|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * The number of objects in the bucket.
      */
-    #[Api('num_objects', optional: true)]
+    #[Optional('num_objects')]
     public ?int $numObjects;
 
     /**
      * The size of the bucket in bytes.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $size;
 
     /**
      * The size of the bucket in kilobytes.
      */
-    #[Api('size_kb', optional: true)]
+    #[Optional('size_kb')]
     public ?int $sizeKB;
 
     /**
      * The time the snapshot was taken.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $timestamp;
 
     public function __construct()
@@ -58,14 +61,14 @@ final class Data implements BaseModel
         ?int $sizeKB = null,
         ?\DateTimeInterface $timestamp = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $numObjects && $obj->numObjects = $numObjects;
-        null !== $size && $obj->size = $size;
-        null !== $sizeKB && $obj->sizeKB = $sizeKB;
-        null !== $timestamp && $obj->timestamp = $timestamp;
+        null !== $numObjects && $self['numObjects'] = $numObjects;
+        null !== $size && $self['size'] = $size;
+        null !== $sizeKB && $self['sizeKB'] = $sizeKB;
+        null !== $timestamp && $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +76,10 @@ final class Data implements BaseModel
      */
     public function withNumObjects(int $numObjects): self
     {
-        $obj = clone $this;
-        $obj->numObjects = $numObjects;
+        $self = clone $this;
+        $self['numObjects'] = $numObjects;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +87,10 @@ final class Data implements BaseModel
      */
     public function withSize(int $size): self
     {
-        $obj = clone $this;
-        $obj->size = $size;
+        $self = clone $this;
+        $self['size'] = $size;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +98,10 @@ final class Data implements BaseModel
      */
     public function withSizeKB(int $sizeKB): self
     {
-        $obj = clone $this;
-        $obj->sizeKB = $sizeKB;
+        $self = clone $this;
+        $self['sizeKB'] = $sizeKB;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +109,9 @@ final class Data implements BaseModel
      */
     public function withTimestamp(\DateTimeInterface $timestamp): self
     {
-        $obj = clone $this;
-        $obj->timestamp = $timestamp;
+        $self = clone $this;
+        $self['timestamp'] = $timestamp;
 
-        return $obj;
+        return $self;
     }
 }

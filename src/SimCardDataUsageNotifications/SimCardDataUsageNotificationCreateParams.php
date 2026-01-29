@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardDataUsageNotifications;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,28 +13,30 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParam
 /**
  * Creates a new SIM card data usage notification.
  *
- * @see Telnyx\SimCardDataUsageNotifications->create
+ * @see Telnyx\Services\SimCardDataUsageNotificationsService::create()
  *
- * @phpstan-type sim_card_data_usage_notification_create_params = array{
- *   simCardID: string, threshold: Threshold
+ * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold
+ *
+ * @phpstan-type SimCardDataUsageNotificationCreateParamsShape = array{
+ *   simCardID: string, threshold: Threshold|ThresholdShape
  * }
  */
 final class SimCardDataUsageNotificationCreateParams implements BaseModel
 {
-    /** @use SdkModel<sim_card_data_usage_notification_create_params> */
+    /** @use SdkModel<SimCardDataUsageNotificationCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
      * The identification UUID of the related SIM card resource.
      */
-    #[Api('sim_card_id')]
+    #[Required('sim_card_id')]
     public string $simCardID;
 
     /**
      * Data usage threshold that will trigger the notification.
      */
-    #[Api]
+    #[Required]
     public Threshold $threshold;
 
     /**
@@ -62,15 +64,19 @@ final class SimCardDataUsageNotificationCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Threshold|ThresholdShape $threshold
      */
-    public static function with(string $simCardID, Threshold $threshold): self
-    {
-        $obj = new self;
+    public static function with(
+        string $simCardID,
+        Threshold|array $threshold
+    ): self {
+        $self = new self;
 
-        $obj->simCardID = $simCardID;
-        $obj->threshold = $threshold;
+        $self['simCardID'] = $simCardID;
+        $self['threshold'] = $threshold;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,20 +84,22 @@ final class SimCardDataUsageNotificationCreateParams implements BaseModel
      */
     public function withSimCardID(string $simCardID): self
     {
-        $obj = clone $this;
-        $obj->simCardID = $simCardID;
+        $self = clone $this;
+        $self['simCardID'] = $simCardID;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Data usage threshold that will trigger the notification.
+     *
+     * @param Threshold|ThresholdShape $threshold
      */
-    public function withThreshold(Threshold $threshold): self
+    public function withThreshold(Threshold|array $threshold): self
     {
-        $obj = clone $this;
-        $obj->threshold = $threshold;
+        $self = clone $this;
+        $self['threshold'] = $threshold;
 
-        return $obj;
+        return $self;
     }
 }

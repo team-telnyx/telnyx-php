@@ -4,25 +4,27 @@ declare(strict_types=1);
 
 namespace Telnyx\Messages\OutboundMessagePayload;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\OutboundMessagePayload\From\LineType;
 
 /**
- * @phpstan-type from_alias = array{
- *   carrier?: string, lineType?: value-of<LineType>, phoneNumber?: string
+ * @phpstan-type FromShape = array{
+ *   carrier?: string|null,
+ *   lineType?: null|LineType|value-of<LineType>,
+ *   phoneNumber?: string|null,
  * }
  */
 final class From implements BaseModel
 {
-    /** @use SdkModel<from_alias> */
+    /** @use SdkModel<FromShape> */
     use SdkModel;
 
     /**
      * The carrier of the receiver.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $carrier;
 
     /**
@@ -30,13 +32,13 @@ final class From implements BaseModel
      *
      * @var value-of<LineType>|null $lineType
      */
-    #[Api('line_type', enum: LineType::class, optional: true)]
+    #[Optional('line_type', enum: LineType::class)]
     public ?string $lineType;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     public function __construct()
@@ -49,20 +51,20 @@ final class From implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param LineType|value-of<LineType> $lineType
+     * @param LineType|value-of<LineType>|null $lineType
      */
     public static function with(
         ?string $carrier = null,
         LineType|string|null $lineType = null,
         ?string $phoneNumber = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $carrier && $obj->carrier = $carrier;
-        null !== $lineType && $obj['lineType'] = $lineType;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
+        null !== $carrier && $self['carrier'] = $carrier;
+        null !== $lineType && $self['lineType'] = $lineType;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -70,10 +72,10 @@ final class From implements BaseModel
      */
     public function withCarrier(string $carrier): self
     {
-        $obj = clone $this;
-        $obj->carrier = $carrier;
+        $self = clone $this;
+        $self['carrier'] = $carrier;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,10 +85,10 @@ final class From implements BaseModel
      */
     public function withLineType(LineType|string $lineType): self
     {
-        $obj = clone $this;
-        $obj['lineType'] = $lineType;
+        $self = clone $this;
+        $self['lineType'] = $lineType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -94,9 +96,9 @@ final class From implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 }

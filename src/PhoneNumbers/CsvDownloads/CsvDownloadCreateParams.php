@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\CsvDownloads;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,15 +14,18 @@ use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
 /**
  * Create a CSV download.
  *
- * @see Telnyx\PhoneNumbers\CsvDownloads->create
+ * @see Telnyx\Services\PhoneNumbers\CsvDownloadsService::create()
  *
- * @phpstan-type csv_download_create_params = array{
- *   csvFormat?: CsvFormat|value-of<CsvFormat>, filter?: Filter
+ * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter
+ *
+ * @phpstan-type CsvDownloadCreateParamsShape = array{
+ *   csvFormat?: null|CsvFormat|value-of<CsvFormat>,
+ *   filter?: null|Filter|FilterShape,
  * }
  */
 final class CsvDownloadCreateParams implements BaseModel
 {
-    /** @use SdkModel<csv_download_create_params> */
+    /** @use SdkModel<CsvDownloadCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -31,13 +34,13 @@ final class CsvDownloadCreateParams implements BaseModel
      *
      * @var value-of<CsvFormat>|null $csvFormat
      */
-    #[Api(enum: CsvFormat::class, optional: true)]
+    #[Optional(enum: CsvFormat::class)]
     public ?string $csvFormat;
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Filter $filter;
 
     public function __construct()
@@ -50,18 +53,19 @@ final class CsvDownloadCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CsvFormat|value-of<CsvFormat> $csvFormat
+     * @param CsvFormat|value-of<CsvFormat>|null $csvFormat
+     * @param Filter|FilterShape|null $filter
      */
     public static function with(
         CsvFormat|string|null $csvFormat = null,
-        ?Filter $filter = null
+        Filter|array|null $filter = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $csvFormat && $obj['csvFormat'] = $csvFormat;
-        null !== $filter && $obj->filter = $filter;
+        null !== $csvFormat && $self['csvFormat'] = $csvFormat;
+        null !== $filter && $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -71,20 +75,22 @@ final class CsvDownloadCreateParams implements BaseModel
      */
     public function withCsvFormat(CsvFormat|string $csvFormat): self
     {
-        $obj = clone $this;
-        $obj['csvFormat'] = $csvFormat;
+        $self = clone $this;
+        $self['csvFormat'] = $csvFormat;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Consolidated filter parameter (deepObject style). Originally: filter[has_bundle], filter[tag], filter[connection_id], filter[phone_number], filter[status], filter[voice.connection_name], filter[voice.usage_payment_method], filter[billing_group_id], filter[emergency_address_id], filter[customer_reference].
+     *
+     * @param Filter|FilterShape $filter
      */
-    public function withFilter(Filter $filter): self
+    public function withFilter(Filter|array $filter): self
     {
-        $obj = clone $this;
-        $obj->filter = $filter;
+        $self = clone $this;
+        $self['filter'] = $filter;
 
-        return $obj;
+        return $self;
     }
 }

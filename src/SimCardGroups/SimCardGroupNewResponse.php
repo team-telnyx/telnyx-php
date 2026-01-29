@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\SimCardGroups;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkResponse;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\Contracts\ResponseConverter;
 
 /**
- * @phpstan-type sim_card_group_new_response = array{data?: SimCardGroup}
+ * @phpstan-import-type SimCardGroupShape from \Telnyx\SimCardGroups\SimCardGroup
+ *
+ * @phpstan-type SimCardGroupNewResponseShape = array{
+ *   data?: null|SimCardGroup|SimCardGroupShape
+ * }
  */
-final class SimCardGroupNewResponse implements BaseModel, ResponseConverter
+final class SimCardGroupNewResponse implements BaseModel
 {
-    /** @use SdkModel<sim_card_group_new_response> */
+    /** @use SdkModel<SimCardGroupNewResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api(optional: true)]
+    #[Optional]
     public ?SimCardGroup $data;
 
     public function __construct()
@@ -32,21 +32,26 @@ final class SimCardGroupNewResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param SimCardGroup|SimCardGroupShape|null $data
      */
-    public static function with(?SimCardGroup $data = null): self
+    public static function with(SimCardGroup|array|null $data = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $data && $obj->data = $data;
+        null !== $data && $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 
-    public function withData(SimCardGroup $data): self
+    /**
+     * @param SimCardGroup|SimCardGroupShape $data
+     */
+    public function withData(SimCardGroup|array $data): self
     {
-        $obj = clone $this;
-        $obj->data = $data;
+        $self = clone $this;
+        $self['data'] = $data;
 
-        return $obj;
+        return $self;
     }
 }

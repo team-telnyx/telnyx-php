@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Clusters\ClusterComputeResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type data_alias = array{taskID: string}
+ * @phpstan-type DataShape = array{taskID: string}
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    #[Api('task_id')]
+    #[Required('task_id')]
     public string $taskID;
 
     /**
@@ -45,18 +45,18 @@ final class Data implements BaseModel
      */
     public static function with(string $taskID): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->taskID = $taskID;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 
     public function withTaskID(string $taskID): self
     {
-        $obj = clone $this;
-        $obj->taskID = $taskID;
+        $self = clone $this;
+        $self['taskID'] = $taskID;
 
-        return $obj;
+        return $self;
     }
 }

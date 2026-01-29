@@ -5,19 +5,21 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Tests\Runs\TestRunResponse;
 
 use Telnyx\AI\Assistants\Tests\Runs\TestStatus;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type detail_status = array{name: string, status: value-of<TestStatus>}
+ * @phpstan-type DetailStatusShape = array{
+ *   name: string, status: TestStatus|value-of<TestStatus>
+ * }
  */
 final class DetailStatus implements BaseModel
 {
-    /** @use SdkModel<detail_status> */
+    /** @use SdkModel<DetailStatusShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public string $name;
 
     /**
@@ -31,7 +33,7 @@ final class DetailStatus implements BaseModel
      *
      * @var value-of<TestStatus> $status
      */
-    #[Api(enum: TestStatus::class)]
+    #[Required(enum: TestStatus::class)]
     public string $status;
 
     /**
@@ -62,20 +64,20 @@ final class DetailStatus implements BaseModel
      */
     public static function with(string $name, TestStatus|string $status): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj->name = $name;
-        $obj['status'] = $status;
+        $self['name'] = $name;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     public function withName(string $name): self
     {
-        $obj = clone $this;
-        $obj->name = $name;
+        $self = clone $this;
+        $self['name'] = $name;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,9 +93,9 @@ final class DetailStatus implements BaseModel
      */
     public function withStatus(TestStatus|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

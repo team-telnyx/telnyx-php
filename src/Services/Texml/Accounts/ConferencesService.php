@@ -6,6 +6,7 @@ namespace Telnyx\Services\Texml\Accounts;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\ConferencesContract;
 use Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService;
@@ -13,21 +14,22 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status;
-use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveParams;
-use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsJsonParams;
-use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsParams;
-use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class ConferencesService implements ConferencesContract
 {
     /**
-     * @@api
+     * @api
+     */
+    public ConferencesRawService $raw;
+
+    /**
+     * @api
      */
     public ParticipantsService $participants;
 
@@ -36,6 +38,7 @@ final class ConferencesService implements ConferencesContract
      */
     public function __construct(private Client $client)
     {
+        $this->raw = new ConferencesRawService($client);
         $this->participants = new ParticipantsService($client);
     }
 
@@ -44,48 +47,23 @@ final class ConferencesService implements ConferencesContract
      *
      * Returns a conference resource.
      *
-     * @param string $accountSid
+     * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
+     * @param string $accountSid the id of the account the resource belongs to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $conferenceSid,
-        $accountSid,
-        ?RequestOptions $requestOptions = null
+        string $accountSid,
+        RequestOptions|array|null $requestOptions = null,
     ): ConferenceGetResponse {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
-        return $this->retrieveRaw($conferenceSid, $params, $requestOptions);
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($conferenceSid, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRaw(
-        string $conferenceSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceGetResponse {
-        [$parsed, $options] = ConferenceRetrieveParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: [
-                'texml/Accounts/%1$s/Conferences/%2$s', $accountSid, $conferenceSid,
-            ],
-            options: $options,
-            convert: ConferenceGetResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -93,61 +71,36 @@ final class ConferencesService implements ConferencesContract
      *
      * Updates a conference resource.
      *
-     * @param string $accountSid
-     * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod The HTTP method used to call the `AnnounceUrl`. Defaults to `POST`.
-     * @param string $announceURL The URL we should call to announce something into the conference. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
-     * @param string $status The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
+     * @param string $conferenceSid path param: The ConferenceSid that uniquely identifies a conference
+     * @param string $accountSid path param: The id of the account the resource belongs to
+     * @param AnnounceMethod|value-of<AnnounceMethod> $announceMethod Body param: The HTTP method used to call the `AnnounceUrl`. Defaults to `POST`.
+     * @param string $announceURL Body param: The URL we should call to announce something into the conference. The URL may return an MP3 file, a WAV file, or a TwiML document that contains `<Play>`, `<Say>`, `<Pause>`, or `<Redirect>` verbs.
+     * @param string $status Body param: The new status of the resource. Specifying `completed` will end the conference and hang up all participants.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $conferenceSid,
-        $accountSid,
-        $announceMethod = omit,
-        $announceURL = omit,
-        $status = omit,
-        ?RequestOptions $requestOptions = null,
+        string $accountSid,
+        AnnounceMethod|string|null $announceMethod = null,
+        ?string $announceURL = null,
+        ?string $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ConferenceUpdateResponse {
-        $params = [
-            'accountSid' => $accountSid,
-            'announceMethod' => $announceMethod,
-            'announceURL' => $announceURL,
-            'status' => $status,
-        ];
-
-        return $this->updateRaw($conferenceSid, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function updateRaw(
-        string $conferenceSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceUpdateResponse {
-        [$parsed, $options] = ConferenceUpdateParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: [
-                'texml/Accounts/%1$s/Conferences/%2$s', $accountSid, $conferenceSid,
+        $params = Util::removeNulls(
+            [
+                'accountSid' => $accountSid,
+                'announceMethod' => $announceMethod,
+                'announceURL' => $announceURL,
+                'status' => $status,
             ],
-            headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
-            body: (object) array_diff_key($parsed, ['accountSid']),
-            options: $options,
-            convert: ConferenceUpdateResponse::class,
         );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($conferenceSid, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -155,6 +108,7 @@ final class ConferencesService implements ConferencesContract
      *
      * Lists conference resources.
      *
+     * @param string $accountSid the id of the account the resource belongs to
      * @param string $dateCreated Filters conferences by the creation date. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateCreated>=2023-05-22.
      * @param string $dateUpdated Filters conferences by the time they were last updated. Expected format is YYYY-MM-DD. Also accepts inequality operators, e.g. DateUpdated>=2023-05-22.
      * @param string $friendlyName filters conferences by their friendly name
@@ -162,58 +116,37 @@ final class ConferencesService implements ConferencesContract
      * @param int $pageSize The number of records to be displayed on a page
      * @param string $pageToken used to request the next page of results
      * @param Status|value-of<Status> $status filters conferences by status
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveConferences(
         string $accountSid,
-        $dateCreated = omit,
-        $dateUpdated = omit,
-        $friendlyName = omit,
-        $page = omit,
-        $pageSize = omit,
-        $pageToken = omit,
-        $status = omit,
-        ?RequestOptions $requestOptions = null,
+        ?string $dateCreated = null,
+        ?string $dateUpdated = null,
+        ?string $friendlyName = null,
+        ?int $page = null,
+        ?int $pageSize = null,
+        ?string $pageToken = null,
+        Status|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): ConferenceGetConferencesResponse {
-        $params = [
-            'dateCreated' => $dateCreated,
-            'dateUpdated' => $dateUpdated,
-            'friendlyName' => $friendlyName,
-            'page' => $page,
-            'pageSize' => $pageSize,
-            'pageToken' => $pageToken,
-            'status' => $status,
-        ];
-
-        return $this->retrieveConferencesRaw($accountSid, $params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveConferencesRaw(
-        string $accountSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceGetConferencesResponse {
-        [$parsed, $options] = ConferenceRetrieveConferencesParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'dateCreated' => $dateCreated,
+                'dateUpdated' => $dateUpdated,
+                'friendlyName' => $friendlyName,
+                'page' => $page,
+                'pageSize' => $pageSize,
+                'pageToken' => $pageToken,
+                'status' => $status,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: ['texml/Accounts/%1$s/Conferences', $accountSid],
-            query: $parsed,
-            options: $options,
-            convert: ConferenceGetConferencesResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveConferences($accountSid, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
@@ -221,54 +154,23 @@ final class ConferencesService implements ConferencesContract
      *
      * Lists conference recordings
      *
-     * @param string $accountSid
+     * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
+     * @param string $accountSid the id of the account the resource belongs to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveRecordings(
         string $conferenceSid,
-        $accountSid,
-        ?RequestOptions $requestOptions = null
+        string $accountSid,
+        RequestOptions|array|null $requestOptions = null,
     ): ConferenceGetRecordingsResponse {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
-        return $this->retrieveRecordingsRaw(
-            $conferenceSid,
-            $params,
-            $requestOptions
-        );
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveRecordings($conferenceSid, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordingsRaw(
-        string $conferenceSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceGetRecordingsResponse {
-        [$parsed, $options] = ConferenceRetrieveRecordingsParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: [
-                'texml/Accounts/%1$s/Conferences/%2$s/Recordings',
-                $accountSid,
-                $conferenceSid,
-            ],
-            options: $options,
-            convert: ConferenceGetRecordingsResponse::class,
-        );
+        return $response->parse();
     }
 
     /**
@@ -276,53 +178,22 @@ final class ConferencesService implements ConferencesContract
      *
      * Returns recordings for a conference identified by conference_sid.
      *
-     * @param string $accountSid
+     * @param string $conferenceSid the ConferenceSid that uniquely identifies a conference
+     * @param string $accountSid the id of the account the resource belongs to
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveRecordingsJson(
         string $conferenceSid,
-        $accountSid,
-        ?RequestOptions $requestOptions = null
+        string $accountSid,
+        RequestOptions|array|null $requestOptions = null,
     ): ConferenceGetRecordingsJsonResponse {
-        $params = ['accountSid' => $accountSid];
+        $params = Util::removeNulls(['accountSid' => $accountSid]);
 
-        return $this->retrieveRecordingsJsonRaw(
-            $conferenceSid,
-            $params,
-            $requestOptions
-        );
-    }
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveRecordingsJson($conferenceSid, params: $params, requestOptions: $requestOptions);
 
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function retrieveRecordingsJsonRaw(
-        string $conferenceSid,
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): ConferenceGetRecordingsJsonResponse {
-        [$parsed, $options] = ConferenceRetrieveRecordingsJsonParams::parseRequest(
-            $params,
-            $requestOptions
-        );
-        $accountSid = $parsed['accountSid'];
-        unset($parsed['accountSid']);
-
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'get',
-            path: [
-                'texml/Accounts/%1$s/Conferences/%2$s/Recordings.json',
-                $accountSid,
-                $conferenceSid,
-            ],
-            options: $options,
-            convert: ConferenceGetRecordingsJsonResponse::class,
-        );
+        return $response->parse();
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumberBlocks\Jobs;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumberBlocks\Jobs\Job\FailedOperation;
@@ -13,49 +13,52 @@ use Telnyx\PhoneNumberBlocks\Jobs\Job\SuccessfulOperation;
 use Telnyx\PhoneNumberBlocks\Jobs\Job\Type;
 
 /**
- * @phpstan-type job_alias = array{
- *   id?: string,
- *   createdAt?: string,
- *   etc?: \DateTimeInterface,
- *   failedOperations?: list<FailedOperation>,
- *   recordType?: string,
- *   status?: value-of<Status>,
- *   successfulOperations?: list<SuccessfulOperation>,
- *   type?: value-of<Type>,
- *   updatedAt?: string,
+ * @phpstan-import-type FailedOperationShape from \Telnyx\PhoneNumberBlocks\Jobs\Job\FailedOperation
+ * @phpstan-import-type SuccessfulOperationShape from \Telnyx\PhoneNumberBlocks\Jobs\Job\SuccessfulOperation
+ *
+ * @phpstan-type JobShape = array{
+ *   id?: string|null,
+ *   createdAt?: string|null,
+ *   etc?: \DateTimeInterface|null,
+ *   failedOperations?: list<FailedOperation|FailedOperationShape>|null,
+ *   recordType?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   successfulOperations?: list<SuccessfulOperation|SuccessfulOperationShape>|null,
+ *   type?: null|Type|value-of<Type>,
+ *   updatedAt?: string|null,
  * }
  */
 final class Job implements BaseModel
 {
-    /** @use SdkModel<job_alias> */
+    /** @use SdkModel<JobShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * ISO 8601 formatted date indicating when the estimated time of completion of the background job.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?\DateTimeInterface $etc;
 
     /** @var list<FailedOperation>|null $failedOperations */
-    #[Api('failed_operations', list: FailedOperation::class, optional: true)]
+    #[Optional('failed_operations', list: FailedOperation::class)]
     public ?array $failedOperations;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -63,15 +66,11 @@ final class Job implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /** @var list<SuccessfulOperation>|null $successfulOperations */
-    #[Api(
-        'successful_operations',
-        list: SuccessfulOperation::class,
-        optional: true
-    )]
+    #[Optional('successful_operations', list: SuccessfulOperation::class)]
     public ?array $successfulOperations;
 
     /**
@@ -79,13 +78,13 @@ final class Job implements BaseModel
      *
      * @var value-of<Type>|null $type
      */
-    #[Api(enum: Type::class, optional: true)]
+    #[Optional(enum: Type::class)]
     public ?string $type;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     public function __construct()
@@ -98,10 +97,10 @@ final class Job implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<FailedOperation> $failedOperations
-     * @param Status|value-of<Status> $status
-     * @param list<SuccessfulOperation> $successfulOperations
-     * @param Type|value-of<Type> $type
+     * @param list<FailedOperation|FailedOperationShape>|null $failedOperations
+     * @param Status|value-of<Status>|null $status
+     * @param list<SuccessfulOperation|SuccessfulOperationShape>|null $successfulOperations
+     * @param Type|value-of<Type>|null $type
      */
     public static function with(
         ?string $id = null,
@@ -114,19 +113,19 @@ final class Job implements BaseModel
         Type|string|null $type = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $etc && $obj->etc = $etc;
-        null !== $failedOperations && $obj->failedOperations = $failedOperations;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $successfulOperations && $obj->successfulOperations = $successfulOperations;
-        null !== $type && $obj['type'] = $type;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $etc && $self['etc'] = $etc;
+        null !== $failedOperations && $self['failedOperations'] = $failedOperations;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $successfulOperations && $self['successfulOperations'] = $successfulOperations;
+        null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,10 +133,10 @@ final class Job implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -145,10 +144,10 @@ final class Job implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -156,21 +155,21 @@ final class Job implements BaseModel
      */
     public function withEtc(\DateTimeInterface $etc): self
     {
-        $obj = clone $this;
-        $obj->etc = $etc;
+        $self = clone $this;
+        $self['etc'] = $etc;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<FailedOperation> $failedOperations
+     * @param list<FailedOperation|FailedOperationShape> $failedOperations
      */
     public function withFailedOperations(array $failedOperations): self
     {
-        $obj = clone $this;
-        $obj->failedOperations = $failedOperations;
+        $self = clone $this;
+        $self['failedOperations'] = $failedOperations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +177,10 @@ final class Job implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -191,21 +190,21 @@ final class Job implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<SuccessfulOperation> $successfulOperations
+     * @param list<SuccessfulOperation|SuccessfulOperationShape> $successfulOperations
      */
     public function withSuccessfulOperations(array $successfulOperations): self
     {
-        $obj = clone $this;
-        $obj->successfulOperations = $successfulOperations;
+        $self = clone $this;
+        $self['successfulOperations'] = $successfulOperations;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -215,10 +214,10 @@ final class Job implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -226,9 +225,9 @@ final class Job implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

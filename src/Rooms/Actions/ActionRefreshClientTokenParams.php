@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Rooms\Actions;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,25 +13,25 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Synchronously refresh an Client Token to join a Room. Client Token is necessary to join a Telnyx Room. Client Token will expire after `token_ttl_secs`.
  *
- * @see Telnyx\Rooms\Actions->refreshClientToken
+ * @see Telnyx\Services\Rooms\ActionsService::refreshClientToken()
  *
- * @phpstan-type action_refresh_client_token_params = array{
- *   refreshToken: string, tokenTtlSecs?: int
+ * @phpstan-type ActionRefreshClientTokenParamsShape = array{
+ *   refreshToken: string, tokenTtlSecs?: int|null
  * }
  */
 final class ActionRefreshClientTokenParams implements BaseModel
 {
-    /** @use SdkModel<action_refresh_client_token_params> */
+    /** @use SdkModel<ActionRefreshClientTokenParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    #[Api('refresh_token')]
+    #[Required('refresh_token')]
     public string $refreshToken;
 
     /**
      * The time to live in seconds of the Client Token, after that time the Client Token is invalid and can't be used to join a Room.
      */
-    #[Api('token_ttl_secs', optional: true)]
+    #[Optional('token_ttl_secs')]
     public ?int $tokenTtlSecs;
 
     /**
@@ -61,21 +62,21 @@ final class ActionRefreshClientTokenParams implements BaseModel
         string $refreshToken,
         ?int $tokenTtlSecs = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj->refreshToken = $refreshToken;
+        $self['refreshToken'] = $refreshToken;
 
-        null !== $tokenTtlSecs && $obj->tokenTtlSecs = $tokenTtlSecs;
+        null !== $tokenTtlSecs && $self['tokenTtlSecs'] = $tokenTtlSecs;
 
-        return $obj;
+        return $self;
     }
 
     public function withRefreshToken(string $refreshToken): self
     {
-        $obj = clone $this;
-        $obj->refreshToken = $refreshToken;
+        $self = clone $this;
+        $self['refreshToken'] = $refreshToken;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -83,9 +84,9 @@ final class ActionRefreshClientTokenParams implements BaseModel
      */
     public function withTokenTtlSecs(int $tokenTtlSecs): self
     {
-        $obj = clone $this;
-        $obj->tokenTtlSecs = $tokenTtlSecs;
+        $self = clone $this;
+        $self['tokenTtlSecs'] = $tokenTtlSecs;
 
-        return $obj;
+        return $self;
     }
 }

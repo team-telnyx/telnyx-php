@@ -4,145 +4,145 @@ declare(strict_types=1);
 
 namespace Telnyx\PhoneNumbers\PhoneNumberDeleteResponse;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\PhoneNumberType;
 use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\Status;
 
 /**
- * @phpstan-type data_alias = array{
- *   id?: string,
- *   billingGroupID?: string,
- *   callForwardingEnabled?: bool,
- *   callRecordingEnabled?: bool,
- *   callerIDNameEnabled?: bool,
- *   cnamListingEnabled?: bool,
- *   connectionID?: string,
- *   connectionName?: string,
- *   createdAt?: string,
- *   customerReference?: string,
- *   deletionLockEnabled?: bool,
- *   emergencyAddressID?: string,
- *   emergencyEnabled?: bool,
- *   externalPin?: string,
- *   messagingProfileID?: string,
- *   messagingProfileName?: string,
- *   phoneNumber?: string,
- *   phoneNumberType?: value-of<PhoneNumberType>,
- *   purchasedAt?: string,
- *   recordType?: string,
- *   status?: value-of<Status>,
- *   t38FaxGatewayEnabled?: bool,
- *   tags?: list<string>,
- *   updatedAt?: string,
+ * @phpstan-type DataShape = array{
+ *   id?: string|null,
+ *   billingGroupID?: string|null,
+ *   callForwardingEnabled?: bool|null,
+ *   callRecordingEnabled?: bool|null,
+ *   callerIDNameEnabled?: bool|null,
+ *   cnamListingEnabled?: bool|null,
+ *   connectionID?: string|null,
+ *   connectionName?: string|null,
+ *   createdAt?: string|null,
+ *   customerReference?: string|null,
+ *   deletionLockEnabled?: bool|null,
+ *   emergencyAddressID?: string|null,
+ *   emergencyEnabled?: bool|null,
+ *   externalPin?: string|null,
+ *   messagingProfileID?: string|null,
+ *   messagingProfileName?: string|null,
+ *   phoneNumber?: string|null,
+ *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
+ *   purchasedAt?: string|null,
+ *   recordType?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   t38FaxGatewayEnabled?: bool|null,
+ *   tags?: list<string>|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class Data implements BaseModel
 {
-    /** @use SdkModel<data_alias> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
      * Identifies the resource.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Identifies the billing group associated with the phone number.
      */
-    #[Api('billing_group_id', optional: true)]
+    #[Optional('billing_group_id')]
     public ?string $billingGroupID;
 
     /**
      * Indicates if call forwarding will be enabled for this number if forwards_to and forwarding_type are filled in. Defaults to true for backwards compatibility with APIV1 use of numbers endpoints.
      */
-    #[Api('call_forwarding_enabled', optional: true)]
+    #[Optional('call_forwarding_enabled')]
     public ?bool $callForwardingEnabled;
 
     /**
      * Indicates whether call recording is enabled for this number.
      */
-    #[Api('call_recording_enabled', optional: true)]
+    #[Optional('call_recording_enabled')]
     public ?bool $callRecordingEnabled;
 
     /**
      * Indicates whether caller ID is enabled for this number.
      */
-    #[Api('caller_id_name_enabled', optional: true)]
+    #[Optional('caller_id_name_enabled')]
     public ?bool $callerIDNameEnabled;
 
     /**
      * Indicates whether a CNAM listing is enabled for this number.
      */
-    #[Api('cnam_listing_enabled', optional: true)]
+    #[Optional('cnam_listing_enabled')]
     public ?bool $cnamListingEnabled;
 
     /**
      * Identifies the connection associated with the phone number.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * The user-assigned name of the connection to be associated with this phone number.
      */
-    #[Api('connection_name', optional: true)]
+    #[Optional('connection_name')]
     public ?string $connectionName;
 
     /**
      * ISO 8601 formatted date indicating when the time it took to activate after the purchase.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?string $createdAt;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * Indicates whether deletion lock is enabled for this number. When enabled, this prevents the phone number from being deleted via the API or Telnyx portal.
      */
-    #[Api('deletion_lock_enabled', optional: true)]
+    #[Optional('deletion_lock_enabled')]
     public ?bool $deletionLockEnabled;
 
     /**
      * Identifies the emergency address associated with the phone number.
      */
-    #[Api('emergency_address_id', optional: true)]
+    #[Optional('emergency_address_id')]
     public ?string $emergencyAddressID;
 
     /**
      * Indicates whether emergency services are enabled for this number.
      */
-    #[Api('emergency_enabled', optional: true)]
+    #[Optional('emergency_enabled')]
     public ?bool $emergencyEnabled;
 
     /**
      * If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, Telnyx will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
      */
-    #[Api('external_pin', optional: true)]
+    #[Optional('external_pin')]
     public ?string $externalPin;
 
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Api('messaging_profile_id', optional: true)]
+    #[Optional('messaging_profile_id')]
     public ?string $messagingProfileID;
 
     /**
      * The name of the messaging profile associated with the phone number.
      */
-    #[Api('messaging_profile_name', optional: true)]
+    #[Optional('messaging_profile_name')]
     public ?string $messagingProfileName;
 
     /**
      * The +E.164-formatted phone number associated with this record.
      */
-    #[Api('phone_number', optional: true)]
+    #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
@@ -150,19 +150,19 @@ final class Data implements BaseModel
      *
      * @var value-of<PhoneNumberType>|null $phoneNumberType
      */
-    #[Api('phone_number_type', enum: PhoneNumberType::class, optional: true)]
+    #[Optional('phone_number_type', enum: PhoneNumberType::class)]
     public ?string $phoneNumberType;
 
     /**
      * ISO 8601 formatted date indicating the time the request was made to purchase the number.
      */
-    #[Api('purchased_at', optional: true)]
+    #[Optional('purchased_at')]
     public ?string $purchasedAt;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -170,13 +170,13 @@ final class Data implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * Indicates whether T38 Fax Gateway for inbound calls to this number.
      */
-    #[Api('t38_fax_gateway_enabled', optional: true)]
+    #[Optional('t38_fax_gateway_enabled')]
     public ?bool $t38FaxGatewayEnabled;
 
     /**
@@ -184,13 +184,13 @@ final class Data implements BaseModel
      *
      * @var list<string>|null $tags
      */
-    #[Api(list: 'string', optional: true)]
+    #[Optional(list: 'string')]
     public ?array $tags;
 
     /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?string $updatedAt;
 
     public function __construct()
@@ -203,9 +203,9 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberType|value-of<PhoneNumberType> $phoneNumberType
-     * @param Status|value-of<Status> $status
-     * @param list<string> $tags
+     * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param Status|value-of<Status>|null $status
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $id = null,
@@ -233,34 +233,34 @@ final class Data implements BaseModel
         ?array $tags = null,
         ?string $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
-        null !== $callForwardingEnabled && $obj->callForwardingEnabled = $callForwardingEnabled;
-        null !== $callRecordingEnabled && $obj->callRecordingEnabled = $callRecordingEnabled;
-        null !== $callerIDNameEnabled && $obj->callerIDNameEnabled = $callerIDNameEnabled;
-        null !== $cnamListingEnabled && $obj->cnamListingEnabled = $cnamListingEnabled;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $connectionName && $obj->connectionName = $connectionName;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $deletionLockEnabled && $obj->deletionLockEnabled = $deletionLockEnabled;
-        null !== $emergencyAddressID && $obj->emergencyAddressID = $emergencyAddressID;
-        null !== $emergencyEnabled && $obj->emergencyEnabled = $emergencyEnabled;
-        null !== $externalPin && $obj->externalPin = $externalPin;
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
-        null !== $messagingProfileName && $obj->messagingProfileName = $messagingProfileName;
-        null !== $phoneNumber && $obj->phoneNumber = $phoneNumber;
-        null !== $phoneNumberType && $obj['phoneNumberType'] = $phoneNumberType;
-        null !== $purchasedAt && $obj->purchasedAt = $purchasedAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $t38FaxGatewayEnabled && $obj->t38FaxGatewayEnabled = $t38FaxGatewayEnabled;
-        null !== $tags && $obj->tags = $tags;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $callForwardingEnabled && $self['callForwardingEnabled'] = $callForwardingEnabled;
+        null !== $callRecordingEnabled && $self['callRecordingEnabled'] = $callRecordingEnabled;
+        null !== $callerIDNameEnabled && $self['callerIDNameEnabled'] = $callerIDNameEnabled;
+        null !== $cnamListingEnabled && $self['cnamListingEnabled'] = $cnamListingEnabled;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $deletionLockEnabled && $self['deletionLockEnabled'] = $deletionLockEnabled;
+        null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
+        null !== $emergencyEnabled && $self['emergencyEnabled'] = $emergencyEnabled;
+        null !== $externalPin && $self['externalPin'] = $externalPin;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $messagingProfileName && $self['messagingProfileName'] = $messagingProfileName;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $purchasedAt && $self['purchasedAt'] = $purchasedAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $t38FaxGatewayEnabled && $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
+        null !== $tags && $self['tags'] = $tags;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -268,10 +268,10 @@ final class Data implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -279,10 +279,10 @@ final class Data implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj->billingGroupID = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -290,10 +290,10 @@ final class Data implements BaseModel
      */
     public function withCallForwardingEnabled(bool $callForwardingEnabled): self
     {
-        $obj = clone $this;
-        $obj->callForwardingEnabled = $callForwardingEnabled;
+        $self = clone $this;
+        $self['callForwardingEnabled'] = $callForwardingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -301,10 +301,10 @@ final class Data implements BaseModel
      */
     public function withCallRecordingEnabled(bool $callRecordingEnabled): self
     {
-        $obj = clone $this;
-        $obj->callRecordingEnabled = $callRecordingEnabled;
+        $self = clone $this;
+        $self['callRecordingEnabled'] = $callRecordingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -312,10 +312,10 @@ final class Data implements BaseModel
      */
     public function withCallerIDNameEnabled(bool $callerIDNameEnabled): self
     {
-        $obj = clone $this;
-        $obj->callerIDNameEnabled = $callerIDNameEnabled;
+        $self = clone $this;
+        $self['callerIDNameEnabled'] = $callerIDNameEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -323,10 +323,10 @@ final class Data implements BaseModel
      */
     public function withCnamListingEnabled(bool $cnamListingEnabled): self
     {
-        $obj = clone $this;
-        $obj->cnamListingEnabled = $cnamListingEnabled;
+        $self = clone $this;
+        $self['cnamListingEnabled'] = $cnamListingEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -334,10 +334,10 @@ final class Data implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -345,10 +345,10 @@ final class Data implements BaseModel
      */
     public function withConnectionName(string $connectionName): self
     {
-        $obj = clone $this;
-        $obj->connectionName = $connectionName;
+        $self = clone $this;
+        $self['connectionName'] = $connectionName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -356,10 +356,10 @@ final class Data implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -367,10 +367,10 @@ final class Data implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -378,10 +378,10 @@ final class Data implements BaseModel
      */
     public function withDeletionLockEnabled(bool $deletionLockEnabled): self
     {
-        $obj = clone $this;
-        $obj->deletionLockEnabled = $deletionLockEnabled;
+        $self = clone $this;
+        $self['deletionLockEnabled'] = $deletionLockEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -389,10 +389,10 @@ final class Data implements BaseModel
      */
     public function withEmergencyAddressID(string $emergencyAddressID): self
     {
-        $obj = clone $this;
-        $obj->emergencyAddressID = $emergencyAddressID;
+        $self = clone $this;
+        $self['emergencyAddressID'] = $emergencyAddressID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -400,10 +400,10 @@ final class Data implements BaseModel
      */
     public function withEmergencyEnabled(bool $emergencyEnabled): self
     {
-        $obj = clone $this;
-        $obj->emergencyEnabled = $emergencyEnabled;
+        $self = clone $this;
+        $self['emergencyEnabled'] = $emergencyEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -411,10 +411,10 @@ final class Data implements BaseModel
      */
     public function withExternalPin(string $externalPin): self
     {
-        $obj = clone $this;
-        $obj->externalPin = $externalPin;
+        $self = clone $this;
+        $self['externalPin'] = $externalPin;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -422,10 +422,10 @@ final class Data implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -433,10 +433,10 @@ final class Data implements BaseModel
      */
     public function withMessagingProfileName(string $messagingProfileName): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileName = $messagingProfileName;
+        $self = clone $this;
+        $self['messagingProfileName'] = $messagingProfileName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -444,10 +444,10 @@ final class Data implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj->phoneNumber = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -458,10 +458,10 @@ final class Data implements BaseModel
     public function withPhoneNumberType(
         PhoneNumberType|string $phoneNumberType
     ): self {
-        $obj = clone $this;
-        $obj['phoneNumberType'] = $phoneNumberType;
+        $self = clone $this;
+        $self['phoneNumberType'] = $phoneNumberType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -469,10 +469,10 @@ final class Data implements BaseModel
      */
     public function withPurchasedAt(string $purchasedAt): self
     {
-        $obj = clone $this;
-        $obj->purchasedAt = $purchasedAt;
+        $self = clone $this;
+        $self['purchasedAt'] = $purchasedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -480,10 +480,10 @@ final class Data implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -493,10 +493,10 @@ final class Data implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -504,10 +504,10 @@ final class Data implements BaseModel
      */
     public function withT38FaxGatewayEnabled(bool $t38FaxGatewayEnabled): self
     {
-        $obj = clone $this;
-        $obj->t38FaxGatewayEnabled = $t38FaxGatewayEnabled;
+        $self = clone $this;
+        $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -517,10 +517,10 @@ final class Data implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj->tags = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -528,9 +528,9 @@ final class Data implements BaseModel
      */
     public function withUpdatedAt(string $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

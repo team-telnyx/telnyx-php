@@ -4,24 +4,33 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\Audio\AudioTranscribeParams;
 use Telnyx\AI\Audio\AudioTranscribeParams\Model;
 use Telnyx\AI\Audio\AudioTranscribeParams\ResponseFormat;
 use Telnyx\AI\Audio\AudioTranscribeParams\TimestampGranularities;
 use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioContract;
 
-use const Telnyx\Core\OMIT as omit;
-
+/**
+ * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ */
 final class AudioService implements AudioContract
 {
     /**
+     * @api
+     */
+    public AudioRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AudioRawService($client);
+    }
 
     /**
      * @api
@@ -33,52 +42,31 @@ final class AudioService implements AudioContract
      * @param string $fileURL Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`
      * @param ResponseFormat|value-of<ResponseFormat> $responseFormat The format of the transcript output. Use `verbose_json` to take advantage of timestamps.
      * @param TimestampGranularities|value-of<TimestampGranularities> $timestampGranularities The timestamp granularities to populate for this transcription. `response_format` must be set verbose_json to use timestamp granularities. Currently `segment` is supported.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function transcribe(
-        $model = 'distil-whisper/distil-large-v2',
-        $file = omit,
-        $fileURL = omit,
-        $responseFormat = omit,
-        $timestampGranularities = omit,
-        ?RequestOptions $requestOptions = null,
+        Model|string $model = 'distil-whisper/distil-large-v2',
+        ?string $file = null,
+        ?string $fileURL = null,
+        ResponseFormat|string $responseFormat = 'json',
+        TimestampGranularities|string|null $timestampGranularities = null,
+        RequestOptions|array|null $requestOptions = null,
     ): AudioTranscribeResponse {
-        $params = [
-            'model' => $model,
-            'file' => $file,
-            'fileURL' => $fileURL,
-            'responseFormat' => $responseFormat,
-            'timestampGranularities' => $timestampGranularities,
-        ];
-
-        return $this->transcribeRaw($params, $requestOptions);
-    }
-
-    /**
-     * @api
-     *
-     * @param array<string, mixed> $params
-     *
-     * @throws APIException
-     */
-    public function transcribeRaw(
-        array $params,
-        ?RequestOptions $requestOptions = null
-    ): AudioTranscribeResponse {
-        [$parsed, $options] = AudioTranscribeParams::parseRequest(
-            $params,
-            $requestOptions
+        $params = Util::removeNulls(
+            [
+                'model' => $model,
+                'file' => $file,
+                'fileURL' => $fileURL,
+                'responseFormat' => $responseFormat,
+                'timestampGranularities' => $timestampGranularities,
+            ],
         );
 
-        // @phpstan-ignore-next-line;
-        return $this->client->request(
-            method: 'post',
-            path: 'ai/audio/transcriptions',
-            headers: ['Content-Type' => 'multipart/form-data'],
-            body: (object) $parsed,
-            options: $options,
-            convert: AudioTranscribeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->transcribe(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

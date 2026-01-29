@@ -5,40 +5,42 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\Assistant\Tool;
 
 use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool\BookAppointment;
-use Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool\Type;
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type book_appointment_tool = array{
- *   bookAppointment: BookAppointment, type: value-of<Type>
+ * @phpstan-import-type BookAppointmentShape from \Telnyx\AI\Assistants\Assistant\Tool\BookAppointmentTool\BookAppointment
+ *
+ * @phpstan-type BookAppointmentToolShape = array{
+ *   bookAppointment: BookAppointment|BookAppointmentShape,
+ *   type: 'book_appointment',
  * }
  */
 final class BookAppointmentTool implements BaseModel
 {
-    /** @use SdkModel<book_appointment_tool> */
+    /** @use SdkModel<BookAppointmentToolShape> */
     use SdkModel;
 
-    #[Api('book_appointment')]
-    public BookAppointment $bookAppointment;
+    /** @var 'book_appointment' $type */
+    #[Required]
+    public string $type = 'book_appointment';
 
-    /** @var value-of<Type> $type */
-    #[Api(enum: Type::class)]
-    public string $type;
+    #[Required('book_appointment')]
+    public BookAppointment $bookAppointment;
 
     /**
      * `new BookAppointmentTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * BookAppointmentTool::with(bookAppointment: ..., type: ...)
+     * BookAppointmentTool::with(bookAppointment: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new BookAppointmentTool)->withBookAppointment(...)->withType(...)
+     * (new BookAppointmentTool)->withBookAppointment(...)
      * ```
      */
     public function __construct()
@@ -51,36 +53,26 @@ final class BookAppointmentTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param BookAppointment|BookAppointmentShape $bookAppointment
      */
-    public static function with(
-        BookAppointment $bookAppointment,
-        Type|string $type
-    ): self {
-        $obj = new self;
-
-        $obj->bookAppointment = $bookAppointment;
-        $obj['type'] = $type;
-
-        return $obj;
-    }
-
-    public function withBookAppointment(BookAppointment $bookAppointment): self
+    public static function with(BookAppointment|array $bookAppointment): self
     {
-        $obj = clone $this;
-        $obj->bookAppointment = $bookAppointment;
+        $self = new self;
 
-        return $obj;
+        $self['bookAppointment'] = $bookAppointment;
+
+        return $self;
     }
 
     /**
-     * @param Type|value-of<Type> $type
+     * @param BookAppointment|BookAppointmentShape $bookAppointment
      */
-    public function withType(Type|string $type): self
-    {
-        $obj = clone $this;
-        $obj['type'] = $type;
+    public function withBookAppointment(
+        BookAppointment|array $bookAppointment
+    ): self {
+        $self = clone $this;
+        $self['bookAppointment'] = $bookAppointment;
 
-        return $obj;
+        return $self;
     }
 }

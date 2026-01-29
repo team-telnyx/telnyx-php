@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\FqdnConnections\FqdnConnectionListParams\Filter;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * Filter by connection_name using nested operations.
  *
- * @phpstan-type connection_name = array{contains?: string}
+ * @phpstan-type ConnectionNameShape = array{contains?: string|null}
  */
 final class ConnectionName implements BaseModel
 {
-    /** @use SdkModel<connection_name> */
+    /** @use SdkModel<ConnectionNameShape> */
     use SdkModel;
 
     /**
      * If present, connections with <code>connection_name</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $contains;
 
     public function __construct()
@@ -36,11 +36,11 @@ final class ConnectionName implements BaseModel
      */
     public static function with(?string $contains = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $contains && $obj->contains = $contains;
+        null !== $contains && $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -48,9 +48,9 @@ final class ConnectionName implements BaseModel
      */
     public function withContains(string $contains): self
     {
-        $obj = clone $this;
-        $obj->contains = $contains;
+        $self = clone $this;
+        $self['contains'] = $contains;
 
-        return $obj;
+        return $self;
     }
 }

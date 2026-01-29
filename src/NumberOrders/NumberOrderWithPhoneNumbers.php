@@ -4,83 +4,85 @@ declare(strict_types=1);
 
 namespace Telnyx\NumberOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\NumberOrders\NumberOrderWithPhoneNumbers\Status;
 
 /**
- * @phpstan-type number_order_with_phone_numbers = array{
- *   id?: string,
- *   billingGroupID?: string,
- *   connectionID?: string,
- *   createdAt?: \DateTimeInterface,
- *   customerReference?: string,
- *   messagingProfileID?: string,
- *   phoneNumbers?: list<PhoneNumber>,
- *   phoneNumbersCount?: int,
- *   recordType?: string,
- *   requirementsMet?: bool,
- *   status?: value-of<Status>,
- *   subNumberOrdersIDs?: list<string>,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\PhoneNumber
+ *
+ * @phpstan-type NumberOrderWithPhoneNumbersShape = array{
+ *   id?: string|null,
+ *   billingGroupID?: string|null,
+ *   connectionID?: string|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   customerReference?: string|null,
+ *   messagingProfileID?: string|null,
+ *   phoneNumbers?: list<PhoneNumber|PhoneNumberShape>|null,
+ *   phoneNumbersCount?: int|null,
+ *   recordType?: string|null,
+ *   requirementsMet?: bool|null,
+ *   status?: null|Status|value-of<Status>,
+ *   subNumberOrdersIDs?: list<string>|null,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class NumberOrderWithPhoneNumbers implements BaseModel
 {
-    /** @use SdkModel<number_order_with_phone_numbers> */
+    /** @use SdkModel<NumberOrderWithPhoneNumbersShape> */
     use SdkModel;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Api('billing_group_id', optional: true)]
+    #[Optional('billing_group_id')]
     public ?string $billingGroupID;
 
     /**
      * Identifies the connection associated with this phone number.
      */
-    #[Api('connection_id', optional: true)]
+    #[Optional('connection_id')]
     public ?string $connectionID;
 
     /**
      * An ISO 8901 datetime string denoting when the number order was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * A customer reference string for customer look ups.
      */
-    #[Api('customer_reference', optional: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
      * Identifies the messaging profile associated with the phone number.
      */
-    #[Api('messaging_profile_id', optional: true)]
+    #[Optional('messaging_profile_id')]
     public ?string $messagingProfileID;
 
     /** @var list<PhoneNumber>|null $phoneNumbers */
-    #[Api('phone_numbers', list: PhoneNumber::class, optional: true)]
+    #[Optional('phone_numbers', list: PhoneNumber::class)]
     public ?array $phoneNumbers;
 
     /**
      * The count of phone numbers in the number order.
      */
-    #[Api('phone_numbers_count', optional: true)]
+    #[Optional('phone_numbers_count')]
     public ?int $phoneNumbersCount;
 
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
      * True if all requirements are met for every phone number, false otherwise.
      */
-    #[Api('requirements_met', optional: true)]
+    #[Optional('requirements_met')]
     public ?bool $requirementsMet;
 
     /**
@@ -88,17 +90,17 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /** @var list<string>|null $subNumberOrdersIDs */
-    #[Api('sub_number_orders_ids', list: 'string', optional: true)]
+    #[Optional('sub_number_orders_ids', list: 'string')]
     public ?array $subNumberOrdersIDs;
 
     /**
      * An ISO 8901 datetime string for when the number order was updated.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -111,9 +113,9 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber> $phoneNumbers
-     * @param Status|value-of<Status> $status
-     * @param list<string> $subNumberOrdersIDs
+     * @param list<PhoneNumber|PhoneNumberShape>|null $phoneNumbers
+     * @param Status|value-of<Status>|null $status
+     * @param list<string>|null $subNumberOrdersIDs
      */
     public static function with(
         ?string $id = null,
@@ -130,31 +132,31 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
         ?array $subNumberOrdersIDs = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $billingGroupID && $obj->billingGroupID = $billingGroupID;
-        null !== $connectionID && $obj->connectionID = $connectionID;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $messagingProfileID && $obj->messagingProfileID = $messagingProfileID;
-        null !== $phoneNumbers && $obj->phoneNumbers = $phoneNumbers;
-        null !== $phoneNumbersCount && $obj->phoneNumbersCount = $phoneNumbersCount;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $requirementsMet && $obj->requirementsMet = $requirementsMet;
-        null !== $status && $obj['status'] = $status;
-        null !== $subNumberOrdersIDs && $obj->subNumberOrdersIDs = $subNumberOrdersIDs;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
+        null !== $phoneNumbersCount && $self['phoneNumbersCount'] = $phoneNumbersCount;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $requirementsMet && $self['requirementsMet'] = $requirementsMet;
+        null !== $status && $self['status'] = $status;
+        null !== $subNumberOrdersIDs && $self['subNumberOrdersIDs'] = $subNumberOrdersIDs;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -162,10 +164,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withBillingGroupID(string $billingGroupID): self
     {
-        $obj = clone $this;
-        $obj->billingGroupID = $billingGroupID;
+        $self = clone $this;
+        $self['billingGroupID'] = $billingGroupID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -173,10 +175,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withConnectionID(string $connectionID): self
     {
-        $obj = clone $this;
-        $obj->connectionID = $connectionID;
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,10 +186,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -195,10 +197,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withCustomerReference(string $customerReference): self
     {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
+        $self = clone $this;
+        $self['customerReference'] = $customerReference;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -206,21 +208,21 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withMessagingProfileID(string $messagingProfileID): self
     {
-        $obj = clone $this;
-        $obj->messagingProfileID = $messagingProfileID;
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param list<PhoneNumber> $phoneNumbers
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbers = $phoneNumbers;
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -228,18 +230,18 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withPhoneNumbersCount(int $phoneNumbersCount): self
     {
-        $obj = clone $this;
-        $obj->phoneNumbersCount = $phoneNumbersCount;
+        $self = clone $this;
+        $self['phoneNumbersCount'] = $phoneNumbersCount;
 
-        return $obj;
+        return $self;
     }
 
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -247,10 +249,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withRequirementsMet(bool $requirementsMet): self
     {
-        $obj = clone $this;
-        $obj->requirementsMet = $requirementsMet;
+        $self = clone $this;
+        $self['requirementsMet'] = $requirementsMet;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -260,10 +262,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -271,10 +273,10 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withSubNumberOrdersIDs(array $subNumberOrdersIDs): self
     {
-        $obj = clone $this;
-        $obj->subNumberOrdersIDs = $subNumberOrdersIDs;
+        $self = clone $this;
+        $self['subNumberOrdersIDs'] = $subNumberOrdersIDs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -282,9 +284,9 @@ final class NumberOrderWithPhoneNumbers implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

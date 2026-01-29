@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\PortingOrders;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationType;
@@ -12,32 +12,34 @@ use Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow;
 use Telnyx\PortingOrders\PortingOrdersActivationJob\Status;
 
 /**
- * @phpstan-type porting_orders_activation_job = array{
- *   id?: string,
- *   activateAt?: \DateTimeInterface,
- *   activationType?: value-of<ActivationType>,
- *   activationWindows?: list<ActivationWindow>,
- *   createdAt?: \DateTimeInterface,
- *   recordType?: string,
- *   status?: value-of<Status>,
- *   updatedAt?: \DateTimeInterface,
+ * @phpstan-import-type ActivationWindowShape from \Telnyx\PortingOrders\PortingOrdersActivationJob\ActivationWindow
+ *
+ * @phpstan-type PortingOrdersActivationJobShape = array{
+ *   id?: string|null,
+ *   activateAt?: \DateTimeInterface|null,
+ *   activationType?: null|ActivationType|value-of<ActivationType>,
+ *   activationWindows?: list<ActivationWindow|ActivationWindowShape>|null,
+ *   createdAt?: \DateTimeInterface|null,
+ *   recordType?: string|null,
+ *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: \DateTimeInterface|null,
  * }
  */
 final class PortingOrdersActivationJob implements BaseModel
 {
-    /** @use SdkModel<porting_orders_activation_job> */
+    /** @use SdkModel<PortingOrdersActivationJobShape> */
     use SdkModel;
 
     /**
      * Uniquely identifies this activation job.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $id;
 
     /**
      * ISO 8601 formatted date indicating when the activation job should be executed. This time should be between some activation window.
      */
-    #[Api('activate_at', optional: true)]
+    #[Optional('activate_at')]
     public ?\DateTimeInterface $activateAt;
 
     /**
@@ -45,7 +47,7 @@ final class PortingOrdersActivationJob implements BaseModel
      *
      * @var value-of<ActivationType>|null $activationType
      */
-    #[Api('activation_type', enum: ActivationType::class, optional: true)]
+    #[Optional('activation_type', enum: ActivationType::class)]
     public ?string $activationType;
 
     /**
@@ -53,19 +55,19 @@ final class PortingOrdersActivationJob implements BaseModel
      *
      * @var list<ActivationWindow>|null $activationWindows
      */
-    #[Api('activation_windows', list: ActivationWindow::class, optional: true)]
+    #[Optional('activation_windows', list: ActivationWindow::class)]
     public ?array $activationWindows;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('created_at', optional: true)]
+    #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
     /**
      * Identifies the type of the resource.
      */
-    #[Api('record_type', optional: true)]
+    #[Optional('record_type')]
     public ?string $recordType;
 
     /**
@@ -73,13 +75,13 @@ final class PortingOrdersActivationJob implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
-    #[Api('updated_at', optional: true)]
+    #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
     public function __construct()
@@ -92,9 +94,9 @@ final class PortingOrdersActivationJob implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ActivationType|value-of<ActivationType> $activationType
-     * @param list<ActivationWindow> $activationWindows
-     * @param Status|value-of<Status> $status
+     * @param ActivationType|value-of<ActivationType>|null $activationType
+     * @param list<ActivationWindow|ActivationWindowShape>|null $activationWindows
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -106,18 +108,18 @@ final class PortingOrdersActivationJob implements BaseModel
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        null !== $id && $obj->id = $id;
-        null !== $activateAt && $obj->activateAt = $activateAt;
-        null !== $activationType && $obj['activationType'] = $activationType;
-        null !== $activationWindows && $obj->activationWindows = $activationWindows;
-        null !== $createdAt && $obj->createdAt = $createdAt;
-        null !== $recordType && $obj->recordType = $recordType;
-        null !== $status && $obj['status'] = $status;
-        null !== $updatedAt && $obj->updatedAt = $updatedAt;
+        null !== $id && $self['id'] = $id;
+        null !== $activateAt && $self['activateAt'] = $activateAt;
+        null !== $activationType && $self['activationType'] = $activationType;
+        null !== $activationWindows && $self['activationWindows'] = $activationWindows;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +127,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withID(string $id): self
     {
-        $obj = clone $this;
-        $obj->id = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +138,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withActivateAt(\DateTimeInterface $activateAt): self
     {
-        $obj = clone $this;
-        $obj->activateAt = $activateAt;
+        $self = clone $this;
+        $self['activateAt'] = $activateAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,23 +152,23 @@ final class PortingOrdersActivationJob implements BaseModel
     public function withActivationType(
         ActivationType|string $activationType
     ): self {
-        $obj = clone $this;
-        $obj['activationType'] = $activationType;
+        $self = clone $this;
+        $self['activationType'] = $activationType;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * List of allowed activation windows for this activation job.
      *
-     * @param list<ActivationWindow> $activationWindows
+     * @param list<ActivationWindow|ActivationWindowShape> $activationWindows
      */
     public function withActivationWindows(array $activationWindows): self
     {
-        $obj = clone $this;
-        $obj->activationWindows = $activationWindows;
+        $self = clone $this;
+        $self['activationWindows'] = $activationWindows;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -174,10 +176,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $obj = clone $this;
-        $obj->createdAt = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -185,10 +187,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withRecordType(string $recordType): self
     {
-        $obj = clone $this;
-        $obj->recordType = $recordType;
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -198,10 +200,10 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -209,9 +211,9 @@ final class PortingOrdersActivationJob implements BaseModel
      */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $obj = clone $this;
-        $obj->updatedAt = $updatedAt;
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
-        return $obj;
+        return $self;
     }
 }

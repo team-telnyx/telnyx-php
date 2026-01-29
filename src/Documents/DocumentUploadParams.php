@@ -4,62 +4,44 @@ declare(strict_types=1);
 
 namespace Telnyx\Documents;
 
-use Telnyx\Core\Attributes\Api;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Documents\DocumentUploadParams\Document;
 
 /**
  * Upload a document.<br /><br />Uploaded files must be linked to a service within 30 minutes or they will be automatically deleted.
  *
- * @see Telnyx\Documents->upload
+ * @see Telnyx\Services\DocumentsService::upload()
  *
- * @phpstan-type document_upload_params = array{
- *   url: string, customerReference?: string, filename?: string, file: string
+ * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadParams\Document
+ *
+ * @phpstan-type DocumentUploadParamsShape = array{
+ *   document: Document|DocumentShape
  * }
  */
 final class DocumentUploadParams implements BaseModel
 {
-    /** @use SdkModel<document_upload_params> */
+    /** @use SdkModel<DocumentUploadParamsShape> */
     use SdkModel;
     use SdkParams;
 
-    /**
-     * If the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you.
-     */
-    #[Api]
-    public string $url;
-
-    /**
-     * A customer reference string for customer look ups.
-     */
-    #[Api('customer_reference', optional: true)]
-    public ?string $customerReference;
-
-    /**
-     * The filename of the document.
-     */
-    #[Api(optional: true)]
-    public ?string $filename;
-
-    /**
-     * The Base64 encoded contents of the file you are uploading.
-     */
-    #[Api]
-    public string $file;
+    #[Required]
+    public Document $document;
 
     /**
      * `new DocumentUploadParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * DocumentUploadParams::with(url: ..., file: ...)
+     * DocumentUploadParams::with(document: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new DocumentUploadParams)->withURL(...)->withFile(...)
+     * (new DocumentUploadParams)->withDocument(...)
      * ```
      */
     public function __construct()
@@ -71,65 +53,26 @@ final class DocumentUploadParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Document|DocumentShape $document
      */
-    public static function with(
-        string $url,
-        string $file,
-        ?string $customerReference = null,
-        ?string $filename = null,
-    ): self {
-        $obj = new self;
+    public static function with(Document|array $document): self
+    {
+        $self = new self;
 
-        $obj->url = $url;
-        $obj->file = $file;
+        $self['document'] = $document;
 
-        null !== $customerReference && $obj->customerReference = $customerReference;
-        null !== $filename && $obj->filename = $filename;
-
-        return $obj;
+        return $self;
     }
 
     /**
-     * If the file is already hosted publicly, you can provide a URL and have the documents service fetch it for you.
+     * @param Document|DocumentShape $document
      */
-    public function withURL(string $url): self
+    public function withDocument(Document|array $document): self
     {
-        $obj = clone $this;
-        $obj->url = $url;
+        $self = clone $this;
+        $self['document'] = $document;
 
-        return $obj;
-    }
-
-    /**
-     * A customer reference string for customer look ups.
-     */
-    public function withCustomerReference(string $customerReference): self
-    {
-        $obj = clone $this;
-        $obj->customerReference = $customerReference;
-
-        return $obj;
-    }
-
-    /**
-     * The filename of the document.
-     */
-    public function withFilename(string $filename): self
-    {
-        $obj = clone $this;
-        $obj->filename = $filename;
-
-        return $obj;
-    }
-
-    /**
-     * The Base64 encoded contents of the file you are uploading.
-     */
-    public function withFile(string $file): self
-    {
-        $obj = clone $this;
-        $obj->file = $file;
-
-        return $obj;
+        return $self;
     }
 }
