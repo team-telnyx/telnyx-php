@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\OtaUpdates\OtaUpdateGetResponse;
 use Telnyx\OtaUpdates\OtaUpdateListParams\Filter;
+use Telnyx\OtaUpdates\OtaUpdateListParams\Page;
 use Telnyx\OtaUpdates\OtaUpdateListResponse;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\OtaUpdates\OtaUpdateListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\OtaUpdates\OtaUpdateListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface OtaUpdatesContract
@@ -34,16 +36,16 @@ interface OtaUpdatesContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter for OTA updates (deepObject style). Originally: filter[status], filter[sim_card_id], filter[type]
+     * @param Page|PageShape $page Consolidated pagination parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<OtaUpdateListResponse>
+     * @return DefaultPagination<OtaUpdateListResponse>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+    ): DefaultPagination;
 }

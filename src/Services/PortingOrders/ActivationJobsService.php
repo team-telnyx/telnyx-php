@@ -7,14 +7,16 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobGetResponse;
+use Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page;
 use Telnyx\PortingOrders\ActivationJobs\ActivationJobUpdateResponse;
 use Telnyx\PortingOrders\PortingOrdersActivationJob;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsContract;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\ActivationJobs\ActivationJobListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActivationJobsService implements ActivationJobsContract
@@ -88,21 +90,19 @@ final class ActivationJobsService implements ActivationJobsContract
      * Returns a list of your porting activation jobs.
      *
      * @param string $id Porting Order id
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PortingOrdersActivationJob>
+     * @return DefaultPagination<PortingOrdersActivationJob>
      *
      * @throws APIException
      */
     public function list(
         string $id,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
-        );
+    ): DefaultPagination {
+        $params = Util::removeNulls(['page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($id, params: $params, requestOptions: $requestOptions);

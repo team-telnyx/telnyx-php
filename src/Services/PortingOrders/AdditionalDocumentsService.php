@@ -7,9 +7,10 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter;
+use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
@@ -19,6 +20,7 @@ use Telnyx\ServiceContracts\PortingOrders\AdditionalDocumentsContract;
 /**
  * @phpstan-import-type AdditionalDocumentShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -70,28 +72,23 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      *
      * @param string $id Porting Order id
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[document_type]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<AdditionalDocumentListResponse>
+     * @return DefaultPagination<AdditionalDocumentListResponse>
      *
      * @throws APIException
      */
     public function list(
         string $id,
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): DefaultPagination {
         $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
-            ],
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
         // @phpstan-ignore-next-line argument.type

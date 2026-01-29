@@ -7,17 +7,18 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesRawContract;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
@@ -59,11 +60,11 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
      * Lists webhook_deliveries for the authenticated user
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|WebhookDeliveryListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WebhookDeliveryListResponse>>
+     * @return BaseResponse<DefaultPagination<WebhookDeliveryListResponse>>
      *
      * @throws APIException
      */
@@ -80,13 +81,10 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
         return $this->client->request(
             method: 'get',
             path: 'webhook_deliveries',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: WebhookDeliveryListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

@@ -7,13 +7,13 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\NotificationProfiles\NotificationProfile;
 use Telnyx\NotificationProfiles\NotificationProfileCreateParams;
 use Telnyx\NotificationProfiles\NotificationProfileDeleteResponse;
 use Telnyx\NotificationProfiles\NotificationProfileGetResponse;
 use Telnyx\NotificationProfiles\NotificationProfileListParams;
+use Telnyx\NotificationProfiles\NotificationProfileListParams\Page;
 use Telnyx\NotificationProfiles\NotificationProfileNewResponse;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateParams;
 use Telnyx\NotificationProfiles\NotificationProfileUpdateResponse;
@@ -21,6 +21,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationProfilesRawContract;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\NotificationProfiles\NotificationProfileListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NotificationProfilesRawService implements NotificationProfilesRawContract
@@ -125,12 +126,10 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
      *
      * Returns a list of your notifications profiles.
      *
-     * @param array{
-     *   pageNumber?: int, pageSize?: int
-     * }|NotificationProfileListParams $params
+     * @param array{page?: Page|PageShape}|NotificationProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NotificationProfile>>
+     * @return BaseResponse<DefaultPagination<NotificationProfile>>
      *
      * @throws APIException
      */
@@ -147,13 +146,10 @@ final class NotificationProfilesRawService implements NotificationProfilesRawCon
         return $this->client->request(
             method: 'get',
             path: 'notification_profiles',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: NotificationProfile::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

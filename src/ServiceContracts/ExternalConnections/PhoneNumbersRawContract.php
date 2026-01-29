@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\ExternalConnections\PhoneNumbers\ExternalConnectionPhoneNumber;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberGetResponse;
 use Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams;
@@ -61,7 +61,7 @@ interface PhoneNumbersRawContract
      * @param array<string,mixed>|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ExternalConnectionPhoneNumber>>
+     * @return BaseResponse<DefaultPagination<ExternalConnectionPhoneNumber>>
      *
      * @throws APIException
      */

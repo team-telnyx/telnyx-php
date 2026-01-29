@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams;
@@ -43,7 +43,7 @@ interface AdditionalDocumentsRawContract
      * @param array<string,mixed>|AdditionalDocumentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<AdditionalDocumentListResponse>>
+     * @return BaseResponse<DefaultPagination<AdditionalDocumentListResponse>>
      *
      * @throws APIException
      */

@@ -10,7 +10,7 @@ use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -103,7 +103,7 @@ final class AddressesTest extends TestCase
         $page = $this->client->addresses->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

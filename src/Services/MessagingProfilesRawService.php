@@ -7,8 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
@@ -16,6 +15,7 @@ use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
+use Telnyx\MessagingProfiles\MessagingProfileListParams\Page;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
@@ -30,6 +30,9 @@ use Telnyx\ShortCode;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListParams\Page
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams\Page as PageShape1
+ * @phpstan-import-type PageShape from \Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams\Page as PageShape2
  * @phpstan-import-type NumberPoolSettingsShape from \Telnyx\MessagingProfiles\NumberPoolSettings
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -170,11 +173,11 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * List messaging profiles
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|MessagingProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessagingProfile>>
+     * @return BaseResponse<DefaultPagination<MessagingProfile>>
      *
      * @throws APIException
      */
@@ -191,13 +194,10 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
         return $this->client->request(
             method: 'get',
             path: 'messaging_profiles',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: MessagingProfile::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -233,11 +233,11 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param array{
-     *   pageNumber?: int, pageSize?: int
+     *   page?: MessagingProfileListPhoneNumbersParams\Page|PageShape1,
      * }|MessagingProfileListPhoneNumbersParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberWithMessagingSettings>>
+     * @return BaseResponse<DefaultPagination<PhoneNumberWithMessagingSettings>>
      *
      * @throws APIException
      */
@@ -255,13 +255,10 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
         return $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s/phone_numbers', $messagingProfileID],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: PhoneNumberWithMessagingSettings::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -272,11 +269,11 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param array{
-     *   pageNumber?: int, pageSize?: int
+     *   page?: MessagingProfileListShortCodesParams\Page|PageShape2,
      * }|MessagingProfileListShortCodesParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ShortCode>>
+     * @return BaseResponse<DefaultPagination<ShortCode>>
      *
      * @throws APIException
      */
@@ -294,13 +291,10 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
         return $this->client->request(
             method: 'get',
             path: ['messaging_profiles/%1$s/short_codes', $messagingProfileID],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: ShortCode::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

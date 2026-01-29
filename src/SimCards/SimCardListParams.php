@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SimCards\SimCardListParams\Filter;
+use Telnyx\SimCards\SimCardListParams\Page;
 use Telnyx\SimCards\SimCardListParams\Sort;
 
 /**
@@ -17,13 +18,13 @@ use Telnyx\SimCards\SimCardListParams\Sort;
  * @see Telnyx\Services\SimCardsService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\SimCards\SimCardListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\SimCards\SimCardListParams\Page
  *
  * @phpstan-type SimCardListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
  *   filterSimCardGroupID?: string|null,
  *   includeSimCardGroup?: bool|null,
- *   pageNumber?: int|null,
- *   pageSize?: int|null,
+ *   page?: null|Page|PageShape,
  *   sort?: null|Sort|value-of<Sort>,
  * }
  */
@@ -34,7 +35,7 @@ final class SimCardListParams implements BaseModel
     use SdkParams;
 
     /**
-     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
+     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags].
      */
     #[Optional]
     public ?Filter $filter;
@@ -51,11 +52,11 @@ final class SimCardListParams implements BaseModel
     #[Optional]
     public ?bool $includeSimCardGroup;
 
+    /**
+     * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     /**
      * Sorts SIM cards by the given field. Defaults to ascending order unless field is prefixed with a minus sign.
@@ -76,14 +77,14 @@ final class SimCardListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
         ?string $filterSimCardGroupID = null,
         ?bool $includeSimCardGroup = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
         $self = new self;
@@ -91,15 +92,14 @@ final class SimCardListParams implements BaseModel
         null !== $filter && $self['filter'] = $filter;
         null !== $filterSimCardGroupID && $self['filterSimCardGroupID'] = $filterSimCardGroupID;
         null !== $includeSimCardGroup && $self['includeSimCardGroup'] = $includeSimCardGroup;
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
     }
 
     /**
-     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
+     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags].
      *
      * @param Filter|FilterShape $filter
      */
@@ -133,18 +133,15 @@ final class SimCardListParams implements BaseModel
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated pagination parameter (deepObject style). Originally: page[number], page[size].
+     *
+     * @param Page|PageShape $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

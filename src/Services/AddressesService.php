@@ -8,18 +8,20 @@ use Telnyx\Addresses\Address;
 use Telnyx\Addresses\AddressDeleteResponse;
 use Telnyx\Addresses\AddressGetResponse;
 use Telnyx\Addresses\AddressListParams\Filter;
+use Telnyx\Addresses\AddressListParams\Page;
 use Telnyx\Addresses\AddressListParams\Sort;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AddressesContract;
 use Telnyx\Services\Addresses\ActionsService;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Addresses\AddressListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Addresses\AddressListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class AddressesService implements AddressesContract
@@ -137,6 +139,7 @@ final class AddressesService implements AddressesContract
      * Returns a list of your addresses.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[customer_reference][eq], filter[customer_reference][contains], filter[used_as_emergency], filter[street_address][contains], filter[address_book][eq]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
      *   <li>
@@ -151,24 +154,18 @@ final class AddressesService implements AddressesContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<Address>
+     * @return DefaultPagination<Address>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|string $sort = 'created_at',
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): DefaultPagination {
         $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
-            ],
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
         // @phpstan-ignore-next-line argument.type

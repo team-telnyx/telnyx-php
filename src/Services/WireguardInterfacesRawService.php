@@ -7,8 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardInterfacesRawContract;
 use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
@@ -16,11 +15,13 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
+use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Page;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class WireguardInterfacesRawService implements WireguardInterfacesRawContract
@@ -98,11 +99,11 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      * List all WireGuard Interfaces.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|WireguardInterfaceListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WireguardInterfaceListResponse>>
+     * @return BaseResponse<DefaultPagination<WireguardInterfaceListResponse>>
      *
      * @throws APIException
      */
@@ -119,13 +120,10 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
         return $this->client->request(
             method: 'get',
             path: 'wireguard_interfaces',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: WireguardInterfaceListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

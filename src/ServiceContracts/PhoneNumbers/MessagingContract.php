@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\PhoneNumbers;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
+use Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\Messaging\MessagingListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface MessagingContract
@@ -56,15 +58,15 @@ interface MessagingContract
     /**
      * @api
      *
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PhoneNumberWithMessagingSettings>
+     * @return DefaultPagination<PhoneNumberWithMessagingSettings>
      *
      * @throws APIException
      */
     public function list(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination;
 }

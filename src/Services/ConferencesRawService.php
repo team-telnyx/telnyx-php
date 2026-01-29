@@ -12,6 +12,7 @@ use Telnyx\Conferences\ConferenceCreateParams\Region;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams;
 use Telnyx\Conferences\ConferenceListParams\Filter;
+use Telnyx\Conferences\ConferenceListParams\Page;
 use Telnyx\Conferences\ConferenceListParticipantsParams;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
@@ -25,7 +26,9 @@ use Telnyx\ServiceContracts\ConferencesRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Page as PageShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ConferencesRawService implements ConferencesRawContract
@@ -131,6 +134,7 @@ final class ConferencesRawService implements ConferencesRawContract
      *
      * @param array{
      *   filter?: Filter|FilterShape,
+     *   page?: Page|PageShape,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   region?: ConferenceListParams\Region|value-of<ConferenceListParams\Region>,
@@ -172,6 +176,7 @@ final class ConferencesRawService implements ConferencesRawContract
      * @param string $conferenceID Uniquely identifies the conference by id
      * @param array{
      *   filter?: ConferenceListParticipantsParams\Filter|FilterShape1,
+     *   page?: ConferenceListParticipantsParams\Page|PageShape1,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   region?: ConferenceListParticipantsParams\Region|value-of<ConferenceListParticipantsParams\Region>,

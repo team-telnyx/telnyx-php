@@ -12,6 +12,7 @@ use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -40,7 +41,7 @@ interface ConnectionsRawContract
      * @param array<string,mixed>|ConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ConnectionListResponse>>
+     * @return BaseResponse<DefaultPagination<ConnectionListResponse>>
      *
      * @throws APIException
      */

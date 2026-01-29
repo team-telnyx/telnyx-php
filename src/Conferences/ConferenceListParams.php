@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Conferences;
 
 use Telnyx\Conferences\ConferenceListParams\Filter;
+use Telnyx\Conferences\ConferenceListParams\Page;
 use Telnyx\Conferences\ConferenceListParams\Region;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -17,9 +18,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\ConferencesService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Conferences\ConferenceListParams\Page
  *
  * @phpstan-type ConferenceListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
+ *   page?: null|Page|PageShape,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  *   region?: null|Region|value-of<Region>,
@@ -36,6 +39,12 @@ final class ConferenceListParams implements BaseModel
      */
     #[Optional]
     public ?Filter $filter;
+
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
+     */
+    #[Optional]
+    public ?Page $page;
 
     #[Optional]
     public ?int $pageNumber;
@@ -62,10 +71,12 @@ final class ConferenceListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      * @param Region|value-of<Region>|null $region
      */
     public static function with(
         Filter|array|null $filter = null,
+        Page|array|null $page = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         Region|string|null $region = null,
@@ -73,6 +84,7 @@ final class ConferenceListParams implements BaseModel
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
+        null !== $page && $self['page'] = $page;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $region && $self['region'] = $region;
@@ -89,6 +101,19 @@ final class ConferenceListParams implements BaseModel
     {
         $self = clone $this;
         $self['filter'] = $filter;
+
+        return $self;
+    }
+
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[after], page[before], page[limit], page[size], page[number].
+     *
+     * @param Page|PageShape $page
+     */
+    public function withPage(Page|array $page): self
+    {
+        $self = clone $this;
+        $self['page'] = $page;
 
         return $self;
     }

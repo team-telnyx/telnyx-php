@@ -7,20 +7,22 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse;
 use Telnyx\RoomRecordings\RoomRecordingListParams;
 use Telnyx\RoomRecordings\RoomRecordingListParams\Filter;
+use Telnyx\RoomRecordings\RoomRecordingListParams\Page;
 use Telnyx\RoomRecordings\RoomRecordingListResponse;
 use Telnyx\ServiceContracts\RoomRecordingsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\RoomRecordings\RoomRecordingListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\RoomRecordings\RoomRecordingListParams\Page
  * @phpstan-import-type FilterShape from \Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Filter as FilterShape1
+ * @phpstan-import-type PageShape from \Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams\Page as PageShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RoomRecordingsRawService implements RoomRecordingsRawContract
@@ -62,11 +64,11 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      * View a list of room recordings.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|RoomRecordingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RoomRecordingListResponse>>
+     * @return BaseResponse<DefaultPagination<RoomRecordingListResponse>>
      *
      * @throws APIException
      */
@@ -83,13 +85,10 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
         return $this->client->request(
             method: 'get',
             path: 'room_recordings',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: RoomRecordingListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 
@@ -125,8 +124,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      *
      * @param array{
      *   filter?: RoomRecordingDeleteBulkParams\Filter|FilterShape1,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: RoomRecordingDeleteBulkParams\Page|PageShape1,
      * }|RoomRecordingDeleteBulkParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -147,10 +145,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
         return $this->client->request(
             method: 'delete',
             path: 'room_recordings',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: RoomRecordingDeleteBulkResponse::class,
         );

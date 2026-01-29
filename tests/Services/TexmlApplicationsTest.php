@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\DtmfType;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\TexmlApplications\TexmlApplication;
 use Telnyx\TexmlApplications\TexmlApplicationDeleteResponse;
 use Telnyx\TexmlApplications\TexmlApplicationGetResponse;
@@ -163,7 +163,7 @@ final class TexmlApplicationsTest extends TestCase
         $page = $this->client->texmlApplications->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+        $this->assertInstanceOf(DefaultPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType

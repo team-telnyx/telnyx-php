@@ -7,13 +7,13 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\NumberReservations\NumberReservation;
 use Telnyx\NumberReservations\NumberReservationCreateParams;
 use Telnyx\NumberReservations\NumberReservationGetResponse;
 use Telnyx\NumberReservations\NumberReservationListParams;
 use Telnyx\NumberReservations\NumberReservationListParams\Filter;
+use Telnyx\NumberReservations\NumberReservationListParams\Page;
 use Telnyx\NumberReservations\NumberReservationNewResponse;
 use Telnyx\NumberReservations\ReservedPhoneNumber;
 use Telnyx\RequestOptions;
@@ -22,6 +22,7 @@ use Telnyx\ServiceContracts\NumberReservationsRawContract;
 /**
  * @phpstan-import-type ReservedPhoneNumberShape from \Telnyx\NumberReservations\ReservedPhoneNumber
  * @phpstan-import-type FilterShape from \Telnyx\NumberReservations\NumberReservationListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberReservations\NumberReservationListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NumberReservationsRawService implements NumberReservationsRawContract
@@ -97,11 +98,11 @@ final class NumberReservationsRawService implements NumberReservationsRawContrac
      * Gets a paginated list of phone number reservations.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NumberReservationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NumberReservation>>
+     * @return BaseResponse<DefaultPagination<NumberReservation>>
      *
      * @throws APIException
      */
@@ -118,13 +119,10 @@ final class NumberReservationsRawService implements NumberReservationsRawContrac
         return $this->client->request(
             method: 'get',
             path: 'number_reservations',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: NumberReservation::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Porting;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams;
@@ -75,7 +75,7 @@ interface LoaConfigurationsRawContract
      * @param array<string,mixed>|LoaConfigurationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingLoaConfiguration>>
+     * @return BaseResponse<DefaultPagination<PortingLoaConfiguration>>
      *
      * @throws APIException
      */

@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Portouts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
 use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
@@ -40,7 +40,7 @@ interface EventsRawContract
      * @param array<string,mixed>|EventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>,>
+     * @return BaseResponse<DefaultPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>,>
      *
      * @throws APIException
      */

@@ -7,24 +7,25 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecord;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordGetResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter;
+use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Page;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomerServiceRecordsRawContract;
 
 /**
  * @phpstan-import-type AdditionalDataShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData
  * @phpstan-import-type FilterShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -102,14 +103,11 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
      * List customer service records.
      *
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|SortShape,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|CustomerServiceRecordListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<CustomerServiceRecord>>
+     * @return BaseResponse<DefaultPagination<CustomerServiceRecord>>
      *
      * @throws APIException
      */
@@ -126,13 +124,10 @@ final class CustomerServiceRecordsRawService implements CustomerServiceRecordsRa
         return $this->client->request(
             method: 'get',
             path: 'customer_service_records',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: CustomerServiceRecord::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

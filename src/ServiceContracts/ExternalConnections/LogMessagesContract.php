@@ -9,11 +9,13 @@ use Telnyx\DefaultPaginationForLogMessages;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Telnyx\RequestOptions;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface LogMessagesContract
@@ -35,6 +37,7 @@ interface LogMessagesContract
      * @api
      *
      * @param Filter|FilterShape $filter Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPaginationForLogMessages<LogMessageListResponse>
@@ -43,8 +46,7 @@ interface LogMessagesContract
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultPaginationForLogMessages;
 
