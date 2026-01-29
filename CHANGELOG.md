@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.1.0 (2026-01-29)
+
+Full Changelog: [v6.0.0...v6.1.0](https://github.com/team-telnyx/telnyx-php/compare/v6.0.0...v6.1.0)
+
+### Features
+
+* **api:** revert bad update to spec ([f2698fe](https://github.com/team-telnyx/telnyx-php/commit/f2698fe106c67db9d74b9fbcc74e7d25f1324873))
+
 ## 6.0.0 (2026-01-29)
 
 Full Changelog: [v5.0.0...v6.0.0](https://github.com/team-telnyx/telnyx-php/compare/v5.0.0...v6.0.0)
