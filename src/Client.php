@@ -931,6 +931,10 @@ class Client extends BaseClient
      */
     public OrganizationsService $organizations;
 
+    private ?string $oauthAccessToken = null;
+
+    private ?int $oauthTokenExpiresAt = null;
+
     /**
      * @param RequestOpts|null $requestOptions
      */
@@ -1145,7 +1149,13 @@ class Client extends BaseClient
     /** @return array<string,string> */
     protected function oauthClientAuth(): array
     {
-        throw new \BadMethodCallException;
+        if (!$this->clientID || !$this->clientSecret) {
+            return [];
+        }
+
+        $token = $this->getOAuthAccessToken();
+
+        return ['Authorization' => "Bearer {$token}"];
     }
 
     /**
@@ -1174,5 +1184,53 @@ class Client extends BaseClient
             body: $body,
             opts: $opts,
         );
+    }
+
+    private function getOAuthAccessToken(): string
+    {
+        // Check if we have a valid cached token (with 10 second buffer before expiry)
+        if (null !== $this->oauthAccessToken && null !== $this->oauthTokenExpiresAt) {
+            if (time() < ($this->oauthTokenExpiresAt - 10)) {
+                return $this->oauthAccessToken;
+            }
+        }
+
+        // Fetch new token
+        $this->refreshOAuthToken();
+
+        assert(null !== $this->oauthAccessToken);
+
+        return $this->oauthAccessToken;
+    }
+
+    private function refreshOAuthToken(): void
+    {
+        assert(null !== $this->options->requestFactory && null !== $this->options->streamFactory && null !== $this->options->transporter);
+
+        $credentials = base64_encode("{$this->clientID}:{$this->clientSecret}");
+        $tokenUrl = rtrim($this->baseUrl->__toString(), '/').'/oauth/token';
+
+        $request = $this->options->requestFactory->createRequest('POST', $tokenUrl);
+        $request = $request->withHeader('Authorization', "Basic {$credentials}");
+        $request = $request->withHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        $body = $this->options->streamFactory->createStream('grant_type=client_credentials');
+        $request = $request->withBody($body);
+
+        $response = $this->options->transporter->sendRequest($request);
+
+        if ($response->getStatusCode() >= 400) {
+            throw Core\Exceptions\APIStatusException::from(request: $request, response: $response, message: 'OAuth token request failed');
+        }
+
+        /** @var array{access_token?: string, expires_in?: int} */
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        if (!isset($data['access_token'])) {
+            throw new Core\Exceptions\APIConnectionException($request, message: 'OAuth token response missing access_token');
+        }
+
+        $this->oauthAccessToken = $data['access_token'];
+        $this->oauthTokenExpiresAt = time() + ($data['expires_in'] ?? 3600);
     }
 }

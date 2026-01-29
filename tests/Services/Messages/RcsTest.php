@@ -108,7 +108,7 @@ final class RcsTest extends TestCase
                                                     'url' => 'http://example.com',
                                                     'webviewViewMode' => 'HALF',
                                                     'description' => 'description',
-                                            ],
+                                                ],
                                                 'postbackData' => 'postback_data',
                                                 'shareLocationAction' => ['foo' => 'bar'],
                                                 'text' => 'Hello world',
@@ -118,11 +118,11 @@ final class RcsTest extends TestCase
                                                         'latitude' => 41.8, 'longitude' => -87.6,
                                                     ],
                                                     'query' => 'query',
-                                            ],
+                                                ],
                                             ],
                                             'reply' => [
-                                            'postbackData' => 'postback_data', 'text' => 'text',
-                                        ],
+                                                'postbackData' => 'postback_data', 'text' => 'text',
+                                            ],
                                         ],
                                     ],
                                     'title' => 'Elephant',
@@ -131,86 +131,86 @@ final class RcsTest extends TestCase
                             'cardWidth' => 'SMALL',
                         ],
                         'standaloneCard' => [
-                        'cardContent' => [
-                            'description' => 'description',
-                            'media' => [
-                                'contentInfo' => [
-                                    'fileURL' => 'https://example.com/elephant.jpg',
-                                    'forceRefresh' => true,
-                                    'thumbnailURL' => 'thumbnail_url',
+                            'cardContent' => [
+                                'description' => 'description',
+                                'media' => [
+                                    'contentInfo' => [
+                                        'fileURL' => 'https://example.com/elephant.jpg',
+                                        'forceRefresh' => true,
+                                        'thumbnailURL' => 'thumbnail_url',
+                                    ],
+                                    'height' => 'MEDIUM',
                                 ],
-                                'height' => 'MEDIUM',
-                            ],
-                            'suggestions' => [
-                                [
-                                    'action' => [
-                                        'createCalendarEventAction' => [
-                                            'description' => 'description',
-                                            'endTime' => new \DateTimeImmutable(
-                                                '2024-10-02T15:02:31Z'
-                                            ),
-                                            'startTime' => new \DateTimeImmutable(
-                                                '2024-10-02T15:01:23Z'
-                                            ),
-                                            'title' => 'title',
+                                'suggestions' => [
+                                    [
+                                        'action' => [
+                                            'createCalendarEventAction' => [
+                                                'description' => 'description',
+                                                'endTime' => new \DateTimeImmutable(
+                                                    '2024-10-02T15:02:31Z'
+                                                ),
+                                                'startTime' => new \DateTimeImmutable(
+                                                    '2024-10-02T15:01:23Z'
+                                                ),
+                                                'title' => 'title',
+                                            ],
+                                            'dialAction' => ['phoneNumber' => '+13125551234'],
+                                            'fallbackURL' => 'fallback_url',
+                                            'openURLAction' => [
+                                                'application' => 'BROWSER',
+                                                'url' => 'http://example.com',
+                                                'webviewViewMode' => 'HALF',
+                                                'description' => 'description',
+                                            ],
+                                            'postbackData' => 'postback_data',
+                                            'shareLocationAction' => ['foo' => 'bar'],
+                                            'text' => 'Hello world',
+                                            'viewLocationAction' => [
+                                                'label' => 'label',
+                                                'latLong' => ['latitude' => 41.8, 'longitude' => -87.6],
+                                                'query' => 'query',
+                                            ],
                                         ],
-                                        'dialAction' => ['phoneNumber' => '+13125551234'],
-                                        'fallbackURL' => 'fallback_url',
-                                        'openURLAction' => [
-                                            'application' => 'BROWSER',
-                                            'url' => 'http://example.com',
-                                            'webviewViewMode' => 'HALF',
-                                            'description' => 'description',
-                                        ],
-                                        'postbackData' => 'postback_data',
-                                        'shareLocationAction' => ['foo' => 'bar'],
-                                        'text' => 'Hello world',
-                                        'viewLocationAction' => [
-                                            'label' => 'label',
-                                            'latLong' => ['latitude' => 41.8, 'longitude' => -87.6],
-                                            'query' => 'query',
+                                        'reply' => [
+                                            'postbackData' => 'postback_data', 'text' => 'text',
                                         ],
                                     ],
-                                    'reply' => [
-                                        'postbackData' => 'postback_data', 'text' => 'text',
-                                    ],
                                 ],
+                                'title' => 'Elephant',
                             ],
-                            'title' => 'Elephant',
+                            'cardOrientation' => 'HORIZONTAL',
+                            'thumbnailImageAlignment' => 'LEFT',
                         ],
-                        'cardOrientation' => 'HORIZONTAL',
-                        'thumbnailImageAlignment' => 'LEFT',
-                    ],
                     ],
                     'suggestions' => [
-                    [
-                        'action' => [
-                            'createCalendarEventAction' => [
-                                'description' => 'description',
-                                'endTime' => new \DateTimeImmutable('2024-10-02T15:02:31Z'),
-                                'startTime' => new \DateTimeImmutable('2024-10-02T15:01:23Z'),
-                                'title' => 'title',
+                        [
+                            'action' => [
+                                'createCalendarEventAction' => [
+                                    'description' => 'description',
+                                    'endTime' => new \DateTimeImmutable('2024-10-02T15:02:31Z'),
+                                    'startTime' => new \DateTimeImmutable('2024-10-02T15:01:23Z'),
+                                    'title' => 'title',
+                                ],
+                                'dialAction' => ['phoneNumber' => '+13125551234'],
+                                'fallbackURL' => 'fallback_url',
+                                'openURLAction' => [
+                                    'application' => 'BROWSER',
+                                    'url' => 'http://example.com',
+                                    'webviewViewMode' => 'HALF',
+                                    'description' => 'description',
+                                ],
+                                'postbackData' => 'postback_data',
+                                'shareLocationAction' => ['foo' => 'bar'],
+                                'text' => 'Hello world',
+                                'viewLocationAction' => [
+                                    'label' => 'label',
+                                    'latLong' => ['latitude' => 41.8, 'longitude' => -87.6],
+                                    'query' => 'query',
+                                ],
                             ],
-                            'dialAction' => ['phoneNumber' => '+13125551234'],
-                            'fallbackURL' => 'fallback_url',
-                            'openURLAction' => [
-                                'application' => 'BROWSER',
-                                'url' => 'http://example.com',
-                                'webviewViewMode' => 'HALF',
-                                'description' => 'description',
-                            ],
-                            'postbackData' => 'postback_data',
-                            'shareLocationAction' => ['foo' => 'bar'],
-                            'text' => 'Hello world',
-                            'viewLocationAction' => [
-                                'label' => 'label',
-                                'latLong' => ['latitude' => 41.8, 'longitude' => -87.6],
-                                'query' => 'query',
-                            ],
+                            'reply' => ['postbackData' => 'postback_data', 'text' => 'text'],
                         ],
-                        'reply' => ['postbackData' => 'postback_data', 'text' => 'text'],
                     ],
-                ],
                     'text' => 'Hello world!',
                 ],
                 'event' => ['eventType' => 'IS_TYPING'],
