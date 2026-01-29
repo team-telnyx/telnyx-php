@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Texml\Accounts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPaginationForQueues;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
 use Telnyx\Texml\Accounts\Queues\QueueListResponse;
@@ -77,8 +76,6 @@ interface QueuesContract
      * @param string $pageToken used to request the next page of results
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPaginationForQueues<QueueListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -89,7 +86,7 @@ interface QueuesContract
         ?int $pageSize = null,
         ?string $pageToken = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPaginationForQueues;
+    ): QueueListResponse;
 
     /**
      * @api

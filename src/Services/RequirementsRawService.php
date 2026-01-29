@@ -7,18 +7,19 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
 use Telnyx\Requirements\RequirementListParams\Filter;
+use Telnyx\Requirements\RequirementListParams\Page;
 use Telnyx\Requirements\RequirementListParams\Sort;
 use Telnyx\Requirements\RequirementListResponse;
 use Telnyx\ServiceContracts\RequirementsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Requirements\RequirementListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Requirements\RequirementListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RequirementsRawService implements RequirementsRawContract
@@ -61,13 +62,12 @@ final class RequirementsRawService implements RequirementsRawContract
      *
      * @param array{
      *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: Page|PageShape,
      *   sort?: list<Sort|value-of<Sort>>,
      * }|RequirementListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RequirementListResponse>>
+     * @return BaseResponse<DefaultPagination<RequirementListResponse>>
      *
      * @throws APIException
      */
@@ -84,13 +84,10 @@ final class RequirementsRawService implements RequirementsRawContract
         return $this->client->request(
             method: 'get',
             path: 'requirements',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: RequirementListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

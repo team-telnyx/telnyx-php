@@ -7,7 +7,6 @@ namespace Telnyx\Services\Texml\Accounts;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultPaginationForQueues;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\QueuesContract;
 use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
@@ -126,8 +125,6 @@ final class QueuesService implements QueuesContract
      * @param string $pageToken used to request the next page of results
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPaginationForQueues<QueueListResponse>
-     *
      * @throws APIException
      */
     public function list(
@@ -138,7 +135,7 @@ final class QueuesService implements QueuesContract
         ?int $pageSize = null,
         ?string $pageToken = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultPaginationForQueues {
+    ): QueueListResponse {
         $params = Util::removeNulls(
             [
                 'dateCreated' => $dateCreated,

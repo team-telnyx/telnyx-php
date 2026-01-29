@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Messaging\Rcs;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
+use Telnyx\Messaging\Rcs\Agents\AgentListParams\Page;
 use Telnyx\RcsAgents\RcsAgent;
 use Telnyx\RcsAgents\RcsAgentResponse;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\Messaging\Rcs\Agents\AgentListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface AgentsContract
@@ -50,15 +52,15 @@ interface AgentsContract
     /**
      * @api
      *
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<RcsAgent>
+     * @return DefaultPagination<RcsAgent>
      *
      * @throws APIException
      */
     public function list(
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination;
+        Page|array|null $page = null,
+        RequestOptions|array|null $requestOptions = null
+    ): DefaultPagination;
 }

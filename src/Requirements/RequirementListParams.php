@@ -9,6 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Requirements\RequirementListParams\Filter;
+use Telnyx\Requirements\RequirementListParams\Page;
 use Telnyx\Requirements\RequirementListParams\Sort;
 
 /**
@@ -17,11 +18,11 @@ use Telnyx\Requirements\RequirementListParams\Sort;
  * @see Telnyx\Services\RequirementsService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\Requirements\RequirementListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Requirements\RequirementListParams\Page
  *
  * @phpstan-type RequirementListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
- *   pageNumber?: int|null,
- *   pageSize?: int|null,
+ *   page?: null|Page|PageShape,
  *   sort?: list<Sort|value-of<Sort>>|null,
  * }
  */
@@ -37,11 +38,11 @@ final class RequirementListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     /**
      * Consolidated sort parameter for requirements (deepObject style). Originally: sort[].
@@ -62,19 +63,18 @@ final class RequirementListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Filter|FilterShape|null $filter
+     * @param Page|PageShape|null $page
      * @param list<Sort|value-of<Sort>>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
-        ?array $sort = null,
+        Page|array|null $page = null,
+        ?array $sort = null
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
@@ -93,18 +93,15 @@ final class RequirementListParams implements BaseModel
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|PageShape $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

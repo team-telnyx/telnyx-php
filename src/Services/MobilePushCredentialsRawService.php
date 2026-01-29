@@ -7,11 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter;
+use Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page;
 use Telnyx\MobilePushCredentials\PushCredential;
 use Telnyx\MobilePushCredentials\PushCredentialResponse;
 use Telnyx\RequestOptions;
@@ -20,6 +20,7 @@ use Telnyx\ServiceContracts\MobilePushCredentialsRawContract;
 /**
  * @phpstan-import-type CreateMobilePushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest
  * @phpstan-import-type FilterShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MobilePushCredentialsRawService implements MobilePushCredentialsRawContract
@@ -94,11 +95,11 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
      * List mobile push credentials
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|MobilePushCredentialListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PushCredential>>
+     * @return BaseResponse<DefaultPagination<PushCredential>>
      *
      * @throws APIException
      */
@@ -115,13 +116,10 @@ final class MobilePushCredentialsRawService implements MobilePushCredentialsRawC
         return $this->client->request(
             method: 'get',
             path: 'mobile_push_credentials',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: PushCredential::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

@@ -6,7 +6,6 @@ namespace Telnyx\ServiceContracts\Texml\Accounts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultPaginationForQueues;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Queues\QueueCreateParams;
 use Telnyx\Texml\Accounts\Queues\QueueDeleteParams;
@@ -81,7 +80,7 @@ interface QueuesRawContract
      * @param array<string,mixed>|QueueListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPaginationForQueues<QueueListResponse>>
+     * @return BaseResponse<QueueListResponse>
      *
      * @throws APIException
      */

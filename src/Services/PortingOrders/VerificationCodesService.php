@@ -7,8 +7,9 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\VerificationMethod;
@@ -19,6 +20,7 @@ use Telnyx\ServiceContracts\PortingOrders\VerificationCodesContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort
  * @phpstan-import-type VerificationCodeShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -45,28 +47,23 @@ final class VerificationCodesService implements VerificationCodesContract
      *
      * @param string $id Porting Order id
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[verified]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[size], page[number]
      * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<VerificationCodeListResponse>
+     * @return DefaultPagination<VerificationCodeListResponse>
      *
      * @throws APIException
      */
     public function list(
         string $id,
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|array|null $sort = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
+    ): DefaultPagination {
         $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-                'sort' => $sort,
-            ],
+            ['filter' => $filter, 'page' => $page, 'sort' => $sort]
         );
 
         // @phpstan-ignore-next-line argument.type

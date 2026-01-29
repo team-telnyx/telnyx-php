@@ -7,13 +7,13 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter;
+use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
@@ -23,6 +23,7 @@ use Telnyx\ServiceContracts\PortingOrders\AdditionalDocumentsRawContract;
 /**
  * @phpstan-import-type AdditionalDocumentShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Page
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -76,14 +77,11 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
      *
      * @param string $id Porting Order id
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|SortShape,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|SortShape
      * }|AdditionalDocumentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<AdditionalDocumentListResponse>>
+     * @return BaseResponse<DefaultPagination<AdditionalDocumentListResponse>>
      *
      * @throws APIException
      */
@@ -101,13 +99,10 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/additional_documents', $id],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: AdditionalDocumentListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

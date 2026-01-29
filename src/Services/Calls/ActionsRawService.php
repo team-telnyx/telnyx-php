@@ -71,6 +71,7 @@ use Telnyx\Calls\Actions\ActionStartRecordingParams;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Channels;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
 use Telnyx\Calls\Actions\ActionStartRecordingResponse;
@@ -81,7 +82,6 @@ use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
@@ -1159,7 +1159,7 @@ final class ActionsRawService implements ActionsRawContract
      *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
      *   timeoutSecs?: int,
      *   transcription?: bool,
-     *   transcriptionEngine?: string,
+     *   transcriptionEngine?: TranscriptionEngine|value-of<TranscriptionEngine>,
      *   transcriptionLanguage?: value-of<TranscriptionLanguage>,
      *   transcriptionMaxSpeakerCount?: int,
      *   transcriptionMinSpeakerCount?: int,
@@ -1300,7 +1300,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string,
      *   commandID?: string,
-     *   transcriptionEngine?: TranscriptionEngine|value-of<TranscriptionEngine>,
+     *   transcriptionEngine?: ActionStartTranscriptionParams\TranscriptionEngine|value-of<ActionStartTranscriptionParams\TranscriptionEngine>,
      *   transcriptionEngineConfig?: TranscriptionEngineConfigShape,
      *   transcriptionTracks?: string,
      * }|ActionStartTranscriptionParams $params

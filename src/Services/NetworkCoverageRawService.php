@@ -7,11 +7,11 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter;
 use Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters;
+use Telnyx\NetworkCoverage\NetworkCoverageListParams\Page;
 use Telnyx\NetworkCoverage\NetworkCoverageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NetworkCoverageRawContract;
@@ -19,6 +19,7 @@ use Telnyx\ServiceContracts\NetworkCoverageRawContract;
 /**
  * @phpstan-import-type FilterShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filter
  * @phpstan-import-type FiltersShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Filters
+ * @phpstan-import-type PageShape from \Telnyx\NetworkCoverage\NetworkCoverageListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NetworkCoverageRawService implements NetworkCoverageRawContract
@@ -37,12 +38,11 @@ final class NetworkCoverageRawService implements NetworkCoverageRawContract
      * @param array{
      *   filter?: Filter|FilterShape,
      *   filters?: Filters|FiltersShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: Page|PageShape,
      * }|NetworkCoverageListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NetworkCoverageListResponse>>
+     * @return BaseResponse<DefaultPagination<NetworkCoverageListResponse>>
      *
      * @throws APIException
      */
@@ -59,13 +59,10 @@ final class NetworkCoverageRawService implements NetworkCoverageRawContract
         return $this->client->request(
             method: 'get',
             path: 'network_coverage',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: NetworkCoverageListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

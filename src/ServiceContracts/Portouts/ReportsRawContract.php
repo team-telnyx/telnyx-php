@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Portouts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Reports\PortoutReport;
 use Telnyx\Portouts\Reports\ReportCreateParams;
 use Telnyx\Portouts\Reports\ReportGetResponse;
@@ -55,7 +55,7 @@ interface ReportsRawContract
      * @param array<string,mixed>|ReportListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortoutReport>>
+     * @return BaseResponse<DefaultPagination<PortoutReport>>
      *
      * @throws APIException
      */

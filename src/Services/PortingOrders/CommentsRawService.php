@@ -7,16 +7,17 @@ namespace Telnyx\Services\PortingOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
+use Telnyx\PortingOrders\Comments\CommentListParams\Page;
 use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\CommentsRawContract;
 
 /**
+ * @phpstan-import-type PageShape from \Telnyx\PortingOrders\Comments\CommentListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CommentsRawService implements CommentsRawContract
@@ -66,10 +67,10 @@ final class CommentsRawService implements CommentsRawContract
      * Returns a list of all comments of a porting order.
      *
      * @param string $id Porting Order id
-     * @param array{pageNumber?: int, pageSize?: int}|CommentListParams $params
+     * @param array{page?: Page|PageShape}|CommentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<CommentListResponse>>
+     * @return BaseResponse<DefaultPagination<CommentListResponse>>
      *
      * @throws APIException
      */
@@ -87,13 +88,10 @@ final class CommentsRawService implements CommentsRawContract
         return $this->client->request(
             method: 'get',
             path: ['porting_orders/%1$s/comments', $id],
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: CommentListResponse::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

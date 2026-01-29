@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListParams;
 use Telnyx\MessagingURLDomains\MessagingURLDomainListResponse;
 use Telnyx\RequestOptions;
@@ -22,7 +22,7 @@ interface MessagingURLDomainsRawContract
      * @param array<string,mixed>|MessagingURLDomainListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessagingURLDomainListResponse>>
+     * @return BaseResponse<DefaultPagination<MessagingURLDomainListResponse>>
      *
      * @throws APIException
      */

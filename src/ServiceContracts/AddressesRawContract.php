@@ -12,7 +12,7 @@ use Telnyx\Addresses\AddressListParams;
 use Telnyx\Addresses\AddressNewResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -56,7 +56,7 @@ interface AddressesRawContract
      * @param array<string,mixed>|AddressListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<Address>>
+     * @return BaseResponse<DefaultPagination<Address>>
      *
      * @throws APIException
      */

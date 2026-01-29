@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams;
 use Telnyx\MobilePushCredentials\MobilePushCredentialListParams;
 use Telnyx\MobilePushCredentials\PushCredential;
@@ -54,7 +54,7 @@ interface MobilePushCredentialsRawContract
      * @param array<string,mixed>|MobilePushCredentialListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PushCredential>>
+     * @return BaseResponse<DefaultPagination<PushCredential>>
      *
      * @throws APIException
      */

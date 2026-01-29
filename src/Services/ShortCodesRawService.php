@@ -7,19 +7,20 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ShortCodesRawContract;
 use Telnyx\ShortCode;
 use Telnyx\ShortCodes\ShortCodeGetResponse;
 use Telnyx\ShortCodes\ShortCodeListParams;
 use Telnyx\ShortCodes\ShortCodeListParams\Filter;
+use Telnyx\ShortCodes\ShortCodeListParams\Page;
 use Telnyx\ShortCodes\ShortCodeUpdateParams;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\ShortCodes\ShortCodeListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\ShortCodes\ShortCodeListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ShortCodesRawService implements ShortCodesRawContract
@@ -97,11 +98,11 @@ final class ShortCodesRawService implements ShortCodesRawContract
      * List short codes
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|ShortCodeListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ShortCode>>
+     * @return BaseResponse<DefaultPagination<ShortCode>>
      *
      * @throws APIException
      */
@@ -118,13 +119,10 @@ final class ShortCodesRawService implements ShortCodesRawContract
         return $this->client->request(
             method: 'get',
             path: 'short_codes',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: ShortCode::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

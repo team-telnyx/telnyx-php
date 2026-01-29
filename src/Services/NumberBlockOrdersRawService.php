@@ -7,19 +7,20 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\NumberBlockOrders\NumberBlockOrder;
 use Telnyx\NumberBlockOrders\NumberBlockOrderCreateParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderGetResponse;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams;
 use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter;
+use Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page;
 use Telnyx\NumberBlockOrders\NumberBlockOrderNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberBlockOrdersRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\NumberBlockOrders\NumberBlockOrderListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
@@ -98,11 +99,11 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
      * Get a paginated list of number block orders.
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape, page?: Page|PageShape
      * }|NumberBlockOrderListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NumberBlockOrder>>
+     * @return BaseResponse<DefaultPagination<NumberBlockOrder>>
      *
      * @throws APIException
      */
@@ -119,13 +120,10 @@ final class NumberBlockOrdersRawService implements NumberBlockOrdersRawContract
         return $this->client->request(
             method: 'get',
             path: 'number_block_orders',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: NumberBlockOrder::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

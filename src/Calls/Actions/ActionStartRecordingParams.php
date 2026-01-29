@@ -7,6 +7,7 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Channels;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
+use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
 use Telnyx\Core\Attributes\Optional;
@@ -37,7 +38,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordingTrack?: null|RecordingTrack|value-of<RecordingTrack>,
  *   timeoutSecs?: int|null,
  *   transcription?: bool|null,
- *   transcriptionEngine?: string|null,
+ *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
  *   transcriptionLanguage?: null|TranscriptionLanguage|value-of<TranscriptionLanguage>,
  *   transcriptionMaxSpeakerCount?: int|null,
  *   transcriptionMinSpeakerCount?: int|null,
@@ -119,16 +120,14 @@ final class ActionStartRecordingParams implements BaseModel
     public ?bool $transcription;
 
     /**
-     * Engine to use for speech recognition. `A` - `Google`.
+     * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
+     *
+     * @var value-of<TranscriptionEngine>|null $transcriptionEngine
      */
-    #[Optional('transcription_engine')]
+    #[Optional('transcription_engine', enum: TranscriptionEngine::class)]
     public ?string $transcriptionEngine;
 
-    /**
-     * Language to use for speech recognition.
-     *
-     * @var value-of<TranscriptionLanguage>|null $transcriptionLanguage
-     */
+    /** @var value-of<TranscriptionLanguage>|null $transcriptionLanguage */
     #[Optional('transcription_language', enum: TranscriptionLanguage::class)]
     public ?string $transcriptionLanguage;
 
@@ -191,6 +190,7 @@ final class ActionStartRecordingParams implements BaseModel
      * @param Channels|value-of<Channels> $channels
      * @param Format|value-of<Format> $format
      * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
+     * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
      * @param TranscriptionLanguage|value-of<TranscriptionLanguage>|null $transcriptionLanguage
      * @param Trim|value-of<Trim>|null $trim
      */
@@ -205,7 +205,7 @@ final class ActionStartRecordingParams implements BaseModel
         RecordingTrack|string|null $recordingTrack = null,
         ?int $timeoutSecs = null,
         ?bool $transcription = null,
-        ?string $transcriptionEngine = null,
+        TranscriptionEngine|string|null $transcriptionEngine = null,
         TranscriptionLanguage|string|null $transcriptionLanguage = null,
         ?int $transcriptionMaxSpeakerCount = null,
         ?int $transcriptionMinSpeakerCount = null,
@@ -355,10 +355,13 @@ final class ActionStartRecordingParams implements BaseModel
     }
 
     /**
-     * Engine to use for speech recognition. `A` - `Google`.
+     * Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
+     *
+     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
      */
-    public function withTranscriptionEngine(string $transcriptionEngine): self
-    {
+    public function withTranscriptionEngine(
+        TranscriptionEngine|string $transcriptionEngine
+    ): self {
         $self = clone $this;
         $self['transcriptionEngine'] = $transcriptionEngine;
 
@@ -366,8 +369,6 @@ final class ActionStartRecordingParams implements BaseModel
     }
 
     /**
-     * Language to use for speech recognition.
-     *
      * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage
      */
     public function withTranscriptionLanguage(

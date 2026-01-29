@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Filter;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\HandleMessagingProfileError;
+use Telnyx\PhoneNumbers\PhoneNumberListParams\Page;
 use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
 
 /**
@@ -18,12 +19,12 @@ use Telnyx\PhoneNumbers\PhoneNumberListParams\Sort;
  * @see Telnyx\Services\PhoneNumbersService::list()
  *
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Page
  *
  * @phpstan-type PhoneNumberListParamsShape = array{
  *   filter?: null|Filter|FilterShape,
  *   handleMessagingProfileError?: null|HandleMessagingProfileError|value-of<HandleMessagingProfileError>,
- *   pageNumber?: int|null,
- *   pageSize?: int|null,
+ *   page?: null|Page|PageShape,
  *   sort?: null|Sort|value-of<Sort>,
  * }
  */
@@ -47,11 +48,11 @@ final class PhoneNumberListParams implements BaseModel
     #[Optional(enum: HandleMessagingProfileError::class)]
     public ?string $handleMessagingProfileError;
 
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     */
     #[Optional]
-    public ?int $pageNumber;
-
-    #[Optional]
-    public ?int $pageSize;
+    public ?Page $page;
 
     /**
      * Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
@@ -73,21 +74,20 @@ final class PhoneNumberListParams implements BaseModel
      *
      * @param Filter|FilterShape|null $filter
      * @param HandleMessagingProfileError|value-of<HandleMessagingProfileError>|null $handleMessagingProfileError
+     * @param Page|PageShape|null $page
      * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
         Filter|array|null $filter = null,
         HandleMessagingProfileError|string|null $handleMessagingProfileError = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         Sort|string|null $sort = null,
     ): self {
         $self = new self;
 
         null !== $filter && $self['filter'] = $filter;
         null !== $handleMessagingProfileError && $self['handleMessagingProfileError'] = $handleMessagingProfileError;
-        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $page && $self['page'] = $page;
         null !== $sort && $self['sort'] = $sort;
 
         return $self;
@@ -120,18 +120,15 @@ final class PhoneNumberListParams implements BaseModel
         return $self;
     }
 
-    public function withPageNumber(int $pageNumber): self
+    /**
+     * Consolidated page parameter (deepObject style). Originally: page[size], page[number].
+     *
+     * @param Page|PageShape $page
+     */
+    public function withPage(Page|array $page): self
     {
         $self = clone $this;
-        $self['pageNumber'] = $pageNumber;
-
-        return $self;
-    }
-
-    public function withPageSize(int $pageSize): self
-    {
-        $self = clone $this;
-        $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
 
         return $self;
     }

@@ -13,7 +13,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordNewResponse;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageParams;
 use Telnyx\CustomerServiceRecords\CustomerServiceRecordVerifyPhoneNumberCoverageResponse;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -57,7 +57,7 @@ interface CustomerServiceRecordsRawContract
      * @param array<string,mixed>|CustomerServiceRecordListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<CustomerServiceRecord>>
+     * @return BaseResponse<DefaultPagination<CustomerServiceRecord>>
      *
      * @throws APIException
      */

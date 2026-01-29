@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\PhoneNumberBlocks;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumberBlocks\Jobs\Job;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockParams;
 use Telnyx\PhoneNumberBlocks\Jobs\JobDeletePhoneNumberBlockResponse;
@@ -40,7 +40,7 @@ interface JobsRawContract
      * @param array<string,mixed>|JobListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<Job>>
+     * @return BaseResponse<DefaultPagination<Job>>
      *
      * @throws APIException
      */

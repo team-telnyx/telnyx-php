@@ -8,12 +8,11 @@ use Telnyx\Client;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer;
@@ -22,6 +21,7 @@ use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams;
 use Telnyx\FqdnConnections\FqdnConnectionListParams\Filter;
+use Telnyx\FqdnConnections\FqdnConnectionListParams\Page;
 use Telnyx\FqdnConnections\FqdnConnectionListParams\Sort;
 use Telnyx\FqdnConnections\FqdnConnectionNewResponse;
 use Telnyx\FqdnConnections\FqdnConnectionUpdateParams;
@@ -37,6 +37,7 @@ use Telnyx\ServiceContracts\FqdnConnectionsRawContract;
  * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer
  * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\JitterBuffer as JitterBufferShape1
  * @phpstan-import-type FilterShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Page
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
@@ -195,14 +196,11 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      * Returns a list of your FQDN connections.
      *
      * @param array{
-     *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
-     *   sort?: Sort|value-of<Sort>,
+     *   filter?: Filter|FilterShape, page?: Page|PageShape, sort?: Sort|value-of<Sort>
      * }|FqdnConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<FqdnConnection>>
+     * @return BaseResponse<DefaultPagination<FqdnConnection>>
      *
      * @throws APIException
      */
@@ -219,13 +217,10 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
         return $this->client->request(
             method: 'get',
             path: 'fqdn_connections',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: FqdnConnection::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 

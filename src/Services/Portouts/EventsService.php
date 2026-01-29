@@ -7,9 +7,10 @@ namespace Telnyx\Services\Portouts;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams\Filter;
+use Telnyx\Portouts\Events\EventListParams\Page;
 use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
 use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment;
 use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged;
@@ -18,6 +19,7 @@ use Telnyx\ServiceContracts\Portouts\EventsContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Portouts\Events\EventListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\Portouts\Events\EventListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EventsService implements EventsContract
@@ -61,25 +63,19 @@ final class EventsService implements EventsContract
      * Returns a list of all port-out events.
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[event_type], filter[portout_id], filter[created_at]
+     * @param Page|PageShape $page Consolidated page parameter (deepObject style). Originally: page[number], page[size]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>
+     * @return DefaultPagination<WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged,>
      *
      * @throws APIException
      */
     public function list(
         Filter|array|null $filter = null,
-        ?int $pageNumber = null,
-        ?int $pageSize = null,
+        Page|array|null $page = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPagination {
-        $params = Util::removeNulls(
-            [
-                'filter' => $filter,
-                'pageNumber' => $pageNumber,
-                'pageSize' => $pageSize,
-            ],
-        );
+    ): DefaultPagination {
+        $params = Util::removeNulls(['filter' => $filter, 'page' => $page]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);

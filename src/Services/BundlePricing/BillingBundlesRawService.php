@@ -7,18 +7,20 @@ namespace Telnyx\Services\BundlePricing;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleGetResponse;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Filter;
+use Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Page;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleRetrieveParams;
 use Telnyx\BundlePricing\BillingBundles\BillingBundleSummary;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BundlePricing\BillingBundlesRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\BundlePricing\BillingBundles\BillingBundleListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BillingBundlesRawService implements BillingBundlesRawContract
@@ -72,13 +74,12 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
      *
      * @param array{
      *   filter?: Filter|FilterShape,
-     *   pageNumber?: int,
-     *   pageSize?: int,
+     *   page?: Page|PageShape,
      *   authorizationBearer?: string,
      * }|BillingBundleListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<BillingBundleSummary>>
+     * @return BaseResponse<DefaultPagination<BillingBundleSummary>>
      *
      * @throws APIException
      */
@@ -90,7 +91,7 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
             $params,
             $requestOptions,
         );
-        $query_params = array_flip(['filter', 'pageNumber', 'pageSize']);
+        $query_params = array_flip(['filter', 'page']);
 
         /** @var array<string,string> */
         $header_params = array_diff_key($parsed, $query_params);
@@ -99,17 +100,14 @@ final class BillingBundlesRawService implements BillingBundlesRawContract
         return $this->client->request(
             method: 'get',
             path: 'bundle_pricing/billing_bundles',
-            query: Util::array_transform_keys(
-                array_intersect_key($parsed, $query_params),
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]'],
-            ),
+            query: array_intersect_key($parsed, $query_params),
             headers: Util::array_transform_keys(
                 $header_params,
                 ['authorizationBearer' => 'authorization_bearer']
             ),
             options: $options,
             convert: BillingBundleSummary::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }

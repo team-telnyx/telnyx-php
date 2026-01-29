@@ -8,19 +8,21 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPagination;
+use Telnyx\DefaultPagination;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownload;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\CsvFormat;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadGetResponse;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams;
+use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page;
 use Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\CsvDownloadsRawContract;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadCreateParams\Filter
+ * @phpstan-import-type PageShape from \Telnyx\PhoneNumbers\CsvDownloads\CsvDownloadListParams\Page
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CsvDownloadsRawService implements CsvDownloadsRawContract
@@ -94,10 +96,10 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
      *
      * List CSV downloads
      *
-     * @param array{pageNumber?: int, pageSize?: int}|CsvDownloadListParams $params
+     * @param array{page?: Page|PageShape}|CsvDownloadListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<CsvDownload>>
+     * @return BaseResponse<DefaultPagination<CsvDownload>>
      *
      * @throws APIException
      */
@@ -114,13 +116,10 @@ final class CsvDownloadsRawService implements CsvDownloadsRawContract
         return $this->client->request(
             method: 'get',
             path: 'phone_numbers/csv_downloads',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
-            ),
+            query: $parsed,
             options: $options,
             convert: CsvDownload::class,
-            page: DefaultFlatPagination::class,
+            page: DefaultPagination::class,
         );
     }
 }
