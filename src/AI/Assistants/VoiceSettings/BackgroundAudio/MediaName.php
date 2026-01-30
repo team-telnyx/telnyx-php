@@ -64,6 +64,19 @@ final class MediaName implements BaseModel
     }
 
     /**
+     * Reference a previously uploaded media by its name from Telnyx Media Storage.
+     *
+     * @param 'media_name' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * The `name` of a media asset created via [Media Storage API](https://developers.telnyx.com/api/media-storage/create-media-storage). The audio will loop during the call.
      */
     public function withValue(string $value): self

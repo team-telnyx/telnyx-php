@@ -88,6 +88,19 @@ final class UserMessage implements BaseModel
     }
 
     /**
+     * The role of the messages author, in this case `user`.
+     *
+     * @param 'user' $role
+     */
+    public function withRole(string $role): self
+    {
+        $self = clone $this;
+        $self['role'] = $role;
+
+        return $self;
+    }
+
+    /**
      * Metadata to add to the message.
      */
     public function withMetadata(mixed $metadata): self

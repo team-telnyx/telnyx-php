@@ -73,4 +73,15 @@ final class CallControlRetrievalTool implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'retrieval' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }

@@ -106,4 +106,17 @@ final class CreateAndroidPushCredentialRequest implements BaseModel
 
         return $self;
     }
+
+    /**
+     * Type of mobile push credential. Should be <code>android</code> here.
+     *
+     * @param 'android' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }
