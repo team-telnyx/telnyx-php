@@ -75,4 +75,15 @@ final class HandoffTool implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'handoff' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }

@@ -71,4 +71,15 @@ final class DtmfTool implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'send_dtmf' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }

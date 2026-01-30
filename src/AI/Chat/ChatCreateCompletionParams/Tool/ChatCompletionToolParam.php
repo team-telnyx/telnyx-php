@@ -73,4 +73,15 @@ final class ChatCompletionToolParam implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'function' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }

@@ -73,4 +73,15 @@ final class InferenceEmbeddingTransferTool implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'transfer' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }

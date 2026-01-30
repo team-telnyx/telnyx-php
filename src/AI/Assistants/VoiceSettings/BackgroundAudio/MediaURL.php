@@ -64,6 +64,19 @@ final class MediaURL implements BaseModel
     }
 
     /**
+     * Provide a direct URL to an MP3 file. The audio will loop during the call.
+     *
+     * @param 'media_url' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * HTTPS URL to an MP3 file.
      */
     public function withValue(string $value): self

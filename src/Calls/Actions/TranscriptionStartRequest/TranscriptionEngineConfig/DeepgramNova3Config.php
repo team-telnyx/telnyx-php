@@ -92,6 +92,17 @@ final class DeepgramNova3Config implements BaseModel
     }
 
     /**
+     * @param 'Deepgram' $transcriptionEngine
+     */
+    public function withTranscriptionEngine(string $transcriptionEngine): self
+    {
+        $self = clone $this;
+        $self['transcriptionEngine'] = $transcriptionEngine;
+
+        return $self;
+    }
+
+    /**
      * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
      */
     public function withTranscriptionModel(

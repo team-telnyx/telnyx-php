@@ -119,4 +119,17 @@ final class CreateIosPushCredentialRequest implements BaseModel
 
         return $self;
     }
+
+    /**
+     * Type of mobile push credential. Should be <code>ios</code> here.
+     *
+     * @param 'ios' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }
