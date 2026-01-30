@@ -22,6 +22,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   model: Model|value-of<Model>,
  *   file?: string|null,
  *   fileURL?: string|null,
+ *   language?: string|null,
+ *   modelConfig?: array<string,mixed>|null,
  *   responseFormat?: null|ResponseFormat|value-of<ResponseFormat>,
  *   timestampGranularities?: null|TimestampGranularities|value-of<TimestampGranularities>,
  * }
@@ -33,7 +35,7 @@ final class AudioTranscribeParams implements BaseModel
     use SdkParams;
 
     /**
-     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency.
+     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. `deepgram/nova-3` supports English variants (en, en-US, en-GB, en-AU, en-NZ, en-IN) and only accepts mp3/wav files.
      *
      * @var value-of<Model> $model
      */
@@ -41,16 +43,30 @@ final class AudioTranscribeParams implements BaseModel
     public string $model;
 
     /**
-     * The audio file object to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. File uploads are limited to 100 MB. Cannot be used together with `file_url`.
+     * The audio file object to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. File uploads are limited to 100 MB. Cannot be used together with `file_url`. Note: `deepgram/nova-3` only supports mp3 and wav formats.
      */
     #[Optional]
     public ?string $file;
 
     /**
-     * Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`.
+     * Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`. Note: `deepgram/nova-3` only supports mp3 and wav formats.
      */
     #[Optional('file_url')]
     public ?string $fileURL;
+
+    /**
+     * The language of the audio to be transcribed. For `deepgram/nova-3`, only English variants are supported: `en`, `en-US`, `en-GB`, `en-AU`, `en-NZ`, `en-IN`. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter.
+     */
+    #[Optional]
+    public ?string $language;
+
+    /**
+     * Additional model-specific configuration parameters. Only allowed with `deepgram/nova-3` model. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize`, `utterance`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
+     *
+     * @var array<string,mixed>|null $modelConfig
+     */
+    #[Optional('model_config', map: 'mixed')]
+    public ?array $modelConfig;
 
     /**
      * The format of the transcript output. Use `verbose_json` to take advantage of timestamps.
@@ -93,6 +109,7 @@ final class AudioTranscribeParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Model|value-of<Model> $model
+     * @param array<string,mixed>|null $modelConfig
      * @param ResponseFormat|value-of<ResponseFormat>|null $responseFormat
      * @param TimestampGranularities|value-of<TimestampGranularities>|null $timestampGranularities
      */
@@ -100,6 +117,8 @@ final class AudioTranscribeParams implements BaseModel
         Model|string $model = 'distil-whisper/distil-large-v2',
         ?string $file = null,
         ?string $fileURL = null,
+        ?string $language = null,
+        ?array $modelConfig = null,
         ResponseFormat|string|null $responseFormat = null,
         TimestampGranularities|string|null $timestampGranularities = null,
     ): self {
@@ -109,6 +128,8 @@ final class AudioTranscribeParams implements BaseModel
 
         null !== $file && $self['file'] = $file;
         null !== $fileURL && $self['fileURL'] = $fileURL;
+        null !== $language && $self['language'] = $language;
+        null !== $modelConfig && $self['modelConfig'] = $modelConfig;
         null !== $responseFormat && $self['responseFormat'] = $responseFormat;
         null !== $timestampGranularities && $self['timestampGranularities'] = $timestampGranularities;
 
@@ -116,7 +137,7 @@ final class AudioTranscribeParams implements BaseModel
     }
 
     /**
-     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency.
+     * ID of the model to use. `distil-whisper/distil-large-v2` is lower latency but English-only. `openai/whisper-large-v3-turbo` is multi-lingual but slightly higher latency. `deepgram/nova-3` supports English variants (en, en-US, en-GB, en-AU, en-NZ, en-IN) and only accepts mp3/wav files.
      *
      * @param Model|value-of<Model> $model
      */
@@ -129,7 +150,7 @@ final class AudioTranscribeParams implements BaseModel
     }
 
     /**
-     * The audio file object to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. File uploads are limited to 100 MB. Cannot be used together with `file_url`.
+     * The audio file object to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. File uploads are limited to 100 MB. Cannot be used together with `file_url`. Note: `deepgram/nova-3` only supports mp3 and wav formats.
      */
     public function withFile(string $file): self
     {
@@ -140,12 +161,36 @@ final class AudioTranscribeParams implements BaseModel
     }
 
     /**
-     * Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`.
+     * Link to audio file in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. Support for hosted files is limited to 100MB. Cannot be used together with `file`. Note: `deepgram/nova-3` only supports mp3 and wav formats.
      */
     public function withFileURL(string $fileURL): self
     {
         $self = clone $this;
         $self['fileURL'] = $fileURL;
+
+        return $self;
+    }
+
+    /**
+     * The language of the audio to be transcribed. For `deepgram/nova-3`, only English variants are supported: `en`, `en-US`, `en-GB`, `en-AU`, `en-NZ`, `en-IN`. For `openai/whisper-large-v3-turbo`, supports multiple languages. `distil-whisper/distil-large-v2` does not support language parameter.
+     */
+    public function withLanguage(string $language): self
+    {
+        $self = clone $this;
+        $self['language'] = $language;
+
+        return $self;
+    }
+
+    /**
+     * Additional model-specific configuration parameters. Only allowed with `deepgram/nova-3` model. Can include Deepgram-specific options such as `smart_format`, `punctuate`, `diarize`, `utterance`, `numerals`, and `language`. If `language` is provided both as a top-level parameter and in `model_config`, the top-level parameter takes precedence.
+     *
+     * @param array<string,mixed> $modelConfig
+     */
+    public function withModelConfig(array $modelConfig): self
+    {
+        $self = clone $this;
+        $self['modelConfig'] = $modelConfig;
 
         return $self;
     }
