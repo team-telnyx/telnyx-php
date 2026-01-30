@@ -32,9 +32,11 @@ final class AudioRawService implements AudioRawContract
      * Transcribe speech to text. This endpoint is consistent with the [OpenAI Transcription API](https://platform.openai.com/docs/api-reference/audio/createTranscription) and may be used with the OpenAI JS or Python SDK.
      *
      * @param array{
-     *   model: Model|value-of<Model>,
+     *   model: value-of<Model>,
      *   file?: string,
      *   fileURL?: string,
+     *   language?: string,
+     *   modelConfig?: array<string,mixed>,
      *   responseFormat?: ResponseFormat|value-of<ResponseFormat>,
      *   timestampGranularities?: TimestampGranularities|value-of<TimestampGranularities>,
      * }|AudioTranscribeParams $params

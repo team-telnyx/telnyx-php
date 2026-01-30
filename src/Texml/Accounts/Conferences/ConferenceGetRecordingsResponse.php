@@ -18,6 +18,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
  *   nextPageUri?: string|null,
  *   page?: int|null,
  *   pageSize?: int|null,
+ *   participants?: list<mixed>|null,
  *   recordings?: list<Recording|RecordingShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
@@ -58,6 +59,14 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     #[Optional('page_size')]
     public ?int $pageSize;
 
+    /**
+     * List of participant resources.
+     *
+     * @var list<mixed>|null $participants
+     */
+    #[Optional(list: 'mixed')]
+    public ?array $participants;
+
     /** @var list<Recording>|null $recordings */
     #[Optional(list: Recording::class)]
     public ?array $recordings;
@@ -84,6 +93,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param list<mixed>|null $participants
      * @param list<Recording|RecordingShape>|null $recordings
      */
     public static function with(
@@ -92,6 +102,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
         ?string $nextPageUri = null,
         ?int $page = null,
         ?int $pageSize = null,
+        ?array $participants = null,
         ?array $recordings = null,
         ?int $start = null,
         ?string $uri = null,
@@ -103,6 +114,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
         null !== $nextPageUri && $self['nextPageUri'] = $nextPageUri;
         null !== $page && $self['page'] = $page;
         null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $participants && $self['participants'] = $participants;
         null !== $recordings && $self['recordings'] = $recordings;
         null !== $start && $self['start'] = $start;
         null !== $uri && $self['uri'] = $uri;
@@ -161,6 +173,19 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     {
         $self = clone $this;
         $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    /**
+     * List of participant resources.
+     *
+     * @param list<mixed> $participants
+     */
+    public function withParticipants(array $participants): self
+    {
+        $self = clone $this;
+        $self['participants'] = $participants;
 
         return $self;
     }

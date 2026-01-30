@@ -15,6 +15,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsRespon
  *   callSid?: string|null,
  *   coaching?: bool|null,
  *   coachingCallSid?: string|null,
+ *   conferenceSid?: string|null,
  *   endConferenceOnExit?: bool|null,
  *   hold?: bool|null,
  *   muted?: bool|null,
@@ -50,6 +51,12 @@ final class ParticipantParticipantsResponse implements BaseModel
      */
     #[Optional('coaching_call_sid')]
     public ?string $coachingCallSid;
+
+    /**
+     * The unique identifier for the conference.
+     */
+    #[Optional('conference_sid')]
+    public ?string $conferenceSid;
 
     /**
      * Whether the conference ends when the participant leaves.
@@ -100,6 +107,7 @@ final class ParticipantParticipantsResponse implements BaseModel
         ?string $callSid = null,
         ?bool $coaching = null,
         ?string $coachingCallSid = null,
+        ?string $conferenceSid = null,
         ?bool $endConferenceOnExit = null,
         ?bool $hold = null,
         ?bool $muted = null,
@@ -112,6 +120,7 @@ final class ParticipantParticipantsResponse implements BaseModel
         null !== $callSid && $self['callSid'] = $callSid;
         null !== $coaching && $self['coaching'] = $coaching;
         null !== $coachingCallSid && $self['coachingCallSid'] = $coachingCallSid;
+        null !== $conferenceSid && $self['conferenceSid'] = $conferenceSid;
         null !== $endConferenceOnExit && $self['endConferenceOnExit'] = $endConferenceOnExit;
         null !== $hold && $self['hold'] = $hold;
         null !== $muted && $self['muted'] = $muted;
@@ -161,6 +170,17 @@ final class ParticipantParticipantsResponse implements BaseModel
     {
         $self = clone $this;
         $self['coachingCallSid'] = $coachingCallSid;
+
+        return $self;
+    }
+
+    /**
+     * The unique identifier for the conference.
+     */
+    public function withConferenceSid(string $conferenceSid): self
+    {
+        $self = clone $this;
+        $self['conferenceSid'] = $conferenceSid;
 
         return $self;
     }

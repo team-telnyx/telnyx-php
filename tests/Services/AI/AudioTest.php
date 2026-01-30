@@ -53,6 +53,8 @@ final class AudioTest extends TestCase
             model: 'distil-whisper/distil-large-v2',
             file: 'file',
             fileURL: 'https://example.com/file.mp3',
+            language: 'en-US',
+            modelConfig: ['smart_format' => 'bar', 'punctuate' => 'bar'],
             responseFormat: 'json',
             timestampGranularities: 'segment',
         );

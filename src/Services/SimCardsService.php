@@ -127,7 +127,7 @@ final class SimCardsService implements SimCardsContract
      *
      * Get all SIM cards belonging to the user that match the given filters.
      *
-     * @param Filter|FilterShape $filter Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status]
+     * @param Filter|FilterShape $filter Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags]
      * @param string $filterSimCardGroupID a valid SIM card group ID
      * @param bool $includeSimCardGroup it includes the associated SIM card group object in the response when present
      * @param Sort|value-of<Sort> $sort Sorts SIM cards by the given field. Defaults to ascending order unless field is prefixed with a minus sign.
