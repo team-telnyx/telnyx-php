@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.2.2 (2026-01-30)
+
+Full Changelog: [v6.2.1...v6.2.2](https://github.com/team-telnyx/telnyx-php/compare/v6.2.1...v6.2.2)
+
+### Bug Fixes
+
+* use PaginationMeta schema for ListFaxesResponse.meta ([4e9bd01](https://github.com/team-telnyx/telnyx-php/commit/4e9bd0160f3b0ecd08f47c9c3f9bd97cda05a3e8))
+
 ## 6.2.1 (2026-01-30)
 
 Full Changelog: [v6.2.0...v6.2.1](https://github.com/team-telnyx/telnyx-php/compare/v6.2.0...v6.2.1)
