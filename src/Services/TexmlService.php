@@ -10,7 +10,6 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TexmlContract;
 use Telnyx\Services\Texml\AccountsService;
-use Telnyx\Services\Texml\CallsService;
 use Telnyx\Texml\TexmlSecretsResponse;
 
 /**
@@ -29,18 +28,12 @@ final class TexmlService implements TexmlContract
     public AccountsService $accounts;
 
     /**
-     * @api
-     */
-    public CallsService $calls;
-
-    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new TexmlRawService($client);
         $this->accounts = new AccountsService($client);
-        $this->calls = new CallsService($client);
     }
 
     /**
