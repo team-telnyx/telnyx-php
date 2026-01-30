@@ -96,6 +96,19 @@ final class ToolMessage implements BaseModel
     }
 
     /**
+     * The role of the messages author, in this case `tool`.
+     *
+     * @param 'tool' $role
+     */
+    public function withRole(string $role): self
+    {
+        $self = clone $this;
+        $self['role'] = $role;
+
+        return $self;
+    }
+
+    /**
      * Tool call that this message is responding to.
      */
     public function withToolCallID(string $toolCallID): self

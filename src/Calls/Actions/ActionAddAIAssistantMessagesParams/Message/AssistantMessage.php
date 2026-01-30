@@ -82,6 +82,19 @@ final class AssistantMessage implements BaseModel
     }
 
     /**
+     * The role of the messages author, in this case `assistant`.
+     *
+     * @param 'assistant' $role
+     */
+    public function withRole(string $role): self
+    {
+        $self = clone $this;
+        $self['role'] = $role;
+
+        return $self;
+    }
+
+    /**
      * The contents of the assistant message. Required unless `tool_calls`.
      */
     public function withContent(string $content): self

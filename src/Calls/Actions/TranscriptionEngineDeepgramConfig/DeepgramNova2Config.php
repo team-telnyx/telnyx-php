@@ -104,6 +104,17 @@ final class DeepgramNova2Config implements BaseModel
     }
 
     /**
+     * @param 'deepgram/nova-2' $transcriptionModel
+     */
+    public function withTranscriptionModel(string $transcriptionModel): self
+    {
+        $self = clone $this;
+        $self['transcriptionModel'] = $transcriptionModel;
+
+        return $self;
+    }
+
+    /**
      * Keywords and their respective intensifiers (boosting values) to improve transcription accuracy for specific words or phrases. The intensifier should be a numeric value. Example: `{"snuffleupagus": 5, "systrom": 2, "krieger": 1}`.
      *
      * @param array<string,float> $keywordsBoosting

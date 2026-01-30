@@ -76,4 +76,15 @@ final class CheckAvailabilityTool implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'check_availability' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }

@@ -133,4 +133,15 @@ final class SimpleLine implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'simple' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }

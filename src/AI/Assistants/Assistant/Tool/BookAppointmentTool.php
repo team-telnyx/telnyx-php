@@ -75,4 +75,15 @@ final class BookAppointmentTool implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'book_appointment' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }

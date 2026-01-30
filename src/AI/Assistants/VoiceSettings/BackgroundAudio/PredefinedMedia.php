@@ -71,6 +71,19 @@ final class PredefinedMedia implements BaseModel
     }
 
     /**
+     * Select from predefined media options.
+     *
+     * @param 'predefined_media' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
      * The predefined media to use. `silence` disables background audio.
      *
      * @param Value|value-of<Value> $value

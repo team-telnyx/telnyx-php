@@ -73,4 +73,15 @@ final class SendMessageTool implements BaseModel
 
         return $self;
     }
+
+    /**
+     * @param 'send_message' $type
+     */
+    public function withType(string $type): self
+    {
+        $self = clone $this;
+        $self['type'] = $type;
+
+        return $self;
+    }
 }
