@@ -34,7 +34,7 @@ final class SimCardListParams implements BaseModel
     use SdkParams;
 
     /**
-     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
+     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags].
      */
     #[Optional]
     public ?Filter $filter;
@@ -99,7 +99,7 @@ final class SimCardListParams implements BaseModel
     }
 
     /**
-     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[tags], filter[iccid], filter[status].
+     * Consolidated filter parameter for SIM cards (deepObject style). Originally: filter[iccid], filter[msisdn], filter[status], filter[tags].
      *
      * @param Filter|FilterShape $filter
      */

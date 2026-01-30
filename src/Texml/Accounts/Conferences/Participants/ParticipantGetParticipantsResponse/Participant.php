@@ -18,6 +18,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsRes
  *   coaching?: bool|null,
  *   coachingCallSid?: string|null,
  *   coachingCallSidLegacy?: string|null,
+ *   conferenceSid?: string|null,
  *   dateCreated?: string|null,
  *   dateUpdated?: string|null,
  *   endConferenceOnExit?: bool|null,
@@ -73,6 +74,12 @@ final class Participant implements BaseModel
      */
     #[Optional('coaching_call_sid_legacy')]
     public ?string $coachingCallSidLegacy;
+
+    /**
+     * The unique identifier for the conference.
+     */
+    #[Optional('conference_sid')]
+    public ?string $conferenceSid;
 
     /**
      * The timestamp of when the resource was created.
@@ -138,6 +145,7 @@ final class Participant implements BaseModel
         ?bool $coaching = null,
         ?string $coachingCallSid = null,
         ?string $coachingCallSidLegacy = null,
+        ?string $conferenceSid = null,
         ?string $dateCreated = null,
         ?string $dateUpdated = null,
         ?bool $endConferenceOnExit = null,
@@ -155,6 +163,7 @@ final class Participant implements BaseModel
         null !== $coaching && $self['coaching'] = $coaching;
         null !== $coachingCallSid && $self['coachingCallSid'] = $coachingCallSid;
         null !== $coachingCallSidLegacy && $self['coachingCallSidLegacy'] = $coachingCallSidLegacy;
+        null !== $conferenceSid && $self['conferenceSid'] = $conferenceSid;
         null !== $dateCreated && $self['dateCreated'] = $dateCreated;
         null !== $dateUpdated && $self['dateUpdated'] = $dateUpdated;
         null !== $endConferenceOnExit && $self['endConferenceOnExit'] = $endConferenceOnExit;
@@ -240,6 +249,17 @@ final class Participant implements BaseModel
     ): self {
         $self = clone $this;
         $self['coachingCallSidLegacy'] = $coachingCallSidLegacy;
+
+        return $self;
+    }
+
+    /**
+     * The unique identifier for the conference.
+     */
+    public function withConferenceSid(string $conferenceSid): self
+    {
+        $self = clone $this;
+        $self['conferenceSid'] = $conferenceSid;
 
         return $self;
     }

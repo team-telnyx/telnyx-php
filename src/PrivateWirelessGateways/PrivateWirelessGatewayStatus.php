@@ -24,7 +24,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     use SdkModel;
 
     /**
-     * This attribute is an [error code](https://developers.telnyx.com/api/errors) related to the failure reason.
+     * This attribute is an [error code](https://developers.telnyx.com/development/api-fundamentals/api-errors) related to the failure reason.
      */
     #[Optional('error_code', nullable: true)]
     public ?string $errorCode;
@@ -76,7 +76,7 @@ final class PrivateWirelessGatewayStatus implements BaseModel
     }
 
     /**
-     * This attribute is an [error code](https://developers.telnyx.com/api/errors) related to the failure reason.
+     * This attribute is an [error code](https://developers.telnyx.com/development/api-fundamentals/api-errors) related to the failure reason.
      */
     public function withErrorCode(?string $errorCode): self
     {
