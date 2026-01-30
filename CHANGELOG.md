@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.2.0 (2026-01-30)
+
+Full Changelog: [v6.1.0...v6.2.0](https://github.com/team-telnyx/telnyx-php/compare/v6.1.0...v6.2.0)
+
+### Features
+
+* add setters to constant parameters ([6ebbf2c](https://github.com/team-telnyx/telnyx-php/commit/6ebbf2c5c428440480c1dc1d5611612a38d0d983))
+
+
+### Chores
+
+* **internal:** ignore stainless-internal artifacts ([20cd09b](https://github.com/team-telnyx/telnyx-php/commit/20cd09b3181e8e7cd5fd626484ccc57e6c0b6157))
+
 ## 6.1.0 (2026-01-29)
 
 Full Changelog: [v6.0.0...v6.1.0](https://github.com/team-telnyx/telnyx-php/compare/v6.0.0...v6.1.0)
