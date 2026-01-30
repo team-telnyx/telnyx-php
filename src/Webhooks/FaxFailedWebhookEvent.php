@@ -7,18 +7,15 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\FaxFailedWebhookEvent\EventType;
-use Telnyx\Webhooks\FaxFailedWebhookEvent\Payload;
-use Telnyx\Webhooks\FaxFailedWebhookEvent\RecordType;
+use Telnyx\Webhooks\FaxFailedWebhookEvent\Data;
+use Telnyx\Webhooks\FaxFailedWebhookEvent\Meta;
 
 /**
- * @phpstan-import-type PayloadShape from \Telnyx\Webhooks\FaxFailedWebhookEvent\Payload
+ * @phpstan-import-type DataShape from \Telnyx\Webhooks\FaxFailedWebhookEvent\Data
+ * @phpstan-import-type MetaShape from \Telnyx\Webhooks\FaxFailedWebhookEvent\Meta
  *
  * @phpstan-type FaxFailedWebhookEventShape = array{
- *   id?: string|null,
- *   eventType?: null|EventType|value-of<EventType>,
- *   payload?: null|Payload|PayloadShape,
- *   recordType?: null|RecordType|value-of<RecordType>,
+ *   data?: null|Data|DataShape, meta?: null|Meta|MetaShape
  * }
  */
 final class FaxFailedWebhookEvent implements BaseModel
@@ -26,30 +23,14 @@ final class FaxFailedWebhookEvent implements BaseModel
     /** @use SdkModel<FaxFailedWebhookEventShape> */
     use SdkModel;
 
+    #[Optional]
+    public ?Data $data;
+
     /**
-     * Identifies the type of resource.
+     * Metadata about the webhook delivery.
      */
     #[Optional]
-    public ?string $id;
-
-    /**
-     * The type of event being delivered.
-     *
-     * @var value-of<EventType>|null $eventType
-     */
-    #[Optional('event_type', enum: EventType::class)]
-    public ?string $eventType;
-
-    #[Optional]
-    public ?Payload $payload;
-
-    /**
-     * Identifies the type of the resource.
-     *
-     * @var value-of<RecordType>|null $recordType
-     */
-    #[Optional('record_type', enum: RecordType::class)]
-    public ?string $recordType;
+    public ?Meta $meta;
 
     public function __construct()
     {
@@ -61,70 +42,41 @@ final class FaxFailedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EventType|value-of<EventType>|null $eventType
-     * @param Payload|PayloadShape|null $payload
-     * @param RecordType|value-of<RecordType>|null $recordType
+     * @param Data|DataShape|null $data
+     * @param Meta|MetaShape|null $meta
      */
     public static function with(
-        ?string $id = null,
-        EventType|string|null $eventType = null,
-        Payload|array|null $payload = null,
-        RecordType|string|null $recordType = null,
+        Data|array|null $data = null,
+        Meta|array|null $meta = null
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
-        null !== $eventType && $self['eventType'] = $eventType;
-        null !== $payload && $self['payload'] = $payload;
-        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $data && $self['data'] = $data;
+        null !== $meta && $self['meta'] = $meta;
 
         return $self;
     }
 
     /**
-     * Identifies the type of resource.
+     * @param Data|DataShape $data
      */
-    public function withID(string $id): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
-        $self['id'] = $id;
+        $self['data'] = $data;
 
         return $self;
     }
 
     /**
-     * The type of event being delivered.
+     * Metadata about the webhook delivery.
      *
-     * @param EventType|value-of<EventType> $eventType
+     * @param Meta|MetaShape $meta
      */
-    public function withEventType(EventType|string $eventType): self
+    public function withMeta(Meta|array $meta): self
     {
         $self = clone $this;
-        $self['eventType'] = $eventType;
-
-        return $self;
-    }
-
-    /**
-     * @param Payload|PayloadShape $payload
-     */
-    public function withPayload(Payload|array $payload): self
-    {
-        $self = clone $this;
-        $self['payload'] = $payload;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     *
-     * @param RecordType|value-of<RecordType> $recordType
-     */
-    public function withRecordType(RecordType|string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
+        $self['meta'] = $meta;
 
         return $self;
     }
