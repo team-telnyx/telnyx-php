@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.2.1 (2026-01-30)
+
+Full Changelog: [v6.2.0...v6.2.1](https://github.com/team-telnyx/telnyx-php/compare/v6.2.0...v6.2.1)
+
+### Bug Fixes
+
+* remove deprecated TeXML API endpoints from OpenAPI spec ([b51b437](https://github.com/team-telnyx/telnyx-php/commit/b51b437bbf8b11fa339e9464d52e3a595f4a2162))
+* used redirect count instead of retry count in base client ([1e82f7c](https://github.com/team-telnyx/telnyx-php/commit/1e82f7c7412ab1e5979ce84023c308926ba08c81))
+
 ## 6.2.0 (2026-01-30)
 
 Full Changelog: [v6.1.0...v6.2.0](https://github.com/team-telnyx/telnyx-php/compare/v6.1.0...v6.2.0)
