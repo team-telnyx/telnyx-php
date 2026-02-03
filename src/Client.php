@@ -942,14 +942,18 @@ class Client extends BaseClient
         ?string $baseUrl = null,
         RequestOptions|array|null $requestOptions = null,
     ) {
-        $this->apiKey = (string) ($apiKey ?? getenv('TELNYX_API_KEY'));
-        $this->clientID = (string) ($clientID ?? getenv('TELNYX_CLIENT_ID'));
-        $this->clientSecret = (string) ($clientSecret ?? getenv('TELNYX_CLIENT_SECRET'));
-        $this->publicKey = (string) ($publicKey ?? getenv('TELNYX_PUBLIC_KEY'));
+        $this->apiKey = (string) ($apiKey ?? Util::getenv('TELNYX_API_KEY'));
+        $this->clientID = (string) ($clientID ?? Util::getenv('TELNYX_CLIENT_ID'));
+        $this->clientSecret = (string) ($clientSecret ?? Util::getenv(
+            'TELNYX_CLIENT_SECRET'
+        ));
+        $this->publicKey = (string) ($publicKey ?? Util::getenv(
+            'TELNYX_PUBLIC_KEY'
+        ));
 
         $this->baseUrlOverridden = !is_null($baseUrl);
 
-        $baseUrl ??= getenv('TELNYX_BASE_URL') ?: 'https://api.telnyx.com/v2';
+        $baseUrl ??= Util::getenv('TELNYX_BASE_URL') ?: 'https://api.telnyx.com/v2';
 
         $options = RequestOptions::parse(
             RequestOptions::with(
