@@ -44,6 +44,7 @@ use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
 use Telnyx\Client;
+use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -58,7 +59,7 @@ final class ActionsTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;

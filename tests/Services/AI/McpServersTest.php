@@ -10,6 +10,7 @@ use Telnyx\AI\McpServers\McpServerListResponse;
 use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
+use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Tests\UnsupportedMockTests;
 
@@ -25,7 +26,7 @@ final class McpServersTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
