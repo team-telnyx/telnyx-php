@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.4.0 (2026-02-03)
+
+Full Changelog: [v6.3.0...v6.4.0](https://github.com/team-telnyx/telnyx-php/compare/v6.3.0...v6.4.0)
+
+### Features
+
+* use `$_ENV` aware getenv helper ([713a6b7](https://github.com/team-telnyx/telnyx-php/commit/713a6b77fd4e9941364b042cde75e04c64aa16d2))
+
+
+### Chores
+
+* **internal:** php cs fixer should not be memory limited ([37c71d9](https://github.com/team-telnyx/telnyx-php/commit/37c71d93051a2998ad982c01a8b86d30cc87e39f))
+
 ## 6.3.0 (2026-01-30)
 
 Full Changelog: [v6.2.2...v6.3.0](https://github.com/team-telnyx/telnyx-php/compare/v6.2.2...v6.3.0)
