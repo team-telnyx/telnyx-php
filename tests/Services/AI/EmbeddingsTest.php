@@ -10,6 +10,7 @@ use Telnyx\AI\Embeddings\EmbeddingListResponse;
 use Telnyx\AI\Embeddings\EmbeddingResponse;
 use Telnyx\AI\Embeddings\EmbeddingSimilaritySearchResponse;
 use Telnyx\Client;
+use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -24,7 +25,7 @@ final class EmbeddingsTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;

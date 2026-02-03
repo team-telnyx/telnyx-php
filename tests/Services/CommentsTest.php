@@ -10,6 +10,7 @@ use Telnyx\Comments\CommentGetResponse;
 use Telnyx\Comments\CommentListResponse;
 use Telnyx\Comments\CommentMarkAsReadResponse;
 use Telnyx\Comments\CommentNewResponse;
+use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -24,7 +25,7 @@ final class CommentsTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
