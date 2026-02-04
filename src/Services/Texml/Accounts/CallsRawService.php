@@ -176,6 +176,7 @@ final class CallsRawService implements CallsRawContract
      *   statusCallbackMethod?: CallCallsParams\StatusCallbackMethod|value-of<CallCallsParams\StatusCallbackMethod>,
      *   superviseCallSid?: string,
      *   supervisingRole?: SupervisingRole|value-of<SupervisingRole>,
+     *   texml?: string,
      *   trim?: Trim|value-of<Trim>,
      *   url?: string,
      *   urlMethod?: URLMethod|value-of<URLMethod>,
