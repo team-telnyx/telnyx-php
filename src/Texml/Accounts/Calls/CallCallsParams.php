@@ -65,6 +65,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
  *   superviseCallSid?: string|null,
  *   supervisingRole?: null|SupervisingRole|value-of<SupervisingRole>,
+ *   texml?: string|null,
  *   trim?: null|Trim|value-of<Trim>,
  *   url?: string|null,
  *   urlMethod?: null|URLMethod|value-of<URLMethod>,
@@ -309,6 +310,12 @@ final class CallCallsParams implements BaseModel
     public ?string $supervisingRole;
 
     /**
+     * TeXML to be used as instructions for the call. If provided, the call will execute these instructions instead of fetching from the Url.
+     */
+    #[Optional('Texml')]
+    public ?string $texml;
+
+    /**
      * Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      *
      * @var value-of<Trim>|null $trim
@@ -403,6 +410,7 @@ final class CallCallsParams implements BaseModel
         StatusCallbackMethod|string|null $statusCallbackMethod = null,
         ?string $superviseCallSid = null,
         SupervisingRole|string|null $supervisingRole = null,
+        ?string $texml = null,
         Trim|string|null $trim = null,
         ?string $url = null,
         URLMethod|string|null $urlMethod = null,
@@ -444,6 +452,7 @@ final class CallCallsParams implements BaseModel
         null !== $statusCallbackMethod && $self['statusCallbackMethod'] = $statusCallbackMethod;
         null !== $superviseCallSid && $self['superviseCallSid'] = $superviseCallSid;
         null !== $supervisingRole && $self['supervisingRole'] = $supervisingRole;
+        null !== $texml && $self['texml'] = $texml;
         null !== $trim && $self['trim'] = $trim;
         null !== $url && $self['url'] = $url;
         null !== $urlMethod && $self['urlMethod'] = $urlMethod;
@@ -860,6 +869,17 @@ final class CallCallsParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['supervisingRole'] = $supervisingRole;
+
+        return $self;
+    }
+
+    /**
+     * TeXML to be used as instructions for the call. If provided, the call will execute these instructions instead of fetching from the Url.
+     */
+    public function withTexml(string $texml): self
+    {
+        $self = clone $this;
+        $self['texml'] = $texml;
 
         return $self;
     }
