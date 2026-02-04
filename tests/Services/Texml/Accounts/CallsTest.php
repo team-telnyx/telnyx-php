@@ -166,6 +166,7 @@ final class CallsTest extends TestCase
             statusCallbackMethod: 'GET',
             superviseCallSid: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             supervisingRole: 'monitor',
+            texml: '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hello</Say></Response>',
             trim: 'trim-silence',
             url: 'https://www.example.com/texml.xml',
             urlMethod: 'GET',

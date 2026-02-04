@@ -123,6 +123,7 @@ interface CallsContract
      * @param \Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param string $superviseCallSid The call control ID of the existing call to supervise. When provided, the created leg will be added to the specified call in supervising mode. Status callbacks and action callbacks will NOT be sent for the supervising leg.
      * @param SupervisingRole|value-of<SupervisingRole> $supervisingRole The supervising role for the new leg. Determines the audio behavior: barge (hear both sides), whisper (only hear supervisor), monitor (hear both sides but supervisor muted). Default: barge
+     * @param string $texml TeXML to be used as instructions for the call. If provided, the call will execute these instructions instead of fetching from the Url.
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
@@ -166,6 +167,7 @@ interface CallsContract
         \Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod|string $statusCallbackMethod = 'POST',
         ?string $superviseCallSid = null,
         SupervisingRole|string $supervisingRole = 'barge',
+        ?string $texml = null,
         Trim|string|null $trim = null,
         ?string $url = null,
         URLMethod|string $urlMethod = 'POST',
