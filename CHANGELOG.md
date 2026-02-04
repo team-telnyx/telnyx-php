@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.5.0 (2026-02-04)
+
+Full Changelog: [v6.4.0...v6.5.0](https://github.com/team-telnyx/telnyx-php/compare/v6.4.0...v6.5.0)
+
+### Features
+
+* Add Texml parameter to create call endpoint [ENGDESK-49187] ([124cbfa](https://github.com/team-telnyx/telnyx-php/commit/124cbfa1722993e0d44ad175fe66036a5dac7db6))
+
 ## 6.4.0 (2026-02-03)
 
 Full Changelog: [v6.3.0...v6.4.0](https://github.com/team-telnyx/telnyx-php/compare/v6.3.0...v6.4.0)
