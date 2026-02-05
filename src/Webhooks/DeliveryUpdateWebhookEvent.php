@@ -7,15 +7,14 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data;
 use Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Meta;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Data
+ * @phpstan-import-type OutboundMessageShape from \Telnyx\Webhooks\OutboundMessage
  * @phpstan-import-type MetaShape from \Telnyx\Webhooks\DeliveryUpdateWebhookEvent\Meta
  *
  * @phpstan-type DeliveryUpdateWebhookEventShape = array{
- *   data?: null|Data|DataShape, meta?: null|Meta|MetaShape
+ *   data?: null|OutboundMessage|OutboundMessageShape, meta?: null|Meta|MetaShape
  * }
  */
 final class DeliveryUpdateWebhookEvent implements BaseModel
@@ -24,7 +23,7 @@ final class DeliveryUpdateWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?OutboundMessage $data;
 
     #[Optional]
     public ?Meta $meta;
@@ -39,11 +38,11 @@ final class DeliveryUpdateWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param OutboundMessage|OutboundMessageShape|null $data
      * @param Meta|MetaShape|null $meta
      */
     public static function with(
-        Data|array|null $data = null,
+        OutboundMessage|array|null $data = null,
         Meta|array|null $meta = null
     ): self {
         $self = new self;
@@ -55,9 +54,9 @@ final class DeliveryUpdateWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param OutboundMessage|OutboundMessageShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(OutboundMessage|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\ConferenceParticipantPlaybackStartedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\ConferenceParticipantPlaybackStartedWebhookEvent\Data
+ * @phpstan-import-type ConferenceParticipantPlaybackStartedShape from \Telnyx\Webhooks\ConferenceParticipantPlaybackStarted
  *
  * @phpstan-type ConferenceParticipantPlaybackStartedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|ConferenceParticipantPlaybackStarted|ConferenceParticipantPlaybackStartedShape,
  * }
  */
 final class ConferenceParticipantPlaybackStartedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class ConferenceParticipantPlaybackStartedWebhookEvent implements BaseMode
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ConferenceParticipantPlaybackStarted $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class ConferenceParticipantPlaybackStartedWebhookEvent implements BaseMode
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ConferenceParticipantPlaybackStarted|ConferenceParticipantPlaybackStartedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        ConferenceParticipantPlaybackStarted|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,10 +46,11 @@ final class ConferenceParticipantPlaybackStartedWebhookEvent implements BaseMode
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ConferenceParticipantPlaybackStarted|ConferenceParticipantPlaybackStartedShape $data
      */
-    public function withData(Data|array $data): self
-    {
+    public function withData(
+        ConferenceParticipantPlaybackStarted|array $data
+    ): self {
         $self = clone $this;
         $self['data'] = $data;
 

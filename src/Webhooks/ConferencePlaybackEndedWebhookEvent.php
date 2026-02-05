@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\ConferencePlaybackEndedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\ConferencePlaybackEndedWebhookEvent\Data
+ * @phpstan-import-type ConferencePlaybackEndedShape from \Telnyx\Webhooks\ConferencePlaybackEnded
  *
  * @phpstan-type ConferencePlaybackEndedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|ConferencePlaybackEnded|ConferencePlaybackEndedShape
  * }
  */
 final class ConferencePlaybackEndedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class ConferencePlaybackEndedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ConferencePlaybackEnded $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class ConferencePlaybackEndedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ConferencePlaybackEnded|ConferencePlaybackEndedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        ConferencePlaybackEnded|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class ConferencePlaybackEndedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ConferencePlaybackEnded|ConferencePlaybackEndedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(ConferencePlaybackEnded|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

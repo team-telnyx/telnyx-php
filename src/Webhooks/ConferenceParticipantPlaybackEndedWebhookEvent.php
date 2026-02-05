@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\ConferenceParticipantPlaybackEndedWebhookEvent\Data
+ * @phpstan-import-type ConferenceParticipantPlaybackEndedShape from \Telnyx\Webhooks\ConferenceParticipantPlaybackEnded
  *
  * @phpstan-type ConferenceParticipantPlaybackEndedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|ConferenceParticipantPlaybackEnded|ConferenceParticipantPlaybackEndedShape,
  * }
  */
 final class ConferenceParticipantPlaybackEndedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class ConferenceParticipantPlaybackEndedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ConferenceParticipantPlaybackEnded $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class ConferenceParticipantPlaybackEndedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ConferenceParticipantPlaybackEnded|ConferenceParticipantPlaybackEndedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        ConferenceParticipantPlaybackEnded|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,10 +46,11 @@ final class ConferenceParticipantPlaybackEndedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ConferenceParticipantPlaybackEnded|ConferenceParticipantPlaybackEndedShape $data
      */
-    public function withData(Data|array $data): self
-    {
+    public function withData(
+        ConferenceParticipantPlaybackEnded|array $data
+    ): self {
         $self = clone $this;
         $self['data'] = $data;
 

@@ -7,12 +7,13 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallBridgedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallBridgedWebhookEvent\Data
+ * @phpstan-import-type CallBridgedShape from \Telnyx\Webhooks\CallBridged
  *
- * @phpstan-type CallBridgedWebhookEventShape = array{data?: null|Data|DataShape}
+ * @phpstan-type CallBridgedWebhookEventShape = array{
+ *   data?: null|CallBridged|CallBridgedShape
+ * }
  */
 final class CallBridgedWebhookEvent implements BaseModel
 {
@@ -20,7 +21,7 @@ final class CallBridgedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CallBridged $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class CallBridgedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CallBridged|CallBridgedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CallBridged|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class CallBridgedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CallBridged|CallBridgedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CallBridged|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

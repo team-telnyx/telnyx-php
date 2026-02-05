@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\ConferenceParticipantLeftWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\ConferenceParticipantLeftWebhookEvent\Data
+ * @phpstan-import-type ConferenceParticipantLeftShape from \Telnyx\Webhooks\ConferenceParticipantLeft
  *
  * @phpstan-type ConferenceParticipantLeftWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|ConferenceParticipantLeft|ConferenceParticipantLeftShape
  * }
  */
 final class ConferenceParticipantLeftWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class ConferenceParticipantLeftWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ConferenceParticipantLeft $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class ConferenceParticipantLeftWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ConferenceParticipantLeft|ConferenceParticipantLeftShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        ConferenceParticipantLeft|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class ConferenceParticipantLeftWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ConferenceParticipantLeft|ConferenceParticipantLeftShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(ConferenceParticipantLeft|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

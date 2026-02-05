@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallMachineDetectionEndedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallMachineDetectionEndedWebhookEvent\Data
+ * @phpstan-import-type CallMachineDetectionEndedShape from \Telnyx\Webhooks\CallMachineDetectionEnded
  *
  * @phpstan-type CallMachineDetectionEndedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|CallMachineDetectionEnded|CallMachineDetectionEndedShape
  * }
  */
 final class CallMachineDetectionEndedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class CallMachineDetectionEndedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CallMachineDetectionEnded $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class CallMachineDetectionEndedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CallMachineDetectionEnded|CallMachineDetectionEndedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        CallMachineDetectionEnded|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class CallMachineDetectionEndedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CallMachineDetectionEnded|CallMachineDetectionEndedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CallMachineDetectionEnded|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

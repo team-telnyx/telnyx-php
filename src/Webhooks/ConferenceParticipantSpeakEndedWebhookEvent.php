@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\ConferenceParticipantSpeakEndedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\ConferenceParticipantSpeakEndedWebhookEvent\Data
+ * @phpstan-import-type ConferenceParticipantSpeakEndedShape from \Telnyx\Webhooks\ConferenceParticipantSpeakEnded
  *
  * @phpstan-type ConferenceParticipantSpeakEndedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|ConferenceParticipantSpeakEnded|ConferenceParticipantSpeakEndedShape,
  * }
  */
 final class ConferenceParticipantSpeakEndedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class ConferenceParticipantSpeakEndedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ConferenceParticipantSpeakEnded $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class ConferenceParticipantSpeakEndedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ConferenceParticipantSpeakEnded|ConferenceParticipantSpeakEndedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        ConferenceParticipantSpeakEnded|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class ConferenceParticipantSpeakEndedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ConferenceParticipantSpeakEnded|ConferenceParticipantSpeakEndedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(ConferenceParticipantSpeakEnded|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

@@ -7,12 +7,13 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallInitiatedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallInitiatedWebhookEvent\Data
+ * @phpstan-import-type CallInitiatedShape from \Telnyx\Webhooks\CallInitiated
  *
- * @phpstan-type CallInitiatedWebhookEventShape = array{data?: null|Data|DataShape}
+ * @phpstan-type CallInitiatedWebhookEventShape = array{
+ *   data?: null|CallInitiated|CallInitiatedShape
+ * }
  */
 final class CallInitiatedWebhookEvent implements BaseModel
 {
@@ -20,7 +21,7 @@ final class CallInitiatedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CallInitiated $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class CallInitiatedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CallInitiated|CallInitiatedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CallInitiated|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class CallInitiatedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CallInitiated|CallInitiatedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CallInitiated|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
