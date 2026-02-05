@@ -7,12 +7,13 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallHangupWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallHangupWebhookEvent\Data
+ * @phpstan-import-type CallHangupShape from \Telnyx\Webhooks\CallHangup
  *
- * @phpstan-type CallHangupWebhookEventShape = array{data?: null|Data|DataShape}
+ * @phpstan-type CallHangupWebhookEventShape = array{
+ *   data?: null|CallHangup|CallHangupShape
+ * }
  */
 final class CallHangupWebhookEvent implements BaseModel
 {
@@ -20,7 +21,7 @@ final class CallHangupWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CallHangup $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class CallHangupWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CallHangup|CallHangupShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CallHangup|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class CallHangupWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CallHangup|CallHangupShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CallHangup|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

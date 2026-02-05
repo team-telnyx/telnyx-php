@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallMachinePremiumDetectionEndedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallMachinePremiumDetectionEndedWebhookEvent\Data
+ * @phpstan-import-type CallMachinePremiumDetectionEndedShape from \Telnyx\Webhooks\CallMachinePremiumDetectionEnded
  *
  * @phpstan-type CallMachinePremiumDetectionEndedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|CallMachinePremiumDetectionEnded|CallMachinePremiumDetectionEndedShape,
  * }
  */
 final class CallMachinePremiumDetectionEndedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class CallMachinePremiumDetectionEndedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CallMachinePremiumDetectionEnded $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class CallMachinePremiumDetectionEndedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CallMachinePremiumDetectionEnded|CallMachinePremiumDetectionEndedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        CallMachinePremiumDetectionEnded|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class CallMachinePremiumDetectionEndedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CallMachinePremiumDetectionEnded|CallMachinePremiumDetectionEndedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CallMachinePremiumDetectionEnded|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
