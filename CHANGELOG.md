@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.6.0 (2026-02-05)
+
+Full Changelog: [v6.5.0...v6.6.0](https://github.com/team-telnyx/telnyx-php/compare/v6.5.0...v6.6.0)
+
+### Features
+
+* **api:** Merge pull request [#22](https://github.com/team-telnyx/telnyx-php/issues/22) from stainless-sdks/add-all-webhook-models ([c4ad4ef](https://github.com/team-telnyx/telnyx-php/commit/c4ad4efd99cc1ee4b59a1724ae43bf4754ed85d2))
+
 ## 6.5.0 (2026-02-04)
 
 Full Changelog: [v6.4.0...v6.5.0](https://github.com/team-telnyx/telnyx-php/compare/v6.4.0...v6.5.0)
