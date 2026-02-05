@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\ConnectionJitterBuffer;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -18,7 +19,6 @@ use Telnyx\IPConnections\InboundIP;
 use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
-use Telnyx\IPConnections\IPConnectionCreateParams\JitterBuffer;
 use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
@@ -36,10 +36,9 @@ use Telnyx\ServiceContracts\IPConnectionsRawContract;
 
 /**
  * @phpstan-import-type InboundShape from \Telnyx\IPConnections\IPConnectionCreateParams\Inbound
- * @phpstan-import-type JitterBufferShape from \Telnyx\IPConnections\IPConnectionCreateParams\JitterBuffer
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
- * @phpstan-import-type JitterBufferShape from \Telnyx\IPConnections\IPConnectionUpdateParams\JitterBuffer as JitterBufferShape1
  * @phpstan-import-type FilterShape from \Telnyx\IPConnections\IPConnectionListParams\Filter
+ * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundIPShape from \Telnyx\IPConnections\OutboundIP
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -70,7 +69,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: Inbound|InboundShape,
      *   iosPushCredentialID?: string|null,
-     *   jitterBuffer?: JitterBuffer|JitterBufferShape,
+     *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
@@ -151,7 +150,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: InboundIP|InboundIPShape,
      *   iosPushCredentialID?: string|null,
-     *   jitterBuffer?: IPConnectionUpdateParams\JitterBuffer|JitterBufferShape1,
+     *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
      *   noiseSuppression?: IPConnectionUpdateParams\NoiseSuppression|value-of<IPConnectionUpdateParams\NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,

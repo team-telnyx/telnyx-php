@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\WidgetSettings\AudioVisualizerConfig;
+namespace Telnyx\AI\Assistants\AudioVisualizerConfig;
 
 /**
  * The color theme for the audio visualizer.

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\ConnectionJitterBuffer;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -13,7 +14,6 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
-use Telnyx\CredentialConnections\CredentialConnectionCreateParams\JitterBuffer;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppression;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
@@ -34,10 +34,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnectionsRawContract;
 
 /**
- * @phpstan-import-type JitterBufferShape from \Telnyx\CredentialConnections\CredentialConnectionCreateParams\JitterBuffer
- * @phpstan-import-type JitterBufferShape from \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\JitterBuffer as JitterBufferShape1
  * @phpstan-import-type FilterShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Filter
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
+ * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -70,7 +69,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
-     *   jitterBuffer?: JitterBuffer|JitterBufferShape,
+     *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
@@ -151,7 +150,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
-     *   jitterBuffer?: CredentialConnectionUpdateParams\JitterBuffer|JitterBufferShape1,
+     *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
      *   noiseSuppression?: CredentialConnectionUpdateParams\NoiseSuppression|value-of<CredentialConnectionUpdateParams\NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
