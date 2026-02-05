@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
+use Telnyx\ConnectionJitterBuffer;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -16,7 +17,6 @@ use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
-use Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
@@ -34,10 +34,9 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FqdnConnectionsRawContract;
 
 /**
- * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer
- * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\JitterBuffer as JitterBufferShape1
  * @phpstan-import-type FilterShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Filter
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
+ * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -68,7 +67,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: InboundFqdn|InboundFqdnShape,
      *   iosPushCredentialID?: string|null,
-     *   jitterBuffer?: JitterBuffer|JitterBufferShape,
+     *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
      *   microsoftTeamsSbc?: bool,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
@@ -150,7 +149,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
      *   inbound?: InboundFqdn|InboundFqdnShape,
      *   iosPushCredentialID?: string|null,
-     *   jitterBuffer?: FqdnConnectionUpdateParams\JitterBuffer|JitterBufferShape1,
+     *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
      *   noiseSuppression?: FqdnConnectionUpdateParams\NoiseSuppression|value-of<FqdnConnectionUpdateParams\NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,

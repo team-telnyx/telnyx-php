@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\FqdnConnections\FqdnConnectionCreateParams;
+namespace Telnyx;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -11,15 +11,15 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
  *
- * @phpstan-type JitterBufferShape = array{
+ * @phpstan-type ConnectionJitterBufferShape = array{
  *   enableJitterBuffer?: bool|null,
  *   jitterbufferMsecMax?: int|null,
  *   jitterbufferMsecMin?: int|null,
  * }
  */
-final class JitterBuffer implements BaseModel
+final class ConnectionJitterBuffer implements BaseModel
 {
-    /** @use SdkModel<JitterBufferShape> */
+    /** @use SdkModel<ConnectionJitterBufferShape> */
     use SdkModel;
 
     /**
