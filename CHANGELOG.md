@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.7.0 (2026-02-05)
+
+Full Changelog: [v6.6.0...v6.7.0](https://github.com/team-telnyx/telnyx-php/compare/v6.6.0...v6.7.0)
+
+### Features
+
+* **api:** manual updates ([5d1d564](https://github.com/team-telnyx/telnyx-php/commit/5d1d56425900ae57a2b37e1fa31d929d3d9c05c4))
+* **api:** Merge pull request [#23](https://github.com/team-telnyx/telnyx-php/issues/23) from stainless-sdks/fix/deepgram-nova3-enum-duplicates ([a3bd17a](https://github.com/team-telnyx/telnyx-php/commit/a3bd17ad18a62c7bfb58c12baae5e6ecae190f1a))
+
 ## 6.6.0 (2026-02-05)
 
 Full Changelog: [v6.5.0...v6.6.0](https://github.com/team-telnyx/telnyx-php/compare/v6.5.0...v6.6.0)
