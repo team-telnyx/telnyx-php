@@ -7,12 +7,13 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\TranscriptionWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\TranscriptionWebhookEvent\Data
+ * @phpstan-import-type TranscriptionShape from \Telnyx\Webhooks\Transcription
  *
- * @phpstan-type TranscriptionWebhookEventShape = array{data?: null|Data|DataShape}
+ * @phpstan-type TranscriptionWebhookEventShape = array{
+ *   data?: null|Transcription|TranscriptionShape
+ * }
  */
 final class TranscriptionWebhookEvent implements BaseModel
 {
@@ -20,7 +21,7 @@ final class TranscriptionWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?Transcription $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class TranscriptionWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param Transcription|TranscriptionShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(Transcription|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class TranscriptionWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param Transcription|TranscriptionShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(Transcription|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

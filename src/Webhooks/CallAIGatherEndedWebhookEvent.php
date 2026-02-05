@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallAIGatherEndedWebhookEvent\Data
+ * @phpstan-import-type CallAIGatherEndedShape from \Telnyx\Webhooks\CallAIGatherEnded
  *
  * @phpstan-type CallAIGatherEndedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|CallAIGatherEnded|CallAIGatherEndedShape
  * }
  */
 final class CallAIGatherEndedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class CallAIGatherEndedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CallAIGatherEnded $data;
 
     public function __construct()
     {
@@ -34,9 +33,9 @@ final class CallAIGatherEndedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CallAIGatherEnded|CallAIGatherEndedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CallAIGatherEnded|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +45,9 @@ final class CallAIGatherEndedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CallAIGatherEnded|CallAIGatherEndedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CallAIGatherEnded|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

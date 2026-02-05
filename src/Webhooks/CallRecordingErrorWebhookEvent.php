@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallRecordingErrorWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallRecordingErrorWebhookEvent\Data
+ * @phpstan-import-type CallRecordingErrorShape from \Telnyx\Webhooks\CallRecordingError
  *
  * @phpstan-type CallRecordingErrorWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|CallRecordingError|CallRecordingErrorShape
  * }
  */
 final class CallRecordingErrorWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class CallRecordingErrorWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CallRecordingError $data;
 
     public function __construct()
     {
@@ -34,9 +33,9 @@ final class CallRecordingErrorWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CallRecordingError|CallRecordingErrorShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CallRecordingError|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +45,9 @@ final class CallRecordingErrorWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CallRecordingError|CallRecordingErrorShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CallRecordingError|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\ConferenceParticipantSpeakStartedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\ConferenceParticipantSpeakStartedWebhookEvent\Data
+ * @phpstan-import-type ConferenceParticipantSpeakStartedShape from \Telnyx\Webhooks\ConferenceParticipantSpeakStarted
  *
  * @phpstan-type ConferenceParticipantSpeakStartedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|ConferenceParticipantSpeakStarted|ConferenceParticipantSpeakStartedShape,
  * }
  */
 final class ConferenceParticipantSpeakStartedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class ConferenceParticipantSpeakStartedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ConferenceParticipantSpeakStarted $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class ConferenceParticipantSpeakStartedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ConferenceParticipantSpeakStarted|ConferenceParticipantSpeakStartedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        ConferenceParticipantSpeakStarted|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,10 +46,11 @@ final class ConferenceParticipantSpeakStartedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ConferenceParticipantSpeakStarted|ConferenceParticipantSpeakStartedShape $data
      */
-    public function withData(Data|array $data): self
-    {
+    public function withData(
+        ConferenceParticipantSpeakStarted|array $data
+    ): self {
         $self = clone $this;
         $self['data'] = $data;
 

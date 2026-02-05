@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallReferFailedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallReferFailedWebhookEvent\Data
+ * @phpstan-import-type CallReferFailedShape from \Telnyx\Webhooks\CallReferFailed
  *
  * @phpstan-type CallReferFailedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|CallReferFailed|CallReferFailedShape
  * }
  */
 final class CallReferFailedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class CallReferFailedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CallReferFailed $data;
 
     public function __construct()
     {
@@ -34,9 +33,9 @@ final class CallReferFailedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CallReferFailed|CallReferFailedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CallReferFailed|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +45,9 @@ final class CallReferFailedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CallReferFailed|CallReferFailedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CallReferFailed|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

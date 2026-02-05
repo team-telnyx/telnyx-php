@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallPlaybackEndedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\CallPlaybackEndedWebhookEvent\Data
+ * @phpstan-import-type CallPlaybackEndedShape from \Telnyx\Webhooks\CallPlaybackEnded
  *
  * @phpstan-type CallPlaybackEndedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|CallPlaybackEnded|CallPlaybackEndedShape
  * }
  */
 final class CallPlaybackEndedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class CallPlaybackEndedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CallPlaybackEnded $data;
 
     public function __construct()
     {
@@ -34,9 +33,9 @@ final class CallPlaybackEndedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CallPlaybackEnded|CallPlaybackEndedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CallPlaybackEnded|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +45,9 @@ final class CallPlaybackEndedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CallPlaybackEnded|CallPlaybackEndedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CallPlaybackEnded|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

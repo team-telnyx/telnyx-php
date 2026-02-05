@@ -7,13 +7,12 @@ namespace Telnyx\Webhooks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\ConferenceParticipantJoinedWebhookEvent\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Webhooks\ConferenceParticipantJoinedWebhookEvent\Data
+ * @phpstan-import-type ConferenceParticipantJoinedShape from \Telnyx\Webhooks\ConferenceParticipantJoined
  *
  * @phpstan-type ConferenceParticipantJoinedWebhookEventShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|ConferenceParticipantJoined|ConferenceParticipantJoinedShape
  * }
  */
 final class ConferenceParticipantJoinedWebhookEvent implements BaseModel
@@ -22,7 +21,7 @@ final class ConferenceParticipantJoinedWebhookEvent implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ConferenceParticipantJoined $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class ConferenceParticipantJoinedWebhookEvent implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ConferenceParticipantJoined|ConferenceParticipantJoinedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        ConferenceParticipantJoined|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class ConferenceParticipantJoinedWebhookEvent implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ConferenceParticipantJoined|ConferenceParticipantJoinedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(ConferenceParticipantJoined|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
