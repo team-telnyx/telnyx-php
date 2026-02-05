@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\CredentialConnections;
 
+use Telnyx\ConnectionJitterBuffer;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\JitterBuffer;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\NoiseSuppression;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVersion;
@@ -20,7 +20,7 @@ use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVers
  * @see Telnyx\Services\CredentialConnectionsService::update()
  *
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
- * @phpstan-import-type JitterBufferShape from \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\JitterBuffer
+ * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type CredentialOutboundShape from \Telnyx\CredentialConnections\CredentialOutbound
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -37,7 +37,7 @@ use Telnyx\CredentialConnections\CredentialConnectionUpdateParams\WebhookAPIVers
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   inbound?: null|CredentialInbound|CredentialInboundShape,
  *   iosPushCredentialID?: string|null,
- *   jitterBuffer?: null|JitterBuffer|JitterBufferShape,
+ *   jitterBuffer?: null|ConnectionJitterBuffer|ConnectionJitterBufferShape,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
@@ -132,7 +132,7 @@ final class CredentialConnectionUpdateParams implements BaseModel
      * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      */
     #[Optional('jitter_buffer')]
-    public ?JitterBuffer $jitterBuffer;
+    public ?ConnectionJitterBuffer $jitterBuffer;
 
     /**
      * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
@@ -231,7 +231,7 @@ final class CredentialConnectionUpdateParams implements BaseModel
      * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param CredentialInbound|CredentialInboundShape|null $inbound
-     * @param JitterBuffer|JitterBufferShape|null $jitterBuffer
+     * @param ConnectionJitterBuffer|ConnectionJitterBufferShape|null $jitterBuffer
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param CredentialOutbound|CredentialOutboundShape|null $outbound
@@ -252,7 +252,7 @@ final class CredentialConnectionUpdateParams implements BaseModel
         EncryptedMedia|string|null $encryptedMedia = null,
         CredentialInbound|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
-        JitterBuffer|array|null $jitterBuffer = null,
+        ConnectionJitterBuffer|array|null $jitterBuffer = null,
         NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
@@ -433,10 +433,11 @@ final class CredentialConnectionUpdateParams implements BaseModel
     /**
      * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      *
-     * @param JitterBuffer|JitterBufferShape $jitterBuffer
+     * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer
      */
-    public function withJitterBuffer(JitterBuffer|array $jitterBuffer): self
-    {
+    public function withJitterBuffer(
+        ConnectionJitterBuffer|array $jitterBuffer
+    ): self {
         $self = clone $this;
         $self['jitterBuffer'] = $jitterBuffer;
 

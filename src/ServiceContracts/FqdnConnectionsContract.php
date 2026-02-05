@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\ConnectionJitterBuffer;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
@@ -12,7 +13,6 @@ use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
-use Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
@@ -27,10 +27,9 @@ use Telnyx\FqdnConnections\WebhookAPIVersion;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer
- * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\JitterBuffer as JitterBufferShape1
  * @phpstan-import-type FilterShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Filter
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
+ * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -52,7 +51,7 @@ interface FqdnConnectionsContract
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      * @param InboundFqdn|InboundFqdnShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
-     * @param JitterBuffer|JitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      * @param bool $microsoftTeamsSbc When enabled, the connection will be created for Microsoft Teams Direct Routing. A *.mstsbc.telnyx.tech FQDN will be created for the connection automatically.
      * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
@@ -81,7 +80,7 @@ interface FqdnConnectionsContract
         EncryptedMedia|string|null $encryptedMedia = null,
         InboundFqdn|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
-        JitterBuffer|array|null $jitterBuffer = null,
+        ConnectionJitterBuffer|array|null $jitterBuffer = null,
         bool $microsoftTeamsSbc = false,
         NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
@@ -125,7 +124,7 @@ interface FqdnConnectionsContract
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia Enable use of SRTP for encryption. Cannot be set if the transport_portocol is TLS.
      * @param InboundFqdn|InboundFqdnShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
-     * @param \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\JitterBuffer|JitterBufferShape1 $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
+     * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      * @param \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppression|value-of<\Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer that the sender and receiver negotiate T38 directly when both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call according to each leg's settings.
@@ -154,7 +153,7 @@ interface FqdnConnectionsContract
         EncryptedMedia|string|null $encryptedMedia = null,
         InboundFqdn|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
-        \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\JitterBuffer|array|null $jitterBuffer = null,
+        ConnectionJitterBuffer|array|null $jitterBuffer = null,
         \Telnyx\FqdnConnections\FqdnConnectionUpdateParams\NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,

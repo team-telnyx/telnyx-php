@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\FqdnConnections;
 
+use Telnyx\ConnectionJitterBuffer;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -14,7 +15,6 @@ use Telnyx\CredentialConnections\AnchorsiteOverride;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
-use Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
 
 /**
@@ -23,7 +23,7 @@ use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
  * @see Telnyx\Services\FqdnConnectionsService::create()
  *
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
- * @phpstan-import-type JitterBufferShape from \Telnyx\FqdnConnections\FqdnConnectionCreateParams\JitterBuffer
+ * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
  * @phpstan-import-type OutboundFqdnShape from \Telnyx\FqdnConnections\OutboundFqdn
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
@@ -40,7 +40,7 @@ use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
  *   encryptedMedia?: null|EncryptedMedia|value-of<EncryptedMedia>,
  *   inbound?: null|InboundFqdn|InboundFqdnShape,
  *   iosPushCredentialID?: string|null,
- *   jitterBuffer?: null|JitterBuffer|JitterBufferShape,
+ *   jitterBuffer?: null|ConnectionJitterBuffer|ConnectionJitterBufferShape,
  *   microsoftTeamsSbc?: bool|null,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
@@ -134,7 +134,7 @@ final class FqdnConnectionCreateParams implements BaseModel
      * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      */
     #[Optional('jitter_buffer')]
-    public ?JitterBuffer $jitterBuffer;
+    public ?ConnectionJitterBuffer $jitterBuffer;
 
     /**
      * When enabled, the connection will be created for Microsoft Teams Direct Routing. A *.mstsbc.telnyx.tech FQDN will be created for the connection automatically.
@@ -238,7 +238,7 @@ final class FqdnConnectionCreateParams implements BaseModel
      * @param DtmfType|value-of<DtmfType>|null $dtmfType
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundFqdn|InboundFqdnShape|null $inbound
-     * @param JitterBuffer|JitterBufferShape|null $jitterBuffer
+     * @param ConnectionJitterBuffer|ConnectionJitterBufferShape|null $jitterBuffer
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param OutboundFqdn|OutboundFqdnShape|null $outbound
@@ -259,7 +259,7 @@ final class FqdnConnectionCreateParams implements BaseModel
         EncryptedMedia|string|null $encryptedMedia = null,
         InboundFqdn|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
-        JitterBuffer|array|null $jitterBuffer = null,
+        ConnectionJitterBuffer|array|null $jitterBuffer = null,
         ?bool $microsoftTeamsSbc = null,
         NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
@@ -439,10 +439,11 @@ final class FqdnConnectionCreateParams implements BaseModel
     /**
      * Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
      *
-     * @param JitterBuffer|JitterBufferShape $jitterBuffer
+     * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer
      */
-    public function withJitterBuffer(JitterBuffer|array $jitterBuffer): self
-    {
+    public function withJitterBuffer(
+        ConnectionJitterBuffer|array $jitterBuffer
+    ): self {
         $self = clone $this;
         $self['jitterBuffer'] = $jitterBuffer;
 
