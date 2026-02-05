@@ -9,8 +9,6 @@ namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngin
  */
 enum Language: string
 {
-    case EN = 'en';
-
     case EN_US = 'en-US';
 
     case EN_AU = 'en-AU';
@@ -25,11 +23,7 @@ enum Language: string
 
     case NL = 'nl';
 
-    case SV = 'sv';
-
     case SV_SE = 'sv-SE';
-
-    case DA = 'da';
 
     case DA_DK = 'da-DK';
 
@@ -40,8 +34,6 @@ enum Language: string
     case FR = 'fr';
 
     case FR_CA = 'fr-CA';
-
-    case PT = 'pt';
 
     case PT_BR = 'pt-BR';
 
