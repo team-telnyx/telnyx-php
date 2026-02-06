@@ -6,6 +6,7 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\TelephonySettings\NoiseSuppression;
 use Telnyx\AI\Assistants\TelephonySettings\NoiseSuppressionConfig;
+use Telnyx\AI\Assistants\TelephonySettings\RecordingSettings;
 use Telnyx\AI\Assistants\TelephonySettings\VoicemailDetection;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -13,12 +14,14 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type NoiseSuppressionConfigShape from \Telnyx\AI\Assistants\TelephonySettings\NoiseSuppressionConfig
+ * @phpstan-import-type RecordingSettingsShape from \Telnyx\AI\Assistants\TelephonySettings\RecordingSettings
  * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\TelephonySettings\VoicemailDetection
  *
  * @phpstan-type TelephonySettingsShape = array{
  *   defaultTexmlAppID?: string|null,
  *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionConfig?: null|NoiseSuppressionConfig|NoiseSuppressionConfigShape,
+ *   recordingSettings?: null|RecordingSettings|RecordingSettingsShape,
  *   supportsUnauthenticatedWebCalls?: bool|null,
  *   timeLimitSecs?: int|null,
  *   userIdleTimeoutSecs?: int|null,
@@ -49,6 +52,12 @@ final class TelephonySettings implements BaseModel
      */
     #[Optional('noise_suppression_config')]
     public ?NoiseSuppressionConfig $noiseSuppressionConfig;
+
+    /**
+     * Configuration for call recording format and channel settings.
+     */
+    #[Optional('recording_settings')]
+    public ?RecordingSettings $recordingSettings;
 
     /**
      * When enabled, allows users to interact with your AI assistant directly from your website without requiring authentication. This is required for FE widgets that work with assistants that have telephony enabled.
@@ -86,12 +95,14 @@ final class TelephonySettings implements BaseModel
      *
      * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
      * @param NoiseSuppressionConfig|NoiseSuppressionConfigShape|null $noiseSuppressionConfig
+     * @param RecordingSettings|RecordingSettingsShape|null $recordingSettings
      * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      */
     public static function with(
         ?string $defaultTexmlAppID = null,
         NoiseSuppression|string|null $noiseSuppression = null,
         NoiseSuppressionConfig|array|null $noiseSuppressionConfig = null,
+        RecordingSettings|array|null $recordingSettings = null,
         ?bool $supportsUnauthenticatedWebCalls = null,
         ?int $timeLimitSecs = null,
         ?int $userIdleTimeoutSecs = null,
@@ -102,6 +113,7 @@ final class TelephonySettings implements BaseModel
         null !== $defaultTexmlAppID && $self['defaultTexmlAppID'] = $defaultTexmlAppID;
         null !== $noiseSuppression && $self['noiseSuppression'] = $noiseSuppression;
         null !== $noiseSuppressionConfig && $self['noiseSuppressionConfig'] = $noiseSuppressionConfig;
+        null !== $recordingSettings && $self['recordingSettings'] = $recordingSettings;
         null !== $supportsUnauthenticatedWebCalls && $self['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
         null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
         null !== $userIdleTimeoutSecs && $self['userIdleTimeoutSecs'] = $userIdleTimeoutSecs;
@@ -145,6 +157,20 @@ final class TelephonySettings implements BaseModel
     ): self {
         $self = clone $this;
         $self['noiseSuppressionConfig'] = $noiseSuppressionConfig;
+
+        return $self;
+    }
+
+    /**
+     * Configuration for call recording format and channel settings.
+     *
+     * @param RecordingSettings|RecordingSettingsShape $recordingSettings
+     */
+    public function withRecordingSettings(
+        RecordingSettings|array $recordingSettings
+    ): self {
+        $self = clone $this;
+        $self['recordingSettings'] = $recordingSettings;
 
         return $self;
     }
