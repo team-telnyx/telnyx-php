@@ -13,8 +13,6 @@ enum Language: string
 
     case CA = 'ca';
 
-    case ZH = 'zh';
-
     case ZH_CN = 'zh-CN';
 
     case ZH_HANS = 'zh-Hans';
@@ -27,13 +25,9 @@ enum Language: string
 
     case CS = 'cs';
 
-    case DA = 'da';
-
     case DA_DK = 'da-DK';
 
-    case NL = 'nl';
-
-    case EN = 'en';
+    case NL_BE = 'nl-BE';
 
     case EN_US = 'en-US';
 
@@ -49,13 +43,9 @@ enum Language: string
 
     case FI = 'fi';
 
-    case NL_BE = 'nl-BE';
-
     case FR = 'fr';
 
     case FR_CA = 'fr-CA';
-
-    case DE = 'de';
 
     case DE_CH = 'de-CH';
 
@@ -71,8 +61,6 @@ enum Language: string
 
     case JA = 'ja';
 
-    case KO = 'ko';
-
     case KO_KR = 'ko-KR';
 
     case LV = 'lv';
@@ -85,8 +73,6 @@ enum Language: string
 
     case PL = 'pl';
 
-    case PT = 'pt';
-
     case PT_BR = 'pt-BR';
 
     case PT_PT = 'pt-PT';
@@ -97,15 +83,9 @@ enum Language: string
 
     case SK = 'sk';
 
-    case ES = 'es';
-
     case ES_419 = 'es-419';
 
-    case SV = 'sv';
-
     case SV_SE = 'sv-SE';
-
-    case TH = 'th';
 
     case TH_TH = 'th-TH';
 
