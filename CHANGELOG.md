@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.8.0 (2026-02-06)
+
+Full Changelog: [v6.7.0...v6.8.0](https://github.com/team-telnyx/telnyx-php/compare/v6.7.0...v6.8.0)
+
+### Features
+
+* Revert "fix emergency settings -schema" ([9fdb65c](https://github.com/team-telnyx/telnyx-php/commit/9fdb65cb962f3035a1151ccb5d7642a42e78b989))
+
 ## 6.7.0 (2026-02-05)
 
 Full Changelog: [v6.6.0...v6.7.0](https://github.com/team-telnyx/telnyx-php/compare/v6.6.0...v6.7.0)
