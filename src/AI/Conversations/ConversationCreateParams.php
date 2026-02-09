@@ -25,7 +25,7 @@ final class ConversationCreateParams implements BaseModel
     use SdkParams;
 
     /**
-     * Metadata associated with the conversation.
+     * Metadata associated with the conversation. Set `ai_disabled` to `true` to create the conversation with AI message responses disabled.
      *
      * @var array<string,string>|null $metadata
      */
@@ -60,7 +60,7 @@ final class ConversationCreateParams implements BaseModel
     }
 
     /**
-     * Metadata associated with the conversation.
+     * Metadata associated with the conversation. Set `ai_disabled` to `true` to create the conversation with AI message responses disabled.
      *
      * @param array<string,string> $metadata
      */

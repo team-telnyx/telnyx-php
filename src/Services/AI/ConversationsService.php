@@ -61,7 +61,7 @@ final class ConversationsService implements ConversationsContract
      *
      * Create a new AI Conversation.
      *
-     * @param array<string,string> $metadata metadata associated with the conversation
+     * @param array<string,string> $metadata Metadata associated with the conversation. Set `ai_disabled` to `true` to create the conversation with AI message responses disabled.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -105,7 +105,7 @@ final class ConversationsService implements ConversationsContract
      * Update metadata for a specific conversation.
      *
      * @param string $conversationID The ID of the conversation to update
-     * @param array<string,string> $metadata metadata associated with the conversation
+     * @param array<string,string> $metadata Metadata associated with the conversation. Set `ai_disabled` to `true` to stop AI from responding to messages (e.g., when a human agent takes over). Set to `false` to re-enable AI responses.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

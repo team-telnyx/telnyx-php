@@ -6,6 +6,7 @@ namespace Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
 
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\CustomHeader;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Target;
+use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\VoicemailDetection;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -14,11 +15,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type TargetShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Target
  * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\CustomHeader
+ * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\VoicemailDetection
  *
  * @phpstan-type TransferShape = array{
  *   from: string,
  *   targets: list<Target|TargetShape>,
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
+ *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  *   warmTransferInstructions?: string|null,
  * }
  */
@@ -48,6 +51,12 @@ final class Transfer implements BaseModel
      */
     #[Optional('custom_headers', list: CustomHeader::class)]
     public ?array $customHeaders;
+
+    /**
+     * Configuration for voicemail detection (AMD - Answering Machine Detection) on the transferred call. Allows the assistant to detect when a voicemail system answers the transferred call and take appropriate action.
+     */
+    #[Optional('voicemail_detection')]
+    public ?VoicemailDetection $voicemailDetection;
 
     /**
      * Natural language instructions for your agent for how to provide context for the transfer recipient.
@@ -81,11 +90,13 @@ final class Transfer implements BaseModel
      *
      * @param list<Target|TargetShape> $targets
      * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
+     * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      */
     public static function with(
         string $from,
         array $targets,
         ?array $customHeaders = null,
+        VoicemailDetection|array|null $voicemailDetection = null,
         ?string $warmTransferInstructions = null,
     ): self {
         $self = new self;
@@ -94,6 +105,7 @@ final class Transfer implements BaseModel
         $self['targets'] = $targets;
 
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
         null !== $warmTransferInstructions && $self['warmTransferInstructions'] = $warmTransferInstructions;
 
         return $self;
@@ -132,6 +144,20 @@ final class Transfer implements BaseModel
     {
         $self = clone $this;
         $self['customHeaders'] = $customHeaders;
+
+        return $self;
+    }
+
+    /**
+     * Configuration for voicemail detection (AMD - Answering Machine Detection) on the transferred call. Allows the assistant to detect when a voicemail system answers the transferred call and take appropriate action.
+     *
+     * @param VoicemailDetection|VoicemailDetectionShape $voicemailDetection
+     */
+    public function withVoicemailDetection(
+        VoicemailDetection|array $voicemailDetection
+    ): self {
+        $self = clone $this;
+        $self['voicemailDetection'] = $voicemailDetection;
 
         return $self;
     }
