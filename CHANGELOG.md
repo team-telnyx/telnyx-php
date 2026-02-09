@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.10.0 (2026-02-09)
+
+Full Changelog: [v6.9.0...v6.10.0](https://github.com/team-telnyx/telnyx-php/compare/v6.9.0...v6.10.0)
+
+### Features
+
+* AI-2078 Feature: API endpoint to disable AI assistant mid-conversation ([59aed4a](https://github.com/team-telnyx/telnyx-php/commit/59aed4a784ae21d72b947aa6357fbd1e648ca95e))
+
 ## 6.9.0 (2026-02-09)
 
 Full Changelog: [v6.8.0...v6.9.0](https://github.com/team-telnyx/telnyx-php/compare/v6.8.0...v6.9.0)
