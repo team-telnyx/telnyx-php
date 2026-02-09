@@ -73,7 +73,10 @@ final class WebhooksService implements WebhooksContract
     ): UnwrapWebhookEvent {
         $this->verifySignature($payload, $headers, $publicKey, $tolerance);
 
-        return $this->parseWebhookEvent($payload, UnwrapWebhookEvent::class);
+        $data = json_decode($payload, true, 512, JSON_THROW_ON_ERROR);
+        $converter = UnwrapWebhookEvent::converter();
+        $state = new \Telnyx\Core\Conversion\CoerceState();
+        return $converter->coerce($data, $state);
     }
 
     /**
@@ -84,22 +87,9 @@ final class WebhooksService implements WebhooksContract
      */
     public function unsafeUnwrap(string $payload): UnsafeUnwrapWebhookEvent
     {
-        return $this->parseWebhookEvent($payload, UnsafeUnwrapWebhookEvent::class);
-    }
-
-    /**
-     * Parse a webhook payload into a typed event.
-     *
-     * @param string $payload The raw webhook payload (JSON string)
-     * @param class-string<UnwrapWebhookEvent|UnsafeUnwrapWebhookEvent> $eventClass The event class to use
-     * @return UnwrapWebhookEvent|UnsafeUnwrapWebhookEvent The parsed webhook event
-     */
-    private function parseWebhookEvent(string $payload, string $eventClass): UnwrapWebhookEvent|UnsafeUnwrapWebhookEvent
-    {
         $data = json_decode($payload, true, 512, JSON_THROW_ON_ERROR);
-        $converter = $eventClass::converter();
+        $converter = UnsafeUnwrapWebhookEvent::converter();
         $state = new \Telnyx\Core\Conversion\CoerceState();
-        /** @var UnwrapWebhookEvent|UnsafeUnwrapWebhookEvent */
         return $converter->coerce($data, $state);
     }
 
