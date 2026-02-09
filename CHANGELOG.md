@@ -1,5 +1,21 @@
 # Changelog
 
+## 6.9.0 (2026-02-09)
+
+Full Changelog: [v6.8.0...v6.9.0](https://github.com/team-telnyx/telnyx-php/compare/v6.8.0...v6.9.0)
+
+### Features
+
+* Add ED25519 webhook signature verification ([98147de](https://github.com/team-telnyx/telnyx-php/commit/98147de9336e47cf3006f2c53c39969a7914c2f4))
+
+
+### Bug Fixes
+
+* add [@var](https://github.com/var) annotations for coerce return types ([33534ad](https://github.com/team-telnyx/telnyx-php/commit/33534ad23d04d4095f5dcd69a005eb2a7eff4de6))
+* inline parsing to satisfy PHPStan return types ([bb86a94](https://github.com/team-telnyx/telnyx-php/commit/bb86a94902f1f20fca0f1ecf1ce49d362e702e61))
+* PHPStan lint errors ([16c8941](https://github.com/team-telnyx/telnyx-php/commit/16c8941fbbe3fafcc3ea3e1c807893940074a2ba))
+* Use proper converter pattern and fix test key format ([58eef7a](https://github.com/team-telnyx/telnyx-php/commit/58eef7a27abaff1044f908cf8d3b78ca744d9351))
+
 ## 6.8.0 (2026-02-06)
 
 Full Changelog: [v6.7.0...v6.8.0](https://github.com/team-telnyx/telnyx-php/compare/v6.7.0...v6.8.0)
