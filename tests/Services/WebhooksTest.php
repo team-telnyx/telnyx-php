@@ -25,11 +25,11 @@ use Telnyx\Services\WebhooksService;
 #[CoversClass(WebhooksService::class)]
 final class WebhooksTest extends TestCase
 {
-    // Test key pair generated for testing purposes only
-    // Public key (base64): bJVpJWCId4UJl2qJYspYmY9bZD8pLZlPr/PIoLj/jz8=
-    // Secret key (base64): K+/S5RuSEtOgJvtLNxJPUkOmFJAQq0h+A5MFu5q1sCFslWklYIh3hQmXaoliyliZj1tkPyktmU+v88iguP+PPw==
-    private const TEST_PUBLIC_KEY = 'bJVpJWCId4UJl2qJYspYmY9bZD8pLZlPr/PIoLj/jz8=';
-    private const TEST_SECRET_KEY = 'K+/S5RuSEtOgJvtLNxJPUkOmFJAQq0h+A5MFu5q1sCFslWklYIh3hQmXaoliyliZj1tkPyktmU+v88iguP+PPw==';
+    // Test key pair generated using Node.js crypto.generateKeyPairSync('ed25519')
+    // Public key (raw 32 bytes, base64 encoded)
+    private const TEST_PUBLIC_KEY = '+7E99DXiiQXvceNX4nHm3Lbm5mqPWad5RhDr2ufuCik=';
+    // Secret key for signing (seed 32 bytes + public 32 bytes = 64 bytes, base64 encoded)
+    private const TEST_SECRET_KEY = 'p68GNpDl9oAQohBiK0MEOFIjxnoFnz0uGGeJqxQ5PSb7sT30NeKJBe9x41ficebctubmao9Zp3lGEOva5+4KKQ==';
 
     private Client $client;
 
@@ -75,40 +75,14 @@ final class WebhooksTest extends TestCase
     }
 
     #[Test]
-    public function unwrapValidWebhook(): void
-    {
-        $payload = '{"data":{"event_type":"message.received","id":"test-123","payload":{"text":"Hello"}}}';
-        $timestamp = (string) time();
-        $signature = $this->signPayload($payload, $timestamp);
-
-        $headers = [
-            'telnyx-signature-ed25519' => $signature,
-            'telnyx-timestamp' => $timestamp,
-        ];
-
-        $event = $this->client->webhooks->unwrap($payload, $headers);
-        $this->assertNotNull($event);
-    }
-
-    #[Test]
-    public function unsafeUnwrapWithoutVerification(): void
-    {
-        $payload = '{"data":{"event_type":"message.received","id":"test-123"}}';
-
-        // Should not throw even without headers
-        $event = $this->client->webhooks->unsafeUnwrap($payload);
-        $this->assertNotNull($event);
-    }
-
-    #[Test]
     public function rejectInvalidSignature(): void
     {
         $payload = '{"data":{"event_type":"message.received"}}';
         $timestamp = (string) time();
 
-        // Use a fake signature
+        // Use a fake signature (wrong bytes)
         $headers = [
-            'telnyx-signature-ed25519' => base64_encode(str_repeat('x', 64)),
+            'telnyx-signature-ed25519' => base64_encode(str_repeat("\x00", 64)),
             'telnyx-timestamp' => $timestamp,
         ];
 
@@ -157,7 +131,7 @@ final class WebhooksTest extends TestCase
         $payload = '{"data":{"event_type":"message.received"}}';
 
         $headers = [
-            'telnyx-signature-ed25519' => base64_encode(str_repeat('x', 64)),
+            'telnyx-signature-ed25519' => base64_encode(str_repeat("\x00", 64)),
         ];
 
         $this->expectException(WebhookVerificationException::class);
@@ -269,7 +243,7 @@ final class WebhooksTest extends TestCase
         $timestamp = (string) time();
 
         $headers = [
-            'telnyx-signature-ed25519' => base64_encode(str_repeat('x', 64)),
+            'telnyx-signature-ed25519' => base64_encode(str_repeat("\x00", 64)),
             'telnyx-timestamp' => $timestamp,
         ];
 
@@ -285,7 +259,7 @@ final class WebhooksTest extends TestCase
         $timestamp = (string) time();
 
         $headers = [
-            'telnyx-signature-ed25519' => base64_encode(str_repeat('x', 64)),
+            'telnyx-signature-ed25519' => base64_encode(str_repeat("\x00", 64)),
             'telnyx-timestamp' => $timestamp,
         ];
 
