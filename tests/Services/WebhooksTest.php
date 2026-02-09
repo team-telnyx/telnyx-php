@@ -51,7 +51,8 @@ final class WebhooksTest extends TestCase
      */
     private function signPayload(string $payload, string $timestamp): string
     {
-        $secretKey = base64_decode(self::TEST_SECRET_KEY);
+        $secretKey = base64_decode(self::TEST_SECRET_KEY, true);
+        assert($secretKey !== false && $secretKey !== '');
         $signedPayload = $timestamp . '|' . $payload;
         $signature = sodium_crypto_sign_detached($signedPayload, $secretKey);
         return base64_encode($signature);

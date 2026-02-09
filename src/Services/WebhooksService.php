@@ -90,16 +90,16 @@ final class WebhooksService implements WebhooksContract
     /**
      * Parse a webhook payload into a typed event.
      *
-     * @template T of UnwrapWebhookEvent|UnsafeUnwrapWebhookEvent
      * @param string $payload The raw webhook payload (JSON string)
-     * @param class-string<T> $eventClass The event class to use
-     * @return T The parsed webhook event
+     * @param class-string<UnwrapWebhookEvent|UnsafeUnwrapWebhookEvent> $eventClass The event class to use
+     * @return UnwrapWebhookEvent|UnsafeUnwrapWebhookEvent The parsed webhook event
      */
     private function parseWebhookEvent(string $payload, string $eventClass): UnwrapWebhookEvent|UnsafeUnwrapWebhookEvent
     {
         $data = json_decode($payload, true, 512, JSON_THROW_ON_ERROR);
         $converter = $eventClass::converter();
         $state = new \Telnyx\Core\Conversion\CoerceState();
+        /** @var UnwrapWebhookEvent|UnsafeUnwrapWebhookEvent */
         return $converter->coerce($data, $state);
     }
 
@@ -173,7 +173,7 @@ final class WebhooksService implements WebhooksContract
 
         // Get the public key
         $key = $publicKey ?? $this->client->publicKey;
-        if ($key === '' || $key === null) {
+        if ($key === '') {
             throw new WebhookVerificationException(
                 'Public key is required for webhook verification. ' .
                 'Set it via the Client constructor or TELNYX_PUBLIC_KEY environment variable.'
