@@ -25,7 +25,7 @@ final class ConversationUpdateParams implements BaseModel
     use SdkParams;
 
     /**
-     * Metadata associated with the conversation.
+     * Metadata associated with the conversation. Set `ai_disabled` to `true` to stop AI from responding to messages (e.g., when a human agent takes over). Set to `false` to re-enable AI responses.
      *
      * @var array<string,string>|null $metadata
      */
@@ -54,7 +54,7 @@ final class ConversationUpdateParams implements BaseModel
     }
 
     /**
-     * Metadata associated with the conversation.
+     * Metadata associated with the conversation. Set `ai_disabled` to `true` to stop AI from responding to messages (e.g., when a human agent takes over). Set to `false` to re-enable AI responses.
      *
      * @param array<string,string> $metadata
      */
