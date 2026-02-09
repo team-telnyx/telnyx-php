@@ -76,6 +76,7 @@ final class WebhooksService implements WebhooksContract
         $data = json_decode($payload, true, 512, JSON_THROW_ON_ERROR);
         $converter = UnwrapWebhookEvent::converter();
         $state = new \Telnyx\Core\Conversion\CoerceState();
+        /** @var UnwrapWebhookEvent */
         return $converter->coerce($data, $state);
     }
 
@@ -90,6 +91,7 @@ final class WebhooksService implements WebhooksContract
         $data = json_decode($payload, true, 512, JSON_THROW_ON_ERROR);
         $converter = UnsafeUnwrapWebhookEvent::converter();
         $state = new \Telnyx\Core\Conversion\CoerceState();
+        /** @var UnsafeUnwrapWebhookEvent */
         return $converter->coerce($data, $state);
     }
 
