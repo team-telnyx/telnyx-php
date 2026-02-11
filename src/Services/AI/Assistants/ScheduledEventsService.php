@@ -43,6 +43,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
      * @param string $telnyxEndUserTarget the phone number, SIP URI, to schedule the call or text to
      * @param array<string,ConversationMetadataShape> $conversationMetadata Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
+     * @param array<string,string> $dynamicVariables A map of dynamic variable names to values. These variables can be referenced in the assistant's instructions and messages using {{variable_name}} syntax.
      * @param string $text Required for sms scheduled events. The text to be sent to the end user.
      * @param RequestOpts|null $requestOptions
      *
@@ -55,6 +56,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
         ConversationChannelType|string $telnyxConversationChannel,
         string $telnyxEndUserTarget,
         ?array $conversationMetadata = null,
+        ?array $dynamicVariables = null,
         ?string $text = null,
         RequestOptions|array|null $requestOptions = null,
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse {
@@ -65,6 +67,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
                 'telnyxConversationChannel' => $telnyxConversationChannel,
                 'telnyxEndUserTarget' => $telnyxEndUserTarget,
                 'conversationMetadata' => $conversationMetadata,
+                'dynamicVariables' => $dynamicVariables,
                 'text' => $text,
             ],
         );

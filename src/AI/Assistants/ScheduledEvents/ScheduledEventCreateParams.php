@@ -25,6 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
  *   telnyxEndUserTarget: string,
  *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
+ *   dynamicVariables?: array<string,string>|null,
  *   text?: string|null,
  * }
  */
@@ -68,6 +69,14 @@ final class ScheduledEventCreateParams implements BaseModel
     public ?array $conversationMetadata;
 
     /**
+     * A map of dynamic variable names to values. These variables can be referenced in the assistant's instructions and messages using {{variable_name}} syntax.
+     *
+     * @var array<string,string>|null $dynamicVariables
+     */
+    #[Optional('dynamic_variables', map: 'string')]
+    public ?array $dynamicVariables;
+
+    /**
      * Required for sms scheduled events. The text to be sent to the end user.
      */
     #[Optional]
@@ -108,6 +117,7 @@ final class ScheduledEventCreateParams implements BaseModel
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
      * @param array<string,ConversationMetadataShape>|null $conversationMetadata
+     * @param array<string,string>|null $dynamicVariables
      */
     public static function with(
         \DateTimeInterface $scheduledAtFixedDatetime,
@@ -115,6 +125,7 @@ final class ScheduledEventCreateParams implements BaseModel
         ConversationChannelType|string $telnyxConversationChannel,
         string $telnyxEndUserTarget,
         ?array $conversationMetadata = null,
+        ?array $dynamicVariables = null,
         ?string $text = null,
     ): self {
         $self = new self;
@@ -125,6 +136,7 @@ final class ScheduledEventCreateParams implements BaseModel
         $self['telnyxEndUserTarget'] = $telnyxEndUserTarget;
 
         null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
+        null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $text && $self['text'] = $text;
 
         return $self;
@@ -185,6 +197,19 @@ final class ScheduledEventCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['conversationMetadata'] = $conversationMetadata;
+
+        return $self;
+    }
+
+    /**
+     * A map of dynamic variable names to values. These variables can be referenced in the assistant's instructions and messages using {{variable_name}} syntax.
+     *
+     * @param array<string,string> $dynamicVariables
+     */
+    public function withDynamicVariables(array $dynamicVariables): self
+    {
+        $self = clone $this;
+        $self['dynamicVariables'] = $dynamicVariables;
 
         return $self;
     }
