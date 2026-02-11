@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.12.0 (2026-02-11)
+
+Full Changelog: [v6.11.0...v6.12.0](https://github.com/team-telnyx/telnyx-php/compare/v6.11.0...v6.12.0)
+
+### Features
+
+* fix schema in emergency address schema ([6503bdf](https://github.com/team-telnyx/telnyx-php/commit/6503bdf2913af9ef76823506bf554f92d789a842))
+
 ## 6.11.0 (2026-02-11)
 
 Full Changelog: [v6.10.0...v6.11.0](https://github.com/team-telnyx/telnyx-php/compare/v6.10.0...v6.11.0)
