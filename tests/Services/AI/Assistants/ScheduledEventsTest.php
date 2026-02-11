@@ -66,6 +66,7 @@ final class ScheduledEventsTest extends TestCase
             telnyxConversationChannel: ConversationChannelType::PHONE_CALL,
             telnyxEndUserTarget: 'telnyx_end_user_target',
             conversationMetadata: ['foo' => 'string'],
+            dynamicVariables: ['foo' => 'string'],
             text: 'text',
         );
 
