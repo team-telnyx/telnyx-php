@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\OpenAI;
 
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateParams\EncodingFormat;
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingListModelsResponse;
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingNewResponse;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateEmbeddingsParams\EncodingFormat;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingListEmbeddingModelsResponse;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingNewEmbeddingsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -14,7 +14,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\OpenAI\EmbeddingsContract;
 
 /**
- * @phpstan-import-type InputShape from \Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateParams\Input
+ * @phpstan-import-type InputShape from \Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateEmbeddingsParams\Input
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EmbeddingsService implements EmbeddingsContract
@@ -46,14 +46,14 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * @throws APIException
      */
-    public function create(
+    public function createEmbeddings(
         string|array $input,
         string $model,
         ?int $dimensions = null,
         EncodingFormat|string $encodingFormat = 'float',
         ?string $user = null,
         RequestOptions|array|null $requestOptions = null,
-    ): EmbeddingNewResponse {
+    ): EmbeddingNewEmbeddingsResponse {
         $params = Util::removeNulls(
             [
                 'input' => $input,
@@ -65,7 +65,7 @@ final class EmbeddingsService implements EmbeddingsContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->createEmbeddings(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -79,11 +79,11 @@ final class EmbeddingsService implements EmbeddingsContract
      *
      * @throws APIException
      */
-    public function listModels(
+    public function listEmbeddingModels(
         RequestOptions|array|null $requestOptions = null
-    ): EmbeddingListModelsResponse {
+    ): EmbeddingListEmbeddingModelsResponse {
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->listModels(requestOptions: $requestOptions);
+        $response = $this->raw->listEmbeddingModels(requestOptions: $requestOptions);
 
         return $response->parse();
     }
