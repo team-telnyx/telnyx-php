@@ -44,6 +44,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
      *   telnyxEndUserTarget: string,
      *   conversationMetadata?: array<string,ConversationMetadataShape>,
+     *   dynamicVariables?: array<string,string>,
      *   text?: string,
      * }|ScheduledEventCreateParams $params
      * @param RequestOpts|null $requestOptions

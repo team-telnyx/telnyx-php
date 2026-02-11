@@ -23,6 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   conversationID?: string|null,
  *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
  *   createdAt?: \DateTimeInterface|null,
+ *   dynamicVariables?: array<string,string>|null,
  *   errors?: list<string>|null,
  *   retryAttempts?: int|null,
  *   retryCount?: int|null,
@@ -63,6 +64,14 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
 
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
+
+    /**
+     * A map of dynamic variable names to values. These variables can be referenced in the assistant's instructions and messages using {{variable_name}} syntax.
+     *
+     * @var array<string,string>|null $dynamicVariables
+     */
+    #[Optional('dynamic_variables', map: 'string')]
+    public ?array $dynamicVariables;
 
     /** @var list<string>|null $errors */
     #[Optional(list: 'string')]
@@ -118,6 +127,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
      * @param array<string,ConversationMetadataShape>|null $conversationMetadata
+     * @param array<string,string>|null $dynamicVariables
      * @param list<string>|null $errors
      * @param EventStatus|value-of<EventStatus>|null $status
      */
@@ -130,6 +140,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
         ?string $conversationID = null,
         ?array $conversationMetadata = null,
         ?\DateTimeInterface $createdAt = null,
+        ?array $dynamicVariables = null,
         ?array $errors = null,
         ?int $retryAttempts = null,
         ?int $retryCount = null,
@@ -147,6 +158,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
         null !== $conversationID && $self['conversationID'] = $conversationID;
         null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
         null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $errors && $self['errors'] = $errors;
         null !== $retryAttempts && $self['retryAttempts'] = $retryAttempts;
         null !== $retryCount && $self['retryCount'] = $retryCount;
@@ -224,6 +236,19 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     {
         $self = clone $this;
         $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * A map of dynamic variable names to values. These variables can be referenced in the assistant's instructions and messages using {{variable_name}} syntax.
+     *
+     * @param array<string,string> $dynamicVariables
+     */
+    public function withDynamicVariables(array $dynamicVariables): self
+    {
+        $self = clone $this;
+        $self['dynamicVariables'] = $dynamicVariables;
 
         return $self;
     }
