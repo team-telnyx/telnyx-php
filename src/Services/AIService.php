@@ -20,6 +20,7 @@ use Telnyx\Services\AI\EmbeddingsService;
 use Telnyx\Services\AI\FineTuningService;
 use Telnyx\Services\AI\IntegrationsService;
 use Telnyx\Services\AI\McpServersService;
+use Telnyx\Services\AI\OpenAIService;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -77,6 +78,11 @@ final class AIService implements AIContract
     public McpServersService $mcpServers;
 
     /**
+     * @api
+     */
+    public OpenAIService $openai;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -91,6 +97,7 @@ final class AIService implements AIContract
         $this->fineTuning = new FineTuningService($client);
         $this->integrations = new IntegrationsService($client);
         $this->mcpServers = new McpServersService($client);
+        $this->openai = new OpenAIService($client);
     }
 
     /**
