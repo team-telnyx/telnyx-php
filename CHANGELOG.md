@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.15.0 (2026-02-11)
+
+Full Changelog: [v6.14.0...v6.15.0](https://github.com/team-telnyx/telnyx-php/compare/v6.14.0...v6.15.0)
+
+### Features
+
+* AI-2086: Add AI Missions endpoints to inference spec ([2fa1686](https://github.com/team-telnyx/telnyx-php/commit/2fa168665c126bb1a3421f81b59bc2850ef06552))
+
+
+### Bug Fixes
+
+* **client:** revert change to certain pagination metadata types ([f31387d](https://github.com/team-telnyx/telnyx-php/commit/f31387d83721197c37e143801d552dabfb4a3a35))
+
 ## 6.14.0 (2026-02-11)
 
 Full Changelog: [v6.13.0...v6.14.0](https://github.com/team-telnyx/telnyx-php/compare/v6.13.0...v6.14.0)
