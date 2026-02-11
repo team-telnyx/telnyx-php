@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.12.1 (2026-02-11)
+
+Full Changelog: [v6.12.0...v6.12.1](https://github.com/team-telnyx/telnyx-php/compare/v6.12.0...v6.12.1)
+
+### Bug Fixes
+
+* remove invalid discriminators from string enum schemas ([3c5c42a](https://github.com/team-telnyx/telnyx-php/commit/3c5c42a7f65ea44fbed513c8765d5965e6540871))
+
 ## 6.12.0 (2026-02-11)
 
 Full Changelog: [v6.11.0...v6.12.0](https://github.com/team-telnyx/telnyx-php/compare/v6.11.0...v6.12.0)
