@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.14.0 (2026-02-11)
+
+Full Changelog: [v6.13.0...v6.14.0](https://github.com/team-telnyx/telnyx-php/compare/v6.13.0...v6.14.0)
+
+### Features
+
+* Add OpenAI-compatible embeddings API spec ([c9b7c1b](https://github.com/team-telnyx/telnyx-php/commit/c9b7c1bd4238b54e8951c73724d49eb22e805ad5))
+
 ## 6.13.0 (2026-02-11)
 
 Full Changelog: [v6.12.1...v6.13.0](https://github.com/team-telnyx/telnyx-php/compare/v6.12.1...v6.13.0)
