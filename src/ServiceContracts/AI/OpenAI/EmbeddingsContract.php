@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\OpenAI;
 
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateParams\EncodingFormat;
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingListModelsResponse;
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingNewResponse;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateEmbeddingsParams\EncodingFormat;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingListEmbeddingModelsResponse;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingNewEmbeddingsResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type InputShape from \Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateParams\Input
+ * @phpstan-import-type InputShape from \Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateEmbeddingsParams\Input
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface EmbeddingsContract
@@ -28,14 +28,14 @@ interface EmbeddingsContract
      *
      * @throws APIException
      */
-    public function create(
+    public function createEmbeddings(
         string|array $input,
         string $model,
         ?int $dimensions = null,
         EncodingFormat|string $encodingFormat = 'float',
         ?string $user = null,
         RequestOptions|array|null $requestOptions = null,
-    ): EmbeddingNewResponse;
+    ): EmbeddingNewEmbeddingsResponse;
 
     /**
      * @api
@@ -44,7 +44,7 @@ interface EmbeddingsContract
      *
      * @throws APIException
      */
-    public function listModels(
+    public function listEmbeddingModels(
         RequestOptions|array|null $requestOptions = null
-    ): EmbeddingListModelsResponse;
+    ): EmbeddingListEmbeddingModelsResponse;
 }

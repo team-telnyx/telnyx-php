@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\OpenAI;
 
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateParams;
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateParams\EncodingFormat;
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingListModelsResponse;
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingNewResponse;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateEmbeddingsParams;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateEmbeddingsParams\EncodingFormat;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingListEmbeddingModelsResponse;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingNewEmbeddingsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -15,7 +15,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\OpenAI\EmbeddingsRawContract;
 
 /**
- * @phpstan-import-type InputShape from \Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateParams\Input
+ * @phpstan-import-type InputShape from \Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateEmbeddingsParams\Input
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EmbeddingsRawService implements EmbeddingsRawContract
@@ -37,18 +37,18 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      *   dimensions?: int,
      *   encodingFormat?: EncodingFormat|value-of<EncodingFormat>,
      *   user?: string,
-     * }|EmbeddingCreateParams $params
+     * }|EmbeddingCreateEmbeddingsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmbeddingNewResponse>
+     * @return BaseResponse<EmbeddingNewEmbeddingsResponse>
      *
      * @throws APIException
      */
-    public function create(
-        array|EmbeddingCreateParams $params,
+    public function createEmbeddings(
+        array|EmbeddingCreateEmbeddingsParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = EmbeddingCreateParams::parseRequest(
+        [$parsed, $options] = EmbeddingCreateEmbeddingsParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -59,7 +59,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
             path: 'ai/openai/embeddings',
             body: (object) $parsed,
             options: $options,
-            convert: EmbeddingNewResponse::class,
+            convert: EmbeddingNewEmbeddingsResponse::class,
         );
     }
 
@@ -70,11 +70,11 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EmbeddingListModelsResponse>
+     * @return BaseResponse<EmbeddingListEmbeddingModelsResponse>
      *
      * @throws APIException
      */
-    public function listModels(
+    public function listEmbeddingModels(
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
@@ -82,7 +82,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
             method: 'get',
             path: 'ai/openai/embeddings/models',
             options: $requestOptions,
-            convert: EmbeddingListModelsResponse::class,
+            convert: EmbeddingListEmbeddingModelsResponse::class,
         );
     }
 }
