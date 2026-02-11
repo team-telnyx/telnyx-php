@@ -20,6 +20,7 @@ use Telnyx\Services\AI\EmbeddingsService;
 use Telnyx\Services\AI\FineTuningService;
 use Telnyx\Services\AI\IntegrationsService;
 use Telnyx\Services\AI\McpServersService;
+use Telnyx\Services\AI\MissionsService;
 use Telnyx\Services\AI\OpenAIService;
 
 /**
@@ -80,6 +81,11 @@ final class AIService implements AIContract
     /**
      * @api
      */
+    public MissionsService $missions;
+
+    /**
+     * @api
+     */
     public OpenAIService $openai;
 
     /**
@@ -97,6 +103,7 @@ final class AIService implements AIContract
         $this->fineTuning = new FineTuningService($client);
         $this->integrations = new IntegrationsService($client);
         $this->mcpServers = new McpServersService($client);
+        $this->missions = new MissionsService($client);
         $this->openai = new OpenAIService($client);
     }
 

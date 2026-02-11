@@ -5,8 +5,8 @@ namespace Tests\Services\AI\OpenAI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingListModelsResponse;
-use Telnyx\AI\OpenAI\Embeddings\EmbeddingNewResponse;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingListEmbeddingModelsResponse;
+use Telnyx\AI\OpenAI\Embeddings\EmbeddingNewEmbeddingsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -30,29 +30,29 @@ final class EmbeddingsTest extends TestCase
     }
 
     #[Test]
-    public function testCreate(): void
+    public function testCreateEmbeddings(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->openai->embeddings->create(
+        $result = $this->client->ai->openai->embeddings->createEmbeddings(
             input: 'The quick brown fox jumps over the lazy dog',
             model: 'thenlper/gte-large',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmbeddingNewResponse::class, $result);
+        $this->assertInstanceOf(EmbeddingNewEmbeddingsResponse::class, $result);
     }
 
     #[Test]
-    public function testCreateWithOptionalParams(): void
+    public function testCreateEmbeddingsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->openai->embeddings->create(
+        $result = $this->client->ai->openai->embeddings->createEmbeddings(
             input: 'The quick brown fox jumps over the lazy dog',
             model: 'thenlper/gte-large',
             dimensions: 0,
@@ -61,19 +61,22 @@ final class EmbeddingsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmbeddingNewResponse::class, $result);
+        $this->assertInstanceOf(EmbeddingNewEmbeddingsResponse::class, $result);
     }
 
     #[Test]
-    public function testListModels(): void
+    public function testListEmbeddingModels(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->ai->openai->embeddings->listModels();
+        $result = $this->client->ai->openai->embeddings->listEmbeddingModels();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EmbeddingListModelsResponse::class, $result);
+        $this->assertInstanceOf(
+            EmbeddingListEmbeddingModelsResponse::class,
+            $result
+        );
     }
 }
