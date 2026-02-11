@@ -662,7 +662,7 @@ final class ActionsTest extends TestCase
             timeoutSecs: 0,
             transcription: true,
             transcriptionEngine: 'B',
-            transcriptionLanguage: 'en-US',
+            transcriptionLanguage: 'en',
             transcriptionMaxSpeakerCount: 4,
             transcriptionMinSpeakerCount: 4,
             transcriptionProfanityFilter: true,
