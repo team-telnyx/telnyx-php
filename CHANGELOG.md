@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.11.0 (2026-02-11)
+
+Full Changelog: [v6.10.0...v6.11.0](https://github.com/team-telnyx/telnyx-php/compare/v6.10.0...v6.11.0)
+
+### Features
+
+* Limit detection_mode enum to disabled and detect only ([f7d6971](https://github.com/team-telnyx/telnyx-php/commit/f7d69714e1ed48689beae528924d2e5612439841))
+
 ## 6.10.0 (2026-02-09)
 
 Full Changelog: [v6.9.0...v6.10.0](https://github.com/team-telnyx/telnyx-php/compare/v6.9.0...v6.10.0)
