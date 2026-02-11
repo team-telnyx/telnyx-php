@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.13.0 (2026-02-11)
+
+Full Changelog: [v6.12.1...v6.13.0](https://github.com/team-telnyx/telnyx-php/compare/v6.12.1...v6.13.0)
+
+### Features
+
+* Add dynamic_variables field to scheduled event schemas ([dedf7ab](https://github.com/team-telnyx/telnyx-php/commit/dedf7ab24fbb5c06dcd3cc9ee3972f4ccdb409a0))
+
 ## 6.12.1 (2026-02-11)
 
 Full Changelog: [v6.12.0...v6.12.1](https://github.com/team-telnyx/telnyx-php/compare/v6.12.0...v6.12.1)
