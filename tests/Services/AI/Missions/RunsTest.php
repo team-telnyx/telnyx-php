@@ -5,10 +5,9 @@ namespace Tests\Services\AI\Missions;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Missions\Runs\MissionRunData;
 use Telnyx\AI\Missions\Runs\RunCancelRunResponse;
 use Telnyx\AI\Missions\Runs\RunGetResponse;
-use Telnyx\AI\Missions\Runs\RunListResponse;
-use Telnyx\AI\Missions\Runs\RunListRunsResponse;
 use Telnyx\AI\Missions\Runs\RunNewResponse;
 use Telnyx\AI\Missions\Runs\RunPauseRunResponse;
 use Telnyx\AI\Missions\Runs\RunResumeRunResponse;
@@ -136,7 +135,7 @@ final class RunsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(RunListResponse::class, $item);
+            $this->assertInstanceOf(MissionRunData::class, $item);
         }
     }
 
@@ -186,7 +185,7 @@ final class RunsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(RunListRunsResponse::class, $item);
+            $this->assertInstanceOf(MissionRunData::class, $item);
         }
     }
 

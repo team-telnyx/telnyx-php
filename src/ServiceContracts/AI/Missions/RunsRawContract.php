@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Missions;
 
+use Telnyx\AI\Missions\Runs\MissionRunData;
 use Telnyx\AI\Missions\Runs\RunCancelRunParams;
 use Telnyx\AI\Missions\Runs\RunCancelRunResponse;
 use Telnyx\AI\Missions\Runs\RunCreateParams;
 use Telnyx\AI\Missions\Runs\RunGetResponse;
 use Telnyx\AI\Missions\Runs\RunListParams;
-use Telnyx\AI\Missions\Runs\RunListResponse;
 use Telnyx\AI\Missions\Runs\RunListRunsParams;
-use Telnyx\AI\Missions\Runs\RunListRunsResponse;
 use Telnyx\AI\Missions\Runs\RunNewResponse;
 use Telnyx\AI\Missions\Runs\RunPauseRunParams;
 use Telnyx\AI\Missions\Runs\RunPauseRunResponse;
@@ -85,7 +84,7 @@ interface RunsRawContract
      * @param array<string,mixed>|RunListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RunListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<MissionRunData>>
      *
      * @throws APIException
      */
@@ -117,7 +116,7 @@ interface RunsRawContract
      * @param array<string,mixed>|RunListRunsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RunListRunsResponse>>
+     * @return BaseResponse<DefaultFlatPagination<MissionRunData>>
      *
      * @throws APIException
      */
