@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.16.0 (2026-02-12)
+
+Full Changelog: [v6.15.0...v6.16.0](https://github.com/team-telnyx/telnyx-php/compare/v6.15.0...v6.16.0)
+
+### Features
+
+* **api:** manual updates to include models ([ecadabe](https://github.com/team-telnyx/telnyx-php/commit/ecadabeecf6f54ce9e6149240989ee6c48642b7d))
+
 ## 6.15.0 (2026-02-11)
 
 Full Changelog: [v6.14.0...v6.15.0](https://github.com/team-telnyx/telnyx-php/compare/v6.14.0...v6.15.0)
