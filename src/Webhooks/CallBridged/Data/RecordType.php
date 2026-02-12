@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CallBridged;
+namespace Telnyx\Webhooks\CallBridged\Data;
 
 /**
  * Identifies the type of the resource.
