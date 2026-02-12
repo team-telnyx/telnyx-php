@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CallBridged;
+namespace Telnyx\Webhooks\CallBridged\Data;
 
 /**
  * The type of event being delivered.
