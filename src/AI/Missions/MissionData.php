@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Missions\MissionNewResponse;
+namespace Telnyx\AI\Missions;
 
-use Telnyx\AI\Missions\MissionNewResponse\Data\ExecutionMode;
+use Telnyx\AI\Missions\MissionData\ExecutionMode;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type MissionDataShape = array{
  *   createdAt: \DateTimeInterface,
  *   executionMode: ExecutionMode|value-of<ExecutionMode>,
  *   missionID: string,
@@ -23,9 +23,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   model?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class MissionData implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<MissionDataShape> */
     use SdkModel;
 
     #[Required('created_at')]
@@ -58,11 +58,11 @@ final class Data implements BaseModel
     public ?string $model;
 
     /**
-     * `new Data()` is missing required properties by the API.
+     * `new MissionData()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(
+     * MissionData::with(
      *   createdAt: ..., executionMode: ..., missionID: ..., name: ..., updatedAt: ...
      * )
      * ```
@@ -70,7 +70,7 @@ final class Data implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Data)
+     * (new MissionData)
      *   ->withCreatedAt(...)
      *   ->withExecutionMode(...)
      *   ->withMissionID(...)

@@ -5,9 +5,9 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Missions\MissionData;
 use Telnyx\AI\Missions\MissionGetResponse;
 use Telnyx\AI\Missions\MissionListEventsResponse;
-use Telnyx\AI\Missions\MissionListResponse;
 use Telnyx\AI\Missions\MissionNewResponse;
 use Telnyx\AI\Missions\MissionUpdateMissionResponse;
 use Telnyx\Client;
@@ -95,7 +95,7 @@ final class MissionsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(MissionListResponse::class, $item);
+            $this->assertInstanceOf(MissionData::class, $item);
         }
     }
 
