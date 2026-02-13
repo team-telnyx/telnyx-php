@@ -221,6 +221,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
      *   earlyMedia?: bool,
      *   endConferenceOnExit?: bool,
      *   from?: string,
+     *   label?: string,
      *   machineDetection?: MachineDetection|value-of<MachineDetection>,
      *   machineDetectionSilenceTimeout?: int,
      *   machineDetectionSpeechEndThreshold?: int,

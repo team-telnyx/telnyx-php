@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Missions\Runs\MissionRunData;
+namespace Telnyx\AI\Missions\Runs\RunListResponse;
 
 enum Status: string
 {
