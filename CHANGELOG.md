@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.21.0 (2026-02-13)
+
+Full Changelog: [v6.20.0...v6.21.0](https://github.com/team-telnyx/telnyx-php/compare/v6.20.0...v6.21.0)
+
+### Features
+
+* AI-2090: Add skip_turn tool type to assistant config schema ([b7e4325](https://github.com/team-telnyx/telnyx-php/commit/b7e43254d44d0d3ef0b83bfdd14f749790f9b460))
+
 ## 6.20.0 (2026-02-13)
 
 Full Changelog: [v6.19.0...v6.20.0](https://github.com/team-telnyx/telnyx-php/compare/v6.19.0...v6.20.0)
