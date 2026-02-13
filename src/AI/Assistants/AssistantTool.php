@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
 use Telnyx\AI\Assistants\AssistantTool\SendMessageTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
+use Telnyx\AI\Assistants\AssistantTool\SkipTurnTool;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -24,9 +25,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type SipReferToolShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool
  * @phpstan-import-type DtmfToolShape from \Telnyx\AI\Assistants\AssistantTool\DtmfTool
  * @phpstan-import-type SendMessageToolShape from \Telnyx\AI\Assistants\AssistantTool\SendMessageTool
+ * @phpstan-import-type SkipTurnToolShape from \Telnyx\AI\Assistants\AssistantTool\SkipTurnTool
  *
- * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|SipReferTool|DtmfTool|SendMessageTool
- * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape
+ * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape
  */
 final class AssistantTool implements ConverterSource
 {
@@ -51,6 +53,7 @@ final class AssistantTool implements ConverterSource
             'refer' => SipReferTool::class,
             'send_dtmf' => DtmfTool::class,
             'send_message' => SendMessageTool::class,
+            'skip_turn' => SkipTurnTool::class,
         ];
     }
 }
