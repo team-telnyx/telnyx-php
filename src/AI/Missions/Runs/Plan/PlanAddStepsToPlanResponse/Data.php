@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Missions\Runs\Plan;
+namespace Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanResponse;
 
-use Telnyx\AI\Missions\Runs\Plan\PlanStepData\Status;
+use Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanResponse\Data\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type PlanStepDataShape = array{
+ * @phpstan-type DataShape = array{
  *   description: string,
  *   runID: string,
  *   sequence: int,
@@ -23,9 +23,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   startedAt?: \DateTimeInterface|null,
  * }
  */
-final class PlanStepData implements BaseModel
+final class Data implements BaseModel
 {
-    /** @use SdkModel<PlanStepDataShape> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Required]
@@ -58,11 +58,11 @@ final class PlanStepData implements BaseModel
     public ?\DateTimeInterface $startedAt;
 
     /**
-     * `new PlanStepData()` is missing required properties by the API.
+     * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PlanStepData::with(
+     * Data::with(
      *   description: ..., runID: ..., sequence: ..., status: ..., stepID: ...
      * )
      * ```
@@ -70,7 +70,7 @@ final class PlanStepData implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new PlanStepData)
+     * (new Data)
      *   ->withDescription(...)
      *   ->withRunID(...)
      *   ->withSequence(...)
