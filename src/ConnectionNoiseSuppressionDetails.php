@@ -22,13 +22,13 @@ final class ConnectionNoiseSuppressionDetails implements BaseModel
     use SdkModel;
 
     /**
-     * The attenuation limit value for the selected engine. Default values vary by engine: 0 for 'denoiser', 80 for 'deep_filter_net', 'deep_filter_net_large', and all Krisp engines ('krisp_viva_tel', 'krisp_viva_tel_lite', 'krisp_viva_promodel', 'krisp_viva_ss').
+     * The attenuation limit value for the selected engine. Default values vary by engine: 0 for 'denoiser', 80 for 'deep_filter_net', 'deep_filter_net_large', and all Krisp engines ('krisp_viva_tel', 'krisp_viva_tel_lite', 'krisp_viva_promodel', 'krisp_viva_ss'), 100 for 'quail_voice_focus'.
      */
     #[Optional('attenuation_limit')]
     public ?int $attenuationLimit;
 
     /**
-     * The noise suppression engine to use. 'denoiser' is the default engine. 'deep_filter_net' and 'deep_filter_net_large' are alternative engines with different performance characteristics. Krisp engines ('krisp_viva_tel', 'krisp_viva_tel_lite', 'krisp_viva_promodel', 'krisp_viva_ss') provide advanced noise suppression capabilities.
+     * The noise suppression engine to use. 'denoiser' is the default engine. 'deep_filter_net' and 'deep_filter_net_large' are alternative engines with different performance characteristics. Krisp engines ('krisp_viva_tel', 'krisp_viva_tel_lite', 'krisp_viva_promodel', 'krisp_viva_ss') provide advanced noise suppression capabilities. 'quail_voice_focus' provides Quail-based voice focus noise suppression.
      *
      * @var value-of<Engine>|null $engine
      */
@@ -60,7 +60,7 @@ final class ConnectionNoiseSuppressionDetails implements BaseModel
     }
 
     /**
-     * The attenuation limit value for the selected engine. Default values vary by engine: 0 for 'denoiser', 80 for 'deep_filter_net', 'deep_filter_net_large', and all Krisp engines ('krisp_viva_tel', 'krisp_viva_tel_lite', 'krisp_viva_promodel', 'krisp_viva_ss').
+     * The attenuation limit value for the selected engine. Default values vary by engine: 0 for 'denoiser', 80 for 'deep_filter_net', 'deep_filter_net_large', and all Krisp engines ('krisp_viva_tel', 'krisp_viva_tel_lite', 'krisp_viva_promodel', 'krisp_viva_ss'), 100 for 'quail_voice_focus'.
      */
     public function withAttenuationLimit(int $attenuationLimit): self
     {
@@ -71,7 +71,7 @@ final class ConnectionNoiseSuppressionDetails implements BaseModel
     }
 
     /**
-     * The noise suppression engine to use. 'denoiser' is the default engine. 'deep_filter_net' and 'deep_filter_net_large' are alternative engines with different performance characteristics. Krisp engines ('krisp_viva_tel', 'krisp_viva_tel_lite', 'krisp_viva_promodel', 'krisp_viva_ss') provide advanced noise suppression capabilities.
+     * The noise suppression engine to use. 'denoiser' is the default engine. 'deep_filter_net' and 'deep_filter_net_large' are alternative engines with different performance characteristics. Krisp engines ('krisp_viva_tel', 'krisp_viva_tel_lite', 'krisp_viva_promodel', 'krisp_viva_ss') provide advanced noise suppression capabilities. 'quail_voice_focus' provides Quail-based voice focus noise suppression.
      *
      * @param Engine|value-of<Engine> $engine
      */
