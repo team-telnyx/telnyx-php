@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.20.0 (2026-02-13)
+
+Full Changelog: [v6.19.0...v6.20.0](https://github.com/team-telnyx/telnyx-php/compare/v6.19.0...v6.20.0)
+
+### Features
+
+* Add Label parameter to Dial Conference Participant endpoint ([5e5507e](https://github.com/team-telnyx/telnyx-php/commit/5e5507e4662181ec17770d02cdfcc5990fc774e0))
+
 ## 6.19.0 (2026-02-13)
 
 Full Changelog: [v6.18.0...v6.19.0](https://github.com/team-telnyx/telnyx-php/compare/v6.18.0...v6.19.0)
