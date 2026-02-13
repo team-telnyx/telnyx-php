@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.19.0 (2026-02-13)
+
+Full Changelog: [v6.18.0...v6.19.0](https://github.com/team-telnyx/telnyx-php/compare/v6.18.0...v6.19.0)
+
+### Features
+
+* ENGDESK-49554: Add quail_voice_focus to noise suppression engine enums ([8a84876](https://github.com/team-telnyx/telnyx-php/commit/8a84876c2ece1c2de7ab54459e87ad505f629981))
+
 ## 6.18.0 (2026-02-12)
 
 Full Changelog: [v6.17.0...v6.18.0](https://github.com/team-telnyx/telnyx-php/compare/v6.17.0...v6.18.0)
