@@ -215,6 +215,7 @@ final class ParticipantsTest extends TestCase
                 earlyMedia: true,
                 endConferenceOnExit: true,
                 from: '+12065550200',
+                label: 'customer',
                 machineDetection: 'Enable',
                 machineDetectionSilenceTimeout: 2000,
                 machineDetectionSpeechEndThreshold: 2000,

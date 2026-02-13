@@ -131,6 +131,7 @@ interface ParticipantsContract
      * @param bool $earlyMedia Body param: Whether participant shall be bridged to conference before the participant answers (from early media if available). Defaults to `false`.
      * @param bool $endConferenceOnExit Body param: Whether to end the conference when the participant leaves. Defaults to `false`.
      * @param string $from Body param: The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
+     * @param string $label Body param: A unique label for the participant that will be added to the conference. The label can be used to reference the participant for updates via the TeXML REST API.
      * @param MachineDetection|value-of<MachineDetection> $machineDetection Body param: Whether to detect if a human or an answering machine picked up the call. Use `Enable` if you would like to ne notified as soon as the called party is identified. Use `DetectMessageEnd`, if you would like to leave a message on an answering machine.
      * @param int $machineDetectionSilenceTimeout Body param: If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechEndThreshold Body param: Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
@@ -184,6 +185,7 @@ interface ParticipantsContract
         bool $earlyMedia = false,
         ?bool $endConferenceOnExit = null,
         ?string $from = null,
+        ?string $label = null,
         MachineDetection|string|null $machineDetection = null,
         int $machineDetectionSilenceTimeout = 3500,
         int $machineDetectionSpeechEndThreshold = 800,

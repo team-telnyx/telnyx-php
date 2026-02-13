@@ -53,6 +53,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *   earlyMedia?: bool|null,
  *   endConferenceOnExit?: bool|null,
  *   from?: string|null,
+ *   label?: string|null,
  *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
  *   machineDetectionSilenceTimeout?: int|null,
  *   machineDetectionSpeechEndThreshold?: int|null,
@@ -234,6 +235,12 @@ final class ParticipantParticipantsParams implements BaseModel
      */
     #[Optional('From')]
     public ?string $from;
+
+    /**
+     * A unique label for the participant that will be added to the conference. The label can be used to reference the participant for updates via the TeXML REST API.
+     */
+    #[Optional('Label')]
+    public ?string $label;
 
     /**
      * Whether to detect if a human or an answering machine picked up the call. Use `Enable` if you would like to ne notified as soon as the called party is identified. Use `DetectMessageEnd`, if you would like to leave a message on an answering machine.
@@ -461,6 +468,7 @@ final class ParticipantParticipantsParams implements BaseModel
         ?bool $earlyMedia = null,
         ?bool $endConferenceOnExit = null,
         ?string $from = null,
+        ?string $label = null,
         MachineDetection|string|null $machineDetection = null,
         ?int $machineDetectionSilenceTimeout = null,
         ?int $machineDetectionSpeechEndThreshold = null,
@@ -512,6 +520,7 @@ final class ParticipantParticipantsParams implements BaseModel
         null !== $earlyMedia && $self['earlyMedia'] = $earlyMedia;
         null !== $endConferenceOnExit && $self['endConferenceOnExit'] = $endConferenceOnExit;
         null !== $from && $self['from'] = $from;
+        null !== $label && $self['label'] = $label;
         null !== $machineDetection && $self['machineDetection'] = $machineDetection;
         null !== $machineDetectionSilenceTimeout && $self['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
         null !== $machineDetectionSpeechEndThreshold && $self['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
@@ -802,6 +811,17 @@ final class ParticipantParticipantsParams implements BaseModel
     {
         $self = clone $this;
         $self['from'] = $from;
+
+        return $self;
+    }
+
+    /**
+     * A unique label for the participant that will be added to the conference. The label can be used to reference the participant for updates via the TeXML REST API.
+     */
+    public function withLabel(string $label): self
+    {
+        $self = clone $this;
+        $self['label'] = $label;
 
         return $self;
     }

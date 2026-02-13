@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Missions;
 
-use Telnyx\AI\Missions\Runs\MissionRunData;
 use Telnyx\AI\Missions\Runs\RunCancelRunParams;
 use Telnyx\AI\Missions\Runs\RunCancelRunResponse;
 use Telnyx\AI\Missions\Runs\RunCreateParams;
 use Telnyx\AI\Missions\Runs\RunGetResponse;
 use Telnyx\AI\Missions\Runs\RunListParams;
+use Telnyx\AI\Missions\Runs\RunListResponse;
 use Telnyx\AI\Missions\Runs\RunListRunsParams;
+use Telnyx\AI\Missions\Runs\RunListRunsResponse;
 use Telnyx\AI\Missions\Runs\RunNewResponse;
 use Telnyx\AI\Missions\Runs\RunPauseRunParams;
 use Telnyx\AI\Missions\Runs\RunPauseRunResponse;
@@ -158,7 +159,7 @@ final class RunsRawService implements RunsRawContract
      * }|RunListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MissionRunData>>
+     * @return BaseResponse<DefaultFlatPagination<RunListResponse>>
      *
      * @throws APIException
      */
@@ -181,7 +182,7 @@ final class RunsRawService implements RunsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: MissionRunData::class,
+            convert: RunListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }
@@ -229,7 +230,7 @@ final class RunsRawService implements RunsRawContract
      * }|RunListRunsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MissionRunData>>
+     * @return BaseResponse<DefaultFlatPagination<RunListRunsResponse>>
      *
      * @throws APIException
      */
@@ -251,7 +252,7 @@ final class RunsRawService implements RunsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: MissionRunData::class,
+            convert: RunListRunsResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

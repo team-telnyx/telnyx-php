@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Missions\MissionData;
+namespace Telnyx\AI\Missions\MissionListResponse;
 
 enum ExecutionMode: string
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Missions\Runs\Plan\PlanStepData;
+namespace Telnyx\AI\Missions\Runs\Plan\PlanGetResponse\Data;
 
 enum Status: string
 {
