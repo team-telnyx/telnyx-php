@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.22.0 (2026-02-17)
+
+Full Changelog: [v6.21.0...v6.22.0](https://github.com/team-telnyx/telnyx-php/compare/v6.21.0...v6.22.0)
+
+### Features
+
+* Add Minimax and Resemble voice providers for speak commands ([8c4ea1e](https://github.com/team-telnyx/telnyx-php/commit/8c4ea1e15636830b22922e1b309831ca8422e93c))
+
 ## 6.21.0 (2026-02-13)
 
 Full Changelog: [v6.20.0...v6.21.0](https://github.com/team-telnyx/telnyx-php/compare/v6.20.0...v6.21.0)
