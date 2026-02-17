@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.23.0 (2026-02-17)
+
+Full Changelog: [v6.22.0...v6.23.0](https://github.com/team-telnyx/telnyx-php/compare/v6.22.0...v6.23.0)
+
+### Features
+
+* Align transfer tool AMD spec with portal: premium mode, drop continue actions ([adba8c4](https://github.com/team-telnyx/telnyx-php/commit/adba8c49e16779d6019868cb4a92270ea4acb510))
+
 ## 6.22.0 (2026-02-17)
 
 Full Changelog: [v6.21.0...v6.22.0](https://github.com/team-telnyx/telnyx-php/compare/v6.21.0...v6.22.0)
