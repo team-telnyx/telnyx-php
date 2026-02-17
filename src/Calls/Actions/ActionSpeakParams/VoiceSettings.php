@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionSpeakParams;
 
+use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\MinimaxVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -17,9 +18,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type ElevenLabsVoiceSettingsShape from \Telnyx\Calls\Actions\ElevenLabsVoiceSettings
  * @phpstan-import-type TelnyxVoiceSettingsShape from \Telnyx\Calls\Actions\TelnyxVoiceSettings
  * @phpstan-import-type AwsVoiceSettingsShape from \Telnyx\Calls\Actions\AwsVoiceSettings
+ * @phpstan-import-type MinimaxVoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\MinimaxVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
@@ -39,6 +41,7 @@ final class VoiceSettings implements ConverterSource
             'elevenlabs' => ElevenLabsVoiceSettings::class,
             'telnyx' => TelnyxVoiceSettings::class,
             'aws' => AwsVoiceSettings::class,
+            'minimax' => MinimaxVoiceSettings::class,
         ];
     }
 }
