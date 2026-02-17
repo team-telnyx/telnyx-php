@@ -26,7 +26,7 @@ final class OnVoicemailDetected implements BaseModel
     use SdkModel;
 
     /**
-     * The action to take when voicemail is detected. 'stop_transfer' hangs up immediately. 'leave_message_and_stop_transfer' leaves a message then hangs up. 'continue_transfer' bridges the call despite voicemail detection.
+     * The action to take when voicemail is detected. 'stop_transfer' hangs up immediately. 'leave_message_and_stop_transfer' leaves a message then hangs up.
      *
      * @var value-of<Action>|null $action
      */
@@ -65,7 +65,7 @@ final class OnVoicemailDetected implements BaseModel
     }
 
     /**
-     * The action to take when voicemail is detected. 'stop_transfer' hangs up immediately. 'leave_message_and_stop_transfer' leaves a message then hangs up. 'continue_transfer' bridges the call despite voicemail detection.
+     * The action to take when voicemail is detected. 'stop_transfer' hangs up immediately. 'leave_message_and_stop_transfer' leaves a message then hangs up.
      *
      * @param Action|value-of<Action> $action
      */
