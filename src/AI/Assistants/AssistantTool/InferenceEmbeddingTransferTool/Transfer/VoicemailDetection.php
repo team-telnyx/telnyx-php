@@ -35,7 +35,7 @@ final class VoicemailDetection implements BaseModel
     public ?DetectionConfig $detectionConfig;
 
     /**
-     * The AMD detection mode to use. 'detect' enables answering machine detection (works best when warm transfer instructions are also set). 'disabled' turns off AMD detection.
+     * The AMD detection mode to use. 'premium' enables premium answering machine detection. 'disabled' turns off AMD detection.
      *
      * @var value-of<DetectionMode>|null $detectionMode
      */
@@ -91,7 +91,7 @@ final class VoicemailDetection implements BaseModel
     }
 
     /**
-     * The AMD detection mode to use. 'detect' enables answering machine detection (works best when warm transfer instructions are also set). 'disabled' turns off AMD detection.
+     * The AMD detection mode to use. 'premium' enables premium answering machine detection. 'disabled' turns off AMD detection.
      *
      * @param DetectionMode|value-of<DetectionMode> $detectionMode
      */
