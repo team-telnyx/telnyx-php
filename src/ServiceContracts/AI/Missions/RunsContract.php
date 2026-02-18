@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Missions;
 
+use Telnyx\AI\Missions\Runs\MissionRunData;
 use Telnyx\AI\Missions\Runs\RunCancelRunResponse;
 use Telnyx\AI\Missions\Runs\RunGetResponse;
-use Telnyx\AI\Missions\Runs\RunListResponse;
-use Telnyx\AI\Missions\Runs\RunListRunsResponse;
 use Telnyx\AI\Missions\Runs\RunNewResponse;
 use Telnyx\AI\Missions\Runs\RunPauseRunResponse;
 use Telnyx\AI\Missions\Runs\RunResumeRunResponse;
@@ -83,7 +82,7 @@ interface RunsContract
      * @param int $pageSize Number of items per page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<RunListResponse>
+     * @return DefaultFlatPagination<MissionRunData>
      *
      * @throws APIException
      */
@@ -115,7 +114,7 @@ interface RunsContract
      * @param int $pageSize Number of items per page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<RunListRunsResponse>
+     * @return DefaultFlatPagination<MissionRunData>
      *
      * @throws APIException
      */

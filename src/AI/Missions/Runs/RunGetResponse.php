@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs;
 
-use Telnyx\AI\Missions\Runs\RunGetResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\AI\Missions\Runs\RunGetResponse\Data
+ * @phpstan-import-type MissionRunDataShape from \Telnyx\AI\Missions\Runs\MissionRunData
  *
- * @phpstan-type RunGetResponseShape = array{data: Data|DataShape}
+ * @phpstan-type RunGetResponseShape = array{
+ *   data: MissionRunData|MissionRunDataShape
+ * }
  */
 final class RunGetResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class RunGetResponse implements BaseModel
     use SdkModel;
 
     #[Required]
-    public Data $data;
+    public MissionRunData $data;
 
     /**
      * `new RunGetResponse()` is missing required properties by the API.
@@ -46,9 +47,9 @@ final class RunGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param MissionRunData|MissionRunDataShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(MissionRunData|array $data): self
     {
         $self = new self;
 
@@ -58,9 +59,9 @@ final class RunGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param MissionRunData|MissionRunDataShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(MissionRunData|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
