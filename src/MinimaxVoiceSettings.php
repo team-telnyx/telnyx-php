@@ -2,16 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings;
+namespace Telnyx;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\MinimaxVoiceSettings\Type;
 
 /**
  * @phpstan-type MinimaxVoiceSettingsShape = array{
- *   type: 'minimax', pitch?: int|null, speed?: float|null, vol?: float|null
+ *   type: Type|value-of<Type>,
+ *   pitch?: int|null,
+ *   speed?: float|null,
+ *   vol?: float|null,
  * }
  */
 final class MinimaxVoiceSettings implements BaseModel
@@ -22,10 +26,10 @@ final class MinimaxVoiceSettings implements BaseModel
     /**
      * Voice settings provider type.
      *
-     * @var 'minimax' $type
+     * @var value-of<Type> $type
      */
-    #[Required]
-    public string $type = 'minimax';
+    #[Required(enum: Type::class)]
+    public string $type;
 
     /**
      * Voice pitch adjustment. Default is 0.
@@ -45,6 +49,20 @@ final class MinimaxVoiceSettings implements BaseModel
     #[Optional]
     public ?float $vol;
 
+    /**
+     * `new MinimaxVoiceSettings()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * MinimaxVoiceSettings::with(type: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new MinimaxVoiceSettings)->withType(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -54,13 +72,18 @@ final class MinimaxVoiceSettings implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Type|value-of<Type> $type
      */
     public static function with(
+        Type|string $type,
         ?int $pitch = null,
         ?float $speed = null,
         ?float $vol = null
     ): self {
         $self = new self;
+
+        $self['type'] = $type;
 
         null !== $pitch && $self['pitch'] = $pitch;
         null !== $speed && $self['speed'] = $speed;
@@ -72,9 +95,9 @@ final class MinimaxVoiceSettings implements BaseModel
     /**
      * Voice settings provider type.
      *
-     * @param 'minimax' $type
+     * @param Type|value-of<Type> $type
      */
-    public function withType(string $type): self
+    public function withType(Type|string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;
