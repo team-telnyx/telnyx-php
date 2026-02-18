@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.29.0 (2026-02-18)
+
+Full Changelog: [v6.28.0...v6.29.0](https://github.com/team-telnyx/telnyx-php/compare/v6.28.0...v6.29.0)
+
+### Features
+
+* AI-2093: Add language_boost to MiniMax voice settings ([abf9c5e](https://github.com/team-telnyx/telnyx-php/commit/abf9c5ee3e9c04147e9a65ef1ca743f2a24d9c5c))
+
 ## 6.28.0 (2026-02-18)
 
 Full Changelog: [v6.27.0...v6.28.0](https://github.com/team-telnyx/telnyx-php/compare/v6.27.0...v6.28.0)
