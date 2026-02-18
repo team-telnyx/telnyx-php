@@ -12,6 +12,7 @@ use Telnyx\Messages\MessageScheduleResponse;
 use Telnyx\Messages\MessageSendGroupMmsResponse;
 use Telnyx\Messages\MessageSendLongCodeResponse;
 use Telnyx\Messages\MessageSendNumberPoolResponse;
+use Telnyx\Messages\MessageSendParams\Encoding;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
@@ -98,6 +99,7 @@ interface MessagesContract
      *
      * @param string $to Receiving address (+E.164 formatted phone number or short code).
      * @param bool $autoDetect automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts
+     * @param Encoding|value-of<Encoding> $encoding Encoding to use for the message. `auto` (default) uses smart encoding to automatically select the most efficient encoding. `gsm7` forces GSM-7 encoding (returns 400 if message contains characters that cannot be encoded). `ucs2` forces UCS-2 encoding and disables smart encoding. When set, this overrides the messaging profile's `smart_encoding` setting.
      * @param string $from Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
      *
      * **Required if sending with a phone number, short code, or alphanumeric sender ID.**
@@ -123,6 +125,7 @@ interface MessagesContract
     public function send(
         string $to,
         bool $autoDetect = false,
+        Encoding|string $encoding = 'auto',
         ?string $from = null,
         ?array $mediaURLs = null,
         ?string $messagingProfileID = null,
@@ -169,6 +172,7 @@ interface MessagesContract
      * @param string $from Phone number, in +E.164 format, used to send the message.
      * @param string $to Receiving address (+E.164 formatted phone number or short code).
      * @param bool $autoDetect automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts
+     * @param \Telnyx\Messages\MessageSendLongCodeParams\Encoding|value-of<\Telnyx\Messages\MessageSendLongCodeParams\Encoding> $encoding Encoding to use for the message. `auto` (default) uses smart encoding to automatically select the most efficient encoding. `gsm7` forces GSM-7 encoding (returns 400 if message contains characters that cannot be encoded). `ucs2` forces UCS-2 encoding and disables smart encoding. When set, this overrides the messaging profile's `smart_encoding` setting.
      * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
      *
      * **Required for MMS**
@@ -188,6 +192,7 @@ interface MessagesContract
         string $from,
         string $to,
         bool $autoDetect = false,
+        \Telnyx\Messages\MessageSendLongCodeParams\Encoding|string $encoding = 'auto',
         ?array $mediaURLs = null,
         ?string $subject = null,
         ?string $text = null,
@@ -204,6 +209,7 @@ interface MessagesContract
      * @param string $messagingProfileID unique identifier for a messaging profile
      * @param string $to Receiving address (+E.164 formatted phone number or short code).
      * @param bool $autoDetect automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts
+     * @param \Telnyx\Messages\MessageSendNumberPoolParams\Encoding|value-of<\Telnyx\Messages\MessageSendNumberPoolParams\Encoding> $encoding Encoding to use for the message. `auto` (default) uses smart encoding to automatically select the most efficient encoding. `gsm7` forces GSM-7 encoding (returns 400 if message contains characters that cannot be encoded). `ucs2` forces UCS-2 encoding and disables smart encoding. When set, this overrides the messaging profile's `smart_encoding` setting.
      * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
      *
      * **Required for MMS**
@@ -223,6 +229,7 @@ interface MessagesContract
         string $messagingProfileID,
         string $to,
         bool $autoDetect = false,
+        \Telnyx\Messages\MessageSendNumberPoolParams\Encoding|string $encoding = 'auto',
         ?array $mediaURLs = null,
         ?string $subject = null,
         ?string $text = null,
@@ -239,6 +246,7 @@ interface MessagesContract
      * @param string $from Phone number, in +E.164 format, used to send the message.
      * @param string $to Receiving address (+E.164 formatted phone number or short code).
      * @param bool $autoDetect automatically detect if an SMS message is unusually long and exceeds a recommended limit of message parts
+     * @param \Telnyx\Messages\MessageSendShortCodeParams\Encoding|value-of<\Telnyx\Messages\MessageSendShortCodeParams\Encoding> $encoding Encoding to use for the message. `auto` (default) uses smart encoding to automatically select the most efficient encoding. `gsm7` forces GSM-7 encoding (returns 400 if message contains characters that cannot be encoded). `ucs2` forces UCS-2 encoding and disables smart encoding. When set, this overrides the messaging profile's `smart_encoding` setting.
      * @param list<string> $mediaURLs A list of media URLs. The total media size must be less than 1 MB.
      *
      * **Required for MMS**
@@ -258,6 +266,7 @@ interface MessagesContract
         string $from,
         string $to,
         bool $autoDetect = false,
+        \Telnyx\Messages\MessageSendShortCodeParams\Encoding|string $encoding = 'auto',
         ?array $mediaURLs = null,
         ?string $subject = null,
         ?string $text = null,

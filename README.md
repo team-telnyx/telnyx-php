@@ -40,10 +40,10 @@ var_dump($response->data);
 
 ### Value Objects
 
-It is recommended to use the static `with` constructor `MinimaxVoiceSettings::with(type: 'minimax', ...)`
+It is recommended to use the static `with` constructor `HangupTool::with(hangup: (object)[], ...)`
 and named parameters to initialize value objects.
 
-However, builders are also provided `(new MinimaxVoiceSettings)->withType('minimax')`.
+However, builders are also provided `(new HangupTool)->withHangup((object)[])`.
 
 ### Pagination
 

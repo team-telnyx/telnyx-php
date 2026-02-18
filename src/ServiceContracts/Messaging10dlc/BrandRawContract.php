@@ -9,8 +9,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messaging10dlc\Brand\BrandCreateParams;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
-use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceParams;
-use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Messaging10dlc\Brand\BrandListParams;
 use Telnyx\Messaging10dlc\Brand\BrandListResponse;
@@ -113,23 +111,6 @@ interface BrandRawContract
     public function getFeedback(
         string $brandID,
         RequestOptions|array|null $requestOptions = null
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param string $referenceID The reference ID returned when the OTP was initially triggered
-     * @param array<string,mixed>|BrandGetSMSOtpByReferenceParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<BrandGetSMSOtpByReferenceResponse>
-     *
-     * @throws APIException
-     */
-    public function getSMSOtpByReference(
-        string $referenceID,
-        array|BrandGetSMSOtpByReferenceParams $params,
-        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**

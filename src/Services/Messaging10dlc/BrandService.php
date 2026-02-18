@@ -10,7 +10,6 @@ use Telnyx\Core\Util;
 use Telnyx\Messaging10dlc\Brand\AltBusinessIDType;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
-use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Messaging10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Messaging10dlc\Brand\BrandListParams\Sort;
@@ -357,37 +356,6 @@ final class BrandService implements BrandContract
     ): BrandGetFeedbackResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getFeedback($brandID, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
-     * Query the status of an SMS OTP (One-Time Password) for Sole Proprietor brand verification.
-     *
-     * This endpoint allows you to check the delivery and verification status of an OTP sent during the Sole Proprietor brand verification process. You can query by either:
-     *
-     * * `referenceId` - The reference ID returned when the OTP was initially triggered
-     * * `brandId` - Query parameter for portal users to look up OTP status by Brand ID
-     *
-     * The response includes delivery status, verification dates, and detailed delivery information.
-     *
-     * @param string $referenceID The reference ID returned when the OTP was initially triggered
-     * @param string $brandID Filter by Brand ID for easier lookup in portal applications
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function getSMSOtpByReference(
-        string $referenceID,
-        ?string $brandID = null,
-        RequestOptions|array|null $requestOptions = null,
-    ): BrandGetSMSOtpByReferenceResponse {
-        $params = Util::removeNulls(['brandID' => $brandID]);
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->getSMSOtpByReference($referenceID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -19,6 +19,7 @@ use Telnyx\Messages\MessageSendLongCodeResponse;
 use Telnyx\Messages\MessageSendNumberPoolParams;
 use Telnyx\Messages\MessageSendNumberPoolResponse;
 use Telnyx\Messages\MessageSendParams;
+use Telnyx\Messages\MessageSendParams\Encoding;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
@@ -150,6 +151,7 @@ final class MessagesRawService implements MessagesRawContract
      * @param array{
      *   to: string,
      *   autoDetect?: bool,
+     *   encoding?: Encoding|value-of<Encoding>,
      *   from?: string,
      *   mediaURLs?: list<string>,
      *   messagingProfileID?: string,
@@ -235,6 +237,7 @@ final class MessagesRawService implements MessagesRawContract
      *   from: string,
      *   to: string,
      *   autoDetect?: bool,
+     *   encoding?: MessageSendLongCodeParams\Encoding|value-of<MessageSendLongCodeParams\Encoding>,
      *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,
@@ -277,6 +280,7 @@ final class MessagesRawService implements MessagesRawContract
      *   messagingProfileID: string,
      *   to: string,
      *   autoDetect?: bool,
+     *   encoding?: MessageSendNumberPoolParams\Encoding|value-of<MessageSendNumberPoolParams\Encoding>,
      *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,
@@ -319,6 +323,7 @@ final class MessagesRawService implements MessagesRawContract
      *   from: string,
      *   to: string,
      *   autoDetect?: bool,
+     *   encoding?: MessageSendShortCodeParams\Encoding|value-of<MessageSendShortCodeParams\Encoding>,
      *   mediaURLs?: list<string>,
      *   subject?: string,
      *   text?: string,

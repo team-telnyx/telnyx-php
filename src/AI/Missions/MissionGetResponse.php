@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions;
 
+use Telnyx\AI\Missions\MissionGetResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type MissionDataShape from \Telnyx\AI\Missions\MissionData
+ * @phpstan-import-type DataShape from \Telnyx\AI\Missions\MissionGetResponse\Data
  *
- * @phpstan-type MissionGetResponseShape = array{
- *   data: MissionData|MissionDataShape
- * }
+ * @phpstan-type MissionGetResponseShape = array{data: Data|DataShape}
  */
 final class MissionGetResponse implements BaseModel
 {
@@ -21,7 +20,7 @@ final class MissionGetResponse implements BaseModel
     use SdkModel;
 
     #[Required]
-    public MissionData $data;
+    public Data $data;
 
     /**
      * `new MissionGetResponse()` is missing required properties by the API.
@@ -47,9 +46,9 @@ final class MissionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param MissionData|MissionDataShape $data
+     * @param Data|DataShape $data
      */
-    public static function with(MissionData|array $data): self
+    public static function with(Data|array $data): self
     {
         $self = new self;
 
@@ -59,9 +58,9 @@ final class MissionGetResponse implements BaseModel
     }
 
     /**
-     * @param MissionData|MissionDataShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(MissionData|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
