@@ -9,10 +9,10 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
- * @phpstan-type UnionMember3Variants = string|int|bool
- * @phpstan-type UnionMember3Shape = UnionMember3Variants
+ * @phpstan-type UnionArrayVariant3Variants = string|int|bool
+ * @phpstan-type UnionArrayVariant3Shape = UnionArrayVariant3Variants
  */
-final class UnionMember3 implements ConverterSource
+final class UnionArrayVariant3 implements ConverterSource
 {
     use SdkUnion;
 
