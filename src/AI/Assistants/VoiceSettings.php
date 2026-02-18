@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio;
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaName;
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\MediaURL;
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia;
+use Telnyx\AI\Assistants\VoiceSettings\LanguageBoost;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -21,6 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   voice: string,
  *   apiKeyRef?: string|null,
  *   backgroundAudio?: BackgroundAudioShape|null,
+ *   languageBoost?: null|LanguageBoost|value-of<LanguageBoost>,
  *   similarityBoost?: float|null,
  *   speed?: float|null,
  *   style?: float|null,
@@ -54,6 +56,14 @@ final class VoiceSettings implements BaseModel
      */
     #[Optional('background_audio', union: BackgroundAudio::class)]
     public PredefinedMedia|MediaURL|MediaName|null $backgroundAudio;
+
+    /**
+     * Enhances recognition for specific languages and dialects during MiniMax TTS synthesis. Default is null (no boost). Set to 'auto' for automatic language detection. Only applicable when using MiniMax voices.
+     *
+     * @var value-of<LanguageBoost>|null $languageBoost
+     */
+    #[Optional('language_boost', enum: LanguageBoost::class, nullable: true)]
+    public ?string $languageBoost;
 
     /**
      * Determines how closely the AI should adhere to the original voice when attempting to replicate it. Only applicable when using ElevenLabs.
@@ -116,11 +126,13 @@ final class VoiceSettings implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BackgroundAudioShape|null $backgroundAudio
+     * @param LanguageBoost|value-of<LanguageBoost>|null $languageBoost
      */
     public static function with(
         string $voice,
         ?string $apiKeyRef = null,
         PredefinedMedia|array|MediaURL|MediaName|null $backgroundAudio = null,
+        LanguageBoost|string|null $languageBoost = null,
         ?float $similarityBoost = null,
         ?float $speed = null,
         ?float $style = null,
@@ -134,6 +146,7 @@ final class VoiceSettings implements BaseModel
 
         null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $backgroundAudio && $self['backgroundAudio'] = $backgroundAudio;
+        null !== $languageBoost && $self['languageBoost'] = $languageBoost;
         null !== $similarityBoost && $self['similarityBoost'] = $similarityBoost;
         null !== $speed && $self['speed'] = $speed;
         null !== $style && $self['style'] = $style;
@@ -177,6 +190,20 @@ final class VoiceSettings implements BaseModel
     ): self {
         $self = clone $this;
         $self['backgroundAudio'] = $backgroundAudio;
+
+        return $self;
+    }
+
+    /**
+     * Enhances recognition for specific languages and dialects during MiniMax TTS synthesis. Default is null (no boost). Set to 'auto' for automatic language detection. Only applicable when using MiniMax voices.
+     *
+     * @param LanguageBoost|value-of<LanguageBoost>|null $languageBoost
+     */
+    public function withLanguageBoost(
+        LanguageBoost|string|null $languageBoost
+    ): self {
+        $self = clone $this;
+        $self['languageBoost'] = $languageBoost;
 
         return $self;
     }

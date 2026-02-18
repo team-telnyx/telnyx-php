@@ -127,7 +127,11 @@ final class ActionStartRecordingParams implements BaseModel
     #[Optional('transcription_engine', enum: TranscriptionEngine::class)]
     public ?string $transcriptionEngine;
 
-    /** @var value-of<TranscriptionLanguage>|null $transcriptionLanguage */
+    /**
+     * Language code for transcription. Note: Not all languages are supported by all transcription engines (google, telnyx, deepgram). See engine-specific documentation for supported values.
+     *
+     * @var value-of<TranscriptionLanguage>|null $transcriptionLanguage
+     */
     #[Optional('transcription_language', enum: TranscriptionLanguage::class)]
     public ?string $transcriptionLanguage;
 
@@ -369,6 +373,8 @@ final class ActionStartRecordingParams implements BaseModel
     }
 
     /**
+     * Language code for transcription. Note: Not all languages are supported by all transcription engines (google, telnyx, deepgram). See engine-specific documentation for supported values.
+     *
      * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage
      */
     public function withTranscriptionLanguage(
