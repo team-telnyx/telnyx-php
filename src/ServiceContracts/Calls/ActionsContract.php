@@ -795,7 +795,7 @@ interface ActionsContract
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite)
      * @param bool $transcription Enable post recording transcription. The default value is false.
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
-     * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage
+     * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage Language code for transcription. Note: Not all languages are supported by all transcription engines (google, telnyx, deepgram). See engine-specific documentation for supported values.
      * @param int $transcriptionMaxSpeakerCount Defines maximum number of speakers in the conversation. Applies to `google` engine only.
      * @param int $transcriptionMinSpeakerCount Defines minimum number of speakers in the conversation. Applies to `google` engine only.
      * @param bool $transcriptionProfanityFilter Enables profanity_filter. Applies to `google` engine only.
@@ -818,7 +818,7 @@ interface ActionsContract
         int $timeoutSecs = 0,
         bool $transcription = false,
         TranscriptionEngine|string $transcriptionEngine = 'A',
-        TranscriptionLanguage|string|null $transcriptionLanguage = null,
+        TranscriptionLanguage|string $transcriptionLanguage = 'en-US',
         int $transcriptionMaxSpeakerCount = 6,
         int $transcriptionMinSpeakerCount = 2,
         bool $transcriptionProfanityFilter = false,
