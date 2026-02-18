@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Messages sent by an end user.
  *
  * @phpstan-type UserMessageShape = array{
- *   content: string, role: 'user', metadata?: array<string,mixed>|null
+ *   content: string, role: 'user', metadata?: mixed
  * }
  */
 final class UserMessage implements BaseModel
@@ -37,11 +37,9 @@ final class UserMessage implements BaseModel
 
     /**
      * Metadata to add to the message.
-     *
-     * @var array<string,mixed>|null $metadata
      */
-    #[Optional(map: 'mixed')]
-    public ?array $metadata;
+    #[Optional]
+    public mixed $metadata;
 
     /**
      * `new UserMessage()` is missing required properties by the API.
@@ -66,10 +64,8 @@ final class UserMessage implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param array<string,mixed>|null $metadata
      */
-    public static function with(string $content, ?array $metadata = null): self
+    public static function with(string $content, mixed $metadata = null): self
     {
         $self = new self;
 
@@ -106,10 +102,8 @@ final class UserMessage implements BaseModel
 
     /**
      * Metadata to add to the message.
-     *
-     * @param array<string,mixed> $metadata
      */
-    public function withMetadata(array $metadata): self
+    public function withMetadata(mixed $metadata): self
     {
         $self = clone $this;
         $self['metadata'] = $metadata;

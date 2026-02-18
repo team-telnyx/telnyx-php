@@ -26,6 +26,7 @@ use Telnyx\Calls\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
+use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\MinimaxVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakResponse;
 use Telnyx\Calls\Actions\ActionHangupResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
@@ -57,6 +58,8 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStopForkingResponse;
@@ -77,8 +80,6 @@ use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
-use Telnyx\Calls\Actions\DeepgramNova2Config;
-use Telnyx\Calls\Actions\DeepgramNova3Config;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
 use Telnyx\Calls\Actions\InterruptionSettings;
@@ -100,7 +101,6 @@ use Telnyx\Calls\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
 
 /**
@@ -656,7 +656,7 @@ interface ActionsContract
         \Telnyx\Calls\Actions\ActionSpeakParams\PayloadType|string $payloadType = 'text',
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\MinimaxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse;
 

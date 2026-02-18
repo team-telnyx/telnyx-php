@@ -43,6 +43,7 @@ use Telnyx\Messages\MessageCancelScheduledResponse\Type;
  *   receivedAt?: \DateTimeInterface|null,
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   sentAt?: \DateTimeInterface|null,
+ *   smartEncodingApplied?: bool|null,
  *   subject?: string|null,
  *   tags?: list<string>|null,
  *   tcrCampaignBillable?: bool|null,
@@ -154,6 +155,12 @@ final class MessageCancelScheduledResponse implements BaseModel
     public ?\DateTimeInterface $sentAt;
 
     /**
+     * Indicates whether smart encoding was applied to this message. When `true`, one or more Unicode characters were automatically replaced with GSM-7 equivalents to reduce segment count and cost. The original message text is preserved in webhooks.
+     */
+    #[Optional('smart_encoding_applied')]
+    public ?bool $smartEncodingApplied;
+
+    /**
      * Subject of multimedia message.
      */
     #[Optional(nullable: true)]
@@ -262,6 +269,7 @@ final class MessageCancelScheduledResponse implements BaseModel
         ?\DateTimeInterface $receivedAt = null,
         RecordType|string|null $recordType = null,
         ?\DateTimeInterface $sentAt = null,
+        ?bool $smartEncodingApplied = null,
         ?string $subject = null,
         ?array $tags = null,
         ?bool $tcrCampaignBillable = null,
@@ -292,6 +300,7 @@ final class MessageCancelScheduledResponse implements BaseModel
         null !== $receivedAt && $self['receivedAt'] = $receivedAt;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $sentAt && $self['sentAt'] = $sentAt;
+        null !== $smartEncodingApplied && $self['smartEncodingApplied'] = $smartEncodingApplied;
         null !== $subject && $self['subject'] = $subject;
         null !== $tags && $self['tags'] = $tags;
         null !== $tcrCampaignBillable && $self['tcrCampaignBillable'] = $tcrCampaignBillable;
@@ -488,6 +497,17 @@ final class MessageCancelScheduledResponse implements BaseModel
     {
         $self = clone $this;
         $self['sentAt'] = $sentAt;
+
+        return $self;
+    }
+
+    /**
+     * Indicates whether smart encoding was applied to this message. When `true`, one or more Unicode characters were automatically replaced with GSM-7 equivalents to reduce segment count and cost. The original message text is preserved in webhooks.
+     */
+    public function withSmartEncodingApplied(bool $smartEncodingApplied): self
+    {
+        $self = clone $this;
+        $self['smartEncodingApplied'] = $smartEncodingApplied;
 
         return $self;
     }
