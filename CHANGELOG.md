@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.27.0 (2026-02-18)
+
+Full Changelog: [v6.26.0...v6.27.0](https://github.com/team-telnyx/telnyx-php/compare/v6.26.0...v6.27.0)
+
+### Features
+
+* Add smart encoding fields to messaging API spec ([46a383c](https://github.com/team-telnyx/telnyx-php/commit/46a383c81df759e08b212c69f851f3964239cf37))
+* **api:** manual updates ([d0df599](https://github.com/team-telnyx/telnyx-php/commit/d0df599002bee06394b13295bb88fb59707cb3f0))
+
 ## 6.26.0 (2026-02-18)
 
 Full Changelog: [v6.25.0...v6.26.0](https://github.com/team-telnyx/telnyx-php/compare/v6.25.0...v6.26.0)
