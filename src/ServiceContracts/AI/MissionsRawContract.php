@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Missions\MissionCreateParams;
+use Telnyx\AI\Missions\MissionData;
 use Telnyx\AI\Missions\MissionGetResponse;
 use Telnyx\AI\Missions\MissionListEventsParams;
 use Telnyx\AI\Missions\MissionListEventsResponse;
 use Telnyx\AI\Missions\MissionListParams;
-use Telnyx\AI\Missions\MissionListResponse;
 use Telnyx\AI\Missions\MissionNewResponse;
 use Telnyx\AI\Missions\MissionUpdateMissionParams;
 use Telnyx\AI\Missions\MissionUpdateMissionResponse;
@@ -58,7 +58,7 @@ interface MissionsRawContract
      * @param array<string,mixed>|MissionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MissionListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<MissionData>>
      *
      * @throws APIException
      */
