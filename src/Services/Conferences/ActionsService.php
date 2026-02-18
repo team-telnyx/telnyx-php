@@ -22,6 +22,7 @@ use Telnyx\Conferences\Actions\ActionRecordStartResponse;
 use Telnyx\Conferences\Actions\ActionRecordStopResponse;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
+use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\MinimaxVoiceSettings;
 use Telnyx\Conferences\Actions\ActionSpeakResponse;
 use Telnyx\Conferences\Actions\ActionStopResponse;
 use Telnyx\Conferences\Actions\ActionUnholdResponse;
@@ -31,7 +32,6 @@ use Telnyx\Conferences\Actions\ActionUpdateParams\SupervisorRole;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Conferences\ActionsContract;
 

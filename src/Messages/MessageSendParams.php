@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Messages\MessageSendParams\Encoding;
 use Telnyx\Messages\MessageSendParams\Type;
 
 /**
@@ -23,6 +24,7 @@ use Telnyx\Messages\MessageSendParams\Type;
  * @phpstan-type MessageSendParamsShape = array{
  *   to: string,
  *   autoDetect?: bool|null,
+ *   encoding?: null|Encoding|value-of<Encoding>,
  *   from?: string|null,
  *   mediaURLs?: list<string>|null,
  *   messagingProfileID?: string|null,
@@ -52,6 +54,14 @@ final class MessageSendParams implements BaseModel
      */
     #[Optional('auto_detect')]
     public ?bool $autoDetect;
+
+    /**
+     * Encoding to use for the message. `auto` (default) uses smart encoding to automatically select the most efficient encoding. `gsm7` forces GSM-7 encoding (returns 400 if message contains characters that cannot be encoded). `ucs2` forces UCS-2 encoding and disables smart encoding. When set, this overrides the messaging profile's `smart_encoding` setting.
+     *
+     * @var value-of<Encoding>|null $encoding
+     */
+    #[Optional(enum: Encoding::class)]
+    public ?string $encoding;
 
     /**
      * Sending address (+E.164 formatted phone number, alphanumeric sender ID, or short code).
@@ -149,12 +159,14 @@ final class MessageSendParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Encoding|value-of<Encoding>|null $encoding
      * @param list<string>|null $mediaURLs
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
         string $to,
         ?bool $autoDetect = null,
+        Encoding|string|null $encoding = null,
         ?string $from = null,
         ?array $mediaURLs = null,
         ?string $messagingProfileID = null,
@@ -171,6 +183,7 @@ final class MessageSendParams implements BaseModel
         $self['to'] = $to;
 
         null !== $autoDetect && $self['autoDetect'] = $autoDetect;
+        null !== $encoding && $self['encoding'] = $encoding;
         null !== $from && $self['from'] = $from;
         null !== $mediaURLs && $self['mediaURLs'] = $mediaURLs;
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
@@ -203,6 +216,19 @@ final class MessageSendParams implements BaseModel
     {
         $self = clone $this;
         $self['autoDetect'] = $autoDetect;
+
+        return $self;
+    }
+
+    /**
+     * Encoding to use for the message. `auto` (default) uses smart encoding to automatically select the most efficient encoding. `gsm7` forces GSM-7 encoding (returns 400 if message contains characters that cannot be encoded). `ucs2` forces UCS-2 encoding and disables smart encoding. When set, this overrides the messaging profile's `smart_encoding` setting.
+     *
+     * @param Encoding|value-of<Encoding> $encoding
+     */
+    public function withEncoding(Encoding|string $encoding): self
+    {
+        $self = clone $this;
+        $self['encoding'] = $encoding;
 
         return $self;
     }

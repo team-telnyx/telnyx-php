@@ -7,10 +7,10 @@ namespace Telnyx\Conferences\Actions\ActionSpeakParams;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
+use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\MinimaxVoiceSettings;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\MinimaxVoiceSettings;
 
 /**
  * The settings associated with the voice selected.
@@ -18,7 +18,7 @@ use Telnyx\MinimaxVoiceSettings;
  * @phpstan-import-type ElevenLabsVoiceSettingsShape from \Telnyx\Calls\Actions\ElevenLabsVoiceSettings
  * @phpstan-import-type TelnyxVoiceSettingsShape from \Telnyx\Calls\Actions\TelnyxVoiceSettings
  * @phpstan-import-type AwsVoiceSettingsShape from \Telnyx\Calls\Actions\AwsVoiceSettings
- * @phpstan-import-type MinimaxVoiceSettingsShape from \Telnyx\MinimaxVoiceSettings
+ * @phpstan-import-type MinimaxVoiceSettingsShape from \Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\MinimaxVoiceSettings
  *
  * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings
  * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape
