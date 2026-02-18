@@ -12,6 +12,8 @@ use Telnyx\Messaging10dlc\Brand\AltBusinessIDType;
 use Telnyx\Messaging10dlc\Brand\BrandCreateParams;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
+use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceParams;
+use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Messaging10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Messaging10dlc\Brand\BrandListParams;
@@ -280,6 +282,46 @@ final class BrandRawService implements BrandRawContract
             path: ['10dlc/brand/feedback/%1$s', $brandID],
             options: $requestOptions,
             convert: BrandGetFeedbackResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Query the status of an SMS OTP (One-Time Password) for Sole Proprietor brand verification.
+     *
+     * This endpoint allows you to check the delivery and verification status of an OTP sent during the Sole Proprietor brand verification process. You can query by either:
+     *
+     * * `referenceId` - The reference ID returned when the OTP was initially triggered
+     * * `brandId` - Query parameter for portal users to look up OTP status by Brand ID
+     *
+     * The response includes delivery status, verification dates, and detailed delivery information.
+     *
+     * @param string $referenceID The reference ID returned when the OTP was initially triggered
+     * @param array{brandID?: string}|BrandGetSMSOtpByReferenceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<BrandGetSMSOtpByReferenceResponse>
+     *
+     * @throws APIException
+     */
+    public function getSMSOtpByReference(
+        string $referenceID,
+        array|BrandGetSMSOtpByReferenceParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = BrandGetSMSOtpByReferenceParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['10dlc/brand/smsOtp/%1$s', $referenceID],
+            query: Util::array_transform_keys($parsed, ['brandID' => 'brandId']),
+            options: $options,
+            convert: BrandGetSMSOtpByReferenceResponse::class,
         );
     }
 
