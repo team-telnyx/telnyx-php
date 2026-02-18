@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs\Plan;
 
-use Telnyx\AI\Missions\Runs\Plan\PlanNewResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\AI\Missions\Runs\Plan\PlanNewResponse\Data
+ * @phpstan-import-type PlanStepDataShape from \Telnyx\AI\Missions\Runs\Plan\PlanStepData
  *
- * @phpstan-type PlanNewResponseShape = array{data: list<Data|DataShape>}
+ * @phpstan-type PlanNewResponseShape = array{
+ *   data: list<PlanStepData|PlanStepDataShape>
+ * }
  */
 final class PlanNewResponse implements BaseModel
 {
     /** @use SdkModel<PlanNewResponseShape> */
     use SdkModel;
 
-    /** @var list<Data> $data */
-    #[Required(list: Data::class)]
+    /** @var list<PlanStepData> $data */
+    #[Required(list: PlanStepData::class)]
     public array $data;
 
     /**
@@ -47,7 +48,7 @@ final class PlanNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape> $data
+     * @param list<PlanStepData|PlanStepDataShape> $data
      */
     public static function with(array $data): self
     {
@@ -59,7 +60,7 @@ final class PlanNewResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * @param list<PlanStepData|PlanStepDataShape> $data
      */
     public function withData(array $data): self
     {
