@@ -6,11 +6,11 @@ namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Missions\MissionCreateParams;
 use Telnyx\AI\Missions\MissionCreateParams\ExecutionMode;
+use Telnyx\AI\Missions\MissionData;
 use Telnyx\AI\Missions\MissionGetResponse;
 use Telnyx\AI\Missions\MissionListEventsParams;
 use Telnyx\AI\Missions\MissionListEventsResponse;
 use Telnyx\AI\Missions\MissionListParams;
-use Telnyx\AI\Missions\MissionListResponse;
 use Telnyx\AI\Missions\MissionNewResponse;
 use Telnyx\AI\Missions\MissionUpdateMissionParams;
 use Telnyx\AI\Missions\MissionUpdateMissionResponse;
@@ -103,7 +103,7 @@ final class MissionsRawService implements MissionsRawContract
      * @param array{pageNumber?: int, pageSize?: int}|MissionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MissionListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<MissionData>>
      *
      * @throws APIException
      */
@@ -125,7 +125,7 @@ final class MissionsRawService implements MissionsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: MissionListResponse::class,
+            convert: MissionData::class,
             page: DefaultFlatPagination::class,
         );
     }
