@@ -5,5 +5,5 @@ declare(strict_types=1);
 namespace Telnyx;
 
 // x-release-please-start-version
-const VERSION = '6.27.0';
+const VERSION = '6.28.0';
 // x-release-please-end

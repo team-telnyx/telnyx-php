@@ -1,5 +1,20 @@
 # Changelog
 
+## 6.28.0 (2026-02-18)
+
+Full Changelog: [v6.27.0...v6.28.0](https://github.com/team-telnyx/telnyx-php/compare/v6.27.0...v6.28.0)
+
+### Features
+
+* **api:** manual updates ([2c82bae](https://github.com/team-telnyx/telnyx-php/commit/2c82bae5523030d4704b152a3af156ca8b2d755f))
+* **api:** manual updates ([0190880](https://github.com/team-telnyx/telnyx-php/commit/0190880a2f06f1cd61e22cedb59a733fa3baa242))
+* **api:** manual updates ([b245e3a](https://github.com/team-telnyx/telnyx-php/commit/b245e3a73a2ba4318303fdd43ac21d2386558695))
+
+
+### Chores
+
+* **release:** add packagist trigger on published release ([656a7a5](https://github.com/team-telnyx/telnyx-php/commit/656a7a53da76ebb33310421c2da79bed0effa1fa))
+
 ## 6.27.0 (2026-02-18)
 
 Full Changelog: [v6.26.0...v6.27.0](https://github.com/team-telnyx/telnyx-php/compare/v6.26.0...v6.27.0)
