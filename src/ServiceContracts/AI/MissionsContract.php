@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Missions\MissionCreateParams\ExecutionMode;
+use Telnyx\AI\Missions\MissionData;
 use Telnyx\AI\Missions\MissionGetResponse;
 use Telnyx\AI\Missions\MissionListEventsResponse;
-use Telnyx\AI\Missions\MissionListResponse;
 use Telnyx\AI\Missions\MissionNewResponse;
 use Telnyx\AI\Missions\MissionUpdateMissionResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -57,7 +57,7 @@ interface MissionsContract
      * @param int $pageSize Number of items per page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<MissionListResponse>
+     * @return DefaultFlatPagination<MissionData>
      *
      * @throws APIException
      */

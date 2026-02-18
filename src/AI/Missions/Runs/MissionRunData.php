@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Missions\Runs\RunPauseRunResponse;
+namespace Telnyx\AI\Missions\Runs;
 
-use Telnyx\AI\Missions\Runs\RunPauseRunResponse\Data\Status;
+use Telnyx\AI\Missions\Runs\MissionRunData\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type MissionRunDataShape = array{
  *   missionID: string,
  *   runID: string,
  *   startedAt: \DateTimeInterface,
@@ -25,9 +25,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   resultSummary?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class MissionRunData implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<MissionRunDataShape> */
     use SdkModel;
 
     #[Required('mission_id')]
@@ -68,11 +68,11 @@ final class Data implements BaseModel
     public ?string $resultSummary;
 
     /**
-     * `new Data()` is missing required properties by the API.
+     * `new MissionRunData()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Data::with(
+     * MissionRunData::with(
      *   missionID: ..., runID: ..., startedAt: ..., status: ..., updatedAt: ...
      * )
      * ```
@@ -80,7 +80,7 @@ final class Data implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Data)
+     * (new MissionRunData)
      *   ->withMissionID(...)
      *   ->withRunID(...)
      *   ->withStartedAt(...)
