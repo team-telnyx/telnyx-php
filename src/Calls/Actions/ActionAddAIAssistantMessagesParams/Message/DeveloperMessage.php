@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
  *
  * @phpstan-type DeveloperMessageShape = array{
- *   content: string, role: 'developer', metadata?: mixed
+ *   content: string, role: 'developer', metadata?: array<string,mixed>|null
  * }
  */
 final class DeveloperMessage implements BaseModel
@@ -37,9 +37,11 @@ final class DeveloperMessage implements BaseModel
 
     /**
      * Metadata to add to the message.
+     *
+     * @var array<string,mixed>|null $metadata
      */
-    #[Optional]
-    public mixed $metadata;
+    #[Optional(map: 'mixed')]
+    public ?array $metadata;
 
     /**
      * `new DeveloperMessage()` is missing required properties by the API.
@@ -64,8 +66,10 @@ final class DeveloperMessage implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param array<string,mixed>|null $metadata
      */
-    public static function with(string $content, mixed $metadata = null): self
+    public static function with(string $content, ?array $metadata = null): self
     {
         $self = new self;
 
@@ -102,8 +106,10 @@ final class DeveloperMessage implements BaseModel
 
     /**
      * Metadata to add to the message.
+     *
+     * @param array<string,mixed> $metadata
      */
-    public function withMetadata(mixed $metadata): self
+    public function withMetadata(array $metadata): self
     {
         $self = clone $this;
         $self['metadata'] = $metadata;

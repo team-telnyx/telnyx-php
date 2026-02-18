@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * The query parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the query of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
  *
  * @phpstan-type QueryParametersShape = array{
- *   properties?: mixed,
+ *   properties?: array<string,mixed>|null,
  *   required?: list<string>|null,
  *   type?: null|Type|value-of<Type>,
  * }
@@ -25,9 +25,11 @@ final class QueryParameters implements BaseModel
 
     /**
      * The properties of the query parameters.
+     *
+     * @var array<string,mixed>|null $properties
      */
-    #[Optional]
-    public mixed $properties;
+    #[Optional(map: 'mixed')]
+    public ?array $properties;
 
     /**
      * The required properties of the query parameters.
@@ -51,11 +53,12 @@ final class QueryParameters implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param array<string,mixed>|null $properties
      * @param list<string>|null $required
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
-        mixed $properties = null,
+        ?array $properties = null,
         ?array $required = null,
         Type|string|null $type = null
     ): self {
@@ -70,8 +73,10 @@ final class QueryParameters implements BaseModel
 
     /**
      * The properties of the query parameters.
+     *
+     * @param array<string,mixed> $properties
      */
-    public function withProperties(mixed $properties): self
+    public function withProperties(array $properties): self
     {
         $self = clone $this;
         $self['properties'] = $properties;
