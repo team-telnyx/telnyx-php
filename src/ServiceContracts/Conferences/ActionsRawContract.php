@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Conferences;
 
+use Telnyx\Conferences\Actions\ActionEndConferenceParams;
+use Telnyx\Conferences\Actions\ActionEndConferenceResponse;
+use Telnyx\Conferences\Actions\ActionGatherDtmfAudioParams;
+use Telnyx\Conferences\Actions\ActionGatherDtmfAudioResponse;
 use Telnyx\Conferences\Actions\ActionHoldParams;
 use Telnyx\Conferences\Actions\ActionHoldResponse;
 use Telnyx\Conferences\Actions\ActionJoinParams;
@@ -22,6 +26,8 @@ use Telnyx\Conferences\Actions\ActionRecordStartParams;
 use Telnyx\Conferences\Actions\ActionRecordStartResponse;
 use Telnyx\Conferences\Actions\ActionRecordStopParams;
 use Telnyx\Conferences\Actions\ActionRecordStopResponse;
+use Telnyx\Conferences\Actions\ActionSendDtmfParams;
+use Telnyx\Conferences\Actions\ActionSendDtmfResponse;
 use Telnyx\Conferences\Actions\ActionSpeakParams;
 use Telnyx\Conferences\Actions\ActionSpeakResponse;
 use Telnyx\Conferences\Actions\ActionStopParams;
@@ -55,6 +61,40 @@ interface ActionsRawContract
     public function update(
         string $id,
         array|ActionUpdateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id uniquely identifies the conference
+     * @param array<string,mixed>|ActionEndConferenceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionEndConferenceResponse>
+     *
+     * @throws APIException
+     */
+    public function endConference(
+        string $id,
+        array|ActionEndConferenceParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id uniquely identifies the conference
+     * @param array<string,mixed>|ActionGatherDtmfAudioParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionGatherDtmfAudioResponse>
+     *
+     * @throws APIException
+     */
+    public function gatherDtmfAudio(
+        string $id,
+        array|ActionGatherDtmfAudioParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
@@ -208,6 +248,23 @@ interface ActionsRawContract
     public function recordStop(
         string $id,
         array|ActionRecordStopParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id uniquely identifies the conference
+     * @param array<string,mixed>|ActionSendDtmfParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionSendDtmfResponse>
+     *
+     * @throws APIException
+     */
+    public function sendDtmf(
+        string $id,
+        array|ActionSendDtmfParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 

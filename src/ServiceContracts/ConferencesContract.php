@@ -7,10 +7,12 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
+use Telnyx\Conferences\ConferenceGetParticipantResponse;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams\Filter;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
+use Telnyx\Conferences\ConferenceUpdateParticipantResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
@@ -111,4 +113,40 @@ interface ConferencesContract
         \Telnyx\Conferences\ConferenceListParticipantsParams\Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
+
+    /**
+     * @api
+     *
+     * @param string $participantID uniquely identifies the participant by their ID or label
+     * @param string $id uniquely identifies the conference
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveParticipant(
+        string $participantID,
+        string $id,
+        RequestOptions|array|null $requestOptions = null,
+    ): ConferenceGetParticipantResponse;
+
+    /**
+     * @api
+     *
+     * @param string $participantID path param: Uniquely identifies the participant
+     * @param string $id path param: Uniquely identifies the conference
+     * @param \Telnyx\Conferences\ConferenceUpdateParticipantParams\BeepEnabled|value-of<\Telnyx\Conferences\ConferenceUpdateParticipantParams\BeepEnabled> $beepEnabled body param: Whether entry/exit beeps are enabled for this participant
+     * @param bool $endConferenceOnExit body param: Whether the conference should end when this participant exits
+     * @param bool $softEndConferenceOnExit Body param: Whether the conference should soft-end when this participant exits. A soft end will stop new participants from joining but allow existing participants to remain.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function updateParticipant(
+        string $participantID,
+        string $id,
+        \Telnyx\Conferences\ConferenceUpdateParticipantParams\BeepEnabled|string|null $beepEnabled = null,
+        ?bool $endConferenceOnExit = null,
+        ?bool $softEndConferenceOnExit = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ConferenceUpdateParticipantResponse;
 }

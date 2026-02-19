@@ -7,9 +7,11 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Conferences\Conference;
+use Telnyx\Conferences\ConferenceGetParticipantResponse;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
+use Telnyx\Conferences\ConferenceUpdateParticipantResponse;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
@@ -121,5 +123,78 @@ final class ConferencesTest extends TestCase
             // @phpstan-ignore-next-line method.alreadyNarrowedType
             $this->assertInstanceOf(ConferenceListParticipantsResponse::class, $item);
         }
+    }
+
+    #[Test]
+    public function testRetrieveParticipant(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->conferences->retrieveParticipant(
+            'participant_id',
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetParticipantResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRetrieveParticipantWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->conferences->retrieveParticipant(
+            'participant_id',
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ConferenceGetParticipantResponse::class, $result);
+    }
+
+    #[Test]
+    public function testUpdateParticipant(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->conferences->updateParticipant(
+            'participant_id',
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ConferenceUpdateParticipantResponse::class,
+            $result
+        );
+    }
+
+    #[Test]
+    public function testUpdateParticipantWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->conferences->updateParticipant(
+            'participant_id',
+            id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            beepEnabled: 'never',
+            endConferenceOnExit: true,
+            softEndConferenceOnExit: false,
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ConferenceUpdateParticipantResponse::class,
+            $result
+        );
     }
 }

@@ -8,10 +8,12 @@ use Telnyx\Client;
 use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
+use Telnyx\Conferences\ConferenceGetParticipantResponse;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams\Filter;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
+use Telnyx\Conferences\ConferenceUpdateParticipantResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
@@ -205,6 +207,67 @@ final class ConferencesService implements ConferencesContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listParticipants($conferenceID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Retrieve details of a specific conference participant by their ID or label.
+     *
+     * @param string $participantID uniquely identifies the participant by their ID or label
+     * @param string $id uniquely identifies the conference
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveParticipant(
+        string $participantID,
+        string $id,
+        RequestOptions|array|null $requestOptions = null,
+    ): ConferenceGetParticipantResponse {
+        $params = Util::removeNulls(['id' => $id]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveParticipant($participantID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Update properties of a conference participant.
+     *
+     * @param string $participantID path param: Uniquely identifies the participant
+     * @param string $id path param: Uniquely identifies the conference
+     * @param \Telnyx\Conferences\ConferenceUpdateParticipantParams\BeepEnabled|value-of<\Telnyx\Conferences\ConferenceUpdateParticipantParams\BeepEnabled> $beepEnabled body param: Whether entry/exit beeps are enabled for this participant
+     * @param bool $endConferenceOnExit body param: Whether the conference should end when this participant exits
+     * @param bool $softEndConferenceOnExit Body param: Whether the conference should soft-end when this participant exits. A soft end will stop new participants from joining but allow existing participants to remain.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function updateParticipant(
+        string $participantID,
+        string $id,
+        \Telnyx\Conferences\ConferenceUpdateParticipantParams\BeepEnabled|string|null $beepEnabled = null,
+        ?bool $endConferenceOnExit = null,
+        ?bool $softEndConferenceOnExit = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ConferenceUpdateParticipantResponse {
+        $params = Util::removeNulls(
+            [
+                'id' => $id,
+                'beepEnabled' => $beepEnabled,
+                'endConferenceOnExit' => $endConferenceOnExit,
+                'softEndConferenceOnExit' => $softEndConferenceOnExit,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->updateParticipant($participantID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
