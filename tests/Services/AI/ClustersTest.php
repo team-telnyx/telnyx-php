@@ -111,7 +111,7 @@ final class ClustersTest extends TestCase
     public function testFetchGraph(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server doesn\'t support image/png responses');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->clusters->fetchGraph('task_id');
