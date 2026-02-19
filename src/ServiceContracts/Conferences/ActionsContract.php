@@ -7,6 +7,8 @@ namespace Telnyx\ServiceContracts\Conferences;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
+use Telnyx\Conferences\Actions\ActionEndConferenceResponse;
+use Telnyx\Conferences\Actions\ActionGatherDtmfAudioResponse;
 use Telnyx\Conferences\Actions\ActionHoldResponse;
 use Telnyx\Conferences\Actions\ActionJoinParams\BeepEnabled;
 use Telnyx\Conferences\Actions\ActionJoinResponse;
@@ -19,6 +21,7 @@ use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
 use Telnyx\Conferences\Actions\ActionRecordStartResponse;
 use Telnyx\Conferences\Actions\ActionRecordStopResponse;
+use Telnyx\Conferences\Actions\ActionSendDtmfResponse;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Conferences\Actions\ActionSpeakResponse;
@@ -61,6 +64,66 @@ interface ActionsContract
         ?array $whisperCallControlIDs = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionUpdateResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id uniquely identifies the conference
+     * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same conference.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function endConference(
+        string $id,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionEndConferenceResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id uniquely identifies the conference
+     * @param string $callControlID unique identifier and token for controlling the call leg that will receive the gather prompt
+     * @param string $audioURL The URL of the audio file to play as the gather prompt. Must be WAV or MP3 format.
+     * @param string $clientState Use this field to add state to every subsequent webhook. Must be a valid Base-64 encoded string.
+     * @param string $gatherID Identifier for this gather command. Will be included in the gather ended webhook. Maximum 100 characters.
+     * @param int $initialTimeoutMillis duration in milliseconds to wait for the first digit before timing out
+     * @param int $interDigitTimeoutMillis duration in milliseconds to wait between digits
+     * @param string $invalidAudioURL URL of audio file to play when invalid input is received
+     * @param string $invalidMediaName name of media file to play when invalid input is received
+     * @param int $maximumDigits maximum number of digits to gather
+     * @param int $maximumTries maximum number of times to play the prompt if no input is received
+     * @param string $mediaName the name of the media file uploaded to the Media Storage API to play as the gather prompt
+     * @param int $minimumDigits minimum number of digits to gather
+     * @param bool $stopPlaybackOnDtmf whether to stop the audio playback when a DTMF digit is received
+     * @param string $terminatingDigit digit that terminates gathering
+     * @param int $timeoutMillis duration in milliseconds to wait for input before timing out
+     * @param string $validDigits Digits that are valid for gathering. All other digits will be ignored.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function gatherDtmfAudio(
+        string $id,
+        string $callControlID,
+        ?string $audioURL = null,
+        ?string $clientState = null,
+        ?string $gatherID = null,
+        ?int $initialTimeoutMillis = null,
+        int $interDigitTimeoutMillis = 5000,
+        ?string $invalidAudioURL = null,
+        ?string $invalidMediaName = null,
+        int $maximumDigits = 128,
+        int $maximumTries = 3,
+        ?string $mediaName = null,
+        int $minimumDigits = 1,
+        bool $stopPlaybackOnDtmf = true,
+        string $terminatingDigit = '#',
+        int $timeoutMillis = 60000,
+        string $validDigits = '0123456789#*',
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionGatherDtmfAudioResponse;
 
     /**
      * @api
@@ -268,6 +331,27 @@ interface ActionsContract
         \Telnyx\Conferences\Actions\ActionRecordStopParams\Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionRecordStopResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id uniquely identifies the conference
+     * @param string $digits DTMF digits to send. Valid characters: 0-9, A-D, *, #, w (0.5s pause), W (1s pause).
+     * @param list<string> $callControlIDs Array of participant call control IDs to send DTMF to. When empty, DTMF will be sent to all participants.
+     * @param string $clientState Use this field to add state to every subsequent webhook. Must be a valid Base-64 encoded string.
+     * @param int $durationMillis duration of each DTMF digit in milliseconds
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function sendDtmf(
+        string $id,
+        string $digits,
+        ?array $callControlIDs = null,
+        ?string $clientState = null,
+        int $durationMillis = 250,
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionSendDtmfResponse;
 
     /**
      * @api

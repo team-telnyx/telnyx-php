@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services\Conferences;
 
 use Telnyx\Client;
+use Telnyx\Conferences\Actions\ActionEndConferenceParams;
+use Telnyx\Conferences\Actions\ActionEndConferenceResponse;
+use Telnyx\Conferences\Actions\ActionGatherDtmfAudioParams;
+use Telnyx\Conferences\Actions\ActionGatherDtmfAudioResponse;
 use Telnyx\Conferences\Actions\ActionHoldParams;
 use Telnyx\Conferences\Actions\ActionHoldResponse;
 use Telnyx\Conferences\Actions\ActionJoinParams;
@@ -26,6 +30,8 @@ use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
 use Telnyx\Conferences\Actions\ActionRecordStartResponse;
 use Telnyx\Conferences\Actions\ActionRecordStopParams;
 use Telnyx\Conferences\Actions\ActionRecordStopResponse;
+use Telnyx\Conferences\Actions\ActionSendDtmfParams;
+use Telnyx\Conferences\Actions\ActionSendDtmfResponse;
 use Telnyx\Conferences\Actions\ActionSpeakParams;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
@@ -94,6 +100,89 @@ final class ActionsRawService implements ActionsRawContract
             body: (object) $parsed,
             options: $options,
             convert: ActionUpdateResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * End a conference and terminate all active participants.
+     *
+     * @param string $id uniquely identifies the conference
+     * @param array{commandID?: string}|ActionEndConferenceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionEndConferenceResponse>
+     *
+     * @throws APIException
+     */
+    public function endConference(
+        string $id,
+        array|ActionEndConferenceParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionEndConferenceParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['conferences/%1$s/actions/end', $id],
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionEndConferenceResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Play an audio file to a specific conference participant and gather DTMF input.
+     *
+     * @param string $id uniquely identifies the conference
+     * @param array{
+     *   callControlID: string,
+     *   audioURL?: string,
+     *   clientState?: string,
+     *   gatherID?: string,
+     *   initialTimeoutMillis?: int,
+     *   interDigitTimeoutMillis?: int,
+     *   invalidAudioURL?: string,
+     *   invalidMediaName?: string,
+     *   maximumDigits?: int,
+     *   maximumTries?: int,
+     *   mediaName?: string,
+     *   minimumDigits?: int,
+     *   stopPlaybackOnDtmf?: bool,
+     *   terminatingDigit?: string,
+     *   timeoutMillis?: int,
+     *   validDigits?: string,
+     * }|ActionGatherDtmfAudioParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionGatherDtmfAudioResponse>
+     *
+     * @throws APIException
+     */
+    public function gatherDtmfAudio(
+        string $id,
+        array|ActionGatherDtmfAudioParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionGatherDtmfAudioParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['conferences/%1$s/actions/gather_using_audio', $id],
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionGatherDtmfAudioResponse::class,
         );
     }
 
@@ -462,6 +551,44 @@ final class ActionsRawService implements ActionsRawContract
             body: (object) $parsed,
             options: $options,
             convert: ActionRecordStopResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Send DTMF tones to one or more conference participants.
+     *
+     * @param string $id uniquely identifies the conference
+     * @param array{
+     *   digits: string,
+     *   callControlIDs?: list<string>,
+     *   clientState?: string,
+     *   durationMillis?: int,
+     * }|ActionSendDtmfParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionSendDtmfResponse>
+     *
+     * @throws APIException
+     */
+    public function sendDtmf(
+        string $id,
+        array|ActionSendDtmfParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionSendDtmfParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['conferences/%1$s/actions/send_dtmf', $id],
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionSendDtmfResponse::class,
         );
     }
 
