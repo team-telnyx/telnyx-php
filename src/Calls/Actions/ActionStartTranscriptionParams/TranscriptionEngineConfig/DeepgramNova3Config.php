@@ -2,19 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions;
+namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig;
 
-use Telnyx\Calls\Actions\DeepgramNova2Config\Language;
-use Telnyx\Calls\Actions\DeepgramNova2Config\TranscriptionEngine;
-use Telnyx\Calls\Actions\DeepgramNova2Config\TranscriptionModel;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config\Language;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config\TranscriptionModel;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DeepgramNova2ConfigShape = array{
- *   transcriptionEngine: TranscriptionEngine|value-of<TranscriptionEngine>,
+ * @phpstan-type DeepgramNova3ConfigShape = array{
+ *   transcriptionEngine: 'Deepgram',
  *   transcriptionModel: TranscriptionModel|value-of<TranscriptionModel>,
  *   interimResults?: bool|null,
  *   keywordsBoosting?: array<string,float>|null,
@@ -22,14 +21,14 @@ use Telnyx\Core\Contracts\BaseModel;
  *   utteranceEndMs?: int|null,
  * }
  */
-final class DeepgramNova2Config implements BaseModel
+final class DeepgramNova3Config implements BaseModel
 {
-    /** @use SdkModel<DeepgramNova2ConfigShape> */
+    /** @use SdkModel<DeepgramNova3ConfigShape> */
     use SdkModel;
 
-    /** @var value-of<TranscriptionEngine> $transcriptionEngine */
-    #[Required('transcription_engine', enum: TranscriptionEngine::class)]
-    public string $transcriptionEngine;
+    /** @var 'Deepgram' $transcriptionEngine */
+    #[Required('transcription_engine')]
+    public string $transcriptionEngine = 'Deepgram';
 
     /** @var value-of<TranscriptionModel> $transcriptionModel */
     #[Required('transcription_model', enum: TranscriptionModel::class)]
@@ -50,7 +49,7 @@ final class DeepgramNova2Config implements BaseModel
     public ?array $keywordsBoosting;
 
     /**
-     * Language to use for speech recognition with nova-2 model.
+     * Language to use for speech recognition with nova-3 model.
      *
      * @var value-of<Language>|null $language
      */
@@ -64,19 +63,17 @@ final class DeepgramNova2Config implements BaseModel
     public ?int $utteranceEndMs;
 
     /**
-     * `new DeepgramNova2Config()` is missing required properties by the API.
+     * `new DeepgramNova3Config()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * DeepgramNova2Config::with(transcriptionEngine: ..., transcriptionModel: ...)
+     * DeepgramNova3Config::with(transcriptionModel: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new DeepgramNova2Config)
-     *   ->withTranscriptionEngine(...)
-     *   ->withTranscriptionModel(...)
+     * (new DeepgramNova3Config)->withTranscriptionModel(...)
      * ```
      */
     public function __construct()
@@ -89,13 +86,11 @@ final class DeepgramNova2Config implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
      * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
      * @param array<string,float>|null $keywordsBoosting
      * @param Language|value-of<Language>|null $language
      */
     public static function with(
-        TranscriptionEngine|string $transcriptionEngine,
         TranscriptionModel|string $transcriptionModel,
         ?bool $interimResults = null,
         ?array $keywordsBoosting = null,
@@ -104,7 +99,6 @@ final class DeepgramNova2Config implements BaseModel
     ): self {
         $self = new self;
 
-        $self['transcriptionEngine'] = $transcriptionEngine;
         $self['transcriptionModel'] = $transcriptionModel;
 
         null !== $interimResults && $self['interimResults'] = $interimResults;
@@ -116,11 +110,10 @@ final class DeepgramNova2Config implements BaseModel
     }
 
     /**
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
+     * @param 'Deepgram' $transcriptionEngine
      */
-    public function withTranscriptionEngine(
-        TranscriptionEngine|string $transcriptionEngine
-    ): self {
+    public function withTranscriptionEngine(string $transcriptionEngine): self
+    {
         $self = clone $this;
         $self['transcriptionEngine'] = $transcriptionEngine;
 
@@ -164,7 +157,7 @@ final class DeepgramNova2Config implements BaseModel
     }
 
     /**
-     * Language to use for speech recognition with nova-2 model.
+     * Language to use for speech recognition with nova-3 model.
      *
      * @param Language|value-of<Language> $language
      */

@@ -14,6 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AuthenticationProviderShape = array{
  *   id?: string|null,
+ *   activatedAt?: \DateTimeInterface|null,
  *   active?: bool|null,
  *   createdAt?: \DateTimeInterface|null,
  *   name?: string|null,
@@ -34,6 +35,12 @@ final class AuthenticationProvider implements BaseModel
      */
     #[Optional]
     public ?string $id;
+
+    /**
+     * ISO 8601 formatted date indicating when the authentication provider was activated.
+     */
+    #[Optional('activated_at')]
+    public ?\DateTimeInterface $activatedAt;
 
     /**
      * The active status of the authentication provider.
@@ -97,6 +104,7 @@ final class AuthenticationProvider implements BaseModel
      */
     public static function with(
         ?string $id = null,
+        ?\DateTimeInterface $activatedAt = null,
         ?bool $active = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $name = null,
@@ -109,6 +117,7 @@ final class AuthenticationProvider implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
+        null !== $activatedAt && $self['activatedAt'] = $activatedAt;
         null !== $active && $self['active'] = $active;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $name && $self['name'] = $name;
@@ -128,6 +137,17 @@ final class AuthenticationProvider implements BaseModel
     {
         $self = clone $this;
         $self['id'] = $id;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the authentication provider was activated.
+     */
+    public function withActivatedAt(\DateTimeInterface $activatedAt): self
+    {
+        $self = clone $this;
+        $self['activatedAt'] = $activatedAt;
 
         return $self;
     }
