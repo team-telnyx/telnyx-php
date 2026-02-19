@@ -9,6 +9,7 @@ use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams;
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
+use Telnyx\Conferences\ConferenceGetParticipantResponse;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams;
 use Telnyx\Conferences\ConferenceListParams\Filter;
@@ -16,6 +17,9 @@ use Telnyx\Conferences\ConferenceListParticipantsParams;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
 use Telnyx\Conferences\ConferenceRetrieveParams;
+use Telnyx\Conferences\ConferenceRetrieveParticipantParams;
+use Telnyx\Conferences\ConferenceUpdateParticipantParams;
+use Telnyx\Conferences\ConferenceUpdateParticipantResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -203,6 +207,80 @@ final class ConferencesRawService implements ConferencesRawContract
             options: $options,
             convert: ConferenceListParticipantsResponse::class,
             page: DefaultFlatPagination::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Retrieve details of a specific conference participant by their ID or label.
+     *
+     * @param string $participantID uniquely identifies the participant by their ID or label
+     * @param array{id: string}|ConferenceRetrieveParticipantParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ConferenceGetParticipantResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveParticipant(
+        string $participantID,
+        array|ConferenceRetrieveParticipantParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ConferenceRetrieveParticipantParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $id = $parsed['id'];
+        unset($parsed['id']);
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['conferences/%1$s/participants/%2$s', $id, $participantID],
+            options: $options,
+            convert: ConferenceGetParticipantResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Update properties of a conference participant.
+     *
+     * @param string $participantID path param: Uniquely identifies the participant
+     * @param array{
+     *   id: string,
+     *   beepEnabled?: ConferenceUpdateParticipantParams\BeepEnabled|value-of<ConferenceUpdateParticipantParams\BeepEnabled>,
+     *   endConferenceOnExit?: bool,
+     *   softEndConferenceOnExit?: bool,
+     * }|ConferenceUpdateParticipantParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ConferenceUpdateParticipantResponse>
+     *
+     * @throws APIException
+     */
+    public function updateParticipant(
+        string $participantID,
+        array|ConferenceUpdateParticipantParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ConferenceUpdateParticipantParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $id = $parsed['id'];
+        unset($parsed['id']);
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'patch',
+            path: ['conferences/%1$s/participants/%2$s', $id, $participantID],
+            body: (object) array_diff_key($parsed, array_flip(['id'])),
+            options: $options,
+            convert: ConferenceUpdateParticipantResponse::class,
         );
     }
 }

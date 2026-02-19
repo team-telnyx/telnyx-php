@@ -6,6 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Conferences\Actions\ActionEndConferenceResponse;
+use Telnyx\Conferences\Actions\ActionGatherDtmfAudioResponse;
 use Telnyx\Conferences\Actions\ActionHoldResponse;
 use Telnyx\Conferences\Actions\ActionJoinResponse;
 use Telnyx\Conferences\Actions\ActionLeaveResponse;
@@ -15,6 +17,7 @@ use Telnyx\Conferences\Actions\ActionRecordPauseResponse;
 use Telnyx\Conferences\Actions\ActionRecordResumeResponse;
 use Telnyx\Conferences\Actions\ActionRecordStartResponse;
 use Telnyx\Conferences\Actions\ActionRecordStopResponse;
+use Telnyx\Conferences\Actions\ActionSendDtmfResponse;
 use Telnyx\Conferences\Actions\ActionSpeakResponse;
 use Telnyx\Conferences\Actions\ActionStopResponse;
 use Telnyx\Conferences\Actions\ActionUnholdResponse;
@@ -79,6 +82,68 @@ final class ActionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionUpdateResponse::class, $result);
+    }
+
+    #[Test]
+    public function testEndConference(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->conferences->actions->endConference(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionEndConferenceResponse::class, $result);
+    }
+
+    #[Test]
+    public function testGatherDtmfAudio(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->conferences->actions->gatherDtmfAudio(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionGatherDtmfAudioResponse::class, $result);
+    }
+
+    #[Test]
+    public function testGatherDtmfAudioWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->conferences->actions->gatherDtmfAudio(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            audioURL: 'http://example.com/gather_prompt.wav',
+            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            gatherID: 'gather_id',
+            initialTimeoutMillis: 10000,
+            interDigitTimeoutMillis: 3000,
+            invalidAudioURL: 'invalid_audio_url',
+            invalidMediaName: 'invalid_media_name',
+            maximumDigits: 4,
+            maximumTries: 3,
+            mediaName: 'media_name',
+            minimumDigits: 1,
+            stopPlaybackOnDtmf: true,
+            terminatingDigit: '#',
+            timeoutMillis: 30000,
+            validDigits: '0123456789',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionGatherDtmfAudioResponse::class, $result);
     }
 
     #[Test]
@@ -277,6 +342,43 @@ final class ActionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionRecordStopResponse::class, $result);
+    }
+
+    #[Test]
+    public function testSendDtmf(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->conferences->actions->sendDtmf(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            digits: '1234#'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionSendDtmfResponse::class, $result);
+    }
+
+    #[Test]
+    public function testSendDtmfWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->conferences->actions->sendDtmf(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            digits: '1234#',
+            callControlIDs: [
+                'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+            ],
+            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            durationMillis: 250,
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionSendDtmfResponse::class, $result);
     }
 
     #[Test]
