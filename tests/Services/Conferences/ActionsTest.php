@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
-use Telnyx\Conferences\Actions\ActionEndConferenceResponse;
-use Telnyx\Conferences\Actions\ActionGatherDtmfAudioResponse;
+use Telnyx\Conferences\Actions\ActionEndResponse;
+use Telnyx\Conferences\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Conferences\Actions\ActionHoldResponse;
 use Telnyx\Conferences\Actions\ActionJoinResponse;
 use Telnyx\Conferences\Actions\ActionLeaveResponse;
@@ -85,44 +85,44 @@ final class ActionsTest extends TestCase
     }
 
     #[Test]
-    public function testEndConference(): void
+    public function testEnd(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->endConference(
+        $result = $this->client->conferences->actions->end(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ActionEndConferenceResponse::class, $result);
+        $this->assertInstanceOf(ActionEndResponse::class, $result);
     }
 
     #[Test]
-    public function testGatherDtmfAudio(): void
+    public function testGatherUsingAudio(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->gatherDtmfAudio(
+        $result = $this->client->conferences->actions->gatherUsingAudio(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ActionGatherDtmfAudioResponse::class, $result);
+        $this->assertInstanceOf(ActionGatherUsingAudioResponse::class, $result);
     }
 
     #[Test]
-    public function testGatherDtmfAudioWithOptionalParams(): void
+    public function testGatherUsingAudioWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->conferences->actions->gatherDtmfAudio(
+        $result = $this->client->conferences->actions->gatherUsingAudio(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             audioURL: 'http://example.com/gather_prompt.wav',
@@ -143,7 +143,7 @@ final class ActionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ActionGatherDtmfAudioResponse::class, $result);
+        $this->assertInstanceOf(ActionGatherUsingAudioResponse::class, $result);
     }
 
     #[Test]
