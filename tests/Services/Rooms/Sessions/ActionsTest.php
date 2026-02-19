@@ -35,7 +35,7 @@ final class ActionsTest extends TestCase
     public function testEnd(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->rooms->sessions->actions->end(
@@ -50,7 +50,7 @@ final class ActionsTest extends TestCase
     public function testKick(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->rooms->sessions->actions->kick(
@@ -65,7 +65,7 @@ final class ActionsTest extends TestCase
     public function testMute(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->rooms->sessions->actions->mute(
@@ -80,7 +80,7 @@ final class ActionsTest extends TestCase
     public function testUnmute(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->rooms->sessions->actions->unmute(

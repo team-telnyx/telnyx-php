@@ -33,7 +33,7 @@ final class MessagingNumbersBulkUpdatesTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingNumbersBulkUpdates->create(
@@ -52,7 +52,7 @@ final class MessagingNumbersBulkUpdatesTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingNumbersBulkUpdates->create(
@@ -71,7 +71,7 @@ final class MessagingNumbersBulkUpdatesTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingNumbersBulkUpdates->retrieve('order_id');

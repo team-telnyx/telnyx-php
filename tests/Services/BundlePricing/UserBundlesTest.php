@@ -38,7 +38,7 @@ final class UserBundlesTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->bundlePricing->userBundles->create();
@@ -51,7 +51,7 @@ final class UserBundlesTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->bundlePricing->userBundles->retrieve(
@@ -66,7 +66,7 @@ final class UserBundlesTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->bundlePricing->userBundles->list();
@@ -84,7 +84,7 @@ final class UserBundlesTest extends TestCase
     public function testDeactivate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->bundlePricing->userBundles->deactivate(
@@ -99,7 +99,7 @@ final class UserBundlesTest extends TestCase
     public function testListResources(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->bundlePricing->userBundles->listResources(
@@ -114,7 +114,7 @@ final class UserBundlesTest extends TestCase
     public function testListUnused(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->bundlePricing->userBundles->listUnused();

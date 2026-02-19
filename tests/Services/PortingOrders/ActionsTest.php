@@ -35,7 +35,7 @@ final class ActionsTest extends TestCase
     public function testActivate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->actions->activate(
@@ -50,7 +50,7 @@ final class ActionsTest extends TestCase
     public function testCancel(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->actions->cancel(
@@ -65,7 +65,7 @@ final class ActionsTest extends TestCase
     public function testConfirm(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->actions->confirm(
@@ -80,7 +80,7 @@ final class ActionsTest extends TestCase
     public function testShare(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->actions->share(

@@ -32,7 +32,7 @@ final class PortingTest extends TestCase
     public function testListUkCarriers(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->porting->listUkCarriers();

@@ -35,7 +35,7 @@ final class JobsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumberBlocks->jobs->retrieve('id');
@@ -48,7 +48,7 @@ final class JobsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->phoneNumberBlocks->jobs->list();
@@ -66,7 +66,7 @@ final class JobsTest extends TestCase
     public function testDeletePhoneNumberBlock(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(
@@ -81,7 +81,7 @@ final class JobsTest extends TestCase
     public function testDeletePhoneNumberBlockWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumberBlocks->jobs->deletePhoneNumberBlock(

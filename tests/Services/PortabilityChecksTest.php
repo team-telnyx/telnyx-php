@@ -32,7 +32,7 @@ final class PortabilityChecksTest extends TestCase
     public function testRun(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portabilityChecks->run();

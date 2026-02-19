@@ -33,7 +33,7 @@ final class TelnyxAgentsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->telnyxAgents->list(
@@ -49,7 +49,7 @@ final class TelnyxAgentsTest extends TestCase
     public function testListWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->telnyxAgents->list(
@@ -65,7 +65,7 @@ final class TelnyxAgentsTest extends TestCase
     public function testLink(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->telnyxAgents->link(
@@ -82,7 +82,7 @@ final class TelnyxAgentsTest extends TestCase
     public function testLinkWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->telnyxAgents->link(
@@ -99,7 +99,7 @@ final class TelnyxAgentsTest extends TestCase
     public function testUnlink(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->telnyxAgents->unlink(
@@ -116,7 +116,7 @@ final class TelnyxAgentsTest extends TestCase
     public function testUnlinkWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->telnyxAgents->unlink(

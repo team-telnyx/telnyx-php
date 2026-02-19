@@ -32,7 +32,7 @@ final class WirelessTest extends TestCase
     public function testRetrieveRegions(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->wireless->retrieveRegions(product: 'public_ips');
@@ -45,7 +45,7 @@ final class WirelessTest extends TestCase
     public function testRetrieveRegionsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->wireless->retrieveRegions(product: 'public_ips');

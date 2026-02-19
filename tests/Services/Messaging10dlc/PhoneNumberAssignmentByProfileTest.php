@@ -35,7 +35,7 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     public function testAssign(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -56,7 +56,7 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     public function testAssignWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -81,7 +81,7 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     public function testListPhoneNumberStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -102,7 +102,7 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     public function testRetrievePhoneNumberStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -123,7 +123,7 @@ final class PhoneNumberAssignmentByProfileTest extends TestCase
     public function testRetrieveStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this

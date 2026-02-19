@@ -69,7 +69,7 @@ final class ActionsTest extends TestCase
     public function testAddAIAssistantMessages(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->addAIAssistantMessages(
@@ -87,7 +87,7 @@ final class ActionsTest extends TestCase
     public function testAnswer(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->answer('call_control_id');
@@ -100,7 +100,7 @@ final class ActionsTest extends TestCase
     public function testBridge(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->bridge(
@@ -116,7 +116,7 @@ final class ActionsTest extends TestCase
     public function testBridgeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->bridge(
@@ -149,7 +149,7 @@ final class ActionsTest extends TestCase
     public function testEnqueue(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->enqueue(
@@ -165,7 +165,7 @@ final class ActionsTest extends TestCase
     public function testEnqueueWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->enqueue(
@@ -186,7 +186,7 @@ final class ActionsTest extends TestCase
     public function testGather(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->gather('call_control_id');
@@ -199,7 +199,7 @@ final class ActionsTest extends TestCase
     public function testGatherUsingAI(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->gatherUsingAI(
@@ -215,7 +215,7 @@ final class ActionsTest extends TestCase
     public function testGatherUsingAIWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->gatherUsingAI(
@@ -265,7 +265,7 @@ final class ActionsTest extends TestCase
     public function testGatherUsingAudio(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->gatherUsingAudio(
@@ -280,7 +280,7 @@ final class ActionsTest extends TestCase
     public function testGatherUsingSpeak(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->gatherUsingSpeak(
@@ -297,7 +297,7 @@ final class ActionsTest extends TestCase
     public function testGatherUsingSpeakWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->gatherUsingSpeak(
@@ -330,7 +330,7 @@ final class ActionsTest extends TestCase
     public function testHangup(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->hangup('call_control_id');
@@ -343,7 +343,7 @@ final class ActionsTest extends TestCase
     public function testLeaveQueue(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->leaveQueue('call_control_id');
@@ -356,7 +356,7 @@ final class ActionsTest extends TestCase
     public function testPauseRecording(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->pauseRecording('call_control_id');
@@ -369,7 +369,7 @@ final class ActionsTest extends TestCase
     public function testRefer(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->refer(
@@ -385,7 +385,7 @@ final class ActionsTest extends TestCase
     public function testReferWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->refer(
@@ -410,7 +410,7 @@ final class ActionsTest extends TestCase
     public function testReject(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->reject(
@@ -426,7 +426,7 @@ final class ActionsTest extends TestCase
     public function testRejectWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->reject(
@@ -444,7 +444,7 @@ final class ActionsTest extends TestCase
     public function testResumeRecording(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->resumeRecording('call_control_id');
@@ -457,7 +457,7 @@ final class ActionsTest extends TestCase
     public function testSendDtmf(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->sendDtmf(
@@ -473,7 +473,7 @@ final class ActionsTest extends TestCase
     public function testSendDtmfWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->sendDtmf(
@@ -492,7 +492,7 @@ final class ActionsTest extends TestCase
     public function testSendSipInfo(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->sendSipInfo(
@@ -509,7 +509,7 @@ final class ActionsTest extends TestCase
     public function testSendSipInfoWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->sendSipInfo(
@@ -528,7 +528,7 @@ final class ActionsTest extends TestCase
     public function testSpeak(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->speak(
@@ -545,7 +545,7 @@ final class ActionsTest extends TestCase
     public function testSpeakWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->speak(
@@ -573,7 +573,7 @@ final class ActionsTest extends TestCase
     public function testStartAIAssistant(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->startAIAssistant(
@@ -588,7 +588,7 @@ final class ActionsTest extends TestCase
     public function testStartForking(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->startForking('call_control_id');
@@ -601,7 +601,7 @@ final class ActionsTest extends TestCase
     public function testStartNoiseSuppression(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->startNoiseSuppression(
@@ -619,7 +619,7 @@ final class ActionsTest extends TestCase
     public function testStartPlayback(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->startPlayback('call_control_id');
@@ -632,7 +632,7 @@ final class ActionsTest extends TestCase
     public function testStartRecording(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->startRecording(
@@ -649,7 +649,7 @@ final class ActionsTest extends TestCase
     public function testStartRecordingWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->startRecording(
@@ -681,7 +681,7 @@ final class ActionsTest extends TestCase
     public function testStartSiprec(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->startSiprec('call_control_id');
@@ -694,7 +694,7 @@ final class ActionsTest extends TestCase
     public function testStartStreaming(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->startStreaming('call_control_id');
@@ -707,7 +707,7 @@ final class ActionsTest extends TestCase
     public function testStartTranscription(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->startTranscription(
@@ -722,7 +722,7 @@ final class ActionsTest extends TestCase
     public function testStopAIAssistant(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->stopAIAssistant('call_control_id');
@@ -735,7 +735,7 @@ final class ActionsTest extends TestCase
     public function testStopForking(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->stopForking('call_control_id');
@@ -748,7 +748,7 @@ final class ActionsTest extends TestCase
     public function testStopGather(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->stopGather('call_control_id');
@@ -761,7 +761,7 @@ final class ActionsTest extends TestCase
     public function testStopNoiseSuppression(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->stopNoiseSuppression(
@@ -776,7 +776,7 @@ final class ActionsTest extends TestCase
     public function testStopPlayback(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->stopPlayback('call_control_id');
@@ -789,7 +789,7 @@ final class ActionsTest extends TestCase
     public function testStopRecording(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->stopRecording('call_control_id');
@@ -802,7 +802,7 @@ final class ActionsTest extends TestCase
     public function testStopSiprec(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->stopSiprec('call_control_id');
@@ -815,7 +815,7 @@ final class ActionsTest extends TestCase
     public function testStopStreaming(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->stopStreaming('call_control_id');
@@ -828,7 +828,7 @@ final class ActionsTest extends TestCase
     public function testStopTranscription(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->stopTranscription(
@@ -843,7 +843,7 @@ final class ActionsTest extends TestCase
     public function testSwitchSupervisorRole(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->switchSupervisorRole(
@@ -859,7 +859,7 @@ final class ActionsTest extends TestCase
     public function testSwitchSupervisorRoleWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->switchSupervisorRole(
@@ -875,7 +875,7 @@ final class ActionsTest extends TestCase
     public function testTransfer(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->transfer(
@@ -891,7 +891,7 @@ final class ActionsTest extends TestCase
     public function testTransferWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->transfer(
@@ -964,7 +964,7 @@ final class ActionsTest extends TestCase
     public function testUpdateClientState(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->updateClientState(
@@ -980,7 +980,7 @@ final class ActionsTest extends TestCase
     public function testUpdateClientStateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->actions->updateClientState(

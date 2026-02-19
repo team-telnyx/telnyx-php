@@ -32,7 +32,7 @@ final class GlobalIPAssignmentsUsageTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->globalIPAssignmentsUsage->retrieve();

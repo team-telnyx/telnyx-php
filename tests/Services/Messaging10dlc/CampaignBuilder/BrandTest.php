@@ -32,7 +32,7 @@ final class BrandTest extends TestCase
     public function testQualifyByUsecase(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -51,7 +51,7 @@ final class BrandTest extends TestCase
     public function testQualifyByUsecaseWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this

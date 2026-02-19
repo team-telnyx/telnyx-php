@@ -37,7 +37,7 @@ final class OAuthTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->retrieve('consent_token');
@@ -50,7 +50,7 @@ final class OAuthTest extends TestCase
     public function testGrants(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->grants(
@@ -66,7 +66,7 @@ final class OAuthTest extends TestCase
     public function testGrantsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->grants(
@@ -82,7 +82,7 @@ final class OAuthTest extends TestCase
     public function testIntrospect(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->introspect(token: 'token');
@@ -95,7 +95,7 @@ final class OAuthTest extends TestCase
     public function testIntrospectWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->introspect(token: 'token');
@@ -108,7 +108,7 @@ final class OAuthTest extends TestCase
     public function testRegister(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->register();
@@ -121,7 +121,7 @@ final class OAuthTest extends TestCase
     public function testRetrieveAuthorize(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->retrieveAuthorize(
@@ -138,7 +138,7 @@ final class OAuthTest extends TestCase
     public function testRetrieveAuthorizeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->retrieveAuthorize(
@@ -159,7 +159,7 @@ final class OAuthTest extends TestCase
     public function testRetrieveJwks(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->retrieveJwks();
@@ -172,7 +172,7 @@ final class OAuthTest extends TestCase
     public function testToken(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->token(grantType: 'client_credentials');
@@ -185,7 +185,7 @@ final class OAuthTest extends TestCase
     public function testTokenWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->oauth->token(

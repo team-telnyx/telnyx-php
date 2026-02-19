@@ -35,7 +35,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->numberOrderPhoneNumbers->retrieve(
@@ -50,7 +50,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->numberOrderPhoneNumbers->list();
@@ -63,7 +63,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     public function testUpdateRequirementGroup(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->numberOrderPhoneNumbers->updateRequirementGroup(
@@ -82,7 +82,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     public function testUpdateRequirementGroupWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->numberOrderPhoneNumbers->updateRequirementGroup(
@@ -101,7 +101,7 @@ final class NumberOrderPhoneNumbersTest extends TestCase
     public function testUpdateRequirements(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->numberOrderPhoneNumbers->updateRequirements(

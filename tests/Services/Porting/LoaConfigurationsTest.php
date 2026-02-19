@@ -36,7 +36,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->porting->loaConfigurations->create(
@@ -63,7 +63,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->porting->loaConfigurations->create(
@@ -91,7 +91,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->porting->loaConfigurations->retrieve(
@@ -106,7 +106,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->porting->loaConfigurations->update(
@@ -134,7 +134,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testUpdateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->porting->loaConfigurations->update(
@@ -163,7 +163,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->porting->loaConfigurations->list();
@@ -181,7 +181,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->porting->loaConfigurations->delete(
@@ -196,7 +196,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testPreview0(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
+            $this->markTestSkipped('Mock server doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->porting->loaConfigurations->preview0(
@@ -223,7 +223,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testPreview0WithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
+            $this->markTestSkipped('Mock server doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->porting->loaConfigurations->preview0(
@@ -251,7 +251,7 @@ final class LoaConfigurationsTest extends TestCase
     public function testPreview1(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
+            $this->markTestSkipped('Mock server doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->porting->loaConfigurations->preview1(

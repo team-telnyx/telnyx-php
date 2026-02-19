@@ -40,7 +40,7 @@ final class SimCardsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->retrieve(
@@ -55,7 +55,7 @@ final class SimCardsTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->update(
@@ -70,7 +70,7 @@ final class SimCardsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->simCards->list();
@@ -88,7 +88,7 @@ final class SimCardsTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->delete(
@@ -103,7 +103,7 @@ final class SimCardsTest extends TestCase
     public function testGetActivationCode(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->getActivationCode(
@@ -118,7 +118,7 @@ final class SimCardsTest extends TestCase
     public function testGetDeviceDetails(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->getDeviceDetails(
@@ -133,7 +133,7 @@ final class SimCardsTest extends TestCase
     public function testGetPublicIP(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->getPublicIP(
@@ -148,7 +148,7 @@ final class SimCardsTest extends TestCase
     public function testListWirelessConnectivityLogs(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->simCards->listWirelessConnectivityLogs(

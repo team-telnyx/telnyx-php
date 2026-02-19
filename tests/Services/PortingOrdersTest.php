@@ -40,7 +40,7 @@ final class PortingOrdersTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->create(
@@ -55,7 +55,7 @@ final class PortingOrdersTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->create(
@@ -72,7 +72,7 @@ final class PortingOrdersTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->retrieve(
@@ -87,7 +87,7 @@ final class PortingOrdersTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->update(
@@ -102,7 +102,7 @@ final class PortingOrdersTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->portingOrders->list();
@@ -120,7 +120,7 @@ final class PortingOrdersTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->delete(
@@ -135,7 +135,7 @@ final class PortingOrdersTest extends TestCase
     public function testRetrieveAllowedFocWindows(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->retrieveAllowedFocWindows(
@@ -153,7 +153,7 @@ final class PortingOrdersTest extends TestCase
     public function testRetrieveExceptionTypes(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->retrieveExceptionTypes();
@@ -169,7 +169,7 @@ final class PortingOrdersTest extends TestCase
     public function testRetrieveLoaTemplate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support application/pdf responses');
+            $this->markTestSkipped('Mock server doesn\'t support application/pdf responses');
         }
 
         $result = $this->client->portingOrders->retrieveLoaTemplate(
@@ -184,7 +184,7 @@ final class PortingOrdersTest extends TestCase
     public function testRetrieveRequirements(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->portingOrders->retrieveRequirements(
@@ -207,7 +207,7 @@ final class PortingOrdersTest extends TestCase
     public function testRetrieveSubRequest(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->retrieveSubRequest(

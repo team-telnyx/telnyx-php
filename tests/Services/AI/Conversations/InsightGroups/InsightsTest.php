@@ -31,7 +31,7 @@ final class InsightsTest extends TestCase
     public function testAssign(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->conversations->insightGroups->insights->assign(
@@ -47,7 +47,7 @@ final class InsightsTest extends TestCase
     public function testAssignWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->conversations->insightGroups->insights->assign(
@@ -63,7 +63,7 @@ final class InsightsTest extends TestCase
     public function testDeleteUnassign(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -86,7 +86,7 @@ final class InsightsTest extends TestCase
     public function testDeleteUnassignWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this

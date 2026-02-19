@@ -33,7 +33,7 @@ final class ActionsTest extends TestCase
     public function testGenerateJoinClientToken(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->rooms->actions->generateJoinClientToken(
@@ -51,7 +51,7 @@ final class ActionsTest extends TestCase
     public function testRefreshClientToken(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->rooms->actions->refreshClientToken(
@@ -67,7 +67,7 @@ final class ActionsTest extends TestCase
     public function testRefreshClientTokenWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->rooms->actions->refreshClientToken(

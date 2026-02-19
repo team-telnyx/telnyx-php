@@ -32,7 +32,7 @@ final class CdrUsageReportsTest extends TestCase
     public function testFetchSync(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reports->cdrUsageReports->fetchSync(
@@ -48,7 +48,7 @@ final class CdrUsageReportsTest extends TestCase
     public function testFetchSyncWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reports->cdrUsageReports->fetchSync(

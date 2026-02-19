@@ -38,7 +38,7 @@ final class ActionsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCardGroups->actions->retrieve(
@@ -53,7 +53,7 @@ final class ActionsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->simCardGroups->actions->list();
@@ -71,7 +71,7 @@ final class ActionsTest extends TestCase
     public function testRemovePrivateWirelessGateway(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -92,7 +92,7 @@ final class ActionsTest extends TestCase
     public function testRemoveWirelessBlocklist(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCardGroups->actions->removeWirelessBlocklist(
@@ -110,7 +110,7 @@ final class ActionsTest extends TestCase
     public function testSetPrivateWirelessGateway(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCardGroups->actions->setPrivateWirelessGateway(
@@ -129,7 +129,7 @@ final class ActionsTest extends TestCase
     public function testSetPrivateWirelessGatewayWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCardGroups->actions->setPrivateWirelessGateway(
@@ -148,7 +148,7 @@ final class ActionsTest extends TestCase
     public function testSetWirelessBlocklist(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCardGroups->actions->setWirelessBlocklist(
@@ -164,7 +164,7 @@ final class ActionsTest extends TestCase
     public function testSetWirelessBlocklistWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCardGroups->actions->setWirelessBlocklist(
