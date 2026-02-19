@@ -7,6 +7,7 @@ namespace Telnyx\Calls\Actions;
 use Telnyx\Calls\Actions\ActionSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel;
+use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
 use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -25,7 +26,9 @@ use Telnyx\MinimaxVoiceSettings;
  *
  * @see Telnyx\Services\Calls\ActionsService::speak()
  *
+ * @phpstan-import-type LoopcountVariants from \Telnyx\Calls\Actions\Loopcount
  * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings
+ * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings
  *
  * @phpstan-type ActionSpeakParamsShape = array{
@@ -34,9 +37,11 @@ use Telnyx\MinimaxVoiceSettings;
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   language?: null|Language|value-of<Language>,
+ *   loop?: LoopcountShape|null,
  *   payloadType?: null|PayloadType|value-of<PayloadType>,
  *   serviceLevel?: null|ServiceLevel|value-of<ServiceLevel>,
  *   stop?: string|null,
+ *   targetLegs?: null|TargetLegs|value-of<TargetLegs>,
  *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
@@ -89,6 +94,14 @@ final class ActionSpeakParams implements BaseModel
     public ?string $language;
 
     /**
+     * The number of times to play the audio file. Use `infinity` to loop indefinitely. Defaults to 1.
+     *
+     * @var LoopcountVariants|null $loop
+     */
+    #[Optional]
+    public string|int|null $loop;
+
+    /**
      * The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
      *
      * @var value-of<PayloadType>|null $payloadType
@@ -109,6 +122,14 @@ final class ActionSpeakParams implements BaseModel
      */
     #[Optional]
     public ?string $stop;
+
+    /**
+     * Specifies which legs of the call should receive the spoken audio.
+     *
+     * @var value-of<TargetLegs>|null $targetLegs
+     */
+    #[Optional('target_legs', enum: TargetLegs::class)]
+    public ?string $targetLegs;
 
     /**
      * The settings associated with the voice selected.
@@ -143,8 +164,10 @@ final class ActionSpeakParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Language|value-of<Language>|null $language
+     * @param LoopcountShape|null $loop
      * @param PayloadType|value-of<PayloadType>|null $payloadType
      * @param ServiceLevel|value-of<ServiceLevel>|null $serviceLevel
+     * @param TargetLegs|value-of<TargetLegs>|null $targetLegs
      * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
@@ -153,9 +176,11 @@ final class ActionSpeakParams implements BaseModel
         ?string $clientState = null,
         ?string $commandID = null,
         Language|string|null $language = null,
+        string|int|null $loop = null,
         PayloadType|string|null $payloadType = null,
         ServiceLevel|string|null $serviceLevel = null,
         ?string $stop = null,
+        TargetLegs|string|null $targetLegs = null,
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
@@ -166,9 +191,11 @@ final class ActionSpeakParams implements BaseModel
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $commandID && $self['commandID'] = $commandID;
         null !== $language && $self['language'] = $language;
+        null !== $loop && $self['loop'] = $loop;
         null !== $payloadType && $self['payloadType'] = $payloadType;
         null !== $serviceLevel && $self['serviceLevel'] = $serviceLevel;
         null !== $stop && $self['stop'] = $stop;
+        null !== $targetLegs && $self['targetLegs'] = $targetLegs;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
         return $self;
@@ -242,6 +269,19 @@ final class ActionSpeakParams implements BaseModel
     }
 
     /**
+     * The number of times to play the audio file. Use `infinity` to loop indefinitely. Defaults to 1.
+     *
+     * @param LoopcountShape $loop
+     */
+    public function withLoop(string|int $loop): self
+    {
+        $self = clone $this;
+        $self['loop'] = $loop;
+
+        return $self;
+    }
+
+    /**
      * The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
      *
      * @param PayloadType|value-of<PayloadType> $payloadType
@@ -274,6 +314,19 @@ final class ActionSpeakParams implements BaseModel
     {
         $self = clone $this;
         $self['stop'] = $stop;
+
+        return $self;
+    }
+
+    /**
+     * Specifies which legs of the call should receive the spoken audio.
+     *
+     * @param TargetLegs|value-of<TargetLegs> $targetLegs
+     */
+    public function withTargetLegs(TargetLegs|string $targetLegs): self
+    {
+        $self = clone $this;
+        $self['targetLegs'] = $targetLegs;
 
         return $self;
     }

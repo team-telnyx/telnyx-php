@@ -15,7 +15,9 @@ use Telnyx\Calls\Actions\ActionTransferParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
+use Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy;
 use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod;
+use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLsMethod;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Calls\SoundModifications;
@@ -44,6 +46,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy
  *
  * @phpstan-type ActionTransferParamsShape = array{
  *   to: string,
@@ -60,6 +63,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   mediaName?: string|null,
  *   muteDtmf?: null|MuteDtmf|value-of<MuteDtmf>,
  *   parkAfterUnbridge?: string|null,
+ *   preferredCodecs?: string|null,
  *   record?: null|Record|value-of<Record>,
  *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
  *   recordCustomFileName?: string|null,
@@ -77,8 +81,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *   targetLegClientState?: string|null,
  *   timeLimitSecs?: int|null,
  *   timeoutSecs?: int|null,
+ *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>|null,
  *   webhookURL?: string|null,
  *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
+ *   webhookURLs?: array<string,string>|null,
+ *   webhookURLsMethod?: null|WebhookURLsMethod|value-of<WebhookURLsMethod>,
  * }
  */
 final class ActionTransferParams implements BaseModel
@@ -181,6 +188,12 @@ final class ActionTransferParams implements BaseModel
      */
     #[Optional('park_after_unbridge')]
     public ?string $parkAfterUnbridge;
+
+    /**
+     * The list of comma-separated codecs in order of preference to be used during the call. The codecs supported are `G722`, `PCMU`, `PCMA`, `G729`, `OPUS`, `VP8`, `H264`, `AMR-WB`.
+     */
+    #[Optional('preferred_codecs')]
+    public ?string $preferredCodecs;
 
     /**
      * Start recording automatically after an event. Disabled by default.
@@ -301,6 +314,14 @@ final class ActionTransferParams implements BaseModel
     public ?int $timeoutSecs;
 
     /**
+     * A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
+     *
+     * @var array<string,WebhookRetriesPolicy>|null $webhookRetriesPolicies
+     */
+    #[Optional('webhook_retries_policies', map: WebhookRetriesPolicy::class)]
+    public ?array $webhookRetriesPolicies;
+
+    /**
      * Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
      */
     #[Optional('webhook_url')]
@@ -313,6 +334,22 @@ final class ActionTransferParams implements BaseModel
      */
     #[Optional('webhook_url_method', enum: WebhookURLMethod::class)]
     public ?string $webhookURLMethod;
+
+    /**
+     * A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
+     *
+     * @var array<string,string>|null $webhookURLs
+     */
+    #[Optional('webhook_urls', map: 'string')]
+    public ?array $webhookURLs;
+
+    /**
+     * HTTP request method to invoke `webhook_urls`.
+     *
+     * @var value-of<WebhookURLsMethod>|null $webhookURLsMethod
+     */
+    #[Optional('webhook_urls_method', enum: WebhookURLsMethod::class)]
+    public ?string $webhookURLsMethod;
 
     /**
      * `new ActionTransferParams()` is missing required properties by the API.
@@ -352,7 +389,10 @@ final class ActionTransferParams implements BaseModel
      * @param SipRegion|value-of<SipRegion>|null $sipRegion
      * @param SipTransportProtocol|value-of<SipTransportProtocol>|null $sipTransportProtocol
      * @param SoundModifications|SoundModificationsShape|null $soundModifications
+     * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>|null $webhookRetriesPolicies
      * @param WebhookURLMethod|value-of<WebhookURLMethod>|null $webhookURLMethod
+     * @param array<string,string>|null $webhookURLs
+     * @param WebhookURLsMethod|value-of<WebhookURLsMethod>|null $webhookURLsMethod
      */
     public static function with(
         string $to,
@@ -369,6 +409,7 @@ final class ActionTransferParams implements BaseModel
         ?string $mediaName = null,
         MuteDtmf|string|null $muteDtmf = null,
         ?string $parkAfterUnbridge = null,
+        ?string $preferredCodecs = null,
         Record|string|null $record = null,
         RecordChannels|string|null $recordChannels = null,
         ?string $recordCustomFileName = null,
@@ -386,8 +427,11 @@ final class ActionTransferParams implements BaseModel
         ?string $targetLegClientState = null,
         ?int $timeLimitSecs = null,
         ?int $timeoutSecs = null,
+        ?array $webhookRetriesPolicies = null,
         ?string $webhookURL = null,
         WebhookURLMethod|string|null $webhookURLMethod = null,
+        ?array $webhookURLs = null,
+        WebhookURLsMethod|string|null $webhookURLsMethod = null,
     ): self {
         $self = new self;
 
@@ -406,6 +450,7 @@ final class ActionTransferParams implements BaseModel
         null !== $mediaName && $self['mediaName'] = $mediaName;
         null !== $muteDtmf && $self['muteDtmf'] = $muteDtmf;
         null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
+        null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
         null !== $record && $self['record'] = $record;
         null !== $recordChannels && $self['recordChannels'] = $recordChannels;
         null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
@@ -423,8 +468,11 @@ final class ActionTransferParams implements BaseModel
         null !== $targetLegClientState && $self['targetLegClientState'] = $targetLegClientState;
         null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
         null !== $timeoutSecs && $self['timeoutSecs'] = $timeoutSecs;
+        null !== $webhookRetriesPolicies && $self['webhookRetriesPolicies'] = $webhookRetriesPolicies;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
         null !== $webhookURLMethod && $self['webhookURLMethod'] = $webhookURLMethod;
+        null !== $webhookURLs && $self['webhookURLs'] = $webhookURLs;
+        null !== $webhookURLsMethod && $self['webhookURLsMethod'] = $webhookURLsMethod;
 
         return $self;
     }
@@ -592,6 +640,17 @@ final class ActionTransferParams implements BaseModel
     {
         $self = clone $this;
         $self['parkAfterUnbridge'] = $parkAfterUnbridge;
+
+        return $self;
+    }
+
+    /**
+     * The list of comma-separated codecs in order of preference to be used during the call. The codecs supported are `G722`, `PCMU`, `PCMA`, `G729`, `OPUS`, `VP8`, `H264`, `AMR-WB`.
+     */
+    public function withPreferredCodecs(string $preferredCodecs): self
+    {
+        $self = clone $this;
+        $self['preferredCodecs'] = $preferredCodecs;
 
         return $self;
     }
@@ -805,6 +864,20 @@ final class ActionTransferParams implements BaseModel
     }
 
     /**
+     * A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
+     *
+     * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape> $webhookRetriesPolicies
+     */
+    public function withWebhookRetriesPolicies(
+        array $webhookRetriesPolicies
+    ): self {
+        $self = clone $this;
+        $self['webhookRetriesPolicies'] = $webhookRetriesPolicies;
+
+        return $self;
+    }
+
+    /**
      * Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
      */
     public function withWebhookURL(string $webhookURL): self
@@ -825,6 +898,33 @@ final class ActionTransferParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['webhookURLMethod'] = $webhookURLMethod;
+
+        return $self;
+    }
+
+    /**
+     * A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
+     *
+     * @param array<string,string> $webhookURLs
+     */
+    public function withWebhookURLs(array $webhookURLs): self
+    {
+        $self = clone $this;
+        $self['webhookURLs'] = $webhookURLs;
+
+        return $self;
+    }
+
+    /**
+     * HTTP request method to invoke `webhook_urls`.
+     *
+     * @param WebhookURLsMethod|value-of<WebhookURLsMethod> $webhookURLsMethod
+     */
+    public function withWebhookURLsMethod(
+        WebhookURLsMethod|string $webhookURLsMethod
+    ): self {
+        $self = clone $this;
+        $self['webhookURLsMethod'] = $webhookURLsMethod;
 
         return $self;
     }
