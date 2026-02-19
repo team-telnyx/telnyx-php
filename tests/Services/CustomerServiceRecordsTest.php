@@ -36,7 +36,7 @@ final class CustomerServiceRecordsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->customerServiceRecords->create(
@@ -51,7 +51,7 @@ final class CustomerServiceRecordsTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->customerServiceRecords->create(
@@ -79,7 +79,7 @@ final class CustomerServiceRecordsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->customerServiceRecords->retrieve(
@@ -94,7 +94,7 @@ final class CustomerServiceRecordsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->customerServiceRecords->list();
@@ -112,7 +112,7 @@ final class CustomerServiceRecordsTest extends TestCase
     public function testVerifyPhoneNumberCoverage(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(
@@ -130,7 +130,7 @@ final class CustomerServiceRecordsTest extends TestCase
     public function testVerifyPhoneNumberCoverageWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->customerServiceRecords->verifyPhoneNumberCoverage(

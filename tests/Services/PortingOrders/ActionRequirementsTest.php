@@ -34,7 +34,7 @@ final class ActionRequirementsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->portingOrders->actionRequirements->list(
@@ -54,7 +54,7 @@ final class ActionRequirementsTest extends TestCase
     public function testInitiate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->actionRequirements->initiate(
@@ -71,7 +71,7 @@ final class ActionRequirementsTest extends TestCase
     public function testInitiateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->actionRequirements->initiate(

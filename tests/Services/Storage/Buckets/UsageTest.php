@@ -33,7 +33,7 @@ final class UsageTest extends TestCase
     public function testGetAPIUsage(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->storage->buckets->usage->getAPIUsage(
@@ -52,7 +52,7 @@ final class UsageTest extends TestCase
     public function testGetAPIUsageWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->storage->buckets->usage->getAPIUsage(
@@ -71,7 +71,7 @@ final class UsageTest extends TestCase
     public function testGetBucketUsage(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->storage->buckets->usage->getBucketUsage('');

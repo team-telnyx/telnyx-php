@@ -33,7 +33,7 @@ final class AITest extends TestCase
     public function testRetrieveModels(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->retrieveModels();
@@ -46,7 +46,7 @@ final class AITest extends TestCase
     public function testSummarize(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->summarize(
@@ -62,7 +62,7 @@ final class AITest extends TestCase
     public function testSummarizeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->summarize(

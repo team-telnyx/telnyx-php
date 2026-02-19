@@ -33,7 +33,7 @@ final class RecordingsJsonTest extends TestCase
     public function testRecordingsJson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -56,7 +56,7 @@ final class RecordingsJsonTest extends TestCase
     public function testRecordingsJsonWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -89,7 +89,7 @@ final class RecordingsJsonTest extends TestCase
     public function testRetrieveRecordingsJson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -112,7 +112,7 @@ final class RecordingsJsonTest extends TestCase
     public function testRetrieveRecordingsJsonWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this

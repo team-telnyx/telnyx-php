@@ -33,7 +33,7 @@ final class ActionsTest extends TestCase
     public function testDisable(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->managedAccounts->actions->disable('id');
@@ -46,7 +46,7 @@ final class ActionsTest extends TestCase
     public function testEnable(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->managedAccounts->actions->enable('id');

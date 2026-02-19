@@ -36,7 +36,7 @@ final class SubNumberOrdersTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->subNumberOrders->retrieve('sub_number_order_id');
@@ -49,7 +49,7 @@ final class SubNumberOrdersTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->subNumberOrders->update('sub_number_order_id');
@@ -62,7 +62,7 @@ final class SubNumberOrdersTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->subNumberOrders->list();
@@ -75,7 +75,7 @@ final class SubNumberOrdersTest extends TestCase
     public function testCancel(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->subNumberOrders->cancel('sub_number_order_id');
@@ -88,7 +88,7 @@ final class SubNumberOrdersTest extends TestCase
     public function testUpdateRequirementGroup(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->subNumberOrders->updateRequirementGroup(
@@ -107,7 +107,7 @@ final class SubNumberOrdersTest extends TestCase
     public function testUpdateRequirementGroupWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->subNumberOrders->updateRequirementGroup(

@@ -37,7 +37,7 @@ final class MdrUsageReportsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reports->mdrUsageReports->create(
@@ -54,7 +54,7 @@ final class MdrUsageReportsTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reports->mdrUsageReports->create(
@@ -72,7 +72,7 @@ final class MdrUsageReportsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reports->mdrUsageReports->retrieve(
@@ -87,7 +87,7 @@ final class MdrUsageReportsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->reports->mdrUsageReports->list();
@@ -105,7 +105,7 @@ final class MdrUsageReportsTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reports->mdrUsageReports->delete(
@@ -120,7 +120,7 @@ final class MdrUsageReportsTest extends TestCase
     public function testFetchSync(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reports->mdrUsageReports->fetchSync(
@@ -135,7 +135,7 @@ final class MdrUsageReportsTest extends TestCase
     public function testFetchSyncWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reports->mdrUsageReports->fetchSync(

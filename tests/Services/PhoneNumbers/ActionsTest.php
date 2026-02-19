@@ -34,7 +34,7 @@ final class ActionsTest extends TestCase
     public function testChangeBundleStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->actions->changeBundleStatus(
@@ -50,7 +50,7 @@ final class ActionsTest extends TestCase
     public function testChangeBundleStatusWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->actions->changeBundleStatus(
@@ -66,7 +66,7 @@ final class ActionsTest extends TestCase
     public function testEnableEmergency(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->actions->enableEmergency(
@@ -83,7 +83,7 @@ final class ActionsTest extends TestCase
     public function testEnableEmergencyWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->actions->enableEmergency(
@@ -100,7 +100,7 @@ final class ActionsTest extends TestCase
     public function testVerifyOwnership(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->actions->verifyOwnership(
@@ -115,7 +115,7 @@ final class ActionsTest extends TestCase
     public function testVerifyOwnershipWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->actions->verifyOwnership(

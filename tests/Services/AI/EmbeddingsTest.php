@@ -35,7 +35,7 @@ final class EmbeddingsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->embeddings->create(bucketName: 'bucket_name');
@@ -48,7 +48,7 @@ final class EmbeddingsTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->embeddings->create(
@@ -67,7 +67,7 @@ final class EmbeddingsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->embeddings->retrieve('task_id');
@@ -80,7 +80,7 @@ final class EmbeddingsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->embeddings->list();
@@ -93,7 +93,7 @@ final class EmbeddingsTest extends TestCase
     public function testSimilaritySearch(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->embeddings->similaritySearch(
@@ -109,7 +109,7 @@ final class EmbeddingsTest extends TestCase
     public function testSimilaritySearchWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->embeddings->similaritySearch(
@@ -126,7 +126,7 @@ final class EmbeddingsTest extends TestCase
     public function testURL(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->embeddings->url(
@@ -142,7 +142,7 @@ final class EmbeddingsTest extends TestCase
     public function testURLWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->embeddings->url(

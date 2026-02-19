@@ -34,7 +34,7 @@ final class VerificationCodesTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->portingOrders->verificationCodes->list(
@@ -54,7 +54,7 @@ final class VerificationCodesTest extends TestCase
     public function testSend(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->verificationCodes->send(
@@ -69,7 +69,7 @@ final class VerificationCodesTest extends TestCase
     public function testVerify(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portingOrders->verificationCodes->verify(

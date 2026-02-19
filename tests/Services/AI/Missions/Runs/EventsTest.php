@@ -35,7 +35,7 @@ final class EventsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->ai->missions->runs->events->list(
@@ -56,7 +56,7 @@ final class EventsTest extends TestCase
     public function testListWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->ai->missions->runs->events->list(
@@ -82,7 +82,7 @@ final class EventsTest extends TestCase
     public function testGetEventDetails(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->events->getEventDetails(
@@ -99,7 +99,7 @@ final class EventsTest extends TestCase
     public function testGetEventDetailsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->events->getEventDetails(
@@ -116,7 +116,7 @@ final class EventsTest extends TestCase
     public function testLog(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->events->log(
@@ -134,7 +134,7 @@ final class EventsTest extends TestCase
     public function testLogWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->events->log(

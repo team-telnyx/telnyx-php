@@ -39,7 +39,7 @@ final class CallsTest extends TestCase
     public function testDial(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->dial(
@@ -56,7 +56,7 @@ final class CallsTest extends TestCase
     public function testDialWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->dial(
@@ -177,7 +177,7 @@ final class CallsTest extends TestCase
     public function testRetrieveStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->calls->retrieveStatus('call_control_id');

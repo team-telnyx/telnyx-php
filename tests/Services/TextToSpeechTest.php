@@ -32,7 +32,7 @@ final class TextToSpeechTest extends TestCase
     public function testGenerateSpeech(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support audio/mpeg responses');
+            $this->markTestSkipped('Mock server doesn\'t support audio/mpeg responses');
         }
 
         $result = $this->client->textToSpeech->generateSpeech(
@@ -48,7 +48,7 @@ final class TextToSpeechTest extends TestCase
     public function testGenerateSpeechWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support audio/mpeg responses');
+            $this->markTestSkipped('Mock server doesn\'t support audio/mpeg responses');
         }
 
         $result = $this->client->textToSpeech->generateSpeech(
@@ -64,7 +64,7 @@ final class TextToSpeechTest extends TestCase
     public function testListVoices(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->textToSpeech->listVoices();

@@ -31,7 +31,7 @@ final class OsrTest extends TestCase
     public function testGetAttributes(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->osr->getAttributes(

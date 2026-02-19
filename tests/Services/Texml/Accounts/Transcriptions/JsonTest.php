@@ -32,7 +32,7 @@ final class JsonTest extends TestCase
     public function testDeleteRecordingTranscriptionSidJson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -55,7 +55,7 @@ final class JsonTest extends TestCase
     public function testDeleteRecordingTranscriptionSidJsonWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -78,7 +78,7 @@ final class JsonTest extends TestCase
     public function testRetrieveRecordingTranscriptionSidJson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -104,7 +104,7 @@ final class JsonTest extends TestCase
     public function testRetrieveRecordingTranscriptionSidJsonWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this

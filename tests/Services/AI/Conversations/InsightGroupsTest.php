@@ -34,7 +34,7 @@ final class InsightGroupsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->conversations->insightGroups->retrieve(
@@ -49,7 +49,7 @@ final class InsightGroupsTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->conversations->insightGroups->update(
@@ -64,7 +64,7 @@ final class InsightGroupsTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->conversations->insightGroups->delete(
@@ -79,7 +79,7 @@ final class InsightGroupsTest extends TestCase
     public function testInsightGroups(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->conversations->insightGroups->insightGroups(
@@ -94,7 +94,7 @@ final class InsightGroupsTest extends TestCase
     public function testInsightGroupsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->conversations->insightGroups->insightGroups(
@@ -111,7 +111,7 @@ final class InsightGroupsTest extends TestCase
     public function testRetrieveInsightGroups(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this

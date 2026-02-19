@@ -33,7 +33,7 @@ final class ExternalVettingTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->externalVetting->list(
@@ -48,7 +48,7 @@ final class ExternalVettingTest extends TestCase
     public function testImports(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->externalVetting->imports(
@@ -65,7 +65,7 @@ final class ExternalVettingTest extends TestCase
     public function testImportsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->externalVetting->imports(
@@ -83,7 +83,7 @@ final class ExternalVettingTest extends TestCase
     public function testOrder(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->externalVetting->order(
@@ -100,7 +100,7 @@ final class ExternalVettingTest extends TestCase
     public function testOrderWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->externalVetting->order(

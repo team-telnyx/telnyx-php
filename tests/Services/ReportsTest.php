@@ -34,7 +34,7 @@ final class ReportsTest extends TestCase
     public function testListMdrs(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->reports->listMdrs();
@@ -47,7 +47,7 @@ final class ReportsTest extends TestCase
     public function testListWdrs(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->reports->listWdrs();

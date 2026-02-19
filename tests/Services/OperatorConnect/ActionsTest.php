@@ -32,7 +32,7 @@ final class ActionsTest extends TestCase
     public function testRefresh(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->operatorConnect->actions->refresh();

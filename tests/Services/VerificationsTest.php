@@ -33,7 +33,7 @@ final class VerificationsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->verifications->retrieve(
@@ -48,7 +48,7 @@ final class VerificationsTest extends TestCase
     public function testTriggerCall(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->verifications->triggerCall(
@@ -64,7 +64,7 @@ final class VerificationsTest extends TestCase
     public function testTriggerCallWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->verifications->triggerCall(
@@ -83,7 +83,7 @@ final class VerificationsTest extends TestCase
     public function testTriggerFlashcall(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->verifications->triggerFlashcall(
@@ -99,7 +99,7 @@ final class VerificationsTest extends TestCase
     public function testTriggerFlashcallWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->verifications->triggerFlashcall(
@@ -116,7 +116,7 @@ final class VerificationsTest extends TestCase
     public function testTriggerSMS(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->verifications->triggerSMS(
@@ -132,7 +132,7 @@ final class VerificationsTest extends TestCase
     public function testTriggerSMSWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->verifications->triggerSMS(

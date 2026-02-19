@@ -35,7 +35,7 @@ final class LogMessagesTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->logMessages->retrieve('id');
@@ -48,7 +48,7 @@ final class LogMessagesTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->externalConnections->logMessages->list();
@@ -66,7 +66,7 @@ final class LogMessagesTest extends TestCase
     public function testDismiss(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->logMessages->dismiss('id');

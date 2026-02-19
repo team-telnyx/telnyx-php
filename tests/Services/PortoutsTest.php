@@ -36,7 +36,7 @@ final class PortoutsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portouts->retrieve(
@@ -51,7 +51,7 @@ final class PortoutsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->portouts->list();
@@ -69,7 +69,7 @@ final class PortoutsTest extends TestCase
     public function testListRejectionCodes(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portouts->listRejectionCodes(
@@ -84,7 +84,7 @@ final class PortoutsTest extends TestCase
     public function testUpdateStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portouts->updateStatus(
@@ -101,7 +101,7 @@ final class PortoutsTest extends TestCase
     public function testUpdateStatusWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->portouts->updateStatus(

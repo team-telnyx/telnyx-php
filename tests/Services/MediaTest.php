@@ -35,7 +35,7 @@ final class MediaTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->media->retrieve('media_name');
@@ -48,7 +48,7 @@ final class MediaTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->media->update('media_name');
@@ -61,7 +61,7 @@ final class MediaTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->media->list();
@@ -74,7 +74,7 @@ final class MediaTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->media->delete('media_name');
@@ -87,7 +87,7 @@ final class MediaTest extends TestCase
     public function testDownload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support application/octet-stream responses');
+            $this->markTestSkipped('Mock server doesn\'t support application/octet-stream responses');
         }
 
         $result = $this->client->media->download('media_name');
@@ -100,7 +100,7 @@ final class MediaTest extends TestCase
     public function testUpload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->media->upload(
@@ -115,7 +115,7 @@ final class MediaTest extends TestCase
     public function testUploadWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->media->upload(

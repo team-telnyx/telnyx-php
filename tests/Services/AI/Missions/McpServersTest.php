@@ -31,7 +31,7 @@ final class McpServersTest extends TestCase
     public function testCreateMcpServer(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->mcpServers->createMcpServer(
@@ -46,7 +46,7 @@ final class McpServersTest extends TestCase
     public function testDeleteMcpServer(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->mcpServers->deleteMcpServer(
@@ -62,7 +62,7 @@ final class McpServersTest extends TestCase
     public function testDeleteMcpServerWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->mcpServers->deleteMcpServer(
@@ -78,7 +78,7 @@ final class McpServersTest extends TestCase
     public function testGetMcpServer(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->mcpServers->getMcpServer(
@@ -94,7 +94,7 @@ final class McpServersTest extends TestCase
     public function testGetMcpServerWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->mcpServers->getMcpServer(
@@ -110,7 +110,7 @@ final class McpServersTest extends TestCase
     public function testListMcpServers(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->mcpServers->listMcpServers(
@@ -125,7 +125,7 @@ final class McpServersTest extends TestCase
     public function testUpdateMcpServer(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->mcpServers->updateMcpServer(
@@ -141,7 +141,7 @@ final class McpServersTest extends TestCase
     public function testUpdateMcpServerWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->mcpServers->updateMcpServer(

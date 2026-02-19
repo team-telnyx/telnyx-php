@@ -33,7 +33,7 @@ final class ActionsTest extends TestCase
     public function testAcceptSuggestions(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->addresses->actions->acceptSuggestions(
@@ -48,7 +48,7 @@ final class ActionsTest extends TestCase
     public function testValidate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->addresses->actions->validate(
@@ -65,7 +65,7 @@ final class ActionsTest extends TestCase
     public function testValidateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->addresses->actions->validate(

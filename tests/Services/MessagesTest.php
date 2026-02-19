@@ -40,7 +40,7 @@ final class MessagesTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->retrieve(
@@ -55,7 +55,7 @@ final class MessagesTest extends TestCase
     public function testCancelScheduled(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->cancelScheduled(
@@ -70,7 +70,7 @@ final class MessagesTest extends TestCase
     public function testSchedule(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->schedule(to: '+18445550001');
@@ -83,7 +83,7 @@ final class MessagesTest extends TestCase
     public function testScheduleWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->schedule(
@@ -109,7 +109,7 @@ final class MessagesTest extends TestCase
     public function testSend(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->send(to: '+18445550001');
@@ -122,7 +122,7 @@ final class MessagesTest extends TestCase
     public function testSendWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->send(
@@ -149,7 +149,7 @@ final class MessagesTest extends TestCase
     public function testSendGroupMms(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendGroupMms(
@@ -165,7 +165,7 @@ final class MessagesTest extends TestCase
     public function testSendGroupMmsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendGroupMms(
@@ -187,7 +187,7 @@ final class MessagesTest extends TestCase
     public function testSendLongCode(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendLongCode(
@@ -203,7 +203,7 @@ final class MessagesTest extends TestCase
     public function testSendLongCodeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendLongCode(
@@ -228,7 +228,7 @@ final class MessagesTest extends TestCase
     public function testSendNumberPool(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendNumberPool(
@@ -244,7 +244,7 @@ final class MessagesTest extends TestCase
     public function testSendNumberPoolWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendNumberPool(
@@ -269,7 +269,7 @@ final class MessagesTest extends TestCase
     public function testSendShortCode(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendShortCode(
@@ -285,7 +285,7 @@ final class MessagesTest extends TestCase
     public function testSendShortCodeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendShortCode(
@@ -310,7 +310,7 @@ final class MessagesTest extends TestCase
     public function testSendWhatsapp(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendWhatsapp(
@@ -327,7 +327,7 @@ final class MessagesTest extends TestCase
     public function testSendWhatsappWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->sendWhatsapp(

@@ -32,7 +32,7 @@ final class StreamsTest extends TestCase
     public function testStreamingSidJson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->calls->streams->streamingSidJson(
@@ -49,7 +49,7 @@ final class StreamsTest extends TestCase
     public function testStreamingSidJsonWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->calls->streams->streamingSidJson(
