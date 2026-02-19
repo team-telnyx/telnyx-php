@@ -41,7 +41,7 @@ final class ActionsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->actions->retrieve(
@@ -56,7 +56,7 @@ final class ActionsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->simCards->actions->list();
@@ -74,7 +74,7 @@ final class ActionsTest extends TestCase
     public function testBulkSetPublicIPs(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->actions->bulkSetPublicIPs(
@@ -89,7 +89,7 @@ final class ActionsTest extends TestCase
     public function testBulkSetPublicIPsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->actions->bulkSetPublicIPs(
@@ -104,7 +104,7 @@ final class ActionsTest extends TestCase
     public function testDisable(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->actions->disable(
@@ -119,7 +119,7 @@ final class ActionsTest extends TestCase
     public function testEnable(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->actions->enable(
@@ -134,7 +134,7 @@ final class ActionsTest extends TestCase
     public function testRemovePublicIP(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->actions->removePublicIP(
@@ -149,7 +149,7 @@ final class ActionsTest extends TestCase
     public function testSetPublicIP(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->actions->setPublicIP(
@@ -164,7 +164,7 @@ final class ActionsTest extends TestCase
     public function testSetStandby(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->actions->setStandby(
@@ -179,7 +179,7 @@ final class ActionsTest extends TestCase
     public function testValidateRegistrationCodes(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCards->actions->validateRegistrationCodes();

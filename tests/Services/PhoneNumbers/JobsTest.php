@@ -37,7 +37,7 @@ final class JobsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->jobs->retrieve('id');
@@ -50,7 +50,7 @@ final class JobsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->phoneNumbers->jobs->list();
@@ -68,7 +68,7 @@ final class JobsTest extends TestCase
     public function testDeleteBatch(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->jobs->deleteBatch(
@@ -83,7 +83,7 @@ final class JobsTest extends TestCase
     public function testDeleteBatchWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->jobs->deleteBatch(
@@ -98,7 +98,7 @@ final class JobsTest extends TestCase
     public function testUpdateBatch(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->jobs->updateBatch(
@@ -113,7 +113,7 @@ final class JobsTest extends TestCase
     public function testUpdateBatchWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->jobs->updateBatch(
@@ -177,7 +177,7 @@ final class JobsTest extends TestCase
     public function testUpdateEmergencySettingsBatch(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch(
@@ -196,7 +196,7 @@ final class JobsTest extends TestCase
     public function testUpdateEmergencySettingsBatchWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->phoneNumbers->jobs->updateEmergencySettingsBatch(

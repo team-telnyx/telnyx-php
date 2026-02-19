@@ -35,7 +35,7 @@ final class CommentsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->comments->create();
@@ -48,7 +48,7 @@ final class CommentsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->comments->retrieve('id');
@@ -61,7 +61,7 @@ final class CommentsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->comments->list();
@@ -74,7 +74,7 @@ final class CommentsTest extends TestCase
     public function testMarkAsRead(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->comments->markAsRead('id');

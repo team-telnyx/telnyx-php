@@ -33,7 +33,7 @@ final class EmbeddingsTest extends TestCase
     public function testCreateEmbeddings(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->openai->embeddings->createEmbeddings(
@@ -49,7 +49,7 @@ final class EmbeddingsTest extends TestCase
     public function testCreateEmbeddingsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->openai->embeddings->createEmbeddings(
@@ -68,7 +68,7 @@ final class EmbeddingsTest extends TestCase
     public function testListEmbeddingModels(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->openai->embeddings->listEmbeddingModels();

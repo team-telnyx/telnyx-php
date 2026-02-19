@@ -32,7 +32,7 @@ final class ToolsTest extends TestCase
     public function testTest(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->tools->test(
@@ -48,7 +48,7 @@ final class ToolsTest extends TestCase
     public function testTestWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->tools->test(

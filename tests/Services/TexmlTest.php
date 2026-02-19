@@ -32,7 +32,7 @@ final class TexmlTest extends TestCase
     public function testSecrets(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->secrets(
@@ -48,7 +48,7 @@ final class TexmlTest extends TestCase
     public function testSecretsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->secrets(

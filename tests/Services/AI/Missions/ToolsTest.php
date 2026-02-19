@@ -31,7 +31,7 @@ final class ToolsTest extends TestCase
     public function testCreateTool(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->tools->createTool('mission_id');
@@ -44,7 +44,7 @@ final class ToolsTest extends TestCase
     public function testDeleteTool(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->tools->deleteTool(
@@ -60,7 +60,7 @@ final class ToolsTest extends TestCase
     public function testDeleteToolWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->tools->deleteTool(
@@ -76,7 +76,7 @@ final class ToolsTest extends TestCase
     public function testGetTool(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->tools->getTool(
@@ -92,7 +92,7 @@ final class ToolsTest extends TestCase
     public function testGetToolWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->tools->getTool(
@@ -108,7 +108,7 @@ final class ToolsTest extends TestCase
     public function testListTools(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->tools->listTools('mission_id');
@@ -121,7 +121,7 @@ final class ToolsTest extends TestCase
     public function testUpdateTool(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->tools->updateTool(
@@ -137,7 +137,7 @@ final class ToolsTest extends TestCase
     public function testUpdateToolWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->tools->updateTool(

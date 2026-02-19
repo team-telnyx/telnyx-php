@@ -35,7 +35,7 @@ final class SessionsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->rooms->sessions->retrieve(
@@ -50,7 +50,7 @@ final class SessionsTest extends TestCase
     public function testList0(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->rooms->sessions->list0();
@@ -68,7 +68,7 @@ final class SessionsTest extends TestCase
     public function testList1(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->rooms->sessions->list1(
@@ -88,7 +88,7 @@ final class SessionsTest extends TestCase
     public function testRetrieveParticipants(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->rooms->sessions->retrieveParticipants(

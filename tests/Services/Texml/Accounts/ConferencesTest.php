@@ -36,7 +36,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->conferences->retrieve(
@@ -52,7 +52,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->conferences->retrieve(
@@ -68,7 +68,7 @@ final class ConferencesTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->conferences->update(
@@ -84,7 +84,7 @@ final class ConferencesTest extends TestCase
     public function testUpdateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->conferences->update(
@@ -103,7 +103,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieveConferences(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->conferences->retrieveConferences(
@@ -118,7 +118,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieveRecordings(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->conferences->retrieveRecordings(
@@ -134,7 +134,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieveRecordingsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->conferences->retrieveRecordings(
@@ -150,7 +150,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieveRecordingsJson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -172,7 +172,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieveRecordingsJsonWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this

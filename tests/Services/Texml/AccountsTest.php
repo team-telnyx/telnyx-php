@@ -33,7 +33,7 @@ final class AccountsTest extends TestCase
     public function testRetrieveRecordingsJson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->retrieveRecordingsJson(
@@ -48,7 +48,7 @@ final class AccountsTest extends TestCase
     public function testRetrieveTranscriptionsJson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->texml->accounts->retrieveTranscriptionsJson(

@@ -42,7 +42,7 @@ final class FqdnConnectionsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->fqdnConnections->create(connectionName: 'string');
@@ -55,7 +55,7 @@ final class FqdnConnectionsTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->fqdnConnections->create(
@@ -138,7 +138,7 @@ final class FqdnConnectionsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->fqdnConnections->retrieve('id');
@@ -151,7 +151,7 @@ final class FqdnConnectionsTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->fqdnConnections->update('id');
@@ -164,7 +164,7 @@ final class FqdnConnectionsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->fqdnConnections->list();
@@ -182,7 +182,7 @@ final class FqdnConnectionsTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->fqdnConnections->delete('id');

@@ -32,7 +32,7 @@ final class SimCardOrderPreviewTest extends TestCase
     public function testPreview(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCardOrderPreview->preview(
@@ -48,7 +48,7 @@ final class SimCardOrderPreviewTest extends TestCase
     public function testPreviewWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->simCardOrderPreview->preview(

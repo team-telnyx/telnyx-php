@@ -37,7 +37,7 @@ final class AssistantsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->create(
@@ -54,7 +54,7 @@ final class AssistantsTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->create(
@@ -171,7 +171,7 @@ final class AssistantsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->retrieve('assistant_id');
@@ -184,7 +184,7 @@ final class AssistantsTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->update('assistant_id');
@@ -197,7 +197,7 @@ final class AssistantsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->list();
@@ -210,7 +210,7 @@ final class AssistantsTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->delete('assistant_id');
@@ -223,7 +223,7 @@ final class AssistantsTest extends TestCase
     public function testChat(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->chat(
@@ -240,7 +240,7 @@ final class AssistantsTest extends TestCase
     public function testChatWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->chat(
@@ -258,7 +258,7 @@ final class AssistantsTest extends TestCase
     public function testClone(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->clone('assistant_id');
@@ -271,7 +271,7 @@ final class AssistantsTest extends TestCase
     public function testGetTexml(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->getTexml('assistant_id');
@@ -284,7 +284,7 @@ final class AssistantsTest extends TestCase
     public function testImports(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->imports(
@@ -300,7 +300,7 @@ final class AssistantsTest extends TestCase
     public function testImportsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->imports(
@@ -317,7 +317,7 @@ final class AssistantsTest extends TestCase
     public function testSendSMS(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->sendSMS(
@@ -334,7 +334,7 @@ final class AssistantsTest extends TestCase
     public function testSendSMSWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->assistants->sendSMS(

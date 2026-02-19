@@ -38,7 +38,7 @@ final class CampaignTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->retrieve('campaignId');
@@ -51,7 +51,7 @@ final class CampaignTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->update('campaignId');
@@ -64,7 +64,7 @@ final class CampaignTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->messaging10dlc->campaign->list(brandID: 'brandId');
@@ -82,7 +82,7 @@ final class CampaignTest extends TestCase
     public function testListWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->messaging10dlc->campaign->list(
@@ -105,7 +105,7 @@ final class CampaignTest extends TestCase
     public function testAcceptSharing(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->acceptSharing(
@@ -120,7 +120,7 @@ final class CampaignTest extends TestCase
     public function testDeactivate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->deactivate('campaignId');
@@ -133,7 +133,7 @@ final class CampaignTest extends TestCase
     public function testGetMnoMetadata(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->getMnoMetadata(
@@ -148,7 +148,7 @@ final class CampaignTest extends TestCase
     public function testGetOperationStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->getOperationStatus(
@@ -163,7 +163,7 @@ final class CampaignTest extends TestCase
     public function testGetSharingStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->getSharingStatus(
@@ -178,7 +178,7 @@ final class CampaignTest extends TestCase
     public function testSubmitAppeal(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->submitAppeal(
@@ -194,7 +194,7 @@ final class CampaignTest extends TestCase
     public function testSubmitAppealWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->campaign->submitAppeal(

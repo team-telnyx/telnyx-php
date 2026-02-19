@@ -32,7 +32,7 @@ final class WirelessBlocklistValuesTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->wirelessBlocklistValues->list(type: 'country');
@@ -45,7 +45,7 @@ final class WirelessBlocklistValuesTest extends TestCase
     public function testListWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->wirelessBlocklistValues->list(type: 'country');

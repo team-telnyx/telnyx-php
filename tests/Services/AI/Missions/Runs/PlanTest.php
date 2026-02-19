@@ -36,7 +36,7 @@ final class PlanTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->create(
@@ -55,7 +55,7 @@ final class PlanTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->create(
@@ -80,7 +80,7 @@ final class PlanTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->retrieve(
@@ -96,7 +96,7 @@ final class PlanTest extends TestCase
     public function testRetrieveWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->retrieve(
@@ -112,7 +112,7 @@ final class PlanTest extends TestCase
     public function testAddStepsToPlan(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->addStepsToPlan(
@@ -131,7 +131,7 @@ final class PlanTest extends TestCase
     public function testAddStepsToPlanWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->addStepsToPlan(
@@ -156,7 +156,7 @@ final class PlanTest extends TestCase
     public function testGetStepDetails(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->getStepDetails(
@@ -173,7 +173,7 @@ final class PlanTest extends TestCase
     public function testGetStepDetailsWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->getStepDetails(
@@ -190,7 +190,7 @@ final class PlanTest extends TestCase
     public function testUpdateStep(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->updateStep(
@@ -207,7 +207,7 @@ final class PlanTest extends TestCase
     public function testUpdateStepWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->runs->plan->updateStep(

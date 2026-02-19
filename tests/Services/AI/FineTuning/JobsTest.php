@@ -33,7 +33,7 @@ final class JobsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->fineTuning->jobs->create(
@@ -49,7 +49,7 @@ final class JobsTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->fineTuning->jobs->create(
@@ -67,7 +67,7 @@ final class JobsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->fineTuning->jobs->retrieve('job_id');
@@ -80,7 +80,7 @@ final class JobsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->fineTuning->jobs->list();
@@ -93,7 +93,7 @@ final class JobsTest extends TestCase
     public function testCancel(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->fineTuning->jobs->cancel('job_id');

@@ -35,7 +35,7 @@ final class ClustersTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->clusters->retrieve('task_id');
@@ -48,7 +48,7 @@ final class ClustersTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->ai->clusters->list();
@@ -66,7 +66,7 @@ final class ClustersTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->clusters->delete('task_id');
@@ -79,7 +79,7 @@ final class ClustersTest extends TestCase
     public function testCompute(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->clusters->compute(bucket: 'bucket');
@@ -92,7 +92,7 @@ final class ClustersTest extends TestCase
     public function testComputeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->clusters->compute(
@@ -111,7 +111,7 @@ final class ClustersTest extends TestCase
     public function testFetchGraph(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support image/png responses');
+            $this->markTestSkipped('Mock server doesn\'t support image/png responses');
         }
 
         $result = $this->client->ai->clusters->fetchGraph('task_id');

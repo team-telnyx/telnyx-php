@@ -33,7 +33,7 @@ final class RcsTest extends TestCase
     public function testGenerateDeeplink(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->rcs->generateDeeplink('agent_id');
@@ -46,7 +46,7 @@ final class RcsTest extends TestCase
     public function testSend(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->rcs->send(
@@ -64,7 +64,7 @@ final class RcsTest extends TestCase
     public function testSendWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messages->rcs->send(

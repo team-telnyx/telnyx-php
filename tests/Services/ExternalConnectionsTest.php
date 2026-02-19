@@ -38,7 +38,7 @@ final class ExternalConnectionsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->create(
@@ -54,7 +54,7 @@ final class ExternalConnectionsTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->create(
@@ -82,7 +82,7 @@ final class ExternalConnectionsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->retrieve('id');
@@ -95,7 +95,7 @@ final class ExternalConnectionsTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->update(
@@ -111,7 +111,7 @@ final class ExternalConnectionsTest extends TestCase
     public function testUpdateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->update(
@@ -136,7 +136,7 @@ final class ExternalConnectionsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->externalConnections->list();
@@ -154,7 +154,7 @@ final class ExternalConnectionsTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->delete('id');
@@ -167,7 +167,7 @@ final class ExternalConnectionsTest extends TestCase
     public function testUpdateLocation(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->updateLocation(
@@ -187,7 +187,7 @@ final class ExternalConnectionsTest extends TestCase
     public function testUpdateLocationWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->externalConnections->updateLocation(

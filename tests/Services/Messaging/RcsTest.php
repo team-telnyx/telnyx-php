@@ -34,7 +34,7 @@ final class RcsTest extends TestCase
     public function testInviteTestNumber(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging->rcs->inviteTestNumber(
@@ -50,7 +50,7 @@ final class RcsTest extends TestCase
     public function testInviteTestNumberWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging->rcs->inviteTestNumber(
@@ -66,7 +66,7 @@ final class RcsTest extends TestCase
     public function testListBulkCapabilities(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging->rcs->listBulkCapabilities(
@@ -82,7 +82,7 @@ final class RcsTest extends TestCase
     public function testListBulkCapabilitiesWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging->rcs->listBulkCapabilities(
@@ -98,7 +98,7 @@ final class RcsTest extends TestCase
     public function testRetrieveCapabilities(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging->rcs->retrieveCapabilities(
@@ -114,7 +114,7 @@ final class RcsTest extends TestCase
     public function testRetrieveCapabilitiesWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging->rcs->retrieveCapabilities(

@@ -38,7 +38,7 @@ final class ManagedAccountsTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->managedAccounts->create(
@@ -53,7 +53,7 @@ final class ManagedAccountsTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->managedAccounts->create(
@@ -72,7 +72,7 @@ final class ManagedAccountsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->managedAccounts->retrieve('id');
@@ -85,7 +85,7 @@ final class ManagedAccountsTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->managedAccounts->update('id');
@@ -98,7 +98,7 @@ final class ManagedAccountsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->managedAccounts->list();
@@ -116,7 +116,7 @@ final class ManagedAccountsTest extends TestCase
     public function testGetAllocatableGlobalOutboundChannels(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -136,7 +136,7 @@ final class ManagedAccountsTest extends TestCase
     public function testUpdateGlobalChannelLimit(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->managedAccounts->updateGlobalChannelLimit('id');

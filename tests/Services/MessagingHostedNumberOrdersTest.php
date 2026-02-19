@@ -39,7 +39,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingHostedNumberOrders->create();
@@ -55,7 +55,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingHostedNumberOrders->retrieve('id');
@@ -71,7 +71,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->messagingHostedNumberOrders->list();
@@ -89,7 +89,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingHostedNumberOrders->delete('id');
@@ -105,7 +105,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testCheckEligibility(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingHostedNumberOrders->checkEligibility(
@@ -123,7 +123,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testCheckEligibilityWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingHostedNumberOrders->checkEligibility(
@@ -141,7 +141,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testCreateVerificationCodes(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -165,7 +165,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testCreateVerificationCodesWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -189,7 +189,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testValidateCodes(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingHostedNumberOrders->validateCodes(
@@ -208,7 +208,7 @@ final class MessagingHostedNumberOrdersTest extends TestCase
     public function testValidateCodesWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messagingHostedNumberOrders->validateCodes(

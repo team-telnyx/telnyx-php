@@ -38,7 +38,7 @@ final class ConferencesTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->conferences->create(
@@ -54,7 +54,7 @@ final class ConferencesTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->conferences->create(
@@ -80,7 +80,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->conferences->retrieve('id');
@@ -93,7 +93,7 @@ final class ConferencesTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->conferences->list();
@@ -111,7 +111,7 @@ final class ConferencesTest extends TestCase
     public function testListParticipants(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->conferences->listParticipants('conference_id');
@@ -129,7 +129,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieveParticipant(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->conferences->retrieveParticipant(
@@ -145,7 +145,7 @@ final class ConferencesTest extends TestCase
     public function testRetrieveParticipantWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->conferences->retrieveParticipant(
@@ -161,7 +161,7 @@ final class ConferencesTest extends TestCase
     public function testUpdateParticipant(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->conferences->updateParticipant(
@@ -180,7 +180,7 @@ final class ConferencesTest extends TestCase
     public function testUpdateParticipantWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->conferences->updateParticipant(

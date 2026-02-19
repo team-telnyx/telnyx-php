@@ -34,7 +34,7 @@ final class PartnerCampaignsTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->partnerCampaigns->retrieve(
@@ -49,7 +49,7 @@ final class PartnerCampaignsTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->partnerCampaigns->update(
@@ -64,7 +64,7 @@ final class PartnerCampaignsTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->messaging10dlc->partnerCampaigns->list();
@@ -82,7 +82,7 @@ final class PartnerCampaignsTest extends TestCase
     public function testListSharedByMe(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->messaging10dlc->partnerCampaigns->listSharedByMe();
@@ -103,7 +103,7 @@ final class PartnerCampaignsTest extends TestCase
     public function testRetrieveSharingStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this

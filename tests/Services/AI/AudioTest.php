@@ -32,7 +32,7 @@ final class AudioTest extends TestCase
     public function testTranscribe(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->audio->transcribe(
@@ -47,7 +47,7 @@ final class AudioTest extends TestCase
     public function testTranscribeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->audio->transcribe(

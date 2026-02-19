@@ -44,7 +44,7 @@ final class BrandTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->create(
@@ -63,7 +63,7 @@ final class BrandTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->create(
@@ -101,7 +101,7 @@ final class BrandTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->retrieve('brandId');
@@ -114,7 +114,7 @@ final class BrandTest extends TestCase
     public function testUpdate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->update(
@@ -134,7 +134,7 @@ final class BrandTest extends TestCase
     public function testUpdateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->update(
@@ -174,7 +174,7 @@ final class BrandTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->messaging10dlc->brand->list();
@@ -192,7 +192,7 @@ final class BrandTest extends TestCase
     public function testDelete(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->delete('brandId');
@@ -205,7 +205,7 @@ final class BrandTest extends TestCase
     public function testGetFeedback(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->getFeedback('brandId');
@@ -218,7 +218,7 @@ final class BrandTest extends TestCase
     public function testGetSMSOtpByReference(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->getSMSOtpByReference(
@@ -233,7 +233,7 @@ final class BrandTest extends TestCase
     public function testResend2faEmail(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->resend2faEmail('brandId');
@@ -246,7 +246,7 @@ final class BrandTest extends TestCase
     public function testRetrieveSMSOtpStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->retrieveSMSOtpStatus(
@@ -261,7 +261,7 @@ final class BrandTest extends TestCase
     public function testRevet(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->revet('brandId');
@@ -274,7 +274,7 @@ final class BrandTest extends TestCase
     public function testTriggerSMSOtp(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->triggerSMSOtp(
@@ -291,7 +291,7 @@ final class BrandTest extends TestCase
     public function testTriggerSMSOtpWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->triggerSMSOtp(
@@ -308,7 +308,7 @@ final class BrandTest extends TestCase
     public function testVerifySMSOtp(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->verifySMSOtp(
@@ -324,7 +324,7 @@ final class BrandTest extends TestCase
     public function testVerifySMSOtpWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->messaging10dlc->brand->verifySMSOtp(

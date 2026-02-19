@@ -32,7 +32,7 @@ final class RecordingsTest extends TestCase
     public function testRecordingSidJson(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this
@@ -56,7 +56,7 @@ final class RecordingsTest extends TestCase
     public function testRecordingSidJsonWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this

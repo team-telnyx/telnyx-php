@@ -33,7 +33,7 @@ final class ListTest extends TestCase
     public function testRetrieveAll(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->list->retrieveAll();
@@ -46,7 +46,7 @@ final class ListTest extends TestCase
     public function testRetrieveByZone(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->list->retrieveByZone('channel_zone_id');

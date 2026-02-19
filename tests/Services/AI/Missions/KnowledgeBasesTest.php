@@ -31,7 +31,7 @@ final class KnowledgeBasesTest extends TestCase
     public function testCreateKnowledgeBase(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->knowledgeBases->createKnowledgeBase(
@@ -46,7 +46,7 @@ final class KnowledgeBasesTest extends TestCase
     public function testDeleteKnowledgeBase(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->knowledgeBases->deleteKnowledgeBase(
@@ -62,7 +62,7 @@ final class KnowledgeBasesTest extends TestCase
     public function testDeleteKnowledgeBaseWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->knowledgeBases->deleteKnowledgeBase(
@@ -78,7 +78,7 @@ final class KnowledgeBasesTest extends TestCase
     public function testGetKnowledgeBase(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->knowledgeBases->getKnowledgeBase(
@@ -94,7 +94,7 @@ final class KnowledgeBasesTest extends TestCase
     public function testGetKnowledgeBaseWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->knowledgeBases->getKnowledgeBase(
@@ -110,7 +110,7 @@ final class KnowledgeBasesTest extends TestCase
     public function testListKnowledgeBases(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->knowledgeBases->listKnowledgeBases(
@@ -125,7 +125,7 @@ final class KnowledgeBasesTest extends TestCase
     public function testUpdateKnowledgeBase(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->knowledgeBases->updateKnowledgeBase(
@@ -141,7 +141,7 @@ final class KnowledgeBasesTest extends TestCase
     public function testUpdateKnowledgeBaseWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->ai->missions->knowledgeBases->updateKnowledgeBase(
