@@ -66,6 +66,8 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   superviseCallSid?: string|null,
  *   supervisingRole?: null|SupervisingRole|value-of<SupervisingRole>,
  *   texml?: string|null,
+ *   timeLimit?: int|null,
+ *   timeout?: int|null,
  *   trim?: null|Trim|value-of<Trim>,
  *   url?: string|null,
  *   urlMethod?: null|URLMethod|value-of<URLMethod>,
@@ -316,6 +318,18 @@ final class CallCallsParams implements BaseModel
     public ?string $texml;
 
     /**
+     * The maximum duration of the call in seconds. The minimum value is 30 and the maximum value is 14400 (4 hours). Default is 14400 seconds.
+     */
+    #[Optional('TimeLimit')]
+    public ?int $timeLimit;
+
+    /**
+     * The number of seconds to wait for the called party to answer the call before the call is canceled. The minimum value is 5 and the maximum value is 120. Default is 30 seconds.
+     */
+    #[Optional('Timeout')]
+    public ?int $timeout;
+
+    /**
      * Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      *
      * @var value-of<Trim>|null $trim
@@ -411,6 +425,8 @@ final class CallCallsParams implements BaseModel
         ?string $superviseCallSid = null,
         SupervisingRole|string|null $supervisingRole = null,
         ?string $texml = null,
+        ?int $timeLimit = null,
+        ?int $timeout = null,
         Trim|string|null $trim = null,
         ?string $url = null,
         URLMethod|string|null $urlMethod = null,
@@ -453,6 +469,8 @@ final class CallCallsParams implements BaseModel
         null !== $superviseCallSid && $self['superviseCallSid'] = $superviseCallSid;
         null !== $supervisingRole && $self['supervisingRole'] = $supervisingRole;
         null !== $texml && $self['texml'] = $texml;
+        null !== $timeLimit && $self['timeLimit'] = $timeLimit;
+        null !== $timeout && $self['timeout'] = $timeout;
         null !== $trim && $self['trim'] = $trim;
         null !== $url && $self['url'] = $url;
         null !== $urlMethod && $self['urlMethod'] = $urlMethod;
@@ -880,6 +898,28 @@ final class CallCallsParams implements BaseModel
     {
         $self = clone $this;
         $self['texml'] = $texml;
+
+        return $self;
+    }
+
+    /**
+     * The maximum duration of the call in seconds. The minimum value is 30 and the maximum value is 14400 (4 hours). Default is 14400 seconds.
+     */
+    public function withTimeLimit(int $timeLimit): self
+    {
+        $self = clone $this;
+        $self['timeLimit'] = $timeLimit;
+
+        return $self;
+    }
+
+    /**
+     * The number of seconds to wait for the called party to answer the call before the call is canceled. The minimum value is 5 and the maximum value is 120. Default is 30 seconds.
+     */
+    public function withTimeout(int $timeout): self
+    {
+        $self = clone $this;
+        $self['timeout'] = $timeout;
 
         return $self;
     }
