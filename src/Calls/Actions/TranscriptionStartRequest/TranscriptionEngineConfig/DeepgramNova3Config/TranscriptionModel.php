@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\DeepgramNova3Config;
+namespace Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova3Config;
 
 enum TranscriptionModel: string
 {

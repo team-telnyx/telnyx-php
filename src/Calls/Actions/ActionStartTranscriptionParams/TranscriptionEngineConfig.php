@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams;
 
-use Telnyx\Calls\Actions\DeepgramNova2Config;
-use Telnyx\Calls\Actions\DeepgramNova3Config;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
@@ -18,8 +18,8 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 /**
  * @phpstan-import-type TranscriptionEngineGoogleConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig
  * @phpstan-import-type TranscriptionEngineTelnyxConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig
- * @phpstan-import-type DeepgramNova2ConfigShape from \Telnyx\Calls\Actions\DeepgramNova2Config
- * @phpstan-import-type DeepgramNova3ConfigShape from \Telnyx\Calls\Actions\DeepgramNova3Config
+ * @phpstan-import-type DeepgramNova2ConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config
+ * @phpstan-import-type DeepgramNova3ConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config
  * @phpstan-import-type TranscriptionEngineAzureConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAzureConfig
  * @phpstan-import-type TranscriptionEngineAConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAConfig
  * @phpstan-import-type TranscriptionEngineBConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineBConfig

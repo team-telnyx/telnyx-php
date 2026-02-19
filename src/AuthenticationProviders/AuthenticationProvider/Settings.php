@@ -14,12 +14,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type SettingsShape = array{
  *   assertionConsumerServiceURL?: string|null,
+ *   idpAttributeNames?: mixed,
  *   idpCertFingerprint?: string|null,
  *   idpCertFingerprintAlgorithm?: null|IdpCertFingerprintAlgorithm|value-of<IdpCertFingerprintAlgorithm>,
+ *   idpCertificate?: string|null,
  *   idpEntityID?: string|null,
+ *   idpSloTargetURL?: string|null,
  *   idpSSOTargetURL?: string|null,
  *   nameIdentifierFormat?: string|null,
+ *   provisionGroups?: bool|null,
  *   serviceProviderEntityID?: string|null,
+ *   serviceProviderLoginURL?: string|null,
  * }
  */
 final class Settings implements BaseModel
@@ -32,6 +37,12 @@ final class Settings implements BaseModel
      */
     #[Optional('assertion_consumer_service_url')]
     public ?string $assertionConsumerServiceURL;
+
+    /**
+     * Mapping of SAML attribute names used by the identity provider (IdP).
+     */
+    #[Optional('idp_attribute_names')]
+    public mixed $idpAttributeNames;
 
     /**
      * The certificate fingerprint for the identity provider (IdP).
@@ -51,10 +62,22 @@ final class Settings implements BaseModel
     public ?string $idpCertFingerprintAlgorithm;
 
     /**
+     * The full X.509 certificate for the identity provider (IdP).
+     */
+    #[Optional('idp_certificate')]
+    public ?string $idpCertificate;
+
+    /**
      * The Entity ID for the identity provider (IdP).
      */
     #[Optional('idp_entity_id')]
     public ?string $idpEntityID;
+
+    /**
+     * The Single Logout (SLO) target URL for the identity provider (IdP).
+     */
+    #[Optional('idp_slo_target_url')]
+    public ?string $idpSloTargetURL;
 
     /**
      * The SSO target url for the identity provider (IdP).
@@ -69,10 +92,22 @@ final class Settings implements BaseModel
     public ?string $nameIdentifierFormat;
 
     /**
+     * Whether group provisioning is enabled for this authentication provider.
+     */
+    #[Optional('provision_groups')]
+    public ?bool $provisionGroups;
+
+    /**
      * The Entity ID for the service provider (Telnyx).
      */
     #[Optional('service_provider_entity_id')]
     public ?string $serviceProviderEntityID;
+
+    /**
+     * The login URL for the service provider (Telnyx). Users navigate to this URL to initiate SSO login.
+     */
+    #[Optional('service_provider_login_url')]
+    public ?string $serviceProviderLoginURL;
 
     public function __construct()
     {
@@ -88,22 +123,32 @@ final class Settings implements BaseModel
      */
     public static function with(
         ?string $assertionConsumerServiceURL = null,
+        mixed $idpAttributeNames = null,
         ?string $idpCertFingerprint = null,
         IdpCertFingerprintAlgorithm|string|null $idpCertFingerprintAlgorithm = null,
+        ?string $idpCertificate = null,
         ?string $idpEntityID = null,
+        ?string $idpSloTargetURL = null,
         ?string $idpSSOTargetURL = null,
         ?string $nameIdentifierFormat = null,
+        ?bool $provisionGroups = null,
         ?string $serviceProviderEntityID = null,
+        ?string $serviceProviderLoginURL = null,
     ): self {
         $self = new self;
 
         null !== $assertionConsumerServiceURL && $self['assertionConsumerServiceURL'] = $assertionConsumerServiceURL;
+        null !== $idpAttributeNames && $self['idpAttributeNames'] = $idpAttributeNames;
         null !== $idpCertFingerprint && $self['idpCertFingerprint'] = $idpCertFingerprint;
         null !== $idpCertFingerprintAlgorithm && $self['idpCertFingerprintAlgorithm'] = $idpCertFingerprintAlgorithm;
+        null !== $idpCertificate && $self['idpCertificate'] = $idpCertificate;
         null !== $idpEntityID && $self['idpEntityID'] = $idpEntityID;
+        null !== $idpSloTargetURL && $self['idpSloTargetURL'] = $idpSloTargetURL;
         null !== $idpSSOTargetURL && $self['idpSSOTargetURL'] = $idpSSOTargetURL;
         null !== $nameIdentifierFormat && $self['nameIdentifierFormat'] = $nameIdentifierFormat;
+        null !== $provisionGroups && $self['provisionGroups'] = $provisionGroups;
         null !== $serviceProviderEntityID && $self['serviceProviderEntityID'] = $serviceProviderEntityID;
+        null !== $serviceProviderLoginURL && $self['serviceProviderLoginURL'] = $serviceProviderLoginURL;
 
         return $self;
     }
@@ -116,6 +161,17 @@ final class Settings implements BaseModel
     ): self {
         $self = clone $this;
         $self['assertionConsumerServiceURL'] = $assertionConsumerServiceURL;
+
+        return $self;
+    }
+
+    /**
+     * Mapping of SAML attribute names used by the identity provider (IdP).
+     */
+    public function withIdpAttributeNames(mixed $idpAttributeNames): self
+    {
+        $self = clone $this;
+        $self['idpAttributeNames'] = $idpAttributeNames;
 
         return $self;
     }
@@ -146,12 +202,34 @@ final class Settings implements BaseModel
     }
 
     /**
+     * The full X.509 certificate for the identity provider (IdP).
+     */
+    public function withIdpCertificate(string $idpCertificate): self
+    {
+        $self = clone $this;
+        $self['idpCertificate'] = $idpCertificate;
+
+        return $self;
+    }
+
+    /**
      * The Entity ID for the identity provider (IdP).
      */
     public function withIdpEntityID(string $idpEntityID): self
     {
         $self = clone $this;
         $self['idpEntityID'] = $idpEntityID;
+
+        return $self;
+    }
+
+    /**
+     * The Single Logout (SLO) target URL for the identity provider (IdP).
+     */
+    public function withIdpSloTargetURL(string $idpSloTargetURL): self
+    {
+        $self = clone $this;
+        $self['idpSloTargetURL'] = $idpSloTargetURL;
 
         return $self;
     }
@@ -179,6 +257,17 @@ final class Settings implements BaseModel
     }
 
     /**
+     * Whether group provisioning is enabled for this authentication provider.
+     */
+    public function withProvisionGroups(bool $provisionGroups): self
+    {
+        $self = clone $this;
+        $self['provisionGroups'] = $provisionGroups;
+
+        return $self;
+    }
+
+    /**
      * The Entity ID for the service provider (Telnyx).
      */
     public function withServiceProviderEntityID(
@@ -186,6 +275,18 @@ final class Settings implements BaseModel
     ): self {
         $self = clone $this;
         $self['serviceProviderEntityID'] = $serviceProviderEntityID;
+
+        return $self;
+    }
+
+    /**
+     * The login URL for the service provider (Telnyx). Users navigate to this URL to initiate SSO login.
+     */
+    public function withServiceProviderLoginURL(
+        string $serviceProviderLoginURL
+    ): self {
+        $self = clone $this;
+        $self['serviceProviderLoginURL'] = $serviceProviderLoginURL;
 
         return $self;
     }
