@@ -6,6 +6,8 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova2Config;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\DeepgramNova3Config;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;

@@ -7,7 +7,6 @@ namespace Telnyx\Texml\Accounts\Conferences;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
 
 /**
@@ -19,7 +18,7 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse\Recording;
  *   nextPageUri?: string|null,
  *   page?: int|null,
  *   pageSize?: int|null,
- *   participants?: list<array<string,mixed>>|null,
+ *   participants?: list<mixed>|null,
  *   recordings?: list<Recording|RecordingShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
@@ -63,9 +62,9 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     /**
      * List of participant resources.
      *
-     * @var list<array<string,mixed>>|null $participants
+     * @var list<mixed>|null $participants
      */
-    #[Optional(list: new MapOf('mixed'))]
+    #[Optional(list: 'mixed')]
     public ?array $participants;
 
     /** @var list<Recording>|null $recordings */
@@ -94,7 +93,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<array<string,mixed>>|null $participants
+     * @param list<mixed>|null $participants
      * @param list<Recording|RecordingShape>|null $recordings
      */
     public static function with(
@@ -181,7 +180,7 @@ final class ConferenceGetRecordingsResponse implements BaseModel
     /**
      * List of participant resources.
      *
-     * @param list<array<string,mixed>> $participants
+     * @param list<mixed> $participants
      */
     public function withParticipants(array $participants): self
     {

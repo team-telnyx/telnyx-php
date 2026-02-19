@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\DeepgramNova3Config;
+namespace Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\DeepgramNova3Config;
 
 /**
  * Language to use for speech recognition with nova-3 model.

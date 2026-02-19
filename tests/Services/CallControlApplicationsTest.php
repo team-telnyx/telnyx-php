@@ -72,7 +72,8 @@ final class CallControlApplicationsTest extends TestCase
                 'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
             outbound: [
-                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
+                'channelLimit' => 10,
+                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
             ],
             redactDtmfDebugLogging: true,
             webhookAPIVersion: '1',
@@ -141,7 +142,8 @@ final class CallControlApplicationsTest extends TestCase
                 'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
             outbound: [
-                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
+                'channelLimit' => 10,
+                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
             ],
             redactDtmfDebugLogging: true,
             tags: ['tag1', 'tag2'],
