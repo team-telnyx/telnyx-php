@@ -7,8 +7,8 @@ namespace Telnyx\ServiceContracts\Conferences;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
-use Telnyx\Conferences\Actions\ActionEndConferenceResponse;
-use Telnyx\Conferences\Actions\ActionGatherDtmfAudioResponse;
+use Telnyx\Conferences\Actions\ActionEndResponse;
+use Telnyx\Conferences\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Conferences\Actions\ActionHoldResponse;
 use Telnyx\Conferences\Actions\ActionJoinParams\BeepEnabled;
 use Telnyx\Conferences\Actions\ActionJoinResponse;
@@ -74,11 +74,11 @@ interface ActionsContract
      *
      * @throws APIException
      */
-    public function endConference(
+    public function end(
         string $id,
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ActionEndConferenceResponse;
+    ): ActionEndResponse;
 
     /**
      * @api
@@ -104,7 +104,7 @@ interface ActionsContract
      *
      * @throws APIException
      */
-    public function gatherDtmfAudio(
+    public function gatherUsingAudio(
         string $id,
         string $callControlID,
         ?string $audioURL = null,
@@ -123,7 +123,7 @@ interface ActionsContract
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
         RequestOptions|array|null $requestOptions = null,
-    ): ActionGatherDtmfAudioResponse;
+    ): ActionGatherUsingAudioResponse;
 
     /**
      * @api

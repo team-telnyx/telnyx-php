@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type ConferenceCommandResultShape from \Telnyx\Conferences\Actions\ConferenceCommandResult
  *
- * @phpstan-type ActionGatherDtmfAudioResponseShape = array{
+ * @phpstan-type ActionEndResponseShape = array{
  *   data?: null|ConferenceCommandResult|ConferenceCommandResultShape
  * }
  */
-final class ActionGatherDtmfAudioResponse implements BaseModel
+final class ActionEndResponse implements BaseModel
 {
-    /** @use SdkModel<ActionGatherDtmfAudioResponseShape> */
+    /** @use SdkModel<ActionEndResponseShape> */
     use SdkModel;
 
     #[Optional]

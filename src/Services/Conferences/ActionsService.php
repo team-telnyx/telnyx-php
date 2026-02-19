@@ -8,8 +8,8 @@ use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Client;
-use Telnyx\Conferences\Actions\ActionEndConferenceResponse;
-use Telnyx\Conferences\Actions\ActionGatherDtmfAudioResponse;
+use Telnyx\Conferences\Actions\ActionEndResponse;
+use Telnyx\Conferences\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Conferences\Actions\ActionHoldResponse;
 use Telnyx\Conferences\Actions\ActionJoinParams\BeepEnabled;
 use Telnyx\Conferences\Actions\ActionJoinResponse;
@@ -109,15 +109,15 @@ final class ActionsService implements ActionsContract
      *
      * @throws APIException
      */
-    public function endConference(
+    public function end(
         string $id,
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ActionEndConferenceResponse {
+    ): ActionEndResponse {
         $params = Util::removeNulls(['commandID' => $commandID]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->endConference($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->end($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -148,7 +148,7 @@ final class ActionsService implements ActionsContract
      *
      * @throws APIException
      */
-    public function gatherDtmfAudio(
+    public function gatherUsingAudio(
         string $id,
         string $callControlID,
         ?string $audioURL = null,
@@ -167,7 +167,7 @@ final class ActionsService implements ActionsContract
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
         RequestOptions|array|null $requestOptions = null,
-    ): ActionGatherDtmfAudioResponse {
+    ): ActionGatherUsingAudioResponse {
         $params = Util::removeNulls(
             [
                 'callControlID' => $callControlID,
@@ -190,7 +190,7 @@ final class ActionsService implements ActionsContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->gatherDtmfAudio($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->gatherUsingAudio($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
