@@ -39,6 +39,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   assistant?: null|Assistant|AssistantShape,
  *   clientState?: string|null,
  *   commandID?: string|null,
+ *   gatherEndedSpeech?: string|null,
  *   greeting?: string|null,
  *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   language?: null|GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage>,
@@ -82,6 +83,12 @@ final class ActionGatherUsingAIParams implements BaseModel
      */
     #[Optional('command_id')]
     public ?string $commandID;
+
+    /**
+     * Text that will be played when the gathering has finished. There is a 3,000 character limit.
+     */
+    #[Optional('gather_ended_speech')]
+    public ?string $gatherEndedSpeech;
 
     /**
      * Text that will be played when the gathering starts, if none then nothing will be played when the gathering starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
@@ -130,7 +137,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     public ?TranscriptionConfig $transcription;
 
     /**
-     * The number of milliseconds to wait for a user response before the voice assistant times out and check if the user is still there.
+     * The maximum time in milliseconds to wait for user response before timing out.
      */
     #[Optional('user_response_timeout_ms')]
     public ?int $userResponseTimeoutMs;
@@ -192,6 +199,7 @@ final class ActionGatherUsingAIParams implements BaseModel
         Assistant|array|null $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,
+        ?string $gatherEndedSpeech = null,
         ?string $greeting = null,
         InterruptionSettings|array|null $interruptionSettings = null,
         GoogleTranscriptionLanguage|string|null $language = null,
@@ -210,6 +218,7 @@ final class ActionGatherUsingAIParams implements BaseModel
         null !== $assistant && $self['assistant'] = $assistant;
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $commandID && $self['commandID'] = $commandID;
+        null !== $gatherEndedSpeech && $self['gatherEndedSpeech'] = $gatherEndedSpeech;
         null !== $greeting && $self['greeting'] = $greeting;
         null !== $interruptionSettings && $self['interruptionSettings'] = $interruptionSettings;
         null !== $language && $self['language'] = $language;
@@ -268,6 +277,17 @@ final class ActionGatherUsingAIParams implements BaseModel
     {
         $self = clone $this;
         $self['commandID'] = $commandID;
+
+        return $self;
+    }
+
+    /**
+     * Text that will be played when the gathering has finished. There is a 3,000 character limit.
+     */
+    public function withGatherEndedSpeech(string $gatherEndedSpeech): self
+    {
+        $self = clone $this;
+        $self['gatherEndedSpeech'] = $gatherEndedSpeech;
 
         return $self;
     }
@@ -362,7 +382,7 @@ final class ActionGatherUsingAIParams implements BaseModel
     }
 
     /**
-     * The number of milliseconds to wait for a user response before the voice assistant times out and check if the user is still there.
+     * The maximum time in milliseconds to wait for user response before timing out.
      */
     public function withUserResponseTimeoutMs(int $userResponseTimeoutMs): self
     {

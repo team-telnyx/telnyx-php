@@ -110,6 +110,7 @@ final class CallsRawService implements CallsRawContract
      *   sipRegion?: SipRegion|value-of<SipRegion>,
      *   sipTransportProtocol?: SipTransportProtocol|value-of<SipTransportProtocol>,
      *   soundModifications?: SoundModifications|SoundModificationsShape,
+     *   streamAuthToken?: string,
      *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
      *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
      *   streamBidirectionalSamplingRate?: StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,

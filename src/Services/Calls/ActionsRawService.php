@@ -53,6 +53,7 @@ use Telnyx\Calls\Actions\ActionSendDtmfResponse;
 use Telnyx\Calls\Actions\ActionSendSipInfoParams;
 use Telnyx\Calls\Actions\ActionSendSipInfoResponse;
 use Telnyx\Calls\Actions\ActionSpeakParams;
+use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
@@ -80,6 +81,7 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams;
+use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
@@ -110,6 +112,8 @@ use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
 use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
+use Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy;
+use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLsMethod;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateParams;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
@@ -143,16 +147,18 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
- * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
+ * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  * @phpstan-import-type TranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
  */
 final class ActionsRawService implements ActionsRawContract
 {
@@ -432,6 +438,7 @@ final class ActionsRawService implements ActionsRawContract
      *   assistant?: Assistant|AssistantShape,
      *   clientState?: string,
      *   commandID?: string,
+     *   gatherEndedSpeech?: string,
      *   greeting?: string,
      *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
      *   language?: value-of<GoogleTranscriptionLanguage>,
@@ -916,9 +923,11 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   language?: value-of<ActionSpeakParams\Language>,
+     *   loop?: LoopcountShape,
      *   payloadType?: ActionSpeakParams\PayloadType|value-of<ActionSpeakParams\PayloadType>,
      *   serviceLevel?: ActionSpeakParams\ServiceLevel|value-of<ActionSpeakParams\ServiceLevel>,
      *   stop?: string,
+     *   targetLegs?: TargetLegs|value-of<TargetLegs>,
      *   voiceSettings?: VoiceSettingsShape2,
      * }|ActionSpeakParams $params
      * @param RequestOpts|null $requestOptions
@@ -1251,8 +1260,10 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string,
      *   commandID?: string,
+     *   customParameters?: list<CustomParameter|CustomParameterShape>,
      *   dialogflowConfig?: DialogflowConfig|DialogflowConfigShape,
      *   enableDialogflow?: bool,
+     *   streamAuthToken?: string,
      *   streamBidirectionalCodec?: StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
      *   streamBidirectionalMode?: StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
      *   streamBidirectionalSamplingRate?: StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
@@ -1735,6 +1746,7 @@ final class ActionsRawService implements ActionsRawContract
      *   mediaName?: string,
      *   muteDtmf?: ActionTransferParams\MuteDtmf|value-of<ActionTransferParams\MuteDtmf>,
      *   parkAfterUnbridge?: string,
+     *   preferredCodecs?: string,
      *   record?: ActionTransferParams\Record|value-of<ActionTransferParams\Record>,
      *   recordChannels?: ActionTransferParams\RecordChannels|value-of<ActionTransferParams\RecordChannels>,
      *   recordCustomFileName?: string,
@@ -1752,8 +1764,11 @@ final class ActionsRawService implements ActionsRawContract
      *   targetLegClientState?: string,
      *   timeLimitSecs?: int,
      *   timeoutSecs?: int,
+     *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>,
      *   webhookURL?: string,
      *   webhookURLMethod?: ActionTransferParams\WebhookURLMethod|value-of<ActionTransferParams\WebhookURLMethod>,
+     *   webhookURLs?: array<string,string>,
+     *   webhookURLsMethod?: WebhookURLsMethod|value-of<WebhookURLsMethod>,
      * }|ActionTransferParams $params
      * @param RequestOpts|null $requestOptions
      *

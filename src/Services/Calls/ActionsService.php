@@ -36,6 +36,7 @@ use Telnyx\Calls\Actions\ActionRejectResponse;
 use Telnyx\Calls\Actions\ActionResumeRecordingResponse;
 use Telnyx\Calls\Actions\ActionSendDtmfResponse;
 use Telnyx\Calls\Actions\ActionSendSipInfoResponse;
+use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
@@ -56,6 +57,7 @@ use Telnyx\Calls\Actions\ActionStartRecordingResponse;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SiprecTrack;
 use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
+use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
@@ -74,6 +76,8 @@ use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
 use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
+use Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy;
+use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLsMethod;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
@@ -117,16 +121,18 @@ use Telnyx\ServiceContracts\Calls\ActionsContract;
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
- * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
+ * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  * @phpstan-import-type TranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
  */
 final class ActionsService implements ActionsContract
 {
@@ -495,6 +501,7 @@ final class ActionsService implements ActionsContract
      * @param Assistant|AssistantShape $assistant assistant configuration including choice of LLM, custom instructions, and tools
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param string $gatherEndedSpeech Text that will be played when the gathering has finished. There is a 3,000 character limit.
      * @param string $greeting Text that will be played when the gathering starts, if none then nothing will be played when the gathering starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
      * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings Settings for handling user interruptions during assistant speech
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language Language to use for speech recognition
@@ -502,7 +509,7 @@ final class ActionsService implements ActionsContract
      * @param bool $sendMessageHistoryUpdates Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` callback in real time as the message history is updated.
      * @param bool $sendPartialResults Default is `false`. If set to `true`, the voice assistant will send partial results via the `call.ai_gather.partial_results` callback in real time as individual fields are gathered. If set to `false`, the voice assistant will only send the final result via the `call.ai_gather.ended` callback.
      * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
-     * @param int $userResponseTimeoutMs the number of milliseconds to wait for a user response before the voice assistant times out and check if the user is still there
+     * @param int $userResponseTimeoutMs the maximum time in milliseconds to wait for user response before timing out
      * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
      *
      *  **Supported Providers:**
@@ -521,6 +528,7 @@ final class ActionsService implements ActionsContract
         Assistant|array|null $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,
+        ?string $gatherEndedSpeech = null,
         ?string $greeting = null,
         InterruptionSettings|array|null $interruptionSettings = null,
         GoogleTranscriptionLanguage|string $language = 'en',
@@ -539,6 +547,7 @@ final class ActionsService implements ActionsContract
                 'assistant' => $assistant,
                 'clientState' => $clientState,
                 'commandID' => $commandID,
+                'gatherEndedSpeech' => $gatherEndedSpeech,
                 'greeting' => $greeting,
                 'interruptionSettings' => $interruptionSettings,
                 'language' => $language,
@@ -1056,9 +1065,11 @@ final class ActionsService implements ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param \Telnyx\Calls\Actions\ActionSpeakParams\Language|value-of<\Telnyx\Calls\Actions\ActionSpeakParams\Language> $language The language you want spoken. This parameter is ignored when a `Polly.*` voice is specified.
+     * @param LoopcountShape $loop The number of times to play the audio file. Use `infinity` to loop indefinitely. Defaults to 1.
      * @param \Telnyx\Calls\Actions\ActionSpeakParams\PayloadType|value-of<\Telnyx\Calls\Actions\ActionSpeakParams\PayloadType> $payloadType The type of the provided payload. The payload can either be plain text, or Speech Synthesis Markup Language (SSML).
      * @param \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|value-of<\Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel> $serviceLevel This parameter impacts speech quality, language options and payload types. When using `basic`, only the `en-US` language and payload type `text` are allowed.
      * @param string $stop When specified, it stops the current audio being played. Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
+     * @param TargetLegs|value-of<TargetLegs> $targetLegs specifies which legs of the call should receive the spoken audio
      * @param VoiceSettingsShape2 $voiceSettings The settings associated with the voice selected
      * @param RequestOpts|null $requestOptions
      *
@@ -1071,9 +1082,11 @@ final class ActionsService implements ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         \Telnyx\Calls\Actions\ActionSpeakParams\Language|string|null $language = null,
+        string|int|null $loop = null,
         \Telnyx\Calls\Actions\ActionSpeakParams\PayloadType|string $payloadType = 'text',
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
+        TargetLegs|string $targetLegs = 'self',
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse {
@@ -1084,9 +1097,11 @@ final class ActionsService implements ActionsContract
                 'clientState' => $clientState,
                 'commandID' => $commandID,
                 'language' => $language,
+                'loop' => $loop,
                 'payloadType' => $payloadType,
                 'serviceLevel' => $serviceLevel,
                 'stop' => $stop,
+                'targetLegs' => $targetLegs,
                 'voiceSettings' => $voiceSettings,
             ],
         );
@@ -1462,8 +1477,10 @@ final class ActionsService implements ActionsContract
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param list<CustomParameter|CustomParameterShape> $customParameters custom parameters to be sent as part of the WebSocket connection
      * @param DialogflowConfig|DialogflowConfigShape $dialogflowConfig
      * @param bool $enableDialogflow Enables Dialogflow for the current call. The default value is false.
+     * @param string $streamAuthToken An authentication token to be sent as part of the WebSocket connection. Maximum length is 4000 characters.
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
      * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate audio sampling rate
@@ -1479,8 +1496,10 @@ final class ActionsService implements ActionsContract
         string $callControlID,
         ?string $clientState = null,
         ?string $commandID = null,
+        ?array $customParameters = null,
         DialogflowConfig|array|null $dialogflowConfig = null,
         bool $enableDialogflow = false,
+        ?string $streamAuthToken = null,
         StreamBidirectionalCodec|string $streamBidirectionalCodec = 'PCMU',
         StreamBidirectionalMode|string $streamBidirectionalMode = 'mp3',
         StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate = 8000,
@@ -1494,8 +1513,10 @@ final class ActionsService implements ActionsContract
             [
                 'clientState' => $clientState,
                 'commandID' => $commandID,
+                'customParameters' => $customParameters,
                 'dialogflowConfig' => $dialogflowConfig,
                 'enableDialogflow' => $enableDialogflow,
+                'streamAuthToken' => $streamAuthToken,
                 'streamBidirectionalCodec' => $streamBidirectionalCodec,
                 'streamBidirectionalMode' => $streamBidirectionalMode,
                 'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
@@ -1913,6 +1934,7 @@ final class ActionsService implements ActionsContract
      * @param string $mediaName The media_name of a file to be played back when the transfer destination answers before bridging the call. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      * @param \Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf|value-of<\Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
      * @param string $parkAfterUnbridge Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
+     * @param string $preferredCodecs The list of comma-separated codecs in order of preference to be used during the call. The codecs supported are `G722`, `PCMU`, `PCMA`, `G729`, `OPUS`, `VP8`, `H264`, `AMR-WB`.
      * @param \Telnyx\Calls\Actions\ActionTransferParams\Record|value-of<\Telnyx\Calls\Actions\ActionTransferParams\Record> $record Start recording automatically after an event. Disabled by default.
      * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordChannels|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
@@ -1930,8 +1952,11 @@ final class ActionsService implements ActionsContract
      * @param string $targetLegClientState Use this field to add state to every subsequent webhook for the new leg. It must be a valid Base-64 encoded string.
      * @param int $timeLimitSecs Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being transferred. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 600 seconds.
+     * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape> $webhookRetriesPolicies A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param \Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod|value-of<\Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
+     * @param array<string,string> $webhookURLs A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
+     * @param WebhookURLsMethod|value-of<WebhookURLsMethod> $webhookURLsMethod HTTP request method to invoke `webhook_urls`
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -1952,6 +1977,7 @@ final class ActionsService implements ActionsContract
         ?string $mediaName = null,
         \Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf|string $muteDtmf = 'none',
         ?string $parkAfterUnbridge = null,
+        ?string $preferredCodecs = null,
         \Telnyx\Calls\Actions\ActionTransferParams\Record|string|null $record = null,
         \Telnyx\Calls\Actions\ActionTransferParams\RecordChannels|string $recordChannels = 'dual',
         ?string $recordCustomFileName = null,
@@ -1969,8 +1995,11 @@ final class ActionsService implements ActionsContract
         ?string $targetLegClientState = null,
         int $timeLimitSecs = 14400,
         int $timeoutSecs = 30,
+        ?array $webhookRetriesPolicies = null,
         ?string $webhookURL = null,
         \Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod|string $webhookURLMethod = 'POST',
+        ?array $webhookURLs = null,
+        WebhookURLsMethod|string $webhookURLsMethod = 'POST',
         RequestOptions|array|null $requestOptions = null,
     ): ActionTransferResponse {
         $params = Util::removeNulls(
@@ -1989,6 +2018,7 @@ final class ActionsService implements ActionsContract
                 'mediaName' => $mediaName,
                 'muteDtmf' => $muteDtmf,
                 'parkAfterUnbridge' => $parkAfterUnbridge,
+                'preferredCodecs' => $preferredCodecs,
                 'record' => $record,
                 'recordChannels' => $recordChannels,
                 'recordCustomFileName' => $recordCustomFileName,
@@ -2006,8 +2036,11 @@ final class ActionsService implements ActionsContract
                 'targetLegClientState' => $targetLegClientState,
                 'timeLimitSecs' => $timeLimitSecs,
                 'timeoutSecs' => $timeoutSecs,
+                'webhookRetriesPolicies' => $webhookRetriesPolicies,
                 'webhookURL' => $webhookURL,
                 'webhookURLMethod' => $webhookURLMethod,
+                'webhookURLs' => $webhookURLs,
+                'webhookURLsMethod' => $webhookURLsMethod,
             ],
         );
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\StreamTrack;
 use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\StreamBidirectionalCodec;
@@ -23,13 +24,16 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::startStreaming()
  *
+ * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  *
  * @phpstan-type ActionStartStreamingParamsShape = array{
  *   clientState?: string|null,
  *   commandID?: string|null,
+ *   customParameters?: list<CustomParameter|CustomParameterShape>|null,
  *   dialogflowConfig?: null|DialogflowConfig|DialogflowConfigShape,
  *   enableDialogflow?: bool|null,
+ *   streamAuthToken?: string|null,
  *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
  *   streamBidirectionalSamplingRate?: null|StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
@@ -57,6 +61,14 @@ final class ActionStartStreamingParams implements BaseModel
     #[Optional('command_id')]
     public ?string $commandID;
 
+    /**
+     * Custom parameters to be sent as part of the WebSocket connection.
+     *
+     * @var list<CustomParameter>|null $customParameters
+     */
+    #[Optional('custom_parameters', list: CustomParameter::class)]
+    public ?array $customParameters;
+
     #[Optional('dialogflow_config')]
     public ?DialogflowConfig $dialogflowConfig;
 
@@ -65,6 +77,12 @@ final class ActionStartStreamingParams implements BaseModel
      */
     #[Optional('enable_dialogflow')]
     public ?bool $enableDialogflow;
+
+    /**
+     * An authentication token to be sent as part of the WebSocket connection. Maximum length is 4000 characters.
+     */
+    #[Optional('stream_auth_token')]
+    public ?string $streamAuthToken;
 
     /**
      * Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
@@ -139,6 +157,7 @@ final class ActionStartStreamingParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param list<CustomParameter|CustomParameterShape>|null $customParameters
      * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode>|null $streamBidirectionalMode
@@ -150,8 +169,10 @@ final class ActionStartStreamingParams implements BaseModel
     public static function with(
         ?string $clientState = null,
         ?string $commandID = null,
+        ?array $customParameters = null,
         DialogflowConfig|array|null $dialogflowConfig = null,
         ?bool $enableDialogflow = null,
+        ?string $streamAuthToken = null,
         StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
         StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
         StreamBidirectionalSamplingRate|int|null $streamBidirectionalSamplingRate = null,
@@ -164,8 +185,10 @@ final class ActionStartStreamingParams implements BaseModel
 
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $commandID && $self['commandID'] = $commandID;
+        null !== $customParameters && $self['customParameters'] = $customParameters;
         null !== $dialogflowConfig && $self['dialogflowConfig'] = $dialogflowConfig;
         null !== $enableDialogflow && $self['enableDialogflow'] = $enableDialogflow;
+        null !== $streamAuthToken && $self['streamAuthToken'] = $streamAuthToken;
         null !== $streamBidirectionalCodec && $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
         null !== $streamBidirectionalMode && $self['streamBidirectionalMode'] = $streamBidirectionalMode;
         null !== $streamBidirectionalSamplingRate && $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
@@ -200,6 +223,19 @@ final class ActionStartStreamingParams implements BaseModel
     }
 
     /**
+     * Custom parameters to be sent as part of the WebSocket connection.
+     *
+     * @param list<CustomParameter|CustomParameterShape> $customParameters
+     */
+    public function withCustomParameters(array $customParameters): self
+    {
+        $self = clone $this;
+        $self['customParameters'] = $customParameters;
+
+        return $self;
+    }
+
+    /**
      * @param DialogflowConfig|DialogflowConfigShape $dialogflowConfig
      */
     public function withDialogflowConfig(
@@ -218,6 +254,17 @@ final class ActionStartStreamingParams implements BaseModel
     {
         $self = clone $this;
         $self['enableDialogflow'] = $enableDialogflow;
+
+        return $self;
+    }
+
+    /**
+     * An authentication token to be sent as part of the WebSocket connection. Maximum length is 4000 characters.
+     */
+    public function withStreamAuthToken(string $streamAuthToken): self
+    {
+        $self = clone $this;
+        $self['streamAuthToken'] = $streamAuthToken;
 
         return $self;
     }

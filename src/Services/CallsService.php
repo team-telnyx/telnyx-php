@@ -122,6 +122,7 @@ final class CallsService implements CallsContract
      * @param SipRegion|value-of<SipRegion> $sipRegion defines the SIP region to be used for the call
      * @param SipTransportProtocol|value-of<SipTransportProtocol> $sipTransportProtocol defines SIP transport protocol to be used on the call
      * @param SoundModifications|SoundModificationsShape $soundModifications use this field to modify sound effects, for example adjust the pitch
+     * @param string $streamAuthToken An authentication token to be sent as part of the WebSocket connection when using streaming. Maximum length is 4000 characters.
      * @param StreamBidirectionalCodec|value-of<StreamBidirectionalCodec> $streamBidirectionalCodec Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      * @param StreamBidirectionalMode|value-of<StreamBidirectionalMode> $streamBidirectionalMode configures method of bidirectional streaming (mp3, rtp)
      * @param StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate> $streamBidirectionalSamplingRate audio sampling rate
@@ -179,6 +180,7 @@ final class CallsService implements CallsContract
         SipRegion|string $sipRegion = 'US',
         SipTransportProtocol|string $sipTransportProtocol = 'UDP',
         SoundModifications|array|null $soundModifications = null,
+        ?string $streamAuthToken = null,
         StreamBidirectionalCodec|string $streamBidirectionalCodec = 'PCMU',
         StreamBidirectionalMode|string $streamBidirectionalMode = 'mp3',
         StreamBidirectionalSamplingRate|int $streamBidirectionalSamplingRate = 8000,
@@ -235,6 +237,7 @@ final class CallsService implements CallsContract
                 'sipRegion' => $sipRegion,
                 'sipTransportProtocol' => $sipTransportProtocol,
                 'soundModifications' => $soundModifications,
+                'streamAuthToken' => $streamAuthToken,
                 'streamBidirectionalCodec' => $streamBidirectionalCodec,
                 'streamBidirectionalMode' => $streamBidirectionalMode,
                 'streamBidirectionalSamplingRate' => $streamBidirectionalSamplingRate,
