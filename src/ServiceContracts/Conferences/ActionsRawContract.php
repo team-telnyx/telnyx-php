@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Conferences;
 
-use Telnyx\Conferences\Actions\ActionEndConferenceParams;
-use Telnyx\Conferences\Actions\ActionEndConferenceResponse;
-use Telnyx\Conferences\Actions\ActionGatherDtmfAudioParams;
-use Telnyx\Conferences\Actions\ActionGatherDtmfAudioResponse;
+use Telnyx\Conferences\Actions\ActionEndParams;
+use Telnyx\Conferences\Actions\ActionEndResponse;
+use Telnyx\Conferences\Actions\ActionGatherUsingAudioParams;
+use Telnyx\Conferences\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Conferences\Actions\ActionHoldParams;
 use Telnyx\Conferences\Actions\ActionHoldResponse;
 use Telnyx\Conferences\Actions\ActionJoinParams;
@@ -68,16 +68,16 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id uniquely identifies the conference
-     * @param array<string,mixed>|ActionEndConferenceParams $params
+     * @param array<string,mixed>|ActionEndParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ActionEndConferenceResponse>
+     * @return BaseResponse<ActionEndResponse>
      *
      * @throws APIException
      */
-    public function endConference(
+    public function end(
         string $id,
-        array|ActionEndConferenceParams $params,
+        array|ActionEndParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
@@ -85,16 +85,16 @@ interface ActionsRawContract
      * @api
      *
      * @param string $id uniquely identifies the conference
-     * @param array<string,mixed>|ActionGatherDtmfAudioParams $params
+     * @param array<string,mixed>|ActionGatherUsingAudioParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ActionGatherDtmfAudioResponse>
+     * @return BaseResponse<ActionGatherUsingAudioResponse>
      *
      * @throws APIException
      */
-    public function gatherDtmfAudio(
+    public function gatherUsingAudio(
         string $id,
-        array|ActionGatherDtmfAudioParams $params,
+        array|ActionGatherUsingAudioParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 

@@ -12,13 +12,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * End a conference and terminate all active participants.
  *
- * @see Telnyx\Services\Conferences\ActionsService::endConference()
+ * @see Telnyx\Services\Conferences\ActionsService::end()
  *
- * @phpstan-type ActionEndConferenceParamsShape = array{commandID?: string|null}
+ * @phpstan-type ActionEndParamsShape = array{commandID?: string|null}
  */
-final class ActionEndConferenceParams implements BaseModel
+final class ActionEndParams implements BaseModel
 {
-    /** @use SdkModel<ActionEndConferenceParamsShape> */
+    /** @use SdkModel<ActionEndParamsShape> */
     use SdkModel;
     use SdkParams;
 

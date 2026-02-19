@@ -16,8 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DeepgramNova2ConfigShape = array{
  *   transcriptionEngine: TranscriptionEngine|value-of<TranscriptionEngine>,
  *   transcriptionModel: TranscriptionModel|value-of<TranscriptionModel>,
+ *   interimResults?: bool|null,
  *   keywordsBoosting?: array<string,float>|null,
  *   language?: null|Language|value-of<Language>,
+ *   utteranceEndMs?: int|null,
  * }
  */
 final class DeepgramNova2Config implements BaseModel
@@ -34,6 +36,12 @@ final class DeepgramNova2Config implements BaseModel
     public string $transcriptionModel;
 
     /**
+     * Whether to send also interim results. If set to false, only final results will be sent.
+     */
+    #[Optional('interim_results')]
+    public ?bool $interimResults;
+
+    /**
      * Keywords and their respective intensifiers (boosting values) to improve transcription accuracy for specific words or phrases. The intensifier should be a numeric value. Example: `{"snuffleupagus": 5, "systrom": 2, "krieger": 1}`.
      *
      * @var array<string,float>|null $keywordsBoosting
@@ -48,6 +56,12 @@ final class DeepgramNova2Config implements BaseModel
      */
     #[Optional(enum: Language::class)]
     public ?string $language;
+
+    /**
+     * Number of milliseconds of silence to consider an utterance ended. Ranges from 0 to 5000 ms.
+     */
+    #[Optional('utterance_end_ms')]
+    public ?int $utteranceEndMs;
 
     /**
      * `new DeepgramNova2Config()` is missing required properties by the API.
@@ -83,16 +97,20 @@ final class DeepgramNova2Config implements BaseModel
     public static function with(
         TranscriptionEngine|string $transcriptionEngine,
         TranscriptionModel|string $transcriptionModel,
+        ?bool $interimResults = null,
         ?array $keywordsBoosting = null,
         Language|string|null $language = null,
+        ?int $utteranceEndMs = null,
     ): self {
         $self = new self;
 
         $self['transcriptionEngine'] = $transcriptionEngine;
         $self['transcriptionModel'] = $transcriptionModel;
 
+        null !== $interimResults && $self['interimResults'] = $interimResults;
         null !== $keywordsBoosting && $self['keywordsBoosting'] = $keywordsBoosting;
         null !== $language && $self['language'] = $language;
+        null !== $utteranceEndMs && $self['utteranceEndMs'] = $utteranceEndMs;
 
         return $self;
     }
@@ -122,6 +140,17 @@ final class DeepgramNova2Config implements BaseModel
     }
 
     /**
+     * Whether to send also interim results. If set to false, only final results will be sent.
+     */
+    public function withInterimResults(bool $interimResults): self
+    {
+        $self = clone $this;
+        $self['interimResults'] = $interimResults;
+
+        return $self;
+    }
+
+    /**
      * Keywords and their respective intensifiers (boosting values) to improve transcription accuracy for specific words or phrases. The intensifier should be a numeric value. Example: `{"snuffleupagus": 5, "systrom": 2, "krieger": 1}`.
      *
      * @param array<string,float> $keywordsBoosting
@@ -143,6 +172,17 @@ final class DeepgramNova2Config implements BaseModel
     {
         $self = clone $this;
         $self['language'] = $language;
+
+        return $self;
+    }
+
+    /**
+     * Number of milliseconds of silence to consider an utterance ended. Ranges from 0 to 5000 ms.
+     */
+    public function withUtteranceEndMs(int $utteranceEndMs): self
+    {
+        $self = clone $this;
+        $self['utteranceEndMs'] = $utteranceEndMs;
 
         return $self;
     }

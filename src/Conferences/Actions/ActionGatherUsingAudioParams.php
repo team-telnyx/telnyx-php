@@ -13,9 +13,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Play an audio file to a specific conference participant and gather DTMF input.
  *
- * @see Telnyx\Services\Conferences\ActionsService::gatherDtmfAudio()
+ * @see Telnyx\Services\Conferences\ActionsService::gatherUsingAudio()
  *
- * @phpstan-type ActionGatherDtmfAudioParamsShape = array{
+ * @phpstan-type ActionGatherUsingAudioParamsShape = array{
  *   callControlID: string,
  *   audioURL?: string|null,
  *   clientState?: string|null,
@@ -34,9 +34,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   validDigits?: string|null,
  * }
  */
-final class ActionGatherDtmfAudioParams implements BaseModel
+final class ActionGatherUsingAudioParams implements BaseModel
 {
-    /** @use SdkModel<ActionGatherDtmfAudioParamsShape> */
+    /** @use SdkModel<ActionGatherUsingAudioParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -137,17 +137,17 @@ final class ActionGatherDtmfAudioParams implements BaseModel
     public ?string $validDigits;
 
     /**
-     * `new ActionGatherDtmfAudioParams()` is missing required properties by the API.
+     * `new ActionGatherUsingAudioParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ActionGatherDtmfAudioParams::with(callControlID: ...)
+     * ActionGatherUsingAudioParams::with(callControlID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ActionGatherDtmfAudioParams)->withCallControlID(...)
+     * (new ActionGatherUsingAudioParams)->withCallControlID(...)
      * ```
      */
     public function __construct()
