@@ -102,7 +102,7 @@ final class DocumentsTest extends TestCase
     public function testDownload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server doesn\'t support application/octet-stream responses');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->documents->download(
