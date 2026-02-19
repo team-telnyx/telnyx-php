@@ -32,7 +32,7 @@ final class TextToSpeechTest extends TestCase
     public function testGenerateSpeech(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server doesn\'t support audio/mpeg responses');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->textToSpeech->generateSpeech(
@@ -48,7 +48,7 @@ final class TextToSpeechTest extends TestCase
     public function testGenerateSpeechWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server doesn\'t support audio/mpeg responses');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->textToSpeech->generateSpeech(
