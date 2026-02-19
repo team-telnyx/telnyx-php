@@ -1,5 +1,27 @@
 # Changelog
 
+## 6.34.0 (2026-02-19)
+
+Full Changelog: [v6.33.0...v6.34.0](https://github.com/team-telnyx/telnyx-php/compare/v6.33.0...v6.34.0)
+
+### Features
+
+* TELAPPS Add interim_results to deepgram config ([dcceeec](https://github.com/team-telnyx/telnyx-php/commit/dcceeecb5757b9331714a2948da1c19a4f3a822f))
+
+
+### Chores
+
+* **internal:** remove mock server code ([f940ad1](https://github.com/team-telnyx/telnyx-php/commit/f940ad184c1ccf579b4ea83402b303a0323b55cd))
+* **test:** update skip reason message ([5b73c75](https://github.com/team-telnyx/telnyx-php/commit/5b73c758d3eeef789630a33238a32114bb862fe0))
+* update mock server docs ([80da762](https://github.com/team-telnyx/telnyx-php/commit/80da762f5aa3341b1889694c4e23d607aa9f9cd1))
+
+
+### Documentation
+
+* **call-control:** Add missing conference endpoints ([45928c3](https://github.com/team-telnyx/telnyx-php/commit/45928c336af8d276c6cb5ea91d281b2137054789))
+* **call-control:** Add missing parameters to call control endpoints ([3f10a67](https://github.com/team-telnyx/telnyx-php/commit/3f10a6796853f3dca0ca39e1c2a052234d93d330))
+* **call-scripting:** add Timeout and TimeLimit to InitiateTexmlCall ([8eb8c6f](https://github.com/team-telnyx/telnyx-php/commit/8eb8c6f9e626cfe72b63e5177bb606b13e2cf2a8))
+
 ## 6.33.0 (2026-02-19)
 
 Full Changelog: [v6.32.0...v6.33.0](https://github.com/team-telnyx/telnyx-php/compare/v6.32.0...v6.33.0)
