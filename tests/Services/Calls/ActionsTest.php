@@ -239,6 +239,7 @@ final class ActionsTest extends TestCase
             ],
             clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
             commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            gatherEndedSpeech: 'Thank you for providing the information.',
             greeting: 'Hello, can you tell me your age and where you live?',
             interruptionSettings: ['enable' => true],
             language: GoogleTranscriptionLanguage::EN,
@@ -554,9 +555,11 @@ final class ActionsTest extends TestCase
             clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
             commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
             language: 'arb',
+            loop: 'string',
             payloadType: 'text',
             serviceLevel: 'basic',
             stop: 'current',
+            targetLegs: 'both',
             voiceSettings: [
                 'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
             ],
@@ -921,6 +924,7 @@ final class ActionsTest extends TestCase
             mediaName: 'my_media_uploaded_to_media_storage_api',
             muteDtmf: 'opposite',
             parkAfterUnbridge: 'self',
+            preferredCodecs: 'G722,PCMU,PCMA,G729,OPUS,VP8,H264',
             record: 'record-from-answer',
             recordChannels: 'single',
             recordCustomFileName: 'my_recording_file_name',
@@ -940,8 +944,16 @@ final class ActionsTest extends TestCase
             targetLegClientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
             timeLimitSecs: 60,
             timeoutSecs: 60,
+            webhookRetriesPolicies: [
+                'call.answered' => ['retriesMs' => [1000, 2000, 5000]],
+            ],
             webhookURL: 'https://www.example.com/server-b/',
             webhookURLMethod: 'POST',
+            webhookURLs: [
+                'call.answered' => 'https://www.example.com/webhooks/answered',
+                'call.hangup' => 'https://www.example.com/webhooks/hangup',
+            ],
+            webhookURLsMethod: 'POST',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -132,6 +132,7 @@ final class CallsTest extends TestCase
             soundModifications: [
                 'octaves' => 0.1, 'pitch' => 0.8, 'semitone' => -2, 'track' => 'both',
             ],
+            streamAuthToken: 'your-auth-token',
             streamBidirectionalCodec: StreamBidirectionalCodec::G722,
             streamBidirectionalMode: StreamBidirectionalMode::RTP,
             streamBidirectionalSamplingRate: StreamBidirectionalSamplingRate::RATE_16000,

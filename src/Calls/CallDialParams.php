@@ -90,6 +90,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   sipRegion?: null|SipRegion|value-of<SipRegion>,
  *   sipTransportProtocol?: null|SipTransportProtocol|value-of<SipTransportProtocol>,
  *   soundModifications?: null|SoundModifications|SoundModificationsShape,
+ *   streamAuthToken?: string|null,
  *   streamBidirectionalCodec?: null|StreamBidirectionalCodec|value-of<StreamBidirectionalCodec>,
  *   streamBidirectionalMode?: null|StreamBidirectionalMode|value-of<StreamBidirectionalMode>,
  *   streamBidirectionalSamplingRate?: null|StreamBidirectionalSamplingRate|value-of<StreamBidirectionalSamplingRate>,
@@ -355,6 +356,12 @@ final class CallDialParams implements BaseModel
     public ?SoundModifications $soundModifications;
 
     /**
+     * An authentication token to be sent as part of the WebSocket connection when using streaming. Maximum length is 4000 characters.
+     */
+    #[Optional('stream_auth_token')]
+    public ?string $streamAuthToken;
+
+    /**
      * Indicates codec for bidirectional streaming RTP payloads. Used only with stream_bidirectional_mode=rtp. Case sensitive.
      *
      * @var value-of<StreamBidirectionalCodec>|null $streamBidirectionalCodec
@@ -559,6 +566,7 @@ final class CallDialParams implements BaseModel
         SipRegion|string|null $sipRegion = null,
         SipTransportProtocol|string|null $sipTransportProtocol = null,
         SoundModifications|array|null $soundModifications = null,
+        ?string $streamAuthToken = null,
         StreamBidirectionalCodec|string|null $streamBidirectionalCodec = null,
         StreamBidirectionalMode|string|null $streamBidirectionalMode = null,
         StreamBidirectionalSamplingRate|int|null $streamBidirectionalSamplingRate = null,
@@ -615,6 +623,7 @@ final class CallDialParams implements BaseModel
         null !== $sipRegion && $self['sipRegion'] = $sipRegion;
         null !== $sipTransportProtocol && $self['sipTransportProtocol'] = $sipTransportProtocol;
         null !== $soundModifications && $self['soundModifications'] = $soundModifications;
+        null !== $streamAuthToken && $self['streamAuthToken'] = $streamAuthToken;
         null !== $streamBidirectionalCodec && $self['streamBidirectionalCodec'] = $streamBidirectionalCodec;
         null !== $streamBidirectionalMode && $self['streamBidirectionalMode'] = $streamBidirectionalMode;
         null !== $streamBidirectionalSamplingRate && $self['streamBidirectionalSamplingRate'] = $streamBidirectionalSamplingRate;
@@ -1065,6 +1074,17 @@ final class CallDialParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['soundModifications'] = $soundModifications;
+
+        return $self;
+    }
+
+    /**
+     * An authentication token to be sent as part of the WebSocket connection when using streaming. Maximum length is 4000 characters.
+     */
+    public function withStreamAuthToken(string $streamAuthToken): self
+    {
+        $self = clone $this;
+        $self['streamAuthToken'] = $streamAuthToken;
 
         return $self;
     }
