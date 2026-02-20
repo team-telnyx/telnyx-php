@@ -67,7 +67,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   supervisingRole?: null|SupervisingRole|value-of<SupervisingRole>,
  *   texml?: string|null,
  *   timeLimit?: int|null,
- *   timeout?: int|null,
+ *   timeoutSeconds?: int|null,
  *   trim?: null|Trim|value-of<Trim>,
  *   url?: string|null,
  *   urlMethod?: null|URLMethod|value-of<URLMethod>,
@@ -327,7 +327,7 @@ final class CallCallsParams implements BaseModel
      * The number of seconds to wait for the called party to answer the call before the call is canceled. The minimum value is 5 and the maximum value is 120. Default is 30 seconds.
      */
     #[Optional('Timeout')]
-    public ?int $timeout;
+    public ?int $timeoutSeconds;
 
     /**
      * Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
@@ -426,7 +426,7 @@ final class CallCallsParams implements BaseModel
         SupervisingRole|string|null $supervisingRole = null,
         ?string $texml = null,
         ?int $timeLimit = null,
-        ?int $timeout = null,
+        ?int $timeoutSeconds = null,
         Trim|string|null $trim = null,
         ?string $url = null,
         URLMethod|string|null $urlMethod = null,
@@ -470,7 +470,7 @@ final class CallCallsParams implements BaseModel
         null !== $supervisingRole && $self['supervisingRole'] = $supervisingRole;
         null !== $texml && $self['texml'] = $texml;
         null !== $timeLimit && $self['timeLimit'] = $timeLimit;
-        null !== $timeout && $self['timeout'] = $timeout;
+        null !== $timeoutSeconds && $self['timeoutSeconds'] = $timeoutSeconds;
         null !== $trim && $self['trim'] = $trim;
         null !== $url && $self['url'] = $url;
         null !== $urlMethod && $self['urlMethod'] = $urlMethod;
@@ -916,10 +916,10 @@ final class CallCallsParams implements BaseModel
     /**
      * The number of seconds to wait for the called party to answer the call before the call is canceled. The minimum value is 5 and the maximum value is 120. Default is 30 seconds.
      */
-    public function withTimeout(int $timeout): self
+    public function withTimeoutSeconds(int $timeoutSeconds): self
     {
         $self = clone $this;
-        $self['timeout'] = $timeout;
+        $self['timeoutSeconds'] = $timeoutSeconds;
 
         return $self;
     }
