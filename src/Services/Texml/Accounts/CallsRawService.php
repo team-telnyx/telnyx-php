@@ -178,7 +178,7 @@ final class CallsRawService implements CallsRawContract
      *   supervisingRole?: SupervisingRole|value-of<SupervisingRole>,
      *   texml?: string,
      *   timeLimit?: int,
-     *   timeout?: int,
+     *   timeoutSeconds?: int,
      *   trim?: Trim|value-of<Trim>,
      *   url?: string,
      *   urlMethod?: URLMethod|value-of<URLMethod>,

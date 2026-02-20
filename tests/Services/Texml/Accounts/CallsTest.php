@@ -168,7 +168,7 @@ final class CallsTest extends TestCase
             supervisingRole: 'monitor',
             texml: '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hello</Say></Response>',
             timeLimit: 3600,
-            timeout: 60,
+            timeoutSeconds: 60,
             trim: 'trim-silence',
             url: 'https://www.example.com/texml.xml',
             urlMethod: 'GET',
