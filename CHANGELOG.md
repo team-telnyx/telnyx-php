@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.40.0 (2026-02-20)
+
+Full Changelog: [v6.39.0...v6.40.0](https://github.com/team-telnyx/telnyx-php/compare/v6.39.0...v6.40.0)
+
+### Features
+
+* fix-stainless-sdk-timeout ([1e36246](https://github.com/team-telnyx/telnyx-php/commit/1e362467290edc4e128b418b1e669e6aa6f82a17))
+
 ## 6.39.0 (2026-02-20)
 
 Full Changelog: [v6.38.0...v6.39.0](https://github.com/team-telnyx/telnyx-php/compare/v6.38.0...v6.39.0)
