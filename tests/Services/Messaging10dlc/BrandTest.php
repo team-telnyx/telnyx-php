@@ -10,6 +10,7 @@ use Telnyx\Core\Util;
 use Telnyx\Messaging10dlc\Brand\AltBusinessIDType;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
+use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Messaging10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Messaging10dlc\Brand\BrandListResponse;
@@ -211,6 +212,21 @@ final class BrandTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(BrandGetFeedbackResponse::class, $result);
+    }
+
+    #[Test]
+    public function testGetSMSOtpByReference(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->messaging10dlc->brand->getSMSOtpByReference(
+            'OTP4B2001'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(BrandGetSMSOtpByReferenceResponse::class, $result);
     }
 
     #[Test]
