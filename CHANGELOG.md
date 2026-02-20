@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.41.0 (2026-02-20)
+
+Full Changelog: [v6.40.0...v6.41.0](https://github.com/team-telnyx/telnyx-php/compare/v6.40.0...v6.41.0)
+
+### Features
+
+* **api:** manual updates ([c85d5a7](https://github.com/team-telnyx/telnyx-php/commit/c85d5a7e1cb222ab69255f5853ab6481e362c8f0))
+
+
+### Bug Fixes
+
+* move unsupported string formats to x-format ([f9c971c](https://github.com/team-telnyx/telnyx-php/commit/f9c971ca947479144bbbf28e45718c715cdf2dde))
+
 ## 6.40.0 (2026-02-20)
 
 Full Changelog: [v6.39.0...v6.40.0](https://github.com/team-telnyx/telnyx-php/compare/v6.39.0...v6.40.0)
