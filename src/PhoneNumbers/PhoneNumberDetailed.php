@@ -38,11 +38,13 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
  *   emergencyAddressID?: string|null,
  *   emergencyEnabled?: bool|null,
  *   emergencyStatus?: null|EmergencyStatus|value-of<EmergencyStatus>,
+ *   hdVoiceEnabled?: bool|null,
  *   inboundCallScreening?: null|InboundCallScreening|value-of<InboundCallScreening>,
  *   messagingProfileID?: string|null,
  *   messagingProfileName?: string|null,
  *   sourceType?: null|SourceType|value-of<SourceType>,
  *   t38FaxGatewayEnabled?: bool|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class PhoneNumberDetailed implements BaseModel
@@ -192,6 +194,12 @@ final class PhoneNumberDetailed implements BaseModel
     public ?string $emergencyStatus;
 
     /**
+     * Indicates whether HD voice is enabled for this number.
+     */
+    #[Optional('hd_voice_enabled')]
+    public ?bool $hdVoiceEnabled;
+
+    /**
      * The inbound_call_screening setting is a phone number configuration option variable that allows users to configure their settings to block or flag fraudulent calls. It can be set to disabled, reject_calls, or flag_calls. This feature has an additional per-number monthly cost associated with it.
      *
      * @var value-of<InboundCallScreening>|null $inboundCallScreening
@@ -224,6 +232,12 @@ final class PhoneNumberDetailed implements BaseModel
      */
     #[Optional('t38_fax_gateway_enabled')]
     public ?bool $t38FaxGatewayEnabled;
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     /**
      * `new PhoneNumberDetailed()` is missing required properties by the API.
@@ -302,11 +316,13 @@ final class PhoneNumberDetailed implements BaseModel
         ?string $emergencyAddressID = null,
         ?bool $emergencyEnabled = null,
         EmergencyStatus|string|null $emergencyStatus = null,
+        ?bool $hdVoiceEnabled = null,
         InboundCallScreening|string|null $inboundCallScreening = null,
         ?string $messagingProfileID = null,
         ?string $messagingProfileName = null,
         SourceType|string|null $sourceType = null,
         ?bool $t38FaxGatewayEnabled = null,
+        ?string $updatedAt = null,
     ): self {
         $self = new self;
 
@@ -333,11 +349,13 @@ final class PhoneNumberDetailed implements BaseModel
         null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
         null !== $emergencyEnabled && $self['emergencyEnabled'] = $emergencyEnabled;
         null !== $emergencyStatus && $self['emergencyStatus'] = $emergencyStatus;
+        null !== $hdVoiceEnabled && $self['hdVoiceEnabled'] = $hdVoiceEnabled;
         null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $messagingProfileName && $self['messagingProfileName'] = $messagingProfileName;
         null !== $sourceType && $self['sourceType'] = $sourceType;
         null !== $t38FaxGatewayEnabled && $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
@@ -596,6 +614,17 @@ final class PhoneNumberDetailed implements BaseModel
     }
 
     /**
+     * Indicates whether HD voice is enabled for this number.
+     */
+    public function withHDVoiceEnabled(bool $hdVoiceEnabled): self
+    {
+        $self = clone $this;
+        $self['hdVoiceEnabled'] = $hdVoiceEnabled;
+
+        return $self;
+    }
+
+    /**
      * The inbound_call_screening setting is a phone number configuration option variable that allows users to configure their settings to block or flag fraudulent calls. It can be set to disabled, reject_calls, or flag_calls. This feature has an additional per-number monthly cost associated with it.
      *
      * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
@@ -652,6 +681,17 @@ final class PhoneNumberDetailed implements BaseModel
     {
         $self = clone $this;
         $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }

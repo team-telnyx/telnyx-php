@@ -15,6 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PhoneNumbersService::update()
  *
  * @phpstan-type PhoneNumberUpdateParamsShape = array{
+ *   addressID?: string|null,
  *   billingGroupID?: string|null,
  *   connectionID?: string|null,
  *   customerReference?: string|null,
@@ -28,6 +29,12 @@ final class PhoneNumberUpdateParams implements BaseModel
     /** @use SdkModel<PhoneNumberUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /**
+     * Identifies the address associated with the phone number.
+     */
+    #[Optional('address_id')]
+    public ?string $addressID;
 
     /**
      * Identifies the billing group associated with the phone number.
@@ -80,6 +87,7 @@ final class PhoneNumberUpdateParams implements BaseModel
      * @param list<string>|null $tags
      */
     public static function with(
+        ?string $addressID = null,
         ?string $billingGroupID = null,
         ?string $connectionID = null,
         ?string $customerReference = null,
@@ -89,12 +97,24 @@ final class PhoneNumberUpdateParams implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $addressID && $self['addressID'] = $addressID;
         null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
         null !== $connectionID && $self['connectionID'] = $connectionID;
         null !== $customerReference && $self['customerReference'] = $customerReference;
         null !== $externalPin && $self['externalPin'] = $externalPin;
         null !== $hdVoiceEnabled && $self['hdVoiceEnabled'] = $hdVoiceEnabled;
         null !== $tags && $self['tags'] = $tags;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the address associated with the phone number.
+     */
+    public function withAddressID(string $addressID): self
+    {
+        $self = clone $this;
+        $self['addressID'] = $addressID;
 
         return $self;
     }

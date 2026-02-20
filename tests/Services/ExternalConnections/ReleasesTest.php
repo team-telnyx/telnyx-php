@@ -39,7 +39,7 @@ final class ReleasesTest extends TestCase
 
         $result = $this->client->externalConnections->releases->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,7 +55,7 @@ final class ReleasesTest extends TestCase
 
         $result = $this->client->externalConnections->releases->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -69,7 +69,9 @@ final class ReleasesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $page = $this->client->externalConnections->releases->list('id');
+        $page = $this->client->externalConnections->releases->list(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DefaultFlatPagination::class, $page);

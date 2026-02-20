@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PortingOrder\AdditionalStep;
+use Telnyx\PortingOrders\PortingOrder\PhoneNumber;
 use Telnyx\PortingOrders\PortingOrder\PhoneNumberType;
 use Telnyx\PortingOrderStatus;
 
@@ -18,6 +19,7 @@ use Telnyx\PortingOrderStatus;
  * @phpstan-import-type PortingOrderMessagingShape from \Telnyx\PortingOrders\PortingOrderMessaging
  * @phpstan-import-type PortingOrderMiscShape from \Telnyx\PortingOrders\PortingOrderMisc
  * @phpstan-import-type PortingOrderPhoneNumberConfigurationShape from \Telnyx\PortingOrders\PortingOrderPhoneNumberConfiguration
+ * @phpstan-import-type PhoneNumberShape from \Telnyx\PortingOrders\PortingOrder\PhoneNumber
  * @phpstan-import-type PortingOrderRequirementShape from \Telnyx\PortingOrders\PortingOrderRequirement
  * @phpstan-import-type PortingOrderStatusShape from \Telnyx\PortingOrderStatus
  * @phpstan-import-type PortingOrderUserFeedbackShape from \Telnyx\PortingOrders\PortingOrderUserFeedback
@@ -38,6 +40,7 @@ use Telnyx\PortingOrderStatus;
  *   parentSupportKey?: string|null,
  *   phoneNumberConfiguration?: null|PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape,
  *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
+ *   phoneNumbers?: list<PhoneNumber|PhoneNumberShape>|null,
  *   portingPhoneNumbersCount?: int|null,
  *   recordType?: string|null,
  *   requirements?: list<PortingOrderRequirement|PortingOrderRequirementShape>|null,
@@ -138,6 +141,14 @@ final class PortingOrder implements BaseModel
     public ?string $phoneNumberType;
 
     /**
+     * List of phone numbers associated with this porting order.
+     *
+     * @var list<PhoneNumber>|null $phoneNumbers
+     */
+    #[Optional('phone_numbers', list: PhoneNumber::class)]
+    public ?array $phoneNumbers;
+
+    /**
      * Count of phone numbers associated with this porting order.
      */
     #[Optional('porting_phone_numbers_count')]
@@ -211,6 +222,7 @@ final class PortingOrder implements BaseModel
      * @param PortingOrderMisc|PortingOrderMiscShape|null $misc
      * @param PortingOrderPhoneNumberConfiguration|PortingOrderPhoneNumberConfigurationShape|null $phoneNumberConfiguration
      * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
+     * @param list<PhoneNumber|PhoneNumberShape>|null $phoneNumbers
      * @param list<PortingOrderRequirement|PortingOrderRequirementShape>|null $requirements
      * @param PortingOrderStatus|PortingOrderStatusShape|null $status
      * @param PortingOrderUserFeedback|PortingOrderUserFeedbackShape|null $userFeedback
@@ -231,6 +243,7 @@ final class PortingOrder implements BaseModel
         ?string $parentSupportKey = null,
         PortingOrderPhoneNumberConfiguration|array|null $phoneNumberConfiguration = null,
         PhoneNumberType|string|null $phoneNumberType = null,
+        ?array $phoneNumbers = null,
         ?int $portingPhoneNumbersCount = null,
         ?string $recordType = null,
         ?array $requirements = null,
@@ -259,6 +272,7 @@ final class PortingOrder implements BaseModel
         null !== $parentSupportKey && $self['parentSupportKey'] = $parentSupportKey;
         null !== $phoneNumberConfiguration && $self['phoneNumberConfiguration'] = $phoneNumberConfiguration;
         null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
+        null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
         null !== $portingPhoneNumbersCount && $self['portingPhoneNumbersCount'] = $portingPhoneNumbersCount;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $requirements && $self['requirements'] = $requirements;
@@ -447,6 +461,19 @@ final class PortingOrder implements BaseModel
     ): self {
         $self = clone $this;
         $self['phoneNumberType'] = $phoneNumberType;
+
+        return $self;
+    }
+
+    /**
+     * List of phone numbers associated with this porting order.
+     *
+     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
+     */
+    public function withPhoneNumbers(array $phoneNumbers): self
+    {
+        $self = clone $this;
+        $self['phoneNumbers'] = $phoneNumbers;
 
         return $self;
     }

@@ -20,6 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   sipPassword?: string|null,
  *   sipUsername?: string|null,
  *   updatedAt?: string|null,
+ *   userID?: string|null,
  * }
  */
 final class TelephonyCredential implements BaseModel
@@ -84,6 +85,12 @@ final class TelephonyCredential implements BaseModel
     #[Optional('updated_at')]
     public ?string $updatedAt;
 
+    /**
+     * Identifies the user this credential is associated with.
+     */
+    #[Optional('user_id')]
+    public ?string $userID;
+
     public function __construct()
     {
         $this->initialize();
@@ -105,6 +112,7 @@ final class TelephonyCredential implements BaseModel
         ?string $sipPassword = null,
         ?string $sipUsername = null,
         ?string $updatedAt = null,
+        ?string $userID = null,
     ): self {
         $self = new self;
 
@@ -118,6 +126,7 @@ final class TelephonyCredential implements BaseModel
         null !== $sipPassword && $self['sipPassword'] = $sipPassword;
         null !== $sipUsername && $self['sipUsername'] = $sipUsername;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $userID && $self['userID'] = $userID;
 
         return $self;
     }
@@ -225,6 +234,17 @@ final class TelephonyCredential implements BaseModel
     {
         $self = clone $this;
         $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the user this credential is associated with.
+     */
+    public function withUserID(string $userID): self
+    {
+        $self = clone $this;
+        $self['userID'] = $userID;
 
         return $self;
     }

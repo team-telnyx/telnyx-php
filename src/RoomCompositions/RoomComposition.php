@@ -22,6 +22,7 @@ use Telnyx\RoomCompositions\RoomComposition\Status;
  *   endedAt?: \DateTimeInterface|null,
  *   format?: null|Format|value-of<Format>,
  *   recordType?: string|null,
+ *   resolution?: string|null,
  *   roomID?: string|null,
  *   sessionID?: string|null,
  *   sizeMB?: float|null,
@@ -86,6 +87,12 @@ final class RoomComposition implements BaseModel
 
     #[Optional('record_type')]
     public ?string $recordType;
+
+    /**
+     * The resolution of the room composition.
+     */
+    #[Optional]
+    public ?string $resolution;
 
     /**
      * Identify the room associated with the room composition.
@@ -180,6 +187,7 @@ final class RoomComposition implements BaseModel
         ?\DateTimeInterface $endedAt = null,
         Format|string|null $format = null,
         ?string $recordType = null,
+        ?string $resolution = null,
         ?string $roomID = null,
         ?string $sessionID = null,
         ?float $sizeMB = null,
@@ -202,6 +210,7 @@ final class RoomComposition implements BaseModel
         null !== $endedAt && $self['endedAt'] = $endedAt;
         null !== $format && $self['format'] = $format;
         null !== $recordType && $self['recordType'] = $recordType;
+        null !== $resolution && $self['resolution'] = $resolution;
         null !== $roomID && $self['roomID'] = $roomID;
         null !== $sessionID && $self['sessionID'] = $sessionID;
         null !== $sizeMB && $self['sizeMB'] = $sizeMB;
@@ -300,6 +309,17 @@ final class RoomComposition implements BaseModel
     {
         $self = clone $this;
         $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * The resolution of the room composition.
+     */
+    public function withResolution(string $resolution): self
+    {
+        $self = clone $this;
+        $self['resolution'] = $resolution;
 
         return $self;
     }

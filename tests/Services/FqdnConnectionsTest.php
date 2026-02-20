@@ -111,7 +111,7 @@ final class FqdnConnectionsTest extends TestCase
                 'ipAuthenticationMethod' => 'credential-authentication',
                 'ipAuthenticationToken' => 'aBcD1234',
                 'localization' => 'string',
-                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+                'outboundVoiceProfileID' => '1293384261075731499',
                 't38ReinviteSource' => 'customer',
                 'techPrefix' => '0123',
                 'timeout1xxSecs' => 10,
@@ -141,7 +141,7 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->retrieve('id');
+        $result = $this->client->fqdnConnections->retrieve('1293384261075731499');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnConnectionGetResponse::class, $result);
@@ -154,7 +154,7 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->update('id');
+        $result = $this->client->fqdnConnections->update('1293384261075731499');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnConnectionUpdateResponse::class, $result);
@@ -185,7 +185,7 @@ final class FqdnConnectionsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->fqdnConnections->delete('id');
+        $result = $this->client->fqdnConnections->delete('1293384261075731499');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnConnectionDeleteResponse::class, $result);

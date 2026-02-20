@@ -72,8 +72,7 @@ final class CallControlApplicationsTest extends TestCase
                 'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
             outbound: [
-                'channelLimit' => 10,
-                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
             ],
             redactDtmfDebugLogging: true,
             webhookAPIVersion: '1',
@@ -92,7 +91,9 @@ final class CallControlApplicationsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->callControlApplications->retrieve('id');
+        $result = $this->client->callControlApplications->retrieve(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CallControlApplicationGetResponse::class, $result);
@@ -106,7 +107,7 @@ final class CallControlApplicationsTest extends TestCase
         }
 
         $result = $this->client->callControlApplications->update(
-            'id',
+            '1293384261075731499',
             applicationName: 'call-router',
             webhookEventURL: 'https://example.com',
         );
@@ -126,7 +127,7 @@ final class CallControlApplicationsTest extends TestCase
         }
 
         $result = $this->client->callControlApplications->update(
-            'id',
+            '1293384261075731499',
             applicationName: 'call-router',
             webhookEventURL: 'https://example.com',
             active: false,
@@ -142,8 +143,7 @@ final class CallControlApplicationsTest extends TestCase
                 'sipSubdomainReceiveSettings' => 'only_my_connections',
             ],
             outbound: [
-                'channelLimit' => 10,
-                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1293384261075731499',
             ],
             redactDtmfDebugLogging: true,
             tags: ['tag1', 'tag2'],
@@ -184,7 +184,9 @@ final class CallControlApplicationsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->callControlApplications->delete('id');
+        $result = $this->client->callControlApplications->delete(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type SettingsShape = array{
  *   assertionConsumerServiceURL?: string|null,
- *   idpAttributeNames?: array<string,mixed>|null,
+ *   idpAttributeNames?: mixed,
  *   idpCertFingerprint?: string|null,
  *   idpCertFingerprintAlgorithm?: null|IdpCertFingerprintAlgorithm|value-of<IdpCertFingerprintAlgorithm>,
  *   idpCertificate?: string|null,
@@ -40,11 +40,9 @@ final class Settings implements BaseModel
 
     /**
      * Mapping of SAML attribute names used by the identity provider (IdP).
-     *
-     * @var array<string,mixed>|null $idpAttributeNames
      */
-    #[Optional('idp_attribute_names', map: 'mixed')]
-    public ?array $idpAttributeNames;
+    #[Optional('idp_attribute_names')]
+    public mixed $idpAttributeNames;
 
     /**
      * The certificate fingerprint for the identity provider (IdP).
@@ -121,12 +119,11 @@ final class Settings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed>|null $idpAttributeNames
      * @param IdpCertFingerprintAlgorithm|value-of<IdpCertFingerprintAlgorithm>|null $idpCertFingerprintAlgorithm
      */
     public static function with(
         ?string $assertionConsumerServiceURL = null,
-        ?array $idpAttributeNames = null,
+        mixed $idpAttributeNames = null,
         ?string $idpCertFingerprint = null,
         IdpCertFingerprintAlgorithm|string|null $idpCertFingerprintAlgorithm = null,
         ?string $idpCertificate = null,
@@ -170,10 +167,8 @@ final class Settings implements BaseModel
 
     /**
      * Mapping of SAML attribute names used by the identity provider (IdP).
-     *
-     * @param array<string,mixed> $idpAttributeNames
      */
-    public function withIdpAttributeNames(array $idpAttributeNames): self
+    public function withIdpAttributeNames(mixed $idpAttributeNames): self
     {
         $self = clone $this;
         $self['idpAttributeNames'] = $idpAttributeNames;

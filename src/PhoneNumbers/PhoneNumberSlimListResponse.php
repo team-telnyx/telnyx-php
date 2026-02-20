@@ -28,6 +28,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\Status;
  *   emergencyEnabled?: bool|null,
  *   emergencyStatus?: null|EmergencyStatus|value-of<EmergencyStatus>,
  *   externalPin?: string|null,
+ *   hdVoiceEnabled?: bool|null,
  *   inboundCallScreening?: null|InboundCallScreening|value-of<InboundCallScreening>,
  *   phoneNumber?: string|null,
  *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
@@ -35,6 +36,7 @@ use Telnyx\PhoneNumbers\PhoneNumberSlimListResponse\Status;
  *   recordType?: string|null,
  *   status?: null|Status|value-of<Status>,
  *   t38FaxGatewayEnabled?: bool|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class PhoneNumberSlimListResponse implements BaseModel
@@ -129,6 +131,12 @@ final class PhoneNumberSlimListResponse implements BaseModel
     public ?string $externalPin;
 
     /**
+     * Indicates whether HD voice is enabled for this number.
+     */
+    #[Optional('hd_voice_enabled')]
+    public ?bool $hdVoiceEnabled;
+
+    /**
      * The inbound_call_screening setting is a phone number configuration option variable that allows users to configure their settings to block or flag fraudulent calls. It can be set to disabled, reject_calls, or flag_calls. This feature has an additional per-number monthly cost associated with it.
      *
      * @var value-of<InboundCallScreening>|null $inboundCallScreening
@@ -177,6 +185,12 @@ final class PhoneNumberSlimListResponse implements BaseModel
     #[Optional('t38_fax_gateway_enabled')]
     public ?bool $t38FaxGatewayEnabled;
 
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
+
     public function __construct()
     {
         $this->initialize();
@@ -207,6 +221,7 @@ final class PhoneNumberSlimListResponse implements BaseModel
         ?bool $emergencyEnabled = null,
         EmergencyStatus|string|null $emergencyStatus = null,
         ?string $externalPin = null,
+        ?bool $hdVoiceEnabled = null,
         InboundCallScreening|string|null $inboundCallScreening = null,
         ?string $phoneNumber = null,
         PhoneNumberType|string|null $phoneNumberType = null,
@@ -214,6 +229,7 @@ final class PhoneNumberSlimListResponse implements BaseModel
         ?string $recordType = null,
         Status|string|null $status = null,
         ?bool $t38FaxGatewayEnabled = null,
+        ?string $updatedAt = null,
     ): self {
         $self = new self;
 
@@ -231,6 +247,7 @@ final class PhoneNumberSlimListResponse implements BaseModel
         null !== $emergencyEnabled && $self['emergencyEnabled'] = $emergencyEnabled;
         null !== $emergencyStatus && $self['emergencyStatus'] = $emergencyStatus;
         null !== $externalPin && $self['externalPin'] = $externalPin;
+        null !== $hdVoiceEnabled && $self['hdVoiceEnabled'] = $hdVoiceEnabled;
         null !== $inboundCallScreening && $self['inboundCallScreening'] = $inboundCallScreening;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
@@ -238,6 +255,7 @@ final class PhoneNumberSlimListResponse implements BaseModel
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $status && $self['status'] = $status;
         null !== $t38FaxGatewayEnabled && $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
@@ -400,6 +418,17 @@ final class PhoneNumberSlimListResponse implements BaseModel
     }
 
     /**
+     * Indicates whether HD voice is enabled for this number.
+     */
+    public function withHDVoiceEnabled(bool $hdVoiceEnabled): self
+    {
+        $self = clone $this;
+        $self['hdVoiceEnabled'] = $hdVoiceEnabled;
+
+        return $self;
+    }
+
+    /**
      * The inbound_call_screening setting is a phone number configuration option variable that allows users to configure their settings to block or flag fraudulent calls. It can be set to disabled, reject_calls, or flag_calls. This feature has an additional per-number monthly cost associated with it.
      *
      * @param InboundCallScreening|value-of<InboundCallScreening> $inboundCallScreening
@@ -481,6 +510,17 @@ final class PhoneNumberSlimListResponse implements BaseModel
     {
         $self = clone $this;
         $self['t38FaxGatewayEnabled'] = $t38FaxGatewayEnabled;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }

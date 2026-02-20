@@ -42,7 +42,7 @@ final class UploadsTest extends TestCase
         }
 
         $result = $this->client->externalConnections->uploads->create(
-            'id',
+            '1293384261075731499',
             numberIDs: [
                 '3920457616934164700',
                 '3920457616934164701',
@@ -63,7 +63,7 @@ final class UploadsTest extends TestCase
         }
 
         $result = $this->client->externalConnections->uploads->create(
-            'id',
+            '1293384261075731499',
             numberIDs: [
                 '3920457616934164700',
                 '3920457616934164701',
@@ -89,7 +89,7 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -105,7 +105,7 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->retrieve(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -119,7 +119,9 @@ final class UploadsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $page = $this->client->externalConnections->uploads->list('id');
+        $page = $this->client->externalConnections->uploads->list(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DefaultFlatPagination::class, $page);
@@ -137,7 +139,9 @@ final class UploadsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->externalConnections->uploads->pendingCount('id');
+        $result = $this->client->externalConnections->uploads->pendingCount(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UploadPendingCountResponse::class, $result);
@@ -150,7 +154,9 @@ final class UploadsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->externalConnections->uploads->refreshStatus('id');
+        $result = $this->client->externalConnections->uploads->refreshStatus(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(UploadRefreshStatusResponse::class, $result);
@@ -165,7 +171,7 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->retry(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -181,7 +187,7 @@ final class UploadsTest extends TestCase
 
         $result = $this->client->externalConnections->uploads->retry(
             '7b6a6449-b055-45a6-81f6-f6f0dffa4cc6',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

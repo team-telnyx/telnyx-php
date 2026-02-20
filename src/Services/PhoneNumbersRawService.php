@@ -68,6 +68,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *
      * @param string $phoneNumberID identifies the resource
      * @param array{
+     *   addressID?: string,
      *   billingGroupID?: string,
      *   connectionID?: string,
      *   customerReference?: string,
