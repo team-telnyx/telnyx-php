@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.38.0 (2026-02-20)
+
+Full Changelog: [v6.37.0...v6.38.0](https://github.com/team-telnyx/telnyx-php/compare/v6.37.0...v6.38.0)
+
+### Features
+
+* TELAPPS Add ApplicationSid param ([81da0dc](https://github.com/team-telnyx/telnyx-php/commit/81da0dc3336c528e3a89c5cc405e36b67421012f))
+
 ## 6.37.0 (2026-02-20)
 
 Full Changelog: [v6.36.0...v6.37.0](https://github.com/team-telnyx/telnyx-php/compare/v6.36.0...v6.37.0)
