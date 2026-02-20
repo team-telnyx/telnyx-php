@@ -196,6 +196,7 @@ final class ParticipantsTest extends TestCase
                 accountSid: 'account_sid',
                 amdStatusCallback: 'https://www.example.com/amd_result',
                 amdStatusCallbackMethod: 'GET',
+                applicationSid: '1846572522338780702',
                 beep: 'onExit',
                 callerID: 'Info',
                 callSidToCoach: 'v3:9X2vxPDFY2RHSJ1EdMS0RHRksMTg7ldNxdjWbVr9zBjbGjGsSe-aiQ',

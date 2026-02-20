@@ -202,6 +202,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
      *   accountSid: string,
      *   amdStatusCallback?: string,
      *   amdStatusCallbackMethod?: AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod>,
+     *   applicationSid?: string,
      *   beep?: Beep|value-of<Beep>,
      *   callerID?: string,
      *   callSidToCoach?: string,
