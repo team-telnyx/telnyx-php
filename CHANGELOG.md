@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.41.1 (2026-02-20)
+
+Full Changelog: [v6.41.0...v6.41.1](https://github.com/team-telnyx/telnyx-php/compare/v6.41.0...v6.41.1)
+
+### Bug Fixes
+
+* StringFormatNotSupported ([a9f51d4](https://github.com/team-telnyx/telnyx-php/commit/a9f51d4031df861fd777db837abd4877d8d899cc))
+
 ## 6.41.0 (2026-02-20)
 
 Full Changelog: [v6.40.0...v6.41.0](https://github.com/team-telnyx/telnyx-php/compare/v6.40.0...v6.41.0)
