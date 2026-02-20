@@ -34,6 +34,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
  *   accountSid: string,
  *   amdStatusCallback?: string|null,
  *   amdStatusCallbackMethod?: null|AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod>,
+ *   applicationSid?: string|null,
  *   beep?: null|Beep|value-of<Beep>,
  *   callerID?: string|null,
  *   callSidToCoach?: string|null,
@@ -103,6 +104,12 @@ final class ParticipantParticipantsParams implements BaseModel
      */
     #[Optional('AmdStatusCallbackMethod', enum: AmdStatusCallbackMethod::class)]
     public ?string $amdStatusCallbackMethod;
+
+    /**
+     * The SID of the TeXML application that will handle the new participant's call. Required unless joining an existing conference by its ConferenceSid.
+     */
+    #[Optional('ApplicationSid')]
+    public ?string $applicationSid;
 
     /**
      * Whether to play a notification beep to the conference when the participant enters and exits.
@@ -449,6 +456,7 @@ final class ParticipantParticipantsParams implements BaseModel
         string $accountSid,
         ?string $amdStatusCallback = null,
         AmdStatusCallbackMethod|string|null $amdStatusCallbackMethod = null,
+        ?string $applicationSid = null,
         Beep|string|null $beep = null,
         ?string $callerID = null,
         ?string $callSidToCoach = null,
@@ -501,6 +509,7 @@ final class ParticipantParticipantsParams implements BaseModel
 
         null !== $amdStatusCallback && $self['amdStatusCallback'] = $amdStatusCallback;
         null !== $amdStatusCallbackMethod && $self['amdStatusCallbackMethod'] = $amdStatusCallbackMethod;
+        null !== $applicationSid && $self['applicationSid'] = $applicationSid;
         null !== $beep && $self['beep'] = $beep;
         null !== $callerID && $self['callerID'] = $callerID;
         null !== $callSidToCoach && $self['callSidToCoach'] = $callSidToCoach;
@@ -579,6 +588,17 @@ final class ParticipantParticipantsParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['amdStatusCallbackMethod'] = $amdStatusCallbackMethod;
+
+        return $self;
+    }
+
+    /**
+     * The SID of the TeXML application that will handle the new participant's call. Required unless joining an existing conference by its ConferenceSid.
+     */
+    public function withApplicationSid(string $applicationSid): self
+    {
+        $self = clone $this;
+        $self['applicationSid'] = $applicationSid;
 
         return $self;
     }
