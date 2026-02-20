@@ -11,7 +11,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type ToolMessageShape = array{
- *   content: string, role: 'tool', toolCallID: string, metadata?: mixed
+ *   content: string,
+ *   role: 'tool',
+ *   toolCallID: string,
+ *   metadata?: array<string,mixed>|null,
  * }
  */
 final class ToolMessage implements BaseModel
@@ -41,9 +44,11 @@ final class ToolMessage implements BaseModel
 
     /**
      * Metadata to add to the message.
+     *
+     * @var array<string,mixed>|null $metadata
      */
-    #[Optional]
-    public mixed $metadata;
+    #[Optional(map: 'mixed')]
+    public ?array $metadata;
 
     /**
      * `new ToolMessage()` is missing required properties by the API.
@@ -68,11 +73,13 @@ final class ToolMessage implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param array<string,mixed>|null $metadata
      */
     public static function with(
         string $content,
         string $toolCallID,
-        mixed $metadata = null
+        ?array $metadata = null
     ): self {
         $self = new self;
 
@@ -121,8 +128,10 @@ final class ToolMessage implements BaseModel
 
     /**
      * Metadata to add to the message.
+     *
+     * @param array<string,mixed> $metadata
      */
-    public function withMetadata(mixed $metadata): self
+    public function withMetadata(array $metadata): self
     {
         $self = clone $this;
         $self['metadata'] = $metadata;
