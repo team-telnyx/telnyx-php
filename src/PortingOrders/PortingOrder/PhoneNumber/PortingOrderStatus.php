@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status;
+namespace Telnyx\PortingOrders\PortingOrder\PhoneNumber;
 
-enum UnionMember1: string
+/**
+ * The current status of the porting order.
+ */
+enum PortingOrderStatus: string
 {
     case DRAFT = 'draft';
 

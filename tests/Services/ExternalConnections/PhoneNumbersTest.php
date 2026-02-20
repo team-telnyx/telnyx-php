@@ -40,7 +40,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->retrieve(
             '1234567889',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -56,7 +56,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->retrieve(
             '1234567889',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -72,7 +72,7 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -88,8 +88,8 @@ final class PhoneNumbersTest extends TestCase
 
         $result = $this->client->externalConnections->phoneNumbers->update(
             '1234567889',
-            id: 'id',
-            locationID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            id: '1293384261075731499',
+            locationID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -103,7 +103,9 @@ final class PhoneNumbersTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $page = $this->client->externalConnections->phoneNumbers->list('id');
+        $page = $this->client->externalConnections->phoneNumbers->list(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DefaultFlatPagination::class, $page);

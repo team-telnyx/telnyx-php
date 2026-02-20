@@ -13,6 +13,7 @@ use Telnyx\NumberReservations\ReservedPhoneNumber\Status;
  * @phpstan-type ReservedPhoneNumberShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
+ *   errors?: string|null,
  *   expiredAt?: \DateTimeInterface|null,
  *   phoneNumber?: string|null,
  *   recordType?: string|null,
@@ -33,6 +34,12 @@ final class ReservedPhoneNumber implements BaseModel
      */
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
+
+    /**
+     * Errors the reservation could happen upon.
+     */
+    #[Optional]
+    public ?string $errors;
 
     /**
      * An ISO 8901 datetime string for when the individual number reservation is going to expire.
@@ -75,6 +82,7 @@ final class ReservedPhoneNumber implements BaseModel
     public static function with(
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
+        ?string $errors = null,
         ?\DateTimeInterface $expiredAt = null,
         ?string $phoneNumber = null,
         ?string $recordType = null,
@@ -85,6 +93,7 @@ final class ReservedPhoneNumber implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $errors && $self['errors'] = $errors;
         null !== $expiredAt && $self['expiredAt'] = $expiredAt;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $recordType && $self['recordType'] = $recordType;
@@ -109,6 +118,17 @@ final class ReservedPhoneNumber implements BaseModel
     {
         $self = clone $this;
         $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * Errors the reservation could happen upon.
+     */
+    public function withErrors(string $errors): self
+    {
+        $self = clone $this;
+        $self['errors'] = $errors;
 
         return $self;
     }

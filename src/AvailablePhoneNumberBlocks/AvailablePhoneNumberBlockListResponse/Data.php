@@ -20,10 +20,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DataShape = array{
  *   costInformation?: null|CostInformation|CostInformationShape,
  *   features?: list<Feature|FeatureShape>|null,
+ *   phoneNumber?: string|null,
  *   range?: int|null,
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   regionInformation?: list<RegionInformation|RegionInformationShape>|null,
- *   startingNumber?: string|null,
  * }
  */
 final class Data implements BaseModel
@@ -38,6 +38,9 @@ final class Data implements BaseModel
     #[Optional(list: Feature::class)]
     public ?array $features;
 
+    #[Optional('phone_number')]
+    public ?string $phoneNumber;
+
     #[Optional]
     public ?int $range;
 
@@ -48,9 +51,6 @@ final class Data implements BaseModel
     /** @var list<RegionInformation>|null $regionInformation */
     #[Optional('region_information', list: RegionInformation::class)]
     public ?array $regionInformation;
-
-    #[Optional('starting_number')]
-    public ?string $startingNumber;
 
     public function __construct()
     {
@@ -70,19 +70,19 @@ final class Data implements BaseModel
     public static function with(
         CostInformation|array|null $costInformation = null,
         ?array $features = null,
+        ?string $phoneNumber = null,
         ?int $range = null,
         RecordType|string|null $recordType = null,
         ?array $regionInformation = null,
-        ?string $startingNumber = null,
     ): self {
         $self = new self;
 
         null !== $costInformation && $self['costInformation'] = $costInformation;
         null !== $features && $self['features'] = $features;
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $range && $self['range'] = $range;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $regionInformation && $self['regionInformation'] = $regionInformation;
-        null !== $startingNumber && $self['startingNumber'] = $startingNumber;
 
         return $self;
     }
@@ -106,6 +106,14 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['features'] = $features;
+
+        return $self;
+    }
+
+    public function withPhoneNumber(string $phoneNumber): self
+    {
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
         return $self;
     }
@@ -136,14 +144,6 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['regionInformation'] = $regionInformation;
-
-        return $self;
-    }
-
-    public function withStartingNumber(string $startingNumber): self
-    {
-        $self = clone $this;
-        $self['startingNumber'] = $startingNumber;
 
         return $self;
     }

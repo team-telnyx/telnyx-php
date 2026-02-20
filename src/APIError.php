@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type APIErrorShape = array{
  *   code: string,
  *   title: string,
- *   detail?: string|null,
+ *   description?: string|null,
  *   meta?: array<string,mixed>|null,
  *   source?: null|Source|SourceShape,
  * }
@@ -33,7 +33,7 @@ final class APIError implements BaseModel
     public string $title;
 
     #[Optional]
-    public ?string $detail;
+    public ?string $description;
 
     /** @var array<string,mixed>|null $meta */
     #[Optional(map: 'mixed')]
@@ -72,7 +72,7 @@ final class APIError implements BaseModel
     public static function with(
         string $code,
         string $title,
-        ?string $detail = null,
+        ?string $description = null,
         ?array $meta = null,
         Source|array|null $source = null,
     ): self {
@@ -81,7 +81,7 @@ final class APIError implements BaseModel
         $self['code'] = $code;
         $self['title'] = $title;
 
-        null !== $detail && $self['detail'] = $detail;
+        null !== $description && $self['description'] = $description;
         null !== $meta && $self['meta'] = $meta;
         null !== $source && $self['source'] = $source;
 
@@ -104,10 +104,10 @@ final class APIError implements BaseModel
         return $self;
     }
 
-    public function withDetail(string $detail): self
+    public function withDescription(string $description): self
     {
         $self = clone $this;
-        $self['detail'] = $detail;
+        $self['description'] = $description;
 
         return $self;
     }

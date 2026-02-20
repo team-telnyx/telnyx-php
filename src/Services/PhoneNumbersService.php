@@ -107,6 +107,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      * Update a phone number
      *
      * @param string $phoneNumberID identifies the resource
+     * @param string $addressID identifies the address associated with the phone number
      * @param string $billingGroupID identifies the billing group associated with the phone number
      * @param string $connectionID identifies the connection associated with the phone number
      * @param string $customerReference a customer reference string for customer look ups
@@ -119,6 +120,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      */
     public function update(
         string $phoneNumberID,
+        ?string $addressID = null,
         ?string $billingGroupID = null,
         ?string $connectionID = null,
         ?string $customerReference = null,
@@ -129,6 +131,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
     ): PhoneNumberUpdateResponse {
         $params = Util::removeNulls(
             [
+                'addressID' => $addressID,
                 'billingGroupID' => $billingGroupID,
                 'connectionID' => $connectionID,
                 'customerReference' => $customerReference,

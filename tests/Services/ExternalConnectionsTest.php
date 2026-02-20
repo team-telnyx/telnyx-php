@@ -60,8 +60,7 @@ final class ExternalConnectionsTest extends TestCase
         $result = $this->client->externalConnections->create(
             externalSipConnection: 'zoom',
             outbound: [
-                'channelLimit' => 10,
-                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+                'channelLimit' => 10, 'outboundVoiceProfileID' => '1911630617284445511',
             ],
             active: false,
             inbound: [
@@ -85,7 +84,9 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->externalConnections->retrieve('id');
+        $result = $this->client->externalConnections->retrieve(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExternalConnectionGetResponse::class, $result);
@@ -99,8 +100,8 @@ final class ExternalConnectionsTest extends TestCase
         }
 
         $result = $this->client->externalConnections->update(
-            'id',
-            outbound: ['outboundVoiceProfileID' => 'outbound_voice_profile_id']
+            '1293384261075731499',
+            outbound: ['outboundVoiceProfileID' => '1911630617284445511'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -115,10 +116,9 @@ final class ExternalConnectionsTest extends TestCase
         }
 
         $result = $this->client->externalConnections->update(
-            'id',
+            '1293384261075731499',
             outbound: [
-                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
-                'channelLimit' => 10,
+                'outboundVoiceProfileID' => '1911630617284445511', 'channelLimit' => 10,
             ],
             active: false,
             inbound: ['channelLimit' => 10],
@@ -157,7 +157,7 @@ final class ExternalConnectionsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->externalConnections->delete('id');
+        $result = $this->client->externalConnections->delete('1293384261075731499');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ExternalConnectionDeleteResponse::class, $result);

@@ -38,7 +38,7 @@ final class CivicAddressesTest extends TestCase
 
         $result = $this->client->externalConnections->civicAddresses->retrieve(
             '318fb664-d341-44d2-8405-e6bfb9ced6d9',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,7 +54,7 @@ final class CivicAddressesTest extends TestCase
 
         $result = $this->client->externalConnections->civicAddresses->retrieve(
             '318fb664-d341-44d2-8405-e6bfb9ced6d9',
-            id: 'id'
+            id: '1293384261075731499'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -68,7 +68,9 @@ final class CivicAddressesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->externalConnections->civicAddresses->list('id');
+        $result = $this->client->externalConnections->civicAddresses->list(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CivicAddressListResponse::class, $result);
