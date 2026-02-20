@@ -201,7 +201,7 @@ final class CallsService implements CallsContract
      * @param SupervisingRole|value-of<SupervisingRole> $supervisingRole The supervising role for the new leg. Determines the audio behavior: barge (hear both sides), whisper (only hear supervisor), monitor (hear both sides but supervisor muted). Default: barge
      * @param string $texml TeXML to be used as instructions for the call. If provided, the call will execute these instructions instead of fetching from the Url.
      * @param int $timeLimit The maximum duration of the call in seconds. The minimum value is 30 and the maximum value is 14400 (4 hours). Default is 14400 seconds.
-     * @param int $timeout The number of seconds to wait for the called party to answer the call before the call is canceled. The minimum value is 5 and the maximum value is 120. Default is 30 seconds.
+     * @param int $timeoutSeconds The number of seconds to wait for the called party to answer the call before the call is canceled. The minimum value is 5 and the maximum value is 120. Default is 30 seconds.
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
@@ -247,7 +247,7 @@ final class CallsService implements CallsContract
         SupervisingRole|string $supervisingRole = 'barge',
         ?string $texml = null,
         int $timeLimit = 14400,
-        int $timeout = 30,
+        int $timeoutSeconds = 30,
         Trim|string|null $trim = null,
         ?string $url = null,
         URLMethod|string $urlMethod = 'POST',
@@ -291,7 +291,7 @@ final class CallsService implements CallsContract
                 'supervisingRole' => $supervisingRole,
                 'texml' => $texml,
                 'timeLimit' => $timeLimit,
-                'timeout' => $timeout,
+                'timeoutSeconds' => $timeoutSeconds,
                 'trim' => $trim,
                 'url' => $url,
                 'urlMethod' => $urlMethod,
