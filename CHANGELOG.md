@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.35.0 (2026-02-20)
+
+Full Changelog: [v6.34.0...v6.35.0](https://github.com/team-telnyx/telnyx-php/compare/v6.34.0...v6.35.0)
+
+### Features
+
+* **api:** manual updates ([b9cfdc3](https://github.com/team-telnyx/telnyx-php/commit/b9cfdc3f649bfe22c056069a7836eb90c1149e13))
+
+
+### Documentation
+
+* add service_provider_login_url to authentication provider settings ([3a95495](https://github.com/team-telnyx/telnyx-php/commit/3a95495fc590c59d1ed7c9ea107970c338eb7cb6))
+
 ## 6.34.0 (2026-02-19)
 
 Full Changelog: [v6.33.0...v6.34.0](https://github.com/team-telnyx/telnyx-php/compare/v6.33.0...v6.34.0)
