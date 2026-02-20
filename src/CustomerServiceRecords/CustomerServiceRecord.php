@@ -22,6 +22,7 @@ use Telnyx\CustomerServiceRecords\CustomerServiceRecord\Status;
  *   result?: null|Result|ResultShape,
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
+ *   webhookURL?: string|null,
  * }
  */
 final class CustomerServiceRecord implements BaseModel
@@ -79,6 +80,12 @@ final class CustomerServiceRecord implements BaseModel
     #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
+    /**
+     * Callback URL to receive webhook notifications.
+     */
+    #[Optional('webhook_url')]
+    public ?string $webhookURL;
+
     public function __construct()
     {
         $this->initialize();
@@ -101,6 +108,7 @@ final class CustomerServiceRecord implements BaseModel
         Result|array|null $result = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
+        ?string $webhookURL = null,
     ): self {
         $self = new self;
 
@@ -112,6 +120,7 @@ final class CustomerServiceRecord implements BaseModel
         null !== $result && $self['result'] = $result;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
     }
@@ -204,6 +213,17 @@ final class CustomerServiceRecord implements BaseModel
     {
         $self = clone $this;
         $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    /**
+     * Callback URL to receive webhook notifications.
+     */
+    public function withWebhookURL(string $webhookURL): self
+    {
+        $self = clone $this;
+        $self['webhookURL'] = $webhookURL;
 
         return $self;
     }

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services\Conferences;
 
 use Telnyx\Client;
-use Telnyx\Conferences\Actions\ActionEndParams;
-use Telnyx\Conferences\Actions\ActionEndResponse;
-use Telnyx\Conferences\Actions\ActionGatherUsingAudioParams;
-use Telnyx\Conferences\Actions\ActionGatherUsingAudioResponse;
+use Telnyx\Conferences\Actions\ActionEndConferenceParams;
+use Telnyx\Conferences\Actions\ActionEndConferenceResponse;
+use Telnyx\Conferences\Actions\ActionGatherDtmfAudioParams;
+use Telnyx\Conferences\Actions\ActionGatherDtmfAudioResponse;
 use Telnyx\Conferences\Actions\ActionHoldParams;
 use Telnyx\Conferences\Actions\ActionHoldResponse;
 use Telnyx\Conferences\Actions\ActionJoinParams;
@@ -109,19 +109,19 @@ final class ActionsRawService implements ActionsRawContract
      * End a conference and terminate all active participants.
      *
      * @param string $id uniquely identifies the conference
-     * @param array{commandID?: string}|ActionEndParams $params
+     * @param array{commandID?: string}|ActionEndConferenceParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ActionEndResponse>
+     * @return BaseResponse<ActionEndConferenceResponse>
      *
      * @throws APIException
      */
-    public function end(
+    public function endConference(
         string $id,
-        array|ActionEndParams $params,
+        array|ActionEndConferenceParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = ActionEndParams::parseRequest(
+        [$parsed, $options] = ActionEndConferenceParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -132,7 +132,7 @@ final class ActionsRawService implements ActionsRawContract
             path: ['conferences/%1$s/actions/end', $id],
             body: (object) $parsed,
             options: $options,
-            convert: ActionEndResponse::class,
+            convert: ActionEndConferenceResponse::class,
         );
     }
 
@@ -159,19 +159,19 @@ final class ActionsRawService implements ActionsRawContract
      *   terminatingDigit?: string,
      *   timeoutMillis?: int,
      *   validDigits?: string,
-     * }|ActionGatherUsingAudioParams $params
+     * }|ActionGatherDtmfAudioParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ActionGatherUsingAudioResponse>
+     * @return BaseResponse<ActionGatherDtmfAudioResponse>
      *
      * @throws APIException
      */
-    public function gatherUsingAudio(
+    public function gatherDtmfAudio(
         string $id,
-        array|ActionGatherUsingAudioParams $params,
+        array|ActionGatherDtmfAudioParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = ActionGatherUsingAudioParams::parseRequest(
+        [$parsed, $options] = ActionGatherDtmfAudioParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -182,7 +182,7 @@ final class ActionsRawService implements ActionsRawContract
             path: ['conferences/%1$s/actions/gather_using_audio', $id],
             body: (object) $parsed,
             options: $options,
-            convert: ActionGatherUsingAudioResponse::class,
+            convert: ActionGatherDtmfAudioResponse::class,
         );
     }
 

@@ -75,7 +75,7 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->fqdns->retrieve('id');
+        $result = $this->client->fqdns->retrieve('1517907029795014409');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnGetResponse::class, $result);
@@ -88,7 +88,7 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->fqdns->update('id');
+        $result = $this->client->fqdns->update('1517907029795014409');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnUpdateResponse::class, $result);
@@ -119,7 +119,7 @@ final class FqdnsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->fqdns->delete('id');
+        $result = $this->client->fqdns->delete('1517907029795014409');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FqdnDeleteResponse::class, $result);

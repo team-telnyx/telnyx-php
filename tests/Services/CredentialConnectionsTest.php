@@ -106,7 +106,7 @@ final class CredentialConnectionsTest extends TestCase
                 'generateRingbackTone' => true,
                 'instantRingbackEnabled' => true,
                 'localization' => 'US',
-                'outboundVoiceProfileID' => 'outbound_voice_profile_id',
+                'outboundVoiceProfileID' => '1293384261075731499',
                 't38ReinviteSource' => 'customer',
             ],
             rtcpSettings: [

@@ -26,6 +26,7 @@ use Telnyx\PhoneNumbers\PhoneNumberDeleteResponse\Data\Status;
  *   emergencyAddressID?: string|null,
  *   emergencyEnabled?: bool|null,
  *   externalPin?: string|null,
+ *   hdVoiceEnabled?: bool|null,
  *   messagingProfileID?: string|null,
  *   messagingProfileName?: string|null,
  *   phoneNumber?: string|null,
@@ -128,6 +129,12 @@ final class Data implements BaseModel
     public ?string $externalPin;
 
     /**
+     * Indicates whether HD voice is enabled for this number.
+     */
+    #[Optional('hd_voice_enabled')]
+    public ?bool $hdVoiceEnabled;
+
+    /**
      * Identifies the messaging profile associated with the phone number.
      */
     #[Optional('messaging_profile_id')]
@@ -222,6 +229,7 @@ final class Data implements BaseModel
         ?string $emergencyAddressID = null,
         ?bool $emergencyEnabled = null,
         ?string $externalPin = null,
+        ?bool $hdVoiceEnabled = null,
         ?string $messagingProfileID = null,
         ?string $messagingProfileName = null,
         ?string $phoneNumber = null,
@@ -249,6 +257,7 @@ final class Data implements BaseModel
         null !== $emergencyAddressID && $self['emergencyAddressID'] = $emergencyAddressID;
         null !== $emergencyEnabled && $self['emergencyEnabled'] = $emergencyEnabled;
         null !== $externalPin && $self['externalPin'] = $externalPin;
+        null !== $hdVoiceEnabled && $self['hdVoiceEnabled'] = $hdVoiceEnabled;
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $messagingProfileName && $self['messagingProfileName'] = $messagingProfileName;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
@@ -413,6 +422,17 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['externalPin'] = $externalPin;
+
+        return $self;
+    }
+
+    /**
+     * Indicates whether HD voice is enabled for this number.
+     */
+    public function withHDVoiceEnabled(bool $hdVoiceEnabled): self
+    {
+        $self = clone $this;
+        $self['hdVoiceEnabled'] = $hdVoiceEnabled;
 
         return $self;
     }

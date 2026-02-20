@@ -16,6 +16,7 @@ use Telnyx\NumberReservations\NumberReservation\Status;
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   customerReference?: string|null,
+ *   errors?: string|null,
  *   phoneNumbers?: list<ReservedPhoneNumber|ReservedPhoneNumberShape>|null,
  *   recordType?: string|null,
  *   status?: null|Status|value-of<Status>,
@@ -41,6 +42,12 @@ final class NumberReservation implements BaseModel
      */
     #[Optional('customer_reference')]
     public ?string $customerReference;
+
+    /**
+     * Errors the reservation could happen upon.
+     */
+    #[Optional]
+    public ?string $errors;
 
     /** @var list<ReservedPhoneNumber>|null $phoneNumbers */
     #[Optional('phone_numbers', list: ReservedPhoneNumber::class)]
@@ -80,6 +87,7 @@ final class NumberReservation implements BaseModel
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $customerReference = null,
+        ?string $errors = null,
         ?array $phoneNumbers = null,
         ?string $recordType = null,
         Status|string|null $status = null,
@@ -90,6 +98,7 @@ final class NumberReservation implements BaseModel
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $customerReference && $self['customerReference'] = $customerReference;
+        null !== $errors && $self['errors'] = $errors;
         null !== $phoneNumbers && $self['phoneNumbers'] = $phoneNumbers;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $status && $self['status'] = $status;
@@ -124,6 +133,17 @@ final class NumberReservation implements BaseModel
     {
         $self = clone $this;
         $self['customerReference'] = $customerReference;
+
+        return $self;
+    }
+
+    /**
+     * Errors the reservation could happen upon.
+     */
+    public function withErrors(string $errors): self
+    {
+        $self = clone $this;
+        $self['errors'] = $errors;
 
         return $self;
     }

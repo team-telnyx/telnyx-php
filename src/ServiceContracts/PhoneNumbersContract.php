@@ -40,6 +40,7 @@ interface PhoneNumbersContract
      * @api
      *
      * @param string $phoneNumberID identifies the resource
+     * @param string $addressID identifies the address associated with the phone number
      * @param string $billingGroupID identifies the billing group associated with the phone number
      * @param string $connectionID identifies the connection associated with the phone number
      * @param string $customerReference a customer reference string for customer look ups
@@ -52,6 +53,7 @@ interface PhoneNumbersContract
      */
     public function update(
         string $phoneNumberID,
+        ?string $addressID = null,
         ?string $billingGroupID = null,
         ?string $connectionID = null,
         ?string $customerReference = null,

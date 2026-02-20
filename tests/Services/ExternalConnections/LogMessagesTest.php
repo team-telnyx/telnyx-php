@@ -38,7 +38,9 @@ final class LogMessagesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->externalConnections->logMessages->retrieve('id');
+        $result = $this->client->externalConnections->logMessages->retrieve(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(LogMessageGetResponse::class, $result);
@@ -69,7 +71,9 @@ final class LogMessagesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->externalConnections->logMessages->dismiss('id');
+        $result = $this->client->externalConnections->logMessages->dismiss(
+            '1293384261075731499'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(LogMessageDismissResponse::class, $result);
