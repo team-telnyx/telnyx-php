@@ -177,6 +177,7 @@ final class ParticipantsService implements ParticipantsContract
      * @param string $accountSid path param: The id of the account the resource belongs to
      * @param string $amdStatusCallback body param: The URL the result of answering machine detection will be sent to
      * @param AmdStatusCallbackMethod|value-of<AmdStatusCallbackMethod> $amdStatusCallbackMethod Body param: HTTP request type used for `AmdStatusCallback`. Defaults to `POST`.
+     * @param string $applicationSid Body param: The SID of the TeXML application that will handle the new participant's call. Required unless joining an existing conference by its ConferenceSid.
      * @param Beep|value-of<Beep> $beep body param: Whether to play a notification beep to the conference when the participant enters and exits
      * @param string $callerID Body param: To be used as the caller id name (SIP From Display Name) presented to the destination (`To` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and `-_~!.+` special characters. If ommited, the display name will be the same as the number in the `From` field.
      * @param string $callSidToCoach Body param: The SID of the participant who is being coached. The participant being coached is the only participant who can hear the participant who is coaching.
@@ -231,6 +232,7 @@ final class ParticipantsService implements ParticipantsContract
         string $accountSid,
         ?string $amdStatusCallback = null,
         AmdStatusCallbackMethod|string|null $amdStatusCallbackMethod = null,
+        ?string $applicationSid = null,
         Beep|string|null $beep = null,
         ?string $callerID = null,
         ?string $callSidToCoach = null,
@@ -283,6 +285,7 @@ final class ParticipantsService implements ParticipantsContract
                 'accountSid' => $accountSid,
                 'amdStatusCallback' => $amdStatusCallback,
                 'amdStatusCallbackMethod' => $amdStatusCallbackMethod,
+                'applicationSid' => $applicationSid,
                 'beep' => $beep,
                 'callerID' => $callerID,
                 'callSidToCoach' => $callSidToCoach,
