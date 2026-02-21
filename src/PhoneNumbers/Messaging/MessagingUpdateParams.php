@@ -15,7 +15,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\PhoneNumbers\MessagingService::update()
  *
  * @phpstan-type MessagingUpdateParamsShape = array{
- *   messagingProduct?: string|null, messagingProfileID?: string|null
+ *   messagingProduct?: string|null,
+ *   messagingProfileID?: string|null,
+ *   tags?: list<string>|null,
  * }
  */
 final class MessagingUpdateParams implements BaseModel
@@ -43,6 +45,14 @@ final class MessagingUpdateParams implements BaseModel
     #[Optional('messaging_profile_id')]
     public ?string $messagingProfileID;
 
+    /**
+     * Tags to set on this phone number.
+     *
+     * @var list<string>|null $tags
+     */
+    #[Optional(list: 'string')]
+    public ?array $tags;
+
     public function __construct()
     {
         $this->initialize();
@@ -52,15 +62,19 @@ final class MessagingUpdateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<string>|null $tags
      */
     public static function with(
         ?string $messagingProduct = null,
-        ?string $messagingProfileID = null
+        ?string $messagingProfileID = null,
+        ?array $tags = null,
     ): self {
         $self = new self;
 
         null !== $messagingProduct && $self['messagingProduct'] = $messagingProduct;
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $tags && $self['tags'] = $tags;
 
         return $self;
     }
@@ -90,6 +104,19 @@ final class MessagingUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['messagingProfileID'] = $messagingProfileID;
+
+        return $self;
+    }
+
+    /**
+     * Tags to set on this phone number.
+     *
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
 
         return $self;
     }

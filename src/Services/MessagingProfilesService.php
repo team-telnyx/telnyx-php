@@ -11,15 +11,19 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
+use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
+use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams\TimeFrame;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
 use Telnyx\MessagingProfiles\URLShortenerSettings;
 use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfilesContract;
+use Telnyx\Services\MessagingProfiles\ActionsService;
 use Telnyx\Services\MessagingProfiles\AutorespConfigsService;
 use Telnyx\ShortCode;
 
@@ -42,12 +46,18 @@ final class MessagingProfilesService implements MessagingProfilesContract
     public AutorespConfigsService $autorespConfigs;
 
     /**
+     * @api
+     */
+    public ActionsService $actions;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new MessagingProfilesRawService($client);
         $this->autorespConfigs = new AutorespConfigsService($client);
+        $this->actions = new ActionsService($client);
     }
 
     /**
@@ -57,10 +67,12 @@ final class MessagingProfilesService implements MessagingProfilesContract
      *
      * @param string $name a user friendly name for the messaging profile
      * @param list<string> $whitelistedDestinations Destinations to which the messaging profile is allowed to send. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]` all destinations will be allowed.
+     * @param string|null $aiAssistantID the AI assistant ID to associate with this messaging profile
      * @param string|null $alphaSender the alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID
      * @param string $dailySpendLimit the maximum amount of money (in USD) that can be spent by this profile before midnight UTC
      * @param bool $dailySpendLimitEnabled whether to enforce the value configured by `daily_spend_limit`
      * @param bool $enabled specifies whether the messaging profile is enabled or not
+     * @param string|null $healthWebhookURL a URL to receive health check webhooks for numbers in this profile
      * @param bool $mmsFallBackToSMS enables SMS fallback for MMS messages
      * @param bool $mmsTranscoding enables automated resizing of MMS media
      * @param bool $mobileOnly send messages only to mobile phone numbers
@@ -69,6 +81,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * assigned to the messaging profile.
      *
      * To disable this feature, set the object field to `null`.
+     * @param string|null $resourceGroupID the resource group ID to associate with this messaging profile
      * @param bool $smartEncoding Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
      * @param URLShortenerSettings|URLShortenerSettingsShape|null $urlShortenerSettings The URL shortener feature allows automatic replacement of URLs that were generated using
      * a public URL shortener service. Some examples include bit.do, bit.ly, goo.gl, ht.ly,
@@ -87,14 +100,17 @@ final class MessagingProfilesService implements MessagingProfilesContract
     public function create(
         string $name,
         array $whitelistedDestinations,
+        ?string $aiAssistantID = null,
         ?string $alphaSender = null,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
         bool $enabled = true,
+        ?string $healthWebhookURL = null,
         bool $mmsFallBackToSMS = false,
         bool $mmsTranscoding = false,
         bool $mobileOnly = false,
         NumberPoolSettings|array|null $numberPoolSettings = null,
+        ?string $resourceGroupID = null,
         bool $smartEncoding = false,
         URLShortenerSettings|array|null $urlShortenerSettings = null,
         WebhookAPIVersion|string $webhookAPIVersion = '2',
@@ -106,14 +122,17 @@ final class MessagingProfilesService implements MessagingProfilesContract
             [
                 'name' => $name,
                 'whitelistedDestinations' => $whitelistedDestinations,
+                'aiAssistantID' => $aiAssistantID,
                 'alphaSender' => $alphaSender,
                 'dailySpendLimit' => $dailySpendLimit,
                 'dailySpendLimitEnabled' => $dailySpendLimitEnabled,
                 'enabled' => $enabled,
+                'healthWebhookURL' => $healthWebhookURL,
                 'mmsFallBackToSMS' => $mmsFallBackToSMS,
                 'mmsTranscoding' => $mmsTranscoding,
                 'mobileOnly' => $mobileOnly,
                 'numberPoolSettings' => $numberPoolSettings,
+                'resourceGroupID' => $resourceGroupID,
                 'smartEncoding' => $smartEncoding,
                 'urlShortenerSettings' => $urlShortenerSettings,
                 'webhookAPIVersion' => $webhookAPIVersion,
@@ -239,6 +258,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * List messaging profiles
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
+     * @param string $filterNameContains filter profiles by name containing the given string
+     * @param string $filterNameEq filter profiles by exact name match
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<MessagingProfile>
@@ -247,6 +268,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      */
     public function list(
         Filter|array|null $filter = null,
+        ?string $filterNameContains = null,
+        ?string $filterNameEq = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
@@ -254,6 +277,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
         $params = Util::removeNulls(
             [
                 'filter' => $filter,
+                'filterNameContains' => $filterNameContains,
+                'filterNameEq' => $filterNameEq,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
             ],
@@ -281,6 +306,34 @@ final class MessagingProfilesService implements MessagingProfilesContract
     ): MessagingProfileDeleteResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($messagingProfileID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * List all alphanumeric sender IDs associated with a specific messaging profile.
+     *
+     * @param string $id the identifier of the messaging profile
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<MessagingProfileListAlphanumericSenderIDsResponse>
+     *
+     * @throws APIException
+     */
+    public function listAlphanumericSenderIDs(
+        string $id,
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listAlphanumericSenderIDs($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -337,6 +390,30 @@ final class MessagingProfilesService implements MessagingProfilesContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listShortCodes($messagingProfileID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Get detailed metrics for a specific messaging profile, broken down by time interval.
+     *
+     * @param string $id the identifier of the messaging profile
+     * @param TimeFrame|value-of<TimeFrame> $timeFrame the time frame for metrics
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveMetrics(
+        string $id,
+        TimeFrame|string $timeFrame = '24h',
+        RequestOptions|array|null $requestOptions = null,
+    ): MessagingProfileGetMetricsResponse {
+        $params = Util::removeNulls(['timeFrame' => $timeFrame]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveMetrics($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messages\MessageCancelScheduledResponse;
+use Telnyx\Messages\MessageGetGroupMessagesResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams\Type;
 use Telnyx\Messages\MessageScheduleResponse;
@@ -17,6 +18,7 @@ use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
 use Telnyx\Messages\MessageSendWhatsappResponse;
+use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -50,6 +52,19 @@ interface MessagesContract
         string $id,
         RequestOptions|array|null $requestOptions = null
     ): MessageCancelScheduledResponse;
+
+    /**
+     * @api
+     *
+     * @param string $messageID the group message ID
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveGroupMessages(
+        string $messageID,
+        RequestOptions|array|null $requestOptions = null
+    ): MessageGetGroupMessagesResponse;
 
     /**
      * @api
@@ -297,4 +312,29 @@ interface MessagesContract
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessageSendWhatsappResponse;
+
+    /**
+     * @api
+     *
+     * @param string $from a valid alphanumeric sender ID on the user's account
+     * @param string $messagingProfileID the messaging profile ID to use
+     * @param string $text the message body
+     * @param string $to Receiving address (+E.164 formatted phone number).
+     * @param bool $useProfileWebhooks if true, use the messaging profile's webhook settings
+     * @param string|null $webhookFailoverURL failover callback URL for delivery status updates
+     * @param string|null $webhookURL callback URL for delivery status updates
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function sendWithAlphanumericSender(
+        string $from,
+        string $messagingProfileID,
+        string $text,
+        string $to,
+        ?bool $useProfileWebhooks = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): MessageSendWithAlphanumericSenderResponse;
 }

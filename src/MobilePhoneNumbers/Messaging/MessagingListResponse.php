@@ -21,8 +21,10 @@ use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse\Type;
  *   features?: null|Features|FeaturesShape,
  *   messagingProduct?: string|null,
  *   messagingProfileID?: string|null,
+ *   organizationID?: string|null,
  *   phoneNumber?: string|null,
  *   recordType?: null|RecordType|value-of<RecordType>,
+ *   tags?: list<string>|null,
  *   trafficType?: string|null,
  *   type?: null|Type|value-of<Type>,
  *   updatedAt?: \DateTimeInterface|null,
@@ -67,6 +69,12 @@ final class MessagingListResponse implements BaseModel
     public ?string $messagingProfileID;
 
     /**
+     * The organization that owns this phone number.
+     */
+    #[Optional('organization_id')]
+    public ?string $organizationID;
+
+    /**
      * +E.164 formatted phone number.
      */
     #[Optional('phone_number')]
@@ -79,6 +87,14 @@ final class MessagingListResponse implements BaseModel
      */
     #[Optional('record_type', enum: RecordType::class)]
     public ?string $recordType;
+
+    /**
+     * Tags associated with this phone number.
+     *
+     * @var list<string>|null $tags
+     */
+    #[Optional(list: 'string')]
+    public ?array $tags;
 
     /**
      * The messaging traffic or use case for which the number is currently configured.
@@ -112,6 +128,7 @@ final class MessagingListResponse implements BaseModel
      *
      * @param Features|FeaturesShape|null $features
      * @param RecordType|value-of<RecordType>|null $recordType
+     * @param list<string>|null $tags
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
@@ -121,8 +138,10 @@ final class MessagingListResponse implements BaseModel
         Features|array|null $features = null,
         ?string $messagingProduct = null,
         ?string $messagingProfileID = null,
+        ?string $organizationID = null,
         ?string $phoneNumber = null,
         RecordType|string|null $recordType = null,
+        ?array $tags = null,
         ?string $trafficType = null,
         Type|string|null $type = null,
         ?\DateTimeInterface $updatedAt = null,
@@ -135,8 +154,10 @@ final class MessagingListResponse implements BaseModel
         null !== $features && $self['features'] = $features;
         null !== $messagingProduct && $self['messagingProduct'] = $messagingProduct;
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $recordType && $self['recordType'] = $recordType;
+        null !== $tags && $self['tags'] = $tags;
         null !== $trafficType && $self['trafficType'] = $trafficType;
         null !== $type && $self['type'] = $type;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
@@ -211,6 +232,17 @@ final class MessagingListResponse implements BaseModel
     }
 
     /**
+     * The organization that owns this phone number.
+     */
+    public function withOrganizationID(string $organizationID): self
+    {
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
+
+        return $self;
+    }
+
+    /**
      * +E.164 formatted phone number.
      */
     public function withPhoneNumber(string $phoneNumber): self
@@ -230,6 +262,19 @@ final class MessagingListResponse implements BaseModel
     {
         $self = clone $this;
         $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * Tags associated with this phone number.
+     *
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
 
         return $self;
     }

@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\Messages\MessageCancelScheduledResponse;
+use Telnyx\Messages\MessageGetGroupMessagesResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams\Type;
 use Telnyx\Messages\MessageScheduleResponse;
@@ -19,6 +20,7 @@ use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
 use Telnyx\Messages\MessageSendWhatsappResponse;
+use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesContract;
 use Telnyx\Services\Messages\RcsService;
@@ -84,6 +86,26 @@ final class MessagesService implements MessagesContract
     ): MessageCancelScheduledResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->cancelScheduled($id, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Retrieve all messages in a group MMS conversation by the group message ID.
+     *
+     * @param string $messageID the group message ID
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveGroupMessages(
+        string $messageID,
+        RequestOptions|array|null $requestOptions = null
+    ): MessageGetGroupMessagesResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveGroupMessages($messageID, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -494,6 +516,50 @@ final class MessagesService implements MessagesContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->sendWhatsapp(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Send an SMS message using an alphanumeric sender ID. This is SMS only.
+     *
+     * @param string $from a valid alphanumeric sender ID on the user's account
+     * @param string $messagingProfileID the messaging profile ID to use
+     * @param string $text the message body
+     * @param string $to Receiving address (+E.164 formatted phone number).
+     * @param bool $useProfileWebhooks if true, use the messaging profile's webhook settings
+     * @param string|null $webhookFailoverURL failover callback URL for delivery status updates
+     * @param string|null $webhookURL callback URL for delivery status updates
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function sendWithAlphanumericSender(
+        string $from,
+        string $messagingProfileID,
+        string $text,
+        string $to,
+        ?bool $useProfileWebhooks = null,
+        ?string $webhookFailoverURL = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): MessageSendWithAlphanumericSenderResponse {
+        $params = Util::removeNulls(
+            [
+                'from' => $from,
+                'messagingProfileID' => $messagingProfileID,
+                'text' => $text,
+                'to' => $to,
+                'useProfileWebhooks' => $useProfileWebhooks,
+                'webhookFailoverURL' => $webhookFailoverURL,
+                'webhookURL' => $webhookURL,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->sendWithAlphanumericSender(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

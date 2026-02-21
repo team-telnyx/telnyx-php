@@ -13,12 +13,17 @@ use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
+use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsParams;
+use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
+use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams;
+use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams\TimeFrame;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
@@ -50,14 +55,17 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * @param array{
      *   name: string,
      *   whitelistedDestinations: list<string>,
+     *   aiAssistantID?: string|null,
      *   alphaSender?: string|null,
      *   dailySpendLimit?: string,
      *   dailySpendLimitEnabled?: bool,
      *   enabled?: bool,
+     *   healthWebhookURL?: string|null,
      *   mmsFallBackToSMS?: bool,
      *   mmsTranscoding?: bool,
      *   mobileOnly?: bool,
      *   numberPoolSettings?: NumberPoolSettings|NumberPoolSettingsShape|null,
+     *   resourceGroupID?: string|null,
      *   smartEncoding?: bool,
      *   urlShortenerSettings?: URLShortenerSettings|URLShortenerSettingsShape|null,
      *   webhookAPIVersion?: WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -170,7 +178,11 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * List messaging profiles
      *
      * @param array{
-     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     *   filter?: Filter|FilterShape,
+     *   filterNameContains?: string,
+     *   filterNameEq?: string,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|MessagingProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -193,7 +205,12 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
             path: 'messaging_profiles',
             query: Util::array_transform_keys(
                 $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+                [
+                    'filterNameContains' => 'filter[name][contains]',
+                    'filterNameEq' => 'filter[name][eq]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
             ),
             options: $options,
             convert: MessagingProfile::class,
@@ -223,6 +240,45 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
             path: ['messaging_profiles/%1$s', $messagingProfileID],
             options: $requestOptions,
             convert: MessagingProfileDeleteResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * List all alphanumeric sender IDs associated with a specific messaging profile.
+     *
+     * @param string $id the identifier of the messaging profile
+     * @param array{
+     *   pageNumber?: int, pageSize?: int
+     * }|MessagingProfileListAlphanumericSenderIDsParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<DefaultFlatPagination<MessagingProfileListAlphanumericSenderIDsResponse,>,>
+     *
+     * @throws APIException
+     */
+    public function listAlphanumericSenderIDs(
+        string $id,
+        array|MessagingProfileListAlphanumericSenderIDsParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = MessagingProfileListAlphanumericSenderIDsParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['messaging_profiles/%1$s/alphanumeric_sender_ids', $id],
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
+            options: $options,
+            convert: MessagingProfileListAlphanumericSenderIDsResponse::class,
+            page: DefaultFlatPagination::class,
         );
     }
 
@@ -301,6 +357,41 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
             options: $options,
             convert: ShortCode::class,
             page: DefaultFlatPagination::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Get detailed metrics for a specific messaging profile, broken down by time interval.
+     *
+     * @param string $id the identifier of the messaging profile
+     * @param array{
+     *   timeFrame?: TimeFrame|value-of<TimeFrame>
+     * }|MessagingProfileRetrieveMetricsParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessagingProfileGetMetricsResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveMetrics(
+        string $id,
+        array|MessagingProfileRetrieveMetricsParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = MessagingProfileRetrieveMetricsParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['messaging_profiles/%1$s/metrics', $id],
+            query: Util::array_transform_keys($parsed, ['timeFrame' => 'time_frame']),
+            options: $options,
+            convert: MessagingProfileGetMetricsResponse::class,
         );
     }
 }
