@@ -144,7 +144,7 @@ final class BrandTest extends TestCase
             email: 'email',
             entityType: EntityType::PRIVATE_PROFIT,
             vertical: Vertical::TECHNOLOGY,
-            altBusinessID: 'altBusiness_id',
+            altBusinessID: 'altBusinessId',
             altBusinessIDType: AltBusinessIDType::NONE,
             businessContactEmail: 'name@example.com',
             city: 'New York',
