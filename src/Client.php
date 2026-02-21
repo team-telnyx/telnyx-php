@@ -14,6 +14,7 @@ use Telnyx\Services\ActionsService;
 use Telnyx\Services\AddressesService;
 use Telnyx\Services\AdvancedOrdersService;
 use Telnyx\Services\AIService;
+use Telnyx\Services\AlphanumericSenderIDsService;
 use Telnyx\Services\AuditEventsService;
 use Telnyx\Services\AuthenticationProvidersService;
 use Telnyx\Services\AvailablePhoneNumberBlocksService;
@@ -74,6 +75,7 @@ use Telnyx\Services\MessagingHostedNumberOrdersService;
 use Telnyx\Services\MessagingHostedNumbersService;
 use Telnyx\Services\MessagingNumbersBulkUpdatesService;
 use Telnyx\Services\MessagingOptoutsService;
+use Telnyx\Services\MessagingProfileMetricsService;
 use Telnyx\Services\MessagingProfilesService;
 use Telnyx\Services\MessagingService;
 use Telnyx\Services\MessagingTollfreeService;
@@ -932,6 +934,16 @@ class Client extends BaseClient
     public OrganizationsService $organizations;
 
     /**
+     * @api
+     */
+    public AlphanumericSenderIDsService $alphanumericSenderIDs;
+
+    /**
+     * @api
+     */
+    public MessagingProfileMetricsService $messagingProfileMetrics;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1132,6 +1144,8 @@ class Client extends BaseClient
         $this->messaging10dlc = new Messaging10dlcService($this);
         $this->speechToText = new SpeechToTextService($this);
         $this->organizations = new OrganizationsService($this);
+        $this->alphanumericSenderIDs = new AlphanumericSenderIDsService($this);
+        $this->messagingProfileMetrics = new MessagingProfileMetricsService($this);
     }
 
     /** @return array<string,string> */

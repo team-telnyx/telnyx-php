@@ -22,14 +22,17 @@ use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
  * @phpstan-type MessagingProfileCreateParamsShape = array{
  *   name: string,
  *   whitelistedDestinations: list<string>,
+ *   aiAssistantID?: string|null,
  *   alphaSender?: string|null,
  *   dailySpendLimit?: string|null,
  *   dailySpendLimitEnabled?: bool|null,
  *   enabled?: bool|null,
+ *   healthWebhookURL?: string|null,
  *   mmsFallBackToSMS?: bool|null,
  *   mmsTranscoding?: bool|null,
  *   mobileOnly?: bool|null,
  *   numberPoolSettings?: null|NumberPoolSettings|NumberPoolSettingsShape,
+ *   resourceGroupID?: string|null,
  *   smartEncoding?: bool|null,
  *   urlShortenerSettings?: null|URLShortenerSettings|URLShortenerSettingsShape,
  *   webhookAPIVersion?: null|WebhookAPIVersion|value-of<WebhookAPIVersion>,
@@ -58,6 +61,12 @@ final class MessagingProfileCreateParams implements BaseModel
     public array $whitelistedDestinations;
 
     /**
+     * The AI assistant ID to associate with this messaging profile.
+     */
+    #[Optional('ai_assistant_id', nullable: true)]
+    public ?string $aiAssistantID;
+
+    /**
      * The alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID.
      */
     #[Optional('alpha_sender', nullable: true)]
@@ -80,6 +89,12 @@ final class MessagingProfileCreateParams implements BaseModel
      */
     #[Optional]
     public ?bool $enabled;
+
+    /**
+     * A URL to receive health check webhooks for numbers in this profile.
+     */
+    #[Optional('health_webhook_url', nullable: true)]
+    public ?string $healthWebhookURL;
 
     /**
      * enables SMS fallback for MMS messages.
@@ -108,6 +123,12 @@ final class MessagingProfileCreateParams implements BaseModel
      */
     #[Optional('number_pool_settings', nullable: true)]
     public ?NumberPoolSettings $numberPoolSettings;
+
+    /**
+     * The resource group ID to associate with this messaging profile.
+     */
+    #[Optional('resource_group_id', nullable: true)]
+    public ?string $resourceGroupID;
 
     /**
      * Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
@@ -181,14 +202,17 @@ final class MessagingProfileCreateParams implements BaseModel
     public static function with(
         string $name,
         array $whitelistedDestinations,
+        ?string $aiAssistantID = null,
         ?string $alphaSender = null,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
         ?bool $enabled = null,
+        ?string $healthWebhookURL = null,
         ?bool $mmsFallBackToSMS = null,
         ?bool $mmsTranscoding = null,
         ?bool $mobileOnly = null,
         NumberPoolSettings|array|null $numberPoolSettings = null,
+        ?string $resourceGroupID = null,
         ?bool $smartEncoding = null,
         URLShortenerSettings|array|null $urlShortenerSettings = null,
         WebhookAPIVersion|string|null $webhookAPIVersion = null,
@@ -200,14 +224,17 @@ final class MessagingProfileCreateParams implements BaseModel
         $self['name'] = $name;
         $self['whitelistedDestinations'] = $whitelistedDestinations;
 
+        null !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
         null !== $alphaSender && $self['alphaSender'] = $alphaSender;
         null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
         null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
         null !== $enabled && $self['enabled'] = $enabled;
+        null !== $healthWebhookURL && $self['healthWebhookURL'] = $healthWebhookURL;
         null !== $mmsFallBackToSMS && $self['mmsFallBackToSMS'] = $mmsFallBackToSMS;
         null !== $mmsTranscoding && $self['mmsTranscoding'] = $mmsTranscoding;
         null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
         null !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
+        null !== $resourceGroupID && $self['resourceGroupID'] = $resourceGroupID;
         null !== $smartEncoding && $self['smartEncoding'] = $smartEncoding;
         null !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
         null !== $webhookAPIVersion && $self['webhookAPIVersion'] = $webhookAPIVersion;
@@ -238,6 +265,17 @@ final class MessagingProfileCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['whitelistedDestinations'] = $whitelistedDestinations;
+
+        return $self;
+    }
+
+    /**
+     * The AI assistant ID to associate with this messaging profile.
+     */
+    public function withAIAssistantID(?string $aiAssistantID): self
+    {
+        $self = clone $this;
+        $self['aiAssistantID'] = $aiAssistantID;
 
         return $self;
     }
@@ -283,6 +321,17 @@ final class MessagingProfileCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['enabled'] = $enabled;
+
+        return $self;
+    }
+
+    /**
+     * A URL to receive health check webhooks for numbers in this profile.
+     */
+    public function withHealthWebhookURL(?string $healthWebhookURL): self
+    {
+        $self = clone $this;
+        $self['healthWebhookURL'] = $healthWebhookURL;
 
         return $self;
     }
@@ -334,6 +383,17 @@ final class MessagingProfileCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['numberPoolSettings'] = $numberPoolSettings;
+
+        return $self;
+    }
+
+    /**
+     * The resource group ID to associate with this messaging profile.
+     */
+    public function withResourceGroupID(?string $resourceGroupID): self
+    {
+        $self = clone $this;
+        $self['resourceGroupID'] = $resourceGroupID;
 
         return $self;
     }

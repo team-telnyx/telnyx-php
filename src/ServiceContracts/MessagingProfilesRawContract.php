@@ -10,11 +10,15 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
+use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsParams;
+use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
+use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
@@ -106,6 +110,23 @@ interface MessagingProfilesRawContract
     /**
      * @api
      *
+     * @param string $id the identifier of the messaging profile
+     * @param array<string,mixed>|MessagingProfileListAlphanumericSenderIDsParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<DefaultFlatPagination<MessagingProfileListAlphanumericSenderIDsResponse,>,>
+     *
+     * @throws APIException
+     */
+    public function listAlphanumericSenderIDs(
+        string $id,
+        array|MessagingProfileListAlphanumericSenderIDsParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param array<string,mixed>|MessagingProfileListPhoneNumbersParams $params
      * @param RequestOpts|null $requestOptions
@@ -134,6 +155,23 @@ interface MessagingProfilesRawContract
     public function listShortCodes(
         string $messagingProfileID,
         array|MessagingProfileListShortCodesParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id the identifier of the messaging profile
+     * @param array<string,mixed>|MessagingProfileRetrieveMetricsParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessagingProfileGetMetricsResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveMetrics(
+        string $id,
+        array|MessagingProfileRetrieveMetricsParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

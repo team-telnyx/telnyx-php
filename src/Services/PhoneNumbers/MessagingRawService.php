@@ -11,6 +11,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\PhoneNumbers\Messaging\MessagingListParams;
+use Telnyx\PhoneNumbers\Messaging\MessagingListParams\FilterType;
+use Telnyx\PhoneNumbers\Messaging\MessagingListParams\SortPhoneNumber;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateParams;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
@@ -60,7 +62,7 @@ final class MessagingRawService implements MessagingRawContract
      *
      * @param string $id the phone number to update
      * @param array{
-     *   messagingProduct?: string, messagingProfileID?: string
+     *   messagingProduct?: string, messagingProfileID?: string, tags?: list<string>
      * }|MessagingUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -93,7 +95,15 @@ final class MessagingRawService implements MessagingRawContract
      *
      * List phone numbers with messaging settings
      *
-     * @param array{pageNumber?: int, pageSize?: int}|MessagingListParams $params
+     * @param array{
+     *   filterMessagingProfileID?: string,
+     *   filterPhoneNumber?: string,
+     *   filterPhoneNumberContains?: string,
+     *   filterType?: FilterType|value-of<FilterType>,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   sortPhoneNumber?: SortPhoneNumber|value-of<SortPhoneNumber>,
+     * }|MessagingListParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DefaultFlatPagination<PhoneNumberWithMessagingSettings>>
@@ -115,7 +125,15 @@ final class MessagingRawService implements MessagingRawContract
             path: 'phone_numbers/messaging',
             query: Util::array_transform_keys(
                 $parsed,
-                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+                [
+                    'filterMessagingProfileID' => 'filter[messaging_profile_id]',
+                    'filterPhoneNumber' => 'filter[phone_number]',
+                    'filterPhoneNumberContains' => 'filter[phone_number][contains]',
+                    'filterType' => 'filter[type]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                    'sortPhoneNumber' => 'sort[phone_number]',
+                ],
             ),
             options: $options,
             convert: PhoneNumberWithMessagingSettings::class,

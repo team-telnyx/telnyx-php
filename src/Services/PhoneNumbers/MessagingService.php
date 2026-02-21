@@ -9,6 +9,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PhoneNumbers\Messaging\MessagingGetResponse;
+use Telnyx\PhoneNumbers\Messaging\MessagingListParams\FilterType;
+use Telnyx\PhoneNumbers\Messaging\MessagingListParams\SortPhoneNumber;
 use Telnyx\PhoneNumbers\Messaging\MessagingUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
@@ -67,6 +69,7 @@ final class MessagingService implements MessagingContract
      * * Omit this field or set its value to `null` to keep the current value.
      * * Set this field to `""` to unassign the number from its messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign this number to that messaging profile
+     * @param list<string> $tags tags to set on this phone number
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -75,12 +78,14 @@ final class MessagingService implements MessagingContract
         string $id,
         ?string $messagingProduct = null,
         ?string $messagingProfileID = null,
+        ?array $tags = null,
         RequestOptions|array|null $requestOptions = null,
     ): MessagingUpdateResponse {
         $params = Util::removeNulls(
             [
                 'messagingProduct' => $messagingProduct,
                 'messagingProfileID' => $messagingProfileID,
+                'tags' => $tags,
             ],
         );
 
@@ -95,6 +100,11 @@ final class MessagingService implements MessagingContract
      *
      * List phone numbers with messaging settings
      *
+     * @param string $filterMessagingProfileID filter by messaging profile ID
+     * @param string $filterPhoneNumber filter by exact phone number (supports comma-separated list)
+     * @param string $filterPhoneNumberContains filter by phone number substring
+     * @param FilterType|value-of<FilterType> $filterType filter by phone number type
+     * @param SortPhoneNumber|value-of<SortPhoneNumber> $sortPhoneNumber sort by phone number
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<PhoneNumberWithMessagingSettings>
@@ -102,12 +112,25 @@ final class MessagingService implements MessagingContract
      * @throws APIException
      */
     public function list(
+        ?string $filterMessagingProfileID = null,
+        ?string $filterPhoneNumber = null,
+        ?string $filterPhoneNumberContains = null,
+        FilterType|string|null $filterType = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
+        SortPhoneNumber|string|null $sortPhoneNumber = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+            [
+                'filterMessagingProfileID' => $filterMessagingProfileID,
+                'filterPhoneNumber' => $filterPhoneNumber,
+                'filterPhoneNumberContains' => $filterPhoneNumberContains,
+                'filterType' => $filterType,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+                'sortPhoneNumber' => $sortPhoneNumber,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type

@@ -16,6 +16,7 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
  *
  * @phpstan-type MessagingProfileShape = array{
  *   id?: string|null,
+ *   aiAssistantID?: string|null,
  *   alphaSender?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   dailySpendLimit?: string|null,
@@ -27,9 +28,11 @@ use Telnyx\MessagingProfiles\MessagingProfile\WebhookAPIVersion;
  *   mobileOnly?: bool|null,
  *   name?: string|null,
  *   numberPoolSettings?: null|NumberPoolSettings|NumberPoolSettingsShape,
+ *   organizationID?: string|null,
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   redactionEnabled?: bool|null,
  *   redactionLevel?: int|null,
+ *   resourceGroupID?: string|null,
  *   smartEncoding?: bool|null,
  *   updatedAt?: \DateTimeInterface|null,
  *   urlShortenerSettings?: null|URLShortenerSettings|URLShortenerSettingsShape,
@@ -50,6 +53,12 @@ final class MessagingProfile implements BaseModel
      */
     #[Optional]
     public ?string $id;
+
+    /**
+     * The AI assistant ID associated with this messaging profile.
+     */
+    #[Optional('ai_assistant_id', nullable: true)]
+    public ?string $aiAssistantID;
 
     /**
      * The alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID.
@@ -122,6 +131,12 @@ final class MessagingProfile implements BaseModel
     public ?NumberPoolSettings $numberPoolSettings;
 
     /**
+     * The organization that owns this messaging profile.
+     */
+    #[Optional('organization_id')]
+    public ?string $organizationID;
+
+    /**
      * Identifies the type of the resource.
      *
      * @var value-of<RecordType>|null $recordType
@@ -140,6 +155,12 @@ final class MessagingProfile implements BaseModel
      */
     #[Optional('redaction_level')]
     public ?int $redactionLevel;
+
+    /**
+     * The resource group ID associated with this messaging profile.
+     */
+    #[Optional('resource_group_id', nullable: true)]
+    public ?string $resourceGroupID;
 
     /**
      * Enables automatic character encoding optimization for SMS messages. When enabled, the system automatically selects the most efficient encoding (GSM-7 or UCS-2) based on message content to maximize character limits and minimize costs.
@@ -217,6 +238,7 @@ final class MessagingProfile implements BaseModel
      */
     public static function with(
         ?string $id = null,
+        ?string $aiAssistantID = null,
         ?string $alphaSender = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $dailySpendLimit = null,
@@ -228,9 +250,11 @@ final class MessagingProfile implements BaseModel
         ?bool $mobileOnly = null,
         ?string $name = null,
         NumberPoolSettings|array|null $numberPoolSettings = null,
+        ?string $organizationID = null,
         RecordType|string|null $recordType = null,
         ?bool $redactionEnabled = null,
         ?int $redactionLevel = null,
+        ?string $resourceGroupID = null,
         ?bool $smartEncoding = null,
         ?\DateTimeInterface $updatedAt = null,
         URLShortenerSettings|array|null $urlShortenerSettings = null,
@@ -243,6 +267,7 @@ final class MessagingProfile implements BaseModel
         $self = new self;
 
         null !== $id && $self['id'] = $id;
+        null !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
         null !== $alphaSender && $self['alphaSender'] = $alphaSender;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
@@ -254,9 +279,11 @@ final class MessagingProfile implements BaseModel
         null !== $mobileOnly && $self['mobileOnly'] = $mobileOnly;
         null !== $name && $self['name'] = $name;
         null !== $numberPoolSettings && $self['numberPoolSettings'] = $numberPoolSettings;
+        null !== $organizationID && $self['organizationID'] = $organizationID;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $redactionEnabled && $self['redactionEnabled'] = $redactionEnabled;
         null !== $redactionLevel && $self['redactionLevel'] = $redactionLevel;
+        null !== $resourceGroupID && $self['resourceGroupID'] = $resourceGroupID;
         null !== $smartEncoding && $self['smartEncoding'] = $smartEncoding;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $urlShortenerSettings && $self['urlShortenerSettings'] = $urlShortenerSettings;
@@ -276,6 +303,17 @@ final class MessagingProfile implements BaseModel
     {
         $self = clone $this;
         $self['id'] = $id;
+
+        return $self;
+    }
+
+    /**
+     * The AI assistant ID associated with this messaging profile.
+     */
+    public function withAIAssistantID(?string $aiAssistantID): self
+    {
+        $self = clone $this;
+        $self['aiAssistantID'] = $aiAssistantID;
 
         return $self;
     }
@@ -410,6 +448,17 @@ final class MessagingProfile implements BaseModel
     }
 
     /**
+     * The organization that owns this messaging profile.
+     */
+    public function withOrganizationID(string $organizationID): self
+    {
+        $self = clone $this;
+        $self['organizationID'] = $organizationID;
+
+        return $self;
+    }
+
+    /**
      * Identifies the type of the resource.
      *
      * @param RecordType|value-of<RecordType> $recordType
@@ -440,6 +489,17 @@ final class MessagingProfile implements BaseModel
     {
         $self = clone $this;
         $self['redactionLevel'] = $redactionLevel;
+
+        return $self;
+    }
+
+    /**
+     * The resource group ID associated with this messaging profile.
+     */
+    public function withResourceGroupID(?string $resourceGroupID): self
+    {
+        $self = clone $this;
+        $self['resourceGroupID'] = $resourceGroupID;
 
         return $self;
     }
