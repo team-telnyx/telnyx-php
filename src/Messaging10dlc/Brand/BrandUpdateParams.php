@@ -86,7 +86,7 @@ final class BrandUpdateParams implements BaseModel
     /**
      * Alternate business identifier such as DUNS, LEI, or GIIN.
      */
-    #[Optional('altBusiness_id')]
+    #[Optional('altBusinessId')]
     public ?string $altBusinessID;
 
     /**
