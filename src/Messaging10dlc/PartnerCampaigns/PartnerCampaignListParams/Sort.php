@@ -19,7 +19,7 @@ enum Sort: string
 
     case TCR_BRAND_ID = 'tcrBrandId';
 
-    case TCR_BRAN_ID_DESC = '-tcrBranId';
+    case TCR_BRAND_ID_DESC = '-tcrBrandId';
 
     case TCR_CAMPAIGN_ID = 'tcrCampaignId';
 
