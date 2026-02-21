@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.41.3 (2026-02-21)
+
+Full Changelog: [v6.41.2...v6.41.3](https://github.com/team-telnyx/telnyx-php/compare/v6.41.2...v6.41.3)
+
+### Bug Fixes
+
+* OAS drift — 10dlc.json (messaging-campaign-registry) ([d9c48cc](https://github.com/team-telnyx/telnyx-php/commit/d9c48ccd16aa97e4375b9242ebfcc662d8819aaa))
+
 ## 6.41.2 (2026-02-21)
 
 Full Changelog: [v6.41.1...v6.41.2](https://github.com/team-telnyx/telnyx-php/compare/v6.41.1...v6.41.2)
