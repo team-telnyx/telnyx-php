@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.41.2 (2026-02-21)
+
+Full Changelog: [v6.41.1...v6.41.2](https://github.com/team-telnyx/telnyx-php/compare/v6.41.1...v6.41.2)
+
+### Bug Fixes
+
+* OAS drift — messaging.json (messaging-settings + messaging-outbound) ([6df1f68](https://github.com/team-telnyx/telnyx-php/commit/6df1f682c19f912f5b08b6119c2906285bd29ef8))
+
 ## 6.41.1 (2026-02-20)
 
 Full Changelog: [v6.41.0...v6.41.1](https://github.com/team-telnyx/telnyx-php/compare/v6.41.0...v6.41.1)
