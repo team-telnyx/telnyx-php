@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messages\MessageCancelScheduledResponse;
+use Telnyx\Messages\MessageGetGroupMessagesResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams;
 use Telnyx\Messages\MessageScheduleParams\Type;
@@ -26,6 +27,8 @@ use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappParams;
 use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
 use Telnyx\Messages\MessageSendWhatsappResponse;
+use Telnyx\Messages\MessageSendWithAlphanumericSenderParams;
+use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesRawContract;
 
@@ -88,6 +91,31 @@ final class MessagesRawService implements MessagesRawContract
             path: ['messages/%1$s', $id],
             options: $requestOptions,
             convert: MessageCancelScheduledResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Retrieve all messages in a group MMS conversation by the group message ID.
+     *
+     * @param string $messageID the group message ID
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessageGetGroupMessagesResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveGroupMessages(
+        string $messageID,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['messages/group/%1$s', $messageID],
+            options: $requestOptions,
+            convert: MessageGetGroupMessagesResponse::class,
         );
     }
 
@@ -391,6 +419,45 @@ final class MessagesRawService implements MessagesRawContract
             body: (object) $parsed,
             options: $options,
             convert: MessageSendWhatsappResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Send an SMS message using an alphanumeric sender ID. This is SMS only.
+     *
+     * @param array{
+     *   from: string,
+     *   messagingProfileID: string,
+     *   text: string,
+     *   to: string,
+     *   useProfileWebhooks?: bool,
+     *   webhookFailoverURL?: string|null,
+     *   webhookURL?: string|null,
+     * }|MessageSendWithAlphanumericSenderParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessageSendWithAlphanumericSenderResponse>
+     *
+     * @throws APIException
+     */
+    public function sendWithAlphanumericSender(
+        array|MessageSendWithAlphanumericSenderParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = MessageSendWithAlphanumericSenderParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'messages/alphanumeric_sender_id',
+            body: (object) $parsed,
+            options: $options,
+            convert: MessageSendWithAlphanumericSenderResponse::class,
         );
     }
 }

@@ -58,6 +58,7 @@ final class MessagingNumbersBulkUpdatesTest extends TestCase
         $result = $this->client->messagingNumbersBulkUpdates->create(
             messagingProfileID: '00000000-0000-0000-0000-000000000000',
             numbers: ['+18880000000', '+18880000001', '+18880000002'],
+            assignOnly: true,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

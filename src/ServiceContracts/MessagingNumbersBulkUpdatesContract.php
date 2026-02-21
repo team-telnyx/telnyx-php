@@ -22,6 +22,7 @@ interface MessagingNumbersBulkUpdatesContract
      * * Set this field to `""` to unassign each number from their respective messaging profile
      * * Set this field to a quoted UUID of a messaging profile to assign these numbers to that messaging profile
      * @param list<string> $numbers the list of phone numbers to update
+     * @param bool $assignOnly if true, only assign numbers to the profile without changing other settings
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -29,6 +30,7 @@ interface MessagingNumbersBulkUpdatesContract
     public function create(
         string $messagingProfileID,
         array $numbers,
+        bool $assignOnly = false,
         RequestOptions|array|null $requestOptions = null,
     ): MessagingNumbersBulkUpdateNewResponse;
 

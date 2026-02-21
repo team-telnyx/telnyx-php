@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\Messages\MessageCancelScheduledResponse;
+use Telnyx\Messages\MessageGetGroupMessagesResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleResponse;
 use Telnyx\Messages\MessageSendGroupMmsResponse;
@@ -16,6 +17,7 @@ use Telnyx\Messages\MessageSendNumberPoolResponse;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappResponse;
+use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -64,6 +66,21 @@ final class MessagesTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageCancelScheduledResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRetrieveGroupMessages(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->messages->retrieveGroupMessages(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessageGetGroupMessagesResponse::class, $result);
     }
 
     #[Test]
@@ -486,5 +503,50 @@ final class MessagesTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(MessageSendWhatsappResponse::class, $result);
+    }
+
+    #[Test]
+    public function testSendWithAlphanumericSender(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->messages->sendWithAlphanumericSender(
+            from: 'MyCompany',
+            messagingProfileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            text: 'text',
+            to: '+E.164',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessageSendWithAlphanumericSenderResponse::class,
+            $result
+        );
+    }
+
+    #[Test]
+    public function testSendWithAlphanumericSenderWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->messages->sendWithAlphanumericSender(
+            from: 'MyCompany',
+            messagingProfileID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            text: 'text',
+            to: '+E.164',
+            useProfileWebhooks: true,
+            webhookFailoverURL: 'webhook_failover_url',
+            webhookURL: 'webhook_url',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            MessageSendWithAlphanumericSenderResponse::class,
+            $result
+        );
     }
 }

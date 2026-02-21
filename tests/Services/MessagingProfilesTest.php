@@ -10,7 +10,9 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
+use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
+use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
@@ -61,10 +63,12 @@ final class MessagingProfilesTest extends TestCase
         $result = $this->client->messagingProfiles->create(
             name: 'My name',
             whitelistedDestinations: ['US'],
+            aiAssistantID: 'ai_assistant_id',
             alphaSender: 'sqF',
             dailySpendLimit: '269125115713',
             dailySpendLimitEnabled: true,
             enabled: true,
+            healthWebhookURL: 'health_webhook_url',
             mmsFallBackToSMS: true,
             mmsTranscoding: true,
             mobileOnly: true,
@@ -75,6 +79,7 @@ final class MessagingProfilesTest extends TestCase
                 'geomatch' => false,
                 'stickySender' => false,
             ],
+            resourceGroupID: 'resource_group_id',
             smartEncoding: true,
             urlShortenerSettings: [
                 'domain' => 'example.ex',
@@ -155,6 +160,29 @@ final class MessagingProfilesTest extends TestCase
     }
 
     #[Test]
+    public function testListAlphanumericSenderIDs(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $page = $this->client->messagingProfiles->listAlphanumericSenderIDs(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(
+                MessagingProfileListAlphanumericSenderIDsResponse::class,
+                $item
+            );
+        }
+    }
+
+    #[Test]
     public function testListPhoneNumbers(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -192,5 +220,20 @@ final class MessagingProfilesTest extends TestCase
             // @phpstan-ignore-next-line method.alreadyNarrowedType
             $this->assertInstanceOf(ShortCode::class, $item);
         }
+    }
+
+    #[Test]
+    public function testRetrieveMetrics(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->messagingProfiles->retrieveMetrics(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(MessagingProfileGetMetricsResponse::class, $result);
     }
 }

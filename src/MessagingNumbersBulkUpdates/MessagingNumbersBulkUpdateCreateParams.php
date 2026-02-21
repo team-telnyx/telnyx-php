@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\MessagingNumbersBulkUpdates;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -15,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\MessagingNumbersBulkUpdatesService::create()
  *
  * @phpstan-type MessagingNumbersBulkUpdateCreateParamsShape = array{
- *   messagingProfileID: string, numbers: list<string>
+ *   messagingProfileID: string, numbers: list<string>, assignOnly?: bool|null
  * }
  */
 final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
@@ -40,6 +41,12 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      */
     #[Required(list: 'string')]
     public array $numbers;
+
+    /**
+     * If true, only assign numbers to the profile without changing other settings.
+     */
+    #[Optional('assign_only')]
+    public ?bool $assignOnly;
 
     /**
      * `new MessagingNumbersBulkUpdateCreateParams()` is missing required properties by the API.
@@ -73,12 +80,15 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
      */
     public static function with(
         string $messagingProfileID,
-        array $numbers
+        array $numbers,
+        ?bool $assignOnly = null
     ): self {
         $self = new self;
 
         $self['messagingProfileID'] = $messagingProfileID;
         $self['numbers'] = $numbers;
+
+        null !== $assignOnly && $self['assignOnly'] = $assignOnly;
 
         return $self;
     }
@@ -106,6 +116,17 @@ final class MessagingNumbersBulkUpdateCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['numbers'] = $numbers;
+
+        return $self;
+    }
+
+    /**
+     * If true, only assign numbers to the profile without changing other settings.
+     */
+    public function withAssignOnly(bool $assignOnly): self
+    {
+        $self = clone $this;
+        $self['assignOnly'] = $assignOnly;
 
         return $self;
     }

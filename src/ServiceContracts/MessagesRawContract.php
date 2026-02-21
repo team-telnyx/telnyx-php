@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Messages\MessageCancelScheduledResponse;
+use Telnyx\Messages\MessageGetGroupMessagesResponse;
 use Telnyx\Messages\MessageGetResponse;
 use Telnyx\Messages\MessageScheduleParams;
 use Telnyx\Messages\MessageScheduleResponse;
@@ -22,6 +23,8 @@ use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappParams;
 use Telnyx\Messages\MessageSendWhatsappResponse;
+use Telnyx\Messages\MessageSendWithAlphanumericSenderParams;
+use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -56,6 +59,21 @@ interface MessagesRawContract
      */
     public function cancelScheduled(
         string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $messageID the group message ID
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessageGetGroupMessagesResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveGroupMessages(
+        string $messageID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
@@ -161,6 +179,21 @@ interface MessagesRawContract
      */
     public function sendWhatsapp(
         array|MessageSendWhatsappParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|MessageSendWithAlphanumericSenderParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessageSendWithAlphanumericSenderResponse>
+     *
+     * @throws APIException
+     */
+    public function sendWithAlphanumericSender(
+        array|MessageSendWithAlphanumericSenderParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

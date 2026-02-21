@@ -30,7 +30,7 @@ final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBul
      * Bulk update phone number profiles
      *
      * @param array{
-     *   messagingProfileID: string, numbers: list<string>
+     *   messagingProfileID: string, numbers: list<string>, assignOnly?: bool
      * }|MessagingNumbersBulkUpdateCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
