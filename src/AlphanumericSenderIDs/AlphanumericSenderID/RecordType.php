@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsResponse;
+namespace Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 
 enum RecordType: string
 {

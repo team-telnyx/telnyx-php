@@ -5,6 +5,7 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
@@ -12,7 +13,6 @@ use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
-use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\PhoneNumberWithMessagingSettings;
@@ -175,10 +175,7 @@ final class MessagingProfilesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(
-                MessagingProfileListAlphanumericSenderIDsResponse::class,
-                $item
-            );
+            $this->assertInstanceOf(AlphanumericSenderID::class, $item);
         }
     }
 

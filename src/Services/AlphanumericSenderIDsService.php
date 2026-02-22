@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDDeleteResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDGetResponse;
-use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDListResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -95,7 +95,7 @@ final class AlphanumericSenderIDsService implements AlphanumericSenderIDsContrac
      * @param int $pageSize page size
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<AlphanumericSenderIDListResponse>
+     * @return DefaultFlatPagination<AlphanumericSenderID>
      *
      * @throws APIException
      */
