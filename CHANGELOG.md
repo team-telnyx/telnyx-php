@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.41.4 (2026-02-22)
+
+Full Changelog: [v6.41.3...v6.41.4](https://github.com/team-telnyx/telnyx-php/compare/v6.41.3...v6.41.4)
+
+### Bug Fixes
+
+* OAS drift — toll-free-verification.json (messaging-tf-verify) ([8ec466e](https://github.com/team-telnyx/telnyx-php/commit/8ec466eceffdf58b3269565e5ddfee82ec55b71c))
+* OAS drift — verify.json (messaging-2fa) ([235309b](https://github.com/team-telnyx/telnyx-php/commit/235309b3ba53f0de762545cc6979c1ade60684a6))
+
 ## 6.41.3 (2026-02-21)
 
 Full Changelog: [v6.41.2...v6.41.3](https://github.com/team-telnyx/telnyx-php/compare/v6.41.2...v6.41.3)
