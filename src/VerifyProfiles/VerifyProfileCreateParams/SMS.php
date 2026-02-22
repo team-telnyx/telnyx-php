@@ -5,32 +5,23 @@ declare(strict_types=1);
 namespace Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 
 use Telnyx\Core\Attributes\Optional;
-use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type SMSShape = array{
- *   whitelistedDestinations: list<string>,
  *   alphaSender?: string|null,
  *   appName?: string|null,
  *   codeLength?: int|null,
  *   defaultVerificationTimeoutSecs?: int|null,
  *   messagingTemplateID?: string|null,
+ *   whitelistedDestinations?: list<string>|null,
  * }
  */
 final class SMS implements BaseModel
 {
     /** @use SdkModel<SMSShape> */
     use SdkModel;
-
-    /**
-     * Enabled country destinations to send verification codes. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
-     *
-     * @var list<string> $whitelistedDestinations
-     */
-    #[Required('whitelisted_destinations', list: 'string')]
-    public array $whitelistedDestinations;
 
     /**
      * The alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID.
@@ -63,19 +54,13 @@ final class SMS implements BaseModel
     public ?string $messagingTemplateID;
 
     /**
-     * `new SMS()` is missing required properties by the API.
+     * Enabled country destinations to send verification codes. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
      *
-     * To enforce required parameters use
-     * ```
-     * SMS::with(whitelistedDestinations: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new SMS)->withWhitelistedDestinations(...)
-     * ```
+     * @var list<string>|null $whitelistedDestinations
      */
+    #[Optional('whitelisted_destinations', list: 'string')]
+    public ?array $whitelistedDestinations;
+
     public function __construct()
     {
         $this->initialize();
@@ -86,39 +71,24 @@ final class SMS implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $whitelistedDestinations
+     * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
-        array $whitelistedDestinations,
         ?string $alphaSender = null,
         ?string $appName = null,
         ?int $codeLength = null,
         ?int $defaultVerificationTimeoutSecs = null,
         ?string $messagingTemplateID = null,
+        ?array $whitelistedDestinations = null,
     ): self {
         $self = new self;
-
-        $self['whitelistedDestinations'] = $whitelistedDestinations;
 
         null !== $alphaSender && $self['alphaSender'] = $alphaSender;
         null !== $appName && $self['appName'] = $appName;
         null !== $codeLength && $self['codeLength'] = $codeLength;
         null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
         null !== $messagingTemplateID && $self['messagingTemplateID'] = $messagingTemplateID;
-
-        return $self;
-    }
-
-    /**
-     * Enabled country destinations to send verification codes. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
-     *
-     * @param list<string> $whitelistedDestinations
-     */
-    public function withWhitelistedDestinations(
-        array $whitelistedDestinations
-    ): self {
-        $self = clone $this;
-        $self['whitelistedDestinations'] = $whitelistedDestinations;
+        null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
         return $self;
     }
@@ -175,6 +145,20 @@ final class SMS implements BaseModel
     {
         $self = clone $this;
         $self['messagingTemplateID'] = $messagingTemplateID;
+
+        return $self;
+    }
+
+    /**
+     * Enabled country destinations to send verification codes. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
+     *
+     * @param list<string> $whitelistedDestinations
+     */
+    public function withWhitelistedDestinations(
+        array $whitelistedDestinations
+    ): self {
+        $self = clone $this;
+        $self['whitelistedDestinations'] = $whitelistedDestinations;
 
         return $self;
     }

@@ -9,12 +9,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifyProfiles\VerifyProfile\Call;
 use Telnyx\VerifyProfiles\VerifyProfile\Flashcall;
+use Telnyx\VerifyProfiles\VerifyProfile\Rcs;
 use Telnyx\VerifyProfiles\VerifyProfile\RecordType;
 use Telnyx\VerifyProfiles\VerifyProfile\SMS;
 
 /**
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfile\Call
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfile\Flashcall
+ * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfile\Rcs
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfile\SMS
  *
  * @phpstan-type VerifyProfileShape = array{
@@ -24,6 +26,7 @@ use Telnyx\VerifyProfiles\VerifyProfile\SMS;
  *   flashcall?: null|Flashcall|FlashcallShape,
  *   language?: string|null,
  *   name?: string|null,
+ *   rcs?: null|Rcs|RcsShape,
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   sms?: null|SMS|SMSShape,
  *   updatedAt?: string|null,
@@ -53,6 +56,9 @@ final class VerifyProfile implements BaseModel
 
     #[Optional]
     public ?string $name;
+
+    #[Optional]
+    public ?Rcs $rcs;
 
     /**
      * The possible verification profile record types.
@@ -86,6 +92,7 @@ final class VerifyProfile implements BaseModel
      *
      * @param Call|CallShape|null $call
      * @param Flashcall|FlashcallShape|null $flashcall
+     * @param Rcs|RcsShape|null $rcs
      * @param RecordType|value-of<RecordType>|null $recordType
      * @param SMS|SMSShape|null $sms
      */
@@ -96,6 +103,7 @@ final class VerifyProfile implements BaseModel
         Flashcall|array|null $flashcall = null,
         ?string $language = null,
         ?string $name = null,
+        Rcs|array|null $rcs = null,
         RecordType|string|null $recordType = null,
         SMS|array|null $sms = null,
         ?string $updatedAt = null,
@@ -110,6 +118,7 @@ final class VerifyProfile implements BaseModel
         null !== $flashcall && $self['flashcall'] = $flashcall;
         null !== $language && $self['language'] = $language;
         null !== $name && $self['name'] = $name;
+        null !== $rcs && $self['rcs'] = $rcs;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $sms && $self['sms'] = $sms;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
@@ -169,6 +178,17 @@ final class VerifyProfile implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * @param Rcs|RcsShape $rcs
+     */
+    public function withRcs(Rcs|array $rcs): self
+    {
+        $self = clone $this;
+        $self['rcs'] = $rcs;
 
         return $self;
     }
