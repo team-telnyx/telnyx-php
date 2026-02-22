@@ -10,7 +10,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForMessagingTollfree;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestGetStatusHistoryResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestRetrieveStatusHistoryParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
@@ -53,7 +55,6 @@ final class RequestsRawService implements RequestsRawContract
      *   businessState: string,
      *   businessZip: string,
      *   corporateWebsite: string,
-     *   isvReseller: string,
      *   messageVolume: value-of<Volume>,
      *   optInWorkflow: string,
      *   optInWorkflowImageURLs: list<URL|URLShape>,
@@ -70,6 +71,7 @@ final class RequestsRawService implements RequestsRawContract
      *   doingBusinessAs?: string|null,
      *   entityType?: TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null,
      *   helpMessageResponse?: string|null,
+     *   isvReseller?: string|null,
      *   optInConfirmationResponse?: string|null,
      *   optInKeywords?: string|null,
      *   privacyPolicyURL?: string|null,
@@ -142,7 +144,6 @@ final class RequestsRawService implements RequestsRawContract
      *   businessState: string,
      *   businessZip: string,
      *   corporateWebsite: string,
-     *   isvReseller: string,
      *   messageVolume: value-of<Volume>,
      *   optInWorkflow: string,
      *   optInWorkflowImageURLs: list<URL|URLShape>,
@@ -159,6 +160,7 @@ final class RequestsRawService implements RequestsRawContract
      *   doingBusinessAs?: string|null,
      *   entityType?: TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null,
      *   helpMessageResponse?: string|null,
+     *   isvReseller?: string|null,
      *   optInConfirmationResponse?: string|null,
      *   optInKeywords?: string|null,
      *   privacyPolicyURL?: string|null,
@@ -199,6 +201,7 @@ final class RequestsRawService implements RequestsRawContract
      * @param array{
      *   page: int,
      *   pageSize: int,
+     *   businessName?: string,
      *   dateEnd?: \DateTimeInterface,
      *   dateStart?: \DateTimeInterface,
      *   phoneNumber?: string,
@@ -227,6 +230,7 @@ final class RequestsRawService implements RequestsRawContract
                 $parsed,
                 [
                     'pageSize' => 'page_size',
+                    'businessName' => 'business_name',
                     'dateEnd' => 'date_end',
                     'dateStart' => 'date_start',
                     'phoneNumber' => 'phone_number',
@@ -265,6 +269,47 @@ final class RequestsRawService implements RequestsRawContract
             path: ['messaging_tollfree/verification/requests/%1$s', $id],
             options: $requestOptions,
             convert: null,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Get the history of status changes for a verification request.
+     *
+     * Returns a paginated list of historical status changes including the reason for each change and when it occurred.
+     *
+     * @param array{
+     *   pageNumber: int, pageSize: int
+     * }|RequestRetrieveStatusHistoryParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<RequestGetStatusHistoryResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveStatusHistory(
+        string $id,
+        array|RequestRetrieveStatusHistoryParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = RequestRetrieveStatusHistoryParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: [
+                'messaging_tollfree/verification/requests/%1$s/status_history', $id,
+            ],
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
+            options: $options,
+            convert: RequestGetStatusHistoryResponse::class,
         );
     }
 }

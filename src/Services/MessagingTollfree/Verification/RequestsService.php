@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestGetStatusHistoryResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
@@ -55,7 +56,6 @@ final class RequestsService implements RequestsContract
      * @param string $businessState The full name of the state (not the 2 letter code) of the business address; the first letter should be capitalized
      * @param string $businessZip The ZIP code of the business address
      * @param string $corporateWebsite A URL, including the scheme, pointing to the corporate website
-     * @param string $isvReseller ISV name
      * @param Volume|value-of<Volume> $messageVolume Message Volume Enums
      * @param string $optInWorkflow Human-readable description of how end users will opt into receiving messages from the given phone numbers
      * @param list<URL|URLShape> $optInWorkflowImageURLs Images showing the opt-in workflow
@@ -72,6 +72,7 @@ final class RequestsService implements RequestsContract
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|null $isvReseller ISV name
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
      * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
      * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
@@ -93,7 +94,6 @@ final class RequestsService implements RequestsContract
         string $businessState,
         string $businessZip,
         string $corporateWebsite,
-        string $isvReseller,
         Volume|string $messageVolume,
         string $optInWorkflow,
         array $optInWorkflowImageURLs,
@@ -110,6 +110,7 @@ final class RequestsService implements RequestsContract
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
+        ?string $isvReseller = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
@@ -130,7 +131,6 @@ final class RequestsService implements RequestsContract
                 'businessState' => $businessState,
                 'businessZip' => $businessZip,
                 'corporateWebsite' => $corporateWebsite,
-                'isvReseller' => $isvReseller,
                 'messageVolume' => $messageVolume,
                 'optInWorkflow' => $optInWorkflow,
                 'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
@@ -147,6 +147,7 @@ final class RequestsService implements RequestsContract
                 'doingBusinessAs' => $doingBusinessAs,
                 'entityType' => $entityType,
                 'helpMessageResponse' => $helpMessageResponse,
+                'isvReseller' => $isvReseller,
                 'optInConfirmationResponse' => $optInConfirmationResponse,
                 'optInKeywords' => $optInKeywords,
                 'privacyPolicyURL' => $privacyPolicyURL,
@@ -196,7 +197,6 @@ final class RequestsService implements RequestsContract
      * @param string $businessState The full name of the state (not the 2 letter code) of the business address; the first letter should be capitalized
      * @param string $businessZip The ZIP code of the business address
      * @param string $corporateWebsite A URL, including the scheme, pointing to the corporate website
-     * @param string $isvReseller ISV name
      * @param Volume|value-of<Volume> $messageVolume Message Volume Enums
      * @param string $optInWorkflow Human-readable description of how end users will opt into receiving messages from the given phone numbers
      * @param list<URL|URLShape> $optInWorkflowImageURLs Images showing the opt-in workflow
@@ -213,6 +213,7 @@ final class RequestsService implements RequestsContract
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|null $isvReseller ISV name
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
      * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
      * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
@@ -235,7 +236,6 @@ final class RequestsService implements RequestsContract
         string $businessState,
         string $businessZip,
         string $corporateWebsite,
-        string $isvReseller,
         Volume|string $messageVolume,
         string $optInWorkflow,
         array $optInWorkflowImageURLs,
@@ -252,6 +252,7 @@ final class RequestsService implements RequestsContract
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
+        ?string $isvReseller = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
@@ -272,7 +273,6 @@ final class RequestsService implements RequestsContract
                 'businessState' => $businessState,
                 'businessZip' => $businessZip,
                 'corporateWebsite' => $corporateWebsite,
-                'isvReseller' => $isvReseller,
                 'messageVolume' => $messageVolume,
                 'optInWorkflow' => $optInWorkflow,
                 'optInWorkflowImageURLs' => $optInWorkflowImageURLs,
@@ -289,6 +289,7 @@ final class RequestsService implements RequestsContract
                 'doingBusinessAs' => $doingBusinessAs,
                 'entityType' => $entityType,
                 'helpMessageResponse' => $helpMessageResponse,
+                'isvReseller' => $isvReseller,
                 'optInConfirmationResponse' => $optInConfirmationResponse,
                 'optInKeywords' => $optInKeywords,
                 'privacyPolicyURL' => $privacyPolicyURL,
@@ -312,6 +313,7 @@ final class RequestsService implements RequestsContract
      *         Request this many records per page
      *
      *         This value is automatically clamped if the provided value is too large
+     * @param string $businessName Filter verification requests by business name
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $status Tollfree verification status
      * @param RequestOpts|null $requestOptions
      *
@@ -322,6 +324,7 @@ final class RequestsService implements RequestsContract
     public function list(
         int $page,
         int $pageSize,
+        ?string $businessName = null,
         ?\DateTimeInterface $dateEnd = null,
         ?\DateTimeInterface $dateStart = null,
         ?string $phoneNumber = null,
@@ -332,6 +335,7 @@ final class RequestsService implements RequestsContract
             [
                 'page' => $page,
                 'pageSize' => $pageSize,
+                'businessName' => $businessName,
                 'dateEnd' => $dateEnd,
                 'dateStart' => $dateStart,
                 'phoneNumber' => $phoneNumber,
@@ -366,6 +370,34 @@ final class RequestsService implements RequestsContract
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Get the history of status changes for a verification request.
+     *
+     * Returns a paginated list of historical status changes including the reason for each change and when it occurred.
+     *
+     * @param int $pageSize Request this many records per page. This value is automatically clamped if the provided value is too large.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveStatusHistory(
+        string $id,
+        int $pageNumber,
+        int $pageSize,
+        RequestOptions|array|null $requestOptions = null,
+    ): RequestGetStatusHistoryResponse {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveStatusHistory($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

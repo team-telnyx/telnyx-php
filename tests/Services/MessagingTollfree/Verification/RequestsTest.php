@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestGetStatusHistoryResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
 use Telnyx\MessagingTollfree\Verification\Requests\UseCaseCategories;
@@ -53,7 +54,6 @@ final class RequestsTest extends TestCase
             businessState: 'Texas',
             businessZip: '78701',
             corporateWebsite: 'http://example.com',
-            isvReseller: 'isvReseller',
             messageVolume: Volume::V_100000,
             optInWorkflow: 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             optInWorkflowImageURLs: [
@@ -91,7 +91,6 @@ final class RequestsTest extends TestCase
             businessState: 'Texas',
             businessZip: '78701',
             corporateWebsite: 'http://example.com',
-            isvReseller: 'isvReseller',
             messageVolume: Volume::V_100000,
             optInWorkflow: 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             optInWorkflowImageURLs: [
@@ -113,6 +112,7 @@ final class RequestsTest extends TestCase
             doingBusinessAs: 'Acme Services',
             entityType: TollFreeVerificationEntityType::SOLE_PROPRIETOR,
             helpMessageResponse: 'Reply HELP for assistance or STOP to unsubscribe. Contact: support@example.com',
+            isvReseller: 'isvReseller',
             optInConfirmationResponse: 'You have successfully opted in to receive messages from Acme Corp',
             optInKeywords: 'START, YES, SUBSCRIBE',
             privacyPolicyURL: 'https://example.com/privacy',
@@ -163,7 +163,6 @@ final class RequestsTest extends TestCase
             businessState: 'Texas',
             businessZip: '78701',
             corporateWebsite: 'http://example.com',
-            isvReseller: 'isvReseller',
             messageVolume: Volume::V_100000,
             optInWorkflow: 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             optInWorkflowImageURLs: [
@@ -202,7 +201,6 @@ final class RequestsTest extends TestCase
             businessState: 'Texas',
             businessZip: '78701',
             corporateWebsite: 'http://example.com',
-            isvReseller: 'isvReseller',
             messageVolume: Volume::V_100000,
             optInWorkflow: 'User signs into the Telnyx portal, enters a number and is prompted to select whether they want to use 2FA verification for security purposes. If they\'ve opted in a confirmation message is sent out to the handset',
             optInWorkflowImageURLs: [
@@ -224,6 +222,7 @@ final class RequestsTest extends TestCase
             doingBusinessAs: 'Acme Services',
             entityType: TollFreeVerificationEntityType::SOLE_PROPRIETOR,
             helpMessageResponse: 'Reply HELP for assistance or STOP to unsubscribe. Contact: support@example.com',
+            isvReseller: 'isvReseller',
             optInConfirmationResponse: 'You have successfully opted in to receive messages from Acme Corp',
             optInKeywords: 'START, YES, SUBSCRIBE',
             privacyPolicyURL: 'https://example.com/privacy',
@@ -269,6 +268,7 @@ final class RequestsTest extends TestCase
         $page = $this->client->messagingTollfree->verification->requests->list(
             page: 1,
             pageSize: 1,
+            businessName: 'business_name',
             dateEnd: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
             dateStart: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
             phoneNumber: 'phone_number',
@@ -300,5 +300,51 @@ final class RequestsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testRetrieveStatusHistory(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this
+            ->client
+            ->messagingTollfree
+            ->verification
+            ->requests
+            ->retrieveStatusHistory(
+                '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                pageNumber: 1,
+                pageSize: 1
+            )
+        ;
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequestGetStatusHistoryResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRetrieveStatusHistoryWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this
+            ->client
+            ->messagingTollfree
+            ->verification
+            ->requests
+            ->retrieveStatusHistory(
+                '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+                pageNumber: 1,
+                pageSize: 1
+            )
+        ;
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RequestGetStatusHistoryResponse::class, $result);
     }
 }
