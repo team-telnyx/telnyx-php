@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall;
+use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Rcs;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
 
 /**
@@ -19,6 +20,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
  *
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall
+ * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Rcs
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS
  *
  * @phpstan-type VerifyProfileUpdateParamsShape = array{
@@ -26,6 +28,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
  *   flashcall?: null|Flashcall|FlashcallShape,
  *   language?: string|null,
  *   name?: string|null,
+ *   rcs?: null|Rcs|RcsShape,
  *   sms?: null|SMS|SMSShape,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
@@ -50,6 +53,9 @@ final class VerifyProfileUpdateParams implements BaseModel
     public ?string $name;
 
     #[Optional]
+    public ?Rcs $rcs;
+
+    #[Optional]
     public ?SMS $sms;
 
     #[Optional('webhook_failover_url')]
@@ -70,6 +76,7 @@ final class VerifyProfileUpdateParams implements BaseModel
      *
      * @param Call|CallShape|null $call
      * @param Flashcall|FlashcallShape|null $flashcall
+     * @param Rcs|RcsShape|null $rcs
      * @param SMS|SMSShape|null $sms
      */
     public static function with(
@@ -77,6 +84,7 @@ final class VerifyProfileUpdateParams implements BaseModel
         Flashcall|array|null $flashcall = null,
         ?string $language = null,
         ?string $name = null,
+        Rcs|array|null $rcs = null,
         SMS|array|null $sms = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
@@ -87,6 +95,7 @@ final class VerifyProfileUpdateParams implements BaseModel
         null !== $flashcall && $self['flashcall'] = $flashcall;
         null !== $language && $self['language'] = $language;
         null !== $name && $self['name'] = $name;
+        null !== $rcs && $self['rcs'] = $rcs;
         null !== $sms && $self['sms'] = $sms;
         null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
@@ -128,6 +137,17 @@ final class VerifyProfileUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * @param Rcs|RcsShape $rcs
+     */
+    public function withRcs(Rcs|array $rcs): self
+    {
+        $self = clone $this;
+        $self['rcs'] = $rcs;
 
         return $self;
     }

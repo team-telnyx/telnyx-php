@@ -9,15 +9,18 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type FlashcallShape = array{
+ * @phpstan-type RcsShape = array{
  *   appName?: string|null,
+ *   codeLength?: int|null,
  *   defaultVerificationTimeoutSecs?: int|null,
+ *   messagingTemplateID?: string|null,
+ *   smsFallback?: bool|null,
  *   whitelistedDestinations?: list<string>|null,
  * }
  */
-final class Flashcall implements BaseModel
+final class Rcs implements BaseModel
 {
-    /** @use SdkModel<FlashcallShape> */
+    /** @use SdkModel<RcsShape> */
     use SdkModel;
 
     /**
@@ -27,10 +30,28 @@ final class Flashcall implements BaseModel
     public ?string $appName;
 
     /**
+     * The length of the verify code to generate.
+     */
+    #[Optional('code_length')]
+    public ?int $codeLength;
+
+    /**
      * For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
      */
     #[Optional('default_verification_timeout_secs')]
     public ?int $defaultVerificationTimeoutSecs;
+
+    /**
+     * The message template identifier selected from /verify_profiles/templates.
+     */
+    #[Optional('messaging_template_id')]
+    public ?string $messagingTemplateID;
+
+    /**
+     * Enable SMS fallback when RCS delivery fails.
+     */
+    #[Optional('sms_fallback')]
+    public ?bool $smsFallback;
 
     /**
      * Enabled country destinations to send verification codes. The elements in the list must be valid ISO 3166-1 alpha-2 country codes. If set to `["*"]`, all destinations will be allowed.
@@ -54,13 +75,19 @@ final class Flashcall implements BaseModel
      */
     public static function with(
         ?string $appName = null,
+        ?int $codeLength = null,
         ?int $defaultVerificationTimeoutSecs = null,
+        ?string $messagingTemplateID = null,
+        ?bool $smsFallback = null,
         ?array $whitelistedDestinations = null,
     ): self {
         $self = new self;
 
         null !== $appName && $self['appName'] = $appName;
+        null !== $codeLength && $self['codeLength'] = $codeLength;
         null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        null !== $messagingTemplateID && $self['messagingTemplateID'] = $messagingTemplateID;
+        null !== $smsFallback && $self['smsFallback'] = $smsFallback;
         null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
 
         return $self;
@@ -78,6 +105,17 @@ final class Flashcall implements BaseModel
     }
 
     /**
+     * The length of the verify code to generate.
+     */
+    public function withCodeLength(int $codeLength): self
+    {
+        $self = clone $this;
+        $self['codeLength'] = $codeLength;
+
+        return $self;
+    }
+
+    /**
      * For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
      */
     public function withDefaultVerificationTimeoutSecs(
@@ -85,6 +123,28 @@ final class Flashcall implements BaseModel
     ): self {
         $self = clone $this;
         $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+
+        return $self;
+    }
+
+    /**
+     * The message template identifier selected from /verify_profiles/templates.
+     */
+    public function withMessagingTemplateID(string $messagingTemplateID): self
+    {
+        $self = clone $this;
+        $self['messagingTemplateID'] = $messagingTemplateID;
+
+        return $self;
+    }
+
+    /**
+     * Enable SMS fallback when RCS delivery fails.
+     */
+    public function withSMSFallback(bool $smsFallback): self
+    {
+        $self = clone $this;
+        $self['smsFallback'] = $smsFallback;
 
         return $self;
     }

@@ -11,6 +11,7 @@ use Telnyx\VerifyProfiles\MessageTemplate;
 use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
+use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Rcs;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
 use Telnyx\VerifyProfiles\VerifyProfileData;
 use Telnyx\VerifyProfiles\VerifyProfileGetTemplatesResponse;
@@ -19,9 +20,11 @@ use Telnyx\VerifyProfiles\VerifyProfileListParams\Filter;
 /**
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall
+ * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Rcs
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call as CallShape1
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall as FlashcallShape1
+ * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Rcs as RcsShape1
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS as SMSShape1
  * @phpstan-import-type FilterShape from \Telnyx\VerifyProfiles\VerifyProfileListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -33,6 +36,7 @@ interface VerifyProfilesContract
      *
      * @param Call|CallShape $call
      * @param Flashcall|FlashcallShape $flashcall
+     * @param Rcs|RcsShape $rcs
      * @param SMS|SMSShape $sms
      * @param RequestOpts|null $requestOptions
      *
@@ -43,6 +47,7 @@ interface VerifyProfilesContract
         Call|array|null $call = null,
         Flashcall|array|null $flashcall = null,
         ?string $language = null,
+        Rcs|array|null $rcs = null,
         SMS|array|null $sms = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
@@ -68,6 +73,7 @@ interface VerifyProfilesContract
      * @param string $verifyProfileID the identifier of the Verify profile to update
      * @param \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call|CallShape1 $call
      * @param \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall|FlashcallShape1 $flashcall
+     * @param \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Rcs|RcsShape1 $rcs
      * @param \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS|SMSShape1 $sms
      * @param RequestOpts|null $requestOptions
      *
@@ -79,6 +85,7 @@ interface VerifyProfilesContract
         \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall|array|null $flashcall = null,
         ?string $language = null,
         ?string $name = null,
+        \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Rcs|array|null $rcs = null,
         \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS|array|null $sms = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
