@@ -62,17 +62,26 @@ final class VerifyProfilesTest extends TestCase
                 'whitelistedDestinations' => ['US', 'CA'],
             ],
             flashcall: [
+                'appName' => 'Example Secure App',
                 'defaultVerificationTimeoutSecs' => 300,
                 'whitelistedDestinations' => ['US', 'CA'],
             ],
             language: 'en-US',
-            sms: [
+            rcs: [
+                'appName' => 'Example Secure App',
+                'codeLength' => 6,
+                'defaultVerificationTimeoutSecs' => 300,
+                'messagingTemplateID' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
+                'smsFallback' => true,
                 'whitelistedDestinations' => ['US', 'CA'],
+            ],
+            sms: [
                 'alphaSender' => 'sqF',
                 'appName' => 'Example Secure App',
                 'codeLength' => 6,
                 'defaultVerificationTimeoutSecs' => 300,
                 'messagingTemplateID' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
+                'whitelistedDestinations' => ['US', 'CA'],
             ],
             webhookFailoverURL: 'http://example.com/webhook/failover',
             webhookURL: 'http://example.com/webhook',

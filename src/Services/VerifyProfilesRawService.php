@@ -16,6 +16,7 @@ use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
+use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Rcs;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
 use Telnyx\VerifyProfiles\VerifyProfileCreateTemplateParams;
 use Telnyx\VerifyProfiles\VerifyProfileData;
@@ -28,9 +29,11 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
 /**
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall
+ * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Rcs
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call as CallShape1
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall as FlashcallShape1
+ * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Rcs as RcsShape1
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS as SMSShape1
  * @phpstan-import-type FilterShape from \Telnyx\VerifyProfiles\VerifyProfileListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -53,6 +56,7 @@ final class VerifyProfilesRawService implements VerifyProfilesRawContract
      *   call?: Call|CallShape,
      *   flashcall?: Flashcall|FlashcallShape,
      *   language?: string,
+     *   rcs?: Rcs|RcsShape,
      *   sms?: SMS|SMSShape,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
@@ -118,6 +122,7 @@ final class VerifyProfilesRawService implements VerifyProfilesRawContract
      *   flashcall?: VerifyProfileUpdateParams\Flashcall|FlashcallShape1,
      *   language?: string,
      *   name?: string,
+     *   rcs?: VerifyProfileUpdateParams\Rcs|RcsShape1,
      *   sms?: VerifyProfileUpdateParams\SMS|SMSShape1,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
