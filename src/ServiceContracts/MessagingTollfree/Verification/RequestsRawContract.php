@@ -8,7 +8,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPaginationForMessagingTollfree;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestCreateParams;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestGetStatusHistoryResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestListParams;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestRetrieveStatusHistoryParams;
 use Telnyx\MessagingTollfree\Verification\Requests\RequestUpdateParams;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestEgress;
 use Telnyx\MessagingTollfree\Verification\Requests\VerificationRequestStatus;
@@ -91,5 +93,21 @@ interface RequestsRawContract
     public function delete(
         string $id,
         RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|RequestRetrieveStatusHistoryParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<RequestGetStatusHistoryResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveStatusHistory(
+        string $id,
+        array|RequestRetrieveStatusHistoryParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

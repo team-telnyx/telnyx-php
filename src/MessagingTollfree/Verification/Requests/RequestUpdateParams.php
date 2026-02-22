@@ -30,7 +30,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *   businessState: string,
  *   businessZip: string,
  *   corporateWebsite: string,
- *   isvReseller: string,
  *   messageVolume: Volume|value-of<Volume>,
  *   optInWorkflow: string,
  *   optInWorkflowImageURLs: list<URL|URLShape>,
@@ -47,6 +46,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   doingBusinessAs?: string|null,
  *   entityType?: null|TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>,
  *   helpMessageResponse?: string|null,
+ *   isvReseller?: string|null,
  *   optInConfirmationResponse?: string|null,
  *   optInKeywords?: string|null,
  *   privacyPolicyURL?: string|null,
@@ -125,12 +125,6 @@ final class RequestUpdateParams implements BaseModel
      */
     #[Required]
     public string $corporateWebsite;
-
-    /**
-     * ISV name.
-     */
-    #[Required]
-    public string $isvReseller;
 
     /**
      * Message Volume Enums.
@@ -239,6 +233,12 @@ final class RequestUpdateParams implements BaseModel
     public ?string $helpMessageResponse;
 
     /**
+     * ISV name.
+     */
+    #[Optional(nullable: true)]
+    public ?string $isvReseller;
+
+    /**
      * Message sent to users confirming their opt-in to receive messages.
      */
     #[Optional(nullable: true)]
@@ -285,7 +285,6 @@ final class RequestUpdateParams implements BaseModel
      *   businessState: ...,
      *   businessZip: ...,
      *   corporateWebsite: ...,
-     *   isvReseller: ...,
      *   messageVolume: ...,
      *   optInWorkflow: ...,
      *   optInWorkflowImageURLs: ...,
@@ -311,7 +310,6 @@ final class RequestUpdateParams implements BaseModel
      *   ->withBusinessState(...)
      *   ->withBusinessZip(...)
      *   ->withCorporateWebsite(...)
-     *   ->withIsvReseller(...)
      *   ->withMessageVolume(...)
      *   ->withOptInWorkflow(...)
      *   ->withOptInWorkflowImageURLs(...)
@@ -349,7 +347,6 @@ final class RequestUpdateParams implements BaseModel
         string $businessState,
         string $businessZip,
         string $corporateWebsite,
-        string $isvReseller,
         Volume|string $messageVolume,
         string $optInWorkflow,
         array $optInWorkflowImageURLs,
@@ -366,6 +363,7 @@ final class RequestUpdateParams implements BaseModel
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
+        ?string $isvReseller = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
@@ -385,7 +383,6 @@ final class RequestUpdateParams implements BaseModel
         $self['businessState'] = $businessState;
         $self['businessZip'] = $businessZip;
         $self['corporateWebsite'] = $corporateWebsite;
-        $self['isvReseller'] = $isvReseller;
         $self['messageVolume'] = $messageVolume;
         $self['optInWorkflow'] = $optInWorkflow;
         $self['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
@@ -403,6 +400,7 @@ final class RequestUpdateParams implements BaseModel
         null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
         null !== $entityType && $self['entityType'] = $entityType;
         null !== $helpMessageResponse && $self['helpMessageResponse'] = $helpMessageResponse;
+        null !== $isvReseller && $self['isvReseller'] = $isvReseller;
         null !== $optInConfirmationResponse && $self['optInConfirmationResponse'] = $optInConfirmationResponse;
         null !== $optInKeywords && $self['optInKeywords'] = $optInKeywords;
         null !== $privacyPolicyURL && $self['privacyPolicyURL'] = $privacyPolicyURL;
@@ -532,17 +530,6 @@ final class RequestUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['corporateWebsite'] = $corporateWebsite;
-
-        return $self;
-    }
-
-    /**
-     * ISV name.
-     */
-    public function withIsvReseller(string $isvReseller): self
-    {
-        $self = clone $this;
-        $self['isvReseller'] = $isvReseller;
 
         return $self;
     }
@@ -736,6 +723,17 @@ final class RequestUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['helpMessageResponse'] = $helpMessageResponse;
+
+        return $self;
+    }
+
+    /**
+     * ISV name.
+     */
+    public function withIsvReseller(?string $isvReseller): self
+    {
+        $self = clone $this;
+        $self['isvReseller'] = $isvReseller;
 
         return $self;
     }
