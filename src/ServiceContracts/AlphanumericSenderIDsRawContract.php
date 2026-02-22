@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDCreateParams;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDDeleteResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDGetResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDListParams;
-use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDListResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDNewResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -56,7 +56,7 @@ interface AlphanumericSenderIDsRawContract
      * @param array<string,mixed>|AlphanumericSenderIDListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<AlphanumericSenderIDListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<AlphanumericSenderID>>
      *
      * @throws APIException
      */

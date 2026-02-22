@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDCreateParams;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDDeleteResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDGetResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDListParams;
-use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDListResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -99,7 +99,7 @@ final class AlphanumericSenderIDsRawService implements AlphanumericSenderIDsRawC
      * }|AlphanumericSenderIDListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<AlphanumericSenderIDListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<AlphanumericSenderID>>
      *
      * @throws APIException
      */
@@ -125,7 +125,7 @@ final class AlphanumericSenderIDsRawService implements AlphanumericSenderIDsRawC
                 ],
             ),
             options: $options,
-            convert: AlphanumericSenderIDListResponse::class,
+            convert: AlphanumericSenderID::class,
             page: DefaultFlatPagination::class,
         );
     }

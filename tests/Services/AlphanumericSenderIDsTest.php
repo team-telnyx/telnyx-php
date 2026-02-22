@@ -5,9 +5,9 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDDeleteResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDGetResponse;
-use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDListResponse;
 use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
@@ -92,7 +92,7 @@ final class AlphanumericSenderIDsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(AlphanumericSenderIDListResponse::class, $item);
+            $this->assertInstanceOf(AlphanumericSenderID::class, $item);
         }
     }
 

@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\AlphanumericSenderIDs;
 
-use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDGetResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDGetResponse\Data
+ * @phpstan-import-type AlphanumericSenderIDShape from \Telnyx\AlphanumericSenderIDs\AlphanumericSenderID
  *
  * @phpstan-type AlphanumericSenderIDGetResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|AlphanumericSenderID|AlphanumericSenderIDShape
  * }
  */
 final class AlphanumericSenderIDGetResponse implements BaseModel
@@ -22,7 +21,7 @@ final class AlphanumericSenderIDGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?AlphanumericSenderID $data;
 
     public function __construct()
     {
@@ -34,9 +33,9 @@ final class AlphanumericSenderIDGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param AlphanumericSenderID|AlphanumericSenderIDShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(AlphanumericSenderID|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +45,9 @@ final class AlphanumericSenderIDGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param AlphanumericSenderID|AlphanumericSenderIDShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(AlphanumericSenderID|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

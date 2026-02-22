@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDNewResponse;
+namespace Telnyx\AlphanumericSenderIDs;
 
-use Telnyx\AlphanumericSenderIDs\AlphanumericSenderIDNewResponse\Data\RecordType;
+use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID\RecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type AlphanumericSenderIDShape = array{
  *   id?: string|null,
  *   alphanumericSenderID?: string|null,
  *   messagingProfileID?: string|null,
@@ -19,9 +19,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   usLongCodeFallback?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class AlphanumericSenderID implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<AlphanumericSenderIDShape> */
     use SdkModel;
 
     /**
