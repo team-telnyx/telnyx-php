@@ -28,7 +28,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *   businessState: string,
  *   businessZip: string,
  *   corporateWebsite: string,
- *   isvReseller: string,
  *   messageVolume: Volume|value-of<Volume>,
  *   optInWorkflow: string,
  *   optInWorkflowImageURLs: list<URL|URLShape>,
@@ -46,6 +45,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   doingBusinessAs?: string|null,
  *   entityType?: null|TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>,
  *   helpMessageResponse?: string|null,
+ *   isvReseller?: string|null,
  *   optInConfirmationResponse?: string|null,
  *   optInKeywords?: string|null,
  *   privacyPolicyURL?: string|null,
@@ -94,9 +94,6 @@ final class VerificationRequestEgress implements BaseModel
 
     #[Required]
     public string $corporateWebsite;
-
-    #[Required]
-    public string $isvReseller;
 
     /**
      * Message Volume Enums.
@@ -170,6 +167,9 @@ final class VerificationRequestEgress implements BaseModel
     public ?string $helpMessageResponse;
 
     #[Optional]
+    public ?string $isvReseller;
+
+    #[Optional]
     public ?string $optInConfirmationResponse;
 
     #[Optional]
@@ -210,7 +210,6 @@ final class VerificationRequestEgress implements BaseModel
      *   businessState: ...,
      *   businessZip: ...,
      *   corporateWebsite: ...,
-     *   isvReseller: ...,
      *   messageVolume: ...,
      *   optInWorkflow: ...,
      *   optInWorkflowImageURLs: ...,
@@ -238,7 +237,6 @@ final class VerificationRequestEgress implements BaseModel
      *   ->withBusinessState(...)
      *   ->withBusinessZip(...)
      *   ->withCorporateWebsite(...)
-     *   ->withIsvReseller(...)
      *   ->withMessageVolume(...)
      *   ->withOptInWorkflow(...)
      *   ->withOptInWorkflowImageURLs(...)
@@ -279,7 +277,6 @@ final class VerificationRequestEgress implements BaseModel
         string $businessState,
         string $businessZip,
         string $corporateWebsite,
-        string $isvReseller,
         Volume|string $messageVolume,
         string $optInWorkflow,
         array $optInWorkflowImageURLs,
@@ -297,6 +294,7 @@ final class VerificationRequestEgress implements BaseModel
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
+        ?string $isvReseller = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
@@ -318,7 +316,6 @@ final class VerificationRequestEgress implements BaseModel
         $self['businessState'] = $businessState;
         $self['businessZip'] = $businessZip;
         $self['corporateWebsite'] = $corporateWebsite;
-        $self['isvReseller'] = $isvReseller;
         $self['messageVolume'] = $messageVolume;
         $self['optInWorkflow'] = $optInWorkflow;
         $self['optInWorkflowImageURLs'] = $optInWorkflowImageURLs;
@@ -337,6 +334,7 @@ final class VerificationRequestEgress implements BaseModel
         null !== $doingBusinessAs && $self['doingBusinessAs'] = $doingBusinessAs;
         null !== $entityType && $self['entityType'] = $entityType;
         null !== $helpMessageResponse && $self['helpMessageResponse'] = $helpMessageResponse;
+        null !== $isvReseller && $self['isvReseller'] = $isvReseller;
         null !== $optInConfirmationResponse && $self['optInConfirmationResponse'] = $optInConfirmationResponse;
         null !== $optInKeywords && $self['optInKeywords'] = $optInKeywords;
         null !== $privacyPolicyURL && $self['privacyPolicyURL'] = $privacyPolicyURL;
@@ -442,14 +440,6 @@ final class VerificationRequestEgress implements BaseModel
     {
         $self = clone $this;
         $self['corporateWebsite'] = $corporateWebsite;
-
-        return $self;
-    }
-
-    public function withIsvReseller(string $isvReseller): self
-    {
-        $self = clone $this;
-        $self['isvReseller'] = $isvReseller;
 
         return $self;
     }
@@ -618,6 +608,14 @@ final class VerificationRequestEgress implements BaseModel
     {
         $self = clone $this;
         $self['helpMessageResponse'] = $helpMessageResponse;
+
+        return $self;
+    }
+
+    public function withIsvReseller(string $isvReseller): self
+    {
+        $self = clone $this;
+        $self['isvReseller'] = $isvReseller;
 
         return $self;
     }

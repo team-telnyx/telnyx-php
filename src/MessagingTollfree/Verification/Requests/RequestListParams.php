@@ -18,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type RequestListParamsShape = array{
  *   page: int,
  *   pageSize: int,
+ *   businessName?: string|null,
  *   dateEnd?: \DateTimeInterface|null,
  *   dateStart?: \DateTimeInterface|null,
  *   phoneNumber?: string|null,
@@ -40,6 +41,12 @@ final class RequestListParams implements BaseModel
      */
     #[Required]
     public int $pageSize;
+
+    /**
+     * Filter verification requests by business name.
+     */
+    #[Optional]
+    public ?string $businessName;
 
     #[Optional]
     public ?\DateTimeInterface $dateEnd;
@@ -87,6 +94,7 @@ final class RequestListParams implements BaseModel
     public static function with(
         int $page,
         int $pageSize,
+        ?string $businessName = null,
         ?\DateTimeInterface $dateEnd = null,
         ?\DateTimeInterface $dateStart = null,
         ?string $phoneNumber = null,
@@ -97,6 +105,7 @@ final class RequestListParams implements BaseModel
         $self['page'] = $page;
         $self['pageSize'] = $pageSize;
 
+        null !== $businessName && $self['businessName'] = $businessName;
         null !== $dateEnd && $self['dateEnd'] = $dateEnd;
         null !== $dateStart && $self['dateStart'] = $dateStart;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
@@ -122,6 +131,17 @@ final class RequestListParams implements BaseModel
     {
         $self = clone $this;
         $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    /**
+     * Filter verification requests by business name.
+     */
+    public function withBusinessName(string $businessName): self
+    {
+        $self = clone $this;
+        $self['businessName'] = $businessName;
 
         return $self;
     }

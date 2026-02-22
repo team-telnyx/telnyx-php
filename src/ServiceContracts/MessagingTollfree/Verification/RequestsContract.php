@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\MessagingTollfree\Verification;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPaginationForMessagingTollfree;
+use Telnyx\MessagingTollfree\Verification\Requests\RequestGetStatusHistoryResponse;
 use Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber;
 use Telnyx\MessagingTollfree\Verification\Requests\TfVerificationStatus;
 use Telnyx\MessagingTollfree\Verification\Requests\TollFreeVerificationEntityType;
@@ -37,7 +38,6 @@ interface RequestsContract
      * @param string $businessState The full name of the state (not the 2 letter code) of the business address; the first letter should be capitalized
      * @param string $businessZip The ZIP code of the business address
      * @param string $corporateWebsite A URL, including the scheme, pointing to the corporate website
-     * @param string $isvReseller ISV name
      * @param Volume|value-of<Volume> $messageVolume Message Volume Enums
      * @param string $optInWorkflow Human-readable description of how end users will opt into receiving messages from the given phone numbers
      * @param list<URL|URLShape> $optInWorkflowImageURLs Images showing the opt-in workflow
@@ -54,6 +54,7 @@ interface RequestsContract
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|null $isvReseller ISV name
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
      * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
      * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
@@ -75,7 +76,6 @@ interface RequestsContract
         string $businessState,
         string $businessZip,
         string $corporateWebsite,
-        string $isvReseller,
         Volume|string $messageVolume,
         string $optInWorkflow,
         array $optInWorkflowImageURLs,
@@ -92,6 +92,7 @@ interface RequestsContract
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
+        ?string $isvReseller = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
@@ -126,7 +127,6 @@ interface RequestsContract
      * @param string $businessState The full name of the state (not the 2 letter code) of the business address; the first letter should be capitalized
      * @param string $businessZip The ZIP code of the business address
      * @param string $corporateWebsite A URL, including the scheme, pointing to the corporate website
-     * @param string $isvReseller ISV name
      * @param Volume|value-of<Volume> $messageVolume Message Volume Enums
      * @param string $optInWorkflow Human-readable description of how end users will opt into receiving messages from the given phone numbers
      * @param list<URL|URLShape> $optInWorkflowImageURLs Images showing the opt-in workflow
@@ -143,6 +143,7 @@ interface RequestsContract
      * @param string|null $doingBusinessAs Doing Business As (DBA) name if different from legal name
      * @param TollFreeVerificationEntityType|value-of<TollFreeVerificationEntityType>|null $entityType Business entity classification
      * @param string|null $helpMessageResponse The message returned when users text 'HELP'
+     * @param string|null $isvReseller ISV name
      * @param string|null $optInConfirmationResponse Message sent to users confirming their opt-in to receive messages
      * @param string|null $optInKeywords Keywords used to collect and process consumer opt-ins
      * @param string|null $privacyPolicyURL URL pointing to the business's privacy policy. Plain string, no URL format validation.
@@ -165,7 +166,6 @@ interface RequestsContract
         string $businessState,
         string $businessZip,
         string $corporateWebsite,
-        string $isvReseller,
         Volume|string $messageVolume,
         string $optInWorkflow,
         array $optInWorkflowImageURLs,
@@ -182,6 +182,7 @@ interface RequestsContract
         ?string $doingBusinessAs = null,
         TollFreeVerificationEntityType|string|null $entityType = null,
         ?string $helpMessageResponse = null,
+        ?string $isvReseller = null,
         ?string $optInConfirmationResponse = null,
         ?string $optInKeywords = null,
         ?string $privacyPolicyURL = null,
@@ -197,6 +198,7 @@ interface RequestsContract
      *         Request this many records per page
      *
      *         This value is automatically clamped if the provided value is too large
+     * @param string $businessName Filter verification requests by business name
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $status Tollfree verification status
      * @param RequestOpts|null $requestOptions
      *
@@ -207,6 +209,7 @@ interface RequestsContract
     public function list(
         int $page,
         int $pageSize,
+        ?string $businessName = null,
         ?\DateTimeInterface $dateEnd = null,
         ?\DateTimeInterface $dateStart = null,
         ?string $phoneNumber = null,
@@ -225,4 +228,19 @@ interface RequestsContract
         string $id,
         RequestOptions|array|null $requestOptions = null
     ): mixed;
+
+    /**
+     * @api
+     *
+     * @param int $pageSize Request this many records per page. This value is automatically clamped if the provided value is too large.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveStatusHistory(
+        string $id,
+        int $pageNumber,
+        int $pageSize,
+        RequestOptions|array|null $requestOptions = null,
+    ): RequestGetStatusHistoryResponse;
 }
