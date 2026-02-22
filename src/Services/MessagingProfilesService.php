@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -13,7 +14,6 @@ use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
-use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams\TimeFrame;
@@ -318,7 +318,7 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * @param string $id the identifier of the messaging profile
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<MessagingProfileListAlphanumericSenderIDsResponse>
+     * @return DefaultFlatPagination<AlphanumericSenderID>
      *
      * @throws APIException
      */

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\AlphanumericSenderIDs\AlphanumericSenderID;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -16,7 +17,6 @@ use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsParams;
-use Telnyx\MessagingProfiles\MessagingProfileListAlphanumericSenderIDsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
 use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
@@ -254,7 +254,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      * }|MessagingProfileListAlphanumericSenderIDsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessagingProfileListAlphanumericSenderIDsResponse,>,>
+     * @return BaseResponse<DefaultFlatPagination<AlphanumericSenderID>>
      *
      * @throws APIException
      */
@@ -277,7 +277,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: MessagingProfileListAlphanumericSenderIDsResponse::class,
+            convert: AlphanumericSenderID::class,
             page: DefaultFlatPagination::class,
         );
     }
