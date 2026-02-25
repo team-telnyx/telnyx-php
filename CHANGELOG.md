@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.45.0 (2026-02-25)
+
+Full Changelog: [v6.44.0...v6.45.0](https://github.com/team-telnyx/telnyx-php/compare/v6.44.0...v6.45.0)
+
+### Features
+
+* TELAPPS Add prevent_double_bridge to bridge command ([9052449](https://github.com/team-telnyx/telnyx-php/commit/90524498b27a91733d5f4618500f19260bc35085))
+
 ## 6.44.0 (2026-02-25)
 
 Full Changelog: [v6.43.0...v6.44.0](https://github.com/team-telnyx/telnyx-php/compare/v6.43.0...v6.44.0)
