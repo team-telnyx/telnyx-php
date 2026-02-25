@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\ResembleVoiceSettings;
+namespace Telnyx\ResembleVoiceSettings;
 
 /**
  * Audio precision format.

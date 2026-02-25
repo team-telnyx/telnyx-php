@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\ResembleVoiceSettings;
+namespace Telnyx\ResembleVoiceSettings;
 
 /**
  * Output audio format.

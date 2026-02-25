@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionSpeakParams;
 
-use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\ResembleVoiceSettings;
-use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\RimeVoiceSettings;
+use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -14,6 +12,8 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\MinimaxVoiceSettings;
+use Telnyx\ResembleVoiceSettings;
+use Telnyx\RimeVoiceSettings;
 
 /**
  * The settings associated with the voice selected.
@@ -22,9 +22,9 @@ use Telnyx\MinimaxVoiceSettings;
  * @phpstan-import-type TelnyxVoiceSettingsShape from \Telnyx\Calls\Actions\TelnyxVoiceSettings
  * @phpstan-import-type AwsVoiceSettingsShape from \Telnyx\Calls\Actions\AwsVoiceSettings
  * @phpstan-import-type MinimaxVoiceSettingsShape from \Telnyx\MinimaxVoiceSettings
- * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\AzureVoiceSettings
- * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\RimeVoiceSettings
- * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\ResembleVoiceSettings
+ * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\AzureVoiceSettings
+ * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
+ * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
  *
  * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings
  * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape

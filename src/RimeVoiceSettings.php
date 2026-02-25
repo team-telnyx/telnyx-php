@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings;
+namespace Telnyx;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\RimeVoiceSettings\Type;
 
 /**
  * @phpstan-type RimeVoiceSettingsShape = array{
- *   type: 'rime', voiceSpeed?: float|null
+ *   type: Type|value-of<Type>, voiceSpeed?: float|null
  * }
  */
 final class RimeVoiceSettings implements BaseModel
@@ -22,10 +23,10 @@ final class RimeVoiceSettings implements BaseModel
     /**
      * Voice settings provider type.
      *
-     * @var 'rime' $type
+     * @var value-of<Type> $type
      */
-    #[Required]
-    public string $type = 'rime';
+    #[Required(enum: Type::class)]
+    public string $type;
 
     /**
      * Speech speed multiplier. Default is 1.0.
@@ -33,6 +34,20 @@ final class RimeVoiceSettings implements BaseModel
     #[Optional('voice_speed')]
     public ?float $voiceSpeed;
 
+    /**
+     * `new RimeVoiceSettings()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * RimeVoiceSettings::with(type: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new RimeVoiceSettings)->withType(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -42,10 +57,16 @@ final class RimeVoiceSettings implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Type|value-of<Type> $type
      */
-    public static function with(?float $voiceSpeed = null): self
-    {
+    public static function with(
+        Type|string $type,
+        ?float $voiceSpeed = null
+    ): self {
         $self = new self;
+
+        $self['type'] = $type;
 
         null !== $voiceSpeed && $self['voiceSpeed'] = $voiceSpeed;
 
@@ -55,9 +76,9 @@ final class RimeVoiceSettings implements BaseModel
     /**
      * Voice settings provider type.
      *
-     * @param 'rime' $type
+     * @param Type|value-of<Type> $type
      */
-    public function withType(string $type): self
+    public function withType(Type|string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;

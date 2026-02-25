@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\Calls;
 
 use Telnyx\AI\Assistants\Assistant;
+use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
@@ -21,9 +22,6 @@ use Telnyx\Calls\Actions\ActionBridgeResponse;
 use Telnyx\Calls\Actions\ActionEnqueueResponse;
 use Telnyx\Calls\Actions\ActionGatherResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\ResembleVoiceSettings;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\RimeVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingAIResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
@@ -111,6 +109,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
+use Telnyx\ResembleVoiceSettings;
+use Telnyx\RimeVoiceSettings;
 use Telnyx\ServiceContracts\Calls\ActionsContract;
 
 /**
@@ -706,7 +706,7 @@ final class ActionsService implements ActionsContract
         string $terminatingDigit = '#',
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|\Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\AzureVoiceSettings|\Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\RimeVoiceSettings|\Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\ResembleVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse {
         $params = Util::removeNulls(
@@ -1096,7 +1096,7 @@ final class ActionsService implements ActionsContract
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
         TargetLegs|string $targetLegs = 'self',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\AzureVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\RimeVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\ResembleVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse {
         $params = Util::removeNulls(
@@ -1159,7 +1159,7 @@ final class ActionsService implements ActionsContract
         InterruptionSettings|array|null $interruptionSettings = null,
         TranscriptionConfig|array|null $transcription = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|\Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\AzureVoiceSettings|\Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\RimeVoiceSettings|\Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\ResembleVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartAIAssistantResponse {
         $params = Util::removeNulls(

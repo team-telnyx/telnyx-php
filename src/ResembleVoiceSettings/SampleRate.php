@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\ResembleVoiceSettings;
+namespace Telnyx\ResembleVoiceSettings;
 
 /**
  * Audio sample rate in Hz.
