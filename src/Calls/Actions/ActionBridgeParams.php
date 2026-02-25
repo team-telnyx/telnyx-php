@@ -34,6 +34,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   muteDtmf?: null|MuteDtmf|value-of<MuteDtmf>,
  *   parkAfterUnbridge?: string|null,
  *   playRingtone?: bool|null,
+ *   preventDoubleBridge?: bool|null,
  *   queue?: string|null,
  *   record?: null|Record|value-of<Record>,
  *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
@@ -91,6 +92,12 @@ final class ActionBridgeParams implements BaseModel
      */
     #[Optional('play_ringtone')]
     public ?bool $playRingtone;
+
+    /**
+     * When set to `true`, it prevents bridging if the target call is already bridged to another call. Disabled by default.
+     */
+    #[Optional('prevent_double_bridge')]
+    public ?bool $preventDoubleBridge;
 
     /**
      * The name of the queue you want to bridge with, can't be used together with call_control_id parameter or video_room_id parameter. Bridging with a queue means bridging with the first call in the queue. The call will always be removed from the queue regardless of whether bridging succeeds. Returns an error when the queue is empty.
@@ -215,6 +222,7 @@ final class ActionBridgeParams implements BaseModel
         MuteDtmf|string|null $muteDtmf = null,
         ?string $parkAfterUnbridge = null,
         ?bool $playRingtone = null,
+        ?bool $preventDoubleBridge = null,
         ?string $queue = null,
         Record|string|null $record = null,
         RecordChannels|string|null $recordChannels = null,
@@ -237,6 +245,7 @@ final class ActionBridgeParams implements BaseModel
         null !== $muteDtmf && $self['muteDtmf'] = $muteDtmf;
         null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
         null !== $playRingtone && $self['playRingtone'] = $playRingtone;
+        null !== $preventDoubleBridge && $self['preventDoubleBridge'] = $preventDoubleBridge;
         null !== $queue && $self['queue'] = $queue;
         null !== $record && $self['record'] = $record;
         null !== $recordChannels && $self['recordChannels'] = $recordChannels;
@@ -318,6 +327,17 @@ final class ActionBridgeParams implements BaseModel
     {
         $self = clone $this;
         $self['playRingtone'] = $playRingtone;
+
+        return $self;
+    }
+
+    /**
+     * When set to `true`, it prevents bridging if the target call is already bridged to another call. Disabled by default.
+     */
+    public function withPreventDoubleBridge(bool $preventDoubleBridge): self
+    {
+        $self = clone $this;
+        $self['preventDoubleBridge'] = $preventDoubleBridge;
 
         return $self;
     }
