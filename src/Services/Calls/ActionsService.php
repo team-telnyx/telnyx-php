@@ -313,6 +313,7 @@ final class ActionsService implements ActionsContract
      * @param MuteDtmf|value-of<MuteDtmf> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
      * @param string $parkAfterUnbridge Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
      * @param bool $playRingtone specifies whether to play a ringtone if the call you want to bridge with has not yet been answered
+     * @param bool $preventDoubleBridge When set to `true`, it prevents bridging if the target call is already bridged to another call. Disabled by default.
      * @param string $queue The name of the queue you want to bridge with, can't be used together with call_control_id parameter or video_room_id parameter. Bridging with a queue means bridging with the first call in the queue. The call will always be removed from the queue regardless of whether bridging succeeds. Returns an error when the queue is empty.
      * @param \Telnyx\Calls\Actions\ActionBridgeParams\Record|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\Record> $record Start recording automatically after an event. Disabled by default.
      * @param \Telnyx\Calls\Actions\ActionBridgeParams\RecordChannels|value-of<\Telnyx\Calls\Actions\ActionBridgeParams\RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
@@ -337,6 +338,7 @@ final class ActionsService implements ActionsContract
         MuteDtmf|string $muteDtmf = 'none',
         ?string $parkAfterUnbridge = null,
         bool $playRingtone = false,
+        bool $preventDoubleBridge = false,
         ?string $queue = null,
         \Telnyx\Calls\Actions\ActionBridgeParams\Record|string|null $record = null,
         \Telnyx\Calls\Actions\ActionBridgeParams\RecordChannels|string $recordChannels = 'dual',
@@ -359,6 +361,7 @@ final class ActionsService implements ActionsContract
                 'muteDtmf' => $muteDtmf,
                 'parkAfterUnbridge' => $parkAfterUnbridge,
                 'playRingtone' => $playRingtone,
+                'preventDoubleBridge' => $preventDoubleBridge,
                 'queue' => $queue,
                 'record' => $record,
                 'recordChannels' => $recordChannels,
