@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionGatherUsingAIParams;
 
+use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\AzureVoiceSettings;
+use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\ResembleVoiceSettings;
+use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\RimeVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -17,9 +20,12 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type ElevenLabsVoiceSettingsShape from \Telnyx\Calls\Actions\ElevenLabsVoiceSettings
  * @phpstan-import-type TelnyxVoiceSettingsShape from \Telnyx\Calls\Actions\TelnyxVoiceSettings
  * @phpstan-import-type AwsVoiceSettingsShape from \Telnyx\Calls\Actions\AwsVoiceSettings
+ * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\AzureVoiceSettings
+ * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\RimeVoiceSettings
+ * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\ResembleVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
@@ -39,6 +45,9 @@ final class VoiceSettings implements ConverterSource
             'elevenlabs' => ElevenLabsVoiceSettings::class,
             'telnyx' => TelnyxVoiceSettings::class,
             'aws' => AwsVoiceSettings::class,
+            'azure' => AzureVoiceSettings::class,
+            'rime' => RimeVoiceSettings::class,
+            'resemble' => ResembleVoiceSettings::class,
         ];
     }
 }
