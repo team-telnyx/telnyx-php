@@ -11,7 +11,9 @@ use Telnyx\Calls\Actions\ActionAnswerParams\RecordFormat;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
+use Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
+use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLsMethod;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Calls\SoundModifications;
@@ -40,6 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
  *
  * @phpstan-type ActionAnswerParamsShape = array{
  *   billingGroupID?: string|null,
@@ -66,8 +69,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *   streamURL?: string|null,
  *   transcription?: bool|null,
  *   transcriptionConfig?: null|TranscriptionStartRequest|TranscriptionStartRequestShape,
+ *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>|null,
  *   webhookURL?: string|null,
  *   webhookURLMethod?: null|WebhookURLMethod|value-of<WebhookURLMethod>,
+ *   webhookURLs?: array<string,string>|null,
+ *   webhookURLsMethod?: null|WebhookURLsMethod|value-of<WebhookURLsMethod>,
  * }
  */
 final class ActionAnswerParams implements BaseModel
@@ -250,6 +256,14 @@ final class ActionAnswerParams implements BaseModel
     public ?TranscriptionStartRequest $transcriptionConfig;
 
     /**
+     * A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
+     *
+     * @var array<string,WebhookRetriesPolicy>|null $webhookRetriesPolicies
+     */
+    #[Optional('webhook_retries_policies', map: WebhookRetriesPolicy::class)]
+    public ?array $webhookRetriesPolicies;
+
+    /**
      * Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
      */
     #[Optional('webhook_url')]
@@ -262,6 +276,22 @@ final class ActionAnswerParams implements BaseModel
      */
     #[Optional('webhook_url_method', enum: WebhookURLMethod::class)]
     public ?string $webhookURLMethod;
+
+    /**
+     * A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
+     *
+     * @var array<string,string>|null $webhookURLs
+     */
+    #[Optional('webhook_urls', map: 'string')]
+    public ?array $webhookURLs;
+
+    /**
+     * HTTP request method to invoke `webhook_urls`.
+     *
+     * @var value-of<WebhookURLsMethod>|null $webhookURLsMethod
+     */
+    #[Optional('webhook_urls_method', enum: WebhookURLsMethod::class)]
+    public ?string $webhookURLsMethod;
 
     public function __construct()
     {
@@ -288,7 +318,10 @@ final class ActionAnswerParams implements BaseModel
      * @param StreamCodec|value-of<StreamCodec>|null $streamCodec
      * @param StreamTrack|value-of<StreamTrack>|null $streamTrack
      * @param TranscriptionStartRequest|TranscriptionStartRequestShape|null $transcriptionConfig
+     * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>|null $webhookRetriesPolicies
      * @param WebhookURLMethod|value-of<WebhookURLMethod>|null $webhookURLMethod
+     * @param array<string,string>|null $webhookURLs
+     * @param WebhookURLsMethod|value-of<WebhookURLsMethod>|null $webhookURLsMethod
      */
     public static function with(
         ?string $billingGroupID = null,
@@ -315,8 +348,11 @@ final class ActionAnswerParams implements BaseModel
         ?string $streamURL = null,
         ?bool $transcription = null,
         TranscriptionStartRequest|array|null $transcriptionConfig = null,
+        ?array $webhookRetriesPolicies = null,
         ?string $webhookURL = null,
         WebhookURLMethod|string|null $webhookURLMethod = null,
+        ?array $webhookURLs = null,
+        WebhookURLsMethod|string|null $webhookURLsMethod = null,
     ): self {
         $self = new self;
 
@@ -344,8 +380,11 @@ final class ActionAnswerParams implements BaseModel
         null !== $streamURL && $self['streamURL'] = $streamURL;
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $transcriptionConfig && $self['transcriptionConfig'] = $transcriptionConfig;
+        null !== $webhookRetriesPolicies && $self['webhookRetriesPolicies'] = $webhookRetriesPolicies;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
         null !== $webhookURLMethod && $self['webhookURLMethod'] = $webhookURLMethod;
+        null !== $webhookURLs && $self['webhookURLs'] = $webhookURLs;
+        null !== $webhookURLsMethod && $self['webhookURLsMethod'] = $webhookURLsMethod;
 
         return $self;
     }
@@ -650,6 +689,20 @@ final class ActionAnswerParams implements BaseModel
     }
 
     /**
+     * A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
+     *
+     * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape> $webhookRetriesPolicies
+     */
+    public function withWebhookRetriesPolicies(
+        array $webhookRetriesPolicies
+    ): self {
+        $self = clone $this;
+        $self['webhookRetriesPolicies'] = $webhookRetriesPolicies;
+
+        return $self;
+    }
+
+    /**
      * Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
      */
     public function withWebhookURL(string $webhookURL): self
@@ -670,6 +723,33 @@ final class ActionAnswerParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['webhookURLMethod'] = $webhookURLMethod;
+
+        return $self;
+    }
+
+    /**
+     * A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
+     *
+     * @param array<string,string> $webhookURLs
+     */
+    public function withWebhookURLs(array $webhookURLs): self
+    {
+        $self = clone $this;
+        $self['webhookURLs'] = $webhookURLs;
+
+        return $self;
+    }
+
+    /**
+     * HTTP request method to invoke `webhook_urls`.
+     *
+     * @param WebhookURLsMethod|value-of<WebhookURLsMethod> $webhookURLsMethod
+     */
+    public function withWebhookURLsMethod(
+        WebhookURLsMethod|string $webhookURLsMethod
+    ): self {
+        $self = clone $this;
+        $self['webhookURLsMethod'] = $webhookURLsMethod;
 
         return $self;
     }

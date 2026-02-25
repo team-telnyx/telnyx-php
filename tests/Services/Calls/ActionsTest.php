@@ -124,6 +124,7 @@ final class ActionsTest extends TestCase
             callControlIDToBridgeWith: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
             commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            holdAfterUnbridge: true,
             muteDtmf: 'opposite',
             parkAfterUnbridge: 'self',
             playRingtone: true,
