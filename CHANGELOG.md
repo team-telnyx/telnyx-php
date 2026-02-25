@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.43.0 (2026-02-25)
+
+Full Changelog: [v6.42.0...v6.43.0](https://github.com/team-telnyx/telnyx-php/compare/v6.42.0...v6.43.0)
+
+### Features
+
+* Add missing TTS voice settings schemas and update voice descriptions ([7084546](https://github.com/team-telnyx/telnyx-php/commit/708454620c290b237bc17101fa93496ff6738922))
+
 ## 6.42.0 (2026-02-22)
 
 Full Changelog: [v6.41.4...v6.42.0](https://github.com/team-telnyx/telnyx-php/compare/v6.41.4...v6.42.0)
