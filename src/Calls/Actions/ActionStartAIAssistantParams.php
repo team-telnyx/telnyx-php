@@ -6,6 +6,9 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
+use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\AzureVoiceSettings;
+use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\ResembleVoiceSettings;
+use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\RimeVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -98,7 +101,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * @var VoiceSettingsVariants|null $voiceSettings
      */
     #[Optional('voice_settings', union: VoiceSettings::class)]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings;
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|null $voiceSettings;
 
     public function __construct()
     {
@@ -123,7 +126,7 @@ final class ActionStartAIAssistantParams implements BaseModel
         InterruptionSettings|array|null $interruptionSettings = null,
         TranscriptionConfig|array|null $transcription = null,
         ?string $voice = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -236,7 +239,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings $voiceSettings,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings $voiceSettings,
     ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;
