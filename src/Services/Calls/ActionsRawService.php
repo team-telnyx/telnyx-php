@@ -15,7 +15,9 @@ use Telnyx\Calls\Actions\ActionAnswerParams\RecordFormat;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
+use Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
+use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLsMethod;
 use Telnyx\Calls\Actions\ActionAnswerResponse;
 use Telnyx\Calls\Actions\ActionBridgeParams;
 use Telnyx\Calls\Actions\ActionBridgeParams\MuteDtmf;
@@ -112,8 +114,6 @@ use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
 use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
-use Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy;
-use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLsMethod;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateParams;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
@@ -139,6 +139,7 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
 /**
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
  * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
@@ -151,7 +152,7 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  * @phpstan-import-type TranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
- * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy as WebhookRetriesPolicyShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
@@ -241,8 +242,11 @@ final class ActionsRawService implements ActionsRawContract
      *   streamURL?: string,
      *   transcription?: bool,
      *   transcriptionConfig?: TranscriptionStartRequest|TranscriptionStartRequestShape,
+     *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>,
      *   webhookURL?: string,
      *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
+     *   webhookURLs?: array<string,string>,
+     *   webhookURLsMethod?: WebhookURLsMethod|value-of<WebhookURLsMethod>,
      * }|ActionAnswerParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -285,6 +289,7 @@ final class ActionsRawService implements ActionsRawContract
      *   callControlIDToBridgeWith: string,
      *   clientState?: string,
      *   commandID?: string,
+     *   holdAfterUnbridge?: bool,
      *   muteDtmf?: MuteDtmf|value-of<MuteDtmf>,
      *   parkAfterUnbridge?: string,
      *   playRingtone?: bool,
@@ -602,7 +607,9 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   clientState?: string, commandID?: string
+     *   clientState?: string,
+     *   commandID?: string,
+     *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
      * }|ActionHangupParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -1765,11 +1772,11 @@ final class ActionsRawService implements ActionsRawContract
      *   targetLegClientState?: string,
      *   timeLimitSecs?: int,
      *   timeoutSecs?: int,
-     *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>,
+     *   webhookRetriesPolicies?: array<string,ActionTransferParams\WebhookRetriesPolicy|WebhookRetriesPolicyShape1>,
      *   webhookURL?: string,
      *   webhookURLMethod?: ActionTransferParams\WebhookURLMethod|value-of<ActionTransferParams\WebhookURLMethod>,
      *   webhookURLs?: array<string,string>,
-     *   webhookURLsMethod?: WebhookURLsMethod|value-of<WebhookURLsMethod>,
+     *   webhookURLsMethod?: ActionTransferParams\WebhookURLsMethod|value-of<ActionTransferParams\WebhookURLsMethod>,
      * }|ActionTransferParams $params
      * @param RequestOpts|null $requestOptions
      *

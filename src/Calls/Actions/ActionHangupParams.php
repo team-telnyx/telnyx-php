@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -19,8 +20,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::hangup()
  *
+ * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ *
  * @phpstan-type ActionHangupParamsShape = array{
- *   clientState?: string|null, commandID?: string|null
+ *   clientState?: string|null,
+ *   commandID?: string|null,
+ *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
  * }
  */
 final class ActionHangupParams implements BaseModel
@@ -41,6 +46,14 @@ final class ActionHangupParams implements BaseModel
     #[Optional('command_id')]
     public ?string $commandID;
 
+    /**
+     * Custom headers to be added to the SIP BYE message.
+     *
+     * @var list<CustomSipHeader>|null $customHeaders
+     */
+    #[Optional('custom_headers', list: CustomSipHeader::class)]
+    public ?array $customHeaders;
+
     public function __construct()
     {
         $this->initialize();
@@ -50,15 +63,19 @@ final class ActionHangupParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      */
     public static function with(
         ?string $clientState = null,
-        ?string $commandID = null
+        ?string $commandID = null,
+        ?array $customHeaders = null,
     ): self {
         $self = new self;
 
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $commandID && $self['commandID'] = $commandID;
+        null !== $customHeaders && $self['customHeaders'] = $customHeaders;
 
         return $self;
     }
@@ -81,6 +98,19 @@ final class ActionHangupParams implements BaseModel
     {
         $self = clone $this;
         $self['commandID'] = $commandID;
+
+        return $self;
+    }
+
+    /**
+     * Custom headers to be added to the SIP BYE message.
+     *
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders
+     */
+    public function withCustomHeaders(array $customHeaders): self
+    {
+        $self = clone $this;
+        $self['customHeaders'] = $customHeaders;
 
         return $self;
     }

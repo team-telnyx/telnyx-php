@@ -31,6 +31,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callControlIDToBridgeWith: string,
  *   clientState?: string|null,
  *   commandID?: string|null,
+ *   holdAfterUnbridge?: bool|null,
  *   muteDtmf?: null|MuteDtmf|value-of<MuteDtmf>,
  *   parkAfterUnbridge?: string|null,
  *   playRingtone?: bool|null,
@@ -72,6 +73,12 @@ final class ActionBridgeParams implements BaseModel
      */
     #[Optional('command_id')]
     public ?string $commandID;
+
+    /**
+     * Specifies behavior after the bridge ends. If set to `true`, the current leg will be put on hold after unbridge instead of being hung up.
+     */
+    #[Optional('hold_after_unbridge')]
+    public ?bool $holdAfterUnbridge;
 
     /**
      * When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
@@ -219,6 +226,7 @@ final class ActionBridgeParams implements BaseModel
         string $callControlIDToBridgeWith,
         ?string $clientState = null,
         ?string $commandID = null,
+        ?bool $holdAfterUnbridge = null,
         MuteDtmf|string|null $muteDtmf = null,
         ?string $parkAfterUnbridge = null,
         ?bool $playRingtone = null,
@@ -242,6 +250,7 @@ final class ActionBridgeParams implements BaseModel
 
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $commandID && $self['commandID'] = $commandID;
+        null !== $holdAfterUnbridge && $self['holdAfterUnbridge'] = $holdAfterUnbridge;
         null !== $muteDtmf && $self['muteDtmf'] = $muteDtmf;
         null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
         null !== $playRingtone && $self['playRingtone'] = $playRingtone;
@@ -292,6 +301,17 @@ final class ActionBridgeParams implements BaseModel
     {
         $self = clone $this;
         $self['commandID'] = $commandID;
+
+        return $self;
+    }
+
+    /**
+     * Specifies behavior after the bridge ends. If set to `true`, the current leg will be put on hold after unbridge instead of being hung up.
+     */
+    public function withHoldAfterUnbridge(bool $holdAfterUnbridge): self
+    {
+        $self = clone $this;
+        $self['holdAfterUnbridge'] = $holdAfterUnbridge;
 
         return $self;
     }
