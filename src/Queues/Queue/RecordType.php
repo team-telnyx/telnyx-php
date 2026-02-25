@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Queues\QueueGetResponse\Data;
+namespace Telnyx\Queues\Queue;
 
 enum RecordType: string
 {
