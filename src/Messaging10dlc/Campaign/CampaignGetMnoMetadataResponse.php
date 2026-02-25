@@ -13,7 +13,7 @@ use Telnyx\Messaging10dlc\Campaign\CampaignGetMnoMetadataResponse\Mno10999;
  * @phpstan-import-type Mno10999Shape from \Telnyx\Messaging10dlc\Campaign\CampaignGetMnoMetadataResponse\Mno10999
  *
  * @phpstan-type CampaignGetMnoMetadataResponseShape = array{
- *   _10999?: null|Mno10999|Mno10999Shape
+ *   mno10999?: null|Mno10999|Mno10999Shape
  * }
  */
 final class CampaignGetMnoMetadataResponse implements BaseModel
@@ -22,7 +22,7 @@ final class CampaignGetMnoMetadataResponse implements BaseModel
     use SdkModel;
 
     #[Optional('10999')]
-    public ?Mno10999 $_10999;
+    public ?Mno10999 $mno10999;
 
     public function __construct()
     {
@@ -34,24 +34,24 @@ final class CampaignGetMnoMetadataResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Mno10999|Mno10999Shape|null $_10999
+     * @param Mno10999|Mno10999Shape|null $mno10999
      */
-    public static function with(Mno10999|array|null $_10999 = null): self
+    public static function with(Mno10999|array|null $mno10999 = null): self
     {
         $self = new self;
 
-        null !== $_10999 && $self['_10999'] = $_10999;
+        null !== $mno10999 && $self['mno10999'] = $mno10999;
 
         return $self;
     }
 
     /**
-     * @param Mno10999|Mno10999Shape $_10999
+     * @param Mno10999|Mno10999Shape $mno10999
      */
-    public function with10999(Mno10999|array $_10999): self
+    public function withMno10999(Mno10999|array $mno10999): self
     {
         $self = clone $this;
-        $self['_10999'] = $_10999;
+        $self['mno10999'] = $mno10999;
 
         return $self;
     }
