@@ -127,6 +127,7 @@ final class ActionsTest extends TestCase
             muteDtmf: 'opposite',
             parkAfterUnbridge: 'self',
             playRingtone: true,
+            preventDoubleBridge: true,
             queue: 'support',
             record: 'record-from-answer',
             recordChannels: 'single',

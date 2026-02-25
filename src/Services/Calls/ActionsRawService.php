@@ -288,6 +288,7 @@ final class ActionsRawService implements ActionsRawContract
      *   muteDtmf?: MuteDtmf|value-of<MuteDtmf>,
      *   parkAfterUnbridge?: string,
      *   playRingtone?: bool,
+     *   preventDoubleBridge?: bool,
      *   queue?: string,
      *   record?: ActionBridgeParams\Record|value-of<ActionBridgeParams\Record>,
      *   recordChannels?: ActionBridgeParams\RecordChannels|value-of<ActionBridgeParams\RecordChannels>,
