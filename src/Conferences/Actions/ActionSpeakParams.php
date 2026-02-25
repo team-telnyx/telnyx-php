@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
+use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -11,15 +12,14 @@ use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Region;
 use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings;
-use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\AzureVoiceSettings;
-use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\ResembleVoiceSettings;
-use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\RimeVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MinimaxVoiceSettings;
+use Telnyx\ResembleVoiceSettings;
+use Telnyx\RimeVoiceSettings;
 
 /**
  * Convert text to speech and play it to all or some participants.

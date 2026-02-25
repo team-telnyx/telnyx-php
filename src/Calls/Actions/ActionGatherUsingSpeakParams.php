@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings;
-use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\ResembleVoiceSettings;
-use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\RimeVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MinimaxVoiceSettings;
+use Telnyx\ResembleVoiceSettings;
+use Telnyx\RimeVoiceSettings;
 
 /**
  * Convert text to speech and play it on the call until the required DTMF signals are gathered to build interactive menus.

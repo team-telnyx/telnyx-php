@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\AI\Assistants\Assistant;
+use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\ResembleVoiceSettings;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\RimeVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\ResembleVoiceSettings;
+use Telnyx\RimeVoiceSettings;
 
 /**
  * Gather parameters defined in the request payload using a voice assistant.

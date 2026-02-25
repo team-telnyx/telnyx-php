@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
 use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings;
-use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\ResembleVoiceSettings;
-use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\RimeVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MinimaxVoiceSettings;
+use Telnyx\ResembleVoiceSettings;
+use Telnyx\RimeVoiceSettings;
 
 /**
  * Convert text to speech and play it back on the call. If multiple speak text commands are issued consecutively, the audio files will be placed in a queue awaiting playback.

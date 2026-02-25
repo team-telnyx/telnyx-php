@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
+namespace Telnyx;
 
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\AzureVoiceSettings\Effect;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\AzureVoiceSettings\Gender;
+use Telnyx\AzureVoiceSettings\Effect;
+use Telnyx\AzureVoiceSettings\Gender;
+use Telnyx\AzureVoiceSettings\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -13,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type AzureVoiceSettingsShape = array{
- *   type: 'azure',
+ *   type: Type|value-of<Type>,
  *   apiKeyRef?: string|null,
  *   deploymentID?: string|null,
  *   effect?: null|Effect|value-of<Effect>,
@@ -29,10 +30,10 @@ final class AzureVoiceSettings implements BaseModel
     /**
      * Voice settings provider type.
      *
-     * @var 'azure' $type
+     * @var value-of<Type> $type
      */
-    #[Required]
-    public string $type = 'azure';
+    #[Required(enum: Type::class)]
+    public string $type;
 
     /**
      * The `identifier` for an integration secret that refers to your Azure Speech API key.
@@ -68,6 +69,20 @@ final class AzureVoiceSettings implements BaseModel
     #[Optional]
     public ?string $region;
 
+    /**
+     * `new AzureVoiceSettings()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * AzureVoiceSettings::with(type: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new AzureVoiceSettings)->withType(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -78,10 +93,12 @@ final class AzureVoiceSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Type|value-of<Type> $type
      * @param Effect|value-of<Effect>|null $effect
      * @param Gender|value-of<Gender>|null $gender
      */
     public static function with(
+        Type|string $type,
         ?string $apiKeyRef = null,
         ?string $deploymentID = null,
         Effect|string|null $effect = null,
@@ -89,6 +106,8 @@ final class AzureVoiceSettings implements BaseModel
         ?string $region = null,
     ): self {
         $self = new self;
+
+        $self['type'] = $type;
 
         null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $deploymentID && $self['deploymentID'] = $deploymentID;
@@ -102,9 +121,9 @@ final class AzureVoiceSettings implements BaseModel
     /**
      * Voice settings provider type.
      *
-     * @param 'azure' $type
+     * @param Type|value-of<Type> $type
      */
-    public function withType(string $type): self
+    public function withType(Type|string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;
