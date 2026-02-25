@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\ResembleVoiceSettings;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\RimeVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\ResembleVoiceSettings;
+use Telnyx\RimeVoiceSettings;
 
 /**
  * Start an AI assistant on the call.

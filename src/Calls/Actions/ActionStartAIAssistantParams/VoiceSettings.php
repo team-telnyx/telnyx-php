@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\ResembleVoiceSettings;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\RimeVoiceSettings;
+use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
+use Telnyx\ResembleVoiceSettings;
+use Telnyx\RimeVoiceSettings;
 
 /**
  * The settings associated with the voice selected.
@@ -20,9 +20,9 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type ElevenLabsVoiceSettingsShape from \Telnyx\Calls\Actions\ElevenLabsVoiceSettings
  * @phpstan-import-type TelnyxVoiceSettingsShape from \Telnyx\Calls\Actions\TelnyxVoiceSettings
  * @phpstan-import-type AwsVoiceSettingsShape from \Telnyx\Calls\Actions\AwsVoiceSettings
- * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\AzureVoiceSettings
- * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\RimeVoiceSettings
- * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\ResembleVoiceSettings
+ * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\AzureVoiceSettings
+ * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
+ * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
  *
  * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings
  * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape

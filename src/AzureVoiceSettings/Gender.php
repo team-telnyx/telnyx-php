@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\AzureVoiceSettings;
+namespace Telnyx\AzureVoiceSettings;
 
 /**
  * Voice gender filter.
