@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.46.0 (2026-02-25)
+
+Full Changelog: [v6.45.0...v6.46.0](https://github.com/team-telnyx/telnyx-php/compare/v6.45.0...v6.46.0)
+
+### Features
+
+* PORTAL-5923: Add stored_payment_transactions endpoint to OpenAPI docs ([15a74d7](https://github.com/team-telnyx/telnyx-php/commit/15a74d77fb72a7ae5b4ec618a99c56479538bf3b))
+
+
+### Documentation
+
+* **call-control:** Add missing params to hangup, bridge, answer ([0298f78](https://github.com/team-telnyx/telnyx-php/commit/0298f785b50cade0b80d254073b74fac70635648))
+* **call-control:** Add queue CRUD endpoints ([488f7e7](https://github.com/team-telnyx/telnyx-php/commit/488f7e7702c824208b87b71797451c9d13b1a5b7))
+
 ## 6.45.0 (2026-02-25)
 
 Full Changelog: [v6.44.0...v6.45.0](https://github.com/team-telnyx/telnyx-php/compare/v6.44.0...v6.45.0)
