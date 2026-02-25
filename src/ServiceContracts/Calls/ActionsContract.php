@@ -14,7 +14,9 @@ use Telnyx\Calls\Actions\ActionAnswerParams\RecordFormat;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordTrim;
 use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
+use Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
+use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLsMethod;
 use Telnyx\Calls\Actions\ActionAnswerResponse;
 use Telnyx\Calls\Actions\ActionBridgeParams\MuteDtmf;
 use Telnyx\Calls\Actions\ActionBridgeParams\Ringtone;
@@ -77,8 +79,6 @@ use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
 use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
-use Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy;
-use Telnyx\Calls\Actions\ActionTransferParams\WebhookURLsMethod;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
@@ -113,6 +113,7 @@ use Telnyx\RimeVoiceSettings;
 /**
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
  * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
@@ -125,7 +126,7 @@ use Telnyx\RimeVoiceSettings;
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  * @phpstan-import-type TranscriptionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
- * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy as WebhookRetriesPolicyShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
@@ -183,8 +184,11 @@ interface ActionsContract
      * @param string $streamURL the destination WebSocket address where the stream is going to be delivered
      * @param bool $transcription Enable transcription upon call answer. The default value is false.
      * @param TranscriptionStartRequest|TranscriptionStartRequestShape $transcriptionConfig
+     * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape> $webhookRetriesPolicies A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
+     * @param array<string,string> $webhookURLs A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
+     * @param WebhookURLsMethod|value-of<WebhookURLsMethod> $webhookURLsMethod HTTP request method to invoke `webhook_urls`
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -215,8 +219,11 @@ interface ActionsContract
         ?string $streamURL = null,
         bool $transcription = false,
         TranscriptionStartRequest|array|null $transcriptionConfig = null,
+        ?array $webhookRetriesPolicies = null,
         ?string $webhookURL = null,
         WebhookURLMethod|string $webhookURLMethod = 'POST',
+        ?array $webhookURLs = null,
+        WebhookURLsMethod|string $webhookURLsMethod = 'POST',
         RequestOptions|array|null $requestOptions = null,
     ): ActionAnswerResponse;
 
@@ -227,6 +234,7 @@ interface ActionsContract
      * @param string $callControlIDToBridgeWith the Call Control ID of the call you want to bridge with, can't be used together with queue parameter or video_room_id parameter
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param bool $holdAfterUnbridge Specifies behavior after the bridge ends. If set to `true`, the current leg will be put on hold after unbridge instead of being hung up.
      * @param MuteDtmf|value-of<MuteDtmf> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
      * @param string $parkAfterUnbridge Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
      * @param bool $playRingtone specifies whether to play a ringtone if the call you want to bridge with has not yet been answered
@@ -252,6 +260,7 @@ interface ActionsContract
         string $callControlIDToBridgeWith,
         ?string $clientState = null,
         ?string $commandID = null,
+        ?bool $holdAfterUnbridge = null,
         MuteDtmf|string $muteDtmf = 'none',
         ?string $parkAfterUnbridge = null,
         bool $playRingtone = false,
@@ -481,6 +490,7 @@ interface ActionsContract
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP BYE message
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -489,6 +499,7 @@ interface ActionsContract
         string $callControlID,
         ?string $clientState = null,
         ?string $commandID = null,
+        ?array $customHeaders = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionHangupResponse;
 
@@ -1153,11 +1164,11 @@ interface ActionsContract
      * @param string $targetLegClientState Use this field to add state to every subsequent webhook for the new leg. It must be a valid Base-64 encoded string.
      * @param int $timeLimitSecs Sets the maximum duration of a Call Control Leg in seconds. If the time limit is reached, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `time_limit` will be sent. For example, by setting a time limit of 120 seconds, a Call Leg will be automatically terminated two minutes after being answered. The default time limit is 14400 seconds or 4 hours and this is also the maximum allowed call length.
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being transferred. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 600 seconds.
-     * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape> $webhookRetriesPolicies A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
+     * @param array<string,\Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy|WebhookRetriesPolicyShape1> $webhookRetriesPolicies A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param \Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod|value-of<\Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
      * @param array<string,string> $webhookURLs A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of `webhook_url`. Events not mapped here will use the default `webhook_url`.
-     * @param WebhookURLsMethod|value-of<WebhookURLsMethod> $webhookURLsMethod HTTP request method to invoke `webhook_urls`
+     * @param \Telnyx\Calls\Actions\ActionTransferParams\WebhookURLsMethod|value-of<\Telnyx\Calls\Actions\ActionTransferParams\WebhookURLsMethod> $webhookURLsMethod HTTP request method to invoke `webhook_urls`
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -1200,7 +1211,7 @@ interface ActionsContract
         ?string $webhookURL = null,
         \Telnyx\Calls\Actions\ActionTransferParams\WebhookURLMethod|string $webhookURLMethod = 'POST',
         ?array $webhookURLs = null,
-        WebhookURLsMethod|string $webhookURLsMethod = 'POST',
+        \Telnyx\Calls\Actions\ActionTransferParams\WebhookURLsMethod|string $webhookURLsMethod = 'POST',
         RequestOptions|array|null $requestOptions = null,
     ): ActionTransferResponse;
 
