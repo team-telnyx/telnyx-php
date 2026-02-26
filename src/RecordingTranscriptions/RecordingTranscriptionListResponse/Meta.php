@@ -7,15 +7,13 @@ namespace Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Cursors;
+use Telnyx\Cursor;
 
 /**
- * @phpstan-import-type CursorsShape from \Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta\Cursors
+ * @phpstan-import-type CursorShape from \Telnyx\Cursor
  *
  * @phpstan-type MetaShape = array{
- *   cursors?: null|Cursors|CursorsShape,
- *   next?: string|null,
- *   previous?: string|null,
+ *   cursors?: null|Cursor|CursorShape, next?: string|null, previous?: string|null
  * }
  */
 final class Meta implements BaseModel
@@ -24,7 +22,7 @@ final class Meta implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Cursors $cursors;
+    public ?Cursor $cursors;
 
     /**
      * Path to next page.
@@ -48,10 +46,10 @@ final class Meta implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Cursors|CursorsShape|null $cursors
+     * @param Cursor|CursorShape|null $cursors
      */
     public static function with(
-        Cursors|array|null $cursors = null,
+        Cursor|array|null $cursors = null,
         ?string $next = null,
         ?string $previous = null
     ): self {
@@ -65,9 +63,9 @@ final class Meta implements BaseModel
     }
 
     /**
-     * @param Cursors|CursorsShape $cursors
+     * @param Cursor|CursorShape $cursors
      */
-    public function withCursors(Cursors|array $cursors): self
+    public function withCursors(Cursor|array $cursors): self
     {
         $self = clone $this;
         $self['cursors'] = $cursors;

@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace Telnyx\Comments;
 
 use Telnyx\AuthenticationProviders\PaginationMeta;
-use Telnyx\Comments\CommentListResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Comments\CommentListResponse\Data
+ * @phpstan-import-type CommentShape from \Telnyx\Comments\Comment
  * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
  *
  * @phpstan-type CommentListResponseShape = array{
- *   data?: list<Data|DataShape>|null,
+ *   data?: list<Comment|CommentShape>|null,
  *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
@@ -24,8 +23,8 @@ final class CommentListResponse implements BaseModel
     /** @use SdkModel<CommentListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
+    /** @var list<Comment>|null $data */
+    #[Optional(list: Comment::class)]
     public ?array $data;
 
     #[Optional]
@@ -41,7 +40,7 @@ final class CommentListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape>|null $data
+     * @param list<Comment|CommentShape>|null $data
      * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
@@ -57,7 +56,7 @@ final class CommentListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * @param list<Comment|CommentShape> $data
      */
     public function withData(array $data): self
     {

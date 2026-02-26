@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Comments\CommentMarkAsReadResponse\Data;
+namespace Telnyx\Comments\Comment;
 
 enum CommenterType: string
 {
