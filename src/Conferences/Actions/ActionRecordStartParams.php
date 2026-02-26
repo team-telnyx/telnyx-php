@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
-use Telnyx\Conferences\Actions\ActionRecordStartParams\Channels;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Region;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
@@ -25,7 +24,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type ActionRecordStartParamsShape = array{
  *   format: Format|value-of<Format>,
- *   channels?: null|Channels|value-of<Channels>,
  *   commandID?: string|null,
  *   customFileName?: string|null,
  *   playBeep?: bool|null,
@@ -46,14 +44,6 @@ final class ActionRecordStartParams implements BaseModel
      */
     #[Required(enum: Format::class)]
     public string $format;
-
-    /**
-     * When `dual`, final audio file will be stereo recorded with the conference creator on the first channel, and the rest on the second channel.
-     *
-     * @var value-of<Channels>|null $channels
-     */
-    #[Optional(enum: Channels::class)]
-    public ?string $channels;
 
     /**
      * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `conference_id`.
@@ -114,13 +104,11 @@ final class ActionRecordStartParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Format|value-of<Format> $format
-     * @param Channels|value-of<Channels>|null $channels
      * @param Region|value-of<Region>|null $region
      * @param Trim|value-of<Trim>|null $trim
      */
     public static function with(
         Format|string $format,
-        Channels|string|null $channels = null,
         ?string $commandID = null,
         ?string $customFileName = null,
         ?bool $playBeep = null,
@@ -131,7 +119,6 @@ final class ActionRecordStartParams implements BaseModel
 
         $self['format'] = $format;
 
-        null !== $channels && $self['channels'] = $channels;
         null !== $commandID && $self['commandID'] = $commandID;
         null !== $customFileName && $self['customFileName'] = $customFileName;
         null !== $playBeep && $self['playBeep'] = $playBeep;
@@ -150,19 +137,6 @@ final class ActionRecordStartParams implements BaseModel
     {
         $self = clone $this;
         $self['format'] = $format;
-
-        return $self;
-    }
-
-    /**
-     * When `dual`, final audio file will be stereo recorded with the conference creator on the first channel, and the rest on the second channel.
-     *
-     * @param Channels|value-of<Channels> $channels
-     */
-    public function withChannels(Channels|string $channels): self
-    {
-        $self = clone $this;
-        $self['channels'] = $channels;
 
         return $self;
     }
