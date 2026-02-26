@@ -7,12 +7,13 @@ namespace Telnyx\ExternalConnections\CivicAddresses;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\ExternalConnections\CivicAddresses\CivicAddressGetResponse\Data
+ * @phpstan-import-type CivicAddressShape from \Telnyx\ExternalConnections\CivicAddresses\CivicAddress
  *
- * @phpstan-type CivicAddressGetResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type CivicAddressGetResponseShape = array{
+ *   data?: null|CivicAddress|CivicAddressShape
+ * }
  */
 final class CivicAddressGetResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class CivicAddressGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CivicAddress $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class CivicAddressGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CivicAddress|CivicAddressShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CivicAddress|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class CivicAddressGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CivicAddress|CivicAddressShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CivicAddress|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

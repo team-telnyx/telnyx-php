@@ -7,14 +7,13 @@ namespace Telnyx\WebhookDeliveries;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Status;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Webhook;
 
 /**
  * Record of all attempts to deliver a webhook.
  *
- * @phpstan-import-type AttemptShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Attempt
+ * @phpstan-import-type AttemptShape from \Telnyx\WebhookDeliveries\Attempt
  * @phpstan-import-type WebhookShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListResponse\Webhook
  *
  * @phpstan-type WebhookDeliveryListResponseShape = array{

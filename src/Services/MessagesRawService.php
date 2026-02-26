@@ -25,15 +25,15 @@ use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
 use Telnyx\Messages\MessageSendWhatsappParams;
-use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
 use Telnyx\Messages\MessageSendWhatsappResponse;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderParams;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
+use Telnyx\Messages\WhatsappMessageContent;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesRawContract;
 
 /**
- * @phpstan-import-type WhatsappMessageShape from \Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage
+ * @phpstan-import-type WhatsappMessageContentShape from \Telnyx\Messages\WhatsappMessageContent
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagesRawService implements MessagesRawContract
@@ -393,7 +393,7 @@ final class MessagesRawService implements MessagesRawContract
      * @param array{
      *   from: string,
      *   to: string,
-     *   whatsappMessage: WhatsappMessage|WhatsappMessageShape,
+     *   whatsappMessage: WhatsappMessageContent|WhatsappMessageContentShape,
      *   type?: MessageSendWhatsappParams\Type|value-of<MessageSendWhatsappParams\Type>,
      *   webhookURL?: string,
      * }|MessageSendWhatsappParams $params

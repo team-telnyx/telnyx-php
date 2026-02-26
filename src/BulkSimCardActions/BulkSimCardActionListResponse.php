@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\BulkSimCardActions;
 
 use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\ActionType;
-use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\SimCardActionsSummary;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type SimCardActionsSummaryShape from \Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\SimCardActionsSummary
+ * @phpstan-import-type SimCardActionsSummaryShape from \Telnyx\BulkSimCardActions\SimCardActionsSummary
  *
  * @phpstan-type BulkSimCardActionListResponseShape = array{
  *   id?: string|null,

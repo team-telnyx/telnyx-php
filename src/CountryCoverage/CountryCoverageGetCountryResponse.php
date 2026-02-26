@@ -7,13 +7,12 @@ namespace Telnyx\CountryCoverage;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\CountryCoverage\CountryCoverageGetCountryResponse\Data
+ * @phpstan-import-type CountryCoverageShape from \Telnyx\CountryCoverage\CountryCoverage
  *
  * @phpstan-type CountryCoverageGetCountryResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|CountryCoverage|CountryCoverageShape
  * }
  */
 final class CountryCoverageGetCountryResponse implements BaseModel
@@ -22,7 +21,7 @@ final class CountryCoverageGetCountryResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?CountryCoverage $data;
 
     public function __construct()
     {
@@ -34,9 +33,9 @@ final class CountryCoverageGetCountryResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param CountryCoverage|CountryCoverageShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(CountryCoverage|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +45,9 @@ final class CountryCoverageGetCountryResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param CountryCoverage|CountryCoverageShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(CountryCoverage|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

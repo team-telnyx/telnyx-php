@@ -9,13 +9,12 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messaging10dlc\Brand\TelnyxBrand\BrandRelationship;
-use Telnyx\Messaging10dlc\Brand\TelnyxBrand\OptionalAttributes;
 use Telnyx\Messaging10dlc\Brand\TelnyxBrand\Status;
 
 /**
  * Telnyx-specific extensions to The Campaign Registry's `Brand` type.
  *
- * @phpstan-import-type OptionalAttributesShape from \Telnyx\Messaging10dlc\Brand\TelnyxBrand\OptionalAttributes
+ * @phpstan-import-type BrandOptionalAttributesShape from \Telnyx\Messaging10dlc\Brand\BrandOptionalAttributes
  *
  * @phpstan-type TelnyxBrandShape = array{
  *   brandRelationship: BrandRelationship|value-of<BrandRelationship>,
@@ -41,7 +40,7 @@ use Telnyx\Messaging10dlc\Brand\TelnyxBrand\Status;
  *   lastName?: string|null,
  *   mobilePhone?: string|null,
  *   mock?: bool|null,
- *   optionalAttributes?: null|OptionalAttributes|OptionalAttributesShape,
+ *   optionalAttributes?: null|BrandOptionalAttributes|BrandOptionalAttributesShape,
  *   phone?: string|null,
  *   postalCode?: string|null,
  *   referenceID?: string|null,
@@ -212,7 +211,7 @@ final class TelnyxBrand implements BaseModel
     public ?bool $mock;
 
     #[Optional]
-    public ?OptionalAttributes $optionalAttributes;
+    public ?BrandOptionalAttributes $optionalAttributes;
 
     /**
      * Valid phone number in e.164 international format.
@@ -343,7 +342,7 @@ final class TelnyxBrand implements BaseModel
      * @param EntityType|value-of<EntityType> $entityType
      * @param AltBusinessIDType|value-of<AltBusinessIDType>|null $altBusinessIDType
      * @param BrandIdentityStatus|value-of<BrandIdentityStatus>|null $identityStatus
-     * @param OptionalAttributes|OptionalAttributesShape|null $optionalAttributes
+     * @param BrandOptionalAttributes|BrandOptionalAttributesShape|null $optionalAttributes
      * @param Status|value-of<Status>|null $status
      * @param StockExchange|value-of<StockExchange>|null $stockExchange
      */
@@ -371,7 +370,7 @@ final class TelnyxBrand implements BaseModel
         ?string $lastName = null,
         ?string $mobilePhone = null,
         ?bool $mock = null,
-        OptionalAttributes|array|null $optionalAttributes = null,
+        BrandOptionalAttributes|array|null $optionalAttributes = null,
         ?string $phone = null,
         ?string $postalCode = null,
         ?string $referenceID = null,
@@ -699,10 +698,10 @@ final class TelnyxBrand implements BaseModel
     }
 
     /**
-     * @param OptionalAttributes|OptionalAttributesShape $optionalAttributes
+     * @param BrandOptionalAttributes|BrandOptionalAttributesShape $optionalAttributes
      */
     public function withOptionalAttributes(
-        OptionalAttributes|array $optionalAttributes
+        BrandOptionalAttributes|array $optionalAttributes
     ): self {
         $self = clone $this;
         $self['optionalAttributes'] = $optionalAttributes;

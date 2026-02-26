@@ -7,13 +7,12 @@ namespace Telnyx\SubNumberOrdersReport;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse\Data
+ * @phpstan-import-type SubNumberOrdersReportShape from \Telnyx\SubNumberOrdersReport\SubNumberOrdersReport
  *
  * @phpstan-type SubNumberOrdersReportNewResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|SubNumberOrdersReport|SubNumberOrdersReportShape
  * }
  */
 final class SubNumberOrdersReportNewResponse implements BaseModel
@@ -22,7 +21,7 @@ final class SubNumberOrdersReportNewResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?SubNumberOrdersReport $data;
 
     public function __construct()
     {
@@ -34,9 +33,9 @@ final class SubNumberOrdersReportNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param SubNumberOrdersReport|SubNumberOrdersReportShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(SubNumberOrdersReport|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +45,9 @@ final class SubNumberOrdersReportNewResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param SubNumberOrdersReport|SubNumberOrdersReportShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(SubNumberOrdersReport|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

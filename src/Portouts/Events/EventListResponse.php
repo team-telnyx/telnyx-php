@@ -7,14 +7,11 @@ namespace Telnyx\Portouts\Events;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
-use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment;
-use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged;
 
 /**
- * @phpstan-import-type WebhookPortoutStatusChangedShape from \Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged
- * @phpstan-import-type WebhookPortoutNewCommentShape from \Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment
- * @phpstan-import-type WebhookPortoutFocDateChangedShape from \Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged
+ * @phpstan-import-type WebhookPortoutStatusChangedShape from \Telnyx\Portouts\Events\WebhookPortoutStatusChanged
+ * @phpstan-import-type WebhookPortoutNewCommentShape from \Telnyx\Portouts\Events\WebhookPortoutNewComment
+ * @phpstan-import-type WebhookPortoutFocDateChangedShape from \Telnyx\Portouts\Events\WebhookPortoutFocDateChanged
  *
  * @phpstan-type EventListResponseVariants = WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged
  * @phpstan-type EventListResponseShape = EventListResponseVariants|WebhookPortoutStatusChangedShape|WebhookPortoutNewCommentShape|WebhookPortoutFocDateChangedShape

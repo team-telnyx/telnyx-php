@@ -13,9 +13,9 @@ use Telnyx\Portouts\Events\EventGetResponse;
 use Telnyx\Portouts\Events\EventListParams;
 use Telnyx\Portouts\Events\EventListParams\Filter;
 use Telnyx\Portouts\Events\EventListResponse;
-use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutFocDateChanged;
-use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutNewComment;
-use Telnyx\Portouts\Events\EventListResponse\WebhookPortoutStatusChanged;
+use Telnyx\Portouts\Events\WebhookPortoutFocDateChanged;
+use Telnyx\Portouts\Events\WebhookPortoutNewComment;
+use Telnyx\Portouts\Events\WebhookPortoutStatusChanged;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\EventsRawContract;
 

@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Integrations\Connections;
 
-use Telnyx\AI\Integrations\Connections\ConnectionGetResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\AI\Integrations\Connections\ConnectionGetResponse\Data
+ * @phpstan-import-type IntegrationConnectionShape from \Telnyx\AI\Integrations\Connections\IntegrationConnection
  *
- * @phpstan-type ConnectionGetResponseShape = array{data: Data|DataShape}
+ * @phpstan-type ConnectionGetResponseShape = array{
+ *   data: IntegrationConnection|IntegrationConnectionShape
+ * }
  */
 final class ConnectionGetResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class ConnectionGetResponse implements BaseModel
     use SdkModel;
 
     #[Required]
-    public Data $data;
+    public IntegrationConnection $data;
 
     /**
      * `new ConnectionGetResponse()` is missing required properties by the API.
@@ -46,9 +47,9 @@ final class ConnectionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param IntegrationConnection|IntegrationConnectionShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(IntegrationConnection|array $data): self
     {
         $self = new self;
 
@@ -58,9 +59,9 @@ final class ConnectionGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param IntegrationConnection|IntegrationConnectionShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(IntegrationConnection|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

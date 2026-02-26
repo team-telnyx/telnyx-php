@@ -9,15 +9,15 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PendingOperation;
-use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PhoneNumber;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Status;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\SuccessfulOperation;
 use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Type;
+use Telnyx\PhoneNumbersJobPhoneNumber;
 
 /**
  * @phpstan-import-type FailedOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\FailedOperation
  * @phpstan-import-type PendingOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PendingOperation
- * @phpstan-import-type PhoneNumberShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\PhoneNumber
+ * @phpstan-import-type PhoneNumbersJobPhoneNumberShape from \Telnyx\PhoneNumbersJobPhoneNumber
  * @phpstan-import-type SuccessfulOperationShape from \Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\SuccessfulOperation
  *
  * @phpstan-type PhoneNumbersJobShape = array{
@@ -26,7 +26,7 @@ use Telnyx\PhoneNumbers\Jobs\PhoneNumbersJob\Type;
  *   etc?: \DateTimeInterface|null,
  *   failedOperations?: list<FailedOperation|FailedOperationShape>|null,
  *   pendingOperations?: list<PendingOperation|PendingOperationShape>|null,
- *   phoneNumbers?: list<PhoneNumber|PhoneNumberShape>|null,
+ *   phoneNumbers?: list<PhoneNumbersJobPhoneNumber|PhoneNumbersJobPhoneNumberShape>|null,
  *   recordType?: string|null,
  *   status?: null|Status|value-of<Status>,
  *   successfulOperations?: list<SuccessfulOperation|SuccessfulOperationShape>|null,
@@ -65,8 +65,8 @@ final class PhoneNumbersJob implements BaseModel
     #[Optional('pending_operations', list: PendingOperation::class)]
     public ?array $pendingOperations;
 
-    /** @var list<PhoneNumber>|null $phoneNumbers */
-    #[Optional('phone_numbers', list: PhoneNumber::class)]
+    /** @var list<PhoneNumbersJobPhoneNumber>|null $phoneNumbers */
+    #[Optional('phone_numbers', list: PhoneNumbersJobPhoneNumber::class)]
     public ?array $phoneNumbers;
 
     /**
@@ -113,7 +113,7 @@ final class PhoneNumbersJob implements BaseModel
      *
      * @param list<FailedOperation|FailedOperationShape>|null $failedOperations
      * @param list<PendingOperation|PendingOperationShape>|null $pendingOperations
-     * @param list<PhoneNumber|PhoneNumberShape>|null $phoneNumbers
+     * @param list<PhoneNumbersJobPhoneNumber|PhoneNumbersJobPhoneNumberShape>|null $phoneNumbers
      * @param Status|value-of<Status>|null $status
      * @param list<SuccessfulOperation|SuccessfulOperationShape>|null $successfulOperations
      * @param Type|value-of<Type>|null $type
@@ -204,7 +204,7 @@ final class PhoneNumbersJob implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumbersJobPhoneNumber|PhoneNumbersJobPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

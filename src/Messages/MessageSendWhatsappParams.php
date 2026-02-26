@@ -10,19 +10,18 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\MessageSendWhatsappParams\Type;
-use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
 
 /**
  * Send a Whatsapp message.
  *
  * @see Telnyx\Services\MessagesService::sendWhatsapp()
  *
- * @phpstan-import-type WhatsappMessageShape from \Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage
+ * @phpstan-import-type WhatsappMessageContentShape from \Telnyx\Messages\WhatsappMessageContent
  *
  * @phpstan-type MessageSendWhatsappParamsShape = array{
  *   from: string,
  *   to: string,
- *   whatsappMessage: WhatsappMessage|WhatsappMessageShape,
+ *   whatsappMessage: WhatsappMessageContent|WhatsappMessageContentShape,
  *   type?: null|Type|value-of<Type>,
  *   webhookURL?: string|null,
  * }
@@ -46,7 +45,7 @@ final class MessageSendWhatsappParams implements BaseModel
     public string $to;
 
     #[Required('whatsapp_message')]
-    public WhatsappMessage $whatsappMessage;
+    public WhatsappMessageContent $whatsappMessage;
 
     /**
      * Message type - must be set to "WHATSAPP".
@@ -89,13 +88,13 @@ final class MessageSendWhatsappParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WhatsappMessage|WhatsappMessageShape $whatsappMessage
+     * @param WhatsappMessageContent|WhatsappMessageContentShape $whatsappMessage
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
         string $from,
         string $to,
-        WhatsappMessage|array $whatsappMessage,
+        WhatsappMessageContent|array $whatsappMessage,
         Type|string|null $type = null,
         ?string $webhookURL = null,
     ): self {
@@ -134,10 +133,10 @@ final class MessageSendWhatsappParams implements BaseModel
     }
 
     /**
-     * @param WhatsappMessage|WhatsappMessageShape $whatsappMessage
+     * @param WhatsappMessageContent|WhatsappMessageContentShape $whatsappMessage
      */
     public function withWhatsappMessage(
-        WhatsappMessage|array $whatsappMessage
+        WhatsappMessageContent|array $whatsappMessage
     ): self {
         $self = clone $this;
         $self['whatsappMessage'] = $whatsappMessage;

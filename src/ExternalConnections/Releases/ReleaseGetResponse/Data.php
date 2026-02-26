@@ -8,16 +8,16 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\Status;
-use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber;
+use Telnyx\ExternalConnections\Releases\TnReleaseEntry;
 
 /**
- * @phpstan-import-type TelephoneNumberShape from \Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data\TelephoneNumber
+ * @phpstan-import-type TnReleaseEntryShape from \Telnyx\ExternalConnections\Releases\TnReleaseEntry
  *
  * @phpstan-type DataShape = array{
  *   createdAt?: string|null,
  *   errorMessage?: string|null,
  *   status?: null|Status|value-of<Status>,
- *   telephoneNumbers?: list<TelephoneNumber|TelephoneNumberShape>|null,
+ *   telephoneNumbers?: list<TnReleaseEntry|TnReleaseEntryShape>|null,
  *   tenantID?: string|null,
  *   ticketID?: string|null,
  * }
@@ -47,8 +47,8 @@ final class Data implements BaseModel
     #[Optional(enum: Status::class)]
     public ?string $status;
 
-    /** @var list<TelephoneNumber>|null $telephoneNumbers */
-    #[Optional('telephone_numbers', list: TelephoneNumber::class)]
+    /** @var list<TnReleaseEntry>|null $telephoneNumbers */
+    #[Optional('telephone_numbers', list: TnReleaseEntry::class)]
     public ?array $telephoneNumbers;
 
     #[Optional('tenant_id')]
@@ -71,7 +71,7 @@ final class Data implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Status|value-of<Status>|null $status
-     * @param list<TelephoneNumber|TelephoneNumberShape>|null $telephoneNumbers
+     * @param list<TnReleaseEntry|TnReleaseEntryShape>|null $telephoneNumbers
      */
     public static function with(
         ?string $createdAt = null,
@@ -129,7 +129,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<TelephoneNumber|TelephoneNumberShape> $telephoneNumbers
+     * @param list<TnReleaseEntry|TnReleaseEntryShape> $telephoneNumbers
      */
     public function withTelephoneNumbers(array $telephoneNumbers): self
     {

@@ -8,14 +8,14 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Metadata;
-use Telnyx\Portouts\Comments\CommentListResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Portouts\Comments\CommentListResponse\Data
+ * @phpstan-import-type PortoutCommentShape from \Telnyx\Portouts\Comments\PortoutComment
  * @phpstan-import-type MetadataShape from \Telnyx\Metadata
  *
  * @phpstan-type CommentListResponseShape = array{
- *   data?: list<Data|DataShape>|null, meta?: null|Metadata|MetadataShape
+ *   data?: list<PortoutComment|PortoutCommentShape>|null,
+ *   meta?: null|Metadata|MetadataShape,
  * }
  */
 final class CommentListResponse implements BaseModel
@@ -23,8 +23,8 @@ final class CommentListResponse implements BaseModel
     /** @use SdkModel<CommentListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
+    /** @var list<PortoutComment>|null $data */
+    #[Optional(list: PortoutComment::class)]
     public ?array $data;
 
     #[Optional]
@@ -40,7 +40,7 @@ final class CommentListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape>|null $data
+     * @param list<PortoutComment|PortoutCommentShape>|null $data
      * @param Metadata|MetadataShape|null $meta
      */
     public static function with(
@@ -56,7 +56,7 @@ final class CommentListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * @param list<PortoutComment|PortoutCommentShape> $data
      */
     public function withData(array $data): self
     {

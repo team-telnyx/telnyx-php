@@ -7,12 +7,13 @@ namespace Telnyx\Organizations\Users;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Organizations\Users\UserGetResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Organizations\Users\UserGetResponse\Data
+ * @phpstan-import-type OrganizationUserShape from \Telnyx\Organizations\Users\OrganizationUser
  *
- * @phpstan-type UserGetResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type UserGetResponseShape = array{
+ *   data?: null|OrganizationUser|OrganizationUserShape
+ * }
  */
 final class UserGetResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class UserGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?OrganizationUser $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class UserGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param OrganizationUser|OrganizationUserShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(OrganizationUser|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class UserGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param OrganizationUser|OrganizationUserShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(OrganizationUser|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
