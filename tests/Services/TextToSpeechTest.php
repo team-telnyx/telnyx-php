@@ -29,38 +29,6 @@ final class TextToSpeechTest extends TestCase
     }
 
     #[Test]
-    public function testGenerateSpeech(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->textToSpeech->generateSpeech(
-            text: 'text',
-            voice: 'voice'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsString($result);
-    }
-
-    #[Test]
-    public function testGenerateSpeechWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->textToSpeech->generateSpeech(
-            text: 'text',
-            voice: 'voice'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsString($result);
-    }
-
-    #[Test]
     public function testListVoices(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -71,5 +39,18 @@ final class TextToSpeechTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TextToSpeechListVoicesResponse::class, $result);
+    }
+
+    #[Test]
+    public function testStream(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->textToSpeech->stream();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
     }
 }
