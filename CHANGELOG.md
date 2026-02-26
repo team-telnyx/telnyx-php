@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.50.0 (2026-02-26)
+
+Full Changelog: [v6.49.0...v6.50.0](https://github.com/team-telnyx/telnyx-php/compare/v6.49.0...v6.50.0)
+
+### Features
+
+* TELAPPS-ENGDESK-48951 add channels to conf record start ([4295494](https://github.com/team-telnyx/telnyx-php/commit/4295494d44430eba19c5e5ed3c3aeda7cbd7ffce))
+
 ## 6.49.0 (2026-02-26)
 
 Full Changelog: [v6.48.0...v6.49.0](https://github.com/team-telnyx/telnyx-php/compare/v6.48.0...v6.49.0)
