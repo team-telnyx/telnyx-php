@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Comments\CommentGetResponse;
 
-use Telnyx\Comments\CommentGetResponse\Data\CommenterType;
-use Telnyx\Comments\CommentGetResponse\Data\CommentRecordType;
+use Telnyx\Comments\Comment\CommenterType;
+use Telnyx\Comments\Comment\CommentRecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;

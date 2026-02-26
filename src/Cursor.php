@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse\Meta;
+namespace Telnyx;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CursorsShape = array{after?: string|null, before?: string|null}
+ * @phpstan-type CursorShape = array{after?: string|null, before?: string|null}
  */
-final class Cursors implements BaseModel
+final class Cursor implements BaseModel
 {
-    /** @use SdkModel<CursorsShape> */
+    /** @use SdkModel<CursorShape> */
     use SdkModel;
 
     /**
