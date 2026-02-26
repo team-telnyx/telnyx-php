@@ -9,10 +9,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Queues\Queue;
 use Telnyx\Queues\QueueCreateParams;
 use Telnyx\Queues\QueueGetResponse;
 use Telnyx\Queues\QueueListParams;
+use Telnyx\Queues\QueueListResponse;
 use Telnyx\Queues\QueueNewResponse;
 use Telnyx\Queues\QueueUpdateParams;
 use Telnyx\Queues\QueueUpdateResponse;
@@ -127,7 +127,7 @@ final class QueuesRawService implements QueuesRawContract
      * @param array{pageNumber?: int, pageSize?: int}|QueueListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<Queue>>
+     * @return BaseResponse<DefaultFlatPagination<QueueListResponse>>
      *
      * @throws APIException
      */
@@ -149,7 +149,7 @@ final class QueuesRawService implements QueuesRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: Queue::class,
+            convert: QueueListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }
