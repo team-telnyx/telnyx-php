@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse;
 
-use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\CostInformation;
-use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\Feature;
 use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RecordType;
-use Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\CostInformation;
+use Telnyx\Feature;
+use Telnyx\RegionInformation;
 
 /**
- * @phpstan-import-type CostInformationShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\CostInformation
- * @phpstan-import-type FeatureShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\Feature
- * @phpstan-import-type RegionInformationShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListResponse\Data\RegionInformation
+ * @phpstan-import-type CostInformationShape from \Telnyx\CostInformation
+ * @phpstan-import-type FeatureShape from \Telnyx\Feature
+ * @phpstan-import-type RegionInformationShape from \Telnyx\RegionInformation
  *
  * @phpstan-type DataShape = array{
  *   bestEffort?: bool|null,

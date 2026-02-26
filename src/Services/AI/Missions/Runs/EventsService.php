@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Missions\Runs;
 
+use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsResponse;
-use Telnyx\AI\Missions\Runs\Events\EventListResponse;
 use Telnyx\AI\Missions\Runs\Events\EventLogParams\Type;
 use Telnyx\AI\Missions\Runs\Events\EventLogResponse;
 use Telnyx\Client;
@@ -47,7 +47,7 @@ final class EventsService implements EventsContract
      * @param string $type Query param
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<EventListResponse>
+     * @return DefaultFlatPagination<EventData>
      *
      * @throws APIException
      */

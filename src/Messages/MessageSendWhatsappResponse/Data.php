@@ -7,18 +7,18 @@ namespace Telnyx\Messages\MessageSendWhatsappResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messages\MessageSendWhatsappResponse\Data\Body;
 use Telnyx\Messages\MessageSendWhatsappResponse\Data\From;
-use Telnyx\Messages\MessageSendWhatsappResponse\Data\To;
+use Telnyx\Messages\RcsToItem;
+use Telnyx\Messages\WhatsappMessageContent;
 
 /**
- * @phpstan-import-type BodyShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\Body
+ * @phpstan-import-type WhatsappMessageContentShape from \Telnyx\Messages\WhatsappMessageContent
  * @phpstan-import-type FromShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\From
- * @phpstan-import-type ToShape from \Telnyx\Messages\MessageSendWhatsappResponse\Data\To
+ * @phpstan-import-type RcsToItemShape from \Telnyx\Messages\RcsToItem
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
- *   body?: null|Body|BodyShape,
+ *   body?: null|WhatsappMessageContent|WhatsappMessageContentShape,
  *   direction?: string|null,
  *   encoding?: string|null,
  *   from?: null|From|FromShape,
@@ -26,7 +26,7 @@ use Telnyx\Messages\MessageSendWhatsappResponse\Data\To;
  *   organizationID?: string|null,
  *   receivedAt?: \DateTimeInterface|null,
  *   recordType?: string|null,
- *   to?: list<To|ToShape>|null,
+ *   to?: list<RcsToItem|RcsToItemShape>|null,
  *   type?: string|null,
  * }
  */
@@ -42,7 +42,7 @@ final class Data implements BaseModel
     public ?string $id;
 
     #[Optional]
-    public ?Body $body;
+    public ?WhatsappMessageContent $body;
 
     #[Optional]
     public ?string $direction;
@@ -65,8 +65,8 @@ final class Data implements BaseModel
     #[Optional('record_type')]
     public ?string $recordType;
 
-    /** @var list<To>|null $to */
-    #[Optional(list: To::class)]
+    /** @var list<RcsToItem>|null $to */
+    #[Optional(list: RcsToItem::class)]
     public ?array $to;
 
     #[Optional]
@@ -82,13 +82,13 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Body|BodyShape|null $body
+     * @param WhatsappMessageContent|WhatsappMessageContentShape|null $body
      * @param From|FromShape|null $from
-     * @param list<To|ToShape>|null $to
+     * @param list<RcsToItem|RcsToItemShape>|null $to
      */
     public static function with(
         ?string $id = null,
-        Body|array|null $body = null,
+        WhatsappMessageContent|array|null $body = null,
         ?string $direction = null,
         ?string $encoding = null,
         From|array|null $from = null,
@@ -128,9 +128,9 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param Body|BodyShape $body
+     * @param WhatsappMessageContent|WhatsappMessageContentShape $body
      */
-    public function withBody(Body|array $body): self
+    public function withBody(WhatsappMessageContent|array $body): self
     {
         $self = clone $this;
         $self['body'] = $body;
@@ -198,7 +198,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<To|ToShape> $to
+     * @param list<RcsToItem|RcsToItemShape> $to
      */
     public function withTo(array $to): self
     {

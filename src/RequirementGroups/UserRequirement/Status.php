@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\RequirementGroups\UserRequirement;
+
+enum Status: string
+{
+    case APPROVED = 'approved';
+
+    case UNAPPROVED = 'unapproved';
+
+    case PENDING_APPROVAL = 'pending-approval';
+
+    case DECLINED = 'declined';
+
+    case EXPIRED = 'expired';
+}

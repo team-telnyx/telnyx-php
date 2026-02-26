@@ -8,9 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Portouts\Events\EventGetResponse\Data;
-use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutFocDateChanged;
-use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutNewComment;
-use Telnyx\Portouts\Events\EventGetResponse\Data\WebhookPortoutStatusChanged;
 
 /**
  * @phpstan-import-type DataVariants from \Telnyx\Portouts\Events\EventGetResponse\Data

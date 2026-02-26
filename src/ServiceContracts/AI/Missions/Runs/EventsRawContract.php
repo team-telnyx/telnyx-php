@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Missions\Runs;
 
+use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsParams;
 use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsResponse;
 use Telnyx\AI\Missions\Runs\Events\EventListParams;
-use Telnyx\AI\Missions\Runs\Events\EventListResponse;
 use Telnyx\AI\Missions\Runs\Events\EventLogParams;
 use Telnyx\AI\Missions\Runs\Events\EventLogResponse;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -27,7 +27,7 @@ interface EventsRawContract
      * @param array<string,mixed>|EventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<EventListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<EventData>>
      *
      * @throws APIException
      */

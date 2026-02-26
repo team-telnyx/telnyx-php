@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Tests\Runs;
 
-use Telnyx\AI\Assistants\Tests\Runs\TestRunResponse\DetailStatus;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Provides comprehensive information about a test execution including
  * status, timing, logs, and detailed evaluation results.
  *
- * @phpstan-import-type DetailStatusShape from \Telnyx\AI\Assistants\Tests\Runs\TestRunResponse\DetailStatus
+ * @phpstan-import-type TestRunDetailResultShape from \Telnyx\AI\Assistants\Tests\Runs\TestRunDetailResult
  *
  * @phpstan-type TestRunResponseShape = array{
  *   createdAt: \DateTimeInterface,
@@ -27,7 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   completedAt?: \DateTimeInterface|null,
  *   conversationID?: string|null,
  *   conversationInsightsID?: string|null,
- *   detailStatus?: list<DetailStatus|DetailStatusShape>|null,
+ *   detailStatus?: list<TestRunDetailResult|TestRunDetailResultShape>|null,
  *   logs?: string|null,
  *   testSuiteRunID?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -97,9 +96,9 @@ final class TestRunResponse implements BaseModel
     /**
      * Detailed evaluation results for each rubric criteria. Name is name of the criteria from the rubric and status is the result of the evaluation. This list will have a result for every criteria in the rubric section.
      *
-     * @var list<DetailStatus>|null $detailStatus
+     * @var list<TestRunDetailResult>|null $detailStatus
      */
-    #[Optional('detail_status', list: DetailStatus::class)]
+    #[Optional('detail_status', list: TestRunDetailResult::class)]
     public ?array $detailStatus;
 
     /**
@@ -152,7 +151,7 @@ final class TestRunResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param TestStatus|value-of<TestStatus> $status
-     * @param list<DetailStatus|DetailStatusShape>|null $detailStatus
+     * @param list<TestRunDetailResult|TestRunDetailResultShape>|null $detailStatus
      */
     public static function with(
         \DateTimeInterface $createdAt,
@@ -287,7 +286,7 @@ final class TestRunResponse implements BaseModel
     /**
      * Detailed evaluation results for each rubric criteria. Name is name of the criteria from the rubric and status is the result of the evaluation. This list will have a result for every criteria in the rubric section.
      *
-     * @param list<DetailStatus|DetailStatusShape> $detailStatus
+     * @param list<TestRunDetailResult|TestRunDetailResultShape> $detailStatus
      */
     public function withDetailStatus(array $detailStatus): self
     {

@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences;
 
-use Telnyx\Conferences\ConferenceGetParticipantResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Conferences\ConferenceGetParticipantResponse\Data
+ * @phpstan-import-type ConferenceParticipantShape from \Telnyx\Conferences\ConferenceParticipant
  *
  * @phpstan-type ConferenceGetParticipantResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|ConferenceParticipant|ConferenceParticipantShape
  * }
  */
 final class ConferenceGetParticipantResponse implements BaseModel
@@ -22,7 +21,7 @@ final class ConferenceGetParticipantResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ConferenceParticipant $data;
 
     public function __construct()
     {
@@ -34,9 +33,9 @@ final class ConferenceGetParticipantResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ConferenceParticipant|ConferenceParticipantShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(ConferenceParticipant|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +45,9 @@ final class ConferenceGetParticipantResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ConferenceParticipant|ConferenceParticipantShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(ConferenceParticipant|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

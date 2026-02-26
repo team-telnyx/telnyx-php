@@ -8,12 +8,12 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams\Filter;
-use Telnyx\Porting\Events\EventListResponse\PortingEventDeletedPayload;
-use Telnyx\Porting\Events\EventListResponse\PortingEventMessagingChangedPayload;
-use Telnyx\Porting\Events\EventListResponse\PortingEventNewCommentEvent;
-use Telnyx\Porting\Events\EventListResponse\PortingEventSplitEvent;
-use Telnyx\Porting\Events\EventListResponse\PortingEventStatusChangedEvent;
-use Telnyx\Porting\Events\EventListResponse\PortingEventWithoutWebhook;
+use Telnyx\Porting\Events\PortingEventDeletedPayload;
+use Telnyx\Porting\Events\PortingEventMessagingChangedPayload;
+use Telnyx\Porting\Events\PortingEventNewCommentEvent;
+use Telnyx\Porting\Events\PortingEventSplitEvent;
+use Telnyx\Porting\Events\PortingEventStatusChangedEvent;
+use Telnyx\Porting\Events\PortingEventWithoutWebhook;
 use Telnyx\RequestOptions;
 
 /**

@@ -16,13 +16,13 @@ use Telnyx\Messages\MessageSendNumberPoolResponse;
 use Telnyx\Messages\MessageSendParams\Encoding;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeResponse;
-use Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage;
 use Telnyx\Messages\MessageSendWhatsappResponse;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
+use Telnyx\Messages\WhatsappMessageContent;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type WhatsappMessageShape from \Telnyx\Messages\MessageSendWhatsappParams\WhatsappMessage
+ * @phpstan-import-type WhatsappMessageContentShape from \Telnyx\Messages\WhatsappMessageContent
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface MessagesContract
@@ -297,7 +297,7 @@ interface MessagesContract
      *
      * @param string $from Phone number in +E.164 format associated with Whatsapp account
      * @param string $to Phone number in +E.164 format
-     * @param WhatsappMessage|WhatsappMessageShape $whatsappMessage
+     * @param WhatsappMessageContent|WhatsappMessageContentShape $whatsappMessage
      * @param \Telnyx\Messages\MessageSendWhatsappParams\Type|value-of<\Telnyx\Messages\MessageSendWhatsappParams\Type> $type Message type - must be set to "WHATSAPP"
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      * @param RequestOpts|null $requestOptions
@@ -307,7 +307,7 @@ interface MessagesContract
     public function sendWhatsapp(
         string $from,
         string $to,
-        WhatsappMessage|array $whatsappMessage,
+        WhatsappMessageContent|array $whatsappMessage,
         \Telnyx\Messages\MessageSendWhatsappParams\Type|string|null $type = null,
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,

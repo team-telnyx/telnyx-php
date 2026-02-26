@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Missions\Runs;
 
+use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsParams;
 use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsResponse;
 use Telnyx\AI\Missions\Runs\Events\EventListParams;
-use Telnyx\AI\Missions\Runs\Events\EventListResponse;
 use Telnyx\AI\Missions\Runs\Events\EventLogParams;
 use Telnyx\AI\Missions\Runs\Events\EventLogParams\Type;
 use Telnyx\AI\Missions\Runs\Events\EventLogResponse;
@@ -46,7 +46,7 @@ final class EventsRawService implements EventsRawContract
      * }|EventListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<EventListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<EventData>>
      *
      * @throws APIException
      */
@@ -76,7 +76,7 @@ final class EventsRawService implements EventsRawContract
                 ],
             ),
             options: $options,
-            convert: EventListResponse::class,
+            convert: EventData::class,
             page: DefaultFlatPagination::class,
         );
     }

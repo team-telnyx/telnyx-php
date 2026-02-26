@@ -8,11 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Organizations\Users\OrganizationUser;
 use Telnyx\Organizations\Users\UserGetGroupsReportParams\Accept;
 use Telnyx\Organizations\Users\UserGetGroupsReportResponse;
 use Telnyx\Organizations\Users\UserGetResponse;
 use Telnyx\Organizations\Users\UserListParams\FilterUserStatus;
-use Telnyx\Organizations\Users\UserListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Organizations\UsersContract;
 use Telnyx\Services\Organizations\Users\ActionsService;
@@ -77,7 +77,7 @@ final class UsersService implements UsersContract
      * @param int $pageSize The size of the page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<UserListResponse>
+     * @return DefaultFlatPagination<OrganizationUser>
      *
      * @throws APIException
      */

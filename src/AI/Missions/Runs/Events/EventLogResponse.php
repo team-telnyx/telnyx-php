@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs\Events;
 
-use Telnyx\AI\Missions\Runs\Events\EventLogResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\AI\Missions\Runs\Events\EventLogResponse\Data
+ * @phpstan-import-type EventDataShape from \Telnyx\AI\Missions\Runs\Events\EventData
  *
- * @phpstan-type EventLogResponseShape = array{data: Data|DataShape}
+ * @phpstan-type EventLogResponseShape = array{data: EventData|EventDataShape}
  */
 final class EventLogResponse implements BaseModel
 {
@@ -20,7 +19,7 @@ final class EventLogResponse implements BaseModel
     use SdkModel;
 
     #[Required]
-    public Data $data;
+    public EventData $data;
 
     /**
      * `new EventLogResponse()` is missing required properties by the API.
@@ -46,9 +45,9 @@ final class EventLogResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param EventData|EventDataShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(EventData|array $data): self
     {
         $self = new self;
 
@@ -58,9 +57,9 @@ final class EventLogResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param EventData|EventDataShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(EventData|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
