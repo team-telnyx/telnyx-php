@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.48.0 (2026-02-26)
+
+Full Changelog: [v6.47.0...v6.48.0](https://github.com/team-telnyx/telnyx-php/compare/v6.47.0...v6.48.0)
+
+### Features
+
+* Add text-to-speech WebSocket streaming OpenAPI spec ([ae7e9f6](https://github.com/team-telnyx/telnyx-php/commit/ae7e9f63558a76a120b46724d3417ebc56c01b60))
+
+
+### Chores
+
+* **internal:** codegen related update ([28b8739](https://github.com/team-telnyx/telnyx-php/commit/28b8739ac296279af5eb9b0de300a518bd26c0c5))
+
 ## 6.47.0 (2026-02-25)
 
 Full Changelog: [v6.46.0...v6.47.0](https://github.com/team-telnyx/telnyx-php/compare/v6.46.0...v6.47.0)
