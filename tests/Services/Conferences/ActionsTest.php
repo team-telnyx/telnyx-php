@@ -320,6 +320,7 @@ final class ActionsTest extends TestCase
         $result = $this->client->conferences->actions->recordStart(
             'id',
             format: 'wav',
+            channels: 'dual',
             commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
             customFileName: 'my_recording_file_name',
             playBeep: true,
