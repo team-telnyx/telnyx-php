@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Queues\Queue;
 use Telnyx\Queues\QueueGetResponse;
+use Telnyx\Queues\QueueListResponse;
 use Telnyx\Queues\QueueNewResponse;
 use Telnyx\Queues\QueueUpdateResponse;
 use Telnyx\RequestOptions;
@@ -67,7 +67,7 @@ interface QueuesContract
      * @param int $pageSize The size of the page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<Queue>
+     * @return DefaultFlatPagination<QueueListResponse>
      *
      * @throws APIException
      */

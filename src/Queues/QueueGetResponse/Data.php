@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Queues;
+namespace Telnyx\Queues\QueueGetResponse;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Queues\Queue\RecordType;
+use Telnyx\Queues\QueueGetResponse\Data\RecordType;
 
 /**
- * @phpstan-type QueueShape = array{
+ * @phpstan-type DataShape = array{
  *   id: string,
  *   averageWaitTimeSecs: int,
  *   createdAt: string,
@@ -21,9 +21,9 @@ use Telnyx\Queues\Queue\RecordType;
  *   updatedAt: string,
  * }
  */
-final class Queue implements BaseModel
+final class Data implements BaseModel
 {
-    /** @use SdkModel<QueueShape> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
@@ -73,11 +73,11 @@ final class Queue implements BaseModel
     public string $updatedAt;
 
     /**
-     * `new Queue()` is missing required properties by the API.
+     * `new Data()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Queue::with(
+     * Data::with(
      *   id: ...,
      *   averageWaitTimeSecs: ...,
      *   createdAt: ...,
@@ -92,7 +92,7 @@ final class Queue implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Queue)
+     * (new Data)
      *   ->withID(...)
      *   ->withAverageWaitTimeSecs(...)
      *   ->withCreatedAt(...)

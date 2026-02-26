@@ -7,10 +7,10 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Queues\Queue;
 use Telnyx\Queues\QueueCreateParams;
 use Telnyx\Queues\QueueGetResponse;
 use Telnyx\Queues\QueueListParams;
+use Telnyx\Queues\QueueListResponse;
 use Telnyx\Queues\QueueNewResponse;
 use Telnyx\Queues\QueueUpdateParams;
 use Telnyx\Queues\QueueUpdateResponse;
@@ -74,7 +74,7 @@ interface QueuesRawContract
      * @param array<string,mixed>|QueueListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<Queue>>
+     * @return BaseResponse<DefaultFlatPagination<QueueListResponse>>
      *
      * @throws APIException
      */

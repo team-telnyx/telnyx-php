@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Queues\Queue;
 use Telnyx\Queues\QueueGetResponse;
+use Telnyx\Queues\QueueListResponse;
 use Telnyx\Queues\QueueNewResponse;
 use Telnyx\Queues\QueueUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -114,7 +114,7 @@ final class QueuesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(Queue::class, $item);
+            $this->assertInstanceOf(QueueListResponse::class, $item);
         }
     }
 

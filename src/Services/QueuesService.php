@@ -8,8 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Queues\Queue;
 use Telnyx\Queues\QueueGetResponse;
+use Telnyx\Queues\QueueListResponse;
 use Telnyx\Queues\QueueNewResponse;
 use Telnyx\Queues\QueueUpdateResponse;
 use Telnyx\RequestOptions;
@@ -119,7 +119,7 @@ final class QueuesService implements QueuesContract
      * @param int $pageSize The size of the page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<Queue>
+     * @return DefaultFlatPagination<QueueListResponse>
      *
      * @throws APIException
      */
