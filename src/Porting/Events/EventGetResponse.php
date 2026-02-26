@@ -8,12 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Porting\Events\EventGetResponse\Data;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventDeletedPayload;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventMessagingChangedPayload;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventNewCommentEvent;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventSplitEvent;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventStatusChangedEvent;
-use Telnyx\Porting\Events\EventGetResponse\Data\PortingEventWithoutWebhook;
 
 /**
  * @phpstan-import-type DataVariants from \Telnyx\Porting\Events\EventGetResponse\Data

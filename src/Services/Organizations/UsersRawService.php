@@ -9,13 +9,13 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Organizations\Users\OrganizationUser;
 use Telnyx\Organizations\Users\UserGetGroupsReportParams;
 use Telnyx\Organizations\Users\UserGetGroupsReportParams\Accept;
 use Telnyx\Organizations\Users\UserGetGroupsReportResponse;
 use Telnyx\Organizations\Users\UserGetResponse;
 use Telnyx\Organizations\Users\UserListParams;
 use Telnyx\Organizations\Users\UserListParams\FilterUserStatus;
-use Telnyx\Organizations\Users\UserListResponse;
 use Telnyx\Organizations\Users\UserRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Organizations\UsersRawContract;
@@ -81,7 +81,7 @@ final class UsersRawService implements UsersRawContract
      * }|UserListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<UserListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<OrganizationUser>>
      *
      * @throws APIException
      */
@@ -109,7 +109,7 @@ final class UsersRawService implements UsersRawContract
                 ],
             ),
             options: $options,
-            convert: UserListResponse::class,
+            convert: OrganizationUser::class,
             page: DefaultFlatPagination::class,
         );
     }

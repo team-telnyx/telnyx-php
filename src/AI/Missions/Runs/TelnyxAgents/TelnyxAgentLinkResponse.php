@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs\TelnyxAgents;
 
-use Telnyx\AI\Missions\Runs\TelnyxAgents\TelnyxAgentLinkResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\AI\Missions\Runs\TelnyxAgents\TelnyxAgentLinkResponse\Data
+ * @phpstan-import-type TelnyxAgentDataShape from \Telnyx\AI\Missions\Runs\TelnyxAgents\TelnyxAgentData
  *
- * @phpstan-type TelnyxAgentLinkResponseShape = array{data: Data|DataShape}
+ * @phpstan-type TelnyxAgentLinkResponseShape = array{
+ *   data: TelnyxAgentData|TelnyxAgentDataShape
+ * }
  */
 final class TelnyxAgentLinkResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class TelnyxAgentLinkResponse implements BaseModel
     use SdkModel;
 
     #[Required]
-    public Data $data;
+    public TelnyxAgentData $data;
 
     /**
      * `new TelnyxAgentLinkResponse()` is missing required properties by the API.
@@ -46,9 +47,9 @@ final class TelnyxAgentLinkResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape $data
+     * @param TelnyxAgentData|TelnyxAgentDataShape $data
      */
-    public static function with(Data|array $data): self
+    public static function with(TelnyxAgentData|array $data): self
     {
         $self = new self;
 
@@ -58,9 +59,9 @@ final class TelnyxAgentLinkResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param TelnyxAgentData|TelnyxAgentDataShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(TelnyxAgentData|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

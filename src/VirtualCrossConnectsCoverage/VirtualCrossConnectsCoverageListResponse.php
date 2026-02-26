@@ -7,17 +7,17 @@ namespace Telnyx\VirtualCrossConnectsCoverage;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\NetappsLocation;
 use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\CloudProvider;
-use Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Location;
 
 /**
- * @phpstan-import-type LocationShape from \Telnyx\VirtualCrossConnectsCoverage\VirtualCrossConnectsCoverageListResponse\Location
+ * @phpstan-import-type NetappsLocationShape from \Telnyx\NetappsLocation
  *
  * @phpstan-type VirtualCrossConnectsCoverageListResponseShape = array{
  *   availableBandwidth?: list<float>|null,
  *   cloudProvider?: null|CloudProvider|value-of<CloudProvider>,
  *   cloudProviderRegion?: string|null,
- *   location?: null|Location|LocationShape,
+ *   location?: null|NetappsLocation|NetappsLocationShape,
  *   recordType?: string|null,
  * }
  */
@@ -49,7 +49,7 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
     public ?string $cloudProviderRegion;
 
     #[Optional]
-    public ?Location $location;
+    public ?NetappsLocation $location;
 
     /**
      * Identifies the type of the resource.
@@ -69,13 +69,13 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
      *
      * @param list<float>|null $availableBandwidth
      * @param CloudProvider|value-of<CloudProvider>|null $cloudProvider
-     * @param Location|LocationShape|null $location
+     * @param NetappsLocation|NetappsLocationShape|null $location
      */
     public static function with(
         ?array $availableBandwidth = null,
         CloudProvider|string|null $cloudProvider = null,
         ?string $cloudProviderRegion = null,
-        Location|array|null $location = null,
+        NetappsLocation|array|null $location = null,
         ?string $recordType = null,
     ): self {
         $self = new self;
@@ -127,9 +127,9 @@ final class VirtualCrossConnectsCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param Location|LocationShape $location
+     * @param NetappsLocation|NetappsLocationShape $location
      */
-    public function withLocation(Location|array $location): self
+    public function withLocation(NetappsLocation|array $location): self
     {
         $self = clone $this;
         $self['location'] = $location;

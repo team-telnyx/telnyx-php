@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Actions\Register;
 
-use Telnyx\Actions\Register\RegisterNewResponse\Error;
+use Telnyx\Actions\WirelessError;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -12,11 +12,11 @@ use Telnyx\SimpleSimCard;
 
 /**
  * @phpstan-import-type SimpleSimCardShape from \Telnyx\SimpleSimCard
- * @phpstan-import-type ErrorShape from \Telnyx\Actions\Register\RegisterNewResponse\Error
+ * @phpstan-import-type WirelessErrorShape from \Telnyx\Actions\WirelessError
  *
  * @phpstan-type RegisterNewResponseShape = array{
  *   data?: list<SimpleSimCard|SimpleSimCardShape>|null,
- *   errors?: list<Error|ErrorShape>|null,
+ *   errors?: list<WirelessError|WirelessErrorShape>|null,
  * }
  */
 final class RegisterNewResponse implements BaseModel
@@ -32,8 +32,8 @@ final class RegisterNewResponse implements BaseModel
     #[Optional(list: SimpleSimCard::class)]
     public ?array $data;
 
-    /** @var list<Error>|null $errors */
-    #[Optional(list: Error::class)]
+    /** @var list<WirelessError>|null $errors */
+    #[Optional(list: WirelessError::class)]
     public ?array $errors;
 
     public function __construct()
@@ -47,7 +47,7 @@ final class RegisterNewResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<SimpleSimCard|SimpleSimCardShape>|null $data
-     * @param list<Error|ErrorShape>|null $errors
+     * @param list<WirelessError|WirelessErrorShape>|null $errors
      */
     public static function with(?array $data = null, ?array $errors = null): self
     {
@@ -73,7 +73,7 @@ final class RegisterNewResponse implements BaseModel
     }
 
     /**
-     * @param list<Error|ErrorShape> $errors
+     * @param list<WirelessError|WirelessErrorShape> $errors
      */
     public function withErrors(array $errors): self
     {

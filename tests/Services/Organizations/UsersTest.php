@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Organizations\Users\OrganizationUser;
 use Telnyx\Organizations\Users\UserGetGroupsReportResponse;
 use Telnyx\Organizations\Users\UserGetResponse;
-use Telnyx\Organizations\Users\UserListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -58,7 +58,7 @@ final class UsersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(UserListResponse::class, $item);
+            $this->assertInstanceOf(OrganizationUser::class, $item);
         }
     }
 

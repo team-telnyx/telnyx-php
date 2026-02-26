@@ -7,9 +7,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Missions\MissionData;
 use Telnyx\AI\Missions\MissionGetResponse;
-use Telnyx\AI\Missions\MissionListEventsResponse;
 use Telnyx\AI\Missions\MissionNewResponse;
 use Telnyx\AI\Missions\MissionUpdateMissionResponse;
+use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
@@ -141,7 +141,7 @@ final class MissionsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(MissionListEventsResponse::class, $item);
+            $this->assertInstanceOf(EventData::class, $item);
         }
     }
 

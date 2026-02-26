@@ -8,13 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Messages\Rcs\RcSendResponse\Data\From;
-use Telnyx\Messages\Rcs\RcSendResponse\Data\To;
 use Telnyx\Messages\RcsAgentMessage;
+use Telnyx\Messages\RcsToItem;
 
 /**
  * @phpstan-import-type RcsAgentMessageShape from \Telnyx\Messages\RcsAgentMessage
  * @phpstan-import-type FromShape from \Telnyx\Messages\Rcs\RcSendResponse\Data\From
- * @phpstan-import-type ToShape from \Telnyx\Messages\Rcs\RcSendResponse\Data\To
+ * @phpstan-import-type RcsToItemShape from \Telnyx\Messages\RcsToItem
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
@@ -26,7 +26,7 @@ use Telnyx\Messages\RcsAgentMessage;
  *   organizationID?: string|null,
  *   receivedAt?: \DateTimeInterface|null,
  *   recordType?: string|null,
- *   to?: list<To|ToShape>|null,
+ *   to?: list<RcsToItem|RcsToItemShape>|null,
  *   type?: string|null,
  * }
  */
@@ -65,8 +65,8 @@ final class Data implements BaseModel
     #[Optional('record_type')]
     public ?string $recordType;
 
-    /** @var list<To>|null $to */
-    #[Optional(list: To::class)]
+    /** @var list<RcsToItem>|null $to */
+    #[Optional(list: RcsToItem::class)]
     public ?array $to;
 
     #[Optional]
@@ -84,7 +84,7 @@ final class Data implements BaseModel
      *
      * @param RcsAgentMessage|RcsAgentMessageShape|null $body
      * @param From|FromShape|null $from
-     * @param list<To|ToShape>|null $to
+     * @param list<RcsToItem|RcsToItemShape>|null $to
      */
     public static function with(
         ?string $id = null,
@@ -198,7 +198,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * @param list<To|ToShape> $to
+     * @param list<RcsToItem|RcsToItemShape> $to
      */
     public function withTo(array $to): self
     {

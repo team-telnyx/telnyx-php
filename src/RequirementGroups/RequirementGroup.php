@@ -7,11 +7,10 @@ namespace Telnyx\RequirementGroups;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement;
 use Telnyx\RequirementGroups\RequirementGroup\Status;
 
 /**
- * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RequirementGroups\RequirementGroup\RegulatoryRequirement
+ * @phpstan-import-type UserRequirementShape from \Telnyx\RequirementGroups\UserRequirement
  *
  * @phpstan-type RequirementGroupShape = array{
  *   id?: string|null,
@@ -21,7 +20,7 @@ use Telnyx\RequirementGroups\RequirementGroup\Status;
  *   customerReference?: string|null,
  *   phoneNumberType?: string|null,
  *   recordType?: string|null,
- *   regulatoryRequirements?: list<RegulatoryRequirement|RegulatoryRequirementShape>|null,
+ *   regulatoryRequirements?: list<UserRequirement|UserRequirementShape>|null,
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -52,8 +51,8 @@ final class RequirementGroup implements BaseModel
     #[Optional('record_type')]
     public ?string $recordType;
 
-    /** @var list<RegulatoryRequirement>|null $regulatoryRequirements */
-    #[Optional('regulatory_requirements', list: RegulatoryRequirement::class)]
+    /** @var list<UserRequirement>|null $regulatoryRequirements */
+    #[Optional('regulatory_requirements', list: UserRequirement::class)]
     public ?array $regulatoryRequirements;
 
     /** @var value-of<Status>|null $status */
@@ -73,7 +72,7 @@ final class RequirementGroup implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<RegulatoryRequirement|RegulatoryRequirementShape>|null $regulatoryRequirements
+     * @param list<UserRequirement|UserRequirementShape>|null $regulatoryRequirements
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
@@ -161,7 +160,7 @@ final class RequirementGroup implements BaseModel
     }
 
     /**
-     * @param list<RegulatoryRequirement|RegulatoryRequirementShape> $regulatoryRequirements
+     * @param list<UserRequirement|UserRequirementShape> $regulatoryRequirements
      */
     public function withRegulatoryRequirements(
         array $regulatoryRequirements

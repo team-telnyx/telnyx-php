@@ -5,8 +5,8 @@ namespace Tests\Services\AI\Missions\Runs;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsResponse;
-use Telnyx\AI\Missions\Runs\Events\EventListResponse;
 use Telnyx\AI\Missions\Runs\Events\EventLogResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
@@ -48,7 +48,7 @@ final class EventsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(EventListResponse::class, $item);
+            $this->assertInstanceOf(EventData::class, $item);
         }
     }
 
@@ -74,7 +74,7 @@ final class EventsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(EventListResponse::class, $item);
+            $this->assertInstanceOf(EventData::class, $item);
         }
     }
 

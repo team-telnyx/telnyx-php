@@ -7,13 +7,12 @@ namespace Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse\Record;
 
 /**
- * @phpstan-import-type RecordShape from \Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse\Record
+ * @phpstan-import-type ProfileAssignmentPhoneNumbersShape from \Telnyx\Messaging10dlc\PhoneNumberAssignmentByProfile\ProfileAssignmentPhoneNumbers
  *
  * @phpstan-type PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponseShape = array{
- *   records: list<Record|RecordShape>
+ *   records: list<ProfileAssignmentPhoneNumbers|ProfileAssignmentPhoneNumbersShape>,
  * }
  */
 final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implements BaseModel
@@ -21,8 +20,8 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
     /** @use SdkModel<PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponseShape> */
     use SdkModel;
 
-    /** @var list<Record> $records */
-    #[Required(list: Record::class)]
+    /** @var list<ProfileAssignmentPhoneNumbers> $records */
+    #[Required(list: ProfileAssignmentPhoneNumbers::class)]
     public array $records;
 
     /**
@@ -50,7 +49,7 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Record|RecordShape> $records
+     * @param list<ProfileAssignmentPhoneNumbers|ProfileAssignmentPhoneNumbersShape> $records
      */
     public static function with(array $records): self
     {
@@ -62,7 +61,7 @@ final class PhoneNumberAssignmentByProfileGetPhoneNumberStatusResponse implement
     }
 
     /**
-     * @param list<Record|RecordShape> $records
+     * @param list<ProfileAssignmentPhoneNumbers|ProfileAssignmentPhoneNumbersShape> $records
      */
     public function withRecords(array $records): self
     {

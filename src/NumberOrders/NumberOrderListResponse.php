@@ -7,11 +7,11 @@ namespace Telnyx\NumberOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NumberOrders\NumberOrderListResponse\PhoneNumber;
 use Telnyx\NumberOrders\NumberOrderListResponse\Status;
+use Telnyx\PhoneNumbersJobPhoneNumber;
 
 /**
- * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\NumberOrderListResponse\PhoneNumber
+ * @phpstan-import-type PhoneNumbersJobPhoneNumberShape from \Telnyx\PhoneNumbersJobPhoneNumber
  *
  * @phpstan-type NumberOrderListResponseShape = array{
  *   id?: string|null,
@@ -20,7 +20,7 @@ use Telnyx\NumberOrders\NumberOrderListResponse\Status;
  *   createdAt?: \DateTimeInterface|null,
  *   customerReference?: string|null,
  *   messagingProfileID?: string|null,
- *   phoneNumbers?: list<\Telnyx\NumberOrders\NumberOrderListResponse\PhoneNumber|PhoneNumberShape>|null,
+ *   phoneNumbers?: list<PhoneNumbersJobPhoneNumber|PhoneNumbersJobPhoneNumberShape>|null,
  *   phoneNumbersCount?: int|null,
  *   recordType?: string|null,
  *   requirementsMet?: bool|null,
@@ -67,13 +67,8 @@ final class NumberOrderListResponse implements BaseModel
     #[Optional('messaging_profile_id')]
     public ?string $messagingProfileID;
 
-    /**
-     * @var list<PhoneNumber>|null $phoneNumbers
-     */
-    #[Optional(
-        'phone_numbers',
-        list: PhoneNumber::class,
-    )]
+    /** @var list<PhoneNumbersJobPhoneNumber>|null $phoneNumbers */
+    #[Optional('phone_numbers', list: PhoneNumbersJobPhoneNumber::class)]
     public ?array $phoneNumbers;
 
     /**
@@ -119,7 +114,7 @@ final class NumberOrderListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PhoneNumber|PhoneNumberShape>|null $phoneNumbers
+     * @param list<PhoneNumbersJobPhoneNumber|PhoneNumbersJobPhoneNumberShape>|null $phoneNumbers
      * @param Status|value-of<Status>|null $status
      * @param list<string>|null $subNumberOrdersIDs
      */
@@ -221,7 +216,7 @@ final class NumberOrderListResponse implements BaseModel
     }
 
     /**
-     * @param list<PhoneNumber|PhoneNumberShape> $phoneNumbers
+     * @param list<PhoneNumbersJobPhoneNumber|PhoneNumbersJobPhoneNumberShape> $phoneNumbers
      */
     public function withPhoneNumbers(array $phoneNumbers): self
     {

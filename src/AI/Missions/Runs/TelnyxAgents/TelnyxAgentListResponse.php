@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs\TelnyxAgents;
 
-use Telnyx\AI\Missions\Runs\TelnyxAgents\TelnyxAgentListResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\AI\Missions\Runs\TelnyxAgents\TelnyxAgentListResponse\Data
+ * @phpstan-import-type TelnyxAgentDataShape from \Telnyx\AI\Missions\Runs\TelnyxAgents\TelnyxAgentData
  *
- * @phpstan-type TelnyxAgentListResponseShape = array{data: list<Data|DataShape>}
+ * @phpstan-type TelnyxAgentListResponseShape = array{
+ *   data: list<TelnyxAgentData|TelnyxAgentDataShape>
+ * }
  */
 final class TelnyxAgentListResponse implements BaseModel
 {
     /** @use SdkModel<TelnyxAgentListResponseShape> */
     use SdkModel;
 
-    /** @var list<Data> $data */
-    #[Required(list: Data::class)]
+    /** @var list<TelnyxAgentData> $data */
+    #[Required(list: TelnyxAgentData::class)]
     public array $data;
 
     /**
@@ -47,7 +48,7 @@ final class TelnyxAgentListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape> $data
+     * @param list<TelnyxAgentData|TelnyxAgentDataShape> $data
      */
     public static function with(array $data): self
     {
@@ -59,7 +60,7 @@ final class TelnyxAgentListResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * @param list<TelnyxAgentData|TelnyxAgentDataShape> $data
      */
     public function withData(array $data): self
     {

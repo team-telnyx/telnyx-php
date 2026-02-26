@@ -7,14 +7,14 @@ namespace Telnyx\NetworkCoverage;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\NetworkCoverage\NetworkCoverageListResponse\Location;
+use Telnyx\NetappsLocation;
 
 /**
- * @phpstan-import-type LocationShape from \Telnyx\NetworkCoverage\NetworkCoverageListResponse\Location
+ * @phpstan-import-type NetappsLocationShape from \Telnyx\NetappsLocation
  *
  * @phpstan-type NetworkCoverageListResponseShape = array{
  *   availableServices?: list<AvailableService|value-of<AvailableService>>|null,
- *   location?: null|Location|LocationShape,
+ *   location?: null|NetappsLocation|NetappsLocationShape,
  *   recordType?: string|null,
  * }
  */
@@ -32,7 +32,7 @@ final class NetworkCoverageListResponse implements BaseModel
     public ?array $availableServices;
 
     #[Optional]
-    public ?Location $location;
+    public ?NetappsLocation $location;
 
     /**
      * Identifies the type of the resource.
@@ -51,11 +51,11 @@ final class NetworkCoverageListResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<AvailableService|value-of<AvailableService>>|null $availableServices
-     * @param Location|LocationShape|null $location
+     * @param NetappsLocation|NetappsLocationShape|null $location
      */
     public static function with(
         ?array $availableServices = null,
-        Location|array|null $location = null,
+        NetappsLocation|array|null $location = null,
         ?string $recordType = null,
     ): self {
         $self = new self;
@@ -81,9 +81,9 @@ final class NetworkCoverageListResponse implements BaseModel
     }
 
     /**
-     * @param Location|LocationShape $location
+     * @param NetappsLocation|NetappsLocationShape $location
      */
-    public function withLocation(Location|array $location): self
+    public function withLocation(NetappsLocation|array $location): self
     {
         $self = clone $this;
         $self['location'] = $location;

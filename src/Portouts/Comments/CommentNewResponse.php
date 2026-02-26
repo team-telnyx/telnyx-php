@@ -7,12 +7,13 @@ namespace Telnyx\Portouts\Comments;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Portouts\Comments\CommentNewResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Portouts\Comments\CommentNewResponse\Data
+ * @phpstan-import-type PortoutCommentShape from \Telnyx\Portouts\Comments\PortoutComment
  *
- * @phpstan-type CommentNewResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type CommentNewResponseShape = array{
+ *   data?: null|PortoutComment|PortoutCommentShape
+ * }
  */
 final class CommentNewResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class CommentNewResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?PortoutComment $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class CommentNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param PortoutComment|PortoutCommentShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(PortoutComment|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class CommentNewResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param PortoutComment|PortoutCommentShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(PortoutComment|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
