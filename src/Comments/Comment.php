@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Comments\CommentListResponse;
+namespace Telnyx\Comments;
 
-use Telnyx\Comments\CommentListResponse\Data\CommenterType;
-use Telnyx\Comments\CommentListResponse\Data\CommentRecordType;
+use Telnyx\Comments\Comment\CommenterType;
+use Telnyx\Comments\Comment\CommentRecordType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type CommentShape = array{
  *   id?: string|null,
  *   body?: string|null,
  *   commentRecordID?: string|null,
@@ -23,9 +23,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
-final class Data implements BaseModel
+final class Comment implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<CommentShape> */
     use SdkModel;
 
     #[Optional]

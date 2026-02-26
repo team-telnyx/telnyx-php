@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Comments\CommentNewResponse\Data;
+namespace Telnyx\Comments\Comment;
 
 enum CommentRecordType: string
 {
