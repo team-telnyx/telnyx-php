@@ -19,7 +19,6 @@ use Telnyx\Conferences\Actions\ActionMuteResponse;
 use Telnyx\Conferences\Actions\ActionPlayResponse;
 use Telnyx\Conferences\Actions\ActionRecordPauseResponse;
 use Telnyx\Conferences\Actions\ActionRecordResumeResponse;
-use Telnyx\Conferences\Actions\ActionRecordStartParams\Channels;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
 use Telnyx\Conferences\Actions\ActionRecordStartResponse;
@@ -496,7 +495,6 @@ final class ActionsService implements ActionsContract
      *
      * @param string $id Specifies the conference to record by id or name
      * @param Format|value-of<Format> $format The audio file format used when storing the conference recording. Can be either `mp3` or `wav`.
-     * @param Channels|value-of<Channels> $channels when `dual`, final audio file will be stereo recorded with the conference creator on the first channel, and the rest on the second channel
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `conference_id`.
      * @param string $customFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
      * @param bool $playBeep if enabled, a beep sound will be played at the start of a recording
@@ -509,7 +507,6 @@ final class ActionsService implements ActionsContract
     public function recordStart(
         string $id,
         Format|string $format,
-        Channels|string $channels = 'single',
         ?string $commandID = null,
         ?string $customFileName = null,
         ?bool $playBeep = null,
@@ -520,7 +517,6 @@ final class ActionsService implements ActionsContract
         $params = Util::removeNulls(
             [
                 'format' => $format,
-                'channels' => $channels,
                 'commandID' => $commandID,
                 'customFileName' => $customFileName,
                 'playBeep' => $playBeep,
