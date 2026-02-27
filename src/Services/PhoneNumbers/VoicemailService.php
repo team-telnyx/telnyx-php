@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\VoicemailContract;
 
 /**
+ * Voicemail API.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoicemailService implements VoicemailContract

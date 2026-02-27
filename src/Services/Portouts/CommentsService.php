@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\CommentsContract;
 
 /**
+ * Number portout operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CommentsService implements CommentsContract

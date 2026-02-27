@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsRawContract;
 
 /**
+ * Call Recordings operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Recordings\RecordingListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

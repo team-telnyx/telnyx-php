@@ -12,6 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OperatorConnect\ActionsRawContract;
 
 /**
+ * External Connections operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsRawService implements ActionsRawContract

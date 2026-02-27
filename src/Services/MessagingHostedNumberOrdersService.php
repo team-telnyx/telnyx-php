@@ -22,6 +22,8 @@ use Telnyx\ServiceContracts\MessagingHostedNumberOrdersContract;
 use Telnyx\Services\MessagingHostedNumberOrders\ActionsService;
 
 /**
+ * Manage your messaging hosted numbers.
+ *
  * @phpstan-import-type VerificationCodeShape from \Telnyx\MessagingHostedNumberOrders\MessagingHostedNumberOrderValidateCodesParams\VerificationCode
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

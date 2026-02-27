@@ -16,6 +16,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IntegrationSecretsContract;
 
 /**
+ * Store and retrieve integration secrets.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\IntegrationSecrets\IntegrationSecretListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

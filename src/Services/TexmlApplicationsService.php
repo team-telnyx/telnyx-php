@@ -25,6 +25,8 @@ use Telnyx\TexmlApplications\TexmlApplicationNewResponse;
 use Telnyx\TexmlApplications\TexmlApplicationUpdateResponse;
 
 /**
+ * TeXML Applications operations.
+ *
  * @phpstan-import-type InboundShape from \Telnyx\TexmlApplications\TexmlApplicationCreateParams\Inbound
  * @phpstan-import-type OutboundShape from \Telnyx\TexmlApplications\TexmlApplicationCreateParams\Outbound
  * @phpstan-import-type InboundShape from \Telnyx\TexmlApplications\TexmlApplicationUpdateParams\Inbound as InboundShape1

@@ -26,6 +26,8 @@ use Telnyx\Services\PhoneNumbers\VoicemailService;
 use Telnyx\Services\PhoneNumbers\VoiceService;
 
 /**
+ * Configure your phone numbers.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberListParams\Filter
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\PhoneNumberSlimListParams\Filter as FilterShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

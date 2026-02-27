@@ -19,6 +19,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationChannelsContract;
 
 /**
+ * Notification settings operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\NotificationChannels\NotificationChannelListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

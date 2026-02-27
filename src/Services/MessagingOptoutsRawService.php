@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingOptoutsRawContract;
 
 /**
+ * Opt-Out Management.
+ *
  * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\CreatedAt
  * @phpstan-import-type FilterShape from \Telnyx\MessagingOptouts\MessagingOptoutListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

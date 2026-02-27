@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\OpenAI\EmbeddingsRawContract;
 
 /**
+ * OpenAI-compatible embeddings endpoints for generating vector representations of text.
+ *
  * @phpstan-import-type InputShape from \Telnyx\AI\OpenAI\Embeddings\EmbeddingCreateEmbeddingsParams\Input
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

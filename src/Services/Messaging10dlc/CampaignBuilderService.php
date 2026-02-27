@@ -13,6 +13,8 @@ use Telnyx\ServiceContracts\Messaging10dlc\CampaignBuilderContract;
 use Telnyx\Services\Messaging10dlc\CampaignBuilder\BrandService;
 
 /**
+ * Campaign operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CampaignBuilderService implements CampaignBuilderContract

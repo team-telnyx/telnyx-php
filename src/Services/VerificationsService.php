@@ -15,6 +15,8 @@ use Telnyx\Verifications\CreateVerificationResponse;
 use Telnyx\Verifications\VerificationGetResponse;
 
 /**
+ * Two factor authentication API.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VerificationsService implements VerificationsContract

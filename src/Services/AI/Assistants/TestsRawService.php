@@ -19,6 +19,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\TestsRawContract;
 
 /**
+ * Configure AI assistant specifications.
+ *
  * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\TestCreateParams\Rubric
  * @phpstan-import-type RubricShape from \Telnyx\AI\Assistants\Tests\TestUpdateParams\Rubric as RubricShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

@@ -14,6 +14,8 @@ use Telnyx\Services\Porting\LoaConfigurationsService;
 use Telnyx\Services\Porting\ReportsService;
 
 /**
+ * Endpoints related to porting orders management.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PortingService implements PortingContract

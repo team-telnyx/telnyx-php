@@ -19,6 +19,8 @@ use Telnyx\VerifiedNumbers\VerifiedNumberListParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
 /**
+ * Verified Numbers operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VerifiedNumbersRawService implements VerifiedNumbersRawContract

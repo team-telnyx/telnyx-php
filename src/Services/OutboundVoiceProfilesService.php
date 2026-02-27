@@ -24,6 +24,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OutboundVoiceProfilesContract;
 
 /**
+ * Outbound voice profiles operations.
+ *
  * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileCreateParams\CallingWindow
  * @phpstan-import-type CallingWindowShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileUpdateParams\CallingWindow as CallingWindowShape1
  * @phpstan-import-type FilterShape from \Telnyx\OutboundVoiceProfiles\OutboundVoiceProfileListParams\Filter

@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 
 /**
+ * Configure AI assistant specifications.
+ *
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings

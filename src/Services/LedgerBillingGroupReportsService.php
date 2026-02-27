@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\LedgerBillingGroupReportsContract;
 
 /**
+ * Ledger billing reports.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class LedgerBillingGroupReportsService implements LedgerBillingGroupReportsContract

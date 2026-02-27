@@ -14,6 +14,8 @@ use Telnyx\SpeechToText\SpeechToTextTranscribeParams\Model;
 use Telnyx\SpeechToText\SpeechToTextTranscribeParams\TranscriptionEngine;
 
 /**
+ * Speech to text command operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SpeechToTextService implements SpeechToTextContract

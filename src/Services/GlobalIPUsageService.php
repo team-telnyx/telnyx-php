@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPUsageContract;
 
 /**
+ * Global IPs.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\GlobalIPUsage\GlobalIPUsageRetrieveParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

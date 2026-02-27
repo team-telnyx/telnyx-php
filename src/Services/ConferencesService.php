@@ -22,6 +22,8 @@ use Telnyx\ServiceContracts\ConferencesContract;
 use Telnyx\Services\Conferences\ActionsService;
 
 /**
+ * Conference command operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParams\Filter
  * @phpstan-import-type FilterShape from \Telnyx\Conferences\ConferenceListParticipantsParams\Filter as FilterShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

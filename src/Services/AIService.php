@@ -24,6 +24,8 @@ use Telnyx\Services\AI\MissionsService;
 use Telnyx\Services\AI\OpenAIService;
 
 /**
+ * Generate text with LLMs.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class AIService implements AIContract

@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ToolsRawContract;
 
 /**
+ * Configure AI assistant specifications.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ToolsRawService implements ToolsRawContract

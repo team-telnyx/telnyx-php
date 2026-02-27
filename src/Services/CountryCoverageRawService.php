@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CountryCoverageRawContract;
 
 /**
+ * Country Coverage.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CountryCoverageRawService implements CountryCoverageRawContract

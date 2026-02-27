@@ -19,6 +19,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PrivateWirelessGatewaysRawContract;
 
 /**
+ * Private Wireless Gateways operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PrivateWirelessGatewaysRawService implements PrivateWirelessGatewaysRawContract

@@ -12,6 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnections\ActionsRawContract;
 
 /**
+ * Credential connection operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsRawService implements ActionsRawContract

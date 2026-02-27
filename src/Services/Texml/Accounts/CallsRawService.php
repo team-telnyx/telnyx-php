@@ -44,6 +44,8 @@ use Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallUpdateResponse;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActivationJobsContract;
 
 /**
+ * Endpoints related to porting orders management.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActivationJobsService implements ActivationJobsContract

@@ -11,6 +11,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPProtocolsContract;
 
 /**
+ * Global IPs.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class GlobalIPProtocolsService implements GlobalIPProtocolsContract

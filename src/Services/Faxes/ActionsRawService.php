@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Faxes\ActionsRawContract;
 
 /**
+ * Programmable fax command operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsRawService implements ActionsRawContract

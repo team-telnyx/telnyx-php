@@ -12,6 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\MessagesRawContract;
 
 /**
+ * Manage historical AI assistant conversations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagesRawService implements MessagesRawContract

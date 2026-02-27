@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\ActionsContract;
 
 /**
+ * Configure your phone numbers.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsService implements ActionsContract

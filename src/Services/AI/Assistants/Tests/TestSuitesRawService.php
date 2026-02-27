@@ -12,6 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuitesRawContract;
 
 /**
+ * Configure AI assistant specifications.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TestSuitesRawService implements TestSuitesRawContract

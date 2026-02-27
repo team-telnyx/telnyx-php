@@ -14,6 +14,8 @@ use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
 /**
+ * SIPREC connectors configuration.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SiprecConnectorsService implements SiprecConnectorsContract

@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyEndpointsContract;
 
 /**
+ * Dynamic Emergency Endpoints.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyEndpoints\DynamicEmergencyEndpointListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

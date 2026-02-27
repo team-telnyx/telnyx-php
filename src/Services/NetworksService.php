@@ -20,6 +20,8 @@ use Telnyx\ServiceContracts\NetworksContract;
 use Telnyx\Services\Networks\DefaultGatewayService;
 
 /**
+ * Network operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListInterfacesParams\Filter as FilterShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

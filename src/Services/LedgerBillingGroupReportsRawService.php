@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\LedgerBillingGroupReportsRawContract;
 
 /**
+ * Ledger billing reports.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class LedgerBillingGroupReportsRawService implements LedgerBillingGroupReportsRawContract

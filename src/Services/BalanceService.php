@@ -11,6 +11,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BalanceContract;
 
 /**
+ * Billing operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BalanceService implements BalanceContract

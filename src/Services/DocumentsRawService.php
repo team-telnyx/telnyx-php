@@ -27,6 +27,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DocumentsRawContract;
 
 /**
+ * Documents.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Documents\DocumentListParams\Filter
  * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadParams\Document
  * @phpstan-import-type DocumentShape from \Telnyx\Documents\DocumentUploadJsonParams\Document as DocumentShape1

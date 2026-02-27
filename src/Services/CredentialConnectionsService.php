@@ -31,6 +31,8 @@ use Telnyx\ServiceContracts\CredentialConnectionsContract;
 use Telnyx\Services\CredentialConnections\ActionsService;
 
 /**
+ * Credential connection operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Filter
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
  * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer

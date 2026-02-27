@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AuditEventsRawContract;
 
 /**
+ * Audit log operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\AuditEvents\AuditEventListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

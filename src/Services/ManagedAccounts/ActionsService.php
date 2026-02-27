@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ManagedAccounts\ActionsContract;
 
 /**
+ * Managed Accounts operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsService implements ActionsContract

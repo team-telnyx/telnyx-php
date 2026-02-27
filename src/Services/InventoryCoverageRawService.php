@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InventoryCoverageRawContract;
 
 /**
+ * Inventory Level.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\InventoryCoverage\InventoryCoverageListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

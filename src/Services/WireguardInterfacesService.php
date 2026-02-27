@@ -17,6 +17,8 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
 
 /**
+ * WireGuard Interface operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

@@ -14,6 +14,8 @@ use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams;
 use Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter;
 
 /**
+ * Observability into Telnyx platform stability and performance.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Seti\SetiRetrieveBlackBoxTestResultsParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

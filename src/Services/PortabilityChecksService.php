@@ -12,6 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortabilityChecksContract;
 
 /**
+ * Determining portability of phone numbers.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PortabilityChecksService implements PortabilityChecksContract

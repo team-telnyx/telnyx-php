@@ -16,6 +16,8 @@ use Telnyx\SimCardOrders\SimCardOrderListParams\Filter;
 use Telnyx\SimCardOrders\SimCardOrderNewResponse;
 
 /**
+ * SIM Card Orders operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\SimCardOrders\SimCardOrderListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

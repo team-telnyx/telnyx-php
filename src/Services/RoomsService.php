@@ -19,6 +19,8 @@ use Telnyx\Services\Rooms\ActionsService;
 use Telnyx\Services\Rooms\SessionsService;
 
 /**
+ * Rooms operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Rooms\RoomListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

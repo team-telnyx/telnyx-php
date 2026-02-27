@@ -23,6 +23,8 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 
 /**
+ * Virtual Cross Connect operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

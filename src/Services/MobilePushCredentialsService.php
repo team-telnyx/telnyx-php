@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePushCredentialsContract;
 
 /**
+ * Mobile push credential management.
+ *
  * @phpstan-import-type CreateMobilePushCredentialRequestShape from \Telnyx\MobilePushCredentials\MobilePushCredentialCreateParams\CreateMobilePushCredentialRequest
  * @phpstan-import-type FilterShape from \Telnyx\MobilePushCredentials\MobilePushCredentialListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

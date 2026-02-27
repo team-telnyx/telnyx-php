@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallEventsContract;
 
 /**
+ * Call Control debugging.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\CallEvents\CallEventListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

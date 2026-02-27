@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\MessagingContract;
 
 /**
+ * Configure your phone numbers.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagingService implements MessagingContract

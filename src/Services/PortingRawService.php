@@ -12,6 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingRawContract;
 
 /**
+ * Endpoints related to porting orders management.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PortingRawService implements PortingRawContract

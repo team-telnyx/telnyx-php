@@ -14,6 +14,8 @@ use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Streams\StreamStreamingSidJsonResponse;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class StreamsRawService implements StreamsRawContract

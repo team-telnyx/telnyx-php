@@ -19,6 +19,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPHealthChecksRawContract;
 
 /**
+ * Global IPs.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawContract

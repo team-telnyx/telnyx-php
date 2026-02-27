@@ -16,6 +16,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\LogMessagesContract;
 
 /**
+ * External Connections operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

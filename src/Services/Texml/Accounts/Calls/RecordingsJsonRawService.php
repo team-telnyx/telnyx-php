@@ -18,6 +18,8 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonRespo
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRetrieveRecordingsJsonParams;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RecordingsJsonRawService implements RecordingsJsonRawContract

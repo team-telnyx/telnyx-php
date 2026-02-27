@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InboundChannelsRawContract;
 
 /**
+ * Voice Channels.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class InboundChannelsRawService implements InboundChannelsRawContract

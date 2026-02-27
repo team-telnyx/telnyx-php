@@ -11,6 +11,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberReservations\ActionsContract;
 
 /**
+ * Number reservations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsService implements ActionsContract

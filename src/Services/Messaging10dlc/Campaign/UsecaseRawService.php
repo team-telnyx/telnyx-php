@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Campaign\UsecaseRawContract;
 
 /**
+ * Campaign operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class UsecaseRawService implements UsecaseRawContract

@@ -15,6 +15,8 @@ use Telnyx\ServiceContracts\AI\Conversations\InsightGroupsContract;
 use Telnyx\Services\AI\Conversations\InsightGroups\InsightsService;
 
 /**
+ * Manage historical AI assistant conversations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class InsightGroupsService implements InsightGroupsContract

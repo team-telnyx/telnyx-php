@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPLatencyRawContract;
 
 /**
+ * Global IPs.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\GlobalIPLatency\GlobalIPLatencyRetrieveParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

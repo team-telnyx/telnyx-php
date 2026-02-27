@@ -17,6 +17,8 @@ use Telnyx\RoomCompositions\VideoRegion;
 use Telnyx\ServiceContracts\RoomCompositionsContract;
 
 /**
+ * Rooms Compositions operations.
+ *
  * @phpstan-import-type VideoRegionShape from \Telnyx\RoomCompositions\VideoRegion
  * @phpstan-import-type FilterShape from \Telnyx\RoomCompositions\RoomCompositionListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

@@ -12,6 +12,8 @@ use Telnyx\ServiceContracts\SimCardOrderPreviewContract;
 use Telnyx\SimCardOrderPreview\SimCardOrderPreviewPreviewResponse;
 
 /**
+ * SIM Card Orders operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SimCardOrderPreviewService implements SimCardOrderPreviewContract

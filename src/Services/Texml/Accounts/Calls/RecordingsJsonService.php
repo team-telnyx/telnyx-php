@@ -16,6 +16,8 @@ use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParam
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RecordingsJsonService implements RecordingsJsonContract

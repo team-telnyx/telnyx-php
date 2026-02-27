@@ -16,6 +16,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfiles\AutorespConfigsContract;
 
 /**
+ * Opt-Out Management.
+ *
  * @phpstan-import-type CreatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\CreatedAt
  * @phpstan-import-type UpdatedAtShape from \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigListParams\UpdatedAt
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

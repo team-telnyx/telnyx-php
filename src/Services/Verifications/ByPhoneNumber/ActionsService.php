@@ -12,6 +12,8 @@ use Telnyx\ServiceContracts\Verifications\ByPhoneNumber\ActionsContract;
 use Telnyx\Verifications\ByPhoneNumber\Actions\VerifyVerificationCodeResponse;
 
 /**
+ * Two factor authentication API.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsService implements ActionsContract

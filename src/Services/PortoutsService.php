@@ -22,6 +22,8 @@ use Telnyx\Services\Portouts\ReportsService;
 use Telnyx\Services\Portouts\SupportingDocumentsService;
 
 /**
+ * Number portout operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Portouts\PortoutListParams\Filter
  * @phpstan-import-type FilterShape from \Telnyx\Portouts\PortoutListRejectionCodesParams\Filter as FilterShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

@@ -11,6 +11,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RegionsContract;
 
 /**
+ * Regions.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RegionsService implements RegionsContract

@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationSettingsRawContract;
 
 /**
+ * Notification settings operations.
+ *
  * @phpstan-import-type ParameterShape from \Telnyx\NotificationSettings\NotificationSettingCreateParams\Parameter
  * @phpstan-import-type FilterShape from \Telnyx\NotificationSettings\NotificationSettingListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
