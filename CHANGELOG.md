@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.54.0 (2026-02-27)
+
+Full Changelog: [v6.53.0...v6.54.0](https://github.com/team-telnyx/telnyx-php/compare/v6.53.0...v6.54.0)
+
+### Features
+
+* Add TTS file-based endpoint spec ([e5fa211](https://github.com/team-telnyx/telnyx-php/commit/e5fa211c2778357c865dac706b9ac0617247c9ec))
+
+
+### Chores
+
+* **internal:** upgrade phpunit ([cea300b](https://github.com/team-telnyx/telnyx-php/commit/cea300bd459d62a006ea3fd8c125ab1812d93da7))
+
 ## 6.53.0 (2026-02-26)
 
 Full Changelog: [v6.52.0...v6.53.0](https://github.com/team-telnyx/telnyx-php/compare/v6.52.0...v6.53.0)
