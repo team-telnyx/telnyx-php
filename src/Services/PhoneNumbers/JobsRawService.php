@@ -25,6 +25,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\JobsRawContract;
 
 /**
+ * Background jobs performed over a batch of phone numbers.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Jobs\JobListParams\Filter
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbers\Jobs\JobUpdateBatchParams\Filter as FilterShape1
  * @phpstan-import-type UpdateVoiceSettingsShape from \Telnyx\PhoneNumbers\Voice\UpdateVoiceSettings

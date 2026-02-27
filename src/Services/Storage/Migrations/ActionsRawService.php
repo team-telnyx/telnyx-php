@@ -12,6 +12,8 @@ use Telnyx\ServiceContracts\Storage\Migrations\ActionsRawContract;
 use Telnyx\Storage\Migrations\Actions\ActionStopResponse;
 
 /**
+ * Migrate data from an external provider into Telnyx Cloud Storage.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsRawService implements ActionsRawContract

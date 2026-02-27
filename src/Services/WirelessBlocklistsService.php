@@ -18,6 +18,8 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistNewResponse;
 use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateResponse;
 
 /**
+ * Wireless Blocklists operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class WirelessBlocklistsService implements WirelessBlocklistsContract

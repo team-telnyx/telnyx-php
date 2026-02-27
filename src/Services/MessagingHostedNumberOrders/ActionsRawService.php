@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingHostedNumberOrders\ActionsRawContract;
 
 /**
+ * Manage your messaging hosted numbers.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsRawService implements ActionsRawContract

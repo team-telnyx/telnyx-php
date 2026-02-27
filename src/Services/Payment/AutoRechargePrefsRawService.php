@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Payment\AutoRechargePrefsRawContract;
 
 /**
+ * V2 Auto Recharge Preferences API.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class AutoRechargePrefsRawService implements AutoRechargePrefsRawContract

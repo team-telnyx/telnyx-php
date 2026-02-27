@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ChannelZonesRawContract;
 
 /**
+ * Voice Channels.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ChannelZonesRawService implements ChannelZonesRawContract

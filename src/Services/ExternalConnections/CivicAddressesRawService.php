@@ -16,6 +16,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\CivicAddressesRawContract;
 
 /**
+ * External Connections operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\CivicAddresses\CivicAddressListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

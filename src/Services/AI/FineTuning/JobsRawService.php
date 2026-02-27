@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\FineTuning\JobsRawContract;
 
 /**
+ * Customize LLMs for your unique needs.
+ *
  * @phpstan-import-type HyperparametersShape from \Telnyx\AI\FineTuning\Jobs\JobCreateParams\Hyperparameters
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

@@ -10,6 +10,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Campaign\OsrContract;
 
 /**
+ * Campaign operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class OsrService implements OsrContract

@@ -13,6 +13,8 @@ use Telnyx\VerifiedNumbers\Actions\ActionSubmitVerificationCodeParams;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 
 /**
+ * Verified Numbers operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsRawService implements ActionsRawContract

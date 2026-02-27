@@ -18,6 +18,8 @@ use Telnyx\ServiceContracts\NumberReservationsContract;
 use Telnyx\Services\NumberReservations\ActionsService;
 
 /**
+ * Number reservations.
+ *
  * @phpstan-import-type ReservedPhoneNumberShape from \Telnyx\NumberReservations\ReservedPhoneNumber
  * @phpstan-import-type FilterShape from \Telnyx\NumberReservations\NumberReservationListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

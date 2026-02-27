@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingTranscriptionsRawContract;
 
 /**
+ * Call Recordings operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RecordingTranscriptionsRawService implements RecordingTranscriptionsRawContract

@@ -15,6 +15,8 @@ use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportGetResponse;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportNewResponse;
 
 /**
+ * Number orders.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SubNumberOrdersReportRawService implements SubNumberOrdersReportRawContract

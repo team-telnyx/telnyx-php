@@ -16,6 +16,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\VoiceContract;
 
 /**
+ * Voice usage reports.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoiceService implements VoiceContract

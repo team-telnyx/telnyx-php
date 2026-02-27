@@ -20,6 +20,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobileVoiceConnectionsContract;
 
 /**
+ * Mobile voice connection operations.
+ *
  * @phpstan-import-type InboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Inbound
  * @phpstan-import-type OutboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionCreateParams\Outbound
  * @phpstan-import-type InboundShape from \Telnyx\MobileVoiceConnections\MobileVoiceConnectionUpdateParams\Inbound as InboundShape1

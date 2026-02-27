@@ -19,6 +19,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\VoiceRawContract;
 
 /**
+ * Voice usage reports.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoiceRawService implements VoiceRawContract

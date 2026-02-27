@@ -25,6 +25,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ManagedAccountsRawContract;
 
 /**
+ * Managed Accounts operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

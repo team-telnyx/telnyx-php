@@ -20,6 +20,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PublicInternetGatewaysRawContract;
 
 /**
+ * Public Internet Gateway operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

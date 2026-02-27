@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\ReportsRawContract;
 
 /**
+ * Endpoints related to porting orders management.
+ *
  * @phpstan-import-type ExportPortingOrdersCsvReportShape from \Telnyx\Porting\Reports\ExportPortingOrdersCsvReport
  * @phpstan-import-type FilterShape from \Telnyx\Porting\Reports\ReportListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

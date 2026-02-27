@@ -35,6 +35,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IPConnectionsRawContract;
 
 /**
+ * IP connection operations.
+ *
  * @phpstan-import-type InboundShape from \Telnyx\IPConnections\IPConnectionCreateParams\Inbound
  * @phpstan-import-type InboundIPShape from \Telnyx\IPConnections\InboundIP
  * @phpstan-import-type FilterShape from \Telnyx\IPConnections\IPConnectionListParams\Filter

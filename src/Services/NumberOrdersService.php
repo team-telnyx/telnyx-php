@@ -19,6 +19,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberOrdersContract;
 
 /**
+ * Number orders.
+ *
  * @phpstan-import-type PhoneNumberShape from \Telnyx\NumberOrders\NumberOrderCreateParams\PhoneNumber
  * @phpstan-import-type UpdateRegulatoryRequirementShape from \Telnyx\NumberOrderPhoneNumbers\UpdateRegulatoryRequirement
  * @phpstan-import-type FilterShape from \Telnyx\NumberOrders\NumberOrderListParams\Filter

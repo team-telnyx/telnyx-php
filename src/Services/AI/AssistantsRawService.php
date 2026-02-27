@@ -32,6 +32,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsRawContract;
 
 /**
+ * Configure AI assistant specifications.
+ *
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings

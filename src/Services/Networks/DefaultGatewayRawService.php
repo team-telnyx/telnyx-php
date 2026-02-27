@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Networks\DefaultGatewayRawContract;
 
 /**
+ * Network operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class DefaultGatewayRawService implements DefaultGatewayRawContract

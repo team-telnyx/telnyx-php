@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReportsRawContract;
 
 /**
+ * Speech to text usage reports.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class UsageReportsRawService implements UsageReportsRawContract

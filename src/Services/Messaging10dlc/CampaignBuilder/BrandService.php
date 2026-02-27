@@ -12,6 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\CampaignBuilder\BrandContract;
 
 /**
+ * Campaign operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BrandService implements BrandContract

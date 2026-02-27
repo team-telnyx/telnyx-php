@@ -23,6 +23,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Porting\EventsRawContract;
 
 /**
+ * Endpoints related to porting orders management.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Porting\Events\EventListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

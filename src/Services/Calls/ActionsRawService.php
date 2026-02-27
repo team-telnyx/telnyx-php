@@ -137,6 +137,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Calls\ActionsRawContract;
 
 /**
+ * Call Control command operations.
+ *
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy

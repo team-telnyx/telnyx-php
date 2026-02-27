@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingNumbersBulkUpdatesContract;
 
 /**
+ * Configure your phone numbers.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagingNumbersBulkUpdatesService implements MessagingNumbersBulkUpdatesContract

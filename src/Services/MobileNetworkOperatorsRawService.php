@@ -16,6 +16,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobileNetworkOperatorsRawContract;
 
 /**
+ * Mobile network operators operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\MobileNetworkOperators\MobileNetworkOperatorListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

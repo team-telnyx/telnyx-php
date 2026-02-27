@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumberBlocks\JobsContract;
 
 /**
+ * Background jobs performed over a phone-numbers block's phone numbers.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumberBlocks\Jobs\JobListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

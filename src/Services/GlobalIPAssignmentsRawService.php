@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsRawContract;
 
 /**
+ * Global IPs.
+ *
  * @phpstan-import-type GlobalIPAssignmentUpdateRequestShape from \Telnyx\GlobalIPAssignments\GlobalIPAssignmentUpdateParams\GlobalIPAssignmentUpdateRequest
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

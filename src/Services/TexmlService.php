@@ -13,6 +13,8 @@ use Telnyx\Services\Texml\AccountsService;
 use Telnyx\Texml\TexmlSecretsResponse;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TexmlService implements TexmlContract

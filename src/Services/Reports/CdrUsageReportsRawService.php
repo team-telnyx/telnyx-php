@@ -16,6 +16,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\CdrUsageReportsRawContract;
 
 /**
+ * Voice usage reports.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CdrUsageReportsRawService implements CdrUsageReportsRawContract

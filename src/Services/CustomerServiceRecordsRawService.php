@@ -23,6 +23,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomerServiceRecordsRawContract;
 
 /**
+ * Customer Service Record operations.
+ *
  * @phpstan-import-type AdditionalDataShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordCreateParams\AdditionalData
  * @phpstan-import-type FilterShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Filter
  * @phpstan-import-type SortShape from \Telnyx\CustomerServiceRecords\CustomerServiceRecordListParams\Sort

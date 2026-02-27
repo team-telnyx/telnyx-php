@@ -12,6 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Embeddings\BucketsContract;
 
 /**
+ * Embed documents and perform text searches.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BucketsService implements BucketsContract

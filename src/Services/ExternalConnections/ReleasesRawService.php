@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\ReleasesRawContract;
 
 /**
+ * External Connections operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

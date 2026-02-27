@@ -18,6 +18,8 @@ use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportListResponse;
 use Telnyx\Wireless\DetailRecordsReports\DetailRecordsReportNewResponse;
 
 /**
+ * Wireless reporting operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class DetailRecordsReportsRawService implements DetailRecordsReportsRawContract

@@ -16,6 +16,8 @@ use Telnyx\Requirements\RequirementListResponse;
 use Telnyx\ServiceContracts\RequirementsContract;
 
 /**
+ * Requirements for international numbers and porting orders.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Requirements\RequirementListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

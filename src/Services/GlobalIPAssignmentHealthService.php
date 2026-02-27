@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentHealthContract;
 
 /**
+ * Global IPs.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\GlobalIPAssignmentHealth\GlobalIPAssignmentHealthRetrieveParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

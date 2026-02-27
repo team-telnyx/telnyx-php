@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\CommentsRawContract;
 
 /**
+ * Number portout operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CommentsRawService implements CommentsRawContract

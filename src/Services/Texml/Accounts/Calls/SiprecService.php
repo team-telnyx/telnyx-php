@@ -13,6 +13,8 @@ use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonParams\Status;
 use Telnyx\Texml\Accounts\Calls\Siprec\SiprecSiprecSidJsonResponse;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SiprecService implements SiprecContract

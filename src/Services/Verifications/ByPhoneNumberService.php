@@ -12,6 +12,8 @@ use Telnyx\Services\Verifications\ByPhoneNumber\ActionsService;
 use Telnyx\Verifications\ByPhoneNumber\ByPhoneNumberListResponse;
 
 /**
+ * Two factor authentication API.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ByPhoneNumberService implements ByPhoneNumberContract

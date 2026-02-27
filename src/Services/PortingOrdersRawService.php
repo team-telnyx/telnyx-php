@@ -37,6 +37,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrdersRawContract;
 
 /**
+ * Endpoints related to porting orders management.
+ *
  * @phpstan-import-type ActivationSettingsShape from \Telnyx\PortingOrders\PortingOrderUpdateParams\ActivationSettings
  * @phpstan-import-type PortingOrderDocumentsShape from \Telnyx\PortingOrders\PortingOrderDocuments
  * @phpstan-import-type PortingOrderEndUserShape from \Telnyx\PortingOrders\PortingOrderEndUser

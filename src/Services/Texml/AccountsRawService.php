@@ -16,6 +16,8 @@ use Telnyx\Texml\Accounts\AccountRetrieveRecordingsJsonParams;
 use Telnyx\Texml\Accounts\AccountRetrieveTranscriptionsJsonParams;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class AccountsRawService implements AccountsRawContract

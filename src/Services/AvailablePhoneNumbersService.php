@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AvailablePhoneNumbersContract;
 
 /**
+ * Number search.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\AvailablePhoneNumbers\AvailablePhoneNumberListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberLookupRawContract;
 
 /**
+ * Look up phone number data.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NumberLookupRawService implements NumberLookupRawContract

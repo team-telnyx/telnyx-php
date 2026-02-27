@@ -17,6 +17,8 @@ use Telnyx\RoomParticipants\RoomParticipantListParams\Filter;
 use Telnyx\ServiceContracts\RoomParticipantsRawContract;
 
 /**
+ * Rooms Participants operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\RoomParticipants\RoomParticipantListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

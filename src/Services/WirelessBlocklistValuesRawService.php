@@ -14,6 +14,8 @@ use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListParams\Type;
 use Telnyx\WirelessBlocklistValues\WirelessBlocklistValueListResponse;
 
 /**
+ * Wireless Blocklists operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class WirelessBlocklistValuesRawService implements WirelessBlocklistValuesRawContract

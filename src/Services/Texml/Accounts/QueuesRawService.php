@@ -22,6 +22,8 @@ use Telnyx\Texml\Accounts\Queues\QueueUpdateParams;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateResponse;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class QueuesRawService implements QueuesRawContract

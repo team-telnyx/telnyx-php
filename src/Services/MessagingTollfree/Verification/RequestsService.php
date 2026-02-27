@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingTollfree\Verification\RequestsContract;
 
 /**
+ * Manage your tollfree verification requests.
+ *
  * @phpstan-import-type URLShape from \Telnyx\MessagingTollfree\Verification\Requests\URL
  * @phpstan-import-type TfPhoneNumberShape from \Telnyx\MessagingTollfree\Verification\Requests\TfPhoneNumber
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

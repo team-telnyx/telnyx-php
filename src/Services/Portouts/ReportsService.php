@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\ReportsContract;
 
 /**
+ * Number portout operations.
+ *
  * @phpstan-import-type ExportPortoutsCsvReportShape from \Telnyx\Portouts\Reports\ExportPortoutsCsvReport
  * @phpstan-import-type FilterShape from \Telnyx\Portouts\Reports\ReportListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

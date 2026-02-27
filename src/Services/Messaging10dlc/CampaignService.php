@@ -21,6 +21,8 @@ use Telnyx\Services\Messaging10dlc\Campaign\OsrService;
 use Telnyx\Services\Messaging10dlc\Campaign\UsecaseService;
 
 /**
+ * Campaign operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CampaignService implements CampaignContract

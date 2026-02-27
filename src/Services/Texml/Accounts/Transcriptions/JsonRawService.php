@@ -14,6 +14,8 @@ use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJs
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonRetrieveRecordingTranscriptionSidJsonParams;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class JsonRawService implements JsonRawContract

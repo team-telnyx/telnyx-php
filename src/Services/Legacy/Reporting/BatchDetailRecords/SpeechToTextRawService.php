@@ -16,6 +16,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\BatchDetailRecords\SpeechToTextRawContract;
 
 /**
+ * Speech to text batch detail records.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SpeechToTextRawService implements SpeechToTextRawContract

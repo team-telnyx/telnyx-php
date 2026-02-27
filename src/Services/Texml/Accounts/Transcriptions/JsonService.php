@@ -12,6 +12,8 @@ use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonContract;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class JsonService implements JsonContract

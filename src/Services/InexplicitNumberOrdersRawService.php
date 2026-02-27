@@ -19,6 +19,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InexplicitNumberOrdersRawContract;
 
 /**
+ * Inexplicit number orders for bulk purchasing without specifying exact numbers.
+ *
  * @phpstan-import-type OrderingGroupShape from \Telnyx\InexplicitNumberOrders\InexplicitNumberOrderCreateParams\OrderingGroup
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPAssignmentsUsageRawContract;
 
 /**
+ * Global IPs.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\GlobalIPAssignmentsUsage\GlobalIPAssignmentsUsageRetrieveParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
