@@ -30,10 +30,12 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
     /**
      * @api
      *
-     * Returns a list of voices that can be used with the text to speech commands.
+     * Retrieve a list of available voices from one or all TTS providers. When `provider` is specified, returns voices for that provider only. Otherwise, returns voices from all providers.
+     *
+     * Some providers (ElevenLabs, Resemble) require an API key to list voices.
      *
      * @param array{
-     *   elevenlabsAPIKeyRef?: string, provider?: Provider|value-of<Provider>
+     *   apiKey?: string, provider?: Provider|value-of<Provider>
      * }|TextToSpeechListVoicesParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -54,10 +56,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
         return $this->client->request(
             method: 'get',
             path: 'text-to-speech/voices',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['elevenlabsAPIKeyRef' => 'elevenlabs_api_key_ref']
-            ),
+            query: Util::array_transform_keys($parsed, ['apiKey' => 'api_key']),
             options: $options,
             convert: TextToSpeechListVoicesResponse::class,
         );

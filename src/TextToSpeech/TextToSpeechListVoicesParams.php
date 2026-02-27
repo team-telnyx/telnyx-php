@@ -11,12 +11,14 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider;
 
 /**
- * Returns a list of voices that can be used with the text to speech commands.
+ * Retrieve a list of available voices from one or all TTS providers. When `provider` is specified, returns voices for that provider only. Otherwise, returns voices from all providers.
+ *
+ * Some providers (ElevenLabs, Resemble) require an API key to list voices.
  *
  * @see Telnyx\Services\TextToSpeechService::listVoices()
  *
  * @phpstan-type TextToSpeechListVoicesParamsShape = array{
- *   elevenlabsAPIKeyRef?: string|null, provider?: null|Provider|value-of<Provider>
+ *   apiKey?: string|null, provider?: null|Provider|value-of<Provider>
  * }
  */
 final class TextToSpeechListVoicesParams implements BaseModel
@@ -26,13 +28,13 @@ final class TextToSpeechListVoicesParams implements BaseModel
     use SdkParams;
 
     /**
-     * Reference to your ElevenLabs API key stored in the Telnyx Portal.
+     * API key for providers that require one to list voices (e.g. ElevenLabs).
      */
     #[Optional]
-    public ?string $elevenlabsAPIKeyRef;
+    public ?string $apiKey;
 
     /**
-     * Filter voices by provider.
+     * Filter voices by provider. If omitted, voices from all providers are returned.
      *
      * @var value-of<Provider>|null $provider
      */
@@ -52,30 +54,30 @@ final class TextToSpeechListVoicesParams implements BaseModel
      * @param Provider|value-of<Provider>|null $provider
      */
     public static function with(
-        ?string $elevenlabsAPIKeyRef = null,
+        ?string $apiKey = null,
         Provider|string|null $provider = null
     ): self {
         $self = new self;
 
-        null !== $elevenlabsAPIKeyRef && $self['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
+        null !== $apiKey && $self['apiKey'] = $apiKey;
         null !== $provider && $self['provider'] = $provider;
 
         return $self;
     }
 
     /**
-     * Reference to your ElevenLabs API key stored in the Telnyx Portal.
+     * API key for providers that require one to list voices (e.g. ElevenLabs).
      */
-    public function withElevenlabsAPIKeyRef(string $elevenlabsAPIKeyRef): self
+    public function withAPIKey(string $apiKey): self
     {
         $self = clone $this;
-        $self['elevenlabsAPIKeyRef'] = $elevenlabsAPIKeyRef;
+        $self['apiKey'] = $apiKey;
 
         return $self;
     }
 
     /**
-     * Filter voices by provider.
+     * Filter voices by provider. If omitted, voices from all providers are returned.
      *
      * @param Provider|value-of<Provider> $provider
      */

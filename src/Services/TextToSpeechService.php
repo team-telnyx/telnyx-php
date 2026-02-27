@@ -34,22 +34,22 @@ final class TextToSpeechService implements TextToSpeechContract
     /**
      * @api
      *
-     * Returns a list of voices that can be used with the text to speech commands.
+     * Retrieve a list of available voices from one or all TTS providers. When `provider` is specified, returns voices for that provider only. Otherwise, returns voices from all providers.
      *
-     * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
-     * @param Provider|value-of<Provider> $provider Filter voices by provider
+     * Some providers (ElevenLabs, Resemble) require an API key to list voices.
+     *
+     * @param string $apiKey API key for providers that require one to list voices (e.g. ElevenLabs).
+     * @param Provider|value-of<Provider> $provider Filter voices by provider. If omitted, voices from all providers are returned.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listVoices(
-        ?string $elevenlabsAPIKeyRef = null,
+        ?string $apiKey = null,
         Provider|string|null $provider = null,
         RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechListVoicesResponse {
-        $params = Util::removeNulls(
-            ['elevenlabsAPIKeyRef' => $elevenlabsAPIKeyRef, 'provider' => $provider]
-        );
+        $params = Util::removeNulls(['apiKey' => $apiKey, 'provider' => $provider]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listVoices(params: $params, requestOptions: $requestOptions);
