@@ -40,38 +40,7 @@ final class VirtualCrossConnectsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->virtualCrossConnects->create(
-            regionCode: 'ashburn-va'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VirtualCrossConnectNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCreateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->virtualCrossConnects->create(
-            regionCode: 'ashburn-va',
-            bandwidthMbps: 50,
-            bgpAsn: 1234,
-            cloudProvider: 'aws',
-            cloudProviderRegion: 'us-east-1',
-            name: 'test interface',
-            networkID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            primaryBgpKey: 'yFV4wEPtPVPfDUGLWiyQzwga',
-            primaryCloudAccountID: '123456789012',
-            primaryCloudIP: '169.254.0.2',
-            primaryTelnyxIP: '169.254.0.1',
-            secondaryBgpKey: 'ge1lONeK9RcA83uuWaw9DvZy',
-            secondaryCloudAccountID: '',
-            secondaryCloudIP: '169.254.0.4',
-            secondaryTelnyxIP: '169.254.0.3',
-        );
+        $result = $this->client->virtualCrossConnects->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(VirtualCrossConnectNewResponse::class, $result);

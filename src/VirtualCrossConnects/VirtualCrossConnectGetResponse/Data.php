@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
 
 use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
@@ -22,7 +23,7 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region;
  *   name?: string|null,
  *   networkID?: string|null,
  *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
- *   regionCode?: string|null,
+ *   regionCode: string,
  *   bandwidthMbps?: float|null,
  *   bgpAsn?: float|null,
  *   cloudProvider?: null|CloudProvider|value-of<CloudProvider>,
@@ -92,10 +93,10 @@ final class Data implements BaseModel
     public ?string $status;
 
     /**
-     * The region the interface should be deployed to.
+     * The region interface is deployed to.
      */
-    #[Optional('region_code')]
-    public ?string $regionCode;
+    #[Required('region_code')]
+    public string $regionCode;
 
     /**
      * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
@@ -198,6 +199,20 @@ final class Data implements BaseModel
     #[Optional('secondary_telnyx_ip')]
     public ?string $secondaryTelnyxIP;
 
+    /**
+     * `new Data()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * Data::with(regionCode: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new Data)->withRegionCode(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -213,6 +228,7 @@ final class Data implements BaseModel
      * @param Region|RegionShape|null $region
      */
     public static function with(
+        string $regionCode,
         ?string $id = null,
         ?string $createdAt = null,
         ?string $recordType = null,
@@ -220,7 +236,6 @@ final class Data implements BaseModel
         ?string $name = null,
         ?string $networkID = null,
         InterfaceStatus|string|null $status = null,
-        ?string $regionCode = null,
         ?float $bandwidthMbps = null,
         ?float $bgpAsn = null,
         CloudProvider|string|null $cloudProvider = null,
@@ -241,6 +256,8 @@ final class Data implements BaseModel
     ): self {
         $self = new self;
 
+        $self['regionCode'] = $regionCode;
+
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $recordType && $self['recordType'] = $recordType;
@@ -248,7 +265,6 @@ final class Data implements BaseModel
         null !== $name && $self['name'] = $name;
         null !== $networkID && $self['networkID'] = $networkID;
         null !== $status && $self['status'] = $status;
-        null !== $regionCode && $self['regionCode'] = $regionCode;
         null !== $bandwidthMbps && $self['bandwidthMbps'] = $bandwidthMbps;
         null !== $bgpAsn && $self['bgpAsn'] = $bgpAsn;
         null !== $cloudProvider && $self['cloudProvider'] = $cloudProvider;
@@ -350,7 +366,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * The region the interface should be deployed to.
+     * The region interface is deployed to.
      */
     public function withRegionCode(string $regionCode): self
     {
