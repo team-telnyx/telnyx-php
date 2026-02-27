@@ -56,8 +56,7 @@ final class WireguardPeersTest extends TestCase
         }
 
         $result = $this->client->wireguardPeers->create(
-            wireguardInterfaceID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            publicKey: 'qF4EqlZq+5JL2IKYY8ij49daYyfKVhevJrcDxdqC8GU=',
+            wireguardInterfaceID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

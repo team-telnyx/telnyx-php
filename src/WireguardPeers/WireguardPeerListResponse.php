@@ -14,7 +14,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: string|null,
- *   publicKey?: string|null,
  *   lastSeen?: string|null,
  *   privateKey?: string|null,
  *   wireguardInterfaceID?: string|null,
@@ -50,12 +49,6 @@ final class WireguardPeerListResponse implements BaseModel
     public ?string $updatedAt;
 
     /**
-     * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
-     */
-    #[Optional('public_key')]
-    public ?string $publicKey;
-
-    /**
      * ISO 8601 formatted date-time indicating when peer sent traffic last time.
      */
     #[Optional('last_seen')]
@@ -88,7 +81,6 @@ final class WireguardPeerListResponse implements BaseModel
         ?string $createdAt = null,
         ?string $recordType = null,
         ?string $updatedAt = null,
-        ?string $publicKey = null,
         ?string $lastSeen = null,
         ?string $privateKey = null,
         ?string $wireguardInterfaceID = null,
@@ -99,7 +91,6 @@ final class WireguardPeerListResponse implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
-        null !== $publicKey && $self['publicKey'] = $publicKey;
         null !== $lastSeen && $self['lastSeen'] = $lastSeen;
         null !== $privateKey && $self['privateKey'] = $privateKey;
         null !== $wireguardInterfaceID && $self['wireguardInterfaceID'] = $wireguardInterfaceID;
@@ -147,17 +138,6 @@ final class WireguardPeerListResponse implements BaseModel
     {
         $self = clone $this;
         $self['updatedAt'] = $updatedAt;
-
-        return $self;
-    }
-
-    /**
-     * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
-     */
-    public function withPublicKey(string $publicKey): self
-    {
-        $self = clone $this;
-        $self['publicKey'] = $publicKey;
 
         return $self;
     }
