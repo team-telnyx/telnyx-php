@@ -18,14 +18,14 @@ interface TextToSpeechContract
     /**
      * @api
      *
-     * @param string $elevenlabsAPIKeyRef Reference to your ElevenLabs API key stored in the Telnyx Portal
-     * @param Provider|value-of<Provider> $provider Filter voices by provider
+     * @param string $apiKey API key for providers that require one to list voices (e.g. ElevenLabs).
+     * @param Provider|value-of<Provider> $provider Filter voices by provider. If omitted, voices from all providers are returned.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function listVoices(
-        ?string $elevenlabsAPIKeyRef = null,
+        ?string $apiKey = null,
         Provider|string|null $provider = null,
         RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechListVoicesResponse;
