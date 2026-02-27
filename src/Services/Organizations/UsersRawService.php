@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Organizations\UsersRawContract;
 
 /**
+ * Operations related to users in your organization.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class UsersRawService implements UsersRawContract

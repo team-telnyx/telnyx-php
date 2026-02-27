@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AccessIPAddressRawContract;
 
 /**
+ * IP Address Operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\AccessIPAddress\AccessIPAddressListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

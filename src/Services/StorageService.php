@@ -14,6 +14,8 @@ use Telnyx\Services\Storage\MigrationsService;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse;
 
 /**
+ * Migrate data from an external provider into Telnyx Cloud Storage.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class StorageService implements StorageContract

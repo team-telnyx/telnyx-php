@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomStorageCredentialsContract;
 
 /**
+ * Call Recordings operations.
+ *
  * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Configuration
  * @phpstan-import-type ConfigurationShape from \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration as ConfigurationShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

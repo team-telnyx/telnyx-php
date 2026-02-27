@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbersRegulatoryRequirementsContract;
 
 /**
+ * Regulatory Requirements.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\PhoneNumbersRegulatoryRequirements\PhoneNumbersRegulatoryRequirementRetrieveParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

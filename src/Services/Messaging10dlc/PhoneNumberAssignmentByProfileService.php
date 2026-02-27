@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\PhoneNumberAssignmentByProfileContract;
 
 /**
+ * Phone number campaign bulk assignment.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignmentByProfileContract

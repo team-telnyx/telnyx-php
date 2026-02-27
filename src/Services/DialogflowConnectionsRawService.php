@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DialogflowConnectionsRawContract;
 
 /**
+ * Dialogflow Connection Operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class DialogflowConnectionsRawService implements DialogflowConnectionsRawContract

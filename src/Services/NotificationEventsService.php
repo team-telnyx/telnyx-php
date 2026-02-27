@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationEventsContract;
 
 /**
+ * Notification settings operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NotificationEventsService implements NotificationEventsContract

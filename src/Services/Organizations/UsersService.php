@@ -18,6 +18,8 @@ use Telnyx\ServiceContracts\Organizations\UsersContract;
 use Telnyx\Services\Organizations\Users\ActionsService;
 
 /**
+ * Operations related to users in your organization.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class UsersService implements UsersContract

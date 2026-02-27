@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FaxesRawContract;
 
 /**
+ * Programmable fax command operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Faxes\FaxListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

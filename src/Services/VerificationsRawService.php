@@ -16,6 +16,8 @@ use Telnyx\Verifications\VerificationTriggerFlashcallParams;
 use Telnyx\Verifications\VerificationTriggerSMSParams;
 
 /**
+ * Two factor authentication API.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VerificationsRawService implements VerificationsRawContract

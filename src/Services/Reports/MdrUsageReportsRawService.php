@@ -22,6 +22,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\MdrUsageReportsRawContract;
 
 /**
+ * Messaging usage reports.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MdrUsageReportsRawService implements MdrUsageReportsRawContract

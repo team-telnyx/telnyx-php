@@ -18,6 +18,8 @@ use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationNewResponse
 use Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateResponse;
 
 /**
+ * SIM Cards operations.
+ *
  * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationCreateParams\Threshold
  * @phpstan-import-type ThresholdShape from \Telnyx\SimCardDataUsageNotifications\SimCardDataUsageNotificationUpdateParams\Threshold as ThresholdShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

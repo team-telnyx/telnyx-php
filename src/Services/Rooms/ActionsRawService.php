@@ -15,6 +15,8 @@ use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
 use Telnyx\ServiceContracts\Rooms\ActionsRawContract;
 
 /**
+ * Rooms Client Tokens operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsRawService implements ActionsRawContract

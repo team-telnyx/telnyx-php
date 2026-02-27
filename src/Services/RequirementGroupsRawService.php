@@ -20,6 +20,8 @@ use Telnyx\RequirementGroups\RequirementGroupUpdateParams;
 use Telnyx\ServiceContracts\RequirementGroupsRawContract;
 
 /**
+ * Requirement Groups.
+ *
  * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RequirementGroups\RequirementGroupCreateParams\RegulatoryRequirement
  * @phpstan-import-type RegulatoryRequirementShape from \Telnyx\RequirementGroups\RequirementGroupUpdateParams\RegulatoryRequirement as RegulatoryRequirementShape1
  * @phpstan-import-type FilterShape from \Telnyx\RequirementGroups\RequirementGroupListParams\Filter

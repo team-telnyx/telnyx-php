@@ -34,6 +34,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CredentialConnectionsRawContract;
 
 /**
+ * Credential connection operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\CredentialConnections\CredentialConnectionListParams\Filter
  * @phpstan-import-type CredentialInboundShape from \Telnyx\CredentialConnections\CredentialInbound
  * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer

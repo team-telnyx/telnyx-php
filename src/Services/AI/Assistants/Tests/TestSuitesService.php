@@ -12,6 +12,8 @@ use Telnyx\ServiceContracts\AI\Assistants\Tests\TestSuitesContract;
 use Telnyx\Services\AI\Assistants\Tests\TestSuites\RunsService;
 
 /**
+ * Configure AI assistant specifications.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TestSuitesService implements TestSuitesContract

@@ -15,6 +15,8 @@ use Telnyx\ServiceContracts\Messaging\RcsContract;
 use Telnyx\Services\Messaging\Rcs\AgentsService;
 
 /**
+ * Send RCS messages.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RcsService implements RcsContract

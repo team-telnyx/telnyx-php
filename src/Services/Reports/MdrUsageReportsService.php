@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reports\MdrUsageReportsContract;
 
 /**
+ * Messaging usage reports.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MdrUsageReportsService implements MdrUsageReportsContract

@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BulkSimCardActionsRawContract;
 
 /**
+ * View SIM card actions, their progress and timestamps using the SIM Card Actions API.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContract

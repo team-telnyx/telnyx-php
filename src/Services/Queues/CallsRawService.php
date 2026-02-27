@@ -19,6 +19,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Queues\CallsRawContract;
 
 /**
+ * Queue commands operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CallsRawService implements CallsRawContract

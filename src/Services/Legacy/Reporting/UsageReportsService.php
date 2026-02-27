@@ -15,6 +15,8 @@ use Telnyx\Services\Legacy\Reporting\UsageReports\NumberLookupService;
 use Telnyx\Services\Legacy\Reporting\UsageReports\VoiceService;
 
 /**
+ * Speech to text usage reports.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class UsageReportsService implements UsageReportsContract

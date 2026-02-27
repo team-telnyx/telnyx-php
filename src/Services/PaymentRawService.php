@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PaymentRawContract;
 
 /**
+ * Operations for managing stored payment transactions.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PaymentRawService implements PaymentRawContract

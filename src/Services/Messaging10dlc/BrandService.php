@@ -26,6 +26,8 @@ use Telnyx\ServiceContracts\Messaging10dlc\BrandContract;
 use Telnyx\Services\Messaging10dlc\Brand\ExternalVettingService;
 
 /**
+ * Brand operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BrandService implements BrandContract

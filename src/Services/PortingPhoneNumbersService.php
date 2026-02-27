@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingPhoneNumbersContract;
 
 /**
+ * Endpoints related to porting orders management.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

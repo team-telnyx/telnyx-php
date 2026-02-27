@@ -12,6 +12,8 @@ use Telnyx\ServiceContracts\Texml\Accounts\Recordings\JsonContract;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class JsonService implements JsonContract

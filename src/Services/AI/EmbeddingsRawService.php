@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\EmbeddingsRawContract;
 
 /**
+ * Embed documents and perform text searches.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EmbeddingsRawService implements EmbeddingsRawContract

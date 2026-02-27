@@ -17,6 +17,8 @@ use Telnyx\TextToSpeech\TextToSpeechStreamParams;
 use Telnyx\TextToSpeech\TextToSpeechStreamParams\AudioFormat;
 
 /**
+ * Text to speech streaming command operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TextToSpeechRawService implements TextToSpeechRawContract

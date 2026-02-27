@@ -18,6 +18,8 @@ use Telnyx\UsageReports\UsageReportListParams;
 use Telnyx\UsageReports\UsageReportListParams\Format;
 
 /**
+ * Usage data reporting across Telnyx products.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class UsageReportsRawService implements UsageReportsRawContract

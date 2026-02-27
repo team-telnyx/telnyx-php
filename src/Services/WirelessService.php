@@ -13,6 +13,8 @@ use Telnyx\Services\Wireless\DetailRecordsReportsService;
 use Telnyx\Wireless\WirelessGetRegionsResponse;
 
 /**
+ * Regions for wireless services.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class WirelessService implements WirelessContract

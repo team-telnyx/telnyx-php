@@ -13,6 +13,8 @@ use Telnyx\ServiceContracts\PaymentContract;
 use Telnyx\Services\Payment\AutoRechargePrefsService;
 
 /**
+ * Operations for managing stored payment transactions.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PaymentService implements PaymentContract

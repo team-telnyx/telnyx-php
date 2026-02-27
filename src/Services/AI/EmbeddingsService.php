@@ -18,6 +18,8 @@ use Telnyx\ServiceContracts\AI\EmbeddingsContract;
 use Telnyx\Services\AI\Embeddings\BucketsService;
 
 /**
+ * Embed documents and perform text searches.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EmbeddingsService implements EmbeddingsContract

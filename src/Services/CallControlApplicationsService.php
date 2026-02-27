@@ -24,6 +24,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CallControlApplicationsContract;
 
 /**
+ * Call Control applications operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\CallControlApplications\CallControlApplicationListParams\Filter
  * @phpstan-import-type CallControlApplicationInboundShape from \Telnyx\CallControlApplications\CallControlApplicationInbound
  * @phpstan-import-type CallControlApplicationOutboundShape from \Telnyx\CallControlApplications\CallControlApplicationOutbound

@@ -17,6 +17,8 @@ use Telnyx\ServiceContracts\RecordingsContract;
 use Telnyx\Services\Recordings\ActionsService;
 
 /**
+ * Call Recordings operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Recordings\RecordingListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

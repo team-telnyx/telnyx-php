@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Embeddings\BucketsRawContract;
 
 /**
+ * Embed documents and perform text searches.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BucketsRawService implements BucketsRawContract

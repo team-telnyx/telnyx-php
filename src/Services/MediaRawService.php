@@ -19,6 +19,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MediaRawContract;
 
 /**
+ * Media Storage operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Media\MediaListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

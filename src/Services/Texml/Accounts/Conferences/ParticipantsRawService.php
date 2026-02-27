@@ -35,6 +35,8 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldM
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

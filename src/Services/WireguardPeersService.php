@@ -18,6 +18,8 @@ use Telnyx\WireguardPeers\WireguardPeerNewResponse;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 
 /**
+ * WireGuard Interface operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\WireguardPeers\WireguardPeerListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

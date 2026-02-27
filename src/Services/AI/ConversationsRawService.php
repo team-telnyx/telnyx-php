@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsRawContract;
 
 /**
+ * Manage historical AI assistant conversations.
+ *
  * @phpstan-import-type MetadataShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\Metadata
  * @phpstan-import-type ToolChoiceShape from \Telnyx\AI\Conversations\ConversationAddMessageParams\ToolChoice
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

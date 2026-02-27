@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\IPsContract;
 
 /**
+ * IP operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\IPs\IPListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

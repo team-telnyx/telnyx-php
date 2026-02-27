@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\BillingGroupsContract;
 
 /**
+ * Billing groups operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BillingGroupsService implements BillingGroupsContract

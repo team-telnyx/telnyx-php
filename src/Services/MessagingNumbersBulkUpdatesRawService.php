@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingNumbersBulkUpdatesRawContract;
 
 /**
+ * Configure your phone numbers.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagingNumbersBulkUpdatesRawService implements MessagingNumbersBulkUpdatesRawContract

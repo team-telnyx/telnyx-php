@@ -20,6 +20,8 @@ use Telnyx\UserAddresses\UserAddressListParams\Sort;
 use Telnyx\UserAddresses\UserAddressNewResponse;
 
 /**
+ * Operations for working with UserAddress records. UserAddress records are stored addresses that users can use for non-emergency-calling purposes, such as for shipping addresses for orders of wireless SIMs (or other physical items). They cannot be used for emergency calling and are distinct from Address records, which are used on phone numbers.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\UserAddresses\UserAddressListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

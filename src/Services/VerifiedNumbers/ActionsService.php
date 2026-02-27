@@ -12,6 +12,8 @@ use Telnyx\ServiceContracts\VerifiedNumbers\ActionsContract;
 use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 
 /**
+ * Verified Numbers operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsService implements ActionsContract

@@ -21,6 +21,8 @@ use Telnyx\ServiceContracts\ManagedAccountsContract;
 use Telnyx\Services\ManagedAccounts\ActionsService;
 
 /**
+ * Managed Accounts operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\ManagedAccounts\ManagedAccountListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

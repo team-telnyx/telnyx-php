@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysRawContract;
 
 /**
+ * Configure AI assistant specifications.
+ *
  * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

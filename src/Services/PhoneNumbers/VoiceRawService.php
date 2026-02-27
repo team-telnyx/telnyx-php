@@ -26,6 +26,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PhoneNumbers\VoiceRawContract;
 
 /**
+ * Configure your phone numbers.
+ *
  * @phpstan-import-type CallForwardingShape from \Telnyx\PhoneNumbers\Voice\CallForwarding
  * @phpstan-import-type CallRecordingShape from \Telnyx\PhoneNumbers\Voice\CallRecording
  * @phpstan-import-type CnamListingShape from \Telnyx\PhoneNumbers\Voice\CnamListing

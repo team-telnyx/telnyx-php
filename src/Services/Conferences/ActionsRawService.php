@@ -53,6 +53,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Conferences\ActionsRawContract;
 
 /**
+ * Conference command operations.
+ *
  * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

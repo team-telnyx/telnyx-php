@@ -18,6 +18,8 @@ use Telnyx\Storage\MigrationSources\MigrationSourceListResponse;
 use Telnyx\Storage\MigrationSources\MigrationSourceNewResponse;
 
 /**
+ * Migrate data from an external provider into Telnyx Cloud Storage.
+ *
  * @phpstan-import-type ProviderAuthShape from \Telnyx\Storage\MigrationSources\MigrationSourceCreateParams\ProviderAuth
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

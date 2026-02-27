@@ -15,6 +15,8 @@ use Telnyx\Storage\Migrations\MigrationListResponse;
 use Telnyx\Storage\Migrations\MigrationNewResponse;
 
 /**
+ * Migrate data from an external provider into Telnyx Cloud Storage.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MigrationsRawService implements MigrationsRawContract

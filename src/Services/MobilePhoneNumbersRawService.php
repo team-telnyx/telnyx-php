@@ -24,6 +24,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePhoneNumbersRawContract;
 
 /**
+ * Mobile phone number operations.
+ *
  * @phpstan-import-type CallForwardingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallForwarding
  * @phpstan-import-type CallRecordingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CallRecording
  * @phpstan-import-type CnamListingShape from \Telnyx\MobilePhoneNumbers\MobilePhoneNumberUpdateParams\CnamListing

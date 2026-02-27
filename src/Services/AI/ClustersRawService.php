@@ -20,6 +20,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersRawContract;
 
 /**
+ * Identify common themes and patterns in your embedded documents.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ClustersRawService implements ClustersRawContract

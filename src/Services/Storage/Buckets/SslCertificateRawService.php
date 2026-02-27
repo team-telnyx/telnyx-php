@@ -15,6 +15,8 @@ use Telnyx\Storage\Buckets\SslCertificate\SslCertificateGetResponse;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateNewResponse;
 
 /**
+ * SSL certificate operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SslCertificateRawService implements SslCertificateRawContract

@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationProfilesRawContract;
 
 /**
+ * Notification settings operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NotificationProfilesRawService implements NotificationProfilesRawContract

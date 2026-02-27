@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingURLDomainsContract;
 
 /**
+ * Messaging URL Domains.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagingURLDomainsService implements MessagingURLDomainsContract

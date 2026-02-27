@@ -21,6 +21,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DynamicEmergencyAddressesRawContract;
 
 /**
+ * Dynamic emergency address operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\DynamicEmergencyAddresses\DynamicEmergencyAddressListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

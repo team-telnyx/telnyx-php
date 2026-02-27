@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\SupportingDocumentsContract;
 
 /**
+ * Number portout operations.
+ *
  * @phpstan-import-type DocumentShape from \Telnyx\Portouts\SupportingDocuments\SupportingDocumentCreateParams\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

@@ -20,6 +20,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Portouts\EventsRawContract;
 
 /**
+ * Number portout operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Portouts\Events\EventListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

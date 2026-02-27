@@ -14,6 +14,8 @@ use Telnyx\Services\Storage\Buckets\UsageService;
 use Telnyx\Storage\Buckets\BucketNewPresignedURLResponse;
 
 /**
+ * Presigned object URL operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BucketsService implements BucketsContract

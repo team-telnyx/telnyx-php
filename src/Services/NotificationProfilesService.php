@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NotificationProfilesContract;
 
 /**
+ * Notification settings operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NotificationProfilesService implements NotificationProfilesContract

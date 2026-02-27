@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\PhoneNumberAssignmentByProfileRawContract;
 
 /**
+ * Phone number campaign bulk assignment.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssignmentByProfileRawContract

@@ -22,6 +22,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FaxApplicationsContract;
 
 /**
+ * Fax Applications operations.
+ *
  * @phpstan-import-type InboundShape from \Telnyx\FaxApplications\FaxApplicationCreateParams\Inbound
  * @phpstan-import-type OutboundShape from \Telnyx\FaxApplications\FaxApplicationCreateParams\Outbound
  * @phpstan-import-type InboundShape from \Telnyx\FaxApplications\FaxApplicationUpdateParams\Inbound as InboundShape1

@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DocumentLinksContract;
 
 /**
+ * Documents.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\DocumentLinks\DocumentLinkListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

@@ -19,6 +19,8 @@ use Telnyx\ShortCodes\ShortCodeUpdateParams;
 use Telnyx\ShortCodes\ShortCodeUpdateResponse;
 
 /**
+ * Short codes.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\ShortCodes\ShortCodeListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

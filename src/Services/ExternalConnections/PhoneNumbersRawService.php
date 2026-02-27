@@ -20,6 +20,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\PhoneNumbersRawContract;
 
 /**
+ * External Connections operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\ExternalConnections\PhoneNumbers\PhoneNumberListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

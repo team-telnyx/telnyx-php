@@ -30,6 +30,8 @@ use Telnyx\SimCardStatus;
 use Telnyx\SimpleSimCard;
 
 /**
+ * SIM Cards operations.
+ *
  * @phpstan-import-type DataLimitShape from \Telnyx\SimCards\SimCardUpdateParams\DataLimit
  * @phpstan-import-type SimCardStatusShape from \Telnyx\SimCardStatus
  * @phpstan-import-type FilterShape from \Telnyx\SimCards\SimCardListParams\Filter

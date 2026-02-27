@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\OtaUpdatesRawContract;
 
 /**
+ * OTA updates operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\OtaUpdates\OtaUpdateListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

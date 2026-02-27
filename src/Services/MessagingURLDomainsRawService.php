@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingURLDomainsRawContract;
 
 /**
+ * Messaging URL Domains.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagingURLDomainsRawService implements MessagingURLDomainsRawContract

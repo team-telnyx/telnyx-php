@@ -13,6 +13,8 @@ use Telnyx\Rooms\Actions\ActionRefreshClientTokenResponse;
 use Telnyx\ServiceContracts\Rooms\ActionsContract;
 
 /**
+ * Rooms Client Tokens operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ActionsService implements ActionsContract

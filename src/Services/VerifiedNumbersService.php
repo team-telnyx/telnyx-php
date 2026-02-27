@@ -17,6 +17,8 @@ use Telnyx\VerifiedNumbers\VerifiedNumberDataWrapper;
 use Telnyx\VerifiedNumbers\VerifiedNumberNewResponse;
 
 /**
+ * Verified Numbers operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VerifiedNumbersService implements VerifiedNumbersContract

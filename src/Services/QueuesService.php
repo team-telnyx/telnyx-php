@@ -17,6 +17,8 @@ use Telnyx\ServiceContracts\QueuesContract;
 use Telnyx\Services\Queues\CallsService;
 
 /**
+ * Queue commands operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class QueuesService implements QueuesContract

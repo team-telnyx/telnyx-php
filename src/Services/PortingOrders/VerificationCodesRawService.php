@@ -22,6 +22,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\VerificationCodesRawContract;
 
 /**
+ * Endpoints related to porting orders management.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter
  * @phpstan-import-type SortShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort
  * @phpstan-import-type VerificationCodeShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode

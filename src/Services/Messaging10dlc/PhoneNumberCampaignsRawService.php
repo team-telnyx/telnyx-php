@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\PhoneNumberCampaignsRawContract;
 
 /**
+ * Phone number campaign assignment.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaignListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

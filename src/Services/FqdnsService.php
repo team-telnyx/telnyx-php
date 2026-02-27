@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FqdnsContract;
 
 /**
+ * FQDN operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Fqdns\FqdnListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

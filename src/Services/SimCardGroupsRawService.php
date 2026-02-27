@@ -23,6 +23,8 @@ use Telnyx\SimCardGroups\SimCardGroupUpdateParams;
 use Telnyx\SimCardGroups\SimCardGroupUpdateResponse;
 
 /**
+ * SIM Card Groups operations.
+ *
  * @phpstan-import-type DataLimitShape from \Telnyx\SimCardGroups\SimCardGroupCreateParams\DataLimit
  * @phpstan-import-type DataLimitShape from \Telnyx\SimCardGroups\SimCardGroupUpdateParams\DataLimit as DataLimitShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions

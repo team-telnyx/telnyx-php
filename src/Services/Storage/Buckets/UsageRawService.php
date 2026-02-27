@@ -15,6 +15,8 @@ use Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageResponse;
 use Telnyx\Storage\Buckets\Usage\UsageGetBucketUsageResponse;
 
 /**
+ * Bucket Usage operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\Storage\Buckets\Usage\UsageGetAPIUsageParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

@@ -14,6 +14,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\RegisterRawContract;
 
 /**
+ * SIM Cards operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RegisterRawService implements RegisterRawContract

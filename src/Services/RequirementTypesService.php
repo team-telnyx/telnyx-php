@@ -15,6 +15,8 @@ use Telnyx\RequirementTypes\RequirementTypeListResponse;
 use Telnyx\ServiceContracts\RequirementTypesContract;
 
 /**
+ * Types of requirements for international numbers and porting orders.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\RequirementTypes\RequirementTypeListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

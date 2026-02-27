@@ -27,6 +27,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnectionsRawContract;
 
 /**
+ * External Connections operations.
+ *
  * @phpstan-import-type OutboundShape from \Telnyx\ExternalConnections\ExternalConnectionCreateParams\Outbound
  * @phpstan-import-type InboundShape from \Telnyx\ExternalConnections\ExternalConnectionCreateParams\Inbound
  * @phpstan-import-type OutboundShape from \Telnyx\ExternalConnections\ExternalConnectionUpdateParams\Outbound as OutboundShape1

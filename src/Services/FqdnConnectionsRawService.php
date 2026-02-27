@@ -34,6 +34,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\FqdnConnectionsRawContract;
 
 /**
+ * FQDN connection operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\FqdnConnections\FqdnConnectionListParams\Filter
  * @phpstan-import-type InboundFqdnShape from \Telnyx\FqdnConnections\InboundFqdn
  * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer

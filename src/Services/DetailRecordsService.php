@@ -20,6 +20,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DetailRecordsContract;
 
 /**
+ * Detail Records operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\DetailRecords\DetailRecordListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\NumberLookupContract;
 
 /**
+ * Look up phone number data.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NumberLookupService implements NumberLookupContract

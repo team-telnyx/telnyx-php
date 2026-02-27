@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ClustersContract;
 
 /**
+ * Identify common themes and patterns in your embedded documents.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ClustersService implements ClustersContract

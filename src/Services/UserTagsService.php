@@ -13,6 +13,8 @@ use Telnyx\UserTags\UserTagListParams\Filter;
 use Telnyx\UserTags\UserTagListResponse;
 
 /**
+ * User-defined tags for Telnyx resources.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\UserTags\UserTagListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

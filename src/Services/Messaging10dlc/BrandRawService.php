@@ -32,6 +32,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\BrandRawContract;
 
 /**
+ * Brand operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class BrandRawService implements BrandRawContract

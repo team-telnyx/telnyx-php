@@ -24,6 +24,8 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 
 /**
+ * TeXML REST Commands.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ConferencesRawService implements ConferencesRawContract

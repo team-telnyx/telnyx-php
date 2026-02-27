@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingTranscriptionsContract;
 
 /**
+ * Call Recordings operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RecordingTranscriptionsService implements RecordingTranscriptionsContract

@@ -17,6 +17,8 @@ use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 
 /**
+ * Webhooks operations.
+ *
  * @phpstan-import-type FilterShape from \Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */

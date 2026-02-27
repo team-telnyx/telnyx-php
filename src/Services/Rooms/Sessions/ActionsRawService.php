@@ -18,6 +18,8 @@ use Telnyx\Rooms\Sessions\Actions\ActionUnmuteResponse;
 use Telnyx\ServiceContracts\Rooms\Sessions\ActionsRawContract;
 
 /**
+ * Rooms Sessions operations.
+ *
  * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionKickParams\Participants
  * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionMuteParams\Participants as ParticipantsShape1
  * @phpstan-import-type ParticipantsShape from \Telnyx\Rooms\Sessions\Actions\ActionUnmuteParams\Participants as ParticipantsShape2

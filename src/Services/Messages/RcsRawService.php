@@ -20,6 +20,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messages\RcsRawContract;
 
 /**
+ * Send RCS messages.
+ *
  * @phpstan-import-type RcsAgentMessageShape from \Telnyx\Messages\RcsAgentMessage
  * @phpstan-import-type MmsFallbackShape from \Telnyx\Messages\Rcs\RcSendParams\MmsFallback
  * @phpstan-import-type SMSFallbackShape from \Telnyx\Messages\Rcs\RcSendParams\SMSFallback

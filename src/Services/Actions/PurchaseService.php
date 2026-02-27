@@ -13,6 +13,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Actions\PurchaseContract;
 
 /**
+ * SIM Cards operations.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PurchaseService implements PurchaseContract

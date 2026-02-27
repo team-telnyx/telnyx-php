@@ -22,6 +22,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsRawContract;
 
 /**
+ * Configure AI assistant specifications.
+ *
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
