@@ -9,15 +9,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * A voice available for text-to-speech synthesis.
+ *
  * @phpstan-type VoiceShape = array{
- *   id?: string|null,
- *   accent?: string|null,
- *   age?: string|null,
  *   gender?: string|null,
- *   label?: string|null,
  *   language?: string|null,
  *   name?: string|null,
  *   provider?: string|null,
+ *   voiceID?: string|null,
  * }
  */
 final class Voice implements BaseModel
@@ -25,29 +24,35 @@ final class Voice implements BaseModel
     /** @use SdkModel<VoiceShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?string $id;
-
-    #[Optional]
-    public ?string $accent;
-
-    #[Optional]
-    public ?string $age;
-
+    /**
+     * Voice gender.
+     */
     #[Optional]
     public ?string $gender;
 
-    #[Optional]
-    public ?string $label;
-
+    /**
+     * Language code.
+     */
     #[Optional]
     public ?string $language;
 
+    /**
+     * Voice name.
+     */
     #[Optional]
     public ?string $name;
 
+    /**
+     * The TTS provider.
+     */
     #[Optional]
     public ?string $provider;
+
+    /**
+     * Voice identifier.
+     */
+    #[Optional('voice_id')]
+    public ?string $voiceID;
 
     public function __construct()
     {
@@ -60,53 +65,26 @@ final class Voice implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $id = null,
-        ?string $accent = null,
-        ?string $age = null,
         ?string $gender = null,
-        ?string $label = null,
         ?string $language = null,
         ?string $name = null,
         ?string $provider = null,
+        ?string $voiceID = null,
     ): self {
         $self = new self;
 
-        null !== $id && $self['id'] = $id;
-        null !== $accent && $self['accent'] = $accent;
-        null !== $age && $self['age'] = $age;
         null !== $gender && $self['gender'] = $gender;
-        null !== $label && $self['label'] = $label;
         null !== $language && $self['language'] = $language;
         null !== $name && $self['name'] = $name;
         null !== $provider && $self['provider'] = $provider;
+        null !== $voiceID && $self['voiceID'] = $voiceID;
 
         return $self;
     }
 
-    public function withID(string $id): self
-    {
-        $self = clone $this;
-        $self['id'] = $id;
-
-        return $self;
-    }
-
-    public function withAccent(string $accent): self
-    {
-        $self = clone $this;
-        $self['accent'] = $accent;
-
-        return $self;
-    }
-
-    public function withAge(string $age): self
-    {
-        $self = clone $this;
-        $self['age'] = $age;
-
-        return $self;
-    }
-
+    /**
+     * Voice gender.
+     */
     public function withGender(string $gender): self
     {
         $self = clone $this;
@@ -115,14 +93,9 @@ final class Voice implements BaseModel
         return $self;
     }
 
-    public function withLabel(string $label): self
-    {
-        $self = clone $this;
-        $self['label'] = $label;
-
-        return $self;
-    }
-
+    /**
+     * Language code.
+     */
     public function withLanguage(string $language): self
     {
         $self = clone $this;
@@ -131,6 +104,9 @@ final class Voice implements BaseModel
         return $self;
     }
 
+    /**
+     * Voice name.
+     */
     public function withName(string $name): self
     {
         $self = clone $this;
@@ -139,10 +115,24 @@ final class Voice implements BaseModel
         return $self;
     }
 
+    /**
+     * The TTS provider.
+     */
     public function withProvider(string $provider): self
     {
         $self = clone $this;
         $self['provider'] = $provider;
+
+        return $self;
+    }
+
+    /**
+     * Voice identifier.
+     */
+    public function withVoiceID(string $voiceID): self
+    {
+        $self = clone $this;
+        $self['voiceID'] = $voiceID;
 
         return $self;
     }

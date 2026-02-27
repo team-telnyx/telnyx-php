@@ -10,6 +10,8 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice;
 
 /**
+ * List of available voices.
+ *
  * @phpstan-import-type VoiceShape from \Telnyx\TextToSpeech\TextToSpeechListVoicesResponse\Voice
  *
  * @phpstan-type TextToSpeechListVoicesResponseShape = array{
