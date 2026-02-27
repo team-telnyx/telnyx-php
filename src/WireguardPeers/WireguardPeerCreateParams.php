@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\WireguardPeers;
 
-use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -16,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\WireguardPeersService::create()
  *
  * @phpstan-type WireguardPeerCreateParamsShape = array{
- *   wireguardInterfaceID: string, publicKey?: string|null
+ *   wireguardInterfaceID: string
  * }
  */
 final class WireguardPeerCreateParams implements BaseModel
@@ -30,12 +29,6 @@ final class WireguardPeerCreateParams implements BaseModel
      */
     #[Required('wireguard_interface_id')]
     public string $wireguardInterfaceID;
-
-    /**
-     * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
-     */
-    #[Optional('public_key')]
-    public ?string $publicKey;
 
     /**
      * `new WireguardPeerCreateParams()` is missing required properties by the API.
@@ -61,15 +54,11 @@ final class WireguardPeerCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(
-        string $wireguardInterfaceID,
-        ?string $publicKey = null
-    ): self {
+    public static function with(string $wireguardInterfaceID): self
+    {
         $self = new self;
 
         $self['wireguardInterfaceID'] = $wireguardInterfaceID;
-
-        null !== $publicKey && $self['publicKey'] = $publicKey;
 
         return $self;
     }
@@ -81,17 +70,6 @@ final class WireguardPeerCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['wireguardInterfaceID'] = $wireguardInterfaceID;
-
-        return $self;
-    }
-
-    /**
-     * The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
-     */
-    public function withPublicKey(string $publicKey): self
-    {
-        $self = clone $this;
-        $self['publicKey'] = $publicKey;
 
         return $self;
     }

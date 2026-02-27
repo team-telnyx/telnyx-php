@@ -24,14 +24,12 @@ interface WireguardPeersContract
      * @api
      *
      * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
-     * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $wireguardInterfaceID,
-        ?string $publicKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): WireguardPeerNewResponse;
 
