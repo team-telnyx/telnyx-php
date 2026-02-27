@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\VirtualCrossConnects;
 
 use Telnyx\Core\Attributes\Optional;
-use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -17,7 +16,6 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
  * @see Telnyx\Services\VirtualCrossConnectsService::create()
  *
  * @phpstan-type VirtualCrossConnectCreateParamsShape = array{
- *   regionCode: string,
  *   bandwidthMbps?: float|null,
  *   bgpAsn?: float|null,
  *   cloudProvider?: null|CloudProvider|value-of<CloudProvider>,
@@ -39,12 +37,6 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     /** @use SdkModel<VirtualCrossConnectCreateParamsShape> */
     use SdkModel;
     use SdkParams;
-
-    /**
-     * The region the interface should be deployed to.
-     */
-    #[Required('region_code')]
-    public string $regionCode;
 
     /**
      * The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
@@ -132,20 +124,6 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     #[Optional('secondary_telnyx_ip')]
     public ?string $secondaryTelnyxIP;
 
-    /**
-     * `new VirtualCrossConnectCreateParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * VirtualCrossConnectCreateParams::with(regionCode: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new VirtualCrossConnectCreateParams)->withRegionCode(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -159,7 +137,6 @@ final class VirtualCrossConnectCreateParams implements BaseModel
      * @param CloudProvider|value-of<CloudProvider>|null $cloudProvider
      */
     public static function with(
-        string $regionCode,
         ?float $bandwidthMbps = null,
         ?float $bgpAsn = null,
         CloudProvider|string|null $cloudProvider = null,
@@ -177,8 +154,6 @@ final class VirtualCrossConnectCreateParams implements BaseModel
     ): self {
         $self = new self;
 
-        $self['regionCode'] = $regionCode;
-
         null !== $bandwidthMbps && $self['bandwidthMbps'] = $bandwidthMbps;
         null !== $bgpAsn && $self['bgpAsn'] = $bgpAsn;
         null !== $cloudProvider && $self['cloudProvider'] = $cloudProvider;
@@ -193,17 +168,6 @@ final class VirtualCrossConnectCreateParams implements BaseModel
         null !== $secondaryCloudAccountID && $self['secondaryCloudAccountID'] = $secondaryCloudAccountID;
         null !== $secondaryCloudIP && $self['secondaryCloudIP'] = $secondaryCloudIP;
         null !== $secondaryTelnyxIP && $self['secondaryTelnyxIP'] = $secondaryTelnyxIP;
-
-        return $self;
-    }
-
-    /**
-     * The region the interface should be deployed to.
-     */
-    public function withRegionCode(string $regionCode): self
-    {
-        $self = clone $this;
-        $self['regionCode'] = $regionCode;
 
         return $self;
     }
