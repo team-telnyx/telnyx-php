@@ -38,9 +38,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      *
      * Create a new WireGuard Peer. Current limitation of 5 peers per interface can be created.
      *
-     * @param array{
-     *   wireguardInterfaceID: string, publicKey?: string
-     * }|WireguardPeerCreateParams $params
+     * @param array{wireguardInterfaceID: string}|WireguardPeerCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerNewResponse>

@@ -42,21 +42,16 @@ final class WireguardPeersService implements WireguardPeersContract
      * Create a new WireGuard Peer. Current limitation of 5 peers per interface can be created.
      *
      * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
-     * @param string $publicKey The WireGuard `PublicKey`.<br /><br />If you do not provide a Public Key, a new Public and Private key pair will be generated for you.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $wireguardInterfaceID,
-        ?string $publicKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): WireguardPeerNewResponse {
         $params = Util::removeNulls(
-            [
-                'wireguardInterfaceID' => $wireguardInterfaceID,
-                'publicKey' => $publicKey,
-            ],
+            ['wireguardInterfaceID' => $wireguardInterfaceID]
         );
 
         // @phpstan-ignore-next-line argument.type
