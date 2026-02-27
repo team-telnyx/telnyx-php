@@ -24,6 +24,7 @@ interface VirtualCrossConnectsContract
     /**
      * @api
      *
+     * @param string $regionCode the region the interface should be deployed to
      * @param float $bandwidthMbps The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
      * @param float $bgpAsn The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
      * @param CloudProvider|value-of<CloudProvider> $cloudProvider the Virtual Private Cloud with which you would like to establish a cross connect
@@ -43,6 +44,7 @@ interface VirtualCrossConnectsContract
      * @throws APIException
      */
     public function create(
+        string $regionCode,
         ?float $bandwidthMbps = null,
         ?float $bgpAsn = null,
         CloudProvider|string|null $cloudProvider = null,
