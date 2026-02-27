@@ -42,7 +42,6 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      *
      * Create a new Virtual Cross Connect.<br /><br />For AWS and GCE, you have the option of creating the primary connection first and the secondary connection later. You also have the option of disabling the primary and/or secondary connections at any time and later re-enabling them. With Azure, you do not have this option. Azure requires both the primary and secondary connections to be created at the same time and they can not be independantly disabled.
      *
-     * @param string $regionCode the region the interface should be deployed to
      * @param float $bandwidthMbps The desired throughput in Megabits per Second (Mbps) for your Virtual Cross Connect.<br /><br />The available bandwidths can be found using the /virtual_cross_connect_regions endpoint.
      * @param float $bgpAsn The Border Gateway Protocol (BGP) Autonomous System Number (ASN). If null, value will be assigned by Telnyx.
      * @param CloudProvider|value-of<CloudProvider> $cloudProvider the Virtual Private Cloud with which you would like to establish a cross connect
@@ -62,7 +61,6 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * @throws APIException
      */
     public function create(
-        string $regionCode,
         ?float $bandwidthMbps = null,
         ?float $bgpAsn = null,
         CloudProvider|string|null $cloudProvider = null,
@@ -81,7 +79,6 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
     ): VirtualCrossConnectNewResponse {
         $params = Util::removeNulls(
             [
-                'regionCode' => $regionCode,
                 'bandwidthMbps' => $bandwidthMbps,
                 'bgpAsn' => $bgpAsn,
                 'cloudProvider' => $cloudProvider,
