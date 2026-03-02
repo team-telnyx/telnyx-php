@@ -24,6 +24,8 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 use Telnyx\TextToSpeech\TextToSpeechStreamParams\AudioFormat;
 
 /**
+ * Text to speech streaming command operations.
+ *
  * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Aws
  * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Azure
  * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Elevenlabs
