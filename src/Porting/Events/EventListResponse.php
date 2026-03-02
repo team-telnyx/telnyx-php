@@ -23,18 +23,23 @@ final class EventListResponse implements ConverterSource
 {
     use SdkUnion;
 
+    public static function discriminator(): string
+    {
+        return 'eventType';
+    }
+
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
         return [
-            PortingEventDeletedPayload::class,
-            PortingEventMessagingChangedPayload::class,
-            PortingEventStatusChangedEvent::class,
-            PortingEventNewCommentEvent::class,
-            PortingEventSplitEvent::class,
             PortingEventWithoutWebhook::class,
+            'porting_order.deleted' => PortingEventDeletedPayload::class,
+            'porting_order.messaging_changed' => PortingEventMessagingChangedPayload::class,
+            'porting_order.status_changed' => PortingEventStatusChangedEvent::class,
+            'porting_order.new_comment' => PortingEventNewCommentEvent::class,
+            'porting_order.split' => PortingEventSplitEvent::class,
         ];
     }
 }
