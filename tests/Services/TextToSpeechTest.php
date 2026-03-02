@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 use Tests\UnsupportedMockTests;
 
@@ -26,6 +27,19 @@ final class TextToSpeechTest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
+    }
+
+    #[Test]
+    public function testGenerate(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->textToSpeech->generate();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TextToSpeechGenerateResponse::class, $result);
     }
 
     #[Test]

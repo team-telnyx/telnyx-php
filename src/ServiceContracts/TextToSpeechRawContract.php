@@ -7,6 +7,8 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\TextToSpeech\TextToSpeechGenerateParams;
+use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 use Telnyx\TextToSpeech\TextToSpeechStreamParams;
@@ -16,6 +18,21 @@ use Telnyx\TextToSpeech\TextToSpeechStreamParams;
  */
 interface TextToSpeechRawContract
 {
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|TextToSpeechGenerateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<TextToSpeechGenerateResponse>
+     *
+     * @throws APIException
+     */
+    public function generate(
+        array|TextToSpeechGenerateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
     /**
      * @api
      *
