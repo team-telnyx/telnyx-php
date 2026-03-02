@@ -7,6 +7,7 @@ namespace Telnyx\AI\Assistants;
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool;
 use Telnyx\AI\Assistants\AssistantTool\SendMessageTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\AssistantTool\SkipTurnTool;
@@ -22,13 +23,14 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type HandoffToolShape from \Telnyx\AI\Assistants\AssistantTool\HandoffTool
  * @phpstan-import-type HangupToolShape from \Telnyx\AI\Assistants\HangupTool
  * @phpstan-import-type InferenceEmbeddingTransferToolShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool
+ * @phpstan-import-type InviteToolShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool
  * @phpstan-import-type SipReferToolShape from \Telnyx\AI\Assistants\AssistantTool\SipReferTool
  * @phpstan-import-type DtmfToolShape from \Telnyx\AI\Assistants\AssistantTool\DtmfTool
  * @phpstan-import-type SendMessageToolShape from \Telnyx\AI\Assistants\AssistantTool\SendMessageTool
  * @phpstan-import-type SkipTurnToolShape from \Telnyx\AI\Assistants\AssistantTool\SkipTurnTool
  *
- * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool
- * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape
+ * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape
  */
 final class AssistantTool implements ConverterSource
 {
@@ -50,6 +52,7 @@ final class AssistantTool implements ConverterSource
             'handoff' => HandoffTool::class,
             'hangup' => HangupTool::class,
             'transfer' => InferenceEmbeddingTransferTool::class,
+            'invite' => InviteTool::class,
             'refer' => SipReferTool::class,
             'send_dtmf' => DtmfTool::class,
             'send_message' => SendMessageTool::class,
