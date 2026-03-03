@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SessionAnalysis\SessionAnalysisGetResponse;
+namespace Telnyx\SessionAnalysis;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Cost;
-use Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Links;
-use Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Relationship;
+use Telnyx\SessionAnalysis\EventNode\Cost;
+use Telnyx\SessionAnalysis\EventNode\Links;
+use Telnyx\SessionAnalysis\EventNode\Relationship;
 
 /**
- * @phpstan-import-type CostShape from \Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Cost
- * @phpstan-import-type LinksShape from \Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Links
- * @phpstan-import-type RelationshipShape from \Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Relationship
+ * @phpstan-import-type CostShape from \Telnyx\SessionAnalysis\EventNode\Cost
+ * @phpstan-import-type LinksShape from \Telnyx\SessionAnalysis\EventNode\Links
+ * @phpstan-import-type RelationshipShape from \Telnyx\SessionAnalysis\EventNode\Relationship
  *
- * @phpstan-type RootShape = array{
+ * @phpstan-type EventNodeShape = array{
  *   id: string,
  *   children: list<mixed>,
- *   cost: \Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Cost|CostShape,
+ *   cost: Cost|CostShape,
  *   eventName: string,
  *   links: Links|LinksShape,
  *   product: string,
@@ -28,9 +28,9 @@ use Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Relationship;
  *   relationship?: null|Relationship|RelationshipShape,
  * }
  */
-final class Root implements BaseModel
+final class EventNode implements BaseModel
 {
-    /** @use SdkModel<RootShape> */
+    /** @use SdkModel<EventNodeShape> */
     use SdkModel;
 
     /**
@@ -44,7 +44,7 @@ final class Root implements BaseModel
      *
      * @var list<mixed> $children
      */
-    #[Required(list: 'mixed')]
+    #[Required(list: EventNode::class)]
     public array $children;
 
     #[Required]
@@ -80,11 +80,11 @@ final class Root implements BaseModel
     public ?Relationship $relationship;
 
     /**
-     * `new Root()` is missing required properties by the API.
+     * `new EventNode()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Root::with(
+     * EventNode::with(
      *   id: ...,
      *   children: ...,
      *   cost: ...,
@@ -98,7 +98,7 @@ final class Root implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Root)
+     * (new EventNode)
      *   ->withID(...)
      *   ->withChildren(...)
      *   ->withCost(...)
@@ -176,9 +176,8 @@ final class Root implements BaseModel
     /**
      * @param Cost|CostShape $cost
      */
-    public function withCost(
-        Cost|array $cost
-    ): self {
+    public function withCost(Cost|array $cost): self
+    {
         $self = clone $this;
         $self['cost'] = $cost;
 

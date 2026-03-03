@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType;
+namespace Telnyx\SessionAnalysis\Metadata;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ParentRelationship\Via;
 
 /**
- * @phpstan-import-type ViaShape from \Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ParentRelationship\Via
+ * @phpstan-import-type MetadataFieldMappingShape from \Telnyx\SessionAnalysis\Metadata\MetadataFieldMapping
  *
- * @phpstan-type ParentRelationshipShape = array{
+ * @phpstan-type ParentRelationshipInfoShape = array{
  *   costRollup: bool,
  *   description: string,
  *   parentEvent: string,
@@ -20,12 +19,12 @@ use Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ParentRelatio
  *   parentRecordType: string,
  *   relationshipType: string,
  *   traversalEnabled: bool,
- *   via: Via|ViaShape,
+ *   via: MetadataFieldMapping|MetadataFieldMappingShape,
  * }
  */
-final class ParentRelationship implements BaseModel
+final class ParentRelationshipInfo implements BaseModel
 {
-    /** @use SdkModel<ParentRelationshipShape> */
+    /** @use SdkModel<ParentRelationshipInfoShape> */
     use SdkModel;
 
     #[Required('cost_rollup')]
@@ -50,14 +49,14 @@ final class ParentRelationship implements BaseModel
     public bool $traversalEnabled;
 
     #[Required]
-    public Via $via;
+    public MetadataFieldMapping $via;
 
     /**
-     * `new ParentRelationship()` is missing required properties by the API.
+     * `new ParentRelationshipInfo()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ParentRelationship::with(
+     * ParentRelationshipInfo::with(
      *   costRollup: ...,
      *   description: ...,
      *   parentEvent: ...,
@@ -72,7 +71,7 @@ final class ParentRelationship implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ParentRelationship)
+     * (new ParentRelationshipInfo)
      *   ->withCostRollup(...)
      *   ->withDescription(...)
      *   ->withParentEvent(...)
@@ -93,7 +92,7 @@ final class ParentRelationship implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Via|ViaShape $via
+     * @param MetadataFieldMapping|MetadataFieldMappingShape $via
      */
     public static function with(
         bool $costRollup,
@@ -103,7 +102,7 @@ final class ParentRelationship implements BaseModel
         string $parentRecordType,
         string $relationshipType,
         bool $traversalEnabled,
-        Via|array $via,
+        MetadataFieldMapping|array $via,
     ): self {
         $self = new self;
 
@@ -176,9 +175,9 @@ final class ParentRelationship implements BaseModel
     }
 
     /**
-     * @param Via|ViaShape $via
+     * @param MetadataFieldMapping|MetadataFieldMappingShape $via
      */
-    public function withVia(Via|array $via): self
+    public function withVia(MetadataFieldMapping|array $via): self
     {
         $self = clone $this;
         $self['via'] = $via;

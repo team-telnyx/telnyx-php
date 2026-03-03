@@ -10,18 +10,17 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Cost;
 use Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Meta;
-use Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root;
 
 /**
  * @phpstan-import-type CostShape from \Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Cost
  * @phpstan-import-type MetaShape from \Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Meta
- * @phpstan-import-type RootShape from \Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root
+ * @phpstan-import-type EventNodeShape from \Telnyx\SessionAnalysis\EventNode
  *
  * @phpstan-type SessionAnalysisGetResponseShape = array{
  *   cost: Cost|CostShape,
  *   createdAt: \DateTimeInterface,
  *   meta: Meta|MetaShape,
- *   root: Root|RootShape,
+ *   root: EventNode|EventNodeShape,
  *   sessionID: string,
  *   status: string,
  *   completedAt?: \DateTimeInterface|null,
@@ -45,7 +44,7 @@ final class SessionAnalysisGetResponse implements BaseModel
     public Meta $meta;
 
     #[Required]
-    public Root $root;
+    public EventNode $root;
 
     /**
      * Identifier for the analyzed session.
@@ -99,13 +98,13 @@ final class SessionAnalysisGetResponse implements BaseModel
      *
      * @param Cost|CostShape $cost
      * @param Meta|MetaShape $meta
-     * @param Root|RootShape $root
+     * @param EventNode|EventNodeShape $root
      */
     public static function with(
         Cost|array $cost,
         \DateTimeInterface $createdAt,
         Meta|array $meta,
-        Root|array $root,
+        EventNode|array $root,
         string $sessionID,
         string $status,
         ?\DateTimeInterface $completedAt = null,
@@ -158,9 +157,9 @@ final class SessionAnalysisGetResponse implements BaseModel
     }
 
     /**
-     * @param Root|RootShape $root
+     * @param EventNode|EventNodeShape $root
      */
-    public function withRoot(Root|array $root): self
+    public function withRoot(EventNode|array $root): self
     {
         $self = clone $this;
         $self['root'] = $root;
