@@ -1,5 +1,29 @@
 # Changelog
 
+## 6.57.0 (2026-03-03)
+
+Full Changelog: [v6.56.0...v6.57.0](https://github.com/team-telnyx/telnyx-php/compare/v6.56.0...v6.57.0)
+
+### Features
+
+* AI-2106: Add invite tool schema to inference OpenAPI spec ([c158f88](https://github.com/team-telnyx/telnyx-php/commit/c158f88673131a714aeb11ce64deadf714bd30d5))
+* **api:** add webhook verification ([11de4c7](https://github.com/team-telnyx/telnyx-php/commit/11de4c788a136a78bd2e7411615f31ecf9164e2f))
+* **api:** manual updates ([86c402c](https://github.com/team-telnyx/telnyx-php/commit/86c402ce76083809601754b5cf57440db0feb721))
+* **api:** manual updates ([bcf822e](https://github.com/team-telnyx/telnyx-php/commit/bcf822e68a1e96c122693ab5f41fcd70349ba00c))
+* Changing the tag for TTS endpoint ([1ec27fd](https://github.com/team-telnyx/telnyx-php/commit/1ec27fd6a6d32c4bdbb427a715057e9c36d24d83))
+* Merge TTS file-based spec into text-to-speech.json ([2dd406b](https://github.com/team-telnyx/telnyx-php/commit/2dd406be9d41aa7fb1af056d817f80c3fd74223b))
+
+
+### Bug Fixes
+
+* narrow porting event_type enums for SDK discriminator support ([f21e5bd](https://github.com/team-telnyx/telnyx-php/commit/f21e5bda074d5b35f69e6e87f469621591730178))
+* resolve merge conflict in webhooks ([7d9dd8d](https://github.com/team-telnyx/telnyx-php/commit/7d9dd8d7383284df44add3c0c7afd1b9498a2211))
+
+
+### Chores
+
+* **docs:** add missing descriptions ([ad264ae](https://github.com/team-telnyx/telnyx-php/commit/ad264ae2a0a654e689f104f644fa639a65fb47fb))
+
 ## 6.56.0 (2026-02-27)
 
 Full Changelog: [v6.55.0...v6.56.0](https://github.com/team-telnyx/telnyx-php/compare/v6.55.0...v6.56.0)
