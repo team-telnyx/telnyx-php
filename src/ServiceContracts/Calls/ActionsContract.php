@@ -945,7 +945,7 @@ interface ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine|string $transcriptionEngine = 'Google',
-        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|DeepgramNova2Config|DeepgramNova3Config|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|null $transcriptionEngineConfig = null,
+        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config|null $transcriptionEngineConfig = null,
         string $transcriptionTracks = 'inbound',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartTranscriptionResponse;
