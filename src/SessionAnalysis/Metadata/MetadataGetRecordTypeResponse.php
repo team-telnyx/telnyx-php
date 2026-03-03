@@ -7,22 +7,20 @@ namespace Telnyx\SessionAnalysis\Metadata;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SessionAnalysis\Metadata\MetadataGetRecordTypeResponse\ChildRelationship;
 use Telnyx\SessionAnalysis\Metadata\MetadataGetRecordTypeResponse\Meta;
-use Telnyx\SessionAnalysis\Metadata\MetadataGetRecordTypeResponse\ParentRelationship;
 
 /**
- * @phpstan-import-type ChildRelationshipShape from \Telnyx\SessionAnalysis\Metadata\MetadataGetRecordTypeResponse\ChildRelationship
+ * @phpstan-import-type ChildRelationshipInfoShape from \Telnyx\SessionAnalysis\Metadata\ChildRelationshipInfo
  * @phpstan-import-type MetaShape from \Telnyx\SessionAnalysis\Metadata\MetadataGetRecordTypeResponse\Meta
- * @phpstan-import-type ParentRelationshipShape from \Telnyx\SessionAnalysis\Metadata\MetadataGetRecordTypeResponse\ParentRelationship
+ * @phpstan-import-type ParentRelationshipInfoShape from \Telnyx\SessionAnalysis\Metadata\ParentRelationshipInfo
  *
  * @phpstan-type MetadataGetRecordTypeResponseShape = array{
  *   aliases: list<string>,
- *   childRelationships: list<ChildRelationship|ChildRelationshipShape>,
+ *   childRelationships: list<ChildRelationshipInfo|ChildRelationshipInfoShape>,
  *   event: string,
  *   examples: array<string,mixed>,
  *   meta: Meta|MetaShape,
- *   parentRelationships: list<ParentRelationship|ParentRelationshipShape>,
+ *   parentRelationships: list<ParentRelationshipInfo|ParentRelationshipInfoShape>,
  *   product: string,
  *   recordType: string,
  * }
@@ -36,8 +34,8 @@ final class MetadataGetRecordTypeResponse implements BaseModel
     #[Required(list: 'string')]
     public array $aliases;
 
-    /** @var list<ChildRelationship> $childRelationships */
-    #[Required('child_relationships', list: ChildRelationship::class)]
+    /** @var list<ChildRelationshipInfo> $childRelationships */
+    #[Required('child_relationships', list: ChildRelationshipInfo::class)]
     public array $childRelationships;
 
     #[Required]
@@ -54,8 +52,8 @@ final class MetadataGetRecordTypeResponse implements BaseModel
     #[Required]
     public Meta $meta;
 
-    /** @var list<ParentRelationship> $parentRelationships */
-    #[Required('parent_relationships', list: ParentRelationship::class)]
+    /** @var list<ParentRelationshipInfo> $parentRelationships */
+    #[Required('parent_relationships', list: ParentRelationshipInfo::class)]
     public array $parentRelationships;
 
     #[Required]
@@ -106,10 +104,10 @@ final class MetadataGetRecordTypeResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $aliases
-     * @param list<ChildRelationship|ChildRelationshipShape> $childRelationships
+     * @param list<ChildRelationshipInfo|ChildRelationshipInfoShape> $childRelationships
      * @param array<string,mixed> $examples
      * @param Meta|MetaShape $meta
-     * @param list<ParentRelationship|ParentRelationshipShape> $parentRelationships
+     * @param list<ParentRelationshipInfo|ParentRelationshipInfoShape> $parentRelationships
      */
     public static function with(
         array $aliases,
@@ -147,7 +145,7 @@ final class MetadataGetRecordTypeResponse implements BaseModel
     }
 
     /**
-     * @param list<ChildRelationship|ChildRelationshipShape> $childRelationships
+     * @param list<ChildRelationshipInfo|ChildRelationshipInfoShape> $childRelationships
      */
     public function withChildRelationships(array $childRelationships): self
     {
@@ -190,7 +188,7 @@ final class MetadataGetRecordTypeResponse implements BaseModel
     }
 
     /**
-     * @param list<ParentRelationship|ParentRelationshipShape> $parentRelationships
+     * @param list<ParentRelationshipInfo|ParentRelationshipInfoShape> $parentRelationships
      */
     public function withParentRelationships(array $parentRelationships): self
     {

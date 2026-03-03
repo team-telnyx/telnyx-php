@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root;
+namespace Telnyx\SessionAnalysis\EventNode;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
