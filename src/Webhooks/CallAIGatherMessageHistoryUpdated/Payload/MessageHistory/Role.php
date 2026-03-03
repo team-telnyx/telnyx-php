@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated\Data\Payload\MessageHistory;
+namespace Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated\Payload\MessageHistory;
 
 /**
  * The role of the message sender.
