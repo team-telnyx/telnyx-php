@@ -129,6 +129,7 @@ use Telnyx\Services\RoomCompositionsService;
 use Telnyx\Services\RoomParticipantsService;
 use Telnyx\Services\RoomRecordingsService;
 use Telnyx\Services\RoomsService;
+use Telnyx\Services\SessionAnalysisService;
 use Telnyx\Services\SetiService;
 use Telnyx\Services\ShortCodesService;
 use Telnyx\Services\SimCardDataUsageNotificationsService;
@@ -948,6 +949,11 @@ class Client extends BaseClient
     public MessagingProfileMetricsService $messagingProfileMetrics;
 
     /**
+     * @api
+     */
+    public SessionAnalysisService $sessionAnalysis;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1150,6 +1156,7 @@ class Client extends BaseClient
         $this->organizations = new OrganizationsService($this);
         $this->alphanumericSenderIDs = new AlphanumericSenderIDsService($this);
         $this->messagingProfileMetrics = new MessagingProfileMetricsService($this);
+        $this->sessionAnalysis = new SessionAnalysisService($this);
     }
 
     /** @return array<string,string> */
