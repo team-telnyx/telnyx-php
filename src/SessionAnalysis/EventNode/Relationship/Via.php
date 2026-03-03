@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ParentRelationship;
+namespace Telnyx\SessionAnalysis\EventNode\Relationship;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,9 +16,15 @@ final class Via implements BaseModel
     /** @use SdkModel<ViaShape> */
     use SdkModel;
 
+    /**
+     * Field name on the child record.
+     */
     #[Required('local_field')]
     public string $localField;
 
+    /**
+     * Field name on the parent record.
+     */
     #[Required('parent_field')]
     public string $parentField;
 
@@ -56,6 +62,9 @@ final class Via implements BaseModel
         return $self;
     }
 
+    /**
+     * Field name on the child record.
+     */
     public function withLocalField(string $localField): self
     {
         $self = clone $this;
@@ -64,6 +73,9 @@ final class Via implements BaseModel
         return $self;
     }
 
+    /**
+     * Field name on the parent record.
+     */
     public function withParentField(string $parentField): self
     {
         $self = clone $this;

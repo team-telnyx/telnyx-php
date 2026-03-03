@@ -7,19 +7,19 @@ namespace Telnyx\SessionAnalysis\Metadata\MetadataGetResponse;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ChildRelationship;
-use Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ParentRelationship;
+use Telnyx\SessionAnalysis\Metadata\ChildRelationshipInfo;
+use Telnyx\SessionAnalysis\Metadata\ParentRelationshipInfo;
 
 /**
- * @phpstan-import-type ChildRelationshipShape from \Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ChildRelationship
- * @phpstan-import-type ParentRelationshipShape from \Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ParentRelationship
+ * @phpstan-import-type ChildRelationshipInfoShape from \Telnyx\SessionAnalysis\Metadata\ChildRelationshipInfo
+ * @phpstan-import-type ParentRelationshipInfoShape from \Telnyx\SessionAnalysis\Metadata\ParentRelationshipInfo
  *
  * @phpstan-type RecordTypeShape = array{
  *   aliases: list<string>,
- *   childRelationships: list<ChildRelationship|ChildRelationshipShape>,
+ *   childRelationships: list<ChildRelationshipInfo|ChildRelationshipInfoShape>,
  *   description: string,
  *   event: string,
- *   parentRelationships: list<ParentRelationship|ParentRelationshipShape>,
+ *   parentRelationships: list<ParentRelationshipInfo|ParentRelationshipInfoShape>,
  *   product: string,
  *   recordType: string,
  * }
@@ -33,8 +33,8 @@ final class RecordType implements BaseModel
     #[Required(list: 'string')]
     public array $aliases;
 
-    /** @var list<ChildRelationship> $childRelationships */
-    #[Required('child_relationships', list: ChildRelationship::class)]
+    /** @var list<ChildRelationshipInfo> $childRelationships */
+    #[Required('child_relationships', list: ChildRelationshipInfo::class)]
     public array $childRelationships;
 
     #[Required]
@@ -43,8 +43,8 @@ final class RecordType implements BaseModel
     #[Required]
     public string $event;
 
-    /** @var list<ParentRelationship> $parentRelationships */
-    #[Required('parent_relationships', list: ParentRelationship::class)]
+    /** @var list<ParentRelationshipInfo> $parentRelationships */
+    #[Required('parent_relationships', list: ParentRelationshipInfo::class)]
     public array $parentRelationships;
 
     #[Required]
@@ -93,8 +93,8 @@ final class RecordType implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $aliases
-     * @param list<ChildRelationship|ChildRelationshipShape> $childRelationships
-     * @param list<ParentRelationship|ParentRelationshipShape> $parentRelationships
+     * @param list<ChildRelationshipInfo|ChildRelationshipInfoShape> $childRelationships
+     * @param list<ParentRelationshipInfo|ParentRelationshipInfoShape> $parentRelationships
      */
     public static function with(
         array $aliases,
@@ -130,7 +130,7 @@ final class RecordType implements BaseModel
     }
 
     /**
-     * @param list<ChildRelationship|ChildRelationshipShape> $childRelationships
+     * @param list<ChildRelationshipInfo|ChildRelationshipInfoShape> $childRelationships
      */
     public function withChildRelationships(array $childRelationships): self
     {
@@ -157,7 +157,7 @@ final class RecordType implements BaseModel
     }
 
     /**
-     * @param list<ParentRelationship|ParentRelationshipShape> $parentRelationships
+     * @param list<ParentRelationshipInfo|ParentRelationshipInfoShape> $parentRelationships
      */
     public function withParentRelationships(array $parentRelationships): self
     {

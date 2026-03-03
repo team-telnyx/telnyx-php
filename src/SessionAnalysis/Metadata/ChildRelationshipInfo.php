@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType;
+namespace Telnyx\SessionAnalysis\Metadata;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ChildRelationship\Via;
 
 /**
- * @phpstan-import-type ViaShape from \Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ChildRelationship\Via
+ * @phpstan-import-type MetadataFieldMappingShape from \Telnyx\SessionAnalysis\Metadata\MetadataFieldMapping
  *
- * @phpstan-type ChildRelationshipShape = array{
+ * @phpstan-type ChildRelationshipInfoShape = array{
  *   childEvent: string,
  *   childProduct: string,
  *   childRecordType: string,
@@ -20,12 +19,12 @@ use Telnyx\SessionAnalysis\Metadata\MetadataGetResponse\RecordType\ChildRelation
  *   description: string,
  *   relationshipType: string,
  *   traversalEnabled: bool,
- *   via: Via|ViaShape,
+ *   via: MetadataFieldMapping|MetadataFieldMappingShape,
  * }
  */
-final class ChildRelationship implements BaseModel
+final class ChildRelationshipInfo implements BaseModel
 {
-    /** @use SdkModel<ChildRelationshipShape> */
+    /** @use SdkModel<ChildRelationshipInfoShape> */
     use SdkModel;
 
     #[Required('child_event')]
@@ -50,14 +49,14 @@ final class ChildRelationship implements BaseModel
     public bool $traversalEnabled;
 
     #[Required]
-    public Via $via;
+    public MetadataFieldMapping $via;
 
     /**
-     * `new ChildRelationship()` is missing required properties by the API.
+     * `new ChildRelationshipInfo()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ChildRelationship::with(
+     * ChildRelationshipInfo::with(
      *   childEvent: ...,
      *   childProduct: ...,
      *   childRecordType: ...,
@@ -72,7 +71,7 @@ final class ChildRelationship implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ChildRelationship)
+     * (new ChildRelationshipInfo)
      *   ->withChildEvent(...)
      *   ->withChildProduct(...)
      *   ->withChildRecordType(...)
@@ -93,7 +92,7 @@ final class ChildRelationship implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Via|ViaShape $via
+     * @param MetadataFieldMapping|MetadataFieldMappingShape $via
      */
     public static function with(
         string $childEvent,
@@ -103,7 +102,7 @@ final class ChildRelationship implements BaseModel
         string $description,
         string $relationshipType,
         bool $traversalEnabled,
-        Via|array $via,
+        MetadataFieldMapping|array $via,
     ): self {
         $self = new self;
 
@@ -176,9 +175,9 @@ final class ChildRelationship implements BaseModel
     }
 
     /**
-     * @param Via|ViaShape $via
+     * @param MetadataFieldMapping|MetadataFieldMappingShape $via
      */
-    public function withVia(Via|array $via): self
+    public function withVia(MetadataFieldMapping|array $via): self
     {
         $self = clone $this;
         $self['via'] = $via;

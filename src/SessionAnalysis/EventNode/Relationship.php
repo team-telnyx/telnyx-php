@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root;
+namespace Telnyx\SessionAnalysis\EventNode;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Relationship\Via;
+use Telnyx\SessionAnalysis\EventNode\Relationship\Via;
 
 /**
  * Relationship to the parent node, null for root.
  *
- * @phpstan-import-type ViaShape from \Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Root\Relationship\Via
+ * @phpstan-import-type ViaShape from \Telnyx\SessionAnalysis\EventNode\Relationship\Via
  *
  * @phpstan-type RelationshipShape = array{
  *   parentID: string, type: string, via: Via|ViaShape

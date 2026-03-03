@@ -2,18 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SessionAnalysis\Metadata\MetadataGetRecordTypeResponse\ParentRelationship;
+namespace Telnyx\SessionAnalysis\Metadata;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ViaShape = array{localField: string, parentField: string}
+ * @phpstan-type MetadataFieldMappingShape = array{
+ *   localField: string, parentField: string
+ * }
  */
-final class Via implements BaseModel
+final class MetadataFieldMapping implements BaseModel
 {
-    /** @use SdkModel<ViaShape> */
+    /** @use SdkModel<MetadataFieldMappingShape> */
     use SdkModel;
 
     #[Required('local_field')]
@@ -23,17 +25,17 @@ final class Via implements BaseModel
     public string $parentField;
 
     /**
-     * `new Via()` is missing required properties by the API.
+     * `new MetadataFieldMapping()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Via::with(localField: ..., parentField: ...)
+     * MetadataFieldMapping::with(localField: ..., parentField: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Via)->withLocalField(...)->withParentField(...)
+     * (new MetadataFieldMapping)->withLocalField(...)->withParentField(...)
      * ```
      */
     public function __construct()
