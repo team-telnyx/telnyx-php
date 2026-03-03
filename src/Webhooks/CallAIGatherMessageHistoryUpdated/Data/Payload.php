@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CallAIGatherEnded;
+namespace Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated\Data;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallAIGatherEnded\Payload\MessageHistory;
-use Telnyx\Webhooks\CallAIGatherEnded\Payload\Status;
+use Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated\Data\Payload\MessageHistory;
 
 /**
- * @phpstan-import-type MessageHistoryShape from \Telnyx\Webhooks\CallAIGatherEnded\Payload\MessageHistory
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated\Data\Payload\MessageHistory
  *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,
@@ -21,8 +20,6 @@ use Telnyx\Webhooks\CallAIGatherEnded\Payload\Status;
  *   connectionID?: string|null,
  *   from?: string|null,
  *   messageHistory?: list<MessageHistory|MessageHistoryShape>|null,
- *   result?: array<string,mixed>|null,
- *   status?: null|Status|value-of<Status>,
  *   to?: string|null,
  * }
  */
@@ -76,22 +73,6 @@ final class Payload implements BaseModel
     public ?array $messageHistory;
 
     /**
-     * The result of the AI gather, its type depends of the `parameters` provided in the command.
-     *
-     * @var array<string,mixed>|null $result
-     */
-    #[Optional(map: 'mixed')]
-    public ?array $result;
-
-    /**
-     * Reflects how command ended.
-     *
-     * @var value-of<Status>|null $status
-     */
-    #[Optional(enum: Status::class)]
-    public ?string $status;
-
-    /**
      * Destination number or SIP URI of the call.
      */
     #[Optional]
@@ -108,8 +89,6 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<MessageHistory|MessageHistoryShape>|null $messageHistory
-     * @param array<string,mixed>|null $result
-     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $callControlID = null,
@@ -119,8 +98,6 @@ final class Payload implements BaseModel
         ?string $connectionID = null,
         ?string $from = null,
         ?array $messageHistory = null,
-        ?array $result = null,
-        Status|string|null $status = null,
         ?string $to = null,
     ): self {
         $self = new self;
@@ -132,8 +109,6 @@ final class Payload implements BaseModel
         null !== $connectionID && $self['connectionID'] = $connectionID;
         null !== $from && $self['from'] = $from;
         null !== $messageHistory && $self['messageHistory'] = $messageHistory;
-        null !== $result && $self['result'] = $result;
-        null !== $status && $self['status'] = $status;
         null !== $to && $self['to'] = $to;
 
         return $self;
@@ -214,32 +189,6 @@ final class Payload implements BaseModel
     {
         $self = clone $this;
         $self['messageHistory'] = $messageHistory;
-
-        return $self;
-    }
-
-    /**
-     * The result of the AI gather, its type depends of the `parameters` provided in the command.
-     *
-     * @param array<string,mixed> $result
-     */
-    public function withResult(array $result): self
-    {
-        $self = clone $this;
-        $self['result'] = $result;
-
-        return $self;
-    }
-
-    /**
-     * Reflects how command ended.
-     *
-     * @param Status|value-of<Status> $status
-     */
-    public function withStatus(Status|string $status): self
-    {
-        $self = clone $this;
-        $self['status'] = $status;
 
         return $self;
     }

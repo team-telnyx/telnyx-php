@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated;
+namespace Telnyx\Webhooks\CallAIGatherEnded\Data;
 
 /**
  * Identifies the type of the resource.
