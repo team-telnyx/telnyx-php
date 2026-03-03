@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.58.0 (2026-03-03)
+
+Full Changelog: [v6.57.0...v6.58.0](https://github.com/team-telnyx/telnyx-php/compare/v6.57.0...v6.58.0)
+
+### Features
+
+* [TDA-6425] Add Session Analysis API spec to public docs ([01e4a05](https://github.com/team-telnyx/telnyx-php/commit/01e4a05bd7e07568d8566d1b0dec8c61f1290bf8))
+
 ## 6.57.0 (2026-03-03)
 
 Full Changelog: [v6.56.0...v6.57.0](https://github.com/team-telnyx/telnyx-php/compare/v6.56.0...v6.57.0)
