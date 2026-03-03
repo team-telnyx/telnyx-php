@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CallAIGatherEnded;
+namespace Telnyx\Webhooks\CallAIGatherEnded\Data;
 
 /**
  * The type of event being delivered.

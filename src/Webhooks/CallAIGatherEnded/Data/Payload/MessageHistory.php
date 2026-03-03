@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated\Payload;
+namespace Telnyx\Webhooks\CallAIGatherEnded\Data\Payload;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated\Payload\MessageHistory\Role;
+use Telnyx\Webhooks\CallAIGatherEnded\Data\Payload\MessageHistory\Role;
 
 /**
  * @phpstan-type MessageHistoryShape = array{
