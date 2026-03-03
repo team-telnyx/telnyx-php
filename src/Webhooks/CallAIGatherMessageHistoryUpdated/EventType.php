@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated\Data;
+namespace Telnyx\Webhooks\CallAIGatherMessageHistoryUpdated;
 
 /**
  * The type of event being delivered.

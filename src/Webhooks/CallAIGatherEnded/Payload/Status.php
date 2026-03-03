@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\CallAIGatherEnded\Data\Payload;
+namespace Telnyx\Webhooks\CallAIGatherEnded\Payload;
 
 /**
  * Reflects how command ended.
