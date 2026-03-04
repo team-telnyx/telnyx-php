@@ -11,7 +11,6 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams;
 use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
-use Telnyx\TextToSpeech\TextToSpeechStreamParams;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -45,21 +44,6 @@ interface TextToSpeechRawContract
      */
     public function listVoices(
         array|TextToSpeechListVoicesParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string,mixed>|TextToSpeechStreamParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<mixed>
-     *
-     * @throws APIException
-     */
-    public function stream(
-        array|TextToSpeechStreamParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }
