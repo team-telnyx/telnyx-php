@@ -75,6 +75,7 @@ final class SpeechToTextRawService implements SpeechToTextRawContract
                     'interimResults' => 'interim_results',
                 ],
             ),
+            headers: ['Content-Type' => 'application/octet-stream'],
             options: $options,
             convert: null,
         );
