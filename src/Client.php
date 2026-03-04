@@ -138,7 +138,6 @@ use Telnyx\Services\SimCardOrderPreviewService;
 use Telnyx\Services\SimCardOrdersService;
 use Telnyx\Services\SimCardsService;
 use Telnyx\Services\SiprecConnectorsService;
-use Telnyx\Services\SpeechToTextService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
 use Telnyx\Services\SubNumberOrdersService;
@@ -927,11 +926,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public SpeechToTextService $speechToText;
-
-    /**
-     * @api
-     */
     public OrganizationsService $organizations;
 
     private ?string $oauthAccessToken = null;
@@ -1152,7 +1146,6 @@ class Client extends BaseClient
         $this->mobilePhoneNumbers = new MobilePhoneNumbersService($this);
         $this->mobileVoiceConnections = new MobileVoiceConnectionsService($this);
         $this->messaging10dlc = new Messaging10dlcService($this);
-        $this->speechToText = new SpeechToTextService($this);
         $this->organizations = new OrganizationsService($this);
         $this->alphanumericSenderIDs = new AlphanumericSenderIDsService($this);
         $this->messagingProfileMetrics = new MessagingProfileMetricsService($this);
