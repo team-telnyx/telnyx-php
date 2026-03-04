@@ -9,15 +9,15 @@ namespace Telnyx\ResembleVoiceSettings;
  */
 enum SampleRate: string
 {
-    case _8000 = '8000';
+    case SAMPLE_RATE_8000 = '8000';
 
-    case _16000 = '16000';
+    case SAMPLE_RATE_16000 = '16000';
 
-    case _22050 = '22050';
+    case SAMPLE_RATE_22050 = '22050';
 
-    case _32000 = '32000';
+    case SAMPLE_RATE_32000 = '32000';
 
-    case _44100 = '44100';
+    case SAMPLE_RATE_44100 = '44100';
 
-    case _48000 = '48000';
+    case SAMPLE_RATE_48000 = '48000';
 }
