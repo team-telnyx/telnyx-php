@@ -15,8 +15,6 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioContract;
 
 /**
- * Turn audio into text or text into audio.
- *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class AudioService implements AudioContract
