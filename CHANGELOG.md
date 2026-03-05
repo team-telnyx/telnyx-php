@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.66.0 (2026-03-05)
+
+Full Changelog: [v6.65.0...v6.66.0](https://github.com/team-telnyx/telnyx-php/compare/v6.65.0...v6.66.0)
+
+### Features
+
+* **api:** manual updates ([69ec321](https://github.com/team-telnyx/telnyx-php/commit/69ec321d499ac82572b83ef6133e23caeb488f30))
+
 ## 6.65.0 (2026-03-04)
 
 Full Changelog: [v6.64.0...v6.65.0](https://github.com/team-telnyx/telnyx-php/compare/v6.64.0...v6.65.0)
