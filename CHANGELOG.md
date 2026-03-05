@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.67.0 (2026-03-05)
+
+Full Changelog: [v6.66.0...v6.67.0](https://github.com/team-telnyx/telnyx-php/compare/v6.66.0...v6.67.0)
+
+### Features
+
+* Changing a tag for filebased STT endpoint ([23e64ac](https://github.com/team-telnyx/telnyx-php/commit/23e64aca0da0df532fd9fb785bc07d54e0179cc6))
+
 ## 6.66.0 (2026-03-05)
 
 Full Changelog: [v6.65.0...v6.66.0](https://github.com/team-telnyx/telnyx-php/compare/v6.65.0...v6.66.0)
