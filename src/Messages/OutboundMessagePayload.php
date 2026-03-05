@@ -53,6 +53,7 @@ use Telnyx\Messages\OutboundMessagePayload\Type;
  *   to?: list<To|ToShape>|null,
  *   type?: null|Type|value-of<Type>,
  *   validUntil?: \DateTimeInterface|null,
+ *   waitSeconds?: float|null,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
  * }
@@ -219,6 +220,12 @@ final class OutboundMessagePayload implements BaseModel
     public ?\DateTimeInterface $validUntil;
 
     /**
+     * Seconds the message is queued due to rate limiting before being sent to the carrier. Represents the maximum wait across all applicable rate limits (account, carrier, campaign). 0.0 = no queuing delay.
+     */
+    #[Optional('wait_seconds', nullable: true)]
+    public ?float $waitSeconds;
+
+    /**
      * The failover URL where webhooks related to this message will be sent if sending to the primary URL fails.
      */
     #[Optional('webhook_failover_url', nullable: true)]
@@ -279,6 +286,7 @@ final class OutboundMessagePayload implements BaseModel
         ?array $to = null,
         Type|string|null $type = null,
         ?\DateTimeInterface $validUntil = null,
+        ?float $waitSeconds = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
     ): self {
@@ -310,6 +318,7 @@ final class OutboundMessagePayload implements BaseModel
         null !== $to && $self['to'] = $to;
         null !== $type && $self['type'] = $type;
         null !== $validUntil && $self['validUntil'] = $validUntil;
+        null !== $waitSeconds && $self['waitSeconds'] = $waitSeconds;
         null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
@@ -614,6 +623,17 @@ final class OutboundMessagePayload implements BaseModel
     {
         $self = clone $this;
         $self['validUntil'] = $validUntil;
+
+        return $self;
+    }
+
+    /**
+     * Seconds the message is queued due to rate limiting before being sent to the carrier. Represents the maximum wait across all applicable rate limits (account, carrier, campaign). 0.0 = no queuing delay.
+     */
+    public function withWaitSeconds(?float $waitSeconds): self
+    {
+        $self = clone $this;
+        $self['waitSeconds'] = $waitSeconds;
 
         return $self;
     }

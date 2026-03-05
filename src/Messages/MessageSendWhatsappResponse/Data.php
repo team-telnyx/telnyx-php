@@ -28,6 +28,7 @@ use Telnyx\Messages\WhatsappMessageContent;
  *   recordType?: string|null,
  *   to?: list<RcsToItem|RcsToItemShape>|null,
  *   type?: string|null,
+ *   waitSeconds?: float|null,
  * }
  */
 final class Data implements BaseModel
@@ -72,6 +73,12 @@ final class Data implements BaseModel
     #[Optional]
     public ?string $type;
 
+    /**
+     * Seconds the message is queued due to rate limiting before being sent to the carrier. Represents the maximum wait across all applicable rate limits (account, carrier, campaign). 0.0 = no queuing delay.
+     */
+    #[Optional('wait_seconds', nullable: true)]
+    public ?float $waitSeconds;
+
     public function __construct()
     {
         $this->initialize();
@@ -98,6 +105,7 @@ final class Data implements BaseModel
         ?string $recordType = null,
         ?array $to = null,
         ?string $type = null,
+        ?float $waitSeconds = null,
     ): self {
         $self = new self;
 
@@ -112,6 +120,7 @@ final class Data implements BaseModel
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $to && $self['to'] = $to;
         null !== $type && $self['type'] = $type;
+        null !== $waitSeconds && $self['waitSeconds'] = $waitSeconds;
 
         return $self;
     }
@@ -212,6 +221,17 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
+     * Seconds the message is queued due to rate limiting before being sent to the carrier. Represents the maximum wait across all applicable rate limits (account, carrier, campaign). 0.0 = no queuing delay.
+     */
+    public function withWaitSeconds(?float $waitSeconds): self
+    {
+        $self = clone $this;
+        $self['waitSeconds'] = $waitSeconds;
 
         return $self;
     }
