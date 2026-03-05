@@ -9,15 +9,15 @@ namespace Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams;
  */
 enum TimeFrame: string
 {
-    case _1_H = '1h';
+    case TIME_FRAME_1_H = '1h';
 
-    case _3_H = '3h';
+    case TIME_FRAME_3_H = '3h';
 
-    case _24_H = '24h';
+    case TIME_FRAME_24_H = '24h';
 
-    case _3_D = '3d';
+    case TIME_FRAME_3_D = '3d';
 
-    case _7_D = '7d';
+    case TIME_FRAME_7_D = '7d';
 
-    case _30_D = '30d';
+    case TIME_FRAME_30_D = '30d';
 }
