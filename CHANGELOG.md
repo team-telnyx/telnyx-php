@@ -1,5 +1,18 @@
 # Changelog
 
+## 6.68.0 (2026-03-06)
+
+Full Changelog: [v6.67.0...v6.68.0](https://github.com/team-telnyx/telnyx-php/compare/v6.67.0...v6.68.0)
+
+### Features
+
+* Assistant tags ([4e5cef8](https://github.com/team-telnyx/telnyx-php/commit/4e5cef839b579741f10717346691298a72eb7b73))
+
+
+### Documentation
+
+* **messaging:** Add wait_seconds to message response schemas ([be256a0](https://github.com/team-telnyx/telnyx-php/commit/be256a01537d71a1eb053c6e196c21e954d4492f))
+
 ## 6.67.0 (2026-03-05)
 
 Full Changelog: [v6.66.0...v6.67.0](https://github.com/team-telnyx/telnyx-php/compare/v6.66.0...v6.67.0)
