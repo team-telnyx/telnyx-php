@@ -25,6 +25,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AssistantsContract;
 use Telnyx\Services\AI\Assistants\CanaryDeploysService;
 use Telnyx\Services\AI\Assistants\ScheduledEventsService;
+use Telnyx\Services\AI\Assistants\TagsService;
 use Telnyx\Services\AI\Assistants\TestsService;
 use Telnyx\Services\AI\Assistants\ToolsService;
 use Telnyx\Services\AI\Assistants\VersionsService;
@@ -76,6 +77,11 @@ final class AssistantsService implements AssistantsContract
     public VersionsService $versions;
 
     /**
+     * @api
+     */
+    public TagsService $tags;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -86,6 +92,7 @@ final class AssistantsService implements AssistantsContract
         $this->scheduledEvents = new ScheduledEventsService($client);
         $this->tools = new ToolsService($client);
         $this->versions = new VersionsService($client);
+        $this->tags = new TagsService($client);
     }
 
     /**
