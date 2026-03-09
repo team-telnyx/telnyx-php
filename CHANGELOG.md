@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.69.0 (2026-03-09)
+
+Full Changelog: [v6.68.0...v6.69.0](https://github.com/team-telnyx/telnyx-php/compare/v6.68.0...v6.69.0)
+
+### Features
+
+* MSG-6418: remove flashcall from hosted number verification codes endpoint ([84dbc7f](https://github.com/team-telnyx/telnyx-php/commit/84dbc7f8b5aa07b35a6e5eac2e339c7d8380ed90))
+
 ## 6.68.0 (2026-03-06)
 
 Full Changelog: [v6.67.0...v6.68.0](https://github.com/team-telnyx/telnyx-php/compare/v6.67.0...v6.68.0)
