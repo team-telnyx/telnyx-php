@@ -58,12 +58,13 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `inworld`.
      *
      * @param Aws|AwsShape $aws AWS Polly provider-specific parameters
      * @param Azure|AzureShape $azure azure Cognitive Services provider-specific parameters
      * @param bool $disableCache when `true`, bypass the audio cache and generate fresh audio
      * @param Elevenlabs|ElevenlabsShape $elevenlabs elevenLabs provider-specific parameters
+     * @param mixed $inworld inworld provider-specific parameters
      * @param string $language Language code (e.g. `en-US`). Usage varies by provider.
      * @param Minimax|MinimaxShape $minimax minimax provider-specific parameters
      * @param OutputType|value-of<OutputType> $outputType Determines the response format. `binary_output` returns raw audio bytes, `base64_output` returns base64-encoded audio in JSON.
@@ -84,6 +85,7 @@ final class TextToSpeechService implements TextToSpeechContract
         Azure|array|null $azure = null,
         bool $disableCache = false,
         Elevenlabs|array|null $elevenlabs = null,
+        mixed $inworld = null,
         ?string $language = null,
         Minimax|array|null $minimax = null,
         OutputType|string $outputType = 'binary_output',
@@ -103,6 +105,7 @@ final class TextToSpeechService implements TextToSpeechContract
                 'azure' => $azure,
                 'disableCache' => $disableCache,
                 'elevenlabs' => $elevenlabs,
+                'inworld' => $inworld,
                 'language' => $language,
                 'minimax' => $minimax,
                 'outputType' => $outputType,

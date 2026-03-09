@@ -75,6 +75,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   mediaName?: string|null,
  *   parkAfterUnbridge?: string|null,
  *   preferredCodecs?: string|null,
+ *   preventDoubleBridge?: bool|null,
  *   record?: null|Record|value-of<Record>,
  *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
  *   recordCustomFileName?: string|null,
@@ -248,6 +249,12 @@ final class CallDialParams implements BaseModel
      */
     #[Optional('preferred_codecs')]
     public ?string $preferredCodecs;
+
+    /**
+     * Prevents bridging and hangs up the call if the target is already bridged. Disabled by default.
+     */
+    #[Optional('prevent_double_bridge')]
+    public ?bool $preventDoubleBridge;
 
     /**
      * Start recording automatically after an event. Disabled by default.
@@ -551,6 +558,7 @@ final class CallDialParams implements BaseModel
         ?string $mediaName = null,
         ?string $parkAfterUnbridge = null,
         ?string $preferredCodecs = null,
+        ?bool $preventDoubleBridge = null,
         Record|string|null $record = null,
         RecordChannels|string|null $recordChannels = null,
         ?string $recordCustomFileName = null,
@@ -608,6 +616,7 @@ final class CallDialParams implements BaseModel
         null !== $mediaName && $self['mediaName'] = $mediaName;
         null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
         null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
+        null !== $preventDoubleBridge && $self['preventDoubleBridge'] = $preventDoubleBridge;
         null !== $record && $self['record'] = $record;
         null !== $recordChannels && $self['recordChannels'] = $recordChannels;
         null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
@@ -888,6 +897,17 @@ final class CallDialParams implements BaseModel
     {
         $self = clone $this;
         $self['preferredCodecs'] = $preferredCodecs;
+
+        return $self;
+    }
+
+    /**
+     * Prevents bridging and hangs up the call if the target is already bridged. Disabled by default.
+     */
+    public function withPreventDoubleBridge(bool $preventDoubleBridge): self
+    {
+        $self = clone $this;
+        $self['preventDoubleBridge'] = $preventDoubleBridge;
 
         return $self;
     }

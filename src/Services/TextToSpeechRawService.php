@@ -54,13 +54,14 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `inworld`.
      *
      * @param array{
      *   aws?: Aws|AwsShape,
      *   azure?: Azure|AzureShape,
      *   disableCache?: bool,
      *   elevenlabs?: Elevenlabs|ElevenlabsShape,
+     *   inworld?: mixed,
      *   language?: string,
      *   minimax?: Minimax|MinimaxShape,
      *   outputType?: OutputType|value-of<OutputType>,
