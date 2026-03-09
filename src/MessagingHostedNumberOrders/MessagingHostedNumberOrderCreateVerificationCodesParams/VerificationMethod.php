@@ -9,6 +9,4 @@ enum VerificationMethod: string
     case SMS = 'sms';
 
     case CALL = 'call';
-
-    case FLASHCALL = 'flashcall';
 }
