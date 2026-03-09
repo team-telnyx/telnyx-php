@@ -70,6 +70,7 @@ interface CallsContract
      * @param string $mediaName The media_name of a file to be played back to the callee when the call is answered. The media_name must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. The file must either be a WAV or MP3 file.
      * @param string $parkAfterUnbridge If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg. When park_after_unbridge is set, link_to becomes required.
      * @param string $preferredCodecs the list of comma-separated codecs in a preferred order for the forked media to be received
+     * @param bool $preventDoubleBridge Prevents bridging and hangs up the call if the target is already bridged. Disabled by default.
      * @param Record|value-of<Record> $record Start recording automatically after an event. Disabled by default.
      * @param RecordChannels|value-of<RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
@@ -128,6 +129,7 @@ interface CallsContract
         ?string $mediaName = null,
         ?string $parkAfterUnbridge = null,
         ?string $preferredCodecs = null,
+        bool $preventDoubleBridge = false,
         Record|string|null $record = null,
         RecordChannels|string $recordChannels = 'dual',
         ?string $recordCustomFileName = null,

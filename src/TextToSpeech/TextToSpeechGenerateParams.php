@@ -26,7 +26,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
  *
  * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
  *
- * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`.
+ * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `inworld`.
  *
  * @see Telnyx\Services\TextToSpeechService::generate()
  *
@@ -43,6 +43,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
  *   azure?: null|Azure|AzureShape,
  *   disableCache?: bool|null,
  *   elevenlabs?: null|Elevenlabs|ElevenlabsShape,
+ *   inworld?: mixed,
  *   language?: string|null,
  *   minimax?: null|Minimax|MinimaxShape,
  *   outputType?: null|OutputType|value-of<OutputType>,
@@ -85,6 +86,12 @@ final class TextToSpeechGenerateParams implements BaseModel
      */
     #[Optional]
     public ?Elevenlabs $elevenlabs;
+
+    /**
+     * Inworld provider-specific parameters.
+     */
+    #[Optional]
+    public mixed $inworld;
 
     /**
      * Language code (e.g. `en-US`). Usage varies by provider.
@@ -187,6 +194,7 @@ final class TextToSpeechGenerateParams implements BaseModel
         Azure|array|null $azure = null,
         ?bool $disableCache = null,
         Elevenlabs|array|null $elevenlabs = null,
+        mixed $inworld = null,
         ?string $language = null,
         Minimax|array|null $minimax = null,
         OutputType|string|null $outputType = null,
@@ -205,6 +213,7 @@ final class TextToSpeechGenerateParams implements BaseModel
         null !== $azure && $self['azure'] = $azure;
         null !== $disableCache && $self['disableCache'] = $disableCache;
         null !== $elevenlabs && $self['elevenlabs'] = $elevenlabs;
+        null !== $inworld && $self['inworld'] = $inworld;
         null !== $language && $self['language'] = $language;
         null !== $minimax && $self['minimax'] = $minimax;
         null !== $outputType && $self['outputType'] = $outputType;
@@ -266,6 +275,17 @@ final class TextToSpeechGenerateParams implements BaseModel
     {
         $self = clone $this;
         $self['elevenlabs'] = $elevenlabs;
+
+        return $self;
+    }
+
+    /**
+     * Inworld provider-specific parameters.
+     */
+    public function withInworld(mixed $inworld): self
+    {
+        $self = clone $this;
+        $self['inworld'] = $inworld;
 
         return $self;
     }
