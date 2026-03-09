@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.70.0 (2026-03-09)
+
+Full Changelog: [v6.69.0...v6.70.0](https://github.com/team-telnyx/telnyx-php/compare/v6.69.0...v6.70.0)
+
+### Features
+
+* TELAPPS-ENGDESK-49737 Add prevent_double_bridge param to dial ([0afab73](https://github.com/team-telnyx/telnyx-php/commit/0afab7343e2976fdd6351b98cd6527223de8bded))
+
 ## 6.69.0 (2026-03-09)
 
 Full Changelog: [v6.68.0...v6.69.0](https://github.com/team-telnyx/telnyx-php/compare/v6.68.0...v6.69.0)
