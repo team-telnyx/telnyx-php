@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions\ActionSpeakParams;
 
 use Telnyx\AzureVoiceSettings;
+use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -25,9 +26,10 @@ use Telnyx\RimeVoiceSettings;
  * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\AzureVoiceSettings
  * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
  * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
+ * @phpstan-import-type InworldVoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
@@ -51,6 +53,7 @@ final class VoiceSettings implements ConverterSource
             'azure' => AzureVoiceSettings::class,
             'rime' => RimeVoiceSettings::class,
             'resemble' => ResembleVoiceSettings::class,
+            'inworld' => InworldVoiceSettings::class,
         ];
     }
 }

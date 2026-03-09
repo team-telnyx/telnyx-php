@@ -95,6 +95,7 @@ final class CallsRawService implements CallsRawContract
      *   mediaName?: string,
      *   parkAfterUnbridge?: string,
      *   preferredCodecs?: string,
+     *   preventDoubleBridge?: bool,
      *   record?: Record|value-of<Record>,
      *   recordChannels?: RecordChannels|value-of<RecordChannels>,
      *   recordCustomFileName?: string,
