@@ -64,7 +64,7 @@ final class TextToSpeechService implements TextToSpeechContract
      * @param Azure|AzureShape $azure azure Cognitive Services provider-specific parameters
      * @param bool $disableCache when `true`, bypass the audio cache and generate fresh audio
      * @param Elevenlabs|ElevenlabsShape $elevenlabs elevenLabs provider-specific parameters
-     * @param mixed $inworld inworld provider-specific parameters
+     * @param array<string,mixed> $inworld inworld provider-specific parameters
      * @param string $language Language code (e.g. `en-US`). Usage varies by provider.
      * @param Minimax|MinimaxShape $minimax minimax provider-specific parameters
      * @param OutputType|value-of<OutputType> $outputType Determines the response format. `binary_output` returns raw audio bytes, `base64_output` returns base64-encoded audio in JSON.
@@ -85,7 +85,7 @@ final class TextToSpeechService implements TextToSpeechContract
         Azure|array|null $azure = null,
         bool $disableCache = false,
         Elevenlabs|array|null $elevenlabs = null,
-        mixed $inworld = null,
+        ?array $inworld = null,
         ?string $language = null,
         Minimax|array|null $minimax = null,
         OutputType|string $outputType = 'binary_output',
