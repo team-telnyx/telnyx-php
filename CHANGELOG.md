@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.73.0 (2026-03-10)
+
+Full Changelog: [v6.72.0...v6.73.0](https://github.com/team-telnyx/telnyx-php/compare/v6.72.0...v6.73.0)
+
+### Features
+
+* **messaging:** add wait_seconds to OutboundMessagePayload example ([3559413](https://github.com/team-telnyx/telnyx-php/commit/3559413361fbc93368bafb1165b72828050c1a52))
+
 ## 6.72.0 (2026-03-10)
 
 Full Changelog: [v6.71.0...v6.72.0](https://github.com/team-telnyx/telnyx-php/compare/v6.71.0...v6.72.0)
