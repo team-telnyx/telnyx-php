@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection;
+namespace Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection;
 
-use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection\OnVoicemailDetected\Action;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection\OnVoicemailDetected\Action;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
