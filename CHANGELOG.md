@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.73.1 (2026-03-10)
+
+Full Changelog: [v6.73.0...v6.73.1](https://github.com/team-telnyx/telnyx-php/compare/v6.73.0...v6.73.1)
+
+### Bug Fixes
+
+* add title to InviteTool.invite for Stainless SDK ([61f4448](https://github.com/team-telnyx/telnyx-php/commit/61f4448b4419a9362ff33ca8027c27ead1df0249))
+
 ## 6.73.0 (2026-03-10)
 
 Full Changelog: [v6.72.0...v6.73.0](https://github.com/team-telnyx/telnyx-php/compare/v6.72.0...v6.73.0)
