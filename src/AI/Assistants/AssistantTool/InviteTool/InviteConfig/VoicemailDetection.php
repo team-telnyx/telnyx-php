@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite;
+namespace Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig;
 
-use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection\DetectionMode;
-use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection\OnVoicemailDetected;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection\DetectionMode;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection\OnVoicemailDetected;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Configuration for voicemail detection (AMD - Answering Machine Detection) on the invited call.
  *
- * @phpstan-import-type OnVoicemailDetectedShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection\OnVoicemailDetected
+ * @phpstan-import-type OnVoicemailDetectedShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection\OnVoicemailDetected
  *
  * @phpstan-type VoicemailDetectionShape = array{
  *   detectionMode?: null|DetectionMode|value-of<DetectionMode>,

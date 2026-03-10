@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection\OnVoicemailDetected;
+namespace Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection\OnVoicemailDetected;
 
 /**
  * The action to take when voicemail is detected.

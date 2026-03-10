@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantTool\InviteTool;
 
-use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\CustomHeader;
-use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\CustomHeader;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\CustomHeader
- * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\CustomHeader
+ * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection
  *
- * @phpstan-type InviteShape = array{
+ * @phpstan-type InviteConfigShape = array{
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   from?: string|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  * }
  */
-final class Invite implements BaseModel
+final class InviteConfig implements BaseModel
 {
-    /** @use SdkModel<InviteShape> */
+    /** @use SdkModel<InviteConfigShape> */
     use SdkModel;
 
     /**
