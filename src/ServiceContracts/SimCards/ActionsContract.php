@@ -7,6 +7,8 @@ namespace Telnyx\ServiceContracts\SimCards;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse;
+use Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
@@ -53,6 +55,30 @@ interface ActionsContract
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
+
+    /**
+     * @api
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function bulkDisableVoice(
+        string $simCardGroupID,
+        RequestOptions|array|null $requestOptions = null
+    ): ActionBulkDisableVoiceResponse;
+
+    /**
+     * @api
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function bulkEnableVoice(
+        string $simCardGroupID,
+        RequestOptions|array|null $requestOptions = null
+    ): ActionBulkEnableVoiceResponse;
 
     /**
      * @api

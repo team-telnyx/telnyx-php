@@ -52,6 +52,7 @@ use Telnyx\SimCardStatus;
  *   type?: null|Type|value-of<Type>,
  *   updatedAt?: string|null,
  *   version?: string|null,
+ *   voiceEnabled?: bool|null,
  * }
  */
 final class SimCard implements BaseModel
@@ -235,6 +236,12 @@ final class SimCard implements BaseModel
     #[Optional]
     public ?string $version;
 
+    /**
+     * Indicates whether voice services are enabled for the SIM card.
+     */
+    #[Optional('voice_enabled')]
+    public ?bool $voiceEnabled;
+
     public function __construct()
     {
         $this->initialize();
@@ -285,6 +292,7 @@ final class SimCard implements BaseModel
         Type|string|null $type = null,
         ?string $updatedAt = null,
         ?string $version = null,
+        ?bool $voiceEnabled = null,
     ): self {
         $self = new self;
 
@@ -315,6 +323,7 @@ final class SimCard implements BaseModel
         null !== $type && $self['type'] = $type;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $version && $self['version'] = $version;
+        null !== $voiceEnabled && $self['voiceEnabled'] = $voiceEnabled;
 
         return $self;
     }
@@ -638,6 +647,17 @@ final class SimCard implements BaseModel
     {
         $self = clone $this;
         $self['version'] = $version;
+
+        return $self;
+    }
+
+    /**
+     * Indicates whether voice services are enabled for the SIM card.
+     */
+    public function withVoiceEnabled(bool $voiceEnabled): self
+    {
+        $self = clone $this;
+        $self['voiceEnabled'] = $voiceEnabled;
 
         return $self;
     }

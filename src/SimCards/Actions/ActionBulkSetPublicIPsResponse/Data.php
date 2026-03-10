@@ -33,9 +33,11 @@ final class Data implements BaseModel
     public ?string $id;
 
     /**
-     * The operation type. It can be one of the following: <br/>
+     * The action type. It can be one of the following: <br/>
      * <ul>
-     * <li><code>bulk_set_public_ips</code> - set a public IP for each specified SIM card.</li>
+     * <li><code>bulk_disable_voice</code> - disable voice for every SIM Card in a SIM Card Group.</li>
+     * <li><code>bulk_enable_voice</code> - enable voice for every SIM Card in a SIM Card Group.</li>
+     * <li><code>bulk_set_public_ips</code> - set a public IP for each specified SIM Card.</li>
      * </ul>.
      *
      * @var value-of<ActionType>|null $actionType
@@ -111,9 +113,11 @@ final class Data implements BaseModel
     }
 
     /**
-     * The operation type. It can be one of the following: <br/>
+     * The action type. It can be one of the following: <br/>
      * <ul>
-     * <li><code>bulk_set_public_ips</code> - set a public IP for each specified SIM card.</li>
+     * <li><code>bulk_disable_voice</code> - disable voice for every SIM Card in a SIM Card Group.</li>
+     * <li><code>bulk_enable_voice</code> - enable voice for every SIM Card in a SIM Card Group.</li>
+     * <li><code>bulk_set_public_ips</code> - set a public IP for each specified SIM Card.</li>
      * </ul>.
      *
      * @param ActionType|value-of<ActionType> $actionType

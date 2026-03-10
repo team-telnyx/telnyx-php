@@ -8,6 +8,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\SimCards\Actions\ActionBulkDisableVoiceParams;
+use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse;
+use Telnyx\SimCards\Actions\ActionBulkEnableVoiceParams;
+use Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
@@ -54,6 +58,36 @@ interface ActionsRawContract
      */
     public function list(
         array|ActionListParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|ActionBulkDisableVoiceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionBulkDisableVoiceResponse>
+     *
+     * @throws APIException
+     */
+    public function bulkDisableVoice(
+        array|ActionBulkDisableVoiceParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|ActionBulkEnableVoiceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionBulkEnableVoiceResponse>
+     *
+     * @throws APIException
+     */
+    public function bulkEnableVoice(
+        array|ActionBulkEnableVoiceParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 

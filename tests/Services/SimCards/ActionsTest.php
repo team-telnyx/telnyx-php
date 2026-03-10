@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse;
+use Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
 use Telnyx\SimCards\Actions\ActionEnableResponse;
@@ -68,6 +70,66 @@ final class ActionsTest extends TestCase
             // @phpstan-ignore-next-line method.alreadyNarrowedType
             $this->assertInstanceOf(SimCardAction::class, $item);
         }
+    }
+
+    #[Test]
+    public function testBulkDisableVoice(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->simCards->actions->bulkDisableVoice(
+            simCardGroupID: '6b14e151-8493-4fa1-8664-1cc4e6d14158'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionBulkDisableVoiceResponse::class, $result);
+    }
+
+    #[Test]
+    public function testBulkDisableVoiceWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->simCards->actions->bulkDisableVoice(
+            simCardGroupID: '6b14e151-8493-4fa1-8664-1cc4e6d14158'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionBulkDisableVoiceResponse::class, $result);
+    }
+
+    #[Test]
+    public function testBulkEnableVoice(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->simCards->actions->bulkEnableVoice(
+            simCardGroupID: '6b14e151-8493-4fa1-8664-1cc4e6d14158'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionBulkEnableVoiceResponse::class, $result);
+    }
+
+    #[Test]
+    public function testBulkEnableVoiceWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->simCards->actions->bulkEnableVoice(
+            simCardGroupID: '6b14e151-8493-4fa1-8664-1cc4e6d14158'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionBulkEnableVoiceResponse::class, $result);
     }
 
     #[Test]

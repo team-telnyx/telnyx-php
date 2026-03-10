@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data;
+namespace Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse\Data;
 
 /**
  * The action type. It can be one of the following: <br/>
