@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SimCards\Actions\BulkSimCardAction;
+namespace Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse\Data;
 
 /**
  * The action type. It can be one of the following: <br/>
