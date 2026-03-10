@@ -2,29 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\BulkSimCardActions;
+namespace Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse;
 
-use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse\ActionType;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse\Data\ActionType;
 
 /**
- * @phpstan-import-type SimCardActionsSummaryShape from \Telnyx\BulkSimCardActions\SimCardActionsSummary
+ * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.
  *
- * @phpstan-type BulkSimCardActionListResponseShape = array{
+ * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   actionType?: null|ActionType|value-of<ActionType>,
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   settings?: array<string,mixed>|null,
- *   simCardActionsSummary?: list<SimCardActionsSummary|SimCardActionsSummaryShape>|null,
  *   updatedAt?: string|null,
  * }
  */
-final class BulkSimCardActionListResponse implements BaseModel
+final class Data implements BaseModel
 {
-    /** @use SdkModel<BulkSimCardActionListResponseShape> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
@@ -63,10 +62,6 @@ final class BulkSimCardActionListResponse implements BaseModel
     #[Optional(map: 'mixed')]
     public ?array $settings;
 
-    /** @var list<SimCardActionsSummary>|null $simCardActionsSummary */
-    #[Optional('sim_card_actions_summary', list: SimCardActionsSummary::class)]
-    public ?array $simCardActionsSummary;
-
     /**
      * ISO 8601 formatted date-time indicating when the resource was updated.
      */
@@ -85,7 +80,6 @@ final class BulkSimCardActionListResponse implements BaseModel
      *
      * @param ActionType|value-of<ActionType>|null $actionType
      * @param array<string,mixed>|null $settings
-     * @param list<SimCardActionsSummary|SimCardActionsSummaryShape>|null $simCardActionsSummary
      */
     public static function with(
         ?string $id = null,
@@ -93,7 +87,6 @@ final class BulkSimCardActionListResponse implements BaseModel
         ?string $createdAt = null,
         ?string $recordType = null,
         ?array $settings = null,
-        ?array $simCardActionsSummary = null,
         ?string $updatedAt = null,
     ): self {
         $self = new self;
@@ -103,7 +96,6 @@ final class BulkSimCardActionListResponse implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $settings && $self['settings'] = $settings;
-        null !== $simCardActionsSummary && $self['simCardActionsSummary'] = $simCardActionsSummary;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
@@ -166,18 +158,6 @@ final class BulkSimCardActionListResponse implements BaseModel
     {
         $self = clone $this;
         $self['settings'] = $settings;
-
-        return $self;
-    }
-
-    /**
-     * @param list<SimCardActionsSummary|SimCardActionsSummaryShape> $simCardActionsSummary
-     */
-    public function withSimCardActionsSummary(
-        array $simCardActionsSummary
-    ): self {
-        $self = clone $this;
-        $self['simCardActionsSummary'] = $simCardActionsSummary;
 
         return $self;
     }

@@ -11,6 +11,10 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SimCards\ActionsRawContract;
+use Telnyx\SimCards\Actions\ActionBulkDisableVoiceParams;
+use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse;
+use Telnyx\SimCards\Actions\ActionBulkEnableVoiceParams;
+use Telnyx\SimCards\Actions\ActionBulkEnableVoiceResponse;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsParams;
 use Telnyx\SimCards\Actions\ActionBulkSetPublicIPsResponse;
 use Telnyx\SimCards\Actions\ActionDisableResponse;
@@ -97,6 +101,74 @@ final class ActionsRawService implements ActionsRawContract
             options: $options,
             convert: SimCardAction::class,
             page: DefaultFlatPagination::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * This API triggers an asynchronous operation to disable voice on SIM cards belonging to a specified SIM Card Group.<br/>
+     * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Actions can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
+     *
+     * The overall status of the Bulk SIM Card Action can be followed through the [List Bulk SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-bulk-sim-card-actions) API.
+     *
+     * @param array{simCardGroupID: string}|ActionBulkDisableVoiceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionBulkDisableVoiceResponse>
+     *
+     * @throws APIException
+     */
+    public function bulkDisableVoice(
+        array|ActionBulkDisableVoiceParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionBulkDisableVoiceParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'sim_cards/actions/bulk_disable_voice',
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionBulkDisableVoiceResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * This API triggers an asynchronous operation to enable voice on SIM cards belonging to a specified SIM Card Group.<br/>
+     * For each SIM Card a SIM Card Action will be generated. The status of the SIM Card Actions can be followed through the [List SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-sim-card-actions) API.
+     *
+     * The overall status of the Bulk SIM Card Action can be followed through the [List Bulk SIM Card Action](https://developers.telnyx.com/api-reference/sim-card-actions/list-bulk-sim-card-actions) API.
+     *
+     * @param array{simCardGroupID: string}|ActionBulkEnableVoiceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionBulkEnableVoiceResponse>
+     *
+     * @throws APIException
+     */
+    public function bulkEnableVoice(
+        array|ActionBulkEnableVoiceParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionBulkEnableVoiceParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'sim_cards/actions/bulk_enable_voice',
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionBulkEnableVoiceResponse::class,
         );
     }
 
