@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.71.0 (2026-03-10)
+
+Full Changelog: [v6.70.0...v6.71.0](https://github.com/team-telnyx/telnyx-php/compare/v6.70.0...v6.71.0)
+
+### Features
+
+* CW-2881 publish wireless VoLTE docs to prod ([646e35c](https://github.com/team-telnyx/telnyx-php/commit/646e35c46aa7b6a4e0e49760f9fa78adf1f07996))
+
 ## 6.70.0 (2026-03-09)
 
 Full Changelog: [v6.69.0...v6.70.0](https://github.com/team-telnyx/telnyx-php/compare/v6.69.0...v6.70.0)
