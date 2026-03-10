@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\SimCards\Actions;
+namespace Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SimCards\Actions\BulkSimCardAction\ActionType;
+use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse\Data\ActionType;
 
 /**
  * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.
  *
- * @phpstan-type BulkSimCardActionShape = array{
+ * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   actionType?: null|ActionType|value-of<ActionType>,
  *   createdAt?: string|null,
@@ -21,9 +21,9 @@ use Telnyx\SimCards\Actions\BulkSimCardAction\ActionType;
  *   updatedAt?: string|null,
  * }
  */
-final class BulkSimCardAction implements BaseModel
+final class Data implements BaseModel
 {
-    /** @use SdkModel<BulkSimCardActionShape> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     /**
