@@ -41,6 +41,7 @@ final class ChatRawService implements ChatRawContract
      *   apiKeyRef?: string,
      *   bestOf?: int,
      *   earlyStopping?: bool,
+     *   enableThinking?: bool,
      *   frequencyPenalty?: float,
      *   guidedChoice?: list<string>,
      *   guidedJson?: array<string,mixed>,

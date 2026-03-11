@@ -45,6 +45,7 @@ final class ChatService implements ChatContract
      * @param string $apiKeyRef If you are using an external inference provider like xAI or OpenAI, this field allows you to pass along a reference to your API key. After creating an [integration secret](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) for you API key, pass the secret's `identifier` in this field.
      * @param int $bestOf this is used with `use_beam_search` to determine how many candidate beams to explore
      * @param bool $earlyStopping This is used with `use_beam_search`. If `true`, generation stops as soon as there are `best_of` complete candidates; if `false`, a heuristic is applied and the generation stops when is it very unlikely to find better candidates.
+     * @param bool $enableThinking Whether to enable the thinking/reasoning phase for models that support it (e.g., QwQ, Qwen3). When set to false, the model will skip the internal reasoning step and respond directly, which can reduce latency. Defaults to true.
      * @param float $frequencyPenalty higher values will penalize the model from repeating the same output tokens
      * @param list<string> $guidedChoice if specified, the output will be exactly one of the choices
      * @param array<string,mixed> $guidedJson Must be a valid JSON schema. If specified, the output will follow the JSON schema.
@@ -75,6 +76,7 @@ final class ChatService implements ChatContract
         ?string $apiKeyRef = null,
         ?int $bestOf = null,
         bool $earlyStopping = false,
+        bool $enableThinking = true,
         float $frequencyPenalty = 0,
         ?array $guidedChoice = null,
         ?array $guidedJson = null,
@@ -102,6 +104,7 @@ final class ChatService implements ChatContract
                 'apiKeyRef' => $apiKeyRef,
                 'bestOf' => $bestOf,
                 'earlyStopping' => $earlyStopping,
+                'enableThinking' => $enableThinking,
                 'frequencyPenalty' => $frequencyPenalty,
                 'guidedChoice' => $guidedChoice,
                 'guidedJson' => $guidedJson,
