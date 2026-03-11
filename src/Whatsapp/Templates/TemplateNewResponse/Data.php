@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Whatsapp\MessageTemplates;
+namespace Telnyx\Whatsapp\Templates\TemplateNewResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse\Category;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse\WhatsappBusinessAccount;
+use Telnyx\Whatsapp\Templates\TemplateNewResponse\Data\Category;
+use Telnyx\Whatsapp\Templates\TemplateNewResponse\Data\WhatsappBusinessAccount;
 
 /**
- * @phpstan-import-type WhatsappBusinessAccountShape from \Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse\WhatsappBusinessAccount
+ * @phpstan-import-type WhatsappBusinessAccountShape from \Telnyx\Whatsapp\Templates\TemplateNewResponse\Data\WhatsappBusinessAccount
  *
- * @phpstan-type MessageTemplateListResponseShape = array{
+ * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   category?: null|Category|value-of<Category>,
  *   components?: list<mixed>|null,
@@ -28,9 +28,9 @@ use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse\WhatsappBusines
  *   whatsappBusinessAccount?: null|WhatsappBusinessAccount|WhatsappBusinessAccountShape,
  * }
  */
-final class MessageTemplateListResponse implements BaseModel
+final class Data implements BaseModel
 {
-    /** @use SdkModel<MessageTemplateListResponseShape> */
+    /** @use SdkModel<DataShape> */
     use SdkModel;
 
     #[Optional]

@@ -10,20 +10,20 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\ServiceContracts\Whatsapp\MessageTemplatesRawContract;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams\Category;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListParams;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListParams\FilterCategory;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateNewResponse;
+use Telnyx\ServiceContracts\Whatsapp\TemplatesRawContract;
+use Telnyx\Whatsapp\Templates\TemplateCreateParams;
+use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
+use Telnyx\Whatsapp\Templates\TemplateListParams;
+use Telnyx\Whatsapp\Templates\TemplateListParams\FilterCategory;
+use Telnyx\Whatsapp\Templates\TemplateListResponse;
+use Telnyx\Whatsapp\Templates\TemplateNewResponse;
 
 /**
  * Manage Whatsapp message templates.
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
-final class MessageTemplatesRawService implements MessageTemplatesRawContract
+final class TemplatesRawService implements TemplatesRawContract
 {
     // @phpstan-ignore-next-line
     /**
@@ -42,18 +42,18 @@ final class MessageTemplatesRawService implements MessageTemplatesRawContract
      *   language: string,
      *   name: string,
      *   wabaID: string,
-     * }|MessageTemplateCreateParams $params
+     * }|TemplateCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MessageTemplateNewResponse>
+     * @return BaseResponse<TemplateNewResponse>
      *
      * @throws APIException
      */
     public function create(
-        array|MessageTemplateCreateParams $params,
+        array|TemplateCreateParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = MessageTemplateCreateParams::parseRequest(
+        [$parsed, $options] = TemplateCreateParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -64,7 +64,7 @@ final class MessageTemplatesRawService implements MessageTemplatesRawContract
             path: 'v2/whatsapp/message_templates',
             body: (object) $parsed,
             options: $options,
-            convert: MessageTemplateNewResponse::class,
+            convert: TemplateNewResponse::class,
         );
     }
 
@@ -80,18 +80,18 @@ final class MessageTemplatesRawService implements MessageTemplatesRawContract
      *   filterWabaID?: string,
      *   pageNumber?: int,
      *   pageSize?: int,
-     * }|MessageTemplateListParams $params
+     * }|TemplateListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessageTemplateListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<TemplateListResponse>>
      *
      * @throws APIException
      */
     public function list(
-        array|MessageTemplateListParams $params,
+        array|TemplateListParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = MessageTemplateListParams::parseRequest(
+        [$parsed, $options] = TemplateListParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -112,7 +112,7 @@ final class MessageTemplatesRawService implements MessageTemplatesRawContract
                 ],
             ),
             options: $options,
-            convert: MessageTemplateListResponse::class,
+            convert: TemplateListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

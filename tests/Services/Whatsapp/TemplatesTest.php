@@ -8,15 +8,15 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateNewResponse;
+use Telnyx\Whatsapp\Templates\TemplateListResponse;
+use Telnyx\Whatsapp\Templates\TemplateNewResponse;
 use Tests\UnsupportedMockTests;
 
 /**
  * @internal
  */
 #[CoversNothing]
-final class MessageTemplatesTest extends TestCase
+final class TemplatesTest extends TestCase
 {
     protected Client $client;
 
@@ -37,7 +37,7 @@ final class MessageTemplatesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->whatsapp->messageTemplates->create(
+        $result = $this->client->whatsapp->templates->create(
             category: 'MARKETING',
             components: [(object) []],
             language: 'language',
@@ -46,7 +46,7 @@ final class MessageTemplatesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MessageTemplateNewResponse::class, $result);
+        $this->assertInstanceOf(TemplateNewResponse::class, $result);
     }
 
     #[Test]
@@ -56,7 +56,7 @@ final class MessageTemplatesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->whatsapp->messageTemplates->create(
+        $result = $this->client->whatsapp->templates->create(
             category: 'MARKETING',
             components: [(object) []],
             language: 'language',
@@ -65,7 +65,7 @@ final class MessageTemplatesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MessageTemplateNewResponse::class, $result);
+        $this->assertInstanceOf(TemplateNewResponse::class, $result);
     }
 
     #[Test]
@@ -75,14 +75,14 @@ final class MessageTemplatesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $page = $this->client->whatsapp->messageTemplates->list();
+        $page = $this->client->whatsapp->templates->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(DefaultFlatPagination::class, $page);
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(MessageTemplateListResponse::class, $item);
+            $this->assertInstanceOf(TemplateListResponse::class, $item);
         }
     }
 }

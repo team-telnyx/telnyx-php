@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Whatsapp\MessageTemplates;
+namespace Telnyx\Whatsapp\Templates;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams\Category;
+use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
 
 /**
  * Create a Whatsapp message template.
  *
- * @see Telnyx\Services\Whatsapp\MessageTemplatesService::create()
+ * @see Telnyx\Services\Whatsapp\TemplatesService::create()
  *
- * @phpstan-type MessageTemplateCreateParamsShape = array{
+ * @phpstan-type TemplateCreateParamsShape = array{
  *   category: Category|value-of<Category>,
  *   components: list<mixed>,
  *   language: string,
@@ -23,9 +23,9 @@ use Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams\Category;
  *   wabaID: string,
  * }
  */
-final class MessageTemplateCreateParams implements BaseModel
+final class TemplateCreateParams implements BaseModel
 {
-    /** @use SdkModel<MessageTemplateCreateParamsShape> */
+    /** @use SdkModel<TemplateCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -47,11 +47,11 @@ final class MessageTemplateCreateParams implements BaseModel
     public string $wabaID;
 
     /**
-     * `new MessageTemplateCreateParams()` is missing required properties by the API.
+     * `new TemplateCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * MessageTemplateCreateParams::with(
+     * TemplateCreateParams::with(
      *   category: ..., components: ..., language: ..., name: ..., wabaID: ...
      * )
      * ```
@@ -59,7 +59,7 @@ final class MessageTemplateCreateParams implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new MessageTemplateCreateParams)
+     * (new TemplateCreateParams)
      *   ->withCategory(...)
      *   ->withComponents(...)
      *   ->withLanguage(...)
