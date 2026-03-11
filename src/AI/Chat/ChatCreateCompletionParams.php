@@ -29,6 +29,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   apiKeyRef?: string|null,
  *   bestOf?: int|null,
  *   earlyStopping?: bool|null,
+ *   enableThinking?: bool|null,
  *   frequencyPenalty?: float|null,
  *   guidedChoice?: list<string>|null,
  *   guidedJson?: array<string,mixed>|null,
@@ -81,6 +82,12 @@ final class ChatCreateCompletionParams implements BaseModel
      */
     #[Optional('early_stopping')]
     public ?bool $earlyStopping;
+
+    /**
+     * Whether to enable the thinking/reasoning phase for models that support it (e.g., QwQ, Qwen3). When set to false, the model will skip the internal reasoning step and respond directly, which can reduce latency. Defaults to true.
+     */
+    #[Optional('enable_thinking')]
+    public ?bool $enableThinking;
 
     /**
      * Higher values will penalize the model from repeating the same output tokens.
@@ -236,6 +243,7 @@ final class ChatCreateCompletionParams implements BaseModel
         ?string $apiKeyRef = null,
         ?int $bestOf = null,
         ?bool $earlyStopping = null,
+        ?bool $enableThinking = null,
         ?float $frequencyPenalty = null,
         ?array $guidedChoice = null,
         ?array $guidedJson = null,
@@ -263,6 +271,7 @@ final class ChatCreateCompletionParams implements BaseModel
         null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $bestOf && $self['bestOf'] = $bestOf;
         null !== $earlyStopping && $self['earlyStopping'] = $earlyStopping;
+        null !== $enableThinking && $self['enableThinking'] = $enableThinking;
         null !== $frequencyPenalty && $self['frequencyPenalty'] = $frequencyPenalty;
         null !== $guidedChoice && $self['guidedChoice'] = $guidedChoice;
         null !== $guidedJson && $self['guidedJson'] = $guidedJson;
@@ -328,6 +337,17 @@ final class ChatCreateCompletionParams implements BaseModel
     {
         $self = clone $this;
         $self['earlyStopping'] = $earlyStopping;
+
+        return $self;
+    }
+
+    /**
+     * Whether to enable the thinking/reasoning phase for models that support it (e.g., QwQ, Qwen3). When set to false, the model will skip the internal reasoning step and respond directly, which can reduce latency. Defaults to true.
+     */
+    public function withEnableThinking(bool $enableThinking): self
+    {
+        $self = clone $this;
+        $self['enableThinking'] = $enableThinking;
 
         return $self;
     }
