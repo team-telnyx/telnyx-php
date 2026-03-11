@@ -7,8 +7,8 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\ServiceContracts\WhatsappContract;
 use Telnyx\Services\Whatsapp\BusinessAccountsService;
+use Telnyx\Services\Whatsapp\MessageTemplatesService;
 use Telnyx\Services\Whatsapp\PhoneNumbersService;
-use Telnyx\Services\Whatsapp\TemplatesService;
 
 final class WhatsappService implements WhatsappContract
 {
@@ -25,7 +25,7 @@ final class WhatsappService implements WhatsappContract
     /**
      * @api
      */
-    public TemplatesService $templates;
+    public MessageTemplatesService $messageTemplates;
 
     /**
      * @api
@@ -39,7 +39,7 @@ final class WhatsappService implements WhatsappContract
     {
         $this->raw = new WhatsappRawService($client);
         $this->businessAccounts = new BusinessAccountsService($client);
-        $this->templates = new TemplatesService($client);
+        $this->messageTemplates = new MessageTemplatesService($client);
         $this->phoneNumbers = new PhoneNumbersService($client);
     }
 }

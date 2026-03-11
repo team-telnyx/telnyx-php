@@ -33,7 +33,7 @@ interface WhatsappMessageTemplatesContract
      *
      * @param string $id Whatsapp message template ID
      * @param Category|value-of<Category> $category
-     * @param list<array<string,mixed>> $components
+     * @param list<mixed> $components
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -43,7 +43,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
  *   azure?: null|Azure|AzureShape,
  *   disableCache?: bool|null,
  *   elevenlabs?: null|Elevenlabs|ElevenlabsShape,
- *   inworld?: array<string,mixed>|null,
+ *   inworld?: mixed,
  *   language?: string|null,
  *   minimax?: null|Minimax|MinimaxShape,
  *   outputType?: null|OutputType|value-of<OutputType>,
@@ -89,11 +89,9 @@ final class TextToSpeechGenerateParams implements BaseModel
 
     /**
      * Inworld provider-specific parameters.
-     *
-     * @var array<string,mixed>|null $inworld
      */
-    #[Optional(map: 'mixed')]
-    public ?array $inworld;
+    #[Optional]
+    public mixed $inworld;
 
     /**
      * Language code (e.g. `en-US`). Usage varies by provider.
@@ -182,7 +180,6 @@ final class TextToSpeechGenerateParams implements BaseModel
      * @param Aws|AwsShape|null $aws
      * @param Azure|AzureShape|null $azure
      * @param Elevenlabs|ElevenlabsShape|null $elevenlabs
-     * @param array<string,mixed>|null $inworld
      * @param Minimax|MinimaxShape|null $minimax
      * @param OutputType|value-of<OutputType>|null $outputType
      * @param Provider|value-of<Provider>|null $provider
@@ -197,7 +194,7 @@ final class TextToSpeechGenerateParams implements BaseModel
         Azure|array|null $azure = null,
         ?bool $disableCache = null,
         Elevenlabs|array|null $elevenlabs = null,
-        ?array $inworld = null,
+        mixed $inworld = null,
         ?string $language = null,
         Minimax|array|null $minimax = null,
         OutputType|string|null $outputType = null,
@@ -284,10 +281,8 @@ final class TextToSpeechGenerateParams implements BaseModel
 
     /**
      * Inworld provider-specific parameters.
-     *
-     * @param array<string,mixed> $inworld
      */
-    public function withInworld(array $inworld): self
+    public function withInworld(mixed $inworld): self
     {
         $self = clone $this;
         $self['inworld'] = $inworld;

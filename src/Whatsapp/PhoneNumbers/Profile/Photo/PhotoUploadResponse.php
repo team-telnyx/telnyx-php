@@ -7,14 +7,12 @@ namespace Telnyx\Whatsapp\PhoneNumbers\Profile\Photo;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Whatsapp\PhoneNumbers\Profile\ProfileData;
+use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadResponse\Data;
 
 /**
- * @phpstan-import-type ProfileDataShape from \Telnyx\Whatsapp\PhoneNumbers\Profile\ProfileData
+ * @phpstan-import-type DataShape from \Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadResponse\Data
  *
- * @phpstan-type PhotoUploadResponseShape = array{
- *   data?: null|ProfileData|ProfileDataShape
- * }
+ * @phpstan-type PhotoUploadResponseShape = array{data?: null|Data|DataShape}
  */
 final class PhotoUploadResponse implements BaseModel
 {
@@ -22,7 +20,7 @@ final class PhotoUploadResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?ProfileData $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -34,9 +32,9 @@ final class PhotoUploadResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ProfileData|ProfileDataShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(ProfileData|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +44,9 @@ final class PhotoUploadResponse implements BaseModel
     }
 
     /**
-     * @param ProfileData|ProfileDataShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(ProfileData|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
