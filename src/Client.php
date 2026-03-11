@@ -156,6 +156,8 @@ use Telnyx\Services\VirtualCrossConnectsService;
 use Telnyx\Services\WebhookDeliveriesService;
 use Telnyx\Services\WebhooksService;
 use Telnyx\Services\WellKnownService;
+use Telnyx\Services\WhatsappMessageTemplatesService;
+use Telnyx\Services\WhatsappService;
 use Telnyx\Services\WireguardInterfacesService;
 use Telnyx\Services\WireguardPeersService;
 use Telnyx\Services\WirelessBlocklistsService;
@@ -944,6 +946,16 @@ class Client extends BaseClient
     public SessionAnalysisService $sessionAnalysis;
 
     /**
+     * @api
+     */
+    public WhatsappService $whatsapp;
+
+    /**
+     * @api
+     */
+    public WhatsappMessageTemplatesService $whatsappMessageTemplates;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1146,6 +1158,8 @@ class Client extends BaseClient
         $this->alphanumericSenderIDs = new AlphanumericSenderIDsService($this);
         $this->messagingProfileMetrics = new MessagingProfileMetricsService($this);
         $this->sessionAnalysis = new SessionAnalysisService($this);
+        $this->whatsapp = new WhatsappService($this);
+        $this->whatsappMessageTemplates = new WhatsappMessageTemplatesService($this);
     }
 
     /** @return array<string,string> */
