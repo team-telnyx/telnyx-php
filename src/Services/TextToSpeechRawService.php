@@ -61,7 +61,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *   azure?: Azure|AzureShape,
      *   disableCache?: bool,
      *   elevenlabs?: Elevenlabs|ElevenlabsShape,
-     *   inworld?: array<string,mixed>,
+     *   inworld?: mixed,
      *   language?: string,
      *   minimax?: Minimax|MinimaxShape,
      *   outputType?: OutputType|value-of<OutputType>,

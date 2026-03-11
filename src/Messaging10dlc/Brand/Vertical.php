@@ -9,37 +9,49 @@ namespace Telnyx\Messaging10dlc\Brand;
  */
 enum Vertical: string
 {
-    case REAL_ESTATE = 'REAL_ESTATE';
+    case AGRICULTURE = 'AGRICULTURE';
 
-    case HEALTHCARE = 'HEALTHCARE';
+    case COMMUNICATION = 'COMMUNICATION';
+
+    case CONSTRUCTION = 'CONSTRUCTION';
+
+    case EDUCATION = 'EDUCATION';
 
     case ENERGY = 'ENERGY';
 
     case ENTERTAINMENT = 'ENTERTAINMENT';
 
-    case RETAIL = 'RETAIL';
-
-    case AGRICULTURE = 'AGRICULTURE';
-
-    case INSURANCE = 'INSURANCE';
-
-    case EDUCATION = 'EDUCATION';
-
-    case HOSPITALITY = 'HOSPITALITY';
-
     case FINANCIAL = 'FINANCIAL';
 
     case GAMBLING = 'GAMBLING';
 
-    case CONSTRUCTION = 'CONSTRUCTION';
+    case GOVERNMENT = 'GOVERNMENT';
 
-    case NGO = 'NGO';
+    case HEALTHCARE = 'HEALTHCARE';
+
+    case HOSPITALITY = 'HOSPITALITY';
+
+    case HUMAN_RESOURCES = 'HUMAN_RESOURCES';
+
+    case INSURANCE = 'INSURANCE';
+
+    case LEGAL = 'LEGAL';
 
     case MANUFACTURING = 'MANUFACTURING';
 
-    case GOVERNMENT = 'GOVERNMENT';
+    case NGO = 'NGO';
+
+    case POLITICAL = 'POLITICAL';
+
+    case POSTAL = 'POSTAL';
+
+    case PROFESSIONAL = 'PROFESSIONAL';
+
+    case REAL_ESTATE = 'REAL_ESTATE';
+
+    case RETAIL = 'RETAIL';
 
     case TECHNOLOGY = 'TECHNOLOGY';
 
-    case COMMUNICATION = 'COMMUNICATION';
+    case TRANSPORTATION = 'TRANSPORTATION';
 }

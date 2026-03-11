@@ -59,7 +59,7 @@ final class WhatsappMessageTemplatesRawService implements WhatsappMessageTemplat
      *
      * @param string $id Whatsapp message template ID
      * @param array{
-     *   category?: Category|value-of<Category>, components?: list<array<string,mixed>>
+     *   category?: Category|value-of<Category>, components?: list<mixed>
      * }|WhatsappMessageTemplateUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
