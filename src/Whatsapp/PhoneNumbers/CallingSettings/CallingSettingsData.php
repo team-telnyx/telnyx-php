@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Whatsapp\PhoneNumbers\CallingSettings\CallingSettingUpdateResponse;
+namespace Telnyx\Whatsapp\PhoneNumbers\CallingSettings;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type CallingSettingsDataShape = array{
  *   enabled?: bool|null,
  *   phoneNumber?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
-final class Data implements BaseModel
+final class CallingSettingsData implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<CallingSettingsDataShape> */
     use SdkModel;
 
     /**

@@ -15,8 +15,8 @@ use Telnyx\Whatsapp\Templates\TemplateCreateParams;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
 use Telnyx\Whatsapp\Templates\TemplateListParams;
 use Telnyx\Whatsapp\Templates\TemplateListParams\FilterCategory;
-use Telnyx\Whatsapp\Templates\TemplateListResponse;
 use Telnyx\Whatsapp\Templates\TemplateNewResponse;
+use Telnyx\WhatsappTemplateData;
 
 /**
  * Manage Whatsapp message templates.
@@ -83,7 +83,7 @@ final class TemplatesRawService implements TemplatesRawContract
      * }|TemplateListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<TemplateListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WhatsappTemplateData>>
      *
      * @throws APIException
      */
@@ -112,7 +112,7 @@ final class TemplatesRawService implements TemplatesRawContract
                 ],
             ),
             options: $options,
-            convert: TemplateListResponse::class,
+            convert: WhatsappTemplateData::class,
             page: DefaultFlatPagination::class,
         );
     }

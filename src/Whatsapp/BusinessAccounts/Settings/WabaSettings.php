@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Whatsapp\BusinessAccounts\Settings\SettingGetResponse;
+namespace Telnyx\Whatsapp\BusinessAccounts\Settings;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type WabaSettingsShape = array{
  *   id?: string|null,
  *   name?: string|null,
  *   recordType?: string|null,
@@ -21,9 +21,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   webhookURL?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class WabaSettings implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<WabaSettingsShape> */
     use SdkModel;
 
     /**

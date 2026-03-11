@@ -12,8 +12,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\TemplatesContract;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
 use Telnyx\Whatsapp\Templates\TemplateListParams\FilterCategory;
-use Telnyx\Whatsapp\Templates\TemplateListResponse;
 use Telnyx\Whatsapp\Templates\TemplateNewResponse;
+use Telnyx\WhatsappTemplateData;
 
 /**
  * Manage Whatsapp message templates.
@@ -81,7 +81,7 @@ final class TemplatesService implements TemplatesContract
      * @param string $filterWabaID Filter by WABA ID
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<TemplateListResponse>
+     * @return DefaultFlatPagination<WhatsappTemplateData>
      *
      * @throws APIException
      */

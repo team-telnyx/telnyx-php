@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Whatsapp\Templates\TemplateListResponse;
 use Telnyx\Whatsapp\Templates\TemplateNewResponse;
+use Telnyx\WhatsappTemplateData;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -82,7 +82,7 @@ final class TemplatesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(TemplateListResponse::class, $item);
+            $this->assertInstanceOf(WhatsappTemplateData::class, $item);
         }
     }
 }
