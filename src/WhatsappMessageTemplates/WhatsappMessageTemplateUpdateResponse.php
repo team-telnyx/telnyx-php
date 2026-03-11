@@ -7,13 +7,13 @@ namespace Telnyx\WhatsappMessageTemplates;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateResponse\Data;
+use Telnyx\WhatsappTemplateData;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateResponse\Data
+ * @phpstan-import-type WhatsappTemplateDataShape from \Telnyx\WhatsappTemplateData
  *
  * @phpstan-type WhatsappMessageTemplateUpdateResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|WhatsappTemplateData|WhatsappTemplateDataShape
  * }
  */
 final class WhatsappMessageTemplateUpdateResponse implements BaseModel
@@ -22,7 +22,7 @@ final class WhatsappMessageTemplateUpdateResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?WhatsappTemplateData $data;
 
     public function __construct()
     {
@@ -34,9 +34,9 @@ final class WhatsappMessageTemplateUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param WhatsappTemplateData|WhatsappTemplateDataShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(WhatsappTemplateData|array|null $data = null): self
     {
         $self = new self;
 
@@ -46,9 +46,9 @@ final class WhatsappMessageTemplateUpdateResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param WhatsappTemplateData|WhatsappTemplateDataShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(WhatsappTemplateData|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
