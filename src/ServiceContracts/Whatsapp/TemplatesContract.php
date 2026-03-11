@@ -7,15 +7,15 @@ namespace Telnyx\ServiceContracts\Whatsapp;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams\Category;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListParams\FilterCategory;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateNewResponse;
+use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
+use Telnyx\Whatsapp\Templates\TemplateListParams\FilterCategory;
+use Telnyx\Whatsapp\Templates\TemplateListResponse;
+use Telnyx\Whatsapp\Templates\TemplateNewResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
-interface MessageTemplatesContract
+interface TemplatesContract
 {
     /**
      * @api
@@ -33,7 +33,7 @@ interface MessageTemplatesContract
         string $name,
         string $wabaID,
         RequestOptions|array|null $requestOptions = null,
-    ): MessageTemplateNewResponse;
+    ): TemplateNewResponse;
 
     /**
      * @api
@@ -44,7 +44,7 @@ interface MessageTemplatesContract
      * @param string $filterWabaID Filter by WABA ID
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<MessageTemplateListResponse>
+     * @return DefaultFlatPagination<TemplateListResponse>
      *
      * @throws APIException
      */

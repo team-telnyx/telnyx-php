@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Whatsapp\MessageTemplates;
+namespace Telnyx\Whatsapp\Templates;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListParams\FilterCategory;
+use Telnyx\Whatsapp\Templates\TemplateListParams\FilterCategory;
 
 /**
  * List Whatsapp message templates.
  *
- * @see Telnyx\Services\Whatsapp\MessageTemplatesService::list()
+ * @see Telnyx\Services\Whatsapp\TemplatesService::list()
  *
- * @phpstan-type MessageTemplateListParamsShape = array{
+ * @phpstan-type TemplateListParamsShape = array{
  *   filterCategory?: null|FilterCategory|value-of<FilterCategory>,
  *   filterSearch?: string|null,
  *   filterStatus?: string|null,
@@ -24,9 +24,9 @@ use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListParams\FilterCategory;
  *   pageSize?: int|null,
  * }
  */
-final class MessageTemplateListParams implements BaseModel
+final class TemplateListParams implements BaseModel
 {
-    /** @use SdkModel<MessageTemplateListParamsShape> */
+    /** @use SdkModel<TemplateListParamsShape> */
     use SdkModel;
     use SdkParams;
 

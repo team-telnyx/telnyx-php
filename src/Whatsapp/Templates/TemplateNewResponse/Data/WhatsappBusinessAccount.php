@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Whatsapp\MessageTemplates\MessageTemplateNewResponse\Data;
+namespace Telnyx\Whatsapp\Templates\TemplateNewResponse\Data;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;

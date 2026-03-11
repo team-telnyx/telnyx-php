@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams;
+namespace Telnyx\Whatsapp\Templates\TemplateListParams;
 
-enum Category: string
+/**
+ * Filter by category.
+ */
+enum FilterCategory: string
 {
     case MARKETING = 'MARKETING';
 

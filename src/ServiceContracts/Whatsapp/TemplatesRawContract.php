@@ -8,43 +8,43 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListParams;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateNewResponse;
+use Telnyx\Whatsapp\Templates\TemplateCreateParams;
+use Telnyx\Whatsapp\Templates\TemplateListParams;
+use Telnyx\Whatsapp\Templates\TemplateListResponse;
+use Telnyx\Whatsapp\Templates\TemplateNewResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
-interface MessageTemplatesRawContract
+interface TemplatesRawContract
 {
     /**
      * @api
      *
-     * @param array<string,mixed>|MessageTemplateCreateParams $params
+     * @param array<string,mixed>|TemplateCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MessageTemplateNewResponse>
+     * @return BaseResponse<TemplateNewResponse>
      *
      * @throws APIException
      */
     public function create(
-        array|MessageTemplateCreateParams $params,
+        array|TemplateCreateParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
-     * @param array<string,mixed>|MessageTemplateListParams $params
+     * @param array<string,mixed>|TemplateListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessageTemplateListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<TemplateListResponse>>
      *
      * @throws APIException
      */
     public function list(
-        array|MessageTemplateListParams $params,
+        array|TemplateListParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

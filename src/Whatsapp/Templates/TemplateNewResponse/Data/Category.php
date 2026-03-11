@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse;
+namespace Telnyx\Whatsapp\Templates\TemplateNewResponse\Data;
 
 enum Category: string
 {

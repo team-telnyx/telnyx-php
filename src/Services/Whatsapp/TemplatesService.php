@@ -9,30 +9,30 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\ServiceContracts\Whatsapp\MessageTemplatesContract;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams\Category;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListParams\FilterCategory;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateNewResponse;
+use Telnyx\ServiceContracts\Whatsapp\TemplatesContract;
+use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
+use Telnyx\Whatsapp\Templates\TemplateListParams\FilterCategory;
+use Telnyx\Whatsapp\Templates\TemplateListResponse;
+use Telnyx\Whatsapp\Templates\TemplateNewResponse;
 
 /**
  * Manage Whatsapp message templates.
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
-final class MessageTemplatesService implements MessageTemplatesContract
+final class TemplatesService implements TemplatesContract
 {
     /**
      * @api
      */
-    public MessageTemplatesRawService $raw;
+    public TemplatesRawService $raw;
 
     /**
      * @internal
      */
     public function __construct(private Client $client)
     {
-        $this->raw = new MessageTemplatesRawService($client);
+        $this->raw = new TemplatesRawService($client);
     }
 
     /**
@@ -53,7 +53,7 @@ final class MessageTemplatesService implements MessageTemplatesContract
         string $name,
         string $wabaID,
         RequestOptions|array|null $requestOptions = null,
-    ): MessageTemplateNewResponse {
+    ): TemplateNewResponse {
         $params = Util::removeNulls(
             [
                 'category' => $category,
@@ -81,7 +81,7 @@ final class MessageTemplatesService implements MessageTemplatesContract
      * @param string $filterWabaID Filter by WABA ID
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<MessageTemplateListResponse>
+     * @return DefaultFlatPagination<TemplateListResponse>
      *
      * @throws APIException
      */
