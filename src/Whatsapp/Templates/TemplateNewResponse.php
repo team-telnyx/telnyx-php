@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\WhatsappMessageTemplates;
+namespace Telnyx\Whatsapp\Templates;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -12,13 +12,13 @@ use Telnyx\WhatsappTemplateData;
 /**
  * @phpstan-import-type WhatsappTemplateDataShape from \Telnyx\WhatsappTemplateData
  *
- * @phpstan-type WhatsappMessageTemplateGetResponseShape = array{
+ * @phpstan-type TemplateNewResponseShape = array{
  *   data?: null|WhatsappTemplateData|WhatsappTemplateDataShape
  * }
  */
-final class WhatsappMessageTemplateGetResponse implements BaseModel
+final class TemplateNewResponse implements BaseModel
 {
-    /** @use SdkModel<WhatsappMessageTemplateGetResponseShape> */
+    /** @use SdkModel<TemplateNewResponseShape> */
     use SdkModel;
 
     #[Optional]
