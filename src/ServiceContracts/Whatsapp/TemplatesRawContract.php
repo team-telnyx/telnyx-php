@@ -10,8 +10,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams;
 use Telnyx\Whatsapp\Templates\TemplateListParams;
-use Telnyx\Whatsapp\Templates\TemplateListResponse;
 use Telnyx\Whatsapp\Templates\TemplateNewResponse;
+use Telnyx\WhatsappTemplateData;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -39,7 +39,7 @@ interface TemplatesRawContract
      * @param array<string,mixed>|TemplateListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<TemplateListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WhatsappTemplateData>>
      *
      * @throws APIException
      */

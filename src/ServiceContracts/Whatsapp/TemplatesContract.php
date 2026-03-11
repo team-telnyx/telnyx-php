@@ -9,8 +9,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
 use Telnyx\Whatsapp\Templates\TemplateListParams\FilterCategory;
-use Telnyx\Whatsapp\Templates\TemplateListResponse;
 use Telnyx\Whatsapp\Templates\TemplateNewResponse;
+use Telnyx\WhatsappTemplateData;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -44,7 +44,7 @@ interface TemplatesContract
      * @param string $filterWabaID Filter by WABA ID
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<TemplateListResponse>
+     * @return DefaultFlatPagination<WhatsappTemplateData>
      *
      * @throws APIException
      */
