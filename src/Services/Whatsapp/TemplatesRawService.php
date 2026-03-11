@@ -38,7 +38,7 @@ final class TemplatesRawService implements TemplatesRawContract
      *
      * @param array{
      *   category: Category|value-of<Category>,
-     *   components: list<mixed>,
+     *   components: list<array<string,mixed>>,
      *   language: string,
      *   name: string,
      *   wabaID: string,

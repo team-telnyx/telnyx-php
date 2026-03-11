@@ -7,6 +7,7 @@ namespace Telnyx;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\WhatsappTemplateData\Category;
 use Telnyx\WhatsappTemplateData\WhatsappBusinessAccount;
 
@@ -16,7 +17,7 @@ use Telnyx\WhatsappTemplateData\WhatsappBusinessAccount;
  * @phpstan-type WhatsappTemplateDataShape = array{
  *   id?: string|null,
  *   category?: null|Category|value-of<Category>,
- *   components?: list<mixed>|null,
+ *   components?: list<array<string,mixed>>|null,
  *   createdAt?: \DateTimeInterface|null,
  *   language?: string|null,
  *   name?: string|null,
@@ -43,9 +44,9 @@ final class WhatsappTemplateData implements BaseModel
     /**
      * Whatsapp template components (header, body, footer, buttons).
      *
-     * @var list<mixed>|null $components
+     * @var list<array<string,mixed>>|null $components
      */
-    #[Optional(list: 'mixed')]
+    #[Optional(list: new MapOf('mixed'))]
     public ?array $components;
 
     #[Optional('created_at')]
@@ -86,7 +87,7 @@ final class WhatsappTemplateData implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Category|value-of<Category>|null $category
-     * @param list<mixed>|null $components
+     * @param list<array<string,mixed>>|null $components
      * @param WhatsappBusinessAccount|WhatsappBusinessAccountShape|null $whatsappBusinessAccount
      */
     public static function with(
@@ -143,7 +144,7 @@ final class WhatsappTemplateData implements BaseModel
     /**
      * Whatsapp template components (header, body, footer, buttons).
      *
-     * @param list<mixed> $components
+     * @param list<array<string,mixed>> $components
      */
     public function withComponents(array $components): self
     {

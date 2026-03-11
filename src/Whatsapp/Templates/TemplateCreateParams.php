@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
 
 /**
@@ -17,7 +18,7 @@ use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
  *
  * @phpstan-type TemplateCreateParamsShape = array{
  *   category: Category|value-of<Category>,
- *   components: list<mixed>,
+ *   components: list<array<string,mixed>>,
  *   language: string,
  *   name: string,
  *   wabaID: string,
@@ -33,8 +34,8 @@ final class TemplateCreateParams implements BaseModel
     #[Required(enum: Category::class)]
     public string $category;
 
-    /** @var list<mixed> $components */
-    #[Required(list: 'mixed')]
+    /** @var list<array<string,mixed>> $components */
+    #[Required(list: new MapOf('mixed'))]
     public array $components;
 
     #[Required]
@@ -78,7 +79,7 @@ final class TemplateCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Category|value-of<Category> $category
-     * @param list<mixed> $components
+     * @param list<array<string,mixed>> $components
      */
     public static function with(
         Category|string $category,
@@ -110,7 +111,7 @@ final class TemplateCreateParams implements BaseModel
     }
 
     /**
-     * @param list<mixed> $components
+     * @param list<array<string,mixed>> $components
      */
     public function withComponents(array $components): self
     {

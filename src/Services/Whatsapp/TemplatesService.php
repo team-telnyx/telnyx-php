@@ -41,7 +41,7 @@ final class TemplatesService implements TemplatesContract
      * Create a Whatsapp message template
      *
      * @param Category|value-of<Category> $category
-     * @param list<mixed> $components
+     * @param list<array<string,mixed>> $components
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
