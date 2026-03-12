@@ -153,6 +153,8 @@ use Telnyx\Services\VerifiedNumbersService;
 use Telnyx\Services\VerifyProfilesService;
 use Telnyx\Services\VirtualCrossConnectsCoverageService;
 use Telnyx\Services\VirtualCrossConnectsService;
+use Telnyx\Services\VoiceClonesService;
+use Telnyx\Services\VoiceDesignsService;
 use Telnyx\Services\WebhookDeliveriesService;
 use Telnyx\Services\WebhooksService;
 use Telnyx\Services\WellKnownService;
@@ -956,6 +958,16 @@ class Client extends BaseClient
     public WhatsappMessageTemplatesService $whatsappMessageTemplates;
 
     /**
+     * @api
+     */
+    public VoiceClonesService $voiceClones;
+
+    /**
+     * @api
+     */
+    public VoiceDesignsService $voiceDesigns;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1160,6 +1172,8 @@ class Client extends BaseClient
         $this->sessionAnalysis = new SessionAnalysisService($this);
         $this->whatsapp = new WhatsappService($this);
         $this->whatsappMessageTemplates = new WhatsappMessageTemplatesService($this);
+        $this->voiceClones = new VoiceClonesService($this);
+        $this->voiceDesigns = new VoiceDesignsService($this);
     }
 
     /** @return array<string,string> */
