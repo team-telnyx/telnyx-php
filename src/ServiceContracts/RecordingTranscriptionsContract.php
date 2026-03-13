@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\RecordingTranscriptions\RecordingTranscription;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionDeleteResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionGetResponse;
-use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
+use Telnyx\RecordingTranscriptions\RecordingTranscriptionListParams\Filter;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type FilterShape from \Telnyx\RecordingTranscriptions\RecordingTranscriptionListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface RecordingTranscriptionsContract
@@ -31,13 +34,19 @@ interface RecordingTranscriptionsContract
     /**
      * @api
      *
+     * @param Filter|FilterShape $filter filter recording transcriptions by various attributes
      * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<RecordingTranscription>
      *
      * @throws APIException
      */
     public function list(
-        RequestOptions|array|null $requestOptions = null
-    ): RecordingTranscriptionListResponse;
+        Filter|array|null $filter = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination;
 
     /**
      * @api

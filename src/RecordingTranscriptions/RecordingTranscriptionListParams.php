@@ -2,33 +2,33 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Recordings;
+namespace Telnyx\RecordingTranscriptions;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Recordings\RecordingListParams\Filter;
+use Telnyx\RecordingTranscriptions\RecordingTranscriptionListParams\Filter;
 
 /**
- * Returns a list of your call recordings.
+ * Returns a list of your recording transcriptions.
  *
- * @see Telnyx\Services\RecordingsService::list()
+ * @see Telnyx\Services\RecordingTranscriptionsService::list()
  *
- * @phpstan-import-type FilterShape from \Telnyx\Recordings\RecordingListParams\Filter
+ * @phpstan-import-type FilterShape from \Telnyx\RecordingTranscriptions\RecordingTranscriptionListParams\Filter
  *
- * @phpstan-type RecordingListParamsShape = array{
+ * @phpstan-type RecordingTranscriptionListParamsShape = array{
  *   filter?: null|Filter|FilterShape, pageNumber?: int|null, pageSize?: int|null
  * }
  */
-final class RecordingListParams implements BaseModel
+final class RecordingTranscriptionListParams implements BaseModel
 {
-    /** @use SdkModel<RecordingListParamsShape> */
+    /** @use SdkModel<RecordingTranscriptionListParamsShape> */
     use SdkModel;
     use SdkParams;
 
     /**
-     * Filter recordings by various attributes.
+     * Filter recording transcriptions by various attributes.
      */
     #[Optional]
     public ?Filter $filter;
@@ -66,7 +66,7 @@ final class RecordingListParams implements BaseModel
     }
 
     /**
-     * Filter recordings by various attributes.
+     * Filter recording transcriptions by various attributes.
      *
      * @param Filter|FilterShape $filter
      */

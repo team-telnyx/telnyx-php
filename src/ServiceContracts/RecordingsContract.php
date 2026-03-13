@@ -34,7 +34,7 @@ interface RecordingsContract
     /**
      * @api
      *
-     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[conference_id], filter[created_at][gte], filter[created_at][lte], filter[call_leg_id], filter[call_session_id], filter[from], filter[to], filter[connection_id], filter[sip_call_id]
+     * @param Filter|FilterShape $filter filter recordings by various attributes
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<RecordingResponseData>

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Recordings;
 
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Recordings\Actions\ActionDeleteResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -23,5 +24,5 @@ interface ActionsContract
     public function delete(
         array $ids,
         RequestOptions|array|null $requestOptions = null
-    ): mixed;
+    ): ActionDeleteResponse;
 }

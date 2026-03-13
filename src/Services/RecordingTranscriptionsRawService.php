@@ -7,15 +7,20 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\RecordingTranscriptions\RecordingTranscription;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionDeleteResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionGetResponse;
-use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
+use Telnyx\RecordingTranscriptions\RecordingTranscriptionListParams;
+use Telnyx\RecordingTranscriptions\RecordingTranscriptionListParams\Filter;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingTranscriptionsRawContract;
 
 /**
  * Call Recordings operations.
  *
+ * @phpstan-import-type FilterShape from \Telnyx\RecordingTranscriptions\RecordingTranscriptionListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class RecordingTranscriptionsRawService implements RecordingTranscriptionsRawContract
@@ -56,21 +61,35 @@ final class RecordingTranscriptionsRawService implements RecordingTranscriptions
      *
      * Returns a list of your recording transcriptions.
      *
+     * @param array{
+     *   filter?: Filter|FilterShape, pageNumber?: int, pageSize?: int
+     * }|RecordingTranscriptionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingTranscriptionListResponse>
+     * @return BaseResponse<DefaultFlatPagination<RecordingTranscription>>
      *
      * @throws APIException
      */
     public function list(
-        RequestOptions|array|null $requestOptions = null
+        array|RecordingTranscriptionListParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
+        [$parsed, $options] = RecordingTranscriptionListParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'recording_transcriptions',
-            options: $requestOptions,
-            convert: RecordingTranscriptionListResponse::class,
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
+            ),
+            options: $options,
+            convert: RecordingTranscription::class,
+            page: DefaultFlatPagination::class,
         );
     }
 
