@@ -11,8 +11,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesContract;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
+use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
-use Telnyx\VoiceClones\VoiceCloneListResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
 use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
@@ -113,7 +113,7 @@ final class VoiceClonesService implements VoiceClonesContract
      * @param Sort|value-of<Sort> $sort Sort order. Prefix with `-` for descending. Defaults to `-created_at`.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<VoiceCloneListResponse>
+     * @return DefaultFlatPagination<VoiceCloneData>
      *
      * @throws APIException
      */
