@@ -23,14 +23,18 @@ use Telnyx\Recordings\RecordingResponseData\Status;
  *   callSessionID?: string|null,
  *   channels?: null|Channels|value-of<Channels>,
  *   conferenceID?: string|null,
+ *   connectionID?: string|null,
  *   createdAt?: string|null,
  *   downloadURLs?: null|DownloadURLs|DownloadURLsShape,
  *   durationMillis?: int|null,
+ *   from?: string|null,
+ *   initiatedBy?: string|null,
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   recordingEndedAt?: string|null,
  *   recordingStartedAt?: string|null,
  *   source?: null|Source|value-of<Source>,
  *   status?: null|Status|value-of<Status>,
+ *   to?: string|null,
  *   updatedAt?: string|null,
  * }
  */
@@ -78,6 +82,12 @@ final class RecordingResponseData implements BaseModel
     public ?string $conferenceID;
 
     /**
+     * Identifies the Telnyx application (Call Control, TeXML) or SIP connection resource associated with this recording.
+     */
+    #[Optional('connection_id')]
+    public ?string $connectionID;
+
+    /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
     #[Optional('created_at')]
@@ -94,6 +104,18 @@ final class RecordingResponseData implements BaseModel
      */
     #[Optional('duration_millis')]
     public ?int $durationMillis;
+
+    /**
+     * The `from` (caller) number for the call that generated this recording.
+     */
+    #[Optional]
+    public ?string $from;
+
+    /**
+     * Indicates what triggered the recording. Possible values include `DialVerb`, `Conference`, `OutboundAPI`, `Trunking`, `RecordVerb`, `StartCallRecordingAPI`, `StartConferenceRecordingAPI`.
+     */
+    #[Optional('initiated_by')]
+    public ?string $initiatedBy;
 
     /** @var value-of<RecordType>|null $recordType */
     #[Optional('record_type', enum: RecordType::class)]
@@ -128,6 +150,12 @@ final class RecordingResponseData implements BaseModel
     public ?string $status;
 
     /**
+     * The `to` (callee) number for the call that generated this recording.
+     */
+    #[Optional]
+    public ?string $to;
+
+    /**
      * ISO 8601 formatted date indicating when the resource was updated.
      */
     #[Optional('updated_at')]
@@ -156,14 +184,18 @@ final class RecordingResponseData implements BaseModel
         ?string $callSessionID = null,
         Channels|string|null $channels = null,
         ?string $conferenceID = null,
+        ?string $connectionID = null,
         ?string $createdAt = null,
         DownloadURLs|array|null $downloadURLs = null,
         ?int $durationMillis = null,
+        ?string $from = null,
+        ?string $initiatedBy = null,
         RecordType|string|null $recordType = null,
         ?string $recordingEndedAt = null,
         ?string $recordingStartedAt = null,
         Source|string|null $source = null,
         Status|string|null $status = null,
+        ?string $to = null,
         ?string $updatedAt = null,
     ): self {
         $self = new self;
@@ -174,14 +206,18 @@ final class RecordingResponseData implements BaseModel
         null !== $callSessionID && $self['callSessionID'] = $callSessionID;
         null !== $channels && $self['channels'] = $channels;
         null !== $conferenceID && $self['conferenceID'] = $conferenceID;
+        null !== $connectionID && $self['connectionID'] = $connectionID;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $downloadURLs && $self['downloadURLs'] = $downloadURLs;
         null !== $durationMillis && $self['durationMillis'] = $durationMillis;
+        null !== $from && $self['from'] = $from;
+        null !== $initiatedBy && $self['initiatedBy'] = $initiatedBy;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $recordingEndedAt && $self['recordingEndedAt'] = $recordingEndedAt;
         null !== $recordingStartedAt && $self['recordingStartedAt'] = $recordingStartedAt;
         null !== $source && $self['source'] = $source;
         null !== $status && $self['status'] = $status;
+        null !== $to && $self['to'] = $to;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
@@ -256,6 +292,17 @@ final class RecordingResponseData implements BaseModel
     }
 
     /**
+     * Identifies the Telnyx application (Call Control, TeXML) or SIP connection resource associated with this recording.
+     */
+    public function withConnectionID(string $connectionID): self
+    {
+        $self = clone $this;
+        $self['connectionID'] = $connectionID;
+
+        return $self;
+    }
+
+    /**
      * ISO 8601 formatted date indicating when the resource was created.
      */
     public function withCreatedAt(string $createdAt): self
@@ -286,6 +333,28 @@ final class RecordingResponseData implements BaseModel
     {
         $self = clone $this;
         $self['durationMillis'] = $durationMillis;
+
+        return $self;
+    }
+
+    /**
+     * The `from` (caller) number for the call that generated this recording.
+     */
+    public function withFrom(string $from): self
+    {
+        $self = clone $this;
+        $self['from'] = $from;
+
+        return $self;
+    }
+
+    /**
+     * Indicates what triggered the recording. Possible values include `DialVerb`, `Conference`, `OutboundAPI`, `Trunking`, `RecordVerb`, `StartCallRecordingAPI`, `StartConferenceRecordingAPI`.
+     */
+    public function withInitiatedBy(string $initiatedBy): self
+    {
+        $self = clone $this;
+        $self['initiatedBy'] = $initiatedBy;
 
         return $self;
     }
@@ -345,6 +414,17 @@ final class RecordingResponseData implements BaseModel
     {
         $self = clone $this;
         $self['status'] = $status;
+
+        return $self;
+    }
+
+    /**
+     * The `to` (callee) number for the call that generated this recording.
+     */
+    public function withTo(string $to): self
+    {
+        $self = clone $this;
+        $self['to'] = $to;
 
         return $self;
     }

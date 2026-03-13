@@ -8,6 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Recordings\Actions\ActionDeleteParams;
+use Telnyx\Recordings\Actions\ActionDeleteResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Recordings\ActionsRawContract;
 
@@ -32,7 +33,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{ids: list<string>}|ActionDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<mixed>
+     * @return BaseResponse<ActionDeleteResponse>
      *
      * @throws APIException
      */
@@ -51,7 +52,7 @@ final class ActionsRawService implements ActionsRawContract
             path: 'recordings/actions/delete',
             body: (object) $parsed,
             options: $options,
-            convert: null,
+            convert: ActionDeleteResponse::class,
         );
     }
 }

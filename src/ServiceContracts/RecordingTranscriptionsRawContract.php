@@ -6,9 +6,11 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\RecordingTranscriptions\RecordingTranscription;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionDeleteResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionGetResponse;
-use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
+use Telnyx\RecordingTranscriptions\RecordingTranscriptionListParams;
 use Telnyx\RequestOptions;
 
 /**
@@ -34,14 +36,16 @@ interface RecordingTranscriptionsRawContract
     /**
      * @api
      *
+     * @param array<string,mixed>|RecordingTranscriptionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingTranscriptionListResponse>
+     * @return BaseResponse<DefaultFlatPagination<RecordingTranscription>>
      *
      * @throws APIException
      */
     public function list(
-        RequestOptions|array|null $requestOptions = null
+        array|RecordingTranscriptionListParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**

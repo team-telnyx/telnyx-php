@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\Recordings\Actions\ActionDeleteResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +43,7 @@ final class ActionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
+        $this->assertInstanceOf(ActionDeleteResponse::class, $result);
     }
 
     #[Test]
@@ -60,6 +61,6 @@ final class ActionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
+        $this->assertInstanceOf(ActionDeleteResponse::class, $result);
     }
 }
