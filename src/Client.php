@@ -165,6 +165,7 @@ use Telnyx\Services\WireguardPeersService;
 use Telnyx\Services\WirelessBlocklistsService;
 use Telnyx\Services\WirelessBlocklistValuesService;
 use Telnyx\Services\WirelessService;
+use Telnyx\Services\X402Service;
 
 /**
  * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
@@ -968,6 +969,11 @@ class Client extends BaseClient
     public VoiceDesignsService $voiceDesigns;
 
     /**
+     * @api
+     */
+    public X402Service $x402;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1174,6 +1180,7 @@ class Client extends BaseClient
         $this->whatsappMessageTemplates = new WhatsappMessageTemplatesService($this);
         $this->voiceClones = new VoiceClonesService($this);
         $this->voiceDesigns = new VoiceDesignsService($this);
+        $this->x402 = new X402Service($this);
     }
 
     /** @return array<string,string> */
