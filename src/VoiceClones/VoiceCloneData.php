@@ -7,13 +7,13 @@ namespace Telnyx\VoiceClones;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceClones\VoiceCloneListResponse\Gender;
-use Telnyx\VoiceClones\VoiceCloneListResponse\RecordType;
+use Telnyx\VoiceClones\VoiceCloneData\Gender;
+use Telnyx\VoiceClones\VoiceCloneData\RecordType;
 
 /**
  * A voice clone object.
  *
- * @phpstan-type VoiceCloneListResponseShape = array{
+ * @phpstan-type VoiceCloneDataShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   gender?: null|Gender|value-of<Gender>,
@@ -26,9 +26,9 @@ use Telnyx\VoiceClones\VoiceCloneListResponse\RecordType;
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
-final class VoiceCloneListResponse implements BaseModel
+final class VoiceCloneData implements BaseModel
 {
-    /** @use SdkModel<VoiceCloneListResponseShape> */
+    /** @use SdkModel<VoiceCloneDataShape> */
     use SdkModel;
 
     /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceDesigns\VoiceDesignGetResponse\Data;
+namespace Telnyx\VoiceDesigns\VoiceDesignData;
 
 /**
  * Identifies the resource type.
