@@ -22,6 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   voice: string,
  *   apiKeyRef?: string|null,
  *   backgroundAudio?: BackgroundAudioShape|null,
+ *   expressiveMode?: bool|null,
  *   languageBoost?: null|LanguageBoost|value-of<LanguageBoost>,
  *   similarityBoost?: float|null,
  *   speed?: float|null,
@@ -56,6 +57,12 @@ final class VoiceSettings implements BaseModel
      */
     #[Optional('background_audio', union: BackgroundAudio::class)]
     public PredefinedMedia|MediaURL|MediaName|null $backgroundAudio;
+
+    /**
+     * Enables emotionally expressive speech using SSML emotion tags. When enabled, the assistant uses audio tags like angry, excited, content, and sad to add emotional nuance. Only supported for Telnyx Ultra voices.
+     */
+    #[Optional('expressive_mode')]
+    public ?bool $expressiveMode;
 
     /**
      * Enhances recognition for specific languages and dialects during MiniMax TTS synthesis. Default is null (no boost). Set to 'auto' for automatic language detection. Only applicable when using MiniMax voices.
@@ -132,6 +139,7 @@ final class VoiceSettings implements BaseModel
         string $voice,
         ?string $apiKeyRef = null,
         PredefinedMedia|array|MediaURL|MediaName|null $backgroundAudio = null,
+        ?bool $expressiveMode = null,
         LanguageBoost|string|null $languageBoost = null,
         ?float $similarityBoost = null,
         ?float $speed = null,
@@ -146,6 +154,7 @@ final class VoiceSettings implements BaseModel
 
         null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $backgroundAudio && $self['backgroundAudio'] = $backgroundAudio;
+        null !== $expressiveMode && $self['expressiveMode'] = $expressiveMode;
         null !== $languageBoost && $self['languageBoost'] = $languageBoost;
         null !== $similarityBoost && $self['similarityBoost'] = $similarityBoost;
         null !== $speed && $self['speed'] = $speed;
@@ -190,6 +199,17 @@ final class VoiceSettings implements BaseModel
     ): self {
         $self = clone $this;
         $self['backgroundAudio'] = $backgroundAudio;
+
+        return $self;
+    }
+
+    /**
+     * Enables emotionally expressive speech using SSML emotion tags. When enabled, the assistant uses audio tags like angry, excited, content, and sad to add emotional nuance. Only supported for Telnyx Ultra voices.
+     */
+    public function withExpressiveMode(bool $expressiveMode): self
+    {
+        $self = clone $this;
+        $self['expressiveMode'] = $expressiveMode;
 
         return $self;
     }
