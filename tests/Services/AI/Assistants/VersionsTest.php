@@ -171,6 +171,7 @@ final class VersionsTest extends TestCase
                 'backgroundAudio' => [
                     'type' => 'predefined_media', 'value' => 'silence',
                 ],
+                'expressiveMode' => true,
                 'languageBoost' => 'auto',
                 'similarityBoost' => 0,
                 'speed' => 0,
