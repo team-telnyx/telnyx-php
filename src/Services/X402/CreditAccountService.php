@@ -61,7 +61,7 @@ final class CreditAccountService implements CreditAccountContract
      *
      * @param string $id body param: The quote ID to settle
      * @param string $paymentSignature Body param: Base64-encoded signed payment authorization (x402 PaymentPayload). Can alternatively be provided via the PAYMENT-SIGNATURE header.
-     * @param string $paymentSignature1 Header param: Signed payment authorization for the quote. Alternative to providing `payment_signature` in the request body.
+     * @param string $paymentSignatureHeader Header param: Signed payment authorization for the quote. Alternative to providing `payment_signature` in the request body.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -69,14 +69,14 @@ final class CreditAccountService implements CreditAccountContract
     public function settle(
         string $id,
         ?string $paymentSignature = null,
-        ?string $paymentSignature1 = null,
+        ?string $paymentSignatureHeader = null,
         RequestOptions|array|null $requestOptions = null,
     ): CreditAccountSettleResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,
                 'paymentSignature' => $paymentSignature,
-                'paymentSignature1' => $paymentSignature1,
+                'paymentSignatureHeader' => $paymentSignatureHeader,
             ],
         );
 
