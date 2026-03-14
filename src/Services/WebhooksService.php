@@ -121,7 +121,11 @@ final class WebhooksService implements WebhooksContract
     /**
      * Unwrap a webhook payload without verification.
      *
+     * Unwraps a webhook event from its JSON representation.
+     *
      * @param string $body The raw webhook payload (JSON string)
+     *
+     * @throws WebhookException
      */
     public function unsafeUnwrap(
         string $body
