@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\Core\Exceptions\WebhookException;
 use Telnyx\Core\Exceptions\WebhookVerificationException;
 use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent;
 use Telnyx\Webhooks\CallAIGatherMessageHistoryUpdatedWebhookEvent;
@@ -75,6 +76,8 @@ interface WebhooksContract
      * Use with caution - only for testing or when verification is handled elsewhere.
      *
      * @param string $body The raw webhook payload (JSON string)
+     *
+     * @throws WebhookException
      */
     public function unsafeUnwrap(
         string $body

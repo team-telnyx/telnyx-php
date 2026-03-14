@@ -60,6 +60,7 @@ final class ChatTest extends TestCase
             apiKeyRef: 'api_key_ref',
             bestOf: 0,
             earlyStopping: true,
+            enableThinking: true,
             frequencyPenalty: 0,
             guidedChoice: ['string'],
             guidedJson: ['foo' => 'bar'],

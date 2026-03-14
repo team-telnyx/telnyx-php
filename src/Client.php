@@ -153,14 +153,19 @@ use Telnyx\Services\VerifiedNumbersService;
 use Telnyx\Services\VerifyProfilesService;
 use Telnyx\Services\VirtualCrossConnectsCoverageService;
 use Telnyx\Services\VirtualCrossConnectsService;
+use Telnyx\Services\VoiceClonesService;
+use Telnyx\Services\VoiceDesignsService;
 use Telnyx\Services\WebhookDeliveriesService;
 use Telnyx\Services\WebhooksService;
 use Telnyx\Services\WellKnownService;
+use Telnyx\Services\WhatsappMessageTemplatesService;
+use Telnyx\Services\WhatsappService;
 use Telnyx\Services\WireguardInterfacesService;
 use Telnyx\Services\WireguardPeersService;
 use Telnyx\Services\WirelessBlocklistsService;
 use Telnyx\Services\WirelessBlocklistValuesService;
 use Telnyx\Services\WirelessService;
+use Telnyx\Services\X402Service;
 
 /**
  * @phpstan-import-type NormalizedRequest from \Telnyx\Core\BaseClient
@@ -948,6 +953,31 @@ class Client extends BaseClient
     public SessionAnalysisService $sessionAnalysis;
 
     /**
+     * @api
+     */
+    public WhatsappService $whatsapp;
+
+    /**
+     * @api
+     */
+    public WhatsappMessageTemplatesService $whatsappMessageTemplates;
+
+    /**
+     * @api
+     */
+    public VoiceClonesService $voiceClones;
+
+    /**
+     * @api
+     */
+    public VoiceDesignsService $voiceDesigns;
+
+    /**
+     * @api
+     */
+    public X402Service $x402;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1150,6 +1180,11 @@ class Client extends BaseClient
         $this->alphanumericSenderIDs = new AlphanumericSenderIDsService($this);
         $this->messagingProfileMetrics = new MessagingProfileMetricsService($this);
         $this->sessionAnalysis = new SessionAnalysisService($this);
+        $this->whatsapp = new WhatsappService($this);
+        $this->whatsappMessageTemplates = new WhatsappMessageTemplatesService($this);
+        $this->voiceClones = new VoiceClonesService($this);
+        $this->voiceDesigns = new VoiceDesignsService($this);
+        $this->x402 = new X402Service($this);
     }
 
     /** @return array<string,string> */

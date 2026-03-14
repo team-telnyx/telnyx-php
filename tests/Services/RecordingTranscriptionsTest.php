@@ -7,9 +7,10 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
+use Telnyx\RecordingTranscriptions\RecordingTranscription;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionDeleteResponse;
 use Telnyx\RecordingTranscriptions\RecordingTranscriptionGetResponse;
-use Telnyx\RecordingTranscriptions\RecordingTranscriptionListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -52,10 +53,15 @@ final class RecordingTranscriptionsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->recordingTranscriptions->list();
+        $page = $this->client->recordingTranscriptions->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RecordingTranscriptionListResponse::class, $result);
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(RecordingTranscription::class, $item);
+        }
     }
 
     #[Test]

@@ -1,5 +1,40 @@
 # Changelog
 
+## 7.0.0 (2026-03-14)
+
+Full Changelog: [v6.74.0...v7.0.0](https://github.com/team-telnyx/telnyx-php/compare/v6.74.0...v7.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* remove unused webhook params
+
+### Features
+
+* Add enable_thinking parameter to chat completions API ([cb7dd2d](https://github.com/team-telnyx/telnyx-php/commit/cb7dd2d18e51d4a264176cd7f446e297ec9c19b3))
+* add public x402 payment endpoints to external specs ([b9ef3a7](https://github.com/team-telnyx/telnyx-php/commit/b9ef3a7ffbfa5fda120e6b6a7cf017961c227d27))
+* Add Voice Designs and Voice Clones API specification ([a736f8f](https://github.com/team-telnyx/telnyx-php/commit/a736f8f6a4fc3a1bc11ed24e5718d534352021a0))
+* AI-2131: Add expressive_mode boolean to VoiceSettings ([565ec08](https://github.com/team-telnyx/telnyx-php/commit/565ec08efd8af1f70feba6187f5e6ef53abd60f8))
+* **api:** manual updates ([f2ed6f0](https://github.com/team-telnyx/telnyx-php/commit/f2ed6f0679e90f533ea0a650c0d0cbcb2b310b4e))
+* **api:** manual updates ([bd565e4](https://github.com/team-telnyx/telnyx-php/commit/bd565e4fcf5e864fb3afcb64101d13d27fccb2ce))
+* **api:** manual updates ([c36e043](https://github.com/team-telnyx/telnyx-php/commit/c36e0437fc7a6540985e62261ebd5e39e92f13be))
+* **api:** Merge pull request [#27](https://github.com/team-telnyx/telnyx-php/issues/27) from stainless-sdks/fix/whatsapp-message-templates-conflict ([309d5aa](https://github.com/team-telnyx/telnyx-php/commit/309d5aa364f7ec3c456e0a1fef186155bb6fed94))
+* **api:** Merge pull request [#29](https://github.com/team-telnyx/telnyx-php/issues/29) from stainless-sdks/fix-add-voice-model ([1beff75](https://github.com/team-telnyx/telnyx-php/commit/1beff75a3072b897d0cb78d093d94f75da9f1c2a))
+* **api:** update OpenAPI spec or Stainless config ([1beff75](https://github.com/team-telnyx/telnyx-php/commit/1beff75a3072b897d0cb78d093d94f75da9f1c2a))
+
+
+### Bug Fixes
+
+* add missing vertical enum values for 10DLC brand creation (ENGDESK-49040) ([3bd9ad4](https://github.com/team-telnyx/telnyx-php/commit/3bd9ad45c61876dc351c896933dbebfedf9fb1ed))
+* **call-recordings:** align OpenAPI spec with implementation ([07cb413](https://github.com/team-telnyx/telnyx-php/commit/07cb4136120a4cc4f9374ee484ba8b9e51e377df))
+* remove unused webhook params ([4d77959](https://github.com/team-telnyx/telnyx-php/commit/4d77959d8c253712cac52eab1b779552740fd306))
+* rename whatsapp.message_templates to whatsapp.templates to avoid conflict ([309d5aa](https://github.com/team-telnyx/telnyx-php/commit/309d5aa364f7ec3c456e0a1fef186155bb6fed94))
+* update wait_seconds example to 0.5 ([265dcef](https://github.com/team-telnyx/telnyx-php/commit/265dceffb3ea188e4ddc6f7e85c40cdfd1cb8935))
+
+
+### Reverts
+
+* restore stainless.yml changes removed in 1de6067 ([f7f9ee4](https://github.com/team-telnyx/telnyx-php/commit/f7f9ee422b7f41e2cecaba85aa6f2b73cdf3d28e))
+
 ## 6.74.0 (2026-03-10)
 
 Full Changelog: [v6.73.1...v6.74.0](https://github.com/team-telnyx/telnyx-php/compare/v6.73.1...v6.74.0)
