@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.2.0 (2026-03-16)
+
+Full Changelog: [v7.1.0...v7.2.0](https://github.com/team-telnyx/telnyx-php/compare/v7.1.0...v7.2.0)
+
+### Features
+
+* CW-2881 update `filter[action_type]` enum ([c146a1e](https://github.com/team-telnyx/telnyx-php/commit/c146a1ece761dc2caf936c40b8e9b56cc370455b))
+
 ## 7.1.0 (2026-03-16)
 
 Full Changelog: [v7.0.0...v7.1.0](https://github.com/team-telnyx/telnyx-php/compare/v7.0.0...v7.1.0)
