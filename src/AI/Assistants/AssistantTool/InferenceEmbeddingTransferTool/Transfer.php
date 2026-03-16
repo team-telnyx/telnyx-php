@@ -22,6 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   targets: list<Target|TargetShape>,
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
+ *   warmMessageDelayMs?: int|null,
  *   warmTransferInstructions?: string|null,
  * }
  */
@@ -57,6 +58,12 @@ final class Transfer implements BaseModel
      */
     #[Optional('voicemail_detection')]
     public ?VoicemailDetection $voicemailDetection;
+
+    /**
+     * Optional delay in milliseconds before playing the warm message audio when the transferred call is answered. When set, the audio_url is not included in the dial command; instead, playback starts after the specified delay. When not set, existing behavior (audio_url in dial) is preserved.
+     */
+    #[Optional('warm_message_delay_ms', nullable: true)]
+    public ?int $warmMessageDelayMs;
 
     /**
      * Natural language instructions for your agent for how to provide context for the transfer recipient.
@@ -97,6 +104,7 @@ final class Transfer implements BaseModel
         array $targets,
         ?array $customHeaders = null,
         VoicemailDetection|array|null $voicemailDetection = null,
+        ?int $warmMessageDelayMs = null,
         ?string $warmTransferInstructions = null,
     ): self {
         $self = new self;
@@ -106,6 +114,7 @@ final class Transfer implements BaseModel
 
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
+        null !== $warmMessageDelayMs && $self['warmMessageDelayMs'] = $warmMessageDelayMs;
         null !== $warmTransferInstructions && $self['warmTransferInstructions'] = $warmTransferInstructions;
 
         return $self;
@@ -158,6 +167,17 @@ final class Transfer implements BaseModel
     ): self {
         $self = clone $this;
         $self['voicemailDetection'] = $voicemailDetection;
+
+        return $self;
+    }
+
+    /**
+     * Optional delay in milliseconds before playing the warm message audio when the transferred call is answered. When set, the audio_url is not included in the dial command; instead, playback starts after the specified delay. When not set, existing behavior (audio_url in dial) is preserved.
+     */
+    public function withWarmMessageDelayMs(?int $warmMessageDelayMs): self
+    {
+        $self = clone $this;
+        $self['warmMessageDelayMs'] = $warmMessageDelayMs;
 
         return $self;
     }
