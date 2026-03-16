@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.1.0 (2026-03-16)
+
+Full Changelog: [v7.0.0...v7.1.0](https://github.com/team-telnyx/telnyx-php/compare/v7.0.0...v7.1.0)
+
+### Features
+
+* AI-2132: Add warm_message_delay_ms to transfer tool OpenAPI spec ([c1aeaab](https://github.com/team-telnyx/telnyx-php/commit/c1aeaab38bde3a18d95b92a92dc89e17680e53d7))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([ba511dc](https://github.com/team-telnyx/telnyx-php/commit/ba511dcda518b346aacd676983c177e4734166b7))
+
 ## 7.0.0 (2026-03-14)
 
 Full Changelog: [v6.74.0...v7.0.0](https://github.com/team-telnyx/telnyx-php/compare/v6.74.0...v7.0.0)
