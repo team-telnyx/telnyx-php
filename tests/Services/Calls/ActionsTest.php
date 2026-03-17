@@ -14,6 +14,7 @@ use Telnyx\Calls\Actions\ActionGatherUsingAIResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakResponse;
 use Telnyx\Calls\Actions\ActionHangupResponse;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
 use Telnyx\Calls\Actions\ActionReferResponse;
@@ -339,6 +340,47 @@ final class ActionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionHangupResponse::class, $result);
+    }
+
+    #[Test]
+    public function testJoinAIAssistant(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->calls->actions->joinAIAssistant(
+            'call_control_id',
+            conversationID: 'v3:abc123',
+            participant: ['id' => 'v3:abc123def456', 'role' => 'user'],
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionJoinAIAssistantResponse::class, $result);
+    }
+
+    #[Test]
+    public function testJoinAIAssistantWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->calls->actions->joinAIAssistant(
+            'call_control_id',
+            conversationID: 'v3:abc123',
+            participant: [
+                'id' => 'v3:abc123def456',
+                'role' => 'user',
+                'name' => 'John Doe',
+                'onHangup' => 'continue_conversation',
+            ],
+            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionJoinAIAssistantResponse::class, $result);
     }
 
     #[Test]
