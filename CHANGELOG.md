@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.3.0 (2026-03-17)
+
+Full Changelog: [v7.2.0...v7.3.0](https://github.com/team-telnyx/telnyx-php/compare/v7.2.0...v7.3.0)
+
+### Features
+
+* add ai_assistant_join call control command OpenAPI spec ([038ed77](https://github.com/team-telnyx/telnyx-php/commit/038ed7742a9658f18578c9744d0af05a2c882f35))
+
 ## 7.2.0 (2026-03-16)
 
 Full Changelog: [v7.1.0...v7.2.0](https://github.com/team-telnyx/telnyx-php/compare/v7.1.0...v7.2.0)
