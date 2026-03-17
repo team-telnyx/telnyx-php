@@ -32,6 +32,8 @@ use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\InworldVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakResponse;
 use Telnyx\Calls\Actions\ActionHangupResponse;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
 use Telnyx\Calls\Actions\ActionReferResponse;
@@ -124,6 +126,7 @@ use Telnyx\ServiceContracts\Calls\ActionsContract;
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
+ * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
@@ -792,6 +795,43 @@ final class ActionsService implements ActionsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->hangup($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Add a participant to an existing AI assistant conversation. Use this command to bring an additional call leg into a running AI conversation.
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param string $conversationID the ID of the AI assistant conversation to join
+     * @param Participant|ParticipantShape $participant
+     * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+     * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function joinAIAssistant(
+        string $callControlID,
+        string $conversationID,
+        Participant|array $participant,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionJoinAIAssistantResponse {
+        $params = Util::removeNulls(
+            [
+                'conversationID' => $conversationID,
+                'participant' => $participant,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->joinAIAssistant($callControlID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
