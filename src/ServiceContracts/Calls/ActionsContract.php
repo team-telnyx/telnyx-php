@@ -32,6 +32,8 @@ use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\InworldVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakResponse;
 use Telnyx\Calls\Actions\ActionHangupResponse;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
 use Telnyx\Calls\Actions\ActionReferResponse;
@@ -119,6 +121,7 @@ use Telnyx\RimeVoiceSettings;
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
+ * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
@@ -505,6 +508,27 @@ interface ActionsContract
         ?array $customHeaders = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionHangupResponse;
+
+    /**
+     * @api
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param string $conversationID the ID of the AI assistant conversation to join
+     * @param Participant|ParticipantShape $participant
+     * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+     * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function joinAIAssistant(
+        string $callControlID,
+        string $conversationID,
+        Participant|array $participant,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionJoinAIAssistantResponse;
 
     /**
      * @api

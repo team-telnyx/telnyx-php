@@ -39,6 +39,9 @@ use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakResponse;
 use Telnyx\Calls\Actions\ActionHangupParams;
 use Telnyx\Calls\Actions\ActionHangupResponse;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantParams;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueParams;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingParams;
@@ -146,6 +149,7 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
+ * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
@@ -636,6 +640,44 @@ final class ActionsRawService implements ActionsRawContract
             body: (object) $parsed,
             options: $options,
             convert: ActionHangupResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Add a participant to an existing AI assistant conversation. Use this command to bring an additional call leg into a running AI conversation.
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array{
+     *   conversationID: string,
+     *   participant: Participant|ParticipantShape,
+     *   clientState?: string,
+     *   commandID?: string,
+     * }|ActionJoinAIAssistantParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionJoinAIAssistantResponse>
+     *
+     * @throws APIException
+     */
+    public function joinAIAssistant(
+        string $callControlID,
+        array|ActionJoinAIAssistantParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionJoinAIAssistantParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['calls/%1$s/actions/ai_assistant_join', $callControlID],
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionJoinAIAssistantResponse::class,
         );
     }
 

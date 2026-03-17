@@ -138,6 +138,7 @@ use Telnyx\Services\SimCardOrderPreviewService;
 use Telnyx\Services\SimCardOrdersService;
 use Telnyx\Services\SimCardsService;
 use Telnyx\Services\SiprecConnectorsService;
+use Telnyx\Services\SpeechToTextService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
 use Telnyx\Services\SubNumberOrdersService;
@@ -978,6 +979,11 @@ class Client extends BaseClient
     public X402Service $x402;
 
     /**
+     * @api
+     */
+    public SpeechToTextService $speechToText;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1185,6 +1191,7 @@ class Client extends BaseClient
         $this->voiceClones = new VoiceClonesService($this);
         $this->voiceDesigns = new VoiceDesignsService($this);
         $this->x402 = new X402Service($this);
+        $this->speechToText = new SpeechToTextService($this);
     }
 
     /** @return array<string,string> */

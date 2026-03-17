@@ -7,15 +7,13 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
-use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 use Tests\UnsupportedMockTests;
 
 /**
  * @internal
  */
 #[CoversNothing]
-final class TextToSpeechTest extends TestCase
+final class SpeechToTextTest extends TestCase
 {
     protected Client $client;
 
@@ -30,39 +28,39 @@ final class TextToSpeechTest extends TestCase
     }
 
     #[Test]
-    public function testGenerate(): void
+    public function testTranscribe(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->textToSpeech->generate();
+        $result = $this->client->speechToText->transcribe(
+            inputFormat: 'mp3',
+            transcriptionEngine: 'Azure'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TextToSpeechGenerateResponse::class, $result);
+        $this->assertNull($result);
     }
 
     #[Test]
-    public function testListVoices(): void
+    public function testTranscribeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->textToSpeech->listVoices();
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TextToSpeechListVoicesResponse::class, $result);
-    }
-
-    #[Test]
-    public function testStream(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->textToSpeech->stream();
+        $result = $this->client->speechToText->transcribe(
+            inputFormat: 'mp3',
+            transcriptionEngine: 'Azure',
+            endpointing: 0,
+            interimResults: true,
+            keyterm: 'keyterm',
+            keywords: 'keywords',
+            language: 'language',
+            model: 'fast',
+            redact: 'redact',
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);

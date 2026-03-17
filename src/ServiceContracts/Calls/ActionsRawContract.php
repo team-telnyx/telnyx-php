@@ -22,6 +22,8 @@ use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakResponse;
 use Telnyx\Calls\Actions\ActionHangupParams;
 use Telnyx\Calls\Actions\ActionHangupResponse;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantParams;
+use Telnyx\Calls\Actions\ActionJoinAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueParams;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingParams;
@@ -237,6 +239,23 @@ interface ActionsRawContract
     public function hangup(
         string $callControlID,
         array|ActionHangupParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array<string,mixed>|ActionJoinAIAssistantParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionJoinAIAssistantResponse>
+     *
+     * @throws APIException
+     */
+    public function joinAIAssistant(
+        string $callControlID,
+        array|ActionJoinAIAssistantParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
