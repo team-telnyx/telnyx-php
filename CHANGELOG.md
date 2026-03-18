@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.5.0 (2026-03-18)
+
+Full Changelog: [v7.4.0...v7.5.0](https://github.com/team-telnyx/telnyx-php/compare/v7.4.0...v7.5.0)
+
+### Features
+
+* add message_history, send_message_history_updates, participants to AIAssistantStartRequest ([6869f40](https://github.com/team-telnyx/telnyx-php/commit/6869f407a9fc070df7ab695338a7e62c83890201))
+
 ## 7.4.0 (2026-03-18)
 
 Full Changelog: [v7.3.0...v7.4.0](https://github.com/team-telnyx/telnyx-php/compare/v7.3.0...v7.4.0)
