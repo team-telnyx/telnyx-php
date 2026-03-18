@@ -193,13 +193,13 @@ final class LoaConfigurationsTest extends TestCase
     }
 
     #[Test]
-    public function testPreview0(): void
+    public function testPreview(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->porting->loaConfigurations->preview0(
+        $result = $this->client->porting->loaConfigurations->preview(
             address: [
                 'city' => 'Austin',
                 'countryCode' => 'US',
@@ -220,13 +220,13 @@ final class LoaConfigurationsTest extends TestCase
     }
 
     #[Test]
-    public function testPreview0WithOptionalParams(): void
+    public function testPreviewWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->porting->loaConfigurations->preview0(
+        $result = $this->client->porting->loaConfigurations->preview(
             address: [
                 'city' => 'Austin',
                 'countryCode' => 'US',

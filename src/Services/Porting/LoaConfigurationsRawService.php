@@ -16,7 +16,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
@@ -32,9 +32,9 @@ use Telnyx\ServiceContracts\Porting\LoaConfigurationsRawContract;
  * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address as AddressShape1
  * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact as ContactShape1
  * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo as LogoShape1
- * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address as AddressShape2
- * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact as ContactShape2
- * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo as LogoShape2
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Address as AddressShape2
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Contact as ContactShape2
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Logo as LogoShape2
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
@@ -214,23 +214,23 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
      * Preview the LOA template that would be generated without need to create LOA configuration.
      *
      * @param array{
-     *   address: LoaConfigurationPreview0Params\Address|AddressShape2,
+     *   address: LoaConfigurationPreviewParams\Address|AddressShape2,
      *   companyName: string,
-     *   contact: LoaConfigurationPreview0Params\Contact|ContactShape2,
-     *   logo: LoaConfigurationPreview0Params\Logo|LogoShape2,
+     *   contact: LoaConfigurationPreviewParams\Contact|ContactShape2,
+     *   logo: LoaConfigurationPreviewParams\Logo|LogoShape2,
      *   name: string,
-     * }|LoaConfigurationPreview0Params $params
+     * }|LoaConfigurationPreviewParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
      * @throws APIException
      */
-    public function preview0(
-        array|LoaConfigurationPreview0Params $params,
+    public function preview(
+        array|LoaConfigurationPreviewParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = LoaConfigurationPreview0Params::parseRequest(
+        [$parsed, $options] = LoaConfigurationPreviewParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -238,7 +238,7 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'porting/loa_configuration/preview',
+            path: 'porting/loa_configurations/preview',
             headers: ['Accept' => 'application/pdf'],
             body: (object) $parsed,
             options: $options,
