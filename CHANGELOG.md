@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.4.0 (2026-03-18)
+
+Full Changelog: [v7.3.0...v7.4.0](https://github.com/team-telnyx/telnyx-php/compare/v7.3.0...v7.4.0)
+
+### Features
+
+* port-4690: fix LOA configuration preview path (singular → plural) ([67e36e4](https://github.com/team-telnyx/telnyx-php/commit/67e36e4007643171dc97a1c7ed21cd0f341432a3))
+
 ## 7.3.0 (2026-03-17)
 
 Full Changelog: [v7.2.0...v7.3.0](https://github.com/team-telnyx/telnyx-php/compare/v7.2.0...v7.3.0)
