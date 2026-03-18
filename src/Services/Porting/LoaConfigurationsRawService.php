@@ -16,6 +16,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams\Logo;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
@@ -35,6 +36,9 @@ use Telnyx\ServiceContracts\Porting\LoaConfigurationsRawContract;
  * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Address as AddressShape2
  * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Contact as ContactShape2
  * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Logo as LogoShape2
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address as AddressShape3
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact as ContactShape3
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo as LogoShape3
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
@@ -231,6 +235,44 @@ final class LoaConfigurationsRawService implements LoaConfigurationsRawContract
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = LoaConfigurationPreviewParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'porting/loa_configurations/preview',
+            headers: ['Accept' => 'application/pdf'],
+            body: (object) $parsed,
+            options: $options,
+            convert: 'string',
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Preview the LOA template that would be generated without need to create LOA configuration.
+     *
+     * @param array{
+     *   address: LoaConfigurationPreview0Params\Address|AddressShape3,
+     *   companyName: string,
+     *   contact: LoaConfigurationPreview0Params\Contact|ContactShape3,
+     *   logo: LoaConfigurationPreview0Params\Logo|LogoShape3,
+     *   name: string,
+     * }|LoaConfigurationPreview0Params $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<string>
+     *
+     * @throws APIException
+     */
+    public function preview0(
+        array|LoaConfigurationPreview0Params $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = LoaConfigurationPreview0Params::parseRequest(
             $params,
             $requestOptions,
         );
