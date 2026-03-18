@@ -22,9 +22,9 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Address as AddressShape1
  * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Contact as ContactShape1
  * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams\Logo as LogoShape1
- * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address as AddressShape2
- * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact as ContactShape2
- * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo as LogoShape2
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Address as AddressShape2
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Contact as ContactShape2
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Logo as LogoShape2
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface LoaConfigurationsContract
@@ -117,20 +117,20 @@ interface LoaConfigurationsContract
     /**
      * @api
      *
-     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address|AddressShape2 $address the address of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Address|AddressShape2 $address the address of the company
      * @param string $companyName The name of the company
-     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact|ContactShape2 $contact the contact information of the company
-     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo|LogoShape2 $logo The logo of the LOA configuration
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Contact|ContactShape2 $contact the contact information of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Logo|LogoShape2 $logo The logo of the LOA configuration
      * @param string $name The name of the LOA configuration
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function preview0(
-        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address|array $address,
+    public function preview(
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Address|array $address,
         string $companyName,
-        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact|array $contact,
-        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo|array $logo,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Contact|array $contact,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Logo|array $logo,
         string $name,
         RequestOptions|array|null $requestOptions = null,
     ): string;

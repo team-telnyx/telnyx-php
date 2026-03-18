@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
+namespace Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;

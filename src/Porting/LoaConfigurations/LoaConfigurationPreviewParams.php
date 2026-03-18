@@ -8,20 +8,20 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Address;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Contact;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Logo;
 
 /**
  * Preview the LOA template that would be generated without need to create LOA configuration.
  *
- * @see Telnyx\Services\Porting\LoaConfigurationsService::preview0()
+ * @see Telnyx\Services\Porting\LoaConfigurationsService::preview()
  *
- * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address
- * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact
- * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Address
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Contact
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Logo
  *
- * @phpstan-type LoaConfigurationPreview0ParamsShape = array{
+ * @phpstan-type LoaConfigurationPreviewParamsShape = array{
  *   address: Address|AddressShape,
  *   companyName: string,
  *   contact: Contact|ContactShape,
@@ -29,9 +29,9 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo;
  *   name: string,
  * }
  */
-final class LoaConfigurationPreview0Params implements BaseModel
+final class LoaConfigurationPreviewParams implements BaseModel
 {
-    /** @use SdkModel<LoaConfigurationPreview0ParamsShape> */
+    /** @use SdkModel<LoaConfigurationPreviewParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -66,11 +66,11 @@ final class LoaConfigurationPreview0Params implements BaseModel
     public string $name;
 
     /**
-     * `new LoaConfigurationPreview0Params()` is missing required properties by the API.
+     * `new LoaConfigurationPreviewParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * LoaConfigurationPreview0Params::with(
+     * LoaConfigurationPreviewParams::with(
      *   address: ..., companyName: ..., contact: ..., logo: ..., name: ...
      * )
      * ```
@@ -78,7 +78,7 @@ final class LoaConfigurationPreview0Params implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new LoaConfigurationPreview0Params)
+     * (new LoaConfigurationPreviewParams)
      *   ->withAddress(...)
      *   ->withCompanyName(...)
      *   ->withContact(...)

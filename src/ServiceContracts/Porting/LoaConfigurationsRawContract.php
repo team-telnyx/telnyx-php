@@ -11,7 +11,7 @@ use Telnyx\Porting\LoaConfigurations\LoaConfigurationCreateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationGetResponse;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationListParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationNewResponse;
-use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params;
+use Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateParams;
 use Telnyx\Porting\LoaConfigurations\LoaConfigurationUpdateResponse;
 use Telnyx\Porting\LoaConfigurations\PortingLoaConfiguration;
@@ -102,15 +102,15 @@ interface LoaConfigurationsRawContract
     /**
      * @api
      *
-     * @param array<string,mixed>|LoaConfigurationPreview0Params $params
+     * @param array<string,mixed>|LoaConfigurationPreviewParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
      *
      * @throws APIException
      */
-    public function preview0(
-        array|LoaConfigurationPreview0Params $params,
+    public function preview(
+        array|LoaConfigurationPreviewParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
