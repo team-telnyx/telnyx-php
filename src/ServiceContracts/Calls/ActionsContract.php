@@ -124,6 +124,8 @@ use Telnyx\RimeVoiceSettings;
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
+ * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant as ParticipantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
@@ -731,6 +733,9 @@ interface ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $greeting Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
      * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings Settings for handling user interruptions during assistant speech
+     * @param list<MessageHistoryShape1> $messageHistory A list of messages to seed the conversation history before the assistant starts. Follows the same message format as the `ai_assistant_add_messages` command.
+     * @param list<\Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant|ParticipantShape1> $participants a list of participants to add to the conversation when it starts
+     * @param bool $sendMessageHistoryUpdates when `true`, a webhook is sent each time the conversation message history is updated
      * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
      *
@@ -752,6 +757,9 @@ interface ActionsContract
         ?string $commandID = null,
         ?string $greeting = null,
         InterruptionSettings|array|null $interruptionSettings = null,
+        array $messageHistory = [],
+        array $participants = [],
+        bool $sendMessageHistoryUpdates = false,
         TranscriptionConfig|array|null $transcription = null,
         string $voice = 'Telnyx.KokoroTTS.af',
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|null $voiceSettings = null,

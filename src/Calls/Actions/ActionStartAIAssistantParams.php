@@ -6,6 +6,8 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant;
+use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory;
+use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -24,9 +26,12 @@ use Telnyx\RimeVoiceSettings;
  *
  * @see Telnyx\Services\Calls\ActionsService::startAIAssistant()
  *
+ * @phpstan-import-type MessageHistoryVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory
  * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory
+ * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  *
@@ -36,6 +41,9 @@ use Telnyx\RimeVoiceSettings;
  *   commandID?: string|null,
  *   greeting?: string|null,
  *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
+ *   messageHistory?: list<MessageHistoryShape>|null,
+ *   participants?: list<Participant|ParticipantShape>|null,
+ *   sendMessageHistoryUpdates?: bool|null,
  *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
  *   voice?: string|null,
  *   voiceSettings?: VoiceSettingsShape|null,
@@ -78,6 +86,28 @@ final class ActionStartAIAssistantParams implements BaseModel
     public ?InterruptionSettings $interruptionSettings;
 
     /**
+     * A list of messages to seed the conversation history before the assistant starts. Follows the same message format as the `ai_assistant_add_messages` command.
+     *
+     * @var list<MessageHistoryVariants>|null $messageHistory
+     */
+    #[Optional('message_history', list: MessageHistory::class)]
+    public ?array $messageHistory;
+
+    /**
+     * A list of participants to add to the conversation when it starts.
+     *
+     * @var list<Participant>|null $participants
+     */
+    #[Optional(list: Participant::class)]
+    public ?array $participants;
+
+    /**
+     * When `true`, a webhook is sent each time the conversation message history is updated.
+     */
+    #[Optional('send_message_history_updates')]
+    public ?bool $sendMessageHistoryUpdates;
+
+    /**
      * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      */
     #[Optional]
@@ -116,6 +146,8 @@ final class ActionStartAIAssistantParams implements BaseModel
      *
      * @param Assistant|AssistantShape|null $assistant
      * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param list<MessageHistoryShape>|null $messageHistory
+     * @param list<Participant|ParticipantShape>|null $participants
      * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
      * @param VoiceSettingsShape|null $voiceSettings
      */
@@ -125,6 +157,9 @@ final class ActionStartAIAssistantParams implements BaseModel
         ?string $commandID = null,
         ?string $greeting = null,
         InterruptionSettings|array|null $interruptionSettings = null,
+        ?array $messageHistory = null,
+        ?array $participants = null,
+        ?bool $sendMessageHistoryUpdates = null,
         TranscriptionConfig|array|null $transcription = null,
         ?string $voice = null,
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|null $voiceSettings = null,
@@ -136,6 +171,9 @@ final class ActionStartAIAssistantParams implements BaseModel
         null !== $commandID && $self['commandID'] = $commandID;
         null !== $greeting && $self['greeting'] = $greeting;
         null !== $interruptionSettings && $self['interruptionSettings'] = $interruptionSettings;
+        null !== $messageHistory && $self['messageHistory'] = $messageHistory;
+        null !== $participants && $self['participants'] = $participants;
+        null !== $sendMessageHistoryUpdates && $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $voice && $self['voice'] = $voice;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
@@ -199,6 +237,44 @@ final class ActionStartAIAssistantParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['interruptionSettings'] = $interruptionSettings;
+
+        return $self;
+    }
+
+    /**
+     * A list of messages to seed the conversation history before the assistant starts. Follows the same message format as the `ai_assistant_add_messages` command.
+     *
+     * @param list<MessageHistoryShape> $messageHistory
+     */
+    public function withMessageHistory(array $messageHistory): self
+    {
+        $self = clone $this;
+        $self['messageHistory'] = $messageHistory;
+
+        return $self;
+    }
+
+    /**
+     * A list of participants to add to the conversation when it starts.
+     *
+     * @param list<Participant|ParticipantShape> $participants
+     */
+    public function withParticipants(array $participants): self
+    {
+        $self = clone $this;
+        $self['participants'] = $participants;
+
+        return $self;
+    }
+
+    /**
+     * When `true`, a webhook is sent each time the conversation message history is updated.
+     */
+    public function withSendMessageHistoryUpdates(
+        bool $sendMessageHistoryUpdates
+    ): self {
+        $self = clone $this;
+        $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
 
         return $self;
     }

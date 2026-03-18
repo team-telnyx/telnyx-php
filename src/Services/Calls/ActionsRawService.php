@@ -152,6 +152,8 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
+ * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
+ * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant as ParticipantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
@@ -1025,6 +1027,9 @@ final class ActionsRawService implements ActionsRawContract
      *   commandID?: string,
      *   greeting?: string,
      *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
+     *   messageHistory?: list<MessageHistoryShape1>,
+     *   participants?: list<ActionStartAIAssistantParams\Participant|ParticipantShape1>,
+     *   sendMessageHistoryUpdates?: bool,
      *   transcription?: TranscriptionConfig|TranscriptionConfigShape,
      *   voice?: string,
      *   voiceSettings?: VoiceSettingsShape3,
