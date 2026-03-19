@@ -24,9 +24,11 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
  *
  * Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header.
  *
- * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
+ * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy` or `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
  *
- * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `inworld`.
+ * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`.
+ *
+ * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
  *
  * @see Telnyx\Services\TextToSpeechService::generate()
  *
@@ -43,7 +45,6 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
  *   azure?: null|Azure|AzureShape,
  *   disableCache?: bool|null,
  *   elevenlabs?: null|Elevenlabs|ElevenlabsShape,
- *   inworld?: array<string,mixed>|null,
  *   language?: string|null,
  *   minimax?: null|Minimax|MinimaxShape,
  *   outputType?: null|OutputType|value-of<OutputType>,
@@ -88,14 +89,6 @@ final class TextToSpeechGenerateParams implements BaseModel
     public ?Elevenlabs $elevenlabs;
 
     /**
-     * Inworld provider-specific parameters.
-     *
-     * @var array<string,mixed>|null $inworld
-     */
-    #[Optional(map: 'mixed')]
-    public ?array $inworld;
-
-    /**
      * Language code (e.g. `en-US`). Usage varies by provider.
      */
     #[Optional]
@@ -136,7 +129,7 @@ final class TextToSpeechGenerateParams implements BaseModel
     public ?Rime $rime;
 
     /**
-     * Telnyx provider-specific parameters.
+     * Telnyx provider-specific parameters. Use `voice_speed` and `temperature` for `Natural` and `NaturalHD` models. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`.
      */
     #[Optional]
     public ?Telnyx $telnyx;
@@ -156,7 +149,7 @@ final class TextToSpeechGenerateParams implements BaseModel
     public ?string $textType;
 
     /**
-     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `telnyx.NaturalHD.Alloy`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
+     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `telnyx.NaturalHD.Alloy`, `Telnyx.Ultra.<voice_id>`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
      */
     #[Optional]
     public ?string $voice;
@@ -182,7 +175,6 @@ final class TextToSpeechGenerateParams implements BaseModel
      * @param Aws|AwsShape|null $aws
      * @param Azure|AzureShape|null $azure
      * @param Elevenlabs|ElevenlabsShape|null $elevenlabs
-     * @param array<string,mixed>|null $inworld
      * @param Minimax|MinimaxShape|null $minimax
      * @param OutputType|value-of<OutputType>|null $outputType
      * @param Provider|value-of<Provider>|null $provider
@@ -197,7 +189,6 @@ final class TextToSpeechGenerateParams implements BaseModel
         Azure|array|null $azure = null,
         ?bool $disableCache = null,
         Elevenlabs|array|null $elevenlabs = null,
-        ?array $inworld = null,
         ?string $language = null,
         Minimax|array|null $minimax = null,
         OutputType|string|null $outputType = null,
@@ -216,7 +207,6 @@ final class TextToSpeechGenerateParams implements BaseModel
         null !== $azure && $self['azure'] = $azure;
         null !== $disableCache && $self['disableCache'] = $disableCache;
         null !== $elevenlabs && $self['elevenlabs'] = $elevenlabs;
-        null !== $inworld && $self['inworld'] = $inworld;
         null !== $language && $self['language'] = $language;
         null !== $minimax && $self['minimax'] = $minimax;
         null !== $outputType && $self['outputType'] = $outputType;
@@ -278,19 +268,6 @@ final class TextToSpeechGenerateParams implements BaseModel
     {
         $self = clone $this;
         $self['elevenlabs'] = $elevenlabs;
-
-        return $self;
-    }
-
-    /**
-     * Inworld provider-specific parameters.
-     *
-     * @param array<string,mixed> $inworld
-     */
-    public function withInworld(array $inworld): self
-    {
-        $self = clone $this;
-        $self['inworld'] = $inworld;
 
         return $self;
     }
@@ -372,7 +349,7 @@ final class TextToSpeechGenerateParams implements BaseModel
     }
 
     /**
-     * Telnyx provider-specific parameters.
+     * Telnyx provider-specific parameters. Use `voice_speed` and `temperature` for `Natural` and `NaturalHD` models. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`.
      *
      * @param Telnyx|TelnyxShape $telnyx
      */
@@ -409,7 +386,7 @@ final class TextToSpeechGenerateParams implements BaseModel
     }
 
     /**
-     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `telnyx.NaturalHD.Alloy`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
+     * Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `telnyx.NaturalHD.Alloy`, `Telnyx.Ultra.<voice_id>`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
      */
     public function withVoice(string $voice): self
     {
