@@ -13,10 +13,13 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\MessageTemplatesRawContract;
 use Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams;
 use Telnyx\Whatsapp\MessageTemplates\MessageTemplateCreateParams\Category;
+use Telnyx\Whatsapp\MessageTemplates\MessageTemplateGetResponse;
 use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListParams;
 use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListParams\FilterCategory;
-use Telnyx\Whatsapp\MessageTemplates\MessageTemplateListResponse;
 use Telnyx\Whatsapp\MessageTemplates\MessageTemplateNewResponse;
+use Telnyx\Whatsapp\MessageTemplates\MessageTemplateUpdateParams;
+use Telnyx\Whatsapp\MessageTemplates\MessageTemplateUpdateResponse;
+use Telnyx\WhatsappTemplateData;
 
 /**
  * Manage Whatsapp message templates.
@@ -38,7 +41,7 @@ final class MessageTemplatesRawService implements MessageTemplatesRawContract
      *
      * @param array{
      *   category: Category|value-of<Category>,
-     *   components: list<mixed>,
+     *   components: list<array<string,mixed>>,
      *   language: string,
      *   name: string,
      *   wabaID: string,
@@ -71,6 +74,67 @@ final class MessageTemplatesRawService implements MessageTemplatesRawContract
     /**
      * @api
      *
+     * Get a Whatsapp message template by ID
+     *
+     * @param string $id Whatsapp message template ID
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessageTemplateGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['v2/whatsapp_message_templates/%1$s', $id],
+            options: $requestOptions,
+            convert: MessageTemplateGetResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Update a Whatsapp message template
+     *
+     * @param string $id Whatsapp message template ID
+     * @param array{
+     *   category?: MessageTemplateUpdateParams\Category|value-of<MessageTemplateUpdateParams\Category>,
+     *   components?: list<array<string,mixed>>,
+     * }|MessageTemplateUpdateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<MessageTemplateUpdateResponse>
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $id,
+        array|MessageTemplateUpdateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = MessageTemplateUpdateParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'patch',
+            path: ['v2/whatsapp_message_templates/%1$s', $id],
+            body: (object) $parsed,
+            options: $options,
+            convert: MessageTemplateUpdateResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
      * List Whatsapp message templates
      *
      * @param array{
@@ -83,7 +147,7 @@ final class MessageTemplatesRawService implements MessageTemplatesRawContract
      * }|MessageTemplateListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessageTemplateListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WhatsappTemplateData>>
      *
      * @throws APIException
      */
@@ -112,8 +176,33 @@ final class MessageTemplatesRawService implements MessageTemplatesRawContract
                 ],
             ),
             options: $options,
-            convert: MessageTemplateListResponse::class,
+            convert: WhatsappTemplateData::class,
             page: DefaultFlatPagination::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Delete a Whatsapp message template
+     *
+     * @param string $id Whatsapp message template ID
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function delete(
+        string $id,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'delete',
+            path: ['v2/whatsapp_message_templates/%1$s', $id],
+            options: $requestOptions,
+            convert: null,
         );
     }
 }
