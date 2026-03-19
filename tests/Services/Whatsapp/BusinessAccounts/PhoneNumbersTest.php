@@ -48,7 +48,7 @@ final class PhoneNumbersTest extends TestCase
     }
 
     #[Test]
-    public function testInitializeVerification(): void
+    public function testCreateVerification(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
@@ -59,7 +59,7 @@ final class PhoneNumbersTest extends TestCase
             ->whatsapp
             ->businessAccounts
             ->phoneNumbers
-            ->initializeVerification(
+            ->createVerification(
                 'id',
                 displayName: 'display_name',
                 phoneNumber: 'phone_number'
@@ -71,7 +71,7 @@ final class PhoneNumbersTest extends TestCase
     }
 
     #[Test]
-    public function testInitializeVerificationWithOptionalParams(): void
+    public function testCreateVerificationWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
@@ -82,7 +82,7 @@ final class PhoneNumbersTest extends TestCase
             ->whatsapp
             ->businessAccounts
             ->phoneNumbers
-            ->initializeVerification(
+            ->createVerification(
                 'id',
                 displayName: 'display_name',
                 phoneNumber: 'phone_number',

@@ -14,7 +14,7 @@ use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
 use Telnyx\VoiceDesigns\VoiceDesignListParams\Sort;
 use Telnyx\VoiceDesigns\VoiceDesignListResponse;
 use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
-use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
+use Telnyx\VoiceDesigns\VoiceDesignUpdateResponse;
 
 /**
  * Create and manage AI-generated voice designs using natural language prompts.
@@ -109,6 +109,30 @@ final class VoiceDesignsService implements VoiceDesignsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Updates the name of a voice design. All versions retain their other properties.
+     *
+     * @param string $id the voice design UUID or name
+     * @param string $name new name for the voice design
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $id,
+        string $name,
+        RequestOptions|array|null $requestOptions = null
+    ): VoiceDesignUpdateResponse {
+        $params = Util::removeNulls(['name' => $name]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -214,30 +238,6 @@ final class VoiceDesignsService implements VoiceDesignsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->downloadSample($id, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
-     * Updates the name of a voice design. All versions retain their other properties.
-     *
-     * @param string $id the voice design UUID or name
-     * @param string $name new name for the voice design
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function rename(
-        string $id,
-        string $name,
-        RequestOptions|array|null $requestOptions = null
-    ): VoiceDesignRenameResponse {
-        $params = Util::removeNulls(['name' => $name]);
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->rename($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

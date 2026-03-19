@@ -7,12 +7,13 @@ namespace Telnyx\SimCards\Actions;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse\Data;
 
 /**
- * @phpstan-import-type BulkSimCardActionShape from \Telnyx\SimCards\Actions\BulkSimCardAction
+ * @phpstan-import-type DataShape from \Telnyx\SimCards\Actions\ActionBulkDisableVoiceResponse\Data
  *
  * @phpstan-type ActionBulkDisableVoiceResponseShape = array{
- *   data?: null|BulkSimCardAction|BulkSimCardActionShape
+ *   data?: null|Data|DataShape
  * }
  */
 final class ActionBulkDisableVoiceResponse implements BaseModel
@@ -24,7 +25,7 @@ final class ActionBulkDisableVoiceResponse implements BaseModel
      * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.
      */
     #[Optional]
-    public ?BulkSimCardAction $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -36,9 +37,9 @@ final class ActionBulkDisableVoiceResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BulkSimCardAction|BulkSimCardActionShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(BulkSimCardAction|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -50,9 +51,9 @@ final class ActionBulkDisableVoiceResponse implements BaseModel
     /**
      * This object represents a bulk SIM card action. It groups SIM card actions created through a bulk endpoint under a single resource for further lookup.
      *
-     * @param BulkSimCardAction|BulkSimCardActionShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(BulkSimCardAction|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
