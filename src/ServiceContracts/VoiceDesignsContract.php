@@ -11,7 +11,7 @@ use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
 use Telnyx\VoiceDesigns\VoiceDesignListParams\Sort;
 use Telnyx\VoiceDesigns\VoiceDesignListResponse;
 use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
-use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
+use Telnyx\VoiceDesigns\VoiceDesignUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -63,6 +63,21 @@ interface VoiceDesignsContract
         ?int $version = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceDesignGetResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id the voice design UUID or name
+     * @param string $name new name for the voice design
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $id,
+        string $name,
+        RequestOptions|array|null $requestOptions = null
+    ): VoiceDesignUpdateResponse;
 
     /**
      * @api
@@ -127,19 +142,4 @@ interface VoiceDesignsContract
         ?int $version = null,
         RequestOptions|array|null $requestOptions = null,
     ): string;
-
-    /**
-     * @api
-     *
-     * @param string $id the voice design UUID or name
-     * @param string $name new name for the voice design
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function rename(
-        string $id,
-        string $name,
-        RequestOptions|array|null $requestOptions = null
-    ): VoiceDesignRenameResponse;
 }

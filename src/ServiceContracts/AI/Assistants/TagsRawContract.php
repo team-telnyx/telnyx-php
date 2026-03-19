@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Assistants;
 
-use Telnyx\AI\Assistants\Tags\TagAddParams;
-use Telnyx\AI\Assistants\Tags\TagAddResponse;
+use Telnyx\AI\Assistants\Tags\TagCreateParams;
+use Telnyx\AI\Assistants\Tags\TagDeleteParams;
+use Telnyx\AI\Assistants\Tags\TagDeleteResponse;
 use Telnyx\AI\Assistants\Tags\TagListResponse;
-use Telnyx\AI\Assistants\Tags\TagRemoveParams;
-use Telnyx\AI\Assistants\Tags\TagRemoveResponse;
+use Telnyx\AI\Assistants\Tags\TagNewResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -18,6 +18,22 @@ use Telnyx\RequestOptions;
  */
 interface TagsRawContract
 {
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|TagCreateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<TagNewResponse>
+     *
+     * @throws APIException
+     */
+    public function create(
+        string $assistantID,
+        array|TagCreateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
     /**
      * @api
      *
@@ -34,32 +50,16 @@ interface TagsRawContract
     /**
      * @api
      *
-     * @param array<string,mixed>|TagAddParams $params
+     * @param array<string,mixed>|TagDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TagAddResponse>
+     * @return BaseResponse<TagDeleteResponse>
      *
      * @throws APIException
      */
-    public function add(
-        string $assistantID,
-        array|TagAddParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string,mixed>|TagRemoveParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<TagRemoveResponse>
-     *
-     * @throws APIException
-     */
-    public function remove(
+    public function delete(
         string $tag,
-        array|TagRemoveParams $params,
+        array|TagDeleteParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

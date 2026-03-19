@@ -15,9 +15,9 @@ use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
 use Telnyx\VoiceDesigns\VoiceDesignListParams;
 use Telnyx\VoiceDesigns\VoiceDesignListResponse;
 use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
-use Telnyx\VoiceDesigns\VoiceDesignRenameParams;
-use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
 use Telnyx\VoiceDesigns\VoiceDesignRetrieveParams;
+use Telnyx\VoiceDesigns\VoiceDesignUpdateParams;
+use Telnyx\VoiceDesigns\VoiceDesignUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -53,6 +53,23 @@ interface VoiceDesignsRawContract
     public function retrieve(
         string $id,
         array|VoiceDesignRetrieveParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id the voice design UUID or name
+     * @param array<string,mixed>|VoiceDesignUpdateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<VoiceDesignUpdateResponse>
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $id,
+        array|VoiceDesignUpdateParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
@@ -117,23 +134,6 @@ interface VoiceDesignsRawContract
     public function downloadSample(
         string $id,
         array|VoiceDesignDownloadSampleParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param string $id the voice design UUID or name
-     * @param array<string,mixed>|VoiceDesignRenameParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<VoiceDesignRenameResponse>
-     *
-     * @throws APIException
-     */
-    public function rename(
-        string $id,
-        array|VoiceDesignRenameParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

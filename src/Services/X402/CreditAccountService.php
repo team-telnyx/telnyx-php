@@ -9,8 +9,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\X402\CreditAccountContract;
-use Telnyx\X402\CreditAccount\CreditAccountNewQuoteResponse;
-use Telnyx\X402\CreditAccount\CreditAccountSettleResponse;
+use Telnyx\X402\CreditAccount\CreditAccountNewPaymentQuoteResponse;
+use Telnyx\X402\CreditAccount\CreditAccountSettlePaymentResponse;
 
 /**
  * Operations for x402 cryptocurrency payment transactions. Fund your Telnyx account using USDC stablecoin payments via the x402 protocol.
@@ -42,14 +42,14 @@ final class CreditAccountService implements CreditAccountContract
      *
      * @throws APIException
      */
-    public function createQuote(
+    public function createPaymentQuote(
         string $amountUsd,
         RequestOptions|array|null $requestOptions = null
-    ): CreditAccountNewQuoteResponse {
+    ): CreditAccountNewPaymentQuoteResponse {
         $params = Util::removeNulls(['amountUsd' => $amountUsd]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createQuote(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->createPaymentQuote(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -66,12 +66,12 @@ final class CreditAccountService implements CreditAccountContract
      *
      * @throws APIException
      */
-    public function settle(
+    public function settlePayment(
         string $id,
         ?string $paymentSignature = null,
         ?string $paymentSignature1 = null,
         RequestOptions|array|null $requestOptions = null,
-    ): CreditAccountSettleResponse {
+    ): CreditAccountSettlePaymentResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,
@@ -81,7 +81,7 @@ final class CreditAccountService implements CreditAccountContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->settle(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->settlePayment(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

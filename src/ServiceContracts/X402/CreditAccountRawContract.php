@@ -7,10 +7,10 @@ namespace Telnyx\ServiceContracts\X402;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\X402\CreditAccount\CreditAccountCreateQuoteParams;
-use Telnyx\X402\CreditAccount\CreditAccountNewQuoteResponse;
-use Telnyx\X402\CreditAccount\CreditAccountSettleParams;
-use Telnyx\X402\CreditAccount\CreditAccountSettleResponse;
+use Telnyx\X402\CreditAccount\CreditAccountCreatePaymentQuoteParams;
+use Telnyx\X402\CreditAccount\CreditAccountNewPaymentQuoteResponse;
+use Telnyx\X402\CreditAccount\CreditAccountSettlePaymentParams;
+use Telnyx\X402\CreditAccount\CreditAccountSettlePaymentResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -20,30 +20,30 @@ interface CreditAccountRawContract
     /**
      * @api
      *
-     * @param array<string,mixed>|CreditAccountCreateQuoteParams $params
+     * @param array<string,mixed>|CreditAccountCreatePaymentQuoteParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CreditAccountNewQuoteResponse>
+     * @return BaseResponse<CreditAccountNewPaymentQuoteResponse>
      *
      * @throws APIException
      */
-    public function createQuote(
-        array|CreditAccountCreateQuoteParams $params,
+    public function createPaymentQuote(
+        array|CreditAccountCreatePaymentQuoteParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
-     * @param array<string,mixed>|CreditAccountSettleParams $params
+     * @param array<string,mixed>|CreditAccountSettlePaymentParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CreditAccountSettleResponse>
+     * @return BaseResponse<CreditAccountSettlePaymentResponse>
      *
      * @throws APIException
      */
-    public function settle(
-        array|CreditAccountSettleParams $params,
+    public function settlePayment(
+        array|CreditAccountSettlePaymentParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

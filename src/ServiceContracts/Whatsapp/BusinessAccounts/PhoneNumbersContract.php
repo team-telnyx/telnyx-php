@@ -7,7 +7,7 @@ namespace Telnyx\ServiceContracts\Whatsapp\BusinessAccounts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberInitializeVerificationParams\VerificationMethod;
+use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberCreateVerificationParams\VerificationMethod;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberListResponse;
 
 /**
@@ -41,7 +41,7 @@ interface PhoneNumbersContract
      *
      * @throws APIException
      */
-    public function initializeVerification(
+    public function createVerification(
         string $id,
         string $displayName,
         string $phoneNumber,

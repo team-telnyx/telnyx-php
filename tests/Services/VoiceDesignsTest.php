@@ -11,7 +11,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
 use Telnyx\VoiceDesigns\VoiceDesignListResponse;
 use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
-use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
+use Telnyx\VoiceDesigns\VoiceDesignUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -86,6 +86,38 @@ final class VoiceDesignsTest extends TestCase
     }
 
     #[Test]
+    public function testUpdate(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->voiceDesigns->update(
+            'id',
+            name: 'updated-narrator'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceDesignUpdateResponse::class, $result);
+    }
+
+    #[Test]
+    public function testUpdateWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->voiceDesigns->update(
+            'id',
+            name: 'updated-narrator'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceDesignUpdateResponse::class, $result);
+    }
+
+    #[Test]
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -153,37 +185,5 @@ final class VoiceDesignsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsString($result);
-    }
-
-    #[Test]
-    public function testRename(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->voiceDesigns->rename(
-            'id',
-            name: 'updated-narrator'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceDesignRenameResponse::class, $result);
-    }
-
-    #[Test]
-    public function testRenameWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->voiceDesigns->rename(
-            'id',
-            name: 'updated-narrator'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceDesignRenameResponse::class, $result);
     }
 }

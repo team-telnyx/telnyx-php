@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants;
 
-use Telnyx\AI\Assistants\Tags\TagAddParams;
-use Telnyx\AI\Assistants\Tags\TagAddResponse;
+use Telnyx\AI\Assistants\Tags\TagCreateParams;
+use Telnyx\AI\Assistants\Tags\TagDeleteParams;
+use Telnyx\AI\Assistants\Tags\TagDeleteResponse;
 use Telnyx\AI\Assistants\Tags\TagListResponse;
-use Telnyx\AI\Assistants\Tags\TagRemoveParams;
-use Telnyx\AI\Assistants\Tags\TagRemoveResponse;
+use Telnyx\AI\Assistants\Tags\TagNewResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -27,6 +27,38 @@ final class TagsRawService implements TagsRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * Add Assistant Tag
+     *
+     * @param array{tag: string}|TagCreateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<TagNewResponse>
+     *
+     * @throws APIException
+     */
+    public function create(
+        string $assistantID,
+        array|TagCreateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = TagCreateParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['ai/assistants/%1$s/tags', $assistantID],
+            body: (object) $parsed,
+            options: $options,
+            convert: TagNewResponse::class,
+        );
+    }
 
     /**
      * @api
@@ -54,53 +86,21 @@ final class TagsRawService implements TagsRawContract
     /**
      * @api
      *
-     * Add Assistant Tag
-     *
-     * @param array{tag: string}|TagAddParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<TagAddResponse>
-     *
-     * @throws APIException
-     */
-    public function add(
-        string $assistantID,
-        array|TagAddParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = TagAddParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: ['ai/assistants/%1$s/tags', $assistantID],
-            body: (object) $parsed,
-            options: $options,
-            convert: TagAddResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
      * Remove Assistant Tag
      *
-     * @param array{assistantID: string}|TagRemoveParams $params
+     * @param array{assistantID: string}|TagDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TagRemoveResponse>
+     * @return BaseResponse<TagDeleteResponse>
      *
      * @throws APIException
      */
-    public function remove(
+    public function delete(
         string $tag,
-        array|TagRemoveParams $params,
+        array|TagDeleteParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = TagRemoveParams::parseRequest(
+        [$parsed, $options] = TagDeleteParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -112,7 +112,7 @@ final class TagsRawService implements TagsRawContract
             method: 'delete',
             path: ['ai/assistants/%1$s/tags/%2$s', $assistantID, $tag],
             options: $options,
-            convert: TagRemoveResponse::class,
+            convert: TagDeleteResponse::class,
         );
     }
 }

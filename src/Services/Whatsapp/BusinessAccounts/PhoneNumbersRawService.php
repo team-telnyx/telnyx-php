@@ -11,8 +11,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\BusinessAccounts\PhoneNumbersRawContract;
-use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberInitializeVerificationParams;
-use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberInitializeVerificationParams\VerificationMethod;
+use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberCreateVerificationParams;
+use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberCreateVerificationParams\VerificationMethod;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberListResponse;
 
@@ -75,19 +75,19 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *   phoneNumber: string,
      *   language?: string,
      *   verificationMethod?: VerificationMethod|value-of<VerificationMethod>,
-     * }|PhoneNumberInitializeVerificationParams $params
+     * }|PhoneNumberCreateVerificationParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
-    public function initializeVerification(
+    public function createVerification(
         string $id,
-        array|PhoneNumberInitializeVerificationParams $params,
+        array|PhoneNumberCreateVerificationParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = PhoneNumberInitializeVerificationParams::parseRequest(
+        [$parsed, $options] = PhoneNumberCreateVerificationParams::parseRequest(
             $params,
             $requestOptions,
         );

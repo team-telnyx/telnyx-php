@@ -145,6 +145,7 @@ use Telnyx\Services\TelephonyCredentialsService;
 use Telnyx\Services\TexmlApplicationsService;
 use Telnyx\Services\TexmlService;
 use Telnyx\Services\TextToSpeechService;
+use Telnyx\Services\TrafficPolicyProfilesService;
 use Telnyx\Services\UsageReportsService;
 use Telnyx\Services\UserAddressesService;
 use Telnyx\Services\UserTagsService;
@@ -955,6 +956,11 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public TrafficPolicyProfilesService $trafficPolicyProfiles;
+
+    /**
+     * @api
+     */
     public WhatsappService $whatsapp;
 
     /**
@@ -1180,6 +1186,7 @@ class Client extends BaseClient
         $this->alphanumericSenderIDs = new AlphanumericSenderIDsService($this);
         $this->messagingProfileMetrics = new MessagingProfileMetricsService($this);
         $this->sessionAnalysis = new SessionAnalysisService($this);
+        $this->trafficPolicyProfiles = new TrafficPolicyProfilesService($this);
         $this->whatsapp = new WhatsappService($this);
         $this->whatsappMessageTemplates = new WhatsappMessageTemplatesService($this);
         $this->x402 = new X402Service($this);
