@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadResponse;
+namespace Telnyx\Whatsapp\PhoneNumbers\Profile;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type ProfileDataShape = array{
  *   id?: string|null,
  *   about?: string|null,
  *   address?: string|null,
@@ -25,9 +25,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   website?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class ProfileData implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<ProfileDataShape> */
     use SdkModel;
 
     #[Optional]
