@@ -54,17 +54,4 @@ final class TextToSpeechTest extends TestCase
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(TextToSpeechListVoicesResponse::class, $result);
     }
-
-    #[Test]
-    public function testStream(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->textToSpeech->stream();
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
-    }
 }

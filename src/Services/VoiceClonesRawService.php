@@ -11,15 +11,15 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesRawContract;
+use Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams;
-use Telnyx\VoiceClones\VoiceCloneCreateParams;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
-use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
+use Telnyx\VoiceClones\VoiceCloneListResponse;
+use Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
-use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams;
+use Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender;
 use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
 /**
@@ -38,49 +38,11 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
     /**
      * @api
      *
-     * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
-     *
-     * @param array{
-     *   gender: Gender|value-of<Gender>,
-     *   language: string,
-     *   name: string,
-     *   voiceDesignID: string,
-     * }|VoiceCloneCreateParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<VoiceCloneNewResponse>
-     *
-     * @throws APIException
-     */
-    public function create(
-        array|VoiceCloneCreateParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = VoiceCloneCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: 'voice_clones',
-            body: (object) $parsed,
-            options: $options,
-            convert: VoiceCloneNewResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
      * Updates the name, language, or gender of a voice clone.
      *
      * @param string $id the voice clone UUID
      * @param array{
-     *   name: string,
-     *   gender?: VoiceCloneUpdateParams\Gender|value-of<VoiceCloneUpdateParams\Gender>,
-     *   language?: string,
+     *   name: string, gender?: Gender|value-of<Gender>, language?: string
      * }|VoiceCloneUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -121,7 +83,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      * }|VoiceCloneListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VoiceCloneData>>
+     * @return BaseResponse<DefaultFlatPagination<VoiceCloneListResponse>>
      *
      * @throws APIException
      */
@@ -147,7 +109,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
                 ],
             ),
             options: $options,
-            convert: VoiceCloneData::class,
+            convert: VoiceCloneListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }
@@ -174,6 +136,42 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
             path: ['voice_clones/%1$s', $id],
             options: $requestOptions,
             convert: null,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
+     *
+     * @param array{
+     *   gender: VoiceCloneCreateFromDesignParams\Gender|value-of<VoiceCloneCreateFromDesignParams\Gender>,
+     *   language: string,
+     *   name: string,
+     *   voiceDesignID: string,
+     * }|VoiceCloneCreateFromDesignParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<VoiceCloneNewFromDesignResponse>
+     *
+     * @throws APIException
+     */
+    public function createFromDesign(
+        array|VoiceCloneCreateFromDesignParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = VoiceCloneCreateFromDesignParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'voice_clones',
+            body: (object) $parsed,
+            options: $options,
+            convert: VoiceCloneNewFromDesignResponse::class,
         );
     }
 

@@ -8,12 +8,12 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams;
-use Telnyx\VoiceClones\VoiceCloneCreateParams;
-use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams;
+use Telnyx\VoiceClones\VoiceCloneListResponse;
+use Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
-use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams;
 use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
@@ -22,21 +22,6 @@ use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
  */
 interface VoiceClonesRawContract
 {
-    /**
-     * @api
-     *
-     * @param array<string,mixed>|VoiceCloneCreateParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<VoiceCloneNewResponse>
-     *
-     * @throws APIException
-     */
-    public function create(
-        array|VoiceCloneCreateParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
     /**
      * @api
      *
@@ -60,7 +45,7 @@ interface VoiceClonesRawContract
      * @param array<string,mixed>|VoiceCloneListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VoiceCloneData>>
+     * @return BaseResponse<DefaultFlatPagination<VoiceCloneListResponse>>
      *
      * @throws APIException
      */
@@ -82,6 +67,21 @@ interface VoiceClonesRawContract
     public function delete(
         string $id,
         RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|VoiceCloneCreateFromDesignParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<VoiceCloneNewFromDesignResponse>
+     *
+     * @throws APIException
+     */
+    public function createFromDesign(
+        array|VoiceCloneCreateFromDesignParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**

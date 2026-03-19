@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\VoiceClones\VoiceCloneData;
+use Telnyx\VoiceClones\VoiceCloneListResponse;
+use Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
-use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 use Tests\UnsupportedMockTests;
 
@@ -30,42 +30,6 @@ final class VoiceClonesTest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
-    }
-
-    #[Test]
-    public function testCreate(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->voiceClones->create(
-            gender: 'male',
-            language: 'en',
-            name: 'clone-narrator',
-            voiceDesignID: '550e8400-e29b-41d4-a716-446655440000',
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceCloneNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCreateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->voiceClones->create(
-            gender: 'male',
-            language: 'en',
-            name: 'clone-narrator',
-            voiceDesignID: '550e8400-e29b-41d4-a716-446655440000',
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceCloneNewResponse::class, $result);
     }
 
     #[Test]
@@ -116,7 +80,7 @@ final class VoiceClonesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(VoiceCloneData::class, $item);
+            $this->assertInstanceOf(VoiceCloneListResponse::class, $item);
         }
     }
 
@@ -133,6 +97,42 @@ final class VoiceClonesTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testCreateFromDesign(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->voiceClones->createFromDesign(
+            gender: 'male',
+            language: 'en',
+            name: 'clone-narrator',
+            voiceDesignID: '550e8400-e29b-41d4-a716-446655440000',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceCloneNewFromDesignResponse::class, $result);
+    }
+
+    #[Test]
+    public function testCreateFromDesignWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->voiceClones->createFromDesign(
+            gender: 'male',
+            language: 'en',
+            name: 'clone-narrator',
+            voiceDesignID: '550e8400-e29b-41d4-a716-446655440000',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(VoiceCloneNewFromDesignResponse::class, $result);
     }
 
     #[Test]

@@ -65,7 +65,7 @@ final class CreditAccountRawService implements CreditAccountRawContract
      * Settles an x402 payment using the quote ID and a signed payment authorization. The payment signature can be provided via the `PAYMENT-SIGNATURE` header or the `payment_signature` body parameter. Settlement is idempotent — submitting the same quote ID multiple times returns the existing transaction.
      *
      * @param array{
-     *   id: string, paymentSignature?: string, paymentSignatureHeader?: string
+     *   id: string, paymentSignature?: string, paymentSignature1?: string
      * }|CreditAccountSettleParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -81,7 +81,7 @@ final class CreditAccountRawService implements CreditAccountRawContract
             $params,
             $requestOptions,
         );
-        $header_params = ['paymentSignatureHeader' => 'PAYMENT-SIGNATURE'];
+        $header_params = ['paymentSignature' => 'PAYMENT-SIGNATURE'];
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

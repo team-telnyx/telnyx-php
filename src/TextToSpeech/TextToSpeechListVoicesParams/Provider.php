@@ -22,6 +22,4 @@ enum Provider: string
     case RIME = 'rime';
 
     case RESEMBLE = 'resemble';
-
-    case INWORLD = 'inworld';
 }

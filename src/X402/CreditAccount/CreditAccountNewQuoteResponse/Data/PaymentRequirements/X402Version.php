@@ -9,5 +9,5 @@ namespace Telnyx\X402\CreditAccount\CreditAccountNewQuoteResponse\Data\PaymentRe
  */
 enum X402Version: int
 {
-    case V2 = 2;
+    case _2 = 2;
 }
