@@ -30,6 +30,9 @@ use Telnyx\ServiceContracts\Porting\LoaConfigurationsContract;
  * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Address as AddressShape2
  * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Contact as ContactShape2
  * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreviewParams\Logo as LogoShape2
+ * @phpstan-import-type AddressShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address as AddressShape3
+ * @phpstan-import-type ContactShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact as ContactShape3
+ * @phpstan-import-type LogoShape from \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo as LogoShape3
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class LoaConfigurationsService implements LoaConfigurationsContract
@@ -225,6 +228,44 @@ final class LoaConfigurationsService implements LoaConfigurationsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->preview(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Preview the LOA template that would be generated without need to create LOA configuration.
+     *
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address|AddressShape3 $address the address of the company
+     * @param string $companyName The name of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact|ContactShape3 $contact the contact information of the company
+     * @param \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo|LogoShape3 $logo The logo of the LOA configuration
+     * @param string $name The name of the LOA configuration
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function preview0(
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Address|array $address,
+        string $companyName,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Contact|array $contact,
+        \Telnyx\Porting\LoaConfigurations\LoaConfigurationPreview0Params\Logo|array $logo,
+        string $name,
+        RequestOptions|array|null $requestOptions = null,
+    ): string {
+        $params = Util::removeNulls(
+            [
+                'address' => $address,
+                'companyName' => $companyName,
+                'contact' => $contact,
+                'logo' => $logo,
+                'name' => $name,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->preview0(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -248,6 +248,61 @@ final class LoaConfigurationsTest extends TestCase
     }
 
     #[Test]
+    public function testPreview0(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->porting->loaConfigurations->preview0(
+            address: [
+                'city' => 'Austin',
+                'countryCode' => 'US',
+                'state' => 'TX',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+            ],
+            companyName: 'Telnyx',
+            contact: [
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
+            ],
+            logo: ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            name: 'My LOA Configuration',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
+    }
+
+    #[Test]
+    public function testPreview0WithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->porting->loaConfigurations->preview0(
+            address: [
+                'city' => 'Austin',
+                'countryCode' => 'US',
+                'state' => 'TX',
+                'streetAddress' => '600 Congress Avenue',
+                'zipCode' => '78701',
+                'extendedAddress' => '14th Floor',
+            ],
+            companyName: 'Telnyx',
+            contact: [
+                'email' => 'testing@telnyx.com', 'phoneNumber' => '+12003270001',
+            ],
+            logo: ['documentID' => '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'],
+            name: 'My LOA Configuration',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
+    }
+
+    #[Test]
     public function testPreview1(): void
     {
         if (UnsupportedMockTests::$skip) {
