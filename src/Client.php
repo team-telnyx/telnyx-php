@@ -159,7 +159,6 @@ use Telnyx\Services\VoiceDesignsService;
 use Telnyx\Services\WebhookDeliveriesService;
 use Telnyx\Services\WebhooksService;
 use Telnyx\Services\WellKnownService;
-use Telnyx\Services\WhatsappMessageTemplatesService;
 use Telnyx\Services\WhatsappService;
 use Telnyx\Services\WireguardInterfacesService;
 use Telnyx\Services\WireguardPeersService;
@@ -966,11 +965,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public WhatsappMessageTemplatesService $whatsappMessageTemplates;
-
-    /**
-     * @api
-     */
     public X402Service $x402;
 
     /**
@@ -1188,7 +1182,6 @@ class Client extends BaseClient
         $this->sessionAnalysis = new SessionAnalysisService($this);
         $this->trafficPolicyProfiles = new TrafficPolicyProfilesService($this);
         $this->whatsapp = new WhatsappService($this);
-        $this->whatsappMessageTemplates = new WhatsappMessageTemplatesService($this);
         $this->x402 = new X402Service($this);
         $this->voiceClones = new VoiceClonesService($this);
         $this->voiceDesigns = new VoiceDesignsService($this);
