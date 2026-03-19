@@ -10,11 +10,11 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesContract;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
 use Telnyx\VoiceClones\VoiceCloneListResponse;
-use Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
-use Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender;
+use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
 /**
@@ -40,11 +40,46 @@ final class VoiceClonesService implements VoiceClonesContract
     /**
      * @api
      *
+     * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
+     *
+     * @param Gender|value-of<Gender> $gender gender of the voice clone
+     * @param string $language ISO 639-1 language code for the clone (e.g. `en`, `fr`, `de`).
+     * @param string $name name for the voice clone
+     * @param string $voiceDesignID UUID of the source voice design to clone
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function create(
+        Gender|string $gender,
+        string $language,
+        string $name,
+        string $voiceDesignID,
+        RequestOptions|array|null $requestOptions = null,
+    ): VoiceCloneNewResponse {
+        $params = Util::removeNulls(
+            [
+                'gender' => $gender,
+                'language' => $language,
+                'name' => $name,
+                'voiceDesignID' => $voiceDesignID,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * Updates the name, language, or gender of a voice clone.
      *
      * @param string $id the voice clone UUID
      * @param string $name new name for the voice clone
-     * @param Gender|value-of<Gender> $gender updated gender for the voice clone
+     * @param \Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender|value-of<\Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender> $gender updated gender for the voice clone
      * @param string $language updated ISO 639-1 language code or `auto`
      * @param RequestOpts|null $requestOptions
      *
@@ -53,7 +88,7 @@ final class VoiceClonesService implements VoiceClonesContract
     public function update(
         string $id,
         string $name,
-        Gender|string|null $gender = null,
+        \Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender|string|null $gender = null,
         ?string $language = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneUpdateResponse {
@@ -120,41 +155,6 @@ final class VoiceClonesService implements VoiceClonesContract
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($id, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
-     * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
-     *
-     * @param \Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams\Gender|value-of<\Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams\Gender> $gender gender of the voice clone
-     * @param string $language ISO 639-1 language code for the clone (e.g. `en`, `fr`, `de`).
-     * @param string $name name for the voice clone
-     * @param string $voiceDesignID UUID of the source voice design to clone
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function createFromDesign(
-        \Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams\Gender|string $gender,
-        string $language,
-        string $name,
-        string $voiceDesignID,
-        RequestOptions|array|null $requestOptions = null,
-    ): VoiceCloneNewFromDesignResponse {
-        $params = Util::removeNulls(
-            [
-                'gender' => $gender,
-                'language' => $language,
-                'name' => $name,
-                'voiceDesignID' => $voiceDesignID,
-            ],
-        );
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createFromDesign(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

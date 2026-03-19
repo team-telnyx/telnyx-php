@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse;
+namespace Telnyx\VoiceClones\VoiceCloneNewResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse\Data\Gender;
-use Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse\Data\RecordType;
+use Telnyx\VoiceClones\VoiceCloneNewResponse\Data\Gender;
+use Telnyx\VoiceClones\VoiceCloneNewResponse\Data\RecordType;
 
 /**
  * A voice clone object.

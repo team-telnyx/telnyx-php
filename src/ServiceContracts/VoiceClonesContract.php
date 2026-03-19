@@ -7,11 +7,11 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
 use Telnyx\VoiceClones\VoiceCloneListResponse;
-use Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
-use Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender;
+use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
 /**
@@ -22,9 +22,28 @@ interface VoiceClonesContract
     /**
      * @api
      *
+     * @param Gender|value-of<Gender> $gender gender of the voice clone
+     * @param string $language ISO 639-1 language code for the clone (e.g. `en`, `fr`, `de`).
+     * @param string $name name for the voice clone
+     * @param string $voiceDesignID UUID of the source voice design to clone
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function create(
+        Gender|string $gender,
+        string $language,
+        string $name,
+        string $voiceDesignID,
+        RequestOptions|array|null $requestOptions = null,
+    ): VoiceCloneNewResponse;
+
+    /**
+     * @api
+     *
      * @param string $id the voice clone UUID
      * @param string $name new name for the voice clone
-     * @param Gender|value-of<Gender> $gender updated gender for the voice clone
+     * @param \Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender|value-of<\Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender> $gender updated gender for the voice clone
      * @param string $language updated ISO 639-1 language code or `auto`
      * @param RequestOpts|null $requestOptions
      *
@@ -33,7 +52,7 @@ interface VoiceClonesContract
     public function update(
         string $id,
         string $name,
-        Gender|string|null $gender = null,
+        \Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender|string|null $gender = null,
         ?string $language = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneUpdateResponse;
@@ -71,25 +90,6 @@ interface VoiceClonesContract
         string $id,
         RequestOptions|array|null $requestOptions = null
     ): mixed;
-
-    /**
-     * @api
-     *
-     * @param \Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams\Gender|value-of<\Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams\Gender> $gender gender of the voice clone
-     * @param string $language ISO 639-1 language code for the clone (e.g. `en`, `fr`, `de`).
-     * @param string $name name for the voice clone
-     * @param string $voiceDesignID UUID of the source voice design to clone
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function createFromDesign(
-        \Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams\Gender|string $gender,
-        string $language,
-        string $name,
-        string $voiceDesignID,
-        RequestOptions|array|null $requestOptions = null,
-    ): VoiceCloneNewFromDesignResponse;
 
     /**
      * @api
