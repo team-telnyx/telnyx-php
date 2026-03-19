@@ -82,7 +82,7 @@ final class CreditAccountTest extends TestCase
         $result = $this->client->x402->creditAccount->settle(
             id: 'quote_abc123',
             paymentSignature: '0xabc123...',
-            paymentSignatureHeader: 'PAYMENT-SIGNATURE',
+            paymentSignature1: 'PAYMENT-SIGNATURE',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
