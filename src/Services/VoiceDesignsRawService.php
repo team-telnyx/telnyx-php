@@ -19,9 +19,9 @@ use Telnyx\VoiceDesigns\VoiceDesignListParams;
 use Telnyx\VoiceDesigns\VoiceDesignListParams\Sort;
 use Telnyx\VoiceDesigns\VoiceDesignListResponse;
 use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
-use Telnyx\VoiceDesigns\VoiceDesignRenameParams;
-use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
 use Telnyx\VoiceDesigns\VoiceDesignRetrieveParams;
+use Telnyx\VoiceDesigns\VoiceDesignUpdateParams;
+use Telnyx\VoiceDesigns\VoiceDesignUpdateResponse;
 
 /**
  * Create and manage AI-generated voice designs using natural language prompts.
@@ -108,6 +108,39 @@ final class VoiceDesignsRawService implements VoiceDesignsRawContract
             query: $parsed,
             options: $options,
             convert: VoiceDesignGetResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Updates the name of a voice design. All versions retain their other properties.
+     *
+     * @param string $id the voice design UUID or name
+     * @param array{name: string}|VoiceDesignUpdateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<VoiceDesignUpdateResponse>
+     *
+     * @throws APIException
+     */
+    public function update(
+        string $id,
+        array|VoiceDesignUpdateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = VoiceDesignUpdateParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'patch',
+            path: ['voice_designs/%1$s', $id],
+            body: (object) $parsed,
+            options: $options,
+            convert: VoiceDesignUpdateResponse::class,
         );
     }
 
@@ -245,39 +278,6 @@ final class VoiceDesignsRawService implements VoiceDesignsRawContract
             headers: ['Accept' => 'audio/wav'],
             options: $options,
             convert: 'string',
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Updates the name of a voice design. All versions retain their other properties.
-     *
-     * @param string $id the voice design UUID or name
-     * @param array{name: string}|VoiceDesignRenameParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<VoiceDesignRenameResponse>
-     *
-     * @throws APIException
-     */
-    public function rename(
-        string $id,
-        array|VoiceDesignRenameParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = VoiceDesignRenameParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'patch',
-            path: ['voice_designs/%1$s', $id],
-            body: (object) $parsed,
-            options: $options,
-            convert: VoiceDesignRenameResponse::class,
         );
     }
 }

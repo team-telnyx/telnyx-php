@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts\X402;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\X402\CreditAccount\CreditAccountNewQuoteResponse;
-use Telnyx\X402\CreditAccount\CreditAccountSettleResponse;
+use Telnyx\X402\CreditAccount\CreditAccountNewPaymentQuoteResponse;
+use Telnyx\X402\CreditAccount\CreditAccountSettlePaymentResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -22,10 +22,10 @@ interface CreditAccountContract
      *
      * @throws APIException
      */
-    public function createQuote(
+    public function createPaymentQuote(
         string $amountUsd,
         RequestOptions|array|null $requestOptions = null
-    ): CreditAccountNewQuoteResponse;
+    ): CreditAccountNewPaymentQuoteResponse;
 
     /**
      * @api
@@ -37,10 +37,10 @@ interface CreditAccountContract
      *
      * @throws APIException
      */
-    public function settle(
+    public function settlePayment(
         string $id,
         ?string $paymentSignature = null,
         ?string $paymentSignature1 = null,
         RequestOptions|array|null $requestOptions = null,
-    ): CreditAccountSettleResponse;
+    ): CreditAccountSettlePaymentResponse;
 }

@@ -7,13 +7,12 @@ namespace Telnyx\Whatsapp\PhoneNumbers\CallingSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Whatsapp\PhoneNumbers\CallingSettings\CallingSettingGetResponse\Data;
 
 /**
- * @phpstan-import-type CallingSettingsDataShape from \Telnyx\Whatsapp\PhoneNumbers\CallingSettings\CallingSettingsData
+ * @phpstan-import-type DataShape from \Telnyx\Whatsapp\PhoneNumbers\CallingSettings\CallingSettingGetResponse\Data
  *
- * @phpstan-type CallingSettingGetResponseShape = array{
- *   data?: null|CallingSettingsData|CallingSettingsDataShape
- * }
+ * @phpstan-type CallingSettingGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class CallingSettingGetResponse implements BaseModel
 {
@@ -21,7 +20,7 @@ final class CallingSettingGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?CallingSettingsData $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -33,9 +32,9 @@ final class CallingSettingGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CallingSettingsData|CallingSettingsDataShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(CallingSettingsData|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +44,9 @@ final class CallingSettingGetResponse implements BaseModel
     }
 
     /**
-     * @param CallingSettingsData|CallingSettingsDataShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(CallingSettingsData|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
