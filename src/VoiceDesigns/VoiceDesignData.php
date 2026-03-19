@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceDesigns\VoiceDesignNewResponse;
+namespace Telnyx\VoiceDesigns;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceDesigns\VoiceDesignNewResponse\Data\RecordType;
+use Telnyx\VoiceDesigns\VoiceDesignData\RecordType;
 
 /**
  * A voice design object with full version detail.
  *
- * @phpstan-type DataShape = array{
+ * @phpstan-type VoiceDesignDataShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   name?: string|null,
@@ -25,9 +25,9 @@ use Telnyx\VoiceDesigns\VoiceDesignNewResponse\Data\RecordType;
  *   voiceSampleSize?: int|null,
  * }
  */
-final class Data implements BaseModel
+final class VoiceDesignData implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<VoiceDesignDataShape> */
     use SdkModel;
 
     /**
