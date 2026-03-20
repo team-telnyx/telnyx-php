@@ -7,20 +7,18 @@ namespace Telnyx\VoiceClones;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse\Data;
+use Telnyx\VoiceClones\VoiceCloneNewResponse\Data;
 
 /**
  * Response envelope for a single voice clone.
  *
- * @phpstan-import-type DataShape from \Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse\Data
+ * @phpstan-import-type DataShape from \Telnyx\VoiceClones\VoiceCloneNewResponse\Data
  *
- * @phpstan-type VoiceCloneNewFromDesignResponseShape = array{
- *   data?: null|Data|DataShape
- * }
+ * @phpstan-type VoiceCloneNewResponseShape = array{data?: null|Data|DataShape}
  */
-final class VoiceCloneNewFromDesignResponse implements BaseModel
+final class VoiceCloneNewResponse implements BaseModel
 {
-    /** @use SdkModel<VoiceCloneNewFromDesignResponseShape> */
+    /** @use SdkModel<VoiceCloneNewResponseShape> */
     use SdkModel;
 
     /**

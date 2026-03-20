@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneNewFromDesignResponse\Data;
+namespace Telnyx\VoiceClones\VoiceCloneNewResponse\Data;
 
 /**
  * Identifies the resource type.

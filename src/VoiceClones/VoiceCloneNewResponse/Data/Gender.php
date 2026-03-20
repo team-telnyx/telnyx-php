@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams;
+namespace Telnyx\VoiceClones\VoiceCloneNewResponse\Data;
 
 /**
  * Gender of the voice clone.

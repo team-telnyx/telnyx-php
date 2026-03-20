@@ -8,23 +8,23 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceClones\VoiceCloneCreateFromDesignParams\Gender;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
 
 /**
  * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
  *
- * @see Telnyx\Services\VoiceClonesService::createFromDesign()
+ * @see Telnyx\Services\VoiceClonesService::create()
  *
- * @phpstan-type VoiceCloneCreateFromDesignParamsShape = array{
+ * @phpstan-type VoiceCloneCreateParamsShape = array{
  *   gender: Gender|value-of<Gender>,
  *   language: string,
  *   name: string,
  *   voiceDesignID: string,
  * }
  */
-final class VoiceCloneCreateFromDesignParams implements BaseModel
+final class VoiceCloneCreateParams implements BaseModel
 {
-    /** @use SdkModel<VoiceCloneCreateFromDesignParamsShape> */
+    /** @use SdkModel<VoiceCloneCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -55,11 +55,11 @@ final class VoiceCloneCreateFromDesignParams implements BaseModel
     public string $voiceDesignID;
 
     /**
-     * `new VoiceCloneCreateFromDesignParams()` is missing required properties by the API.
+     * `new VoiceCloneCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VoiceCloneCreateFromDesignParams::with(
+     * VoiceCloneCreateParams::with(
      *   gender: ..., language: ..., name: ..., voiceDesignID: ...
      * )
      * ```
@@ -67,7 +67,7 @@ final class VoiceCloneCreateFromDesignParams implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new VoiceCloneCreateFromDesignParams)
+     * (new VoiceCloneCreateParams)
      *   ->withGender(...)
      *   ->withLanguage(...)
      *   ->withName(...)
