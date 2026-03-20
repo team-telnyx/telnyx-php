@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfile;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileDeleteResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileGetResponse;
+use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListServicesResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileNewResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateResponse;
@@ -110,7 +110,7 @@ final class TrafficPolicyProfilesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(TrafficPolicyProfile::class, $item);
+            $this->assertInstanceOf(TrafficPolicyProfileListResponse::class, $item);
         }
     }
 

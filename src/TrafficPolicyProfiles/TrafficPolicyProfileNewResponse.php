@@ -7,12 +7,13 @@ namespace Telnyx\TrafficPolicyProfiles;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileNewResponse\Data;
 
 /**
- * @phpstan-import-type TrafficPolicyProfileShape from \Telnyx\TrafficPolicyProfiles\TrafficPolicyProfile
+ * @phpstan-import-type DataShape from \Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileNewResponse\Data
  *
  * @phpstan-type TrafficPolicyProfileNewResponseShape = array{
- *   data?: null|TrafficPolicyProfile|TrafficPolicyProfileShape
+ *   data?: null|Data|DataShape
  * }
  */
 final class TrafficPolicyProfileNewResponse implements BaseModel
@@ -21,7 +22,7 @@ final class TrafficPolicyProfileNewResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?TrafficPolicyProfile $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -33,9 +34,9 @@ final class TrafficPolicyProfileNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TrafficPolicyProfile|TrafficPolicyProfileShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(TrafficPolicyProfile|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +46,9 @@ final class TrafficPolicyProfileNewResponse implements BaseModel
     }
 
     /**
-     * @param TrafficPolicyProfile|TrafficPolicyProfileShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(TrafficPolicyProfile|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

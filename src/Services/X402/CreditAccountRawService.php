@@ -10,10 +10,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\X402\CreditAccountRawContract;
-use Telnyx\X402\CreditAccount\CreditAccountCreatePaymentQuoteParams;
-use Telnyx\X402\CreditAccount\CreditAccountNewPaymentQuoteResponse;
-use Telnyx\X402\CreditAccount\CreditAccountSettlePaymentParams;
-use Telnyx\X402\CreditAccount\CreditAccountSettlePaymentResponse;
+use Telnyx\X402\CreditAccount\CreditAccountCreateQuoteParams;
+use Telnyx\X402\CreditAccount\CreditAccountNewQuoteResponse;
+use Telnyx\X402\CreditAccount\CreditAccountSettleParams;
+use Telnyx\X402\CreditAccount\CreditAccountSettleResponse;
 
 /**
  * Operations for x402 cryptocurrency payment transactions. Fund your Telnyx account using USDC stablecoin payments via the x402 protocol.
@@ -33,18 +33,18 @@ final class CreditAccountRawService implements CreditAccountRawContract
      *
      * Creates a payment quote for the specified USD amount. Returns payment details including the x402 payment requirements, network, and expiration time. The quote must be settled before it expires.
      *
-     * @param array{amountUsd: string}|CreditAccountCreatePaymentQuoteParams $params
+     * @param array{amountUsd: string}|CreditAccountCreateQuoteParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CreditAccountNewPaymentQuoteResponse>
+     * @return BaseResponse<CreditAccountNewQuoteResponse>
      *
      * @throws APIException
      */
-    public function createPaymentQuote(
-        array|CreditAccountCreatePaymentQuoteParams $params,
+    public function createQuote(
+        array|CreditAccountCreateQuoteParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = CreditAccountCreatePaymentQuoteParams::parseRequest(
+        [$parsed, $options] = CreditAccountCreateQuoteParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -55,7 +55,7 @@ final class CreditAccountRawService implements CreditAccountRawContract
             path: 'v2/x402/credit_account/quote',
             body: (object) $parsed,
             options: $options,
-            convert: CreditAccountNewPaymentQuoteResponse::class,
+            convert: CreditAccountNewQuoteResponse::class,
         );
     }
 
@@ -66,18 +66,18 @@ final class CreditAccountRawService implements CreditAccountRawContract
      *
      * @param array{
      *   id: string, paymentSignature?: string, paymentSignature1?: string
-     * }|CreditAccountSettlePaymentParams $params
+     * }|CreditAccountSettleParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CreditAccountSettlePaymentResponse>
+     * @return BaseResponse<CreditAccountSettleResponse>
      *
      * @throws APIException
      */
-    public function settlePayment(
-        array|CreditAccountSettlePaymentParams $params,
+    public function settle(
+        array|CreditAccountSettleParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = CreditAccountSettlePaymentParams::parseRequest(
+        [$parsed, $options] = CreditAccountSettleParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -96,7 +96,7 @@ final class CreditAccountRawService implements CreditAccountRawContract
                 array_flip(array_keys($header_params))
             ),
             options: $options,
-            convert: CreditAccountSettlePaymentResponse::class,
+            convert: CreditAccountSettleResponse::class,
         );
     }
 }

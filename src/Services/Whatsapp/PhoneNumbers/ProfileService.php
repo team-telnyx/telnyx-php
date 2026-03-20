@@ -9,7 +9,6 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\ProfileContract;
-use Telnyx\Services\Whatsapp\PhoneNumbers\Profile\ModelsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\Profile\PhotoService;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\ProfileGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\ProfileUpdateResponse;
@@ -32,18 +31,12 @@ final class ProfileService implements ProfileContract
     public PhotoService $photo;
 
     /**
-     * @api
-     */
-    public ModelsService $models;
-
-    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new ProfileRawService($client);
         $this->photo = new PhotoService($client);
-        $this->models = new ModelsService($client);
     }
 
     /**

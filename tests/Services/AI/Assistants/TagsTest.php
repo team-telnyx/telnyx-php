@@ -5,9 +5,9 @@ namespace Tests\Services\AI\Assistants;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Assistants\Tags\TagDeleteResponse;
+use Telnyx\AI\Assistants\Tags\TagAddResponse;
 use Telnyx\AI\Assistants\Tags\TagListResponse;
-use Telnyx\AI\Assistants\Tags\TagNewResponse;
+use Telnyx\AI\Assistants\Tags\TagRemoveResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -31,38 +31,6 @@ final class TagsTest extends TestCase
     }
 
     #[Test]
-    public function testCreate(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->assistants->tags->create(
-            'assistant_id',
-            tag: 'tag'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TagNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCreateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->assistants->tags->create(
-            'assistant_id',
-            tag: 'tag'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TagNewResponse::class, $result);
-    }
-
-    #[Test]
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -76,34 +44,66 @@ final class TagsTest extends TestCase
     }
 
     #[Test]
-    public function testDelete(): void
+    public function testAdd(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tags->delete(
-            'tag',
-            assistantID: 'assistant_id'
+        $result = $this->client->ai->assistants->tags->add(
+            'assistant_id',
+            tag: 'tag'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TagDeleteResponse::class, $result);
+        $this->assertInstanceOf(TagAddResponse::class, $result);
     }
 
     #[Test]
-    public function testDeleteWithOptionalParams(): void
+    public function testAddWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tags->delete(
+        $result = $this->client->ai->assistants->tags->add(
+            'assistant_id',
+            tag: 'tag'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TagAddResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRemove(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->assistants->tags->remove(
             'tag',
             assistantID: 'assistant_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TagDeleteResponse::class, $result);
+        $this->assertInstanceOf(TagRemoveResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRemoveWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->assistants->tags->remove(
+            'tag',
+            assistantID: 'assistant_id'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TagRemoveResponse::class, $result);
     }
 }

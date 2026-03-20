@@ -7,14 +7,15 @@ namespace Telnyx\VoiceClones;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse\Data;
 
 /**
  * Response envelope for a single voice clone.
  *
- * @phpstan-import-type VoiceCloneDataShape from \Telnyx\VoiceClones\VoiceCloneData
+ * @phpstan-import-type DataShape from \Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse\Data
  *
  * @phpstan-type VoiceCloneNewFromUploadResponseShape = array{
- *   data?: null|VoiceCloneData|VoiceCloneDataShape
+ *   data?: null|Data|DataShape
  * }
  */
 final class VoiceCloneNewFromUploadResponse implements BaseModel
@@ -26,7 +27,7 @@ final class VoiceCloneNewFromUploadResponse implements BaseModel
      * A voice clone object.
      */
     #[Optional]
-    public ?VoiceCloneData $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -38,9 +39,9 @@ final class VoiceCloneNewFromUploadResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VoiceCloneData|VoiceCloneDataShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(VoiceCloneData|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -52,9 +53,9 @@ final class VoiceCloneNewFromUploadResponse implements BaseModel
     /**
      * A voice clone object.
      *
-     * @param VoiceCloneData|VoiceCloneDataShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(VoiceCloneData|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

@@ -10,11 +10,12 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceDesignsContract;
+use Telnyx\VoiceDesigns\VoiceDesignCreateParams\Provider;
 use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
 use Telnyx\VoiceDesigns\VoiceDesignListParams\Sort;
 use Telnyx\VoiceDesigns\VoiceDesignListResponse;
 use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
-use Telnyx\VoiceDesigns\VoiceDesignUpdateResponse;
+use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
 
 /**
  * Create and manage AI-generated voice designs using natural language prompts.
@@ -46,6 +47,7 @@ final class VoiceDesignsService implements VoiceDesignsContract
      * @param string $language Language for synthesis. Supported values: Auto, Chinese, English, Japanese, Korean, German, French, Russian, Portuguese, Spanish, Italian. Defaults to Auto.
      * @param int $maxNewTokens Maximum number of tokens to generate. Default: 2048.
      * @param string $name Name for the voice design. Required when creating a new design (`voice_design_id` is not provided); ignored when adding a version. Cannot be a UUID.
+     * @param Provider|value-of<Provider> $provider Voice synthesis provider. `telnyx` uses the Qwen3TTS model; `minimax` uses the Minimax speech models. Case-insensitive. Defaults to `telnyx`.
      * @param float $repetitionPenalty Repetition penalty to reduce repeated patterns in generated audio. Default: 1.05.
      * @param float $temperature Sampling temperature controlling randomness. Higher values produce more varied output. Default: 0.9.
      * @param int $topK Top-k sampling parameter — limits the token vocabulary considered at each step. Default: 50.
@@ -61,6 +63,7 @@ final class VoiceDesignsService implements VoiceDesignsContract
         string $language = 'Auto',
         ?int $maxNewTokens = null,
         ?string $name = null,
+        Provider|string $provider = 'telnyx',
         ?float $repetitionPenalty = null,
         ?float $temperature = null,
         ?int $topK = null,
@@ -75,6 +78,7 @@ final class VoiceDesignsService implements VoiceDesignsContract
                 'language' => $language,
                 'maxNewTokens' => $maxNewTokens,
                 'name' => $name,
+                'provider' => $provider,
                 'repetitionPenalty' => $repetitionPenalty,
                 'temperature' => $temperature,
                 'topK' => $topK,
@@ -109,30 +113,6 @@ final class VoiceDesignsService implements VoiceDesignsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
-     * Updates the name of a voice design. All versions retain their other properties.
-     *
-     * @param string $id the voice design UUID or name
-     * @param string $name new name for the voice design
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function update(
-        string $id,
-        string $name,
-        RequestOptions|array|null $requestOptions = null
-    ): VoiceDesignUpdateResponse {
-        $params = Util::removeNulls(['name' => $name]);
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -238,6 +218,30 @@ final class VoiceDesignsService implements VoiceDesignsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->downloadSample($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Updates the name of a voice design. All versions retain their other properties.
+     *
+     * @param string $id the voice design UUID or name
+     * @param string $name new name for the voice design
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function rename(
+        string $id,
+        string $name,
+        RequestOptions|array|null $requestOptions = null
+    ): VoiceDesignRenameResponse {
+        $params = Util::removeNulls(['name' => $name]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->rename($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Gender;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Provider;
 
 /**
  * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 2MB.
@@ -22,6 +23,7 @@ use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Gender;
  *   name: string,
  *   gender?: null|Gender|value-of<Gender>,
  *   label?: string|null,
+ *   provider?: null|Provider|value-of<Provider>,
  *   refText?: string|null,
  * }
  */
@@ -32,7 +34,7 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     use SdkParams;
 
     /**
-     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 2MB.
+     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 5MB for Telnyx, 20MB for Minimax.
      */
     #[Required('audio_file')]
     public string $audioFile;
@@ -62,6 +64,14 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      */
     #[Optional]
     public ?string $label;
+
+    /**
+     * Voice synthesis provider. Case-insensitive. Defaults to `telnyx`.
+     *
+     * @var value-of<Provider>|null $provider
+     */
+    #[Optional(enum: Provider::class)]
+    public ?string $provider;
 
     /**
      * Optional transcript of the audio file. Providing this improves clone quality.
@@ -97,6 +107,7 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Gender|value-of<Gender>|null $gender
+     * @param Provider|value-of<Provider>|null $provider
      */
     public static function with(
         string $audioFile,
@@ -104,6 +115,7 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
         string $name,
         Gender|string|null $gender = null,
         ?string $label = null,
+        Provider|string|null $provider = null,
         ?string $refText = null,
     ): self {
         $self = new self;
@@ -114,13 +126,14 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
 
         null !== $gender && $self['gender'] = $gender;
         null !== $label && $self['label'] = $label;
+        null !== $provider && $self['provider'] = $provider;
         null !== $refText && $self['refText'] = $refText;
 
         return $self;
     }
 
     /**
-     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 2MB.
+     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 5MB for Telnyx, 20MB for Minimax.
      */
     public function withAudioFile(string $audioFile): self
     {
@@ -172,6 +185,19 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     {
         $self = clone $this;
         $self['label'] = $label;
+
+        return $self;
+    }
+
+    /**
+     * Voice synthesis provider. Case-insensitive. Defaults to `telnyx`.
+     *
+     * @param Provider|value-of<Provider> $provider
+     */
+    public function withProvider(Provider|string $provider): self
+    {
+        $self = clone $this;
+        $self['provider'] = $provider;
 
         return $self;
     }
