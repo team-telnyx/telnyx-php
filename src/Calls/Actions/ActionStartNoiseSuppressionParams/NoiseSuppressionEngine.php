@@ -6,10 +6,11 @@ namespace Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams;
 
 /**
  * The engine to use for noise suppression.
- * For backward compatibility, engines A, B, and C are also supported, but are deprecated:
+ * For backward compatibility, engines A, B, C, and D are also supported, but are deprecated:
  *  A - Denoiser
  *  B - DeepFilterNet
- *  C - Krisp.
+ *  C - Krisp
+ *  D - AiCoustics.
  */
 enum NoiseSuppressionEngine: string
 {
@@ -18,4 +19,6 @@ enum NoiseSuppressionEngine: string
     case DEEP_FILTER_NET = 'DeepFilterNet';
 
     case KRISP = 'Krisp';
+
+    case AI_COUSTICS = 'AiCoustics';
 }

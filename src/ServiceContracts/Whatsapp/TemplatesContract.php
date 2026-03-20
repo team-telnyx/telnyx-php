@@ -13,6 +13,7 @@ use Telnyx\Whatsapp\Templates\TemplateNewResponse;
 use Telnyx\WhatsappTemplateData;
 
 /**
+ * @phpstan-import-type ComponentShape from \Telnyx\Whatsapp\Templates\TemplateCreateParams\Component
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface TemplatesContract
@@ -20,8 +21,11 @@ interface TemplatesContract
     /**
      * @api
      *
-     * @param Category|value-of<Category> $category
-     * @param list<array<string,mixed>> $components
+     * @param Category|value-of<Category> $category template category: AUTHENTICATION, UTILITY, or MARKETING
+     * @param list<ComponentShape> $components Template components defining message structure. Passed through to Meta Graph API. Templates with variables must include example values. Supports HEADER, BODY, FOOTER, BUTTONS, CAROUSEL and any future Meta component types.
+     * @param string $language Template language code (e.g. en_US, es, pt_BR).
+     * @param string $name Template name. Lowercase letters, numbers, and underscores only.
+     * @param string $wabaID the WhatsApp Business Account ID
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
