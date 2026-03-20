@@ -39,7 +39,7 @@ final class TemplatesTest extends TestCase
 
         $result = $this->client->whatsapp->templates->create(
             category: 'MARKETING',
-            components: [['foo' => 'bar']],
+            components: [['format' => 'TEXT', 'type' => 'HEADER']],
             language: 'language',
             name: 'name',
             wabaID: 'waba_id',
@@ -58,7 +58,16 @@ final class TemplatesTest extends TestCase
 
         $result = $this->client->whatsapp->templates->create(
             category: 'MARKETING',
-            components: [['foo' => 'bar']],
+            components: [
+                [
+                    'format' => 'TEXT',
+                    'type' => 'HEADER',
+                    'example' => [
+                        'headerHandle' => ['string'], 'headerText' => ['string'],
+                    ],
+                    'text' => 'text',
+                ],
+            ],
             language: 'language',
             name: 'name',
             wabaID: 'waba_id',

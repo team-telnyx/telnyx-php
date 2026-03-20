@@ -1319,11 +1319,12 @@ final class ActionsService implements ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param Direction|value-of<Direction> $direction the direction of the audio stream to be noise suppressed
      * @param NoiseSuppressionEngine|value-of<NoiseSuppressionEngine> $noiseSuppressionEngine The engine to use for noise suppression.
-     * For backward compatibility, engines A, B, and C are also supported, but are deprecated:
+     * For backward compatibility, engines A, B, C, and D are also supported, but are deprecated:
      *  A - Denoiser
      *  B - DeepFilterNet
      *  C - Krisp
-     * @param NoiseSuppressionEngineConfig|NoiseSuppressionEngineConfigShape $noiseSuppressionEngineConfig configuration parameters for noise suppression engines
+     *  D - AiCoustics
+     * @param NoiseSuppressionEngineConfig|NoiseSuppressionEngineConfigShape $noiseSuppressionEngineConfig Configuration parameters for noise suppression engines. Different engines support different parameters.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

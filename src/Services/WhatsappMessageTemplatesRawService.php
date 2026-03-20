@@ -17,6 +17,7 @@ use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateResponse;
 /**
  * Manage Whatsapp message templates.
  *
+ * @phpstan-import-type ComponentShape from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class WhatsappMessageTemplatesRawService implements WhatsappMessageTemplatesRawContract
@@ -59,7 +60,7 @@ final class WhatsappMessageTemplatesRawService implements WhatsappMessageTemplat
      *
      * @param string $id Whatsapp message template ID
      * @param array{
-     *   category?: Category|value-of<Category>, components?: list<array<string,mixed>>
+     *   category?: Category|value-of<Category>, components?: list<ComponentShape>
      * }|WhatsappMessageTemplateUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *

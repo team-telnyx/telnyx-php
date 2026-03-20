@@ -55,10 +55,11 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
 
     /**
      * The engine to use for noise suppression.
-     * For backward compatibility, engines A, B, and C are also supported, but are deprecated:
+     * For backward compatibility, engines A, B, C, and D are also supported, but are deprecated:
      *  A - Denoiser
      *  B - DeepFilterNet
-     *  C - Krisp.
+     *  C - Krisp
+     *  D - AiCoustics.
      *
      * @var value-of<NoiseSuppressionEngine>|null $noiseSuppressionEngine
      */
@@ -66,7 +67,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     public ?string $noiseSuppressionEngine;
 
     /**
-     * Configuration parameters for noise suppression engines.
+     * Configuration parameters for noise suppression engines. Different engines support different parameters.
      */
     #[Optional('noise_suppression_engine_config')]
     public ?NoiseSuppressionEngineConfig $noiseSuppressionEngineConfig;
@@ -140,10 +141,11 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
 
     /**
      * The engine to use for noise suppression.
-     * For backward compatibility, engines A, B, and C are also supported, but are deprecated:
+     * For backward compatibility, engines A, B, C, and D are also supported, but are deprecated:
      *  A - Denoiser
      *  B - DeepFilterNet
-     *  C - Krisp.
+     *  C - Krisp
+     *  D - AiCoustics.
      *
      * @param NoiseSuppressionEngine|value-of<NoiseSuppressionEngine> $noiseSuppressionEngine
      */
@@ -157,7 +159,7 @@ final class ActionStartNoiseSuppressionParams implements BaseModel
     }
 
     /**
-     * Configuration parameters for noise suppression engines.
+     * Configuration parameters for noise suppression engines. Different engines support different parameters.
      *
      * @param NoiseSuppressionEngineConfig|NoiseSuppressionEngineConfigShape $noiseSuppressionEngineConfig
      */

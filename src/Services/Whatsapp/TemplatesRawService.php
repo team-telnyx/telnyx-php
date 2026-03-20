@@ -21,6 +21,7 @@ use Telnyx\WhatsappTemplateData;
 /**
  * Manage Whatsapp message templates.
  *
+ * @phpstan-import-type ComponentShape from \Telnyx\Whatsapp\Templates\TemplateCreateParams\Component
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TemplatesRawService implements TemplatesRawContract
@@ -38,7 +39,7 @@ final class TemplatesRawService implements TemplatesRawContract
      *
      * @param array{
      *   category: Category|value-of<Category>,
-     *   components: list<array<string,mixed>>,
+     *   components: list<ComponentShape>,
      *   language: string,
      *   name: string,
      *   wabaID: string,

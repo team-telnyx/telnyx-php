@@ -42,7 +42,7 @@ final class WhatsappTemplateData implements BaseModel
     public ?string $category;
 
     /**
-     * Whatsapp template components (header, body, footer, buttons).
+     * Template components (header, body, footer, buttons) as submitted, including example values.
      *
      * @var list<array<string,mixed>>|null $components
      */
@@ -64,6 +64,9 @@ final class WhatsappTemplateData implements BaseModel
     #[Optional('rejection_reason')]
     public ?string $rejectionReason;
 
+    /**
+     * Current template status from Meta (e.g. PENDING, APPROVED, REJECTED, PAUSED, DISABLED). Additional statuses may be returned as Meta evolves the template lifecycle.
+     */
     #[Optional]
     public ?string $status;
 
@@ -142,7 +145,7 @@ final class WhatsappTemplateData implements BaseModel
     }
 
     /**
-     * Whatsapp template components (header, body, footer, buttons).
+     * Template components (header, body, footer, buttons) as submitted, including example values.
      *
      * @param list<array<string,mixed>> $components
      */
@@ -194,6 +197,9 @@ final class WhatsappTemplateData implements BaseModel
         return $self;
     }
 
+    /**
+     * Current template status from Meta (e.g. PENDING, APPROVED, REJECTED, PAUSED, DISABLED). Additional statuses may be returned as Meta evolves the template lifecycle.
+     */
     public function withStatus(string $status): self
     {
         $self = clone $this;

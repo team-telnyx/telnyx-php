@@ -11,6 +11,7 @@ use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Category
 use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateResponse;
 
 /**
+ * @phpstan-import-type ComponentShape from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface WhatsappMessageTemplatesContract
@@ -33,7 +34,7 @@ interface WhatsappMessageTemplatesContract
      *
      * @param string $id Whatsapp message template ID
      * @param Category|value-of<Category> $category
-     * @param list<array<string,mixed>> $components
+     * @param list<ComponentShape> $components Updated template components. Same structure as the create request.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
