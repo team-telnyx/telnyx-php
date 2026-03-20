@@ -1,5 +1,22 @@
 # Changelog
 
+## 7.7.0 (2026-03-20)
+
+Full Changelog: [v7.6.0...v7.7.0](https://github.com/team-telnyx/telnyx-php/compare/v7.6.0...v7.7.0)
+
+### Features
+
+* **api:** manual updates ([3218dde](https://github.com/team-telnyx/telnyx-php/commit/3218ddef09e5c48831e3d36a32f06590a0edb07d))
+* **api:** manual updates ([a25c074](https://github.com/team-telnyx/telnyx-php/commit/a25c074d91e79cc34a45b526e7443c456fbe6442))
+* **api:** manual updates ([eac80c9](https://github.com/team-telnyx/telnyx-php/commit/eac80c997cba5fdf78bfb88237644c7f43dc8cf6))
+* TELAPPS-5668: Add call.cost webhook event documentation ([d200707](https://github.com/team-telnyx/telnyx-php/commit/d2007079280b23e103945cfeac200c07f8d44a0e))
+* **wireless:** add traffic policy profiles endpoints to OpenAPI spec ([70146bb](https://github.com/team-telnyx/telnyx-php/commit/70146bbd1ffe5125854fa801d7f610fa9262255f))
+
+
+### Documentation
+
+* **tts:** Add Telnyx.Ultra model documentation ([ff96c10](https://github.com/team-telnyx/telnyx-php/commit/ff96c10b93da98aa561f8ddbf9d00dd599bc9e2b))
+
 ## 7.6.0 (2026-03-18)
 
 Full Changelog: [v7.5.0...v7.6.0](https://github.com/team-telnyx/telnyx-php/compare/v7.5.0...v7.6.0)
