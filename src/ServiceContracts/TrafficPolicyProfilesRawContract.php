@@ -8,11 +8,11 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfile;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileCreateParams;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileDeleteResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileGetResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListParams;
-use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListServicesParams;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListServicesResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileNewResponse;
@@ -77,7 +77,7 @@ interface TrafficPolicyProfilesRawContract
      * @param array<string,mixed>|TrafficPolicyProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<TrafficPolicyProfileListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<TrafficPolicyProfile>>
      *
      * @throws APIException
      */

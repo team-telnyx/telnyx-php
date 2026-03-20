@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
+namespace Telnyx\VoiceClones;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse\Data\Gender;
-use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse\Data\Provider;
-use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse\Data\RecordType;
+use Telnyx\VoiceClones\VoiceCloneData\Gender;
+use Telnyx\VoiceClones\VoiceCloneData\Provider;
+use Telnyx\VoiceClones\VoiceCloneData\RecordType;
 
 /**
  * A voice clone object.
  *
- * @phpstan-type DataShape = array{
+ * @phpstan-type VoiceCloneDataShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   gender?: null|Gender|value-of<Gender>,
@@ -30,9 +30,9 @@ use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse\Data\RecordType;
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
-final class Data implements BaseModel
+final class VoiceCloneData implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<VoiceCloneDataShape> */
     use SdkModel;
 
     /**
