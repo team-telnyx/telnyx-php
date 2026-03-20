@@ -46,9 +46,12 @@ use Telnyx\Core\Exceptions\WebhookVerificationException;
  */
 trait WebhookVerification
 {
-    private const WEBHOOK_SIGNATURE_HEADER = 'telnyx-signature-ed25519';
-    private const WEBHOOK_TIMESTAMP_HEADER = 'telnyx-timestamp';
-    private const WEBHOOK_DEFAULT_TOLERANCE = 300; // 5 minutes in seconds
+    /** @var string */
+    private static string $webhookSignatureHeader = 'telnyx-signature-ed25519';
+    /** @var string */
+    private static string $webhookTimestampHeader = 'telnyx-timestamp';
+    /** @var int */
+    private static int $webhookDefaultTolerance = 300; // 5 minutes in seconds
 
     /**
      * Verify a webhook signature without parsing the payload.
@@ -97,23 +100,23 @@ trait WebhookVerification
         }
 
         // Extract required headers
-        $signature = $normalizedHeaders[self::WEBHOOK_SIGNATURE_HEADER] ?? null;
-        $timestamp = $normalizedHeaders[self::WEBHOOK_TIMESTAMP_HEADER] ?? null;
+        $signature = $normalizedHeaders[self::$webhookSignatureHeader] ?? null;
+        $timestamp = $normalizedHeaders[self::$webhookTimestampHeader] ?? null;
 
         if (null === $signature || '' === $signature) {
             throw new WebhookVerificationException(
-                'Missing required header: ' . self::WEBHOOK_SIGNATURE_HEADER
+                'Missing required header: ' . self::$webhookSignatureHeader
             );
         }
 
         if (null === $timestamp || '' === $timestamp) {
             throw new WebhookVerificationException(
-                'Missing required header: ' . self::WEBHOOK_TIMESTAMP_HEADER
+                'Missing required header: ' . self::$webhookTimestampHeader
             );
         }
 
         // Validate timestamp to prevent replay attacks
-        $tolerance = $tolerance ?? self::WEBHOOK_DEFAULT_TOLERANCE;
+        $tolerance = $tolerance ?? self::$webhookDefaultTolerance;
         $webhookTime = (int) $timestamp;
         $currentTime = time();
 
