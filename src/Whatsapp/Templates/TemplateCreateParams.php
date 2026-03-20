@@ -8,17 +8,20 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Category;
+use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component;
 
 /**
  * Create a Whatsapp message template.
  *
  * @see Telnyx\Services\Whatsapp\TemplatesService::create()
  *
+ * @phpstan-import-type ComponentVariants from \Telnyx\Whatsapp\Templates\TemplateCreateParams\Component
+ * @phpstan-import-type ComponentShape from \Telnyx\Whatsapp\Templates\TemplateCreateParams\Component
+ *
  * @phpstan-type TemplateCreateParamsShape = array{
  *   category: Category|value-of<Category>,
- *   components: list<array<string,mixed>>,
+ *   components: list<ComponentShape>,
  *   language: string,
  *   name: string,
  *   wabaID: string,
@@ -30,20 +33,37 @@ final class TemplateCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var value-of<Category> $category */
+    /**
+     * Template category: AUTHENTICATION, UTILITY, or MARKETING.
+     *
+     * @var value-of<Category> $category
+     */
     #[Required(enum: Category::class)]
     public string $category;
 
-    /** @var list<array<string,mixed>> $components */
-    #[Required(list: new MapOf('mixed'))]
+    /**
+     * Template components defining message structure. Passed through to Meta Graph API. Templates with variables must include example values. Supports HEADER, BODY, FOOTER, BUTTONS, CAROUSEL and any future Meta component types.
+     *
+     * @var list<ComponentVariants> $components
+     */
+    #[Required(list: Component::class)]
     public array $components;
 
+    /**
+     * Template language code (e.g. en_US, es, pt_BR).
+     */
     #[Required]
     public string $language;
 
+    /**
+     * Template name. Lowercase letters, numbers, and underscores only.
+     */
     #[Required]
     public string $name;
 
+    /**
+     * The WhatsApp Business Account ID.
+     */
     #[Required('waba_id')]
     public string $wabaID;
 
@@ -79,7 +99,7 @@ final class TemplateCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Category|value-of<Category> $category
-     * @param list<array<string,mixed>> $components
+     * @param list<ComponentShape> $components
      */
     public static function with(
         Category|string $category,
@@ -100,6 +120,8 @@ final class TemplateCreateParams implements BaseModel
     }
 
     /**
+     * Template category: AUTHENTICATION, UTILITY, or MARKETING.
+     *
      * @param Category|value-of<Category> $category
      */
     public function withCategory(Category|string $category): self
@@ -111,7 +133,9 @@ final class TemplateCreateParams implements BaseModel
     }
 
     /**
-     * @param list<array<string,mixed>> $components
+     * Template components defining message structure. Passed through to Meta Graph API. Templates with variables must include example values. Supports HEADER, BODY, FOOTER, BUTTONS, CAROUSEL and any future Meta component types.
+     *
+     * @param list<ComponentShape> $components
      */
     public function withComponents(array $components): self
     {
@@ -121,6 +145,9 @@ final class TemplateCreateParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Template language code (e.g. en_US, es, pt_BR).
+     */
     public function withLanguage(string $language): self
     {
         $self = clone $this;
@@ -129,6 +156,9 @@ final class TemplateCreateParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Template name. Lowercase letters, numbers, and underscores only.
+     */
     public function withName(string $name): self
     {
         $self = clone $this;
@@ -137,6 +167,9 @@ final class TemplateCreateParams implements BaseModel
         return $self;
     }
 
+    /**
+     * The WhatsApp Business Account ID.
+     */
     public function withWabaID(string $wabaID): self
     {
         $self = clone $this;

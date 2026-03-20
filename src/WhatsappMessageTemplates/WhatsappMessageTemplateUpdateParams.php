@@ -8,17 +8,20 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Category;
+use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component;
 
 /**
  * Update a Whatsapp message template.
  *
  * @see Telnyx\Services\WhatsappMessageTemplatesService::update()
  *
+ * @phpstan-import-type ComponentVariants from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component
+ * @phpstan-import-type ComponentShape from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component
+ *
  * @phpstan-type WhatsappMessageTemplateUpdateParamsShape = array{
  *   category?: null|Category|value-of<Category>,
- *   components?: list<array<string,mixed>>|null,
+ *   components?: list<ComponentShape>|null,
  * }
  */
 final class WhatsappMessageTemplateUpdateParams implements BaseModel
@@ -31,8 +34,12 @@ final class WhatsappMessageTemplateUpdateParams implements BaseModel
     #[Optional(enum: Category::class)]
     public ?string $category;
 
-    /** @var list<array<string,mixed>>|null $components */
-    #[Optional(list: new MapOf('mixed'))]
+    /**
+     * Updated template components. Same structure as the create request.
+     *
+     * @var list<ComponentVariants>|null $components
+     */
+    #[Optional(list: Component::class)]
     public ?array $components;
 
     public function __construct()
@@ -46,7 +53,7 @@ final class WhatsappMessageTemplateUpdateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Category|value-of<Category>|null $category
-     * @param list<array<string,mixed>>|null $components
+     * @param list<ComponentShape>|null $components
      */
     public static function with(
         Category|string|null $category = null,
@@ -72,7 +79,9 @@ final class WhatsappMessageTemplateUpdateParams implements BaseModel
     }
 
     /**
-     * @param list<array<string,mixed>> $components
+     * Updated template components. Same structure as the create request.
+     *
+     * @param list<ComponentShape> $components
      */
     public function withComponents(array $components): self
     {
