@@ -1,5 +1,29 @@
 # Changelog
 
+## 7.8.0 (2026-03-20)
+
+Full Changelog: [v7.7.0...v7.8.0](https://github.com/team-telnyx/telnyx-php/compare/v7.7.0...v7.8.0)
+
+### Features
+
+* Add Minimax provider support to Voice Designs and Voice Clones API spec ([689bacb](https://github.com/team-telnyx/telnyx-php/commit/689bacb213cc57a81340ea04d1a3a84f6b6dfc05))
+* **api:** manual updates ([56df656](https://github.com/team-telnyx/telnyx-php/commit/56df656fd0ae29b9cc0b9b32d4794f3e163da41e))
+
+
+### Bug Fixes
+
+* use static properties instead of constants for PHP &lt;8.2 compatibility ([0c5f17c](https://github.com/team-telnyx/telnyx-php/commit/0c5f17c9570244566bca3939aa1f2caec692ced4))
+
+
+### Documentation
+
+* WhatsApp template components schema ([0f8f785](https://github.com/team-telnyx/telnyx-php/commit/0f8f7857b6276b7eadd5fcb00daa7fbbf9c0ed57))
+
+
+### Refactors
+
+* move webhook verification to separate trait to avoid merge conflicts ([8362e5b](https://github.com/team-telnyx/telnyx-php/commit/8362e5b1069baad4791a42ab692709d11a6fac37))
+
 ## 7.7.0 (2026-03-20)
 
 Full Changelog: [v7.6.0...v7.7.0](https://github.com/team-telnyx/telnyx-php/compare/v7.6.0...v7.7.0)
