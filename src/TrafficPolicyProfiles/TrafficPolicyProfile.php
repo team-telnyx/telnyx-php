@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateResponse;
+namespace Telnyx\TrafficPolicyProfiles;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateResponse\Data\Type;
+use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfile\Type;
 
 /**
- * @phpstan-type DataShape = array{
+ * @phpstan-type TrafficPolicyProfileShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
  *   domains?: list<string>|null,
@@ -22,9 +22,9 @@ use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateResponse\Data\Type;
  *   updatedAt?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class TrafficPolicyProfile implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<TrafficPolicyProfileShape> */
     use SdkModel;
 
     /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileNewResponse\Data;
+namespace Telnyx\TrafficPolicyProfiles\TrafficPolicyProfile;
 
 /**
  * The type of the traffic policy profile.

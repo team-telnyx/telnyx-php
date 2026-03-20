@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse\Data;
+namespace Telnyx\VoiceClones\VoiceCloneData;
 
 /**
  * Voice synthesis provider used for this clone.
