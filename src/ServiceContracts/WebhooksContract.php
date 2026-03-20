@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\WebhookException;
-use Telnyx\Core\Exceptions\WebhookVerificationException;
 use Telnyx\Webhooks\CallAIGatherEndedWebhookEvent;
 use Telnyx\Webhooks\CallAIGatherMessageHistoryUpdatedWebhookEvent;
 use Telnyx\Webhooks\CallAIGatherPartialResultsWebhookEvent;
@@ -73,10 +72,7 @@ interface WebhooksContract
     /**
      * @api
      *
-     * Parses the webhook payload without verifying the signature.
-     * Use with caution - only for testing or when verification is handled elsewhere.
-     *
-     * @param string $body The raw webhook payload (JSON string)
+     * Unwraps a webhook event from its JSON representation.
      *
      * @throws WebhookException
      */
@@ -87,39 +83,15 @@ interface WebhooksContract
     /**
      * @api
      *
-     * Verifies the ED25519 signature using the provided headers and returns
-     * the parsed webhook event. Throws an exception if verification fails.
+     * Unwraps a webhook event from its JSON representation.
      *
-     * @param string $body The raw webhook payload (JSON string)
-     * @param array<string, string|list<string>> $headers The HTTP headers from the webhook request
-     * @param string|null $secret Optional secret override (defaults to client's secret)
-     * @param int|null $tolerance Optional timestamp tolerance in seconds (defaults to 300 = 5 minutes)
+     * @param array<string,string|list<string>>|null $headers
      *
-     * @throws WebhookVerificationException If signature verification fails
+     * @throws WebhookException
      */
     public function unwrap(
         string $body,
         ?array $headers = null,
-        ?string $secret = null,
-        ?int $tolerance = null
+        ?string $secret = null
     ): CallAIGatherEndedWebhookEvent|CallAIGatherMessageHistoryUpdatedWebhookEvent|CallAIGatherPartialResultsWebhookEvent|CallAnsweredWebhookEvent|CallBridgedWebhookEvent|CallConversationEndedWebhookEvent|CallConversationInsightsGeneratedWebhookEvent|CallCostWebhookEvent|CallDtmfReceivedWebhookEvent|CallEnqueuedWebhookEvent|CallForkStartedWebhookEvent|CallForkStoppedWebhookEvent|CallGatherEndedWebhookEvent|CallHangupWebhookEvent|CallInitiatedWebhookEvent|CallLeftQueueWebhookEvent|CallMachineDetectionEndedWebhookEvent|CallMachineGreetingEndedWebhookEvent|CallMachinePremiumDetectionEndedWebhookEvent|CallMachinePremiumGreetingEndedWebhookEvent|CallPlaybackEndedWebhookEvent|CallPlaybackStartedWebhookEvent|CallRecordingErrorWebhookEvent|CallRecordingSavedWebhookEvent|CallRecordingTranscriptionSavedWebhookEvent|CallReferCompletedWebhookEvent|CallReferFailedWebhookEvent|CallReferStartedWebhookEvent|CallSiprecFailedWebhookEvent|CallSiprecStartedWebhookEvent|CallSiprecStoppedWebhookEvent|CallSpeakEndedWebhookEvent|CallSpeakStartedWebhookEvent|CallStreamingFailedWebhookEvent|CallStreamingStartedWebhookEvent|CallStreamingStoppedWebhookEvent|CampaignStatusUpdate|ConferenceCreatedWebhookEvent|ConferenceEndedWebhookEvent|ConferenceFloorChanged|ConferenceParticipantJoinedWebhookEvent|ConferenceParticipantLeftWebhookEvent|ConferenceParticipantPlaybackEndedWebhookEvent|ConferenceParticipantPlaybackStartedWebhookEvent|ConferenceParticipantSpeakEndedWebhookEvent|ConferenceParticipantSpeakStartedWebhookEvent|ConferencePlaybackEndedWebhookEvent|ConferencePlaybackStartedWebhookEvent|ConferenceRecordingSavedWebhookEvent|ConferenceSpeakEndedWebhookEvent|ConferenceSpeakStartedWebhookEvent|DeliveryUpdateWebhookEvent|FaxDelivered|FaxFailed|FaxMediaProcessed|FaxQueued|FaxSendingStarted|InboundMessageWebhookEvent|NumberOrderStatusUpdate|ReplacedLinkClickWebhookEvent|TranscriptionWebhookEvent;
-
-    /**
-     * Verify a webhook signature without parsing the payload.
-     *
-     * @param string $payload The raw webhook payload (JSON string)
-     * @param array<string, string|list<string>> $headers The HTTP headers from the webhook request
-     * @param string|null $publicKey Optional public key override (defaults to client's publicKey)
-     * @param int|null $tolerance Optional timestamp tolerance in seconds (defaults to 300 = 5 minutes)
-     *
-     * @return bool True if signature is valid
-     *
-     * @throws WebhookVerificationException If verification fails
-     */
-    public function verify(
-        string $payload,
-        array $headers,
-        ?string $publicKey = null,
-        ?int $tolerance = 300,
-    ): bool;
 }
