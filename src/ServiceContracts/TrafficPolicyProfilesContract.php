@@ -7,13 +7,13 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfile;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileCreateParams\LimitBwKbps;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileCreateParams\Type;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileDeleteResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileGetResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListParams\FilterType;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListParams\Sort;
-use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListServicesResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileNewResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileUpdateResponse;
@@ -90,7 +90,7 @@ interface TrafficPolicyProfilesContract
      * @param Sort|value-of<Sort> $sort Sorts traffic policy profiles by the given field. Defaults to ascending order unless field is prefixed with a minus sign.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<TrafficPolicyProfileListResponse>
+     * @return DefaultFlatPagination<TrafficPolicyProfile>
      *
      * @throws APIException
      */

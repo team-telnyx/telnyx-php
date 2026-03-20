@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneListResponse;
+namespace Telnyx\VoiceDesigns\VoiceDesignData;
 
 /**
- * Voice synthesis provider used for this clone.
+ * Voice synthesis provider used for this design.
  */
 enum Provider: string
 {
