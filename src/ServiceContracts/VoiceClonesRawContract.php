@@ -10,8 +10,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams;
 use Telnyx\VoiceClones\VoiceCloneCreateParams;
-use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams;
+use Telnyx\VoiceClones\VoiceCloneListResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
 use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams;
@@ -60,7 +60,7 @@ interface VoiceClonesRawContract
      * @param array<string,mixed>|VoiceCloneListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VoiceCloneData>>
+     * @return BaseResponse<DefaultFlatPagination<VoiceCloneListResponse>>
      *
      * @throws APIException
      */

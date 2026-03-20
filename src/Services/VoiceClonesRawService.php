@@ -14,9 +14,11 @@ use Telnyx\ServiceContracts\VoiceClonesRawContract;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams;
 use Telnyx\VoiceClones\VoiceCloneCreateParams;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
-use Telnyx\VoiceClones\VoiceCloneData;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Provider;
 use Telnyx\VoiceClones\VoiceCloneListParams;
+use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
+use Telnyx\VoiceClones\VoiceCloneListResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
 use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams;
@@ -45,6 +47,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      *   language: string,
      *   name: string,
      *   voiceDesignID: string,
+     *   provider?: Provider|value-of<Provider>,
      * }|VoiceCloneCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -115,13 +118,14 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      *
      * @param array{
      *   filterName?: string,
+     *   filterProvider?: FilterProvider|value-of<FilterProvider>,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   sort?: Sort|value-of<Sort>,
      * }|VoiceCloneListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VoiceCloneData>>
+     * @return BaseResponse<DefaultFlatPagination<VoiceCloneListResponse>>
      *
      * @throws APIException
      */
@@ -142,12 +146,13 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
                 $parsed,
                 [
                     'filterName' => 'filter[name]',
+                    'filterProvider' => 'filter[provider]',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
                 ],
             ),
             options: $options,
-            convert: VoiceCloneData::class,
+            convert: VoiceCloneListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }
@@ -188,6 +193,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      *   name: string,
      *   gender?: VoiceCloneCreateFromUploadParams\Gender|value-of<VoiceCloneCreateFromUploadParams\Gender>,
      *   label?: string,
+     *   provider?: VoiceCloneCreateFromUploadParams\Provider|value-of<VoiceCloneCreateFromUploadParams\Provider>,
      *   refText?: string,
      * }|VoiceCloneCreateFromUploadParams $params
      * @param RequestOpts|null $requestOptions

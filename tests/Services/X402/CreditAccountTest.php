@@ -7,8 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\X402\CreditAccount\CreditAccountNewPaymentQuoteResponse;
-use Telnyx\X402\CreditAccount\CreditAccountSettlePaymentResponse;
+use Telnyx\X402\CreditAccount\CreditAccountNewQuoteResponse;
+use Telnyx\X402\CreditAccount\CreditAccountSettleResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -30,70 +30,62 @@ final class CreditAccountTest extends TestCase
     }
 
     #[Test]
-    public function testCreatePaymentQuote(): void
+    public function testCreateQuote(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->x402->creditAccount->createPaymentQuote(
+        $result = $this->client->x402->creditAccount->createQuote(
             amountUsd: '50.00'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            CreditAccountNewPaymentQuoteResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(CreditAccountNewQuoteResponse::class, $result);
     }
 
     #[Test]
-    public function testCreatePaymentQuoteWithOptionalParams(): void
+    public function testCreateQuoteWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->x402->creditAccount->createPaymentQuote(
+        $result = $this->client->x402->creditAccount->createQuote(
             amountUsd: '50.00'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            CreditAccountNewPaymentQuoteResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(CreditAccountNewQuoteResponse::class, $result);
     }
 
     #[Test]
-    public function testSettlePayment(): void
+    public function testSettle(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->x402->creditAccount->settlePayment(
-            id: 'quote_abc123'
-        );
+        $result = $this->client->x402->creditAccount->settle(id: 'quote_abc123');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CreditAccountSettlePaymentResponse::class, $result);
+        $this->assertInstanceOf(CreditAccountSettleResponse::class, $result);
     }
 
     #[Test]
-    public function testSettlePaymentWithOptionalParams(): void
+    public function testSettleWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->x402->creditAccount->settlePayment(
+        $result = $this->client->x402->creditAccount->settle(
             id: 'quote_abc123',
             paymentSignature: '0xabc123...',
             paymentSignature1: 'PAYMENT-SIGNATURE',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CreditAccountSettlePaymentResponse::class, $result);
+        $this->assertInstanceOf(CreditAccountSettleResponse::class, $result);
     }
 }
