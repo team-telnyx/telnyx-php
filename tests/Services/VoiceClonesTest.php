@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\VoiceClones\VoiceCloneData;
+use Telnyx\VoiceClones\VoiceCloneListResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
 use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
@@ -62,6 +62,7 @@ final class VoiceClonesTest extends TestCase
             language: 'en',
             name: 'clone-narrator',
             voiceDesignID: '550e8400-e29b-41d4-a716-446655440000',
+            provider: 'telnyx',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -116,7 +117,7 @@ final class VoiceClonesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(VoiceCloneData::class, $item);
+            $this->assertInstanceOf(VoiceCloneListResponse::class, $item);
         }
     }
 
@@ -165,6 +166,7 @@ final class VoiceClonesTest extends TestCase
             name: 'name',
             gender: 'male',
             label: 'label',
+            provider: 'telnyx',
             refText: 'ref_text',
         );
 

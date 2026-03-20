@@ -10,7 +10,7 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\BusinessAccounts\PhoneNumbersContract;
-use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberCreateVerificationParams\VerificationMethod;
+use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberInitializeVerificationParams\VerificationMethod;
 use Telnyx\Whatsapp\BusinessAccounts\PhoneNumbers\PhoneNumberListResponse;
 
 /**
@@ -70,7 +70,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
      *
      * @throws APIException
      */
-    public function createVerification(
+    public function initializeVerification(
         string $id,
         string $displayName,
         string $phoneNumber,
@@ -88,7 +88,7 @@ final class PhoneNumbersService implements PhoneNumbersContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createVerification($id, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->initializeVerification($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

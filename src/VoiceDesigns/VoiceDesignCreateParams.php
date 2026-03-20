@@ -9,6 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\VoiceDesigns\VoiceDesignCreateParams\Provider;
 
 /**
  * Creates a new voice design (version 1) when `voice_design_id` is omitted. When `voice_design_id` is provided, adds a new version to the existing design instead. A design can have at most 50 versions.
@@ -21,6 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   language?: string|null,
  *   maxNewTokens?: int|null,
  *   name?: string|null,
+ *   provider?: null|Provider|value-of<Provider>,
  *   repetitionPenalty?: float|null,
  *   temperature?: float|null,
  *   topK?: int|null,
@@ -63,6 +65,14 @@ final class VoiceDesignCreateParams implements BaseModel
      */
     #[Optional]
     public ?string $name;
+
+    /**
+     * Voice synthesis provider. `telnyx` uses the Qwen3TTS model; `minimax` uses the Minimax speech models. Case-insensitive. Defaults to `telnyx`.
+     *
+     * @var value-of<Provider>|null $provider
+     */
+    #[Optional(enum: Provider::class)]
+    public ?string $provider;
 
     /**
      * Repetition penalty to reduce repeated patterns in generated audio. Default: 1.05.
@@ -117,6 +127,8 @@ final class VoiceDesignCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Provider|value-of<Provider>|null $provider
      */
     public static function with(
         string $prompt,
@@ -124,6 +136,7 @@ final class VoiceDesignCreateParams implements BaseModel
         ?string $language = null,
         ?int $maxNewTokens = null,
         ?string $name = null,
+        Provider|string|null $provider = null,
         ?float $repetitionPenalty = null,
         ?float $temperature = null,
         ?int $topK = null,
@@ -138,6 +151,7 @@ final class VoiceDesignCreateParams implements BaseModel
         null !== $language && $self['language'] = $language;
         null !== $maxNewTokens && $self['maxNewTokens'] = $maxNewTokens;
         null !== $name && $self['name'] = $name;
+        null !== $provider && $self['provider'] = $provider;
         null !== $repetitionPenalty && $self['repetitionPenalty'] = $repetitionPenalty;
         null !== $temperature && $self['temperature'] = $temperature;
         null !== $topK && $self['topK'] = $topK;
@@ -198,6 +212,19 @@ final class VoiceDesignCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * Voice synthesis provider. `telnyx` uses the Qwen3TTS model; `minimax` uses the Minimax speech models. Case-insensitive. Defaults to `telnyx`.
+     *
+     * @param Provider|value-of<Provider> $provider
+     */
+    public function withProvider(Provider|string $provider): self
+    {
+        $self = clone $this;
+        $self['provider'] = $provider;
 
         return $self;
     }

@@ -7,6 +7,7 @@ namespace Telnyx\VoiceDesigns;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\VoiceDesigns\VoiceDesignListResponse\Provider;
 use Telnyx\VoiceDesigns\VoiceDesignListResponse\RecordType;
 
 /**
@@ -16,6 +17,8 @@ use Telnyx\VoiceDesigns\VoiceDesignListResponse\RecordType;
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   name?: string|null,
+ *   provider?: null|Provider|value-of<Provider>,
+ *   providerSupportedModels?: list<string>|null,
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
@@ -44,6 +47,22 @@ final class VoiceDesignListResponse implements BaseModel
     public ?string $name;
 
     /**
+     * Voice synthesis provider used for this design.
+     *
+     * @var value-of<Provider>|null $provider
+     */
+    #[Optional(enum: Provider::class, nullable: true)]
+    public ?string $provider;
+
+    /**
+     * List of TTS model identifiers supported by this design's provider.
+     *
+     * @var list<string>|null $providerSupportedModels
+     */
+    #[Optional('provider_supported_models', list: 'string')]
+    public ?array $providerSupportedModels;
+
+    /**
      * Identifies the resource type.
      *
      * @var value-of<RecordType>|null $recordType
@@ -67,12 +86,16 @@ final class VoiceDesignListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Provider|value-of<Provider>|null $provider
+     * @param list<string>|null $providerSupportedModels
      * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $name = null,
+        Provider|string|null $provider = null,
+        ?array $providerSupportedModels = null,
         RecordType|string|null $recordType = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
@@ -81,6 +104,8 @@ final class VoiceDesignListResponse implements BaseModel
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $name && $self['name'] = $name;
+        null !== $provider && $self['provider'] = $provider;
+        null !== $providerSupportedModels && $self['providerSupportedModels'] = $providerSupportedModels;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
@@ -116,6 +141,33 @@ final class VoiceDesignListResponse implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * Voice synthesis provider used for this design.
+     *
+     * @param Provider|value-of<Provider>|null $provider
+     */
+    public function withProvider(Provider|string|null $provider): self
+    {
+        $self = clone $this;
+        $self['provider'] = $provider;
+
+        return $self;
+    }
+
+    /**
+     * List of TTS model identifiers supported by this design's provider.
+     *
+     * @param list<string> $providerSupportedModels
+     */
+    public function withProviderSupportedModels(
+        array $providerSupportedModels
+    ): self {
+        $self = clone $this;
+        $self['providerSupportedModels'] = $providerSupportedModels;
 
         return $self;
     }

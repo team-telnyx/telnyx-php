@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\VoiceClones;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Provider;
 
 /**
  * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
@@ -20,6 +22,7 @@ use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
  *   language: string,
  *   name: string,
  *   voiceDesignID: string,
+ *   provider?: null|Provider|value-of<Provider>,
  * }
  */
 final class VoiceCloneCreateParams implements BaseModel
@@ -55,6 +58,14 @@ final class VoiceCloneCreateParams implements BaseModel
     public string $voiceDesignID;
 
     /**
+     * Voice synthesis provider. Case-insensitive. Defaults to `telnyx`.
+     *
+     * @var value-of<Provider>|null $provider
+     */
+    #[Optional(enum: Provider::class)]
+    public ?string $provider;
+
+    /**
      * `new VoiceCloneCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -85,12 +96,14 @@ final class VoiceCloneCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Gender|value-of<Gender> $gender
+     * @param Provider|value-of<Provider>|null $provider
      */
     public static function with(
         Gender|string $gender,
         string $language,
         string $name,
-        string $voiceDesignID
+        string $voiceDesignID,
+        Provider|string|null $provider = null,
     ): self {
         $self = new self;
 
@@ -98,6 +111,8 @@ final class VoiceCloneCreateParams implements BaseModel
         $self['language'] = $language;
         $self['name'] = $name;
         $self['voiceDesignID'] = $voiceDesignID;
+
+        null !== $provider && $self['provider'] = $provider;
 
         return $self;
     }
@@ -144,6 +159,19 @@ final class VoiceCloneCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['voiceDesignID'] = $voiceDesignID;
+
+        return $self;
+    }
+
+    /**
+     * Voice synthesis provider. Case-insensitive. Defaults to `telnyx`.
+     *
+     * @param Provider|value-of<Provider> $provider
+     */
+    public function withProvider(Provider|string $provider): self
+    {
+        $self = clone $this;
+        $self['provider'] = $provider;
 
         return $self;
     }

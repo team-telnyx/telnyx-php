@@ -11,7 +11,6 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TrafficPolicyProfilesRawContract;
-use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfile;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileCreateParams;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileCreateParams\LimitBwKbps;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileCreateParams\Type;
@@ -20,6 +19,7 @@ use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileGetResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListParams;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListParams\FilterType;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListParams\Sort;
+use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListServicesParams;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileListServicesResponse;
 use Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileNewResponse;
@@ -154,7 +154,7 @@ final class TrafficPolicyProfilesRawService implements TrafficPolicyProfilesRawC
      * }|TrafficPolicyProfileListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<TrafficPolicyProfile>>
+     * @return BaseResponse<DefaultFlatPagination<TrafficPolicyProfileListResponse>>
      *
      * @throws APIException
      */
@@ -181,7 +181,7 @@ final class TrafficPolicyProfilesRawService implements TrafficPolicyProfilesRawC
                 ],
             ),
             options: $options,
-            convert: TrafficPolicyProfile::class,
+            convert: TrafficPolicyProfileListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }
