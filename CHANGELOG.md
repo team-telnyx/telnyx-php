@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.10.0 (2026-03-24)
+
+Full Changelog: [v7.9.0...v7.10.0](https://github.com/team-telnyx/telnyx-php/compare/v7.9.0...v7.10.0)
+
+### Features
+
+* **api:** Merge pull request [#30](https://github.com/team-telnyx/telnyx-php/issues/30) from stainless-sdks/fix-schemaUnionDiscriminatorMissing ([7856ac0](https://github.com/team-telnyx/telnyx-php/commit/7856ac04c695b54b63e07e20f0f025800dff67f4))
+
 ## 7.9.0 (2026-03-23)
 
 Full Changelog: [v7.8.0...v7.9.0](https://github.com/team-telnyx/telnyx-php/compare/v7.8.0...v7.9.0)
