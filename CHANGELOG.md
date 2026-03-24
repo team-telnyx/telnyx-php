@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.12.0 (2026-03-24)
+
+Full Changelog: [v7.11.0...v7.12.0](https://github.com/team-telnyx/telnyx-php/compare/v7.11.0...v7.12.0)
+
+### Features
+
+* New tools api ([f4dce9b](https://github.com/team-telnyx/telnyx-php/commit/f4dce9b921da21bf34a5ed50e49d06d3f2f96d38))
+
 ## 7.11.0 (2026-03-24)
 
 Full Changelog: [v7.10.0...v7.11.0](https://github.com/team-telnyx/telnyx-php/compare/v7.10.0...v7.11.0)
