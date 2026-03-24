@@ -22,6 +22,7 @@ use Telnyx\Services\AI\IntegrationsService;
 use Telnyx\Services\AI\McpServersService;
 use Telnyx\Services\AI\MissionsService;
 use Telnyx\Services\AI\OpenAIService;
+use Telnyx\Services\AI\ToolsService;
 
 /**
  * Generate text with LLMs.
@@ -91,6 +92,11 @@ final class AIService implements AIContract
     public OpenAIService $openai;
 
     /**
+     * @api
+     */
+    public ToolsService $tools;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -107,6 +113,7 @@ final class AIService implements AIContract
         $this->mcpServers = new McpServersService($client);
         $this->missions = new MissionsService($client);
         $this->openai = new OpenAIService($client);
+        $this->tools = new ToolsService($client);
     }
 
     /**

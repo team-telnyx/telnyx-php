@@ -34,6 +34,50 @@ final class ToolsService implements ToolsContract
     /**
      * @api
      *
+     * Add Assistant Tool
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function add(
+        string $toolID,
+        string $assistantID,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed {
+        $params = Util::removeNulls(['assistantID' => $assistantID]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->add($toolID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Remove Assistant Tool
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function remove(
+        string $toolID,
+        string $assistantID,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed {
+        $params = Util::removeNulls(['assistantID' => $assistantID]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->remove($toolID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * Test a webhook tool for an assistant
      *
      * @param string $toolID Path param

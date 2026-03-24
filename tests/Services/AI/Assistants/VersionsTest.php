@@ -124,6 +124,7 @@ final class VersionsTest extends TestCase
                     ],
                 ],
             ],
+            toolIDs: ['string'],
             tools: [
                 [
                     'type' => 'webhook',
