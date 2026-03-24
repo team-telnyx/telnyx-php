@@ -118,6 +118,7 @@ final class AssistantsTest extends TestCase
                             'required' => ['page'],
                             'type' => 'object',
                         ],
+                        'storeFieldsAsVariables' => [['name' => 'x', 'valuePath' => 'x']],
                         'timeoutMs' => 500,
                     ],
                 ],

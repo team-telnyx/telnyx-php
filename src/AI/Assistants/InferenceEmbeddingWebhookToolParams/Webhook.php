@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\Header;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\Method;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\PathParameters;
 use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\QueryParameters;
+use Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\StoreFieldsAsVariable;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -19,6 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type HeaderShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\Header
  * @phpstan-import-type PathParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\PathParameters
  * @phpstan-import-type QueryParametersShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\QueryParameters
+ * @phpstan-import-type StoreFieldsAsVariableShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams\Webhook\StoreFieldsAsVariable
  *
  * @phpstan-type WebhookShape = array{
  *   description: string,
@@ -30,6 +32,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   method?: null|Method|value-of<Method>,
  *   pathParameters?: null|PathParameters|PathParametersShape,
  *   queryParameters?: null|QueryParameters|QueryParametersShape,
+ *   storeFieldsAsVariables?: list<StoreFieldsAsVariable|StoreFieldsAsVariableShape>|null,
  *   timeoutMs?: int|null,
  * }
  */
@@ -97,6 +100,14 @@ final class Webhook implements BaseModel
     public ?QueryParameters $queryParameters;
 
     /**
+     * A list of mappings that extract values from the webhook response and store them as dynamic variables. Each mapping specifies a dynamic variable name and a dot-notation path to the value in the response body.
+     *
+     * @var list<StoreFieldsAsVariable>|null $storeFieldsAsVariables
+     */
+    #[Optional('store_fields_as_variables', list: StoreFieldsAsVariable::class)]
+    public ?array $storeFieldsAsVariables;
+
+    /**
      * The maximum number of milliseconds to wait for the webhook to respond. Only applicable when async is false.
      */
     #[Optional('timeout_ms')]
@@ -131,6 +142,7 @@ final class Webhook implements BaseModel
      * @param Method|value-of<Method>|null $method
      * @param PathParameters|PathParametersShape|null $pathParameters
      * @param QueryParameters|QueryParametersShape|null $queryParameters
+     * @param list<StoreFieldsAsVariable|StoreFieldsAsVariableShape>|null $storeFieldsAsVariables
      */
     public static function with(
         string $description,
@@ -142,6 +154,7 @@ final class Webhook implements BaseModel
         Method|string|null $method = null,
         PathParameters|array|null $pathParameters = null,
         QueryParameters|array|null $queryParameters = null,
+        ?array $storeFieldsAsVariables = null,
         ?int $timeoutMs = null,
     ): self {
         $self = new self;
@@ -156,6 +169,7 @@ final class Webhook implements BaseModel
         null !== $method && $self['method'] = $method;
         null !== $pathParameters && $self['pathParameters'] = $pathParameters;
         null !== $queryParameters && $self['queryParameters'] = $queryParameters;
+        null !== $storeFieldsAsVariables && $self['storeFieldsAsVariables'] = $storeFieldsAsVariables;
         null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
 
         return $self;
@@ -269,6 +283,20 @@ final class Webhook implements BaseModel
     ): self {
         $self = clone $this;
         $self['queryParameters'] = $queryParameters;
+
+        return $self;
+    }
+
+    /**
+     * A list of mappings that extract values from the webhook response and store them as dynamic variables. Each mapping specifies a dynamic variable name and a dot-notation path to the value in the response body.
+     *
+     * @param list<StoreFieldsAsVariable|StoreFieldsAsVariableShape> $storeFieldsAsVariables
+     */
+    public function withStoreFieldsAsVariables(
+        array $storeFieldsAsVariables
+    ): self {
+        $self = clone $this;
+        $self['storeFieldsAsVariables'] = $storeFieldsAsVariables;
 
         return $self;
     }
