@@ -32,7 +32,7 @@ interface CreditAccountContract
      *
      * @param string $id body param: The quote ID to settle
      * @param string $paymentSignature Body param: Base64-encoded signed payment authorization (x402 PaymentPayload). Can alternatively be provided via the PAYMENT-SIGNATURE header.
-     * @param string $paymentSignature1 Header param: Signed payment authorization for the quote. Alternative to providing `payment_signature` in the request body.
+     * @param string $headerPaymentSignature Header param: Signed payment authorization for the quote. Alternative to providing `payment_signature` in the request body.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -40,7 +40,7 @@ interface CreditAccountContract
     public function settle(
         string $id,
         ?string $paymentSignature = null,
-        ?string $paymentSignature1 = null,
+        ?string $headerPaymentSignature = null,
         RequestOptions|array|null $requestOptions = null,
     ): CreditAccountSettleResponse;
 }

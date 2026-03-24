@@ -29,17 +29,22 @@ final class Component implements ConverterSource
 {
     use SdkUnion;
 
+    public static function discriminator(): string
+    {
+        return 'type';
+    }
+
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
      */
     public static function variants(): array
     {
         return [
-            WhatsappTemplateHeaderComponent::class,
-            WhatsappTemplateBodyComponent::class,
-            WhatsappTemplateFooterComponent::class,
-            WhatsappTemplateButtonsComponent::class,
-            WhatsappTemplateCarouselComponent::class,
+            'HEADER' => WhatsappTemplateHeaderComponent::class,
+            'BODY' => WhatsappTemplateBodyComponent::class,
+            'FOOTER' => WhatsappTemplateFooterComponent::class,
+            'BUTTONS' => WhatsappTemplateButtonsComponent::class,
+            'CAROUSEL' => WhatsappTemplateCarouselComponent::class,
         ];
     }
 }
