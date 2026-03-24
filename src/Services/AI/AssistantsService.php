@@ -111,6 +111,7 @@ final class AssistantsService implements AssistantsContract
      * @param MessagingSettings|MessagingSettingsShape $messagingSettings
      * @param PrivacySettings|PrivacySettingsShape $privacySettings
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings
+     * @param list<string> $toolIDs
      * @param list<AssistantToolShape> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
      * @param VoiceSettings|VoiceSettingsShape $voiceSettings
@@ -133,6 +134,7 @@ final class AssistantsService implements AssistantsContract
         MessagingSettings|array|null $messagingSettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
+        ?array $toolIDs = null,
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
@@ -154,6 +156,7 @@ final class AssistantsService implements AssistantsContract
                 'messagingSettings' => $messagingSettings,
                 'privacySettings' => $privacySettings,
                 'telephonySettings' => $telephonySettings,
+                'toolIDs' => $toolIDs,
                 'tools' => $tools,
                 'transcription' => $transcription,
                 'voiceSettings' => $voiceSettings,
@@ -216,6 +219,7 @@ final class AssistantsService implements AssistantsContract
      * @param PrivacySettings|PrivacySettingsShape $privacySettings
      * @param bool $promoteToMain Indicates whether the assistant should be promoted to the main version. Defaults to true.
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings
+     * @param list<string> $toolIDs
      * @param list<AssistantToolShape> $tools The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription
      * @param VoiceSettings|VoiceSettingsShape $voiceSettings
@@ -240,6 +244,7 @@ final class AssistantsService implements AssistantsContract
         PrivacySettings|array|null $privacySettings = null,
         bool $promoteToMain = true,
         TelephonySettings|array|null $telephonySettings = null,
+        ?array $toolIDs = null,
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
@@ -262,6 +267,7 @@ final class AssistantsService implements AssistantsContract
                 'privacySettings' => $privacySettings,
                 'promoteToMain' => $promoteToMain,
                 'telephonySettings' => $telephonySettings,
+                'toolIDs' => $toolIDs,
                 'tools' => $tools,
                 'transcription' => $transcription,
                 'voiceSettings' => $voiceSettings,

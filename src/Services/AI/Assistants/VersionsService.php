@@ -96,6 +96,7 @@ final class VersionsService implements VersionsContract
      * @param string $name Body param
      * @param PrivacySettings|PrivacySettingsShape $privacySettings Body param
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings Body param
+     * @param list<string> $toolIDs Body param
      * @param list<AssistantToolShape> $tools Body param: The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
      * @param TranscriptionSettings|TranscriptionSettingsShape $transcription Body param
      * @param VoiceSettings|VoiceSettingsShape $voiceSettings Body param
@@ -120,6 +121,7 @@ final class VersionsService implements VersionsContract
         ?string $name = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
+        ?array $toolIDs = null,
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
@@ -142,6 +144,7 @@ final class VersionsService implements VersionsContract
                 'name' => $name,
                 'privacySettings' => $privacySettings,
                 'telephonySettings' => $telephonySettings,
+                'toolIDs' => $toolIDs,
                 'tools' => $tools,
                 'transcription' => $transcription,
                 'voiceSettings' => $voiceSettings,

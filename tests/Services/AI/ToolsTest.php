@@ -1,13 +1,17 @@
 <?php
 
-namespace Tests\Services\AI\Assistants;
+namespace Tests\Services\AI;
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Assistants\Tools\ToolTestResponse;
+use Telnyx\AI\Tools\ToolGetResponse;
+use Telnyx\AI\Tools\ToolListResponse;
+use Telnyx\AI\Tools\ToolNewResponse;
+use Telnyx\AI\Tools\ToolUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -29,100 +33,97 @@ final class ToolsTest extends TestCase
     }
 
     #[Test]
-    public function testAdd(): void
+    public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->assistants->tools->add(
-            'tool_id',
-            assistantID: 'assistant_id'
+        $result = $this->client->ai->tools->create(
+            displayName: 'display_name',
+            type: 'type'
         );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ToolNewResponse::class, $result);
+    }
+
+    #[Test]
+    public function testCreateWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->tools->create(
+            displayName: 'display_name',
+            type: 'type',
+            function: ['foo' => 'bar'],
+            handoff: ['foo' => 'bar'],
+            invite: ['foo' => 'bar'],
+            retrieval: ['foo' => 'bar'],
+            timeoutMs: 0,
+            webhook: ['foo' => 'bar'],
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ToolNewResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRetrieve(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->tools->retrieve('tool_id');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ToolGetResponse::class, $result);
+    }
+
+    #[Test]
+    public function testUpdate(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->tools->update('tool_id');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ToolUpdateResponse::class, $result);
+    }
+
+    #[Test]
+    public function testList(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $page = $this->client->ai->tools->list();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(DefaultFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(ToolListResponse::class, $item);
+        }
+    }
+
+    #[Test]
+    public function testDelete(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->tools->delete('tool_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsNotResource($result);
-    }
-
-    #[Test]
-    public function testAddWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->assistants->tools->add(
-            'tool_id',
-            assistantID: 'assistant_id'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsNotResource($result);
-    }
-
-    #[Test]
-    public function testRemove(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->assistants->tools->remove(
-            'tool_id',
-            assistantID: 'assistant_id'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsNotResource($result);
-    }
-
-    #[Test]
-    public function testRemoveWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->assistants->tools->remove(
-            'tool_id',
-            assistantID: 'assistant_id'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsNotResource($result);
-    }
-
-    #[Test]
-    public function testTest(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->assistants->tools->test(
-            'tool_id',
-            assistantID: 'assistant_id'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ToolTestResponse::class, $result);
-    }
-
-    #[Test]
-    public function testTestWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->assistants->tools->test(
-            'tool_id',
-            assistantID: 'assistant_id',
-            arguments: ['foo' => 'bar'],
-            dynamicVariables: ['foo' => 'bar'],
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ToolTestResponse::class, $result);
     }
 }
