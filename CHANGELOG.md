@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.11.0 (2026-03-24)
+
+Full Changelog: [v7.10.0...v7.11.0](https://github.com/team-telnyx/telnyx-php/compare/v7.10.0...v7.11.0)
+
+### Features
+
+* TELAPPS-5685: Add store_fields_as_variables to WebhookToolParams ([5b8a7b3](https://github.com/team-telnyx/telnyx-php/commit/5b8a7b3d35065ac0be505feb3e5948e87e23820f))
+
 ## 7.10.0 (2026-03-24)
 
 Full Changelog: [v7.9.0...v7.10.0](https://github.com/team-telnyx/telnyx-php/compare/v7.9.0...v7.10.0)
