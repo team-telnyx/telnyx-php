@@ -16,6 +16,32 @@ interface ToolsContract
     /**
      * @api
      *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function add(
+        string $toolID,
+        string $assistantID,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function remove(
+        string $toolID,
+        string $assistantID,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed;
+
+    /**
+     * @api
+     *
      * @param string $toolID Path param
      * @param string $assistantID Path param
      * @param array<string,mixed> $arguments Body param: Key-value arguments to use for the webhook test

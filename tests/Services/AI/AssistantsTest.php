@@ -93,6 +93,7 @@ final class AssistantsTest extends TestCase
                     ],
                 ],
             ],
+            toolIDs: ['string'],
             tools: [
                 [
                     'type' => 'webhook',

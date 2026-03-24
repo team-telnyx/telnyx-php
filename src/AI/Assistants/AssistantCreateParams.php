@@ -39,6 +39,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
  *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
  *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
+ *   toolIDs?: list<string>|null,
  *   tools?: list<AssistantToolShape>|null,
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
  *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
@@ -111,6 +112,10 @@ final class AssistantCreateParams implements BaseModel
     #[Optional('telephony_settings')]
     public ?TelephonySettings $telephonySettings;
 
+    /** @var list<string>|null $toolIDs */
+    #[Optional('tool_ids', list: 'string')]
+    public ?array $toolIDs;
+
     /**
      * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      *
@@ -164,6 +169,7 @@ final class AssistantCreateParams implements BaseModel
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
      * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
      * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
+     * @param list<string>|null $toolIDs
      * @param list<AssistantToolShape>|null $tools
      * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
      * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
@@ -183,6 +189,7 @@ final class AssistantCreateParams implements BaseModel
         MessagingSettings|array|null $messagingSettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
+        ?array $toolIDs = null,
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
         VoiceSettings|array|null $voiceSettings = null,
@@ -204,6 +211,7 @@ final class AssistantCreateParams implements BaseModel
         null !== $messagingSettings && $self['messagingSettings'] = $messagingSettings;
         null !== $privacySettings && $self['privacySettings'] = $privacySettings;
         null !== $telephonySettings && $self['telephonySettings'] = $telephonySettings;
+        null !== $toolIDs && $self['toolIDs'] = $toolIDs;
         null !== $tools && $self['tools'] = $tools;
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
@@ -352,6 +360,17 @@ final class AssistantCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['telephonySettings'] = $telephonySettings;
+
+        return $self;
+    }
+
+    /**
+     * @param list<string> $toolIDs
+     */
+    public function withToolIDs(array $toolIDs): self
+    {
+        $self = clone $this;
+        $self['toolIDs'] = $toolIDs;
 
         return $self;
     }

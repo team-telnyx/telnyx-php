@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants;
 
+use Telnyx\AI\Assistants\Tools\ToolAddParams;
+use Telnyx\AI\Assistants\Tools\ToolRemoveParams;
 use Telnyx\AI\Assistants\Tools\ToolTestParams;
 use Telnyx\AI\Assistants\Tools\ToolTestResponse;
 use Telnyx\Client;
@@ -24,6 +26,72 @@ final class ToolsRawService implements ToolsRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * Add Assistant Tool
+     *
+     * @param array{assistantID: string}|ToolAddParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function add(
+        string $toolID,
+        array|ToolAddParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ToolAddParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $assistantID = $parsed['assistantID'];
+        unset($parsed['assistantID']);
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'put',
+            path: ['ai/assistants/%1$s/tools/%2$s', $assistantID, $toolID],
+            options: $options,
+            convert: 'mixed',
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Remove Assistant Tool
+     *
+     * @param array{assistantID: string}|ToolRemoveParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function remove(
+        string $toolID,
+        array|ToolRemoveParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ToolRemoveParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $assistantID = $parsed['assistantID'];
+        unset($parsed['assistantID']);
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'delete',
+            path: ['ai/assistants/%1$s/tools/%2$s', $assistantID, $toolID],
+            options: $options,
+            convert: 'mixed',
+        );
+    }
 
     /**
      * @api

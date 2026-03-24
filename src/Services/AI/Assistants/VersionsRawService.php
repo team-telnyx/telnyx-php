@@ -107,6 +107,7 @@ final class VersionsRawService implements VersionsRawContract
      *   name?: string,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
+     *   toolIDs?: list<string>,
      *   tools?: list<AssistantToolShape>,
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
      *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
