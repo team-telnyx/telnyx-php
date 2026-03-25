@@ -42,7 +42,7 @@ final class NumberReputationRawService implements NumberReputationRawContract
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
-            path: 'terms-of-service/number-reputation/agree',
+            path: 'terms_of_service/number_reputation/agree',
             options: $requestOptions,
             convert: null,
         );
