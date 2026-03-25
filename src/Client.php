@@ -42,6 +42,7 @@ use Telnyx\Services\DocumentLinksService;
 use Telnyx\Services\DocumentsService;
 use Telnyx\Services\DynamicEmergencyAddressesService;
 use Telnyx\Services\DynamicEmergencyEndpointsService;
+use Telnyx\Services\EnterprisesService;
 use Telnyx\Services\ExternalConnectionsService;
 use Telnyx\Services\FaxApplicationsService;
 use Telnyx\Services\FaxesService;
@@ -122,6 +123,7 @@ use Telnyx\Services\RecordingTranscriptionsService;
 use Telnyx\Services\RegionsService;
 use Telnyx\Services\RegulatoryRequirementsService;
 use Telnyx\Services\ReportsService;
+use Telnyx\Services\ReputationService;
 use Telnyx\Services\RequirementGroupsService;
 use Telnyx\Services\RequirementsService;
 use Telnyx\Services\RequirementTypesService;
@@ -142,6 +144,7 @@ use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
 use Telnyx\Services\SubNumberOrdersService;
 use Telnyx\Services\TelephonyCredentialsService;
+use Telnyx\Services\TermsOfServiceService;
 use Telnyx\Services\TexmlApplicationsService;
 use Telnyx\Services\TexmlService;
 use Telnyx\Services\TextToSpeechService;
@@ -984,6 +987,21 @@ class Client extends BaseClient
     public TrafficPolicyProfilesService $trafficPolicyProfiles;
 
     /**
+     * @api
+     */
+    public EnterprisesService $enterprises;
+
+    /**
+     * @api
+     */
+    public ReputationService $reputation;
+
+    /**
+     * @api
+     */
+    public TermsOfServiceService $termsOfService;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1192,6 +1210,9 @@ class Client extends BaseClient
         $this->voiceClones = new VoiceClonesService($this);
         $this->voiceDesigns = new VoiceDesignsService($this);
         $this->trafficPolicyProfiles = new TrafficPolicyProfilesService($this);
+        $this->enterprises = new EnterprisesService($this);
+        $this->reputation = new ReputationService($this);
+        $this->termsOfService = new TermsOfServiceService($this);
     }
 
     /** @return array<string,string> */
