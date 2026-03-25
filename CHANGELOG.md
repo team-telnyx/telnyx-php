@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.14.1 (2026-03-25)
+
+Full Changelog: [v7.14.0...v7.14.1](https://github.com/team-telnyx/telnyx-php/compare/v7.14.0...v7.14.1)
+
+### Bug Fixes
+
+* rename number-reputation ToS route to use underscores ([22ef53f](https://github.com/team-telnyx/telnyx-php/commit/22ef53fca73cb0aed626d97a778a0f66f08481bb))
+
+
+### Documentation
+
+* **branded-calling:** add Number Reputation API specs ([110204e](https://github.com/team-telnyx/telnyx-php/commit/110204ef01bf6ea517c04515ea963f9fc40c4adf))
+
 ## 7.14.0 (2026-03-25)
 
 Full Changelog: [v7.13.0...v7.14.0](https://github.com/team-telnyx/telnyx-php/compare/v7.13.0...v7.14.0)
