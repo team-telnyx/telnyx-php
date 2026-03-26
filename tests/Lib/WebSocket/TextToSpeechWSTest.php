@@ -105,6 +105,7 @@ class TextToSpeechWSTest extends TestCase
     {
         $event = StreamClientEvent::text('Test text', false);
         $json = $event->toJson();
+        /** @var array<string, mixed> $decoded */
         $decoded = json_decode($json, true);
 
         $this->assertEquals('text', $decoded['type']);

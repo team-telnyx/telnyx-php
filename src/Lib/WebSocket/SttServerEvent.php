@@ -47,11 +47,11 @@ class SttServerEvent
     public function __construct(array $data)
     {
         $this->rawData = $data;
-        $this->type = $data['type'] ?? 'unknown';
-        $this->transcript = $data['transcript'] ?? null;
+        $this->type = isset($data['type']) ? (string) $data['type'] : 'unknown';
+        $this->transcript = isset($data['transcript']) ? (string) $data['transcript'] : null;
         $this->isFinal = isset($data['is_final']) ? (bool) $data['is_final'] : null;
         $this->confidence = isset($data['confidence']) ? (float) $data['confidence'] : null;
-        $this->error = $data['error'] ?? null;
+        $this->error = isset($data['error']) ? (string) $data['error'] : null;
     }
 
     /**
@@ -63,6 +63,7 @@ class SttServerEvent
      */
     public static function fromJson(string $json): self
     {
+        /** @var array<string, mixed> $data */
         $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
         return new self($data);

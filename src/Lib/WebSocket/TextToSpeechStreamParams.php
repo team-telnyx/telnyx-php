@@ -50,13 +50,13 @@ class TextToSpeechStreamParams
      */
     public function __construct(array $params = [])
     {
-        $this->voice = $params['voice'] ?? null;
-        $this->voiceProvider = $params['voice_provider'] ?? null;
-        $this->outputFormat = $params['output_format'] ?? null;
-        $this->sampleRate = $params['sample_rate'] ?? null;
-        $this->language = $params['language'] ?? null;
-        $this->speakingRate = $params['speaking_rate'] ?? null;
-        $this->clientRef = $params['client_ref'] ?? null;
+        $this->voice = isset($params['voice']) ? (string) $params['voice'] : null;
+        $this->voiceProvider = isset($params['voice_provider']) ? (string) $params['voice_provider'] : null;
+        $this->outputFormat = isset($params['output_format']) ? (string) $params['output_format'] : null;
+        $this->sampleRate = isset($params['sample_rate']) ? (int) $params['sample_rate'] : null;
+        $this->language = isset($params['language']) ? (string) $params['language'] : null;
+        $this->speakingRate = isset($params['speaking_rate']) ? (float) $params['speaking_rate'] : null;
+        $this->clientRef = isset($params['client_ref']) ? (string) $params['client_ref'] : null;
     }
 
     /**

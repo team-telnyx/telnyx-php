@@ -57,15 +57,15 @@ class TtsServerEvent
     public function __construct(array $data)
     {
         $this->rawData = $data;
-        $this->type = $data['type'] ?? 'unknown';
-        $this->audio = $data['audio'] ?? null;
-        $this->text = $data['text'] ?? null;
+        $this->type = isset($data['type']) ? (string) $data['type'] : 'unknown';
+        $this->audio = isset($data['audio']) ? (string) $data['audio'] : null;
+        $this->text = isset($data['text']) ? (string) $data['text'] : null;
         $this->isFinal = isset($data['is_final']) ? (bool) $data['is_final'] : null;
         $this->cached = isset($data['cached']) ? (bool) $data['cached'] : null;
         $this->timeToFirstAudioFrameMs = isset($data['time_to_first_audio_frame_ms'])
             ? (int) $data['time_to_first_audio_frame_ms']
             : null;
-        $this->error = $data['error'] ?? null;
+        $this->error = isset($data['error']) ? (string) $data['error'] : null;
     }
 
     /**
@@ -77,6 +77,7 @@ class TtsServerEvent
      */
     public static function fromJson(string $json): self
     {
+        /** @var array<string, mixed> $data */
         $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
         return new self($data);

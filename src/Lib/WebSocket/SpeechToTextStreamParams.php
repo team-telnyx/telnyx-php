@@ -47,12 +47,12 @@ class SpeechToTextStreamParams
      */
     public function __construct(array $params = [])
     {
-        $this->transcriptionEngine = $params['transcription_engine'] ?? 'Deepgram';
-        $this->inputFormat = $params['input_format'] ?? 'wav';
-        $this->language = $params['language'] ?? 'en-US';
-        $this->sampleRate = $params['sample_rate'] ?? null;
-        $this->interimResults = $params['interim_results'] ?? null;
-        $this->clientRef = $params['client_ref'] ?? null;
+        $this->transcriptionEngine = isset($params['transcription_engine']) ? (string) $params['transcription_engine'] : 'Deepgram';
+        $this->inputFormat = isset($params['input_format']) ? (string) $params['input_format'] : 'wav';
+        $this->language = isset($params['language']) ? (string) $params['language'] : 'en-US';
+        $this->sampleRate = isset($params['sample_rate']) ? (int) $params['sample_rate'] : null;
+        $this->interimResults = isset($params['interim_results']) ? (bool) $params['interim_results'] : null;
+        $this->clientRef = isset($params['client_ref']) ? (string) $params['client_ref'] : null;
     }
 
     /**
