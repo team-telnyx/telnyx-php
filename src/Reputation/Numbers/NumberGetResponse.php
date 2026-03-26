@@ -7,12 +7,14 @@ namespace Telnyx\Reputation\Numbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Reputation\Numbers\NumberGetResponse\Data;
+use Telnyx\ReputationPhoneNumberWithReputationData;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Reputation\Numbers\NumberGetResponse\Data
+ * @phpstan-import-type ReputationPhoneNumberWithReputationDataShape from \Telnyx\ReputationPhoneNumberWithReputationData
  *
- * @phpstan-type NumberGetResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type NumberGetResponseShape = array{
+ *   data?: null|ReputationPhoneNumberWithReputationData|ReputationPhoneNumberWithReputationDataShape,
+ * }
  */
 final class NumberGetResponse implements BaseModel
 {
@@ -20,7 +22,7 @@ final class NumberGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?ReputationPhoneNumberWithReputationData $data;
 
     public function __construct()
     {
@@ -32,10 +34,11 @@ final class NumberGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param ReputationPhoneNumberWithReputationData|ReputationPhoneNumberWithReputationDataShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        ReputationPhoneNumberWithReputationData|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -44,10 +47,11 @@ final class NumberGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param ReputationPhoneNumberWithReputationData|ReputationPhoneNumberWithReputationDataShape $data
      */
-    public function withData(Data|array $data): self
-    {
+    public function withData(
+        ReputationPhoneNumberWithReputationData|array $data
+    ): self {
         $self = clone $this;
         $self['data'] = $data;
 

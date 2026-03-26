@@ -7,7 +7,7 @@ namespace Telnyx\ServiceContracts\Reputation;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Reputation\Numbers\NumberListResponse;
+use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 
 /**
@@ -38,7 +38,7 @@ interface NumbersContract
      * @param string $phoneNumber Filter by specific phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<NumberListResponse>
+     * @return DefaultFlatPagination<ReputationPhoneNumberWithReputationData>
      *
      * @throws APIException
      */
