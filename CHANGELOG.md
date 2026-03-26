@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.15.0 (2026-03-26)
+
+Full Changelog: [v7.14.1...v7.15.0](https://github.com/team-telnyx/telnyx-php/compare/v7.14.1...v7.15.0)
+
+### Features
+
+* **websocket:** add STT/TTS WebSocket streaming support ([bc957a7](https://github.com/team-telnyx/telnyx-php/commit/bc957a7d58d65922e6b3f31fb5f09e431c7a4175))
+
+
+### Bug Fixes
+
+* **websocket:** resolve PHPStan lint errors ([33a6c50](https://github.com/team-telnyx/telnyx-php/commit/33a6c506e9eea9e0a64bed96a624960d9c6eb8f8))
+
 ## 7.14.1 (2026-03-25)
 
 Full Changelog: [v7.14.0...v7.14.1](https://github.com/team-telnyx/telnyx-php/compare/v7.14.0...v7.14.1)
