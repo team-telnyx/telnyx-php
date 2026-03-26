@@ -98,18 +98,20 @@ class WebSocketClient
         $deferred = new Deferred;
         $connected = false;
 
-        $connector($this->url, [], $this->headers)->then(
-            function (WebSocket $conn) use (&$connected, $deferred) {
+        /** @var \React\Promise\PromiseInterface<\Ratchet\Client\WebSocket> $promise */
+        $promise = $connector($this->url, [], $this->headers);
+        $promise->then(
+            function (WebSocket $conn) use (&$connected, $deferred): void {
                 $this->socket = $conn;
                 $this->connected = true;
                 $connected = true;
 
-                $conn->on('message', function (MessageInterface $msg) {
+                $conn->on('message', function (MessageInterface $msg): void {
                     $this->messageQueue[] = (string) $msg;
                     $this->emit('message', (string) $msg);
                 });
 
-                $conn->on('close', function ($code = null, $reason = null) {
+                $conn->on('close', function ($code = null, $reason = null): void {
                     $this->connected = false;
                     $this->emit('close', $code, $reason);
                 });
@@ -117,7 +119,7 @@ class WebSocketClient
                 $this->emit('open');
                 $deferred->resolve(true);
             },
-            function (\Exception $e) use ($deferred) {
+            function (\Throwable $e) use ($deferred): void {
                 $error = new WebSocketError(
                     'Failed to connect to WebSocket: '.$e->getMessage(),
                     null,
@@ -132,9 +134,6 @@ class WebSocketClient
         $startTime = time();
         while (!$connected && (time() - $startTime) < $this->timeout) {
             $this->loop->run();
-            if ($connected) {
-                break;
-            }
             // Small sleep to prevent busy loop
             usleep(10000);
         }

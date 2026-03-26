@@ -345,7 +345,7 @@ class SpeechToTextWS
         ?string $message = null,
         ?\Throwable $cause = null
     ): void {
-        $errorMessage = $message ?? $event?->error ?? 'Unknown error';
+        $errorMessage = $message ?? ($event !== null ? $event->error : null) ?? 'Unknown error';
 
         if (!isset($this->listeners['error']) || empty($this->listeners['error'])) {
             // No error listener - throw exception
