@@ -9,8 +9,8 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\EnterpriseGetResponse;
-use Telnyx\Enterprises\EnterpriseListResponse;
 use Telnyx\Enterprises\EnterpriseNewResponse;
+use Telnyx\Enterprises\EnterprisePublic;
 use Telnyx\Enterprises\EnterpriseUpdateResponse;
 use Tests\UnsupportedMockTests;
 
@@ -184,7 +184,7 @@ final class EnterprisesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(EnterpriseListResponse::class, $item);
+            $this->assertInstanceOf(EnterprisePublic::class, $item);
         }
     }
 

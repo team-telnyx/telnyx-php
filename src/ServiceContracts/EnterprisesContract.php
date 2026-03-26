@@ -6,29 +6,25 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\EnterpriseCreateParams\BillingAddress;
-use Telnyx\Enterprises\EnterpriseCreateParams\BillingContact;
+use Telnyx\Enterprises\BillingAddress;
+use Telnyx\Enterprises\BillingContact;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
-use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationContact;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
-use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationPhysicalAddress;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
 use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
 use Telnyx\Enterprises\EnterpriseGetResponse;
-use Telnyx\Enterprises\EnterpriseListResponse;
 use Telnyx\Enterprises\EnterpriseNewResponse;
+use Telnyx\Enterprises\EnterprisePublic;
 use Telnyx\Enterprises\EnterpriseUpdateResponse;
+use Telnyx\Enterprises\OrganizationContact;
+use Telnyx\Enterprises\PhysicalAddress;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\EnterpriseCreateParams\BillingAddress
- * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\EnterpriseCreateParams\BillingContact
- * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\EnterpriseCreateParams\OrganizationContact
- * @phpstan-import-type OrganizationPhysicalAddressShape from \Telnyx\Enterprises\EnterpriseCreateParams\OrganizationPhysicalAddress
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\EnterpriseUpdateParams\BillingAddress as BillingAddressShape1
- * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\EnterpriseUpdateParams\BillingContact as BillingContactShape1
- * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationContact as OrganizationContactShape1
- * @phpstan-import-type OrganizationPhysicalAddressShape from \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationPhysicalAddress as OrganizationPhysicalAddressShape1
+ * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
+ * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\BillingContact
+ * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\OrganizationContact
+ * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface EnterprisesContract
@@ -46,7 +42,7 @@ interface EnterprisesContract
      * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees Employee count range
      * @param OrganizationContact|OrganizationContactShape $organizationContact Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
      * @param OrganizationLegalType|value-of<OrganizationLegalType> $organizationLegalType Legal structure type
-     * @param OrganizationPhysicalAddress|OrganizationPhysicalAddressShape $organizationPhysicalAddress
+     * @param PhysicalAddress|PhysicalAddressShape $organizationPhysicalAddress
      * @param OrganizationType|value-of<OrganizationType> $organizationType Type of organization
      * @param string $website Enterprise website URL. Accepts any string — no URL format validation enforced.
      * @param string $corporateRegistrationNumber Corporate registration number (optional)
@@ -70,7 +66,7 @@ interface EnterprisesContract
         NumberOfEmployees|string $numberOfEmployees,
         OrganizationContact|array $organizationContact,
         OrganizationLegalType|string $organizationLegalType,
-        OrganizationPhysicalAddress|array $organizationPhysicalAddress,
+        PhysicalAddress|array $organizationPhysicalAddress,
         OrganizationType|string $organizationType,
         string $website,
         ?string $corporateRegistrationNumber = null,
@@ -99,8 +95,8 @@ interface EnterprisesContract
      * @api
      *
      * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param \Telnyx\Enterprises\EnterpriseUpdateParams\BillingAddress|BillingAddressShape1 $billingAddress
-     * @param \Telnyx\Enterprises\EnterpriseUpdateParams\BillingContact|BillingContactShape1 $billingContact
+     * @param BillingAddress|BillingAddressShape $billingAddress
+     * @param BillingContact|BillingContactShape $billingContact
      * @param string $corporateRegistrationNumber Corporate registration number
      * @param string $customerReference Customer reference identifier
      * @param string $doingBusinessAs DBA name
@@ -109,9 +105,9 @@ interface EnterprisesContract
      * @param string $industry Industry classification
      * @param string $legalName Legal name of the enterprise
      * @param \Telnyx\Enterprises\EnterpriseUpdateParams\NumberOfEmployees|value-of<\Telnyx\Enterprises\EnterpriseUpdateParams\NumberOfEmployees> $numberOfEmployees Employee count range
-     * @param \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationContact|OrganizationContactShape1 $organizationContact Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
+     * @param OrganizationContact|OrganizationContactShape $organizationContact Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
      * @param \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType|value-of<\Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType> $organizationLegalType Legal structure type
-     * @param \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationPhysicalAddress|OrganizationPhysicalAddressShape1 $organizationPhysicalAddress
+     * @param PhysicalAddress|PhysicalAddressShape $organizationPhysicalAddress
      * @param string $primaryBusinessDomainSicCode SIC Code
      * @param string $professionalLicenseNumber Professional license number
      * @param string $website Company website URL
@@ -121,8 +117,8 @@ interface EnterprisesContract
      */
     public function update(
         string $enterpriseID,
-        \Telnyx\Enterprises\EnterpriseUpdateParams\BillingAddress|array|null $billingAddress = null,
-        \Telnyx\Enterprises\EnterpriseUpdateParams\BillingContact|array|null $billingContact = null,
+        BillingAddress|array|null $billingAddress = null,
+        BillingContact|array|null $billingContact = null,
         ?string $corporateRegistrationNumber = null,
         ?string $customerReference = null,
         ?string $doingBusinessAs = null,
@@ -131,9 +127,9 @@ interface EnterprisesContract
         ?string $industry = null,
         ?string $legalName = null,
         \Telnyx\Enterprises\EnterpriseUpdateParams\NumberOfEmployees|string|null $numberOfEmployees = null,
-        \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationContact|array|null $organizationContact = null,
+        OrganizationContact|array|null $organizationContact = null,
         \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType|string|null $organizationLegalType = null,
-        \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationPhysicalAddress|array|null $organizationPhysicalAddress = null,
+        PhysicalAddress|array|null $organizationPhysicalAddress = null,
         ?string $primaryBusinessDomainSicCode = null,
         ?string $professionalLicenseNumber = null,
         ?string $website = null,
@@ -148,7 +144,7 @@ interface EnterprisesContract
      * @param int $pageSize Number of items per page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<EnterpriseListResponse>
+     * @return DefaultFlatPagination<EnterprisePublic>
      *
      * @throws APIException
      */
