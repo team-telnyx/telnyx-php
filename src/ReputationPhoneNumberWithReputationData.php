@@ -9,15 +9,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type ReputationDataVariants from \Telnyx\ReputationPhoneNumberWithReputationData\ReputationData
- * @phpstan-import-type ReputationDataShape from \Telnyx\ReputationPhoneNumberWithReputationData\ReputationData
+ * @phpstan-import-type ReputationDataShape from \Telnyx\ReputationData
  *
  * @phpstan-type ReputationPhoneNumberWithReputationDataShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   enterpriseID?: string|null,
  *   phoneNumber?: string|null,
- *   reputationData?: ReputationDataShape|null,
+ *   reputationData?: null|ReputationData|ReputationDataShape,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -51,15 +50,10 @@ final class ReputationPhoneNumberWithReputationData implements BaseModel
     public ?string $phoneNumber;
 
     /**
-     * Reputation metrics (null if not yet fetched).
-     *
-     * @var ReputationDataVariants|null $reputationData
+     * Reputation metrics.
      */
-    #[Optional(
-        'reputation_data',
-        union: ReputationPhoneNumberWithReputationData\ReputationData::class,
-    )]
-    public ReputationData|array|null $reputationData;
+    #[Optional('reputation_data')]
+    public ?ReputationData $reputationData;
 
     /**
      * When the record was last updated.
@@ -77,7 +71,7 @@ final class ReputationPhoneNumberWithReputationData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ReputationDataShape|null $reputationData
+     * @param ReputationData|ReputationDataShape|null $reputationData
      */
     public static function with(
         ?string $id = null,
@@ -144,12 +138,12 @@ final class ReputationPhoneNumberWithReputationData implements BaseModel
     }
 
     /**
-     * Reputation metrics (null if not yet fetched).
+     * Reputation metrics.
      *
-     * @param ReputationDataShape $reputationData
+     * @param ReputationData|ReputationDataShape $reputationData
      */
     public function withReputationData(
-        ReputationData|array|null $reputationData
+        ReputationData|array $reputationData
     ): self {
         $self = clone $this;
         $self['reputationData'] = $reputationData;
