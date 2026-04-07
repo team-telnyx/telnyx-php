@@ -86,7 +86,9 @@ final class AssistantsTest extends TestCase
                 'noiseSuppressionConfig' => [
                     'attenuationLimit' => 0, 'mode' => 'advanced',
                 ],
-                'recordingSettings' => ['channels' => 'single', 'format' => 'wav'],
+                'recordingSettings' => [
+                    'channels' => 'single', 'enabled' => true, 'format' => 'wav',
+                ],
                 'supportsUnauthenticatedWebCalls' => true,
                 'timeLimitSecs' => 30,
                 'userIdleTimeoutSecs' => 30,
