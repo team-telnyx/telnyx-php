@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.21.0 (2026-04-07)
+
+Full Changelog: [v7.20.0...v7.21.0](https://github.com/team-telnyx/telnyx-php/compare/v7.20.0...v7.21.0)
+
+### Features
+
+* AI-2180: Add message_template to SendMessageTool schema ([dd35f91](https://github.com/team-telnyx/telnyx-php/commit/dd35f91716f7c6ab1e5ea05f34d281bcbfef79a2))
+
 ## 7.20.0 (2026-04-07)
 
 Full Changelog: [v7.19.0...v7.20.0](https://github.com/team-telnyx/telnyx-php/compare/v7.19.0...v7.20.0)
