@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.16.0 (2026-04-07)
+
+Full Changelog: [v7.15.0...v7.16.0](https://github.com/team-telnyx/telnyx-php/compare/v7.15.0...v7.16.0)
+
+### Features
+
+* MSG-6673: Add WhatsApp verification endpoint and profile settings ([edba065](https://github.com/team-telnyx/telnyx-php/commit/edba0652ff9da33b04af30f4c3b17acb17761062))
+
+
+### Documentation
+
+* fix voice settings available voices link ([9e520fa](https://github.com/team-telnyx/telnyx-php/commit/9e520fa82177089ba23ed10ac052c521011e15bb))
+
 ## 7.15.0 (2026-03-26)
 
 Full Changelog: [v7.14.1...v7.15.0](https://github.com/team-telnyx/telnyx-php/compare/v7.14.1...v7.15.0)
