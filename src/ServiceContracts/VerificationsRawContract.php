@@ -12,6 +12,7 @@ use Telnyx\Verifications\VerificationGetResponse;
 use Telnyx\Verifications\VerificationTriggerCallParams;
 use Telnyx\Verifications\VerificationTriggerFlashcallParams;
 use Telnyx\Verifications\VerificationTriggerSMSParams;
+use Telnyx\Verifications\VerificationTriggerWhatsappVerificationParams;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -75,6 +76,21 @@ interface VerificationsRawContract
      */
     public function triggerSMS(
         array|VerificationTriggerSMSParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|VerificationTriggerWhatsappVerificationParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<CreateVerificationResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerWhatsappVerification(
+        array|VerificationTriggerWhatsappVerificationParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

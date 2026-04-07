@@ -83,4 +83,23 @@ interface VerificationsContract
         ?int $timeoutSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): CreateVerificationResponse;
+
+    /**
+     * @api
+     *
+     * @param string $phoneNumber +E164 formatted phone number
+     * @param string $verifyProfileID the identifier of the associated Verify profile
+     * @param string|null $customCode Send a self-generated numeric code to the end-user
+     * @param int $timeoutSecs the number of seconds the verification code is valid for
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function triggerWhatsappVerification(
+        string $phoneNumber,
+        string $verifyProfileID,
+        ?string $customCode = null,
+        ?int $timeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): CreateVerificationResponse;
 }
