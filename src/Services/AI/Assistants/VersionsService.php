@@ -12,6 +12,7 @@ use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ObservabilitySettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
@@ -25,6 +26,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
  *
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ObservabilitySettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -94,6 +96,7 @@ final class VersionsService implements VersionsContract
      * @param MessagingSettings|MessagingSettingsShape $messagingSettings Body param
      * @param string $model Body param: ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,
      * @param string $name Body param
+     * @param ObservabilitySettings|ObservabilitySettingsShape $observabilitySettings Body param
      * @param PrivacySettings|PrivacySettingsShape $privacySettings Body param
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings Body param
      * @param list<string> $toolIDs Body param
@@ -119,6 +122,7 @@ final class VersionsService implements VersionsContract
         MessagingSettings|array|null $messagingSettings = null,
         ?string $model = null,
         ?string $name = null,
+        ObservabilitySettings|array|null $observabilitySettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $toolIDs = null,
@@ -142,6 +146,7 @@ final class VersionsService implements VersionsContract
                 'messagingSettings' => $messagingSettings,
                 'model' => $model,
                 'name' => $name,
+                'observabilitySettings' => $observabilitySettings,
                 'privacySettings' => $privacySettings,
                 'telephonySettings' => $telephonySettings,
                 'toolIDs' => $toolIDs,

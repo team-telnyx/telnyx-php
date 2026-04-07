@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI;
 
 use Telnyx\AI\Assistants\AssistantChatResponse;
+use Telnyx\AI\Assistants\AssistantCreateParams\ObservabilitySettings;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
@@ -33,6 +34,8 @@ use Telnyx\Services\AI\Assistants\VersionsService;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\ObservabilitySettings
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings as ObservabilitySettingsShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
@@ -109,6 +112,7 @@ final class AssistantsService implements AssistantsContract
      * @param InsightSettings|InsightSettingsShape $insightSettings
      * @param string $llmAPIKeyRef This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      * @param MessagingSettings|MessagingSettingsShape $messagingSettings
+     * @param ObservabilitySettings|ObservabilitySettingsShape $observabilitySettings
      * @param PrivacySettings|PrivacySettingsShape $privacySettings
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings
      * @param list<string> $toolIDs
@@ -132,6 +136,7 @@ final class AssistantsService implements AssistantsContract
         InsightSettings|array|null $insightSettings = null,
         ?string $llmAPIKeyRef = null,
         MessagingSettings|array|null $messagingSettings = null,
+        ObservabilitySettings|array|null $observabilitySettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $toolIDs = null,
@@ -154,6 +159,7 @@ final class AssistantsService implements AssistantsContract
                 'insightSettings' => $insightSettings,
                 'llmAPIKeyRef' => $llmAPIKeyRef,
                 'messagingSettings' => $messagingSettings,
+                'observabilitySettings' => $observabilitySettings,
                 'privacySettings' => $privacySettings,
                 'telephonySettings' => $telephonySettings,
                 'toolIDs' => $toolIDs,
@@ -216,6 +222,7 @@ final class AssistantsService implements AssistantsContract
      * @param string $llmAPIKeyRef This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      * @param MessagingSettings|MessagingSettingsShape $messagingSettings
      * @param string $model ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,
+     * @param \Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings|ObservabilitySettingsShape1 $observabilitySettings
      * @param PrivacySettings|PrivacySettingsShape $privacySettings
      * @param bool $promoteToMain Indicates whether the assistant should be promoted to the main version. Defaults to true.
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings
@@ -241,6 +248,7 @@ final class AssistantsService implements AssistantsContract
         MessagingSettings|array|null $messagingSettings = null,
         ?string $model = null,
         ?string $name = null,
+        \Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings|array|null $observabilitySettings = null,
         PrivacySettings|array|null $privacySettings = null,
         bool $promoteToMain = true,
         TelephonySettings|array|null $telephonySettings = null,
@@ -264,6 +272,7 @@ final class AssistantsService implements AssistantsContract
                 'messagingSettings' => $messagingSettings,
                 'model' => $model,
                 'name' => $name,
+                'observabilitySettings' => $observabilitySettings,
                 'privacySettings' => $privacySettings,
                 'promoteToMain' => $promoteToMain,
                 'telephonySettings' => $telephonySettings,
