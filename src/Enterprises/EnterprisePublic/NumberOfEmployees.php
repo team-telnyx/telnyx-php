@@ -21,5 +21,5 @@ enum NumberOfEmployees: string
 
     case _2001_10000 = '2001-10000';
 
-    case _10001 = '10001+';
+    case _10001_PLUS = '10001+';
 }
