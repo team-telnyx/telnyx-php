@@ -14,6 +14,7 @@ use Telnyx\Verifications\VerificationGetResponse;
 use Telnyx\Verifications\VerificationTriggerCallParams;
 use Telnyx\Verifications\VerificationTriggerFlashcallParams;
 use Telnyx\Verifications\VerificationTriggerSMSParams;
+use Telnyx\Verifications\VerificationTriggerWhatsappVerificationParams;
 
 /**
  * Two factor authentication API.
@@ -153,6 +154,42 @@ final class VerificationsRawService implements VerificationsRawContract
         return $this->client->request(
             method: 'post',
             path: 'verifications/sms',
+            body: (object) $parsed,
+            options: $options,
+            convert: CreateVerificationResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Trigger WhatsApp verification
+     *
+     * @param array{
+     *   phoneNumber: string,
+     *   verifyProfileID: string,
+     *   customCode?: string|null,
+     *   timeoutSecs?: int,
+     * }|VerificationTriggerWhatsappVerificationParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<CreateVerificationResponse>
+     *
+     * @throws APIException
+     */
+    public function triggerWhatsappVerification(
+        array|VerificationTriggerWhatsappVerificationParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = VerificationTriggerWhatsappVerificationParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'verifications/whatsapp',
             body: (object) $parsed,
             options: $options,
             convert: CreateVerificationResponse::class,

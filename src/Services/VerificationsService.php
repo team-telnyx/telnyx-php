@@ -170,4 +170,39 @@ final class VerificationsService implements VerificationsContract
 
         return $response->parse();
     }
+
+    /**
+     * @api
+     *
+     * Trigger WhatsApp verification
+     *
+     * @param string $phoneNumber +E164 formatted phone number
+     * @param string $verifyProfileID the identifier of the associated Verify profile
+     * @param string|null $customCode Send a self-generated numeric code to the end-user
+     * @param int $timeoutSecs the number of seconds the verification code is valid for
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function triggerWhatsappVerification(
+        string $phoneNumber,
+        string $verifyProfileID,
+        ?string $customCode = null,
+        ?int $timeoutSecs = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): CreateVerificationResponse {
+        $params = Util::removeNulls(
+            [
+                'phoneNumber' => $phoneNumber,
+                'verifyProfileID' => $verifyProfileID,
+                'customCode' => $customCode,
+                'timeoutSecs' => $timeoutSecs,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->triggerWhatsappVerification(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
 }

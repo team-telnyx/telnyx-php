@@ -12,6 +12,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Rcs;
 use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
+use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Whatsapp;
 
 /**
  * Update Verify profile.
@@ -22,6 +23,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall
  * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Rcs
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS
+ * @phpstan-import-type WhatsappShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Whatsapp
  *
  * @phpstan-type VerifyProfileUpdateParamsShape = array{
  *   call?: null|Call|CallShape,
@@ -32,6 +34,7 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS;
  *   sms?: null|SMS|SMSShape,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
+ *   whatsapp?: null|Whatsapp|WhatsappShape,
  * }
  */
 final class VerifyProfileUpdateParams implements BaseModel
@@ -64,6 +67,9 @@ final class VerifyProfileUpdateParams implements BaseModel
     #[Optional('webhook_url')]
     public ?string $webhookURL;
 
+    #[Optional]
+    public ?Whatsapp $whatsapp;
+
     public function __construct()
     {
         $this->initialize();
@@ -78,6 +84,7 @@ final class VerifyProfileUpdateParams implements BaseModel
      * @param Flashcall|FlashcallShape|null $flashcall
      * @param Rcs|RcsShape|null $rcs
      * @param SMS|SMSShape|null $sms
+     * @param Whatsapp|WhatsappShape|null $whatsapp
      */
     public static function with(
         Call|array|null $call = null,
@@ -88,6 +95,7 @@ final class VerifyProfileUpdateParams implements BaseModel
         SMS|array|null $sms = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
+        Whatsapp|array|null $whatsapp = null,
     ): self {
         $self = new self;
 
@@ -99,6 +107,7 @@ final class VerifyProfileUpdateParams implements BaseModel
         null !== $sms && $self['sms'] = $sms;
         null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
+        null !== $whatsapp && $self['whatsapp'] = $whatsapp;
 
         return $self;
     }
@@ -175,6 +184,17 @@ final class VerifyProfileUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['webhookURL'] = $webhookURL;
+
+        return $self;
+    }
+
+    /**
+     * @param Whatsapp|WhatsappShape $whatsapp
+     */
+    public function withWhatsapp(Whatsapp|array $whatsapp): self
+    {
+        $self = clone $this;
+        $self['whatsapp'] = $whatsapp;
 
         return $self;
     }
