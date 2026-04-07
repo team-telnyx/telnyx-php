@@ -489,6 +489,20 @@ final class MessagesTest extends TestCase
                     'link' => 'http://example.com/media.jpg',
                     'voice' => true,
                 ],
+                'template' => [
+                    'components' => [
+                        [
+                            'index' => 0,
+                            'parameters' => [['text' => 'text', 'type' => 'text']],
+                            'subType' => 'quick_reply',
+                            'type' => 'header',
+                        ],
+                    ],
+                    'language' => ['code' => 'en_US', 'policy' => 'deterministic'],
+                    'name' => 'order_confirmation',
+                    'templateID' => '019cd44b-3a1c-781b-956e-bd33e9fd2ac6',
+                ],
+                'text' => ['body' => 'Hello from Telnyx!', 'previewURL' => true],
                 'type' => 'audio',
                 'video' => [
                     'caption' => 'caption',
