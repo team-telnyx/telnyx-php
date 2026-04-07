@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.20.0 (2026-04-07)
+
+Full Changelog: [v7.19.0...v7.20.0](https://github.com/team-telnyx/telnyx-php/compare/v7.19.0...v7.20.0)
+
+### Features
+
+* add enabled boolean to recording_settings [AI-2178] ([6bb9abe](https://github.com/team-telnyx/telnyx-php/commit/6bb9abec5e3de4be1813d3db6755a4636fa56b75))
+
 ## 7.19.0 (2026-04-07)
 
 Full Changelog: [v7.18.0...v7.19.0](https://github.com/team-telnyx/telnyx-php/compare/v7.18.0...v7.19.0)
