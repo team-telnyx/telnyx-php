@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.17.0 (2026-04-07)
+
+Full Changelog: [v7.16.0...v7.17.0](https://github.com/team-telnyx/telnyx-php/compare/v7.16.0...v7.17.0)
+
+### Features
+
+* Assistants: add observability ([1c92993](https://github.com/team-telnyx/telnyx-php/commit/1c92993ac7eba1a5a52332d92b3edf1a144db640))
+
 ## 7.16.0 (2026-04-07)
 
 Full Changelog: [v7.15.0...v7.16.0](https://github.com/team-telnyx/telnyx-php/compare/v7.15.0...v7.16.0)
