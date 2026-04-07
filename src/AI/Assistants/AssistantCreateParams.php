@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\AssistantCreateParams\ObservabilitySettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -18,6 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\ObservabilitySettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -37,6 +39,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
  *   llmAPIKeyRef?: string|null,
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
+ *   observabilitySettings?: null|ObservabilitySettings|ObservabilitySettingsShape,
  *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
  *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
  *   toolIDs?: list<string>|null,
@@ -106,6 +109,9 @@ final class AssistantCreateParams implements BaseModel
     #[Optional('messaging_settings')]
     public ?MessagingSettings $messagingSettings;
 
+    #[Optional('observability_settings')]
+    public ?ObservabilitySettings $observabilitySettings;
+
     #[Optional('privacy_settings')]
     public ?PrivacySettings $privacySettings;
 
@@ -167,6 +173,7 @@ final class AssistantCreateParams implements BaseModel
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
+     * @param ObservabilitySettings|ObservabilitySettingsShape|null $observabilitySettings
      * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
      * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
      * @param list<string>|null $toolIDs
@@ -187,6 +194,7 @@ final class AssistantCreateParams implements BaseModel
         InsightSettings|array|null $insightSettings = null,
         ?string $llmAPIKeyRef = null,
         MessagingSettings|array|null $messagingSettings = null,
+        ObservabilitySettings|array|null $observabilitySettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $toolIDs = null,
@@ -209,6 +217,7 @@ final class AssistantCreateParams implements BaseModel
         null !== $insightSettings && $self['insightSettings'] = $insightSettings;
         null !== $llmAPIKeyRef && $self['llmAPIKeyRef'] = $llmAPIKeyRef;
         null !== $messagingSettings && $self['messagingSettings'] = $messagingSettings;
+        null !== $observabilitySettings && $self['observabilitySettings'] = $observabilitySettings;
         null !== $privacySettings && $self['privacySettings'] = $privacySettings;
         null !== $telephonySettings && $self['telephonySettings'] = $telephonySettings;
         null !== $toolIDs && $self['toolIDs'] = $toolIDs;
@@ -336,6 +345,18 @@ final class AssistantCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['messagingSettings'] = $messagingSettings;
+
+        return $self;
+    }
+
+    /**
+     * @param ObservabilitySettings|ObservabilitySettingsShape $observabilitySettings
+     */
+    public function withObservabilitySettings(
+        ObservabilitySettings|array $observabilitySettings
+    ): self {
+        $self = clone $this;
+        $self['observabilitySettings'] = $observabilitySettings;
 
         return $self;
     }

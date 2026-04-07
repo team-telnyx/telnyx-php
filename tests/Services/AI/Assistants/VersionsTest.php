@@ -104,6 +104,12 @@ final class VersionsTest extends TestCase
             ],
             model: 'model',
             name: 'name',
+            observabilitySettings: [
+                'host' => 'host',
+                'publicKeyRef' => 'public_key_ref',
+                'secretKeyRef' => 'secret_key_ref',
+                'status' => 'enabled',
+            ],
             privacySettings: ['dataRetention' => true],
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
