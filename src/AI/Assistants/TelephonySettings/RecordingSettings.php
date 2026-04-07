@@ -15,6 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type RecordingSettingsShape = array{
  *   channels?: null|Channels|value-of<Channels>,
+ *   enabled?: bool|null,
  *   format?: null|Format|value-of<Format>,
  * }
  */
@@ -30,6 +31,12 @@ final class RecordingSettings implements BaseModel
      */
     #[Optional(enum: Channels::class)]
     public ?string $channels;
+
+    /**
+     * Whether call recording is enabled. When set to false, calls will not be recorded regardless of other recording configuration.
+     */
+    #[Optional]
+    public ?bool $enabled;
 
     /**
      * The format of the recording file.
@@ -54,11 +61,13 @@ final class RecordingSettings implements BaseModel
      */
     public static function with(
         Channels|string|null $channels = null,
-        Format|string|null $format = null
+        ?bool $enabled = null,
+        Format|string|null $format = null,
     ): self {
         $self = new self;
 
         null !== $channels && $self['channels'] = $channels;
+        null !== $enabled && $self['enabled'] = $enabled;
         null !== $format && $self['format'] = $format;
 
         return $self;
@@ -73,6 +82,17 @@ final class RecordingSettings implements BaseModel
     {
         $self = clone $this;
         $self['channels'] = $channels;
+
+        return $self;
+    }
+
+    /**
+     * Whether call recording is enabled. When set to false, calls will not be recorded regardless of other recording configuration.
+     */
+    public function withEnabled(bool $enabled): self
+    {
+        $self = clone $this;
+        $self['enabled'] = $enabled;
 
         return $self;
     }
