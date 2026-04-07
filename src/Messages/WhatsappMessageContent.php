@@ -7,6 +7,8 @@ namespace Telnyx\Messages;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Messages\WhatsappMessageContent\Template;
+use Telnyx\Messages\WhatsappMessageContent\Text;
 use Telnyx\Messages\WhatsappMessageContent\Type;
 
 /**
@@ -15,6 +17,8 @@ use Telnyx\Messages\WhatsappMessageContent\Type;
  * @phpstan-import-type WhatsappInteractiveShape from \Telnyx\Messages\WhatsappInteractive
  * @phpstan-import-type WhatsappLocationShape from \Telnyx\Messages\WhatsappLocation
  * @phpstan-import-type WhatsappReactionShape from \Telnyx\Messages\WhatsappReaction
+ * @phpstan-import-type TemplateShape from \Telnyx\Messages\WhatsappMessageContent\Template
+ * @phpstan-import-type TextShape from \Telnyx\Messages\WhatsappMessageContent\Text
  *
  * @phpstan-type WhatsappMessageContentShape = array{
  *   audio?: null|WhatsappMedia|WhatsappMediaShape,
@@ -26,6 +30,8 @@ use Telnyx\Messages\WhatsappMessageContent\Type;
  *   location?: null|WhatsappLocation|WhatsappLocationShape,
  *   reaction?: null|WhatsappReaction|WhatsappReactionShape,
  *   sticker?: null|WhatsappMedia|WhatsappMediaShape,
+ *   template?: null|Template|TemplateShape,
+ *   text?: null|Text|TextShape,
  *   type?: null|Type|value-of<Type>,
  *   video?: null|WhatsappMedia|WhatsappMediaShape,
  * }
@@ -66,6 +72,18 @@ final class WhatsappMessageContent implements BaseModel
     #[Optional]
     public ?WhatsappMedia $sticker;
 
+    /**
+     * Template message object. Provide either template_id or name + language to identify the template.
+     */
+    #[Optional]
+    public ?Template $template;
+
+    /**
+     * Text message content. Can only be sent within a 24-hour customer service window.
+     */
+    #[Optional]
+    public ?Text $text;
+
     /** @var value-of<Type>|null $type */
     #[Optional(enum: Type::class)]
     public ?string $type;
@@ -91,6 +109,8 @@ final class WhatsappMessageContent implements BaseModel
      * @param WhatsappLocation|WhatsappLocationShape|null $location
      * @param WhatsappReaction|WhatsappReactionShape|null $reaction
      * @param WhatsappMedia|WhatsappMediaShape|null $sticker
+     * @param Template|TemplateShape|null $template
+     * @param Text|TextShape|null $text
      * @param Type|value-of<Type>|null $type
      * @param WhatsappMedia|WhatsappMediaShape|null $video
      */
@@ -104,6 +124,8 @@ final class WhatsappMessageContent implements BaseModel
         WhatsappLocation|array|null $location = null,
         WhatsappReaction|array|null $reaction = null,
         WhatsappMedia|array|null $sticker = null,
+        Template|array|null $template = null,
+        Text|array|null $text = null,
         Type|string|null $type = null,
         WhatsappMedia|array|null $video = null,
     ): self {
@@ -118,6 +140,8 @@ final class WhatsappMessageContent implements BaseModel
         null !== $location && $self['location'] = $location;
         null !== $reaction && $self['reaction'] = $reaction;
         null !== $sticker && $self['sticker'] = $sticker;
+        null !== $template && $self['template'] = $template;
+        null !== $text && $self['text'] = $text;
         null !== $type && $self['type'] = $type;
         null !== $video && $self['video'] = $video;
 
@@ -221,6 +245,32 @@ final class WhatsappMessageContent implements BaseModel
     {
         $self = clone $this;
         $self['sticker'] = $sticker;
+
+        return $self;
+    }
+
+    /**
+     * Template message object. Provide either template_id or name + language to identify the template.
+     *
+     * @param Template|TemplateShape $template
+     */
+    public function withTemplate(Template|array $template): self
+    {
+        $self = clone $this;
+        $self['template'] = $template;
+
+        return $self;
+    }
+
+    /**
+     * Text message content. Can only be sent within a 24-hour customer service window.
+     *
+     * @param Text|TextShape $text
+     */
+    public function withText(Text|array $text): self
+    {
+        $self = clone $this;
+        $self['text'] = $text;
 
         return $self;
     }

@@ -25,4 +25,6 @@ enum Type: string
     case REACTION = 'reaction';
 
     case CONTACTS = 'contacts';
+
+    case TEXT = 'text';
 }
