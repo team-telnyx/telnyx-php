@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.18.0 (2026-04-07)
+
+Full Changelog: [v7.17.0...v7.18.0](https://github.com/team-telnyx/telnyx-php/compare/v7.17.0...v7.18.0)
+
+### Features
+
+* MSG-6666: Add template and text properties to WhatsApp send message schema ([9e18585](https://github.com/team-telnyx/telnyx-php/commit/9e185853b13cfcf3b9a4e0d09c78c6610c8a4861))
+
 ## 7.17.0 (2026-04-07)
 
 Full Changelog: [v7.16.0...v7.17.0](https://github.com/team-telnyx/telnyx-php/compare/v7.16.0...v7.17.0)
