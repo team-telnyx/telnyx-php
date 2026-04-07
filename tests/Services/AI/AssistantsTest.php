@@ -73,6 +73,12 @@ final class AssistantsTest extends TestCase
                 'defaultMessagingProfileID' => 'default_messaging_profile_id',
                 'deliveryStatusWebhookURL' => 'delivery_status_webhook_url',
             ],
+            observabilitySettings: [
+                'host' => 'host',
+                'publicKeyRef' => 'public_key_ref',
+                'secretKeyRef' => 'secret_key_ref',
+                'status' => 'enabled',
+            ],
             privacySettings: ['dataRetention' => true],
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
