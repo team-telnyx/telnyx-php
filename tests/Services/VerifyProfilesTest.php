@@ -85,6 +85,11 @@ final class VerifyProfilesTest extends TestCase
             ],
             webhookFailoverURL: 'http://example.com/webhook/failover',
             webhookURL: 'http://example.com/webhook',
+            whatsapp: [
+                'appName' => 'Example Secure App',
+                'defaultVerificationTimeoutSecs' => 300,
+                'whitelistedDestinations' => ['US', 'CA'],
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

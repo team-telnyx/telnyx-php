@@ -145,4 +145,38 @@ final class VerificationsTest extends TestCase
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CreateVerificationResponse::class, $result);
     }
+
+    #[Test]
+    public function testTriggerWhatsappVerification(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->verifications->triggerWhatsappVerification(
+            phoneNumber: '+13035551234',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CreateVerificationResponse::class, $result);
+    }
+
+    #[Test]
+    public function testTriggerWhatsappVerificationWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->verifications->triggerWhatsappVerification(
+            phoneNumber: '+13035551234',
+            verifyProfileID: '12ade33a-21c0-473b-b055-b3c836e1c292',
+            customCode: '43612',
+            timeoutSecs: 300,
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CreateVerificationResponse::class, $result);
+    }
 }

@@ -14,4 +14,6 @@ enum Type: string
     case CALL = 'call';
 
     case FLASHCALL = 'flashcall';
+
+    case WHATSAPP = 'whatsapp';
 }
