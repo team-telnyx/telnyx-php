@@ -9,7 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\Reputation\ReputationCreateParams\CheckFrequency;
+use Telnyx\Enterprises\Reputation\ReputationEnableParams\CheckFrequency;
 
 /**
  * Enable Number Reputation service for an enterprise.
@@ -35,16 +35,16 @@ use Telnyx\Enterprises\Reputation\ReputationCreateParams\CheckFrequency;
  * - `monthly` — Once per month
  * - `never` — Manual refresh only
  *
- * @see Telnyx\Services\Enterprises\ReputationService::create()
+ * @see Telnyx\Services\Enterprises\ReputationService::enable()
  *
- * @phpstan-type ReputationCreateParamsShape = array{
+ * @phpstan-type ReputationEnableParamsShape = array{
  *   loaDocumentID: string,
  *   checkFrequency?: null|CheckFrequency|value-of<CheckFrequency>,
  * }
  */
-final class ReputationCreateParams implements BaseModel
+final class ReputationEnableParams implements BaseModel
 {
-    /** @use SdkModel<ReputationCreateParamsShape> */
+    /** @use SdkModel<ReputationEnableParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -63,17 +63,17 @@ final class ReputationCreateParams implements BaseModel
     public ?string $checkFrequency;
 
     /**
-     * `new ReputationCreateParams()` is missing required properties by the API.
+     * `new ReputationEnableParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ReputationCreateParams::with(loaDocumentID: ...)
+     * ReputationEnableParams::with(loaDocumentID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ReputationCreateParams)->withLoaDocumentID(...)
+     * (new ReputationEnableParams)->withLoaDocumentID(...)
      * ```
      */
     public function __construct()

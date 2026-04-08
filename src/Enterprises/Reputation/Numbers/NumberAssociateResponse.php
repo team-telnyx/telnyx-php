@@ -7,20 +7,20 @@ namespace Telnyx\Enterprises\Reputation\Numbers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\Reputation\Numbers\NumberNewResponse\Data;
+use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse\Data;
 use Telnyx\MetaInfo;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Enterprises\Reputation\Numbers\NumberNewResponse\Data
+ * @phpstan-import-type DataShape from \Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse\Data
  * @phpstan-import-type MetaInfoShape from \Telnyx\MetaInfo
  *
- * @phpstan-type NumberNewResponseShape = array{
+ * @phpstan-type NumberAssociateResponseShape = array{
  *   data?: list<Data|DataShape>|null, meta?: null|MetaInfo|MetaInfoShape
  * }
  */
-final class NumberNewResponse implements BaseModel
+final class NumberAssociateResponse implements BaseModel
 {
-    /** @use SdkModel<NumberNewResponseShape> */
+    /** @use SdkModel<NumberAssociateResponseShape> */
     use SdkModel;
 
     /** @var list<Data>|null $data */
