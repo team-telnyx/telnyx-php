@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.23.0 (2026-04-08)
+
+Full Changelog: [v7.22.0...v7.23.0](https://github.com/team-telnyx/telnyx-php/compare/v7.22.0...v7.23.0)
+
+### Features
+
+* **api:** Merge pull request [#39](https://github.com/team-telnyx/telnyx-php/issues/39) from stainless-sdks/revert-a988c49-stainless-changes ([a12ea0e](https://github.com/team-telnyx/telnyx-php/commit/a12ea0e8686ffe5e878b85428e60286c1d1d5606))
+
+
+### Reverts
+
+* restore stainless.yml SDK generation fixes ([a12ea0e](https://github.com/team-telnyx/telnyx-php/commit/a12ea0e8686ffe5e878b85428e60286c1d1d5606))
+
 ## 7.22.0 (2026-04-08)
 
 Full Changelog: [v7.21.0...v7.22.0](https://github.com/team-telnyx/telnyx-php/compare/v7.21.0...v7.22.0)
