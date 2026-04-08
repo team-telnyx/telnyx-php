@@ -10,20 +10,22 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Gender;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\ModelID;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Provider;
 
 /**
- * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 2MB.
+ * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
  *
  * @see Telnyx\Services\VoiceClonesService::createFromUpload()
  *
  * @phpstan-type VoiceCloneCreateFromUploadParamsShape = array{
  *   audioFile: string,
+ *   gender: Gender|value-of<Gender>,
  *   language: string,
  *   name: string,
- *   gender?: null|Gender|value-of<Gender>,
+ *   provider: Provider|value-of<Provider>,
  *   label?: string|null,
- *   provider?: null|Provider|value-of<Provider>,
+ *   modelID?: null|ModelID|value-of<ModelID>,
  *   refText?: string|null,
  * }
  */
@@ -34,13 +36,21 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     use SdkParams;
 
     /**
-     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 5MB for Telnyx, 20MB for Minimax.
+     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 20MB.
      */
     #[Required('audio_file')]
     public string $audioFile;
 
     /**
-     * ISO 639-1 language code (e.g. `en`, `fr`) or `auto` for automatic detection.
+     * Gender of the voice clone.
+     *
+     * @var value-of<Gender> $gender
+     */
+    #[Required(enum: Gender::class)]
+    public string $gender;
+
+    /**
+     * ISO 639-1 language code from the Minimax language set.
      */
     #[Required]
     public string $language;
@@ -52,26 +62,26 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     public string $name;
 
     /**
-     * Gender of the voice clone.
+     * Voice synthesis provider. Must be `minimax`.
      *
-     * @var value-of<Gender>|null $gender
+     * @var value-of<Provider> $provider
      */
-    #[Optional(enum: Gender::class)]
-    public ?string $gender;
+    #[Required(enum: Provider::class)]
+    public string $provider;
 
     /**
-     * Optional custom label describing the voice style. If omitted, falls back to the source design's prompt text.
+     * Optional custom label describing the voice style.
      */
     #[Optional]
     public ?string $label;
 
     /**
-     * Voice synthesis provider. Case-insensitive. Defaults to `telnyx`.
+     * TTS model identifier. Nullable — defaults to speech-2.8-turbo.
      *
-     * @var value-of<Provider>|null $provider
+     * @var value-of<ModelID>|null $modelID
      */
-    #[Optional(enum: Provider::class)]
-    public ?string $provider;
+    #[Optional('model_id', enum: ModelID::class, nullable: true)]
+    public ?string $modelID;
 
     /**
      * Optional transcript of the audio file. Providing this improves clone quality.
@@ -84,7 +94,9 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * VoiceCloneCreateFromUploadParams::with(audioFile: ..., language: ..., name: ...)
+     * VoiceCloneCreateFromUploadParams::with(
+     *   audioFile: ..., gender: ..., language: ..., name: ..., provider: ...
+     * )
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -92,8 +104,10 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      * ```
      * (new VoiceCloneCreateFromUploadParams)
      *   ->withAudioFile(...)
+     *   ->withGender(...)
      *   ->withLanguage(...)
      *   ->withName(...)
+     *   ->withProvider(...)
      * ```
      */
     public function __construct()
@@ -106,34 +120,37 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Gender|value-of<Gender>|null $gender
-     * @param Provider|value-of<Provider>|null $provider
+     * @param Gender|value-of<Gender> $gender
+     * @param Provider|value-of<Provider> $provider
+     * @param ModelID|value-of<ModelID>|null $modelID
      */
     public static function with(
         string $audioFile,
+        Gender|string $gender,
         string $language,
         string $name,
-        Gender|string|null $gender = null,
+        Provider|string $provider,
         ?string $label = null,
-        Provider|string|null $provider = null,
+        ModelID|string|null $modelID = null,
         ?string $refText = null,
     ): self {
         $self = new self;
 
         $self['audioFile'] = $audioFile;
+        $self['gender'] = $gender;
         $self['language'] = $language;
         $self['name'] = $name;
+        $self['provider'] = $provider;
 
-        null !== $gender && $self['gender'] = $gender;
         null !== $label && $self['label'] = $label;
-        null !== $provider && $self['provider'] = $provider;
+        null !== $modelID && $self['modelID'] = $modelID;
         null !== $refText && $self['refText'] = $refText;
 
         return $self;
     }
 
     /**
-     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 5MB for Telnyx, 20MB for Minimax.
+     * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 20MB.
      */
     public function withAudioFile(string $audioFile): self
     {
@@ -144,7 +161,20 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     }
 
     /**
-     * ISO 639-1 language code (e.g. `en`, `fr`) or `auto` for automatic detection.
+     * Gender of the voice clone.
+     *
+     * @param Gender|value-of<Gender> $gender
+     */
+    public function withGender(Gender|string $gender): self
+    {
+        $self = clone $this;
+        $self['gender'] = $gender;
+
+        return $self;
+    }
+
+    /**
+     * ISO 639-1 language code from the Minimax language set.
      */
     public function withLanguage(string $language): self
     {
@@ -166,20 +196,20 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     }
 
     /**
-     * Gender of the voice clone.
+     * Voice synthesis provider. Must be `minimax`.
      *
-     * @param Gender|value-of<Gender> $gender
+     * @param Provider|value-of<Provider> $provider
      */
-    public function withGender(Gender|string $gender): self
+    public function withProvider(Provider|string $provider): self
     {
         $self = clone $this;
-        $self['gender'] = $gender;
+        $self['provider'] = $provider;
 
         return $self;
     }
 
     /**
-     * Optional custom label describing the voice style. If omitted, falls back to the source design's prompt text.
+     * Optional custom label describing the voice style.
      */
     public function withLabel(string $label): self
     {
@@ -190,14 +220,14 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     }
 
     /**
-     * Voice synthesis provider. Case-insensitive. Defaults to `telnyx`.
+     * TTS model identifier. Nullable — defaults to speech-2.8-turbo.
      *
-     * @param Provider|value-of<Provider> $provider
+     * @param ModelID|value-of<ModelID>|null $modelID
      */
-    public function withProvider(Provider|string $provider): self
+    public function withModelID(ModelID|string|null $modelID): self
     {
         $self = clone $this;
-        $self['provider'] = $provider;
+        $self['modelID'] = $modelID;
 
         return $self;
     }

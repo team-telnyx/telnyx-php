@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants;
+namespace Telnyx\AI\Assistants\AssistantCreateParams;
 
-use Telnyx\AI\Assistants\ObservabilityReq\Status;
+use Telnyx\AI\Assistants\AssistantCreateParams\ObservabilitySettings\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ObservabilityReqShape = array{
+ * @phpstan-type ObservabilitySettingsShape = array{
  *   host?: string|null,
  *   publicKeyRef?: string|null,
  *   secretKeyRef?: string|null,
  *   status?: null|Status|value-of<Status>,
  * }
  */
-final class ObservabilityReq implements BaseModel
+final class ObservabilitySettings implements BaseModel
 {
-    /** @use SdkModel<ObservabilityReqShape> */
+    /** @use SdkModel<ObservabilitySettingsShape> */
     use SdkModel;
 
     #[Optional]

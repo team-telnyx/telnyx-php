@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts\Enterprises;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Enterprises\Reputation\ReputationEnableParams;
-use Telnyx\Enterprises\Reputation\ReputationEnableResponse;
-use Telnyx\Enterprises\Reputation\ReputationGetResponse;
+use Telnyx\Enterprises\Reputation\ReputationCreateParams;
+use Telnyx\Enterprises\Reputation\ReputationListResponse;
+use Telnyx\Enterprises\Reputation\ReputationNewResponse;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyResponse;
 use Telnyx\RequestOptions;
@@ -22,13 +22,30 @@ interface ReputationRawContract
      * @api
      *
      * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param array<string,mixed>|ReputationCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationGetResponse>
+     * @return BaseResponse<ReputationNewResponse>
      *
      * @throws APIException
      */
-    public function retrieve(
+    public function create(
+        string $enterpriseID,
+        array|ReputationCreateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ReputationListResponse>
+     *
+     * @throws APIException
+     */
+    public function list(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
@@ -43,26 +60,9 @@ interface ReputationRawContract
      *
      * @throws APIException
      */
-    public function disable(
+    public function deleteAll(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param array<string,mixed>|ReputationEnableParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<ReputationEnableResponse>
-     *
-     * @throws APIException
-     */
-    public function enable(
-        string $enterpriseID,
-        array|ReputationEnableParams $params,
-        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**

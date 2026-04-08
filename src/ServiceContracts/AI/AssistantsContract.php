@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Assistants\AssistantChatResponse;
+use Telnyx\AI\Assistants\AssistantCreateParams\ObservabilitySettings;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
@@ -13,7 +14,6 @@ use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
-use Telnyx\AI\Assistants\ObservabilityReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
@@ -23,10 +23,11 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\ObservabilitySettings
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings as ObservabilitySettingsShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
- * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -49,7 +50,7 @@ interface AssistantsContract
      * @param InsightSettings|InsightSettingsShape $insightSettings
      * @param string $llmAPIKeyRef This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      * @param MessagingSettings|MessagingSettingsShape $messagingSettings
-     * @param ObservabilityReq|ObservabilityReqShape $observabilitySettings
+     * @param ObservabilitySettings|ObservabilitySettingsShape $observabilitySettings
      * @param PrivacySettings|PrivacySettingsShape $privacySettings
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings
      * @param list<string> $toolIDs
@@ -73,7 +74,7 @@ interface AssistantsContract
         InsightSettings|array|null $insightSettings = null,
         ?string $llmAPIKeyRef = null,
         MessagingSettings|array|null $messagingSettings = null,
-        ObservabilityReq|array|null $observabilitySettings = null,
+        ObservabilitySettings|array|null $observabilitySettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $toolIDs = null,
@@ -112,7 +113,7 @@ interface AssistantsContract
      * @param string $llmAPIKeyRef This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
      * @param MessagingSettings|MessagingSettingsShape $messagingSettings
      * @param string $model ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,
-     * @param ObservabilityReq|ObservabilityReqShape $observabilitySettings
+     * @param \Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings|ObservabilitySettingsShape1 $observabilitySettings
      * @param PrivacySettings|PrivacySettingsShape $privacySettings
      * @param bool $promoteToMain Indicates whether the assistant should be promoted to the main version. Defaults to true.
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings
@@ -138,7 +139,7 @@ interface AssistantsContract
         MessagingSettings|array|null $messagingSettings = null,
         ?string $model = null,
         ?string $name = null,
-        ObservabilityReq|array|null $observabilitySettings = null,
+        \Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings|array|null $observabilitySettings = null,
         PrivacySettings|array|null $privacySettings = null,
         bool $promoteToMain = true,
         TelephonySettings|array|null $telephonySettings = null,
