@@ -80,6 +80,7 @@ use Telnyx\Calls\Actions\ActionSwitchSupervisorRoleResponse;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
+use Telnyx\Calls\Actions\ActionTransferParams\Privacy;
 use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferResponse;
@@ -2025,6 +2026,7 @@ final class ActionsService implements ActionsContract
      * @param \Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf|value-of<\Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf> $muteDtmf When enabled, DTMF tones are not passed to the call participant. The webhooks containing the DTMF information will be sent.
      * @param string $parkAfterUnbridge Specifies behavior after the bridge ends (i.e. the opposite leg either hangs up or is transferred). If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg.
      * @param string $preferredCodecs The list of comma-separated codecs in order of preference to be used during the call. The codecs supported are `G722`, `PCMU`, `PCMA`, `G729`, `OPUS`, `VP8`, `H264`, `AMR-WB`.
+     * @param Privacy|value-of<Privacy> $privacy Indicates the privacy level to be used for the call. When set to `id`, caller ID information (name and number) will be hidden from the called party. When set to `none` or omitted, caller ID will be shown normally.
      * @param \Telnyx\Calls\Actions\ActionTransferParams\Record|value-of<\Telnyx\Calls\Actions\ActionTransferParams\Record> $record Start recording automatically after an event. Disabled by default.
      * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordChannels|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
@@ -2068,6 +2070,7 @@ final class ActionsService implements ActionsContract
         \Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf|string $muteDtmf = 'none',
         ?string $parkAfterUnbridge = null,
         ?string $preferredCodecs = null,
+        Privacy|string|null $privacy = null,
         \Telnyx\Calls\Actions\ActionTransferParams\Record|string|null $record = null,
         \Telnyx\Calls\Actions\ActionTransferParams\RecordChannels|string $recordChannels = 'dual',
         ?string $recordCustomFileName = null,
@@ -2109,6 +2112,7 @@ final class ActionsService implements ActionsContract
                 'muteDtmf' => $muteDtmf,
                 'parkAfterUnbridge' => $parkAfterUnbridge,
                 'preferredCodecs' => $preferredCodecs,
+                'privacy' => $privacy,
                 'record' => $record,
                 'recordChannels' => $recordChannels,
                 'recordCustomFileName' => $recordCustomFileName,

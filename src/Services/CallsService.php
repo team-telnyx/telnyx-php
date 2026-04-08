@@ -9,6 +9,7 @@ use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
+use Telnyx\Calls\CallDialParams\Privacy;
 use Telnyx\Calls\CallDialParams\Record;
 use Telnyx\Calls\CallDialParams\RecordChannels;
 use Telnyx\Calls\CallDialParams\RecordFormat;
@@ -108,6 +109,7 @@ final class CallsService implements CallsContract
      * @param string $parkAfterUnbridge If supplied with the value `self`, the current leg will be parked after unbridge. If not set, the default behavior is to hang up the leg. When park_after_unbridge is set, link_to becomes required.
      * @param string $preferredCodecs the list of comma-separated codecs in a preferred order for the forked media to be received
      * @param bool $preventDoubleBridge Prevents bridging and hangs up the call if the target is already bridged. Disabled by default.
+     * @param Privacy|value-of<Privacy> $privacy Indicates the privacy level to be used for the call. When set to `id`, caller ID information (name and number) will be hidden from the called party. When set to `none` or omitted, caller ID will be shown normally.
      * @param Record|value-of<Record> $record Start recording automatically after an event. Disabled by default.
      * @param RecordChannels|value-of<RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
      * @param string $recordCustomFileName The custom recording file name to be used instead of the default `call_leg_id`. Telnyx will still add a Unix timestamp suffix.
@@ -167,6 +169,7 @@ final class CallsService implements CallsContract
         ?string $parkAfterUnbridge = null,
         ?string $preferredCodecs = null,
         bool $preventDoubleBridge = false,
+        Privacy|string|null $privacy = null,
         Record|string|null $record = null,
         RecordChannels|string $recordChannels = 'dual',
         ?string $recordCustomFileName = null,
@@ -225,6 +228,7 @@ final class CallsService implements CallsContract
                 'parkAfterUnbridge' => $parkAfterUnbridge,
                 'preferredCodecs' => $preferredCodecs,
                 'preventDoubleBridge' => $preventDoubleBridge,
+                'privacy' => $privacy,
                 'record' => $record,
                 'recordChannels' => $recordChannels,
                 'recordCustomFileName' => $recordCustomFileName,

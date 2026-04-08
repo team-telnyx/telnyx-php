@@ -115,6 +115,7 @@ use Telnyx\Calls\Actions\ActionTransferParams;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
+use Telnyx\Calls\Actions\ActionTransferParams\Privacy;
 use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferResponse;
@@ -1804,6 +1805,7 @@ final class ActionsRawService implements ActionsRawContract
      *   muteDtmf?: ActionTransferParams\MuteDtmf|value-of<ActionTransferParams\MuteDtmf>,
      *   parkAfterUnbridge?: string,
      *   preferredCodecs?: string,
+     *   privacy?: Privacy|value-of<Privacy>,
      *   record?: ActionTransferParams\Record|value-of<ActionTransferParams\Record>,
      *   recordChannels?: ActionTransferParams\RecordChannels|value-of<ActionTransferParams\RecordChannels>,
      *   recordCustomFileName?: string,
