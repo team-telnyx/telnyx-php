@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\InferenceEmbedding\ObservabilitySettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -14,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type ImportMetadataShape from \Telnyx\AI\Assistants\ImportMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
- * @phpstan-import-type ObservabilityShape from \Telnyx\AI\Assistants\Observability
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\InferenceEmbedding\ObservabilitySettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -37,7 +38,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
  *   llmAPIKeyRef?: string|null,
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
- *   observabilitySettings?: null|Observability|ObservabilityShape,
+ *   observabilitySettings?: null|ObservabilitySettings|ObservabilitySettingsShape,
  *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
  *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
  *   tools?: list<AssistantToolShape>|null,
@@ -115,7 +116,7 @@ final class InferenceEmbedding implements BaseModel
     public ?MessagingSettings $messagingSettings;
 
     #[Optional('observability_settings')]
-    public ?Observability $observabilitySettings;
+    public ?ObservabilitySettings $observabilitySettings;
 
     #[Optional('privacy_settings')]
     public ?PrivacySettings $privacySettings;
@@ -179,7 +180,7 @@ final class InferenceEmbedding implements BaseModel
      * @param ImportMetadata|ImportMetadataShape|null $importMetadata
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
-     * @param Observability|ObservabilityShape|null $observabilitySettings
+     * @param ObservabilitySettings|ObservabilitySettingsShape|null $observabilitySettings
      * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
      * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
      * @param list<AssistantToolShape>|null $tools
@@ -202,7 +203,7 @@ final class InferenceEmbedding implements BaseModel
         InsightSettings|array|null $insightSettings = null,
         ?string $llmAPIKeyRef = null,
         MessagingSettings|array|null $messagingSettings = null,
-        Observability|array|null $observabilitySettings = null,
+        ObservabilitySettings|array|null $observabilitySettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $tools = null,
@@ -387,10 +388,10 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
-     * @param Observability|ObservabilityShape $observabilitySettings
+     * @param ObservabilitySettings|ObservabilitySettingsShape $observabilitySettings
      */
     public function withObservabilitySettings(
-        Observability|array $observabilitySettings
+        ObservabilitySettings|array $observabilitySettings
     ): self {
         $self = clone $this;
         $self['observabilitySettings'] = $observabilitySettings;
