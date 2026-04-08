@@ -12,8 +12,8 @@ use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberDisassociateParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberListParams;
-use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRetrieveParams;
+use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 
 /**
@@ -45,7 +45,7 @@ interface NumbersRawContract
      * @param array<string,mixed>|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumberWithReputationData,>,>
      *
      * @throws APIException
      */

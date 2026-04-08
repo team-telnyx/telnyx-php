@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateButtonsComponent\Button;
-use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateButtonsComponent\Type;
 
 /**
  * Optional interactive buttons. Maximum 3 buttons per template.
@@ -16,13 +15,17 @@ use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateBut
  * @phpstan-import-type ButtonShape from \Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateButtonsComponent\Button
  *
  * @phpstan-type WhatsappTemplateButtonsComponentShape = array{
- *   buttons: list<Button|ButtonShape>, type: Type|value-of<Type>
+ *   buttons: list<Button|ButtonShape>, type: 'BUTTONS'
  * }
  */
 final class WhatsappTemplateButtonsComponent implements BaseModel
 {
     /** @use SdkModel<WhatsappTemplateButtonsComponentShape> */
     use SdkModel;
+
+    /** @var 'BUTTONS' $type */
+    #[Required]
+    public string $type = 'BUTTONS';
 
     /**
      * Array of button objects. Meta supports various combinations of button types.
@@ -32,22 +35,18 @@ final class WhatsappTemplateButtonsComponent implements BaseModel
     #[Required(list: Button::class)]
     public array $buttons;
 
-    /** @var value-of<Type> $type */
-    #[Required(enum: Type::class)]
-    public string $type;
-
     /**
      * `new WhatsappTemplateButtonsComponent()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * WhatsappTemplateButtonsComponent::with(buttons: ..., type: ...)
+     * WhatsappTemplateButtonsComponent::with(buttons: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new WhatsappTemplateButtonsComponent)->withButtons(...)->withType(...)
+     * (new WhatsappTemplateButtonsComponent)->withButtons(...)
      * ```
      */
     public function __construct()
@@ -61,14 +60,12 @@ final class WhatsappTemplateButtonsComponent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Button|ButtonShape> $buttons
-     * @param Type|value-of<Type> $type
      */
-    public static function with(array $buttons, Type|string $type): self
+    public static function with(array $buttons): self
     {
         $self = new self;
 
         $self['buttons'] = $buttons;
-        $self['type'] = $type;
 
         return $self;
     }
@@ -87,9 +84,9 @@ final class WhatsappTemplateButtonsComponent implements BaseModel
     }
 
     /**
-     * @param Type|value-of<Type> $type
+     * @param 'BUTTONS' $type
      */
-    public function withType(Type|string $type): self
+    public function withType(string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;
