@@ -7,8 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\Enterprises\Reputation\ReputationListResponse;
-use Telnyx\Enterprises\Reputation\ReputationNewResponse;
+use Telnyx\Enterprises\Reputation\ReputationEnableResponse;
+use Telnyx\Enterprises\Reputation\ReputationGetResponse;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyResponse;
 use Tests\UnsupportedMockTests;
 
@@ -31,66 +31,66 @@ final class ReputationTest extends TestCase
     }
 
     #[Test]
-    public function testCreate(): void
+    public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->enterprises->reputation->create(
+        $result = $this->client->enterprises->reputation->retrieve(
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ReputationGetResponse::class, $result);
+    }
+
+    #[Test]
+    public function testDisable(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->disable(
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testEnable(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->enable(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             loaDocumentID: 'doc_01HXYZ1234ABCDEF',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReputationNewResponse::class, $result);
+        $this->assertInstanceOf(ReputationEnableResponse::class, $result);
     }
 
     #[Test]
-    public function testCreateWithOptionalParams(): void
+    public function testEnableWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->enterprises->reputation->create(
+        $result = $this->client->enterprises->reputation->enable(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
             loaDocumentID: 'doc_01HXYZ1234ABCDEF',
             checkFrequency: 'business_daily',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReputationNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testList(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->enterprises->reputation->list(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReputationListResponse::class, $result);
-    }
-
-    #[Test]
-    public function testDeleteAll(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->enterprises->reputation->deleteAll(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
+        $this->assertInstanceOf(ReputationEnableResponse::class, $result);
     }
 
     #[Test]

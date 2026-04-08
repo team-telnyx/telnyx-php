@@ -9,8 +9,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Reputation\Numbers\NumberListParams;
+use Telnyx\Reputation\Numbers\NumberListResponse;
 use Telnyx\Reputation\Numbers\NumberRetrieveParams;
-use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 
 /**
@@ -41,7 +41,7 @@ interface NumbersRawContract
      * @param array<string,mixed>|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumberWithReputationData,>,>
+     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
      *
      * @throws APIException
      */

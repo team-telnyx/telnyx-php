@@ -9,7 +9,7 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reputation\Numbers\NumberGetResponse;
-use Telnyx\ReputationPhoneNumberWithReputationData;
+use Telnyx\Reputation\Numbers\NumberListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -57,10 +57,7 @@ final class NumbersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(
-                ReputationPhoneNumberWithReputationData::class,
-                $item
-            );
+            $this->assertInstanceOf(NumberListResponse::class, $item);
         }
     }
 

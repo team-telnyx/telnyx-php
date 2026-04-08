@@ -17,6 +17,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\MediaEncryption;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
@@ -184,6 +185,7 @@ final class CallsService implements CallsContract
      * @param int $machineDetectionSpeechEndThreshold Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechThreshold Maximum threshold of a human greeting. If greeting longer than this value, considered machine. Ignored when `premium` detection is used.
      * @param int $machineDetectionTimeout maximum timeout threshold in milliseconds for overall detection
+     * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption Defines whether media should be encrypted on the call. When set to `SRTP`, the call will use Secure Real-time Transport Protocol for media encryption. When set to `DTLS`, the call will use DTLS for media encryption. Only supported for SIP destinations.
      * @param string $preferredCodecs the list of comma-separated codecs to be offered on a call
      * @param bool $record Whether to record the entire participant's call leg. Defaults to `false`.
      * @param RecordingChannels|value-of<RecordingChannels> $recordingChannels The number of channels in the final recording. Defaults to `mono`.
@@ -230,6 +232,7 @@ final class CallsService implements CallsContract
         int $machineDetectionSpeechEndThreshold = 800,
         int $machineDetectionSpeechThreshold = 3500,
         int $machineDetectionTimeout = 30000,
+        MediaEncryption|string $mediaEncryption = 'disabled',
         ?string $preferredCodecs = null,
         ?bool $record = null,
         RecordingChannels|string|null $recordingChannels = null,
@@ -274,6 +277,7 @@ final class CallsService implements CallsContract
                 'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
                 'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,
                 'machineDetectionTimeout' => $machineDetectionTimeout,
+                'mediaEncryption' => $mediaEncryption,
                 'preferredCodecs' => $preferredCodecs,
                 'record' => $record,
                 'recordingChannels' => $recordingChannels,

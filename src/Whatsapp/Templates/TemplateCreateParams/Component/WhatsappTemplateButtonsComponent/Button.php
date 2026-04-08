@@ -14,7 +14,7 @@ use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateBut
 
 /**
  * @phpstan-type ButtonShape = array{
- *   type: Type|value-of<Type>,
+ *   type: \Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateButtonsComponent\Button\Type|value-of<\Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateButtonsComponent\Button\Type>,
  *   autofillText?: string|null,
  *   example?: list<string>|null,
  *   flowAction?: null|FlowAction|value-of<FlowAction>,
@@ -34,8 +34,12 @@ final class Button implements BaseModel
     /** @use SdkModel<ButtonShape> */
     use SdkModel;
 
-    /** @var value-of<Type> $type */
-    #[Required(enum: Type::class)]
+    /**
+     * @var value-of<Type> $type
+     */
+    #[Required(
+        enum: Type::class,
+    )]
     public string $type;
 
     /**
@@ -179,8 +183,9 @@ final class Button implements BaseModel
     /**
      * @param Type|value-of<Type> $type
      */
-    public function withType(Type|string $type): self
-    {
+    public function withType(
+        Type|string $type,
+    ): self {
         $self = clone $this;
         $self['type'] = $type;
 
