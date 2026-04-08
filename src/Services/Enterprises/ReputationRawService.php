@@ -7,10 +7,10 @@ namespace Telnyx\Services\Enterprises;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Enterprises\Reputation\ReputationCreateParams;
-use Telnyx\Enterprises\Reputation\ReputationCreateParams\CheckFrequency;
-use Telnyx\Enterprises\Reputation\ReputationListResponse;
-use Telnyx\Enterprises\Reputation\ReputationNewResponse;
+use Telnyx\Enterprises\Reputation\ReputationEnableParams;
+use Telnyx\Enterprises\Reputation\ReputationEnableParams\CheckFrequency;
+use Telnyx\Enterprises\Reputation\ReputationEnableResponse;
+use Telnyx\Enterprises\Reputation\ReputationGetResponse;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyResponse;
 use Telnyx\RequestOptions;
@@ -28,6 +28,67 @@ final class ReputationRawService implements ReputationRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * Retrieve the current Number Reputation settings for an enterprise.
+     *
+     * Returns the enrollment status (`pending`, `approved`, `rejected`, `deleted`), check frequency, and any rejection reasons.
+     *
+     * Returns `404` if reputation has not been enabled for this enterprise.
+     *
+     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ReputationGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $enterpriseID,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['enterprises/%1$s/reputation', $enterpriseID],
+            options: $requestOptions,
+            convert: ReputationGetResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Disable Number Reputation for an enterprise.
+     *
+     * This will:
+     * - Delete the reputation settings record
+     * - Log the deletion for audit purposes
+     * - Stop all future automated reputation checks
+     *
+     * **Note:** Can only be performed on `approved` reputation settings.
+     *
+     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function disable(
+        string $enterpriseID,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'delete',
+            path: ['enterprises/%1$s/reputation', $enterpriseID],
+            options: $requestOptions,
+            convert: null,
+        );
+    }
 
     /**
      * @api
@@ -59,19 +120,19 @@ final class ReputationRawService implements ReputationRawContract
      * @param array{
      *   loaDocumentID: string,
      *   checkFrequency?: CheckFrequency|value-of<CheckFrequency>,
-     * }|ReputationCreateParams $params
+     * }|ReputationEnableParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationNewResponse>
+     * @return BaseResponse<ReputationEnableResponse>
      *
      * @throws APIException
      */
-    public function create(
+    public function enable(
         string $enterpriseID,
-        array|ReputationCreateParams $params,
+        array|ReputationEnableParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = ReputationCreateParams::parseRequest(
+        [$parsed, $options] = ReputationEnableParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -82,68 +143,7 @@ final class ReputationRawService implements ReputationRawContract
             path: ['enterprises/%1$s/reputation', $enterpriseID],
             body: (object) $parsed,
             options: $options,
-            convert: ReputationNewResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Retrieve the current Number Reputation settings for an enterprise.
-     *
-     * Returns the enrollment status (`pending`, `approved`, `rejected`, `deleted`), check frequency, and any rejection reasons.
-     *
-     * Returns `404` if reputation has not been enabled for this enterprise.
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<ReputationListResponse>
-     *
-     * @throws APIException
-     */
-    public function list(
-        string $enterpriseID,
-        RequestOptions|array|null $requestOptions = null
-    ): BaseResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: ['enterprises/%1$s/reputation', $enterpriseID],
-            options: $requestOptions,
-            convert: ReputationListResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Disable Number Reputation for an enterprise.
-     *
-     * This will:
-     * - Delete the reputation settings record
-     * - Log the deletion for audit purposes
-     * - Stop all future automated reputation checks
-     *
-     * **Note:** Can only be performed on `approved` reputation settings.
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<mixed>
-     *
-     * @throws APIException
-     */
-    public function deleteAll(
-        string $enterpriseID,
-        RequestOptions|array|null $requestOptions = null
-    ): BaseResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'delete',
-            path: ['enterprises/%1$s/reputation', $enterpriseID],
-            options: $requestOptions,
-            convert: null,
+            convert: ReputationEnableResponse::class,
         );
     }
 

@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\InferenceEmbedding;
+namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\InferenceEmbedding\ObservabilitySettings\Status;
+use Telnyx\AI\Assistants\Observability\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ObservabilitySettingsShape = array{
+ * @phpstan-type ObservabilityShape = array{
  *   host?: string|null,
  *   publicKeyRef?: string|null,
  *   secretKeyRef?: string|null,
  *   status?: null|Status|value-of<Status>,
  * }
  */
-final class ObservabilitySettings implements BaseModel
+final class Observability implements BaseModel
 {
-    /** @use SdkModel<ObservabilitySettingsShape> */
+    /** @use SdkModel<ObservabilityShape> */
     use SdkModel;
 
     #[Optional]

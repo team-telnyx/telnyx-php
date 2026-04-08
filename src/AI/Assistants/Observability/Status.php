@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings;
+namespace Telnyx\AI\Assistants\Observability;
 
 enum Status: string
 {
