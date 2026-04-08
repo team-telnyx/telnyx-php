@@ -149,6 +149,7 @@ final class CallsTest extends TestCase
             machineDetectionSpeechEndThreshold: 2000,
             machineDetectionSpeechThreshold: 2000,
             machineDetectionTimeout: 5000,
+            mediaEncryption: 'disabled',
             preferredCodecs: 'PCMA,PCMU',
             record: false,
             recordingChannels: 'dual',

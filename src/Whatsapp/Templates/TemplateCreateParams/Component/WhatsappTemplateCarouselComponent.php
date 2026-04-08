@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateCarouselComponent\Card;
+use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateCarouselComponent\Type;
 
 /**
  * Carousel component for multi-card templates. Each card can contain its own header, body, and buttons.
@@ -15,17 +16,13 @@ use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateCar
  * @phpstan-import-type CardShape from \Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateCarouselComponent\Card
  *
  * @phpstan-type WhatsappTemplateCarouselComponentShape = array{
- *   cards: list<Card|CardShape>, type: 'CAROUSEL'
+ *   cards: list<Card|CardShape>, type: Type|value-of<Type>
  * }
  */
 final class WhatsappTemplateCarouselComponent implements BaseModel
 {
     /** @use SdkModel<WhatsappTemplateCarouselComponentShape> */
     use SdkModel;
-
-    /** @var 'CAROUSEL' $type */
-    #[Required]
-    public string $type = 'CAROUSEL';
 
     /**
      * Array of card objects, each with its own components.
@@ -35,18 +32,22 @@ final class WhatsappTemplateCarouselComponent implements BaseModel
     #[Required(list: Card::class)]
     public array $cards;
 
+    /** @var value-of<Type> $type */
+    #[Required(enum: Type::class)]
+    public string $type;
+
     /**
      * `new WhatsappTemplateCarouselComponent()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * WhatsappTemplateCarouselComponent::with(cards: ...)
+     * WhatsappTemplateCarouselComponent::with(cards: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new WhatsappTemplateCarouselComponent)->withCards(...)
+     * (new WhatsappTemplateCarouselComponent)->withCards(...)->withType(...)
      * ```
      */
     public function __construct()
@@ -60,12 +61,14 @@ final class WhatsappTemplateCarouselComponent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Card|CardShape> $cards
+     * @param Type|value-of<Type> $type
      */
-    public static function with(array $cards): self
+    public static function with(array $cards, Type|string $type): self
     {
         $self = new self;
 
         $self['cards'] = $cards;
+        $self['type'] = $type;
 
         return $self;
     }
@@ -84,9 +87,9 @@ final class WhatsappTemplateCarouselComponent implements BaseModel
     }
 
     /**
-     * @param 'CAROUSEL' $type
+     * @param Type|value-of<Type> $type
      */
-    public function withType(string $type): self
+    public function withType(Type|string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;

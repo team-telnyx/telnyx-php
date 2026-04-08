@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Enterprises;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Enterprises\Reputation\ReputationCreateParams\CheckFrequency;
-use Telnyx\Enterprises\Reputation\ReputationListResponse;
-use Telnyx\Enterprises\Reputation\ReputationNewResponse;
+use Telnyx\Enterprises\Reputation\ReputationEnableParams\CheckFrequency;
+use Telnyx\Enterprises\Reputation\ReputationEnableResponse;
+use Telnyx\Enterprises\Reputation\ReputationGetResponse;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyResponse;
 use Telnyx\RequestOptions;
 
@@ -20,44 +20,44 @@ interface ReputationContract
      * @api
      *
      * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $enterpriseID,
+        RequestOptions|array|null $requestOptions = null
+    ): ReputationGetResponse;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function disable(
+        string $enterpriseID,
+        RequestOptions|array|null $requestOptions = null
+    ): mixed;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
      * @param string $loaDocumentID ID of the signed Letter of Authorization (LOA) document uploaded to the document service
      * @param CheckFrequency|value-of<CheckFrequency> $checkFrequency Frequency for automatically refreshing reputation data
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function create(
+    public function enable(
         string $enterpriseID,
         string $loaDocumentID,
         CheckFrequency|string $checkFrequency = 'business_daily',
         RequestOptions|array|null $requestOptions = null,
-    ): ReputationNewResponse;
-
-    /**
-     * @api
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function list(
-        string $enterpriseID,
-        RequestOptions|array|null $requestOptions = null
-    ): ReputationListResponse;
-
-    /**
-     * @api
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function deleteAll(
-        string $enterpriseID,
-        RequestOptions|array|null $requestOptions = null
-    ): mixed;
+    ): ReputationEnableResponse;
 
     /**
      * @api

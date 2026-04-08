@@ -9,13 +9,13 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\Reputation\Numbers\NumberCreateParams;
-use Telnyx\Enterprises\Reputation\Numbers\NumberDeleteParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
+use Telnyx\Enterprises\Reputation\Numbers\NumberDisassociateParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberListParams;
-use Telnyx\Enterprises\Reputation\Numbers\NumberNewResponse;
+use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRetrieveParams;
-use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\NumbersRawContract;
 
@@ -31,49 +31,6 @@ final class NumbersRawService implements NumbersRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
-
-    /**
-     * @api
-     *
-     * Associate one or more phone numbers with an enterprise for Number Reputation monitoring.
-     *
-     * **Validations:**
-     * - Phone numbers must be in E.164 format (e.g., `+16035551234`)
-     * - Phone numbers must be in-service and belong to your account (verified via Warehouse)
-     * - Phone numbers must be US local numbers
-     * - Phone numbers cannot already be associated with any enterprise
-     *
-     * **Note:** This operation is atomic — if any number fails validation, the entire request fails.
-     *
-     * **Maximum:** 100 phone numbers per request.
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param array{phoneNumbers: list<string>}|NumberCreateParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<NumberNewResponse>
-     *
-     * @throws APIException
-     */
-    public function create(
-        string $enterpriseID,
-        array|NumberCreateParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = NumberCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: ['enterprises/%1$s/reputation/numbers', $enterpriseID],
-            body: (object) $parsed,
-            options: $options,
-            convert: NumberNewResponse::class,
-        );
-    }
 
     /**
      * @api
@@ -137,7 +94,7 @@ final class NumbersRawService implements NumbersRawContract
      * }|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumberWithReputationData,>,>
+     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
      *
      * @throws APIException
      */
@@ -164,8 +121,51 @@ final class NumbersRawService implements NumbersRawContract
                 ],
             ),
             options: $options,
-            convert: ReputationPhoneNumberWithReputationData::class,
+            convert: NumberListResponse::class,
             page: DefaultFlatPagination::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Associate one or more phone numbers with an enterprise for Number Reputation monitoring.
+     *
+     * **Validations:**
+     * - Phone numbers must be in E.164 format (e.g., `+16035551234`)
+     * - Phone numbers must be in-service and belong to your account (verified via Warehouse)
+     * - Phone numbers must be US local numbers
+     * - Phone numbers cannot already be associated with any enterprise
+     *
+     * **Note:** This operation is atomic — if any number fails validation, the entire request fails.
+     *
+     * **Maximum:** 100 phone numbers per request.
+     *
+     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param array{phoneNumbers: list<string>}|NumberAssociateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<NumberAssociateResponse>
+     *
+     * @throws APIException
+     */
+    public function associate(
+        string $enterpriseID,
+        array|NumberAssociateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = NumberAssociateParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['enterprises/%1$s/reputation/numbers', $enterpriseID],
+            body: (object) $parsed,
+            options: $options,
+            convert: NumberAssociateResponse::class,
         );
     }
 
@@ -177,19 +177,19 @@ final class NumbersRawService implements NumbersRawContract
      * The number will no longer be tracked and reputation data will no longer be refreshed.
      *
      * @param string $phoneNumber Phone number in E.164 format
-     * @param array{enterpriseID: string}|NumberDeleteParams $params
+     * @param array{enterpriseID: string}|NumberDisassociateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
-    public function delete(
+    public function disassociate(
         string $phoneNumber,
-        array|NumberDeleteParams $params,
+        array|NumberDisassociateParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = NumberDeleteParams::parseRequest(
+        [$parsed, $options] = NumberDisassociateParams::parseRequest(
             $params,
             $requestOptions,
         );

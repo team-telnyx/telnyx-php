@@ -15,10 +15,10 @@ use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams;
 use Telnyx\VoiceClones\VoiceCloneCreateParams;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Provider;
-use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams;
 use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
+use Telnyx\VoiceClones\VoiceCloneListResponse;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
 use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams;
@@ -125,7 +125,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      * }|VoiceCloneListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VoiceCloneData>>
+     * @return BaseResponse<DefaultFlatPagination<VoiceCloneListResponse>>
      *
      * @throws APIException
      */
@@ -152,7 +152,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
                 ],
             ),
             options: $options,
-            convert: VoiceCloneData::class,
+            convert: VoiceCloneListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

@@ -10,8 +10,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\EnterpriseCreateParams;
 use Telnyx\Enterprises\EnterpriseGetResponse;
 use Telnyx\Enterprises\EnterpriseListParams;
+use Telnyx\Enterprises\EnterpriseListResponse;
 use Telnyx\Enterprises\EnterpriseNewResponse;
-use Telnyx\Enterprises\EnterprisePublic;
 use Telnyx\Enterprises\EnterpriseUpdateParams;
 use Telnyx\Enterprises\EnterpriseUpdateResponse;
 use Telnyx\RequestOptions;
@@ -74,7 +74,7 @@ interface EnterprisesRawContract
      * @param array<string,mixed>|EnterpriseListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<EnterprisePublic>>
+     * @return BaseResponse<DefaultFlatPagination<EnterpriseListResponse>>
      *
      * @throws APIException
      */
