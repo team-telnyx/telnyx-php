@@ -116,6 +116,7 @@ final class CallsTest extends TestCase
             parkAfterUnbridge: 'self',
             preferredCodecs: 'G722,PCMU,PCMA,G729,OPUS,VP8,H264',
             preventDoubleBridge: true,
+            privacy: 'id',
             record: 'record-from-answer',
             recordChannels: 'single',
             recordCustomFileName: 'my_recording_file_name',
