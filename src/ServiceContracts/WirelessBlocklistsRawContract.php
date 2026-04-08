@@ -55,6 +55,7 @@ interface WirelessBlocklistsRawContract
     /**
      * @api
      *
+     * @param string $id identifies the wireless blocklist
      * @param array<string,mixed>|WirelessBlocklistUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -63,6 +64,7 @@ interface WirelessBlocklistsRawContract
      * @throws APIException
      */
     public function update(
+        string $id,
         array|WirelessBlocklistUpdateParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;

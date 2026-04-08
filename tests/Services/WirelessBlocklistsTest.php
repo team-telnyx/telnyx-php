@@ -89,7 +89,9 @@ final class WirelessBlocklistsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->wirelessBlocklists->update();
+        $result = $this->client->wirelessBlocklists->update(
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WirelessBlocklistUpdateResponse::class, $result);
