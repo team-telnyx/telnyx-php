@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.27.0 (2026-04-08)
+
+Full Changelog: [v7.26.0...v7.27.0](https://github.com/team-telnyx/telnyx-php/compare/v7.26.0...v7.27.0)
+
+### Features
+
+* TELAPPS-5707: Add privacy parameter to Call Control dial and transfer ([5c0271c](https://github.com/team-telnyx/telnyx-php/commit/5c0271c3627ec46ac5195f24dda4b983d696ecec))
+
+
+### Reverts
+
+* revert stainless.yml changes from pronunciation dictionaries commit ([de1c2cf](https://github.com/team-telnyx/telnyx-php/commit/de1c2cf13e5eb344f1b8ccc4ba4b32fec9cf7c25))
+
 ## 7.26.0 (2026-04-08)
 
 Full Changelog: [v7.25.0...v7.26.0](https://github.com/team-telnyx/telnyx-php/compare/v7.25.0...v7.26.0)
