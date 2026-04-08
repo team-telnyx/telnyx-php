@@ -115,6 +115,7 @@ use Telnyx\Services\PortingPhoneNumbersService;
 use Telnyx\Services\PortingService;
 use Telnyx\Services\PortoutsService;
 use Telnyx\Services\PrivateWirelessGatewaysService;
+use Telnyx\Services\PronunciationDictsService;
 use Telnyx\Services\PublicInternetGatewaysService;
 use Telnyx\Services\QueuesService;
 use Telnyx\Services\RcsAgentsService;
@@ -1002,6 +1003,11 @@ class Client extends BaseClient
     public TermsOfServiceService $termsOfService;
 
     /**
+     * @api
+     */
+    public PronunciationDictsService $pronunciationDicts;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1213,6 +1219,7 @@ class Client extends BaseClient
         $this->enterprises = new EnterprisesService($this);
         $this->reputation = new ReputationService($this);
         $this->termsOfService = new TermsOfServiceService($this);
+        $this->pronunciationDicts = new PronunciationDictsService($this);
     }
 
     /** @return array<string,string> */

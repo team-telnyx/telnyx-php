@@ -8,13 +8,13 @@ use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderMultipleStatus;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderStatusList;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\UnionMember1;
 
 /**
  * Filter porting orders by status(es). Originally: filter[status], filter[status][in][].
  *
- * @phpstan-type StatusVariants = list<value-of<PortingOrderStatusList>>|value-of<PortingOrderMultipleStatus>
+ * @phpstan-type StatusVariants = list<value-of<UnionMember1>>|value-of<PortingOrderSingleStatus>
  * @phpstan-type StatusShape = StatusVariants
  */
 final class Status implements ConverterSource
@@ -26,9 +26,6 @@ final class Status implements ConverterSource
      */
     public static function variants(): array
     {
-        return [
-            PortingOrderMultipleStatus::class,
-            new ListOf(PortingOrderStatusList::class),
-        ];
+        return [PortingOrderSingleStatus::class, new ListOf(UnionMember1::class)];
     }
 }
