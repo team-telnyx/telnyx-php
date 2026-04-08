@@ -9,12 +9,8 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\EnterpriseCreateParams\BillingAddress;
-use Telnyx\Enterprises\EnterpriseCreateParams\BillingContact;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
-use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationContact;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
-use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationPhysicalAddress;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
 use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
 
@@ -27,10 +23,10 @@ use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
  *
  * @see Telnyx\Services\EnterprisesService::create()
  *
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\EnterpriseCreateParams\BillingAddress
- * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\EnterpriseCreateParams\BillingContact
- * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\EnterpriseCreateParams\OrganizationContact
- * @phpstan-import-type OrganizationPhysicalAddressShape from \Telnyx\Enterprises\EnterpriseCreateParams\OrganizationPhysicalAddress
+ * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
+ * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\BillingContact
+ * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\OrganizationContact
+ * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  *
  * @phpstan-type EnterpriseCreateParamsShape = array{
  *   billingAddress: BillingAddress|BillingAddressShape,
@@ -43,7 +39,7 @@ use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
  *   numberOfEmployees: NumberOfEmployees|value-of<NumberOfEmployees>,
  *   organizationContact: OrganizationContact|OrganizationContactShape,
  *   organizationLegalType: OrganizationLegalType|value-of<OrganizationLegalType>,
- *   organizationPhysicalAddress: OrganizationPhysicalAddress|OrganizationPhysicalAddressShape,
+ *   organizationPhysicalAddress: PhysicalAddress|PhysicalAddressShape,
  *   organizationType: OrganizationType|value-of<OrganizationType>,
  *   website: string,
  *   corporateRegistrationNumber?: string|null,
@@ -119,7 +115,7 @@ final class EnterpriseCreateParams implements BaseModel
     public string $organizationLegalType;
 
     #[Required('organization_physical_address')]
-    public OrganizationPhysicalAddress $organizationPhysicalAddress;
+    public PhysicalAddress $organizationPhysicalAddress;
 
     /**
      * Type of organization.
@@ -229,7 +225,7 @@ final class EnterpriseCreateParams implements BaseModel
      * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees
      * @param OrganizationContact|OrganizationContactShape $organizationContact
      * @param OrganizationLegalType|value-of<OrganizationLegalType> $organizationLegalType
-     * @param OrganizationPhysicalAddress|OrganizationPhysicalAddressShape $organizationPhysicalAddress
+     * @param PhysicalAddress|PhysicalAddressShape $organizationPhysicalAddress
      * @param OrganizationType|value-of<OrganizationType> $organizationType
      * @param RoleType|value-of<RoleType>|null $roleType
      */
@@ -244,7 +240,7 @@ final class EnterpriseCreateParams implements BaseModel
         NumberOfEmployees|string $numberOfEmployees,
         OrganizationContact|array $organizationContact,
         OrganizationLegalType|string $organizationLegalType,
-        OrganizationPhysicalAddress|array $organizationPhysicalAddress,
+        PhysicalAddress|array $organizationPhysicalAddress,
         OrganizationType|string $organizationType,
         string $website,
         ?string $corporateRegistrationNumber = null,
@@ -402,10 +398,10 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * @param OrganizationPhysicalAddress|OrganizationPhysicalAddressShape $organizationPhysicalAddress
+     * @param PhysicalAddress|PhysicalAddressShape $organizationPhysicalAddress
      */
     public function withOrganizationPhysicalAddress(
-        OrganizationPhysicalAddress|array $organizationPhysicalAddress
+        PhysicalAddress|array $organizationPhysicalAddress
     ): self {
         $self = clone $this;
         $self['organizationPhysicalAddress'] = $organizationPhysicalAddress;

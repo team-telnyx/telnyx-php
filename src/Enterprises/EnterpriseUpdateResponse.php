@@ -7,12 +7,13 @@ namespace Telnyx\Enterprises;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\EnterpriseUpdateResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Enterprises\EnterpriseUpdateResponse\Data
+ * @phpstan-import-type EnterprisePublicShape from \Telnyx\Enterprises\EnterprisePublic
  *
- * @phpstan-type EnterpriseUpdateResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type EnterpriseUpdateResponseShape = array{
+ *   data?: null|EnterprisePublic|EnterprisePublicShape
+ * }
  */
 final class EnterpriseUpdateResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class EnterpriseUpdateResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?EnterprisePublic $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class EnterpriseUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param EnterprisePublic|EnterprisePublicShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(EnterprisePublic|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class EnterpriseUpdateResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param EnterprisePublic|EnterprisePublicShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(EnterprisePublic|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

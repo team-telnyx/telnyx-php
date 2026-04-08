@@ -9,35 +9,31 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\BillingAddress;
+use Telnyx\Enterprises\BillingContact;
 use Telnyx\Enterprises\EnterpriseCreateParams;
-use Telnyx\Enterprises\EnterpriseCreateParams\BillingAddress;
-use Telnyx\Enterprises\EnterpriseCreateParams\BillingContact;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
-use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationContact;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
-use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationPhysicalAddress;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
 use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
 use Telnyx\Enterprises\EnterpriseGetResponse;
 use Telnyx\Enterprises\EnterpriseListParams;
-use Telnyx\Enterprises\EnterpriseListResponse;
 use Telnyx\Enterprises\EnterpriseNewResponse;
+use Telnyx\Enterprises\EnterprisePublic;
 use Telnyx\Enterprises\EnterpriseUpdateParams;
 use Telnyx\Enterprises\EnterpriseUpdateResponse;
+use Telnyx\Enterprises\OrganizationContact;
+use Telnyx\Enterprises\PhysicalAddress;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EnterprisesRawContract;
 
 /**
  * Enterprise management for Branded Calling and Number Reputation services.
  *
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\EnterpriseCreateParams\BillingAddress
- * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\EnterpriseCreateParams\BillingContact
- * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\EnterpriseCreateParams\OrganizationContact
- * @phpstan-import-type OrganizationPhysicalAddressShape from \Telnyx\Enterprises\EnterpriseCreateParams\OrganizationPhysicalAddress
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\EnterpriseUpdateParams\BillingAddress as BillingAddressShape1
- * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\EnterpriseUpdateParams\BillingContact as BillingContactShape1
- * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationContact as OrganizationContactShape1
- * @phpstan-import-type OrganizationPhysicalAddressShape from \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationPhysicalAddress as OrganizationPhysicalAddressShape1
+ * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
+ * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\BillingContact
+ * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\OrganizationContact
+ * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class EnterprisesRawService implements EnterprisesRawContract
@@ -68,7 +64,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
      *   numberOfEmployees: NumberOfEmployees|value-of<NumberOfEmployees>,
      *   organizationContact: OrganizationContact|OrganizationContactShape,
      *   organizationLegalType: OrganizationLegalType|value-of<OrganizationLegalType>,
-     *   organizationPhysicalAddress: OrganizationPhysicalAddress|OrganizationPhysicalAddressShape,
+     *   organizationPhysicalAddress: PhysicalAddress|PhysicalAddressShape,
      *   organizationType: OrganizationType|value-of<OrganizationType>,
      *   website: string,
      *   corporateRegistrationNumber?: string,
@@ -135,8 +131,8 @@ final class EnterprisesRawService implements EnterprisesRawContract
      *
      * @param string $enterpriseID Unique identifier of the enterprise (UUID)
      * @param array{
-     *   billingAddress?: EnterpriseUpdateParams\BillingAddress|BillingAddressShape1,
-     *   billingContact?: EnterpriseUpdateParams\BillingContact|BillingContactShape1,
+     *   billingAddress?: BillingAddress|BillingAddressShape,
+     *   billingContact?: BillingContact|BillingContactShape,
      *   corporateRegistrationNumber?: string,
      *   customerReference?: string,
      *   doingBusinessAs?: string,
@@ -145,9 +141,9 @@ final class EnterprisesRawService implements EnterprisesRawContract
      *   industry?: string,
      *   legalName?: string,
      *   numberOfEmployees?: EnterpriseUpdateParams\NumberOfEmployees|value-of<EnterpriseUpdateParams\NumberOfEmployees>,
-     *   organizationContact?: EnterpriseUpdateParams\OrganizationContact|OrganizationContactShape1,
+     *   organizationContact?: OrganizationContact|OrganizationContactShape,
      *   organizationLegalType?: EnterpriseUpdateParams\OrganizationLegalType|value-of<EnterpriseUpdateParams\OrganizationLegalType>,
-     *   organizationPhysicalAddress?: EnterpriseUpdateParams\OrganizationPhysicalAddress|OrganizationPhysicalAddressShape1,
+     *   organizationPhysicalAddress?: PhysicalAddress|PhysicalAddressShape,
      *   primaryBusinessDomainSicCode?: string,
      *   professionalLicenseNumber?: string,
      *   website?: string,
@@ -188,7 +184,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * }|EnterpriseListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<EnterpriseListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<EnterprisePublic>>
      *
      * @throws APIException
      */
@@ -214,7 +210,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
                 ],
             ),
             options: $options,
-            convert: EnterpriseListResponse::class,
+            convert: EnterprisePublic::class,
             page: DefaultFlatPagination::class,
         );
     }

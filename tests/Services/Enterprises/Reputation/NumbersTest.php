@@ -10,7 +10,7 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
+use Telnyx\ReputationPhoneNumberWithReputationData;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -80,7 +80,10 @@ final class NumbersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(NumberListResponse::class, $item);
+            $this->assertInstanceOf(
+                ReputationPhoneNumberWithReputationData::class,
+                $item
+            );
         }
     }
 
