@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.26.0 (2026-04-08)
+
+Full Changelog: [v7.25.0...v7.26.0](https://github.com/team-telnyx/telnyx-php/compare/v7.25.0...v7.26.0)
+
+### Features
+
+* TELAPPS-5689: Pronunciation dictionaries API docs ([d3c7bcb](https://github.com/team-telnyx/telnyx-php/commit/d3c7bcb1a5a44bf479d65a74dcc94fc10524c04c))
+
 ## 7.25.0 (2026-04-08)
 
 Full Changelog: [v7.24.0...v7.25.0](https://github.com/team-telnyx/telnyx-php/compare/v7.24.0...v7.25.0)
