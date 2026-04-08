@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.22.0 (2026-04-08)
+
+Full Changelog: [v7.21.0...v7.22.0](https://github.com/team-telnyx/telnyx-php/compare/v7.21.0...v7.22.0)
+
+### Features
+
+* Add ai_calls endpoint documentation to OpenAPI spec ([39d8c34](https://github.com/team-telnyx/telnyx-php/commit/39d8c3434ca09e1738e1f3f588d0a9295aea0b49))
+
 ## 7.21.0 (2026-04-07)
 
 Full Changelog: [v7.20.0...v7.21.0](https://github.com/team-telnyx/telnyx-php/compare/v7.20.0...v7.21.0)
