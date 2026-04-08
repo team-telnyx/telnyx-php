@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.24.0 (2026-04-08)
+
+Full Changelog: [v7.23.0...v7.24.0](https://github.com/team-telnyx/telnyx-php/compare/v7.23.0...v7.24.0)
+
+### Features
+
+* Add oneOf constraint for Url/Texml mutual exclusivity in InitiateCallRequest ([e196dc1](https://github.com/team-telnyx/telnyx-php/commit/e196dc185c4dc1d4c4933de7760c7936a5f0149a))
+
 ## 7.23.0 (2026-04-08)
 
 Full Changelog: [v7.22.0...v7.23.0](https://github.com/team-telnyx/telnyx-php/compare/v7.22.0...v7.23.0)
