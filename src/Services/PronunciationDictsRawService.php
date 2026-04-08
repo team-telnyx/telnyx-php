@@ -10,9 +10,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PronunciationDicts\PronunciationDictCreateParams;
+use Telnyx\PronunciationDicts\PronunciationDictData;
 use Telnyx\PronunciationDicts\PronunciationDictGetResponse;
 use Telnyx\PronunciationDicts\PronunciationDictListParams;
-use Telnyx\PronunciationDicts\PronunciationDictListResponse;
 use Telnyx\PronunciationDicts\PronunciationDictNewResponse;
 use Telnyx\PronunciationDicts\PronunciationDictUpdateParams;
 use Telnyx\PronunciationDicts\PronunciationDictUpdateResponse;
@@ -146,7 +146,7 @@ final class PronunciationDictsRawService implements PronunciationDictsRawContrac
      * }|PronunciationDictListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PronunciationDictListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<PronunciationDictData>>
      *
      * @throws APIException
      */
@@ -168,7 +168,7 @@ final class PronunciationDictsRawService implements PronunciationDictsRawContrac
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PronunciationDictListResponse::class,
+            convert: PronunciationDictData::class,
             page: DefaultFlatPagination::class,
         );
     }

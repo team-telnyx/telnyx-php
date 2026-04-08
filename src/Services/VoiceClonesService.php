@@ -10,19 +10,24 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesContract;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\ModelID;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Provider;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxQwen3TtsClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxUltraClone;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\MinimaxDesignClone;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\TelnyxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
 use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
 use Telnyx\VoiceClones\VoiceCloneNewResponse;
+use Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender;
 use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
 /**
  * Capture and manage voice identities as clones for use in text-to-speech synthesis.
  *
+ * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
+ * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params as ParamsShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoiceClonesService implements VoiceClonesContract
@@ -45,35 +50,19 @@ final class VoiceClonesService implements VoiceClonesContract
      *
      * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
      *
-     * @param Gender|value-of<Gender> $gender gender of the voice clone
-     * @param string $language ISO 639-1 language code for the clone. Supports the Minimax language set.
-     * @param string $name name for the voice clone
-     * @param string $voiceDesignID UUID of the source voice design to clone
-     * @param Provider|value-of<Provider> $provider Voice synthesis provider. Must be `minimax`.
+     * @param ParamsShape $params request body for creating a voice clone from an existing voice design
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        Gender|string $gender,
-        string $language,
-        string $name,
-        string $voiceDesignID,
-        Provider|string $provider,
+        TelnyxDesignClone|array|MinimaxDesignClone $params,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneNewResponse {
-        $params = Util::removeNulls(
-            [
-                'gender' => $gender,
-                'language' => $language,
-                'name' => $name,
-                'voiceDesignID' => $voiceDesignID,
-                'provider' => $provider,
-            ],
-        );
+        $params1 = Util::removeNulls(['params' => $params]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->create(params: $params1, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -85,7 +74,7 @@ final class VoiceClonesService implements VoiceClonesContract
      *
      * @param string $id the voice clone UUID
      * @param string $name new name for the voice clone
-     * @param \Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender|value-of<\Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender> $gender updated gender for the voice clone
+     * @param Gender|value-of<Gender> $gender updated gender for the voice clone
      * @param string $language updated ISO 639-1 language code or `auto`
      * @param RequestOpts|null $requestOptions
      *
@@ -94,7 +83,7 @@ final class VoiceClonesService implements VoiceClonesContract
     public function update(
         string $id,
         string $name,
-        \Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender|string|null $gender = null,
+        Gender|string|null $gender = null,
         ?string $language = null,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneUpdateResponse {
@@ -173,44 +162,19 @@ final class VoiceClonesService implements VoiceClonesContract
      *
      * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
-     * @param string $audioFile Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 20MB.
-     * @param \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Gender|value-of<\Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Gender> $gender gender of the voice clone
-     * @param string $language ISO 639-1 language code from the Minimax language set
-     * @param string $name name for the voice clone
-     * @param \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Provider|value-of<\Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Provider> $provider Voice synthesis provider. Must be `minimax`.
-     * @param string $label optional custom label describing the voice style
-     * @param ModelID|value-of<ModelID>|null $modelID TTS model identifier. Nullable — defaults to speech-2.8-turbo.
-     * @param string $refText Optional transcript of the audio file. Providing this improves clone quality.
+     * @param ParamsShape1 $params Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createFromUpload(
-        string $audioFile,
-        \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Gender|string $gender,
-        string $language,
-        string $name,
-        \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Provider|string $provider,
-        ?string $label = null,
-        ModelID|string|null $modelID = null,
-        ?string $refText = null,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $params,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneNewFromUploadResponse {
-        $params = Util::removeNulls(
-            [
-                'audioFile' => $audioFile,
-                'gender' => $gender,
-                'language' => $language,
-                'name' => $name,
-                'provider' => $provider,
-                'label' => $label,
-                'modelID' => $modelID,
-                'refText' => $refText,
-            ],
-        );
+        $params1 = Util::removeNulls(['params' => $params]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createFromUpload(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->createFromUpload(params: $params1, requestOptions: $requestOptions);
 
         return $response->parse();
     }

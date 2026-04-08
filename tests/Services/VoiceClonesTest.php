@@ -40,11 +40,13 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->create(
-            gender: 'male',
-            language: 'en',
-            name: 'clone-narrator',
-            voiceDesignID: '550e8400-e29b-41d4-a716-446655440000',
-            provider: 'minimax',
+            params: [
+                'gender' => 'male',
+                'language' => 'en',
+                'name' => 'clone-narrator',
+                'voiceDesignID' => '550e8400-e29b-41d4-a716-446655440000',
+                'provider' => 'telnyx',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -59,11 +61,13 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->create(
-            gender: 'male',
-            language: 'en',
-            name: 'clone-narrator',
-            voiceDesignID: '550e8400-e29b-41d4-a716-446655440000',
-            provider: 'minimax',
+            params: [
+                'gender' => 'male',
+                'language' => 'en',
+                'name' => 'clone-narrator',
+                'voiceDesignID' => '550e8400-e29b-41d4-a716-446655440000',
+                'provider' => 'telnyx',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -145,11 +149,13 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->createFromUpload(
-            audioFile: 'file',
-            gender: 'male',
-            language: 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
-            name: 'name',
-            provider: 'minimax',
+            params: [
+                'audioFile' => 'file',
+                'gender' => 'male',
+                'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
+                'name' => 'name',
+                'provider' => 'telnyx',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -164,14 +170,16 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->createFromUpload(
-            audioFile: 'file',
-            gender: 'male',
-            language: 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
-            name: 'name',
-            provider: 'minimax',
-            label: 'label',
-            modelID: 'speech-2.8-turbo',
-            refText: 'ref_text',
+            params: [
+                'audioFile' => 'file',
+                'gender' => 'male',
+                'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
+                'name' => 'name',
+                'provider' => 'telnyx',
+                'label' => 'label',
+                'modelID' => 'Qwen3TTS',
+                'refText' => 'ref_text',
+            ],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -8,9 +8,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PronunciationDicts\PronunciationDictCreateParams;
+use Telnyx\PronunciationDicts\PronunciationDictData;
 use Telnyx\PronunciationDicts\PronunciationDictGetResponse;
 use Telnyx\PronunciationDicts\PronunciationDictListParams;
-use Telnyx\PronunciationDicts\PronunciationDictListResponse;
 use Telnyx\PronunciationDicts\PronunciationDictNewResponse;
 use Telnyx\PronunciationDicts\PronunciationDictUpdateParams;
 use Telnyx\PronunciationDicts\PronunciationDictUpdateResponse;
@@ -74,7 +74,7 @@ interface PronunciationDictsRawContract
      * @param array<string,mixed>|PronunciationDictListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PronunciationDictListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<PronunciationDictData>>
      *
      * @throws APIException
      */
