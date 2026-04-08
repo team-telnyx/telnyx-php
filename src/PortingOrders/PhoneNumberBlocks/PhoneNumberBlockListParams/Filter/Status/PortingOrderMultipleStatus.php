@@ -7,7 +7,7 @@ namespace Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filt
 /**
  * Filter by single status.
  */
-enum PortingOrderSingleStatus: string
+enum PortingOrderMultipleStatus: string
 {
     case DRAFT = 'draft';
 
