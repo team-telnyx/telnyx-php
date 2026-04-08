@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.25.0 (2026-04-08)
+
+Full Changelog: [v7.24.0...v7.25.0](https://github.com/team-telnyx/telnyx-php/compare/v7.24.0...v7.25.0)
+
+### Features
+
+* CW-3815 fix PATCH /wirelss_blocklists/{id} endpoint ([21bb1f1](https://github.com/team-telnyx/telnyx-php/commit/21bb1f1741b08594bb3bb2f6a52db247e620c3bf))
+
 ## 7.24.0 (2026-04-08)
 
 Full Changelog: [v7.23.0...v7.24.0](https://github.com/team-telnyx/telnyx-php/compare/v7.23.0...v7.24.0)
