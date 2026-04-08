@@ -10,6 +10,7 @@ use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
+use Telnyx\Calls\CallDialParams\Privacy;
 use Telnyx\Calls\CallDialParams\Record;
 use Telnyx\Calls\CallDialParams\RecordChannels;
 use Telnyx\Calls\CallDialParams\RecordFormat;
@@ -96,6 +97,7 @@ final class CallsRawService implements CallsRawContract
      *   parkAfterUnbridge?: string,
      *   preferredCodecs?: string,
      *   preventDoubleBridge?: bool,
+     *   privacy?: Privacy|value-of<Privacy>,
      *   record?: Record|value-of<Record>,
      *   recordChannels?: RecordChannels|value-of<RecordChannels>,
      *   recordCustomFileName?: string,

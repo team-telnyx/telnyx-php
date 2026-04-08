@@ -8,6 +8,7 @@ use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetection;
 use Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\Actions\ActionTransferParams\MediaEncryption;
 use Telnyx\Calls\Actions\ActionTransferParams\MuteDtmf;
+use Telnyx\Calls\Actions\ActionTransferParams\Privacy;
 use Telnyx\Calls\Actions\ActionTransferParams\Record;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordChannels;
 use Telnyx\Calls\Actions\ActionTransferParams\RecordFormat;
@@ -64,6 +65,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   muteDtmf?: null|MuteDtmf|value-of<MuteDtmf>,
  *   parkAfterUnbridge?: string|null,
  *   preferredCodecs?: string|null,
+ *   privacy?: null|Privacy|value-of<Privacy>,
  *   record?: null|Record|value-of<Record>,
  *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
  *   recordCustomFileName?: string|null,
@@ -194,6 +196,14 @@ final class ActionTransferParams implements BaseModel
      */
     #[Optional('preferred_codecs')]
     public ?string $preferredCodecs;
+
+    /**
+     * Indicates the privacy level to be used for the call. When set to `id`, caller ID information (name and number) will be hidden from the called party. When set to `none` or omitted, caller ID will be shown normally.
+     *
+     * @var value-of<Privacy>|null $privacy
+     */
+    #[Optional(enum: Privacy::class)]
+    public ?string $privacy;
 
     /**
      * Start recording automatically after an event. Disabled by default.
@@ -380,6 +390,7 @@ final class ActionTransferParams implements BaseModel
      * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
      * @param MuteDtmf|value-of<MuteDtmf>|null $muteDtmf
+     * @param Privacy|value-of<Privacy>|null $privacy
      * @param Record|value-of<Record>|null $record
      * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
      * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
@@ -410,6 +421,7 @@ final class ActionTransferParams implements BaseModel
         MuteDtmf|string|null $muteDtmf = null,
         ?string $parkAfterUnbridge = null,
         ?string $preferredCodecs = null,
+        Privacy|string|null $privacy = null,
         Record|string|null $record = null,
         RecordChannels|string|null $recordChannels = null,
         ?string $recordCustomFileName = null,
@@ -451,6 +463,7 @@ final class ActionTransferParams implements BaseModel
         null !== $muteDtmf && $self['muteDtmf'] = $muteDtmf;
         null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
         null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
+        null !== $privacy && $self['privacy'] = $privacy;
         null !== $record && $self['record'] = $record;
         null !== $recordChannels && $self['recordChannels'] = $recordChannels;
         null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
@@ -651,6 +664,19 @@ final class ActionTransferParams implements BaseModel
     {
         $self = clone $this;
         $self['preferredCodecs'] = $preferredCodecs;
+
+        return $self;
+    }
+
+    /**
+     * Indicates the privacy level to be used for the call. When set to `id`, caller ID information (name and number) will be hidden from the called party. When set to `none` or omitted, caller ID will be shown normally.
+     *
+     * @param Privacy|value-of<Privacy> $privacy
+     */
+    public function withPrivacy(Privacy|string $privacy): self
+    {
+        $self = clone $this;
+        $self['privacy'] = $privacy;
 
         return $self;
     }

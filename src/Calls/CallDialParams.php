@@ -9,6 +9,7 @@ use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
+use Telnyx\Calls\CallDialParams\Privacy;
 use Telnyx\Calls\CallDialParams\Record;
 use Telnyx\Calls\CallDialParams\RecordChannels;
 use Telnyx\Calls\CallDialParams\RecordFormat;
@@ -76,6 +77,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   parkAfterUnbridge?: string|null,
  *   preferredCodecs?: string|null,
  *   preventDoubleBridge?: bool|null,
+ *   privacy?: null|Privacy|value-of<Privacy>,
  *   record?: null|Record|value-of<Record>,
  *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
  *   recordCustomFileName?: string|null,
@@ -255,6 +257,14 @@ final class CallDialParams implements BaseModel
      */
     #[Optional('prevent_double_bridge')]
     public ?bool $preventDoubleBridge;
+
+    /**
+     * Indicates the privacy level to be used for the call. When set to `id`, caller ID information (name and number) will be hidden from the called party. When set to `none` or omitted, caller ID will be shown normally.
+     *
+     * @var value-of<Privacy>|null $privacy
+     */
+    #[Optional(enum: Privacy::class)]
+    public ?string $privacy;
 
     /**
      * Start recording automatically after an event. Disabled by default.
@@ -517,6 +527,7 @@ final class CallDialParams implements BaseModel
      * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
      * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
+     * @param Privacy|value-of<Privacy>|null $privacy
      * @param Record|value-of<Record>|null $record
      * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
      * @param RecordFormat|value-of<RecordFormat>|null $recordFormat
@@ -559,6 +570,7 @@ final class CallDialParams implements BaseModel
         ?string $parkAfterUnbridge = null,
         ?string $preferredCodecs = null,
         ?bool $preventDoubleBridge = null,
+        Privacy|string|null $privacy = null,
         Record|string|null $record = null,
         RecordChannels|string|null $recordChannels = null,
         ?string $recordCustomFileName = null,
@@ -617,6 +629,7 @@ final class CallDialParams implements BaseModel
         null !== $parkAfterUnbridge && $self['parkAfterUnbridge'] = $parkAfterUnbridge;
         null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
         null !== $preventDoubleBridge && $self['preventDoubleBridge'] = $preventDoubleBridge;
+        null !== $privacy && $self['privacy'] = $privacy;
         null !== $record && $self['record'] = $record;
         null !== $recordChannels && $self['recordChannels'] = $recordChannels;
         null !== $recordCustomFileName && $self['recordCustomFileName'] = $recordCustomFileName;
@@ -908,6 +921,19 @@ final class CallDialParams implements BaseModel
     {
         $self = clone $this;
         $self['preventDoubleBridge'] = $preventDoubleBridge;
+
+        return $self;
+    }
+
+    /**
+     * Indicates the privacy level to be used for the call. When set to `id`, caller ID information (name and number) will be hidden from the called party. When set to `none` or omitted, caller ID will be shown normally.
+     *
+     * @param Privacy|value-of<Privacy> $privacy
+     */
+    public function withPrivacy(Privacy|string $privacy): self
+    {
+        $self = clone $this;
+        $self['privacy'] = $privacy;
 
         return $self;
     }
