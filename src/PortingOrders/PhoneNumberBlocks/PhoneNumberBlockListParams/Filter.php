@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status;
-use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderMultipleStatus;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderSingleStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\SupportKey;
 
 /**
@@ -105,7 +105,7 @@ final class Filter implements BaseModel
         ?array $phoneNumber = null,
         PortabilityStatus|string|null $portabilityStatus = null,
         ?array $portingOrderID = null,
-        PortingOrderMultipleStatus|array|string|null $status = null,
+        PortingOrderSingleStatus|array|string|null $status = null,
         string|array|null $supportKey = null,
     ): self {
         $self = new self;
@@ -180,7 +180,7 @@ final class Filter implements BaseModel
      * @param StatusShape $status
      */
     public function withStatus(
-        PortingOrderMultipleStatus|array|string $status
+        PortingOrderSingleStatus|array|string $status
     ): self {
         $self = clone $this;
         $self['status'] = $status;

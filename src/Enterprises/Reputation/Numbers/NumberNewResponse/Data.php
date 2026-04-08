@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
+namespace Telnyx\Enterprises\Reputation\Numbers\NumberNewResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;

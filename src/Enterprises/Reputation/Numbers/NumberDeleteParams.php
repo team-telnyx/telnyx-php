@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * The number will no longer be tracked and reputation data will no longer be refreshed.
  *
- * @see Telnyx\Services\Enterprises\Reputation\NumbersService::disassociate()
+ * @see Telnyx\Services\Enterprises\Reputation\NumbersService::delete()
  *
- * @phpstan-type NumberDisassociateParamsShape = array{enterpriseID: string}
+ * @phpstan-type NumberDeleteParamsShape = array{enterpriseID: string}
  */
-final class NumberDisassociateParams implements BaseModel
+final class NumberDeleteParams implements BaseModel
 {
-    /** @use SdkModel<NumberDisassociateParamsShape> */
+    /** @use SdkModel<NumberDeleteParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -28,17 +28,17 @@ final class NumberDisassociateParams implements BaseModel
     public string $enterpriseID;
 
     /**
-     * `new NumberDisassociateParams()` is missing required properties by the API.
+     * `new NumberDeleteParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * NumberDisassociateParams::with(enterpriseID: ...)
+     * NumberDeleteParams::with(enterpriseID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new NumberDisassociateParams)->withEnterpriseID(...)
+     * (new NumberDeleteParams)->withEnterpriseID(...)
      * ```
      */
     public function __construct()

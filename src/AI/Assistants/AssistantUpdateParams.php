@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -17,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
- * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -37,7 +38,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
  *   model?: string|null,
  *   name?: string|null,
- *   observabilitySettings?: null|ObservabilityReq|ObservabilityReqShape,
+ *   observabilitySettings?: null|ObservabilitySettings|ObservabilitySettingsShape,
  *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
  *   promoteToMain?: bool|null,
  *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
@@ -109,7 +110,7 @@ final class AssistantUpdateParams implements BaseModel
     public ?string $name;
 
     #[Optional('observability_settings')]
-    public ?ObservabilityReq $observabilitySettings;
+    public ?ObservabilitySettings $observabilitySettings;
 
     #[Optional('privacy_settings')]
     public ?PrivacySettings $privacySettings;
@@ -161,7 +162,7 @@ final class AssistantUpdateParams implements BaseModel
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
-     * @param ObservabilityReq|ObservabilityReqShape|null $observabilitySettings
+     * @param ObservabilitySettings|ObservabilitySettingsShape|null $observabilitySettings
      * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
      * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
      * @param list<string>|null $toolIDs
@@ -182,7 +183,7 @@ final class AssistantUpdateParams implements BaseModel
         MessagingSettings|array|null $messagingSettings = null,
         ?string $model = null,
         ?string $name = null,
-        ObservabilityReq|array|null $observabilitySettings = null,
+        ObservabilitySettings|array|null $observabilitySettings = null,
         PrivacySettings|array|null $privacySettings = null,
         ?bool $promoteToMain = null,
         TelephonySettings|array|null $telephonySettings = null,
@@ -339,10 +340,10 @@ final class AssistantUpdateParams implements BaseModel
     }
 
     /**
-     * @param ObservabilityReq|ObservabilityReqShape $observabilitySettings
+     * @param ObservabilitySettings|ObservabilitySettingsShape $observabilitySettings
      */
     public function withObservabilitySettings(
-        ObservabilityReq|array $observabilitySettings
+        ObservabilitySettings|array $observabilitySettings
     ): self {
         $self = clone $this;
         $self['observabilitySettings'] = $observabilitySettings;

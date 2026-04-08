@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\VoiceClones;
 
-use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -22,7 +21,7 @@ use Telnyx\VoiceClones\VoiceCloneCreateParams\Provider;
  *   language: string,
  *   name: string,
  *   voiceDesignID: string,
- *   provider?: null|Provider|value-of<Provider>,
+ *   provider: Provider|value-of<Provider>,
  * }
  */
 final class VoiceCloneCreateParams implements BaseModel
@@ -40,7 +39,7 @@ final class VoiceCloneCreateParams implements BaseModel
     public string $gender;
 
     /**
-     * ISO 639-1 language code for the clone (e.g. `en`, `fr`, `de`).
+     * ISO 639-1 language code for the clone. Supports the Minimax language set.
      */
     #[Required]
     public string $language;
@@ -58,12 +57,12 @@ final class VoiceCloneCreateParams implements BaseModel
     public string $voiceDesignID;
 
     /**
-     * Voice synthesis provider. Case-insensitive. Defaults to `telnyx`.
+     * Voice synthesis provider. Must be `minimax`.
      *
-     * @var value-of<Provider>|null $provider
+     * @var value-of<Provider> $provider
      */
-    #[Optional(enum: Provider::class)]
-    public ?string $provider;
+    #[Required(enum: Provider::class)]
+    public string $provider;
 
     /**
      * `new VoiceCloneCreateParams()` is missing required properties by the API.
@@ -71,7 +70,7 @@ final class VoiceCloneCreateParams implements BaseModel
      * To enforce required parameters use
      * ```
      * VoiceCloneCreateParams::with(
-     *   gender: ..., language: ..., name: ..., voiceDesignID: ...
+     *   gender: ..., language: ..., name: ..., voiceDesignID: ..., provider: ...
      * )
      * ```
      *
@@ -83,6 +82,7 @@ final class VoiceCloneCreateParams implements BaseModel
      *   ->withLanguage(...)
      *   ->withName(...)
      *   ->withVoiceDesignID(...)
+     *   ->withProvider(...)
      * ```
      */
     public function __construct()
@@ -96,14 +96,14 @@ final class VoiceCloneCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Gender|value-of<Gender> $gender
-     * @param Provider|value-of<Provider>|null $provider
+     * @param Provider|value-of<Provider> $provider
      */
     public static function with(
         Gender|string $gender,
         string $language,
         string $name,
         string $voiceDesignID,
-        Provider|string|null $provider = null,
+        Provider|string $provider,
     ): self {
         $self = new self;
 
@@ -111,8 +111,7 @@ final class VoiceCloneCreateParams implements BaseModel
         $self['language'] = $language;
         $self['name'] = $name;
         $self['voiceDesignID'] = $voiceDesignID;
-
-        null !== $provider && $self['provider'] = $provider;
+        $self['provider'] = $provider;
 
         return $self;
     }
@@ -131,7 +130,7 @@ final class VoiceCloneCreateParams implements BaseModel
     }
 
     /**
-     * ISO 639-1 language code for the clone (e.g. `en`, `fr`, `de`).
+     * ISO 639-1 language code for the clone. Supports the Minimax language set.
      */
     public function withLanguage(string $language): self
     {
@@ -164,7 +163,7 @@ final class VoiceCloneCreateParams implements BaseModel
     }
 
     /**
-     * Voice synthesis provider. Case-insensitive. Defaults to `telnyx`.
+     * Voice synthesis provider. Must be `minimax`.
      *
      * @param Provider|value-of<Provider> $provider
      */

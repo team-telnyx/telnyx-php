@@ -8,8 +8,10 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VoiceClones\VoiceCloneData\Gender;
+use Telnyx\VoiceClones\VoiceCloneData\ModelID;
 use Telnyx\VoiceClones\VoiceCloneData\Provider;
 use Telnyx\VoiceClones\VoiceCloneData\RecordType;
+use Telnyx\VoiceClones\VoiceCloneData\Status;
 
 /**
  * A voice clone object.
@@ -20,6 +22,7 @@ use Telnyx\VoiceClones\VoiceCloneData\RecordType;
  *   gender?: null|Gender|value-of<Gender>,
  *   label?: string|null,
  *   language?: string|null,
+ *   modelID?: null|ModelID|value-of<ModelID>,
  *   name?: string|null,
  *   provider?: null|Provider|value-of<Provider>,
  *   providerSupportedModels?: list<string>|null,
@@ -27,6 +30,7 @@ use Telnyx\VoiceClones\VoiceCloneData\RecordType;
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   sourceVoiceDesignID?: string|null,
  *   sourceVoiceDesignVersion?: int|null,
+ *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -68,6 +72,14 @@ final class VoiceCloneData implements BaseModel
     public ?string $language;
 
     /**
+     * TTS model identifier for the voice clone.
+     *
+     * @var value-of<ModelID>|null $modelID
+     */
+    #[Optional('model_id', enum: ModelID::class)]
+    public ?string $modelID;
+
+    /**
      * Name of the voice clone.
      */
     #[Optional]
@@ -90,7 +102,7 @@ final class VoiceCloneData implements BaseModel
     public ?array $providerSupportedModels;
 
     /**
-     * Provider-specific voice identifier used for TTS synthesis. For Telnyx clones this equals the clone ID; for Minimax it is the Minimax-assigned voice ID.
+     * Provider-specific voice identifier used for TTS synthesis. May differ from the clone UUID depending on the provider and model.
      */
     #[Optional('provider_voice_id', nullable: true)]
     public ?string $providerVoiceID;
@@ -116,6 +128,14 @@ final class VoiceCloneData implements BaseModel
     public ?int $sourceVoiceDesignVersion;
 
     /**
+     * Clone status. pending for Ultra clones while on-prem import is in progress, active once ready, failed if verification timed out, expired if not kept alive.
+     *
+     * @var value-of<Status>|null $status
+     */
+    #[Optional(enum: Status::class)]
+    public ?string $status;
+
+    /**
      * Timestamp when the voice clone was last updated.
      */
     #[Optional('updated_at')]
@@ -132,9 +152,11 @@ final class VoiceCloneData implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Gender|value-of<Gender>|null $gender
+     * @param ModelID|value-of<ModelID>|null $modelID
      * @param Provider|value-of<Provider>|null $provider
      * @param list<string>|null $providerSupportedModels
      * @param RecordType|value-of<RecordType>|null $recordType
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $id = null,
@@ -142,6 +164,7 @@ final class VoiceCloneData implements BaseModel
         Gender|string|null $gender = null,
         ?string $label = null,
         ?string $language = null,
+        ModelID|string|null $modelID = null,
         ?string $name = null,
         Provider|string|null $provider = null,
         ?array $providerSupportedModels = null,
@@ -149,6 +172,7 @@ final class VoiceCloneData implements BaseModel
         RecordType|string|null $recordType = null,
         ?string $sourceVoiceDesignID = null,
         ?int $sourceVoiceDesignVersion = null,
+        Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
         $self = new self;
@@ -158,6 +182,7 @@ final class VoiceCloneData implements BaseModel
         null !== $gender && $self['gender'] = $gender;
         null !== $label && $self['label'] = $label;
         null !== $language && $self['language'] = $language;
+        null !== $modelID && $self['modelID'] = $modelID;
         null !== $name && $self['name'] = $name;
         null !== $provider && $self['provider'] = $provider;
         null !== $providerSupportedModels && $self['providerSupportedModels'] = $providerSupportedModels;
@@ -165,6 +190,7 @@ final class VoiceCloneData implements BaseModel
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $sourceVoiceDesignID && $self['sourceVoiceDesignID'] = $sourceVoiceDesignID;
         null !== $sourceVoiceDesignVersion && $self['sourceVoiceDesignVersion'] = $sourceVoiceDesignVersion;
+        null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
@@ -228,6 +254,19 @@ final class VoiceCloneData implements BaseModel
     }
 
     /**
+     * TTS model identifier for the voice clone.
+     *
+     * @param ModelID|value-of<ModelID> $modelID
+     */
+    public function withModelID(ModelID|string $modelID): self
+    {
+        $self = clone $this;
+        $self['modelID'] = $modelID;
+
+        return $self;
+    }
+
+    /**
      * Name of the voice clone.
      */
     public function withName(string $name): self
@@ -266,7 +305,7 @@ final class VoiceCloneData implements BaseModel
     }
 
     /**
-     * Provider-specific voice identifier used for TTS synthesis. For Telnyx clones this equals the clone ID; for Minimax it is the Minimax-assigned voice ID.
+     * Provider-specific voice identifier used for TTS synthesis. May differ from the clone UUID depending on the provider and model.
      */
     public function withProviderVoiceID(?string $providerVoiceID): self
     {
@@ -308,6 +347,19 @@ final class VoiceCloneData implements BaseModel
     ): self {
         $self = clone $this;
         $self['sourceVoiceDesignVersion'] = $sourceVoiceDesignVersion;
+
+        return $self;
+    }
+
+    /**
+     * Clone status. pending for Ultra clones while on-prem import is in progress, active once ready, failed if verification timed out, expired if not kept alive.
+     *
+     * @param Status|value-of<Status> $status
+     */
+    public function withStatus(Status|string $status): self
+    {
+        $self = clone $this;
+        $self['status'] = $status;
 
         return $self;
     }
