@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type;
 
 /**
  * Update a Wireless Blocklist.
@@ -16,9 +15,7 @@ use Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type;
  * @see Telnyx\Services\WirelessBlocklistsService::update()
  *
  * @phpstan-type WirelessBlocklistUpdateParamsShape = array{
- *   name?: string|null,
- *   type?: null|Type|value-of<Type>,
- *   values?: list<string>|null,
+ *   name?: string|null, values?: list<string>|null
  * }
  */
 final class WirelessBlocklistUpdateParams implements BaseModel
@@ -32,14 +29,6 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      */
     #[Optional]
     public ?string $name;
-
-    /**
-     * The type of wireless blocklist.
-     *
-     * @var value-of<Type>|null $type
-     */
-    #[Optional(enum: Type::class)]
-    public ?string $type;
 
     /**
      * Values to block. The values here depend on the `type` of Wireless Blocklist.
@@ -59,18 +48,13 @@ final class WirelessBlocklistUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type>|null $type
      * @param list<string>|null $values
      */
-    public static function with(
-        ?string $name = null,
-        Type|string|null $type = null,
-        ?array $values = null
-    ): self {
+    public static function with(?string $name = null, ?array $values = null): self
+    {
         $self = new self;
 
         null !== $name && $self['name'] = $name;
-        null !== $type && $self['type'] = $type;
         null !== $values && $self['values'] = $values;
 
         return $self;
@@ -83,19 +67,6 @@ final class WirelessBlocklistUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
-
-        return $self;
-    }
-
-    /**
-     * The type of wireless blocklist.
-     *
-     * @param Type|value-of<Type> $type
-     */
-    public function withType(Type|string $type): self
-    {
-        $self = clone $this;
-        $self['type'] = $type;
 
         return $self;
     }

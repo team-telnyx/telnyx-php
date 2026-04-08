@@ -90,25 +90,23 @@ final class WirelessBlocklistsService implements WirelessBlocklistsContract
      *
      * Update a Wireless Blocklist.
      *
+     * @param string $id identifies the wireless blocklist
      * @param string $name the name of the Wireless Blocklist
-     * @param \Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type|value-of<\Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type> $type the type of wireless blocklist
      * @param list<string> $values Values to block. The values here depend on the `type` of Wireless Blocklist.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
+        string $id,
         ?string $name = null,
-        \Telnyx\WirelessBlocklists\WirelessBlocklistUpdateParams\Type|string|null $type = null,
         ?array $values = null,
         RequestOptions|array|null $requestOptions = null,
     ): WirelessBlocklistUpdateResponse {
-        $params = Util::removeNulls(
-            ['name' => $name, 'type' => $type, 'values' => $values]
-        );
+        $params = Util::removeNulls(['name' => $name, 'values' => $values]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->update(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->update($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

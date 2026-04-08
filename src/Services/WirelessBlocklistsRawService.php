@@ -97,10 +97,9 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      *
      * Update a Wireless Blocklist.
      *
+     * @param string $id identifies the wireless blocklist
      * @param array{
-     *   name?: string,
-     *   type?: WirelessBlocklistUpdateParams\Type|value-of<WirelessBlocklistUpdateParams\Type>,
-     *   values?: list<string>,
+     *   name?: string, values?: list<string>
      * }|WirelessBlocklistUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -109,6 +108,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
      * @throws APIException
      */
     public function update(
+        string $id,
         array|WirelessBlocklistUpdateParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
@@ -120,7 +120,7 @@ final class WirelessBlocklistsRawService implements WirelessBlocklistsRawContrac
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'patch',
-            path: 'wireless_blocklists',
+            path: ['wireless_blocklists/%1$s', $id],
             body: (object) $parsed,
             options: $options,
             convert: WirelessBlocklistUpdateResponse::class,
