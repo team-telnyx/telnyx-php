@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Enterprises\Reputation\Numbers\NumberNewResponse;
 use Telnyx\ReputationPhoneNumberWithReputationData;
 use Tests\UnsupportedMockTests;
 
@@ -29,38 +29,6 @@ final class NumbersTest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
-    }
-
-    #[Test]
-    public function testCreate(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->enterprises->reputation->numbers->create(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            phoneNumbers: ['+16035551234']
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NumberNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCreateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->enterprises->reputation->numbers->create(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            phoneNumbers: ['+16035551234']
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NumberNewResponse::class, $result);
     }
 
     #[Test]
@@ -120,13 +88,45 @@ final class NumbersTest extends TestCase
     }
 
     #[Test]
-    public function testDelete(): void
+    public function testAssociate(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->enterprises->reputation->numbers->delete(
+        $result = $this->client->enterprises->reputation->numbers->associate(
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            phoneNumbers: ['+16035551234']
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberAssociateResponse::class, $result);
+    }
+
+    #[Test]
+    public function testAssociateWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->numbers->associate(
+            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            phoneNumbers: ['+16035551234']
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberAssociateResponse::class, $result);
+    }
+
+    #[Test]
+    public function testDisassociate(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->numbers->disassociate(
             '+16035551234',
             enterpriseID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
@@ -136,13 +136,13 @@ final class NumbersTest extends TestCase
     }
 
     #[Test]
-    public function testDeleteWithOptionalParams(): void
+    public function testDisassociateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->enterprises->reputation->numbers->delete(
+        $result = $this->client->enterprises->reputation->numbers->disassociate(
             '+16035551234',
             enterpriseID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
         );
