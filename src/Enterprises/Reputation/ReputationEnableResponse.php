@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type EnterpriseReputationPublicShape from \Telnyx\Enterprises\Reputation\EnterpriseReputationPublic
  *
- * @phpstan-type ReputationNewResponseShape = array{
+ * @phpstan-type ReputationEnableResponseShape = array{
  *   data?: null|EnterpriseReputationPublic|EnterpriseReputationPublicShape
  * }
  */
-final class ReputationNewResponse implements BaseModel
+final class ReputationEnableResponse implements BaseModel
 {
-    /** @use SdkModel<ReputationNewResponseShape> */
+    /** @use SdkModel<ReputationEnableResponseShape> */
     use SdkModel;
 
     #[Optional]

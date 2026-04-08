@@ -7,11 +7,11 @@ namespace Telnyx\ServiceContracts\Enterprises\Reputation;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\Reputation\Numbers\NumberCreateParams;
-use Telnyx\Enterprises\Reputation\Numbers\NumberDeleteParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
+use Telnyx\Enterprises\Reputation\Numbers\NumberDisassociateParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberListParams;
-use Telnyx\Enterprises\Reputation\Numbers\NumberNewResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRetrieveParams;
 use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
@@ -21,23 +21,6 @@ use Telnyx\RequestOptions;
  */
 interface NumbersRawContract
 {
-    /**
-     * @api
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param array<string,mixed>|NumberCreateParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<NumberNewResponse>
-     *
-     * @throws APIException
-     */
-    public function create(
-        string $enterpriseID,
-        array|NumberCreateParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
     /**
      * @api
      *
@@ -75,17 +58,34 @@ interface NumbersRawContract
     /**
      * @api
      *
+     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param array<string,mixed>|NumberAssociateParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<NumberAssociateResponse>
+     *
+     * @throws APIException
+     */
+    public function associate(
+        string $enterpriseID,
+        array|NumberAssociateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
      * @param string $phoneNumber Phone number in E.164 format
-     * @param array<string,mixed>|NumberDeleteParams $params
+     * @param array<string,mixed>|NumberDisassociateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
-    public function delete(
+    public function disassociate(
         string $phoneNumber,
-        array|NumberDeleteParams $params,
+        array|NumberDisassociateParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

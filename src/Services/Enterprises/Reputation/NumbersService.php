@@ -8,8 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Enterprises\Reputation\Numbers\NumberNewResponse;
 use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\NumbersContract;
@@ -32,40 +32,6 @@ final class NumbersService implements NumbersContract
     public function __construct(private Client $client)
     {
         $this->raw = new NumbersRawService($client);
-    }
-
-    /**
-     * @api
-     *
-     * Associate one or more phone numbers with an enterprise for Number Reputation monitoring.
-     *
-     * **Validations:**
-     * - Phone numbers must be in E.164 format (e.g., `+16035551234`)
-     * - Phone numbers must be in-service and belong to your account (verified via Warehouse)
-     * - Phone numbers must be US local numbers
-     * - Phone numbers cannot already be associated with any enterprise
-     *
-     * **Note:** This operation is atomic — if any number fails validation, the entire request fails.
-     *
-     * **Maximum:** 100 phone numbers per request.
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param list<string> $phoneNumbers List of phone numbers to associate for reputation monitoring (max 100)
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function create(
-        string $enterpriseID,
-        array $phoneNumbers,
-        RequestOptions|array|null $requestOptions = null,
-    ): NumberNewResponse {
-        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->create($enterpriseID, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
     }
 
     /**
@@ -149,6 +115,40 @@ final class NumbersService implements NumbersContract
     /**
      * @api
      *
+     * Associate one or more phone numbers with an enterprise for Number Reputation monitoring.
+     *
+     * **Validations:**
+     * - Phone numbers must be in E.164 format (e.g., `+16035551234`)
+     * - Phone numbers must be in-service and belong to your account (verified via Warehouse)
+     * - Phone numbers must be US local numbers
+     * - Phone numbers cannot already be associated with any enterprise
+     *
+     * **Note:** This operation is atomic — if any number fails validation, the entire request fails.
+     *
+     * **Maximum:** 100 phone numbers per request.
+     *
+     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param list<string> $phoneNumbers List of phone numbers to associate for reputation monitoring (max 100)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function associate(
+        string $enterpriseID,
+        array $phoneNumbers,
+        RequestOptions|array|null $requestOptions = null,
+    ): NumberAssociateResponse {
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->associate($enterpriseID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * Remove a phone number from Number Reputation monitoring for an enterprise.
      *
      * The number will no longer be tracked and reputation data will no longer be refreshed.
@@ -159,7 +159,7 @@ final class NumbersService implements NumbersContract
      *
      * @throws APIException
      */
-    public function delete(
+    public function disassociate(
         string $phoneNumber,
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null,
@@ -167,7 +167,7 @@ final class NumbersService implements NumbersContract
         $params = Util::removeNulls(['enterpriseID' => $enterpriseID]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->delete($phoneNumber, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->disassociate($phoneNumber, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
