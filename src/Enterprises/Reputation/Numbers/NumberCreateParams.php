@@ -22,13 +22,13 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * **Maximum:** 100 phone numbers per request.
  *
- * @see Telnyx\Services\Enterprises\Reputation\NumbersService::associate()
+ * @see Telnyx\Services\Enterprises\Reputation\NumbersService::create()
  *
- * @phpstan-type NumberAssociateParamsShape = array{phoneNumbers: list<string>}
+ * @phpstan-type NumberCreateParamsShape = array{phoneNumbers: list<string>}
  */
-final class NumberAssociateParams implements BaseModel
+final class NumberCreateParams implements BaseModel
 {
-    /** @use SdkModel<NumberAssociateParamsShape> */
+    /** @use SdkModel<NumberCreateParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -41,17 +41,17 @@ final class NumberAssociateParams implements BaseModel
     public array $phoneNumbers;
 
     /**
-     * `new NumberAssociateParams()` is missing required properties by the API.
+     * `new NumberCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * NumberAssociateParams::with(phoneNumbers: ...)
+     * NumberCreateParams::with(phoneNumbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new NumberAssociateParams)->withPhoneNumbers(...)
+     * (new NumberCreateParams)->withPhoneNumbers(...)
      * ```
      */
     public function __construct()

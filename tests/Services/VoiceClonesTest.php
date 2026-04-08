@@ -44,6 +44,7 @@ final class VoiceClonesTest extends TestCase
             language: 'en',
             name: 'clone-narrator',
             voiceDesignID: '550e8400-e29b-41d4-a716-446655440000',
+            provider: 'minimax',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -62,7 +63,7 @@ final class VoiceClonesTest extends TestCase
             language: 'en',
             name: 'clone-narrator',
             voiceDesignID: '550e8400-e29b-41d4-a716-446655440000',
-            provider: 'telnyx',
+            provider: 'minimax',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -145,8 +146,10 @@ final class VoiceClonesTest extends TestCase
 
         $result = $this->client->voiceClones->createFromUpload(
             audioFile: 'file',
+            gender: 'male',
             language: 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
             name: 'name',
+            provider: 'minimax',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -162,11 +165,12 @@ final class VoiceClonesTest extends TestCase
 
         $result = $this->client->voiceClones->createFromUpload(
             audioFile: 'file',
+            gender: 'male',
             language: 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
             name: 'name',
-            gender: 'male',
+            provider: 'minimax',
             label: 'label',
-            provider: 'telnyx',
+            modelID: 'speech-2.8-turbo',
             refText: 'ref_text',
         );
 

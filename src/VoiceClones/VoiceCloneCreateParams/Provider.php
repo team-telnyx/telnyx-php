@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\VoiceClones\VoiceCloneCreateParams;
 
 /**
- * Voice synthesis provider. Case-insensitive. Defaults to `telnyx`.
+ * Voice synthesis provider. Must be `minimax`.
  */
 enum Provider: string
 {
-    case TELNYX = 'telnyx';
-
     case MINIMAX = 'minimax';
+
+    case MINIMAX1 = 'Minimax';
 }

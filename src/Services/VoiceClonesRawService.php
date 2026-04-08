@@ -12,6 +12,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesRawContract;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\ModelID;
 use Telnyx\VoiceClones\VoiceCloneCreateParams;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Provider;
@@ -47,7 +48,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      *   language: string,
      *   name: string,
      *   voiceDesignID: string,
-     *   provider?: Provider|value-of<Provider>,
+     *   provider: Provider|value-of<Provider>,
      * }|VoiceCloneCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -185,15 +186,16 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
     /**
      * @api
      *
-     * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 2MB.
+     * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
      * @param array{
      *   audioFile: string,
+     *   gender: VoiceCloneCreateFromUploadParams\Gender|value-of<VoiceCloneCreateFromUploadParams\Gender>,
      *   language: string,
      *   name: string,
-     *   gender?: VoiceCloneCreateFromUploadParams\Gender|value-of<VoiceCloneCreateFromUploadParams\Gender>,
+     *   provider: VoiceCloneCreateFromUploadParams\Provider|value-of<VoiceCloneCreateFromUploadParams\Provider>,
      *   label?: string,
-     *   provider?: VoiceCloneCreateFromUploadParams\Provider|value-of<VoiceCloneCreateFromUploadParams\Provider>,
+     *   modelID?: ModelID|value-of<ModelID>|null,
      *   refText?: string,
      * }|VoiceCloneCreateFromUploadParams $params
      * @param RequestOpts|null $requestOptions
