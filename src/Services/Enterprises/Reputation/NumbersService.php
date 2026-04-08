@@ -10,7 +10,7 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
+use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\NumbersContract;
 
@@ -87,7 +87,7 @@ final class NumbersService implements NumbersContract
      * @param string $phoneNumber Filter by specific phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<NumberListResponse>
+     * @return DefaultFlatPagination<ReputationPhoneNumberWithReputationData>
      *
      * @throws APIException
      */

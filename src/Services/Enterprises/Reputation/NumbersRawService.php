@@ -14,8 +14,8 @@ use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberDisassociateParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberListParams;
-use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRetrieveParams;
+use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\NumbersRawContract;
 
@@ -94,7 +94,7 @@ final class NumbersRawService implements NumbersRawContract
      * }|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumberWithReputationData,>,>
      *
      * @throws APIException
      */
@@ -121,7 +121,7 @@ final class NumbersRawService implements NumbersRawContract
                 ],
             ),
             options: $options,
-            convert: NumberListResponse::class,
+            convert: ReputationPhoneNumberWithReputationData::class,
             page: DefaultFlatPagination::class,
         );
     }

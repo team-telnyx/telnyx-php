@@ -9,7 +9,7 @@ namespace Telnyx\TrafficPolicyProfiles\TrafficPolicyProfileCreateParams;
  */
 enum LimitBwKbps: int
 {
-    case _512 = 512;
+    case LIMIT_BW_KBPS_512 = 512;
 
-    case _1024 = 1024;
+    case LIMIT_BW_KBPS_1024 = 1024;
 }

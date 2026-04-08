@@ -8,14 +8,14 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse\Data;
-use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse\Meta;
+use Telnyx\MetaInfo;
 
 /**
  * @phpstan-import-type DataShape from \Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse\Data
- * @phpstan-import-type MetaShape from \Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse\Meta
+ * @phpstan-import-type MetaInfoShape from \Telnyx\MetaInfo
  *
  * @phpstan-type NumberAssociateResponseShape = array{
- *   data?: list<Data|DataShape>|null, meta?: null|Meta|MetaShape
+ *   data?: list<Data|DataShape>|null, meta?: null|MetaInfo|MetaInfoShape
  * }
  */
 final class NumberAssociateResponse implements BaseModel
@@ -28,7 +28,7 @@ final class NumberAssociateResponse implements BaseModel
     public ?array $data;
 
     #[Optional]
-    public ?Meta $meta;
+    public ?MetaInfo $meta;
 
     public function __construct()
     {
@@ -41,11 +41,11 @@ final class NumberAssociateResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|DataShape>|null $data
-     * @param Meta|MetaShape|null $meta
+     * @param MetaInfo|MetaInfoShape|null $meta
      */
     public static function with(
         ?array $data = null,
-        Meta|array|null $meta = null
+        MetaInfo|array|null $meta = null
     ): self {
         $self = new self;
 
@@ -67,9 +67,9 @@ final class NumberAssociateResponse implements BaseModel
     }
 
     /**
-     * @param Meta|MetaShape $meta
+     * @param MetaInfo|MetaInfoShape $meta
      */
-    public function withMeta(Meta|array $meta): self
+    public function withMeta(MetaInfo|array $meta): self
     {
         $self = clone $this;
         $self['meta'] = $meta;

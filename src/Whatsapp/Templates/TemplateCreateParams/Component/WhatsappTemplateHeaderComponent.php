@@ -10,7 +10,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateHeaderComponent\Example;
 use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateHeaderComponent\Format;
-use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateHeaderComponent\Type;
 
 /**
  * Optional header displayed at the top of the message.
@@ -19,7 +18,7 @@ use Telnyx\Whatsapp\Templates\TemplateCreateParams\Component\WhatsappTemplateHea
  *
  * @phpstan-type WhatsappTemplateHeaderComponentShape = array{
  *   format: Format|value-of<Format>,
- *   type: Type|value-of<Type>,
+ *   type: 'HEADER',
  *   example?: null|Example|ExampleShape,
  *   text?: string|null,
  * }
@@ -29,6 +28,10 @@ final class WhatsappTemplateHeaderComponent implements BaseModel
     /** @use SdkModel<WhatsappTemplateHeaderComponentShape> */
     use SdkModel;
 
+    /** @var 'HEADER' $type */
+    #[Required]
+    public string $type = 'HEADER';
+
     /**
      * Header format type: TEXT (supports one variable), IMAGE, VIDEO, DOCUMENT, or LOCATION.
      *
@@ -36,10 +39,6 @@ final class WhatsappTemplateHeaderComponent implements BaseModel
      */
     #[Required(enum: Format::class)]
     public string $format;
-
-    /** @var value-of<Type> $type */
-    #[Required(enum: Type::class)]
-    public string $type;
 
     /**
      * Sample values for header variables.
@@ -58,13 +57,13 @@ final class WhatsappTemplateHeaderComponent implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * WhatsappTemplateHeaderComponent::with(format: ..., type: ...)
+     * WhatsappTemplateHeaderComponent::with(format: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new WhatsappTemplateHeaderComponent)->withFormat(...)->withType(...)
+     * (new WhatsappTemplateHeaderComponent)->withFormat(...)
      * ```
      */
     public function __construct()
@@ -78,19 +77,16 @@ final class WhatsappTemplateHeaderComponent implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Format|value-of<Format> $format
-     * @param Type|value-of<Type> $type
      * @param Example|ExampleShape|null $example
      */
     public static function with(
         Format|string $format,
-        Type|string $type,
         Example|array|null $example = null,
-        ?string $text = null,
+        ?string $text = null
     ): self {
         $self = new self;
 
         $self['format'] = $format;
-        $self['type'] = $type;
 
         null !== $example && $self['example'] = $example;
         null !== $text && $self['text'] = $text;
@@ -112,9 +108,9 @@ final class WhatsappTemplateHeaderComponent implements BaseModel
     }
 
     /**
-     * @param Type|value-of<Type> $type
+     * @param 'HEADER' $type
      */
-    public function withType(Type|string $type): self
+    public function withType(string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;
