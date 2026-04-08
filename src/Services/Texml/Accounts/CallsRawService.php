@@ -145,9 +145,8 @@ final class CallsRawService implements CallsRawContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param array{
-     *   applicationSid: string,
-     *   from: string,
-     *   to: string,
+     *   url?: mixed,
+     *   applicationSid?: string,
      *   asyncAmd?: bool,
      *   asyncAmdStatusCallback?: string,
      *   asyncAmdStatusCallbackMethod?: AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
@@ -157,6 +156,7 @@ final class CallsRawService implements CallsRawContract
      *   customHeaders?: list<CustomHeader|CustomHeaderShape>,
      *   detectionMode?: DetectionMode|value-of<DetectionMode>,
      *   fallbackURL?: string,
+     *   from?: string,
      *   machineDetection?: MachineDetection|value-of<MachineDetection>,
      *   machineDetectionSilenceTimeout?: int,
      *   machineDetectionSpeechEndThreshold?: int,
@@ -180,11 +180,11 @@ final class CallsRawService implements CallsRawContract
      *   statusCallbackMethod?: CallCallsParams\StatusCallbackMethod|value-of<CallCallsParams\StatusCallbackMethod>,
      *   superviseCallSid?: string,
      *   supervisingRole?: SupervisingRole|value-of<SupervisingRole>,
-     *   texml?: string,
+     *   texml?: mixed,
      *   timeLimit?: int,
      *   timeoutSeconds?: int,
+     *   to?: string,
      *   trim?: Trim|value-of<Trim>,
-     *   url?: string,
      *   urlMethod?: URLMethod|value-of<URLMethod>,
      * }|CallCallsParams $params
      * @param RequestOpts|null $requestOptions

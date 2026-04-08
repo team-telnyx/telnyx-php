@@ -112,68 +112,7 @@ final class CallsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->texml->accounts->calls->calls(
-            'account_sid',
-            applicationSid: 'example-app-sid',
-            from: '+13120001234',
-            to: '+13121230000',
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CallCallsResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCallsWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->texml->accounts->calls->calls(
-            'account_sid',
-            applicationSid: 'example-app-sid',
-            from: '+13120001234',
-            to: '+13121230000',
-            asyncAmd: true,
-            asyncAmdStatusCallback: 'https://www.example.com/callback',
-            asyncAmdStatusCallbackMethod: 'GET',
-            callerID: 'Info',
-            cancelPlaybackOnDetectMessageEnd: false,
-            cancelPlaybackOnMachineDetection: false,
-            customHeaders: [['name' => 'X-Custom-Header', 'value' => 'custom-value']],
-            detectionMode: 'Premium',
-            fallbackURL: 'https://www.example.com/instructions-fallback.xml',
-            machineDetection: 'Enable',
-            machineDetectionSilenceTimeout: 2000,
-            machineDetectionSpeechEndThreshold: 2000,
-            machineDetectionSpeechThreshold: 2000,
-            machineDetectionTimeout: 5000,
-            mediaEncryption: 'disabled',
-            preferredCodecs: 'PCMA,PCMU',
-            record: false,
-            recordingChannels: 'dual',
-            recordingStatusCallback: 'https://example.com/recording_status_callback',
-            recordingStatusCallbackEvent: 'in-progress completed absent',
-            recordingStatusCallbackMethod: 'GET',
-            recordingTimeout: 5,
-            recordingTrack: 'inbound',
-            sendRecordingURL: false,
-            sipAuthPassword: '1234',
-            sipAuthUsername: 'user',
-            sipRegion: 'Canada',
-            statusCallback: 'https://www.example.com/statuscallback-listener',
-            statusCallbackEvent: 'initiated',
-            statusCallbackMethod: 'GET',
-            superviseCallSid: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-            supervisingRole: 'monitor',
-            texml: '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hello</Say></Response>',
-            timeLimit: 3600,
-            timeoutSeconds: 60,
-            trim: 'trim-silence',
-            url: 'https://www.example.com/texml.xml',
-            urlMethod: 'GET',
-        );
+        $result = $this->client->texml->accounts->calls->calls('account_sid');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CallCallsResponse::class, $result);

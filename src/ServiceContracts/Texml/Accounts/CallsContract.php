@@ -91,8 +91,6 @@ interface CallsContract
      *
      * @param string $accountSid the id of the account the resource belongs to
      * @param string $applicationSid the ID of the TeXML Application
-     * @param string $from The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
-     * @param string $to The phone number of the called party. Phone numbers are formatted with a `+` and country code.
      * @param bool $asyncAmd Select whether to perform answering machine detection in the background. By default execution is blocked until Answering Machine Detection is completed.
      * @param string $asyncAmdStatusCallback URL destination for Telnyx to send AMD callback events to for the call
      * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod> $asyncAmdStatusCallbackMethod HTTP request type used for `AsyncAmdStatusCallback`. The default value is inherited from TeXML Application setting.
@@ -102,6 +100,7 @@ interface CallsContract
      * @param list<CustomHeader|CustomHeaderShape> $customHeaders Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      * @param DetectionMode|value-of<DetectionMode> $detectionMode allows you to chose between Premium and Standard detections
      * @param string $fallbackURL a failover URL for which Telnyx will retrieve the TeXML call instructions if the `Url` is not responding
+     * @param string $from The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
      * @param MachineDetection|value-of<MachineDetection> $machineDetection enables Answering Machine Detection
      * @param int $machineDetectionSilenceTimeout If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechEndThreshold Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
@@ -125,11 +124,10 @@ interface CallsContract
      * @param \Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param string $superviseCallSid The call control ID of the existing call to supervise. When provided, the created leg will be added to the specified call in supervising mode. Status callbacks and action callbacks will NOT be sent for the supervising leg.
      * @param SupervisingRole|value-of<SupervisingRole> $supervisingRole The supervising role for the new leg. Determines the audio behavior: barge (hear both sides), whisper (only hear supervisor), monitor (hear both sides but supervisor muted). Default: barge
-     * @param string $texml TeXML to be used as instructions for the call. If provided, the call will execute these instructions instead of fetching from the Url.
      * @param int $timeLimit The maximum duration of the call in seconds. The minimum value is 30 and the maximum value is 14400 (4 hours). Default is 14400 seconds.
      * @param int $timeoutSeconds The number of seconds to wait for the called party to answer the call before the call is canceled. The minimum value is 5 and the maximum value is 120. Default is 30 seconds.
+     * @param string $to The phone number of the called party. Phone numbers are formatted with a `+` and country code.
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
-     * @param string $url the URL from which Telnyx will retrieve the TeXML call instructions
      * @param URLMethod|value-of<URLMethod> $urlMethod HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
      * @param RequestOpts|null $requestOptions
      *
@@ -137,9 +135,8 @@ interface CallsContract
      */
     public function calls(
         string $accountSid,
-        string $applicationSid,
-        string $from,
-        string $to,
+        mixed $url = null,
+        ?string $applicationSid = null,
         bool $asyncAmd = false,
         ?string $asyncAmdStatusCallback = null,
         AsyncAmdStatusCallbackMethod|string $asyncAmdStatusCallbackMethod = 'POST',
@@ -149,6 +146,7 @@ interface CallsContract
         ?array $customHeaders = null,
         DetectionMode|string $detectionMode = 'Regular',
         ?string $fallbackURL = null,
+        ?string $from = null,
         MachineDetection|string $machineDetection = 'Disable',
         int $machineDetectionSilenceTimeout = 3500,
         int $machineDetectionSpeechEndThreshold = 800,
@@ -172,11 +170,11 @@ interface CallsContract
         \Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod|string $statusCallbackMethod = 'POST',
         ?string $superviseCallSid = null,
         SupervisingRole|string $supervisingRole = 'barge',
-        ?string $texml = null,
+        mixed $texml = null,
         int $timeLimit = 14400,
         int $timeoutSeconds = 30,
+        ?string $to = null,
         Trim|string|null $trim = null,
-        ?string $url = null,
         URLMethod|string $urlMethod = 'POST',
         RequestOptions|array|null $requestOptions = null,
     ): CallCallsResponse;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Texml\Accounts\Calls;
 
 use Telnyx\Core\Attributes\Optional;
-use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -32,9 +31,8 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader
  *
  * @phpstan-type CallCallsParamsShape = array{
- *   applicationSid: string,
- *   from: string,
- *   to: string,
+ *   url?: mixed,
+ *   applicationSid?: string|null,
  *   asyncAmd?: bool|null,
  *   asyncAmdStatusCallback?: string|null,
  *   asyncAmdStatusCallbackMethod?: null|AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
@@ -44,6 +42,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   detectionMode?: null|DetectionMode|value-of<DetectionMode>,
  *   fallbackURL?: string|null,
+ *   from?: string|null,
  *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
  *   machineDetectionSilenceTimeout?: int|null,
  *   machineDetectionSpeechEndThreshold?: int|null,
@@ -67,11 +66,11 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
  *   superviseCallSid?: string|null,
  *   supervisingRole?: null|SupervisingRole|value-of<SupervisingRole>,
- *   texml?: string|null,
+ *   texml?: mixed,
  *   timeLimit?: int|null,
  *   timeoutSeconds?: int|null,
+ *   to?: string|null,
  *   trim?: null|Trim|value-of<Trim>,
- *   url?: string|null,
  *   urlMethod?: null|URLMethod|value-of<URLMethod>,
  * }
  */
@@ -81,23 +80,14 @@ final class CallCallsParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    #[Optional('Url')]
+    public mixed $url;
+
     /**
      * The ID of the TeXML Application.
      */
-    #[Required('ApplicationSid')]
-    public string $applicationSid;
-
-    /**
-     * The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
-     */
-    #[Required('From')]
-    public string $from;
-
-    /**
-     * The phone number of the called party. Phone numbers are formatted with a `+` and country code.
-     */
-    #[Required('To')]
-    public string $to;
+    #[Optional('ApplicationSid')]
+    public ?string $applicationSid;
 
     /**
      * Select whether to perform answering machine detection in the background. By default execution is blocked until Answering Machine Detection is completed.
@@ -161,6 +151,12 @@ final class CallCallsParams implements BaseModel
      */
     #[Optional('FallbackUrl')]
     public ?string $fallbackURL;
+
+    /**
+     * The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
+     */
+    #[Optional('From')]
+    public ?string $from;
 
     /**
      * Enables Answering Machine Detection.
@@ -321,11 +317,8 @@ final class CallCallsParams implements BaseModel
     #[Optional('SupervisingRole', enum: SupervisingRole::class)]
     public ?string $supervisingRole;
 
-    /**
-     * TeXML to be used as instructions for the call. If provided, the call will execute these instructions instead of fetching from the Url.
-     */
     #[Optional('Texml')]
-    public ?string $texml;
+    public mixed $texml;
 
     /**
      * The maximum duration of the call in seconds. The minimum value is 30 and the maximum value is 14400 (4 hours). Default is 14400 seconds.
@@ -340,18 +333,18 @@ final class CallCallsParams implements BaseModel
     public ?int $timeoutSeconds;
 
     /**
+     * The phone number of the called party. Phone numbers are formatted with a `+` and country code.
+     */
+    #[Optional('To')]
+    public ?string $to;
+
+    /**
      * Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      *
      * @var value-of<Trim>|null $trim
      */
     #[Optional('Trim', enum: Trim::class)]
     public ?string $trim;
-
-    /**
-     * The URL from which Telnyx will retrieve the TeXML call instructions.
-     */
-    #[Optional('Url')]
-    public ?string $url;
 
     /**
      * HTTP request type used for `Url`. The default value is inherited from TeXML Application setting.
@@ -361,20 +354,6 @@ final class CallCallsParams implements BaseModel
     #[Optional('UrlMethod', enum: URLMethod::class)]
     public ?string $urlMethod;
 
-    /**
-     * `new CallCallsParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * CallCallsParams::with(applicationSid: ..., from: ..., to: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new CallCallsParams)->withApplicationSid(...)->withFrom(...)->withTo(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -401,9 +380,8 @@ final class CallCallsParams implements BaseModel
      * @param URLMethod|value-of<URLMethod>|null $urlMethod
      */
     public static function with(
-        string $applicationSid,
-        string $from,
-        string $to,
+        mixed $url = null,
+        ?string $applicationSid = null,
         ?bool $asyncAmd = null,
         ?string $asyncAmdStatusCallback = null,
         AsyncAmdStatusCallbackMethod|string|null $asyncAmdStatusCallbackMethod = null,
@@ -413,6 +391,7 @@ final class CallCallsParams implements BaseModel
         ?array $customHeaders = null,
         DetectionMode|string|null $detectionMode = null,
         ?string $fallbackURL = null,
+        ?string $from = null,
         MachineDetection|string|null $machineDetection = null,
         ?int $machineDetectionSilenceTimeout = null,
         ?int $machineDetectionSpeechEndThreshold = null,
@@ -436,19 +415,17 @@ final class CallCallsParams implements BaseModel
         StatusCallbackMethod|string|null $statusCallbackMethod = null,
         ?string $superviseCallSid = null,
         SupervisingRole|string|null $supervisingRole = null,
-        ?string $texml = null,
+        mixed $texml = null,
         ?int $timeLimit = null,
         ?int $timeoutSeconds = null,
+        ?string $to = null,
         Trim|string|null $trim = null,
-        ?string $url = null,
         URLMethod|string|null $urlMethod = null,
     ): self {
         $self = new self;
 
-        $self['applicationSid'] = $applicationSid;
-        $self['from'] = $from;
-        $self['to'] = $to;
-
+        null !== $url && $self['url'] = $url;
+        null !== $applicationSid && $self['applicationSid'] = $applicationSid;
         null !== $asyncAmd && $self['asyncAmd'] = $asyncAmd;
         null !== $asyncAmdStatusCallback && $self['asyncAmdStatusCallback'] = $asyncAmdStatusCallback;
         null !== $asyncAmdStatusCallbackMethod && $self['asyncAmdStatusCallbackMethod'] = $asyncAmdStatusCallbackMethod;
@@ -458,6 +435,7 @@ final class CallCallsParams implements BaseModel
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
         null !== $detectionMode && $self['detectionMode'] = $detectionMode;
         null !== $fallbackURL && $self['fallbackURL'] = $fallbackURL;
+        null !== $from && $self['from'] = $from;
         null !== $machineDetection && $self['machineDetection'] = $machineDetection;
         null !== $machineDetectionSilenceTimeout && $self['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
         null !== $machineDetectionSpeechEndThreshold && $self['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
@@ -484,9 +462,17 @@ final class CallCallsParams implements BaseModel
         null !== $texml && $self['texml'] = $texml;
         null !== $timeLimit && $self['timeLimit'] = $timeLimit;
         null !== $timeoutSeconds && $self['timeoutSeconds'] = $timeoutSeconds;
+        null !== $to && $self['to'] = $to;
         null !== $trim && $self['trim'] = $trim;
-        null !== $url && $self['url'] = $url;
         null !== $urlMethod && $self['urlMethod'] = $urlMethod;
+
+        return $self;
+    }
+
+    public function withURL(mixed $url): self
+    {
+        $self = clone $this;
+        $self['url'] = $url;
 
         return $self;
     }
@@ -498,28 +484,6 @@ final class CallCallsParams implements BaseModel
     {
         $self = clone $this;
         $self['applicationSid'] = $applicationSid;
-
-        return $self;
-    }
-
-    /**
-     * The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
-     */
-    public function withFrom(string $from): self
-    {
-        $self = clone $this;
-        $self['from'] = $from;
-
-        return $self;
-    }
-
-    /**
-     * The phone number of the called party. Phone numbers are formatted with a `+` and country code.
-     */
-    public function withTo(string $to): self
-    {
-        $self = clone $this;
-        $self['to'] = $to;
 
         return $self;
     }
@@ -629,6 +593,17 @@ final class CallCallsParams implements BaseModel
     {
         $self = clone $this;
         $self['fallbackURL'] = $fallbackURL;
+
+        return $self;
+    }
+
+    /**
+     * The phone number of the party that initiated the call. Phone numbers are formatted with a `+` and country code.
+     */
+    public function withFrom(string $from): self
+    {
+        $self = clone $this;
+        $self['from'] = $from;
 
         return $self;
     }
@@ -918,10 +893,7 @@ final class CallCallsParams implements BaseModel
         return $self;
     }
 
-    /**
-     * TeXML to be used as instructions for the call. If provided, the call will execute these instructions instead of fetching from the Url.
-     */
-    public function withTexml(string $texml): self
+    public function withTexml(mixed $texml): self
     {
         $self = clone $this;
         $self['texml'] = $texml;
@@ -952,6 +924,17 @@ final class CallCallsParams implements BaseModel
     }
 
     /**
+     * The phone number of the called party. Phone numbers are formatted with a `+` and country code.
+     */
+    public function withTo(string $to): self
+    {
+        $self = clone $this;
+        $self['to'] = $to;
+
+        return $self;
+    }
+
+    /**
      * Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.
      *
      * @param Trim|value-of<Trim> $trim
@@ -960,17 +943,6 @@ final class CallCallsParams implements BaseModel
     {
         $self = clone $this;
         $self['trim'] = $trim;
-
-        return $self;
-    }
-
-    /**
-     * The URL from which Telnyx will retrieve the TeXML call instructions.
-     */
-    public function withURL(string $url): self
-    {
-        $self = clone $this;
-        $self['url'] = $url;
 
         return $self;
     }
