@@ -13,6 +13,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\MediaEncryption;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
@@ -48,6 +49,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   machineDetectionSpeechEndThreshold?: int|null,
  *   machineDetectionSpeechThreshold?: int|null,
  *   machineDetectionTimeout?: int|null,
+ *   mediaEncryption?: null|MediaEncryption|value-of<MediaEncryption>,
  *   preferredCodecs?: string|null,
  *   record?: bool|null,
  *   recordingChannels?: null|RecordingChannels|value-of<RecordingChannels>,
@@ -191,6 +193,14 @@ final class CallCallsParams implements BaseModel
      */
     #[Optional('MachineDetectionTimeout')]
     public ?int $machineDetectionTimeout;
+
+    /**
+     * Defines whether media should be encrypted on the call. When set to `SRTP`, the call will use Secure Real-time Transport Protocol for media encryption. When set to `DTLS`, the call will use DTLS for media encryption. Only supported for SIP destinations.
+     *
+     * @var value-of<MediaEncryption>|null $mediaEncryption
+     */
+    #[Optional('MediaEncryption', enum: MediaEncryption::class)]
+    public ?string $mediaEncryption;
 
     /**
      * The list of comma-separated codecs to be offered on a call.
@@ -379,6 +389,7 @@ final class CallCallsParams implements BaseModel
      * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
      * @param DetectionMode|value-of<DetectionMode>|null $detectionMode
      * @param MachineDetection|value-of<MachineDetection>|null $machineDetection
+     * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
      * @param RecordingChannels|value-of<RecordingChannels>|null $recordingChannels
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
      * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
@@ -407,6 +418,7 @@ final class CallCallsParams implements BaseModel
         ?int $machineDetectionSpeechEndThreshold = null,
         ?int $machineDetectionSpeechThreshold = null,
         ?int $machineDetectionTimeout = null,
+        MediaEncryption|string|null $mediaEncryption = null,
         ?string $preferredCodecs = null,
         ?bool $record = null,
         RecordingChannels|string|null $recordingChannels = null,
@@ -451,6 +463,7 @@ final class CallCallsParams implements BaseModel
         null !== $machineDetectionSpeechEndThreshold && $self['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
         null !== $machineDetectionSpeechThreshold && $self['machineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
         null !== $machineDetectionTimeout && $self['machineDetectionTimeout'] = $machineDetectionTimeout;
+        null !== $mediaEncryption && $self['mediaEncryption'] = $mediaEncryption;
         null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
         null !== $record && $self['record'] = $record;
         null !== $recordingChannels && $self['recordingChannels'] = $recordingChannels;
@@ -678,6 +691,20 @@ final class CallCallsParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['machineDetectionTimeout'] = $machineDetectionTimeout;
+
+        return $self;
+    }
+
+    /**
+     * Defines whether media should be encrypted on the call. When set to `SRTP`, the call will use Secure Real-time Transport Protocol for media encryption. When set to `DTLS`, the call will use DTLS for media encryption. Only supported for SIP destinations.
+     *
+     * @param MediaEncryption|value-of<MediaEncryption> $mediaEncryption
+     */
+    public function withMediaEncryption(
+        MediaEncryption|string $mediaEncryption
+    ): self {
+        $self = clone $this;
+        $self['mediaEncryption'] = $mediaEncryption;
 
         return $self;
     }

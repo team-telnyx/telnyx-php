@@ -8,18 +8,22 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Enterprises\EnterpriseUpdateParams\BillingAddress;
+use Telnyx\Enterprises\EnterpriseUpdateParams\BillingContact;
 use Telnyx\Enterprises\EnterpriseUpdateParams\NumberOfEmployees;
+use Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationContact;
 use Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType;
+use Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationPhysicalAddress;
 
 /**
  * Update enterprise information. All fields are optional — only the provided fields will be updated.
  *
  * @see Telnyx\Services\EnterprisesService::update()
  *
- * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
- * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\BillingContact
- * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\OrganizationContact
- * @phpstan-import-type PhysicalAddressShape from \Telnyx\Enterprises\PhysicalAddress
+ * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\EnterpriseUpdateParams\BillingAddress
+ * @phpstan-import-type BillingContactShape from \Telnyx\Enterprises\EnterpriseUpdateParams\BillingContact
+ * @phpstan-import-type OrganizationContactShape from \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationContact
+ * @phpstan-import-type OrganizationPhysicalAddressShape from \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationPhysicalAddress
  *
  * @phpstan-type EnterpriseUpdateParamsShape = array{
  *   billingAddress?: null|BillingAddress|BillingAddressShape,
@@ -34,7 +38,7 @@ use Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType;
  *   numberOfEmployees?: null|NumberOfEmployees|value-of<NumberOfEmployees>,
  *   organizationContact?: null|OrganizationContact|OrganizationContactShape,
  *   organizationLegalType?: null|OrganizationLegalType|value-of<OrganizationLegalType>,
- *   organizationPhysicalAddress?: null|PhysicalAddress|PhysicalAddressShape,
+ *   organizationPhysicalAddress?: null|OrganizationPhysicalAddress|OrganizationPhysicalAddressShape,
  *   primaryBusinessDomainSicCode?: string|null,
  *   professionalLicenseNumber?: string|null,
  *   website?: string|null,
@@ -117,7 +121,7 @@ final class EnterpriseUpdateParams implements BaseModel
     public ?string $organizationLegalType;
 
     #[Optional('organization_physical_address')]
-    public ?PhysicalAddress $organizationPhysicalAddress;
+    public ?OrganizationPhysicalAddress $organizationPhysicalAddress;
 
     /**
      * SIC Code.
@@ -152,7 +156,7 @@ final class EnterpriseUpdateParams implements BaseModel
      * @param NumberOfEmployees|value-of<NumberOfEmployees>|null $numberOfEmployees
      * @param OrganizationContact|OrganizationContactShape|null $organizationContact
      * @param OrganizationLegalType|value-of<OrganizationLegalType>|null $organizationLegalType
-     * @param PhysicalAddress|PhysicalAddressShape|null $organizationPhysicalAddress
+     * @param OrganizationPhysicalAddress|OrganizationPhysicalAddressShape|null $organizationPhysicalAddress
      */
     public static function with(
         BillingAddress|array|null $billingAddress = null,
@@ -167,7 +171,7 @@ final class EnterpriseUpdateParams implements BaseModel
         NumberOfEmployees|string|null $numberOfEmployees = null,
         OrganizationContact|array|null $organizationContact = null,
         OrganizationLegalType|string|null $organizationLegalType = null,
-        PhysicalAddress|array|null $organizationPhysicalAddress = null,
+        OrganizationPhysicalAddress|array|null $organizationPhysicalAddress = null,
         ?string $primaryBusinessDomainSicCode = null,
         ?string $professionalLicenseNumber = null,
         ?string $website = null,
@@ -339,10 +343,10 @@ final class EnterpriseUpdateParams implements BaseModel
     }
 
     /**
-     * @param PhysicalAddress|PhysicalAddressShape $organizationPhysicalAddress
+     * @param OrganizationPhysicalAddress|OrganizationPhysicalAddressShape $organizationPhysicalAddress
      */
     public function withOrganizationPhysicalAddress(
-        PhysicalAddress|array $organizationPhysicalAddress
+        OrganizationPhysicalAddress|array $organizationPhysicalAddress
     ): self {
         $self = clone $this;
         $self['organizationPhysicalAddress'] = $organizationPhysicalAddress;

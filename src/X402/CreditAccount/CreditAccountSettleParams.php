@@ -16,9 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\X402\CreditAccountService::settle()
  *
  * @phpstan-type CreditAccountSettleParamsShape = array{
- *   id: string,
- *   paymentSignature?: string|null,
- *   headerPaymentSignature?: string|null,
+ *   id: string, paymentSignature?: string|null, paymentSignature1?: string|null
  * }
  */
 final class CreditAccountSettleParams implements BaseModel
@@ -40,7 +38,7 @@ final class CreditAccountSettleParams implements BaseModel
     public ?string $paymentSignature;
 
     #[Optional]
-    public ?string $headerPaymentSignature;
+    public ?string $paymentSignature1;
 
     /**
      * `new CreditAccountSettleParams()` is missing required properties by the API.
@@ -69,14 +67,14 @@ final class CreditAccountSettleParams implements BaseModel
     public static function with(
         string $id,
         ?string $paymentSignature = null,
-        ?string $headerPaymentSignature = null,
+        ?string $paymentSignature1 = null,
     ): self {
         $self = new self;
 
         $self['id'] = $id;
 
         null !== $paymentSignature && $self['paymentSignature'] = $paymentSignature;
-        null !== $headerPaymentSignature && $self['headerPaymentSignature'] = $headerPaymentSignature;
+        null !== $paymentSignature1 && $self['paymentSignature1'] = $paymentSignature1;
 
         return $self;
     }
@@ -103,11 +101,10 @@ final class CreditAccountSettleParams implements BaseModel
         return $self;
     }
 
-    public function withHeaderPaymentSignature(
-        string $headerPaymentSignature
-    ): self {
+    public function withPaymentSignature1(string $paymentSignature): self
+    {
         $self = clone $this;
-        $self['headerPaymentSignature'] = $headerPaymentSignature;
+        $self['paymentSignature1'] = $paymentSignature;
 
         return $self;
     }

@@ -15,6 +15,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\MediaEncryption;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
@@ -161,6 +162,7 @@ final class CallsRawService implements CallsRawContract
      *   machineDetectionSpeechEndThreshold?: int,
      *   machineDetectionSpeechThreshold?: int,
      *   machineDetectionTimeout?: int,
+     *   mediaEncryption?: MediaEncryption|value-of<MediaEncryption>,
      *   preferredCodecs?: string,
      *   record?: bool,
      *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,

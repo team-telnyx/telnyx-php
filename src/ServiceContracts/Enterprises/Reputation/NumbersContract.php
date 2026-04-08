@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts\Enterprises\Reputation;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Enterprises\Reputation\Numbers\NumberNewResponse;
-use Telnyx\ReputationPhoneNumberWithReputationData;
+use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -16,21 +16,6 @@ use Telnyx\RequestOptions;
  */
 interface NumbersContract
 {
-    /**
-     * @api
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param list<string> $phoneNumbers List of phone numbers to associate for reputation monitoring (max 100)
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function create(
-        string $enterpriseID,
-        array $phoneNumbers,
-        RequestOptions|array|null $requestOptions = null,
-    ): NumberNewResponse;
-
     /**
      * @api
      *
@@ -57,7 +42,7 @@ interface NumbersContract
      * @param string $phoneNumber Filter by specific phone number (E.164 format)
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<ReputationPhoneNumberWithReputationData>
+     * @return DefaultFlatPagination<NumberListResponse>
      *
      * @throws APIException
      */
@@ -72,13 +57,28 @@ interface NumbersContract
     /**
      * @api
      *
+     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param list<string> $phoneNumbers List of phone numbers to associate for reputation monitoring (max 100)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function associate(
+        string $enterpriseID,
+        array $phoneNumbers,
+        RequestOptions|array|null $requestOptions = null,
+    ): NumberAssociateResponse;
+
+    /**
+     * @api
+     *
      * @param string $phoneNumber Phone number in E.164 format
      * @param string $enterpriseID Unique identifier of the enterprise (UUID)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function delete(
+    public function disassociate(
         string $phoneNumber,
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null,
