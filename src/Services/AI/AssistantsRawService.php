@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
+use Telnyx\AI\Assistants\AssistantCreateParams\ObservabilitySettings;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
@@ -19,7 +20,6 @@ use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
-use Telnyx\AI\Assistants\ObservabilityReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
@@ -35,10 +35,11 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\ObservabilitySettings
+ * @phpstan-import-type ObservabilitySettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ObservabilitySettings as ObservabilitySettingsShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
- * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -72,7 +73,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   llmAPIKeyRef?: string,
      *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
-     *   observabilitySettings?: ObservabilityReq|ObservabilityReqShape,
+     *   observabilitySettings?: ObservabilitySettings|ObservabilitySettingsShape,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
      *   toolIDs?: list<string>,
@@ -166,7 +167,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
      *   model?: string,
      *   name?: string,
-     *   observabilitySettings?: ObservabilityReq|ObservabilityReqShape,
+     *   observabilitySettings?: AssistantUpdateParams\ObservabilitySettings|ObservabilitySettingsShape1,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
      *   promoteToMain?: bool,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
