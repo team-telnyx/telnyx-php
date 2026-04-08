@@ -112,7 +112,70 @@ final class CallsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->texml->accounts->calls->calls('account_sid');
+        $result = $this->client->texml->accounts->calls->calls(
+            'account_sid',
+            params: ['url' => 'https://www.example.com/texml.xml']
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(CallCallsResponse::class, $result);
+    }
+
+    #[Test]
+    public function testCallsWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->texml->accounts->calls->calls(
+            'account_sid',
+            params: [
+                'url' => 'https://www.example.com/texml.xml',
+                'applicationSid' => 'example-app-sid',
+                'asyncAmd' => true,
+                'asyncAmdStatusCallback' => 'https://www.example.com/callback',
+                'asyncAmdStatusCallbackMethod' => 'GET',
+                'callerID' => 'Info',
+                'cancelPlaybackOnDetectMessageEnd' => false,
+                'cancelPlaybackOnMachineDetection' => false,
+                'customHeaders' => [
+                    ['name' => 'X-Custom-Header', 'value' => 'custom-value'],
+                ],
+                'detectionMode' => 'Premium',
+                'fallbackURL' => 'https://www.example.com/instructions-fallback.xml',
+                'from' => '+13120001234',
+                'machineDetection' => 'Enable',
+                'machineDetectionSilenceTimeout' => 2000,
+                'machineDetectionSpeechEndThreshold' => 2000,
+                'machineDetectionSpeechThreshold' => 2000,
+                'machineDetectionTimeout' => 5000,
+                'mediaEncryption' => 'disabled',
+                'preferredCodecs' => 'PCMA,PCMU',
+                'record' => false,
+                'recordingChannels' => 'dual',
+                'recordingStatusCallback' => 'https://example.com/recording_status_callback',
+                'recordingStatusCallbackEvent' => 'in-progress completed absent',
+                'recordingStatusCallbackMethod' => 'GET',
+                'recordingTimeout' => 5,
+                'recordingTrack' => 'inbound',
+                'sendRecordingURL' => false,
+                'sipAuthPassword' => '1234',
+                'sipAuthUsername' => 'user',
+                'sipRegion' => 'Canada',
+                'statusCallback' => 'https://www.example.com/statuscallback-listener',
+                'statusCallbackEvent' => 'initiated',
+                'statusCallbackMethod' => 'GET',
+                'superviseCallSid' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
+                'supervisingRole' => 'monitor',
+                'texml' => 'Texml',
+                'timeLimit' => 3600,
+                'timeout' => 60,
+                'to' => '+13121230000',
+                'trim' => 'trim-silence',
+                'urlMethod' => 'GET',
+            ],
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CallCallsResponse::class, $result);

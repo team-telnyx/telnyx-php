@@ -8,21 +8,19 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Gender;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Provider;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Params;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\MinimaxDesignClone;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\TelnyxDesignClone;
 
 /**
  * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
  *
  * @see Telnyx\Services\VoiceClonesService::create()
  *
- * @phpstan-type VoiceCloneCreateParamsShape = array{
- *   gender: Gender|value-of<Gender>,
- *   language: string,
- *   name: string,
- *   voiceDesignID: string,
- *   provider: Provider|value-of<Provider>,
- * }
+ * @phpstan-import-type ParamsVariants from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
+ * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
+ *
+ * @phpstan-type VoiceCloneCreateParamsShape = array{params: ParamsShape}
  */
 final class VoiceCloneCreateParams implements BaseModel
 {
@@ -31,58 +29,25 @@ final class VoiceCloneCreateParams implements BaseModel
     use SdkParams;
 
     /**
-     * Gender of the voice clone.
+     * Request body for creating a voice clone from an existing voice design.
      *
-     * @var value-of<Gender> $gender
+     * @var ParamsVariants $params
      */
-    #[Required(enum: Gender::class)]
-    public string $gender;
-
-    /**
-     * ISO 639-1 language code for the clone. Supports the Minimax language set.
-     */
-    #[Required]
-    public string $language;
-
-    /**
-     * Name for the voice clone.
-     */
-    #[Required]
-    public string $name;
-
-    /**
-     * UUID of the source voice design to clone.
-     */
-    #[Required('voice_design_id')]
-    public string $voiceDesignID;
-
-    /**
-     * Voice synthesis provider. Must be `minimax`.
-     *
-     * @var value-of<Provider> $provider
-     */
-    #[Required(enum: Provider::class)]
-    public string $provider;
+    #[Required(union: Params::class)]
+    public TelnyxDesignClone|MinimaxDesignClone $params;
 
     /**
      * `new VoiceCloneCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VoiceCloneCreateParams::with(
-     *   gender: ..., language: ..., name: ..., voiceDesignID: ..., provider: ...
-     * )
+     * VoiceCloneCreateParams::with(params: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new VoiceCloneCreateParams)
-     *   ->withGender(...)
-     *   ->withLanguage(...)
-     *   ->withName(...)
-     *   ->withVoiceDesignID(...)
-     *   ->withProvider(...)
+     * (new VoiceCloneCreateParams)->withParams(...)
      * ```
      */
     public function __construct()
@@ -95,82 +60,28 @@ final class VoiceCloneCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Gender|value-of<Gender> $gender
-     * @param Provider|value-of<Provider> $provider
+     * @param ParamsShape $params
      */
     public static function with(
-        Gender|string $gender,
-        string $language,
-        string $name,
-        string $voiceDesignID,
-        Provider|string $provider,
+        TelnyxDesignClone|array|MinimaxDesignClone $params
     ): self {
         $self = new self;
 
-        $self['gender'] = $gender;
-        $self['language'] = $language;
-        $self['name'] = $name;
-        $self['voiceDesignID'] = $voiceDesignID;
-        $self['provider'] = $provider;
+        $self['params'] = $params;
 
         return $self;
     }
 
     /**
-     * Gender of the voice clone.
+     * Request body for creating a voice clone from an existing voice design.
      *
-     * @param Gender|value-of<Gender> $gender
+     * @param ParamsShape $params
      */
-    public function withGender(Gender|string $gender): self
-    {
+    public function withParams(
+        TelnyxDesignClone|array|MinimaxDesignClone $params
+    ): self {
         $self = clone $this;
-        $self['gender'] = $gender;
-
-        return $self;
-    }
-
-    /**
-     * ISO 639-1 language code for the clone. Supports the Minimax language set.
-     */
-    public function withLanguage(string $language): self
-    {
-        $self = clone $this;
-        $self['language'] = $language;
-
-        return $self;
-    }
-
-    /**
-     * Name for the voice clone.
-     */
-    public function withName(string $name): self
-    {
-        $self = clone $this;
-        $self['name'] = $name;
-
-        return $self;
-    }
-
-    /**
-     * UUID of the source voice design to clone.
-     */
-    public function withVoiceDesignID(string $voiceDesignID): self
-    {
-        $self = clone $this;
-        $self['voiceDesignID'] = $voiceDesignID;
-
-        return $self;
-    }
-
-    /**
-     * Voice synthesis provider. Must be `minimax`.
-     *
-     * @param Provider|value-of<Provider> $provider
-     */
-    public function withProvider(Provider|string $provider): self
-    {
-        $self = clone $this;
-        $self['provider'] = $provider;
+        $self['params'] = $params;
 
         return $self;
     }

@@ -7,15 +7,14 @@ namespace Telnyx\PronunciationDicts;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PronunciationDicts\PronunciationDictNewResponse\Data;
 
 /**
  * Response containing a single pronunciation dictionary.
  *
- * @phpstan-import-type DataShape from \Telnyx\PronunciationDicts\PronunciationDictNewResponse\Data
+ * @phpstan-import-type PronunciationDictDataShape from \Telnyx\PronunciationDicts\PronunciationDictData
  *
  * @phpstan-type PronunciationDictNewResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|PronunciationDictData|PronunciationDictDataShape
  * }
  */
 final class PronunciationDictNewResponse implements BaseModel
@@ -27,7 +26,7 @@ final class PronunciationDictNewResponse implements BaseModel
      * A pronunciation dictionary record.
      */
     #[Optional]
-    public ?Data $data;
+    public ?PronunciationDictData $data;
 
     public function __construct()
     {
@@ -39,9 +38,9 @@ final class PronunciationDictNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param PronunciationDictData|PronunciationDictDataShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(PronunciationDictData|array|null $data = null): self
     {
         $self = new self;
 
@@ -53,9 +52,9 @@ final class PronunciationDictNewResponse implements BaseModel
     /**
      * A pronunciation dictionary record.
      *
-     * @param Data|DataShape $data
+     * @param PronunciationDictData|PronunciationDictDataShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(PronunciationDictData|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

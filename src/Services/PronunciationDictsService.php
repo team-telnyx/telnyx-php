@@ -8,8 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\PronunciationDicts\PronunciationDictData;
 use Telnyx\PronunciationDicts\PronunciationDictGetResponse;
-use Telnyx\PronunciationDicts\PronunciationDictListResponse;
 use Telnyx\PronunciationDicts\PronunciationDictNewResponse;
 use Telnyx\PronunciationDicts\PronunciationDictUpdateResponse;
 use Telnyx\RequestOptions;
@@ -125,7 +125,7 @@ final class PronunciationDictsService implements PronunciationDictsContract
      * @param int $pageSize Number of results per page. Defaults to 20, maximum 250.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PronunciationDictListResponse>
+     * @return DefaultFlatPagination<PronunciationDictData>
      *
      * @throws APIException
      */
