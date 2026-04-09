@@ -9,7 +9,7 @@ namespace Telnyx\VoiceClones\VoiceCloneCreateParams\Params\MinimaxDesignClone;
  */
 enum Provider: string
 {
-    case MINIMAX = 'minimax';
+    case TELNYX = 'telnyx';
 
-    case MINIMAX1 = 'Minimax';
+    case MINIMAX = 'minimax';
 }
