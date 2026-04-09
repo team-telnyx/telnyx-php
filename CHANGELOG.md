@@ -1,5 +1,23 @@
 # Changelog
 
+## 7.28.0 (2026-04-09)
+
+Full Changelog: [v7.27.0...v7.28.0](https://github.com/team-telnyx/telnyx-php/compare/v7.27.0...v7.28.0)
+
+### Features
+
+* add shared CallAssistantRequest schema for call-control assistant object ([4274418](https://github.com/team-telnyx/telnyx-php/commit/4274418e9050e9e4ed4ae980fbf748bff2ca8624))
+
+
+### Reverts
+
+* revert stainless.yml changes from 9c5e8d8 ([664054a](https://github.com/team-telnyx/telnyx-php/commit/664054a7c9a5538aa369c655d30e4b7fb9d2dd9d))
+
+
+### Documentation
+
+* update voice clone schemas to match Ultra/model_id implementation ([6d8d84b](https://github.com/team-telnyx/telnyx-php/commit/6d8d84b7383f5f6085b4a92d2a6028c538dc9a4e))
+
 ## 7.27.0 (2026-04-08)
 
 Full Changelog: [v7.26.0...v7.27.0](https://github.com/team-telnyx/telnyx-php/compare/v7.26.0...v7.27.0)
