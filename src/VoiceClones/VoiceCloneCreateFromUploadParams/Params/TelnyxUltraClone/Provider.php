@@ -11,5 +11,5 @@ enum Provider: string
 {
     case TELNYX = 'telnyx';
 
-    case TELNYX1 = 'Telnyx';
+    case MINIMAX = 'minimax';
 }
