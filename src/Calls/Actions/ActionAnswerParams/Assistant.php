@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams;
+namespace Telnyx\Calls\Actions\ActionAnswerParams;
 
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\DynamicVariable;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\Tool;
+use Telnyx\Calls\Actions\ActionAnswerParams\Assistant\DynamicVariable;
+use Telnyx\Calls\Actions\ActionAnswerParams\Assistant\Tool;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -14,10 +14,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
  *
- * @phpstan-import-type DynamicVariableVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\DynamicVariable
- * @phpstan-import-type ToolVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\Tool
- * @phpstan-import-type DynamicVariableShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\DynamicVariable
- * @phpstan-import-type ToolShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\Tool
+ * @phpstan-import-type DynamicVariableVariants from \Telnyx\Calls\Actions\ActionAnswerParams\Assistant\DynamicVariable
+ * @phpstan-import-type ToolVariants from \Telnyx\Calls\Actions\ActionAnswerParams\Assistant\Tool
+ * @phpstan-import-type DynamicVariableShape from \Telnyx\Calls\Actions\ActionAnswerParams\Assistant\DynamicVariable
+ * @phpstan-import-type ToolShape from \Telnyx\Calls\Actions\ActionAnswerParams\Assistant\Tool
  *
  * @phpstan-type AssistantShape = array{
  *   id: string,

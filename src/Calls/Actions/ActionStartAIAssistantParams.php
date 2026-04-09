@@ -56,7 +56,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     use SdkParams;
 
     /**
-     * AI Assistant configuration.
+     * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      */
     #[Optional]
     public ?Assistant $assistant;
@@ -182,7 +182,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     }
 
     /**
-     * AI Assistant configuration.
+     * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      *
      * @param Assistant|AssistantShape $assistant
      */
