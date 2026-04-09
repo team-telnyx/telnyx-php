@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\Calls;
 
-use Telnyx\AI\Assistants\Assistant;
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
+use Telnyx\Calls\Actions\ActionAnswerParams\Assistant;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
@@ -116,15 +116,16 @@ use Telnyx\RimeVoiceSettings;
 
 /**
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
+ * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionAnswerParams\Assistant
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
- * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
+ * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant as AssistantShape1
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
- * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape1
+ * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape2
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant as ParticipantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
@@ -167,6 +168,7 @@ interface ActionsContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
+     * @param Assistant|AssistantShape $assistant AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      * @param string $billingGroupID Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
@@ -202,6 +204,7 @@ interface ActionsContract
      */
     public function answer(
         string $callControlID,
+        Assistant|array|null $assistant = null,
         ?string $billingGroupID = null,
         ?string $clientState = null,
         ?string $commandID = null,
@@ -350,7 +353,7 @@ interface ActionsContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed> $parameters The parameters described as a JSON Schema object that needs to be gathered by the voice assistant. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format
-     * @param Assistant|AssistantShape $assistant assistant configuration including choice of LLM, custom instructions, and tools
+     * @param \Telnyx\AI\Assistants\Assistant|AssistantShape1 $assistant assistant configuration including choice of LLM, custom instructions, and tools
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $gatherEndedSpeech Text that will be played when the gathering has finished. There is a 3,000 character limit.
@@ -378,7 +381,7 @@ interface ActionsContract
     public function gatherUsingAI(
         string $callControlID,
         array $parameters,
-        Assistant|array|null $assistant = null,
+        \Telnyx\AI\Assistants\Assistant|array|null $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,
         ?string $gatherEndedSpeech = null,
@@ -729,7 +732,7 @@ interface ActionsContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant|AssistantShape1 $assistant AI Assistant configuration
+     * @param \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant|AssistantShape2 $assistant AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $greeting Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.

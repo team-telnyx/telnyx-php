@@ -76,6 +76,33 @@ final class CallsTest extends TestCase
                 'silenceThreshold' => 512,
                 'totalAnalysisTimeMillis' => 5000,
             ],
+            assistant: [
+                'id' => 'id',
+                'dynamicVariables' => [
+                    'customer_name' => 'John', 'account_id' => 'ACC-12345',
+                ],
+                'externalLlm' => (object) [],
+                'fallbackConfig' => (object) [],
+                'greeting' => 'greeting',
+                'instructions' => 'You are a friendly voice assistant.',
+                'llmAPIKeyRef' => 'my_llm_api_key',
+                'mcpServers' => [(object) []],
+                'model' => 'gpt-4o',
+                'name' => 'name',
+                'observabilitySettings' => (object) [],
+                'openaiAPIKeyRef' => 'my_openai_api_key',
+                'tools' => [
+                    [
+                        'bookAppointment' => [
+                            'apiKeyRef' => 'my_calcom_api_key',
+                            'eventTypeID' => 0,
+                            'attendeeName' => 'attendee_name',
+                            'attendeeTimezone' => 'attendee_timezone',
+                        ],
+                        'type' => 'book_appointment',
+                    ],
+                ],
+            ],
             audioURL: 'http://www.example.com/sounds/greeting.wav',
             billingGroupID: 'f5586561-8ff0-4291-a0ac-84fe544797bd',
             bridgeIntent: true,
