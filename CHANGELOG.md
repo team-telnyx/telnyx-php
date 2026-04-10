@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.30.0 (2026-04-10)
+
+Full Changelog: [v7.29.0...v7.30.0](https://github.com/team-telnyx/telnyx-php/compare/v7.29.0...v7.30.0)
+
+### Features
+
+* **api:** Merge pull request [#46](https://github.com/team-telnyx/telnyx-php/issues/46) from stainless-sdks/FixModelRecommendation ([486c610](https://github.com/team-telnyx/telnyx-php/commit/486c610812df0e5bd164b7126bc3ca5246501878))
+
 ## 7.29.0 (2026-04-10)
 
 Full Changelog: [v7.28.0...v7.29.0](https://github.com/team-telnyx/telnyx-php/compare/v7.28.0...v7.29.0)
