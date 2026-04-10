@@ -7,6 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\FileParam;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SubNumberOrdersReportRawContract;
 use Telnyx\SubNumberOrdersReport\SubNumberOrdersReportCreateParams;
@@ -112,7 +113,7 @@ final class SubNumberOrdersReportRawService implements SubNumberOrdersReportRawC
             path: ['sub_number_orders_report/%1$s/download', $reportID],
             headers: ['Accept' => 'text/csv'],
             options: $requestOptions,
-            convert: 'string',
+            convert: FileParam::class,
         );
     }
 }

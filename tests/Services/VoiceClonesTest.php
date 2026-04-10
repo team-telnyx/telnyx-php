@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Core\FileParam;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\VoiceClones\VoiceCloneData;
@@ -150,7 +151,7 @@ final class VoiceClonesTest extends TestCase
 
         $result = $this->client->voiceClones->createFromUpload(
             params: [
-                'audioFile' => 'file',
+                'audioFile' => FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
                 'gender' => 'male',
                 'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
                 'name' => 'name',
@@ -171,7 +172,7 @@ final class VoiceClonesTest extends TestCase
 
         $result = $this->client->voiceClones->createFromUpload(
             params: [
-                'audioFile' => 'file',
+                'audioFile' => FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
                 'gender' => 'male',
                 'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
                 'name' => 'name',

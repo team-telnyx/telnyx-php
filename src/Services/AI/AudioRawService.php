@@ -12,6 +12,7 @@ use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\FileParam;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\AudioRawContract;
 
@@ -33,7 +34,7 @@ final class AudioRawService implements AudioRawContract
      *
      * @param array{
      *   model: value-of<Model>,
-     *   file?: string,
+     *   file?: string|FileParam,
      *   fileURL?: string,
      *   language?: string,
      *   modelConfig?: array<string,mixed>,

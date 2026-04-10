@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\FileParam;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone\Gender;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone\ModelID;
 use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone\Provider;
@@ -16,7 +17,7 @@ use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone\Prov
  * Upload-based voice clone using the Minimax provider.
  *
  * @phpstan-type MinimaxCloneShape = array{
- *   audioFile: string,
+ *   audioFile: string|FileParam,
  *   gender: Gender|value-of<Gender>,
  *   language: string,
  *   name: string,
@@ -121,7 +122,7 @@ final class MinimaxClone implements BaseModel
      * @param ModelID|value-of<ModelID>|null $modelID
      */
     public static function with(
-        string $audioFile,
+        string|FileParam $audioFile,
         Gender|string $gender,
         string $language,
         string $name,
@@ -148,7 +149,7 @@ final class MinimaxClone implements BaseModel
     /**
      * Audio file to clone the voice from. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best quality, provide 5–10 seconds of clear, uninterrupted speech. Maximum size: 20MB.
      */
-    public function withAudioFile(string $audioFile): self
+    public function withAudioFile(string|FileParam $audioFile): self
     {
         $self = clone $this;
         $self['audioFile'] = $audioFile;

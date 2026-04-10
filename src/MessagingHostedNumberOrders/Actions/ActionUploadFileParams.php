@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\FileParam;
 
 /**
  * Upload hosted number document.
@@ -15,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\MessagingHostedNumberOrders\ActionsService::uploadFile()
  *
  * @phpstan-type ActionUploadFileParamsShape = array{
- *   bill?: string|null, loa?: string|null
+ *   bill?: string|null|FileParam, loa?: string|null|FileParam
  * }
  */
 final class ActionUploadFileParams implements BaseModel
@@ -46,8 +47,10 @@ final class ActionUploadFileParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $bill = null, ?string $loa = null): self
-    {
+    public static function with(
+        string|FileParam|null $bill = null,
+        string|FileParam|null $loa = null
+    ): self {
         $self = new self;
 
         null !== $bill && $self['bill'] = $bill;
@@ -59,7 +62,7 @@ final class ActionUploadFileParams implements BaseModel
     /**
      * Must be the last month's bill with proof of ownership of all of the numbers in the order in PDF format.
      */
-    public function withBill(string $bill): self
+    public function withBill(string|FileParam $bill): self
     {
         $self = clone $this;
         $self['bill'] = $bill;
@@ -70,7 +73,7 @@ final class ActionUploadFileParams implements BaseModel
     /**
      * Must be a signed LOA for the numbers in the order in PDF format.
      */
-    public function withLoa(string $loa): self
+    public function withLoa(string|FileParam $loa): self
     {
         $self = clone $this;
         $self['loa'] = $loa;

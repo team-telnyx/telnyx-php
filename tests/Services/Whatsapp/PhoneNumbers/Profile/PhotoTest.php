@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Core\FileParam;
 use Telnyx\Core\Util;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadResponse;
@@ -68,7 +69,7 @@ final class PhotoTest extends TestCase
 
         $result = $this->client->whatsapp->phoneNumbers->profile->photo->upload(
             'phone_number',
-            file: 'file'
+            file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -84,7 +85,7 @@ final class PhotoTest extends TestCase
 
         $result = $this->client->whatsapp->phoneNumbers->profile->photo->upload(
             'phone_number',
-            file: 'file'
+            file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
