@@ -9,6 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\Profile\PhotoRawContract;
+use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadParams;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadResponse;
 
@@ -24,6 +25,31 @@ final class PhotoRawService implements PhotoRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * Get Whatsapp profile photo
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<PhotoGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $phoneNumber,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['v2/whatsapp/phone_numbers/%1$s/profile/photo', $phoneNumber],
+            options: $requestOptions,
+            convert: PhotoGetResponse::class,
+        );
+    }
 
     /**
      * @api
