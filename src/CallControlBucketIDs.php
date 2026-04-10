@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\Assistant\Tool\CallControlRetrievalTool;
+namespace Telnyx;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -10,13 +10,13 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type RetrievalShape = array{
+ * @phpstan-type CallControlBucketIDsShape = array{
  *   bucketIDs: list<string>, maxNumResults?: int|null
  * }
  */
-final class Retrieval implements BaseModel
+final class CallControlBucketIDs implements BaseModel
 {
-    /** @use SdkModel<RetrievalShape> */
+    /** @use SdkModel<CallControlBucketIDsShape> */
     use SdkModel;
 
     /** @var list<string> $bucketIDs */
@@ -30,17 +30,17 @@ final class Retrieval implements BaseModel
     public ?int $maxNumResults;
 
     /**
-     * `new Retrieval()` is missing required properties by the API.
+     * `new CallControlBucketIDs()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Retrieval::with(bucketIDs: ...)
+     * CallControlBucketIDs::with(bucketIDs: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Retrieval)->withBucketIDs(...)
+     * (new CallControlBucketIDs)->withBucketIDs(...)
      * ```
      */
     public function __construct()

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Calls\Actions\ActionAnswerParams\Assistant;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
@@ -15,6 +14,7 @@ use Telnyx\Calls\Actions\ActionAnswerParams\StreamTrack;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLMethod;
 use Telnyx\Calls\Actions\ActionAnswerParams\WebhookURLsMethod;
+use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\SipHeader;
 use Telnyx\Calls\SoundModifications;
@@ -39,7 +39,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::answer()
  *
- * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionAnswerParams\Assistant
+ * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
@@ -47,7 +47,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
  *
  * @phpstan-type ActionAnswerParamsShape = array{
- *   assistant?: null|Assistant|AssistantShape,
+ *   assistant?: null|CallAssistantRequest|CallAssistantRequestShape,
  *   billingGroupID?: string|null,
  *   clientState?: string|null,
  *   commandID?: string|null,
@@ -89,7 +89,7 @@ final class ActionAnswerParams implements BaseModel
      * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      */
     #[Optional]
-    public ?Assistant $assistant;
+    public ?CallAssistantRequest $assistant;
 
     /**
      * Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
@@ -312,7 +312,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Assistant|AssistantShape|null $assistant
+     * @param CallAssistantRequest|CallAssistantRequestShape|null $assistant
      * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param PreferredCodecs|value-of<PreferredCodecs>|null $preferredCodecs
      * @param Record|value-of<Record>|null $record
@@ -334,7 +334,7 @@ final class ActionAnswerParams implements BaseModel
      * @param WebhookURLsMethod|value-of<WebhookURLsMethod>|null $webhookURLsMethod
      */
     public static function with(
-        Assistant|array|null $assistant = null,
+        CallAssistantRequest|array|null $assistant = null,
         ?string $billingGroupID = null,
         ?string $clientState = null,
         ?string $commandID = null,
@@ -404,9 +404,9 @@ final class ActionAnswerParams implements BaseModel
     /**
      * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      *
-     * @param Assistant|AssistantShape $assistant
+     * @param CallAssistantRequest|CallAssistantRequestShape $assistant
      */
-    public function withAssistant(Assistant|array $assistant): self
+    public function withAssistant(CallAssistantRequest|array $assistant): self
     {
         $self = clone $this;
         $self['assistant'] = $assistant;

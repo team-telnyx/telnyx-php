@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
+use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
-use Telnyx\Calls\CallDialParams\Assistant;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
@@ -38,7 +38,7 @@ use Telnyx\RequestOptions;
 /**
  * @phpstan-import-type ToShape from \Telnyx\Calls\CallDialParams\To
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig
- * @phpstan-import-type AssistantShape from \Telnyx\Calls\CallDialParams\Assistant
+ * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -57,7 +57,7 @@ interface CallsContract
      * @param ToShape $to The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection Enables Answering Machine Detection. Telnyx offers Premium and Standard detections. With Premium detection, when a call is answered, Telnyx runs real-time detection and sends a `call.machine.premium.detection.ended` webhook with one of the following results: `human_residence`, `human_business`, `machine`, `silence` or `fax_detected`. If we detect a beep, we also send a `call.machine.premium.greeting.ended` webhook with the result of `beep_detected`. If we detect a beep before `call.machine.premium.detection.ended` we only send `call.machine.premium.greeting.ended`, and if we detect a beep after `call.machine.premium.detection.ended`, we send both webhooks. With Standard detection, when a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If `greeting_end` or `detect_words` is used and a `machine` is detected, you will receive another `call.machine.greeting.ended` webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive `call.machine.greeting.ended` if a beep is detected.
      * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig optional configuration parameters to modify 'answering_machine_detection' performance
-     * @param Assistant|AssistantShape $assistant AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
+     * @param CallAssistantRequest|CallAssistantRequestShape $assistant AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      * @param string $audioURL The URL of a file to be played back to the callee when the call is answered. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
      * @param string $billingGroupID Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      * @param bool $bridgeIntent Indicates the intent to bridge this call with the call specified in link_to. When bridge_intent is true, link_to becomes required and the from number will be overwritten by the from number from the linked call.
@@ -118,7 +118,7 @@ interface CallsContract
         string|array $to,
         AnsweringMachineDetection|string $answeringMachineDetection = 'disabled',
         AnsweringMachineDetectionConfig|array|null $answeringMachineDetectionConfig = null,
-        Assistant|array|null $assistant = null,
+        CallAssistantRequest|array|null $assistant = null,
         ?string $audioURL = null,
         ?string $billingGroupID = null,
         bool $bridgeIntent = false,

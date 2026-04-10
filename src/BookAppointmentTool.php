@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionAnswerParams\Assistant\Tool;
+namespace Telnyx;
 
-use Telnyx\Calls\Actions\ActionAnswerParams\Assistant\Tool\BookAppointmentTool\BookAppointment;
+use Telnyx\BookAppointmentTool\Type;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type BookAppointmentShape from \Telnyx\Calls\Actions\ActionAnswerParams\Assistant\Tool\BookAppointmentTool\BookAppointment
+ * @phpstan-import-type BookAppointmentToolParamsShape from \Telnyx\BookAppointmentToolParams
  *
  * @phpstan-type BookAppointmentToolShape = array{
- *   bookAppointment: BookAppointment|BookAppointmentShape,
- *   type: 'book_appointment',
+ *   bookAppointment: BookAppointmentToolParams|BookAppointmentToolParamsShape,
+ *   type: Type|value-of<Type>,
  * }
  */
 final class BookAppointmentTool implements BaseModel
@@ -22,25 +22,25 @@ final class BookAppointmentTool implements BaseModel
     /** @use SdkModel<BookAppointmentToolShape> */
     use SdkModel;
 
-    /** @var 'book_appointment' $type */
-    #[Required]
-    public string $type = 'book_appointment';
-
     #[Required('book_appointment')]
-    public BookAppointment $bookAppointment;
+    public BookAppointmentToolParams $bookAppointment;
+
+    /** @var value-of<Type> $type */
+    #[Required(enum: Type::class)]
+    public string $type;
 
     /**
      * `new BookAppointmentTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * BookAppointmentTool::with(bookAppointment: ...)
+     * BookAppointmentTool::with(bookAppointment: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new BookAppointmentTool)->withBookAppointment(...)
+     * (new BookAppointmentTool)->withBookAppointment(...)->withType(...)
      * ```
      */
     public function __construct()
@@ -53,22 +53,26 @@ final class BookAppointmentTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BookAppointment|BookAppointmentShape $bookAppointment
+     * @param BookAppointmentToolParams|BookAppointmentToolParamsShape $bookAppointment
+     * @param Type|value-of<Type> $type
      */
-    public static function with(BookAppointment|array $bookAppointment): self
-    {
+    public static function with(
+        BookAppointmentToolParams|array $bookAppointment,
+        Type|string $type
+    ): self {
         $self = new self;
 
         $self['bookAppointment'] = $bookAppointment;
+        $self['type'] = $type;
 
         return $self;
     }
 
     /**
-     * @param BookAppointment|BookAppointmentShape $bookAppointment
+     * @param BookAppointmentToolParams|BookAppointmentToolParamsShape $bookAppointment
      */
     public function withBookAppointment(
-        BookAppointment|array $bookAppointment
+        BookAppointmentToolParams|array $bookAppointment
     ): self {
         $self = clone $this;
         $self['bookAppointment'] = $bookAppointment;
@@ -77,9 +81,9 @@ final class BookAppointmentTool implements BaseModel
     }
 
     /**
-     * @param 'book_appointment' $type
+     * @param Type|value-of<Type> $type
      */
-    public function withType(string $type): self
+    public function withType(Type|string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;
