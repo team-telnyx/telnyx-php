@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\Calls;
 
+use Telnyx\AI\Assistants\Assistant;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
 use Telnyx\Calls\Actions\ActionAnswerParams;
-use Telnyx\Calls\Actions\ActionAnswerParams\Assistant;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
@@ -125,6 +125,7 @@ use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
 use Telnyx\Calls\Actions\InterruptionSettings;
 use Telnyx\Calls\Actions\TranscriptionConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
+use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\SipHeader;
@@ -144,16 +145,14 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * Call Control command operations.
  *
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
- * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionAnswerParams\Assistant
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
- * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant as AssistantShape1
+ * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
- * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant as AssistantShape2
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant as ParticipantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
@@ -164,6 +163,7 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\Actions\ActionTransferParams\AnsweringMachineDetectionConfig
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionTransferParams\WebhookRetriesPolicy as WebhookRetriesPolicyShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
@@ -228,7 +228,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   assistant?: Assistant|AssistantShape,
+     *   assistant?: CallAssistantRequest|CallAssistantRequestShape,
      *   billingGroupID?: string,
      *   clientState?: string,
      *   commandID?: string,
@@ -452,7 +452,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
      *   parameters: array<string,mixed>,
-     *   assistant?: \Telnyx\AI\Assistants\Assistant|AssistantShape1,
+     *   assistant?: Assistant|AssistantShape,
      *   clientState?: string,
      *   commandID?: string,
      *   gatherEndedSpeech?: string,
@@ -1025,7 +1025,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   assistant?: ActionStartAIAssistantParams\Assistant|AssistantShape2,
+     *   assistant?: CallAssistantRequest|CallAssistantRequestShape,
      *   clientState?: string,
      *   commandID?: string,
      *   greeting?: string,

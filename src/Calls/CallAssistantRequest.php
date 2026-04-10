@@ -2,42 +2,43 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams;
+namespace Telnyx\Calls;
 
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\DynamicVariable;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\Tool;
+use Telnyx\Calls\CallAssistantRequest\DynamicVariable;
+use Telnyx\Calls\CallAssistantRequest\Tool;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\Conversion\MapOf;
 
 /**
  * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
  *
- * @phpstan-import-type DynamicVariableVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\DynamicVariable
- * @phpstan-import-type ToolVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\Tool
- * @phpstan-import-type DynamicVariableShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\DynamicVariable
- * @phpstan-import-type ToolShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\Tool
+ * @phpstan-import-type DynamicVariableVariants from \Telnyx\Calls\CallAssistantRequest\DynamicVariable
+ * @phpstan-import-type ToolVariants from \Telnyx\Calls\CallAssistantRequest\Tool
+ * @phpstan-import-type DynamicVariableShape from \Telnyx\Calls\CallAssistantRequest\DynamicVariable
+ * @phpstan-import-type ToolShape from \Telnyx\Calls\CallAssistantRequest\Tool
  *
- * @phpstan-type AssistantShape = array{
+ * @phpstan-type CallAssistantRequestShape = array{
  *   id: string,
  *   dynamicVariables?: array<string,DynamicVariableShape>|null,
- *   externalLlm?: mixed,
- *   fallbackConfig?: mixed,
+ *   externalLlm?: array<string,mixed>|null,
+ *   fallbackConfig?: array<string,mixed>|null,
  *   greeting?: string|null,
  *   instructions?: string|null,
  *   llmAPIKeyRef?: string|null,
- *   mcpServers?: list<mixed>|null,
+ *   mcpServers?: list<array<string,mixed>>|null,
  *   model?: string|null,
  *   name?: string|null,
- *   observabilitySettings?: mixed,
+ *   observabilitySettings?: array<string,mixed>|null,
  *   openaiAPIKeyRef?: string|null,
  *   tools?: list<ToolShape>|null,
  * }
  */
-final class Assistant implements BaseModel
+final class CallAssistantRequest implements BaseModel
 {
-    /** @use SdkModel<AssistantShape> */
+    /** @use SdkModel<CallAssistantRequestShape> */
     use SdkModel;
 
     /**
@@ -56,15 +57,19 @@ final class Assistant implements BaseModel
 
     /**
      * External LLM configuration for bringing your own LLM endpoint.
+     *
+     * @var array<string,mixed>|null $externalLlm
      */
-    #[Optional('external_llm')]
-    public mixed $externalLlm;
+    #[Optional('external_llm', map: 'mixed')]
+    public ?array $externalLlm;
 
     /**
      * Fallback LLM configuration used when the primary LLM provider is unavailable.
+     *
+     * @var array<string,mixed>|null $fallbackConfig
      */
-    #[Optional('fallback_config')]
-    public mixed $fallbackConfig;
+    #[Optional('fallback_config', map: 'mixed')]
+    public ?array $fallbackConfig;
 
     /**
      * Initial greeting text spoken when the assistant starts. Can be plain text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
@@ -87,9 +92,9 @@ final class Assistant implements BaseModel
     /**
      * MCP (Model Context Protocol) server configurations for extending the assistant's capabilities with external tools and data sources.
      *
-     * @var list<mixed>|null $mcpServers
+     * @var list<array<string,mixed>>|null $mcpServers
      */
-    #[Optional('mcp_servers', list: 'mixed')]
+    #[Optional('mcp_servers', list: new MapOf('mixed'))]
     public ?array $mcpServers;
 
     /**
@@ -106,12 +111,14 @@ final class Assistant implements BaseModel
 
     /**
      * Observability configuration for the assistant session, including Langfuse integration for tracing and monitoring.
+     *
+     * @var array<string,mixed>|null $observabilitySettings
      */
-    #[Optional('observability_settings')]
-    public mixed $observabilitySettings;
+    #[Optional('observability_settings', map: 'mixed')]
+    public ?array $observabilitySettings;
 
     /**
-     * @deprecated
+     * @deprecated This field is deprecated and will be removed soon
      *
      * Deprecated — use `llm_api_key_ref` instead. Integration secret identifier for the OpenAI API key. This field is maintained for backward compatibility; `llm_api_key_ref` is the canonical field name and supports all LLM providers.
      */
@@ -127,17 +134,17 @@ final class Assistant implements BaseModel
     public ?array $tools;
 
     /**
-     * `new Assistant()` is missing required properties by the API.
+     * `new CallAssistantRequest()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Assistant::with(id: ...)
+     * CallAssistantRequest::with(id: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Assistant)->withID(...)
+     * (new CallAssistantRequest)->withID(...)
      * ```
      */
     public function __construct()
@@ -151,21 +158,24 @@ final class Assistant implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,DynamicVariableShape>|null $dynamicVariables
-     * @param list<mixed>|null $mcpServers
+     * @param array<string,mixed>|null $externalLlm
+     * @param array<string,mixed>|null $fallbackConfig
+     * @param list<array<string,mixed>>|null $mcpServers
+     * @param array<string,mixed>|null $observabilitySettings
      * @param list<ToolShape>|null $tools
      */
     public static function with(
         string $id,
         ?array $dynamicVariables = null,
-        mixed $externalLlm = null,
-        mixed $fallbackConfig = null,
+        ?array $externalLlm = null,
+        ?array $fallbackConfig = null,
         ?string $greeting = null,
         ?string $instructions = null,
         ?string $llmAPIKeyRef = null,
         ?array $mcpServers = null,
         ?string $model = null,
         ?string $name = null,
-        mixed $observabilitySettings = null,
+        ?array $observabilitySettings = null,
         ?string $openaiAPIKeyRef = null,
         ?array $tools = null,
     ): self {
@@ -215,8 +225,10 @@ final class Assistant implements BaseModel
 
     /**
      * External LLM configuration for bringing your own LLM endpoint.
+     *
+     * @param array<string,mixed> $externalLlm
      */
-    public function withExternalLlm(mixed $externalLlm): self
+    public function withExternalLlm(array $externalLlm): self
     {
         $self = clone $this;
         $self['externalLlm'] = $externalLlm;
@@ -226,8 +238,10 @@ final class Assistant implements BaseModel
 
     /**
      * Fallback LLM configuration used when the primary LLM provider is unavailable.
+     *
+     * @param array<string,mixed> $fallbackConfig
      */
-    public function withFallbackConfig(mixed $fallbackConfig): self
+    public function withFallbackConfig(array $fallbackConfig): self
     {
         $self = clone $this;
         $self['fallbackConfig'] = $fallbackConfig;
@@ -271,7 +285,7 @@ final class Assistant implements BaseModel
     /**
      * MCP (Model Context Protocol) server configurations for extending the assistant's capabilities with external tools and data sources.
      *
-     * @param list<mixed> $mcpServers
+     * @param list<array<string,mixed>> $mcpServers
      */
     public function withMcpServers(array $mcpServers): self
     {
@@ -305,9 +319,11 @@ final class Assistant implements BaseModel
 
     /**
      * Observability configuration for the assistant session, including Langfuse integration for tracing and monitoring.
+     *
+     * @param array<string,mixed> $observabilitySettings
      */
     public function withObservabilitySettings(
-        mixed $observabilitySettings
+        array $observabilitySettings
     ): self {
         $self = clone $this;
         $self['observabilitySettings'] = $observabilitySettings;

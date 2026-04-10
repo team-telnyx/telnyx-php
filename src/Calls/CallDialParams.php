@@ -7,7 +7,6 @@ namespace Telnyx\Calls;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
-use Telnyx\Calls\CallDialParams\Assistant;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
@@ -48,7 +47,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type ToVariants from \Telnyx\Calls\CallDialParams\To
  * @phpstan-import-type ToShape from \Telnyx\Calls\CallDialParams\To
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig
- * @phpstan-import-type AssistantShape from \Telnyx\Calls\CallDialParams\Assistant
+ * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -62,7 +61,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   to: ToShape,
  *   answeringMachineDetection?: null|AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
  *   answeringMachineDetectionConfig?: null|AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape,
- *   assistant?: null|Assistant|AssistantShape,
+ *   assistant?: null|CallAssistantRequest|CallAssistantRequestShape,
  *   audioURL?: string|null,
  *   billingGroupID?: string|null,
  *   bridgeIntent?: bool|null,
@@ -162,7 +161,7 @@ final class CallDialParams implements BaseModel
      * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      */
     #[Optional]
-    public ?Assistant $assistant;
+    public ?CallAssistantRequest $assistant;
 
     /**
      * The URL of a file to be played back to the callee when the call is answered. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
@@ -532,7 +531,7 @@ final class CallDialParams implements BaseModel
      * @param ToShape $to
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection>|null $answeringMachineDetection
      * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape|null $answeringMachineDetectionConfig
-     * @param Assistant|AssistantShape|null $assistant
+     * @param CallAssistantRequest|CallAssistantRequestShape|null $assistant
      * @param ConferenceConfig|ConferenceConfigShape|null $conferenceConfig
      * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
@@ -563,7 +562,7 @@ final class CallDialParams implements BaseModel
         string|array $to,
         AnsweringMachineDetection|string|null $answeringMachineDetection = null,
         AnsweringMachineDetectionConfig|array|null $answeringMachineDetectionConfig = null,
-        Assistant|array|null $assistant = null,
+        CallAssistantRequest|array|null $assistant = null,
         ?string $audioURL = null,
         ?string $billingGroupID = null,
         ?bool $bridgeIntent = null,
@@ -744,9 +743,9 @@ final class CallDialParams implements BaseModel
     /**
      * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      *
-     * @param Assistant|AssistantShape $assistant
+     * @param CallAssistantRequest|CallAssistantRequestShape $assistant
      */
-    public function withAssistant(Assistant|array $assistant): self
+    public function withAssistant(CallAssistantRequest|array $assistant): self
     {
         $self = clone $this;
         $self['assistant'] = $assistant;

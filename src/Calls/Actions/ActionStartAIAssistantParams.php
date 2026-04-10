@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions;
 
 use Telnyx\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
+use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -28,7 +28,7 @@ use Telnyx\RimeVoiceSettings;
  *
  * @phpstan-import-type MessageHistoryVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory
  * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
- * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant
+ * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant
@@ -36,7 +36,7 @@ use Telnyx\RimeVoiceSettings;
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  *
  * @phpstan-type ActionStartAIAssistantParamsShape = array{
- *   assistant?: null|Assistant|AssistantShape,
+ *   assistant?: null|CallAssistantRequest|CallAssistantRequestShape,
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   greeting?: string|null,
@@ -59,7 +59,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      */
     #[Optional]
-    public ?Assistant $assistant;
+    public ?CallAssistantRequest $assistant;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -144,7 +144,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Assistant|AssistantShape|null $assistant
+     * @param CallAssistantRequest|CallAssistantRequestShape|null $assistant
      * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
      * @param list<MessageHistoryShape>|null $messageHistory
      * @param list<Participant|ParticipantShape>|null $participants
@@ -152,7 +152,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
-        Assistant|array|null $assistant = null,
+        CallAssistantRequest|array|null $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,
         ?string $greeting = null,
@@ -184,9 +184,9 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * AI Assistant configuration. All fields except `id` are optional — the assistant's stored configuration will be used as fallback for any omitted fields.
      *
-     * @param Assistant|AssistantShape $assistant
+     * @param CallAssistantRequest|CallAssistantRequestShape $assistant
      */
-    public function withAssistant(Assistant|array $assistant): self
+    public function withAssistant(CallAssistantRequest|array $assistant): self
     {
         $self = clone $this;
         $self['assistant'] = $assistant;

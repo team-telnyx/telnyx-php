@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams\Assistant\Tool\CheckAvailabilityTool;
+namespace Telnyx;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type CheckAvailabilityShape = array{
+ * @phpstan-type CheckAvailabilityToolParamsShape = array{
  *   apiKeyRef: string, eventTypeID: int
  * }
  */
-final class CheckAvailability implements BaseModel
+final class CheckAvailabilityToolParams implements BaseModel
 {
-    /** @use SdkModel<CheckAvailabilityShape> */
+    /** @use SdkModel<CheckAvailabilityToolParamsShape> */
     use SdkModel;
 
     /**
@@ -31,17 +31,17 @@ final class CheckAvailability implements BaseModel
     public int $eventTypeID;
 
     /**
-     * `new CheckAvailability()` is missing required properties by the API.
+     * `new CheckAvailabilityToolParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CheckAvailability::with(apiKeyRef: ..., eventTypeID: ...)
+     * CheckAvailabilityToolParams::with(apiKeyRef: ..., eventTypeID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new CheckAvailability)->withAPIKeyRef(...)->withEventTypeID(...)
+     * (new CheckAvailabilityToolParams)->withAPIKeyRef(...)->withEventTypeID(...)
      * ```
      */
     public function __construct()
