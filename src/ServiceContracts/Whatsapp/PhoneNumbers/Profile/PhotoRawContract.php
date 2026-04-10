@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\Profile;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadParams;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadResponse;
 
@@ -15,6 +16,21 @@ use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadResponse;
  */
 interface PhotoRawContract
 {
+    /**
+     * @api
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<PhotoGetResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $phoneNumber,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
     /**
      * @api
      *
