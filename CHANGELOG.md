@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.29.0 (2026-04-10)
+
+Full Changelog: [v7.28.0...v7.29.0](https://github.com/team-telnyx/telnyx-php/compare/v7.28.0...v7.29.0)
+
+### Features
+
+* MSG-6846: add GET /profile/photo docs for whatsapp API ([cedfb96](https://github.com/team-telnyx/telnyx-php/commit/cedfb96118aba3710cd663f43a85081a9b7c5c98))
+
+
+### Reverts
+
+* restore stainless.yml to pre-6a6df5b state ([7dd5f3e](https://github.com/team-telnyx/telnyx-php/commit/7dd5f3ec4763b1d2bb7fe1aca1ddae15eb4190a7))
+
 ## 7.28.0 (2026-04-09)
 
 Full Changelog: [v7.27.0...v7.28.0](https://github.com/team-telnyx/telnyx-php/compare/v7.27.0...v7.28.0)
