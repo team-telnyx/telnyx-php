@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadResponse;
 use Tests\UnsupportedMockTests;
 
@@ -26,6 +27,21 @@ final class PhotoTest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
+    }
+
+    #[Test]
+    public function testRetrieve(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->whatsapp->phoneNumbers->profile->photo->retrieve(
+            'phone_number'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PhotoGetResponse::class, $result);
     }
 
     #[Test]

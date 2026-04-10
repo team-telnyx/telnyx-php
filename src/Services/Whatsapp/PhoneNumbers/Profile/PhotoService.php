@@ -9,6 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\Profile\PhotoContract;
+use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoGetResponse;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoUploadResponse;
 
 /**
@@ -29,6 +30,26 @@ final class PhotoService implements PhotoContract
     public function __construct(private Client $client)
     {
         $this->raw = new PhotoRawService($client);
+    }
+
+    /**
+     * @api
+     *
+     * Get Whatsapp profile photo
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $phoneNumber,
+        RequestOptions|array|null $requestOptions = null
+    ): PhotoGetResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($phoneNumber, requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 
     /**
