@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\FileParam;
 
 /**
  * Uploads an SSL certificate and its matching secret so that you can use Telnyx's storage as your CDN.
@@ -15,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Storage\Buckets\SslCertificateService::create()
  *
  * @phpstan-type SslCertificateCreateParamsShape = array{
- *   certificate?: string|null, privateKey?: string|null
+ *   certificate?: string|null|FileParam, privateKey?: string|null|FileParam
  * }
  */
 final class SslCertificateCreateParams implements BaseModel
@@ -47,8 +48,8 @@ final class SslCertificateCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        ?string $certificate = null,
-        ?string $privateKey = null
+        string|FileParam|null $certificate = null,
+        string|FileParam|null $privateKey = null
     ): self {
         $self = new self;
 
@@ -61,7 +62,7 @@ final class SslCertificateCreateParams implements BaseModel
     /**
      * The SSL certificate file.
      */
-    public function withCertificate(string $certificate): self
+    public function withCertificate(string|FileParam $certificate): self
     {
         $self = clone $this;
         $self['certificate'] = $certificate;
@@ -72,7 +73,7 @@ final class SslCertificateCreateParams implements BaseModel
     /**
      * The private key file.
      */
-    public function withPrivateKey(string $privateKey): self
+    public function withPrivateKey(string|FileParam $privateKey): self
     {
         $self = clone $this;
         $self['privateKey'] = $privateKey;

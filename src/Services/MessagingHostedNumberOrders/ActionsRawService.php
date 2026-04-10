@@ -7,6 +7,7 @@ namespace Telnyx\Services\MessagingHostedNumberOrders;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\FileParam;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileParams;
 use Telnyx\MessagingHostedNumberOrders\Actions\ActionUploadFileResponse;
 use Telnyx\RequestOptions;
@@ -31,7 +32,9 @@ final class ActionsRawService implements ActionsRawContract
      * Upload hosted number document
      *
      * @param string $id identifies the type of resource
-     * @param array{bill?: string, loa?: string}|ActionUploadFileParams $params
+     * @param array{
+     *   bill?: string|FileParam, loa?: string|FileParam
+     * }|ActionUploadFileParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionUploadFileResponse>

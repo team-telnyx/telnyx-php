@@ -8,13 +8,14 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\FileParam;
 
 /**
  * Upload Whatsapp profile photo.
  *
  * @see Telnyx\Services\Whatsapp\PhoneNumbers\Profile\PhotoService::upload()
  *
- * @phpstan-type PhotoUploadParamsShape = array{file: string}
+ * @phpstan-type PhotoUploadParamsShape = array{file: string|FileParam}
  */
 final class PhotoUploadParams implements BaseModel
 {
@@ -52,7 +53,7 @@ final class PhotoUploadParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $file): self
+    public static function with(string|FileParam $file): self
     {
         $self = new self;
 
@@ -64,7 +65,7 @@ final class PhotoUploadParams implements BaseModel
     /**
      * Image file (JPEG recommended, max 10 MB).
      */
-    public function withFile(string $file): self
+    public function withFile(string|FileParam $file): self
     {
         $self = clone $this;
         $self['file'] = $file;

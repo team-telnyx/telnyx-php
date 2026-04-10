@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Audio\AudioTranscribeResponse;
 use Telnyx\Client;
+use Telnyx\Core\FileParam;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
 
@@ -52,7 +53,7 @@ final class AudioTest extends TestCase
 
         $result = $this->client->ai->audio->transcribe(
             model: 'distil-whisper/distil-large-v2',
-            file: 'file',
+            file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
             fileURL: 'https://example.com/file.mp3',
             language: 'en-US',
             modelConfig: ['smart_format' => 'bar', 'punctuate' => 'bar'],

@@ -7,6 +7,7 @@ namespace Telnyx\Services\Storage\Buckets;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\FileParam;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\SslCertificateRawContract;
 use Telnyx\Storage\Buckets\SslCertificate\SslCertificateCreateParams;
@@ -34,7 +35,7 @@ final class SslCertificateRawService implements SslCertificateRawContract
      *
      * @param string $bucketName The name of the bucket
      * @param array{
-     *   certificate?: string, privateKey?: string
+     *   certificate?: string|FileParam, privateKey?: string|FileParam
      * }|SslCertificateCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
