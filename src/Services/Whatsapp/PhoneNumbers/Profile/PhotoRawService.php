@@ -7,6 +7,7 @@ namespace Telnyx\Services\Whatsapp\PhoneNumbers\Profile;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\FileParam;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\Profile\PhotoRawContract;
 use Telnyx\Whatsapp\PhoneNumbers\Profile\Photo\PhotoGetResponse;
@@ -82,7 +83,7 @@ final class PhotoRawService implements PhotoRawContract
      * Upload Whatsapp profile photo
      *
      * @param string $phoneNumber Phone number (E.164 format)
-     * @param array{file: string}|PhotoUploadParams $params
+     * @param array{file: string|FileParam}|PhotoUploadParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhotoUploadResponse>

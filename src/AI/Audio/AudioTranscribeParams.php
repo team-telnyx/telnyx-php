@@ -12,6 +12,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Core\FileParam;
 
 /**
  * Transcribe speech to text. This endpoint is consistent with the [OpenAI Transcription API](https://platform.openai.com/docs/api-reference/audio/createTranscription) and may be used with the OpenAI JS or Python SDK.
@@ -20,7 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AudioTranscribeParamsShape = array{
  *   model: Model|value-of<Model>,
- *   file?: string|null,
+ *   file?: string|null|FileParam,
  *   fileURL?: string|null,
  *   language?: string|null,
  *   modelConfig?: array<string,mixed>|null,
@@ -115,7 +116,7 @@ final class AudioTranscribeParams implements BaseModel
      */
     public static function with(
         Model|string $model = 'distil-whisper/distil-large-v2',
-        ?string $file = null,
+        string|FileParam|null $file = null,
         ?string $fileURL = null,
         ?string $language = null,
         ?array $modelConfig = null,
@@ -152,7 +153,7 @@ final class AudioTranscribeParams implements BaseModel
     /**
      * The audio file object to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. File uploads are limited to 100 MB. Cannot be used together with `file_url`. Note: `deepgram/nova-3` only supports mp3 and wav formats.
      */
-    public function withFile(string $file): self
+    public function withFile(string|FileParam $file): self
     {
         $self = clone $this;
         $self['file'] = $file;

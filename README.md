@@ -135,6 +135,36 @@ $result = $client->numberOrders->create(
 );
 ```
 
+### File uploads
+
+Request parameters that correspond to file uploads can be passed as a resource returned by `fopen()`, a string of file contents, or a `FileParam` instance.
+
+```php
+<?php
+
+use Telnyx\Core\FileParam;
+
+// Pass a string with filename and content type:
+$contents = file_get_contents('/path/to/file');
+// Pass a string with filename and content type:
+$response = $client->ai->audio->transcribe(
+  file: FileParam::fromString($contents, filename: '/path/to/file', contentType: '…'),
+);
+
+// Pass in only a string (where applicable)
+$response = $client->ai->audio->transcribe(file: '…');
+
+// Pass an open resource:
+$fd = fopen('/path/to/file', 'r');
+try {
+  $response = $client->ai->audio->transcribe(
+    file: FileParam::fromResource($fd, filename: '/path/to/file', contentType: '…'),
+  );
+} finally {
+  fclose($fd);
+}
+```
+
 ## Advanced concepts
 
 ### Making custom or undocumented requests

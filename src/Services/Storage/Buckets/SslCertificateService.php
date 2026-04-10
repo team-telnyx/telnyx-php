@@ -6,6 +6,7 @@ namespace Telnyx\Services\Storage\Buckets;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\FileParam;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Storage\Buckets\SslCertificateContract;
@@ -39,16 +40,16 @@ final class SslCertificateService implements SslCertificateContract
      * Uploads an SSL certificate and its matching secret so that you can use Telnyx's storage as your CDN.
      *
      * @param string $bucketName The name of the bucket
-     * @param string $certificate The SSL certificate file
-     * @param string $privateKey The private key file
+     * @param string|FileParam $certificate The SSL certificate file
+     * @param string|FileParam $privateKey The private key file
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $bucketName,
-        ?string $certificate = null,
-        ?string $privateKey = null,
+        string|FileParam|null $certificate = null,
+        string|FileParam|null $privateKey = null,
         RequestOptions|array|null $requestOptions = null,
     ): SslCertificateNewResponse {
         $params = Util::removeNulls(

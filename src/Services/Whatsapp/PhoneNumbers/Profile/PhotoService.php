@@ -6,6 +6,7 @@ namespace Telnyx\Services\Whatsapp\PhoneNumbers\Profile;
 
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\FileParam;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbers\Profile\PhotoContract;
@@ -78,14 +79,14 @@ final class PhotoService implements PhotoContract
      * Upload Whatsapp profile photo
      *
      * @param string $phoneNumber Phone number (E.164 format)
-     * @param string $file Image file (JPEG recommended, max 10 MB)
+     * @param string|FileParam $file Image file (JPEG recommended, max 10 MB)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function upload(
         string $phoneNumber,
-        string $file,
+        string|FileParam $file,
         RequestOptions|array|null $requestOptions = null,
     ): PhotoUploadResponse {
         $params = Util::removeNulls(['file' => $file]);
