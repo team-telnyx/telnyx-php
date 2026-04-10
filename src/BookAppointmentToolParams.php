@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionAnswerParams\Assistant\Tool\BookAppointmentTool;
+namespace Telnyx;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -10,16 +10,16 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type BookAppointmentShape = array{
+ * @phpstan-type BookAppointmentToolParamsShape = array{
  *   apiKeyRef: string,
  *   eventTypeID: int,
  *   attendeeName?: string|null,
  *   attendeeTimezone?: string|null,
  * }
  */
-final class BookAppointment implements BaseModel
+final class BookAppointmentToolParams implements BaseModel
 {
-    /** @use SdkModel<BookAppointmentShape> */
+    /** @use SdkModel<BookAppointmentToolParamsShape> */
     use SdkModel;
 
     /**
@@ -47,17 +47,17 @@ final class BookAppointment implements BaseModel
     public ?string $attendeeTimezone;
 
     /**
-     * `new BookAppointment()` is missing required properties by the API.
+     * `new BookAppointmentToolParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * BookAppointment::with(apiKeyRef: ..., eventTypeID: ...)
+     * BookAppointmentToolParams::with(apiKeyRef: ..., eventTypeID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new BookAppointment)->withAPIKeyRef(...)->withEventTypeID(...)
+     * (new BookAppointmentToolParams)->withAPIKeyRef(...)->withEventTypeID(...)
      * ```
      */
     public function __construct()

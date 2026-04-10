@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\CallDialParams\Assistant\Tool;
+namespace Telnyx;
 
-use Telnyx\Calls\CallDialParams\Assistant\Tool\CallControlRetrievalTool\Retrieval;
+use Telnyx\CallControlRetrievalTool\Type;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type RetrievalShape from \Telnyx\Calls\CallDialParams\Assistant\Tool\CallControlRetrievalTool\Retrieval
+ * @phpstan-import-type CallControlBucketIDsShape from \Telnyx\CallControlBucketIDs
  *
  * @phpstan-type CallControlRetrievalToolShape = array{
- *   retrieval: Retrieval|RetrievalShape, type: 'retrieval'
+ *   retrieval: CallControlBucketIDs|CallControlBucketIDsShape,
+ *   type: Type|value-of<Type>,
  * }
  */
 final class CallControlRetrievalTool implements BaseModel
@@ -21,25 +22,25 @@ final class CallControlRetrievalTool implements BaseModel
     /** @use SdkModel<CallControlRetrievalToolShape> */
     use SdkModel;
 
-    /** @var 'retrieval' $type */
     #[Required]
-    public string $type = 'retrieval';
+    public CallControlBucketIDs $retrieval;
 
-    #[Required]
-    public Retrieval $retrieval;
+    /** @var value-of<Type> $type */
+    #[Required(enum: Type::class)]
+    public string $type;
 
     /**
      * `new CallControlRetrievalTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * CallControlRetrievalTool::with(retrieval: ...)
+     * CallControlRetrievalTool::with(retrieval: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new CallControlRetrievalTool)->withRetrieval(...)
+     * (new CallControlRetrievalTool)->withRetrieval(...)->withType(...)
      * ```
      */
     public function __construct()
@@ -52,21 +53,25 @@ final class CallControlRetrievalTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Retrieval|RetrievalShape $retrieval
+     * @param CallControlBucketIDs|CallControlBucketIDsShape $retrieval
+     * @param Type|value-of<Type> $type
      */
-    public static function with(Retrieval|array $retrieval): self
-    {
+    public static function with(
+        CallControlBucketIDs|array $retrieval,
+        Type|string $type
+    ): self {
         $self = new self;
 
         $self['retrieval'] = $retrieval;
+        $self['type'] = $type;
 
         return $self;
     }
 
     /**
-     * @param Retrieval|RetrievalShape $retrieval
+     * @param CallControlBucketIDs|CallControlBucketIDsShape $retrieval
      */
-    public function withRetrieval(Retrieval|array $retrieval): self
+    public function withRetrieval(CallControlBucketIDs|array $retrieval): self
     {
         $self = clone $this;
         $self['retrieval'] = $retrieval;
@@ -75,9 +80,9 @@ final class CallControlRetrievalTool implements BaseModel
     }
 
     /**
-     * @param 'retrieval' $type
+     * @param Type|value-of<Type> $type
      */
-    public function withType(string $type): self
+    public function withType(Type|string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;

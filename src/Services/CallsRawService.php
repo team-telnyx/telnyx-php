@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
+use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Calls\CallDialParams;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
-use Telnyx\Calls\CallDialParams\Assistant;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
@@ -42,7 +42,7 @@ use Telnyx\ServiceContracts\CallsRawContract;
 /**
  * @phpstan-import-type ToShape from \Telnyx\Calls\CallDialParams\To
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig
- * @phpstan-import-type AssistantShape from \Telnyx\Calls\CallDialParams\Assistant
+ * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -82,7 +82,7 @@ final class CallsRawService implements CallsRawContract
      *   to: ToShape,
      *   answeringMachineDetection?: AnsweringMachineDetection|value-of<AnsweringMachineDetection>,
      *   answeringMachineDetectionConfig?: AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape,
-     *   assistant?: Assistant|AssistantShape,
+     *   assistant?: CallAssistantRequest|CallAssistantRequestShape,
      *   audioURL?: string,
      *   billingGroupID?: string,
      *   bridgeIntent?: bool,

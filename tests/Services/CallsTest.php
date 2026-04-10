@@ -81,15 +81,15 @@ final class CallsTest extends TestCase
                 'dynamicVariables' => [
                     'customer_name' => 'John', 'account_id' => 'ACC-12345',
                 ],
-                'externalLlm' => (object) [],
-                'fallbackConfig' => (object) [],
+                'externalLlm' => ['foo' => 'bar'],
+                'fallbackConfig' => ['foo' => 'bar'],
                 'greeting' => 'greeting',
                 'instructions' => 'You are a friendly voice assistant.',
                 'llmAPIKeyRef' => 'my_llm_api_key',
-                'mcpServers' => [(object) []],
+                'mcpServers' => [['foo' => 'bar']],
                 'model' => 'gpt-4o',
                 'name' => 'name',
-                'observabilitySettings' => (object) [],
+                'observabilitySettings' => ['foo' => 'bar'],
                 'openaiAPIKeyRef' => 'my_openai_api_key',
                 'tools' => [
                     [
