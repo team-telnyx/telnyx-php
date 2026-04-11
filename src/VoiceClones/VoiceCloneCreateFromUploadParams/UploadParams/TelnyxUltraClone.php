@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params;
+namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\FileParam;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxUltraClone\Gender;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxUltraClone\ModelID;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxUltraClone\Provider;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxUltraClone\Gender;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxUltraClone\ModelID;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxUltraClone\Provider;
 
 /**
  * Upload-based voice clone using the Telnyx Ultra model.

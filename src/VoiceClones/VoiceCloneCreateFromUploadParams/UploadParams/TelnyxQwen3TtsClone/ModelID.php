@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxQwen3TtsClone;
+namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxQwen3TtsClone;
 
 /**
  * TTS model identifier. Nullable/omittable — defaults to Qwen3TTS.

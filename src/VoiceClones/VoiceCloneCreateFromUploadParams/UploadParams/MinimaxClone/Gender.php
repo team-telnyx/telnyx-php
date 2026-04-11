@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone;
+namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\MinimaxClone;
 
 /**
  * Gender of the voice clone.
