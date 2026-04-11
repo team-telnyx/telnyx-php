@@ -8,19 +8,21 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxQwen3TtsClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxUltraClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxQwen3TtsClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxUltraClone;
 
 /**
  * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
  *
  * @see Telnyx\Services\VoiceClonesService::createFromUpload()
  *
- * @phpstan-import-type ParamsVariants from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params
- * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params
+ * @phpstan-import-type UploadParamsVariants from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams
+ * @phpstan-import-type UploadParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams
  *
- * @phpstan-type VoiceCloneCreateFromUploadParamsShape = array{params: ParamsShape}
+ * @phpstan-type VoiceCloneCreateFromUploadParamsShape = array{
+ *   uploadParams: UploadParamsShape
+ * }
  */
 final class VoiceCloneCreateFromUploadParams implements BaseModel
 {
@@ -31,23 +33,23 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     /**
      * Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
-     * @var ParamsVariants $params
+     * @var UploadParamsVariants $uploadParams
      */
     #[Required]
-    public TelnyxQwen3TtsClone|TelnyxUltraClone|MinimaxClone $params;
+    public TelnyxQwen3TtsClone|TelnyxUltraClone|MinimaxClone $uploadParams;
 
     /**
      * `new VoiceCloneCreateFromUploadParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VoiceCloneCreateFromUploadParams::with(params: ...)
+     * VoiceCloneCreateFromUploadParams::with(uploadParams: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new VoiceCloneCreateFromUploadParams)->withParams(...)
+     * (new VoiceCloneCreateFromUploadParams)->withUploadParams(...)
      * ```
      */
     public function __construct()
@@ -60,14 +62,14 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ParamsShape $params
+     * @param UploadParamsShape $uploadParams
      */
     public static function with(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $params
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $uploadParams
     ): self {
         $self = new self;
 
-        $self['params'] = $params;
+        $self['uploadParams'] = $uploadParams;
 
         return $self;
     }
@@ -75,13 +77,13 @@ final class VoiceCloneCreateFromUploadParams implements BaseModel
     /**
      * Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
-     * @param ParamsShape $params
+     * @param UploadParamsShape $uploadParams
      */
-    public function withParams(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $params
+    public function withUploadParams(
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $uploadParams
     ): self {
         $self = clone $this;
-        $self['params'] = $params;
+        $self['uploadParams'] = $uploadParams;
 
         return $self;
     }

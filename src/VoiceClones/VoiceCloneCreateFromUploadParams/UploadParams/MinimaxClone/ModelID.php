@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone;
+namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\MinimaxClone;
 
 /**
  * TTS model identifier. Nullable — defaults to speech-2.8-turbo.

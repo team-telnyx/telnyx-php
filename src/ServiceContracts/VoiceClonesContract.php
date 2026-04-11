@@ -7,9 +7,9 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxQwen3TtsClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxUltraClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxQwen3TtsClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxUltraClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\MinimaxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\TelnyxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneData;
@@ -22,7 +22,7 @@ use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
 /**
  * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
- * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params as ParamsShape1
+ * @phpstan-import-type UploadParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface VoiceClonesContract
@@ -98,13 +98,13 @@ interface VoiceClonesContract
     /**
      * @api
      *
-     * @param ParamsShape1 $params Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
+     * @param UploadParamsShape $uploadParams Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createFromUpload(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $params,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $uploadParams,
         RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneNewFromUploadResponse;
 
