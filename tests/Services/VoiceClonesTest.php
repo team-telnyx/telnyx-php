@@ -150,7 +150,7 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->createFromUpload(
-            params: [
+            uploadParams: [
                 'audioFile' => FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
                 'gender' => 'male',
                 'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
@@ -171,7 +171,7 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->createFromUpload(
-            params: [
+            uploadParams: [
                 'audioFile' => FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
                 'gender' => 'male',
                 'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',

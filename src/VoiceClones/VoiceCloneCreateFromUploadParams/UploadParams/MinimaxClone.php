@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params;
+namespace Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Core\FileParam;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone\Gender;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone\ModelID;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone\Provider;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\MinimaxClone\Gender;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\MinimaxClone\ModelID;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\MinimaxClone\Provider;
 
 /**
  * Upload-based voice clone using the Minimax provider.
