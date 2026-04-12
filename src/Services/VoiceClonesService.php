@@ -10,9 +10,6 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesContract;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\MinimaxClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxQwen3TtsClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams\TelnyxUltraClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\MinimaxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\TelnyxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneData;
@@ -27,7 +24,6 @@ use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
  * Capture and manage voice identities as clones for use in text-to-speech synthesis.
  *
  * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
- * @phpstan-import-type UploadParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoiceClonesService implements VoiceClonesContract
@@ -162,14 +158,13 @@ final class VoiceClonesService implements VoiceClonesContract
      *
      * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
-     * @param UploadParamsShape $uploadParams Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createFromUpload(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $uploadParams,
-        RequestOptions|array|null $requestOptions = null,
+        mixed $uploadParams,
+        RequestOptions|array|null $requestOptions = null
     ): VoiceCloneNewFromUploadResponse {
         $params = Util::removeNulls(['uploadParams' => $uploadParams]);
 
