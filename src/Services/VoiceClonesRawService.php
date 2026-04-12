@@ -27,7 +27,6 @@ use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
  * Capture and manage voice identities as clones for use in text-to-speech synthesis.
  *
  * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
- * @phpstan-import-type UploadParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\UploadParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoiceClonesRawService implements VoiceClonesRawContract
@@ -180,9 +179,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      *
      * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
-     * @param array{
-     *   uploadParams: UploadParamsShape
-     * }|VoiceCloneCreateFromUploadParams $params
+     * @param array{uploadParams: mixed}|VoiceCloneCreateFromUploadParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceCloneNewFromUploadResponse>
@@ -203,7 +200,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
             method: 'post',
             path: 'voice_clones/from_upload',
             headers: ['Content-Type' => 'multipart/form-data'],
-            body: (object) $parsed['uploadParams'],
+            body: $parsed['uploadParams'],
             options: $options,
             convert: VoiceCloneNewFromUploadResponse::class,
         );
