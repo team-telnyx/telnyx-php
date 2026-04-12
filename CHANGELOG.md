@@ -1,5 +1,24 @@
 # Changelog
 
+## 7.31.0 (2026-04-12)
+
+Full Changelog: [v7.30.0...v7.31.0](https://github.com/team-telnyx/telnyx-php/compare/v7.30.0...v7.31.0)
+
+### Features
+
+* **api:** manual updates ([cf05165](https://github.com/team-telnyx/telnyx-php/commit/cf051659fcdad981789298d4b126866f9336c3f3))
+
+
+### Bug Fixes
+
+* **client:** properly generate file params ([6cdb55f](https://github.com/team-telnyx/telnyx-php/commit/6cdb55fb2c8f58fa02358748d78b103f1dbc2932))
+* set additionalProperties=false on VoiceCloneUploadRequest to prevent codegen errors ([d9ccd91](https://github.com/team-telnyx/telnyx-php/commit/d9ccd91f810179091803a1a0024250e016b34f8c))
+
+
+### Documentation
+
+* improve examples ([2580bc9](https://github.com/team-telnyx/telnyx-php/commit/2580bc97638c9c84bee852a01cb0953322473319))
+
 ## 7.30.0 (2026-04-10)
 
 Full Changelog: [v7.29.0...v7.30.0](https://github.com/team-telnyx/telnyx-php/compare/v7.29.0...v7.30.0)
