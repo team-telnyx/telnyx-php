@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.33.0 (2026-04-13)
+
+Full Changelog: [v7.32.1...v7.33.0](https://github.com/team-telnyx/telnyx-php/compare/v7.32.1...v7.33.0)
+
+### Features
+
+* [TDA-6425] Fix session analysis API spec: relaxed date_time, remove status & completed_at ([4065b41](https://github.com/team-telnyx/telnyx-php/commit/4065b4190b8e5f6c2cfb6748c81cc71cb45aeb26))
+
 ## 7.32.1 (2026-04-13)
 
 Full Changelog: [v7.32.0...v7.32.1](https://github.com/team-telnyx/telnyx-php/compare/v7.32.0...v7.32.1)
