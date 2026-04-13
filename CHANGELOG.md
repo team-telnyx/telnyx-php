@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.32.1 (2026-04-13)
+
+Full Changelog: [v7.32.0...v7.32.1](https://github.com/team-telnyx/telnyx-php/compare/v7.32.0...v7.32.1)
+
+### Chores
+
+* remove publish-packagist workflow and Packagist API secrets ([db11381](https://github.com/team-telnyx/telnyx-php/commit/db1138144130c03e6b4c7e1582129cade5ae02de))
+
 ## 7.32.0 (2026-04-13)
 
 Full Changelog: [v7.31.0...v7.32.0](https://github.com/team-telnyx/telnyx-php/compare/v7.31.0...v7.32.0)
