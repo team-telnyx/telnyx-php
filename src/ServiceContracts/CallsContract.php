@@ -20,7 +20,9 @@ use Telnyx\Calls\CallDialParams\SipRegion;
 use Telnyx\Calls\CallDialParams\SipTransportProtocol;
 use Telnyx\Calls\CallDialParams\StreamTrack;
 use Telnyx\Calls\CallDialParams\SupervisorRole;
+use Telnyx\Calls\CallDialParams\WebhookRetriesPolicy;
 use Telnyx\Calls\CallDialParams\WebhookURLMethod;
+use Telnyx\Calls\CallDialParams\WebhookURLsMethod;
 use Telnyx\Calls\CallDialResponse;
 use Telnyx\Calls\CallGetStatusResponse;
 use Telnyx\Calls\CustomSipHeader;
@@ -45,6 +47,7 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\CallDialParams\WebhookRetriesPolicy
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface CallsContract
@@ -106,8 +109,11 @@ interface CallsContract
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the call to be answered by the destination to which it is being called. If the timeout is reached before an answer is received, the call will hangup and a `call.hangup` webhook with a `hangup_cause` of `timeout` will be sent. Minimum value is 5 seconds. Maximum value is 600 seconds.
      * @param bool $transcription Enable transcription upon call answer. The default value is false.
      * @param TranscriptionStartRequest|TranscriptionStartRequestShape $transcriptionConfig
+     * @param array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape> $webhookRetriesPolicies A map of event types to retry policies. Each retry policy contains an array of `retries_ms` specifying the delays between retry attempts in milliseconds. Maximum 5 retries, total delay cannot exceed 60 seconds.
      * @param string $webhookURL use this field to override the URL for which Telnyx will send subsequent webhooks to for this call
      * @param WebhookURLMethod|value-of<WebhookURLMethod> $webhookURLMethod HTTP request type used for `webhook_url`
+     * @param array<string,string> $webhookURLs A map of event types to webhook URLs. When an event of the specified type occurs, the webhook URL associated with that event type will be called instead of the default webhook URL. Events not mapped here will use the default webhook URL.
+     * @param WebhookURLsMethod|value-of<WebhookURLsMethod> $webhookURLsMethod HTTP request method to invoke `webhook_urls`
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -167,8 +173,11 @@ interface CallsContract
         int $timeoutSecs = 30,
         bool $transcription = false,
         TranscriptionStartRequest|array|null $transcriptionConfig = null,
+        ?array $webhookRetriesPolicies = null,
         ?string $webhookURL = null,
         WebhookURLMethod|string $webhookURLMethod = 'POST',
+        ?array $webhookURLs = null,
+        WebhookURLsMethod|string $webhookURLsMethod = 'POST',
         RequestOptions|array|null $requestOptions = null,
     ): CallDialResponse;
 
