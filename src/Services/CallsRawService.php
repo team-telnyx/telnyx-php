@@ -21,7 +21,9 @@ use Telnyx\Calls\CallDialParams\SipRegion;
 use Telnyx\Calls\CallDialParams\SipTransportProtocol;
 use Telnyx\Calls\CallDialParams\StreamTrack;
 use Telnyx\Calls\CallDialParams\SupervisorRole;
+use Telnyx\Calls\CallDialParams\WebhookRetriesPolicy;
 use Telnyx\Calls\CallDialParams\WebhookURLMethod;
+use Telnyx\Calls\CallDialParams\WebhookURLsMethod;
 use Telnyx\Calls\CallDialResponse;
 use Telnyx\Calls\CallGetStatusResponse;
 use Telnyx\Calls\CustomSipHeader;
@@ -49,6 +51,7 @@ use Telnyx\ServiceContracts\CallsRawContract;
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
+ * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\CallDialParams\WebhookRetriesPolicy
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CallsRawService implements CallsRawContract
@@ -131,8 +134,11 @@ final class CallsRawService implements CallsRawContract
      *   timeoutSecs?: int,
      *   transcription?: bool,
      *   transcriptionConfig?: TranscriptionStartRequest|TranscriptionStartRequestShape,
+     *   webhookRetriesPolicies?: array<string,WebhookRetriesPolicy|WebhookRetriesPolicyShape>,
      *   webhookURL?: string,
      *   webhookURLMethod?: WebhookURLMethod|value-of<WebhookURLMethod>,
+     *   webhookURLs?: array<string,string>,
+     *   webhookURLsMethod?: WebhookURLsMethod|value-of<WebhookURLsMethod>,
      * }|CallDialParams $params
      * @param RequestOpts|null $requestOptions
      *

@@ -194,8 +194,16 @@ final class CallsTest extends TestCase
                 ],
                 'transcriptionTracks' => 'both',
             ],
+            webhookRetriesPolicies: [
+                'call.hangup' => ['retriesMs' => [1000, 2000, 5000]],
+            ],
             webhookURL: 'https://www.example.com/server-b/',
             webhookURLMethod: 'POST',
+            webhookURLs: [
+                'call.hangup' => 'https://www.example.com/webhooks/hangup',
+                'call.bridge' => 'https://www.example.com/webhooks/bridge',
+            ],
+            webhookURLsMethod: 'POST',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
