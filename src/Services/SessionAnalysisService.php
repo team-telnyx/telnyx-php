@@ -46,7 +46,7 @@ final class SessionAnalysisService implements SessionAnalysisContract
      *
      * @param string $eventID path param: The event identifier (UUID)
      * @param string $recordType path param: The record type identifier
-     * @param \DateTimeInterface $dateTime query param: ISO 8601 timestamp to narrow index selection for faster lookups
+     * @param \DateTimeInterface $dateTime Query param: ISO 8601 timestamp or date to narrow index selection for faster lookups. Accepts full datetime (e.g., 2026-03-17T10:00:00Z) or date-only format (e.g., 2026-03-17).
      * @param Expand|value-of<Expand> $expand query param: Controls what data to expand on each event node
      * @param bool $includeChildren query param: Whether to include child events in the response
      * @param int $maxDepth query param: Maximum traversal depth for the event tree

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\SessionAnalysis;
 
-use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -18,12 +17,9 @@ use Telnyx\SessionAnalysis\SessionAnalysisGetResponse\Meta;
  *
  * @phpstan-type SessionAnalysisGetResponseShape = array{
  *   cost: Cost|CostShape,
- *   createdAt: \DateTimeInterface,
  *   meta: Meta|MetaShape,
  *   root: EventNode|EventNodeShape,
  *   sessionID: string,
- *   status: string,
- *   completedAt?: \DateTimeInterface|null,
  * }
  */
 final class SessionAnalysisGetResponse implements BaseModel
@@ -33,12 +29,6 @@ final class SessionAnalysisGetResponse implements BaseModel
 
     #[Required]
     public Cost $cost;
-
-    /**
-     * When the session started.
-     */
-    #[Required('created_at')]
-    public \DateTimeInterface $createdAt;
 
     #[Required]
     public Meta $meta;
@@ -53,24 +43,12 @@ final class SessionAnalysisGetResponse implements BaseModel
     public string $sessionID;
 
     /**
-     * Analysis status (e.g. "completed").
-     */
-    #[Required]
-    public string $status;
-
-    /**
-     * When the session completed.
-     */
-    #[Optional('completed_at', nullable: true)]
-    public ?\DateTimeInterface $completedAt;
-
-    /**
      * `new SessionAnalysisGetResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
      * SessionAnalysisGetResponse::with(
-     *   cost: ..., createdAt: ..., meta: ..., root: ..., sessionID: ..., status: ...
+     *   cost: ..., meta: ..., root: ..., sessionID: ...
      * )
      * ```
      *
@@ -79,11 +57,9 @@ final class SessionAnalysisGetResponse implements BaseModel
      * ```
      * (new SessionAnalysisGetResponse)
      *   ->withCost(...)
-     *   ->withCreatedAt(...)
      *   ->withMeta(...)
      *   ->withRoot(...)
      *   ->withSessionID(...)
-     *   ->withStatus(...)
      * ```
      */
     public function __construct()
@@ -102,23 +78,16 @@ final class SessionAnalysisGetResponse implements BaseModel
      */
     public static function with(
         Cost|array $cost,
-        \DateTimeInterface $createdAt,
         Meta|array $meta,
         EventNode|array $root,
-        string $sessionID,
-        string $status,
-        ?\DateTimeInterface $completedAt = null,
+        string $sessionID
     ): self {
         $self = new self;
 
         $self['cost'] = $cost;
-        $self['createdAt'] = $createdAt;
         $self['meta'] = $meta;
         $self['root'] = $root;
         $self['sessionID'] = $sessionID;
-        $self['status'] = $status;
-
-        null !== $completedAt && $self['completedAt'] = $completedAt;
 
         return $self;
     }
@@ -130,17 +99,6 @@ final class SessionAnalysisGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['cost'] = $cost;
-
-        return $self;
-    }
-
-    /**
-     * When the session started.
-     */
-    public function withCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $self = clone $this;
-        $self['createdAt'] = $createdAt;
 
         return $self;
     }
@@ -174,28 +132,6 @@ final class SessionAnalysisGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['sessionID'] = $sessionID;
-
-        return $self;
-    }
-
-    /**
-     * Analysis status (e.g. "completed").
-     */
-    public function withStatus(string $status): self
-    {
-        $self = clone $this;
-        $self['status'] = $status;
-
-        return $self;
-    }
-
-    /**
-     * When the session completed.
-     */
-    public function withCompletedAt(?\DateTimeInterface $completedAt): self
-    {
-        $self = clone $this;
-        $self['completedAt'] = $completedAt;
 
         return $self;
     }
