@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.32.0 (2026-04-13)
+
+Full Changelog: [v7.31.0...v7.32.0](https://github.com/team-telnyx/telnyx-php/compare/v7.31.0...v7.32.0)
+
+### Features
+
+* Add webhook_urls, webhook_urls_method, webhook_retries_policies to Dial endpoint ([ae6a25f](https://github.com/team-telnyx/telnyx-php/commit/ae6a25fa43ce861cfa12b83ee2fc4f242c33c85e))
+
 ## 7.31.0 (2026-04-12)
 
 Full Changelog: [v7.30.0...v7.31.0](https://github.com/team-telnyx/telnyx-php/compare/v7.30.0...v7.31.0)
