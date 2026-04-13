@@ -10,6 +10,9 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesContract;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxQwen3TtsClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxUltraClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\MinimaxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\TelnyxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneData;
@@ -24,6 +27,7 @@ use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
  * Capture and manage voice identities as clones for use in text-to-speech synthesis.
  *
  * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
+ * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params as ParamsShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoiceClonesService implements VoiceClonesContract
@@ -158,18 +162,19 @@ final class VoiceClonesService implements VoiceClonesContract
      *
      * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
+     * @param ParamsShape1 $params Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createFromUpload(
-        mixed $uploadParams,
-        RequestOptions|array|null $requestOptions = null
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $params,
+        RequestOptions|array|null $requestOptions = null,
     ): VoiceCloneNewFromUploadResponse {
-        $params = Util::removeNulls(['uploadParams' => $uploadParams]);
+        $params1 = Util::removeNulls(['params' => $params]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createFromUpload(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->createFromUpload(params: $params1, requestOptions: $requestOptions);
 
         return $response->parse();
     }
