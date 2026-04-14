@@ -7,6 +7,7 @@ namespace Telnyx\Services\Calls;
 use Telnyx\AI\Assistants\Assistant;
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
+use Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
@@ -122,6 +123,7 @@ use Telnyx\ServiceContracts\Calls\ActionsContract;
  * Call Control command operations.
  *
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
+ * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
  * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
@@ -205,6 +207,8 @@ final class ActionsService implements ActionsContract
      * **Expected Webhooks:**
      *
      * - `call.answered`
+     * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
+     * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
      * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
      *
      * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
@@ -215,6 +219,7 @@ final class ActionsService implements ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE response
+     * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
      * @param PreferredCodecs|value-of<PreferredCodecs> $preferredCodecs the list of comma-separated codecs in a preferred order for the forked media to be received
      * @param Record|value-of<Record> $record Start recording automatically after an event. Disabled by default.
      * @param RecordChannels|value-of<RecordChannels> $recordChannels defines which channel should be recorded ('single' or 'dual') when `record` is specified
@@ -251,6 +256,7 @@ final class ActionsService implements ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         ?array $customHeaders = null,
+        DeepfakeDetection|array|null $deepfakeDetection = null,
         PreferredCodecs|string|null $preferredCodecs = null,
         Record|string|null $record = null,
         RecordChannels|string $recordChannels = 'dual',
@@ -285,6 +291,7 @@ final class ActionsService implements ActionsContract
                 'clientState' => $clientState,
                 'commandID' => $commandID,
                 'customHeaders' => $customHeaders,
+                'deepfakeDetection' => $deepfakeDetection,
                 'preferredCodecs' => $preferredCodecs,
                 'record' => $record,
                 'recordChannels' => $recordChannels,
