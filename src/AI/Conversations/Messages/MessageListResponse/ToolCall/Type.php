@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
+namespace Telnyx\AI\Conversations\Messages\MessageListResponse\ToolCall;
 
 /**
  * Type of the tool call.

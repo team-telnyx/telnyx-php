@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Conversations\Messages\MessageListResponse\Data;
+namespace Telnyx\AI\Conversations\Messages\MessageListResponse;
 
-use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\CallFunction;
-use Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\Type;
+use Telnyx\AI\Conversations\Messages\MessageListResponse\ToolCall\CallFunction;
+use Telnyx\AI\Conversations\Messages\MessageListResponse\ToolCall\Type;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type CallFunctionShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall\CallFunction
+ * @phpstan-import-type CallFunctionShape from \Telnyx\AI\Conversations\Messages\MessageListResponse\ToolCall\CallFunction
  *
  * @phpstan-type ToolCallShape = array{
  *   id: string,
