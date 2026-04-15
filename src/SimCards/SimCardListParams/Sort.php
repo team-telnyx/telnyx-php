@@ -11,5 +11,5 @@ enum Sort: string
 {
     case CURRENT_BILLING_PERIOD_CONSUMED_DATA_AMOUNT = 'current_billing_period_consumed_data.amount';
 
-    case MINUSCURRENT_BILLING_PERIOD_CONSUMED_DATA_AMOUNT = '-current_billing_period_consumed_data.amount';
+    case DESC_CURRENT_BILLING_PERIOD_CONSUMED_DATA_AMOUNT = '-current_billing_period_consumed_data.amount';
 }
