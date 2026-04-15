@@ -7,6 +7,8 @@ namespace Telnyx\Services\AI\Conversations;
 use Telnyx\AI\Conversations\Messages\MessageListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Conversations\MessagesContract;
 
@@ -35,16 +37,26 @@ final class MessagesService implements MessagesContract
      *
      * Retrieve messages for a specific conversation, including tool calls made by the assistant.
      *
+     * @param int $pageNumber the page number to retrieve
+     * @param int $pageSize the number of messages to return per page
      * @param RequestOpts|null $requestOptions
+     *
+     * @return DefaultFlatPagination<MessageListResponse>
      *
      * @throws APIException
      */
     public function list(
         string $conversationID,
-        RequestOptions|array|null $requestOptions = null
-    ): MessageListResponse {
+        int $pageNumber = 1,
+        int $pageSize = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): DefaultFlatPagination {
+        $params = Util::removeNulls(
+            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+        );
+
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->list($conversationID, requestOptions: $requestOptions);
+        $response = $this->raw->list($conversationID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

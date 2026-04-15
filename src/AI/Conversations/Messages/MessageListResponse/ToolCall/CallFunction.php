@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Conversations\Messages\MessageListResponse\Data\ToolCall;
+namespace Telnyx\AI\Conversations\Messages\MessageListResponse\ToolCall;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
