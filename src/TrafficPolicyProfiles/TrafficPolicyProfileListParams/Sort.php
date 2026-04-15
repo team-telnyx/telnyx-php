@@ -11,9 +11,9 @@ enum Sort: string
 {
     case SERVICE = 'service';
 
-    case MINUSSERVICE = '-service';
+    case DESC_SERVICE = '-service';
 
     case TYPE = 'type';
 
-    case MINUSTYPE = '-type';
+    case DESC_TYPE = '-type';
 }
