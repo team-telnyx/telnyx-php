@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Conversations\Messages\MessageListResponse\Data;
+namespace Telnyx\AI\Conversations\Messages\MessageListResponse;
 
 /**
  * The role of the message sender.
