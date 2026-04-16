@@ -132,6 +132,9 @@ final class CallsTest extends TestCase
                 ['name' => 'head_1', 'value' => 'val_1'],
                 ['name' => 'head_2', 'value' => 'val_2'],
             ],
+            deepfakeDetection: [
+                'enabled' => true, 'rtpTimeout' => 30, 'timeout' => 15,
+            ],
             dialogflowConfig: [
                 'analyzeSentiment' => false, 'partialAutomatedAgentReply' => false,
             ],

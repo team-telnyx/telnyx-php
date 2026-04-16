@@ -9,6 +9,7 @@ use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
+use Telnyx\Calls\CallDialParams\DeepfakeDetection;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
 use Telnyx\Calls\CallDialParams\Record;
@@ -47,6 +48,7 @@ use Telnyx\Services\Calls\ActionsService;
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\CallDialParams\DeepfakeDetection
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
@@ -88,6 +90,8 @@ final class CallsService implements CallsContract
      * - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
      * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
      * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
+     * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
+     * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
      * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
      *
      * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
@@ -106,6 +110,7 @@ final class CallsService implements CallsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore others Dial commands with the same `command_id`.
      * @param ConferenceConfig|ConferenceConfigShape $conferenceConfig optional configuration parameters to dial new participant into a conference
      * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE
+     * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
      * @param DialogflowConfig|DialogflowConfigShape $dialogflowConfig
      * @param bool $enableDialogflow Enables Dialogflow for the current call. The default value is false.
      * @param string $fromDisplayName The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
@@ -170,6 +175,7 @@ final class CallsService implements CallsContract
         ?string $commandID = null,
         ConferenceConfig|array|null $conferenceConfig = null,
         ?array $customHeaders = null,
+        DeepfakeDetection|array|null $deepfakeDetection = null,
         DialogflowConfig|array|null $dialogflowConfig = null,
         bool $enableDialogflow = false,
         ?string $fromDisplayName = null,
@@ -233,6 +239,7 @@ final class CallsService implements CallsContract
                 'commandID' => $commandID,
                 'conferenceConfig' => $conferenceConfig,
                 'customHeaders' => $customHeaders,
+                'deepfakeDetection' => $deepfakeDetection,
                 'dialogflowConfig' => $dialogflowConfig,
                 'enableDialogflow' => $enableDialogflow,
                 'fromDisplayName' => $fromDisplayName,
