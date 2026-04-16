@@ -1,5 +1,20 @@
 # Changelog
 
+## 7.34.0 (2026-04-16)
+
+Full Changelog: [v7.33.0...v7.34.0](https://github.com/team-telnyx/telnyx-php/compare/v7.33.0...v7.34.0)
+
+### Features
+
+* Lower user_idle_timeout_secs minimum from 30s to 10s ([6aa3fa6](https://github.com/team-telnyx/telnyx-php/commit/6aa3fa6194e5d1fdad9eb155fc9c3984198e08c9))
+* MSG-6868: document whitelisted_destinations as conditionally required ([e895c7b](https://github.com/team-telnyx/telnyx-php/commit/e895c7bbebbed9bd4b8a6a7eb6622201a99337ec))
+* TELAPPS-5712: Add deepfake detection to call-control API spec ([b632c53](https://github.com/team-telnyx/telnyx-php/commit/b632c534fa217b8c2b00e4654b8beb1542f45c34))
+
+
+### Documentation
+
+* add pagination params to conversation messages endpoint ([b2e0bcb](https://github.com/team-telnyx/telnyx-php/commit/b2e0bcb668b137e2ee9e217b6b853b006420c743))
+
 ## 7.33.0 (2026-04-13)
 
 Full Changelog: [v7.32.1...v7.33.0](https://github.com/team-telnyx/telnyx-php/compare/v7.32.1...v7.33.0)
