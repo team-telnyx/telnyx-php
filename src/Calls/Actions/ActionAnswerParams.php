@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
@@ -33,6 +34,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * **Expected Webhooks:**
  *
  * - `call.answered`
+ * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
+ * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
  * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
  *
  * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
@@ -41,6 +44,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
@@ -52,6 +56,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
+ *   deepfakeDetection?: null|DeepfakeDetection|DeepfakeDetectionShape,
  *   preferredCodecs?: null|PreferredCodecs|value-of<PreferredCodecs>,
  *   record?: null|Record|value-of<Record>,
  *   recordChannels?: null|RecordChannels|value-of<RecordChannels>,
@@ -116,6 +121,12 @@ final class ActionAnswerParams implements BaseModel
      */
     #[Optional('custom_headers', list: CustomSipHeader::class)]
     public ?array $customHeaders;
+
+    /**
+     * Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
+     */
+    #[Optional('deepfake_detection')]
+    public ?DeepfakeDetection $deepfakeDetection;
 
     /**
      * The list of comma-separated codecs in a preferred order for the forked media to be received.
@@ -314,6 +325,7 @@ final class ActionAnswerParams implements BaseModel
      *
      * @param CallAssistantRequest|CallAssistantRequestShape|null $assistant
      * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
+     * @param DeepfakeDetection|DeepfakeDetectionShape|null $deepfakeDetection
      * @param PreferredCodecs|value-of<PreferredCodecs>|null $preferredCodecs
      * @param Record|value-of<Record>|null $record
      * @param RecordChannels|value-of<RecordChannels>|null $recordChannels
@@ -339,6 +351,7 @@ final class ActionAnswerParams implements BaseModel
         ?string $clientState = null,
         ?string $commandID = null,
         ?array $customHeaders = null,
+        DeepfakeDetection|array|null $deepfakeDetection = null,
         PreferredCodecs|string|null $preferredCodecs = null,
         Record|string|null $record = null,
         RecordChannels|string|null $recordChannels = null,
@@ -372,6 +385,7 @@ final class ActionAnswerParams implements BaseModel
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $commandID && $self['commandID'] = $commandID;
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $deepfakeDetection && $self['deepfakeDetection'] = $deepfakeDetection;
         null !== $preferredCodecs && $self['preferredCodecs'] = $preferredCodecs;
         null !== $record && $self['record'] = $record;
         null !== $recordChannels && $self['recordChannels'] = $recordChannels;
@@ -456,6 +470,20 @@ final class ActionAnswerParams implements BaseModel
     {
         $self = clone $this;
         $self['customHeaders'] = $customHeaders;
+
+        return $self;
+    }
+
+    /**
+     * Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
+     *
+     * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection
+     */
+    public function withDeepfakeDetection(
+        DeepfakeDetection|array $deepfakeDetection
+    ): self {
+        $self = clone $this;
+        $self['deepfakeDetection'] = $deepfakeDetection;
 
         return $self;
     }

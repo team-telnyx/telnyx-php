@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\Assistant;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
 use Telnyx\Calls\Actions\ActionAnswerParams;
+use Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
 use Telnyx\Calls\Actions\ActionAnswerParams\RecordChannels;
@@ -145,6 +146,7 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * Call Control command operations.
  *
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
+ * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
  * @phpstan-import-type AssistantShape from \Telnyx\AI\Assistants\Assistant
@@ -222,6 +224,8 @@ final class ActionsRawService implements ActionsRawContract
      * **Expected Webhooks:**
      *
      * - `call.answered`
+     * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
+     * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
      * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
      *
      * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
@@ -233,6 +237,7 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
+     *   deepfakeDetection?: DeepfakeDetection|DeepfakeDetectionShape,
      *   preferredCodecs?: PreferredCodecs|value-of<PreferredCodecs>,
      *   record?: Record|value-of<Record>,
      *   recordChannels?: RecordChannels|value-of<RecordChannels>,

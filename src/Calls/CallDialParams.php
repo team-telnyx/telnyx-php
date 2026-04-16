@@ -8,6 +8,7 @@ use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
+use Telnyx\Calls\CallDialParams\DeepfakeDetection;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
 use Telnyx\Calls\CallDialParams\Record;
@@ -40,6 +41,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
  * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
  * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
+ * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
+ * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
  * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
  *
  * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
@@ -52,6 +55,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\CallDialParams\DeepfakeDetection
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
@@ -73,6 +77,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   commandID?: string|null,
  *   conferenceConfig?: null|ConferenceConfig|ConferenceConfigShape,
  *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
+ *   deepfakeDetection?: null|DeepfakeDetection|DeepfakeDetectionShape,
  *   dialogflowConfig?: null|DialogflowConfig|DialogflowConfigShape,
  *   enableDialogflow?: bool|null,
  *   fromDisplayName?: string|null,
@@ -218,6 +223,12 @@ final class CallDialParams implements BaseModel
      */
     #[Optional('custom_headers', list: CustomSipHeader::class)]
     public ?array $customHeaders;
+
+    /**
+     * Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
+     */
+    #[Optional('deepfake_detection')]
+    public ?DeepfakeDetection $deepfakeDetection;
 
     #[Optional('dialogflow_config')]
     public ?DialogflowConfig $dialogflowConfig;
@@ -564,6 +575,7 @@ final class CallDialParams implements BaseModel
      * @param CallAssistantRequest|CallAssistantRequestShape|null $assistant
      * @param ConferenceConfig|ConferenceConfigShape|null $conferenceConfig
      * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
+     * @param DeepfakeDetection|DeepfakeDetectionShape|null $deepfakeDetection
      * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
      * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
      * @param Privacy|value-of<Privacy>|null $privacy
@@ -604,6 +616,7 @@ final class CallDialParams implements BaseModel
         ?string $commandID = null,
         ConferenceConfig|array|null $conferenceConfig = null,
         ?array $customHeaders = null,
+        DeepfakeDetection|array|null $deepfakeDetection = null,
         DialogflowConfig|array|null $dialogflowConfig = null,
         ?bool $enableDialogflow = null,
         ?string $fromDisplayName = null,
@@ -667,6 +680,7 @@ final class CallDialParams implements BaseModel
         null !== $commandID && $self['commandID'] = $commandID;
         null !== $conferenceConfig && $self['conferenceConfig'] = $conferenceConfig;
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $deepfakeDetection && $self['deepfakeDetection'] = $deepfakeDetection;
         null !== $dialogflowConfig && $self['dialogflowConfig'] = $dialogflowConfig;
         null !== $enableDialogflow && $self['enableDialogflow'] = $enableDialogflow;
         null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
@@ -881,6 +895,20 @@ final class CallDialParams implements BaseModel
     {
         $self = clone $this;
         $self['customHeaders'] = $customHeaders;
+
+        return $self;
+    }
+
+    /**
+     * Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
+     *
+     * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection
+     */
+    public function withDeepfakeDetection(
+        DeepfakeDetection|array $deepfakeDetection
+    ): self {
+        $self = clone $this;
+        $self['deepfakeDetection'] = $deepfakeDetection;
 
         return $self;
     }

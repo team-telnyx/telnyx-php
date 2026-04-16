@@ -10,6 +10,7 @@ use Telnyx\Calls\CallDialParams;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
+use Telnyx\Calls\CallDialParams\DeepfakeDetection;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
 use Telnyx\Calls\CallDialParams\Record;
@@ -47,6 +48,7 @@ use Telnyx\ServiceContracts\CallsRawContract;
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\CallDialParams\DeepfakeDetection
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
@@ -75,6 +77,8 @@ final class CallsRawService implements CallsRawContract
      * - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
      * - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
      * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
+     * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
+     * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
      * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
      *
      * When the `record` parameter is set to `record-from-answer`, the response will include a `recording_id` field.
@@ -94,6 +98,7 @@ final class CallsRawService implements CallsRawContract
      *   commandID?: string,
      *   conferenceConfig?: ConferenceConfig|ConferenceConfigShape,
      *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
+     *   deepfakeDetection?: DeepfakeDetection|DeepfakeDetectionShape,
      *   dialogflowConfig?: DialogflowConfig|DialogflowConfigShape,
      *   enableDialogflow?: bool,
      *   fromDisplayName?: string,

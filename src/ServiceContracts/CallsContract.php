@@ -9,6 +9,7 @@ use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
+use Telnyx\Calls\CallDialParams\DeepfakeDetection;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
 use Telnyx\Calls\CallDialParams\Record;
@@ -43,6 +44,7 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
+ * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\CallDialParams\DeepfakeDetection
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
@@ -69,6 +71,7 @@ interface CallsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore others Dial commands with the same `command_id`.
      * @param ConferenceConfig|ConferenceConfigShape $conferenceConfig optional configuration parameters to dial new participant into a conference
      * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE
+     * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
      * @param DialogflowConfig|DialogflowConfigShape $dialogflowConfig
      * @param bool $enableDialogflow Enables Dialogflow for the current call. The default value is false.
      * @param string $fromDisplayName The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
@@ -133,6 +136,7 @@ interface CallsContract
         ?string $commandID = null,
         ConferenceConfig|array|null $conferenceConfig = null,
         ?array $customHeaders = null,
+        DeepfakeDetection|array|null $deepfakeDetection = null,
         DialogflowConfig|array|null $dialogflowConfig = null,
         bool $enableDialogflow = false,
         ?string $fromDisplayName = null,
