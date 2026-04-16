@@ -122,7 +122,7 @@ final class VersionsTest extends TestCase
                 ],
                 'supportsUnauthenticatedWebCalls' => true,
                 'timeLimitSecs' => 30,
-                'userIdleTimeoutSecs' => 30,
+                'userIdleTimeoutSecs' => 10,
                 'voicemailDetection' => [
                     'onVoicemailDetected' => [
                         'action' => 'stop_assistant',
