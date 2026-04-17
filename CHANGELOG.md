@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.36.0 (2026-04-17)
+
+Full Changelog: [v7.35.0...v7.36.0](https://github.com/team-telnyx/telnyx-php/compare/v7.35.0...v7.36.0)
+
+### Features
+
+* Add user_idle_reply_secs to TelephonySettings spec ([c2f6ecd](https://github.com/team-telnyx/telnyx-php/commit/c2f6ecdba4866d770638e8b8225fb99de1fc5439))
+
 ## 7.35.0 (2026-04-17)
 
 Full Changelog: [v7.34.0...v7.35.0](https://github.com/team-telnyx/telnyx-php/compare/v7.34.0...v7.35.0)
