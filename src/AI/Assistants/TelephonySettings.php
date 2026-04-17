@@ -24,6 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordingSettings?: null|RecordingSettings|RecordingSettingsShape,
  *   supportsUnauthenticatedWebCalls?: bool|null,
  *   timeLimitSecs?: int|null,
+ *   userIdleReplySecs?: int|null,
  *   userIdleTimeoutSecs?: int|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  * }
@@ -72,6 +73,12 @@ final class TelephonySettings implements BaseModel
     public ?int $timeLimitSecs;
 
     /**
+     * Duration in seconds of end user silence before the assistant checks in on the user. When this limit is reached the assistant will prompt the user to respond. This is distinct from user_idle_timeout_secs which stops the assistant entirely.
+     */
+    #[Optional('user_idle_reply_secs')]
+    public ?int $userIdleReplySecs;
+
+    /**
      * Maximum duration in seconds of end user silence on the call. When this limit is reached the assistant will be stopped. This limit does not apply to portions of a call without an active assistant (for instance, a call transferred to a human representative).
      */
     #[Optional('user_idle_timeout_secs')]
@@ -105,6 +112,7 @@ final class TelephonySettings implements BaseModel
         RecordingSettings|array|null $recordingSettings = null,
         ?bool $supportsUnauthenticatedWebCalls = null,
         ?int $timeLimitSecs = null,
+        ?int $userIdleReplySecs = null,
         ?int $userIdleTimeoutSecs = null,
         VoicemailDetection|array|null $voicemailDetection = null,
     ): self {
@@ -116,6 +124,7 @@ final class TelephonySettings implements BaseModel
         null !== $recordingSettings && $self['recordingSettings'] = $recordingSettings;
         null !== $supportsUnauthenticatedWebCalls && $self['supportsUnauthenticatedWebCalls'] = $supportsUnauthenticatedWebCalls;
         null !== $timeLimitSecs && $self['timeLimitSecs'] = $timeLimitSecs;
+        null !== $userIdleReplySecs && $self['userIdleReplySecs'] = $userIdleReplySecs;
         null !== $userIdleTimeoutSecs && $self['userIdleTimeoutSecs'] = $userIdleTimeoutSecs;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
 
@@ -194,6 +203,17 @@ final class TelephonySettings implements BaseModel
     {
         $self = clone $this;
         $self['timeLimitSecs'] = $timeLimitSecs;
+
+        return $self;
+    }
+
+    /**
+     * Duration in seconds of end user silence before the assistant checks in on the user. When this limit is reached the assistant will prompt the user to respond. This is distinct from user_idle_timeout_secs which stops the assistant entirely.
+     */
+    public function withUserIdleReplySecs(int $userIdleReplySecs): self
+    {
+        $self = clone $this;
+        $self['userIdleReplySecs'] = $userIdleReplySecs;
 
         return $self;
     }

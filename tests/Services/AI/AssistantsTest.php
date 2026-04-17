@@ -91,6 +91,7 @@ final class AssistantsTest extends TestCase
                 ],
                 'supportsUnauthenticatedWebCalls' => true,
                 'timeLimitSecs' => 30,
+                'userIdleReplySecs' => 0,
                 'userIdleTimeoutSecs' => 10,
                 'voicemailDetection' => [
                     'onVoicemailDetected' => [
