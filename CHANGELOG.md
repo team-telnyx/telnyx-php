@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.36.1 (2026-04-17)
+
+Full Changelog: [v7.36.0...v7.36.1](https://github.com/team-telnyx/telnyx-php/compare/v7.36.0...v7.36.1)
+
+### Bug Fixes
+
+* **client:** resolve serialization issue with unions and enums ([f318f72](https://github.com/team-telnyx/telnyx-php/commit/f318f72160cc65636b14762da69b5fa30aacf2e7))
+
 ## 7.36.0 (2026-04-17)
 
 Full Changelog: [v7.35.0...v7.36.0](https://github.com/team-telnyx/telnyx-php/compare/v7.35.0...v7.36.0)
