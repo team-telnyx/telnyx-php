@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.35.0 (2026-04-17)
+
+Full Changelog: [v7.34.0...v7.35.0](https://github.com/team-telnyx/telnyx-php/compare/v7.34.0...v7.35.0)
+
+### Features
+
+* TELAPPS Provide description what params can be used for premium amd ([ae54681](https://github.com/team-telnyx/telnyx-php/commit/ae546815bb12a1dc6594b15cd2a82de9b82efae1))
+
 ## 7.34.0 (2026-04-16)
 
 Full Changelog: [v7.33.0...v7.34.0](https://github.com/team-telnyx/telnyx-php/compare/v7.33.0...v7.34.0)
