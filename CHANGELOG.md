@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.36.2 (2026-04-17)
+
+Full Changelog: [v7.36.1...v7.36.2](https://github.com/team-telnyx/telnyx-php/compare/v7.36.1...v7.36.2)
+
+### Bug Fixes
+
+* populate enum-typed properties with enum instances ([7680271](https://github.com/team-telnyx/telnyx-php/commit/768027153bb97d6ae8d6473ff23fdd94b547b351))
+
 ## 7.36.1 (2026-04-17)
 
 Full Changelog: [v7.36.0...v7.36.1](https://github.com/team-telnyx/telnyx-php/compare/v7.36.0...v7.36.1)
