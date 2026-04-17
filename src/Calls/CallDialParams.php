@@ -163,7 +163,7 @@ final class CallDialParams implements BaseModel
     public ?string $answeringMachineDetection;
 
     /**
-     * Optional configuration parameters to modify 'answering_machine_detection' performance.
+     * Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection.
      */
     #[Optional('answering_machine_detection_config')]
     public ?AnsweringMachineDetectionConfig $answeringMachineDetectionConfig;
@@ -780,7 +780,7 @@ final class CallDialParams implements BaseModel
     }
 
     /**
-     * Optional configuration parameters to modify 'answering_machine_detection' performance.
+     * Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection.
      *
      * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig
      */

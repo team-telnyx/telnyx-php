@@ -9,7 +9,7 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Optional configuration parameters to modify 'answering_machine_detection' performance.
+ * Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection.
  *
  * @phpstan-type AnsweringMachineDetectionConfigShape = array{
  *   afterGreetingSilenceMillis?: int|null,
