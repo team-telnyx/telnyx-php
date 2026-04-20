@@ -13,6 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   eagerEotThreshold?: float|null,
  *   eotThreshold?: float|null,
  *   eotTimeoutMs?: int|null,
+ *   keyterm?: string|null,
  *   numerals?: bool|null,
  *   smartFormat?: bool|null,
  * }
@@ -40,6 +41,12 @@ final class TranscriptionSettingsConfig implements BaseModel
     #[Optional('eot_timeout_ms')]
     public ?int $eotTimeoutMs;
 
+    /**
+     * Available only for deepgram/nova-3 and deepgram/flux. A comma-separated list of key terms to boost for recognition during transcription. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words.
+     */
+    #[Optional]
+    public ?string $keyterm;
+
     #[Optional]
     public ?bool $numerals;
 
@@ -60,6 +67,7 @@ final class TranscriptionSettingsConfig implements BaseModel
         ?float $eagerEotThreshold = null,
         ?float $eotThreshold = null,
         ?int $eotTimeoutMs = null,
+        ?string $keyterm = null,
         ?bool $numerals = null,
         ?bool $smartFormat = null,
     ): self {
@@ -68,6 +76,7 @@ final class TranscriptionSettingsConfig implements BaseModel
         null !== $eagerEotThreshold && $self['eagerEotThreshold'] = $eagerEotThreshold;
         null !== $eotThreshold && $self['eotThreshold'] = $eotThreshold;
         null !== $eotTimeoutMs && $self['eotTimeoutMs'] = $eotTimeoutMs;
+        null !== $keyterm && $self['keyterm'] = $keyterm;
         null !== $numerals && $self['numerals'] = $numerals;
         null !== $smartFormat && $self['smartFormat'] = $smartFormat;
 
@@ -103,6 +112,17 @@ final class TranscriptionSettingsConfig implements BaseModel
     {
         $self = clone $this;
         $self['eotTimeoutMs'] = $eotTimeoutMs;
+
+        return $self;
+    }
+
+    /**
+     * Available only for deepgram/nova-3 and deepgram/flux. A comma-separated list of key terms to boost for recognition during transcription. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words.
+     */
+    public function withKeyterm(string $keyterm): self
+    {
+        $self = clone $this;
+        $self['keyterm'] = $keyterm;
 
         return $self;
     }
