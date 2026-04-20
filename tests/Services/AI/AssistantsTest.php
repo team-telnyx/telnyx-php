@@ -141,6 +141,7 @@ final class AssistantsTest extends TestCase
                     'eagerEotThreshold' => 0.3,
                     'eotThreshold' => 0,
                     'eotTimeoutMs' => 0,
+                    'keyterm' => 'keyterm',
                     'numerals' => true,
                     'smartFormat' => true,
                 ],
