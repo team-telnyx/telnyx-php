@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.37.0 (2026-04-20)
+
+Full Changelog: [v7.36.2...v7.37.0](https://github.com/team-telnyx/telnyx-php/compare/v7.36.2...v7.37.0)
+
+### Features
+
+* Add keyterm field to TranscriptionSettingsConfig ([d8a607a](https://github.com/team-telnyx/telnyx-php/commit/d8a607a3904db83f1089a737fcdc6b6591d4f194))
+
 ## 7.36.2 (2026-04-17)
 
 Full Changelog: [v7.36.1...v7.36.2](https://github.com/team-telnyx/telnyx-php/compare/v7.36.1...v7.36.2)
