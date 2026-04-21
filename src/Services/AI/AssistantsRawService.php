@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
+use Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
@@ -35,6 +36,8 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings
+ * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\PostConversationSettings as PostConversationSettingsShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
@@ -73,6 +76,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   llmAPIKeyRef?: string,
      *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
      *   observabilitySettings?: ObservabilityReq|ObservabilityReqShape,
+     *   postConversationSettings?: PostConversationSettings|PostConversationSettingsShape,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
      *   toolIDs?: list<string>,
@@ -167,6 +171,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *   model?: string,
      *   name?: string,
      *   observabilitySettings?: ObservabilityReq|ObservabilityReqShape,
+     *   postConversationSettings?: AssistantUpdateParams\PostConversationSettings|PostConversationSettingsShape1,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
      *   promoteToMain?: bool,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,

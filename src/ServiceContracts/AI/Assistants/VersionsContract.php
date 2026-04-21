@@ -13,6 +13,7 @@ use Telnyx\AI\Assistants\ObservabilityReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Exceptions\APIException;
@@ -22,6 +23,7 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
+ * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -66,6 +68,7 @@ interface VersionsContract
      * @param string $model Body param: ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,
      * @param string $name Body param
      * @param ObservabilityReq|ObservabilityReqShape $observabilitySettings Body param
+     * @param PostConversationSettings|PostConversationSettingsShape $postConversationSettings Body param: Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
      * @param PrivacySettings|PrivacySettingsShape $privacySettings Body param
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings Body param
      * @param list<string> $toolIDs Body param
@@ -92,6 +95,7 @@ interface VersionsContract
         ?string $model = null,
         ?string $name = null,
         ObservabilityReq|array|null $observabilitySettings = null,
+        PostConversationSettings|array|null $postConversationSettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $toolIDs = null,
