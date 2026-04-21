@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.38.0 (2026-04-21)
+
+Full Changelog: [v7.37.0...v7.38.0](https://github.com/team-telnyx/telnyx-php/compare/v7.37.0...v7.38.0)
+
+### Features
+
+* Add post_conversation_settings to AI Assistants API spec ([ac653a2](https://github.com/team-telnyx/telnyx-php/commit/ac653a2d4af3c1edddecbc40341420eb1fe638b9))
+
 ## 7.37.0 (2026-04-20)
 
 Full Changelog: [v7.36.2...v7.37.0](https://github.com/team-telnyx/telnyx-php/compare/v7.36.2...v7.37.0)
