@@ -110,6 +110,7 @@ final class VersionsTest extends TestCase
                 'secretKeyRef' => 'secret_key_ref',
                 'status' => 'enabled',
             ],
+            postConversationSettings: ['enabled' => true],
             privacySettings: ['dataRetention' => true],
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
