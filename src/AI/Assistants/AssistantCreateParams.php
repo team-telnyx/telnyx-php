@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -19,6 +20,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
+ * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -39,6 +41,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   llmAPIKeyRef?: string|null,
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
  *   observabilitySettings?: null|ObservabilityReq|ObservabilityReqShape,
+ *   postConversationSettings?: null|PostConversationSettings|PostConversationSettingsShape,
  *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
  *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
  *   toolIDs?: list<string>|null,
@@ -111,6 +114,12 @@ final class AssistantCreateParams implements BaseModel
     #[Optional('observability_settings')]
     public ?ObservabilityReq $observabilitySettings;
 
+    /**
+     * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
+     */
+    #[Optional('post_conversation_settings')]
+    public ?PostConversationSettings $postConversationSettings;
+
     #[Optional('privacy_settings')]
     public ?PrivacySettings $privacySettings;
 
@@ -173,6 +182,7 @@ final class AssistantCreateParams implements BaseModel
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
      * @param ObservabilityReq|ObservabilityReqShape|null $observabilitySettings
+     * @param PostConversationSettings|PostConversationSettingsShape|null $postConversationSettings
      * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
      * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
      * @param list<string>|null $toolIDs
@@ -194,6 +204,7 @@ final class AssistantCreateParams implements BaseModel
         ?string $llmAPIKeyRef = null,
         MessagingSettings|array|null $messagingSettings = null,
         ObservabilityReq|array|null $observabilitySettings = null,
+        PostConversationSettings|array|null $postConversationSettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $toolIDs = null,
@@ -217,6 +228,7 @@ final class AssistantCreateParams implements BaseModel
         null !== $llmAPIKeyRef && $self['llmAPIKeyRef'] = $llmAPIKeyRef;
         null !== $messagingSettings && $self['messagingSettings'] = $messagingSettings;
         null !== $observabilitySettings && $self['observabilitySettings'] = $observabilitySettings;
+        null !== $postConversationSettings && $self['postConversationSettings'] = $postConversationSettings;
         null !== $privacySettings && $self['privacySettings'] = $privacySettings;
         null !== $telephonySettings && $self['telephonySettings'] = $telephonySettings;
         null !== $toolIDs && $self['toolIDs'] = $toolIDs;
@@ -356,6 +368,20 @@ final class AssistantCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['observabilitySettings'] = $observabilitySettings;
+
+        return $self;
+    }
+
+    /**
+     * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
+     *
+     * @param PostConversationSettings|PostConversationSettingsShape $postConversationSettings
+     */
+    public function withPostConversationSettings(
+        PostConversationSettings|array $postConversationSettings
+    ): self {
+        $self = clone $this;
+        $self['postConversationSettings'] = $postConversationSettings;
 
         return $self;
     }

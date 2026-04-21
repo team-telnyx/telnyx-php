@@ -17,6 +17,7 @@ use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
@@ -32,6 +33,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
+ * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -108,6 +110,7 @@ final class VersionsRawService implements VersionsRawContract
      *   model?: string,
      *   name?: string,
      *   observabilitySettings?: ObservabilityReq|ObservabilityReqShape,
+     *   postConversationSettings?: PostConversationSettings|PostConversationSettingsShape,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
      *   toolIDs?: list<string>,
