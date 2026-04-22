@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VerifyProfiles\VerifyProfileUpdateParams;
+namespace Telnyx\VerifyProfiles\VerifyProfile;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -10,7 +10,10 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type WhatsappShape = array{
+ *   appName?: string|null,
+ *   codeLength?: int|null,
  *   defaultVerificationTimeoutSecs?: int|null,
+ *   messagingTemplateID?: string|null,
  *   senderPhoneNumber?: string|null,
  *   templateID?: string|null,
  *   wabaID?: string|null,
@@ -23,10 +26,28 @@ final class Whatsapp implements BaseModel
     use SdkModel;
 
     /**
+     * The name that identifies the application requesting 2fa in the verification message.
+     */
+    #[Optional('app_name')]
+    public ?string $appName;
+
+    /**
+     * The length of the verify code to generate.
+     */
+    #[Optional('code_length')]
+    public ?int $codeLength;
+
+    /**
      * For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
      */
     #[Optional('default_verification_timeout_secs')]
     public ?int $defaultVerificationTimeoutSecs;
+
+    /**
+     * The message template identifier selected from /verify_profiles/templates.
+     */
+    #[Optional('messaging_template_id')]
+    public ?string $messagingTemplateID;
 
     /**
      * Phone number registered on the customer WABA to send OTPs from.
@@ -67,7 +88,10 @@ final class Whatsapp implements BaseModel
      * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
+        ?string $appName = null,
+        ?int $codeLength = null,
         ?int $defaultVerificationTimeoutSecs = null,
+        ?string $messagingTemplateID = null,
         ?string $senderPhoneNumber = null,
         ?string $templateID = null,
         ?string $wabaID = null,
@@ -75,11 +99,36 @@ final class Whatsapp implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $appName && $self['appName'] = $appName;
+        null !== $codeLength && $self['codeLength'] = $codeLength;
         null !== $defaultVerificationTimeoutSecs && $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+        null !== $messagingTemplateID && $self['messagingTemplateID'] = $messagingTemplateID;
         null !== $senderPhoneNumber && $self['senderPhoneNumber'] = $senderPhoneNumber;
         null !== $templateID && $self['templateID'] = $templateID;
         null !== $wabaID && $self['wabaID'] = $wabaID;
         null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
+
+        return $self;
+    }
+
+    /**
+     * The name that identifies the application requesting 2fa in the verification message.
+     */
+    public function withAppName(string $appName): self
+    {
+        $self = clone $this;
+        $self['appName'] = $appName;
+
+        return $self;
+    }
+
+    /**
+     * The length of the verify code to generate.
+     */
+    public function withCodeLength(int $codeLength): self
+    {
+        $self = clone $this;
+        $self['codeLength'] = $codeLength;
 
         return $self;
     }
@@ -92,6 +141,17 @@ final class Whatsapp implements BaseModel
     ): self {
         $self = clone $this;
         $self['defaultVerificationTimeoutSecs'] = $defaultVerificationTimeoutSecs;
+
+        return $self;
+    }
+
+    /**
+     * The message template identifier selected from /verify_profiles/templates.
+     */
+    public function withMessagingTemplateID(string $messagingTemplateID): self
+    {
+        $self = clone $this;
+        $self['messagingTemplateID'] = $messagingTemplateID;
 
         return $self;
     }

@@ -86,8 +86,10 @@ final class VerifyProfilesTest extends TestCase
             webhookFailoverURL: 'http://example.com/webhook/failover',
             webhookURL: 'http://example.com/webhook',
             whatsapp: [
-                'appName' => 'Example Secure App',
                 'defaultVerificationTimeoutSecs' => 300,
+                'senderPhoneNumber' => '+13035551234',
+                'templateID' => 'authentication_template_name',
+                'wabaID' => '1234567890',
                 'whitelistedDestinations' => ['US', 'CA'],
             ],
         );
