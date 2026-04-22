@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.39.0 (2026-04-22)
+
+Full Changelog: [v7.38.0...v7.39.0](https://github.com/team-telnyx/telnyx-php/compare/v7.38.0...v7.39.0)
+
+### Features
+
+* MSG-6841: add missing whatsapp api docs ([b427c2a](https://github.com/team-telnyx/telnyx-php/commit/b427c2a36c773fb5ccb71dc471cf2cae922304e6))
+
 ## 7.38.0 (2026-04-21)
 
 Full Changelog: [v7.37.0...v7.38.0](https://github.com/team-telnyx/telnyx-php/compare/v7.37.0...v7.38.0)
