@@ -16,6 +16,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
+use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai;
 use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
@@ -27,6 +28,7 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble
  * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx
+ * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface TextToSpeechContract
@@ -49,6 +51,7 @@ interface TextToSpeechContract
      * @param TextType|value-of<TextType> $textType Text type. Use `ssml` for SSML-formatted input (supported by AWS and Azure).
      * @param string $voice Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `telnyx.NaturalHD.Alloy`, `Telnyx.Ultra.<voice_id>`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
      * @param array<string,mixed> $voiceSettings Provider-specific voice settings. Contents vary by provider — see provider-specific parameter objects below.
+     * @param Xai|XaiShape $xai xAI provider-specific parameters
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -69,6 +72,7 @@ interface TextToSpeechContract
         TextType|string|null $textType = null,
         ?string $voice = null,
         ?array $voiceSettings = null,
+        Xai|array|null $xai = null,
         RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechGenerateResponse;
 

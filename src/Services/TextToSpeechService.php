@@ -19,6 +19,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
+use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai;
 use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 
@@ -32,6 +33,7 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble
  * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx
+ * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TextToSpeechService implements TextToSpeechContract
@@ -58,7 +60,7 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy` or `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`.
      *
      * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
      *
@@ -77,6 +79,7 @@ final class TextToSpeechService implements TextToSpeechContract
      * @param TextType|value-of<TextType> $textType Text type. Use `ssml` for SSML-formatted input (supported by AWS and Azure).
      * @param string $voice Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id`. Examples: `telnyx.NaturalHD.Alloy`, `Telnyx.Ultra.<voice_id>`, `azure.en-US-AvaMultilingualNeural`, `aws.Polly.Generative.Lucia`. When provided, `provider`, `model_id`, and `voice_id` are extracted automatically and take precedence over individual parameters.
      * @param array<string,mixed> $voiceSettings Provider-specific voice settings. Contents vary by provider — see provider-specific parameter objects below.
+     * @param Xai|XaiShape $xai xAI provider-specific parameters
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -97,6 +100,7 @@ final class TextToSpeechService implements TextToSpeechContract
         TextType|string|null $textType = null,
         ?string $voice = null,
         ?array $voiceSettings = null,
+        Xai|array|null $xai = null,
         RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechGenerateResponse {
         $params = Util::removeNulls(
@@ -116,6 +120,7 @@ final class TextToSpeechService implements TextToSpeechContract
                 'textType' => $textType,
                 'voice' => $voice,
                 'voiceSettings' => $voiceSettings,
+                'xai' => $xai,
             ],
         );
 
