@@ -21,6 +21,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
+use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai;
 use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
@@ -35,6 +36,7 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble
  * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx
+ * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TextToSpeechRawService implements TextToSpeechRawContract
@@ -54,7 +56,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy` or `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`.
      *
      * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
      *
@@ -74,6 +76,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *   textType?: TextType|value-of<TextType>,
      *   voice?: string,
      *   voiceSettings?: array<string,mixed>,
+     *   xai?: Xai|XaiShape,
      * }|TextToSpeechGenerateParams $params
      * @param RequestOpts|null $requestOptions
      *
