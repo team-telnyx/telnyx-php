@@ -18,6 +18,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx;
 use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
+use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai;
 
 /**
  * Generate synthesized speech audio from text input. Returns audio in the requested format (binary audio stream, base64-encoded JSON, or an audio URL for later retrieval).
@@ -26,7 +27,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
  *
  * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy` or `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
  *
- * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`.
+ * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`.
  *
  * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
  *
@@ -39,6 +40,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble
  * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime
  * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx
+ * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai
  *
  * @phpstan-type TextToSpeechGenerateParamsShape = array{
  *   aws?: null|Aws|AwsShape,
@@ -56,6 +58,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
  *   textType?: null|TextType|value-of<TextType>,
  *   voice?: string|null,
  *   voiceSettings?: array<string,mixed>|null,
+ *   xai?: null|Xai|XaiShape,
  * }
  */
 final class TextToSpeechGenerateParams implements BaseModel
@@ -162,6 +165,12 @@ final class TextToSpeechGenerateParams implements BaseModel
     #[Optional('voice_settings', map: 'mixed')]
     public ?array $voiceSettings;
 
+    /**
+     * xAI provider-specific parameters.
+     */
+    #[Optional]
+    public ?Xai $xai;
+
     public function __construct()
     {
         $this->initialize();
@@ -183,6 +192,7 @@ final class TextToSpeechGenerateParams implements BaseModel
      * @param Telnyx|TelnyxShape|null $telnyx
      * @param TextType|value-of<TextType>|null $textType
      * @param array<string,mixed>|null $voiceSettings
+     * @param Xai|XaiShape|null $xai
      */
     public static function with(
         Aws|array|null $aws = null,
@@ -200,6 +210,7 @@ final class TextToSpeechGenerateParams implements BaseModel
         TextType|string|null $textType = null,
         ?string $voice = null,
         ?array $voiceSettings = null,
+        Xai|array|null $xai = null,
     ): self {
         $self = new self;
 
@@ -218,6 +229,7 @@ final class TextToSpeechGenerateParams implements BaseModel
         null !== $textType && $self['textType'] = $textType;
         null !== $voice && $self['voice'] = $voice;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
+        null !== $xai && $self['xai'] = $xai;
 
         return $self;
     }
@@ -405,6 +417,19 @@ final class TextToSpeechGenerateParams implements BaseModel
     {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;
+
+        return $self;
+    }
+
+    /**
+     * xAI provider-specific parameters.
+     *
+     * @param Xai|XaiShape $xai
+     */
+    public function withXai(Xai|array $xai): self
+    {
+        $self = clone $this;
+        $self['xai'] = $xai;
 
         return $self;
     }
