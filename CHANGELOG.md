@@ -1,5 +1,20 @@
 # Changelog
 
+## 7.40.0 (2026-04-24)
+
+Full Changelog: [v7.39.0...v7.40.0](https://github.com/team-telnyx/telnyx-php/compare/v7.39.0...v7.40.0)
+
+### Features
+
+* Add call.hold and call.unhold webhook event documentation ([abfa59d](https://github.com/team-telnyx/telnyx-php/commit/abfa59d5bbc7a121f55a6ae19e137a8c5bb7a2f7))
+* Add xAI provider to standalone STT and TTS specs ([9f2c1de](https://github.com/team-telnyx/telnyx-php/commit/9f2c1de38b54fd5713ab3dc17711665085fc916a))
+* MSG-6857: ([327f7bd](https://github.com/team-telnyx/telnyx-php/commit/327f7bdab144f63ae5f8e4e945c727f3d4491fa7))
+
+
+### Documentation
+
+* document dynamic variable support for voice_settings.voice ([e4e41b1](https://github.com/team-telnyx/telnyx-php/commit/e4e41b1bcfb1b231b5d708ee8b9e396e274b6283))
+
 ## 7.39.0 (2026-04-22)
 
 Full Changelog: [v7.38.0...v7.39.0](https://github.com/team-telnyx/telnyx-php/compare/v7.38.0...v7.39.0)
