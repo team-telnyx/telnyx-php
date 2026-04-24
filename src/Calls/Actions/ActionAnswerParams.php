@@ -34,6 +34,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * **Expected Webhooks:**
  *
  * - `call.answered`
+ * - `call.hold` and `call.unhold` if the call is held/unheld
  * - `call.deepfake_detection.result` if `deepfake_detection` was enabled
  * - `call.deepfake_detection.error` if `deepfake_detection` was enabled and an error occurred
  * - `streaming.started`, `streaming.stopped` or `streaming.failed` if `stream_url` was set
