@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.40.1 (2026-04-25)
+
+Full Changelog: [v7.40.0...v7.40.1](https://github.com/team-telnyx/telnyx-php/compare/v7.40.0...v7.40.1)
+
+### Bug Fixes
+
+* revert enum parsing change that lead to unconditional failure ([58356e1](https://github.com/team-telnyx/telnyx-php/commit/58356e1a3e1254d91aa26870514cd3bd896359bc))
+
 ## 7.40.0 (2026-04-24)
 
 Full Changelog: [v7.39.0...v7.40.0](https://github.com/team-telnyx/telnyx-php/compare/v7.39.0...v7.40.0)
