@@ -16,7 +16,6 @@ use Telnyx\VerifyProfiles\VerifyProfile;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
-use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Rcs;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Whatsapp;
 use Telnyx\VerifyProfiles\VerifyProfileCreateTemplateParams;
@@ -32,12 +31,9 @@ use Telnyx\VerifyProfiles\VerifyProfileUpdateTemplateParams;
  *
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall
- * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Rcs
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS
  * @phpstan-import-type WhatsappShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Whatsapp
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Call as CallShape1
- * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Flashcall as FlashcallShape1
- * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Rcs as RcsShape1
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\SMS as SMSShape1
  * @phpstan-import-type WhatsappShape from \Telnyx\VerifyProfiles\VerifyProfileUpdateParams\Whatsapp as WhatsappShape1
  * @phpstan-import-type FilterShape from \Telnyx\VerifyProfiles\VerifyProfileListParams\Filter
@@ -59,9 +55,10 @@ final class VerifyProfilesRawService implements VerifyProfilesRawContract
      * @param array{
      *   name: string,
      *   call?: Call|CallShape,
+     *   dailySpendLimit?: float,
+     *   dailySpendLimitEnabled?: bool,
      *   flashcall?: Flashcall|FlashcallShape,
      *   language?: string,
-     *   rcs?: Rcs|RcsShape,
      *   sms?: SMS|SMSShape,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,
@@ -125,10 +122,10 @@ final class VerifyProfilesRawService implements VerifyProfilesRawContract
      * @param string $verifyProfileID the identifier of the Verify profile to update
      * @param array{
      *   call?: VerifyProfileUpdateParams\Call|CallShape1,
-     *   flashcall?: VerifyProfileUpdateParams\Flashcall|FlashcallShape1,
+     *   dailySpendLimit?: float,
+     *   dailySpendLimitEnabled?: bool,
      *   language?: string,
      *   name?: string,
-     *   rcs?: VerifyProfileUpdateParams\Rcs|RcsShape1,
      *   sms?: VerifyProfileUpdateParams\SMS|SMSShape1,
      *   webhookFailoverURL?: string,
      *   webhookURL?: string,

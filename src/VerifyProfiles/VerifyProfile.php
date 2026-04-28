@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifyProfiles\VerifyProfile\Call;
 use Telnyx\VerifyProfiles\VerifyProfile\Flashcall;
-use Telnyx\VerifyProfiles\VerifyProfile\Rcs;
 use Telnyx\VerifyProfiles\VerifyProfile\RecordType;
 use Telnyx\VerifyProfiles\VerifyProfile\SMS;
 use Telnyx\VerifyProfiles\VerifyProfile\Whatsapp;
@@ -17,7 +16,6 @@ use Telnyx\VerifyProfiles\VerifyProfile\Whatsapp;
 /**
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfile\Call
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfile\Flashcall
- * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfile\Rcs
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfile\SMS
  * @phpstan-import-type WhatsappShape from \Telnyx\VerifyProfiles\VerifyProfile\Whatsapp
  *
@@ -25,10 +23,11 @@ use Telnyx\VerifyProfiles\VerifyProfile\Whatsapp;
  *   id?: string|null,
  *   call?: null|Call|CallShape,
  *   createdAt?: string|null,
+ *   dailySpendLimit?: float|null,
+ *   dailySpendLimitEnabled?: bool|null,
  *   flashcall?: null|Flashcall|FlashcallShape,
  *   language?: string|null,
  *   name?: string|null,
- *   rcs?: null|Rcs|RcsShape,
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   sms?: null|SMS|SMSShape,
  *   updatedAt?: string|null,
@@ -51,6 +50,18 @@ final class VerifyProfile implements BaseModel
     #[Optional('created_at')]
     public ?string $createdAt;
 
+    /**
+     * The maximum daily spend allowed on this verify profile, in USD.
+     */
+    #[Optional('daily_spend_limit')]
+    public ?float $dailySpendLimit;
+
+    /**
+     * Whether the daily spend limit is enforced for this verify profile.
+     */
+    #[Optional('daily_spend_limit_enabled')]
+    public ?bool $dailySpendLimitEnabled;
+
     #[Optional]
     public ?Flashcall $flashcall;
 
@@ -59,9 +70,6 @@ final class VerifyProfile implements BaseModel
 
     #[Optional]
     public ?string $name;
-
-    #[Optional]
-    public ?Rcs $rcs;
 
     /**
      * The possible verification profile record types.
@@ -98,7 +106,6 @@ final class VerifyProfile implements BaseModel
      *
      * @param Call|CallShape|null $call
      * @param Flashcall|FlashcallShape|null $flashcall
-     * @param Rcs|RcsShape|null $rcs
      * @param RecordType|value-of<RecordType>|null $recordType
      * @param SMS|SMSShape|null $sms
      * @param Whatsapp|WhatsappShape|null $whatsapp
@@ -107,10 +114,11 @@ final class VerifyProfile implements BaseModel
         ?string $id = null,
         Call|array|null $call = null,
         ?string $createdAt = null,
+        ?float $dailySpendLimit = null,
+        ?bool $dailySpendLimitEnabled = null,
         Flashcall|array|null $flashcall = null,
         ?string $language = null,
         ?string $name = null,
-        Rcs|array|null $rcs = null,
         RecordType|string|null $recordType = null,
         SMS|array|null $sms = null,
         ?string $updatedAt = null,
@@ -123,10 +131,11 @@ final class VerifyProfile implements BaseModel
         null !== $id && $self['id'] = $id;
         null !== $call && $self['call'] = $call;
         null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
+        null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
         null !== $flashcall && $self['flashcall'] = $flashcall;
         null !== $language && $self['language'] = $language;
         null !== $name && $self['name'] = $name;
-        null !== $rcs && $self['rcs'] = $rcs;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $sms && $self['sms'] = $sms;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
@@ -165,6 +174,29 @@ final class VerifyProfile implements BaseModel
     }
 
     /**
+     * The maximum daily spend allowed on this verify profile, in USD.
+     */
+    public function withDailySpendLimit(float $dailySpendLimit): self
+    {
+        $self = clone $this;
+        $self['dailySpendLimit'] = $dailySpendLimit;
+
+        return $self;
+    }
+
+    /**
+     * Whether the daily spend limit is enforced for this verify profile.
+     */
+    public function withDailySpendLimitEnabled(
+        bool $dailySpendLimitEnabled
+    ): self {
+        $self = clone $this;
+        $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
+
+        return $self;
+    }
+
+    /**
      * @param Flashcall|FlashcallShape $flashcall
      */
     public function withFlashcall(Flashcall|array $flashcall): self
@@ -187,17 +219,6 @@ final class VerifyProfile implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
-
-        return $self;
-    }
-
-    /**
-     * @param Rcs|RcsShape $rcs
-     */
-    public function withRcs(Rcs|array $rcs): self
-    {
-        $self = clone $this;
-        $self['rcs'] = $rcs;
 
         return $self;
     }

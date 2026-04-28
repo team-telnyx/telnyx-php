@@ -11,7 +11,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall;
-use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Rcs;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS;
 use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Whatsapp;
 
@@ -22,16 +21,16 @@ use Telnyx\VerifyProfiles\VerifyProfileCreateParams\Whatsapp;
  *
  * @phpstan-import-type CallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Call
  * @phpstan-import-type FlashcallShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Flashcall
- * @phpstan-import-type RcsShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Rcs
  * @phpstan-import-type SMSShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\SMS
  * @phpstan-import-type WhatsappShape from \Telnyx\VerifyProfiles\VerifyProfileCreateParams\Whatsapp
  *
  * @phpstan-type VerifyProfileCreateParamsShape = array{
  *   name: string,
  *   call?: null|Call|CallShape,
+ *   dailySpendLimit?: float|null,
+ *   dailySpendLimitEnabled?: bool|null,
  *   flashcall?: null|Flashcall|FlashcallShape,
  *   language?: string|null,
- *   rcs?: null|Rcs|RcsShape,
  *   sms?: null|SMS|SMSShape,
  *   webhookFailoverURL?: string|null,
  *   webhookURL?: string|null,
@@ -50,14 +49,23 @@ final class VerifyProfileCreateParams implements BaseModel
     #[Optional]
     public ?Call $call;
 
+    /**
+     * The maximum daily spend allowed on this verify profile, in USD.
+     */
+    #[Optional('daily_spend_limit')]
+    public ?float $dailySpendLimit;
+
+    /**
+     * Whether the daily spend limit is enforced for this verify profile.
+     */
+    #[Optional('daily_spend_limit_enabled')]
+    public ?bool $dailySpendLimitEnabled;
+
     #[Optional]
     public ?Flashcall $flashcall;
 
     #[Optional]
     public ?string $language;
-
-    #[Optional]
-    public ?Rcs $rcs;
 
     #[Optional]
     public ?SMS $sms;
@@ -97,16 +105,16 @@ final class VerifyProfileCreateParams implements BaseModel
      *
      * @param Call|CallShape|null $call
      * @param Flashcall|FlashcallShape|null $flashcall
-     * @param Rcs|RcsShape|null $rcs
      * @param SMS|SMSShape|null $sms
      * @param Whatsapp|WhatsappShape|null $whatsapp
      */
     public static function with(
         string $name,
         Call|array|null $call = null,
+        ?float $dailySpendLimit = null,
+        ?bool $dailySpendLimitEnabled = null,
         Flashcall|array|null $flashcall = null,
         ?string $language = null,
-        Rcs|array|null $rcs = null,
         SMS|array|null $sms = null,
         ?string $webhookFailoverURL = null,
         ?string $webhookURL = null,
@@ -117,9 +125,10 @@ final class VerifyProfileCreateParams implements BaseModel
         $self['name'] = $name;
 
         null !== $call && $self['call'] = $call;
+        null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
+        null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
         null !== $flashcall && $self['flashcall'] = $flashcall;
         null !== $language && $self['language'] = $language;
-        null !== $rcs && $self['rcs'] = $rcs;
         null !== $sms && $self['sms'] = $sms;
         null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
@@ -148,6 +157,29 @@ final class VerifyProfileCreateParams implements BaseModel
     }
 
     /**
+     * The maximum daily spend allowed on this verify profile, in USD.
+     */
+    public function withDailySpendLimit(float $dailySpendLimit): self
+    {
+        $self = clone $this;
+        $self['dailySpendLimit'] = $dailySpendLimit;
+
+        return $self;
+    }
+
+    /**
+     * Whether the daily spend limit is enforced for this verify profile.
+     */
+    public function withDailySpendLimitEnabled(
+        bool $dailySpendLimitEnabled
+    ): self {
+        $self = clone $this;
+        $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
+
+        return $self;
+    }
+
+    /**
      * @param Flashcall|FlashcallShape $flashcall
      */
     public function withFlashcall(Flashcall|array $flashcall): self
@@ -162,17 +194,6 @@ final class VerifyProfileCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['language'] = $language;
-
-        return $self;
-    }
-
-    /**
-     * @param Rcs|RcsShape $rcs
-     */
-    public function withRcs(Rcs|array $rcs): self
-    {
-        $self = clone $this;
-        $self['rcs'] = $rcs;
 
         return $self;
     }
