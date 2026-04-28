@@ -32,7 +32,7 @@ final class TranscriptionSettings implements BaseModel
     public ?string $apiKeyRef;
 
     /**
-     * The language of the audio to be transcribed. If not set, or if set to `auto`, the model will automatically detect the language.
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`.
      */
     #[Optional]
     public ?string $language;
@@ -40,7 +40,7 @@ final class TranscriptionSettings implements BaseModel
     /**
      * The speech to text model to be used by the voice assistant. All Deepgram models are run on-premise.
      *
-     * - `deepgram/flux` is optimized for turn-taking but is English-only.
+     * - `deepgram/flux` is optimized for turn-taking with multilingual language hints.
      * - `deepgram/nova-3` is multilingual with automatic language detection.
      * - `deepgram/nova-2` is Deepgram's previous-generation multilingual model.
      * - `azure/fast` is a multilingual Azure transcription model.
@@ -104,7 +104,7 @@ final class TranscriptionSettings implements BaseModel
     }
 
     /**
-     * The language of the audio to be transcribed. If not set, or if set to `auto`, the model will automatically detect the language.
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`.
      */
     public function withLanguage(string $language): self
     {
@@ -117,7 +117,7 @@ final class TranscriptionSettings implements BaseModel
     /**
      * The speech to text model to be used by the voice assistant. All Deepgram models are run on-premise.
      *
-     * - `deepgram/flux` is optimized for turn-taking but is English-only.
+     * - `deepgram/flux` is optimized for turn-taking with multilingual language hints.
      * - `deepgram/nova-3` is multilingual with automatic language detection.
      * - `deepgram/nova-2` is Deepgram's previous-generation multilingual model.
      * - `azure/fast` is a multilingual Azure transcription model.
