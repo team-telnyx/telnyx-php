@@ -13,6 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type TranscriptionSettingsConfigShape from \Telnyx\AI\Assistants\TranscriptionSettingsConfig
  *
  * @phpstan-type TranscriptionSettingsShape = array{
+ *   apiKeyRef?: string|null,
  *   language?: string|null,
  *   model?: null|Model|value-of<Model>,
  *   region?: string|null,
@@ -25,16 +26,26 @@ final class TranscriptionSettings implements BaseModel
     use SdkModel;
 
     /**
-     * The language of the audio to be transcribed. If not set, of if set to `auto`, the model will automatically detect the language.
+     * Integration secret identifier for the transcription provider API key. Currently used for Azure transcription regions that require a customer-provided API key.
+     */
+    #[Optional('api_key_ref')]
+    public ?string $apiKeyRef;
+
+    /**
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, the model will automatically detect the language.
      */
     #[Optional]
     public ?string $language;
 
     /**
-     * The speech to text model to be used by the voice assistant. All the deepgram models are run on-premise.
+     * The speech to text model to be used by the voice assistant. All Deepgram models are run on-premise.
      *
      * - `deepgram/flux` is optimized for turn-taking but is English-only.
-     * - `deepgram/nova-3` is multi-lingual with automatic language detection but slightly higher latency.
+     * - `deepgram/nova-3` is multilingual with automatic language detection.
+     * - `deepgram/nova-2` is Deepgram's previous-generation multilingual model.
+     * - `azure/fast` is a multilingual Azure transcription model.
+     * - `assemblyai/universal-streaming` is a multilingual streaming model with configurable turn detection.
+     * - `xai/grok-stt` is a multilingual Grok STT model.
      *
      * @var value-of<Model>|null $model
      */
@@ -42,7 +53,7 @@ final class TranscriptionSettings implements BaseModel
     public ?string $model;
 
     /**
-     * Region on third party cloud providers (currently Azure) if using one of their models.
+     * Region on third party cloud providers (currently Azure) if using one of their models. Some regions require `api_key_ref`.
      */
     #[Optional]
     public ?string $region;
@@ -64,6 +75,7 @@ final class TranscriptionSettings implements BaseModel
      * @param TranscriptionSettingsConfig|TranscriptionSettingsConfigShape|null $settings
      */
     public static function with(
+        ?string $apiKeyRef = null,
         ?string $language = null,
         Model|string|null $model = null,
         ?string $region = null,
@@ -71,6 +83,7 @@ final class TranscriptionSettings implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $apiKeyRef && $self['apiKeyRef'] = $apiKeyRef;
         null !== $language && $self['language'] = $language;
         null !== $model && $self['model'] = $model;
         null !== $region && $self['region'] = $region;
@@ -80,7 +93,18 @@ final class TranscriptionSettings implements BaseModel
     }
 
     /**
-     * The language of the audio to be transcribed. If not set, of if set to `auto`, the model will automatically detect the language.
+     * Integration secret identifier for the transcription provider API key. Currently used for Azure transcription regions that require a customer-provided API key.
+     */
+    public function withAPIKeyRef(string $apiKeyRef): self
+    {
+        $self = clone $this;
+        $self['apiKeyRef'] = $apiKeyRef;
+
+        return $self;
+    }
+
+    /**
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, the model will automatically detect the language.
      */
     public function withLanguage(string $language): self
     {
@@ -91,10 +115,14 @@ final class TranscriptionSettings implements BaseModel
     }
 
     /**
-     * The speech to text model to be used by the voice assistant. All the deepgram models are run on-premise.
+     * The speech to text model to be used by the voice assistant. All Deepgram models are run on-premise.
      *
      * - `deepgram/flux` is optimized for turn-taking but is English-only.
-     * - `deepgram/nova-3` is multi-lingual with automatic language detection but slightly higher latency.
+     * - `deepgram/nova-3` is multilingual with automatic language detection.
+     * - `deepgram/nova-2` is Deepgram's previous-generation multilingual model.
+     * - `azure/fast` is a multilingual Azure transcription model.
+     * - `assemblyai/universal-streaming` is a multilingual streaming model with configurable turn detection.
+     * - `xai/grok-stt` is a multilingual Grok STT model.
      *
      * @param Model|value-of<Model> $model
      */
@@ -107,7 +135,7 @@ final class TranscriptionSettings implements BaseModel
     }
 
     /**
-     * Region on third party cloud providers (currently Azure) if using one of their models.
+     * Region on third party cloud providers (currently Azure) if using one of their models. Some regions require `api_key_ref`.
      */
     public function withRegion(string $region): self
     {

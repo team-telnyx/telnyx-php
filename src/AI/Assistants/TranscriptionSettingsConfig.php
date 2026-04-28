@@ -11,9 +11,12 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type TranscriptionSettingsConfigShape = array{
  *   eagerEotThreshold?: float|null,
+ *   endOfTurnConfidenceThreshold?: float|null,
  *   eotThreshold?: float|null,
  *   eotTimeoutMs?: int|null,
  *   keyterm?: string|null,
+ *   maxTurnSilence?: int|null,
+ *   minTurnSilence?: int|null,
  *   numerals?: bool|null,
  *   smartFormat?: bool|null,
  * }
@@ -28,6 +31,12 @@ final class TranscriptionSettingsConfig implements BaseModel
      */
     #[Optional('eager_eot_threshold')]
     public ?float $eagerEotThreshold;
+
+    /**
+     * Available only for assemblyai/universal-streaming. Confidence level required to trigger an end of turn. Higher values require more certainty before ending a turn.
+     */
+    #[Optional('end_of_turn_confidence_threshold')]
+    public ?float $endOfTurnConfidenceThreshold;
 
     /**
      * Available only for deepgram/flux. Confidence required to trigger an end of turn. Higher values = more reliable turn detection but slightly increased latency.
@@ -47,6 +56,18 @@ final class TranscriptionSettingsConfig implements BaseModel
     #[Optional]
     public ?string $keyterm;
 
+    /**
+     * Available only for assemblyai/universal-streaming. Maximum duration of silence in milliseconds before forcing an end of turn.
+     */
+    #[Optional('max_turn_silence')]
+    public ?int $maxTurnSilence;
+
+    /**
+     * Available only for assemblyai/universal-streaming. Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
+     */
+    #[Optional('min_turn_silence')]
+    public ?int $minTurnSilence;
+
     #[Optional]
     public ?bool $numerals;
 
@@ -65,18 +86,24 @@ final class TranscriptionSettingsConfig implements BaseModel
      */
     public static function with(
         ?float $eagerEotThreshold = null,
+        ?float $endOfTurnConfidenceThreshold = null,
         ?float $eotThreshold = null,
         ?int $eotTimeoutMs = null,
         ?string $keyterm = null,
+        ?int $maxTurnSilence = null,
+        ?int $minTurnSilence = null,
         ?bool $numerals = null,
         ?bool $smartFormat = null,
     ): self {
         $self = new self;
 
         null !== $eagerEotThreshold && $self['eagerEotThreshold'] = $eagerEotThreshold;
+        null !== $endOfTurnConfidenceThreshold && $self['endOfTurnConfidenceThreshold'] = $endOfTurnConfidenceThreshold;
         null !== $eotThreshold && $self['eotThreshold'] = $eotThreshold;
         null !== $eotTimeoutMs && $self['eotTimeoutMs'] = $eotTimeoutMs;
         null !== $keyterm && $self['keyterm'] = $keyterm;
+        null !== $maxTurnSilence && $self['maxTurnSilence'] = $maxTurnSilence;
+        null !== $minTurnSilence && $self['minTurnSilence'] = $minTurnSilence;
         null !== $numerals && $self['numerals'] = $numerals;
         null !== $smartFormat && $self['smartFormat'] = $smartFormat;
 
@@ -90,6 +117,18 @@ final class TranscriptionSettingsConfig implements BaseModel
     {
         $self = clone $this;
         $self['eagerEotThreshold'] = $eagerEotThreshold;
+
+        return $self;
+    }
+
+    /**
+     * Available only for assemblyai/universal-streaming. Confidence level required to trigger an end of turn. Higher values require more certainty before ending a turn.
+     */
+    public function withEndOfTurnConfidenceThreshold(
+        float $endOfTurnConfidenceThreshold
+    ): self {
+        $self = clone $this;
+        $self['endOfTurnConfidenceThreshold'] = $endOfTurnConfidenceThreshold;
 
         return $self;
     }
@@ -123,6 +162,28 @@ final class TranscriptionSettingsConfig implements BaseModel
     {
         $self = clone $this;
         $self['keyterm'] = $keyterm;
+
+        return $self;
+    }
+
+    /**
+     * Available only for assemblyai/universal-streaming. Maximum duration of silence in milliseconds before forcing an end of turn.
+     */
+    public function withMaxTurnSilence(int $maxTurnSilence): self
+    {
+        $self = clone $this;
+        $self['maxTurnSilence'] = $maxTurnSilence;
+
+        return $self;
+    }
+
+    /**
+     * Available only for assemblyai/universal-streaming. Minimum duration of silence in milliseconds before a turn can end. Must be less than or equal to max_turn_silence.
+     */
+    public function withMinTurnSilence(int $minTurnSilence): self
+    {
+        $self = clone $this;
+        $self['minTurnSilence'] = $minTurnSilence;
 
         return $self;
     }

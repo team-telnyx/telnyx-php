@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\TranscriptionSettings;
 
 /**
- * The speech to text model to be used by the voice assistant. All the deepgram models are run on-premise.
+ * The speech to text model to be used by the voice assistant. All Deepgram models are run on-premise.
  *
  * - `deepgram/flux` is optimized for turn-taking but is English-only.
- * - `deepgram/nova-3` is multi-lingual with automatic language detection but slightly higher latency.
+ * - `deepgram/nova-3` is multilingual with automatic language detection.
+ * - `deepgram/nova-2` is Deepgram's previous-generation multilingual model.
+ * - `azure/fast` is a multilingual Azure transcription model.
+ * - `assemblyai/universal-streaming` is a multilingual streaming model with configurable turn detection.
+ * - `xai/grok-stt` is a multilingual Grok STT model.
  */
 enum Model: string
 {
@@ -19,6 +23,10 @@ enum Model: string
     case DEEPGRAM_NOVA_2 = 'deepgram/nova-2';
 
     case AZURE_FAST = 'azure/fast';
+
+    case ASSEMBLYAI_UNIVERSAL_STREAMING = 'assemblyai/universal-streaming';
+
+    case XAI_GROK_STT = 'xai/grok-stt';
 
     case DISTIL_WHISPER_DISTIL_LARGE_V2 = 'distil-whisper/distil-large-v2';
 
