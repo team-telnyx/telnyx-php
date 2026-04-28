@@ -10,6 +10,8 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL\AsyncAmdStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL\CustomHeader;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL\DeepfakeDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL\DeepfakeDetectionCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL\DetectionMode;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL\MachineDetection;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL\MediaEncryption;
@@ -36,6 +38,9 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL\URLMethod;
  *   cancelPlaybackOnDetectMessageEnd?: bool|null,
  *   cancelPlaybackOnMachineDetection?: bool|null,
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
+ *   deepfakeDetection?: null|DeepfakeDetection|value-of<DeepfakeDetection>,
+ *   deepfakeDetectionCallbackMethod?: null|DeepfakeDetectionCallbackMethod|value-of<DeepfakeDetectionCallbackMethod>,
+ *   deepfakeDetectionCallbackURL?: string|null,
  *   detectionMode?: null|DetectionMode|value-of<DetectionMode>,
  *   fallbackURL?: string|null,
  *   from?: string|null,
@@ -135,6 +140,31 @@ final class WithURL implements BaseModel
      */
     #[Optional('CustomHeaders', list: CustomHeader::class)]
     public ?array $customHeaders;
+
+    /**
+     * Enables Deepfake Detection on the dialed call. When enabled, audio from the remote party is analyzed to determine whether the voice is AI-generated. Results are delivered asynchronously via a callback.
+     *
+     * @var value-of<DeepfakeDetection>|null $deepfakeDetection
+     */
+    #[Optional('DeepfakeDetection', enum: DeepfakeDetection::class)]
+    public ?string $deepfakeDetection;
+
+    /**
+     * HTTP request type used for `DeepfakeDetectionCallbackUrl`.
+     *
+     * @var value-of<DeepfakeDetectionCallbackMethod>|null $deepfakeDetectionCallbackMethod
+     */
+    #[Optional(
+        'DeepfakeDetectionCallbackMethod',
+        enum: DeepfakeDetectionCallbackMethod::class,
+    )]
+    public ?string $deepfakeDetectionCallbackMethod;
+
+    /**
+     * URL destination for Telnyx to send deepfake detection callback events to for the call.
+     */
+    #[Optional('DeepfakeDetectionCallbackUrl')]
+    public ?string $deepfakeDetectionCallbackURL;
 
     /**
      * Allows you to chose between Premium and Standard detections.
@@ -378,6 +408,8 @@ final class WithURL implements BaseModel
      *
      * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>|null $asyncAmdStatusCallbackMethod
      * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
+     * @param DeepfakeDetection|value-of<DeepfakeDetection>|null $deepfakeDetection
+     * @param DeepfakeDetectionCallbackMethod|value-of<DeepfakeDetectionCallbackMethod>|null $deepfakeDetectionCallbackMethod
      * @param DetectionMode|value-of<DetectionMode>|null $detectionMode
      * @param MachineDetection|value-of<MachineDetection>|null $machineDetection
      * @param MediaEncryption|value-of<MediaEncryption>|null $mediaEncryption
@@ -401,6 +433,9 @@ final class WithURL implements BaseModel
         ?bool $cancelPlaybackOnDetectMessageEnd = null,
         ?bool $cancelPlaybackOnMachineDetection = null,
         ?array $customHeaders = null,
+        DeepfakeDetection|string|null $deepfakeDetection = null,
+        DeepfakeDetectionCallbackMethod|string|null $deepfakeDetectionCallbackMethod = null,
+        ?string $deepfakeDetectionCallbackURL = null,
         DetectionMode|string|null $detectionMode = null,
         ?string $fallbackURL = null,
         ?string $from = null,
@@ -446,6 +481,9 @@ final class WithURL implements BaseModel
         null !== $cancelPlaybackOnDetectMessageEnd && $self['cancelPlaybackOnDetectMessageEnd'] = $cancelPlaybackOnDetectMessageEnd;
         null !== $cancelPlaybackOnMachineDetection && $self['cancelPlaybackOnMachineDetection'] = $cancelPlaybackOnMachineDetection;
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $deepfakeDetection && $self['deepfakeDetection'] = $deepfakeDetection;
+        null !== $deepfakeDetectionCallbackMethod && $self['deepfakeDetectionCallbackMethod'] = $deepfakeDetectionCallbackMethod;
+        null !== $deepfakeDetectionCallbackURL && $self['deepfakeDetectionCallbackURL'] = $deepfakeDetectionCallbackURL;
         null !== $detectionMode && $self['detectionMode'] = $detectionMode;
         null !== $fallbackURL && $self['fallbackURL'] = $fallbackURL;
         null !== $from && $self['from'] = $from;
@@ -585,6 +623,46 @@ final class WithURL implements BaseModel
     {
         $self = clone $this;
         $self['customHeaders'] = $customHeaders;
+
+        return $self;
+    }
+
+    /**
+     * Enables Deepfake Detection on the dialed call. When enabled, audio from the remote party is analyzed to determine whether the voice is AI-generated. Results are delivered asynchronously via a callback.
+     *
+     * @param DeepfakeDetection|value-of<DeepfakeDetection> $deepfakeDetection
+     */
+    public function withDeepfakeDetection(
+        DeepfakeDetection|string $deepfakeDetection
+    ): self {
+        $self = clone $this;
+        $self['deepfakeDetection'] = $deepfakeDetection;
+
+        return $self;
+    }
+
+    /**
+     * HTTP request type used for `DeepfakeDetectionCallbackUrl`.
+     *
+     * @param DeepfakeDetectionCallbackMethod|value-of<DeepfakeDetectionCallbackMethod> $deepfakeDetectionCallbackMethod
+     */
+    public function withDeepfakeDetectionCallbackMethod(
+        DeepfakeDetectionCallbackMethod|string $deepfakeDetectionCallbackMethod
+    ): self {
+        $self = clone $this;
+        $self['deepfakeDetectionCallbackMethod'] = $deepfakeDetectionCallbackMethod;
+
+        return $self;
+    }
+
+    /**
+     * URL destination for Telnyx to send deepfake detection callback events to for the call.
+     */
+    public function withDeepfakeDetectionCallbackURL(
+        string $deepfakeDetectionCallbackURL
+    ): self {
+        $self = clone $this;
+        $self['deepfakeDetectionCallbackURL'] = $deepfakeDetectionCallbackURL;
 
         return $self;
     }
