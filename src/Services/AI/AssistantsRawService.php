@@ -7,6 +7,8 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
+use Telnyx\AI\Assistants\AssistantCreateParams\ExternalLlm;
+use Telnyx\AI\Assistants\AssistantCreateParams\FallbackConfig;
 use Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
@@ -36,7 +38,11 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\AssistantCreateParams\ExternalLlm
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\AssistantCreateParams\FallbackConfig
  * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ExternalLlm as ExternalLlmShape1
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig as FallbackConfigShape1
  * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\PostConversationSettings as PostConversationSettingsShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -71,6 +77,8 @@ final class AssistantsRawService implements AssistantsRawContract
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookURL?: string,
      *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
+     *   externalLlm?: ExternalLlm|ExternalLlmShape,
+     *   fallbackConfig?: FallbackConfig|FallbackConfigShape,
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   llmAPIKeyRef?: string,
@@ -163,6 +171,8 @@ final class AssistantsRawService implements AssistantsRawContract
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookURL?: string,
      *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
+     *   externalLlm?: AssistantUpdateParams\ExternalLlm|ExternalLlmShape1,
+     *   fallbackConfig?: AssistantUpdateParams\FallbackConfig|FallbackConfigShape1,
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   instructions?: string,
