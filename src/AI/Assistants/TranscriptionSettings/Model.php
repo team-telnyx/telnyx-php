@@ -7,7 +7,7 @@ namespace Telnyx\AI\Assistants\TranscriptionSettings;
 /**
  * The speech to text model to be used by the voice assistant. All Deepgram models are run on-premise.
  *
- * - `deepgram/flux` is optimized for turn-taking but is English-only.
+ * - `deepgram/flux` is optimized for turn-taking with multilingual language hints.
  * - `deepgram/nova-3` is multilingual with automatic language detection.
  * - `deepgram/nova-2` is Deepgram's previous-generation multilingual model.
  * - `azure/fast` is a multilingual Azure transcription model.
