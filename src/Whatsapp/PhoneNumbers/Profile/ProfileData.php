@@ -19,6 +19,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   displayName?: string|null,
  *   email?: string|null,
  *   phoneNumberID?: string|null,
+ *   profileID?: string|null,
  *   profilePhotoURL?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
@@ -60,6 +61,9 @@ final class ProfileData implements BaseModel
     #[Optional('phone_number_id')]
     public ?string $phoneNumberID;
 
+    #[Optional('profile_id')]
+    public ?string $profileID;
+
     #[Optional('profile_photo_url')]
     public ?string $profilePhotoURL;
 
@@ -92,6 +96,7 @@ final class ProfileData implements BaseModel
         ?string $displayName = null,
         ?string $email = null,
         ?string $phoneNumberID = null,
+        ?string $profileID = null,
         ?string $profilePhotoURL = null,
         ?string $recordType = null,
         ?\DateTimeInterface $updatedAt = null,
@@ -108,6 +113,7 @@ final class ProfileData implements BaseModel
         null !== $displayName && $self['displayName'] = $displayName;
         null !== $email && $self['email'] = $email;
         null !== $phoneNumberID && $self['phoneNumberID'] = $phoneNumberID;
+        null !== $profileID && $self['profileID'] = $profileID;
         null !== $profilePhotoURL && $self['profilePhotoURL'] = $profilePhotoURL;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
@@ -187,6 +193,14 @@ final class ProfileData implements BaseModel
     {
         $self = clone $this;
         $self['phoneNumberID'] = $phoneNumberID;
+
+        return $self;
+    }
+
+    public function withProfileID(string $profileID): self
+    {
+        $self = clone $this;
+        $self['profileID'] = $profileID;
 
         return $self;
     }

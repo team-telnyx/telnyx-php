@@ -490,6 +490,7 @@ final class MessagesService implements MessagesContract
      * @param string $from Phone number in +E.164 format associated with Whatsapp account
      * @param string $to Phone number in +E.164 format
      * @param WhatsappMessageContent|WhatsappMessageContentShape $whatsappMessage
+     * @param string $messagingProfileID Messaging profile ID - required if the 'from' number is not SMS-enabled
      * @param \Telnyx\Messages\MessageSendWhatsappParams\Type|value-of<\Telnyx\Messages\MessageSendWhatsappParams\Type> $type Message type - must be set to "WHATSAPP"
      * @param string $webhookURL the URL where webhooks related to this message will be sent
      * @param RequestOpts|null $requestOptions
@@ -500,6 +501,7 @@ final class MessagesService implements MessagesContract
         string $from,
         string $to,
         WhatsappMessageContent|array $whatsappMessage,
+        ?string $messagingProfileID = null,
         \Telnyx\Messages\MessageSendWhatsappParams\Type|string|null $type = null,
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
@@ -509,6 +511,7 @@ final class MessagesService implements MessagesContract
                 'from' => $from,
                 'to' => $to,
                 'whatsappMessage' => $whatsappMessage,
+                'messagingProfileID' => $messagingProfileID,
                 'type' => $type,
                 'webhookURL' => $webhookURL,
             ],

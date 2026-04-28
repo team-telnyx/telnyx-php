@@ -65,6 +65,7 @@ final class ProfileService implements ProfileContract
      * Update phone number business profile
      *
      * @param string $phoneNumber Phone number (E.164 format)
+     * @param string $profileID Messaging profile ID for inbound messages
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -77,6 +78,7 @@ final class ProfileService implements ProfileContract
         ?string $description = null,
         ?string $displayName = null,
         ?string $email = null,
+        ?string $profileID = null,
         ?string $website = null,
         RequestOptions|array|null $requestOptions = null,
     ): ProfileUpdateResponse {
@@ -88,6 +90,7 @@ final class ProfileService implements ProfileContract
                 'description' => $description,
                 'displayName' => $displayName,
                 'email' => $email,
+                'profileID' => $profileID,
                 'website' => $website,
             ],
         );

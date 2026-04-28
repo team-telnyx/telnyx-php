@@ -394,6 +394,7 @@ final class MessagesRawService implements MessagesRawContract
      *   from: string,
      *   to: string,
      *   whatsappMessage: WhatsappMessageContent|WhatsappMessageContentShape,
+     *   messagingProfileID?: string,
      *   type?: MessageSendWhatsappParams\Type|value-of<MessageSendWhatsappParams\Type>,
      *   webhookURL?: string,
      * }|MessageSendWhatsappParams $params
