@@ -13,6 +13,8 @@ use Telnyx\AI\Assistants\ObservabilityReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
@@ -25,6 +27,8 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
@@ -91,6 +95,8 @@ final class VersionsService implements VersionsContract
      * @param array<string,mixed> $dynamicVariables Body param: Map of dynamic variables and their default values
      * @param string $dynamicVariablesWebhookURL Body param: If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures Body param
+     * @param ExternalLlm|ExternalLlmShape $externalLlm Body param
+     * @param FallbackConfig|FallbackConfigShape $fallbackConfig Body param
      * @param string $greeting Body param: Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
      * @param InsightSettings|InsightSettingsShape $insightSettings Body param
      * @param string $instructions Body param: System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
@@ -118,6 +124,8 @@ final class VersionsService implements VersionsContract
         ?array $dynamicVariables = null,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
+        ExternalLlm|array|null $externalLlm = null,
+        FallbackConfig|array|null $fallbackConfig = null,
         ?string $greeting = null,
         InsightSettings|array|null $insightSettings = null,
         ?string $instructions = null,
@@ -143,6 +151,8 @@ final class VersionsService implements VersionsContract
                 'dynamicVariables' => $dynamicVariables,
                 'dynamicVariablesWebhookURL' => $dynamicVariablesWebhookURL,
                 'enabledFeatures' => $enabledFeatures,
+                'externalLlm' => $externalLlm,
+                'fallbackConfig' => $fallbackConfig,
                 'greeting' => $greeting,
                 'insightSettings' => $insightSettings,
                 'instructions' => $instructions,

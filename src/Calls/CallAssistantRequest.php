@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Calls;
 
 use Telnyx\Calls\CallAssistantRequest\DynamicVariable;
+use Telnyx\Calls\CallAssistantRequest\ExternalLlm;
+use Telnyx\Calls\CallAssistantRequest\FallbackConfig;
 use Telnyx\Calls\CallAssistantRequest\Tool;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -18,13 +20,15 @@ use Telnyx\Core\Conversion\MapOf;
  * @phpstan-import-type DynamicVariableVariants from \Telnyx\Calls\CallAssistantRequest\DynamicVariable
  * @phpstan-import-type ToolVariants from \Telnyx\Calls\CallAssistantRequest\Tool
  * @phpstan-import-type DynamicVariableShape from \Telnyx\Calls\CallAssistantRequest\DynamicVariable
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\Calls\CallAssistantRequest\ExternalLlm
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\Calls\CallAssistantRequest\FallbackConfig
  * @phpstan-import-type ToolShape from \Telnyx\Calls\CallAssistantRequest\Tool
  *
  * @phpstan-type CallAssistantRequestShape = array{
  *   id: string,
  *   dynamicVariables?: array<string,DynamicVariableShape>|null,
- *   externalLlm?: array<string,mixed>|null,
- *   fallbackConfig?: array<string,mixed>|null,
+ *   externalLlm?: null|ExternalLlm|ExternalLlmShape,
+ *   fallbackConfig?: null|FallbackConfig|FallbackConfigShape,
  *   greeting?: string|null,
  *   instructions?: string|null,
  *   llmAPIKeyRef?: string|null,
@@ -57,19 +61,15 @@ final class CallAssistantRequest implements BaseModel
 
     /**
      * External LLM configuration for bringing your own LLM endpoint.
-     *
-     * @var array<string,mixed>|null $externalLlm
      */
-    #[Optional('external_llm', map: 'mixed')]
-    public ?array $externalLlm;
+    #[Optional('external_llm')]
+    public ?ExternalLlm $externalLlm;
 
     /**
      * Fallback LLM configuration used when the primary LLM provider is unavailable.
-     *
-     * @var array<string,mixed>|null $fallbackConfig
      */
-    #[Optional('fallback_config', map: 'mixed')]
-    public ?array $fallbackConfig;
+    #[Optional('fallback_config')]
+    public ?FallbackConfig $fallbackConfig;
 
     /**
      * Initial greeting text spoken when the assistant starts. Can be plain text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
@@ -158,8 +158,8 @@ final class CallAssistantRequest implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param array<string,DynamicVariableShape>|null $dynamicVariables
-     * @param array<string,mixed>|null $externalLlm
-     * @param array<string,mixed>|null $fallbackConfig
+     * @param ExternalLlm|ExternalLlmShape|null $externalLlm
+     * @param FallbackConfig|FallbackConfigShape|null $fallbackConfig
      * @param list<array<string,mixed>>|null $mcpServers
      * @param array<string,mixed>|null $observabilitySettings
      * @param list<ToolShape>|null $tools
@@ -167,8 +167,8 @@ final class CallAssistantRequest implements BaseModel
     public static function with(
         string $id,
         ?array $dynamicVariables = null,
-        ?array $externalLlm = null,
-        ?array $fallbackConfig = null,
+        ExternalLlm|array|null $externalLlm = null,
+        FallbackConfig|array|null $fallbackConfig = null,
         ?string $greeting = null,
         ?string $instructions = null,
         ?string $llmAPIKeyRef = null,
@@ -226,9 +226,9 @@ final class CallAssistantRequest implements BaseModel
     /**
      * External LLM configuration for bringing your own LLM endpoint.
      *
-     * @param array<string,mixed> $externalLlm
+     * @param ExternalLlm|ExternalLlmShape $externalLlm
      */
-    public function withExternalLlm(array $externalLlm): self
+    public function withExternalLlm(ExternalLlm|array $externalLlm): self
     {
         $self = clone $this;
         $self['externalLlm'] = $externalLlm;
@@ -239,10 +239,11 @@ final class CallAssistantRequest implements BaseModel
     /**
      * Fallback LLM configuration used when the primary LLM provider is unavailable.
      *
-     * @param array<string,mixed> $fallbackConfig
+     * @param FallbackConfig|FallbackConfigShape $fallbackConfig
      */
-    public function withFallbackConfig(array $fallbackConfig): self
-    {
+    public function withFallbackConfig(
+        FallbackConfig|array $fallbackConfig
+    ): self {
         $self = clone $this;
         $self['fallbackConfig'] = $fallbackConfig;
 

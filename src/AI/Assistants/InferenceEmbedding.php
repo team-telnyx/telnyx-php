@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\InferenceEmbedding\ExternalLlm;
+use Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig;
 use Telnyx\AI\Assistants\InferenceEmbedding\PostConversationSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -12,6 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\InferenceEmbedding\ExternalLlm
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig
  * @phpstan-import-type ImportMetadataShape from \Telnyx\AI\Assistants\ImportMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
@@ -34,6 +38,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   dynamicVariables?: array<string,mixed>|null,
  *   dynamicVariablesWebhookURL?: string|null,
  *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>|null,
+ *   externalLlm?: null|ExternalLlm|ExternalLlmShape,
+ *   fallbackConfig?: null|FallbackConfig|FallbackConfigShape,
  *   greeting?: string|null,
  *   importMetadata?: null|ImportMetadata|ImportMetadataShape,
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
@@ -95,6 +101,12 @@ final class InferenceEmbedding implements BaseModel
     /** @var list<value-of<EnabledFeatures>>|null $enabledFeatures */
     #[Optional('enabled_features', list: EnabledFeatures::class)]
     public ?array $enabledFeatures;
+
+    #[Optional('external_llm')]
+    public ?ExternalLlm $externalLlm;
+
+    #[Optional('fallback_config')]
+    public ?FallbackConfig $fallbackConfig;
 
     /**
      * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
@@ -185,6 +197,8 @@ final class InferenceEmbedding implements BaseModel
      *
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
+     * @param ExternalLlm|ExternalLlmShape|null $externalLlm
+     * @param FallbackConfig|FallbackConfigShape|null $fallbackConfig
      * @param ImportMetadata|ImportMetadataShape|null $importMetadata
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
@@ -207,6 +221,8 @@ final class InferenceEmbedding implements BaseModel
         ?array $dynamicVariables = null,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
+        ExternalLlm|array|null $externalLlm = null,
+        FallbackConfig|array|null $fallbackConfig = null,
         ?string $greeting = null,
         ImportMetadata|array|null $importMetadata = null,
         InsightSettings|array|null $insightSettings = null,
@@ -233,6 +249,8 @@ final class InferenceEmbedding implements BaseModel
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $dynamicVariablesWebhookURL && $self['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
         null !== $enabledFeatures && $self['enabledFeatures'] = $enabledFeatures;
+        null !== $externalLlm && $self['externalLlm'] = $externalLlm;
+        null !== $fallbackConfig && $self['fallbackConfig'] = $fallbackConfig;
         null !== $greeting && $self['greeting'] = $greeting;
         null !== $importMetadata && $self['importMetadata'] = $importMetadata;
         null !== $insightSettings && $self['insightSettings'] = $insightSettings;
@@ -336,6 +354,29 @@ final class InferenceEmbedding implements BaseModel
     {
         $self = clone $this;
         $self['enabledFeatures'] = $enabledFeatures;
+
+        return $self;
+    }
+
+    /**
+     * @param ExternalLlm|ExternalLlmShape $externalLlm
+     */
+    public function withExternalLlm(ExternalLlm|array $externalLlm): self
+    {
+        $self = clone $this;
+        $self['externalLlm'] = $externalLlm;
+
+        return $self;
+    }
+
+    /**
+     * @param FallbackConfig|FallbackConfigShape $fallbackConfig
+     */
+    public function withFallbackConfig(
+        FallbackConfig|array $fallbackConfig
+    ): self {
+        $self = clone $this;
+        $self['fallbackConfig'] = $fallbackConfig;
 
         return $self;
     }
