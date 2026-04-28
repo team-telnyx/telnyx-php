@@ -31,6 +31,7 @@ interface ProfileContract
      * @api
      *
      * @param string $phoneNumber Phone number (E.164 format)
+     * @param string $profileID Messaging profile ID for inbound messages
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -43,6 +44,7 @@ interface ProfileContract
         ?string $description = null,
         ?string $displayName = null,
         ?string $email = null,
+        ?string $profileID = null,
         ?string $website = null,
         RequestOptions|array|null $requestOptions = null,
     ): ProfileUpdateResponse;

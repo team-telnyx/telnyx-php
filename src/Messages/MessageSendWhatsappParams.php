@@ -22,6 +22,7 @@ use Telnyx\Messages\MessageSendWhatsappParams\Type;
  *   from: string,
  *   to: string,
  *   whatsappMessage: WhatsappMessageContent|WhatsappMessageContentShape,
+ *   messagingProfileID?: string|null,
  *   type?: null|Type|value-of<Type>,
  *   webhookURL?: string|null,
  * }
@@ -46,6 +47,12 @@ final class MessageSendWhatsappParams implements BaseModel
 
     #[Required('whatsapp_message')]
     public WhatsappMessageContent $whatsappMessage;
+
+    /**
+     * Messaging profile ID - required if the 'from' number is not SMS-enabled.
+     */
+    #[Optional('messaging_profile_id')]
+    public ?string $messagingProfileID;
 
     /**
      * Message type - must be set to "WHATSAPP".
@@ -95,6 +102,7 @@ final class MessageSendWhatsappParams implements BaseModel
         string $from,
         string $to,
         WhatsappMessageContent|array $whatsappMessage,
+        ?string $messagingProfileID = null,
         Type|string|null $type = null,
         ?string $webhookURL = null,
     ): self {
@@ -104,6 +112,7 @@ final class MessageSendWhatsappParams implements BaseModel
         $self['to'] = $to;
         $self['whatsappMessage'] = $whatsappMessage;
 
+        null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
         null !== $type && $self['type'] = $type;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
@@ -140,6 +149,17 @@ final class MessageSendWhatsappParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['whatsappMessage'] = $whatsappMessage;
+
+        return $self;
+    }
+
+    /**
+     * Messaging profile ID - required if the 'from' number is not SMS-enabled.
+     */
+    public function withMessagingProfileID(string $messagingProfileID): self
+    {
+        $self = clone $this;
+        $self['messagingProfileID'] = $messagingProfileID;
 
         return $self;
     }

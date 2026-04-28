@@ -64,6 +64,7 @@ final class ProfileRawService implements ProfileRawContract
      *   description?: string,
      *   displayName?: string,
      *   email?: string,
+     *   profileID?: string,
      *   website?: string,
      * }|ProfileUpdateParams $params
      * @param RequestOpts|null $requestOptions

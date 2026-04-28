@@ -21,6 +21,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   description?: string|null,
  *   displayName?: string|null,
  *   email?: string|null,
+ *   profileID?: string|null,
  *   website?: string|null,
  * }
  */
@@ -48,6 +49,12 @@ final class ProfileUpdateParams implements BaseModel
     #[Optional]
     public ?string $email;
 
+    /**
+     * Messaging profile ID for inbound messages.
+     */
+    #[Optional('profile_id')]
+    public ?string $profileID;
+
     #[Optional]
     public ?string $website;
 
@@ -68,6 +75,7 @@ final class ProfileUpdateParams implements BaseModel
         ?string $description = null,
         ?string $displayName = null,
         ?string $email = null,
+        ?string $profileID = null,
         ?string $website = null,
     ): self {
         $self = new self;
@@ -78,6 +86,7 @@ final class ProfileUpdateParams implements BaseModel
         null !== $description && $self['description'] = $description;
         null !== $displayName && $self['displayName'] = $displayName;
         null !== $email && $self['email'] = $email;
+        null !== $profileID && $self['profileID'] = $profileID;
         null !== $website && $self['website'] = $website;
 
         return $self;
@@ -127,6 +136,17 @@ final class ProfileUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['email'] = $email;
+
+        return $self;
+    }
+
+    /**
+     * Messaging profile ID for inbound messages.
+     */
+    public function withProfileID(string $profileID): self
+    {
+        $self = clone $this;
+        $self['profileID'] = $profileID;
 
         return $self;
     }
