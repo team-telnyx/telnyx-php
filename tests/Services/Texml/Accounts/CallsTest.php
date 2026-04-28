@@ -142,6 +142,9 @@ final class CallsTest extends TestCase
                 'customHeaders' => [
                     ['name' => 'X-Custom-Header', 'value' => 'custom-value'],
                 ],
+                'deepfakeDetection' => 'Enable',
+                'deepfakeDetectionCallbackMethod' => 'GET',
+                'deepfakeDetectionCallbackURL' => 'https://www.example.com/deepfake-callback',
                 'detectionMode' => 'Premium',
                 'fallbackURL' => 'https://www.example.com/instructions-fallback.xml',
                 'from' => '+13120001234',
