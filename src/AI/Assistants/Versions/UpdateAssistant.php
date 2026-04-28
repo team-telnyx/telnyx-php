@@ -12,6 +12,8 @@ use Telnyx\AI\Assistants\ObservabilityReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\UpdateAssistant\ExternalLlm;
+use Telnyx\AI\Assistants\Versions\UpdateAssistant\FallbackConfig;
 use Telnyx\AI\Assistants\Versions\UpdateAssistant\PostConversationSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
@@ -21,6 +23,8 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\Versions\UpdateAssistant\ExternalLlm
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\Versions\UpdateAssistant\FallbackConfig
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
@@ -37,6 +41,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   dynamicVariables?: array<string,mixed>|null,
  *   dynamicVariablesWebhookURL?: string|null,
  *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>|null,
+ *   externalLlm?: null|ExternalLlm|ExternalLlmShape,
+ *   fallbackConfig?: null|FallbackConfig|FallbackConfigShape,
  *   greeting?: string|null,
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
  *   instructions?: string|null,
@@ -80,6 +86,12 @@ final class UpdateAssistant implements BaseModel
     /** @var list<value-of<EnabledFeatures>>|null $enabledFeatures */
     #[Optional('enabled_features', list: EnabledFeatures::class)]
     public ?array $enabledFeatures;
+
+    #[Optional('external_llm')]
+    public ?ExternalLlm $externalLlm;
+
+    #[Optional('fallback_config')]
+    public ?FallbackConfig $fallbackConfig;
 
     /**
      * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
@@ -165,6 +177,8 @@ final class UpdateAssistant implements BaseModel
      *
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
+     * @param ExternalLlm|ExternalLlmShape|null $externalLlm
+     * @param FallbackConfig|FallbackConfigShape|null $fallbackConfig
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
      * @param ObservabilityReq|ObservabilityReqShape|null $observabilitySettings
@@ -182,6 +196,8 @@ final class UpdateAssistant implements BaseModel
         ?array $dynamicVariables = null,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
+        ExternalLlm|array|null $externalLlm = null,
+        FallbackConfig|array|null $fallbackConfig = null,
         ?string $greeting = null,
         InsightSettings|array|null $insightSettings = null,
         ?string $instructions = null,
@@ -205,6 +221,8 @@ final class UpdateAssistant implements BaseModel
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $dynamicVariablesWebhookURL && $self['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
         null !== $enabledFeatures && $self['enabledFeatures'] = $enabledFeatures;
+        null !== $externalLlm && $self['externalLlm'] = $externalLlm;
+        null !== $fallbackConfig && $self['fallbackConfig'] = $fallbackConfig;
         null !== $greeting && $self['greeting'] = $greeting;
         null !== $insightSettings && $self['insightSettings'] = $insightSettings;
         null !== $instructions && $self['instructions'] = $instructions;
@@ -265,6 +283,29 @@ final class UpdateAssistant implements BaseModel
     {
         $self = clone $this;
         $self['enabledFeatures'] = $enabledFeatures;
+
+        return $self;
+    }
+
+    /**
+     * @param ExternalLlm|ExternalLlmShape $externalLlm
+     */
+    public function withExternalLlm(ExternalLlm|array $externalLlm): self
+    {
+        $self = clone $this;
+        $self['externalLlm'] = $externalLlm;
+
+        return $self;
+    }
+
+    /**
+     * @param FallbackConfig|FallbackConfigShape $fallbackConfig
+     */
+    public function withFallbackConfig(
+        FallbackConfig|array $fallbackConfig
+    ): self {
+        $self = clone $this;
+        $self['fallbackConfig'] = $fallbackConfig;
 
         return $self;
     }

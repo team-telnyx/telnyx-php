@@ -17,6 +17,8 @@ use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
@@ -30,6 +32,8 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
@@ -102,6 +106,8 @@ final class VersionsRawService implements VersionsRawContract
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookURL?: string,
      *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
+     *   externalLlm?: ExternalLlm|ExternalLlmShape,
+     *   fallbackConfig?: FallbackConfig|FallbackConfigShape,
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   instructions?: string,
