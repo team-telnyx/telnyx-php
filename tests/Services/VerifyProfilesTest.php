@@ -61,20 +61,14 @@ final class VerifyProfilesTest extends TestCase
                 'messagingTemplateID' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
                 'whitelistedDestinations' => ['US', 'CA'],
             ],
+            dailySpendLimit: 100,
+            dailySpendLimitEnabled: true,
             flashcall: [
                 'appName' => 'Example Secure App',
                 'defaultVerificationTimeoutSecs' => 300,
                 'whitelistedDestinations' => ['US', 'CA'],
             ],
             language: 'en-US',
-            rcs: [
-                'appName' => 'Example Secure App',
-                'codeLength' => 6,
-                'defaultVerificationTimeoutSecs' => 300,
-                'messagingTemplateID' => '0abb5b4f-459f-445a-bfcd-488998b7572d',
-                'smsFallback' => true,
-                'whitelistedDestinations' => ['US', 'CA'],
-            ],
             sms: [
                 'alphaSender' => 'sqF',
                 'appName' => 'Example Secure App',
