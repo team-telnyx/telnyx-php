@@ -53,7 +53,7 @@ final class ExternalLlm implements BaseModel
     public ?string $certificateRef;
 
     /**
-     * When enabled, Telnyx forwards the assistant's dynamic variables to the external LLM endpoint. Defaults to false. The chat completion request includes a top-level `extra_metadata` object when dynamic variables are available. For example: `{"extra_metadata":{"customer_name":"Jane","account_id":"acct_789","telnyx_agent_target":"+13125550100","telnyx_end_user_target":"+13125550123"}}`.
+     * When `true`, Telnyx forwards the assistant's dynamic variables to the external LLM endpoint as a top-level `extra_metadata` object on the chat completion request body. Defaults to `false`. Example payload sent to the external endpoint: `{"extra_metadata": {"customer_name": "Jane", "account_id": "acct_789", "telnyx_agent_target": "+13125550100", "telnyx_end_user_target": "+13125550123"}}`. Distinct from OpenAI's native `metadata` field, which has its own size and type limits.
      */
     #[Optional('forward_metadata')]
     public ?bool $forwardMetadata;
@@ -167,7 +167,7 @@ final class ExternalLlm implements BaseModel
     }
 
     /**
-     * When enabled, Telnyx forwards the assistant's dynamic variables to the external LLM endpoint. Defaults to false. The chat completion request includes a top-level `extra_metadata` object when dynamic variables are available. For example: `{"extra_metadata":{"customer_name":"Jane","account_id":"acct_789","telnyx_agent_target":"+13125550100","telnyx_end_user_target":"+13125550123"}}`.
+     * When `true`, Telnyx forwards the assistant's dynamic variables to the external LLM endpoint as a top-level `extra_metadata` object on the chat completion request body. Defaults to `false`. Example payload sent to the external endpoint: `{"extra_metadata": {"customer_name": "Jane", "account_id": "acct_789", "telnyx_agent_target": "+13125550100", "telnyx_end_user_target": "+13125550123"}}`. Distinct from OpenAI's native `metadata` field, which has its own size and type limits.
      */
     public function withForwardMetadata(bool $forwardMetadata): self
     {

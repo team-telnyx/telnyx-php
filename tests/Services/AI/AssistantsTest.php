@@ -42,7 +42,6 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->create(
             instructions: 'instructions',
-            model: 'model',
             name: 'name'
         );
 
@@ -59,10 +58,10 @@ final class AssistantsTest extends TestCase
 
         $result = $this->client->ai->assistants->create(
             instructions: 'instructions',
-            model: 'model',
             name: 'name',
             description: 'description',
             dynamicVariables: ['foo' => 'bar'],
+            dynamicVariablesWebhookTimeoutMs: 1,
             dynamicVariablesWebhookURL: 'dynamic_variables_webhook_url',
             enabledFeatures: [EnabledFeatures::TELEPHONY],
             externalLlm: [
@@ -89,12 +88,28 @@ final class AssistantsTest extends TestCase
             ],
             greeting: 'greeting',
             insightSettings: ['insightGroupID' => 'insight_group_id'],
+            integrations: [
+                ['integrationID' => 'integration_id', 'allowedList' => ['string']],
+            ],
+            interruptionSettings: [
+                'enable' => true,
+                'startSpeakingPlan' => [
+                    'transcriptionEndpointingPlan' => [
+                        'onNoPunctuationSeconds' => 0,
+                        'onNumberSeconds' => 0,
+                        'onPunctuationSeconds' => 0,
+                    ],
+                    'waitSeconds' => 0,
+                ],
+            ],
             llmAPIKeyRef: 'llm_api_key_ref',
+            mcpServers: [['id' => 'id', 'allowedTools' => ['string']]],
             messagingSettings: [
                 'conversationInactivityMinutes' => 1,
                 'defaultMessagingProfileID' => 'default_messaging_profile_id',
                 'deliveryStatusWebhookURL' => 'delivery_status_webhook_url',
             ],
+            model: 'model',
             observabilitySettings: [
                 'host' => 'host',
                 'publicKeyRef' => 'public_key_ref',
@@ -103,6 +118,7 @@ final class AssistantsTest extends TestCase
             ],
             postConversationSettings: ['enabled' => true],
             privacySettings: ['dataRetention' => true],
+            tags: ['string'],
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
                 'noiseSuppression' => 'krisp',

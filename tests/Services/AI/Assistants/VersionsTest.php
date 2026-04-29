@@ -91,6 +91,7 @@ final class VersionsTest extends TestCase
             assistantID: 'assistant_id',
             description: 'description',
             dynamicVariables: ['foo' => 'bar'],
+            dynamicVariablesWebhookTimeoutMs: 1,
             dynamicVariablesWebhookURL: 'dynamic_variables_webhook_url',
             enabledFeatures: [EnabledFeatures::TELEPHONY],
             externalLlm: [
@@ -118,7 +119,22 @@ final class VersionsTest extends TestCase
             greeting: 'greeting',
             insightSettings: ['insightGroupID' => 'insight_group_id'],
             instructions: 'instructions',
+            integrations: [
+                ['integrationID' => 'integration_id', 'allowedList' => ['string']],
+            ],
+            interruptionSettings: [
+                'enable' => true,
+                'startSpeakingPlan' => [
+                    'transcriptionEndpointingPlan' => [
+                        'onNoPunctuationSeconds' => 0,
+                        'onNumberSeconds' => 0,
+                        'onPunctuationSeconds' => 0,
+                    ],
+                    'waitSeconds' => 0,
+                ],
+            ],
             llmAPIKeyRef: 'llm_api_key_ref',
+            mcpServers: [['id' => 'id', 'allowedTools' => ['string']]],
             messagingSettings: [
                 'conversationInactivityMinutes' => 1,
                 'defaultMessagingProfileID' => 'default_messaging_profile_id',
@@ -134,6 +150,7 @@ final class VersionsTest extends TestCase
             ],
             postConversationSettings: ['enabled' => true],
             privacySettings: ['dataRetention' => true],
+            tags: ['string'],
             telephonySettings: [
                 'defaultTexmlAppID' => 'default_texml_app_id',
                 'noiseSuppression' => 'krisp',
@@ -204,6 +221,7 @@ final class VersionsTest extends TestCase
                     'smartFormat' => true,
                 ],
             ],
+            versionName: 'version_name',
             voiceSettings: [
                 'voice' => 'voice',
                 'apiKeyRef' => 'api_key_ref',

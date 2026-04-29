@@ -6,6 +6,9 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\InferenceEmbedding\ExternalLlm;
 use Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig;
+use Telnyx\AI\Assistants\InferenceEmbedding\Integration;
+use Telnyx\AI\Assistants\InferenceEmbedding\InterruptionSettings;
+use Telnyx\AI\Assistants\InferenceEmbedding\McpServer;
 use Telnyx\AI\Assistants\InferenceEmbedding\PostConversationSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -18,6 +21,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig
  * @phpstan-import-type ImportMetadataShape from \Telnyx\AI\Assistants\ImportMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\InferenceEmbedding\Integration
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\InferenceEmbedding\InterruptionSettings
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\InferenceEmbedding\McpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityShape from \Telnyx\AI\Assistants\Observability
  * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\InferenceEmbedding\PostConversationSettings
@@ -36,6 +42,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name: string,
  *   description?: string|null,
  *   dynamicVariables?: array<string,mixed>|null,
+ *   dynamicVariablesWebhookTimeoutMs?: int|null,
  *   dynamicVariablesWebhookURL?: string|null,
  *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>|null,
  *   externalLlm?: null|ExternalLlm|ExternalLlmShape,
@@ -43,14 +50,22 @@ use Telnyx\Core\Contracts\BaseModel;
  *   greeting?: string|null,
  *   importMetadata?: null|ImportMetadata|ImportMetadataShape,
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
+ *   integrations?: list<Integration|IntegrationShape>|null,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   llmAPIKeyRef?: string|null,
+ *   mcpServers?: list<McpServer|McpServerShape>|null,
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
  *   observabilitySettings?: null|Observability|ObservabilityShape,
  *   postConversationSettings?: null|PostConversationSettings|PostConversationSettingsShape,
  *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
+ *   relatedMissionIDs?: list<string>|null,
+ *   tags?: list<string>|null,
  *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
  *   tools?: list<AssistantToolShape>|null,
  *   transcription?: null|TranscriptionSettings|TranscriptionSettingsShape,
+ *   versionCreatedAt?: \DateTimeInterface|null,
+ *   versionID?: string|null,
+ *   versionName?: string|null,
  *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
  *   widgetSettings?: null|WidgetSettings|WidgetSettingsShape,
  * }
@@ -73,7 +88,7 @@ final class InferenceEmbedding implements BaseModel
     public string $instructions;
 
     /**
-     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,.
+     * ID of the model to use when `external_llm` is not set. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see available models. If `external_llm` is provided, the assistant uses `external_llm` instead of this field. If neither `model` nor `external_llm` is provided, Telnyx applies the default model.
      */
     #[Required]
     public string $model;
@@ -93,7 +108,13 @@ final class InferenceEmbedding implements BaseModel
     public ?array $dynamicVariables;
 
     /**
-     * If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
+     * Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     */
+    #[Optional('dynamic_variables_webhook_timeout_ms')]
+    public ?int $dynamicVariablesWebhookTimeoutMs;
+
+    /**
+     * If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
      */
     #[Optional('dynamic_variables_webhook_url')]
     public ?string $dynamicVariablesWebhookURL;
@@ -121,10 +142,32 @@ final class InferenceEmbedding implements BaseModel
     public ?InsightSettings $insightSettings;
 
     /**
-     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
+     *
+     * @var list<Integration>|null $integrations
+     */
+    #[Optional(list: Integration::class)]
+    public ?array $integrations;
+
+    /**
+     * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
+     */
+    #[Optional('interruption_settings')]
+    public ?InterruptionSettings $interruptionSettings;
+
+    /**
+     * This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
      */
     #[Optional('llm_api_key_ref')]
     public ?string $llmAPIKeyRef;
+
+    /**
+     * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
+     *
+     * @var list<McpServer>|null $mcpServers
+     */
+    #[Optional('mcp_servers', list: McpServer::class)]
+    public ?array $mcpServers;
 
     #[Optional('messaging_settings')]
     public ?MessagingSettings $messagingSettings;
@@ -141,11 +184,27 @@ final class InferenceEmbedding implements BaseModel
     #[Optional('privacy_settings')]
     public ?PrivacySettings $privacySettings;
 
+    /**
+     * IDs of missions related to this assistant.
+     *
+     * @var list<string>|null $relatedMissionIDs
+     */
+    #[Optional('related_mission_ids', list: 'string')]
+    public ?array $relatedMissionIDs;
+
+    /**
+     * Tags associated with the assistant. Tags can also be managed with the assistant tag endpoints.
+     *
+     * @var list<string>|null $tags
+     */
+    #[Optional(list: 'string')]
+    public ?array $tags;
+
     #[Optional('telephony_settings')]
     public ?TelephonySettings $telephonySettings;
 
     /**
-     * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     * Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
      *
      * @var list<AssistantToolVariants>|null $tools
      */
@@ -154,6 +213,24 @@ final class InferenceEmbedding implements BaseModel
 
     #[Optional]
     public ?TranscriptionSettings $transcription;
+
+    /**
+     * Timestamp when this assistant version was created.
+     */
+    #[Optional('version_created_at')]
+    public ?\DateTimeInterface $versionCreatedAt;
+
+    /**
+     * Identifier for the assistant version returned by version-aware assistant endpoints.
+     */
+    #[Optional('version_id')]
+    public ?string $versionID;
+
+    /**
+     * Human-readable name for the assistant version.
+     */
+    #[Optional('version_name')]
+    public ?string $versionName;
 
     #[Optional('voice_settings')]
     public ?VoiceSettings $voiceSettings;
@@ -201,10 +278,15 @@ final class InferenceEmbedding implements BaseModel
      * @param FallbackConfig|FallbackConfigShape|null $fallbackConfig
      * @param ImportMetadata|ImportMetadataShape|null $importMetadata
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
+     * @param list<Integration|IntegrationShape>|null $integrations
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param list<McpServer|McpServerShape>|null $mcpServers
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
      * @param Observability|ObservabilityShape|null $observabilitySettings
      * @param PostConversationSettings|PostConversationSettingsShape|null $postConversationSettings
      * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
+     * @param list<string>|null $relatedMissionIDs
+     * @param list<string>|null $tags
      * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
      * @param list<AssistantToolShape>|null $tools
      * @param TranscriptionSettings|TranscriptionSettingsShape|null $transcription
@@ -219,6 +301,7 @@ final class InferenceEmbedding implements BaseModel
         string $name,
         ?string $description = null,
         ?array $dynamicVariables = null,
+        ?int $dynamicVariablesWebhookTimeoutMs = null,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
         ExternalLlm|array|null $externalLlm = null,
@@ -226,14 +309,22 @@ final class InferenceEmbedding implements BaseModel
         ?string $greeting = null,
         ImportMetadata|array|null $importMetadata = null,
         InsightSettings|array|null $insightSettings = null,
+        ?array $integrations = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
         ?string $llmAPIKeyRef = null,
+        ?array $mcpServers = null,
         MessagingSettings|array|null $messagingSettings = null,
         Observability|array|null $observabilitySettings = null,
         PostConversationSettings|array|null $postConversationSettings = null,
         PrivacySettings|array|null $privacySettings = null,
+        ?array $relatedMissionIDs = null,
+        ?array $tags = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $tools = null,
         TranscriptionSettings|array|null $transcription = null,
+        ?\DateTimeInterface $versionCreatedAt = null,
+        ?string $versionID = null,
+        ?string $versionName = null,
         VoiceSettings|array|null $voiceSettings = null,
         WidgetSettings|array|null $widgetSettings = null,
     ): self {
@@ -247,6 +338,7 @@ final class InferenceEmbedding implements BaseModel
 
         null !== $description && $self['description'] = $description;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
+        null !== $dynamicVariablesWebhookTimeoutMs && $self['dynamicVariablesWebhookTimeoutMs'] = $dynamicVariablesWebhookTimeoutMs;
         null !== $dynamicVariablesWebhookURL && $self['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
         null !== $enabledFeatures && $self['enabledFeatures'] = $enabledFeatures;
         null !== $externalLlm && $self['externalLlm'] = $externalLlm;
@@ -254,14 +346,22 @@ final class InferenceEmbedding implements BaseModel
         null !== $greeting && $self['greeting'] = $greeting;
         null !== $importMetadata && $self['importMetadata'] = $importMetadata;
         null !== $insightSettings && $self['insightSettings'] = $insightSettings;
+        null !== $integrations && $self['integrations'] = $integrations;
+        null !== $interruptionSettings && $self['interruptionSettings'] = $interruptionSettings;
         null !== $llmAPIKeyRef && $self['llmAPIKeyRef'] = $llmAPIKeyRef;
+        null !== $mcpServers && $self['mcpServers'] = $mcpServers;
         null !== $messagingSettings && $self['messagingSettings'] = $messagingSettings;
         null !== $observabilitySettings && $self['observabilitySettings'] = $observabilitySettings;
         null !== $postConversationSettings && $self['postConversationSettings'] = $postConversationSettings;
         null !== $privacySettings && $self['privacySettings'] = $privacySettings;
+        null !== $relatedMissionIDs && $self['relatedMissionIDs'] = $relatedMissionIDs;
+        null !== $tags && $self['tags'] = $tags;
         null !== $telephonySettings && $self['telephonySettings'] = $telephonySettings;
         null !== $tools && $self['tools'] = $tools;
         null !== $transcription && $self['transcription'] = $transcription;
+        null !== $versionCreatedAt && $self['versionCreatedAt'] = $versionCreatedAt;
+        null !== $versionID && $self['versionID'] = $versionID;
+        null !== $versionName && $self['versionName'] = $versionName;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
         null !== $widgetSettings && $self['widgetSettings'] = $widgetSettings;
 
@@ -296,7 +396,7 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
-     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,.
+     * ID of the model to use when `external_llm` is not set. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see available models. If `external_llm` is provided, the assistant uses `external_llm` instead of this field. If neither `model` nor `external_llm` is provided, Telnyx applies the default model.
      */
     public function withModel(string $model): self
     {
@@ -336,7 +436,19 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
-     * If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
+     * Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     */
+    public function withDynamicVariablesWebhookTimeoutMs(
+        int $dynamicVariablesWebhookTimeoutMs
+    ): self {
+        $self = clone $this;
+        $self['dynamicVariablesWebhookTimeoutMs'] = $dynamicVariablesWebhookTimeoutMs;
+
+        return $self;
+    }
+
+    /**
+     * If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
      */
     public function withDynamicVariablesWebhookURL(
         string $dynamicVariablesWebhookURL
@@ -417,12 +529,52 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
-     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
+     *
+     * @param list<Integration|IntegrationShape> $integrations
+     */
+    public function withIntegrations(array $integrations): self
+    {
+        $self = clone $this;
+        $self['integrations'] = $integrations;
+
+        return $self;
+    }
+
+    /**
+     * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
+     *
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
+     */
+    public function withInterruptionSettings(
+        InterruptionSettings|array $interruptionSettings
+    ): self {
+        $self = clone $this;
+        $self['interruptionSettings'] = $interruptionSettings;
+
+        return $self;
+    }
+
+    /**
+     * This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
      */
     public function withLlmAPIKeyRef(string $llmAPIKeyRef): self
     {
         $self = clone $this;
         $self['llmAPIKeyRef'] = $llmAPIKeyRef;
+
+        return $self;
+    }
+
+    /**
+     * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
+     *
+     * @param list<McpServer|McpServerShape> $mcpServers
+     */
+    public function withMcpServers(array $mcpServers): self
+    {
+        $self = clone $this;
+        $self['mcpServers'] = $mcpServers;
 
         return $self;
     }
@@ -478,6 +630,32 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
+     * IDs of missions related to this assistant.
+     *
+     * @param list<string> $relatedMissionIDs
+     */
+    public function withRelatedMissionIDs(array $relatedMissionIDs): self
+    {
+        $self = clone $this;
+        $self['relatedMissionIDs'] = $relatedMissionIDs;
+
+        return $self;
+    }
+
+    /**
+     * Tags associated with the assistant. Tags can also be managed with the assistant tag endpoints.
+     *
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
+
+        return $self;
+    }
+
+    /**
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings
      */
     public function withTelephonySettings(
@@ -490,7 +668,7 @@ final class InferenceEmbedding implements BaseModel
     }
 
     /**
-     * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     * Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
      *
      * @param list<AssistantToolShape> $tools
      */
@@ -510,6 +688,40 @@ final class InferenceEmbedding implements BaseModel
     ): self {
         $self = clone $this;
         $self['transcription'] = $transcription;
+
+        return $self;
+    }
+
+    /**
+     * Timestamp when this assistant version was created.
+     */
+    public function withVersionCreatedAt(
+        \DateTimeInterface $versionCreatedAt
+    ): self {
+        $self = clone $this;
+        $self['versionCreatedAt'] = $versionCreatedAt;
+
+        return $self;
+    }
+
+    /**
+     * Identifier for the assistant version returned by version-aware assistant endpoints.
+     */
+    public function withVersionID(string $versionID): self
+    {
+        $self = clone $this;
+        $self['versionID'] = $versionID;
+
+        return $self;
+    }
+
+    /**
+     * Human-readable name for the assistant version.
+     */
+    public function withVersionName(string $versionName): self
+    {
+        $self = clone $this;
+        $self['versionName'] = $versionName;
 
         return $self;
     }
