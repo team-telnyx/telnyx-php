@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants;
+namespace Telnyx\AI\Assistants\InferenceEmbedding;
 
+use Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig\ExternalLlm;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\ExternalLlm
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig\ExternalLlm
  *
  * @phpstan-type FallbackConfigShape = array{
- *   externalLlm?: null|ExternalLlm|ExternalLlmShape,
+ *   externalLlm?: null|\Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig\ExternalLlm|ExternalLlmShape,
  *   llmAPIKeyRef?: string|null,
  *   model?: string|null,
  * }
@@ -66,8 +67,9 @@ final class FallbackConfig implements BaseModel
     /**
      * @param ExternalLlm|ExternalLlmShape $externalLlm
      */
-    public function withExternalLlm(ExternalLlm|array $externalLlm): self
-    {
+    public function withExternalLlm(
+        ExternalLlm|array $externalLlm,
+    ): self {
         $self = clone $this;
         $self['externalLlm'] = $externalLlm;
 

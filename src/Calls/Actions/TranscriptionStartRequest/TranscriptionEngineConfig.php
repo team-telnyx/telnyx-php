@@ -11,6 +11,8 @@ use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineAssemblyaiConfig;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineXaiConfig;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -19,13 +21,15 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type TranscriptionEngineGoogleConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig
  * @phpstan-import-type TranscriptionEngineTelnyxConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig
  * @phpstan-import-type TranscriptionEngineAzureConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAzureConfig
+ * @phpstan-import-type TranscriptionEngineXaiConfigShape from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineXaiConfig
+ * @phpstan-import-type TranscriptionEngineAssemblyaiConfigShape from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineAssemblyaiConfig
  * @phpstan-import-type TranscriptionEngineAConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAConfig
  * @phpstan-import-type TranscriptionEngineBConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineBConfig
  * @phpstan-import-type DeepgramNova2ConfigShape from \Telnyx\Calls\Actions\DeepgramNova2Config
  * @phpstan-import-type DeepgramNova3ConfigShape from \Telnyx\Calls\Actions\DeepgramNova3Config
  *
- * @phpstan-type TranscriptionEngineConfigVariants = TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config
- * @phpstan-type TranscriptionEngineConfigShape = TranscriptionEngineConfigVariants|TranscriptionEngineGoogleConfigShape|TranscriptionEngineTelnyxConfigShape|TranscriptionEngineAzureConfigShape|TranscriptionEngineAConfigShape|TranscriptionEngineBConfigShape|DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
+ * @phpstan-type TranscriptionEngineConfigVariants = TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config
+ * @phpstan-type TranscriptionEngineConfigShape = TranscriptionEngineConfigVariants|TranscriptionEngineGoogleConfigShape|TranscriptionEngineTelnyxConfigShape|TranscriptionEngineAzureConfigShape|TranscriptionEngineXaiConfigShape|TranscriptionEngineAssemblyaiConfigShape|TranscriptionEngineAConfigShape|TranscriptionEngineBConfigShape|DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
  */
 final class TranscriptionEngineConfig implements ConverterSource
 {
@@ -45,6 +49,8 @@ final class TranscriptionEngineConfig implements ConverterSource
             'Google' => TranscriptionEngineGoogleConfig::class,
             'Telnyx' => TranscriptionEngineTelnyxConfig::class,
             'Azure' => TranscriptionEngineAzureConfig::class,
+            'xAI' => TranscriptionEngineXaiConfig::class,
+            'AssemblyAI' => TranscriptionEngineAssemblyaiConfig::class,
             'A' => TranscriptionEngineAConfig::class,
             'B' => TranscriptionEngineBConfig::class,
             'deepgram/nova-2' => DeepgramNova2Config::class,
