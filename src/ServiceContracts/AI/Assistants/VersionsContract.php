@@ -6,28 +6,28 @@ namespace Telnyx\ServiceContracts\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\EnabledFeatures;
+use Telnyx\AI\Assistants\ExternalLlmReq;
+use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
+use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm
- * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig
+ * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
+ * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
- * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings
+ * @phpstan-import-type PostConversationSettingsReqShape from \Telnyx\AI\Assistants\PostConversationSettingsReq
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -64,8 +64,8 @@ interface VersionsContract
      * @param array<string,mixed> $dynamicVariables Body param: Map of dynamic variables and their default values
      * @param string $dynamicVariablesWebhookURL Body param: If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures Body param
-     * @param ExternalLlm|ExternalLlmShape $externalLlm Body param
-     * @param FallbackConfig|FallbackConfigShape $fallbackConfig Body param
+     * @param ExternalLlmReq|ExternalLlmReqShape $externalLlm Body param
+     * @param FallbackConfigReq|FallbackConfigReqShape $fallbackConfig Body param
      * @param string $greeting Body param: Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
      * @param InsightSettings|InsightSettingsShape $insightSettings Body param
      * @param string $instructions Body param: System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
@@ -74,7 +74,7 @@ interface VersionsContract
      * @param string $model Body param: ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,
      * @param string $name Body param
      * @param ObservabilityReq|ObservabilityReqShape $observabilitySettings Body param
-     * @param PostConversationSettings|PostConversationSettingsShape $postConversationSettings Body param: Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
+     * @param PostConversationSettingsReq|PostConversationSettingsReqShape $postConversationSettings Body param: Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
      * @param PrivacySettings|PrivacySettingsShape $privacySettings Body param
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings Body param
      * @param list<string> $toolIDs Body param
@@ -93,8 +93,8 @@ interface VersionsContract
         ?array $dynamicVariables = null,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
-        ExternalLlm|array|null $externalLlm = null,
-        FallbackConfig|array|null $fallbackConfig = null,
+        ExternalLlmReq|array|null $externalLlm = null,
+        FallbackConfigReq|array|null $fallbackConfig = null,
         ?string $greeting = null,
         InsightSettings|array|null $insightSettings = null,
         ?string $instructions = null,
@@ -103,7 +103,7 @@ interface VersionsContract
         ?string $model = null,
         ?string $name = null,
         ObservabilityReq|array|null $observabilitySettings = null,
-        PostConversationSettings|array|null $postConversationSettings = null,
+        PostConversationSettingsReq|array|null $postConversationSettings = null,
         PrivacySettings|array|null $privacySettings = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $toolIDs = null,
