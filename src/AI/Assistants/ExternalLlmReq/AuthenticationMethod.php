@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig\ExternalLlm;
+namespace Telnyx\AI\Assistants\ExternalLlmReq;
 
 /**
  * Authentication method used when connecting to the external LLM endpoint.
