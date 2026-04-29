@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants;
+namespace Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig;
 
-use Telnyx\AI\Assistants\ExternalLlmReq\AuthenticationMethod;
+use Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig\ExternalLlm\AuthenticationMethod;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type ExternalLlmReqShape = array{
+ * @phpstan-type ExternalLlmShape = array{
  *   baseURL: string,
  *   model: string,
  *   authenticationMethod?: null|AuthenticationMethod|value-of<AuthenticationMethod>,
@@ -21,9 +21,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   tokenRetrievalURL?: string|null,
  * }
  */
-final class ExternalLlmReq implements BaseModel
+final class ExternalLlm implements BaseModel
 {
-    /** @use SdkModel<ExternalLlmReqShape> */
+    /** @use SdkModel<ExternalLlmShape> */
     use SdkModel;
 
     /**
@@ -71,17 +71,17 @@ final class ExternalLlmReq implements BaseModel
     public ?string $tokenRetrievalURL;
 
     /**
-     * `new ExternalLlmReq()` is missing required properties by the API.
+     * `new ExternalLlm()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * ExternalLlmReq::with(baseURL: ..., model: ...)
+     * ExternalLlm::with(baseURL: ..., model: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new ExternalLlmReq)->withBaseURL(...)->withModel(...)
+     * (new ExternalLlm)->withBaseURL(...)->withModel(...)
      * ```
      */
     public function __construct()

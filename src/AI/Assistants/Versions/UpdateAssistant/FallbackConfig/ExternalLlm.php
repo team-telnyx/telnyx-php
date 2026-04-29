@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants;
+namespace Telnyx\AI\Assistants\Versions\UpdateAssistant\FallbackConfig;
 
-use Telnyx\AI\Assistants\ExternalLlm\AuthenticationMethod;
+use Telnyx\AI\Assistants\Versions\UpdateAssistant\FallbackConfig\ExternalLlm\AuthenticationMethod;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;

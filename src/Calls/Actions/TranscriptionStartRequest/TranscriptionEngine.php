@@ -17,6 +17,10 @@ enum TranscriptionEngine: string
 
     case AZURE = 'Azure';
 
+    case X_AI = 'xAI';
+
+    case ASSEMBLY_AI = 'AssemblyAI';
+
     case A = 'A';
 
     case B = 'B';
