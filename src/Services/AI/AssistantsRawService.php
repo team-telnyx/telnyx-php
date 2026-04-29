@@ -9,6 +9,9 @@ use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
 use Telnyx\AI\Assistants\AssistantCreateParams\ExternalLlm;
 use Telnyx\AI\Assistants\AssistantCreateParams\FallbackConfig;
+use Telnyx\AI\Assistants\AssistantCreateParams\Integration;
+use Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings;
+use Telnyx\AI\Assistants\AssistantCreateParams\McpServer;
 use Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
@@ -40,9 +43,15 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
  *
  * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\AssistantCreateParams\ExternalLlm
  * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\AssistantCreateParams\FallbackConfig
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\AssistantCreateParams\Integration
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\AssistantCreateParams\McpServer
  * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings
  * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ExternalLlm as ExternalLlmShape1
  * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig as FallbackConfigShape1
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\AssistantUpdateParams\Integration as IntegrationShape1
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\InterruptionSettings as InterruptionSettingsShape1
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\AssistantUpdateParams\McpServer as McpServerShape1
  * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\PostConversationSettings as PostConversationSettingsShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -71,21 +80,26 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * @param array{
      *   instructions: string,
-     *   model: string,
      *   name: string,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
+     *   dynamicVariablesWebhookTimeoutMs?: int,
      *   dynamicVariablesWebhookURL?: string,
      *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
      *   externalLlm?: ExternalLlm|ExternalLlmShape,
      *   fallbackConfig?: FallbackConfig|FallbackConfigShape,
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
+     *   integrations?: list<Integration|IntegrationShape>,
+     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
      *   llmAPIKeyRef?: string,
+     *   mcpServers?: list<McpServer|McpServerShape>,
      *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
+     *   model?: string,
      *   observabilitySettings?: ObservabilityReq|ObservabilityReqShape,
      *   postConversationSettings?: PostConversationSettings|PostConversationSettingsShape,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
+     *   tags?: list<string>,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
      *   toolIDs?: list<string>,
      *   tools?: list<AssistantToolShape>,
@@ -169,6 +183,7 @@ final class AssistantsRawService implements AssistantsRawContract
      * @param array{
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
+     *   dynamicVariablesWebhookTimeoutMs?: int,
      *   dynamicVariablesWebhookURL?: string,
      *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
      *   externalLlm?: AssistantUpdateParams\ExternalLlm|ExternalLlmShape1,
@@ -176,7 +191,10 @@ final class AssistantsRawService implements AssistantsRawContract
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   instructions?: string,
+     *   integrations?: list<AssistantUpdateParams\Integration|IntegrationShape1>,
+     *   interruptionSettings?: AssistantUpdateParams\InterruptionSettings|InterruptionSettingsShape1,
      *   llmAPIKeyRef?: string,
+     *   mcpServers?: list<AssistantUpdateParams\McpServer|McpServerShape1>,
      *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
      *   model?: string,
      *   name?: string,
@@ -184,10 +202,12 @@ final class AssistantsRawService implements AssistantsRawContract
      *   postConversationSettings?: AssistantUpdateParams\PostConversationSettings|PostConversationSettingsShape1,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
      *   promoteToMain?: bool,
+     *   tags?: list<string>,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
      *   toolIDs?: list<string>,
      *   tools?: list<AssistantToolShape>,
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
+     *   versionName?: string,
      *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
      *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
      * }|AssistantUpdateParams $params

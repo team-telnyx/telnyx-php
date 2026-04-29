@@ -6,6 +6,9 @@ namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantCreateParams\ExternalLlm;
 use Telnyx\AI\Assistants\AssistantCreateParams\FallbackConfig;
+use Telnyx\AI\Assistants\AssistantCreateParams\Integration;
+use Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings;
+use Telnyx\AI\Assistants\AssistantCreateParams\McpServer;
 use Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -22,6 +25,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\AssistantCreateParams\ExternalLlm
  * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\AssistantCreateParams\FallbackConfig
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\AssistantCreateParams\Integration
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\AssistantCreateParams\McpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
  * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings
@@ -34,21 +40,26 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type AssistantCreateParamsShape = array{
  *   instructions: string,
- *   model: string,
  *   name: string,
  *   description?: string|null,
  *   dynamicVariables?: array<string,mixed>|null,
+ *   dynamicVariablesWebhookTimeoutMs?: int|null,
  *   dynamicVariablesWebhookURL?: string|null,
  *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>|null,
  *   externalLlm?: null|ExternalLlm|ExternalLlmShape,
  *   fallbackConfig?: null|FallbackConfig|FallbackConfigShape,
  *   greeting?: string|null,
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
+ *   integrations?: list<Integration|IntegrationShape>|null,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   llmAPIKeyRef?: string|null,
+ *   mcpServers?: list<McpServer|McpServerShape>|null,
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
+ *   model?: string|null,
  *   observabilitySettings?: null|ObservabilityReq|ObservabilityReqShape,
  *   postConversationSettings?: null|PostConversationSettings|PostConversationSettingsShape,
  *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
+ *   tags?: list<string>|null,
  *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
  *   toolIDs?: list<string>|null,
  *   tools?: list<AssistantToolShape>|null,
@@ -69,12 +80,6 @@ final class AssistantCreateParams implements BaseModel
     #[Required]
     public string $instructions;
 
-    /**
-     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,.
-     */
-    #[Required]
-    public string $model;
-
     #[Required]
     public string $name;
 
@@ -90,7 +95,13 @@ final class AssistantCreateParams implements BaseModel
     public ?array $dynamicVariables;
 
     /**
-     * If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
+     * Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     */
+    #[Optional('dynamic_variables_webhook_timeout_ms')]
+    public ?int $dynamicVariablesWebhookTimeoutMs;
+
+    /**
+     * If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
      */
     #[Optional('dynamic_variables_webhook_url')]
     public ?string $dynamicVariablesWebhookURL;
@@ -115,13 +126,41 @@ final class AssistantCreateParams implements BaseModel
     public ?InsightSettings $insightSettings;
 
     /**
-     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
+     *
+     * @var list<Integration>|null $integrations
+     */
+    #[Optional(list: Integration::class)]
+    public ?array $integrations;
+
+    /**
+     * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
+     */
+    #[Optional('interruption_settings')]
+    public ?InterruptionSettings $interruptionSettings;
+
+    /**
+     * This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
      */
     #[Optional('llm_api_key_ref')]
     public ?string $llmAPIKeyRef;
 
+    /**
+     * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
+     *
+     * @var list<McpServer>|null $mcpServers
+     */
+    #[Optional('mcp_servers', list: McpServer::class)]
+    public ?array $mcpServers;
+
     #[Optional('messaging_settings')]
     public ?MessagingSettings $messagingSettings;
+
+    /**
+     * ID of the model to use when `external_llm` is not set. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see available models. If `external_llm` is provided, the assistant uses `external_llm` instead of this field. If neither `model` nor `external_llm` is provided, Telnyx applies the default model.
+     */
+    #[Optional]
+    public ?string $model;
 
     #[Optional('observability_settings')]
     public ?ObservabilityReq $observabilitySettings;
@@ -135,15 +174,27 @@ final class AssistantCreateParams implements BaseModel
     #[Optional('privacy_settings')]
     public ?PrivacySettings $privacySettings;
 
+    /**
+     * Tags associated with the assistant. Tags can also be managed with the assistant tag endpoints.
+     *
+     * @var list<string>|null $tags
+     */
+    #[Optional(list: 'string')]
+    public ?array $tags;
+
     #[Optional('telephony_settings')]
     public ?TelephonySettings $telephonySettings;
 
-    /** @var list<string>|null $toolIDs */
+    /**
+     * IDs of shared tools to attach to the assistant. New integrations should prefer `tool_ids` over inline `tools`.
+     *
+     * @var list<string>|null $toolIDs
+     */
     #[Optional('tool_ids', list: 'string')]
     public ?array $toolIDs;
 
     /**
-     * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     * Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
      *
      * @var list<AssistantToolVariants>|null $tools
      */
@@ -167,16 +218,13 @@ final class AssistantCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * AssistantCreateParams::with(instructions: ..., model: ..., name: ...)
+     * AssistantCreateParams::with(instructions: ..., name: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new AssistantCreateParams)
-     *   ->withInstructions(...)
-     *   ->withModel(...)
-     *   ->withName(...)
+     * (new AssistantCreateParams)->withInstructions(...)->withName(...)
      * ```
      */
     public function __construct()
@@ -194,10 +242,14 @@ final class AssistantCreateParams implements BaseModel
      * @param ExternalLlm|ExternalLlmShape|null $externalLlm
      * @param FallbackConfig|FallbackConfigShape|null $fallbackConfig
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
+     * @param list<Integration|IntegrationShape>|null $integrations
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param list<McpServer|McpServerShape>|null $mcpServers
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
      * @param ObservabilityReq|ObservabilityReqShape|null $observabilitySettings
      * @param PostConversationSettings|PostConversationSettingsShape|null $postConversationSettings
      * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
+     * @param list<string>|null $tags
      * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
      * @param list<string>|null $toolIDs
      * @param list<AssistantToolShape>|null $tools
@@ -207,21 +259,26 @@ final class AssistantCreateParams implements BaseModel
      */
     public static function with(
         string $instructions,
-        string $model,
         string $name,
         ?string $description = null,
         ?array $dynamicVariables = null,
+        ?int $dynamicVariablesWebhookTimeoutMs = null,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
         ExternalLlm|array|null $externalLlm = null,
         FallbackConfig|array|null $fallbackConfig = null,
         ?string $greeting = null,
         InsightSettings|array|null $insightSettings = null,
+        ?array $integrations = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
         ?string $llmAPIKeyRef = null,
+        ?array $mcpServers = null,
         MessagingSettings|array|null $messagingSettings = null,
+        ?string $model = null,
         ObservabilityReq|array|null $observabilitySettings = null,
         PostConversationSettings|array|null $postConversationSettings = null,
         PrivacySettings|array|null $privacySettings = null,
+        ?array $tags = null,
         TelephonySettings|array|null $telephonySettings = null,
         ?array $toolIDs = null,
         ?array $tools = null,
@@ -232,22 +289,27 @@ final class AssistantCreateParams implements BaseModel
         $self = new self;
 
         $self['instructions'] = $instructions;
-        $self['model'] = $model;
         $self['name'] = $name;
 
         null !== $description && $self['description'] = $description;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
+        null !== $dynamicVariablesWebhookTimeoutMs && $self['dynamicVariablesWebhookTimeoutMs'] = $dynamicVariablesWebhookTimeoutMs;
         null !== $dynamicVariablesWebhookURL && $self['dynamicVariablesWebhookURL'] = $dynamicVariablesWebhookURL;
         null !== $enabledFeatures && $self['enabledFeatures'] = $enabledFeatures;
         null !== $externalLlm && $self['externalLlm'] = $externalLlm;
         null !== $fallbackConfig && $self['fallbackConfig'] = $fallbackConfig;
         null !== $greeting && $self['greeting'] = $greeting;
         null !== $insightSettings && $self['insightSettings'] = $insightSettings;
+        null !== $integrations && $self['integrations'] = $integrations;
+        null !== $interruptionSettings && $self['interruptionSettings'] = $interruptionSettings;
         null !== $llmAPIKeyRef && $self['llmAPIKeyRef'] = $llmAPIKeyRef;
+        null !== $mcpServers && $self['mcpServers'] = $mcpServers;
         null !== $messagingSettings && $self['messagingSettings'] = $messagingSettings;
+        null !== $model && $self['model'] = $model;
         null !== $observabilitySettings && $self['observabilitySettings'] = $observabilitySettings;
         null !== $postConversationSettings && $self['postConversationSettings'] = $postConversationSettings;
         null !== $privacySettings && $self['privacySettings'] = $privacySettings;
+        null !== $tags && $self['tags'] = $tags;
         null !== $telephonySettings && $self['telephonySettings'] = $telephonySettings;
         null !== $toolIDs && $self['toolIDs'] = $toolIDs;
         null !== $tools && $self['tools'] = $tools;
@@ -265,17 +327,6 @@ final class AssistantCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['instructions'] = $instructions;
-
-        return $self;
-    }
-
-    /**
-     * ID of the model to use. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see all of your available models,.
-     */
-    public function withModel(string $model): self
-    {
-        $self = clone $this;
-        $self['model'] = $model;
 
         return $self;
     }
@@ -310,7 +361,19 @@ final class AssistantCreateParams implements BaseModel
     }
 
     /**
-     * If the dynamic_variables_webhook_url is set for the assistant, we will send a request at the start of the conversation. See our [guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for more information.
+     * Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     */
+    public function withDynamicVariablesWebhookTimeoutMs(
+        int $dynamicVariablesWebhookTimeoutMs
+    ): self {
+        $self = clone $this;
+        $self['dynamicVariablesWebhookTimeoutMs'] = $dynamicVariablesWebhookTimeoutMs;
+
+        return $self;
+    }
+
+    /**
+     * If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
      */
     public function withDynamicVariablesWebhookURL(
         string $dynamicVariablesWebhookURL
@@ -379,12 +442,52 @@ final class AssistantCreateParams implements BaseModel
     }
 
     /**
-     * This is only needed when using third-party inference providers. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. Warning: Free plans are unlikely to work with this integration.
+     * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
+     *
+     * @param list<Integration|IntegrationShape> $integrations
+     */
+    public function withIntegrations(array $integrations): self
+    {
+        $self = clone $this;
+        $self['integrations'] = $integrations;
+
+        return $self;
+    }
+
+    /**
+     * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
+     *
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
+     */
+    public function withInterruptionSettings(
+        InterruptionSettings|array $interruptionSettings
+    ): self {
+        $self = clone $this;
+        $self['interruptionSettings'] = $interruptionSettings;
+
+        return $self;
+    }
+
+    /**
+     * This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
      */
     public function withLlmAPIKeyRef(string $llmAPIKeyRef): self
     {
         $self = clone $this;
         $self['llmAPIKeyRef'] = $llmAPIKeyRef;
+
+        return $self;
+    }
+
+    /**
+     * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
+     *
+     * @param list<McpServer|McpServerShape> $mcpServers
+     */
+    public function withMcpServers(array $mcpServers): self
+    {
+        $self = clone $this;
+        $self['mcpServers'] = $mcpServers;
 
         return $self;
     }
@@ -397,6 +500,17 @@ final class AssistantCreateParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['messagingSettings'] = $messagingSettings;
+
+        return $self;
+    }
+
+    /**
+     * ID of the model to use when `external_llm` is not set. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see available models. If `external_llm` is provided, the assistant uses `external_llm` instead of this field. If neither `model` nor `external_llm` is provided, Telnyx applies the default model.
+     */
+    public function withModel(string $model): self
+    {
+        $self = clone $this;
+        $self['model'] = $model;
 
         return $self;
     }
@@ -440,6 +554,19 @@ final class AssistantCreateParams implements BaseModel
     }
 
     /**
+     * Tags associated with the assistant. Tags can also be managed with the assistant tag endpoints.
+     *
+     * @param list<string> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $self = clone $this;
+        $self['tags'] = $tags;
+
+        return $self;
+    }
+
+    /**
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings
      */
     public function withTelephonySettings(
@@ -452,6 +579,8 @@ final class AssistantCreateParams implements BaseModel
     }
 
     /**
+     * IDs of shared tools to attach to the assistant. New integrations should prefer `tool_ids` over inline `tools`.
+     *
      * @param list<string> $toolIDs
      */
     public function withToolIDs(array $toolIDs): self
@@ -463,7 +592,7 @@ final class AssistantCreateParams implements BaseModel
     }
 
     /**
-     * The tools that the assistant can use. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
+     * Deprecated for new integrations. Inline tool definitions available to the assistant. Prefer `tool_ids` to attach shared tools created with the AI Tools endpoints.
      *
      * @param list<AssistantToolShape> $tools
      */

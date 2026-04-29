@@ -19,6 +19,9 @@ use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
@@ -35,6 +38,9 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
  * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm
  * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
  * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings
@@ -104,6 +110,7 @@ final class VersionsRawService implements VersionsRawContract
      *   assistantID: string,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
+     *   dynamicVariablesWebhookTimeoutMs?: int,
      *   dynamicVariablesWebhookURL?: string,
      *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
      *   externalLlm?: ExternalLlm|ExternalLlmShape,
@@ -111,17 +118,22 @@ final class VersionsRawService implements VersionsRawContract
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   instructions?: string,
+     *   integrations?: list<Integration|IntegrationShape>,
+     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
      *   llmAPIKeyRef?: string,
+     *   mcpServers?: list<McpServer|McpServerShape>,
      *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
      *   model?: string,
      *   name?: string,
      *   observabilitySettings?: ObservabilityReq|ObservabilityReqShape,
      *   postConversationSettings?: PostConversationSettings|PostConversationSettingsShape,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
+     *   tags?: list<string>,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
      *   toolIDs?: list<string>,
      *   tools?: list<AssistantToolShape>,
      *   transcription?: TranscriptionSettings|TranscriptionSettingsShape,
+     *   versionName?: string,
      *   voiceSettings?: VoiceSettings|VoiceSettingsShape,
      *   widgetSettings?: WidgetSettings|WidgetSettingsShape,
      * }|VersionUpdateParams $params
