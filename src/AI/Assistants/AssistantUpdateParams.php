@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantUpdateParams\ExternalLlm;
-use Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig;
-use Telnyx\AI\Assistants\AssistantUpdateParams\PostConversationSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -18,12 +15,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\AssistantsService::update()
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ExternalLlm
- * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig
+ * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
+ * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
- * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\PostConversationSettings
+ * @phpstan-import-type PostConversationSettingsReqShape from \Telnyx\AI\Assistants\PostConversationSettingsReq
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -36,8 +33,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   dynamicVariables?: array<string,mixed>|null,
  *   dynamicVariablesWebhookURL?: string|null,
  *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>|null,
- *   externalLlm?: null|ExternalLlm|ExternalLlmShape,
- *   fallbackConfig?: null|FallbackConfig|FallbackConfigShape,
+ *   externalLlm?: null|ExternalLlmReq|ExternalLlmReqShape,
+ *   fallbackConfig?: null|FallbackConfigReq|FallbackConfigReqShape,
  *   greeting?: string|null,
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
  *   instructions?: string|null,
@@ -46,7 +43,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   model?: string|null,
  *   name?: string|null,
  *   observabilitySettings?: null|ObservabilityReq|ObservabilityReqShape,
- *   postConversationSettings?: null|PostConversationSettings|PostConversationSettingsShape,
+ *   postConversationSettings?: null|PostConversationSettingsReq|PostConversationSettingsReqShape,
  *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
  *   promoteToMain?: bool|null,
  *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
@@ -85,10 +82,10 @@ final class AssistantUpdateParams implements BaseModel
     public ?array $enabledFeatures;
 
     #[Optional('external_llm')]
-    public ?ExternalLlm $externalLlm;
+    public ?ExternalLlmReq $externalLlm;
 
     #[Optional('fallback_config')]
-    public ?FallbackConfig $fallbackConfig;
+    public ?FallbackConfigReq $fallbackConfig;
 
     /**
      * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
@@ -130,7 +127,7 @@ final class AssistantUpdateParams implements BaseModel
      * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
      */
     #[Optional('post_conversation_settings')]
-    public ?PostConversationSettings $postConversationSettings;
+    public ?PostConversationSettingsReq $postConversationSettings;
 
     #[Optional('privacy_settings')]
     public ?PrivacySettings $privacySettings;
@@ -180,12 +177,12 @@ final class AssistantUpdateParams implements BaseModel
      *
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
-     * @param ExternalLlm|ExternalLlmShape|null $externalLlm
-     * @param FallbackConfig|FallbackConfigShape|null $fallbackConfig
+     * @param ExternalLlmReq|ExternalLlmReqShape|null $externalLlm
+     * @param FallbackConfigReq|FallbackConfigReqShape|null $fallbackConfig
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
      * @param ObservabilityReq|ObservabilityReqShape|null $observabilitySettings
-     * @param PostConversationSettings|PostConversationSettingsShape|null $postConversationSettings
+     * @param PostConversationSettingsReq|PostConversationSettingsReqShape|null $postConversationSettings
      * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
      * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
      * @param list<string>|null $toolIDs
@@ -199,8 +196,8 @@ final class AssistantUpdateParams implements BaseModel
         ?array $dynamicVariables = null,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
-        ExternalLlm|array|null $externalLlm = null,
-        FallbackConfig|array|null $fallbackConfig = null,
+        ExternalLlmReq|array|null $externalLlm = null,
+        FallbackConfigReq|array|null $fallbackConfig = null,
         ?string $greeting = null,
         InsightSettings|array|null $insightSettings = null,
         ?string $instructions = null,
@@ -209,7 +206,7 @@ final class AssistantUpdateParams implements BaseModel
         ?string $model = null,
         ?string $name = null,
         ObservabilityReq|array|null $observabilitySettings = null,
-        PostConversationSettings|array|null $postConversationSettings = null,
+        PostConversationSettingsReq|array|null $postConversationSettings = null,
         PrivacySettings|array|null $privacySettings = null,
         ?bool $promoteToMain = null,
         TelephonySettings|array|null $telephonySettings = null,
@@ -293,9 +290,9 @@ final class AssistantUpdateParams implements BaseModel
     }
 
     /**
-     * @param ExternalLlm|ExternalLlmShape $externalLlm
+     * @param ExternalLlmReq|ExternalLlmReqShape $externalLlm
      */
-    public function withExternalLlm(ExternalLlm|array $externalLlm): self
+    public function withExternalLlm(ExternalLlmReq|array $externalLlm): self
     {
         $self = clone $this;
         $self['externalLlm'] = $externalLlm;
@@ -304,10 +301,10 @@ final class AssistantUpdateParams implements BaseModel
     }
 
     /**
-     * @param FallbackConfig|FallbackConfigShape $fallbackConfig
+     * @param FallbackConfigReq|FallbackConfigReqShape $fallbackConfig
      */
     public function withFallbackConfig(
-        FallbackConfig|array $fallbackConfig
+        FallbackConfigReq|array $fallbackConfig
     ): self {
         $self = clone $this;
         $self['fallbackConfig'] = $fallbackConfig;
@@ -406,10 +403,10 @@ final class AssistantUpdateParams implements BaseModel
     /**
      * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
      *
-     * @param PostConversationSettings|PostConversationSettingsShape $postConversationSettings
+     * @param PostConversationSettingsReq|PostConversationSettingsReqShape $postConversationSettings
      */
     public function withPostConversationSettings(
-        PostConversationSettings|array $postConversationSettings
+        PostConversationSettingsReq|array $postConversationSettings
     ): self {
         $self = clone $this;
         $self['postConversationSettings'] = $postConversationSettings;
