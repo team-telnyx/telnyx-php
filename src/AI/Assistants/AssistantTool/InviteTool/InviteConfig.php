@@ -5,18 +5,22 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool\InviteTool;
 
 use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\CustomHeader;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\Targets;
 use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type TargetsVariants from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\Targets
  * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\CustomHeader
+ * @phpstan-import-type TargetsShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\Targets
  * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection
  *
  * @phpstan-type InviteConfigShape = array{
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   from?: string|null,
+ *   targets?: TargetsShape|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  * }
  */
@@ -40,6 +44,14 @@ final class InviteConfig implements BaseModel
     public ?string $from;
 
     /**
+     * The different possible targets of the invite. The assistant will be able to choose one of the targets to invite to the call. This can also be a dynamic variable string like `{{ targets }}` where `targets` is returned by the dynamic variables webhook and resolves to an array of target objects at runtime. If omitted or null, the invite tool can still be configured and targets may be supplied dynamically at runtime.
+     *
+     * @var TargetsVariants|null $targets
+     */
+    #[Optional(union: Targets::class, nullable: true)]
+    public string|array|null $targets;
+
+    /**
      * Configuration for voicemail detection (AMD - Answering Machine Detection) on the invited call.
      */
     #[Optional('voicemail_detection')]
@@ -56,17 +68,20 @@ final class InviteConfig implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
+     * @param TargetsShape|null $targets
      * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      */
     public static function with(
         ?array $customHeaders = null,
         ?string $from = null,
+        string|array|null $targets = null,
         VoicemailDetection|array|null $voicemailDetection = null,
     ): self {
         $self = new self;
 
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
         null !== $from && $self['from'] = $from;
+        null !== $targets && $self['targets'] = $targets;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
 
         return $self;
@@ -92,6 +107,19 @@ final class InviteConfig implements BaseModel
     {
         $self = clone $this;
         $self['from'] = $from;
+
+        return $self;
+    }
+
+    /**
+     * The different possible targets of the invite. The assistant will be able to choose one of the targets to invite to the call. This can also be a dynamic variable string like `{{ targets }}` where `targets` is returned by the dynamic variables webhook and resolves to an array of target objects at runtime. If omitted or null, the invite tool can still be configured and targets may be supplied dynamically at runtime.
+     *
+     * @param TargetsShape|null $targets
+     */
+    public function withTargets(string|array|null $targets): self
+    {
+        $self = clone $this;
+        $self['targets'] = $targets;
 
         return $self;
     }
