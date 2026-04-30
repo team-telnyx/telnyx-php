@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantTool\InviteTool;
 
-use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\CustomHeader;
-use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\Targets;
-use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\CustomHeader;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\Targets;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type TargetsVariants from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\Targets
- * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\CustomHeader
- * @phpstan-import-type TargetsShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\Targets
- * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig\VoicemailDetection
+ * @phpstan-import-type TargetsVariants from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\Targets
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\CustomHeader
+ * @phpstan-import-type TargetsShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\Targets
+ * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection
  *
- * @phpstan-type InviteConfigShape = array{
+ * @phpstan-type InviteShape = array{
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   from?: string|null,
  *   targets?: TargetsShape|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  * }
  */
-final class InviteConfig implements BaseModel
+final class Invite implements BaseModel
 {
-    /** @use SdkModel<InviteConfigShape> */
+    /** @use SdkModel<InviteShape> */
     use SdkModel;
 
     /**
