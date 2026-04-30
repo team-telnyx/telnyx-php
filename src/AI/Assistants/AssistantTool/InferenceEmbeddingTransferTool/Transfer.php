@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
 
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\CustomHeader;
-use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Target;
+use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Targets;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\VoicemailDetection;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -13,13 +13,14 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type TargetShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Target
+ * @phpstan-import-type TargetsVariants from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Targets
+ * @phpstan-import-type TargetsShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\Targets
  * @phpstan-import-type CustomHeaderShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\CustomHeader
  * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool\Transfer\VoicemailDetection
  *
  * @phpstan-type TransferShape = array{
  *   from: string,
- *   targets: list<Target|TargetShape>,
+ *   targets: TargetsShape,
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  *   warmMessageDelayMs?: int|null,
@@ -38,12 +39,12 @@ final class Transfer implements BaseModel
     public string $from;
 
     /**
-     * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to.
+     * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to. This can also be a dynamic variable string like `{{ targets }}` where `targets` is returned by the dynamic variables webhook and resolves to an array of target objects at runtime.
      *
-     * @var list<Target> $targets
+     * @var TargetsVariants $targets
      */
-    #[Required(list: Target::class)]
-    public array $targets;
+    #[Required(union: Targets::class)]
+    public string|array $targets;
 
     /**
      * Custom headers to be added to the SIP INVITE for the transfer command.
@@ -95,13 +96,13 @@ final class Transfer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Target|TargetShape> $targets
+     * @param TargetsShape $targets
      * @param list<CustomHeader|CustomHeaderShape>|null $customHeaders
      * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      */
     public static function with(
         string $from,
-        array $targets,
+        string|array $targets,
         ?array $customHeaders = null,
         VoicemailDetection|array|null $voicemailDetection = null,
         ?int $warmMessageDelayMs = null,
@@ -132,11 +133,11 @@ final class Transfer implements BaseModel
     }
 
     /**
-     * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to.
+     * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to. This can also be a dynamic variable string like `{{ targets }}` where `targets` is returned by the dynamic variables webhook and resolves to an array of target objects at runtime.
      *
-     * @param list<Target|TargetShape> $targets
+     * @param TargetsShape $targets
      */
-    public function withTargets(array $targets): self
+    public function withTargets(string|array $targets): self
     {
         $self = clone $this;
         $self['targets'] = $targets;

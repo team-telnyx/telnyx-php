@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\TransferTool;
 
-use Telnyx\AI\Assistants\TransferTool\Transfer\Target;
+use Telnyx\AI\Assistants\TransferTool\Transfer\Targets;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type TargetShape from \Telnyx\AI\Assistants\TransferTool\Transfer\Target
+ * @phpstan-import-type TargetsVariants from \Telnyx\AI\Assistants\TransferTool\Transfer\Targets
+ * @phpstan-import-type TargetsShape from \Telnyx\AI\Assistants\TransferTool\Transfer\Targets
  *
- * @phpstan-type TransferShape = array{
- *   from: string, targets: list<Target|TargetShape>
- * }
+ * @phpstan-type TransferShape = array{from: string, targets: TargetsShape}
  */
 final class Transfer implements BaseModel
 {
@@ -28,12 +27,12 @@ final class Transfer implements BaseModel
     public string $from;
 
     /**
-     * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to.
+     * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to. This can also be a dynamic variable string like `{{ targets }}` where `targets` is returned by the dynamic variables webhook and resolves to an array of target objects at runtime.
      *
-     * @var list<Target> $targets
+     * @var TargetsVariants $targets
      */
-    #[Required(list: Target::class)]
-    public array $targets;
+    #[Required(union: Targets::class)]
+    public string|array $targets;
 
     /**
      * `new Transfer()` is missing required properties by the API.
@@ -59,9 +58,9 @@ final class Transfer implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Target|TargetShape> $targets
+     * @param TargetsShape $targets
      */
-    public static function with(string $from, array $targets): self
+    public static function with(string $from, string|array $targets): self
     {
         $self = new self;
 
@@ -83,11 +82,11 @@ final class Transfer implements BaseModel
     }
 
     /**
-     * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to.
+     * The different possible targets of the transfer. The assistant will be able to choose one of the targets to transfer the call to. This can also be a dynamic variable string like `{{ targets }}` where `targets` is returned by the dynamic variables webhook and resolves to an array of target objects at runtime.
      *
-     * @param list<Target|TargetShape> $targets
+     * @param TargetsShape $targets
      */
-    public function withTargets(array $targets): self
+    public function withTargets(string|array $targets): self
     {
         $self = clone $this;
         $self['targets'] = $targets;
