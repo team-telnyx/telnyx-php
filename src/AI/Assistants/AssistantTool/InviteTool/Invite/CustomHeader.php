@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig;
+namespace Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;

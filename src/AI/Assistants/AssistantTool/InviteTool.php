@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantTool;
 
-use Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig;
+use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type InviteConfigShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\InviteConfig
+ * @phpstan-import-type InviteShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite
  *
  * @phpstan-type InviteToolShape = array{
- *   inviteConfig: InviteConfig|InviteConfigShape, type: 'invite'
+ *   invite: Invite|InviteShape, type: 'invite'
  * }
  */
 final class InviteTool implements BaseModel
@@ -25,21 +25,21 @@ final class InviteTool implements BaseModel
     #[Required]
     public string $type = 'invite';
 
-    #[Required('invite_config')]
-    public InviteConfig $inviteConfig;
+    #[Required]
+    public Invite $invite;
 
     /**
      * `new InviteTool()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * InviteTool::with(inviteConfig: ...)
+     * InviteTool::with(invite: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new InviteTool)->withInviteConfig(...)
+     * (new InviteTool)->withInvite(...)
      * ```
      */
     public function __construct()
@@ -52,24 +52,24 @@ final class InviteTool implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InviteConfig|InviteConfigShape $inviteConfig
+     * @param Invite|InviteShape $invite
      */
-    public static function with(InviteConfig|array $inviteConfig): self
+    public static function with(Invite|array $invite): self
     {
         $self = new self;
 
-        $self['inviteConfig'] = $inviteConfig;
+        $self['invite'] = $invite;
 
         return $self;
     }
 
     /**
-     * @param InviteConfig|InviteConfigShape $inviteConfig
+     * @param Invite|InviteShape $invite
      */
-    public function withInviteConfig(InviteConfig|array $inviteConfig): self
+    public function withInvite(Invite|array $invite): self
     {
         $self = clone $this;
-        $self['inviteConfig'] = $inviteConfig;
+        $self['invite'] = $invite;
 
         return $self;
     }
