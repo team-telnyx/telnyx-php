@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\CustomHeader;
 use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\Targets;
 use Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection;
 use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -18,8 +19,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type VoicemailDetectionShape from \Telnyx\AI\Assistants\AssistantTool\InviteTool\Invite\VoicemailDetection
  *
  * @phpstan-type InviteShape = array{
+ *   from: string,
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
- *   from?: string|null,
  *   targets?: TargetsShape|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  * }
@@ -30,18 +31,18 @@ final class Invite implements BaseModel
     use SdkModel;
 
     /**
+     * Number or SIP URI placing the call.
+     */
+    #[Required]
+    public string $from;
+
+    /**
      * Custom headers to be added to the SIP INVITE for the invite command.
      *
      * @var list<CustomHeader>|null $customHeaders
      */
     #[Optional('custom_headers', list: CustomHeader::class)]
     public ?array $customHeaders;
-
-    /**
-     * Number or SIP URI placing the call.
-     */
-    #[Optional]
-    public ?string $from;
 
     /**
      * The different possible targets of the invite. The assistant will be able to choose one of the targets to invite to the call. This can also be a dynamic variable string like `{{ targets }}` where `targets` is returned by the dynamic variables webhook and resolves to an array of target objects at runtime. If omitted or null, the invite tool can still be configured and targets may be supplied dynamically at runtime.
@@ -57,6 +58,20 @@ final class Invite implements BaseModel
     #[Optional('voicemail_detection')]
     public ?VoicemailDetection $voicemailDetection;
 
+    /**
+     * `new Invite()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * Invite::with(from: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new Invite)->withFrom(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -72,17 +87,29 @@ final class Invite implements BaseModel
      * @param VoicemailDetection|VoicemailDetectionShape|null $voicemailDetection
      */
     public static function with(
+        string $from,
         ?array $customHeaders = null,
-        ?string $from = null,
         string|array|null $targets = null,
         VoicemailDetection|array|null $voicemailDetection = null,
     ): self {
         $self = new self;
 
+        $self['from'] = $from;
+
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
-        null !== $from && $self['from'] = $from;
         null !== $targets && $self['targets'] = $targets;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
+
+        return $self;
+    }
+
+    /**
+     * Number or SIP URI placing the call.
+     */
+    public function withFrom(string $from): self
+    {
+        $self = clone $this;
+        $self['from'] = $from;
 
         return $self;
     }
@@ -96,17 +123,6 @@ final class Invite implements BaseModel
     {
         $self = clone $this;
         $self['customHeaders'] = $customHeaders;
-
-        return $self;
-    }
-
-    /**
-     * Number or SIP URI placing the call.
-     */
-    public function withFrom(string $from): self
-    {
-        $self = clone $this;
-        $self['from'] = $from;
 
         return $self;
     }
