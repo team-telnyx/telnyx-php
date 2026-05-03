@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\ObservabilityReq\PromptSync;
 use Telnyx\AI\Assistants\ObservabilityReq\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -12,6 +13,10 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type ObservabilityReqShape = array{
  *   host?: string|null,
+ *   promptLabel?: string|null,
+ *   promptName?: string|null,
+ *   promptSync?: null|PromptSync|value-of<PromptSync>,
+ *   promptVersion?: int|null,
  *   publicKeyRef?: string|null,
  *   secretKeyRef?: string|null,
  *   status?: null|Status|value-of<Status>,
@@ -24,6 +29,27 @@ final class ObservabilityReq implements BaseModel
 
     #[Optional]
     public ?string $host;
+
+    #[Optional('prompt_label')]
+    public ?string $promptLabel;
+
+    #[Optional('prompt_name')]
+    public ?string $promptName;
+
+    /**
+     * Whether to auto-publish the assistant's instructions as a Langfuse prompt.
+     *
+     * When ENABLED + prompt_name set, every assistant create/update pushes
+     * `instructions` to Langfuse via create_prompt and stores the returned
+     * version in prompt_version.
+     *
+     * @var value-of<PromptSync>|null $promptSync
+     */
+    #[Optional('prompt_sync', enum: PromptSync::class)]
+    public ?string $promptSync;
+
+    #[Optional('prompt_version')]
+    public ?int $promptVersion;
 
     #[Optional('public_key_ref')]
     public ?string $publicKeyRef;
@@ -45,10 +71,15 @@ final class ObservabilityReq implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param PromptSync|value-of<PromptSync>|null $promptSync
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $host = null,
+        ?string $promptLabel = null,
+        ?string $promptName = null,
+        PromptSync|string|null $promptSync = null,
+        ?int $promptVersion = null,
         ?string $publicKeyRef = null,
         ?string $secretKeyRef = null,
         Status|string|null $status = null,
@@ -56,6 +87,10 @@ final class ObservabilityReq implements BaseModel
         $self = new self;
 
         null !== $host && $self['host'] = $host;
+        null !== $promptLabel && $self['promptLabel'] = $promptLabel;
+        null !== $promptName && $self['promptName'] = $promptName;
+        null !== $promptSync && $self['promptSync'] = $promptSync;
+        null !== $promptVersion && $self['promptVersion'] = $promptVersion;
         null !== $publicKeyRef && $self['publicKeyRef'] = $publicKeyRef;
         null !== $secretKeyRef && $self['secretKeyRef'] = $secretKeyRef;
         null !== $status && $self['status'] = $status;
@@ -67,6 +102,47 @@ final class ObservabilityReq implements BaseModel
     {
         $self = clone $this;
         $self['host'] = $host;
+
+        return $self;
+    }
+
+    public function withPromptLabel(string $promptLabel): self
+    {
+        $self = clone $this;
+        $self['promptLabel'] = $promptLabel;
+
+        return $self;
+    }
+
+    public function withPromptName(string $promptName): self
+    {
+        $self = clone $this;
+        $self['promptName'] = $promptName;
+
+        return $self;
+    }
+
+    /**
+     * Whether to auto-publish the assistant's instructions as a Langfuse prompt.
+     *
+     * When ENABLED + prompt_name set, every assistant create/update pushes
+     * `instructions` to Langfuse via create_prompt and stores the returned
+     * version in prompt_version.
+     *
+     * @param PromptSync|value-of<PromptSync> $promptSync
+     */
+    public function withPromptSync(PromptSync|string $promptSync): self
+    {
+        $self = clone $this;
+        $self['promptSync'] = $promptSync;
+
+        return $self;
+    }
+
+    public function withPromptVersion(int $promptVersion): self
+    {
+        $self = clone $this;
+        $self['promptVersion'] = $promptVersion;
 
         return $self;
     }

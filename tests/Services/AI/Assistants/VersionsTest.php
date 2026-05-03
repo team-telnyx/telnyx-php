@@ -144,6 +144,10 @@ final class VersionsTest extends TestCase
             name: 'name',
             observabilitySettings: [
                 'host' => 'host',
+                'promptLabel' => 'prompt_label',
+                'promptName' => 'prompt_name',
+                'promptSync' => 'enabled',
+                'promptVersion' => 1,
                 'publicKeyRef' => 'public_key_ref',
                 'secretKeyRef' => 'secret_key_ref',
                 'status' => 'enabled',
