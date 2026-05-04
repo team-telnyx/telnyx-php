@@ -2,29 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\Versions\UpdateAssistant;
+namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\Versions\UpdateAssistant\FallbackConfig\ExternalLlm;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\Versions\UpdateAssistant\FallbackConfig\ExternalLlm
+ * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  *
- * @phpstan-type FallbackConfigShape = array{
- *   externalLlm?: null|\Telnyx\AI\Assistants\Versions\UpdateAssistant\FallbackConfig\ExternalLlm|ExternalLlmShape,
+ * @phpstan-type FallbackConfigReqShape = array{
+ *   externalLlm?: null|ExternalLlmReq|ExternalLlmReqShape,
  *   llmAPIKeyRef?: string|null,
  *   model?: string|null,
  * }
  */
-final class FallbackConfig implements BaseModel
+final class FallbackConfigReq implements BaseModel
 {
-    /** @use SdkModel<FallbackConfigShape> */
+    /** @use SdkModel<FallbackConfigReqShape> */
     use SdkModel;
 
     #[Optional('external_llm')]
-    public ?ExternalLlm $externalLlm;
+    public ?ExternalLlmReq $externalLlm;
 
     /**
      * Integration secret identifier for the fallback model API key.
@@ -48,10 +47,10 @@ final class FallbackConfig implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalLlm|ExternalLlmShape|null $externalLlm
+     * @param ExternalLlmReq|ExternalLlmReqShape|null $externalLlm
      */
     public static function with(
-        ExternalLlm|array|null $externalLlm = null,
+        ExternalLlmReq|array|null $externalLlm = null,
         ?string $llmAPIKeyRef = null,
         ?string $model = null,
     ): self {
@@ -65,11 +64,10 @@ final class FallbackConfig implements BaseModel
     }
 
     /**
-     * @param ExternalLlm|ExternalLlmShape $externalLlm
+     * @param ExternalLlmReq|ExternalLlmReqShape $externalLlm
      */
-    public function withExternalLlm(
-        ExternalLlm|array $externalLlm,
-    ): self {
+    public function withExternalLlm(ExternalLlmReq|array $externalLlm): self
+    {
         $self = clone $this;
         $self['externalLlm'] = $externalLlm;
 
