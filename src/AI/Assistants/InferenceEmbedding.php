@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\InferenceEmbedding\ExternalLlm;
-use Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig;
 use Telnyx\AI\Assistants\InferenceEmbedding\Integration;
 use Telnyx\AI\Assistants\InferenceEmbedding\InterruptionSettings;
 use Telnyx\AI\Assistants\InferenceEmbedding\McpServer;
-use Telnyx\AI\Assistants\InferenceEmbedding\PostConversationSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -17,8 +14,8 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\InferenceEmbedding\ExternalLlm
- * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\ExternalLlm
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\FallbackConfig
  * @phpstan-import-type ImportMetadataShape from \Telnyx\AI\Assistants\ImportMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\InferenceEmbedding\Integration
@@ -26,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\InferenceEmbedding\McpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityShape from \Telnyx\AI\Assistants\Observability
- * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\InferenceEmbedding\PostConversationSettings
+ * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\PostConversationSettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool

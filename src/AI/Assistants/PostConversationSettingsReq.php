@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Assistants\Versions\UpdateAssistant;
+namespace Telnyx\AI\Assistants;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -11,11 +11,11 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
  *
- * @phpstan-type PostConversationSettingsShape = array{enabled?: bool|null}
+ * @phpstan-type PostConversationSettingsReqShape = array{enabled?: bool|null}
  */
-final class PostConversationSettings implements BaseModel
+final class PostConversationSettingsReq implements BaseModel
 {
-    /** @use SdkModel<PostConversationSettingsShape> */
+    /** @use SdkModel<PostConversationSettingsReqShape> */
     use SdkModel;
 
     /**

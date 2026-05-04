@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions\ActionGatherUsingAIParams;
 
 use Telnyx\AzureVoiceSettings;
+use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -23,9 +24,10 @@ use Telnyx\RimeVoiceSettings;
  * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\AzureVoiceSettings
  * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
  * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
+ * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\XaiVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape|XaiVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
@@ -48,6 +50,7 @@ final class VoiceSettings implements ConverterSource
             'azure' => AzureVoiceSettings::class,
             'rime' => RimeVoiceSettings::class,
             'resemble' => ResembleVoiceSettings::class,
+            'xai' => XaiVoiceSettings::class,
         ];
     }
 }
