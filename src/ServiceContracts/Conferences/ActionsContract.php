@@ -27,6 +27,7 @@ use Telnyx\Conferences\Actions\ActionSendDtmfResponse;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Conferences\Actions\ActionSpeakResponse;
 use Telnyx\Conferences\Actions\ActionStopResponse;
 use Telnyx\Conferences\Actions\ActionUnholdResponse;
@@ -378,6 +379,7 @@ interface ActionsContract
      * - **Rime:** Use `Rime.<model_id>.<voice_id>` (e.g., `Rime.Arcana.cove`). Supported model_ids: `Arcana`, `Mist`. Use `voice_settings` to configure voice_speed.
      * - **Resemble:** Use `Resemble.Turbo.<voice_id>` (e.g., `Resemble.Turbo.my_voice`). Only `Turbo` model is supported. Use `voice_settings` to configure precision, sample_rate, and format.
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`). Supported models: `Mini`, `Max`.
+     * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
      * @param list<string> $callControlIDs Call Control IDs of participants who will hear the spoken text. When empty all participants will hear the spoken text.
@@ -399,7 +401,7 @@ interface ActionsContract
         Language|string|null $language = null,
         PayloadType|string $payloadType = 'text',
         \Telnyx\Conferences\Actions\ActionSpeakParams\Region|string|null $region = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse;
 

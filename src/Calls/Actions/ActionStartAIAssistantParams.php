@@ -8,6 +8,7 @@ use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
+use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -122,6 +123,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`). Supported models: `Mini`, `Max`.
+     * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      */
     #[Optional]
     public ?string $voice;
@@ -132,7 +134,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * @var VoiceSettingsVariants|null $voiceSettings
      */
     #[Optional('voice_settings', union: VoiceSettings::class)]
-    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|null $voiceSettings;
+    public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings;
 
     public function __construct()
     {
@@ -162,7 +164,7 @@ final class ActionStartAIAssistantParams implements BaseModel
         ?bool $sendMessageHistoryUpdates = null,
         TranscriptionConfig|array|null $transcription = null,
         ?string $voice = null,
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -302,6 +304,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`). Supported models: `Mini`, `Max`.
+     * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      */
     public function withVoice(string $voice): self
     {
@@ -317,7 +320,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * @param VoiceSettingsShape $voiceSettings
      */
     public function withVoiceSettings(
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings $voiceSettings,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings $voiceSettings,
     ): self {
         $self = clone $this;
         $self['voiceSettings'] = $voiceSettings;

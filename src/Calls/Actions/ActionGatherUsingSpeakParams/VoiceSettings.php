@@ -6,6 +6,7 @@ namespace Telnyx\Calls\Actions\ActionGatherUsingSpeakParams;
 
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -27,9 +28,10 @@ use Telnyx\RimeVoiceSettings;
  * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
  * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
  * @phpstan-import-type InworldVoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\InworldVoiceSettings
+ * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\XaiVoiceSettings
  *
- * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings
- * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape
+ * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings
+ * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape|XaiVoiceSettingsShape
  */
 final class VoiceSettings implements ConverterSource
 {
@@ -54,6 +56,7 @@ final class VoiceSettings implements ConverterSource
             'rime' => RimeVoiceSettings::class,
             'resemble' => ResembleVoiceSettings::class,
             'inworld' => InworldVoiceSettings::class,
+            'xai' => XaiVoiceSettings::class,
         ];
     }
 }

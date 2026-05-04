@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Assistants\AssistantChatResponse;
-use Telnyx\AI\Assistants\AssistantCreateParams\ExternalLlm;
-use Telnyx\AI\Assistants\AssistantCreateParams\FallbackConfig;
 use Telnyx\AI\Assistants\AssistantCreateParams\Integration;
 use Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings;
 use Telnyx\AI\Assistants\AssistantCreateParams\McpServer;
-use Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\EnabledFeatures;
+use Telnyx\AI\Assistants\ExternalLlmReq;
+use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
+use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
@@ -29,22 +29,19 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\AssistantCreateParams\ExternalLlm
- * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\AssistantCreateParams\FallbackConfig
  * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\AssistantCreateParams\Integration
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings
  * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\AssistantCreateParams\McpServer
- * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\PostConversationSettings
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ExternalLlm as ExternalLlmShape1
- * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig as FallbackConfigShape1
  * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\AssistantUpdateParams\Integration as IntegrationShape1
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\InterruptionSettings as InterruptionSettingsShape1
  * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\AssistantUpdateParams\McpServer as McpServerShape1
- * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\PostConversationSettings as PostConversationSettingsShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
+ * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
+ * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
+ * @phpstan-import-type PostConversationSettingsReqShape from \Telnyx\AI\Assistants\PostConversationSettingsReq
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -63,8 +60,8 @@ interface AssistantsContract
      * @param int $dynamicVariablesWebhookTimeoutMs Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      * @param string $dynamicVariablesWebhookURL If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
-     * @param ExternalLlm|ExternalLlmShape $externalLlm
-     * @param FallbackConfig|FallbackConfigShape $fallbackConfig
+     * @param ExternalLlmReq|ExternalLlmReqShape $externalLlm
+     * @param FallbackConfigReq|FallbackConfigReqShape $fallbackConfig
      * @param string $greeting Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
      * @param InsightSettings|InsightSettingsShape $insightSettings
      * @param list<Integration|IntegrationShape> $integrations Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
@@ -74,7 +71,7 @@ interface AssistantsContract
      * @param MessagingSettings|MessagingSettingsShape $messagingSettings
      * @param string $model ID of the model to use when `external_llm` is not set. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see available models. If `external_llm` is provided, the assistant uses `external_llm` instead of this field. If neither `model` nor `external_llm` is provided, Telnyx applies the default model.
      * @param ObservabilityReq|ObservabilityReqShape $observabilitySettings
-     * @param PostConversationSettings|PostConversationSettingsShape $postConversationSettings Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
+     * @param PostConversationSettingsReq|PostConversationSettingsReqShape $postConversationSettings Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
      * @param PrivacySettings|PrivacySettingsShape $privacySettings
      * @param list<string> $tags Tags associated with the assistant. Tags can also be managed with the assistant tag endpoints.
      * @param TelephonySettings|TelephonySettingsShape $telephonySettings
@@ -95,8 +92,8 @@ interface AssistantsContract
         int $dynamicVariablesWebhookTimeoutMs = 1500,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
-        ExternalLlm|array|null $externalLlm = null,
-        FallbackConfig|array|null $fallbackConfig = null,
+        ExternalLlmReq|array|null $externalLlm = null,
+        FallbackConfigReq|array|null $fallbackConfig = null,
         ?string $greeting = null,
         InsightSettings|array|null $insightSettings = null,
         array $integrations = [],
@@ -106,7 +103,7 @@ interface AssistantsContract
         MessagingSettings|array|null $messagingSettings = null,
         ?string $model = null,
         ObservabilityReq|array|null $observabilitySettings = null,
-        PostConversationSettings|array|null $postConversationSettings = null,
+        PostConversationSettingsReq|array|null $postConversationSettings = null,
         PrivacySettings|array|null $privacySettings = null,
         array $tags = [],
         TelephonySettings|array|null $telephonySettings = null,
@@ -141,8 +138,8 @@ interface AssistantsContract
      * @param int $dynamicVariablesWebhookTimeoutMs Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      * @param string $dynamicVariablesWebhookURL If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
      * @param list<EnabledFeatures|value-of<EnabledFeatures>> $enabledFeatures
-     * @param \Telnyx\AI\Assistants\AssistantUpdateParams\ExternalLlm|ExternalLlmShape1 $externalLlm
-     * @param \Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig|FallbackConfigShape1 $fallbackConfig
+     * @param ExternalLlmReq|ExternalLlmReqShape $externalLlm
+     * @param FallbackConfigReq|FallbackConfigReqShape $fallbackConfig
      * @param string $greeting Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
      * @param InsightSettings|InsightSettingsShape $insightSettings
      * @param string $instructions System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
@@ -153,7 +150,7 @@ interface AssistantsContract
      * @param MessagingSettings|MessagingSettingsShape $messagingSettings
      * @param string $model ID of the model to use when `external_llm` is not set. You can use the [Get models API](https://developers.telnyx.com/api-reference/chat/get-available-models) to see available models. If `external_llm` is provided, the assistant uses `external_llm` instead of this field. If neither `model` nor `external_llm` is provided, Telnyx applies the default model.
      * @param ObservabilityReq|ObservabilityReqShape $observabilitySettings
-     * @param \Telnyx\AI\Assistants\AssistantUpdateParams\PostConversationSettings|PostConversationSettingsShape1 $postConversationSettings Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
+     * @param PostConversationSettingsReq|PostConversationSettingsReqShape $postConversationSettings Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
      * @param PrivacySettings|PrivacySettingsShape $privacySettings
      * @param bool $promoteToMain Indicates whether the assistant should be promoted to the main version. Defaults to true.
      * @param list<string> $tags Tags associated with the assistant. Tags can also be managed with the assistant tag endpoints.
@@ -175,8 +172,8 @@ interface AssistantsContract
         int $dynamicVariablesWebhookTimeoutMs = 1500,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
-        \Telnyx\AI\Assistants\AssistantUpdateParams\ExternalLlm|array|null $externalLlm = null,
-        \Telnyx\AI\Assistants\AssistantUpdateParams\FallbackConfig|array|null $fallbackConfig = null,
+        ExternalLlmReq|array|null $externalLlm = null,
+        FallbackConfigReq|array|null $fallbackConfig = null,
         ?string $greeting = null,
         InsightSettings|array|null $insightSettings = null,
         ?string $instructions = null,
@@ -188,7 +185,7 @@ interface AssistantsContract
         ?string $model = null,
         ?string $name = null,
         ObservabilityReq|array|null $observabilitySettings = null,
-        \Telnyx\AI\Assistants\AssistantUpdateParams\PostConversationSettings|array|null $postConversationSettings = null,
+        PostConversationSettingsReq|array|null $postConversationSettings = null,
         PrivacySettings|array|null $privacySettings = null,
         bool $promoteToMain = true,
         array $tags = [],

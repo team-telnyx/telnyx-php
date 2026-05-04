@@ -6,10 +6,13 @@ namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\EnabledFeatures;
+use Telnyx\AI\Assistants\ExternalLlmReq;
+use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbedding;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
+use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
@@ -17,12 +20,9 @@ use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
@@ -35,15 +35,15 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
 /**
  * Configure AI assistant specifications.
  *
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm
- * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig
+ * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
+ * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
  * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings
  * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
- * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings
+ * @phpstan-import-type PostConversationSettingsReqShape from \Telnyx\AI\Assistants\PostConversationSettingsReq
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -113,8 +113,8 @@ final class VersionsRawService implements VersionsRawContract
      *   dynamicVariablesWebhookTimeoutMs?: int,
      *   dynamicVariablesWebhookURL?: string,
      *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>,
-     *   externalLlm?: ExternalLlm|ExternalLlmShape,
-     *   fallbackConfig?: FallbackConfig|FallbackConfigShape,
+     *   externalLlm?: ExternalLlmReq|ExternalLlmReqShape,
+     *   fallbackConfig?: FallbackConfigReq|FallbackConfigReqShape,
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   instructions?: string,
@@ -126,7 +126,7 @@ final class VersionsRawService implements VersionsRawContract
      *   model?: string,
      *   name?: string,
      *   observabilitySettings?: ObservabilityReq|ObservabilityReqShape,
-     *   postConversationSettings?: PostConversationSettings|PostConversationSettingsShape,
+     *   postConversationSettings?: PostConversationSettingsReq|PostConversationSettingsReqShape,
      *   privacySettings?: PrivacySettings|PrivacySettingsShape,
      *   tags?: list<string>,
      *   telephonySettings?: TelephonySettings|TelephonySettingsShape,
