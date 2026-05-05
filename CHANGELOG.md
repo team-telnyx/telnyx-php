@@ -1,5 +1,29 @@
 # Changelog
 
+## 7.41.0 (2026-05-05)
+
+Full Changelog: [v7.40.1...v7.41.0](https://github.com/team-telnyx/telnyx-php/compare/v7.40.1...v7.41.0)
+
+### Features
+
+* Add assistant external LLM forward metadata to OpenAPI ([de1d589](https://github.com/team-telnyx/telnyx-php/commit/de1d5894796b363a08a37caa2fd1eb8174f52c06))
+* Add xAI and AssemblyAI transcription engines to call-control API docs ([cb5ed9a](https://github.com/team-telnyx/telnyx-php/commit/cb5ed9a305b78e706fde08de3dcf1a6e5e10a086))
+* Add xAI and missing voice providers to Call Control API ([ea1b7a5](https://github.com/team-telnyx/telnyx-php/commit/ea1b7a559dbdd1ac6b4d9c52e8648afedec65e76))
+* AI-2183: Document dynamic variable support for transcription keyterm ([98151d7](https://github.com/team-telnyx/telnyx-php/commit/98151d76a0b4dc98161c99422be1310a9d33dd64))
+* **api:** manual updates ([cdd61b2](https://github.com/team-telnyx/telnyx-php/commit/cdd61b26371220221158572ce9cc397b70426d5b))
+* Assistant tool targets master ([56a9dc4](https://github.com/team-telnyx/telnyx-php/commit/56a9dc4c03fff312c7b198732007371358a21487))
+* Correct external LLM forwarded metadata docs ([1eab7b2](https://github.com/team-telnyx/telnyx-php/commit/1eab7b2217e93643b200f701617f431710cb6b74))
+* Document assistant CRUD fields ([68f9f12](https://github.com/team-telnyx/telnyx-php/commit/68f9f12b5953bc6e576f057e6ec7fdaf1983e46d))
+* Document Flux transcription language hints ([6557c2e](https://github.com/team-telnyx/telnyx-php/commit/6557c2e9713ffeee27c93c0543b61391f61894f1))
+* ENGDESK-51445: added profile ID fields to Whatsapp messages ([3643e20](https://github.com/team-telnyx/telnyx-php/commit/3643e2053de39fabec05556d2a3279f0cc528efa))
+* Fix CreateVerifyProfileRequest to match messaging-2fa schema ([bac4ac3](https://github.com/team-telnyx/telnyx-php/commit/bac4ac3b3d7f6ddfd8e08bf8328149c13b08029e))
+* Mark 'from' as required on InviteToolConfig ([b6fa781](https://github.com/team-telnyx/telnyx-php/commit/b6fa78120a1c2a10656caaca80696122d1cb8ee4))
+* Revert "fix: stainless ([#2371](https://github.com/team-telnyx/telnyx-php/issues/2371))" ([39f8b16](https://github.com/team-telnyx/telnyx-php/commit/39f8b1623c68f83dd0b60de9f2047c95a2514dcb))
+* support setting headers via env ([850fc45](https://github.com/team-telnyx/telnyx-php/commit/850fc45ee1456d8b1e2ddd6b2365a8255da09031))
+* TELAPPS-5725: Add deepfake detection params to call-scripting API docs ([d900bd3](https://github.com/team-telnyx/telnyx-php/commit/d900bd3671bc96db342c6bbe84b3a1e07223013e))
+* Update assistant transcription settings spec ([d3f9513](https://github.com/team-telnyx/telnyx-php/commit/d3f95133df145ecd0534f141a2432d7ad1eefc9e))
+* Update observability ([b7d54a5](https://github.com/team-telnyx/telnyx-php/commit/b7d54a591ced9dae665ebdd0b45fab75b665ef8b))
+
 ## 7.40.1 (2026-04-25)
 
 Full Changelog: [v7.40.0...v7.40.1](https://github.com/team-telnyx/telnyx-php/compare/v7.40.0...v7.40.1)
