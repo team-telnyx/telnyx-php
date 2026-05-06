@@ -4,20 +4,23 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
+use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse\Rule;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Response model for canary deploy operations.
+ * Response shape.
  *
- * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
+ * Always carries ``rules`` (canonical).
+ *
+ * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse\Rule
  *
  * @phpstan-type CanaryDeployResponseShape = array{
  *   assistantID: string,
  *   createdAt: \DateTimeInterface,
+ *   rules: list<Rule|RuleShape>,
  *   updatedAt: \DateTimeInterface,
- *   versions: list<VersionConfig|VersionConfigShape>,
  * }
  */
 final class CanaryDeployResponse implements BaseModel
@@ -31,12 +34,12 @@ final class CanaryDeployResponse implements BaseModel
     #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
+    /** @var list<Rule> $rules */
+    #[Required(list: Rule::class)]
+    public array $rules;
+
     #[Required('updated_at')]
     public \DateTimeInterface $updatedAt;
-
-    /** @var list<VersionConfig> $versions */
-    #[Required(list: VersionConfig::class)]
-    public array $versions;
 
     /**
      * `new CanaryDeployResponse()` is missing required properties by the API.
@@ -44,7 +47,7 @@ final class CanaryDeployResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * CanaryDeployResponse::with(
-     *   assistantID: ..., createdAt: ..., updatedAt: ..., versions: ...
+     *   assistantID: ..., createdAt: ..., rules: ..., updatedAt: ...
      * )
      * ```
      *
@@ -54,8 +57,8 @@ final class CanaryDeployResponse implements BaseModel
      * (new CanaryDeployResponse)
      *   ->withAssistantID(...)
      *   ->withCreatedAt(...)
+     *   ->withRules(...)
      *   ->withUpdatedAt(...)
-     *   ->withVersions(...)
      * ```
      */
     public function __construct()
@@ -68,20 +71,20 @@ final class CanaryDeployResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig|VersionConfigShape> $versions
+     * @param list<Rule|RuleShape> $rules
      */
     public static function with(
         string $assistantID,
         \DateTimeInterface $createdAt,
+        array $rules,
         \DateTimeInterface $updatedAt,
-        array $versions,
     ): self {
         $self = new self;
 
         $self['assistantID'] = $assistantID;
         $self['createdAt'] = $createdAt;
+        $self['rules'] = $rules;
         $self['updatedAt'] = $updatedAt;
-        $self['versions'] = $versions;
 
         return $self;
     }
@@ -102,21 +105,21 @@ final class CanaryDeployResponse implements BaseModel
         return $self;
     }
 
-    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
+    /**
+     * @param list<Rule|RuleShape> $rules
+     */
+    public function withRules(array $rules): self
     {
         $self = clone $this;
-        $self['updatedAt'] = $updatedAt;
+        $self['rules'] = $rules;
 
         return $self;
     }
 
-    /**
-     * @param list<VersionConfig|VersionConfigShape> $versions
-     */
-    public function withVersions(array $versions): self
+    public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $self = clone $this;
-        $self['versions'] = $versions;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }

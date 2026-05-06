@@ -4,46 +4,28 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\Core\Attributes\Required;
+use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeploy\Rule;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Request model for creating or updating canary deploys.
+ * Create/update request body. Accepts:
+ * - ``rules`` — canonical ordered list of routing rules
  *
- * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
+ * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeploy\Rule
  *
- * @phpstan-type CanaryDeployShape = array{
- *   versions: list<VersionConfig|VersionConfigShape>
- * }
+ * @phpstan-type CanaryDeployShape = array{rules?: list<Rule|RuleShape>|null}
  */
 final class CanaryDeploy implements BaseModel
 {
     /** @use SdkModel<CanaryDeployShape> */
     use SdkModel;
 
-    /**
-     * List of version configurations.
-     *
-     * @var list<VersionConfig> $versions
-     */
-    #[Required(list: VersionConfig::class)]
-    public array $versions;
+    /** @var list<Rule>|null $rules */
+    #[Optional(list: Rule::class)]
+    public ?array $rules;
 
-    /**
-     * `new CanaryDeploy()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * CanaryDeploy::with(versions: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new CanaryDeploy)->withVersions(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -54,26 +36,24 @@ final class CanaryDeploy implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig|VersionConfigShape> $versions
+     * @param list<Rule|RuleShape>|null $rules
      */
-    public static function with(array $versions): self
+    public static function with(?array $rules = null): self
     {
         $self = new self;
 
-        $self['versions'] = $versions;
+        null !== $rules && $self['rules'] = $rules;
 
         return $self;
     }
 
     /**
-     * List of version configurations.
-     *
-     * @param list<VersionConfig|VersionConfigShape> $versions
+     * @param list<Rule|RuleShape> $rules
      */
-    public function withVersions(array $versions): self
+    public function withRules(array $rules): self
     {
         $self = clone $this;
-        $self['versions'] = $versions;
+        $self['rules'] = $rules;
 
         return $self;
     }
