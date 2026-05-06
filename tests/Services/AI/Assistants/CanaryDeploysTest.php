@@ -36,24 +36,7 @@ final class CanaryDeploysTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->canaryDeploys->create(
-            'assistant_id',
-            versions: [['percentage' => 1, 'versionID' => 'version_id']],
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CanaryDeployResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCreateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->assistants->canaryDeploys->create(
-            'assistant_id',
-            versions: [['percentage' => 1, 'versionID' => 'version_id']],
+            'assistant_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -83,24 +66,7 @@ final class CanaryDeploysTest extends TestCase
         }
 
         $result = $this->client->ai->assistants->canaryDeploys->update(
-            'assistant_id',
-            versions: [['percentage' => 1, 'versionID' => 'version_id']],
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CanaryDeployResponse::class, $result);
-    }
-
-    #[Test]
-    public function testUpdateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->assistants->canaryDeploys->update(
-            'assistant_id',
-            versions: [['percentage' => 1, 'versionID' => 'version_id']],
+            'assistant_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
