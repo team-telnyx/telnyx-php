@@ -150,6 +150,7 @@ use Telnyx\Services\TexmlApplicationsService;
 use Telnyx\Services\TexmlService;
 use Telnyx\Services\TextToSpeechService;
 use Telnyx\Services\TrafficPolicyProfilesService;
+use Telnyx\Services\UacConnectionsService;
 use Telnyx\Services\UsageReportsService;
 use Telnyx\Services\UserAddressesService;
 use Telnyx\Services\UserTagsService;
@@ -1008,6 +1009,11 @@ class Client extends BaseClient
     public PronunciationDictsService $pronunciationDicts;
 
     /**
+     * @api
+     */
+    public UacConnectionsService $uacConnections;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1233,6 +1239,7 @@ class Client extends BaseClient
         $this->reputation = new ReputationService($this);
         $this->termsOfService = new TermsOfServiceService($this);
         $this->pronunciationDicts = new PronunciationDictsService($this);
+        $this->uacConnections = new UacConnectionsService($this);
     }
 
     /** @return array<string,string> */
