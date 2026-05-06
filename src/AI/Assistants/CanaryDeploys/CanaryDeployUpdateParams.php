@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\Core\Attributes\Required;
+use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -17,10 +18,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\CanaryDeploysService::update()
  *
- * @phpstan-import-type VersionConfigShape from \Telnyx\AI\Assistants\CanaryDeploys\VersionConfig
+ * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule
  *
  * @phpstan-type CanaryDeployUpdateParamsShape = array{
- *   versions: list<VersionConfig|VersionConfigShape>
+ *   rules?: list<Rule|RuleShape>|null
  * }
  */
 final class CanaryDeployUpdateParams implements BaseModel
@@ -29,28 +30,10 @@ final class CanaryDeployUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * List of version configurations.
-     *
-     * @var list<VersionConfig> $versions
-     */
-    #[Required(list: VersionConfig::class)]
-    public array $versions;
+    /** @var list<Rule>|null $rules */
+    #[Optional(list: Rule::class)]
+    public ?array $rules;
 
-    /**
-     * `new CanaryDeployUpdateParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * CanaryDeployUpdateParams::with(versions: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new CanaryDeployUpdateParams)->withVersions(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -61,26 +44,24 @@ final class CanaryDeployUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VersionConfig|VersionConfigShape> $versions
+     * @param list<Rule|RuleShape>|null $rules
      */
-    public static function with(array $versions): self
+    public static function with(?array $rules = null): self
     {
         $self = new self;
 
-        $self['versions'] = $versions;
+        null !== $rules && $self['rules'] = $rules;
 
         return $self;
     }
 
     /**
-     * List of version configurations.
-     *
-     * @param list<VersionConfig|VersionConfigShape> $versions
+     * @param list<Rule|RuleShape> $rules
      */
-    public function withVersions(array $versions): self
+    public function withRules(array $rules): self
     {
         $self = clone $this;
-        $self['versions'] = $versions;
+        $self['rules'] = $rules;
 
         return $self;
     }
