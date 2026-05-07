@@ -13,13 +13,13 @@ use Telnyx\Networks\InterfaceStatus;
  * @phpstan-type PublicInternetGatewayListResponseShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: string|null,
  *   name?: string|null,
  *   networkID?: string|null,
- *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
  *   publicIP?: string|null,
+ *   recordType?: string|null,
  *   regionCode?: string|null,
+ *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
+ *   updatedAt?: string|null,
  * }
  */
 final class PublicInternetGatewayListResponse implements BaseModel
@@ -40,18 +40,6 @@ final class PublicInternetGatewayListResponse implements BaseModel
     public ?string $createdAt;
 
     /**
-     * Identifies the type of the resource.
-     */
-    #[Optional('record_type')]
-    public ?string $recordType;
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was updated.
-     */
-    #[Optional('updated_at')]
-    public ?string $updatedAt;
-
-    /**
      * A user specified name for the interface.
      */
     #[Optional]
@@ -64,6 +52,24 @@ final class PublicInternetGatewayListResponse implements BaseModel
     public ?string $networkID;
 
     /**
+     * The publically accessible ip for this interface.
+     */
+    #[Optional('public_ip')]
+    public ?string $publicIP;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * The region interface is deployed to.
+     */
+    #[Optional('region_code')]
+    public ?string $regionCode;
+
+    /**
      * The current status of the interface deployment.
      *
      * @var value-of<InterfaceStatus>|null $status
@@ -72,16 +78,10 @@ final class PublicInternetGatewayListResponse implements BaseModel
     public ?string $status;
 
     /**
-     * The publically accessible ip for this interface.
+     * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    #[Optional('public_ip')]
-    public ?string $publicIP;
-
-    /**
-     * The region interface is deployed to.
-     */
-    #[Optional('region_code')]
-    public ?string $regionCode;
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -98,25 +98,25 @@ final class PublicInternetGatewayListResponse implements BaseModel
     public static function with(
         ?string $id = null,
         ?string $createdAt = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
         ?string $name = null,
         ?string $networkID = null,
-        InterfaceStatus|string|null $status = null,
         ?string $publicIP = null,
+        ?string $recordType = null,
         ?string $regionCode = null,
+        InterfaceStatus|string|null $status = null,
+        ?string $updatedAt = null,
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $name && $self['name'] = $name;
         null !== $networkID && $self['networkID'] = $networkID;
-        null !== $status && $self['status'] = $status;
         null !== $publicIP && $self['publicIP'] = $publicIP;
+        null !== $recordType && $self['recordType'] = $recordType;
         null !== $regionCode && $self['regionCode'] = $regionCode;
+        null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
@@ -144,28 +144,6 @@ final class PublicInternetGatewayListResponse implements BaseModel
     }
 
     /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was updated.
-     */
-    public function withUpdatedAt(string $updatedAt): self
-    {
-        $self = clone $this;
-        $self['updatedAt'] = $updatedAt;
-
-        return $self;
-    }
-
-    /**
      * A user specified name for the interface.
      */
     public function withName(string $name): self
@@ -188,6 +166,39 @@ final class PublicInternetGatewayListResponse implements BaseModel
     }
 
     /**
+     * The publically accessible ip for this interface.
+     */
+    public function withPublicIP(string $publicIP): self
+    {
+        $self = clone $this;
+        $self['publicIP'] = $publicIP;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * The region interface is deployed to.
+     */
+    public function withRegionCode(string $regionCode): self
+    {
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
+
+        return $self;
+    }
+
+    /**
      * The current status of the interface deployment.
      *
      * @param InterfaceStatus|value-of<InterfaceStatus> $status
@@ -201,23 +212,12 @@ final class PublicInternetGatewayListResponse implements BaseModel
     }
 
     /**
-     * The publically accessible ip for this interface.
+     * ISO 8601 formatted date-time indicating when the resource was updated.
      */
-    public function withPublicIP(string $publicIP): self
+    public function withUpdatedAt(string $updatedAt): self
     {
         $self = clone $this;
-        $self['publicIP'] = $publicIP;
-
-        return $self;
-    }
-
-    /**
-     * The region interface is deployed to.
-     */
-    public function withRegionCode(string $regionCode): self
-    {
-        $self = clone $this;
-        $self['regionCode'] = $regionCode;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
