@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -18,10 +17,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Assistants\CanaryDeploysService::update()
  *
- * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule
+ * @phpstan-import-type RuleInputShape from \Telnyx\AI\Assistants\CanaryDeploys\RuleInput
  *
  * @phpstan-type CanaryDeployUpdateParamsShape = array{
- *   rules?: list<Rule|RuleShape>|null
+ *   rules?: list<RuleInput|RuleInputShape>|null
  * }
  */
 final class CanaryDeployUpdateParams implements BaseModel
@@ -30,8 +29,8 @@ final class CanaryDeployUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<Rule>|null $rules */
-    #[Optional(list: Rule::class)]
+    /** @var list<RuleInput>|null $rules */
+    #[Optional(list: RuleInput::class)]
     public ?array $rules;
 
     public function __construct()
@@ -44,7 +43,7 @@ final class CanaryDeployUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Rule|RuleShape>|null $rules
+     * @param list<RuleInput|RuleInputShape>|null $rules
      */
     public static function with(?array $rules = null): self
     {
@@ -56,7 +55,7 @@ final class CanaryDeployUpdateParams implements BaseModel
     }
 
     /**
-     * @param list<Rule|RuleShape> $rules
+     * @param list<RuleInput|RuleInputShape> $rules
      */
     public function withRules(array $rules): self
     {

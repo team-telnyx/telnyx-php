@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\UacConnections\UacConnection;
+
+/**
+ * Determines which webhook format will be used, Telnyx API v1 or v2.
+ */
+enum WebhookAPIVersion: string
+{
+    case V1 = '1';
+
+    case V2 = '2';
+}
