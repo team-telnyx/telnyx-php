@@ -27,9 +27,11 @@ final class AIRawService implements AIRawContract
     public function __construct(private Client $client) {}
 
     /**
+     * @deprecated
+     *
      * @api
      *
-     * This endpoint returns a list of Open Source and OpenAI models that are available for use. <br /><br /> **Note**: Model `id`'s will be in the form `{source}/{model_name}`. For example `openai/gpt-4` or `mistralai/Mistral-7B-Instruct-v0.1` consistent with HuggingFace naming conventions.
+     * **Deprecated**: Use `GET /v2/ai/openai/models` instead. This endpoint returns a list of Open Source and OpenAI models that are available for use. <br /><br /> **Note**: Model `id`'s will be in the form `{source}/{model_name}`. For example `openai/gpt-4` or `mistralai/Mistral-7B-Instruct-v0.1` consistent with HuggingFace naming conventions.
      *
      * @param RequestOpts|null $requestOptions
      *
