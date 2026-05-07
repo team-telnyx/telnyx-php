@@ -19,7 +19,7 @@ final class UacInternalSettings implements BaseModel
     use SdkModel;
 
     /**
-     * The SIP URI that Telnyx will call when handling an inbound request from the external peer. Do not include a `sip:` prefix. The value must be in the format `userinfo@[subdomain.]sip.telnyx.com` or `userinfo@[subdomain.]sipdev.telnyx.com`; the userinfo portion may contain only letters, digits, hyphens, and underscores.
+     * The SIP URI that Telnyx will call when handling an inbound request from the external peer. Do not include a `sip:` prefix. The value must be in the format `userinfo@<subdomain.>sip.telnyx.com` or `userinfo@<subdomain.>sipdev.telnyx.com`; the userinfo portion may contain only letters, digits, hyphens, and underscores.
      */
     #[Optional('destination_uri')]
     public ?string $destinationUri;
@@ -44,7 +44,7 @@ final class UacInternalSettings implements BaseModel
     }
 
     /**
-     * The SIP URI that Telnyx will call when handling an inbound request from the external peer. Do not include a `sip:` prefix. The value must be in the format `userinfo@[subdomain.]sip.telnyx.com` or `userinfo@[subdomain.]sipdev.telnyx.com`; the userinfo portion may contain only letters, digits, hyphens, and underscores.
+     * The SIP URI that Telnyx will call when handling an inbound request from the external peer. Do not include a `sip:` prefix. The value must be in the format `userinfo@<subdomain.>sip.telnyx.com` or `userinfo@<subdomain.>sipdev.telnyx.com`; the userinfo portion may contain only letters, digits, hyphens, and underscores.
      */
     public function withDestinationUri(string $destinationUri): self
     {
