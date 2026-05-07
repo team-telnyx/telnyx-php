@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse\Data;
+namespace Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
