@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
+use Telnyx\Calls\Actions\TranscriptionConfig\Model;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -11,7 +12,9 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
  *
- * @phpstan-type TranscriptionConfigShape = array{model?: string|null}
+ * @phpstan-type TranscriptionConfigShape = array{
+ *   language?: string|null, model?: null|Model|value-of<Model>
+ * }
  */
 final class TranscriptionConfig implements BaseModel
 {
@@ -19,13 +22,27 @@ final class TranscriptionConfig implements BaseModel
     use SdkModel;
 
     /**
-     * The speech to text model to be used by the voice assistant.
-     *
-     * - `distil-whisper/distil-large-v2` is lower latency but English-only.
-     * - `openai/whisper-large-v3-turbo` is multi-lingual with automatic language detection but slightly higher latency.
-     * - `google` is a multi-lingual option, please describe the language in the `language` field.
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. Supported and meaningful values depend on the selected transcription `model`. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`.
      */
     #[Optional]
+    public ?string $language;
+
+    /**
+     * The speech to text model to be used by the voice assistant. Supported models include:
+     *
+     * - `deepgram/flux` (or `flux`) for live streaming turn-taking.
+     * - `deepgram/nova-3` and `deepgram/nova-2` for live streaming transcription.
+     * - `speechmatics/standard` and `speechmatics/enhanced` for live streaming transcription.
+     * - `assemblyai/universal-streaming` for live streaming transcription.
+     * - `xai/grok-stt` for live streaming transcription.
+     * - `azure/fast` and `azure/realtime`; Azure models require `region`, and unsupported regions require `api_key_ref`.
+     * - `google/latest_long` for non-streaming multilingual transcription.
+     * - `distil-whisper/distil-large-v2` for lower-latency English-only non-streaming transcription.
+     * - `openai/whisper-large-v3-turbo` for multilingual non-streaming transcription with automatic language detection.
+     *
+     * @var value-of<Model>|null $model
+     */
+    #[Optional(enum: Model::class)]
     public ?string $model;
 
     public function __construct()
@@ -37,24 +54,48 @@ final class TranscriptionConfig implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Model|value-of<Model>|null $model
      */
-    public static function with(?string $model = null): self
-    {
+    public static function with(
+        ?string $language = null,
+        Model|string|null $model = null
+    ): self {
         $self = new self;
 
+        null !== $language && $self['language'] = $language;
         null !== $model && $self['model'] = $model;
 
         return $self;
     }
 
     /**
-     * The speech to text model to be used by the voice assistant.
-     *
-     * - `distil-whisper/distil-large-v2` is lower latency but English-only.
-     * - `openai/whisper-large-v3-turbo` is multi-lingual with automatic language detection but slightly higher latency.
-     * - `google` is a multi-lingual option, please describe the language in the `language` field.
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. Supported and meaningful values depend on the selected transcription `model`. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`.
      */
-    public function withModel(string $model): self
+    public function withLanguage(string $language): self
+    {
+        $self = clone $this;
+        $self['language'] = $language;
+
+        return $self;
+    }
+
+    /**
+     * The speech to text model to be used by the voice assistant. Supported models include:
+     *
+     * - `deepgram/flux` (or `flux`) for live streaming turn-taking.
+     * - `deepgram/nova-3` and `deepgram/nova-2` for live streaming transcription.
+     * - `speechmatics/standard` and `speechmatics/enhanced` for live streaming transcription.
+     * - `assemblyai/universal-streaming` for live streaming transcription.
+     * - `xai/grok-stt` for live streaming transcription.
+     * - `azure/fast` and `azure/realtime`; Azure models require `region`, and unsupported regions require `api_key_ref`.
+     * - `google/latest_long` for non-streaming multilingual transcription.
+     * - `distil-whisper/distil-large-v2` for lower-latency English-only non-streaming transcription.
+     * - `openai/whisper-large-v3-turbo` for multilingual non-streaming transcription with automatic language detection.
+     *
+     * @param Model|value-of<Model> $model
+     */
+    public function withModel(Model|string $model): self
     {
         $self = clone $this;
         $self['model'] = $model;
