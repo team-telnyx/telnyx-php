@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.42.1 (2026-05-07)
+
+Full Changelog: [v7.42.0...v7.42.1](https://github.com/team-telnyx/telnyx-php/compare/v7.42.0...v7.42.1)
+
+### Bug Fixes
+
+* update UAC internal settings URI examples ([66099de](https://github.com/team-telnyx/telnyx-php/commit/66099de8d818a45a77cc975cd40036f455f11895))
+
+
+### Reverts
+
+* restore stainless.yml from before 964956c ([6b3ede6](https://github.com/team-telnyx/telnyx-php/commit/6b3ede6c3c71bb39167dbe48c277819900b52967))
+
 ## 7.42.0 (2026-05-07)
 
 Full Changelog: [v7.41.0...v7.42.0](https://github.com/team-telnyx/telnyx-php/compare/v7.41.0...v7.42.0)
