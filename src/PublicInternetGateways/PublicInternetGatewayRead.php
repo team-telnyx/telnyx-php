@@ -2,35 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\WireguardInterfaces;
+namespace Telnyx\PublicInternetGateways;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse\Region;
 
 /**
- * @phpstan-import-type RegionShape from \Telnyx\WireguardInterfaces\WireguardInterfaceListResponse\Region
- *
- * @phpstan-type WireguardInterfaceListResponseShape = array{
+ * @phpstan-type PublicInternetGatewayReadShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
- *   enableSipTrunking?: bool|null,
- *   endpoint?: string|null,
  *   name?: string|null,
  *   networkID?: string|null,
- *   publicKey?: string|null,
+ *   publicIP?: string|null,
  *   recordType?: string|null,
- *   region?: null|Region|RegionShape,
  *   regionCode?: string|null,
  *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
  *   updatedAt?: string|null,
  * }
  */
-final class WireguardInterfaceListResponse implements BaseModel
+final class PublicInternetGatewayRead implements BaseModel
 {
-    /** @use SdkModel<WireguardInterfaceListResponseShape> */
+    /** @use SdkModel<PublicInternetGatewayReadShape> */
     use SdkModel;
 
     /**
@@ -46,18 +40,6 @@ final class WireguardInterfaceListResponse implements BaseModel
     public ?string $createdAt;
 
     /**
-     * Enable SIP traffic forwarding over VPN interface.
-     */
-    #[Optional('enable_sip_trunking')]
-    public ?bool $enableSipTrunking;
-
-    /**
-     * The Telnyx WireGuard peers `Peer.endpoint` value.
-     */
-    #[Optional]
-    public ?string $endpoint;
-
-    /**
      * A user specified name for the interface.
      */
     #[Optional]
@@ -70,19 +52,16 @@ final class WireguardInterfaceListResponse implements BaseModel
     public ?string $networkID;
 
     /**
-     * The Telnyx WireGuard peers `Peer.PublicKey`.
+     * The publically accessible ip for this interface.
      */
-    #[Optional('public_key')]
-    public ?string $publicKey;
+    #[Optional('public_ip')]
+    public ?string $publicIP;
 
     /**
      * Identifies the type of the resource.
      */
     #[Optional('record_type')]
     public ?string $recordType;
-
-    #[Optional]
-    public ?Region $region;
 
     /**
      * The region interface is deployed to.
@@ -114,19 +93,15 @@ final class WireguardInterfaceListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Region|RegionShape|null $region
      * @param InterfaceStatus|value-of<InterfaceStatus>|null $status
      */
     public static function with(
         ?string $id = null,
         ?string $createdAt = null,
-        ?bool $enableSipTrunking = null,
-        ?string $endpoint = null,
         ?string $name = null,
         ?string $networkID = null,
-        ?string $publicKey = null,
+        ?string $publicIP = null,
         ?string $recordType = null,
-        Region|array|null $region = null,
         ?string $regionCode = null,
         InterfaceStatus|string|null $status = null,
         ?string $updatedAt = null,
@@ -135,13 +110,10 @@ final class WireguardInterfaceListResponse implements BaseModel
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $enableSipTrunking && $self['enableSipTrunking'] = $enableSipTrunking;
-        null !== $endpoint && $self['endpoint'] = $endpoint;
         null !== $name && $self['name'] = $name;
         null !== $networkID && $self['networkID'] = $networkID;
-        null !== $publicKey && $self['publicKey'] = $publicKey;
+        null !== $publicIP && $self['publicIP'] = $publicIP;
         null !== $recordType && $self['recordType'] = $recordType;
-        null !== $region && $self['region'] = $region;
         null !== $regionCode && $self['regionCode'] = $regionCode;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
@@ -172,28 +144,6 @@ final class WireguardInterfaceListResponse implements BaseModel
     }
 
     /**
-     * Enable SIP traffic forwarding over VPN interface.
-     */
-    public function withEnableSipTrunking(bool $enableSipTrunking): self
-    {
-        $self = clone $this;
-        $self['enableSipTrunking'] = $enableSipTrunking;
-
-        return $self;
-    }
-
-    /**
-     * The Telnyx WireGuard peers `Peer.endpoint` value.
-     */
-    public function withEndpoint(string $endpoint): self
-    {
-        $self = clone $this;
-        $self['endpoint'] = $endpoint;
-
-        return $self;
-    }
-
-    /**
      * A user specified name for the interface.
      */
     public function withName(string $name): self
@@ -216,12 +166,12 @@ final class WireguardInterfaceListResponse implements BaseModel
     }
 
     /**
-     * The Telnyx WireGuard peers `Peer.PublicKey`.
+     * The publically accessible ip for this interface.
      */
-    public function withPublicKey(string $publicKey): self
+    public function withPublicIP(string $publicIP): self
     {
         $self = clone $this;
-        $self['publicKey'] = $publicKey;
+        $self['publicIP'] = $publicIP;
 
         return $self;
     }
@@ -233,17 +183,6 @@ final class WireguardInterfaceListResponse implements BaseModel
     {
         $self = clone $this;
         $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * @param Region|RegionShape $region
-     */
-    public function withRegion(Region|array $region): self
-    {
-        $self = clone $this;
-        $self['region'] = $region;
 
         return $self;
     }
