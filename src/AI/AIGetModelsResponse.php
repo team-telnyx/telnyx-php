@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\AI;
 
-use Telnyx\AI\AIGetModelsResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\AI\AIGetModelsResponse\Data
+ * @phpstan-import-type ModelMetadataShape from \Telnyx\AI\ModelMetadata
  *
  * @phpstan-type AIGetModelsResponseShape = array{
- *   data: list<Data|DataShape>, object?: string|null
+ *   data: list<ModelMetadata|ModelMetadataShape>, object?: string|null
  * }
  */
 final class AIGetModelsResponse implements BaseModel
@@ -22,8 +21,8 @@ final class AIGetModelsResponse implements BaseModel
     /** @use SdkModel<AIGetModelsResponseShape> */
     use SdkModel;
 
-    /** @var list<Data> $data */
-    #[Required(list: Data::class)]
+    /** @var list<ModelMetadata> $data */
+    #[Required(list: ModelMetadata::class)]
     public array $data;
 
     #[Optional]
@@ -53,7 +52,7 @@ final class AIGetModelsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape> $data
+     * @param list<ModelMetadata|ModelMetadataShape> $data
      */
     public static function with(array $data, ?string $object = null): self
     {
@@ -67,7 +66,7 @@ final class AIGetModelsResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * @param list<ModelMetadata|ModelMetadataShape> $data
      */
     public function withData(array $data): self
     {

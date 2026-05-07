@@ -7,13 +7,12 @@ namespace Telnyx\UacConnections;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\UacConnections\UacConnectionUpdateResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\UacConnections\UacConnectionUpdateResponse\Data
+ * @phpstan-import-type UacConnectionShape from \Telnyx\UacConnections\UacConnection
  *
  * @phpstan-type UacConnectionUpdateResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|UacConnection|UacConnectionShape
  * }
  */
 final class UacConnectionUpdateResponse implements BaseModel
@@ -25,7 +24,7 @@ final class UacConnectionUpdateResponse implements BaseModel
      * A UAC (User Agent Client) Connection registers Telnyx to your PBX — the opposite of a standard SIP trunk, where the PBX registers to Telnyx. Use UAC when your PBX doesn’t support outbound SIP registration or you need Telnyx to maintain the registration.
      */
     #[Optional]
-    public ?Data $data;
+    public ?UacConnection $data;
 
     public function __construct()
     {
@@ -37,9 +36,9 @@ final class UacConnectionUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param UacConnection|UacConnectionShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(UacConnection|array|null $data = null): self
     {
         $self = new self;
 
@@ -51,9 +50,9 @@ final class UacConnectionUpdateResponse implements BaseModel
     /**
      * A UAC (User Agent Client) Connection registers Telnyx to your PBX — the opposite of a standard SIP trunk, where the PBX registers to Telnyx. Use UAC when your PBX doesn’t support outbound SIP registration or you need Telnyx to maintain the registration.
      *
-     * @param Data|DataShape $data
+     * @param UacConnection|UacConnectionShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(UacConnection|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;
