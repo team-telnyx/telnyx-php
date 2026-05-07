@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 
 use Telnyx\AzureVoiceSettings;
+use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -13,7 +14,6 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * The settings associated with the voice selected.
@@ -24,7 +24,7 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\AzureVoiceSettings
  * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
  * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
- * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\XaiVoiceSettings
+ * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\XaiVoiceSettings
  *
  * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings
  * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape|XaiVoiceSettingsShape

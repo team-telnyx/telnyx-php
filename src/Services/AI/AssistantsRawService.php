@@ -7,11 +7,12 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
+use Telnyx\AI\Assistants\AssistantCreateParams\Integration;
+use Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings;
+use Telnyx\AI\Assistants\AssistantCreateParams\McpServer;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
-use Telnyx\AI\Assistants\AssistantIntegration;
-use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantRetrieveParams;
 use Telnyx\AI\Assistants\AssistantSendSMSParams;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
@@ -21,7 +22,6 @@ use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbedding;
-use Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
@@ -41,13 +41,16 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\AssistantCreateParams\Integration
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\AssistantCreateParams\McpServer
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\AssistantUpdateParams\Integration as IntegrationShape1
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\AssistantUpdateParams\InterruptionSettings as InterruptionSettingsShape1
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\AssistantUpdateParams\McpServer as McpServerShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
- * @phpstan-import-type AssistantIntegrationShape from \Telnyx\AI\Assistants\AssistantIntegration
- * @phpstan-import-type InferenceEmbeddingInterruptionSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings
- * @phpstan-import-type AssistantMcpServerShape from \Telnyx\AI\Assistants\AssistantMcpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
  * @phpstan-import-type PostConversationSettingsReqShape from \Telnyx\AI\Assistants\PostConversationSettingsReq
@@ -84,10 +87,10 @@ final class AssistantsRawService implements AssistantsRawContract
      *   fallbackConfig?: FallbackConfigReq|FallbackConfigReqShape,
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
-     *   integrations?: list<AssistantIntegration|AssistantIntegrationShape>,
-     *   interruptionSettings?: InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape,
+     *   integrations?: list<Integration|IntegrationShape>,
+     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
      *   llmAPIKeyRef?: string,
-     *   mcpServers?: list<AssistantMcpServer|AssistantMcpServerShape>,
+     *   mcpServers?: list<McpServer|McpServerShape>,
      *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
      *   model?: string,
      *   observabilitySettings?: ObservabilityReq|ObservabilityReqShape,
@@ -185,10 +188,10 @@ final class AssistantsRawService implements AssistantsRawContract
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   instructions?: string,
-     *   integrations?: list<AssistantIntegration|AssistantIntegrationShape>,
-     *   interruptionSettings?: InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape,
+     *   integrations?: list<AssistantUpdateParams\Integration|IntegrationShape1>,
+     *   interruptionSettings?: AssistantUpdateParams\InterruptionSettings|InterruptionSettingsShape1,
      *   llmAPIKeyRef?: string,
-     *   mcpServers?: list<AssistantMcpServer|AssistantMcpServerShape>,
+     *   mcpServers?: list<AssistantUpdateParams\McpServer|McpServerShape1>,
      *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
      *   model?: string,
      *   name?: string,
