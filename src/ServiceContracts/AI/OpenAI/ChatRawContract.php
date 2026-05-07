@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\ServiceContracts\AI;
+namespace Telnyx\ServiceContracts\AI\OpenAI;
 
-use Telnyx\AI\Chat\ChatCreateCompletionParams;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -15,8 +15,6 @@ use Telnyx\RequestOptions;
 interface ChatRawContract
 {
     /**
-     * @deprecated
-     *
      * @api
      *
      * @param array<string,mixed>|ChatCreateCompletionParams $params

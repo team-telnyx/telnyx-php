@@ -17,6 +17,8 @@ use Telnyx\RequestOptions;
 interface AIRawContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param RequestOpts|null $requestOptions
