@@ -26,6 +26,7 @@ interface ScheduledEventsContract
      * @param string $telnyxEndUserTarget the phone number, SIP URI, to schedule the call or text to
      * @param array<string,ConversationMetadataShape> $conversationMetadata Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
      * @param array<string,string> $dynamicVariables A map of dynamic variable names to values. These variables can be referenced in the assistant's instructions and messages using {{variable_name}} syntax.
+     * @param int $maxRetriesClientErrors Configure number of retries on client errors: busy, no-answer, failed, canceled (caller hung up before the callee answered)
      * @param string $text Required for sms scheduled events. The text to be sent to the end user.
      * @param RequestOpts|null $requestOptions
      *
@@ -39,6 +40,8 @@ interface ScheduledEventsContract
         string $telnyxEndUserTarget,
         ?array $conversationMetadata = null,
         ?array $dynamicVariables = null,
+        int $maxRetriesClientErrors = 0,
+        ?int $retryIntervalSecs = null,
         ?string $text = null,
         RequestOptions|array|null $requestOptions = null,
     ): ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse;
