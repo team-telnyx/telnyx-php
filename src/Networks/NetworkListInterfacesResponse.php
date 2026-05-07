@@ -15,14 +15,14 @@ use Telnyx\Networks\NetworkListInterfacesResponse\Region;
  * @phpstan-type NetworkListInterfacesResponseShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: string|null,
  *   name?: string|null,
  *   networkID?: string|null,
- *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
+ *   recordType?: string|null,
  *   region?: null|Region|RegionShape,
  *   regionCode?: string|null,
+ *   status?: null|InterfaceStatus|value-of<InterfaceStatus>,
  *   type?: string|null,
+ *   updatedAt?: string|null,
  * }
  */
 final class NetworkListInterfacesResponse implements BaseModel
@@ -43,18 +43,6 @@ final class NetworkListInterfacesResponse implements BaseModel
     public ?string $createdAt;
 
     /**
-     * Identifies the type of the resource.
-     */
-    #[Optional('record_type')]
-    public ?string $recordType;
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was updated.
-     */
-    #[Optional('updated_at')]
-    public ?string $updatedAt;
-
-    /**
      * A user specified name for the interface.
      */
     #[Optional]
@@ -67,12 +55,10 @@ final class NetworkListInterfacesResponse implements BaseModel
     public ?string $networkID;
 
     /**
-     * The current status of the interface deployment.
-     *
-     * @var value-of<InterfaceStatus>|null $status
+     * Identifies the type of the resource.
      */
-    #[Optional(enum: InterfaceStatus::class)]
-    public ?string $status;
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     #[Optional]
     public ?Region $region;
@@ -84,10 +70,24 @@ final class NetworkListInterfacesResponse implements BaseModel
     public ?string $regionCode;
 
     /**
+     * The current status of the interface deployment.
+     *
+     * @var value-of<InterfaceStatus>|null $status
+     */
+    #[Optional(enum: InterfaceStatus::class)]
+    public ?string $status;
+
+    /**
      * Identifies the type of the interface.
      */
     #[Optional]
     public ?string $type;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
 
     public function __construct()
     {
@@ -99,33 +99,33 @@ final class NetworkListInterfacesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param InterfaceStatus|value-of<InterfaceStatus>|null $status
      * @param Region|RegionShape|null $region
+     * @param InterfaceStatus|value-of<InterfaceStatus>|null $status
      */
     public static function with(
         ?string $id = null,
         ?string $createdAt = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
         ?string $name = null,
         ?string $networkID = null,
-        InterfaceStatus|string|null $status = null,
+        ?string $recordType = null,
         Region|array|null $region = null,
         ?string $regionCode = null,
+        InterfaceStatus|string|null $status = null,
         ?string $type = null,
+        ?string $updatedAt = null,
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $name && $self['name'] = $name;
         null !== $networkID && $self['networkID'] = $networkID;
-        null !== $status && $self['status'] = $status;
+        null !== $recordType && $self['recordType'] = $recordType;
         null !== $region && $self['region'] = $region;
         null !== $regionCode && $self['regionCode'] = $regionCode;
+        null !== $status && $self['status'] = $status;
         null !== $type && $self['type'] = $type;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
@@ -153,28 +153,6 @@ final class NetworkListInterfacesResponse implements BaseModel
     }
 
     /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was updated.
-     */
-    public function withUpdatedAt(string $updatedAt): self
-    {
-        $self = clone $this;
-        $self['updatedAt'] = $updatedAt;
-
-        return $self;
-    }
-
-    /**
      * A user specified name for the interface.
      */
     public function withName(string $name): self
@@ -197,14 +175,12 @@ final class NetworkListInterfacesResponse implements BaseModel
     }
 
     /**
-     * The current status of the interface deployment.
-     *
-     * @param InterfaceStatus|value-of<InterfaceStatus> $status
+     * Identifies the type of the resource.
      */
-    public function withStatus(InterfaceStatus|string $status): self
+    public function withRecordType(string $recordType): self
     {
         $self = clone $this;
-        $self['status'] = $status;
+        $self['recordType'] = $recordType;
 
         return $self;
     }
@@ -232,12 +208,36 @@ final class NetworkListInterfacesResponse implements BaseModel
     }
 
     /**
+     * The current status of the interface deployment.
+     *
+     * @param InterfaceStatus|value-of<InterfaceStatus> $status
+     */
+    public function withStatus(InterfaceStatus|string $status): self
+    {
+        $self = clone $this;
+        $self['status'] = $status;
+
+        return $self;
+    }
+
+    /**
      * Identifies the type of the interface.
      */
     public function withType(string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }

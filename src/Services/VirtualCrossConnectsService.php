@@ -10,11 +10,11 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsContract;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Filter;
-use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 
@@ -178,7 +178,7 @@ final class VirtualCrossConnectsService implements VirtualCrossConnectsContract
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<VirtualCrossConnectListResponse>
+     * @return DefaultFlatPagination<VirtualCrossConnectCombined>
      *
      * @throws APIException
      */
