@@ -8,11 +8,11 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
@@ -75,7 +75,7 @@ interface VirtualCrossConnectsRawContract
      * @param array<string,mixed>|VirtualCrossConnectListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VirtualCrossConnectCombined>>
+     * @return BaseResponse<DefaultFlatPagination<VirtualCrossConnectListResponse>>
      *
      * @throws APIException
      */

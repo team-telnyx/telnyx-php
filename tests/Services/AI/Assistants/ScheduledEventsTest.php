@@ -67,6 +67,8 @@ final class ScheduledEventsTest extends TestCase
             telnyxEndUserTarget: 'telnyx_end_user_target',
             conversationMetadata: ['foo' => 'string'],
             dynamicVariables: ['foo' => 'string'],
+            maxRetriesClientErrors: 0,
+            retryIntervalSecs: 60,
             text: 'text',
         );
 

@@ -26,6 +26,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *   telnyxEndUserTarget: string,
  *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
  *   dynamicVariables?: array<string,string>|null,
+ *   maxRetriesClientErrors?: int|null,
+ *   retryIntervalSecs?: int|null,
  *   text?: string|null,
  * }
  */
@@ -77,6 +79,15 @@ final class ScheduledEventCreateParams implements BaseModel
     public ?array $dynamicVariables;
 
     /**
+     * Configure number of retries on client errors: busy, no-answer, failed, canceled (caller hung up before the callee answered).
+     */
+    #[Optional('max_retries_client_errors')]
+    public ?int $maxRetriesClientErrors;
+
+    #[Optional('retry_interval_secs')]
+    public ?int $retryIntervalSecs;
+
+    /**
      * Required for sms scheduled events. The text to be sent to the end user.
      */
     #[Optional]
@@ -126,6 +137,8 @@ final class ScheduledEventCreateParams implements BaseModel
         string $telnyxEndUserTarget,
         ?array $conversationMetadata = null,
         ?array $dynamicVariables = null,
+        ?int $maxRetriesClientErrors = null,
+        ?int $retryIntervalSecs = null,
         ?string $text = null,
     ): self {
         $self = new self;
@@ -137,6 +150,8 @@ final class ScheduledEventCreateParams implements BaseModel
 
         null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
+        null !== $maxRetriesClientErrors && $self['maxRetriesClientErrors'] = $maxRetriesClientErrors;
+        null !== $retryIntervalSecs && $self['retryIntervalSecs'] = $retryIntervalSecs;
         null !== $text && $self['text'] = $text;
 
         return $self;
@@ -210,6 +225,26 @@ final class ScheduledEventCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['dynamicVariables'] = $dynamicVariables;
+
+        return $self;
+    }
+
+    /**
+     * Configure number of retries on client errors: busy, no-answer, failed, canceled (caller hung up before the callee answered).
+     */
+    public function withMaxRetriesClientErrors(
+        int $maxRetriesClientErrors
+    ): self {
+        $self = clone $this;
+        $self['maxRetriesClientErrors'] = $maxRetriesClientErrors;
+
+        return $self;
+    }
+
+    public function withRetryIntervalSecs(int $retryIntervalSecs): self
+    {
+        $self = clone $this;
+        $self['retryIntervalSecs'] = $retryIntervalSecs;
 
         return $self;
     }

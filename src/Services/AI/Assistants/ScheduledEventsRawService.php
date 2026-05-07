@@ -47,6 +47,8 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      *   telnyxEndUserTarget: string,
      *   conversationMetadata?: array<string,ConversationMetadataShape>,
      *   dynamicVariables?: array<string,string>,
+     *   maxRetriesClientErrors?: int,
+     *   retryIntervalSecs?: int,
      *   text?: string,
      * }|ScheduledEventCreateParams $params
      * @param RequestOpts|null $requestOptions
