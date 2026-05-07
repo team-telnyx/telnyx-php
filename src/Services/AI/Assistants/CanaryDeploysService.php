@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants;
 
-use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployCreateParams\Rule;
 use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
+use Telnyx\AI\Assistants\CanaryDeploys\RuleInput;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -15,8 +15,7 @@ use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysContract;
 /**
  * Configure AI assistant specifications.
  *
- * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployCreateParams\Rule
- * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule as RuleShape1
+ * @phpstan-import-type RuleInputShape from \Telnyx\AI\Assistants\CanaryDeploys\RuleInput
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CanaryDeploysService implements CanaryDeploysContract
@@ -42,7 +41,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Creates a new canary deploy configuration with multiple version IDs and their traffic
      * percentages for A/B testing or gradual rollouts of assistant versions.
      *
-     * @param list<Rule|RuleShape> $rules
+     * @param list<RuleInput|RuleInputShape> $rules
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -90,7 +89,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Updates the existing canary deploy configuration with new version IDs and percentages.
      *   All old versions and percentages are replaces by new ones from this request.
      *
-     * @param list<\Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule|RuleShape1> $rules
+     * @param list<RuleInput|RuleInputShape> $rules
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
