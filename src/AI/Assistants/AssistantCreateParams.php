@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantCreateParams\Integration;
-use Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings;
-use Telnyx\AI\Assistants\AssistantCreateParams\McpServer;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -22,9 +19,9 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
- * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\AssistantCreateParams\Integration
- * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\AssistantCreateParams\InterruptionSettings
- * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\AssistantCreateParams\McpServer
+ * @phpstan-import-type AssistantIntegrationShape from \Telnyx\AI\Assistants\AssistantIntegration
+ * @phpstan-import-type InferenceEmbeddingInterruptionSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings
+ * @phpstan-import-type AssistantMcpServerShape from \Telnyx\AI\Assistants\AssistantMcpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
  * @phpstan-import-type PostConversationSettingsReqShape from \Telnyx\AI\Assistants\PostConversationSettingsReq
@@ -47,10 +44,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   fallbackConfig?: null|FallbackConfigReq|FallbackConfigReqShape,
  *   greeting?: string|null,
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
- *   integrations?: list<Integration|IntegrationShape>|null,
- *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
+ *   integrations?: list<AssistantIntegration|AssistantIntegrationShape>|null,
+ *   interruptionSettings?: null|InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape,
  *   llmAPIKeyRef?: string|null,
- *   mcpServers?: list<McpServer|McpServerShape>|null,
+ *   mcpServers?: list<AssistantMcpServer|AssistantMcpServerShape>|null,
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
  *   model?: string|null,
  *   observabilitySettings?: null|ObservabilityReq|ObservabilityReqShape,
@@ -125,16 +122,16 @@ final class AssistantCreateParams implements BaseModel
     /**
      * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
      *
-     * @var list<Integration>|null $integrations
+     * @var list<AssistantIntegration>|null $integrations
      */
-    #[Optional(list: Integration::class)]
+    #[Optional(list: AssistantIntegration::class)]
     public ?array $integrations;
 
     /**
      * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
      */
     #[Optional('interruption_settings')]
-    public ?InterruptionSettings $interruptionSettings;
+    public ?InferenceEmbeddingInterruptionSettings $interruptionSettings;
 
     /**
      * This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
@@ -145,9 +142,9 @@ final class AssistantCreateParams implements BaseModel
     /**
      * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
      *
-     * @var list<McpServer>|null $mcpServers
+     * @var list<AssistantMcpServer>|null $mcpServers
      */
-    #[Optional('mcp_servers', list: McpServer::class)]
+    #[Optional('mcp_servers', list: AssistantMcpServer::class)]
     public ?array $mcpServers;
 
     #[Optional('messaging_settings')]
@@ -239,9 +236,9 @@ final class AssistantCreateParams implements BaseModel
      * @param ExternalLlmReq|ExternalLlmReqShape|null $externalLlm
      * @param FallbackConfigReq|FallbackConfigReqShape|null $fallbackConfig
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
-     * @param list<Integration|IntegrationShape>|null $integrations
-     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
-     * @param list<McpServer|McpServerShape>|null $mcpServers
+     * @param list<AssistantIntegration|AssistantIntegrationShape>|null $integrations
+     * @param InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape|null $interruptionSettings
+     * @param list<AssistantMcpServer|AssistantMcpServerShape>|null $mcpServers
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
      * @param ObservabilityReq|ObservabilityReqShape|null $observabilitySettings
      * @param PostConversationSettingsReq|PostConversationSettingsReqShape|null $postConversationSettings
@@ -267,7 +264,7 @@ final class AssistantCreateParams implements BaseModel
         ?string $greeting = null,
         InsightSettings|array|null $insightSettings = null,
         ?array $integrations = null,
-        InterruptionSettings|array|null $interruptionSettings = null,
+        InferenceEmbeddingInterruptionSettings|array|null $interruptionSettings = null,
         ?string $llmAPIKeyRef = null,
         ?array $mcpServers = null,
         MessagingSettings|array|null $messagingSettings = null,
@@ -441,7 +438,7 @@ final class AssistantCreateParams implements BaseModel
     /**
      * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
      *
-     * @param list<Integration|IntegrationShape> $integrations
+     * @param list<AssistantIntegration|AssistantIntegrationShape> $integrations
      */
     public function withIntegrations(array $integrations): self
     {
@@ -454,10 +451,10 @@ final class AssistantCreateParams implements BaseModel
     /**
      * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
      *
-     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
+     * @param InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
-        InterruptionSettings|array $interruptionSettings
+        InferenceEmbeddingInterruptionSettings|array $interruptionSettings
     ): self {
         $self = clone $this;
         $self['interruptionSettings'] = $interruptionSettings;
@@ -479,7 +476,7 @@ final class AssistantCreateParams implements BaseModel
     /**
      * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
      *
-     * @param list<McpServer|McpServerShape> $mcpServers
+     * @param list<AssistantMcpServer|AssistantMcpServerShape> $mcpServers
      */
     public function withMcpServers(array $mcpServers): self
     {
