@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
+namespace Telnyx\VirtualCrossConnects;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
-use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\CloudProvider;
-use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined\CloudProvider;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined\Region;
 
 /**
- * @phpstan-import-type RegionShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region
+ * @phpstan-import-type RegionShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined\Region
  *
- * @phpstan-type DataShape = array{
+ * @phpstan-type VirtualCrossConnectCombinedShape = array{
  *   id?: string|null,
  *   bandwidthMbps?: float|null,
  *   bgpAsn?: float|null,
@@ -36,9 +36,9 @@ use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data\Region;
  *   updatedAt?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class VirtualCrossConnectCombined implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<VirtualCrossConnectCombinedShape> */
     use SdkModel;
 
     /**

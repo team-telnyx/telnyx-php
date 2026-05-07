@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse\Data;
+namespace Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined;
 
 /**
  * The Virtual Private Cloud with which you would like to establish a cross connect.

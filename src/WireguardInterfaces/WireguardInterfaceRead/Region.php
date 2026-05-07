@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
+namespace Telnyx\WireguardInterfaces\WireguardInterfaceRead;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;

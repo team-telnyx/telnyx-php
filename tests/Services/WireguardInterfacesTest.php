@@ -10,8 +10,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceRead;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -94,7 +94,7 @@ final class WireguardInterfacesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(WireguardInterfaceListResponse::class, $item);
+            $this->assertInstanceOf(WireguardInterfaceRead::class, $item);
         }
     }
 

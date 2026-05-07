@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
+namespace Telnyx\WireguardInterfaces;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Networks\InterfaceStatus;
-use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse\Data\Region;
+use Telnyx\WireguardInterfaces\WireguardInterfaceRead\Region;
 
 /**
- * @phpstan-import-type RegionShape from \Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse\Data\Region
+ * @phpstan-import-type RegionShape from \Telnyx\WireguardInterfaces\WireguardInterfaceRead\Region
  *
- * @phpstan-type DataShape = array{
+ * @phpstan-type WireguardInterfaceReadShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
  *   enableSipTrunking?: bool|null,
@@ -28,9 +28,9 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse\Data\Region;
  *   updatedAt?: string|null,
  * }
  */
-final class Data implements BaseModel
+final class WireguardInterfaceRead implements BaseModel
 {
-    /** @use SdkModel<DataShape> */
+    /** @use SdkModel<WireguardInterfaceReadShape> */
     use SdkModel;
 
     /**
