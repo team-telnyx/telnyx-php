@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Assistants;
 
+use Telnyx\AI\Assistants\AssistantIntegration;
+use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbedding;
+use Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
@@ -20,9 +23,6 @@ use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings;
-use Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
@@ -38,9 +38,9 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
- * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration
- * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings
- * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer
+ * @phpstan-import-type AssistantIntegrationShape from \Telnyx\AI\Assistants\AssistantIntegration
+ * @phpstan-import-type InferenceEmbeddingInterruptionSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings
+ * @phpstan-import-type AssistantMcpServerShape from \Telnyx\AI\Assistants\AssistantMcpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
  * @phpstan-import-type PostConversationSettingsReqShape from \Telnyx\AI\Assistants\PostConversationSettingsReq
@@ -118,10 +118,10 @@ final class VersionsRawService implements VersionsRawContract
      *   greeting?: string,
      *   insightSettings?: InsightSettings|InsightSettingsShape,
      *   instructions?: string,
-     *   integrations?: list<Integration|IntegrationShape>,
-     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
+     *   integrations?: list<AssistantIntegration|AssistantIntegrationShape>,
+     *   interruptionSettings?: InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape,
      *   llmAPIKeyRef?: string,
-     *   mcpServers?: list<McpServer|McpServerShape>,
+     *   mcpServers?: list<AssistantMcpServer|AssistantMcpServerShape>,
      *   messagingSettings?: MessagingSettings|MessagingSettingsShape,
      *   model?: string,
      *   name?: string,
