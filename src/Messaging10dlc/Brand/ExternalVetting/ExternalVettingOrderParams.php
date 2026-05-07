@@ -12,6 +12,8 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Order new external vetting for a brand.
  *
+ * Duplicate orders for the same `evpId` and `vettingClass` return `400` with code `10012` if a successful vetting exists within the last 180 days, or one is currently being processed. Failed vettings can be retried immediately.
+ *
  * @see Telnyx\Services\Messaging10dlc\Brand\ExternalVettingService::order()
  *
  * @phpstan-type ExternalVettingOrderParamsShape = array{
