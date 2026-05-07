@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployCreateParams;
-use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployCreateParams\Rule;
 use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
 use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams;
+use Telnyx\AI\Assistants\CanaryDeploys\RuleInput;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -17,8 +17,7 @@ use Telnyx\ServiceContracts\AI\Assistants\CanaryDeploysRawContract;
 /**
  * Configure AI assistant specifications.
  *
- * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployCreateParams\Rule
- * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule as RuleShape1
+ * @phpstan-import-type RuleInputShape from \Telnyx\AI\Assistants\CanaryDeploys\RuleInput
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CanaryDeploysRawService implements CanaryDeploysRawContract
@@ -37,7 +36,9 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      * Creates a new canary deploy configuration with multiple version IDs and their traffic
      * percentages for A/B testing or gradual rollouts of assistant versions.
      *
-     * @param array{rules?: list<Rule|RuleShape>}|CanaryDeployCreateParams $params
+     * @param array{
+     *   rules?: list<RuleInput|RuleInputShape>
+     * }|CanaryDeployCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CanaryDeployResponse>
@@ -100,7 +101,7 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      *   All old versions and percentages are replaces by new ones from this request.
      *
      * @param array{
-     *   rules?: list<CanaryDeployUpdateParams\Rule|RuleShape1>,
+     *   rules?: list<RuleInput|RuleInputShape>
      * }|CanaryDeployUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
