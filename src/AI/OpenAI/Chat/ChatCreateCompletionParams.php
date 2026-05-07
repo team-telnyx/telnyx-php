@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\AI\Chat;
+namespace Telnyx\AI\OpenAI\Chat;
 
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Stop;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Tool;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Stop;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Tool;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,17 +16,16 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * **Deprecated**: Use `POST /v2/ai/openai/chat/completions` instead. Chat with a language model. This endpoint is consistent with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and may be used with the OpenAI JS or Python SDK.
+ * Chat with a language model. This endpoint is consistent with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and may be used with the OpenAI JS or Python SDK by setting the base URL to `https://api.telnyx.com/v2/ai/openai`.
  *
- * @deprecated
- * @see Telnyx\Services\AI\ChatService::createCompletion()
+ * @see Telnyx\Services\AI\OpenAI\ChatService::createCompletion()
  *
- * @phpstan-import-type StopVariants from \Telnyx\AI\Chat\ChatCreateCompletionParams\Stop
- * @phpstan-import-type ToolVariants from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool
- * @phpstan-import-type MessageShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message
- * @phpstan-import-type ResponseFormatShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat
- * @phpstan-import-type StopShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Stop
- * @phpstan-import-type ToolShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool
+ * @phpstan-import-type StopVariants from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Stop
+ * @phpstan-import-type ToolVariants from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Tool
+ * @phpstan-import-type MessageShape from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message
+ * @phpstan-import-type ResponseFormatShape from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat
+ * @phpstan-import-type StopShape from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Stop
+ * @phpstan-import-type ToolShape from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Tool
  *
  * @phpstan-type ChatCreateCompletionParamsShape = array{
  *   messages: list<Message|MessageShape>,

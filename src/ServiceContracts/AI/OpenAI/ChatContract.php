@@ -2,47 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Services\AI;
+namespace Telnyx\ServiceContracts\AI\OpenAI;
 
-use Telnyx\AI\Chat\ChatCreateCompletionParams\Message;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat;
-use Telnyx\AI\Chat\ChatCreateCompletionParams\ToolChoice;
-use Telnyx\Client;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat;
+use Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ToolChoice;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
-use Telnyx\ServiceContracts\AI\ChatContract;
 
 /**
- * Generate text with LLMs.
- *
- * @phpstan-import-type MessageShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message
- * @phpstan-import-type ResponseFormatShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat
- * @phpstan-import-type StopShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Stop
- * @phpstan-import-type ToolShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool
+ * @phpstan-import-type MessageShape from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Message
+ * @phpstan-import-type ResponseFormatShape from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\ResponseFormat
+ * @phpstan-import-type StopShape from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Stop
+ * @phpstan-import-type ToolShape from \Telnyx\AI\OpenAI\Chat\ChatCreateCompletionParams\Tool
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
-final class ChatService implements ChatContract
+interface ChatContract
 {
     /**
      * @api
-     */
-    public ChatRawService $raw;
-
-    /**
-     * @internal
-     */
-    public function __construct(private Client $client)
-    {
-        $this->raw = new ChatRawService($client);
-    }
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * **Deprecated**: Use `POST /v2/ai/openai/chat/completions` instead. Chat with a language model. This endpoint is consistent with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and may be used with the OpenAI JS or Python SDK.
      *
      * @param list<Message|MessageShape> $messages a list of the previous chat messages for context
      * @param string $apiKeyRef If you are using an external inference provider like xAI or OpenAI, this field allows you to pass along a reference to your API key. After creating an [integration secret](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) for you API key, pass the secret's `identifier` in this field.
@@ -104,41 +82,5 @@ final class ChatService implements ChatContract
         ?float $topP = null,
         bool $useBeamSearch = false,
         RequestOptions|array|null $requestOptions = null,
-    ): array {
-        $params = Util::removeNulls(
-            [
-                'messages' => $messages,
-                'apiKeyRef' => $apiKeyRef,
-                'bestOf' => $bestOf,
-                'earlyStopping' => $earlyStopping,
-                'enableThinking' => $enableThinking,
-                'frequencyPenalty' => $frequencyPenalty,
-                'guidedChoice' => $guidedChoice,
-                'guidedJson' => $guidedJson,
-                'guidedRegex' => $guidedRegex,
-                'lengthPenalty' => $lengthPenalty,
-                'logprobs' => $logprobs,
-                'maxTokens' => $maxTokens,
-                'minP' => $minP,
-                'model' => $model,
-                'n' => $n,
-                'presencePenalty' => $presencePenalty,
-                'responseFormat' => $responseFormat,
-                'seed' => $seed,
-                'stop' => $stop,
-                'stream' => $stream,
-                'temperature' => $temperature,
-                'toolChoice' => $toolChoice,
-                'tools' => $tools,
-                'topLogprobs' => $topLogprobs,
-                'topP' => $topP,
-                'useBeamSearch' => $useBeamSearch,
-            ],
-        );
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createCompletion(params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
+    ): array;
 }

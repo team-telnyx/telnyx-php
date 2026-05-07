@@ -13,12 +13,15 @@ use Telnyx\RequestOptions;
 /**
  * @phpstan-import-type MessageShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Message
  * @phpstan-import-type ResponseFormatShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\ResponseFormat
+ * @phpstan-import-type StopShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Stop
  * @phpstan-import-type ToolShape from \Telnyx\AI\Chat\ChatCreateCompletionParams\Tool
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ChatContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param list<Message|MessageShape> $messages a list of the previous chat messages for context
@@ -38,6 +41,8 @@ interface ChatContract
      * @param float $n this will return multiple choices for you instead of a single chat completion
      * @param float $presencePenalty higher values will penalize the model from repeating the same output tokens
      * @param ResponseFormat|ResponseFormatShape $responseFormat Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
+     * @param int $seed if specified, the system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result
+     * @param StopShape $stop Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
      * @param bool $stream whether or not to stream data-only server-sent events as they become available
      * @param float $temperature Adjusts the "creativity" of the model. Lower values make the model more deterministic and repetitive, while higher values make the model more random and creative.
      * @param ToolChoice|value-of<ToolChoice> $toolChoice
@@ -69,6 +74,8 @@ interface ChatContract
         ?float $n = null,
         float $presencePenalty = 0,
         ResponseFormat|array|null $responseFormat = null,
+        ?int $seed = null,
+        string|array|null $stop = null,
         bool $stream = false,
         float $temperature = 0.1,
         ToolChoice|string|null $toolChoice = null,

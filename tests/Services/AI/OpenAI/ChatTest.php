@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Services\AI;
+namespace Tests\Services\AI\OpenAI;
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -34,7 +34,7 @@ final class ChatTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->chat->createCompletion(
+        $result = $this->client->ai->openai->chat->createCompletion(
             messages: [
                 ['content' => 'You are a friendly chatbot.', 'role' => 'system'],
                 ['content' => 'Hello, world!', 'role' => 'user'],
@@ -52,7 +52,7 @@ final class ChatTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->chat->createCompletion(
+        $result = $this->client->ai->openai->chat->createCompletion(
             messages: [
                 ['content' => 'You are a friendly chatbot.', 'role' => 'system'],
                 ['content' => 'Hello, world!', 'role' => 'user'],

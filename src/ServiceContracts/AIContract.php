@@ -15,6 +15,8 @@ use Telnyx\RequestOptions;
 interface AIContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param RequestOpts|null $requestOptions
