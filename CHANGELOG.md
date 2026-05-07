@@ -1,5 +1,36 @@
 # Changelog
 
+## 7.42.0 (2026-05-07)
+
+Full Changelog: [v7.41.0...v7.42.0](https://github.com/team-telnyx/telnyx-php/compare/v7.41.0...v7.42.0)
+
+### Features
+
+* Add Speechmatics provider to standalone STT spec ([7602e3f](https://github.com/team-telnyx/telnyx-php/commit/7602e3fd668fba869a792f3eff9455db1b53085b))
+* Ai-assistant: update scheduled events api ([aa86a87](https://github.com/team-telnyx/telnyx-php/commit/aa86a8754a24fe3fc08892e092a537dca810d6ff))
+* Ai-assistants: support pattern in canary deploy ([1affcc3](https://github.com/team-telnyx/telnyx-php/commit/1affcc37f3f95b5c61a7452d6e19f4f198eb40e2))
+* **api:** manual updates ([a2857d7](https://github.com/team-telnyx/telnyx-php/commit/a2857d756a863b3c9b6c4e41d06506c12789c8d1))
+* **api:** manual updates ([bdcdcba](https://github.com/team-telnyx/telnyx-php/commit/bdcdcba60a6638eda49cffd247ff2f3002bd20d2))
+* inference: expose chat completions and models under /ai/openai ([e3e01d5](https://github.com/team-telnyx/telnyx-php/commit/e3e01d5bf5bdc482fe44320df07b39abbdd9529f))
+* MSG-9000: document duplicate-vetting rejection on order brand external vetting ([cceb596](https://github.com/team-telnyx/telnyx-php/commit/cceb59662ca4994f5abd1bb8320bed49ec8f7c6a))
+
+
+### Bug Fixes
+
+* **release:** use canonical GitHub URL in Packagist publish script ([3579242](https://github.com/team-telnyx/telnyx-php/commit/35792420dbd716e41de389c0fb069f287461911c))
+* revert stainless.yml changes from ad4f13c ([b1cf1f2](https://github.com/team-telnyx/telnyx-php/commit/b1cf1f20fd88ea29ce5677a5b32db24c08023013))
+
+
+### Reverts
+
+* restore stainless.yml from before 9853597 ([2fda88a](https://github.com/team-telnyx/telnyx-php/commit/2fda88a93f5c8e7d7163aa51d7d058815fe5997a))
+
+
+### Documentation
+
+* add UAC connection OpenAPI docs ([dadfc72](https://github.com/team-telnyx/telnyx-php/commit/dadfc728d2ad15521f658432e58cf79b55cfe599))
+* update gather_using_ai transcription models ([1528d68](https://github.com/team-telnyx/telnyx-php/commit/1528d68579a8cedb49885cafe216e6107cf1ec6e))
+
 ## 7.41.0 (2026-05-05)
 
 Full Changelog: [v7.40.1...v7.41.0](https://github.com/team-telnyx/telnyx-php/compare/v7.40.1...v7.41.0)
