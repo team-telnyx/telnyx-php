@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.44.0 (2026-05-08)
+
+Full Changelog: [v7.43.0...v7.44.0](https://github.com/team-telnyx/telnyx-php/compare/v7.43.0...v7.44.0)
+
+### Features
+
+* AI-2294: document /ai/openai/models response and refresh LLM examples ([5279ca6](https://github.com/team-telnyx/telnyx-php/commit/5279ca6f03b4048261d98e532c4b6f86e4bd7884))
+* Document per-endpoint media encryption for call control ([8c460d7](https://github.com/team-telnyx/telnyx-php/commit/8c460d7253a44603821c1536251098f4a37a24ab))
+
 ## 7.43.0 (2026-05-08)
 
 Full Changelog: [v7.42.1...v7.43.0](https://github.com/team-telnyx/telnyx-php/compare/v7.42.1...v7.43.0)
