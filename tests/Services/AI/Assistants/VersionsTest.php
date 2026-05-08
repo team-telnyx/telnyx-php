@@ -123,6 +123,7 @@ final class VersionsTest extends TestCase
                 ['integrationID' => 'integration_id', 'allowedList' => ['string']],
             ],
             interruptionSettings: [
+                'disableGreetingInterruption' => true,
                 'enable' => true,
                 'startSpeakingPlan' => [
                     'transcriptionEndpointingPlan' => [

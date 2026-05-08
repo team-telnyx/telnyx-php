@@ -14,6 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type StartSpeakingPlanShape from \Telnyx\AI\Assistants\StartSpeakingPlan
  *
  * @phpstan-type InferenceEmbeddingInterruptionSettingsShape = array{
+ *   disableGreetingInterruption?: bool|null,
  *   enable?: bool|null,
  *   startSpeakingPlan?: null|StartSpeakingPlan|StartSpeakingPlanShape,
  * }
@@ -22,6 +23,12 @@ final class InferenceEmbeddingInterruptionSettings implements BaseModel
 {
     /** @use SdkModel<InferenceEmbeddingInterruptionSettingsShape> */
     use SdkModel;
+
+    /**
+     * When true, disables user interruptions while the assistant greeting is playing.
+     */
+    #[Optional('disable_greeting_interruption')]
+    public ?bool $disableGreetingInterruption;
 
     /**
      * Whether users can interrupt the assistant while it is speaking.
@@ -48,13 +55,27 @@ final class InferenceEmbeddingInterruptionSettings implements BaseModel
      * @param StartSpeakingPlan|StartSpeakingPlanShape|null $startSpeakingPlan
      */
     public static function with(
+        ?bool $disableGreetingInterruption = null,
         ?bool $enable = null,
-        StartSpeakingPlan|array|null $startSpeakingPlan = null
+        StartSpeakingPlan|array|null $startSpeakingPlan = null,
     ): self {
         $self = new self;
 
+        null !== $disableGreetingInterruption && $self['disableGreetingInterruption'] = $disableGreetingInterruption;
         null !== $enable && $self['enable'] = $enable;
         null !== $startSpeakingPlan && $self['startSpeakingPlan'] = $startSpeakingPlan;
+
+        return $self;
+    }
+
+    /**
+     * When true, disables user interruptions while the assistant greeting is playing.
+     */
+    public function withDisableGreetingInterruption(
+        bool $disableGreetingInterruption
+    ): self {
+        $self = clone $this;
+        $self['disableGreetingInterruption'] = $disableGreetingInterruption;
 
         return $self;
     }
