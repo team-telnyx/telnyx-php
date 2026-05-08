@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.43.0 (2026-05-08)
+
+Full Changelog: [v7.42.1...v7.43.0](https://github.com/team-telnyx/telnyx-php/compare/v7.42.1...v7.43.0)
+
+### Features
+
+* AI-2289 add disable greeting interruption OpenAPI fields ([fa2fdb9](https://github.com/team-telnyx/telnyx-php/commit/fa2fdb9c030c8cd60c2e40f02e68040fe26cc937))
+
 ## 7.42.1 (2026-05-07)
 
 Full Changelog: [v7.42.0...v7.42.1](https://github.com/team-telnyx/telnyx-php/compare/v7.42.0...v7.42.1)

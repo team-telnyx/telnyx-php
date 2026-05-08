@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 <!-- x-release-please-start-version -->
 
 ```
-composer require "telnyx/telnyx-php 7.42.1"
+composer require "telnyx/telnyx-php 7.43.0"
 ```
 
 <!-- x-release-please-end -->
