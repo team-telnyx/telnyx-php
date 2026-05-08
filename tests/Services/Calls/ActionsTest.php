@@ -926,7 +926,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->transfer(
             'call_control_id',
-            to: '+18005550100 or sip:username@sip.telnyx.com'
+            to: '+18005550100 or sip:username@sip.telnyx.com;secure=srtp',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -942,7 +942,7 @@ final class ActionsTest extends TestCase
 
         $result = $this->client->calls->actions->transfer(
             'call_control_id',
-            to: '+18005550100 or sip:username@sip.telnyx.com',
+            to: '+18005550100 or sip:username@sip.telnyx.com;secure=srtp',
             answeringMachineDetection: 'detect',
             answeringMachineDetectionConfig: [
                 'afterGreetingSilenceMillis' => 1000,

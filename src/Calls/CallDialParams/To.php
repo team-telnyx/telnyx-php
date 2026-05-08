@@ -10,7 +10,7 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\Core\Conversion\ListOf;
 
 /**
- * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings.
+ * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter.
  *
  * @phpstan-type ToVariants = string|list<string>
  * @phpstan-type ToShape = ToVariants
