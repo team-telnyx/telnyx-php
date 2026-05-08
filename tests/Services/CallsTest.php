@@ -45,7 +45,7 @@ final class CallsTest extends TestCase
         $result = $this->client->calls->dial(
             connectionID: '7267xxxxxxxxxxxxxx',
             from: '+18005550101',
-            to: '+18005550100 or sip:username@sip.telnyx.com',
+            to: '+18005550100 or sip:username@sip.telnyx.com;secure=srtp',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -62,7 +62,7 @@ final class CallsTest extends TestCase
         $result = $this->client->calls->dial(
             connectionID: '7267xxxxxxxxxxxxxx',
             from: '+18005550101',
-            to: '+18005550100 or sip:username@sip.telnyx.com',
+            to: '+18005550100 or sip:username@sip.telnyx.com;secure=srtp',
             answeringMachineDetection: 'detect',
             answeringMachineDetectionConfig: [
                 'afterGreetingSilenceMillis' => 1000,
