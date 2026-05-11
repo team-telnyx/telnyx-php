@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.46.0 (2026-05-11)
+
+Full Changelog: [v7.45.0...v7.46.0](https://github.com/team-telnyx/telnyx-php/compare/v7.45.0...v7.46.0)
+
+### Features
+
+* Fix OpenAI chat API reference links ([50375f2](https://github.com/team-telnyx/telnyx-php/commit/50375f297a711a14810ab623ee51fe2a7d80b8ce))
+
 ## 7.45.0 (2026-05-11)
 
 Full Changelog: [v7.44.0...v7.45.0](https://github.com/team-telnyx/telnyx-php/compare/v7.44.0...v7.45.0)
