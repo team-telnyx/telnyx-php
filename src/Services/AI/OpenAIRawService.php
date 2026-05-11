@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
+use Telnyx\AI\OpenAI\OpenAICreateResponseParams;
 use Telnyx\AI\OpenAI\OpenAIListModelsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
+use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\OpenAIRawContract;
@@ -21,6 +23,37 @@ final class OpenAIRawService implements OpenAIRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
+
+    /**
+     * @api
+     *
+     * Chat with a language model. This endpoint is consistent with the [OpenAI Chat Completions API](https://developers.openai.com/api/reference/resources/responses) and may be used with the OpenAI JS or Python SDK. Response id parameter is not supported at the moment. Use 'conversation' parameter to leverage persistent conversations feature.
+     *
+     * @param array{body: array<string,mixed>}|OpenAICreateResponseParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<array<string,mixed>>
+     *
+     * @throws APIException
+     */
+    public function createResponse(
+        array|OpenAICreateResponseParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = OpenAICreateResponseParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'ai/openai/responses',
+            body: $parsed['body'],
+            options: $options,
+            convert: new MapOf('mixed'),
+        );
+    }
 
     /**
      * @api
