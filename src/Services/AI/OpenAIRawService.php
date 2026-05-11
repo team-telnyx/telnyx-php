@@ -27,9 +27,21 @@ final class OpenAIRawService implements OpenAIRawContract
     /**
      * @api
      *
-     * Chat with a language model. This endpoint is consistent with the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) and may be used with the OpenAI JS or Python SDK. Response id parameter is not supported at the moment. Use 'conversation' parameter to leverage persistent conversations feature.
+     * Create a response using Telnyx's OpenAI-compatible Responses API. This endpoint is compatible with the [OpenAI Responses API](https://developers.openai.com/api/reference/responses/overview) and may be used with the OpenAI JS or Python SDK by setting the base URL to `https://api.telnyx.com/v2/ai/openai`.
      *
-     * @param array{body: array<string,mixed>}|OpenAICreateResponseParams $params
+     * The `conversation` parameter refers to a Telnyx Conversation rather than an OpenAI-hosted conversation object. To persist a thread across turns, first [create a conversation](https://developers.telnyx.com/api-reference/conversations/create-a-conversation) with `POST /ai/conversations`, then pass that conversation's `id` in the Responses request as `conversation`. The endpoint appends the new input, assistant output, reasoning, and tool-call messages to that conversation. Reuse the same `conversation` id on subsequent Responses requests, including tool-result followups, so the model receives the prior context.
+     *
+     * If `conversation` is omitted, the request is processed without persisting messages to a Telnyx conversation. Use the Conversations API to manage history: [list conversations](https://developers.telnyx.com/api-reference/conversations/list-conversations) (optionally filtered by metadata), [fetch messages](https://developers.telnyx.com/api-reference/conversations/get-conversation-messages) for a conversation, and optionally [add messages](https://developers.telnyx.com/api-reference/conversations/create-message) outside the Responses flow.
+     *
+     * You can attach arbitrary metadata when creating a conversation (for example to tag the conversation's source, channel, or user) and later filter by it when listing conversations.
+     *
+     * @param array{
+     *   conversation?: string,
+     *   input?: mixed,
+     *   instructions?: string,
+     *   model?: string,
+     *   stream?: bool,
+     * }|OpenAICreateResponseParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>
@@ -49,7 +61,7 @@ final class OpenAIRawService implements OpenAIRawContract
         return $this->client->request(
             method: 'post',
             path: 'ai/openai/responses',
-            body: $parsed['body'],
+            body: (object) $parsed,
             options: $options,
             convert: new MapOf('mixed'),
         );

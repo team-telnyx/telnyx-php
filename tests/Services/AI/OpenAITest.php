@@ -35,24 +35,7 @@ final class OpenAITest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->openai->createResponse(
-            body: ['model' => 'bar', 'input' => 'bar']
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsArray($result);
-    }
-
-    #[Test]
-    public function testCreateResponseWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->openai->createResponse(
-            body: ['model' => 'bar', 'input' => 'bar']
-        );
+        $result = $this->client->ai->openai->createResponse();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertIsArray($result);
