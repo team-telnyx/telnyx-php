@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.47.0 (2026-05-11)
+
+Full Changelog: [v7.46.0...v7.47.0](https://github.com/team-telnyx/telnyx-php/compare/v7.46.0...v7.47.0)
+
+### Features
+
+* Clean up OpenAI responses API docs ([d7631b8](https://github.com/team-telnyx/telnyx-php/commit/d7631b80cd7f69a5affdb90cad60d815a07da860))
+
 ## 7.46.0 (2026-05-11)
 
 Full Changelog: [v7.45.0...v7.46.0](https://github.com/team-telnyx/telnyx-php/compare/v7.45.0...v7.46.0)
