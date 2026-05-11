@@ -18,6 +18,8 @@ use Telnyx\RequestOptions;
 interface AIRawContract
 {
     /**
+     * @deprecated
+     *
      * @api
      *
      * @param array<string,mixed>|AICreateResponseParams $params
