@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.45.0 (2026-05-11)
+
+Full Changelog: [v7.44.0...v7.45.0](https://github.com/team-telnyx/telnyx-php/compare/v7.44.0...v7.45.0)
+
+### Features
+
+* Responses endpoint ([93c4ce0](https://github.com/team-telnyx/telnyx-php/commit/93c4ce0779ae804339951b3c3a2f47b8734a197e))
+
 ## 7.44.0 (2026-05-08)
 
 Full Changelog: [v7.43.0...v7.44.0](https://github.com/team-telnyx/telnyx-php/compare/v7.43.0...v7.44.0)
