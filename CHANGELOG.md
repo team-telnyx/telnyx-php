@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.48.0 (2026-05-11)
+
+Full Changelog: [v7.47.0...v7.48.0](https://github.com/team-telnyx/telnyx-php/compare/v7.47.0...v7.48.0)
+
+### Features
+
+* AI-2312: document currency and unit in /models pricing schema ([f2df5ce](https://github.com/team-telnyx/telnyx-php/commit/f2df5ceb329d2408f8a1549631ed9c7177b8d2ab))
+
 ## 7.47.0 (2026-05-11)
 
 Full Changelog: [v7.46.0...v7.47.0](https://github.com/team-telnyx/telnyx-php/compare/v7.46.0...v7.47.0)
