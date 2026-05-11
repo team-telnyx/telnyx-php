@@ -7,6 +7,7 @@ namespace Telnyx;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 use Telnyx\Core\BaseClient;
+use Telnyx\Core\Implementation\StreamingHttpClient;
 use Telnyx\Core\Util;
 use Telnyx\Services\AccessIPAddressService;
 use Telnyx\Services\AccessIPRangesService;
@@ -1046,6 +1047,11 @@ class Client extends BaseClient
             ),
             $requestOptions,
         );
+
+        if (is_null($options->streamingTransporter)) {
+            assert(!is_null($options->transporter));
+            $options->streamingTransporter = new StreamingHttpClient($options->transporter);
+        }
 
         /** @var array<string, string|null> $headers */
         $headers = [
