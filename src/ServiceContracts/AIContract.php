@@ -15,6 +15,21 @@ use Telnyx\RequestOptions;
 interface AIContract
 {
     /**
+     * @api
+     *
+     * @param array<string,mixed> $body
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return array<string,mixed>
+     *
+     * @throws APIException
+     */
+    public function createResponse(
+        array $body,
+        RequestOptions|array|null $requestOptions = null
+    ): array;
+
+    /**
      * @deprecated
      *
      * @api

@@ -30,6 +30,36 @@ final class AITest extends TestCase
     }
 
     #[Test]
+    public function testCreateResponse(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->createResponse(
+            body: ['model' => 'bar', 'input' => 'bar']
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsArray($result);
+    }
+
+    #[Test]
+    public function testCreateResponseWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->createResponse(
+            body: ['model' => 'bar', 'input' => 'bar']
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsArray($result);
+    }
+
+    #[Test]
     public function testRetrieveModels(): void
     {
         if (UnsupportedMockTests::$skip) {
