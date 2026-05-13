@@ -24,6 +24,14 @@ use Telnyx\Texml\TexmlInitiateAICallParams\Trim;
 /**
  * Initiate an outbound AI call with warm-up support. Validates parameters, builds an internal TeXML with an AI Assistant configuration, encodes instructions into client state, and calls the dial API. The Twiml, Texml, and Url parameters are not allowed and will result in a 422 error.
  *
+ * **Expected callback events:**
+ *
+ * Status callbacks: `initiated`, `ringing`, `answered`, one terminal status (`completed`, `no-answer`, `busy`, `canceled`, or `failed`), then `analyzed` after post-call processing completes.
+ *
+ * Conversation callbacks: `conversation_created` and `conversation_ended`.
+ *
+ * Recording, AMD, transcription, and deepfake detection callbacks are only sent when those features are enabled.
+ *
  * @see Telnyx\Services\TexmlService::initiateAICall()
  *
  * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\TexmlInitiateAICallParams\CustomHeader
@@ -138,13 +146,13 @@ final class TexmlInitiateAICallParams implements BaseModel
     public ?string $callerID;
 
     /**
-     * URL destination for Telnyx to send conversation callback events to.
+     * URL destination for Telnyx to send AI conversation callback events for this call. Events include `conversation_created` and `conversation_ended`.
      */
     #[Optional('ConversationCallback')]
     public ?string $conversationCallback;
 
     /**
-     * HTTP request type used for `ConversationCallback`.
+     * HTTP request type used for `ConversationCallback` and `ConversationCallbacks`.
      *
      * @var value-of<ConversationCallbackMethod>|null $conversationCallbackMethod
      */
@@ -155,7 +163,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     public ?string $conversationCallbackMethod;
 
     /**
-     * An array of URL destinations for conversation callback events.
+     * Array of URL destinations for AI conversation callback events for this call. Events include `conversation_created` and `conversation_ended`.
      *
      * @var list<string>|null $conversationCallbacks
      */
@@ -300,19 +308,19 @@ final class TexmlInitiateAICallParams implements BaseModel
     public ?string $sipRegion;
 
     /**
-     * URL destination for Telnyx to send status callback events to for the call.
+     * URL destination for Telnyx to send status callback events for this AI call. When provided, this per-call value overrides the status callback URL configured on the TeXML application/connection.
      */
     #[Optional('StatusCallback')]
     public ?string $statusCallback;
 
     /**
-     * The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space. Valid values: initiated, ringing, answered, completed.
+     * The status callback events for which Telnyx should send a webhook for this AI call. Multiple events can be defined when separated by a space. Valid values: initiated, ringing, answered, completed, no-answer, busy, canceled, failed, analyzed. When provided, this per-call value overrides the status callback events configured on the TeXML application/connection.
      */
     #[Optional('StatusCallbackEvent')]
     public ?string $statusCallbackEvent;
 
     /**
-     * HTTP request type used for `StatusCallback`.
+     * HTTP request type used for `StatusCallback` and `StatusCallbacks` for this AI call. When provided, this per-call value overrides the status callback method configured on the TeXML application/connection.
      *
      * @var value-of<StatusCallbackMethod>|null $statusCallbackMethod
      */
@@ -320,7 +328,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     public ?string $statusCallbackMethod;
 
     /**
-     * An array of URL destinations for Telnyx to send status callback events to for the call.
+     * Array of URL destinations for Telnyx to send status callback events for this AI call. When provided, these per-call values override the status callback URL configured on the TeXML application/connection.
      *
      * @var list<string>|null $statusCallbacks
      */
@@ -583,7 +591,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     }
 
     /**
-     * URL destination for Telnyx to send conversation callback events to.
+     * URL destination for Telnyx to send AI conversation callback events for this call. Events include `conversation_created` and `conversation_ended`.
      */
     public function withConversationCallback(string $conversationCallback): self
     {
@@ -594,7 +602,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     }
 
     /**
-     * HTTP request type used for `ConversationCallback`.
+     * HTTP request type used for `ConversationCallback` and `ConversationCallbacks`.
      *
      * @param ConversationCallbackMethod|value-of<ConversationCallbackMethod> $conversationCallbackMethod
      */
@@ -608,7 +616,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     }
 
     /**
-     * An array of URL destinations for conversation callback events.
+     * Array of URL destinations for AI conversation callback events for this call. Events include `conversation_created` and `conversation_ended`.
      *
      * @param list<string> $conversationCallbacks
      */
@@ -866,7 +874,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     }
 
     /**
-     * URL destination for Telnyx to send status callback events to for the call.
+     * URL destination for Telnyx to send status callback events for this AI call. When provided, this per-call value overrides the status callback URL configured on the TeXML application/connection.
      */
     public function withStatusCallback(string $statusCallback): self
     {
@@ -877,7 +885,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     }
 
     /**
-     * The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space. Valid values: initiated, ringing, answered, completed.
+     * The status callback events for which Telnyx should send a webhook for this AI call. Multiple events can be defined when separated by a space. Valid values: initiated, ringing, answered, completed, no-answer, busy, canceled, failed, analyzed. When provided, this per-call value overrides the status callback events configured on the TeXML application/connection.
      */
     public function withStatusCallbackEvent(string $statusCallbackEvent): self
     {
@@ -888,7 +896,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     }
 
     /**
-     * HTTP request type used for `StatusCallback`.
+     * HTTP request type used for `StatusCallback` and `StatusCallbacks` for this AI call. When provided, this per-call value overrides the status callback method configured on the TeXML application/connection.
      *
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod
      */
@@ -902,7 +910,7 @@ final class TexmlInitiateAICallParams implements BaseModel
     }
 
     /**
-     * An array of URL destinations for Telnyx to send status callback events to for the call.
+     * Array of URL destinations for Telnyx to send status callback events for this AI call. When provided, these per-call values override the status callback URL configured on the TeXML application/connection.
      *
      * @param list<string> $statusCallbacks
      */
