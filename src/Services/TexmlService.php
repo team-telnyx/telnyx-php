@@ -56,6 +56,14 @@ final class TexmlService implements TexmlContract
      *
      * Initiate an outbound AI call with warm-up support. Validates parameters, builds an internal TeXML with an AI Assistant configuration, encodes instructions into client state, and calls the dial API. The Twiml, Texml, and Url parameters are not allowed and will result in a 422 error.
      *
+     * **Expected callback events:**
+     *
+     * Status callbacks: `initiated`, `ringing`, `answered`, one terminal status (`completed`, `no-answer`, `busy`, `canceled`, or `failed`), then `analyzed` after post-call processing completes.
+     *
+     * Conversation callbacks: `conversation_created` and `conversation_ended`.
+     *
+     * Recording, AMD, transcription, and deepfake detection callbacks are only sent when those features are enabled.
+     *
      * @param string $connectionID the ID of the TeXML connection to use for the call
      * @param string $aiAssistantID the ID of the AI assistant to use for the call
      * @param string $from The phone number of the party initiating the call. Phone numbers are formatted with a `+` and country code.
@@ -66,9 +74,9 @@ final class TexmlService implements TexmlContract
      * @param string $asyncAmdStatusCallback URL destination for Telnyx to send AMD callback events to for the call
      * @param AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod> $asyncAmdStatusCallbackMethod HTTP request type used for `AsyncAmdStatusCallback`
      * @param string $callerID To be used as the caller id name (SIP From Display Name) presented to the destination (`To` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and `-_~!.+` special characters. If omitted, the display name will be the same as the number in the `From` field.
-     * @param string $conversationCallback URL destination for Telnyx to send conversation callback events to
-     * @param ConversationCallbackMethod|value-of<ConversationCallbackMethod> $conversationCallbackMethod HTTP request type used for `ConversationCallback`
-     * @param list<string> $conversationCallbacks an array of URL destinations for conversation callback events
+     * @param string $conversationCallback URL destination for Telnyx to send AI conversation callback events for this call. Events include `conversation_created` and `conversation_ended`.
+     * @param ConversationCallbackMethod|value-of<ConversationCallbackMethod> $conversationCallbackMethod HTTP request type used for `ConversationCallback` and `ConversationCallbacks`
+     * @param list<string> $conversationCallbacks Array of URL destinations for AI conversation callback events for this call. Events include `conversation_created` and `conversation_ended`.
      * @param list<CustomHeader|CustomHeaderShape> $customHeaders Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
      * @param DetectionMode|value-of<DetectionMode> $detectionMode allows you to choose between Premium and Standard detections
      * @param MachineDetection|value-of<MachineDetection> $machineDetection enables Answering Machine Detection
@@ -89,10 +97,10 @@ final class TexmlService implements TexmlContract
      * @param string $sipAuthPassword the password to use for SIP authentication
      * @param string $sipAuthUsername the username to use for SIP authentication
      * @param SipRegion|value-of<SipRegion> $sipRegion defines the SIP region to be used for the call
-     * @param string $statusCallback URL destination for Telnyx to send status callback events to for the call
-     * @param string $statusCallbackEvent The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space. Valid values: initiated, ringing, answered, completed.
-     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
-     * @param list<string> $statusCallbacks an array of URL destinations for Telnyx to send status callback events to for the call
+     * @param string $statusCallback URL destination for Telnyx to send status callback events for this AI call. When provided, this per-call value overrides the status callback URL configured on the TeXML application/connection.
+     * @param string $statusCallbackEvent The status callback events for which Telnyx should send a webhook for this AI call. Multiple events can be defined when separated by a space. Valid values: initiated, ringing, answered, completed, no-answer, busy, canceled, failed, analyzed. When provided, this per-call value overrides the status callback events configured on the TeXML application/connection.
+     * @param StatusCallbackMethod|value-of<StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback` and `StatusCallbacks` for this AI call. When provided, this per-call value overrides the status callback method configured on the TeXML application/connection.
+     * @param list<string> $statusCallbacks Array of URL destinations for Telnyx to send status callback events for this AI call. When provided, these per-call values override the status callback URL configured on the TeXML application/connection.
      * @param int $timeLimit The maximum duration of the call in seconds. The minimum value is 30 and the maximum value is 14400 (4 hours). Default is 14400 seconds.
      * @param int $timeoutSeconds The number of seconds to wait for the called party to answer the call before the call is canceled. The minimum value is 5 and the maximum value is 120. Default is 30 seconds.
      * @param Trim|value-of<Trim> $trim Whether to trim any leading and trailing silence from the recording. Defaults to `trim-silence`.

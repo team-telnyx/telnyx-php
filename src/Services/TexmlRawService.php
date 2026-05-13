@@ -44,6 +44,14 @@ final class TexmlRawService implements TexmlRawContract
      *
      * Initiate an outbound AI call with warm-up support. Validates parameters, builds an internal TeXML with an AI Assistant configuration, encodes instructions into client state, and calls the dial API. The Twiml, Texml, and Url parameters are not allowed and will result in a 422 error.
      *
+     * **Expected callback events:**
+     *
+     * Status callbacks: `initiated`, `ringing`, `answered`, one terminal status (`completed`, `no-answer`, `busy`, `canceled`, or `failed`), then `analyzed` after post-call processing completes.
+     *
+     * Conversation callbacks: `conversation_created` and `conversation_ended`.
+     *
+     * Recording, AMD, transcription, and deepfake detection callbacks are only sent when those features are enabled.
+     *
      * @param string $connectionID the ID of the TeXML connection to use for the call
      * @param array{
      *   aiAssistantID: string,
