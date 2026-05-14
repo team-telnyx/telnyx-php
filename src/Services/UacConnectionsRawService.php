@@ -17,10 +17,12 @@ use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\UacConnectionsRawContract;
-use Telnyx\UacConnections\UacConnection;
 use Telnyx\UacConnections\UacConnectionCreateParams;
+use Telnyx\UacConnections\UacConnectionCreateParams\ExternalUacSettings;
 use Telnyx\UacConnections\UacConnectionCreateParams\Inbound;
+use Telnyx\UacConnections\UacConnectionCreateParams\InternalUacSettings;
 use Telnyx\UacConnections\UacConnectionCreateParams\NoiseSuppression;
+use Telnyx\UacConnections\UacConnectionCreateParams\Outbound;
 use Telnyx\UacConnections\UacConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\UacConnections\UacConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\UacConnections\UacConnectionDeleteResponse;
@@ -28,24 +30,25 @@ use Telnyx\UacConnections\UacConnectionGetResponse;
 use Telnyx\UacConnections\UacConnectionListParams;
 use Telnyx\UacConnections\UacConnectionListParams\Filter;
 use Telnyx\UacConnections\UacConnectionListParams\Sort;
+use Telnyx\UacConnections\UacConnectionListResponse;
 use Telnyx\UacConnections\UacConnectionNewResponse;
 use Telnyx\UacConnections\UacConnectionUpdateParams;
 use Telnyx\UacConnections\UacConnectionUpdateResponse;
-use Telnyx\UacConnections\UacExternalSettings;
-use Telnyx\UacConnections\UacInternalSettings;
-use Telnyx\UacConnections\UacOutbound;
 
 /**
  * UAC connection operations.
  *
+ * @phpstan-import-type ExternalUacSettingsShape from \Telnyx\UacConnections\UacConnectionCreateParams\ExternalUacSettings
  * @phpstan-import-type InboundShape from \Telnyx\UacConnections\UacConnectionCreateParams\Inbound
+ * @phpstan-import-type InternalUacSettingsShape from \Telnyx\UacConnections\UacConnectionCreateParams\InternalUacSettings
+ * @phpstan-import-type OutboundShape from \Telnyx\UacConnections\UacConnectionCreateParams\Outbound
+ * @phpstan-import-type ExternalUacSettingsShape from \Telnyx\UacConnections\UacConnectionUpdateParams\ExternalUacSettings as ExternalUacSettingsShape1
  * @phpstan-import-type InboundShape from \Telnyx\UacConnections\UacConnectionUpdateParams\Inbound as InboundShape1
+ * @phpstan-import-type InternalUacSettingsShape from \Telnyx\UacConnections\UacConnectionUpdateParams\InternalUacSettings as InternalUacSettingsShape1
+ * @phpstan-import-type OutboundShape from \Telnyx\UacConnections\UacConnectionUpdateParams\Outbound as OutboundShape1
  * @phpstan-import-type FilterShape from \Telnyx\UacConnections\UacConnectionListParams\Filter
- * @phpstan-import-type UacExternalSettingsShape from \Telnyx\UacConnections\UacExternalSettings
- * @phpstan-import-type UacInternalSettingsShape from \Telnyx\UacConnections\UacInternalSettings
  * @phpstan-import-type ConnectionJitterBufferShape from \Telnyx\ConnectionJitterBuffer
  * @phpstan-import-type ConnectionNoiseSuppressionDetailsShape from \Telnyx\ConnectionNoiseSuppressionDetails
- * @phpstan-import-type UacOutboundShape from \Telnyx\UacConnections\UacOutbound
  * @phpstan-import-type ConnectionRtcpSettingsShape from \Telnyx\CredentialConnections\ConnectionRtcpSettings
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -72,15 +75,15 @@ final class UacConnectionsRawService implements UacConnectionsRawContract
      *   dtmfType?: DtmfType|value-of<DtmfType>,
      *   encodeContactHeaderEnabled?: bool,
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
-     *   externalUacSettings?: UacExternalSettings|UacExternalSettingsShape,
+     *   externalUacSettings?: ExternalUacSettings|ExternalUacSettingsShape,
      *   inbound?: Inbound|InboundShape,
-     *   internalUacSettings?: UacInternalSettings|UacInternalSettingsShape,
+     *   internalUacSettings?: InternalUacSettings|InternalUacSettingsShape,
      *   iosPushCredentialID?: string|null,
      *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
      *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
-     *   outbound?: UacOutbound|UacOutboundShape,
+     *   outbound?: Outbound|OutboundShape,
      *   password?: string,
      *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
      *   sipUriCallingPreference?: SipUriCallingPreference|value-of<SipUriCallingPreference>,
@@ -157,15 +160,15 @@ final class UacConnectionsRawService implements UacConnectionsRawContract
      *   dtmfType?: DtmfType|value-of<DtmfType>,
      *   encodeContactHeaderEnabled?: bool,
      *   encryptedMedia?: EncryptedMedia|value-of<EncryptedMedia>|null,
-     *   externalUacSettings?: UacExternalSettings|UacExternalSettingsShape,
+     *   externalUacSettings?: UacConnectionUpdateParams\ExternalUacSettings|ExternalUacSettingsShape1,
      *   inbound?: UacConnectionUpdateParams\Inbound|InboundShape1,
-     *   internalUacSettings?: UacInternalSettings|UacInternalSettingsShape,
+     *   internalUacSettings?: UacConnectionUpdateParams\InternalUacSettings|InternalUacSettingsShape1,
      *   iosPushCredentialID?: string|null,
      *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
      *   noiseSuppression?: UacConnectionUpdateParams\NoiseSuppression|value-of<UacConnectionUpdateParams\NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
-     *   outbound?: UacOutbound|UacOutboundShape,
+     *   outbound?: UacConnectionUpdateParams\Outbound|OutboundShape1,
      *   password?: string,
      *   rtcpSettings?: ConnectionRtcpSettings|ConnectionRtcpSettingsShape,
      *   sipUriCallingPreference?: UacConnectionUpdateParams\SipUriCallingPreference|value-of<UacConnectionUpdateParams\SipUriCallingPreference>,
@@ -215,7 +218,7 @@ final class UacConnectionsRawService implements UacConnectionsRawContract
      * }|UacConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<UacConnection>>
+     * @return BaseResponse<DefaultFlatPagination<UacConnectionListResponse>>
      *
      * @throws APIException
      */
@@ -237,7 +240,7 @@ final class UacConnectionsRawService implements UacConnectionsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: UacConnection::class,
+            convert: UacConnectionListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

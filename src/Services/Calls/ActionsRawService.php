@@ -63,6 +63,10 @@ use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription;
+use Telnyx\Calls\Actions\ActionStartConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams;
 use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
 use Telnyx\Calls\Actions\ActionStartForkingResponse;
@@ -93,6 +97,8 @@ use Telnyx\Calls\Actions\ActionStartTranscriptionParams;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
+use Telnyx\Calls\Actions\ActionStopConversationRelayParams;
+use Telnyx\Calls\Actions\ActionStopConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStopForkingParams;
 use Telnyx\Calls\Actions\ActionStopForkingResponse;
 use Telnyx\Calls\Actions\ActionStopGatherParams;
@@ -123,7 +129,6 @@ use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateParams;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
-use Telnyx\Calls\Actions\InterruptionSettings;
 use Telnyx\Calls\Actions\TranscriptionConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CallAssistantRequest;
@@ -158,6 +163,12 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant as ParticipantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
+ * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
+ * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
+ * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Participant as ParticipantShape2
+ * @phpstan-import-type TranscriptionShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -169,7 +180,7 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
- * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings as InterruptionSettingsShape1
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
  * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
  */
@@ -463,7 +474,7 @@ final class ActionsRawService implements ActionsRawContract
      *   commandID?: string,
      *   gatherEndedSpeech?: string,
      *   greeting?: string,
-     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
+     *   interruptionSettings?: \Telnyx\Calls\Actions\InterruptionSettings|InterruptionSettingsShape1,
      *   language?: value-of<GoogleTranscriptionLanguage>,
      *   messageHistory?: list<MessageHistory|MessageHistoryShape>,
      *   sendMessageHistoryUpdates?: bool,
@@ -1035,7 +1046,7 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   greeting?: string,
-     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
+     *   interruptionSettings?: \Telnyx\Calls\Actions\InterruptionSettings|InterruptionSettingsShape1,
      *   messageHistory?: list<MessageHistoryShape1>,
      *   participants?: list<ActionStartAIAssistantParams\Participant|ParticipantShape1>,
      *   sendMessageHistoryUpdates?: bool,
@@ -1066,6 +1077,61 @@ final class ActionsRawService implements ActionsRawContract
             body: (object) $parsed,
             options: $options,
             convert: ActionStartAIAssistantResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Start a Conversation Relay session on an active call. Conversation Relay connects the call audio to your WebSocket so your application can exchange realtime messages with the caller while Telnyx handles speech recognition and text-to-speech. Only one AI Assistant or Conversation Relay session can be active on a call at a time.
+     *
+     * **Expected Webhooks:**
+     *
+     * - `conversation_relay.disconnected`
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array{
+     *   conversationRelayURL: string,
+     *   assistant?: ActionStartConversationRelayParams\Assistant|AssistantShape1,
+     *   clientState?: string,
+     *   commandID?: string,
+     *   conversationRelayDtmfDetection?: bool,
+     *   greeting?: string,
+     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
+     *   language?: string,
+     *   languages?: list<ActionStartConversationRelayParams\Language|LanguageShape>,
+     *   participants?: list<ActionStartConversationRelayParams\Participant|ParticipantShape2>,
+     *   sendMessageHistoryUpdates?: bool,
+     *   transcription?: Transcription|TranscriptionShape,
+     *   transcriptionLanguage?: string,
+     *   ttsLanguage?: string,
+     *   userResponseTimeoutMs?: int,
+     *   voice?: string,
+     *   voiceSettings?: VoiceSettingsShape4,
+     * }|ActionStartConversationRelayParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionStartConversationRelayResponse>
+     *
+     * @throws APIException
+     */
+    public function startConversationRelay(
+        string $callControlID,
+        array|ActionStartConversationRelayParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionStartConversationRelayParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['calls/%1$s/actions/conversation_relay_start', $callControlID],
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionStartConversationRelayResponse::class,
         );
     }
 
@@ -1439,6 +1505,41 @@ final class ActionsRawService implements ActionsRawContract
             body: (object) $parsed,
             options: $options,
             convert: ActionStopAIAssistantResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Stop the active Conversation Relay session on a call.
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array{
+     *   clientState?: string, commandID?: string
+     * }|ActionStopConversationRelayParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionStopConversationRelayResponse>
+     *
+     * @throws APIException
+     */
+    public function stopConversationRelay(
+        string $callControlID,
+        array|ActionStopConversationRelayParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ActionStopConversationRelayParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['calls/%1$s/actions/conversation_relay_stop', $callControlID],
+            body: (object) $parsed,
+            options: $options,
+            convert: ActionStopConversationRelayResponse::class,
         );
     }
 
