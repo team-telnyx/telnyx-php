@@ -22,6 +22,7 @@ use Telnyx\Webhooks\CallConversationEnded\Payload\CallingPartyType;
  *   durationSec?: int|null,
  *   from?: string|null,
  *   llmModel?: string|null,
+ *   reason?: string|null,
  *   sttModel?: string|null,
  *   to?: string|null,
  *   ttsModelID?: string|null,
@@ -103,6 +104,12 @@ final class Payload implements BaseModel
     public ?string $llmModel;
 
     /**
+     * Reason the conversation ended. For Conversation Relay, `customer_disconnect` indicates that the customer WebSocket disconnected.
+     */
+    #[Optional(nullable: true)]
+    public ?string $reason;
+
+    /**
      * The speech-to-text model used in the conversation.
      */
     #[Optional('stt_model')]
@@ -156,6 +163,7 @@ final class Payload implements BaseModel
         ?int $durationSec = null,
         ?string $from = null,
         ?string $llmModel = null,
+        ?string $reason = null,
         ?string $sttModel = null,
         ?string $to = null,
         ?string $ttsModelID = null,
@@ -175,6 +183,7 @@ final class Payload implements BaseModel
         null !== $durationSec && $self['durationSec'] = $durationSec;
         null !== $from && $self['from'] = $from;
         null !== $llmModel && $self['llmModel'] = $llmModel;
+        null !== $reason && $self['reason'] = $reason;
         null !== $sttModel && $self['sttModel'] = $sttModel;
         null !== $to && $self['to'] = $to;
         null !== $ttsModelID && $self['ttsModelID'] = $ttsModelID;
@@ -304,6 +313,17 @@ final class Payload implements BaseModel
     {
         $self = clone $this;
         $self['llmModel'] = $llmModel;
+
+        return $self;
+    }
+
+    /**
+     * Reason the conversation ended. For Conversation Relay, `customer_disconnect` indicates that the customer WebSocket disconnected.
+     */
+    public function withReason(?string $reason): self
+    {
+        $self = clone $this;
+        $self['reason'] = $reason;
 
         return $self;
     }
