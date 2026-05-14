@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\OpenAI;
 
-use Telnyx\AI\ModelMetadata;
+use Telnyx\AI\OpenAI\OpenAIListModelsResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type ModelMetadataShape from \Telnyx\AI\ModelMetadata
+ * @phpstan-import-type DataShape from \Telnyx\AI\OpenAI\OpenAIListModelsResponse\Data
  *
  * @phpstan-type OpenAIListModelsResponseShape = array{
- *   data: list<ModelMetadata|ModelMetadataShape>, object?: string|null
+ *   data: list<Data|DataShape>, object?: string|null
  * }
  */
 final class OpenAIListModelsResponse implements BaseModel
@@ -22,8 +22,8 @@ final class OpenAIListModelsResponse implements BaseModel
     /** @use SdkModel<OpenAIListModelsResponseShape> */
     use SdkModel;
 
-    /** @var list<ModelMetadata> $data */
-    #[Required(list: ModelMetadata::class)]
+    /** @var list<Data> $data */
+    #[Required(list: Data::class)]
     public array $data;
 
     #[Optional]
@@ -53,7 +53,7 @@ final class OpenAIListModelsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ModelMetadata|ModelMetadataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public static function with(array $data, ?string $object = null): self
     {
@@ -67,7 +67,7 @@ final class OpenAIListModelsResponse implements BaseModel
     }
 
     /**
-     * @param list<ModelMetadata|ModelMetadataShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

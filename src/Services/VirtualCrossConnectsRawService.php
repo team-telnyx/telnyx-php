@@ -11,13 +11,13 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VirtualCrossConnectsRawContract;
-use Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectCreateParams\CloudProvider;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectListParams\Filter;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateParams;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
@@ -158,7 +158,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
      * }|VirtualCrossConnectListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VirtualCrossConnectCombined>>
+     * @return BaseResponse<DefaultFlatPagination<VirtualCrossConnectListResponse>>
      *
      * @throws APIException
      */
@@ -180,7 +180,7 @@ final class VirtualCrossConnectsRawService implements VirtualCrossConnectsRawCon
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: VirtualCrossConnectCombined::class,
+            convert: VirtualCrossConnectListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

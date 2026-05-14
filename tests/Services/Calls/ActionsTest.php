@@ -24,6 +24,7 @@ use Telnyx\Calls\Actions\ActionSendDtmfResponse;
 use Telnyx\Calls\Actions\ActionSendSipInfoResponse;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
+use Telnyx\Calls\Actions\ActionStartConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStartForkingResponse;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionResponse;
 use Telnyx\Calls\Actions\ActionStartPlaybackResponse;
@@ -32,6 +33,7 @@ use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
+use Telnyx\Calls\Actions\ActionStopConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStopForkingResponse;
 use Telnyx\Calls\Actions\ActionStopGatherResponse;
 use Telnyx\Calls\Actions\ActionStopNoiseSuppressionResponse;
@@ -631,6 +633,86 @@ final class ActionsTest extends TestCase
     }
 
     #[Test]
+    public function testStartConversationRelay(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->calls->actions->startConversationRelay(
+            'call_control_id',
+            conversationRelayURL: 'wss://example.com/conversation-relay',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionStartConversationRelayResponse::class,
+            $result
+        );
+    }
+
+    #[Test]
+    public function testStartConversationRelayWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->calls->actions->startConversationRelay(
+            'call_control_id',
+            conversationRelayURL: 'wss://example.com/conversation-relay',
+            assistant: [
+                'dynamicVariables' => ['customer_id' => '12345', 'tier' => 'premium'],
+            ],
+            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
+            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
+            conversationRelayDtmfDetection: true,
+            greeting: 'Hi! Ask me anything!',
+            interruptionSettings: [
+                'enable' => true,
+                'interruptible' => 'speech',
+                'interruptibleGreeting' => 'speech',
+                'welcomeGreetingInterruptible' => 'speech',
+            ],
+            language: 'en-US',
+            languages: [
+                [
+                    'code' => 'en-US',
+                    'speechModel' => 'nova-2',
+                    'transcriptionProvider' => 'Deepgram',
+                    'ttsProvider' => 'ElevenLabs',
+                    'voice' => 'alice',
+                ],
+            ],
+            participants: [
+                [
+                    'id' => 'v3:abc123def456',
+                    'role' => 'user',
+                    'name' => 'John Doe',
+                    'onHangup' => 'continue_conversation',
+                ],
+            ],
+            sendMessageHistoryUpdates: true,
+            transcription: [
+                'language' => 'en-US', 'model' => 'nova-2', 'provider' => 'deepgram',
+            ],
+            transcriptionLanguage: 'en-US',
+            ttsLanguage: 'es',
+            userResponseTimeoutMs: 10000,
+            voice: 'Telnyx.KokoroTTS.af',
+            voiceSettings: [
+                'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
+            ],
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionStartConversationRelayResponse::class,
+            $result
+        );
+    }
+
+    #[Test]
     public function testStartForking(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -775,6 +857,24 @@ final class ActionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionStopAIAssistantResponse::class, $result);
+    }
+
+    #[Test]
+    public function testStopConversationRelay(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->calls->actions->stopConversationRelay(
+            'call_control_id'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            ActionStopConversationRelayResponse::class,
+            $result
+        );
     }
 
     #[Test]
