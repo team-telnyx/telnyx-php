@@ -7,13 +7,12 @@ namespace Telnyx\PublicInternetGateways;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse\Data
+ * @phpstan-import-type PublicInternetGatewayReadShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayRead
  *
  * @phpstan-type PublicInternetGatewayNewResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|PublicInternetGatewayRead|PublicInternetGatewayReadShape
  * }
  */
 final class PublicInternetGatewayNewResponse implements BaseModel
@@ -22,7 +21,7 @@ final class PublicInternetGatewayNewResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?PublicInternetGatewayRead $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class PublicInternetGatewayNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param PublicInternetGatewayRead|PublicInternetGatewayReadShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        PublicInternetGatewayRead|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class PublicInternetGatewayNewResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param PublicInternetGatewayRead|PublicInternetGatewayReadShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(PublicInternetGatewayRead|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

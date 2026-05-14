@@ -16,8 +16,8 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceRead;
 
 /**
  * WireGuard Interface operations.
@@ -104,7 +104,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      * }|WireguardInterfaceListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WireguardInterfaceListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WireguardInterfaceRead>>
      *
      * @throws APIException
      */
@@ -126,7 +126,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: WireguardInterfaceListResponse::class,
+            convert: WireguardInterfaceRead::class,
             page: DefaultFlatPagination::class,
         );
     }
