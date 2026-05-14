@@ -1297,7 +1297,7 @@ final class ActionsService implements ActionsContract
      *
      * **Expected Webhooks:**
      *
-     * - `conversation_relay.disconnected`
+     * - `call.conversation.ended` - Sent when the Conversation Relay session ends. If the customer WebSocket disconnects, the webhook payload `reason` is `customer_disconnect`.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $conversationRelayURL WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
