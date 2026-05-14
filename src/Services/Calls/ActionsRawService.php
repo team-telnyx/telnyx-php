@@ -1087,7 +1087,7 @@ final class ActionsRawService implements ActionsRawContract
      *
      * **Expected Webhooks:**
      *
-     * - `conversation_relay.disconnected`
+     * - `call.conversation.ended` - Sent when the Conversation Relay session ends. If the customer WebSocket disconnects, the webhook payload `reason` is `customer_disconnect`.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
