@@ -7,12 +7,13 @@ namespace Telnyx\WireguardInterfaces;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse\Data;
 
 /**
- * @phpstan-import-type WireguardInterfaceReadShape from \Telnyx\WireguardInterfaces\WireguardInterfaceRead
+ * @phpstan-import-type DataShape from \Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse\Data
  *
  * @phpstan-type WireguardInterfaceDeleteResponseShape = array{
- *   data?: null|WireguardInterfaceRead|WireguardInterfaceReadShape
+ *   data?: null|Data|DataShape
  * }
  */
 final class WireguardInterfaceDeleteResponse implements BaseModel
@@ -21,7 +22,7 @@ final class WireguardInterfaceDeleteResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?WireguardInterfaceRead $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -33,9 +34,9 @@ final class WireguardInterfaceDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WireguardInterfaceRead|WireguardInterfaceReadShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(WireguardInterfaceRead|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +46,9 @@ final class WireguardInterfaceDeleteResponse implements BaseModel
     }
 
     /**
-     * @param WireguardInterfaceRead|WireguardInterfaceReadShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(WireguardInterfaceRead|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

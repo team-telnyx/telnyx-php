@@ -42,6 +42,8 @@ use Telnyx\Calls\Actions\ActionSpeakParams;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams;
+use Telnyx\Calls\Actions\ActionStartConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams;
 use Telnyx\Calls\Actions\ActionStartForkingResponse;
 use Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams;
@@ -58,6 +60,8 @@ use Telnyx\Calls\Actions\ActionStartTranscriptionParams;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
+use Telnyx\Calls\Actions\ActionStopConversationRelayParams;
+use Telnyx\Calls\Actions\ActionStopConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStopForkingParams;
 use Telnyx\Calls\Actions\ActionStopForkingResponse;
 use Telnyx\Calls\Actions\ActionStopGatherParams;
@@ -416,6 +420,23 @@ interface ActionsRawContract
      * @api
      *
      * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array<string,mixed>|ActionStartConversationRelayParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionStartConversationRelayResponse>
+     *
+     * @throws APIException
+     */
+    public function startConversationRelay(
+        string $callControlID,
+        array|ActionStartConversationRelayParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
      * @param array<string,mixed>|ActionStartForkingParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -545,6 +566,23 @@ interface ActionsRawContract
     public function stopAIAssistant(
         string $callControlID,
         array|ActionStopAIAssistantParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array<string,mixed>|ActionStopConversationRelayParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionStopConversationRelayResponse>
+     *
+     * @throws APIException
+     */
+    public function stopConversationRelay(
+        string $callControlID,
+        array|ActionStopConversationRelayParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 

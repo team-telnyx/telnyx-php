@@ -9,8 +9,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayRead;
 use Telnyx\RequestOptions;
 
 /**
@@ -55,7 +55,7 @@ interface PublicInternetGatewaysContract
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PublicInternetGatewayRead>
+     * @return DefaultFlatPagination<PublicInternetGatewayListResponse>
      *
      * @throws APIException
      */

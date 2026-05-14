@@ -14,8 +14,8 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayRead;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PublicInternetGatewaysRawContract;
 
@@ -101,7 +101,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      * }|PublicInternetGatewayListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PublicInternetGatewayRead>>
+     * @return BaseResponse<DefaultFlatPagination<PublicInternetGatewayListResponse>>
      *
      * @throws APIException
      */
@@ -123,7 +123,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PublicInternetGatewayRead::class,
+            convert: PublicInternetGatewayListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }
