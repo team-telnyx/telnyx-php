@@ -7,13 +7,12 @@ namespace Telnyx\VirtualCrossConnects;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse\Data
+ * @phpstan-import-type VirtualCrossConnectCombinedShape from \Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined
  *
  * @phpstan-type VirtualCrossConnectUpdateResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|VirtualCrossConnectCombined|VirtualCrossConnectCombinedShape
  * }
  */
 final class VirtualCrossConnectUpdateResponse implements BaseModel
@@ -22,7 +21,7 @@ final class VirtualCrossConnectUpdateResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?VirtualCrossConnectCombined $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class VirtualCrossConnectUpdateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param VirtualCrossConnectCombined|VirtualCrossConnectCombinedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        VirtualCrossConnectCombined|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class VirtualCrossConnectUpdateResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param VirtualCrossConnectCombined|VirtualCrossConnectCombinedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(VirtualCrossConnectCombined|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

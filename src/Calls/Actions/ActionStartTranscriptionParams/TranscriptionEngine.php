@@ -21,6 +21,8 @@ enum TranscriptionEngine: string
 
     case ASSEMBLY_AI = 'AssemblyAI';
 
+    case SPEECHMATICS = 'Speechmatics';
+
     case A = 'A';
 
     case B = 'B';

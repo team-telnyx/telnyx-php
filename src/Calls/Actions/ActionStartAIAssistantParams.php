@@ -8,7 +8,6 @@ use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,6 +15,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
+use Telnyx\XaiVoiceSettings;
 
 /**
  * Start an AI assistant on the call.

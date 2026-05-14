@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\CanaryDeploys;
 
-use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse\Rule;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -14,12 +13,12 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * Always carries ``rules`` (canonical).
  *
- * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse\Rule
+ * @phpstan-import-type RuleOutputShape from \Telnyx\AI\Assistants\CanaryDeploys\RuleOutput
  *
  * @phpstan-type CanaryDeployResponseShape = array{
  *   assistantID: string,
  *   createdAt: \DateTimeInterface,
- *   rules: list<Rule|RuleShape>,
+ *   rules: list<RuleOutput|RuleOutputShape>,
  *   updatedAt: \DateTimeInterface,
  * }
  */
@@ -34,8 +33,8 @@ final class CanaryDeployResponse implements BaseModel
     #[Required('created_at')]
     public \DateTimeInterface $createdAt;
 
-    /** @var list<Rule> $rules */
-    #[Required(list: Rule::class)]
+    /** @var list<RuleOutput> $rules */
+    #[Required(list: RuleOutput::class)]
     public array $rules;
 
     #[Required('updated_at')]
@@ -71,7 +70,7 @@ final class CanaryDeployResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Rule|RuleShape> $rules
+     * @param list<RuleOutput|RuleOutputShape> $rules
      */
     public static function with(
         string $assistantID,
@@ -106,7 +105,7 @@ final class CanaryDeployResponse implements BaseModel
     }
 
     /**
-     * @param list<Rule|RuleShape> $rules
+     * @param list<RuleOutput|RuleOutputShape> $rules
      */
     public function withRules(array $rules): self
     {
