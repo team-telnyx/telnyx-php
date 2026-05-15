@@ -149,6 +149,7 @@ final class CallsTest extends TestCase
                 'fallbackURL' => 'https://www.example.com/instructions-fallback.xml',
                 'from' => '+13120001234',
                 'machineDetection' => 'Enable',
+                'machineDetectionPromptEndTimeout' => 5000,
                 'machineDetectionSilenceTimeout' => 2000,
                 'machineDetectionSpeechEndThreshold' => 2000,
                 'machineDetectionSpeechThreshold' => 2000,
