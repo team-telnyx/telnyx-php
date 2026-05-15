@@ -45,6 +45,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL\URLMethod;
  *   fallbackURL?: string|null,
  *   from?: string|null,
  *   machineDetection?: null|MachineDetection|value-of<MachineDetection>,
+ *   machineDetectionPromptEndTimeout?: int|null,
  *   machineDetectionSilenceTimeout?: int|null,
  *   machineDetectionSpeechEndThreshold?: int|null,
  *   machineDetectionSpeechThreshold?: int|null,
@@ -167,7 +168,7 @@ final class WithURL implements BaseModel
     public ?string $deepfakeDetectionCallbackURL;
 
     /**
-     * Allows you to chose between Premium and Standard detections.
+     * Allows you to choose between Regular, Premium, and PremiumCallScreening detections. See https://developers.telnyx.com/docs/voice/programmable-voice/answering-machine-detection.
      *
      * @var value-of<DetectionMode>|null $detectionMode
      */
@@ -193,6 +194,12 @@ final class WithURL implements BaseModel
      */
     #[Optional('MachineDetection', enum: MachineDetection::class)]
     public ?string $machineDetection;
+
+    /**
+     * Silence duration threshold after a call screening prompt before ending prompt detection, in milliseconds. Used when `DetectionMode` is `PremiumCallScreening`.
+     */
+    #[Optional('MachineDetectionPromptEndTimeout')]
+    public ?int $machineDetectionPromptEndTimeout;
 
     /**
      * If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
@@ -440,6 +447,7 @@ final class WithURL implements BaseModel
         ?string $fallbackURL = null,
         ?string $from = null,
         MachineDetection|string|null $machineDetection = null,
+        ?int $machineDetectionPromptEndTimeout = null,
         ?int $machineDetectionSilenceTimeout = null,
         ?int $machineDetectionSpeechEndThreshold = null,
         ?int $machineDetectionSpeechThreshold = null,
@@ -488,6 +496,7 @@ final class WithURL implements BaseModel
         null !== $fallbackURL && $self['fallbackURL'] = $fallbackURL;
         null !== $from && $self['from'] = $from;
         null !== $machineDetection && $self['machineDetection'] = $machineDetection;
+        null !== $machineDetectionPromptEndTimeout && $self['machineDetectionPromptEndTimeout'] = $machineDetectionPromptEndTimeout;
         null !== $machineDetectionSilenceTimeout && $self['machineDetectionSilenceTimeout'] = $machineDetectionSilenceTimeout;
         null !== $machineDetectionSpeechEndThreshold && $self['machineDetectionSpeechEndThreshold'] = $machineDetectionSpeechEndThreshold;
         null !== $machineDetectionSpeechThreshold && $self['machineDetectionSpeechThreshold'] = $machineDetectionSpeechThreshold;
@@ -668,7 +677,7 @@ final class WithURL implements BaseModel
     }
 
     /**
-     * Allows you to chose between Premium and Standard detections.
+     * Allows you to choose between Regular, Premium, and PremiumCallScreening detections. See https://developers.telnyx.com/docs/voice/programmable-voice/answering-machine-detection.
      *
      * @param DetectionMode|value-of<DetectionMode> $detectionMode
      */
@@ -712,6 +721,18 @@ final class WithURL implements BaseModel
     ): self {
         $self = clone $this;
         $self['machineDetection'] = $machineDetection;
+
+        return $self;
+    }
+
+    /**
+     * Silence duration threshold after a call screening prompt before ending prompt detection, in milliseconds. Used when `DetectionMode` is `PremiumCallScreening`.
+     */
+    public function withMachineDetectionPromptEndTimeout(
+        int $machineDetectionPromptEndTimeout
+    ): self {
+        $self = clone $this;
+        $self['machineDetectionPromptEndTimeout'] = $machineDetectionPromptEndTimeout;
 
         return $self;
     }

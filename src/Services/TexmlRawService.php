@@ -69,6 +69,7 @@ final class TexmlRawService implements TexmlRawContract
      *   customHeaders?: list<CustomHeader|CustomHeaderShape>,
      *   detectionMode?: DetectionMode|value-of<DetectionMode>,
      *   machineDetection?: MachineDetection|value-of<MachineDetection>,
+     *   machineDetectionPromptEndTimeout?: int,
      *   machineDetectionSilenceTimeout?: int,
      *   machineDetectionSpeechEndThreshold?: int,
      *   machineDetectionSpeechThreshold?: int,
