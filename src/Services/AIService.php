@@ -123,7 +123,7 @@ final class AIService implements AIContract
      *
      * **Deprecated**: Use `POST /v2/ai/openai/responses` instead. This endpoint is compatible with the [OpenAI Responses API](https://developers.openai.com/api/reference/responses/overview) and may be used with the OpenAI JS or Python SDK. Response id parameter is not supported at the moment. Use the `conversation` parameter with a Telnyx Conversation ID to leverage persistent conversations.
      *
-     * @param array<string,mixed> $body
+     * @param array<string,mixed> $params
      * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
@@ -131,13 +131,13 @@ final class AIService implements AIContract
      * @throws APIException
      */
     public function createResponse(
-        array $body,
+        array $params,
         RequestOptions|array|null $requestOptions = null
     ): array {
-        $params = Util::removeNulls(['body' => $body]);
+        $params1 = Util::removeNulls(['params' => $params]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createResponse(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->createResponse(params: $params1, requestOptions: $requestOptions);
 
         return $response->parse();
     }

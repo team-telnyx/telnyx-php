@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
+namespace Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig;
 
 /**
  * Language to use for speech recognition.
