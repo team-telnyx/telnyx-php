@@ -50,6 +50,17 @@ final class FaxesService implements FaxesContract
      *
      * Send a fax. Files have size limits and page count limit validations. If a file is bigger than 50MB or has more than 350 pages it will fail with `file_size_limit_exceeded` and `page_count_limit_exceeded` respectively.
      *
+     * **Supported file formats:**
+     *
+     * - PDF (`application/pdf`)
+     * - TIFF (`application/tiff`, `image/tiff`)
+     * - JPEG (`image/jpeg`)
+     * - PNG (`image/png`)
+     * - Microsoft Word `.doc` (`application/msword`)
+     * - Microsoft Word `.docx` (`application/vnd.openxmlformats-officedocument.wordprocessingml.document`)
+     * - Rich Text Format `.rtf` (`application/rtf`)
+     * - Plain text `.txt` (`text/plain`)
+     *
      * **Expected Webhooks:**
      *
      * - `fax.queued`
@@ -64,8 +75,8 @@ final class FaxesService implements FaxesContract
      * @param int $blackThreshold The black threshold percentage for monochrome faxes. Only applicable if `monochrome` is set to `true`.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $fromDisplayName The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
-     * @param string $mediaName The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
-     * @param string $mediaURL The URL (or list of URLs) to the PDF used for the fax's media. media_url and media_name/contents can't be submitted together.
+     * @param string $mediaName The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_name and media_url/contents can't be submitted together.
+     * @param string $mediaURL The URL (or list of URLs) to the fax document. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_url and media_name/contents can't be submitted together.
      * @param bool $monochrome the flag to enable monochrome, true black and white fax results
      * @param PreviewFormat|value-of<PreviewFormat> $previewFormat the format for the preview file in case the `store_preview` is `true`
      * @param Quality|value-of<Quality> $quality The quality of the fax. The `ultra` settings provides the highest quality available, but also present longer fax processing times. `ultra_light` is best suited for images, wihle `ultra_dark` is best suited for text.

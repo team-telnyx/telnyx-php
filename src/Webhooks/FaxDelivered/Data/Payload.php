@@ -70,7 +70,7 @@ final class Payload implements BaseModel
     public ?string $from;
 
     /**
-     * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
+     * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_name and media_url/contents can't be submitted together.
      */
     #[Optional('media_name')]
     public ?string $mediaName;
@@ -221,7 +221,7 @@ final class Payload implements BaseModel
     }
 
     /**
-     * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
+     * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_name and media_url/contents can't be submitted together.
      */
     public function withMediaName(string $mediaName): self
     {
