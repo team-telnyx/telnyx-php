@@ -46,6 +46,7 @@ use Telnyx\Calls\Actions\ActionSendSipInfoResponse;
 use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription;
 use Telnyx\Calls\Actions\ActionStartConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
@@ -143,9 +144,9 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant as ParticipantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
+ * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
  * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
- * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Participant as ParticipantShape2
  * @phpstan-import-type TranscriptionShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
@@ -1301,21 +1302,19 @@ final class ActionsService implements ActionsContract
      * - `call.conversation.ended` - Sent when the Conversation Relay session ends. If the customer WebSocket disconnects, the webhook payload `reason` is `customer_disconnect`.
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param string $conversationRelayURL WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
      * @param \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant|AssistantShape1 $assistant Custom parameters for the Conversation Relay session. Pass key-value data as `assistant.dynamic_variables` to make it available to the relay session.
      * @param string $clientState Use this field to add state to subsequent webhooks. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param bool $conversationRelayDtmfDetection enable DTMF detection for the relay session
+     * @param ConversationRelaySettings|ConversationRelaySettingsShape $conversationRelaySettings Conversation Relay connection settings. This object is used by TeXML Call Scripting's `<ConversationRelay>` verb. The `interruptible` and `interruptible_greeting` fields are shorthand for `interruption_settings.interruptible` and `interruption_settings.interruptible_greeting`; use top-level `interruption_settings` for the full interruption settings shape.
+     * @param string $conversationRelayURL WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
      * @param string $greeting text played when the relay session starts
      * @param \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings|InterruptionSettingsShape $interruptionSettings settings for handling caller interruptions during Conversation Relay speech
      * @param string $language Default language for the relay session. This value is used for both text-to-speech and speech recognition unless `tts_language` or `transcription_language` are provided.
      * @param list<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language|LanguageShape> $languages Language-specific TTS and transcription settings. Use this when the relay session needs per-language provider, voice, or speech model configuration.
-     * @param list<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\Participant|ParticipantShape2> $participants participants to add to the conversation
-     * @param bool $sendMessageHistoryUpdates when true, sends message history update webhooks
      * @param Transcription|TranscriptionShape $transcription speech-to-text settings for Conversation Relay
      * @param string $transcriptionLanguage Language to use for speech recognition. Overrides `language` for transcription when provided.
      * @param string $ttsLanguage Language to use for text-to-speech. Overrides `language` for TTS when provided.
-     * @param int $userResponseTimeoutMs time in milliseconds to wait for caller input before timing out
      * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
      *
      *  **Supported Providers:**
@@ -1332,42 +1331,38 @@ final class ActionsService implements ActionsContract
      */
     public function startConversationRelay(
         string $callControlID,
-        string $conversationRelayURL,
         \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant|array|null $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,
         bool $conversationRelayDtmfDetection = false,
+        ConversationRelaySettings|array|null $conversationRelaySettings = null,
+        ?string $conversationRelayURL = null,
         ?string $greeting = null,
         \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings|array|null $interruptionSettings = null,
         string $language = 'en',
         ?array $languages = null,
-        array $participants = [],
-        bool $sendMessageHistoryUpdates = false,
         Transcription|array|null $transcription = null,
         ?string $transcriptionLanguage = null,
         ?string $ttsLanguage = null,
-        int $userResponseTimeoutMs = 10000,
         string $voice = 'Telnyx.KokoroTTS.af',
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartConversationRelayResponse {
         $params = Util::removeNulls(
             [
-                'conversationRelayURL' => $conversationRelayURL,
                 'assistant' => $assistant,
                 'clientState' => $clientState,
                 'commandID' => $commandID,
                 'conversationRelayDtmfDetection' => $conversationRelayDtmfDetection,
+                'conversationRelaySettings' => $conversationRelaySettings,
+                'conversationRelayURL' => $conversationRelayURL,
                 'greeting' => $greeting,
                 'interruptionSettings' => $interruptionSettings,
                 'language' => $language,
                 'languages' => $languages,
-                'participants' => $participants,
-                'sendMessageHistoryUpdates' => $sendMessageHistoryUpdates,
                 'transcription' => $transcription,
                 'transcriptionLanguage' => $transcriptionLanguage,
                 'ttsLanguage' => $ttsLanguage,
-                'userResponseTimeoutMs' => $userResponseTimeoutMs,
                 'voice' => $voice,
                 'voiceSettings' => $voiceSettings,
             ],
