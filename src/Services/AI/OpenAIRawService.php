@@ -37,7 +37,7 @@ final class OpenAIRawService implements OpenAIRawContract
      *
      * @param array{
      *   conversation?: string,
-     *   input?: mixed,
+     *   input?: array<string,mixed>,
      *   instructions?: string,
      *   model?: string,
      *   stream?: bool,

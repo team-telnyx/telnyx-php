@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
+namespace Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig;
 
 /**
  * The model to use for transcription.
