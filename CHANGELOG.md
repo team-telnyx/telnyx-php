@@ -1,5 +1,30 @@
 # Changelog
 
+## 7.49.0 (2026-05-15)
+
+Full Changelog: [v7.48.0...v7.49.0](https://github.com/team-telnyx/telnyx-php/compare/v7.48.0...v7.49.0)
+
+### Features
+
+* Add Speechmatics transcription engine to Call Control API ([aca3ab3](https://github.com/team-telnyx/telnyx-php/commit/aca3ab33a68d9109e3137aabc1c728d1d3e38c33))
+* Document AI call status callback overrides ([017a513](https://github.com/team-telnyx/telnyx-php/commit/017a5131fd04e0a6b1bf40ffac52f4d9e2d88b38))
+* Document Conversation Relay ([39aac6c](https://github.com/team-telnyx/telnyx-php/commit/39aac6cd3275d9d6af53bb539b40bad692e0048e))
+* Document OpenAI responses conversation flow ([ed10810](https://github.com/team-telnyx/telnyx-php/commit/ed10810ee5dccf0d5f6dfd05d341da4c749b766b))
+* Document PremiumCallScreening detection mode ([b4dfb65](https://github.com/team-telnyx/telnyx-php/commit/b4dfb6517a7278fbd10131fcc6d1f1bd06311f82))
+* Fix Conversation Relay expected webhook ([13f1172](https://github.com/team-telnyx/telnyx-php/commit/13f1172a7fc22462763a703a4af58f3564cf90f7))
+* Update Conversation Relay start parameters ([e7cb456](https://github.com/team-telnyx/telnyx-php/commit/e7cb45685132c68ca7dc06762bc98918e09cb3b5))
+
+
+### Bug Fixes
+
+* guzzle requires special handling to enable streaming ([73efd12](https://github.com/team-telnyx/telnyx-php/commit/73efd126c8de1f1d3248672e4388c110b1f450f4))
+* resolve PHPStan lint errors with minimal changes ([cdfe30e](https://github.com/team-telnyx/telnyx-php/commit/cdfe30e0b9ee1b8d9b52872a2fbba768d811f73e))
+
+
+### Documentation
+
+* add supported file formats to Send Fax endpoint ([3735e66](https://github.com/team-telnyx/telnyx-php/commit/3735e664fe9cfa617db84cf05d0bf17f7d039ddd))
+
 ## 7.48.0 (2026-05-11)
 
 Full Changelog: [v7.47.0...v7.48.0](https://github.com/team-telnyx/telnyx-php/compare/v7.47.0...v7.48.0)
