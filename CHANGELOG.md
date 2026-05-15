@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.50.0 (2026-05-15)
+
+Full Changelog: [v7.49.0...v7.50.0](https://github.com/team-telnyx/telnyx-php/compare/v7.49.0...v7.50.0)
+
+### Features
+
+* **api:** manual updates ([136dd8e](https://github.com/team-telnyx/telnyx-php/commit/136dd8ef324ecbdd0c955104de357e263ad45fea))
+
 ## 7.49.0 (2026-05-15)
 
 Full Changelog: [v7.48.0...v7.49.0](https://github.com/team-telnyx/telnyx-php/compare/v7.48.0...v7.49.0)
