@@ -78,8 +78,9 @@ final class TexmlService implements TexmlContract
      * @param ConversationCallbackMethod|value-of<ConversationCallbackMethod> $conversationCallbackMethod HTTP request type used for `ConversationCallback` and `ConversationCallbacks`
      * @param list<string> $conversationCallbacks Array of URL destinations for AI conversation callback events for this call. Events include `conversation_created` and `conversation_ended`.
      * @param list<CustomHeader|CustomHeaderShape> $customHeaders Custom HTTP headers to be sent with the call. Each header should be an object with 'name' and 'value' properties.
-     * @param DetectionMode|value-of<DetectionMode> $detectionMode allows you to choose between Premium and Standard detections
+     * @param DetectionMode|value-of<DetectionMode> $detectionMode Allows you to choose between Regular, Premium, and PremiumCallScreening detections. See https://developers.telnyx.com/docs/voice/programmable-voice/answering-machine-detection
      * @param MachineDetection|value-of<MachineDetection> $machineDetection enables Answering Machine Detection
+     * @param int $machineDetectionPromptEndTimeout Silence duration threshold after a call screening prompt before ending prompt detection, in milliseconds. Used when `DetectionMode` is `PremiumCallScreening`.
      * @param int $machineDetectionSilenceTimeout If initial silence duration is greater than this value, consider it a machine. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechEndThreshold Silence duration threshold after a greeting message or voice for it be considered human. Ignored when `premium` detection is used.
      * @param int $machineDetectionSpeechThreshold Maximum threshold of a human greeting. If greeting longer than this value, considered machine. Ignored when `premium` detection is used.
@@ -125,6 +126,7 @@ final class TexmlService implements TexmlContract
         ?array $customHeaders = null,
         DetectionMode|string $detectionMode = 'Regular',
         MachineDetection|string $machineDetection = 'Disable',
+        ?int $machineDetectionPromptEndTimeout = null,
         int $machineDetectionSilenceTimeout = 3500,
         int $machineDetectionSpeechEndThreshold = 800,
         int $machineDetectionSpeechThreshold = 3500,
@@ -168,6 +170,7 @@ final class TexmlService implements TexmlContract
                 'customHeaders' => $customHeaders,
                 'detectionMode' => $detectionMode,
                 'machineDetection' => $machineDetection,
+                'machineDetectionPromptEndTimeout' => $machineDetectionPromptEndTimeout,
                 'machineDetectionSilenceTimeout' => $machineDetectionSilenceTimeout,
                 'machineDetectionSpeechEndThreshold' => $machineDetectionSpeechEndThreshold,
                 'machineDetectionSpeechThreshold' => $machineDetectionSpeechThreshold,

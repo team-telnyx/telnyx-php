@@ -76,6 +76,7 @@ final class TexmlTest extends TestCase
             customHeaders: [['name' => 'X-Custom-Header', 'value' => 'custom-value']],
             detectionMode: 'Premium',
             machineDetection: 'Enable',
+            machineDetectionPromptEndTimeout: 5000,
             machineDetectionSilenceTimeout: 2000,
             machineDetectionSpeechEndThreshold: 2000,
             machineDetectionSpeechThreshold: 2000,
