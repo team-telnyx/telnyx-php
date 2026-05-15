@@ -640,69 +640,7 @@ final class ActionsTest extends TestCase
         }
 
         $result = $this->client->calls->actions->startConversationRelay(
-            'call_control_id',
-            conversationRelayURL: 'wss://example.com/conversation-relay',
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            ActionStartConversationRelayResponse::class,
-            $result
-        );
-    }
-
-    #[Test]
-    public function testStartConversationRelayWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->calls->actions->startConversationRelay(
-            'call_control_id',
-            conversationRelayURL: 'wss://example.com/conversation-relay',
-            assistant: [
-                'dynamicVariables' => ['customer_id' => '12345', 'tier' => 'premium'],
-            ],
-            clientState: 'aGF2ZSBhIG5pY2UgZGF5ID1d',
-            commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
-            conversationRelayDtmfDetection: true,
-            greeting: 'Hi! Ask me anything!',
-            interruptionSettings: [
-                'enable' => true,
-                'interruptible' => 'speech',
-                'interruptibleGreeting' => 'speech',
-                'welcomeGreetingInterruptible' => 'speech',
-            ],
-            language: 'en-US',
-            languages: [
-                [
-                    'code' => 'en-US',
-                    'speechModel' => 'nova-2',
-                    'transcriptionProvider' => 'Deepgram',
-                    'ttsProvider' => 'ElevenLabs',
-                    'voice' => 'alice',
-                ],
-            ],
-            participants: [
-                [
-                    'id' => 'v3:abc123def456',
-                    'role' => 'user',
-                    'name' => 'John Doe',
-                    'onHangup' => 'continue_conversation',
-                ],
-            ],
-            sendMessageHistoryUpdates: true,
-            transcription: [
-                'language' => 'en-US', 'model' => 'nova-2', 'provider' => 'deepgram',
-            ],
-            transcriptionLanguage: 'en-US',
-            ttsLanguage: 'es',
-            userResponseTimeoutMs: 10000,
-            voice: 'Telnyx.KokoroTTS.af',
-            voiceSettings: [
-                'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
-            ],
+            'call_control_id'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
