@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
+namespace Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig;
 
 /**
  * Engine identifier for Speechmatics transcription service.
