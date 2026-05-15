@@ -85,13 +85,13 @@ final class Fax implements BaseModel
     public ?string $fromDisplayName;
 
     /**
-     * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
+     * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_name and media_url/contents can't be submitted together.
      */
     #[Optional('media_name')]
     public ?string $mediaName;
 
     /**
-     * The URL (or list of URLs) to the PDF used for the fax's media. media_url and media_name/contents can't be submitted together.
+     * The URL (or list of URLs) to the fax document. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_url and media_name/contents can't be submitted together.
      */
     #[Optional('media_url')]
     public ?string $mediaURL;
@@ -303,7 +303,7 @@ final class Fax implements BaseModel
     }
 
     /**
-     * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. media_name and media_url/contents can't be submitted together.
+     * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_name and media_url/contents can't be submitted together.
      */
     public function withMediaName(string $mediaName): self
     {
@@ -314,7 +314,7 @@ final class Fax implements BaseModel
     }
 
     /**
-     * The URL (or list of URLs) to the PDF used for the fax's media. media_url and media_name/contents can't be submitted together.
+     * The URL (or list of URLs) to the fax document. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_url and media_name/contents can't be submitted together.
      */
     public function withMediaURL(string $mediaURL): self
     {
