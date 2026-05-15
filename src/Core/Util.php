@@ -49,6 +49,7 @@ final class Util
      */
     public static function get_object_vars(object $object): array
     {
+        /** @var array<string,mixed> */
         return get_object_vars($object);
     }
 
@@ -460,9 +461,7 @@ final class Util
         $contentLine = "Content-Type: %s\r\n\r\n";
 
         if ($val instanceof FileParam) {
-            $ct = $val->contentType ?? $contentType;
-
-            yield sprintf($contentLine, $ct);
+            yield sprintf($contentLine, $val->contentType);
             $data = $val->data;
             if (is_string($data)) {
                 yield $data;
