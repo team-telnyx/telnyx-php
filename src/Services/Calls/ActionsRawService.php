@@ -64,6 +64,7 @@ use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription;
 use Telnyx\Calls\Actions\ActionStartConversationRelayResponse;
@@ -164,9 +165,9 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant as ParticipantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
+ * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
  * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
- * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Participant as ParticipantShape2
  * @phpstan-import-type TranscriptionShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
@@ -1091,21 +1092,19 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   conversationRelayURL: string,
      *   assistant?: ActionStartConversationRelayParams\Assistant|AssistantShape1,
      *   clientState?: string,
      *   commandID?: string,
      *   conversationRelayDtmfDetection?: bool,
+     *   conversationRelaySettings?: ConversationRelaySettings|ConversationRelaySettingsShape,
+     *   conversationRelayURL?: string,
      *   greeting?: string,
      *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
      *   language?: string,
      *   languages?: list<ActionStartConversationRelayParams\Language|LanguageShape>,
-     *   participants?: list<ActionStartConversationRelayParams\Participant|ParticipantShape2>,
-     *   sendMessageHistoryUpdates?: bool,
      *   transcription?: Transcription|TranscriptionShape,
      *   transcriptionLanguage?: string,
      *   ttsLanguage?: string,
-     *   userResponseTimeoutMs?: int,
      *   voice?: string,
      *   voiceSettings?: VoiceSettingsShape4,
      * }|ActionStartConversationRelayParams $params

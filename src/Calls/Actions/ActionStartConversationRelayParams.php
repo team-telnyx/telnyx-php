@@ -6,13 +6,12 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Participant;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings;
 use Telnyx\Core\Attributes\Optional;
-use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
@@ -31,28 +30,26 @@ use Telnyx\XaiVoiceSettings;
  *
  * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant
+ * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
  * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
- * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Participant
  * @phpstan-import-type TranscriptionShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings
  *
  * @phpstan-type ActionStartConversationRelayParamsShape = array{
- *   conversationRelayURL: string,
  *   assistant?: null|Assistant|AssistantShape,
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   conversationRelayDtmfDetection?: bool|null,
+ *   conversationRelaySettings?: null|ConversationRelaySettings|ConversationRelaySettingsShape,
+ *   conversationRelayURL?: string|null,
  *   greeting?: string|null,
  *   interruptionSettings?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings|InterruptionSettingsShape,
  *   language?: string|null,
  *   languages?: list<Language|LanguageShape>|null,
- *   participants?: list<Participant|ParticipantShape>|null,
- *   sendMessageHistoryUpdates?: bool|null,
  *   transcription?: null|Transcription|TranscriptionShape,
  *   transcriptionLanguage?: string|null,
  *   ttsLanguage?: string|null,
- *   userResponseTimeoutMs?: int|null,
  *   voice?: string|null,
  *   voiceSettings?: VoiceSettingsShape|null,
  * }
@@ -62,12 +59,6 @@ final class ActionStartConversationRelayParams implements BaseModel
     /** @use SdkModel<ActionStartConversationRelayParamsShape> */
     use SdkModel;
     use SdkParams;
-
-    /**
-     * WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
-     */
-    #[Required('conversation_relay_url')]
-    public string $conversationRelayURL;
 
     /**
      * Custom parameters for the Conversation Relay session. Pass key-value data as `assistant.dynamic_variables` to make it available to the relay session.
@@ -92,6 +83,18 @@ final class ActionStartConversationRelayParams implements BaseModel
      */
     #[Optional('conversation_relay_dtmf_detection')]
     public ?bool $conversationRelayDtmfDetection;
+
+    /**
+     * Conversation Relay connection settings. This object is used by TeXML Call Scripting's `<ConversationRelay>` verb. The `interruptible` and `interruptible_greeting` fields are shorthand for `interruption_settings.interruptible` and `interruption_settings.interruptible_greeting`; use top-level `interruption_settings` for the full interruption settings shape.
+     */
+    #[Optional('conversation_relay_settings')]
+    public ?ConversationRelaySettings $conversationRelaySettings;
+
+    /**
+     * WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
+     */
+    #[Optional('conversation_relay_url')]
+    public ?string $conversationRelayURL;
 
     /**
      * Text played when the relay session starts.
@@ -120,20 +123,6 @@ final class ActionStartConversationRelayParams implements BaseModel
     public ?array $languages;
 
     /**
-     * Participants to add to the conversation.
-     *
-     * @var list<Participant>|null $participants
-     */
-    #[Optional(list: Participant::class)]
-    public ?array $participants;
-
-    /**
-     * When true, sends message history update webhooks.
-     */
-    #[Optional('send_message_history_updates')]
-    public ?bool $sendMessageHistoryUpdates;
-
-    /**
      * Speech-to-text settings for Conversation Relay.
      */
     #[Optional]
@@ -150,12 +139,6 @@ final class ActionStartConversationRelayParams implements BaseModel
      */
     #[Optional('tts_language')]
     public ?string $ttsLanguage;
-
-    /**
-     * Time in milliseconds to wait for caller input before timing out.
-     */
-    #[Optional('user_response_timeout_ms')]
-    public ?int $userResponseTimeoutMs;
 
     /**
      * The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
@@ -179,20 +162,6 @@ final class ActionStartConversationRelayParams implements BaseModel
     #[Optional('voice_settings', union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings;
 
-    /**
-     * `new ActionStartConversationRelayParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * ActionStartConversationRelayParams::with(conversationRelayURL: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new ActionStartConversationRelayParams)->withConversationRelayURL(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -204,62 +173,46 @@ final class ActionStartConversationRelayParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Assistant|AssistantShape|null $assistant
+     * @param ConversationRelaySettings|ConversationRelaySettingsShape|null $conversationRelaySettings
      * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
      * @param list<Language|LanguageShape>|null $languages
-     * @param list<Participant|ParticipantShape>|null $participants
      * @param Transcription|TranscriptionShape|null $transcription
      * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
-        string $conversationRelayURL,
         Assistant|array|null $assistant = null,
         ?string $clientState = null,
         ?string $commandID = null,
         ?bool $conversationRelayDtmfDetection = null,
+        ConversationRelaySettings|array|null $conversationRelaySettings = null,
+        ?string $conversationRelayURL = null,
         ?string $greeting = null,
         InterruptionSettings|array|null $interruptionSettings = null,
         ?string $language = null,
         ?array $languages = null,
-        ?array $participants = null,
-        ?bool $sendMessageHistoryUpdates = null,
         Transcription|array|null $transcription = null,
         ?string $transcriptionLanguage = null,
         ?string $ttsLanguage = null,
-        ?int $userResponseTimeoutMs = null,
         ?string $voice = null,
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
-        $self['conversationRelayURL'] = $conversationRelayURL;
-
         null !== $assistant && $self['assistant'] = $assistant;
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $commandID && $self['commandID'] = $commandID;
         null !== $conversationRelayDtmfDetection && $self['conversationRelayDtmfDetection'] = $conversationRelayDtmfDetection;
+        null !== $conversationRelaySettings && $self['conversationRelaySettings'] = $conversationRelaySettings;
+        null !== $conversationRelayURL && $self['conversationRelayURL'] = $conversationRelayURL;
         null !== $greeting && $self['greeting'] = $greeting;
         null !== $interruptionSettings && $self['interruptionSettings'] = $interruptionSettings;
         null !== $language && $self['language'] = $language;
         null !== $languages && $self['languages'] = $languages;
-        null !== $participants && $self['participants'] = $participants;
-        null !== $sendMessageHistoryUpdates && $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
         null !== $transcription && $self['transcription'] = $transcription;
         null !== $transcriptionLanguage && $self['transcriptionLanguage'] = $transcriptionLanguage;
         null !== $ttsLanguage && $self['ttsLanguage'] = $ttsLanguage;
-        null !== $userResponseTimeoutMs && $self['userResponseTimeoutMs'] = $userResponseTimeoutMs;
         null !== $voice && $self['voice'] = $voice;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
-
-        return $self;
-    }
-
-    /**
-     * WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
-     */
-    public function withConversationRelayURL(string $conversationRelayURL): self
-    {
-        $self = clone $this;
-        $self['conversationRelayURL'] = $conversationRelayURL;
 
         return $self;
     }
@@ -307,6 +260,31 @@ final class ActionStartConversationRelayParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['conversationRelayDtmfDetection'] = $conversationRelayDtmfDetection;
+
+        return $self;
+    }
+
+    /**
+     * Conversation Relay connection settings. This object is used by TeXML Call Scripting's `<ConversationRelay>` verb. The `interruptible` and `interruptible_greeting` fields are shorthand for `interruption_settings.interruptible` and `interruption_settings.interruptible_greeting`; use top-level `interruption_settings` for the full interruption settings shape.
+     *
+     * @param ConversationRelaySettings|ConversationRelaySettingsShape $conversationRelaySettings
+     */
+    public function withConversationRelaySettings(
+        ConversationRelaySettings|array $conversationRelaySettings
+    ): self {
+        $self = clone $this;
+        $self['conversationRelaySettings'] = $conversationRelaySettings;
+
+        return $self;
+    }
+
+    /**
+     * WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
+     */
+    public function withConversationRelayURL(string $conversationRelayURL): self
+    {
+        $self = clone $this;
+        $self['conversationRelayURL'] = $conversationRelayURL;
 
         return $self;
     }
@@ -361,31 +339,6 @@ final class ActionStartConversationRelayParams implements BaseModel
     }
 
     /**
-     * Participants to add to the conversation.
-     *
-     * @param list<Participant|ParticipantShape> $participants
-     */
-    public function withParticipants(array $participants): self
-    {
-        $self = clone $this;
-        $self['participants'] = $participants;
-
-        return $self;
-    }
-
-    /**
-     * When true, sends message history update webhooks.
-     */
-    public function withSendMessageHistoryUpdates(
-        bool $sendMessageHistoryUpdates
-    ): self {
-        $self = clone $this;
-        $self['sendMessageHistoryUpdates'] = $sendMessageHistoryUpdates;
-
-        return $self;
-    }
-
-    /**
      * Speech-to-text settings for Conversation Relay.
      *
      * @param Transcription|TranscriptionShape $transcription
@@ -417,17 +370,6 @@ final class ActionStartConversationRelayParams implements BaseModel
     {
         $self = clone $this;
         $self['ttsLanguage'] = $ttsLanguage;
-
-        return $self;
-    }
-
-    /**
-     * Time in milliseconds to wait for caller input before timing out.
-     */
-    public function withUserResponseTimeoutMs(int $userResponseTimeoutMs): self
-    {
-        $self = clone $this;
-        $self['userResponseTimeoutMs'] = $userResponseTimeoutMs;
 
         return $self;
     }
