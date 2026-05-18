@@ -184,10 +184,13 @@ final class AssistantsTest extends TestCase
                 'region' => 'region',
                 'settings' => [
                     'eagerEotThreshold' => 0.3,
+                    'enableEndpointDetection' => true,
                     'endOfTurnConfidenceThreshold' => 0,
                     'eotThreshold' => 0.5,
                     'eotTimeoutMs' => 500,
+                    'interimResults' => true,
                     'keyterm' => 'keyterm',
+                    'maxEndpointDelayMs' => 500,
                     'maxTurnSilence' => 100,
                     'minTurnSilence' => 100,
                     'numerals' => true,

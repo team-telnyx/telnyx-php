@@ -11,10 +11,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-type TranscriptionSettingsConfigShape = array{
  *   eagerEotThreshold?: float|null,
+ *   enableEndpointDetection?: bool|null,
  *   endOfTurnConfidenceThreshold?: float|null,
  *   eotThreshold?: float|null,
  *   eotTimeoutMs?: int|null,
+ *   interimResults?: bool|null,
  *   keyterm?: string|null,
+ *   maxEndpointDelayMs?: int|null,
  *   maxTurnSilence?: int|null,
  *   minTurnSilence?: int|null,
  *   numerals?: bool|null,
@@ -31,6 +34,12 @@ final class TranscriptionSettingsConfig implements BaseModel
      */
     #[Optional('eager_eot_threshold')]
     public ?float $eagerEotThreshold;
+
+    /**
+     * Available only for soniox/stt-rt-v4. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
+     */
+    #[Optional('enable_endpoint_detection')]
+    public ?bool $enableEndpointDetection;
 
     /**
      * Available only for assemblyai/universal-streaming. Confidence level required to trigger an end of turn. Higher values require more certainty before ending a turn.
@@ -51,10 +60,22 @@ final class TranscriptionSettingsConfig implements BaseModel
     public ?int $eotTimeoutMs;
 
     /**
+     * Available only for soniox/stt-rt-v4. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
+     */
+    #[Optional('interim_results')]
+    public ?bool $interimResults;
+
+    /**
      * Available only for deepgram/nova-3 and deepgram/flux. A comma-separated list of key terms to boost for recognition during transcription. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
      */
     #[Optional]
     public ?string $keyterm;
+
+    /**
+     * Available only for soniox/stt-rt-v4. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
+     */
+    #[Optional('max_endpoint_delay_ms')]
+    public ?int $maxEndpointDelayMs;
 
     /**
      * Available only for assemblyai/universal-streaming. Maximum duration of silence in milliseconds before forcing an end of turn.
@@ -86,10 +107,13 @@ final class TranscriptionSettingsConfig implements BaseModel
      */
     public static function with(
         ?float $eagerEotThreshold = null,
+        ?bool $enableEndpointDetection = null,
         ?float $endOfTurnConfidenceThreshold = null,
         ?float $eotThreshold = null,
         ?int $eotTimeoutMs = null,
+        ?bool $interimResults = null,
         ?string $keyterm = null,
+        ?int $maxEndpointDelayMs = null,
         ?int $maxTurnSilence = null,
         ?int $minTurnSilence = null,
         ?bool $numerals = null,
@@ -98,10 +122,13 @@ final class TranscriptionSettingsConfig implements BaseModel
         $self = new self;
 
         null !== $eagerEotThreshold && $self['eagerEotThreshold'] = $eagerEotThreshold;
+        null !== $enableEndpointDetection && $self['enableEndpointDetection'] = $enableEndpointDetection;
         null !== $endOfTurnConfidenceThreshold && $self['endOfTurnConfidenceThreshold'] = $endOfTurnConfidenceThreshold;
         null !== $eotThreshold && $self['eotThreshold'] = $eotThreshold;
         null !== $eotTimeoutMs && $self['eotTimeoutMs'] = $eotTimeoutMs;
+        null !== $interimResults && $self['interimResults'] = $interimResults;
         null !== $keyterm && $self['keyterm'] = $keyterm;
+        null !== $maxEndpointDelayMs && $self['maxEndpointDelayMs'] = $maxEndpointDelayMs;
         null !== $maxTurnSilence && $self['maxTurnSilence'] = $maxTurnSilence;
         null !== $minTurnSilence && $self['minTurnSilence'] = $minTurnSilence;
         null !== $numerals && $self['numerals'] = $numerals;
@@ -117,6 +144,18 @@ final class TranscriptionSettingsConfig implements BaseModel
     {
         $self = clone $this;
         $self['eagerEotThreshold'] = $eagerEotThreshold;
+
+        return $self;
+    }
+
+    /**
+     * Available only for soniox/stt-rt-v4. When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
+     */
+    public function withEnableEndpointDetection(
+        bool $enableEndpointDetection
+    ): self {
+        $self = clone $this;
+        $self['enableEndpointDetection'] = $enableEndpointDetection;
 
         return $self;
     }
@@ -156,12 +195,34 @@ final class TranscriptionSettingsConfig implements BaseModel
     }
 
     /**
+     * Available only for soniox/stt-rt-v4. When true, Soniox streams interim (non-final) results in addition to finalized transcripts.
+     */
+    public function withInterimResults(bool $interimResults): self
+    {
+        $self = clone $this;
+        $self['interimResults'] = $interimResults;
+
+        return $self;
+    }
+
+    /**
      * Available only for deepgram/nova-3 and deepgram/flux. A comma-separated list of key terms to boost for recognition during transcription. Helps improve accuracy for domain-specific terminology, proper nouns, or uncommon words. This field may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) using mustache syntax (e.g. `Telnyx,{{customer_name}},VoIP`). Variables are resolved at call time before the value is sent to the speech-to-text engine.
      */
     public function withKeyterm(string $keyterm): self
     {
         $self = clone $this;
         $self['keyterm'] = $keyterm;
+
+        return $self;
+    }
+
+    /**
+     * Available only for soniox/stt-rt-v4. Maximum silence (in milliseconds) before Soniox emits an end-of-utterance event. Only honored when `enable_endpoint_detection` is true.
+     */
+    public function withMaxEndpointDelayMs(int $maxEndpointDelayMs): self
+    {
+        $self = clone $this;
+        $self['maxEndpointDelayMs'] = $maxEndpointDelayMs;
 
         return $self;
     }
