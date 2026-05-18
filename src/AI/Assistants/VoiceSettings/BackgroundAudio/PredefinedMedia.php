@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio;
 
 use Telnyx\AI\Assistants\VoiceSettings\BackgroundAudio\PredefinedMedia\Value;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PredefinedMediaShape = array{
- *   type: 'predefined_media', value: Value|value-of<Value>
+ *   type: 'predefined_media', value: Value|value-of<Value>, volume?: float|null
  * }
  */
 final class PredefinedMedia implements BaseModel
@@ -34,6 +35,12 @@ final class PredefinedMedia implements BaseModel
      */
     #[Required(enum: Value::class)]
     public string $value;
+
+    /**
+     * Volume level for the predefined background audio. Supports values from 0.1 to 1.0 in 0.1 increments.
+     */
+    #[Optional]
+    public ?float $volume;
 
     /**
      * `new PredefinedMedia()` is missing required properties by the API.
@@ -61,11 +68,15 @@ final class PredefinedMedia implements BaseModel
      *
      * @param Value|value-of<Value> $value
      */
-    public static function with(Value|string $value = 'silence'): self
-    {
+    public static function with(
+        Value|string $value = 'silence',
+        ?float $volume = null
+    ): self {
         $self = new self;
 
         $self['value'] = $value;
+
+        null !== $volume && $self['volume'] = $volume;
 
         return $self;
     }
@@ -92,6 +103,17 @@ final class PredefinedMedia implements BaseModel
     {
         $self = clone $this;
         $self['value'] = $value;
+
+        return $self;
+    }
+
+    /**
+     * Volume level for the predefined background audio. Supports values from 0.1 to 1.0 in 0.1 increments.
+     */
+    public function withVolume(float $volume): self
+    {
+        $self = clone $this;
+        $self['volume'] = $volume;
 
         return $self;
     }
