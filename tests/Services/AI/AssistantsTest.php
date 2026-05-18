@@ -198,7 +198,7 @@ final class AssistantsTest extends TestCase
                 'voice' => 'voice',
                 'apiKeyRef' => 'api_key_ref',
                 'backgroundAudio' => [
-                    'type' => 'predefined_media', 'value' => 'silence',
+                    'type' => 'predefined_media', 'value' => 'silence', 'volume' => 0.1,
                 ],
                 'expressiveMode' => true,
                 'languageBoost' => 'auto',
