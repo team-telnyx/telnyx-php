@@ -37,7 +37,7 @@ final class AITest extends TestCase
         }
 
         $result = $this->client->ai->createResponse(
-            params: ['model' => 'bar', 'input' => 'bar']
+            body: ['model' => 'bar', 'input' => 'bar']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -52,7 +52,7 @@ final class AITest extends TestCase
         }
 
         $result = $this->client->ai->createResponse(
-            params: ['model' => 'bar', 'input' => 'bar']
+            body: ['model' => 'bar', 'input' => 'bar']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
