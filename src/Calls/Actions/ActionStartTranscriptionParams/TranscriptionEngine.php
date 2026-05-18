@@ -23,6 +23,8 @@ enum TranscriptionEngine: string
 
     case SPEECHMATICS = 'Speechmatics';
 
+    case SONIOX = 'Soniox';
+
     case A = 'A';
 
     case B = 'B';

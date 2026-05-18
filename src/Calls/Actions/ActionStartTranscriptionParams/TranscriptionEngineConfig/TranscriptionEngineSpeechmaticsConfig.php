@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions;
+namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig;
 
-use Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig\Language;
-use Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig\TranscriptionEngine;
-use Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig\TranscriptionModel;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig\Language;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig\TranscriptionEngine;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig\TranscriptionModel;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;

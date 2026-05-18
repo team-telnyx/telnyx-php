@@ -13,6 +13,7 @@ namespace Telnyx\AI\Assistants\TranscriptionSettings;
  * - `azure/fast` is a multilingual Azure transcription model.
  * - `assemblyai/universal-streaming` is a multilingual streaming model with configurable turn detection.
  * - `xai/grok-stt` is a multilingual Grok STT model.
+ * - `soniox/stt-rt-v4` is a multilingual streaming model with automatic language detection and configurable endpointing.
  */
 enum Model: string
 {
@@ -27,6 +28,8 @@ enum Model: string
     case ASSEMBLYAI_UNIVERSAL_STREAMING = 'assemblyai/universal-streaming';
 
     case XAI_GROK_STT = 'xai/grok-stt';
+
+    case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
 
     case DISTIL_WHISPER_DISTIL_LARGE_V2 = 'distil-whisper/distil-large-v2';
 

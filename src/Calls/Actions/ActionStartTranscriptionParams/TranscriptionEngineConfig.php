@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartTranscriptionParams;
 
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
 use Telnyx\Calls\Actions\DeepgramNova2Config;
 use Telnyx\Calls\Actions\DeepgramNova3Config;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
@@ -11,7 +13,6 @@ use Telnyx\Calls\Actions\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineXaiConfig;
 use Telnyx\Core\Concerns\SdkUnion;
@@ -24,14 +25,15 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type TranscriptionEngineAzureConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAzureConfig
  * @phpstan-import-type TranscriptionEngineXaiConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineXaiConfig
  * @phpstan-import-type TranscriptionEngineAssemblyaiConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAssemblyaiConfig
- * @phpstan-import-type TranscriptionEngineSpeechmaticsConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig
+ * @phpstan-import-type TranscriptionEngineSpeechmaticsConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig
+ * @phpstan-import-type TranscriptionEngineSonioxConfigShape from \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig
  * @phpstan-import-type TranscriptionEngineAConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAConfig
  * @phpstan-import-type TranscriptionEngineBConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineBConfig
  * @phpstan-import-type DeepgramNova2ConfigShape from \Telnyx\Calls\Actions\DeepgramNova2Config
  * @phpstan-import-type DeepgramNova3ConfigShape from \Telnyx\Calls\Actions\DeepgramNova3Config
  *
- * @phpstan-type TranscriptionEngineConfigVariants = TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config
- * @phpstan-type TranscriptionEngineConfigShape = TranscriptionEngineConfigVariants|TranscriptionEngineGoogleConfigShape|TranscriptionEngineTelnyxConfigShape|TranscriptionEngineAzureConfigShape|TranscriptionEngineXaiConfigShape|TranscriptionEngineAssemblyaiConfigShape|TranscriptionEngineSpeechmaticsConfigShape|TranscriptionEngineAConfigShape|TranscriptionEngineBConfigShape|DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
+ * @phpstan-type TranscriptionEngineConfigVariants = TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config
+ * @phpstan-type TranscriptionEngineConfigShape = TranscriptionEngineConfigVariants|TranscriptionEngineGoogleConfigShape|TranscriptionEngineTelnyxConfigShape|TranscriptionEngineAzureConfigShape|TranscriptionEngineXaiConfigShape|TranscriptionEngineAssemblyaiConfigShape|TranscriptionEngineSpeechmaticsConfigShape|TranscriptionEngineSonioxConfigShape|TranscriptionEngineAConfigShape|TranscriptionEngineBConfigShape|DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
  */
 final class TranscriptionEngineConfig implements ConverterSource
 {
@@ -54,6 +56,7 @@ final class TranscriptionEngineConfig implements ConverterSource
             'xAI' => TranscriptionEngineXaiConfig::class,
             'AssemblyAI' => TranscriptionEngineAssemblyaiConfig::class,
             'Speechmatics' => TranscriptionEngineSpeechmaticsConfig::class,
+            'Soniox' => TranscriptionEngineSonioxConfig::class,
             'A' => TranscriptionEngineAConfig::class,
             'B' => TranscriptionEngineBConfig::class,
             'deepgram/nova-2' => DeepgramNova2Config::class,

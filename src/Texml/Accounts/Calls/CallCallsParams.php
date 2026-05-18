@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\ApplicationDefault;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithTeXml;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL;
@@ -30,7 +29,7 @@ final class CallCallsParams implements BaseModel
     use SdkParams;
 
     /** @var ParamsVariants $params */
-    #[Required(union: Params::class)]
+    #[Required]
     public WithURL|WithTeXml|ApplicationDefault $params;
 
     /**
