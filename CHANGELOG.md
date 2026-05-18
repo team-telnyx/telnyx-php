@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.52.0 (2026-05-18)
+
+Full Changelog: [v7.51.0...v7.52.0](https://github.com/team-telnyx/telnyx-php/compare/v7.51.0...v7.52.0)
+
+### Features
+
+* Telapps 101 soniox spec ([57e7570](https://github.com/team-telnyx/telnyx-php/commit/57e757007b71acdee7987d02db8194052a5821d6))
+
 ## 7.51.0 (2026-05-18)
 
 Full Changelog: [v7.50.0...v7.51.0](https://github.com/team-telnyx/telnyx-php/compare/v7.50.0...v7.51.0)
