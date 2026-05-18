@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.51.0 (2026-05-18)
+
+Full Changelog: [v7.50.0...v7.51.0](https://github.com/team-telnyx/telnyx-php/compare/v7.50.0...v7.51.0)
+
+### Features
+
+* Add assistant background audio volume to OpenAPI spec ([dea2c5b](https://github.com/team-telnyx/telnyx-php/commit/dea2c5b3c40e2397369de64931711461d1da612f))
+
 ## 7.50.0 (2026-05-15)
 
 Full Changelog: [v7.49.0...v7.50.0](https://github.com/team-telnyx/telnyx-php/compare/v7.49.0...v7.50.0)
