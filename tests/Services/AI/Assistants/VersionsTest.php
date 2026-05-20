@@ -187,6 +187,7 @@ final class VersionsTest extends TestCase
                         'name' => 'name',
                         'url' => 'https://example.com/api/v1/function',
                         'async' => true,
+                        'asyncTimeoutMs' => 1,
                         'bodyParameters' => [
                             'properties' => ['age' => 'bar', 'location' => 'bar'],
                             'required' => ['age', 'location'],
