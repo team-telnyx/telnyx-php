@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.53.0 (2026-05-20)
+
+Full Changelog: [v7.52.0...v7.53.0](https://github.com/team-telnyx/telnyx-php/compare/v7.52.0...v7.53.0)
+
+### Features
+
+* TELAPPS-483: Add async webhook timeout to OpenAPI ([7a566d8](https://github.com/team-telnyx/telnyx-php/commit/7a566d8d03b829590393c6986b78c274e8498a1d))
+
 ## 7.52.0 (2026-05-18)
 
 Full Changelog: [v7.51.0...v7.52.0](https://github.com/team-telnyx/telnyx-php/compare/v7.51.0...v7.52.0)
