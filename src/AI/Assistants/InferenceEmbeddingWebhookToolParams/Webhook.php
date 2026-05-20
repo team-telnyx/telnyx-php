@@ -27,6 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   name: string,
  *   url: string,
  *   async?: bool|null,
+ *   asyncTimeoutMs?: int|null,
  *   bodyParameters?: null|BodyParameters|BodyParametersShape,
  *   headers?: list<Header|HeaderShape>|null,
  *   method?: null|Method|value-of<Method>,
@@ -64,6 +65,12 @@ final class Webhook implements BaseModel
      */
     #[Optional]
     public ?bool $async;
+
+    /**
+     * Maximum time in milliseconds that the conversation worker waits for an async webhook response before returning "Submitted" to the LLM. If unset, the platform default (currently 300ms) is used.
+     */
+    #[Optional('async_timeout_ms')]
+    public ?int $asyncTimeoutMs;
 
     /**
      * The body parameters the webhook tool accepts, described as a JSON Schema object. These parameters will be passed to the webhook as the body of the request. See the [JSON Schema reference](https://json-schema.org/understanding-json-schema) for documentation about the format.
@@ -149,6 +156,7 @@ final class Webhook implements BaseModel
         string $name,
         string $url,
         ?bool $async = null,
+        ?int $asyncTimeoutMs = null,
         BodyParameters|array|null $bodyParameters = null,
         ?array $headers = null,
         Method|string|null $method = null,
@@ -164,6 +172,7 @@ final class Webhook implements BaseModel
         $self['url'] = $url;
 
         null !== $async && $self['async'] = $async;
+        null !== $asyncTimeoutMs && $self['asyncTimeoutMs'] = $asyncTimeoutMs;
         null !== $bodyParameters && $self['bodyParameters'] = $bodyParameters;
         null !== $headers && $self['headers'] = $headers;
         null !== $method && $self['method'] = $method;
@@ -215,6 +224,17 @@ final class Webhook implements BaseModel
     {
         $self = clone $this;
         $self['async'] = $async;
+
+        return $self;
+    }
+
+    /**
+     * Maximum time in milliseconds that the conversation worker waits for an async webhook response before returning "Submitted" to the LLM. If unset, the platform default (currently 300ms) is used.
+     */
+    public function withAsyncTimeoutMs(int $asyncTimeoutMs): self
+    {
+        $self = clone $this;
+        $self['asyncTimeoutMs'] = $asyncTimeoutMs;
 
         return $self;
     }
