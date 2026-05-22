@@ -1922,6 +1922,7 @@ final class ActionsRawService implements ActionsRawContract
      *   recordTimeoutSecs?: int,
      *   recordTrack?: ActionTransferParams\RecordTrack|value-of<ActionTransferParams\RecordTrack>,
      *   recordTrim?: ActionTransferParams\RecordTrim|value-of<ActionTransferParams\RecordTrim>,
+     *   sendDigitsOnAnswer?: string,
      *   sipAuthPassword?: string,
      *   sipAuthUsername?: string,
      *   sipHeaders?: list<SipHeader|SipHeaderShape>,

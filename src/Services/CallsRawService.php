@@ -118,6 +118,7 @@ final class CallsRawService implements CallsRawContract
      *   recordTimeoutSecs?: int,
      *   recordTrack?: RecordTrack|value-of<RecordTrack>,
      *   recordTrim?: RecordTrim|value-of<RecordTrim>,
+     *   sendDigitsOnAnswer?: string,
      *   sendSilenceWhenIdle?: bool,
      *   sipAuthPassword?: string,
      *   sipAuthUsername?: string,
