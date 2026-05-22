@@ -74,6 +74,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordTimeoutSecs?: int|null,
  *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
  *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
+ *   sendDigitsOnAnswer?: string|null,
  *   sipAuthPassword?: string|null,
  *   sipAuthUsername?: string|null,
  *   sipHeaders?: list<SipHeader|SipHeaderShape>|null,
@@ -97,7 +98,7 @@ final class ActionTransferParams implements BaseModel
     use SdkParams;
 
     /**
-     * The DID or SIP URI to dial out to. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter.
+     * The DID or SIP URI to dial out to. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter. You may also append a comma followed by DTMF digits (e.g. `+18004247767,200`) to play those digits as DTMF once the transfer destination answers — equivalent to setting `send_digits_on_answer` separately. If both are present, the explicit `send_digits_on_answer` parameter takes precedence.
      */
     #[Required]
     public string $to;
@@ -262,6 +263,12 @@ final class ActionTransferParams implements BaseModel
      */
     #[Optional('record_trim', enum: RecordTrim::class)]
     public ?string $recordTrim;
+
+    /**
+     * DTMF digits to send automatically after the transfer destination answers. Useful for reaching an extension behind an IVR (e.g. `"200"` to dial extension 200 once the called party picks up). Allowed characters: `0-9`, `A-D`, `w` (0.5s pause), `W` (1s pause), `*`, `#`. Maximum 64 characters. When omitted, no automatic DTMF is sent. May also be supplied inline by appending `,<digits>` to `to` (e.g. `to=+18004247767,200`); if both forms are present, this explicit field takes precedence.
+     */
+    #[Optional('send_digits_on_answer')]
+    public ?string $sendDigitsOnAnswer;
 
     /**
      * SIP Authentication password used for SIP challenges.
@@ -430,6 +437,7 @@ final class ActionTransferParams implements BaseModel
         ?int $recordTimeoutSecs = null,
         RecordTrack|string|null $recordTrack = null,
         RecordTrim|string|null $recordTrim = null,
+        ?string $sendDigitsOnAnswer = null,
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
         ?array $sipHeaders = null,
@@ -472,6 +480,7 @@ final class ActionTransferParams implements BaseModel
         null !== $recordTimeoutSecs && $self['recordTimeoutSecs'] = $recordTimeoutSecs;
         null !== $recordTrack && $self['recordTrack'] = $recordTrack;
         null !== $recordTrim && $self['recordTrim'] = $recordTrim;
+        null !== $sendDigitsOnAnswer && $self['sendDigitsOnAnswer'] = $sendDigitsOnAnswer;
         null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
         null !== $sipAuthUsername && $self['sipAuthUsername'] = $sipAuthUsername;
         null !== $sipHeaders && $self['sipHeaders'] = $sipHeaders;
@@ -491,7 +500,7 @@ final class ActionTransferParams implements BaseModel
     }
 
     /**
-     * The DID or SIP URI to dial out to. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter.
+     * The DID or SIP URI to dial out to. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter. You may also append a comma followed by DTMF digits (e.g. `+18004247767,200`) to play those digits as DTMF once the transfer destination answers — equivalent to setting `send_digits_on_answer` separately. If both are present, the explicit `send_digits_on_answer` parameter takes precedence.
      */
     public function withTo(string $to): self
     {
@@ -776,6 +785,17 @@ final class ActionTransferParams implements BaseModel
     {
         $self = clone $this;
         $self['recordTrim'] = $recordTrim;
+
+        return $self;
+    }
+
+    /**
+     * DTMF digits to send automatically after the transfer destination answers. Useful for reaching an extension behind an IVR (e.g. `"200"` to dial extension 200 once the called party picks up). Allowed characters: `0-9`, `A-D`, `w` (0.5s pause), `W` (1s pause), `*`, `#`. Maximum 64 characters. When omitted, no automatic DTMF is sent. May also be supplied inline by appending `,<digits>` to `to` (e.g. `to=+18004247767,200`); if both forms are present, this explicit field takes precedence.
+     */
+    public function withSendDigitsOnAnswer(string $sendDigitsOnAnswer): self
+    {
+        $self = clone $this;
+        $self['sendDigitsOnAnswer'] = $sendDigitsOnAnswer;
 
         return $self;
     }

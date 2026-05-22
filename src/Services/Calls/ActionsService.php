@@ -2152,7 +2152,7 @@ final class ActionsService implements ActionsContract
      * - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
      *
      * @param string $callControlID Unique identifier and token for controlling the call
-     * @param string $to The DID or SIP URI to dial out to. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter.
+     * @param string $to The DID or SIP URI to dial out to. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter. You may also append a comma followed by DTMF digits (e.g. `+18004247767,200`) to play those digits as DTMF once the transfer destination answers — equivalent to setting `send_digits_on_answer` separately. If both are present, the explicit `send_digits_on_answer` parameter takes precedence.
      * @param AnsweringMachineDetection|value-of<AnsweringMachineDetection> $answeringMachineDetection Enables Answering Machine Detection. When a call is answered, Telnyx runs real-time detection to determine if it was picked up by a human or a machine and sends an `call.machine.detection.ended` webhook with the analysis result. If 'greeting_end' or 'detect_words' is used and a 'machine' is detected, you will receive another 'call.machine.greeting.ended' webhook when the answering machine greeting ends with a beep or silence. If `detect_beep` is used, you will only receive 'call.machine.greeting.ended' if a beep is detected.
      * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape $answeringMachineDetectionConfig Optional configuration parameters to modify 'answering_machine_detection' performance. Only `total_analysis_time_millis` and `greeting_duration_millis` parameters are applicable when `premium` is selected as answering_machine_detection.
      * @param string $audioURL The URL of a file to be played back when the transfer destination answers before bridging the call. The URL can point to either a WAV or MP3 file. media_name and audio_url cannot be used together in one request.
@@ -2176,6 +2176,7 @@ final class ActionsService implements ActionsContract
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordTrack|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param \Telnyx\Calls\Actions\ActionTransferParams\RecordTrim|value-of<\Telnyx\Calls\Actions\ActionTransferParams\RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
+     * @param string $sendDigitsOnAnswer DTMF digits to send automatically after the transfer destination answers. Useful for reaching an extension behind an IVR (e.g. `"200"` to dial extension 200 once the called party picks up). Allowed characters: `0-9`, `A-D`, `w` (0.5s pause), `W` (1s pause), `*`, `#`. Maximum 64 characters. When omitted, no automatic DTMF is sent. May also be supplied inline by appending `,<digits>` to `to` (e.g. `to=+18004247767,200`); if both forms are present, this explicit field takes precedence.
      * @param string $sipAuthPassword SIP Authentication password used for SIP challenges
      * @param string $sipAuthUsername SIP Authentication username used for SIP challenges
      * @param list<SipHeader|SipHeaderShape> $sipHeaders SIP headers to be added to the SIP INVITE. Currently only User-to-User header is supported.
@@ -2220,6 +2221,7 @@ final class ActionsService implements ActionsContract
         int $recordTimeoutSecs = 0,
         \Telnyx\Calls\Actions\ActionTransferParams\RecordTrack|string $recordTrack = 'both',
         \Telnyx\Calls\Actions\ActionTransferParams\RecordTrim|string|null $recordTrim = null,
+        ?string $sendDigitsOnAnswer = null,
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
         ?array $sipHeaders = null,
@@ -2262,6 +2264,7 @@ final class ActionsService implements ActionsContract
                 'recordTimeoutSecs' => $recordTimeoutSecs,
                 'recordTrack' => $recordTrack,
                 'recordTrim' => $recordTrim,
+                'sendDigitsOnAnswer' => $sendDigitsOnAnswer,
                 'sipAuthPassword' => $sipAuthPassword,
                 'sipAuthUsername' => $sipAuthUsername,
                 'sipHeaders' => $sipHeaders,

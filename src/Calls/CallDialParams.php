@@ -97,6 +97,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordTimeoutSecs?: int|null,
  *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
  *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
+ *   sendDigitsOnAnswer?: string|null,
  *   sendSilenceWhenIdle?: bool|null,
  *   sipAuthPassword?: string|null,
  *   sipAuthUsername?: string|null,
@@ -145,7 +146,7 @@ final class CallDialParams implements BaseModel
     public string $from;
 
     /**
-     * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter.
+     * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter. For a single string destination, you may append a comma followed by DTMF digits (e.g. `+18004247767,200`) to play those digits as DTMF once the called party answers — equivalent to setting `send_digits_on_answer` separately. If both are present, the explicit `send_digits_on_answer` parameter takes precedence. This shorthand is not supported when `to` is an array.
      *
      * @var ToVariants $to
      */
@@ -349,6 +350,12 @@ final class CallDialParams implements BaseModel
      */
     #[Optional('record_trim', enum: RecordTrim::class)]
     public ?string $recordTrim;
+
+    /**
+     * DTMF digits to send automatically after the called party answers. Useful for reaching an extension behind an IVR (e.g. `"200"` to dial extension 200 once the called party picks up). Allowed characters: `0-9`, `A-D`, `w` (0.5s pause), `W` (1s pause), `*`, `#`. Maximum 64 characters. When omitted, no automatic DTMF is sent. May also be supplied inline by appending `,<digits>` to `to` (e.g. `to=+18004247767,200`); if both forms are present, this explicit field takes precedence.
+     */
+    #[Optional('send_digits_on_answer')]
+    public ?string $sendDigitsOnAnswer;
 
     /**
      * Generate silence RTP packets when no transmission available.
@@ -636,6 +643,7 @@ final class CallDialParams implements BaseModel
         ?int $recordTimeoutSecs = null,
         RecordTrack|string|null $recordTrack = null,
         RecordTrim|string|null $recordTrim = null,
+        ?string $sendDigitsOnAnswer = null,
         ?bool $sendSilenceWhenIdle = null,
         ?string $sipAuthPassword = null,
         ?string $sipAuthUsername = null,
@@ -700,6 +708,7 @@ final class CallDialParams implements BaseModel
         null !== $recordTimeoutSecs && $self['recordTimeoutSecs'] = $recordTimeoutSecs;
         null !== $recordTrack && $self['recordTrack'] = $recordTrack;
         null !== $recordTrim && $self['recordTrim'] = $recordTrim;
+        null !== $sendDigitsOnAnswer && $self['sendDigitsOnAnswer'] = $sendDigitsOnAnswer;
         null !== $sendSilenceWhenIdle && $self['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
         null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
         null !== $sipAuthUsername && $self['sipAuthUsername'] = $sipAuthUsername;
@@ -754,7 +763,7 @@ final class CallDialParams implements BaseModel
     }
 
     /**
-     * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter.
+     * The DID or SIP URI to dial out to. Multiple DID or SIP URIs can be provided using an array of strings. For SIP URI destinations, append `;secure=true` or `;secure=srtp` to enable SRTP media encryption for that endpoint, or `;secure=dtls` to enable DTLS media encryption for that endpoint. If `media_encryption` is set to `SRTP` or `DTLS`, it takes precedence over any per-endpoint `secure` URI parameter. For a single string destination, you may append a comma followed by DTMF digits (e.g. `+18004247767,200`) to play those digits as DTMF once the called party answers — equivalent to setting `send_digits_on_answer` separately. If both are present, the explicit `send_digits_on_answer` parameter takes precedence. This shorthand is not supported when `to` is an array.
      *
      * @param ToShape $to
      */
@@ -1125,6 +1134,17 @@ final class CallDialParams implements BaseModel
     {
         $self = clone $this;
         $self['recordTrim'] = $recordTrim;
+
+        return $self;
+    }
+
+    /**
+     * DTMF digits to send automatically after the called party answers. Useful for reaching an extension behind an IVR (e.g. `"200"` to dial extension 200 once the called party picks up). Allowed characters: `0-9`, `A-D`, `w` (0.5s pause), `W` (1s pause), `*`, `#`. Maximum 64 characters. When omitted, no automatic DTMF is sent. May also be supplied inline by appending `,<digits>` to `to` (e.g. `to=+18004247767,200`); if both forms are present, this explicit field takes precedence.
+     */
+    public function withSendDigitsOnAnswer(string $sendDigitsOnAnswer): self
+    {
+        $self = clone $this;
+        $self['sendDigitsOnAnswer'] = $sendDigitsOnAnswer;
 
         return $self;
     }
