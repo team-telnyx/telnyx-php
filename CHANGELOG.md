@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.55.0 (2026-05-22)
+
+Full Changelog: [v7.54.0...v7.55.0](https://github.com/team-telnyx/telnyx-php/compare/v7.54.0...v7.55.0)
+
+### Features
+
+* MSG-919: documentation for Whatsapp user data ([d03e2be](https://github.com/team-telnyx/telnyx-php/commit/d03e2bececa4671d2f0cbaa93f421ef9fafdb318))
+
 ## 7.54.0 (2026-05-22)
 
 Full Changelog: [v7.53.0...v7.54.0](https://github.com/team-telnyx/telnyx-php/compare/v7.53.0...v7.54.0)
