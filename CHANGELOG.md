@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.54.0 (2026-05-22)
+
+Full Changelog: [v7.53.0...v7.54.0](https://github.com/team-telnyx/telnyx-php/compare/v7.53.0...v7.54.0)
+
+### Features
+
+* TELAPPS-72: document send_digits_on_answer on Dial + Transfer ([24bc8ae](https://github.com/team-telnyx/telnyx-php/commit/24bc8ae851a3455bacb1bbe253e01d5af4966170))
+
 ## 7.53.0 (2026-05-20)
 
 Full Changelog: [v7.52.0...v7.53.0](https://github.com/team-telnyx/telnyx-php/compare/v7.52.0...v7.53.0)
