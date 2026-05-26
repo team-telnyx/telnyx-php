@@ -6,8 +6,10 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineXaiConfig;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
