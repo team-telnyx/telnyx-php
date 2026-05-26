@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AI\AICreateResponseParams;
+use Telnyx\AI\AICreateResponseDeprecatedParams;
 use Telnyx\AI\AIGetModelsResponse;
 use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
@@ -35,18 +35,18 @@ final class AIRawService implements AIRawContract
      *
      * **Deprecated**: Use `POST /v2/ai/openai/responses` instead. This endpoint is compatible with the [OpenAI Responses API](https://developers.openai.com/api/reference/responses/overview) and may be used with the OpenAI JS or Python SDK. Response id parameter is not supported at the moment. Use the `conversation` parameter with a Telnyx Conversation ID to leverage persistent conversations.
      *
-     * @param array{body: array<string,mixed>}|AICreateResponseParams $params
+     * @param array{body: array<string,mixed>}|AICreateResponseDeprecatedParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>
      *
      * @throws APIException
      */
-    public function createResponse(
-        array|AICreateResponseParams $params,
+    public function createResponseDeprecated(
+        array|AICreateResponseDeprecatedParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = AICreateResponseParams::parseRequest(
+        [$parsed, $options] = AICreateResponseDeprecatedParams::parseRequest(
             $params,
             $requestOptions,
         );
