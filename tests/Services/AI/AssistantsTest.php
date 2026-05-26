@@ -131,7 +131,10 @@ final class AssistantsTest extends TestCase
                     'attenuationLimit' => 0, 'mode' => 'advanced',
                 ],
                 'recordingSettings' => [
-                    'channels' => 'single', 'enabled' => true, 'format' => 'wav',
+                    'channels' => 'single',
+                    'enabled' => true,
+                    'format' => 'wav',
+                    'stopOnConversationEnd' => true,
                 ],
                 'supportsUnauthenticatedWebCalls' => true,
                 'timeLimitSecs' => 30,

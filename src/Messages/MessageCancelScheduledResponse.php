@@ -38,6 +38,7 @@ use Telnyx\Messages\MessageCancelScheduledResponse\Type;
  *   from?: null|From|FromShape,
  *   media?: list<Media|MediaShape>|null,
  *   messagingProfileID?: string|null,
+ *   numChars?: int|null,
  *   organizationID?: string|null,
  *   parts?: int|null,
  *   receivedAt?: \DateTimeInterface|null,
@@ -121,6 +122,12 @@ final class MessageCancelScheduledResponse implements BaseModel
      */
     #[Optional('messaging_profile_id')]
     public ?string $messagingProfileID;
+
+    /**
+     * The number of characters in the message text.
+     */
+    #[Optional('num_chars')]
+    public ?int $numChars;
 
     /**
      * The id of the organization the messaging profile belongs to.
@@ -264,6 +271,7 @@ final class MessageCancelScheduledResponse implements BaseModel
         From|array|null $from = null,
         ?array $media = null,
         ?string $messagingProfileID = null,
+        ?int $numChars = null,
         ?string $organizationID = null,
         ?int $parts = null,
         ?\DateTimeInterface $receivedAt = null,
@@ -295,6 +303,7 @@ final class MessageCancelScheduledResponse implements BaseModel
         null !== $from && $self['from'] = $from;
         null !== $media && $self['media'] = $media;
         null !== $messagingProfileID && $self['messagingProfileID'] = $messagingProfileID;
+        null !== $numChars && $self['numChars'] = $numChars;
         null !== $organizationID && $self['organizationID'] = $organizationID;
         null !== $parts && $self['parts'] = $parts;
         null !== $receivedAt && $self['receivedAt'] = $receivedAt;
@@ -440,6 +449,17 @@ final class MessageCancelScheduledResponse implements BaseModel
     {
         $self = clone $this;
         $self['messagingProfileID'] = $messagingProfileID;
+
+        return $self;
+    }
+
+    /**
+     * The number of characters in the message text.
+     */
+    public function withNumChars(int $numChars): self
+    {
+        $self = clone $this;
+        $self['numChars'] = $numChars;
 
         return $self;
     }
