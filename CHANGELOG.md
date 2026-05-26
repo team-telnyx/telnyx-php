@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.56.0 (2026-05-26)
+
+Full Changelog: [v7.55.0...v7.56.0](https://github.com/team-telnyx/telnyx-php/compare/v7.55.0...v7.56.0)
+
+### Features
+
+* TELAPPS-523: document stop_on_conversation_end on assistant recording_settings ([9331fd8](https://github.com/team-telnyx/telnyx-php/commit/9331fd8772d8dc59250ceae47c1baccb5b1011d3))
+
 ## 7.55.0 (2026-05-22)
 
 Full Changelog: [v7.54.0...v7.55.0](https://github.com/team-telnyx/telnyx-php/compare/v7.54.0...v7.55.0)
