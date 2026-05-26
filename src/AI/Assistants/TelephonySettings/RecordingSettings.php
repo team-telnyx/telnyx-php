@@ -17,6 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   channels?: null|Channels|value-of<Channels>,
  *   enabled?: bool|null,
  *   format?: null|Format|value-of<Format>,
+ *   stopOnConversationEnd?: bool|null,
  * }
  */
 final class RecordingSettings implements BaseModel
@@ -46,6 +47,12 @@ final class RecordingSettings implements BaseModel
     #[Optional(enum: Format::class)]
     public ?string $format;
 
+    /**
+     * When enabled, the call recording will stop when the conversation ends (for example, when the assistant hangs up or the call is transferred). When disabled, recording continues until the call itself ends.
+     */
+    #[Optional('stop_on_conversation_end')]
+    public ?bool $stopOnConversationEnd;
+
     public function __construct()
     {
         $this->initialize();
@@ -63,12 +70,14 @@ final class RecordingSettings implements BaseModel
         Channels|string|null $channels = null,
         ?bool $enabled = null,
         Format|string|null $format = null,
+        ?bool $stopOnConversationEnd = null,
     ): self {
         $self = new self;
 
         null !== $channels && $self['channels'] = $channels;
         null !== $enabled && $self['enabled'] = $enabled;
         null !== $format && $self['format'] = $format;
+        null !== $stopOnConversationEnd && $self['stopOnConversationEnd'] = $stopOnConversationEnd;
 
         return $self;
     }
@@ -106,6 +115,17 @@ final class RecordingSettings implements BaseModel
     {
         $self = clone $this;
         $self['format'] = $format;
+
+        return $self;
+    }
+
+    /**
+     * When enabled, the call recording will stop when the conversation ends (for example, when the assistant hangs up or the call is transferred). When disabled, recording continues until the call itself ends.
+     */
+    public function withStopOnConversationEnd(bool $stopOnConversationEnd): self
+    {
+        $self = clone $this;
+        $self['stopOnConversationEnd'] = $stopOnConversationEnd;
 
         return $self;
     }
