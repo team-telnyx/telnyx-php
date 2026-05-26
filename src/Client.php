@@ -162,6 +162,8 @@ use Telnyx\Services\VirtualCrossConnectsCoverageService;
 use Telnyx\Services\VirtualCrossConnectsService;
 use Telnyx\Services\VoiceClonesService;
 use Telnyx\Services\VoiceDesignsService;
+use Telnyx\Services\VoiceSDKCallReportService;
+use Telnyx\Services\VoiceSDKCallReportsService;
 use Telnyx\Services\WebhookDeliveriesService;
 use Telnyx\Services\WebhooksService;
 use Telnyx\Services\WellKnownService;
@@ -1011,6 +1013,16 @@ class Client extends BaseClient
     public UacConnectionsService $uacConnections;
 
     /**
+     * @api
+     */
+    public VoiceSDKCallReportService $voiceSDKCallReport;
+
+    /**
+     * @api
+     */
+    public VoiceSDKCallReportsService $voiceSDKCallReports;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1242,6 +1254,8 @@ class Client extends BaseClient
         $this->termsOfService = new TermsOfServiceService($this);
         $this->pronunciationDicts = new PronunciationDictsService($this);
         $this->uacConnections = new UacConnectionsService($this);
+        $this->voiceSDKCallReport = new VoiceSDKCallReportService($this);
+        $this->voiceSDKCallReports = new VoiceSDKCallReportsService($this);
     }
 
     /** @return array<string,string> */

@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Assistants;
 
-use Telnyx\AI\Assistants\AssistantIntegration;
-use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantsList;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\FallbackConfigReq;
 use Telnyx\AI\Assistants\InferenceEmbedding;
-use Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
@@ -19,6 +16,9 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Exceptions\APIException;
@@ -28,9 +28,9 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
- * @phpstan-import-type AssistantIntegrationShape from \Telnyx\AI\Assistants\AssistantIntegration
- * @phpstan-import-type InferenceEmbeddingInterruptionSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings
- * @phpstan-import-type AssistantMcpServerShape from \Telnyx\AI\Assistants\AssistantMcpServer
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
  * @phpstan-import-type PostConversationSettingsReqShape from \Telnyx\AI\Assistants\PostConversationSettingsReq
@@ -76,10 +76,10 @@ interface VersionsContract
      * @param string $greeting Body param: Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
      * @param InsightSettings|InsightSettingsShape $insightSettings Body param
      * @param string $instructions Body param: System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
-     * @param list<AssistantIntegration|AssistantIntegrationShape> $integrations Body param: Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
-     * @param InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape $interruptionSettings Body param: Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
+     * @param list<Integration|IntegrationShape> $integrations Body param: Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings Body param: Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
      * @param string $llmAPIKeyRef Body param: This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
-     * @param list<AssistantMcpServer|AssistantMcpServerShape> $mcpServers Body param: MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
+     * @param list<McpServer|McpServerShape> $mcpServers Body param: MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
      * @param MessagingSettings|MessagingSettingsShape $messagingSettings Body param
      * @param string $model Body param: ID of the model to use when `external_llm` is not set. You can use the [Get models API](https://developers.telnyx.com/api-reference/openai-chat/get-available-models-openai-compatible) to see available models. If `external_llm` is provided, the assistant uses `external_llm` instead of this field. If neither `model` nor `external_llm` is provided, Telnyx applies the default model.
      * @param string $name Body param
@@ -112,7 +112,7 @@ interface VersionsContract
         InsightSettings|array|null $insightSettings = null,
         ?string $instructions = null,
         array $integrations = [],
-        InferenceEmbeddingInterruptionSettings|array|null $interruptionSettings = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
         ?string $llmAPIKeyRef = null,
         array $mcpServers = [],
         MessagingSettings|array|null $messagingSettings = null,
