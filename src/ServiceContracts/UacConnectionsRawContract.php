@@ -8,11 +8,11 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\UacConnections\UacConnection;
 use Telnyx\UacConnections\UacConnectionCreateParams;
 use Telnyx\UacConnections\UacConnectionDeleteResponse;
 use Telnyx\UacConnections\UacConnectionGetResponse;
 use Telnyx\UacConnections\UacConnectionListParams;
-use Telnyx\UacConnections\UacConnectionListResponse;
 use Telnyx\UacConnections\UacConnectionNewResponse;
 use Telnyx\UacConnections\UacConnectionUpdateParams;
 use Telnyx\UacConnections\UacConnectionUpdateResponse;
@@ -75,7 +75,7 @@ interface UacConnectionsRawContract
      * @param array<string,mixed>|UacConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<UacConnectionListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<UacConnection>>
      *
      * @throws APIException
      */

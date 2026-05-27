@@ -11,13 +11,13 @@ use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
+use Telnyx\XaiVoiceSettings;
 
 /**
  * Start a Conversation Relay session on an active call. Conversation Relay connects the call audio to your WebSocket so your application can exchange realtime messages with the caller while Telnyx handles speech recognition and text-to-speech. Only one AI Assistant or Conversation Relay session can be active on a call at a time.

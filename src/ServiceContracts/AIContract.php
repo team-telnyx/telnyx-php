@@ -26,7 +26,7 @@ interface AIContract
      *
      * @throws APIException
      */
-    public function createResponseDeprecated(
+    public function createResponse(
         array $body,
         RequestOptions|array|null $requestOptions = null
     ): array;
