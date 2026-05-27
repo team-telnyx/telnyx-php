@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.57.0 (2026-05-27)
+
+Full Changelog: [v7.56.0...v7.57.0](https://github.com/team-telnyx/telnyx-php/compare/v7.56.0...v7.57.0)
+
+### Features
+
+* TELAPPS-531: document Rime ArcanaV3 and Coda voice models ([020c9aa](https://github.com/team-telnyx/telnyx-php/commit/020c9aa10a4602f076b0debc1caf24754178aee6))
+
+
+### Documentation
+
+* add voice sdk debug call report spec ([d19624b](https://github.com/team-telnyx/telnyx-php/commit/d19624bd868c40fb9b9160022e91a84ec077740d))
+
 ## 7.56.0 (2026-05-26)
 
 Full Changelog: [v7.55.0...v7.56.0](https://github.com/team-telnyx/telnyx-php/compare/v7.55.0...v7.56.0)
