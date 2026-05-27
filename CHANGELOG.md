@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.58.0 (2026-05-27)
+
+Full Changelog: [v7.57.0...v7.58.0](https://github.com/team-telnyx/telnyx-php/compare/v7.57.0...v7.58.0)
+
+### Features
+
+* TELAPPS-5698 document conversation relay API shape ([f608f1d](https://github.com/team-telnyx/telnyx-php/commit/f608f1dabd5253feab7570c1f2a6bd1bd8897336))
+
 ## 7.57.0 (2026-05-27)
 
 Full Changelog: [v7.56.0...v7.57.0](https://github.com/team-telnyx/telnyx-php/compare/v7.56.0...v7.57.0)
