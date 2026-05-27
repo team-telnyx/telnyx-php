@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts\Calls;
 use Telnyx\AI\Assistants\Assistant;
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig;
 use Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
@@ -47,7 +48,9 @@ use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Interruptible;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptibleGreeting;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
 use Telnyx\Calls\Actions\ActionStartForkingResponse;
@@ -60,7 +63,6 @@ use Telnyx\Calls\Actions\ActionStartPlaybackResponse;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Channels;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Format;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\RecordingTrack;
-use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionLanguage;
 use Telnyx\Calls\Actions\ActionStartRecordingParams\Trim;
 use Telnyx\Calls\Actions\ActionStartRecordingResponse;
@@ -127,6 +129,7 @@ use Telnyx\XaiVoiceSettings;
 
 /**
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
+ * @phpstan-import-type ConversationRelayConfigShape from \Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig
  * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
@@ -143,7 +146,6 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
  * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
- * @phpstan-import-type TranscriptionShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
@@ -189,6 +191,7 @@ interface ActionsContract
      * @param string $billingGroupID Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
+     * @param ConversationRelayConfig|ConversationRelayConfigShape $conversationRelayConfig Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.
      * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE response
      * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
      * @param PreferredCodecs|value-of<PreferredCodecs> $preferredCodecs the list of comma-separated codecs in a preferred order for the forked media to be received
@@ -226,6 +229,7 @@ interface ActionsContract
         ?string $billingGroupID = null,
         ?string $clientState = null,
         ?string $commandID = null,
+        ConversationRelayConfig|array|null $conversationRelayConfig = null,
         ?array $customHeaders = null,
         DeepfakeDetection|array|null $deepfakeDetection = null,
         PreferredCodecs|string|null $preferredCodecs = null,
@@ -801,15 +805,23 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to subsequent webhooks. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param bool $conversationRelayDtmfDetection enable DTMF detection for the relay session
-     * @param ConversationRelaySettings|ConversationRelaySettingsShape $conversationRelaySettings Conversation Relay connection settings. This object is used by TeXML Call Scripting's `<ConversationRelay>` verb. The `interruptible` and `interruptible_greeting` fields are shorthand for `interruption_settings.interruptible` and `interruption_settings.interruptible_greeting`; use top-level `interruption_settings` for the full interruption settings shape.
+     * @param ConversationRelaySettings|ConversationRelaySettingsShape $conversationRelaySettings Conversation Relay connection settings. This object can provide `url`, `dtmf_detection`, `interruptible`, `interruptible_greeting`, and `languages`. Top-level aliases override nested values when both are present.
      * @param string $conversationRelayURL WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
+     * @param array<string,mixed> $customParameters Custom key-value parameters forwarded to the relay session as `assistant.dynamic_variables`. If `assistant.dynamic_variables` is also present, these values are merged in.
+     * @param bool $dtmfDetection Public alias for `conversation_relay_dtmf_detection`. If both are present, this value wins.
      * @param string $greeting text played when the relay session starts
+     * @param Interruptible|value-of<Interruptible> $interruptible Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
+     * @param InterruptibleGreeting|value-of<InterruptibleGreeting> $interruptibleGreeting Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
      * @param \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings|InterruptionSettingsShape $interruptionSettings settings for handling caller interruptions during Conversation Relay speech
-     * @param string $language Default language for the relay session. This value is used for both text-to-speech and speech recognition unless `tts_language` or `transcription_language` are provided.
-     * @param list<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language|LanguageShape> $languages Language-specific TTS and transcription settings. Use this when the relay session needs per-language provider, voice, or speech model configuration.
-     * @param Transcription|TranscriptionShape $transcription speech-to-text settings for Conversation Relay
-     * @param string $transcriptionLanguage Language to use for speech recognition. Overrides `language` for transcription when provided.
-     * @param string $ttsLanguage Language to use for text-to-speech. Overrides `language` for TTS when provided.
+     * @param string $language Default language for the relay session. This value is used for both text-to-speech and speech recognition.
+     * @param list<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language|LanguageShape> $languages per-language TTS and transcription settings
+     * @param string $provider Structured voice provider. Must be supplied together with `structured_provider`.
+     * @param array<string,mixed> $structuredProvider Provider-specific structured voice settings. Must be supplied together with `provider`; Telnyx sends the value as the nested provider configuration for Conversation Relay.
+     * @param array<string,mixed> $transcription Not supported for Conversation Relay start requests. Use `transcription_engine` and `transcription_engine_config` instead.
+     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility. For Conversation Relay, use this field with `transcription_engine_config`; the `transcription` object is not supported.
+     * @param array<string,mixed> $transcriptionEngineConfig Engine-specific transcription settings for Conversation Relay. This accepts the same provider-specific options used by the Call Transcription Start command, such as `transcription_model`, without requiring the engine discriminator to be repeated inside this object.
+     * @param string $ttsProvider Text-to-speech provider. If omitted, Telnyx derives it from `voice` or `provider`.
+     * @param string $url Public alias for `conversation_relay_url`. Must start with `ws://` or `wss://`. If both are present, this value wins.
      * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
      *
      *  **Supported Providers:**
@@ -832,15 +844,23 @@ interface ActionsContract
         bool $conversationRelayDtmfDetection = false,
         ConversationRelaySettings|array|null $conversationRelaySettings = null,
         ?string $conversationRelayURL = null,
+        ?array $customParameters = null,
+        bool $dtmfDetection = false,
         ?string $greeting = null,
+        Interruptible|string $interruptible = 'any',
+        InterruptibleGreeting|string $interruptibleGreeting = 'any',
         \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings|array|null $interruptionSettings = null,
         string $language = 'en',
         ?array $languages = null,
-        Transcription|array|null $transcription = null,
-        ?string $transcriptionLanguage = null,
-        ?string $ttsLanguage = null,
+        ?string $provider = null,
+        ?array $structuredProvider = null,
+        ?array $transcription = null,
+        TranscriptionEngine|string $transcriptionEngine = 'Google',
+        ?array $transcriptionEngineConfig = null,
+        ?string $ttsProvider = null,
+        ?string $url = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartConversationRelayResponse;
 
@@ -944,7 +964,7 @@ interface ActionsContract
      * @param RecordingTrack|value-of<RecordingTrack> $recordingTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param int $timeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite)
      * @param bool $transcription Enable post recording transcription. The default value is false.
-     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
+     * @param \Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine|value-of<\Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine> $transcriptionEngine Engine to use for speech recognition. `A` - `Google`, `B` - `Telnyx`, `deepgram/nova-3` - `Deepgram Nova-3`. Note: `deepgram/nova-3` supports only `en` and `en-{Region}` languages.
      * @param TranscriptionLanguage|value-of<TranscriptionLanguage> $transcriptionLanguage Language code for transcription. Note: Not all languages are supported by all transcription engines (google, telnyx, deepgram). See engine-specific documentation for supported values.
      * @param int $transcriptionMaxSpeakerCount Defines maximum number of speakers in the conversation. Applies to `google` engine only.
      * @param int $transcriptionMinSpeakerCount Defines minimum number of speakers in the conversation. Applies to `google` engine only.
@@ -967,7 +987,7 @@ interface ActionsContract
         RecordingTrack|string $recordingTrack = 'both',
         int $timeoutSecs = 0,
         bool $transcription = false,
-        TranscriptionEngine|string $transcriptionEngine = 'A',
+        \Telnyx\Calls\Actions\ActionStartRecordingParams\TranscriptionEngine|string $transcriptionEngine = 'A',
         TranscriptionLanguage|string $transcriptionLanguage = 'en-US',
         int $transcriptionMaxSpeakerCount = 6,
         int $transcriptionMinSpeakerCount = 2,

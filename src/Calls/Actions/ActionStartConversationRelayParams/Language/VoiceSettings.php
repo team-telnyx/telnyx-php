@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartConversationRelayParams;
+namespace Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language;
 
 use Telnyx\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language\VoiceSettings\InworldVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -27,7 +27,7 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type AzureVoiceSettingsShape from \Telnyx\AzureVoiceSettings
  * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
  * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
- * @phpstan-import-type InworldVoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\InworldVoiceSettings
+ * @phpstan-import-type InworldVoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language\VoiceSettings\InworldVoiceSettings
  * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\XaiVoiceSettings
  *
  * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings
