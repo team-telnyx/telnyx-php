@@ -13,8 +13,8 @@ use Telnyx\ServiceContracts\WireguardInterfacesContract;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceRead;
 
 /**
  * WireGuard Interface operations.
@@ -100,7 +100,7 @@ final class WireguardInterfacesService implements WireguardInterfacesContract
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<WireguardInterfaceListResponse>
+     * @return DefaultFlatPagination<WireguardInterfaceRead>
      *
      * @throws APIException
      */

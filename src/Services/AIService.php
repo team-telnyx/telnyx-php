@@ -130,14 +130,14 @@ final class AIService implements AIContract
      *
      * @throws APIException
      */
-    public function createResponseDeprecated(
+    public function createResponse(
         array $body,
         RequestOptions|array|null $requestOptions = null
     ): array {
         $params = Util::removeNulls(['body' => $body]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createResponseDeprecated(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->createResponse(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

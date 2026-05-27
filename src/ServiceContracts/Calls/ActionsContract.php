@@ -25,7 +25,6 @@ use Telnyx\Calls\Actions\ActionBridgeResponse;
 use Telnyx\Calls\Actions\ActionEnqueueResponse;
 use Telnyx\Calls\Actions\ActionGatherResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingAIResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
@@ -70,10 +69,8 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineXaiConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStopConversationRelayResponse;
@@ -104,10 +101,12 @@ use Telnyx\Calls\Actions\InterruptionSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Calls\Actions\TranscriptionConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineXaiConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Calls\CustomSipHeader;
@@ -124,6 +123,7 @@ use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
+use Telnyx\XaiVoiceSettings;
 
 /**
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
@@ -472,7 +472,7 @@ interface ActionsContract
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.eleven_multilingual_v2.21m00Tcm4TlvDq8ikWAM`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration identifier secret in `"voice_settings": {"api_key_ref": "<secret_identifier>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      * - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>` (e.g., `Telnyx.KokoroTTS.af`). Use `voice_settings` to configure voice_speed and other synthesis parameters.
      * - **Minimax:** Use `Minimax.<ModelId>.<VoiceId>` (e.g., `Minimax.speech-02-hd.Wise_Woman`). Supported models: `speech-02-turbo`, `speech-02-hd`, `speech-2.6-turbo`, `speech-2.8-turbo`. Use `voice_settings` to configure speed, volume, pitch, and language_boost.
-     * - **Rime:** Use `Rime.<model_id>.<voice_id>` (e.g., `Rime.Arcana.cove`). Supported model_ids: `Arcana`, `Mist`. Use `voice_settings` to configure voice_speed.
+     * - **Rime:** Use `Rime.<model_id>.<voice_id>` (e.g., `Rime.Arcana.cove`). Supported model_ids: `Arcana`, `Mist`, `ArcanaV3`, `Coda`. Use `voice_settings` to configure voice_speed.
      * - **Resemble:** Use `Resemble.Turbo.<voice_id>` (e.g., `Resemble.Turbo.my_voice`). Only `Turbo` model is supported. Use `voice_settings` to configure precision, sample_rate, and format.
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`). Supported models: `Mini`, `Max`.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
@@ -513,7 +513,7 @@ interface ActionsContract
         string $terminatingDigit = '#',
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|\Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse;
 
@@ -715,7 +715,7 @@ interface ActionsContract
      * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.eleven_multilingual_v2.21m00Tcm4TlvDq8ikWAM`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration identifier secret in `"voice_settings": {"api_key_ref": "<secret_identifier>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
      * - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>` (e.g., `Telnyx.KokoroTTS.af`). Use `voice_settings` to configure voice_speed and other synthesis parameters.
      * - **Minimax:** Use `Minimax.<ModelId>.<VoiceId>` (e.g., `Minimax.speech-02-hd.Wise_Woman`). Supported models: `speech-02-turbo`, `speech-02-hd`, `speech-2.6-turbo`, `speech-2.8-turbo`. Use `voice_settings` to configure speed, volume, pitch, and language_boost.
-     * - **Rime:** Use `Rime.<model_id>.<voice_id>` (e.g., `Rime.Arcana.cove`). Supported model_ids: `Arcana`, `Mist`. Use `voice_settings` to configure voice_speed.
+     * - **Rime:** Use `Rime.<model_id>.<voice_id>` (e.g., `Rime.Arcana.cove`). Supported model_ids: `Arcana`, `Mist`, `ArcanaV3`, `Coda`. Use `voice_settings` to configure voice_speed.
      * - **Resemble:** Use `Resemble.Turbo.<voice_id>` (e.g., `Resemble.Turbo.my_voice`). Only `Turbo` model is supported. Use `voice_settings` to configure precision, sample_rate, and format.
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`). Supported models: `Mini`, `Max`.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
@@ -746,7 +746,7 @@ interface ActionsContract
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
         TargetLegs|string $targetLegs = 'self',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse;
 
@@ -789,7 +789,7 @@ interface ActionsContract
         bool $sendMessageHistoryUpdates = false,
         TranscriptionConfig|array|null $transcription = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartAIAssistantResponse;
 
@@ -840,7 +840,7 @@ interface ActionsContract
         ?string $transcriptionLanguage = null,
         ?string $ttsLanguage = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartConversationRelayResponse;
 
