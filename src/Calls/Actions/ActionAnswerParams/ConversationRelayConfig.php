@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions;
+namespace Telnyx\Calls\Actions\ActionAnswerParams;
 
 use Telnyx\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Interruptible;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptibleGreeting;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\TranscriptionEngine;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\Interruptible;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptibleGreeting;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptionSettings;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\Language;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\TranscriptionEngine;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\VoiceSettings;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\Actions\AwsVoiceSettings;
+use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
+use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
-use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
@@ -24,91 +25,45 @@ use Telnyx\RimeVoiceSettings;
 use Telnyx\XaiVoiceSettings;
 
 /**
- * Start a Conversation Relay session on an active call. Conversation Relay connects the call audio to your WebSocket so your application can exchange realtime messages with the caller while Telnyx handles speech recognition and text-to-speech. Only one AI Assistant or Conversation Relay session can be active on a call at a time.
+ * Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.
  *
- * **Expected Webhooks:**
+ * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\VoiceSettings
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptionSettings
+ * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\Language
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\VoiceSettings
  *
- * - `call.conversation.ended` - Sent when the Conversation Relay session ends. If the customer WebSocket disconnects, the webhook payload `reason` is `customer_disconnect`.
- *
- * @see Telnyx\Services\Calls\ActionsService::startConversationRelay()
- *
- * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings
- * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant
- * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
- * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
- * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings
- *
- * @phpstan-type ActionStartConversationRelayParamsShape = array{
- *   assistant?: null|Assistant|AssistantShape,
- *   clientState?: string|null,
- *   commandID?: string|null,
- *   conversationRelayDtmfDetection?: bool|null,
- *   conversationRelaySettings?: null|ConversationRelaySettings|ConversationRelaySettingsShape,
- *   conversationRelayURL?: string|null,
+ * @phpstan-type ConversationRelayConfigShape = array{
+ *   url: string,
  *   customParameters?: array<string,mixed>|null,
  *   dtmfDetection?: bool|null,
  *   greeting?: string|null,
  *   interruptible?: null|Interruptible|value-of<Interruptible>,
  *   interruptibleGreeting?: null|InterruptibleGreeting|value-of<InterruptibleGreeting>,
- *   interruptionSettings?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings|InterruptionSettingsShape,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   language?: string|null,
  *   languages?: list<Language|LanguageShape>|null,
  *   provider?: string|null,
  *   structuredProvider?: array<string,mixed>|null,
- *   transcription?: array<string,mixed>|null,
  *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
  *   transcriptionEngineConfig?: array<string,mixed>|null,
  *   ttsProvider?: string|null,
- *   url?: string|null,
  *   voice?: string|null,
  *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
-final class ActionStartConversationRelayParams implements BaseModel
+final class ConversationRelayConfig implements BaseModel
 {
-    /** @use SdkModel<ActionStartConversationRelayParamsShape> */
+    /** @use SdkModel<ConversationRelayConfigShape> */
     use SdkModel;
-    use SdkParams;
-
-    /**
-     * Custom parameters for the Conversation Relay session. Pass key-value data as `assistant.dynamic_variables` to make it available to the relay session.
-     */
-    #[Optional]
-    public ?Assistant $assistant;
-
-    /**
-     * Use this field to add state to subsequent webhooks. It must be a valid Base-64 encoded string.
-     */
-    #[Optional('client_state')]
-    public ?string $clientState;
-
-    /**
-     * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     */
-    #[Optional('command_id')]
-    public ?string $commandID;
-
-    /**
-     * Enable DTMF detection for the relay session.
-     */
-    #[Optional('conversation_relay_dtmf_detection')]
-    public ?bool $conversationRelayDtmfDetection;
-
-    /**
-     * Conversation Relay connection settings. This object can provide `url`, `dtmf_detection`, `interruptible`, `interruptible_greeting`, and `languages`. Top-level aliases override nested values when both are present.
-     */
-    #[Optional('conversation_relay_settings')]
-    public ?ConversationRelaySettings $conversationRelaySettings;
 
     /**
      * WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
      */
-    #[Optional('conversation_relay_url')]
-    public ?string $conversationRelayURL;
+    #[Required]
+    public string $url;
 
     /**
-     * Custom key-value parameters forwarded to the relay session as `assistant.dynamic_variables`. If `assistant.dynamic_variables` is also present, these values are merged in.
+     * Custom key-value parameters forwarded to the relay session as assistant dynamic variables.
      *
      * @var array<string,mixed>|null $customParameters
      */
@@ -116,7 +71,7 @@ final class ActionStartConversationRelayParams implements BaseModel
     public ?array $customParameters;
 
     /**
-     * Public alias for `conversation_relay_dtmf_detection`. If both are present, this value wins.
+     * Enable DTMF detection for the relay session.
      */
     #[Optional('dtmf_detection')]
     public ?bool $dtmfDetection;
@@ -150,7 +105,7 @@ final class ActionStartConversationRelayParams implements BaseModel
     public ?InterruptionSettings $interruptionSettings;
 
     /**
-     * Default language for the relay session. This value is used for both text-to-speech and speech recognition.
+     * Default language for both text-to-speech and speech recognition.
      */
     #[Optional]
     public ?string $language;
@@ -178,16 +133,6 @@ final class ActionStartConversationRelayParams implements BaseModel
     public ?array $structuredProvider;
 
     /**
-     * @deprecated
-     *
-     * Not supported for Conversation Relay start requests. Use `transcription_engine` and `transcription_engine_config` instead.
-     *
-     * @var array<string,mixed>|null $transcription
-     */
-    #[Optional(map: 'mixed')]
-    public ?array $transcription;
-
-    /**
      * Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility. For Conversation Relay, use this field with `transcription_engine_config`; the `transcription` object is not supported.
      *
      * @var value-of<TranscriptionEngine>|null $transcriptionEngine
@@ -208,12 +153,6 @@ final class ActionStartConversationRelayParams implements BaseModel
      */
     #[Optional('tts_provider')]
     public ?string $ttsProvider;
-
-    /**
-     * Public alias for `conversation_relay_url`. Must start with `ws://` or `wss://`. If both are present, this value wins.
-     */
-    #[Optional]
-    public ?string $url;
 
     /**
      * The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
@@ -237,6 +176,20 @@ final class ActionStartConversationRelayParams implements BaseModel
     #[Optional('voice_settings', union: VoiceSettings::class)]
     public ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings;
 
+    /**
+     * `new ConversationRelayConfig()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * ConversationRelayConfig::with(url: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new ConversationRelayConfig)->withURL(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -247,26 +200,18 @@ final class ActionStartConversationRelayParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Assistant|AssistantShape|null $assistant
-     * @param ConversationRelaySettings|ConversationRelaySettingsShape|null $conversationRelaySettings
      * @param array<string,mixed>|null $customParameters
      * @param Interruptible|value-of<Interruptible>|null $interruptible
      * @param InterruptibleGreeting|value-of<InterruptibleGreeting>|null $interruptibleGreeting
      * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
      * @param list<Language|LanguageShape>|null $languages
      * @param array<string,mixed>|null $structuredProvider
-     * @param array<string,mixed>|null $transcription
      * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
      * @param array<string,mixed>|null $transcriptionEngineConfig
      * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
-        Assistant|array|null $assistant = null,
-        ?string $clientState = null,
-        ?string $commandID = null,
-        ?bool $conversationRelayDtmfDetection = null,
-        ConversationRelaySettings|array|null $conversationRelaySettings = null,
-        ?string $conversationRelayURL = null,
+        string $url,
         ?array $customParameters = null,
         ?bool $dtmfDetection = null,
         ?string $greeting = null,
@@ -277,22 +222,16 @@ final class ActionStartConversationRelayParams implements BaseModel
         ?array $languages = null,
         ?string $provider = null,
         ?array $structuredProvider = null,
-        ?array $transcription = null,
         TranscriptionEngine|string|null $transcriptionEngine = null,
         ?array $transcriptionEngineConfig = null,
         ?string $ttsProvider = null,
-        ?string $url = null,
         ?string $voice = null,
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
 
-        null !== $assistant && $self['assistant'] = $assistant;
-        null !== $clientState && $self['clientState'] = $clientState;
-        null !== $commandID && $self['commandID'] = $commandID;
-        null !== $conversationRelayDtmfDetection && $self['conversationRelayDtmfDetection'] = $conversationRelayDtmfDetection;
-        null !== $conversationRelaySettings && $self['conversationRelaySettings'] = $conversationRelaySettings;
-        null !== $conversationRelayURL && $self['conversationRelayURL'] = $conversationRelayURL;
+        $self['url'] = $url;
+
         null !== $customParameters && $self['customParameters'] = $customParameters;
         null !== $dtmfDetection && $self['dtmfDetection'] = $dtmfDetection;
         null !== $greeting && $self['greeting'] = $greeting;
@@ -303,11 +242,9 @@ final class ActionStartConversationRelayParams implements BaseModel
         null !== $languages && $self['languages'] = $languages;
         null !== $provider && $self['provider'] = $provider;
         null !== $structuredProvider && $self['structuredProvider'] = $structuredProvider;
-        null !== $transcription && $self['transcription'] = $transcription;
         null !== $transcriptionEngine && $self['transcriptionEngine'] = $transcriptionEngine;
         null !== $transcriptionEngineConfig && $self['transcriptionEngineConfig'] = $transcriptionEngineConfig;
         null !== $ttsProvider && $self['ttsProvider'] = $ttsProvider;
-        null !== $url && $self['url'] = $url;
         null !== $voice && $self['voice'] = $voice;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
@@ -315,79 +252,18 @@ final class ActionStartConversationRelayParams implements BaseModel
     }
 
     /**
-     * Custom parameters for the Conversation Relay session. Pass key-value data as `assistant.dynamic_variables` to make it available to the relay session.
-     *
-     * @param Assistant|AssistantShape $assistant
-     */
-    public function withAssistant(Assistant|array $assistant): self
-    {
-        $self = clone $this;
-        $self['assistant'] = $assistant;
-
-        return $self;
-    }
-
-    /**
-     * Use this field to add state to subsequent webhooks. It must be a valid Base-64 encoded string.
-     */
-    public function withClientState(string $clientState): self
-    {
-        $self = clone $this;
-        $self['clientState'] = $clientState;
-
-        return $self;
-    }
-
-    /**
-     * Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     */
-    public function withCommandID(string $commandID): self
-    {
-        $self = clone $this;
-        $self['commandID'] = $commandID;
-
-        return $self;
-    }
-
-    /**
-     * Enable DTMF detection for the relay session.
-     */
-    public function withConversationRelayDtmfDetection(
-        bool $conversationRelayDtmfDetection
-    ): self {
-        $self = clone $this;
-        $self['conversationRelayDtmfDetection'] = $conversationRelayDtmfDetection;
-
-        return $self;
-    }
-
-    /**
-     * Conversation Relay connection settings. This object can provide `url`, `dtmf_detection`, `interruptible`, `interruptible_greeting`, and `languages`. Top-level aliases override nested values when both are present.
-     *
-     * @param ConversationRelaySettings|ConversationRelaySettingsShape $conversationRelaySettings
-     */
-    public function withConversationRelaySettings(
-        ConversationRelaySettings|array $conversationRelaySettings
-    ): self {
-        $self = clone $this;
-        $self['conversationRelaySettings'] = $conversationRelaySettings;
-
-        return $self;
-    }
-
-    /**
      * WebSocket URL for your Conversation Relay server. Must start with `ws://` or `wss://`.
      */
-    public function withConversationRelayURL(string $conversationRelayURL): self
+    public function withURL(string $url): self
     {
         $self = clone $this;
-        $self['conversationRelayURL'] = $conversationRelayURL;
+        $self['url'] = $url;
 
         return $self;
     }
 
     /**
-     * Custom key-value parameters forwarded to the relay session as `assistant.dynamic_variables`. If `assistant.dynamic_variables` is also present, these values are merged in.
+     * Custom key-value parameters forwarded to the relay session as assistant dynamic variables.
      *
      * @param array<string,mixed> $customParameters
      */
@@ -400,7 +276,7 @@ final class ActionStartConversationRelayParams implements BaseModel
     }
 
     /**
-     * Public alias for `conversation_relay_dtmf_detection`. If both are present, this value wins.
+     * Enable DTMF detection for the relay session.
      */
     public function withDtmfDetection(bool $dtmfDetection): self
     {
@@ -454,7 +330,7 @@ final class ActionStartConversationRelayParams implements BaseModel
      * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
-        InterruptionSettings|array $interruptionSettings,
+        InterruptionSettings|array $interruptionSettings
     ): self {
         $self = clone $this;
         $self['interruptionSettings'] = $interruptionSettings;
@@ -463,7 +339,7 @@ final class ActionStartConversationRelayParams implements BaseModel
     }
 
     /**
-     * Default language for the relay session. This value is used for both text-to-speech and speech recognition.
+     * Default language for both text-to-speech and speech recognition.
      */
     public function withLanguage(string $language): self
     {
@@ -511,19 +387,6 @@ final class ActionStartConversationRelayParams implements BaseModel
     }
 
     /**
-     * Not supported for Conversation Relay start requests. Use `transcription_engine` and `transcription_engine_config` instead.
-     *
-     * @param array<string,mixed> $transcription
-     */
-    public function withTranscription(array $transcription): self
-    {
-        $self = clone $this;
-        $self['transcription'] = $transcription;
-
-        return $self;
-    }
-
-    /**
      * Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility. For Conversation Relay, use this field with `transcription_engine_config`; the `transcription` object is not supported.
      *
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
@@ -558,17 +421,6 @@ final class ActionStartConversationRelayParams implements BaseModel
     {
         $self = clone $this;
         $self['ttsProvider'] = $ttsProvider;
-
-        return $self;
-    }
-
-    /**
-     * Public alias for `conversation_relay_url`. Must start with `ws://` or `wss://`. If both are present, this value wins.
-     */
-    public function withURL(string $url): self
-    {
-        $self = clone $this;
-        $self['url'] = $url;
 
         return $self;
     }

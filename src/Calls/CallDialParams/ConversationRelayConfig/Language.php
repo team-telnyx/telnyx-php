@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartConversationRelayParams;
+namespace Telnyx\Calls\CallDialParams\ConversationRelayConfig;
 
 use Telnyx\AzureVoiceSettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language\TranscriptionEngine;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language\VoiceSettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language\VoiceSettings\InworldVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\TranscriptionEngine;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings\InworldVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -23,13 +23,13 @@ use Telnyx\XaiVoiceSettings;
 /**
  * Language-specific TTS and transcription settings for Conversation Relay.
  *
- * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language\VoiceSettings
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language\VoiceSettings
+ * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings
  *
  * @phpstan-type LanguageShape = array{
  *   language: string,
  *   speechModel?: string|null,
- *   transcriptionEngine?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language\TranscriptionEngine|value-of<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language\TranscriptionEngine>,
+ *   transcriptionEngine?: null|\Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\TranscriptionEngine|value-of<\Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\TranscriptionEngine>,
  *   transcriptionEngineConfig?: array<string,mixed>|null,
  *   transcriptionProvider?: string|null,
  *   ttsProvider?: string|null,

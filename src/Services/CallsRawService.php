@@ -10,6 +10,7 @@ use Telnyx\Calls\CallDialParams;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig;
 use Telnyx\Calls\CallDialParams\DeepfakeDetection;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
@@ -47,6 +48,7 @@ use Telnyx\ServiceContracts\CallsRawContract;
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
+ * @phpstan-import-type ConversationRelayConfigShape from \Telnyx\Calls\CallDialParams\ConversationRelayConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\CallDialParams\DeepfakeDetection
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -98,6 +100,7 @@ final class CallsRawService implements CallsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   conferenceConfig?: ConferenceConfig|ConferenceConfigShape,
+     *   conversationRelayConfig?: ConversationRelayConfig|ConversationRelayConfigShape,
      *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
      *   deepfakeDetection?: DeepfakeDetection|DeepfakeDetectionShape,
      *   dialogflowConfig?: DialogflowConfig|DialogflowConfigShape,
