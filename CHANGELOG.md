@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.59.0 (2026-05-27)
+
+Full Changelog: [v7.58.0...v7.59.0](https://github.com/team-telnyx/telnyx-php/compare/v7.58.0...v7.59.0)
+
+### Features
+
+* TELAPPS-406: document GET /speech-to-text/providers endpoint ([8804d1f](https://github.com/team-telnyx/telnyx-php/commit/8804d1f2588e748caf7e558077d9ac672dafc5e7))
+
 ## 7.58.0 (2026-05-27)
 
 Full Changelog: [v7.57.0...v7.58.0](https://github.com/team-telnyx/telnyx-php/compare/v7.57.0...v7.58.0)
