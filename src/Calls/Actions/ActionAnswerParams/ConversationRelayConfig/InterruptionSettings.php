@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionStartConversationRelayParams;
+namespace Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig;
 
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings\Interruptible;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings\InterruptibleGreeting;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings\WelcomeGreetingInterruptible;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptionSettings\Interruptible;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptionSettings\InterruptibleGreeting;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptionSettings\WelcomeGreetingInterruptible;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -16,8 +16,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type InterruptionSettingsShape = array{
  *   enable?: bool|null,
- *   interruptible?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings\Interruptible|value-of<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings\Interruptible>,
- *   interruptibleGreeting?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings\InterruptibleGreeting|value-of<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings\InterruptibleGreeting>,
+ *   interruptible?: null|\Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptionSettings\Interruptible|value-of<\Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptionSettings\Interruptible>,
+ *   interruptibleGreeting?: null|\Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptionSettings\InterruptibleGreeting|value-of<\Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig\InterruptionSettings\InterruptibleGreeting>,
  *   welcomeGreetingInterruptible?: null|WelcomeGreetingInterruptible|value-of<WelcomeGreetingInterruptible>,
  * }
  */

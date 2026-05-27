@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\Assistant;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
 use Telnyx\Calls\Actions\ActionAnswerParams;
+use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig;
 use Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
@@ -65,8 +66,10 @@ use Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Interruptible;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptibleGreeting;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams;
 use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
@@ -94,7 +97,6 @@ use Telnyx\Calls\Actions\ActionStartStreamingParams;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantParams;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
@@ -152,6 +154,7 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * Call Control command operations.
  *
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
+ * @phpstan-import-type ConversationRelayConfigShape from \Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig
  * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
@@ -168,7 +171,6 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
  * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
- * @phpstan-import-type TranscriptionShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Transcription
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
@@ -249,6 +251,7 @@ final class ActionsRawService implements ActionsRawContract
      *   billingGroupID?: string,
      *   clientState?: string,
      *   commandID?: string,
+     *   conversationRelayConfig?: ConversationRelayConfig|ConversationRelayConfigShape,
      *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>,
      *   deepfakeDetection?: DeepfakeDetection|DeepfakeDetectionShape,
      *   preferredCodecs?: PreferredCodecs|value-of<PreferredCodecs>,
@@ -1098,13 +1101,21 @@ final class ActionsRawService implements ActionsRawContract
      *   conversationRelayDtmfDetection?: bool,
      *   conversationRelaySettings?: ConversationRelaySettings|ConversationRelaySettingsShape,
      *   conversationRelayURL?: string,
+     *   customParameters?: array<string,mixed>,
+     *   dtmfDetection?: bool,
      *   greeting?: string,
+     *   interruptible?: Interruptible|value-of<Interruptible>,
+     *   interruptibleGreeting?: InterruptibleGreeting|value-of<InterruptibleGreeting>,
      *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
      *   language?: string,
      *   languages?: list<ActionStartConversationRelayParams\Language|LanguageShape>,
-     *   transcription?: Transcription|TranscriptionShape,
-     *   transcriptionLanguage?: string,
-     *   ttsLanguage?: string,
+     *   provider?: string,
+     *   structuredProvider?: array<string,mixed>,
+     *   transcription?: array<string,mixed>,
+     *   transcriptionEngine?: value-of<TranscriptionEngine>,
+     *   transcriptionEngineConfig?: array<string,mixed>,
+     *   ttsProvider?: string,
+     *   url?: string,
      *   voice?: string,
      *   voiceSettings?: VoiceSettingsShape4,
      * }|ActionStartConversationRelayParams $params
@@ -1442,7 +1453,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   clientState?: string,
      *   commandID?: string,
-     *   transcriptionEngine?: value-of<TranscriptionEngine>,
+     *   transcriptionEngine?: value-of<ActionStartTranscriptionParams\TranscriptionEngine>,
      *   transcriptionEngineConfig?: TranscriptionEngineConfigShape,
      *   transcriptionTracks?: string,
      * }|ActionStartTranscriptionParams $params

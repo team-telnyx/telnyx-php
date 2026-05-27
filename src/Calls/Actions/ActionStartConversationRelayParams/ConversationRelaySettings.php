@@ -13,15 +13,15 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Conversation Relay connection settings. This object is used by TeXML Call Scripting's `<ConversationRelay>` verb. The `interruptible` and `interruptible_greeting` fields are shorthand for `interruption_settings.interruptible` and `interruption_settings.interruptible_greeting`; use top-level `interruption_settings` for the full interruption settings shape.
+ * Conversation Relay connection settings. This object can provide `url`, `dtmf_detection`, `interruptible`, `interruptible_greeting`, and `languages`. Top-level aliases override nested values when both are present.
  *
  * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language
  *
  * @phpstan-type ConversationRelaySettingsShape = array{
  *   url: string,
  *   dtmfDetection?: bool|null,
- *   interruptible?: null|Interruptible|value-of<Interruptible>,
- *   interruptibleGreeting?: null|InterruptibleGreeting|value-of<InterruptibleGreeting>,
+ *   interruptible?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Interruptible|value-of<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Interruptible>,
+ *   interruptibleGreeting?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\InterruptibleGreeting|value-of<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\InterruptibleGreeting>,
  *   languages?: list<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language|LanguageShape>|null,
  * }
  */
@@ -47,7 +47,9 @@ final class ConversationRelaySettings implements BaseModel
      *
      * @var value-of<Interruptible>|null $interruptible
      */
-    #[Optional(enum: Interruptible::class)]
+    #[Optional(
+        enum: Interruptible::class,
+    )]
     public ?string $interruptible;
 
     /**
@@ -55,7 +57,10 @@ final class ConversationRelaySettings implements BaseModel
      *
      * @var value-of<InterruptibleGreeting>|null $interruptibleGreeting
      */
-    #[Optional('interruptible_greeting', enum: InterruptibleGreeting::class)]
+    #[Optional(
+        'interruptible_greeting',
+        enum: InterruptibleGreeting::class,
+    )]
     public ?string $interruptibleGreeting;
 
     /**
@@ -142,8 +147,9 @@ final class ConversationRelaySettings implements BaseModel
      *
      * @param Interruptible|value-of<Interruptible> $interruptible
      */
-    public function withInterruptible(Interruptible|string $interruptible): self
-    {
+    public function withInterruptible(
+        Interruptible|string $interruptible,
+    ): self {
         $self = clone $this;
         $self['interruptible'] = $interruptible;
 
@@ -156,7 +162,7 @@ final class ConversationRelaySettings implements BaseModel
      * @param InterruptibleGreeting|value-of<InterruptibleGreeting> $interruptibleGreeting
      */
     public function withInterruptibleGreeting(
-        InterruptibleGreeting|string $interruptibleGreeting
+        InterruptibleGreeting|string $interruptibleGreeting,
     ): self {
         $self = clone $this;
         $self['interruptibleGreeting'] = $interruptibleGreeting;
