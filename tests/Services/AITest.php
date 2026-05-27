@@ -30,13 +30,13 @@ final class AITest extends TestCase
     }
 
     #[Test]
-    public function testCreateResponseDeprecated(): void
+    public function testCreateResponse(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->createResponseDeprecated(
+        $result = $this->client->ai->createResponse(
             body: ['model' => 'bar', 'input' => 'bar']
         );
 
@@ -45,13 +45,13 @@ final class AITest extends TestCase
     }
 
     #[Test]
-    public function testCreateResponseDeprecatedWithOptionalParams(): void
+    public function testCreateResponseWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->createResponseDeprecated(
+        $result = $this->client->ai->createResponse(
             body: ['model' => 'bar', 'input' => 'bar']
         );
 

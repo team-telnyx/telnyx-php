@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AI\AICreateResponseDeprecatedParams;
+use Telnyx\AI\AICreateResponseParams;
 use Telnyx\AI\AIGetModelsResponse;
 use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
@@ -22,15 +22,15 @@ interface AIRawContract
      *
      * @api
      *
-     * @param array<string,mixed>|AICreateResponseDeprecatedParams $params
+     * @param array<string,mixed>|AICreateResponseParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>
      *
      * @throws APIException
      */
-    public function createResponseDeprecated(
-        array|AICreateResponseDeprecatedParams $params,
+    public function createResponse(
+        array|AICreateResponseParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
