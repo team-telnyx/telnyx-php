@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\ActionSpeakParams;
+namespace Telnyx\Calls\ConversationRelayLanguage;
 
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
