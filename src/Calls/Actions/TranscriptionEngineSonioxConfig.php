@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig;
+namespace Telnyx\Calls\Actions;
 
-use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig\TranscriptionModel;
+use Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig\TranscriptionEngine;
+use Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig\TranscriptionModel;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -12,7 +13,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type TranscriptionEngineSonioxConfigShape = array{
- *   transcriptionEngine: 'Soniox',
+ *   transcriptionEngine: TranscriptionEngine|value-of<TranscriptionEngine>,
  *   enableEndpointDetection?: bool|null,
  *   interimResults?: bool|null,
  *   language?: string|null,
@@ -28,10 +29,10 @@ final class TranscriptionEngineSonioxConfig implements BaseModel
     /**
      * Engine identifier for Soniox transcription service.
      *
-     * @var 'Soniox' $transcriptionEngine
+     * @var value-of<TranscriptionEngine> $transcriptionEngine
      */
-    #[Required('transcription_engine')]
-    public string $transcriptionEngine = 'Soniox';
+    #[Required('transcription_engine', enum: TranscriptionEngine::class)]
+    public string $transcriptionEngine;
 
     /**
      * When true, Soniox emits end-of-utterance events at the cadence configured by `max_endpoint_delay_ms`.
@@ -65,6 +66,20 @@ final class TranscriptionEngineSonioxConfig implements BaseModel
     #[Optional('transcription_model', enum: TranscriptionModel::class)]
     public ?string $transcriptionModel;
 
+    /**
+     * `new TranscriptionEngineSonioxConfig()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * TranscriptionEngineSonioxConfig::with(transcriptionEngine: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new TranscriptionEngineSonioxConfig)->withTranscriptionEngine(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -75,9 +90,11 @@ final class TranscriptionEngineSonioxConfig implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
      * @param TranscriptionModel|value-of<TranscriptionModel>|null $transcriptionModel
      */
     public static function with(
+        TranscriptionEngine|string $transcriptionEngine,
         ?bool $enableEndpointDetection = null,
         ?bool $interimResults = null,
         ?string $language = null,
@@ -85,6 +102,8 @@ final class TranscriptionEngineSonioxConfig implements BaseModel
         TranscriptionModel|string|null $transcriptionModel = null,
     ): self {
         $self = new self;
+
+        $self['transcriptionEngine'] = $transcriptionEngine;
 
         null !== $enableEndpointDetection && $self['enableEndpointDetection'] = $enableEndpointDetection;
         null !== $interimResults && $self['interimResults'] = $interimResults;
@@ -98,10 +117,11 @@ final class TranscriptionEngineSonioxConfig implements BaseModel
     /**
      * Engine identifier for Soniox transcription service.
      *
-     * @param 'Soniox' $transcriptionEngine
+     * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
      */
-    public function withTranscriptionEngine(string $transcriptionEngine): self
-    {
+    public function withTranscriptionEngine(
+        TranscriptionEngine|string $transcriptionEngine
+    ): self {
         $self = clone $this;
         $self['transcriptionEngine'] = $transcriptionEngine;
 

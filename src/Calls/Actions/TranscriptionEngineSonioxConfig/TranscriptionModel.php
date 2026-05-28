@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig;
+namespace Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig;
 
 /**
  * The model to use for transcription.
