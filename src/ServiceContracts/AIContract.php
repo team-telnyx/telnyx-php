@@ -19,7 +19,7 @@ interface AIContract
      *
      * @api
      *
-     * @param array<string,mixed> $body
+     * @param array<string,mixed> $input
      * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
@@ -27,7 +27,7 @@ interface AIContract
      * @throws APIException
      */
     public function createResponse(
-        array $body,
+        array $input,
         RequestOptions|array|null $requestOptions = null
     ): array;
 

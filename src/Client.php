@@ -735,6 +735,11 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public SpeechToTextService $speechToText;
+
+    /**
+     * @api
+     */
     public RequirementGroupsService $requirementGroups;
 
     /**
@@ -1015,11 +1020,6 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public SpeechToTextService $speechToText;
-
-    /**
-     * @api
-     */
     public VoiceSDKCallReportsService $voiceSDKCallReports;
 
     /**
@@ -1198,6 +1198,7 @@ class Client extends BaseClient
         $this->regions = new RegionsService($this);
         $this->regulatoryRequirements = new RegulatoryRequirementsService($this);
         $this->reports = new ReportsService($this);
+        $this->speechToText = new SpeechToTextService($this);
         $this->requirementGroups = new RequirementGroupsService($this);
         $this->requirementTypes = new RequirementTypesService($this);
         $this->requirements = new RequirementsService($this);
@@ -1254,7 +1255,6 @@ class Client extends BaseClient
         $this->termsOfService = new TermsOfServiceService($this);
         $this->pronunciationDicts = new PronunciationDictsService($this);
         $this->uacConnections = new UacConnectionsService($this);
-        $this->speechToText = new SpeechToTextService($this);
         $this->voiceSDKCallReports = new VoiceSDKCallReportsService($this);
     }
 

@@ -13,9 +13,7 @@ use Telnyx\Services\Texml\Accounts\Calls\RecordingsJsonService;
 use Telnyx\Services\Texml\Accounts\Calls\RecordingsService;
 use Telnyx\Services\Texml\Accounts\Calls\SiprecService;
 use Telnyx\Services\Texml\Accounts\Calls\StreamsService;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\ApplicationDefault;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithTeXml;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params;
 use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse;
@@ -158,14 +156,14 @@ final class CallsService implements CallsContract
      * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
      *
      * @param string $accountSid the id of the account the resource belongs to
-     * @param ParamsShape $params
+     * @param Params|ParamsShape $params Initiate a TeXML call. Provide either `Url` (fetches TeXML from URL) or `Texml` (inline TeXML), or neither (uses the application default). `Url` and `Texml` are mutually exclusive.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function calls(
         string $accountSid,
-        WithURL|array|WithTeXml|ApplicationDefault $params,
+        Params|array $params,
         RequestOptions|array|null $requestOptions = null,
     ): CallCallsResponse {
         $params1 = Util::removeNulls(['params' => $params]);

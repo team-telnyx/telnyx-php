@@ -11,6 +11,7 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsRawContract;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params;
 use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse;
@@ -131,7 +132,7 @@ final class CallsRawService implements CallsRawContract
      * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
      *
      * @param string $accountSid the id of the account the resource belongs to
-     * @param array{params: ParamsShape}|CallCallsParams $params
+     * @param array{params: Params|ParamsShape}|CallCallsParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallCallsResponse>

@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @deprecated
  * @see Telnyx\Services\AIService::createResponse()
  *
- * @phpstan-type AICreateResponseParamsShape = array{body: array<string,mixed>}
+ * @phpstan-type AICreateResponseParamsShape = array{input: array<string,mixed>}
  */
 final class AICreateResponseParams implements BaseModel
 {
@@ -23,22 +23,22 @@ final class AICreateResponseParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var array<string,mixed> $body */
+    /** @var array<string,mixed> $input */
     #[Required(map: 'mixed')]
-    public array $body;
+    public array $input;
 
     /**
      * `new AICreateResponseParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AICreateResponseParams::with(body: ...)
+     * AICreateResponseParams::with(input: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new AICreateResponseParams)->withBody(...)
+     * (new AICreateResponseParams)->withInput(...)
      * ```
      */
     public function __construct()
@@ -51,24 +51,24 @@ final class AICreateResponseParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $body
+     * @param array<string,mixed> $input
      */
-    public static function with(array $body): self
+    public static function with(array $input): self
     {
         $self = new self;
 
-        $self['body'] = $body;
+        $self['input'] = $input;
 
         return $self;
     }
 
     /**
-     * @param array<string,mixed> $body
+     * @param array<string,mixed> $input
      */
-    public function withBody(array $body): self
+    public function withInput(array $input): self
     {
         $self = clone $this;
-        $self['body'] = $body;
+        $self['input'] = $input;
 
         return $self;
     }
