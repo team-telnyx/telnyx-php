@@ -6,7 +6,7 @@ namespace Telnyx\Calls\Actions\ActionStartConversationRelayParams;
 
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Interruptible;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\InterruptibleGreeting;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language;
+use Telnyx\Calls\ConversationRelayLanguage;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -15,14 +15,14 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Conversation Relay connection settings. This object can provide `url`, `dtmf_detection`, `interruptible`, `interruptible_greeting`, and `languages`. Top-level aliases override nested values when both are present.
  *
- * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language
+ * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
  *
  * @phpstan-type ConversationRelaySettingsShape = array{
  *   url: string,
  *   dtmfDetection?: bool|null,
  *   interruptible?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Interruptible|value-of<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Interruptible>,
  *   interruptibleGreeting?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\InterruptibleGreeting|value-of<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\InterruptibleGreeting>,
- *   languages?: list<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language|LanguageShape>|null,
+ *   languages?: list<ConversationRelayLanguage|ConversationRelayLanguageShape>|null,
  * }
  */
 final class ConversationRelaySettings implements BaseModel
@@ -66,11 +66,9 @@ final class ConversationRelaySettings implements BaseModel
     /**
      * Language-specific TTS and transcription settings.
      *
-     * @var list<Language>|null $languages
+     * @var list<ConversationRelayLanguage>|null $languages
      */
-    #[Optional(
-        list: Language::class,
-    )]
+    #[Optional(list: ConversationRelayLanguage::class)]
     public ?array $languages;
 
     /**
@@ -99,7 +97,7 @@ final class ConversationRelaySettings implements BaseModel
      *
      * @param Interruptible|value-of<Interruptible>|null $interruptible
      * @param InterruptibleGreeting|value-of<InterruptibleGreeting>|null $interruptibleGreeting
-     * @param list<Language|LanguageShape>|null $languages
+     * @param list<ConversationRelayLanguage|ConversationRelayLanguageShape>|null $languages
      */
     public static function with(
         string $url,
@@ -173,7 +171,7 @@ final class ConversationRelaySettings implements BaseModel
     /**
      * Language-specific TTS and transcription settings.
      *
-     * @param list<Language|LanguageShape> $languages
+     * @param list<ConversationRelayLanguage|ConversationRelayLanguageShape> $languages
      */
     public function withLanguages(array $languages): self
     {
