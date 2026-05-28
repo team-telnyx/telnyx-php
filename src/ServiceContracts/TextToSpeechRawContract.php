@@ -7,10 +7,11 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams;
-use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
+use Telnyx\TextToSpeech\TextToSpeechNewSpeechResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -20,15 +21,30 @@ interface TextToSpeechRawContract
     /**
      * @api
      *
-     * @param array<string,mixed>|TextToSpeechGenerateParams $params
+     * @param array<string,mixed>|TextToSpeechCreateSpeechParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TextToSpeechGenerateResponse>
+     * @return BaseResponse<TextToSpeechNewSpeechResponse>
      *
      * @throws APIException
      */
-    public function generate(
-        array|TextToSpeechGenerateParams $params,
+    public function createSpeech(
+        array|TextToSpeechCreateSpeechParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|TextToSpeechGenerateSpeechParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function generateSpeech(
+        array|TextToSpeechGenerateSpeechParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
