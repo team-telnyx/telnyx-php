@@ -178,7 +178,7 @@ final class ActionStartConversationRelayParams implements BaseModel
     public ?array $structuredProvider;
 
     /**
-     * @deprecated
+     * @deprecated Not supported for Conversation Relay start requests. Use `transcription_engine` and `transcription_engine_config` instead.
      *
      * Not supported for Conversation Relay start requests. Use `transcription_engine` and `transcription_engine_config` instead.
      *

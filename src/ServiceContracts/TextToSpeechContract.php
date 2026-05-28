@@ -6,29 +6,30 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Aws;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Azure;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Elevenlabs;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Minimax;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\OutputType;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Provider;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai;
-use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Aws;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Azure;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Elevenlabs;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Minimax;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\OutputType;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Provider;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Resemble;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Rime;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Telnyx;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\TextType;
+use Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Xai;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\AudioFormat;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
+use Telnyx\TextToSpeech\TextToSpeechNewSpeechResponse;
 
 /**
- * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Aws
- * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Azure
- * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Elevenlabs
- * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Minimax
- * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble
- * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime
- * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx
- * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai
+ * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Aws
+ * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Azure
+ * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Elevenlabs
+ * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Minimax
+ * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Resemble
+ * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Rime
+ * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Telnyx
+ * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechCreateSpeechParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface TextToSpeechContract
@@ -56,7 +57,7 @@ interface TextToSpeechContract
      *
      * @throws APIException
      */
-    public function generate(
+    public function createSpeech(
         Aws|array|null $aws = null,
         Azure|array|null $azure = null,
         bool $disableCache = false,
@@ -74,7 +75,32 @@ interface TextToSpeechContract
         ?array $voiceSettings = null,
         Xai|array|null $xai = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TextToSpeechGenerateResponse;
+    ): TextToSpeechNewSpeechResponse;
+
+    /**
+     * @api
+     *
+     * @param AudioFormat|value-of<AudioFormat> $audioFormat Audio output format override. Supported for Telnyx models. `pcm` and `wav` are available for `Natural`/`NaturalHD` models. The `Ultra` model outputs PCM at 24kHz s16le or MP3 at 128kbps 24kHz.
+     * @param bool $disableCache when `true`, bypass the audio cache and generate fresh audio
+     * @param string $modelID Model identifier for the chosen provider. Examples: `Natural`, `NaturalHD`, `Ultra` (Telnyx); `Polly.Generative` (AWS).
+     * @param \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider|value-of<\Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider> $provider TTS provider. Defaults to `telnyx` if not specified. Ignored when `voice` is provided.
+     * @param string $socketID Client-provided socket identifier for tracking. If not provided, one is generated server-side.
+     * @param string $voice Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id` (e.g. `telnyx.NaturalHD.Telnyx_Alloy`, `Telnyx.Ultra.<voice_id>`, or `azure.en-US-AvaMultilingualNeural`). When provided, the `provider`, `model_id`, and `voice_id` are extracted automatically. Takes precedence over individual `provider`/`model_id`/`voice_id` parameters.
+     * @param string $voiceID voice identifier for the chosen provider
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function generateSpeech(
+        AudioFormat|string|null $audioFormat = null,
+        bool $disableCache = false,
+        ?string $modelID = null,
+        \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider|string $provider = 'telnyx',
+        ?string $socketID = null,
+        ?string $voice = null,
+        ?string $voiceID = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed;
 
     /**
      * @api
