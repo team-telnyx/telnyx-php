@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.63.0 (2026-05-29)
+
+Full Changelog: [v7.62.0...v7.63.0](https://github.com/team-telnyx/telnyx-php/compare/v7.62.0...v7.63.0)
+
+### Features
+
+* **sip-registration-status:** add OpenAPI spec for /v2/sip_registration_status ([9f8cec8](https://github.com/team-telnyx/telnyx-php/commit/9f8cec8ff6cbef57a5672dcd24800e8a7e359946))
+
 ## 7.62.0 (2026-05-28)
 
 Full Changelog: [v7.61.0...v7.62.0](https://github.com/team-telnyx/telnyx-php/compare/v7.61.0...v7.62.0)
