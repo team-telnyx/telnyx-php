@@ -142,6 +142,7 @@ use Telnyx\Services\SimCardOrderPreviewService;
 use Telnyx\Services\SimCardOrdersService;
 use Telnyx\Services\SimCardsService;
 use Telnyx\Services\SiprecConnectorsService;
+use Telnyx\Services\SipRegistrationStatusService;
 use Telnyx\Services\SpeechToTextService;
 use Telnyx\Services\StorageService;
 use Telnyx\Services\SubNumberOrdersReportService;
@@ -1023,6 +1024,11 @@ class Client extends BaseClient
     public VoiceSDKCallReportsService $voiceSDKCallReports;
 
     /**
+     * @api
+     */
+    public SipRegistrationStatusService $sipRegistrationStatus;
+
+    /**
      * @param RequestOpts|null $requestOptions
      */
     public function __construct(
@@ -1256,6 +1262,7 @@ class Client extends BaseClient
         $this->pronunciationDicts = new PronunciationDictsService($this);
         $this->uacConnections = new UacConnectionsService($this);
         $this->voiceSDKCallReports = new VoiceSDKCallReportsService($this);
+        $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
     }
 
     /** @return array<string,string> */
