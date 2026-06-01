@@ -40,6 +40,9 @@ final class ExternalUacSettings implements BaseModel
     #[Optional('outbound_proxy')]
     public ?string $outboundProxy;
 
+    /**
+     * Always redacted.
+     */
     #[Optional]
     public ?string $password;
 
@@ -121,6 +124,9 @@ final class ExternalUacSettings implements BaseModel
         return $self;
     }
 
+    /**
+     * Always redacted.
+     */
     public function withPassword(string $password): self
     {
         $self = clone $this;

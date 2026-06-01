@@ -15,7 +15,7 @@ use Telnyx\SipRegistrationStatus\SipRegistrationStatusRetrieveParams;
 use Telnyx\SipRegistrationStatus\SipRegistrationStatusRetrieveParams\CredentialType;
 
 /**
- * Look up SIP registration status across credential types.
+ * Look up the live SIP registration status of a UAC connection.
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -30,7 +30,7 @@ final class SipRegistrationStatusRawService implements SipRegistrationStatusRawC
     /**
      * @api
      *
-     * Returns the live SIP registration state of a connection or credential. Supports UAC third-party credentials, telephony credentials, and SIP credential connections.
+     * Returns the live SIP registration state of a UAC connection: whether it is currently registered, when it last registered, and the last response Telnyx received from the registrar. Only `uac_external_credential` is supported today.
      *
      * @param array{
      *   connectionID: string,
