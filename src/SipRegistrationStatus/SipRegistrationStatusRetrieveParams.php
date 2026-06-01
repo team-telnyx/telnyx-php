@@ -11,7 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SipRegistrationStatus\SipRegistrationStatusRetrieveParams\CredentialType;
 
 /**
- * Returns the live SIP registration state of a connection or credential. Supports UAC third-party credentials, telephony credentials, and SIP credential connections.
+ * Returns the live SIP registration state of a UAC connection: whether it is currently registered, when it last registered, and the last response Telnyx received from the registrar. Only `uac_external_credential` is supported today.
  *
  * @see Telnyx\Services\SipRegistrationStatusService::retrieve()
  *
@@ -28,13 +28,13 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
     use SdkParams;
 
     /**
-     * Identifier of the connection or credential to look up.
+     * Identifier of the UAC connection to look up.
      */
     #[Required]
     public string $connectionID;
 
     /**
-     * The kind of credential to look up.
+     * The kind of credential to look up. Only `uac_external_credential` is supported today.
      *
      * @var value-of<CredentialType> $credentialType
      */
@@ -93,7 +93,7 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
     }
 
     /**
-     * Identifier of the connection or credential to look up.
+     * Identifier of the UAC connection to look up.
      */
     public function withConnectionID(string $connectionID): self
     {
@@ -104,7 +104,7 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
     }
 
     /**
-     * The kind of credential to look up.
+     * The kind of credential to look up. Only `uac_external_credential` is supported today.
      *
      * @param CredentialType|value-of<CredentialType> $credentialType
      */
