@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.63.1 (2026-06-01)
+
+Full Changelog: [v7.63.0...v7.63.1](https://github.com/team-telnyx/telnyx-php/compare/v7.63.0...v7.63.1)
+
+### Bug Fixes
+
+* **sip-registration-status:** scope to phase 1 uac_third-party_credential ([a5d4378](https://github.com/team-telnyx/telnyx-php/commit/a5d4378ddc6b991283eadde9381710ea85c12fdf))
+
 ## 7.63.0 (2026-05-29)
 
 Full Changelog: [v7.62.0...v7.63.0](https://github.com/team-telnyx/telnyx-php/compare/v7.62.0...v7.63.0)
