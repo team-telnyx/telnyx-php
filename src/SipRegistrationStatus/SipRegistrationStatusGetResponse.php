@@ -7,6 +7,7 @@ namespace Telnyx\SipRegistrationStatus;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\SipRegistrationStatus\SipRegistrationStatusGetResponse\CredentialType;
 use Telnyx\SipRegistrationStatus\SipRegistrationStatusGetResponse\ExternalUacSettings;
 use Telnyx\SipRegistrationStatus\SipRegistrationStatusGetResponse\InternalUacSettings;
 
@@ -15,8 +16,12 @@ use Telnyx\SipRegistrationStatus\SipRegistrationStatusGetResponse\InternalUacSet
  * @phpstan-import-type InternalUacSettingsShape from \Telnyx\SipRegistrationStatus\SipRegistrationStatusGetResponse\InternalUacSettings
  *
  * @phpstan-type SipRegistrationStatusGetResponseShape = array{
+ *   b2buaExternal?: array<string,mixed>|null,
+ *   b2buaInternal?: array<string,mixed>|null,
  *   connectionID?: string|null,
  *   connectionName?: string|null,
+ *   credentialType?: null|CredentialType|value-of<CredentialType>,
+ *   externalState?: string|null,
  *   externalUacSettings?: null|ExternalUacSettings|ExternalUacSettingsShape,
  *   internalUacSettings?: null|InternalUacSettings|InternalUacSettingsShape,
  *   lastRegistrationResponse?: string|null,
@@ -32,7 +37,23 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     use SdkModel;
 
     /**
-     * Identifier of the resource.
+     * Raw external-side registration block reported by the registrar.
+     *
+     * @var array<string,mixed>|null $b2buaExternal
+     */
+    #[Optional('b2bua_external', map: 'mixed')]
+    public ?array $b2buaExternal;
+
+    /**
+     * Raw internal-side block reported by the registrar.
+     *
+     * @var array<string,mixed>|null $b2buaInternal
+     */
+    #[Optional('b2bua_internal', map: 'mixed')]
+    public ?array $b2buaInternal;
+
+    /**
+     * Identifier of the UAC connection.
      */
     #[Optional('connection_id')]
     public ?string $connectionID;
@@ -42,6 +63,20 @@ final class SipRegistrationStatusGetResponse implements BaseModel
      */
     #[Optional('connection_name')]
     public ?string $connectionName;
+
+    /**
+     * The credential type that was looked up.
+     *
+     * @var value-of<CredentialType>|null $credentialType
+     */
+    #[Optional('credential_type', enum: CredentialType::class)]
+    public ?string $credentialType;
+
+    /**
+     * Registration state on the external (UAC / PBX) side, e.g. REGED.
+     */
+    #[Optional('external_state')]
+    public ?string $externalState;
 
     /**
      * Outward-facing SIP settings used for registration. Password is redacted.
@@ -74,7 +109,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     public ?bool $registered;
 
     /**
-     * Owner of the resource.
+     * Owner of the connection.
      */
     #[Optional('user_id')]
     public ?string $userID;
@@ -95,12 +130,19 @@ final class SipRegistrationStatusGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param array<string,mixed>|null $b2buaExternal
+     * @param array<string,mixed>|null $b2buaInternal
+     * @param CredentialType|value-of<CredentialType>|null $credentialType
      * @param ExternalUacSettings|ExternalUacSettingsShape|null $externalUacSettings
      * @param InternalUacSettings|InternalUacSettingsShape|null $internalUacSettings
      */
     public static function with(
+        ?array $b2buaExternal = null,
+        ?array $b2buaInternal = null,
         ?string $connectionID = null,
         ?string $connectionName = null,
+        CredentialType|string|null $credentialType = null,
+        ?string $externalState = null,
         ExternalUacSettings|array|null $externalUacSettings = null,
         InternalUacSettings|array|null $internalUacSettings = null,
         ?string $lastRegistrationResponse = null,
@@ -111,8 +153,12 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $b2buaExternal && $self['b2buaExternal'] = $b2buaExternal;
+        null !== $b2buaInternal && $self['b2buaInternal'] = $b2buaInternal;
         null !== $connectionID && $self['connectionID'] = $connectionID;
         null !== $connectionName && $self['connectionName'] = $connectionName;
+        null !== $credentialType && $self['credentialType'] = $credentialType;
+        null !== $externalState && $self['externalState'] = $externalState;
         null !== $externalUacSettings && $self['externalUacSettings'] = $externalUacSettings;
         null !== $internalUacSettings && $self['internalUacSettings'] = $internalUacSettings;
         null !== $lastRegistrationResponse && $self['lastRegistrationResponse'] = $lastRegistrationResponse;
@@ -125,7 +171,33 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     }
 
     /**
-     * Identifier of the resource.
+     * Raw external-side registration block reported by the registrar.
+     *
+     * @param array<string,mixed> $b2buaExternal
+     */
+    public function withB2buaExternal(array $b2buaExternal): self
+    {
+        $self = clone $this;
+        $self['b2buaExternal'] = $b2buaExternal;
+
+        return $self;
+    }
+
+    /**
+     * Raw internal-side block reported by the registrar.
+     *
+     * @param array<string,mixed> $b2buaInternal
+     */
+    public function withB2buaInternal(array $b2buaInternal): self
+    {
+        $self = clone $this;
+        $self['b2buaInternal'] = $b2buaInternal;
+
+        return $self;
+    }
+
+    /**
+     * Identifier of the UAC connection.
      */
     public function withConnectionID(string $connectionID): self
     {
@@ -142,6 +214,31 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['connectionName'] = $connectionName;
+
+        return $self;
+    }
+
+    /**
+     * The credential type that was looked up.
+     *
+     * @param CredentialType|value-of<CredentialType> $credentialType
+     */
+    public function withCredentialType(
+        CredentialType|string $credentialType
+    ): self {
+        $self = clone $this;
+        $self['credentialType'] = $credentialType;
+
+        return $self;
+    }
+
+    /**
+     * Registration state on the external (UAC / PBX) side, e.g. REGED.
+     */
+    public function withExternalState(string $externalState): self
+    {
+        $self = clone $this;
+        $self['externalState'] = $externalState;
 
         return $self;
     }
@@ -209,7 +306,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     }
 
     /**
-     * Owner of the resource.
+     * Owner of the connection.
      */
     public function withUserID(string $userID): self
     {
