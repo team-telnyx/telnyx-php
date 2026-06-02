@@ -33,9 +33,7 @@ final class SipRegistrationStatusRawService implements SipRegistrationStatusRawC
      * Returns the live SIP registration state of a UAC connection: whether it is currently registered, when it last registered, and the last response Telnyx received from the registrar. Only `uac_external_credential` is supported today.
      *
      * @param array{
-     *   connectionID: string,
-     *   credentialType: CredentialType|value-of<CredentialType>,
-     *   userID: string,
+     *   connectionID: string, credentialType: CredentialType|value-of<CredentialType>
      * }|SipRegistrationStatusRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -61,7 +59,6 @@ final class SipRegistrationStatusRawService implements SipRegistrationStatusRawC
                 [
                     'connectionID' => 'connection_id',
                     'credentialType' => 'credential_type',
-                    'userID' => 'user_id',
                 ],
             ),
             options: $options,
