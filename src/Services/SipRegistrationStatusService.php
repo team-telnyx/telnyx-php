@@ -13,7 +13,7 @@ use Telnyx\SipRegistrationStatus\SipRegistrationStatusGetResponse;
 use Telnyx\SipRegistrationStatus\SipRegistrationStatusRetrieveParams\CredentialType;
 
 /**
- * Look up the live SIP registration status of a UAC connection.
+ * UAC connection operations.
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
