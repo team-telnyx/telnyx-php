@@ -52,7 +52,7 @@ final class SipRegistrationDetails implements BaseModel
     /**
      * SIP URI user@host of the registered contact.
      */
-    #[Optional]
+    #[Optional('sip_uri_user_host')]
     public ?string $sipUriUserHost;
 
     /**
