@@ -37,8 +37,7 @@ final class SipRegistrationStatusTest extends TestCase
 
         $result = $this->client->sipRegistrationStatus->retrieve(
             connectionID: 'connection_id',
-            credentialType: 'uac_external_credential',
-            userID: 'user_id',
+            credentialType: 'uac_external_credential'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -54,8 +53,7 @@ final class SipRegistrationStatusTest extends TestCase
 
         $result = $this->client->sipRegistrationStatus->retrieve(
             connectionID: 'connection_id',
-            credentialType: 'uac_external_credential',
-            userID: 'user_id',
+            credentialType: 'uac_external_credential'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
