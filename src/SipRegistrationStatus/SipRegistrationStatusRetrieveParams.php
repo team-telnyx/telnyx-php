@@ -16,9 +16,7 @@ use Telnyx\SipRegistrationStatus\SipRegistrationStatusRetrieveParams\CredentialT
  * @see Telnyx\Services\SipRegistrationStatusService::retrieve()
  *
  * @phpstan-type SipRegistrationStatusRetrieveParamsShape = array{
- *   connectionID: string,
- *   credentialType: CredentialType|value-of<CredentialType>,
- *   userID: string,
+ *   connectionID: string, credentialType: CredentialType|value-of<CredentialType>
  * }
  */
 final class SipRegistrationStatusRetrieveParams implements BaseModel
@@ -42,18 +40,12 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
     public string $credentialType;
 
     /**
-     * Owner of the connection. Used to authorize the lookup.
-     */
-    #[Required]
-    public string $userID;
-
-    /**
      * `new SipRegistrationStatusRetrieveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
      * SipRegistrationStatusRetrieveParams::with(
-     *   connectionID: ..., credentialType: ..., userID: ...
+     *   connectionID: ..., credentialType: ...
      * )
      * ```
      *
@@ -63,7 +55,6 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
      * (new SipRegistrationStatusRetrieveParams)
      *   ->withConnectionID(...)
      *   ->withCredentialType(...)
-     *   ->withUserID(...)
      * ```
      */
     public function __construct()
@@ -80,14 +71,12 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
      */
     public static function with(
         string $connectionID,
-        CredentialType|string $credentialType,
-        string $userID
+        CredentialType|string $credentialType
     ): self {
         $self = new self;
 
         $self['connectionID'] = $connectionID;
         $self['credentialType'] = $credentialType;
-        $self['userID'] = $userID;
 
         return $self;
     }
@@ -113,17 +102,6 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['credentialType'] = $credentialType;
-
-        return $self;
-    }
-
-    /**
-     * Owner of the connection. Used to authorize the lookup.
-     */
-    public function withUserID(string $userID): self
-    {
-        $self = clone $this;
-        $self['userID'] = $userID;
 
         return $self;
     }
