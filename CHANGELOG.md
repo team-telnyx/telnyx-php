@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.64.1 (2026-06-02)
+
+Full Changelog: [v7.64.0...v7.64.1](https://github.com/team-telnyx/telnyx-php/compare/v7.64.0...v7.64.1)
+
+### Bug Fixes
+
+* **sip-registration-status:** move operation under UAC Connections tag ([afaa746](https://github.com/team-telnyx/telnyx-php/commit/afaa74653ab0b8e6ad18fc1306b71c8dfba77479))
+
 ## 7.64.0 (2026-06-02)
 
 Full Changelog: [v7.63.2...v7.64.0](https://github.com/team-telnyx/telnyx-php/compare/v7.63.2...v7.64.0)
