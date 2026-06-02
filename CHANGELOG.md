@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.64.0 (2026-06-02)
+
+Full Changelog: [v7.63.2...v7.64.0](https://github.com/team-telnyx/telnyx-php/compare/v7.63.2...v7.64.0)
+
+### Features
+
+* **sip-registration-status:** finalize phase 1 response shape with status mapping ([6f78d7a](https://github.com/team-telnyx/telnyx-php/commit/6f78d7a57a150d09c1265c8d84465738291faf70))
+
+
+### Bug Fixes
+
+* **sip-registration-status:** rename detail field to sip_uri_user_host ([dcd0b71](https://github.com/team-telnyx/telnyx-php/commit/dcd0b7179ed1489af48fc8aa0ebeac038c0d39a8))
+
 ## 7.63.2 (2026-06-02)
 
 Full Changelog: [v7.63.1...v7.63.2](https://github.com/team-telnyx/telnyx-php/compare/v7.63.1...v7.63.2)
