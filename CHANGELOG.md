@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.63.2 (2026-06-02)
+
+Full Changelog: [v7.63.1...v7.63.2](https://github.com/team-telnyx/telnyx-php/compare/v7.63.1...v7.63.2)
+
+### Bug Fixes
+
+* **sip-registration-status:** drop user_id query param ([0f82df7](https://github.com/team-telnyx/telnyx-php/commit/0f82df7bf144e18e8772832f23230eacb0213573))
+
 ## 7.63.1 (2026-06-01)
 
 Full Changelog: [v7.63.0...v7.63.1](https://github.com/team-telnyx/telnyx-php/compare/v7.63.0...v7.63.1)
