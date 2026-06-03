@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.65.0 (2026-06-03)
+
+Full Changelog: [v7.64.1...v7.65.0](https://github.com/team-telnyx/telnyx-php/compare/v7.64.1...v7.65.0)
+
+### Features
+
+* AI-assistants conversation flow ([44cd440](https://github.com/team-telnyx/telnyx-php/commit/44cd4403618f156b27dc1c7e8681c6d04e521804))
+
 ## 7.64.1 (2026-06-02)
 
 Full Changelog: [v7.64.0...v7.64.1](https://github.com/team-telnyx/telnyx-php/compare/v7.64.0...v7.64.1)
