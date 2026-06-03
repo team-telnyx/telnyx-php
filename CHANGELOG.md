@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.67.0 (2026-06-03)
+
+Full Changelog: [v7.66.0...v7.67.0](https://github.com/team-telnyx/telnyx-php/compare/v7.66.0...v7.67.0)
+
+### Features
+
+* TELAPPS-406: nest service_types with per-service languages in STT spec ([188d461](https://github.com/team-telnyx/telnyx-php/commit/188d46154193c1a1ac13948cc82e44dc00dd65e8))
+
 ## 7.66.0 (2026-06-03)
 
 Full Changelog: [v7.65.0...v7.66.0](https://github.com/team-telnyx/telnyx-php/compare/v7.65.0...v7.66.0)
