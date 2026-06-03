@@ -18,6 +18,7 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\UpdateAssistant\ConversationFlow;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Attributes\Optional;
@@ -26,6 +27,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\Versions\UpdateAssistant\ConversationFlow
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -43,6 +45,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type WidgetSettingsShape from \Telnyx\AI\Assistants\WidgetSettings
  *
  * @phpstan-type UpdateAssistantShape = array{
+ *   conversationFlow?: null|ConversationFlow|ConversationFlowShape,
  *   description?: string|null,
  *   dynamicVariables?: array<string,mixed>|null,
  *   dynamicVariablesWebhookTimeoutMs?: int|null,
@@ -77,6 +80,16 @@ final class UpdateAssistant implements BaseModel
 {
     /** @use SdkModel<UpdateAssistantShape> */
     use SdkModel;
+
+    /**
+     * Conversation flow as supplied by API clients (create / update).
+     *
+     * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
+     * enforces unique node/edge IDs, that `start_node_id` references a real
+     * node, and that every edge's endpoints reference real nodes.
+     */
+    #[Optional('conversation_flow')]
+    public ?ConversationFlow $conversationFlow;
 
     #[Optional]
     public ?string $description;
@@ -233,6 +246,7 @@ final class UpdateAssistant implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ConversationFlow|ConversationFlowShape|null $conversationFlow
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
      * @param ExternalLlmReq|ExternalLlmReqShape|null $externalLlm
@@ -254,6 +268,7 @@ final class UpdateAssistant implements BaseModel
      * @param WidgetSettings|WidgetSettingsShape|null $widgetSettings
      */
     public static function with(
+        ConversationFlow|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         ?int $dynamicVariablesWebhookTimeoutMs = null,
@@ -285,6 +300,7 @@ final class UpdateAssistant implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $conversationFlow && $self['conversationFlow'] = $conversationFlow;
         null !== $description && $self['description'] = $description;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $dynamicVariablesWebhookTimeoutMs && $self['dynamicVariablesWebhookTimeoutMs'] = $dynamicVariablesWebhookTimeoutMs;
@@ -313,6 +329,24 @@ final class UpdateAssistant implements BaseModel
         null !== $versionName && $self['versionName'] = $versionName;
         null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
         null !== $widgetSettings && $self['widgetSettings'] = $widgetSettings;
+
+        return $self;
+    }
+
+    /**
+     * Conversation flow as supplied by API clients (create / update).
+     *
+     * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
+     * enforces unique node/edge IDs, that `start_node_id` references a real
+     * node, and that every edge's endpoints reference real nodes.
+     *
+     * @param ConversationFlow|ConversationFlowShape $conversationFlow
+     */
+    public function withConversationFlow(
+        ConversationFlow|array $conversationFlow
+    ): self {
+        $self = clone $this;
+        $self['conversationFlow'] = $conversationFlow;
 
         return $self;
     }

@@ -19,15 +19,15 @@ interface AIContract
      *
      * @api
      *
-     * @param array<string,mixed> $input
+     * @param array<string,mixed> $body
      * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
      *
      * @throws APIException
      */
-    public function createResponse(
-        array $input,
+    public function createResponseDeprecated(
+        array $body,
         RequestOptions|array|null $requestOptions = null
     ): array;
 

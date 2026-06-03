@@ -7,6 +7,7 @@ namespace Telnyx\Services\AI;
 use Telnyx\AI\Assistants\AssistantChatParams;
 use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantCreateParams;
+use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
@@ -41,6 +42,8 @@ use Telnyx\ServiceContracts\AI\AssistantsRawContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow as ConversationFlowShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
@@ -75,6 +78,7 @@ final class AssistantsRawService implements AssistantsRawContract
      * @param array{
      *   instructions: string,
      *   name: string,
+     *   conversationFlow?: ConversationFlow|ConversationFlowShape,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookTimeoutMs?: int,
@@ -175,6 +179,7 @@ final class AssistantsRawService implements AssistantsRawContract
      * Update an AI Assistant's attributes.
      *
      * @param array{
+     *   conversationFlow?: AssistantUpdateParams\ConversationFlow|ConversationFlowShape1,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookTimeoutMs?: int,

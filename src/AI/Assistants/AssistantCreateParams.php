@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,6 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\AssistantsService::create()
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -35,6 +37,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type AssistantCreateParamsShape = array{
  *   instructions: string,
  *   name: string,
+ *   conversationFlow?: null|ConversationFlow|ConversationFlowShape,
  *   description?: string|null,
  *   dynamicVariables?: array<string,mixed>|null,
  *   dynamicVariablesWebhookTimeoutMs?: int|null,
@@ -76,6 +79,16 @@ final class AssistantCreateParams implements BaseModel
 
     #[Required]
     public string $name;
+
+    /**
+     * Conversation flow as supplied by API clients (create / update).
+     *
+     * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
+     * enforces unique node/edge IDs, that `start_node_id` references a real
+     * node, and that every edge's endpoints reference real nodes.
+     */
+    #[Optional('conversation_flow')]
+    public ?ConversationFlow $conversationFlow;
 
     #[Optional]
     public ?string $description;
@@ -231,6 +244,7 @@ final class AssistantCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ConversationFlow|ConversationFlowShape|null $conversationFlow
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
      * @param ExternalLlmReq|ExternalLlmReqShape|null $externalLlm
@@ -254,6 +268,7 @@ final class AssistantCreateParams implements BaseModel
     public static function with(
         string $instructions,
         string $name,
+        ConversationFlow|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         ?int $dynamicVariablesWebhookTimeoutMs = null,
@@ -285,6 +300,7 @@ final class AssistantCreateParams implements BaseModel
         $self['instructions'] = $instructions;
         $self['name'] = $name;
 
+        null !== $conversationFlow && $self['conversationFlow'] = $conversationFlow;
         null !== $description && $self['description'] = $description;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $dynamicVariablesWebhookTimeoutMs && $self['dynamicVariablesWebhookTimeoutMs'] = $dynamicVariablesWebhookTimeoutMs;
@@ -329,6 +345,24 @@ final class AssistantCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * Conversation flow as supplied by API clients (create / update).
+     *
+     * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
+     * enforces unique node/edge IDs, that `start_node_id` references a real
+     * node, and that every edge's endpoints reference real nodes.
+     *
+     * @param ConversationFlow|ConversationFlowShape $conversationFlow
+     */
+    public function withConversationFlow(
+        ConversationFlow|array $conversationFlow
+    ): self {
+        $self = clone $this;
+        $self['conversationFlow'] = $conversationFlow;
 
         return $self;
     }

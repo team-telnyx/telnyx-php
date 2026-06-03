@@ -23,6 +23,7 @@ use Telnyx\AI\Assistants\Versions\VersionDeleteParams;
 use Telnyx\AI\Assistants\Versions\VersionPromoteParams;
 use Telnyx\AI\Assistants\Versions\VersionRetrieveParams;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
@@ -35,6 +36,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsRawContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -108,6 +110,7 @@ final class VersionsRawService implements VersionsRawContract
      * @param string $versionID Path param
      * @param array{
      *   assistantID: string,
+     *   conversationFlow?: ConversationFlow|ConversationFlowShape,
      *   description?: string,
      *   dynamicVariables?: array<string,mixed>,
      *   dynamicVariablesWebhookTimeoutMs?: int,
