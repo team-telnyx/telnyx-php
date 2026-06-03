@@ -6,7 +6,9 @@ namespace Telnyx\ServiceContracts\Texml\Accounts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\ApplicationDefault;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithTeXml;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL;
 use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetResponse;
@@ -78,14 +80,14 @@ interface CallsContract
      * @api
      *
      * @param string $accountSid the id of the account the resource belongs to
-     * @param Params|ParamsShape $params Initiate a TeXML call. Provide either `Url` (fetches TeXML from URL) or `Texml` (inline TeXML), or neither (uses the application default). `Url` and `Texml` are mutually exclusive.
+     * @param ParamsShape $params
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function calls(
         string $accountSid,
-        Params|array $params,
+        WithURL|array|WithTeXml|ApplicationDefault $params,
         RequestOptions|array|null $requestOptions = null,
     ): CallCallsResponse;
 
