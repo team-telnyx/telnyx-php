@@ -10,27 +10,20 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SpeechToText\SpeechToTextListProvidersResponse\Data\ServiceType;
 
 /**
- * A (provider, model) tuple along with its supported service types and languages.
+ * A (provider, model) tuple along with the service surfaces it supports. Each entry in `service_types` describes one surface and the languages accepted on it.
+ *
+ * @phpstan-import-type ServiceTypeShape from \Telnyx\SpeechToText\SpeechToTextListProvidersResponse\Data\ServiceType
  *
  * @phpstan-type DataShape = array{
- *   languages: list<string>,
  *   model: string,
  *   provider: string,
- *   serviceTypes: list<ServiceType|value-of<ServiceType>>,
+ *   serviceTypes: list<ServiceType|ServiceTypeShape>,
  * }
  */
 final class Data implements BaseModel
 {
     /** @use SdkModel<DataShape> */
     use SdkModel;
-
-    /**
-     * Languages this (provider, model) accepts, in the provider's native code format. `auto` indicates the provider performs language detection.
-     *
-     * @var list<string> $languages
-     */
-    #[Required(list: 'string')]
-    public array $languages;
 
     /**
      * Provider-scoped model name.
@@ -45,9 +38,9 @@ final class Data implements BaseModel
     public string $provider;
 
     /**
-     * Service surfaces this (provider, model) supports.
+     * Service surfaces this (provider, model) supports. When the request filters by `service_type`, only the matching nested entry is returned for each matching model.
      *
-     * @var list<value-of<ServiceType>> $serviceTypes
+     * @var list<ServiceType> $serviceTypes
      */
     #[Required('service_types', list: ServiceType::class)]
     public array $serviceTypes;
@@ -57,17 +50,13 @@ final class Data implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Data::with(languages: ..., model: ..., provider: ..., serviceTypes: ...)
+     * Data::with(model: ..., provider: ..., serviceTypes: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new Data)
-     *   ->withLanguages(...)
-     *   ->withModel(...)
-     *   ->withProvider(...)
-     *   ->withServiceTypes(...)
+     * (new Data)->withModel(...)->withProvider(...)->withServiceTypes(...)
      * ```
      */
     public function __construct()
@@ -80,34 +69,18 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string> $languages
-     * @param list<ServiceType|value-of<ServiceType>> $serviceTypes
+     * @param list<ServiceType|ServiceTypeShape> $serviceTypes
      */
     public static function with(
-        array $languages,
         string $model,
         string $provider,
         array $serviceTypes
     ): self {
         $self = new self;
 
-        $self['languages'] = $languages;
         $self['model'] = $model;
         $self['provider'] = $provider;
         $self['serviceTypes'] = $serviceTypes;
-
-        return $self;
-    }
-
-    /**
-     * Languages this (provider, model) accepts, in the provider's native code format. `auto` indicates the provider performs language detection.
-     *
-     * @param list<string> $languages
-     */
-    public function withLanguages(array $languages): self
-    {
-        $self = clone $this;
-        $self['languages'] = $languages;
 
         return $self;
     }
@@ -135,9 +108,9 @@ final class Data implements BaseModel
     }
 
     /**
-     * Service surfaces this (provider, model) supports.
+     * Service surfaces this (provider, model) supports. When the request filters by `service_type`, only the matching nested entry is returned for each matching model.
      *
-     * @param list<ServiceType|value-of<ServiceType>> $serviceTypes
+     * @param list<ServiceType|ServiceTypeShape> $serviceTypes
      */
     public function withServiceTypes(array $serviceTypes): self
     {
