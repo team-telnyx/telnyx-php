@@ -19,6 +19,7 @@ use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Client;
@@ -30,6 +31,7 @@ use Telnyx\ServiceContracts\AI\Assistants\VersionsContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
@@ -97,6 +99,11 @@ final class VersionsService implements VersionsContract
      *
      * @param string $versionID Path param
      * @param string $assistantID Path param
+     * @param ConversationFlow|ConversationFlowShape $conversationFlow Body param: Conversation flow as supplied by API clients (create / update).
+     *
+     * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
+     * enforces unique node/edge IDs, that `start_node_id` references a real
+     * node, and that every edge's endpoints reference real nodes.
      * @param string $description Body param
      * @param array<string,mixed> $dynamicVariables Body param: Map of dynamic variables and their default values
      * @param int $dynamicVariablesWebhookTimeoutMs Body param: Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
@@ -132,6 +139,7 @@ final class VersionsService implements VersionsContract
     public function update(
         string $versionID,
         string $assistantID,
+        ConversationFlow|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         int $dynamicVariablesWebhookTimeoutMs = 1500,
@@ -165,6 +173,7 @@ final class VersionsService implements VersionsContract
         $params = Util::removeNulls(
             [
                 'assistantID' => $assistantID,
+                'conversationFlow' => $conversationFlow,
                 'description' => $description,
                 'dynamicVariables' => $dynamicVariables,
                 'dynamicVariablesWebhookTimeoutMs' => $dynamicVariablesWebhookTimeoutMs,

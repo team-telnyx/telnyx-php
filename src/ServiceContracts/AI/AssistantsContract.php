@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Assistants\AssistantChatResponse;
+use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantImportsParams\Provider;
 use Telnyx\AI\Assistants\AssistantIntegration;
@@ -29,6 +30,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow as ConversationFlowShape1
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\AssistantSendSMSParams\ConversationMetadata
  * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
  * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
@@ -53,6 +56,11 @@ interface AssistantsContract
      * @api
      *
      * @param string $instructions System instructions for the assistant. These may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables)
+     * @param ConversationFlow|ConversationFlowShape $conversationFlow Conversation flow as supplied by API clients (create / update).
+     *
+     * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
+     * enforces unique node/edge IDs, that `start_node_id` references a real
+     * node, and that every edge's endpoints reference real nodes.
      * @param array<string,mixed> $dynamicVariables Map of dynamic variables and their default values
      * @param int $dynamicVariablesWebhookTimeoutMs Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      * @param string $dynamicVariablesWebhookURL If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
@@ -84,6 +92,7 @@ interface AssistantsContract
     public function create(
         string $instructions,
         string $name,
+        ConversationFlow|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         int $dynamicVariablesWebhookTimeoutMs = 1500,
@@ -131,6 +140,11 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param \Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow|ConversationFlowShape1 $conversationFlow Conversation flow as supplied by API clients (create / update).
+     *
+     * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
+     * enforces unique node/edge IDs, that `start_node_id` references a real
+     * node, and that every edge's endpoints reference real nodes.
      * @param array<string,mixed> $dynamicVariables Map of dynamic variables and their default values
      * @param int $dynamicVariablesWebhookTimeoutMs Timeout in milliseconds for the dynamic variables webhook. Must be between 1 and 10000 ms. If the webhook does not respond within this timeout, the call proceeds with default values. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables).
      * @param string $dynamicVariablesWebhookURL If `dynamic_variables_webhook_url` is set, Telnyx sends a POST request to this URL at the start of the conversation to resolve dynamic variables. **Gotcha:** the webhook response must wrap variables under a top-level `dynamic_variables` object, e.g. `{"dynamic_variables": {"customer_name": "Jane"}}`. Returning a flat object will be ignored and variables will fall back to their defaults. See the [dynamic variables guide](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables) for the full request/response format and timeout behavior.
@@ -164,6 +178,7 @@ interface AssistantsContract
      */
     public function update(
         string $assistantID,
+        \Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         int $dynamicVariablesWebhookTimeoutMs = 1500,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -11,6 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow
  * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\ExternalLlm
  * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\FallbackConfig
  * @phpstan-import-type ImportMetadataShape from \Telnyx\AI\Assistants\ImportMetadata
@@ -34,6 +36,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   instructions: string,
  *   model: string,
  *   name: string,
+ *   conversationFlow?: null|ConversationFlow|ConversationFlowShape,
  *   description?: string|null,
  *   dynamicVariables?: array<string,mixed>|null,
  *   dynamicVariablesWebhookTimeoutMs?: int|null,
@@ -89,6 +92,12 @@ final class InferenceEmbedding implements BaseModel
 
     #[Required]
     public string $name;
+
+    /**
+     * Conversation flow as returned by the API.
+     */
+    #[Optional('conversation_flow')]
+    public ?ConversationFlow $conversationFlow;
 
     #[Optional]
     public ?string $description;
@@ -266,6 +275,7 @@ final class InferenceEmbedding implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param ConversationFlow|ConversationFlowShape|null $conversationFlow
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
      * @param ExternalLlm|ExternalLlmShape|null $externalLlm
@@ -293,6 +303,7 @@ final class InferenceEmbedding implements BaseModel
         string $instructions,
         string $model,
         string $name,
+        ConversationFlow|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         ?int $dynamicVariablesWebhookTimeoutMs = null,
@@ -330,6 +341,7 @@ final class InferenceEmbedding implements BaseModel
         $self['model'] = $model;
         $self['name'] = $name;
 
+        null !== $conversationFlow && $self['conversationFlow'] = $conversationFlow;
         null !== $description && $self['description'] = $description;
         null !== $dynamicVariables && $self['dynamicVariables'] = $dynamicVariables;
         null !== $dynamicVariablesWebhookTimeoutMs && $self['dynamicVariablesWebhookTimeoutMs'] = $dynamicVariablesWebhookTimeoutMs;
@@ -404,6 +416,20 @@ final class InferenceEmbedding implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * Conversation flow as returned by the API.
+     *
+     * @param ConversationFlow|ConversationFlowShape $conversationFlow
+     */
+    public function withConversationFlow(
+        ConversationFlow|array $conversationFlow
+    ): self {
+        $self = clone $this;
+        $self['conversationFlow'] = $conversationFlow;
 
         return $self;
     }

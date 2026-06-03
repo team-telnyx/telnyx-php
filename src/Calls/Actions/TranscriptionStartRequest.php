@@ -6,6 +6,8 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngine;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
