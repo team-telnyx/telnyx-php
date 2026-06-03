@@ -7,7 +7,6 @@ namespace Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow;
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition;
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition;
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\LlmCondition;
-use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ToolResultCondition;
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Target;
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Target\AssistantTarget;
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Target\NodeTarget;
@@ -47,12 +46,12 @@ final class Edge implements BaseModel
     public string $id;
 
     /**
-     * Condition that gates the transition. Discriminated by `type`: `llm`, `expression`, or `tool_result`. A `tool_result` condition is only valid on an edge leaving a tool node.
+     * Condition that gates the transition. Discriminated by `type`: `llm`, `expression`.
      *
      * @var ConditionVariants $condition
      */
     #[Required(union: Condition::class)]
-    public LlmCondition|ExpressionCondition|ToolResultCondition $condition;
+    public LlmCondition|ExpressionCondition $condition;
 
     /**
      * ID of the node this edge transitions away from.
@@ -101,7 +100,7 @@ final class Edge implements BaseModel
      */
     public static function with(
         string $id,
-        LlmCondition|array|ExpressionCondition|ToolResultCondition $condition,
+        LlmCondition|array|ExpressionCondition $condition,
         string $startNodeID,
         NodeTarget|array|AssistantTarget $target,
     ): self {
@@ -127,12 +126,12 @@ final class Edge implements BaseModel
     }
 
     /**
-     * Condition that gates the transition. Discriminated by `type`: `llm`, `expression`, or `tool_result`. A `tool_result` condition is only valid on an edge leaving a tool node.
+     * Condition that gates the transition. Discriminated by `type`: `llm`, `expression`.
      *
      * @param ConditionShape $condition
      */
     public function withCondition(
-        LlmCondition|array|ExpressionCondition|ToolResultCondition $condition
+        LlmCondition|array|ExpressionCondition $condition
     ): self {
         $self = clone $this;
         $self['condition'] = $condition;
