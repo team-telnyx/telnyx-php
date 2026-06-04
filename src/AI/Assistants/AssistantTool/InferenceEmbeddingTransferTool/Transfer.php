@@ -22,6 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   from: string,
  *   targets: TargetsShape,
  *   customHeaders?: list<CustomHeader|CustomHeaderShape>|null,
+ *   description?: string|null,
  *   voicemailDetection?: null|VoicemailDetection|VoicemailDetectionShape,
  *   warmMessageDelayMs?: int|null,
  *   warmTransferInstructions?: string|null,
@@ -53,6 +54,12 @@ final class Transfer implements BaseModel
      */
     #[Optional('custom_headers', list: CustomHeader::class)]
     public ?array $customHeaders;
+
+    /**
+     * A description of the transfer tool. By default, Telnyx generates this automatically based on the configured targets. Typically only set when importing an assistant from another provider that allowed a custom description; in that case the provided value is preserved. Most users should leave this empty and let Telnyx manage it.
+     */
+    #[Optional]
+    public ?string $description;
 
     /**
      * Configuration for voicemail detection (AMD - Answering Machine Detection) on the transferred call. Allows the assistant to detect when a voicemail system answers the transferred call and take appropriate action.
@@ -104,6 +111,7 @@ final class Transfer implements BaseModel
         string $from,
         string|array $targets,
         ?array $customHeaders = null,
+        ?string $description = null,
         VoicemailDetection|array|null $voicemailDetection = null,
         ?int $warmMessageDelayMs = null,
         ?string $warmTransferInstructions = null,
@@ -114,6 +122,7 @@ final class Transfer implements BaseModel
         $self['targets'] = $targets;
 
         null !== $customHeaders && $self['customHeaders'] = $customHeaders;
+        null !== $description && $self['description'] = $description;
         null !== $voicemailDetection && $self['voicemailDetection'] = $voicemailDetection;
         null !== $warmMessageDelayMs && $self['warmMessageDelayMs'] = $warmMessageDelayMs;
         null !== $warmTransferInstructions && $self['warmTransferInstructions'] = $warmTransferInstructions;
@@ -154,6 +163,17 @@ final class Transfer implements BaseModel
     {
         $self = clone $this;
         $self['customHeaders'] = $customHeaders;
+
+        return $self;
+    }
+
+    /**
+     * A description of the transfer tool. By default, Telnyx generates this automatically based on the configured targets. Typically only set when importing an assistant from another provider that allowed a custom description; in that case the provided value is preserved. Most users should leave this empty and let Telnyx manage it.
+     */
+    public function withDescription(string $description): self
+    {
+        $self = clone $this;
+        $self['description'] = $description;
 
         return $self;
     }
