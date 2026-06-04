@@ -19,6 +19,7 @@ use Telnyx\MessagingProfiles\MessagingProfileUpdateParams\WebhookAPIVersion;
  * @phpstan-import-type URLShortenerSettingsShape from \Telnyx\MessagingProfiles\URLShortenerSettings
  *
  * @phpstan-type MessagingProfileUpdateParamsShape = array{
+ *   aiAssistantID?: string|null,
  *   alphaSender?: string|null,
  *   dailySpendLimit?: string|null,
  *   dailySpendLimitEnabled?: bool|null,
@@ -42,6 +43,12 @@ final class MessagingProfileUpdateParams implements BaseModel
     /** @use SdkModel<MessagingProfileUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /**
+     * The ID of the AI assistant associated with this messaging profile.
+     */
+    #[Optional('ai_assistant_id', nullable: true)]
+    public ?string $aiAssistantID;
 
     /**
      * The alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID.
@@ -171,6 +178,7 @@ final class MessagingProfileUpdateParams implements BaseModel
      * @param list<string>|null $whitelistedDestinations
      */
     public static function with(
+        ?string $aiAssistantID = null,
         ?string $alphaSender = null,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
@@ -190,6 +198,7 @@ final class MessagingProfileUpdateParams implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $aiAssistantID && $self['aiAssistantID'] = $aiAssistantID;
         null !== $alphaSender && $self['alphaSender'] = $alphaSender;
         null !== $dailySpendLimit && $self['dailySpendLimit'] = $dailySpendLimit;
         null !== $dailySpendLimitEnabled && $self['dailySpendLimitEnabled'] = $dailySpendLimitEnabled;
@@ -206,6 +215,17 @@ final class MessagingProfileUpdateParams implements BaseModel
         null !== $webhookFailoverURL && $self['webhookFailoverURL'] = $webhookFailoverURL;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
         null !== $whitelistedDestinations && $self['whitelistedDestinations'] = $whitelistedDestinations;
+
+        return $self;
+    }
+
+    /**
+     * The ID of the AI assistant associated with this messaging profile.
+     */
+    public function withAIAssistantID(?string $aiAssistantID): self
+    {
+        $self = clone $this;
+        $self['aiAssistantID'] = $aiAssistantID;
 
         return $self;
     }

@@ -104,6 +104,7 @@ interface MessagingProfilesContract
      * @api
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
+     * @param string|null $aiAssistantID the ID of the AI assistant associated with this messaging profile
      * @param string|null $alphaSender the alphanumeric sender ID to use when sending to destinations that require an alphanumeric sender ID
      * @param string $dailySpendLimit the maximum amount of money (in USD) that can be spent by this profile before midnight UTC
      * @param bool $dailySpendLimitEnabled whether to enforce the value configured by `daily_spend_limit`
@@ -138,6 +139,7 @@ interface MessagingProfilesContract
      */
     public function update(
         string $messagingProfileID,
+        ?string $aiAssistantID = null,
         ?string $alphaSender = null,
         ?string $dailySpendLimit = null,
         ?bool $dailySpendLimitEnabled = null,
