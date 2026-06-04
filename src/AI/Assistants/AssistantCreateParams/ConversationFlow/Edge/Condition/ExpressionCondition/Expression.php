@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition;
 
-use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\ArithmeticExpression;
 use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\BooleanLiteralExpression;
-use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\BooleanOpExpression;
-use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\ComparisonExpression;
 use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\DynamicVariableExpression;
 use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\NumberLiteralExpression;
 use Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\StringLiteralExpression;
@@ -16,27 +13,21 @@ use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 
 /**
- * Root of the expression AST. Must evaluate to a boolean.
+ * A node in a deterministic expression AST. Exactly one variant is selected by the `type` discriminator. Terminal variants (`number_literal`, `string_literal`, `bool_literal`, `variable`) bottom out the recursion; `arithmetic`, `bool_op`, and `comparison` nest further sub-expressions.
  *
- * @phpstan-import-type ComparisonExpressionShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\ComparisonExpression
- * @phpstan-import-type BooleanOpExpressionShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\BooleanOpExpression
- * @phpstan-import-type ArithmeticExpressionShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\ArithmeticExpression
+ * Extracted into a single named schema so the recursive union is defined once (was previously inlined at every operand site).
+ *
  * @phpstan-import-type DynamicVariableExpressionShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\DynamicVariableExpression
  * @phpstan-import-type StringLiteralExpressionShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\StringLiteralExpression
  * @phpstan-import-type NumberLiteralExpressionShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\NumberLiteralExpression
  * @phpstan-import-type BooleanLiteralExpressionShape from \Telnyx\AI\Assistants\AssistantCreateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\BooleanLiteralExpression
  *
- * @phpstan-type ExpressionVariants = ComparisonExpression|BooleanOpExpression|ArithmeticExpression|DynamicVariableExpression|StringLiteralExpression|NumberLiteralExpression|BooleanLiteralExpression
- * @phpstan-type ExpressionShape = ExpressionVariants|ComparisonExpressionShape|BooleanOpExpressionShape|ArithmeticExpressionShape|DynamicVariableExpressionShape|StringLiteralExpressionShape|NumberLiteralExpressionShape|BooleanLiteralExpressionShape
+ * @phpstan-type ExpressionVariants = mixed|DynamicVariableExpression|StringLiteralExpression|NumberLiteralExpression|BooleanLiteralExpression
+ * @phpstan-type ExpressionShape = ExpressionVariants|DynamicVariableExpressionShape|StringLiteralExpressionShape|NumberLiteralExpressionShape|BooleanLiteralExpressionShape
  */
 final class Expression implements ConverterSource
 {
     use SdkUnion;
-
-    public static function discriminator(): string
-    {
-        return 'type';
-    }
 
     /**
      * @return list<string|Converter|ConverterSource>|array<string,string|Converter|ConverterSource>
@@ -44,13 +35,11 @@ final class Expression implements ConverterSource
     public static function variants(): array
     {
         return [
-            'comparison' => ComparisonExpression::class,
-            'bool_op' => BooleanOpExpression::class,
-            'arithmetic' => ArithmeticExpression::class,
-            'variable' => DynamicVariableExpression::class,
-            'string_literal' => StringLiteralExpression::class,
-            'number_literal' => NumberLiteralExpression::class,
-            'bool_literal' => BooleanLiteralExpression::class,
+            'mixed',
+            DynamicVariableExpression::class,
+            StringLiteralExpression::class,
+            NumberLiteralExpression::class,
+            BooleanLiteralExpression::class,
         ];
     }
 }
