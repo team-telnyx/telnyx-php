@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.68.1 (2026-06-04)
+
+Full Changelog: [v7.68.0...v7.68.1](https://github.com/team-telnyx/telnyx-php/compare/v7.68.0...v7.68.1)
+
+### Bug Fixes
+
+* **inference:** extract recursive expression AST into named Expression schema ([52e2d08](https://github.com/team-telnyx/telnyx-php/commit/52e2d08dbccf97250ca4729b40a303e2d50b5ea9))
+
 ## 7.68.0 (2026-06-04)
 
 Full Changelog: [v7.67.0...v7.68.0](https://github.com/team-telnyx/telnyx-php/compare/v7.67.0...v7.68.0)
