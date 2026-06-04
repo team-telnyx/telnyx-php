@@ -5,13 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition;
 
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression;
-use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\ArithmeticExpression;
-use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\BooleanLiteralExpression;
-use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\BooleanOpExpression;
-use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\ComparisonExpression;
-use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\DynamicVariableExpression;
-use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\NumberLiteralExpression;
-use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition\Expression\StringLiteralExpression;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -40,12 +33,14 @@ final class ExpressionCondition implements BaseModel
     public string $type = 'expression';
 
     /**
-     * Root of the expression AST. Must evaluate to a boolean.
+     * A node in a deterministic expression AST. Exactly one variant is selected by the `type` discriminator. Terminal variants (`number_literal`, `string_literal`, `bool_literal`, `variable`) bottom out the recursion; `arithmetic`, `bool_op`, and `comparison` nest further sub-expressions.
+     *
+     * Extracted into a single named schema so the recursive union is defined once (was previously inlined at every operand site).
      *
      * @var ExpressionVariants $expression
      */
     #[Required(union: Expression::class)]
-    public ComparisonExpression|BooleanOpExpression|ArithmeticExpression|DynamicVariableExpression|StringLiteralExpression|NumberLiteralExpression|BooleanLiteralExpression $expression;
+    public mixed $expression;
 
     /**
      * `new ExpressionCondition()` is missing required properties by the API.
@@ -73,9 +68,8 @@ final class ExpressionCondition implements BaseModel
      *
      * @param ExpressionShape $expression
      */
-    public static function with(
-        ComparisonExpression|array|BooleanOpExpression|ArithmeticExpression|DynamicVariableExpression|StringLiteralExpression|NumberLiteralExpression|BooleanLiteralExpression $expression,
-    ): self {
+    public static function with(mixed $expression): self
+    {
         $self = new self;
 
         $self['expression'] = $expression;
@@ -84,13 +78,14 @@ final class ExpressionCondition implements BaseModel
     }
 
     /**
-     * Root of the expression AST. Must evaluate to a boolean.
+     * A node in a deterministic expression AST. Exactly one variant is selected by the `type` discriminator. Terminal variants (`number_literal`, `string_literal`, `bool_literal`, `variable`) bottom out the recursion; `arithmetic`, `bool_op`, and `comparison` nest further sub-expressions.
+     *
+     * Extracted into a single named schema so the recursive union is defined once (was previously inlined at every operand site).
      *
      * @param ExpressionShape $expression
      */
-    public function withExpression(
-        ComparisonExpression|array|BooleanOpExpression|ArithmeticExpression|DynamicVariableExpression|StringLiteralExpression|NumberLiteralExpression|BooleanLiteralExpression $expression,
-    ): self {
+    public function withExpression(mixed $expression): self
+    {
         $self = clone $this;
         $self['expression'] = $expression;
 
