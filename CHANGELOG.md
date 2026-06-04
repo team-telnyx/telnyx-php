@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.69.0 (2026-06-04)
+
+Full Changelog: [v7.68.1...v7.69.0](https://github.com/team-telnyx/telnyx-php/compare/v7.68.1...v7.69.0)
+
+### Features
+
+* **inference:** expose description on transfer tool params ([3cd061a](https://github.com/team-telnyx/telnyx-php/commit/3cd061ad91e954a98367c5fbddc8d2ff375059de))
+
 ## 7.68.1 (2026-06-04)
 
 Full Changelog: [v7.68.0...v7.68.1](https://github.com/team-telnyx/telnyx-php/compare/v7.68.0...v7.68.1)
