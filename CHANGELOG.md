@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.68.0 (2026-06-04)
+
+Full Changelog: [v7.67.0...v7.68.0](https://github.com/team-telnyx/telnyx-php/compare/v7.67.0...v7.68.0)
+
+### Features
+
+* add assistant_id to MessagingProfile and request schemas ([4b2832c](https://github.com/team-telnyx/telnyx-php/commit/4b2832c7462c16daaa6f62752b08a3eb3e8a2a3b))
+
 ## 7.67.0 (2026-06-03)
 
 Full Changelog: [v7.66.0...v7.67.0](https://github.com/team-telnyx/telnyx-php/compare/v7.66.0...v7.67.0)
