@@ -129,6 +129,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * @param string $messagingProfileID The id of the messaging profile to retrieve
      * @param array{
+     *   aiAssistantID?: string|null,
      *   alphaSender?: string|null,
      *   dailySpendLimit?: string,
      *   dailySpendLimitEnabled?: bool,
