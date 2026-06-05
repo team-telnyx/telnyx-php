@@ -7,10 +7,6 @@ namespace Telnyx\Enterprises;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\EnterprisePublic\NumberOfEmployees;
-use Telnyx\Enterprises\EnterprisePublic\OrganizationLegalType;
-use Telnyx\Enterprises\EnterprisePublic\OrganizationType;
-use Telnyx\Enterprises\EnterprisePublic\RoleType;
 
 /**
  * @phpstan-import-type BillingAddressShape from \Telnyx\Enterprises\BillingAddress
@@ -22,6 +18,7 @@ use Telnyx\Enterprises\EnterprisePublic\RoleType;
  *   id?: string|null,
  *   billingAddress?: null|BillingAddress|BillingAddressShape,
  *   billingContact?: null|BillingContact|BillingContactShape,
+ *   brandedCallingEnabled?: bool|null,
  *   corporateRegistrationNumber?: string|null,
  *   countryCode?: string|null,
  *   createdAt?: \DateTimeInterface|null,
@@ -30,15 +27,17 @@ use Telnyx\Enterprises\EnterprisePublic\RoleType;
  *   dunBradstreetNumber?: string|null,
  *   fein?: string|null,
  *   industry?: string|null,
+ *   jurisdictionOfIncorporation?: string|null,
  *   legalName?: string|null,
- *   numberOfEmployees?: null|NumberOfEmployees|value-of<NumberOfEmployees>,
+ *   numberOfEmployees?: string|null,
+ *   numberReputationEnabled?: bool|null,
  *   organizationContact?: null|OrganizationContact|OrganizationContactShape,
- *   organizationLegalType?: null|OrganizationLegalType|value-of<OrganizationLegalType>,
+ *   organizationLegalType?: string|null,
  *   organizationPhysicalAddress?: null|PhysicalAddress|PhysicalAddressShape,
- *   organizationType?: null|OrganizationType|value-of<OrganizationType>,
+ *   organizationType?: string|null,
  *   primaryBusinessDomainSicCode?: string|null,
  *   professionalLicenseNumber?: string|null,
- *   roleType?: null|RoleType|value-of<RoleType>,
+ *   roleType?: string|null,
  *   updatedAt?: \DateTimeInterface|null,
  *   website?: string|null,
  * }
@@ -48,9 +47,6 @@ final class EnterprisePublic implements BaseModel
     /** @use SdkModel<EnterprisePublicShape> */
     use SdkModel;
 
-    /**
-     * Unique identifier of the enterprise.
-     */
     #[Optional]
     public ?string $id;
 
@@ -61,130 +57,87 @@ final class EnterprisePublic implements BaseModel
     public ?BillingContact $billingContact;
 
     /**
-     * Corporate registration number.
+     * True once Branded Calling has been activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
+     */
+    #[Optional('branded_calling_enabled')]
+    public ?bool $brandedCallingEnabled;
+
+    /**
+     * Optional corporate-registration / company-number identifier.
      */
     #[Optional('corporate_registration_number', nullable: true)]
     public ?string $corporateRegistrationNumber;
 
-    /**
-     * ISO 3166-1 alpha-2 country code.
-     */
     #[Optional('country_code')]
     public ?string $countryCode;
 
-    /**
-     * When the enterprise was created.
-     */
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
-    /**
-     * Customer reference identifier.
-     */
-    #[Optional('customer_reference', nullable: true)]
+    #[Optional('customer_reference')]
     public ?string $customerReference;
 
-    /**
-     * DBA name.
-     */
     #[Optional('doing_business_as')]
     public ?string $doingBusinessAs;
 
     /**
-     * D-U-N-S Number.
+     * Optional D-U-N-S Number issued by Dun & Bradstreet.
      */
     #[Optional('dun_bradstreet_number', nullable: true)]
     public ?string $dunBradstreetNumber;
 
-    /**
-     * Federal Employer Identification Number.
-     */
-    #[Optional(nullable: true)]
+    #[Optional]
     public ?string $fein;
 
-    /**
-     * Industry classification.
-     */
-    #[Optional(nullable: true)]
+    #[Optional]
     public ?string $industry;
 
-    /**
-     * Legal name of the enterprise.
-     */
+    #[Optional('jurisdiction_of_incorporation')]
+    public ?string $jurisdictionOfIncorporation;
+
     #[Optional('legal_name')]
     public ?string $legalName;
 
-    /**
-     * Employee count range.
-     *
-     * @var value-of<NumberOfEmployees>|null $numberOfEmployees
-     */
-    #[Optional(
-        'number_of_employees',
-        enum: NumberOfEmployees::class,
-        nullable: true
-    )]
+    #[Optional('number_of_employees')]
     public ?string $numberOfEmployees;
 
     /**
-     * Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
+     * True once Phone Number Reputation has been enabled on this enterprise (see `POST /enterprises/{id}/reputation`).
      */
+    #[Optional('number_reputation_enabled')]
+    public ?bool $numberReputationEnabled;
+
     #[Optional('organization_contact')]
     public ?OrganizationContact $organizationContact;
 
-    /**
-     * Legal structure type.
-     *
-     * @var value-of<OrganizationLegalType>|null $organizationLegalType
-     */
-    #[Optional(
-        'organization_legal_type',
-        enum: OrganizationLegalType::class,
-        nullable: true,
-    )]
+    #[Optional('organization_legal_type')]
     public ?string $organizationLegalType;
 
     #[Optional('organization_physical_address')]
     public ?PhysicalAddress $organizationPhysicalAddress;
 
-    /**
-     * Type of organization.
-     *
-     * @var value-of<OrganizationType>|null $organizationType
-     */
-    #[Optional('organization_type', enum: OrganizationType::class)]
+    #[Optional('organization_type')]
     public ?string $organizationType;
 
     /**
-     * SIC Code.
+     * Optional SIC code for the primary line of business.
      */
     #[Optional('primary_business_domain_sic_code', nullable: true)]
     public ?string $primaryBusinessDomainSicCode;
 
     /**
-     * Professional license number.
+     * Optional professional-license number for regulated industries.
      */
     #[Optional('professional_license_number', nullable: true)]
     public ?string $professionalLicenseNumber;
 
-    /**
-     * Role type in Branded Calling / Number Reputation services.
-     *
-     * @var value-of<RoleType>|null $roleType
-     */
-    #[Optional('role_type', enum: RoleType::class)]
+    #[Optional('role_type')]
     public ?string $roleType;
 
-    /**
-     * When the enterprise was last updated.
-     */
     #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
-    /**
-     * Company website URL.
-     */
-    #[Optional(nullable: true)]
+    #[Optional]
     public ?string $website;
 
     public function __construct()
@@ -199,17 +152,14 @@ final class EnterprisePublic implements BaseModel
      *
      * @param BillingAddress|BillingAddressShape|null $billingAddress
      * @param BillingContact|BillingContactShape|null $billingContact
-     * @param NumberOfEmployees|value-of<NumberOfEmployees>|null $numberOfEmployees
      * @param OrganizationContact|OrganizationContactShape|null $organizationContact
-     * @param OrganizationLegalType|value-of<OrganizationLegalType>|null $organizationLegalType
      * @param PhysicalAddress|PhysicalAddressShape|null $organizationPhysicalAddress
-     * @param OrganizationType|value-of<OrganizationType>|null $organizationType
-     * @param RoleType|value-of<RoleType>|null $roleType
      */
     public static function with(
         ?string $id = null,
         BillingAddress|array|null $billingAddress = null,
         BillingContact|array|null $billingContact = null,
+        ?bool $brandedCallingEnabled = null,
         ?string $corporateRegistrationNumber = null,
         ?string $countryCode = null,
         ?\DateTimeInterface $createdAt = null,
@@ -218,15 +168,17 @@ final class EnterprisePublic implements BaseModel
         ?string $dunBradstreetNumber = null,
         ?string $fein = null,
         ?string $industry = null,
+        ?string $jurisdictionOfIncorporation = null,
         ?string $legalName = null,
-        NumberOfEmployees|string|null $numberOfEmployees = null,
+        ?string $numberOfEmployees = null,
+        ?bool $numberReputationEnabled = null,
         OrganizationContact|array|null $organizationContact = null,
-        OrganizationLegalType|string|null $organizationLegalType = null,
+        ?string $organizationLegalType = null,
         PhysicalAddress|array|null $organizationPhysicalAddress = null,
-        OrganizationType|string|null $organizationType = null,
+        ?string $organizationType = null,
         ?string $primaryBusinessDomainSicCode = null,
         ?string $professionalLicenseNumber = null,
-        RoleType|string|null $roleType = null,
+        ?string $roleType = null,
         ?\DateTimeInterface $updatedAt = null,
         ?string $website = null,
     ): self {
@@ -235,6 +187,7 @@ final class EnterprisePublic implements BaseModel
         null !== $id && $self['id'] = $id;
         null !== $billingAddress && $self['billingAddress'] = $billingAddress;
         null !== $billingContact && $self['billingContact'] = $billingContact;
+        null !== $brandedCallingEnabled && $self['brandedCallingEnabled'] = $brandedCallingEnabled;
         null !== $corporateRegistrationNumber && $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
         null !== $countryCode && $self['countryCode'] = $countryCode;
         null !== $createdAt && $self['createdAt'] = $createdAt;
@@ -243,8 +196,10 @@ final class EnterprisePublic implements BaseModel
         null !== $dunBradstreetNumber && $self['dunBradstreetNumber'] = $dunBradstreetNumber;
         null !== $fein && $self['fein'] = $fein;
         null !== $industry && $self['industry'] = $industry;
+        null !== $jurisdictionOfIncorporation && $self['jurisdictionOfIncorporation'] = $jurisdictionOfIncorporation;
         null !== $legalName && $self['legalName'] = $legalName;
         null !== $numberOfEmployees && $self['numberOfEmployees'] = $numberOfEmployees;
+        null !== $numberReputationEnabled && $self['numberReputationEnabled'] = $numberReputationEnabled;
         null !== $organizationContact && $self['organizationContact'] = $organizationContact;
         null !== $organizationLegalType && $self['organizationLegalType'] = $organizationLegalType;
         null !== $organizationPhysicalAddress && $self['organizationPhysicalAddress'] = $organizationPhysicalAddress;
@@ -258,9 +213,6 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Unique identifier of the enterprise.
-     */
     public function withID(string $id): self
     {
         $self = clone $this;
@@ -294,7 +246,18 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * Corporate registration number.
+     * True once Branded Calling has been activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
+     */
+    public function withBrandedCallingEnabled(bool $brandedCallingEnabled): self
+    {
+        $self = clone $this;
+        $self['brandedCallingEnabled'] = $brandedCallingEnabled;
+
+        return $self;
+    }
+
+    /**
+     * Optional corporate-registration / company-number identifier.
      */
     public function withCorporateRegistrationNumber(
         ?string $corporateRegistrationNumber
@@ -305,9 +268,6 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * ISO 3166-1 alpha-2 country code.
-     */
     public function withCountryCode(string $countryCode): self
     {
         $self = clone $this;
@@ -316,9 +276,6 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * When the enterprise was created.
-     */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $self = clone $this;
@@ -327,10 +284,7 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Customer reference identifier.
-     */
-    public function withCustomerReference(?string $customerReference): self
+    public function withCustomerReference(string $customerReference): self
     {
         $self = clone $this;
         $self['customerReference'] = $customerReference;
@@ -338,9 +292,6 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * DBA name.
-     */
     public function withDoingBusinessAs(string $doingBusinessAs): self
     {
         $self = clone $this;
@@ -350,7 +301,7 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * D-U-N-S Number.
+     * Optional D-U-N-S Number issued by Dun & Bradstreet.
      */
     public function withDunBradstreetNumber(?string $dunBradstreetNumber): self
     {
@@ -360,10 +311,7 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Federal Employer Identification Number.
-     */
-    public function withFein(?string $fein): self
+    public function withFein(string $fein): self
     {
         $self = clone $this;
         $self['fein'] = $fein;
@@ -371,10 +319,7 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Industry classification.
-     */
-    public function withIndustry(?string $industry): self
+    public function withIndustry(string $industry): self
     {
         $self = clone $this;
         $self['industry'] = $industry;
@@ -382,9 +327,15 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Legal name of the enterprise.
-     */
+    public function withJurisdictionOfIncorporation(
+        string $jurisdictionOfIncorporation
+    ): self {
+        $self = clone $this;
+        $self['jurisdictionOfIncorporation'] = $jurisdictionOfIncorporation;
+
+        return $self;
+    }
+
     public function withLegalName(string $legalName): self
     {
         $self = clone $this;
@@ -393,14 +344,8 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Employee count range.
-     *
-     * @param NumberOfEmployees|value-of<NumberOfEmployees>|null $numberOfEmployees
-     */
-    public function withNumberOfEmployees(
-        NumberOfEmployees|string|null $numberOfEmployees
-    ): self {
+    public function withNumberOfEmployees(string $numberOfEmployees): self
+    {
         $self = clone $this;
         $self['numberOfEmployees'] = $numberOfEmployees;
 
@@ -408,8 +353,18 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
-     *
+     * True once Phone Number Reputation has been enabled on this enterprise (see `POST /enterprises/{id}/reputation`).
+     */
+    public function withNumberReputationEnabled(
+        bool $numberReputationEnabled
+    ): self {
+        $self = clone $this;
+        $self['numberReputationEnabled'] = $numberReputationEnabled;
+
+        return $self;
+    }
+
+    /**
      * @param OrganizationContact|OrganizationContactShape $organizationContact
      */
     public function withOrganizationContact(
@@ -421,13 +376,8 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Legal structure type.
-     *
-     * @param OrganizationLegalType|value-of<OrganizationLegalType>|null $organizationLegalType
-     */
     public function withOrganizationLegalType(
-        OrganizationLegalType|string|null $organizationLegalType
+        string $organizationLegalType
     ): self {
         $self = clone $this;
         $self['organizationLegalType'] = $organizationLegalType;
@@ -447,14 +397,8 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Type of organization.
-     *
-     * @param OrganizationType|value-of<OrganizationType> $organizationType
-     */
-    public function withOrganizationType(
-        OrganizationType|string $organizationType
-    ): self {
+    public function withOrganizationType(string $organizationType): self
+    {
         $self = clone $this;
         $self['organizationType'] = $organizationType;
 
@@ -462,7 +406,7 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * SIC Code.
+     * Optional SIC code for the primary line of business.
      */
     public function withPrimaryBusinessDomainSicCode(
         ?string $primaryBusinessDomainSicCode
@@ -474,7 +418,7 @@ final class EnterprisePublic implements BaseModel
     }
 
     /**
-     * Professional license number.
+     * Optional professional-license number for regulated industries.
      */
     public function withProfessionalLicenseNumber(
         ?string $professionalLicenseNumber
@@ -485,12 +429,7 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Role type in Branded Calling / Number Reputation services.
-     *
-     * @param RoleType|value-of<RoleType> $roleType
-     */
-    public function withRoleType(RoleType|string $roleType): self
+    public function withRoleType(string $roleType): self
     {
         $self = clone $this;
         $self['roleType'] = $roleType;
@@ -498,9 +437,6 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * When the enterprise was last updated.
-     */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $self = clone $this;
@@ -509,10 +445,7 @@ final class EnterprisePublic implements BaseModel
         return $self;
     }
 
-    /**
-     * Company website URL.
-     */
-    public function withWebsite(?string $website): self
+    public function withWebsite(string $website): self
     {
         $self = clone $this;
         $self['website'] = $website;

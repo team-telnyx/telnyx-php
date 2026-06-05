@@ -12,8 +12,8 @@ use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
+use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
-use Telnyx\WireguardInterfaces\WireguardInterfaceRead;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -56,7 +56,7 @@ interface WireguardInterfacesRawContract
      * @param array<string,mixed>|WireguardInterfaceListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WireguardInterfaceRead>>
+     * @return BaseResponse<DefaultFlatPagination<WireguardInterfaceListResponse>>
      *
      * @throws APIException
      */

@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Retrieve a paginated list of enterprises associated with your account.
+ * Return the enterprises you own, paginated. The default page size is 20; the maximum is 250.
  *
  * @see Telnyx\Services\EnterprisesService::list()
  *
@@ -31,13 +31,13 @@ final class EnterpriseListParams implements BaseModel
     public ?string $legalName;
 
     /**
-     * Page number (1-indexed).
+     * 1-based page number. Out-of-range values return an empty page with correct meta.
      */
     #[Optional]
     public ?int $pageNumber;
 
     /**
-     * Number of items per page.
+     * Items per page. Default 10. Maximum 250; values above are clamped to 250.
      */
     #[Optional]
     public ?int $pageSize;
@@ -78,7 +78,7 @@ final class EnterpriseListParams implements BaseModel
     }
 
     /**
-     * Page number (1-indexed).
+     * 1-based page number. Out-of-range values return an empty page with correct meta.
      */
     public function withPageNumber(int $pageNumber): self
     {
@@ -89,7 +89,7 @@ final class EnterpriseListParams implements BaseModel
     }
 
     /**
-     * Number of items per page.
+     * Items per page. Default 10. Maximum 250; values above are clamped to 250.
      */
     public function withPageSize(int $pageSize): self
     {

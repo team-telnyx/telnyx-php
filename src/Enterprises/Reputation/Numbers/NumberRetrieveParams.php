@@ -11,19 +11,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get detailed reputation data for a specific phone number associated with an enterprise.
- *
- * **Query Parameters:**
- * - `fresh` (default: `false`): When `true`, fetches fresh reputation data (incurs API cost). When `false`, returns cached data. If no cached data exists, fresh data is automatically fetched.
- *
- * **Returns:**
- * - `spam_risk`: Overall spam risk level (`low`, `medium`, `high`)
- * - `spam_category`: Spam category classification
- * - `maturity_score`: Maturity metric (0–100)
- * - `connection_score`: Connection quality metric (0–100)
- * - `engagement_score`: Engagement metric (0–100)
- * - `sentiment_score`: Sentiment metric (0–100)
- * - `last_refreshed_at`: Timestamp of last data refresh
+ * Retrieve one registered number with its latest reputation snapshot. The `phone_number` path parameter is in E.164 format and must be URL-encoded (e.g. `%2B19493253498`).
  *
  * @see Telnyx\Services\Enterprises\Reputation\NumbersService::retrieve()
  *
@@ -41,7 +29,7 @@ final class NumberRetrieveParams implements BaseModel
     public string $enterpriseID;
 
     /**
-     * When true, fetches fresh reputation data (incurs API cost). When false, returns cached data.
+     * When true, fetches fresh reputation data (incurs API cost). When false (default), returns cached data.
      */
     #[Optional]
     public ?bool $fresh;
@@ -90,7 +78,7 @@ final class NumberRetrieveParams implements BaseModel
     }
 
     /**
-     * When true, fetches fresh reputation data (incurs API cost). When false, returns cached data.
+     * When true, fetches fresh reputation data (incurs API cost). When false (default), returns cached data.
      */
     public function withFresh(bool $fresh): self
     {

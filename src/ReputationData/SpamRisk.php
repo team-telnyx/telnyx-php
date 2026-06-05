@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\ReputationData;
 
 /**
- * Overall spam risk level.
+ * Overall spam-risk classification.
  */
 enum SpamRisk: string
 {

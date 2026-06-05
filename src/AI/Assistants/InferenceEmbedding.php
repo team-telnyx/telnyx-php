@@ -5,6 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants;
 
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow;
+use Telnyx\AI\Assistants\InferenceEmbedding\ExternalLlm;
+use Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig;
+use Telnyx\AI\Assistants\InferenceEmbedding\Integration;
+use Telnyx\AI\Assistants\InferenceEmbedding\InterruptionSettings;
+use Telnyx\AI\Assistants\InferenceEmbedding\McpServer;
+use Telnyx\AI\Assistants\InferenceEmbedding\PostConversationSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -13,16 +19,16 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\ExternalLlm
- * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\FallbackConfig
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\InferenceEmbedding\ExternalLlm
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\InferenceEmbedding\FallbackConfig
  * @phpstan-import-type ImportMetadataShape from \Telnyx\AI\Assistants\ImportMetadata
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
- * @phpstan-import-type AssistantIntegrationShape from \Telnyx\AI\Assistants\AssistantIntegration
- * @phpstan-import-type InferenceEmbeddingInterruptionSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings
- * @phpstan-import-type AssistantMcpServerShape from \Telnyx\AI\Assistants\AssistantMcpServer
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\InferenceEmbedding\Integration
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\InferenceEmbedding\InterruptionSettings
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\InferenceEmbedding\McpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityShape from \Telnyx\AI\Assistants\Observability
- * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\PostConversationSettings
+ * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\InferenceEmbedding\PostConversationSettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -47,10 +53,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   greeting?: string|null,
  *   importMetadata?: null|ImportMetadata|ImportMetadataShape,
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
- *   integrations?: list<AssistantIntegration|AssistantIntegrationShape>|null,
- *   interruptionSettings?: null|InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape,
+ *   integrations?: list<Integration|IntegrationShape>|null,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   llmAPIKeyRef?: string|null,
- *   mcpServers?: list<AssistantMcpServer|AssistantMcpServerShape>|null,
+ *   mcpServers?: list<McpServer|McpServerShape>|null,
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
  *   observabilitySettings?: null|Observability|ObservabilityShape,
  *   postConversationSettings?: null|PostConversationSettings|PostConversationSettingsShape,
@@ -147,16 +153,16 @@ final class InferenceEmbedding implements BaseModel
     /**
      * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
      *
-     * @var list<AssistantIntegration>|null $integrations
+     * @var list<Integration>|null $integrations
      */
-    #[Optional(list: AssistantIntegration::class)]
+    #[Optional(list: Integration::class)]
     public ?array $integrations;
 
     /**
      * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
      */
     #[Optional('interruption_settings')]
-    public ?InferenceEmbeddingInterruptionSettings $interruptionSettings;
+    public ?InterruptionSettings $interruptionSettings;
 
     /**
      * This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
@@ -167,9 +173,9 @@ final class InferenceEmbedding implements BaseModel
     /**
      * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
      *
-     * @var list<AssistantMcpServer>|null $mcpServers
+     * @var list<McpServer>|null $mcpServers
      */
-    #[Optional('mcp_servers', list: AssistantMcpServer::class)]
+    #[Optional('mcp_servers', list: McpServer::class)]
     public ?array $mcpServers;
 
     #[Optional('messaging_settings')]
@@ -282,9 +288,9 @@ final class InferenceEmbedding implements BaseModel
      * @param FallbackConfig|FallbackConfigShape|null $fallbackConfig
      * @param ImportMetadata|ImportMetadataShape|null $importMetadata
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
-     * @param list<AssistantIntegration|AssistantIntegrationShape>|null $integrations
-     * @param InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape|null $interruptionSettings
-     * @param list<AssistantMcpServer|AssistantMcpServerShape>|null $mcpServers
+     * @param list<Integration|IntegrationShape>|null $integrations
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param list<McpServer|McpServerShape>|null $mcpServers
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
      * @param Observability|ObservabilityShape|null $observabilitySettings
      * @param PostConversationSettings|PostConversationSettingsShape|null $postConversationSettings
@@ -315,7 +321,7 @@ final class InferenceEmbedding implements BaseModel
         ImportMetadata|array|null $importMetadata = null,
         InsightSettings|array|null $insightSettings = null,
         ?array $integrations = null,
-        InferenceEmbeddingInterruptionSettings|array|null $interruptionSettings = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
         ?string $llmAPIKeyRef = null,
         ?array $mcpServers = null,
         MessagingSettings|array|null $messagingSettings = null,
@@ -551,7 +557,7 @@ final class InferenceEmbedding implements BaseModel
     /**
      * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
      *
-     * @param list<AssistantIntegration|AssistantIntegrationShape> $integrations
+     * @param list<Integration|IntegrationShape> $integrations
      */
     public function withIntegrations(array $integrations): self
     {
@@ -564,10 +570,10 @@ final class InferenceEmbedding implements BaseModel
     /**
      * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
      *
-     * @param InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape $interruptionSettings
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
-        InferenceEmbeddingInterruptionSettings|array $interruptionSettings
+        InterruptionSettings|array $interruptionSettings
     ): self {
         $self = clone $this;
         $self['interruptionSettings'] = $interruptionSettings;
@@ -589,7 +595,7 @@ final class InferenceEmbedding implements BaseModel
     /**
      * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
      *
-     * @param list<AssistantMcpServer|AssistantMcpServerShape> $mcpServers
+     * @param list<McpServer|McpServerShape> $mcpServers
      */
     public function withMcpServers(array $mcpServers): self
     {

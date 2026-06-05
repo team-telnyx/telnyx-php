@@ -26,6 +26,7 @@ use Telnyx\Calls\Actions\ActionBridgeResponse;
 use Telnyx\Calls\Actions\ActionEnqueueResponse;
 use Telnyx\Calls\Actions\ActionGatherResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
+use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingAIResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
@@ -71,8 +72,10 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineXaiConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStopConversationRelayResponse;
@@ -103,12 +106,10 @@ use Telnyx\Calls\Actions\InterruptionSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Calls\Actions\TranscriptionConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
-use Telnyx\Calls\Actions\TranscriptionEngineXaiConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Calls\CustomSipHeader;
@@ -125,7 +126,6 @@ use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
@@ -517,7 +517,7 @@ interface ActionsContract
         string $terminatingDigit = '#',
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|\Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse;
 
@@ -750,7 +750,7 @@ interface ActionsContract
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
         TargetLegs|string $targetLegs = 'self',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse;
 
@@ -793,7 +793,7 @@ interface ActionsContract
         bool $sendMessageHistoryUpdates = false,
         TranscriptionConfig|array|null $transcription = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartAIAssistantResponse;
 
@@ -860,7 +860,7 @@ interface ActionsContract
         ?string $ttsProvider = null,
         ?string $url = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\InworldVoiceSettings|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartConversationRelayResponse;
 

@@ -15,6 +15,7 @@ use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\TranscriptionEngine;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\VoiceSettings;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -22,7 +23,6 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.

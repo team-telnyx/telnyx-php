@@ -9,9 +9,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfService\NumberReputationRawContract;
+use Telnyx\TermsOfService\NumberReputation\NumberReputationAgreeResponse;
 
 /**
- * Terms of Service agreement endpoints.
+ * Accept and review the Branded Calling and Phone Number Reputation terms of service.
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -26,13 +27,13 @@ final class NumberReputationRawService implements NumberReputationRawContract
     /**
      * @api
      *
-     * Accept the Terms of Service for the Number Reputation product. Must be called before using Number Reputation endpoints.
+     * Records the authenticated user's agreement to the current Phone Number Reputation ToS. No body required. Idempotent.
      *
-     * Returns `400` with error code `10015` if the user has already agreed to the current ToS version.
+     * Prerequisite for using any of the `/v2/.../reputation/*` endpoints.
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<mixed>
+     * @return BaseResponse<NumberReputationAgreeResponse>
      *
      * @throws APIException
      */
@@ -44,7 +45,7 @@ final class NumberReputationRawService implements NumberReputationRawContract
             method: 'post',
             path: 'terms_of_service/number_reputation/agree',
             options: $requestOptions,
-            convert: null,
+            convert: NumberReputationAgreeResponse::class,
         );
     }
 }

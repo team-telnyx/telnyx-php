@@ -8,6 +8,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\BillingAddress;
 use Telnyx\Enterprises\BillingContact;
+use Telnyx\Enterprises\EnterpriseActivateBrandedCallingResponse;
+use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
@@ -34,23 +36,29 @@ interface EnterprisesContract
      *
      * @param BillingAddress|BillingAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
-     * @param string $countryCode Country code. Currently only 'US' is accepted.
-     * @param string $doingBusinessAs Primary business name / DBA name
-     * @param string $fein Federal Employer Identification Number. Format: XX-XXXXXXX or 9-digit number (minimum 9 digits).
-     * @param string $industry Industry classification. Case-insensitive. Accepted values: accounting, finance, billing, collections, business, charity, nonprofit, communications, telecom, customer service, support, delivery, shipping, logistics, education, financial, banking, government, public, healthcare, health, pharmacy, medical, insurance, legal, law, notifications, scheduling, real estate, property, retail, ecommerce, sales, marketing, software, technology, tech, media, surveys, market research, travel, hospitality, hotel
-     * @param string $legalName Legal name of the enterprise
-     * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees Employee count range
-     * @param OrganizationContact|OrganizationContactShape $organizationContact Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
-     * @param OrganizationLegalType|value-of<OrganizationLegalType> $organizationLegalType Legal structure type
+     * @param string $countryCode ISO 3166-1 alpha-2 country code. Currently `US` and `CA` are supported.
+     * @param string $fein US Federal Employer Identification Number (`NN-NNNNNNN`) or Canadian equivalent
+     * @param Industry|value-of<Industry> $industry industry classification
+     * @param string $legalName legal name of the enterprise
+     * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees Approximate headcount range. Used for vetting heuristics; pick the bucket that contains your current employee count.
+     * @param OrganizationContact|OrganizationContactShape $organizationContact
+     * @param OrganizationLegalType|value-of<OrganizationLegalType> $organizationLegalType Legal-entity form. Pick the form that matches your incorporation documents:
+     * - `corporation` — C-corp or S-corp.
+     * - `llc` — limited liability company.
+     * - `partnership` — general/limited partnership.
+     * - `nonprofit` — non-profit corporation, charitable trust, or 501(c)(3)/equivalent.
+     * - `other` — anything else (sole proprietorships, government bodies, DBAs, etc.). You may be asked for additional documents during vetting.
      * @param PhysicalAddress|PhysicalAddressShape $organizationPhysicalAddress
-     * @param OrganizationType|value-of<OrganizationType> $organizationType Type of organization
-     * @param string $website Enterprise website URL. Accepts any string — no URL format validation enforced.
-     * @param string $corporateRegistrationNumber Corporate registration number (optional)
-     * @param string $customerReference Optional customer reference identifier for your own tracking
-     * @param string $dunBradstreetNumber D-U-N-S Number (optional)
-     * @param string $primaryBusinessDomainSicCode SIC Code (optional)
-     * @param string $professionalLicenseNumber Professional license number (optional)
-     * @param RoleType|value-of<RoleType> $roleType Role type in Branded Calling / Number Reputation services
+     * @param OrganizationType|value-of<OrganizationType> $organizationType Organization category for vetting purposes:
+     * - `commercial` — for-profit business entities (LLC, corp, partnership, sole proprietorship). Most callers fall here.
+     * - `government` — federal/state/local government bodies.
+     * - `non_profit` — registered 501(c)(3)/equivalent (incl. educational institutions, charities, religious organisations).
+     * @param string|null $corporateRegistrationNumber optional corporate-registration / company-number identifier
+     * @param string $customerReference Optional free-form string the caller can attach for their own bookkeeping. Telnyx does not interpret it.
+     * @param string|null $dunBradstreetNumber optional D-U-N-S Number
+     * @param string|null $primaryBusinessDomainSicCode optional SIC code for the primary line of business
+     * @param string|null $professionalLicenseNumber optional professional-license number for regulated industries
+     * @param RoleType|value-of<RoleType> $roleType `enterprise` for an organization registering its own DIRs; `bpo` for a Business Process Outsourcer placing calls on behalf of one or more enterprises
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -61,7 +69,8 @@ interface EnterprisesContract
         string $countryCode,
         string $doingBusinessAs,
         string $fein,
-        string $industry,
+        Industry|string $industry,
+        string $jurisdictionOfIncorporation,
         string $legalName,
         NumberOfEmployees|string $numberOfEmployees,
         OrganizationContact|array $organizationContact,
@@ -81,7 +90,7 @@ interface EnterprisesContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -94,23 +103,14 @@ interface EnterprisesContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param BillingAddress|BillingAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
-     * @param string $corporateRegistrationNumber Corporate registration number
-     * @param string $customerReference Customer reference identifier
-     * @param string $doingBusinessAs DBA name
-     * @param string $dunBradstreetNumber D-U-N-S Number
-     * @param string $fein Federal Employer Identification Number. Format: XX-XXXXXXX or XXXXXXXXX
-     * @param string $industry Industry classification
-     * @param string $legalName Legal name of the enterprise
-     * @param \Telnyx\Enterprises\EnterpriseUpdateParams\NumberOfEmployees|value-of<\Telnyx\Enterprises\EnterpriseUpdateParams\NumberOfEmployees> $numberOfEmployees Employee count range
-     * @param OrganizationContact|OrganizationContactShape $organizationContact Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
-     * @param \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType|value-of<\Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType> $organizationLegalType Legal structure type
+     * @param \Telnyx\Enterprises\EnterpriseUpdateParams\Industry|value-of<\Telnyx\Enterprises\EnterpriseUpdateParams\Industry> $industry
+     * @param string $jurisdictionOfIncorporation Updated state/province/country of incorporation. Optional on update.
+     * @param string $legalName legal name of the enterprise
+     * @param OrganizationContact|OrganizationContactShape $organizationContact
      * @param PhysicalAddress|PhysicalAddressShape $organizationPhysicalAddress
-     * @param string $primaryBusinessDomainSicCode SIC Code
-     * @param string $professionalLicenseNumber Professional license number
-     * @param string $website Company website URL
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -124,11 +124,12 @@ interface EnterprisesContract
         ?string $doingBusinessAs = null,
         ?string $dunBradstreetNumber = null,
         ?string $fein = null,
-        ?string $industry = null,
+        \Telnyx\Enterprises\EnterpriseUpdateParams\Industry|string|null $industry = null,
+        ?string $jurisdictionOfIncorporation = null,
         ?string $legalName = null,
-        \Telnyx\Enterprises\EnterpriseUpdateParams\NumberOfEmployees|string|null $numberOfEmployees = null,
+        ?string $numberOfEmployees = null,
         OrganizationContact|array|null $organizationContact = null,
-        \Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType|string|null $organizationLegalType = null,
+        ?string $organizationLegalType = null,
         PhysicalAddress|array|null $organizationPhysicalAddress = null,
         ?string $primaryBusinessDomainSicCode = null,
         ?string $professionalLicenseNumber = null,
@@ -139,9 +140,9 @@ interface EnterprisesContract
     /**
      * @api
      *
-     * @param string $legalName Filter by legal name (partial match)
-     * @param int $pageNumber Page number (1-indexed)
-     * @param int $pageSize Number of items per page
+     * @param string $legalName filter by legal name (partial match)
+     * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
+     * @param int $pageSize Items per page. Default 10. Maximum 250; values above are clamped to 250.
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<EnterprisePublic>
@@ -158,7 +159,7 @@ interface EnterprisesContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -167,4 +168,17 @@ interface EnterprisesContract
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
     ): mixed;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function activateBrandedCalling(
+        string $enterpriseID,
+        RequestOptions|array|null $requestOptions = null
+    ): EnterpriseActivateBrandedCallingResponse;
 }

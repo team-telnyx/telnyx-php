@@ -38,7 +38,7 @@ final class ReputationTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->retrieve(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,7 +53,7 @@ final class ReputationTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->disable(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -68,8 +68,8 @@ final class ReputationTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->enable(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            loaDocumentID: 'doc_01HXYZ1234ABCDEF',
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            loaDocumentID: '2a7e8337-e803-4057-a4ae-26c40eb0bc6c',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -84,8 +84,8 @@ final class ReputationTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->enable(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            loaDocumentID: 'doc_01HXYZ1234ABCDEF',
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            loaDocumentID: '2a7e8337-e803-4057-a4ae-26c40eb0bc6c',
             checkFrequency: 'business_daily',
         );
 
@@ -101,8 +101,8 @@ final class ReputationTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->updateFrequency(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            checkFrequency: 'business_daily'
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            checkFrequency: 'weekly'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -117,8 +117,8 @@ final class ReputationTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->updateFrequency(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            checkFrequency: 'business_daily'
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            checkFrequency: 'weekly'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

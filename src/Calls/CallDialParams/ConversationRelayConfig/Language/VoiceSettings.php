@@ -9,13 +9,13 @@ use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * The settings associated with the voice selected.
@@ -28,7 +28,7 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type RimeVoiceSettingsShape from \Telnyx\RimeVoiceSettings
  * @phpstan-import-type ResembleVoiceSettingsShape from \Telnyx\ResembleVoiceSettings
  * @phpstan-import-type InworldVoiceSettingsShape from \Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings\InworldVoiceSettings
- * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\XaiVoiceSettings
+ * @phpstan-import-type XaiVoiceSettingsShape from \Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings\XaiVoiceSettings
  *
  * @phpstan-type VoiceSettingsVariants = ElevenLabsVoiceSettings|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings
  * @phpstan-type VoiceSettingsShape = VoiceSettingsVariants|ElevenLabsVoiceSettingsShape|TelnyxVoiceSettingsShape|AwsVoiceSettingsShape|MinimaxVoiceSettingsShape|AzureVoiceSettingsShape|RimeVoiceSettingsShape|ResembleVoiceSettingsShape|InworldVoiceSettingsShape|XaiVoiceSettingsShape

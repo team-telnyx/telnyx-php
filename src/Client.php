@@ -26,6 +26,7 @@ use Telnyx\Services\BulkSimCardActionsService;
 use Telnyx\Services\BundlePricingService;
 use Telnyx\Services\CallControlApplicationsService;
 use Telnyx\Services\CallEventsService;
+use Telnyx\Services\CallReasonsService;
 use Telnyx\Services\CallsService;
 use Telnyx\Services\ChannelZonesService;
 use Telnyx\Services\ChargesBreakdownService;
@@ -39,6 +40,7 @@ use Telnyx\Services\CustomerServiceRecordsService;
 use Telnyx\Services\CustomStorageCredentialsService;
 use Telnyx\Services\DetailRecordsService;
 use Telnyx\Services\DialogflowConnectionsService;
+use Telnyx\Services\DirService;
 use Telnyx\Services\DocumentLinksService;
 use Telnyx\Services\DocumentsService;
 use Telnyx\Services\DynamicEmergencyAddressesService;
@@ -61,6 +63,7 @@ use Telnyx\Services\GlobalIPsService;
 use Telnyx\Services\GlobalIPUsageService;
 use Telnyx\Services\InboundChannelsService;
 use Telnyx\Services\InexplicitNumberOrdersService;
+use Telnyx\Services\InfringementClaimsService;
 use Telnyx\Services\IntegrationSecretsService;
 use Telnyx\Services\InventoryCoverageService;
 use Telnyx\Services\InvoicesService;
@@ -1015,6 +1018,21 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public CallReasonsService $callReasons;
+
+    /**
+     * @api
+     */
+    public DirService $dir;
+
+    /**
+     * @api
+     */
+    public InfringementClaimsService $infringementClaims;
+
+    /**
+     * @api
+     */
     public UacConnectionsService $uacConnections;
 
     /**
@@ -1263,6 +1281,9 @@ class Client extends BaseClient
         $this->reputation = new ReputationService($this);
         $this->termsOfService = new TermsOfServiceService($this);
         $this->pronunciationDicts = new PronunciationDictsService($this);
+        $this->callReasons = new CallReasonsService($this);
+        $this->dir = new DirService($this);
+        $this->infringementClaims = new InfringementClaimsService($this);
         $this->uacConnections = new UacConnectionsService($this);
         $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
         $this->speechToText = new SpeechToTextService($this);

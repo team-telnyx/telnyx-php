@@ -10,9 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all phone numbers associated with an enterprise for Number Reputation monitoring.
- *
- * Returns phone numbers with their cached reputation data (if available). Supports pagination and filtering by phone number.
+ * Paginated list of phone numbers registered for reputation monitoring under this enterprise. The response includes the latest reputation snapshot per number where one has been collected.
  *
  * @see Telnyx\Services\Enterprises\Reputation\NumbersService::list()
  *
@@ -27,13 +25,13 @@ final class NumberListParams implements BaseModel
     use SdkParams;
 
     /**
-     * Page number (1-indexed).
+     * 1-based page number. Out-of-range values return an empty page with correct meta.
      */
     #[Optional]
     public ?int $pageNumber;
 
     /**
-     * Number of items per page.
+     * Items per page. Default 10. Maximum 250; values above are clamped to 250.
      */
     #[Optional]
     public ?int $pageSize;
@@ -69,7 +67,7 @@ final class NumberListParams implements BaseModel
     }
 
     /**
-     * Page number (1-indexed).
+     * 1-based page number. Out-of-range values return an empty page with correct meta.
      */
     public function withPageNumber(int $pageNumber): self
     {
@@ -80,7 +78,7 @@ final class NumberListParams implements BaseModel
     }
 
     /**
-     * Number of items per page.
+     * Items per page. Default 10. Maximum 250; values above are clamped to 250.
      */
     public function withPageSize(int $pageSize): self
     {

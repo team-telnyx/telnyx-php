@@ -19,7 +19,7 @@ interface ReputationContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -32,7 +32,7 @@ interface ReputationContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -45,9 +45,9 @@ interface ReputationContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param string $loaDocumentID ID of the signed Letter of Authorization (LOA) document uploaded to the document service
-     * @param CheckFrequency|value-of<CheckFrequency> $checkFrequency Frequency for automatically refreshing reputation data
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param string $loaDocumentID Id of the signed Letter of Authorization document, returned by the Telnyx Documents API after upload (upload via `POST /v2/documents`; see https://developers.telnyx.com/api/documents).
+     * @param CheckFrequency|value-of<CheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -62,8 +62,8 @@ interface ReputationContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param \Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency|value-of<\Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency> $checkFrequency New frequency for refreshing reputation data
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param \Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency|value-of<\Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
