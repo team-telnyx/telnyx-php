@@ -10,7 +10,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\ReputationPhoneNumberWithReputationData;
+use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
+use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,8 +40,8 @@ final class NumbersTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->numbers->retrieve(
-            '+16035551234',
-            enterpriseID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '+19493253498',
+            enterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -55,8 +56,8 @@ final class NumbersTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->numbers->retrieve(
-            '+16035551234',
-            enterpriseID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
+            '+19493253498',
+            enterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6',
             fresh: true,
         );
 
@@ -72,7 +73,7 @@ final class NumbersTest extends TestCase
         }
 
         $page = $this->client->enterprises->reputation->numbers->list(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -80,10 +81,7 @@ final class NumbersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(
-                ReputationPhoneNumberWithReputationData::class,
-                $item
-            );
+            $this->assertInstanceOf(NumberListResponse::class, $item);
         }
     }
 
@@ -95,8 +93,8 @@ final class NumbersTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->numbers->associate(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            phoneNumbers: ['+16035551234']
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            phoneNumbers: ['+19493253498', '+12134445566'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -111,8 +109,8 @@ final class NumbersTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->numbers->associate(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            phoneNumbers: ['+16035551234']
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            phoneNumbers: ['+19493253498', '+12134445566'],
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -127,8 +125,8 @@ final class NumbersTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->numbers->disassociate(
-            '+16035551234',
-            enterpriseID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '+19493253498',
+            enterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -143,11 +141,43 @@ final class NumbersTest extends TestCase
         }
 
         $result = $this->client->enterprises->reputation->numbers->disassociate(
-            '+16035551234',
-            enterpriseID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '+19493253498',
+            enterpriseID: '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testRefresh(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->numbers->refresh(
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            phoneNumbers: ['+19493253498']
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberRefreshResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRefreshWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->numbers->refresh(
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            phoneNumbers: ['+19493253498']
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(NumberRefreshResponse::class, $result);
     }
 }

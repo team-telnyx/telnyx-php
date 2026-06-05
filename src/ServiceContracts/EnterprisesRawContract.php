@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\EnterpriseActivateBrandedCallingResponse;
 use Telnyx\Enterprises\EnterpriseCreateParams;
 use Telnyx\Enterprises\EnterpriseGetResponse;
 use Telnyx\Enterprises\EnterpriseListParams;
@@ -39,7 +40,7 @@ interface EnterprisesRawContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EnterpriseGetResponse>
@@ -54,7 +55,7 @@ interface EnterprisesRawContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array<string,mixed>|EnterpriseUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -86,7 +87,7 @@ interface EnterprisesRawContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -94,6 +95,21 @@ interface EnterprisesRawContract
      * @throws APIException
      */
     public function delete(
+        string $enterpriseID,
+        RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<EnterpriseActivateBrandedCallingResponse>
+     *
+     * @throws APIException
+     */
+    public function activateBrandedCalling(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse;

@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ReputationData\SpamRisk;
 
 /**
- * Reputation metrics.
+ * Reputation snapshot for a phone number. Each metric is a 0–100 score; `spam_risk` is a coarse bucket. Field set may grow over time — read by key.
  *
  * @phpstan-type ReputationDataShape = array{
  *   connectionScore?: int|null,
@@ -27,44 +27,29 @@ final class ReputationData implements BaseModel
     /** @use SdkModel<ReputationDataShape> */
     use SdkModel;
 
-    /**
-     * Connection quality metric (0–100).
-     */
     #[Optional('connection_score', nullable: true)]
     public ?int $connectionScore;
 
-    /**
-     * Engagement metric (0–100). Higher = more positive engagement.
-     */
     #[Optional('engagement_score', nullable: true)]
     public ?int $engagementScore;
 
-    /**
-     * Timestamp of the last reputation data refresh.
-     */
     #[Optional('last_refreshed_at', nullable: true)]
     public ?\DateTimeInterface $lastRefreshedAt;
 
-    /**
-     * Maturity metric (0–100). Higher = more established number.
-     */
     #[Optional('maturity_score', nullable: true)]
     public ?int $maturityScore;
 
-    /**
-     * Sentiment metric (0–100). Higher = more positive sentiment.
-     */
     #[Optional('sentiment_score', nullable: true)]
     public ?int $sentimentScore;
 
     /**
-     * Spam category classification (e.g., Telemarketing, Debt Collector).
+     * Category label from the reputation feed when the number is flagged.
      */
     #[Optional('spam_category', nullable: true)]
     public ?string $spamCategory;
 
     /**
-     * Overall spam risk level.
+     * Overall spam-risk classification.
      *
      * @var value-of<SpamRisk>|null $spamRisk
      */
@@ -105,9 +90,6 @@ final class ReputationData implements BaseModel
         return $self;
     }
 
-    /**
-     * Connection quality metric (0–100).
-     */
     public function withConnectionScore(?int $connectionScore): self
     {
         $self = clone $this;
@@ -116,9 +98,6 @@ final class ReputationData implements BaseModel
         return $self;
     }
 
-    /**
-     * Engagement metric (0–100). Higher = more positive engagement.
-     */
     public function withEngagementScore(?int $engagementScore): self
     {
         $self = clone $this;
@@ -127,9 +106,6 @@ final class ReputationData implements BaseModel
         return $self;
     }
 
-    /**
-     * Timestamp of the last reputation data refresh.
-     */
     public function withLastRefreshedAt(
         ?\DateTimeInterface $lastRefreshedAt
     ): self {
@@ -139,9 +115,6 @@ final class ReputationData implements BaseModel
         return $self;
     }
 
-    /**
-     * Maturity metric (0–100). Higher = more established number.
-     */
     public function withMaturityScore(?int $maturityScore): self
     {
         $self = clone $this;
@@ -150,9 +123,6 @@ final class ReputationData implements BaseModel
         return $self;
     }
 
-    /**
-     * Sentiment metric (0–100). Higher = more positive sentiment.
-     */
     public function withSentimentScore(?int $sentimentScore): self
     {
         $self = clone $this;
@@ -162,7 +132,7 @@ final class ReputationData implements BaseModel
     }
 
     /**
-     * Spam category classification (e.g., Telemarketing, Debt Collector).
+     * Category label from the reputation feed when the number is flagged.
      */
     public function withSpamCategory(?string $spamCategory): self
     {
@@ -173,7 +143,7 @@ final class ReputationData implements BaseModel
     }
 
     /**
-     * Overall spam risk level.
+     * Overall spam-risk classification.
      *
      * @param SpamRisk|value-of<SpamRisk>|null $spamRisk
      */

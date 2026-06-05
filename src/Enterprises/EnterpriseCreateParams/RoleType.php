@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Enterprises\EnterpriseCreateParams;
 
 /**
- * Role type in Branded Calling / Number Reputation services.
+ * `enterprise` for an organization registering its own DIRs; `bpo` for a Business Process Outsourcer placing calls on behalf of one or more enterprises.
  */
 enum RoleType: string
 {

@@ -9,8 +9,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Reputation\Numbers\NumberListParams;
+use Telnyx\Reputation\Numbers\NumberListResponse;
 use Telnyx\Reputation\Numbers\NumberRetrieveParams;
-use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 
 /**
@@ -21,7 +21,7 @@ interface NumbersRawContract
     /**
      * @api
      *
-     * @param string $phoneNumber Phone number in E.164 format
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
      * @param array<string,mixed>|NumberRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -41,7 +41,7 @@ interface NumbersRawContract
      * @param array<string,mixed>|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumberWithReputationData,>,>
+     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
      *
      * @throws APIException
      */
@@ -53,7 +53,7 @@ interface NumbersRawContract
     /**
      * @api
      *
-     * @param string $phoneNumber Phone number in E.164 format
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

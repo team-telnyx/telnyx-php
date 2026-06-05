@@ -12,8 +12,10 @@ use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberDisassociateParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberListParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
+use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRetrieveParams;
-use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 
 /**
@@ -24,7 +26,7 @@ interface NumbersRawContract
     /**
      * @api
      *
-     * @param string $phoneNumber Path param: Phone number in E.164 format
+     * @param string $phoneNumber Path param: Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
      * @param array<string,mixed>|NumberRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -41,11 +43,11 @@ interface NumbersRawContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array<string,mixed>|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumberWithReputationData,>,>
+     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
      *
      * @throws APIException
      */
@@ -58,7 +60,7 @@ interface NumbersRawContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array<string,mixed>|NumberAssociateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -75,7 +77,7 @@ interface NumbersRawContract
     /**
      * @api
      *
-     * @param string $phoneNumber Phone number in E.164 format
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
      * @param array<string,mixed>|NumberDisassociateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -86,6 +88,23 @@ interface NumbersRawContract
     public function disassociate(
         string $phoneNumber,
         array|NumberDisassociateParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param array<string,mixed>|NumberRefreshParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<NumberRefreshResponse>
+     *
+     * @throws APIException
+     */
+    public function refresh(
+        string $enterpriseID,
+        array|NumberRefreshParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

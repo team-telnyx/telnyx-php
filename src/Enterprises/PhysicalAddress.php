@@ -25,38 +25,26 @@ final class PhysicalAddress implements BaseModel
     use SdkModel;
 
     /**
-     * State or province.
+     * State or province code (e.g. `IL`, `ON`).
      */
     #[Required('administrative_area')]
     public string $administrativeArea;
 
-    /**
-     * City name.
-     */
     #[Required]
     public string $city;
 
     /**
-     * Country name (e.g., United States).
+     * ISO 3166-1 alpha-2 code (currently `US` or `CA`).
      */
     #[Required]
     public string $country;
 
-    /**
-     * ZIP or postal code.
-     */
     #[Required('postal_code')]
     public string $postalCode;
 
-    /**
-     * Street address.
-     */
     #[Required('street_address')]
     public string $streetAddress;
 
-    /**
-     * Additional address line (suite, apt, etc.).
-     */
     #[Optional('extended_address', nullable: true)]
     public ?string $extendedAddress;
 
@@ -117,7 +105,7 @@ final class PhysicalAddress implements BaseModel
     }
 
     /**
-     * State or province.
+     * State or province code (e.g. `IL`, `ON`).
      */
     public function withAdministrativeArea(string $administrativeArea): self
     {
@@ -127,9 +115,6 @@ final class PhysicalAddress implements BaseModel
         return $self;
     }
 
-    /**
-     * City name.
-     */
     public function withCity(string $city): self
     {
         $self = clone $this;
@@ -139,7 +124,7 @@ final class PhysicalAddress implements BaseModel
     }
 
     /**
-     * Country name (e.g., United States).
+     * ISO 3166-1 alpha-2 code (currently `US` or `CA`).
      */
     public function withCountry(string $country): self
     {
@@ -149,9 +134,6 @@ final class PhysicalAddress implements BaseModel
         return $self;
     }
 
-    /**
-     * ZIP or postal code.
-     */
     public function withPostalCode(string $postalCode): self
     {
         $self = clone $this;
@@ -160,9 +142,6 @@ final class PhysicalAddress implements BaseModel
         return $self;
     }
 
-    /**
-     * Street address.
-     */
     public function withStreetAddress(string $streetAddress): self
     {
         $self = clone $this;
@@ -171,9 +150,6 @@ final class PhysicalAddress implements BaseModel
         return $self;
     }
 
-    /**
-     * Additional address line (suite, apt, etc.).
-     */
     public function withExtendedAddress(?string $extendedAddress): self
     {
         $self = clone $this;

@@ -8,7 +8,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\ReputationPhoneNumberWithReputationData;
+use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
+use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -19,9 +20,9 @@ interface NumbersContract
     /**
      * @api
      *
-     * @param string $phoneNumber Path param: Phone number in E.164 format
-     * @param string $enterpriseID Path param: Unique identifier of the enterprise (UUID)
-     * @param bool $fresh Query param: When true, fetches fresh reputation data (incurs API cost). When false, returns cached data.
+     * @param string $phoneNumber Path param: Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
+     * @param string $enterpriseID Path param: The enterprise id. Lowercase UUID.
+     * @param bool $fresh Query param: When true, fetches fresh reputation data (incurs API cost). When false (default), returns cached data.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -36,13 +37,13 @@ interface NumbersContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param int $pageNumber Page number (1-indexed)
-     * @param int $pageSize Number of items per page
-     * @param string $phoneNumber Filter by specific phone number (E.164 format)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
+     * @param int $pageSize Items per page. Default 10. Maximum 250; values above are clamped to 250.
+     * @param string $phoneNumber Filter by specific phone number (E.164 format).
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<ReputationPhoneNumberWithReputationData>
+     * @return DefaultFlatPagination<NumberListResponse>
      *
      * @throws APIException
      */
@@ -57,8 +58,8 @@ interface NumbersContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param list<string> $phoneNumbers List of phone numbers to associate for reputation monitoring (max 100)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param list<string> $phoneNumbers 1–100 phone numbers in E.164 format with a leading `+`.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -72,8 +73,8 @@ interface NumbersContract
     /**
      * @api
      *
-     * @param string $phoneNumber Phone number in E.164 format
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -83,4 +84,19 @@ interface NumbersContract
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null,
     ): mixed;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param list<string> $phoneNumbers Phone numbers to refresh reputation data for. 1–100 numbers per request, each in E.164 format. Reputation refreshes are subject to per-enterprise rate limits.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function refresh(
+        string $enterpriseID,
+        array $phoneNumbers,
+        RequestOptions|array|null $requestOptions = null,
+    ): NumberRefreshResponse;
 }

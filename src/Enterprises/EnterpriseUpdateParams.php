@@ -8,11 +8,10 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\EnterpriseUpdateParams\NumberOfEmployees;
-use Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType;
+use Telnyx\Enterprises\EnterpriseUpdateParams\Industry;
 
 /**
- * Update enterprise information. All fields are optional — only the provided fields will be updated.
+ * Replace the enterprise's mutable fields. Only mutable fields may be sent. Server-assigned and immutable fields (`id`, `record_type`, `created_at`, `updated_at`, status fields, `organization_type`, `country_code`, `role_type`) cannot be changed: including any of them in the body is rejected with `400 Bad Request` (`Field 'X' is not allowed in this request`).
  *
  * @see Telnyx\Services\EnterprisesService::update()
  *
@@ -29,11 +28,12 @@ use Telnyx\Enterprises\EnterpriseUpdateParams\OrganizationLegalType;
  *   doingBusinessAs?: string|null,
  *   dunBradstreetNumber?: string|null,
  *   fein?: string|null,
- *   industry?: string|null,
+ *   industry?: null|Industry|value-of<Industry>,
+ *   jurisdictionOfIncorporation?: string|null,
  *   legalName?: string|null,
- *   numberOfEmployees?: null|NumberOfEmployees|value-of<NumberOfEmployees>,
+ *   numberOfEmployees?: string|null,
  *   organizationContact?: null|OrganizationContact|OrganizationContactShape,
- *   organizationLegalType?: null|OrganizationLegalType|value-of<OrganizationLegalType>,
+ *   organizationLegalType?: string|null,
  *   organizationPhysicalAddress?: null|PhysicalAddress|PhysicalAddressShape,
  *   primaryBusinessDomainSicCode?: string|null,
  *   professionalLicenseNumber?: string|null,
@@ -52,41 +52,30 @@ final class EnterpriseUpdateParams implements BaseModel
     #[Optional('billing_contact')]
     public ?BillingContact $billingContact;
 
-    /**
-     * Corporate registration number.
-     */
-    #[Optional('corporate_registration_number')]
+    #[Optional('corporate_registration_number', nullable: true)]
     public ?string $corporateRegistrationNumber;
 
-    /**
-     * Customer reference identifier.
-     */
     #[Optional('customer_reference')]
     public ?string $customerReference;
 
-    /**
-     * DBA name.
-     */
     #[Optional('doing_business_as')]
     public ?string $doingBusinessAs;
 
-    /**
-     * D-U-N-S Number.
-     */
-    #[Optional('dun_bradstreet_number')]
+    #[Optional('dun_bradstreet_number', nullable: true)]
     public ?string $dunBradstreetNumber;
 
-    /**
-     * Federal Employer Identification Number. Format: XX-XXXXXXX or XXXXXXXXX.
-     */
     #[Optional]
     public ?string $fein;
 
-    /**
-     * Industry classification.
-     */
-    #[Optional]
+    /** @var value-of<Industry>|null $industry */
+    #[Optional(enum: Industry::class)]
     public ?string $industry;
+
+    /**
+     * Updated state/province/country of incorporation. Optional on update.
+     */
+    #[Optional('jurisdiction_of_incorporation')]
+    public ?string $jurisdictionOfIncorporation;
 
     /**
      * Legal name of the enterprise.
@@ -94,46 +83,24 @@ final class EnterpriseUpdateParams implements BaseModel
     #[Optional('legal_name')]
     public ?string $legalName;
 
-    /**
-     * Employee count range.
-     *
-     * @var value-of<NumberOfEmployees>|null $numberOfEmployees
-     */
-    #[Optional('number_of_employees', enum: NumberOfEmployees::class)]
+    #[Optional('number_of_employees')]
     public ?string $numberOfEmployees;
 
-    /**
-     * Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
-     */
     #[Optional('organization_contact')]
     public ?OrganizationContact $organizationContact;
 
-    /**
-     * Legal structure type.
-     *
-     * @var value-of<OrganizationLegalType>|null $organizationLegalType
-     */
-    #[Optional('organization_legal_type', enum: OrganizationLegalType::class)]
+    #[Optional('organization_legal_type')]
     public ?string $organizationLegalType;
 
     #[Optional('organization_physical_address')]
     public ?PhysicalAddress $organizationPhysicalAddress;
 
-    /**
-     * SIC Code.
-     */
-    #[Optional('primary_business_domain_sic_code')]
+    #[Optional('primary_business_domain_sic_code', nullable: true)]
     public ?string $primaryBusinessDomainSicCode;
 
-    /**
-     * Professional license number.
-     */
-    #[Optional('professional_license_number')]
+    #[Optional('professional_license_number', nullable: true)]
     public ?string $professionalLicenseNumber;
 
-    /**
-     * Company website URL.
-     */
     #[Optional]
     public ?string $website;
 
@@ -149,9 +116,8 @@ final class EnterpriseUpdateParams implements BaseModel
      *
      * @param BillingAddress|BillingAddressShape|null $billingAddress
      * @param BillingContact|BillingContactShape|null $billingContact
-     * @param NumberOfEmployees|value-of<NumberOfEmployees>|null $numberOfEmployees
+     * @param Industry|value-of<Industry>|null $industry
      * @param OrganizationContact|OrganizationContactShape|null $organizationContact
-     * @param OrganizationLegalType|value-of<OrganizationLegalType>|null $organizationLegalType
      * @param PhysicalAddress|PhysicalAddressShape|null $organizationPhysicalAddress
      */
     public static function with(
@@ -162,11 +128,12 @@ final class EnterpriseUpdateParams implements BaseModel
         ?string $doingBusinessAs = null,
         ?string $dunBradstreetNumber = null,
         ?string $fein = null,
-        ?string $industry = null,
+        Industry|string|null $industry = null,
+        ?string $jurisdictionOfIncorporation = null,
         ?string $legalName = null,
-        NumberOfEmployees|string|null $numberOfEmployees = null,
+        ?string $numberOfEmployees = null,
         OrganizationContact|array|null $organizationContact = null,
-        OrganizationLegalType|string|null $organizationLegalType = null,
+        ?string $organizationLegalType = null,
         PhysicalAddress|array|null $organizationPhysicalAddress = null,
         ?string $primaryBusinessDomainSicCode = null,
         ?string $professionalLicenseNumber = null,
@@ -182,6 +149,7 @@ final class EnterpriseUpdateParams implements BaseModel
         null !== $dunBradstreetNumber && $self['dunBradstreetNumber'] = $dunBradstreetNumber;
         null !== $fein && $self['fein'] = $fein;
         null !== $industry && $self['industry'] = $industry;
+        null !== $jurisdictionOfIncorporation && $self['jurisdictionOfIncorporation'] = $jurisdictionOfIncorporation;
         null !== $legalName && $self['legalName'] = $legalName;
         null !== $numberOfEmployees && $self['numberOfEmployees'] = $numberOfEmployees;
         null !== $organizationContact && $self['organizationContact'] = $organizationContact;
@@ -218,11 +186,8 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Corporate registration number.
-     */
     public function withCorporateRegistrationNumber(
-        string $corporateRegistrationNumber
+        ?string $corporateRegistrationNumber
     ): self {
         $self = clone $this;
         $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
@@ -230,9 +195,6 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Customer reference identifier.
-     */
     public function withCustomerReference(string $customerReference): self
     {
         $self = clone $this;
@@ -241,9 +203,6 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * DBA name.
-     */
     public function withDoingBusinessAs(string $doingBusinessAs): self
     {
         $self = clone $this;
@@ -252,10 +211,7 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * D-U-N-S Number.
-     */
-    public function withDunBradstreetNumber(string $dunBradstreetNumber): self
+    public function withDunBradstreetNumber(?string $dunBradstreetNumber): self
     {
         $self = clone $this;
         $self['dunBradstreetNumber'] = $dunBradstreetNumber;
@@ -263,9 +219,6 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Federal Employer Identification Number. Format: XX-XXXXXXX or XXXXXXXXX.
-     */
     public function withFein(string $fein): self
     {
         $self = clone $this;
@@ -275,12 +228,24 @@ final class EnterpriseUpdateParams implements BaseModel
     }
 
     /**
-     * Industry classification.
+     * @param Industry|value-of<Industry> $industry
      */
-    public function withIndustry(string $industry): self
+    public function withIndustry(Industry|string $industry): self
     {
         $self = clone $this;
         $self['industry'] = $industry;
+
+        return $self;
+    }
+
+    /**
+     * Updated state/province/country of incorporation. Optional on update.
+     */
+    public function withJurisdictionOfIncorporation(
+        string $jurisdictionOfIncorporation
+    ): self {
+        $self = clone $this;
+        $self['jurisdictionOfIncorporation'] = $jurisdictionOfIncorporation;
 
         return $self;
     }
@@ -296,14 +261,8 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Employee count range.
-     *
-     * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees
-     */
-    public function withNumberOfEmployees(
-        NumberOfEmployees|string $numberOfEmployees
-    ): self {
+    public function withNumberOfEmployees(string $numberOfEmployees): self
+    {
         $self = clone $this;
         $self['numberOfEmployees'] = $numberOfEmployees;
 
@@ -311,8 +270,6 @@ final class EnterpriseUpdateParams implements BaseModel
     }
 
     /**
-     * Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
-     *
      * @param OrganizationContact|OrganizationContactShape $organizationContact
      */
     public function withOrganizationContact(
@@ -324,13 +281,8 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Legal structure type.
-     *
-     * @param OrganizationLegalType|value-of<OrganizationLegalType> $organizationLegalType
-     */
     public function withOrganizationLegalType(
-        OrganizationLegalType|string $organizationLegalType
+        string $organizationLegalType
     ): self {
         $self = clone $this;
         $self['organizationLegalType'] = $organizationLegalType;
@@ -350,11 +302,8 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * SIC Code.
-     */
     public function withPrimaryBusinessDomainSicCode(
-        string $primaryBusinessDomainSicCode
+        ?string $primaryBusinessDomainSicCode
     ): self {
         $self = clone $this;
         $self['primaryBusinessDomainSicCode'] = $primaryBusinessDomainSicCode;
@@ -362,11 +311,8 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Professional license number.
-     */
     public function withProfessionalLicenseNumber(
-        string $professionalLicenseNumber
+        ?string $professionalLicenseNumber
     ): self {
         $self = clone $this;
         $self['professionalLicenseNumber'] = $professionalLicenseNumber;
@@ -374,9 +320,6 @@ final class EnterpriseUpdateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Company website URL.
-     */
     public function withWebsite(string $website): self
     {
         $self = clone $this;

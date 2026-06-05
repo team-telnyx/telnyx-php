@@ -12,28 +12,17 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Enterprises\Reputation\ReputationEnableParams\CheckFrequency;
 
 /**
- * Enable Number Reputation service for an enterprise.
+ * Activate Phone Number Reputation for the given enterprise. Requires an uploaded Letter of Authorization document (the `loa_document_id` references the Telnyx Documents API) and a refresh-frequency selection. After activation, individual phone numbers can be registered via `POST .../reputation/numbers`.
  *
- * **Requirements:**
- * - Signed LOA (Letter of Authorization) document ID
- * - Reputation check frequency (defaults to `business_daily`)
- * - Number Reputation Terms of Service must be accepted
+ * **Prerequisite**: the calling user must have agreed to the Phone Number Reputation Terms of Service (`POST /terms_of_service/number_reputation/agree`).
  *
- * **Flow:**
- * 1. Registers the enterprise for reputation monitoring
- * 2. Creates reputation settings with `pending` status
- * 3. Awaits admin approval before monitoring begins
+ * Failure modes:
+ * - `403` — Phone Number Reputation Terms of Service not accepted.
+ * - `404` — enterprise does not exist or does not belong to your account.
+ * - `400` — reputation already enabled for this enterprise.
+ * - `422` — `loa_document_id` missing or `check_frequency` invalid.
  *
- * **Resubmission After Rejection:**
- * If a previously rejected record exists, this endpoint will delete it and create a new `pending` record.
- *
- * **Available Frequencies:**
- * - `business_daily` — Monday–Friday
- * - `daily` — Every day
- * - `weekly` — Once per week
- * - `biweekly` — Once every two weeks
- * - `monthly` — Once per month
- * - `never` — Manual refresh only
+ * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
  *
  * @see Telnyx\Services\Enterprises\ReputationService::enable()
  *
@@ -49,13 +38,13 @@ final class ReputationEnableParams implements BaseModel
     use SdkParams;
 
     /**
-     * ID of the signed Letter of Authorization (LOA) document uploaded to the document service.
+     * Id of the signed Letter of Authorization document, returned by the Telnyx Documents API after upload (upload via `POST /v2/documents`; see https://developers.telnyx.com/api/documents).
      */
     #[Required('loa_document_id')]
     public string $loaDocumentID;
 
     /**
-     * Frequency for automatically refreshing reputation data.
+     * How often Telnyx refreshes the stored reputation data for this enterprise's registered numbers.
      *
      * @var value-of<CheckFrequency>|null $checkFrequency
      */
@@ -102,7 +91,7 @@ final class ReputationEnableParams implements BaseModel
     }
 
     /**
-     * ID of the signed Letter of Authorization (LOA) document uploaded to the document service.
+     * Id of the signed Letter of Authorization document, returned by the Telnyx Documents API after upload (upload via `POST /v2/documents`; see https://developers.telnyx.com/api/documents).
      */
     public function withLoaDocumentID(string $loaDocumentID): self
     {
@@ -113,7 +102,7 @@ final class ReputationEnableParams implements BaseModel
     }
 
     /**
-     * Frequency for automatically refreshing reputation data.
+     * How often Telnyx refreshes the stored reputation data for this enterprise's registered numbers.
      *
      * @param CheckFrequency|value-of<CheckFrequency> $checkFrequency
      */

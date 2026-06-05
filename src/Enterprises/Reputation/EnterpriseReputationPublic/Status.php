@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Enterprises\Reputation\EnterpriseReputationPublic;
 
 /**
- * Current enrollment status.
+ * Lifecycle status of the enterprise's Phone Number Reputation activation.
  */
 enum Status: string
 {
@@ -13,7 +13,7 @@ enum Status: string
 
     case APPROVED = 'approved';
 
-    case REJECTED = 'rejected';
-
     case DELETED = 'deleted';
+
+    case REJECTED = 'rejected';
 }

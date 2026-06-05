@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublic\CheckFrequency;
+use Telnyx\Enterprises\Reputation\EnterpriseReputationPublic\LoaStatus;
 use Telnyx\Enterprises\Reputation\EnterpriseReputationPublic\Status;
 
 /**
@@ -16,6 +17,7 @@ use Telnyx\Enterprises\Reputation\EnterpriseReputationPublic\Status;
  *   createdAt?: \DateTimeInterface|null,
  *   enterpriseID?: string|null,
  *   loaDocumentID?: string|null,
+ *   loaStatus?: null|LoaStatus|value-of<LoaStatus>,
  *   rejectionReasons?: list<string>|null,
  *   status?: null|Status|value-of<Status>,
  *   updatedAt?: \DateTimeInterface|null,
@@ -27,33 +29,35 @@ final class EnterpriseReputationPublic implements BaseModel
     use SdkModel;
 
     /**
-     * Frequency for refreshing reputation data.
+     * How often Telnyx refreshes the stored reputation data for this enterprise's registered numbers.
      *
      * @var value-of<CheckFrequency>|null $checkFrequency
      */
     #[Optional('check_frequency', enum: CheckFrequency::class)]
     public ?string $checkFrequency;
 
-    /**
-     * When the reputation settings were created.
-     */
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
-    /**
-     * ID of the associated enterprise.
-     */
     #[Optional('enterprise_id')]
     public ?string $enterpriseID;
 
     /**
-     * ID of the signed LOA document.
+     * Id of the signed LOA document.
      */
     #[Optional('loa_document_id', nullable: true)]
     public ?string $loaDocumentID;
 
     /**
-     * Reasons for rejection (present when status is rejected).
+     * Customer-facing Letter-of-Authorization verification state. `approved` is required (alongside reputation status) before phone numbers can be added.
+     *
+     * @var value-of<LoaStatus>|null $loaStatus
+     */
+    #[Optional('loa_status', enum: LoaStatus::class)]
+    public ?string $loaStatus;
+
+    /**
+     * Populated when `status` is `rejected`.
      *
      * @var list<string>|null $rejectionReasons
      */
@@ -61,16 +65,13 @@ final class EnterpriseReputationPublic implements BaseModel
     public ?array $rejectionReasons;
 
     /**
-     * Current enrollment status.
+     * Lifecycle status of the enterprise's Phone Number Reputation activation.
      *
      * @var value-of<Status>|null $status
      */
     #[Optional(enum: Status::class)]
     public ?string $status;
 
-    /**
-     * When the reputation settings were last updated.
-     */
     #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
@@ -85,6 +86,7 @@ final class EnterpriseReputationPublic implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param CheckFrequency|value-of<CheckFrequency>|null $checkFrequency
+     * @param LoaStatus|value-of<LoaStatus>|null $loaStatus
      * @param list<string>|null $rejectionReasons
      * @param Status|value-of<Status>|null $status
      */
@@ -93,6 +95,7 @@ final class EnterpriseReputationPublic implements BaseModel
         ?\DateTimeInterface $createdAt = null,
         ?string $enterpriseID = null,
         ?string $loaDocumentID = null,
+        LoaStatus|string|null $loaStatus = null,
         ?array $rejectionReasons = null,
         Status|string|null $status = null,
         ?\DateTimeInterface $updatedAt = null,
@@ -103,6 +106,7 @@ final class EnterpriseReputationPublic implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
         null !== $loaDocumentID && $self['loaDocumentID'] = $loaDocumentID;
+        null !== $loaStatus && $self['loaStatus'] = $loaStatus;
         null !== $rejectionReasons && $self['rejectionReasons'] = $rejectionReasons;
         null !== $status && $self['status'] = $status;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
@@ -111,7 +115,7 @@ final class EnterpriseReputationPublic implements BaseModel
     }
 
     /**
-     * Frequency for refreshing reputation data.
+     * How often Telnyx refreshes the stored reputation data for this enterprise's registered numbers.
      *
      * @param CheckFrequency|value-of<CheckFrequency> $checkFrequency
      */
@@ -124,9 +128,6 @@ final class EnterpriseReputationPublic implements BaseModel
         return $self;
     }
 
-    /**
-     * When the reputation settings were created.
-     */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $self = clone $this;
@@ -135,9 +136,6 @@ final class EnterpriseReputationPublic implements BaseModel
         return $self;
     }
 
-    /**
-     * ID of the associated enterprise.
-     */
     public function withEnterpriseID(string $enterpriseID): self
     {
         $self = clone $this;
@@ -147,7 +145,7 @@ final class EnterpriseReputationPublic implements BaseModel
     }
 
     /**
-     * ID of the signed LOA document.
+     * Id of the signed LOA document.
      */
     public function withLoaDocumentID(?string $loaDocumentID): self
     {
@@ -158,7 +156,20 @@ final class EnterpriseReputationPublic implements BaseModel
     }
 
     /**
-     * Reasons for rejection (present when status is rejected).
+     * Customer-facing Letter-of-Authorization verification state. `approved` is required (alongside reputation status) before phone numbers can be added.
+     *
+     * @param LoaStatus|value-of<LoaStatus> $loaStatus
+     */
+    public function withLoaStatus(LoaStatus|string $loaStatus): self
+    {
+        $self = clone $this;
+        $self['loaStatus'] = $loaStatus;
+
+        return $self;
+    }
+
+    /**
+     * Populated when `status` is `rejected`.
      *
      * @param list<string>|null $rejectionReasons
      */
@@ -171,7 +182,7 @@ final class EnterpriseReputationPublic implements BaseModel
     }
 
     /**
-     * Current enrollment status.
+     * Lifecycle status of the enterprise's Phone Number Reputation activation.
      *
      * @param Status|value-of<Status> $status
      */
@@ -183,9 +194,6 @@ final class EnterpriseReputationPublic implements BaseModel
         return $self;
     }
 
-    /**
-     * When the reputation settings were last updated.
-     */
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $self = clone $this;

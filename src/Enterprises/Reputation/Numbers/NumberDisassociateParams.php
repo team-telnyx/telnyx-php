@@ -10,9 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Remove a phone number from Number Reputation monitoring for an enterprise.
- *
- * The number will no longer be tracked and reputation data will no longer be refreshed.
+ * Stop tracking the reputation of this phone number. The number itself remains in your inventory; only the reputation registration is removed.
  *
  * @see Telnyx\Services\Enterprises\Reputation\NumbersService::disassociate()
  *

@@ -10,9 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * List all phone numbers enrolled in Number Reputation monitoring for your account. This is a simplified endpoint that does not require an `enterprise_id` — it returns numbers across all your enterprises.
- *
- * Supports pagination and filtering by phone number.
+ * Convenience alias for `GET /v2/enterprises/{enterprise_id}/reputation/numbers` that returns numbers across every enterprise you own. Useful when you don't want to look up the enterprise id first.
  *
  * @see Telnyx\Services\Reputation\NumbersService::list()
  *
@@ -27,13 +25,13 @@ final class NumberListParams implements BaseModel
     use SdkParams;
 
     /**
-     * Page number (1-indexed).
+     * 1-based page number. Out-of-range values return an empty page with correct meta.
      */
     #[Optional]
     public ?int $pageNumber;
 
     /**
-     * Number of items per page.
+     * Items per page. Maximum 250; values above are clamped to 250.
      */
     #[Optional]
     public ?int $pageSize;
@@ -69,7 +67,7 @@ final class NumberListParams implements BaseModel
     }
 
     /**
-     * Page number (1-indexed).
+     * 1-based page number. Out-of-range values return an empty page with correct meta.
      */
     public function withPageNumber(int $pageNumber): self
     {
@@ -80,7 +78,7 @@ final class NumberListParams implements BaseModel
     }
 
     /**
-     * Number of items per page.
+     * Items per page. Maximum 250; values above are clamped to 250.
      */
     public function withPageSize(int $pageSize): self
     {

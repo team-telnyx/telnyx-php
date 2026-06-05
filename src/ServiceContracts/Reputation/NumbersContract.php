@@ -7,7 +7,7 @@ namespace Telnyx\ServiceContracts\Reputation;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reputation\Numbers\NumberGetResponse;
-use Telnyx\ReputationPhoneNumberWithReputationData;
+use Telnyx\Reputation\Numbers\NumberListResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -18,8 +18,8 @@ interface NumbersContract
     /**
      * @api
      *
-     * @param string $phoneNumber Phone number in E.164 format
-     * @param bool $fresh When true, fetches fresh reputation data (incurs API cost). When false, returns cached data.
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
+     * @param bool $fresh When true, fetches fresh reputation data (incurs API cost). When false (default), returns cached data.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -33,18 +33,18 @@ interface NumbersContract
     /**
      * @api
      *
-     * @param int $pageNumber Page number (1-indexed)
-     * @param int $pageSize Number of items per page
-     * @param string $phoneNumber Filter by specific phone number (E.164 format)
+     * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
+     * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
+     * @param string $phoneNumber Filter by specific phone number (E.164 format).
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<ReputationPhoneNumberWithReputationData>
+     * @return DefaultFlatPagination<NumberListResponse>
      *
      * @throws APIException
      */
     public function list(
         int $pageNumber = 1,
-        int $pageSize = 10,
+        int $pageSize = 20,
         ?string $phoneNumber = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
@@ -52,7 +52,7 @@ interface NumbersContract
     /**
      * @api
      *
-     * @param string $phoneNumber Phone number in E.164 format
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

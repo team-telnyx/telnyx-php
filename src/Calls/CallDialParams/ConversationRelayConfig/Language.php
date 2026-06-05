@@ -11,6 +11,7 @@ use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\TranscriptionEngine;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -18,7 +19,6 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Language-specific TTS and transcription settings for Conversation Relay.

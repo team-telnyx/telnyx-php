@@ -9,17 +9,18 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
 use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
 
 /**
- * Create a new enterprise for Branded Calling / Number Reputation services.
+ * Create the legal entity that owns your Number Reputation registrations.
  *
- * Registers the enterprise in the Branded Calling / Number Reputation services, enabling it to create Display Identity Records (DIRs) or enroll in Number Reputation monitoring.
+ * The response carries a server-assigned `id` you will use for every subsequent call. After creating an enterprise and agreeing to the Number Reputation Terms of Service (`POST /terms_of_service/number_reputation/agree`), enable reputation monitoring via `POST /enterprises/{enterprise_id}/reputation`.
  *
- * **Required Fields:** `legal_name`, `doing_business_as`, `organization_type`, `country_code`, `website`, `fein`, `industry`, `number_of_employees`, `organization_legal_type`, `organization_contact`, `billing_contact`, `organization_physical_address`, `billing_address`
+ * An enterprise is shared across Telnyx products; if you also use Branded Calling, the same enterprise is reused.
  *
  * @see Telnyx\Services\EnterprisesService::create()
  *
@@ -34,7 +35,8 @@ use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
  *   countryCode: string,
  *   doingBusinessAs: string,
  *   fein: string,
- *   industry: string,
+ *   industry: Industry|value-of<Industry>,
+ *   jurisdictionOfIncorporation: string,
  *   legalName: string,
  *   numberOfEmployees: NumberOfEmployees|value-of<NumberOfEmployees>,
  *   organizationContact: OrganizationContact|OrganizationContactShape,
@@ -63,28 +65,30 @@ final class EnterpriseCreateParams implements BaseModel
     public BillingContact $billingContact;
 
     /**
-     * Country code. Currently only 'US' is accepted.
+     * ISO 3166-1 alpha-2 country code. Currently `US` and `CA` are supported.
      */
     #[Required('country_code')]
     public string $countryCode;
 
-    /**
-     * Primary business name / DBA name.
-     */
     #[Required('doing_business_as')]
     public string $doingBusinessAs;
 
     /**
-     * Federal Employer Identification Number. Format: XX-XXXXXXX or 9-digit number (minimum 9 digits).
+     * US Federal Employer Identification Number (`NN-NNNNNNN`) or Canadian equivalent.
      */
     #[Required]
     public string $fein;
 
     /**
-     * Industry classification. Case-insensitive. Accepted values: accounting, finance, billing, collections, business, charity, nonprofit, communications, telecom, customer service, support, delivery, shipping, logistics, education, financial, banking, government, public, healthcare, health, pharmacy, medical, insurance, legal, law, notifications, scheduling, real estate, property, retail, ecommerce, sales, marketing, software, technology, tech, media, surveys, market research, travel, hospitality, hotel.
+     * Industry classification.
+     *
+     * @var value-of<Industry> $industry
      */
-    #[Required]
+    #[Required(enum: Industry::class)]
     public string $industry;
+
+    #[Required('jurisdiction_of_incorporation')]
+    public string $jurisdictionOfIncorporation;
 
     /**
      * Legal name of the enterprise.
@@ -93,21 +97,23 @@ final class EnterpriseCreateParams implements BaseModel
     public string $legalName;
 
     /**
-     * Employee count range.
+     * Approximate headcount range. Used for vetting heuristics; pick the bucket that contains your current employee count.
      *
      * @var value-of<NumberOfEmployees> $numberOfEmployees
      */
     #[Required('number_of_employees', enum: NumberOfEmployees::class)]
     public string $numberOfEmployees;
 
-    /**
-     * Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
-     */
     #[Required('organization_contact')]
     public OrganizationContact $organizationContact;
 
     /**
-     * Legal structure type.
+     * Legal-entity form. Pick the form that matches your incorporation documents:
+     * - `corporation` — C-corp or S-corp.
+     * - `llc` — limited liability company.
+     * - `partnership` — general/limited partnership.
+     * - `nonprofit` — non-profit corporation, charitable trust, or 501(c)(3)/equivalent.
+     * - `other` — anything else (sole proprietorships, government bodies, DBAs, etc.). You may be asked for additional documents during vetting.
      *
      * @var value-of<OrganizationLegalType> $organizationLegalType
      */
@@ -118,51 +124,51 @@ final class EnterpriseCreateParams implements BaseModel
     public PhysicalAddress $organizationPhysicalAddress;
 
     /**
-     * Type of organization.
+     * Organization category for vetting purposes:
+     * - `commercial` — for-profit business entities (LLC, corp, partnership, sole proprietorship). Most callers fall here.
+     * - `government` — federal/state/local government bodies.
+     * - `non_profit` — registered 501(c)(3)/equivalent (incl. educational institutions, charities, religious organisations).
      *
      * @var value-of<OrganizationType> $organizationType
      */
     #[Required('organization_type', enum: OrganizationType::class)]
     public string $organizationType;
 
-    /**
-     * Enterprise website URL. Accepts any string — no URL format validation enforced.
-     */
     #[Required]
     public string $website;
 
     /**
-     * Corporate registration number (optional).
+     * Optional corporate-registration / company-number identifier.
      */
-    #[Optional('corporate_registration_number')]
+    #[Optional('corporate_registration_number', nullable: true)]
     public ?string $corporateRegistrationNumber;
 
     /**
-     * Optional customer reference identifier for your own tracking.
+     * Optional free-form string the caller can attach for their own bookkeeping. Telnyx does not interpret it.
      */
     #[Optional('customer_reference')]
     public ?string $customerReference;
 
     /**
-     * D-U-N-S Number (optional).
+     * Optional D-U-N-S Number.
      */
-    #[Optional('dun_bradstreet_number')]
+    #[Optional('dun_bradstreet_number', nullable: true)]
     public ?string $dunBradstreetNumber;
 
     /**
-     * SIC Code (optional).
+     * Optional SIC code for the primary line of business.
      */
-    #[Optional('primary_business_domain_sic_code')]
+    #[Optional('primary_business_domain_sic_code', nullable: true)]
     public ?string $primaryBusinessDomainSicCode;
 
     /**
-     * Professional license number (optional).
+     * Optional professional-license number for regulated industries.
      */
-    #[Optional('professional_license_number')]
+    #[Optional('professional_license_number', nullable: true)]
     public ?string $professionalLicenseNumber;
 
     /**
-     * Role type in Branded Calling / Number Reputation services.
+     * `enterprise` for an organization registering its own DIRs; `bpo` for a Business Process Outsourcer placing calls on behalf of one or more enterprises.
      *
      * @var value-of<RoleType>|null $roleType
      */
@@ -181,6 +187,7 @@ final class EnterpriseCreateParams implements BaseModel
      *   doingBusinessAs: ...,
      *   fein: ...,
      *   industry: ...,
+     *   jurisdictionOfIncorporation: ...,
      *   legalName: ...,
      *   numberOfEmployees: ...,
      *   organizationContact: ...,
@@ -201,6 +208,7 @@ final class EnterpriseCreateParams implements BaseModel
      *   ->withDoingBusinessAs(...)
      *   ->withFein(...)
      *   ->withIndustry(...)
+     *   ->withJurisdictionOfIncorporation(...)
      *   ->withLegalName(...)
      *   ->withNumberOfEmployees(...)
      *   ->withOrganizationContact(...)
@@ -222,6 +230,7 @@ final class EnterpriseCreateParams implements BaseModel
      *
      * @param BillingAddress|BillingAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
+     * @param Industry|value-of<Industry> $industry
      * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees
      * @param OrganizationContact|OrganizationContactShape $organizationContact
      * @param OrganizationLegalType|value-of<OrganizationLegalType> $organizationLegalType
@@ -235,7 +244,8 @@ final class EnterpriseCreateParams implements BaseModel
         string $countryCode,
         string $doingBusinessAs,
         string $fein,
-        string $industry,
+        Industry|string $industry,
+        string $jurisdictionOfIncorporation,
         string $legalName,
         NumberOfEmployees|string $numberOfEmployees,
         OrganizationContact|array $organizationContact,
@@ -258,6 +268,7 @@ final class EnterpriseCreateParams implements BaseModel
         $self['doingBusinessAs'] = $doingBusinessAs;
         $self['fein'] = $fein;
         $self['industry'] = $industry;
+        $self['jurisdictionOfIncorporation'] = $jurisdictionOfIncorporation;
         $self['legalName'] = $legalName;
         $self['numberOfEmployees'] = $numberOfEmployees;
         $self['organizationContact'] = $organizationContact;
@@ -301,7 +312,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Country code. Currently only 'US' is accepted.
+     * ISO 3166-1 alpha-2 country code. Currently `US` and `CA` are supported.
      */
     public function withCountryCode(string $countryCode): self
     {
@@ -311,9 +322,6 @@ final class EnterpriseCreateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Primary business name / DBA name.
-     */
     public function withDoingBusinessAs(string $doingBusinessAs): self
     {
         $self = clone $this;
@@ -323,7 +331,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Federal Employer Identification Number. Format: XX-XXXXXXX or 9-digit number (minimum 9 digits).
+     * US Federal Employer Identification Number (`NN-NNNNNNN`) or Canadian equivalent.
      */
     public function withFein(string $fein): self
     {
@@ -334,12 +342,23 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Industry classification. Case-insensitive. Accepted values: accounting, finance, billing, collections, business, charity, nonprofit, communications, telecom, customer service, support, delivery, shipping, logistics, education, financial, banking, government, public, healthcare, health, pharmacy, medical, insurance, legal, law, notifications, scheduling, real estate, property, retail, ecommerce, sales, marketing, software, technology, tech, media, surveys, market research, travel, hospitality, hotel.
+     * Industry classification.
+     *
+     * @param Industry|value-of<Industry> $industry
      */
-    public function withIndustry(string $industry): self
+    public function withIndustry(Industry|string $industry): self
     {
         $self = clone $this;
         $self['industry'] = $industry;
+
+        return $self;
+    }
+
+    public function withJurisdictionOfIncorporation(
+        string $jurisdictionOfIncorporation
+    ): self {
+        $self = clone $this;
+        $self['jurisdictionOfIncorporation'] = $jurisdictionOfIncorporation;
 
         return $self;
     }
@@ -356,7 +375,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Employee count range.
+     * Approximate headcount range. Used for vetting heuristics; pick the bucket that contains your current employee count.
      *
      * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees
      */
@@ -370,8 +389,6 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
-     *
      * @param OrganizationContact|OrganizationContactShape $organizationContact
      */
     public function withOrganizationContact(
@@ -384,7 +401,12 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Legal structure type.
+     * Legal-entity form. Pick the form that matches your incorporation documents:
+     * - `corporation` — C-corp or S-corp.
+     * - `llc` — limited liability company.
+     * - `partnership` — general/limited partnership.
+     * - `nonprofit` — non-profit corporation, charitable trust, or 501(c)(3)/equivalent.
+     * - `other` — anything else (sole proprietorships, government bodies, DBAs, etc.). You may be asked for additional documents during vetting.
      *
      * @param OrganizationLegalType|value-of<OrganizationLegalType> $organizationLegalType
      */
@@ -410,7 +432,10 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Type of organization.
+     * Organization category for vetting purposes:
+     * - `commercial` — for-profit business entities (LLC, corp, partnership, sole proprietorship). Most callers fall here.
+     * - `government` — federal/state/local government bodies.
+     * - `non_profit` — registered 501(c)(3)/equivalent (incl. educational institutions, charities, religious organisations).
      *
      * @param OrganizationType|value-of<OrganizationType> $organizationType
      */
@@ -423,9 +448,6 @@ final class EnterpriseCreateParams implements BaseModel
         return $self;
     }
 
-    /**
-     * Enterprise website URL. Accepts any string — no URL format validation enforced.
-     */
     public function withWebsite(string $website): self
     {
         $self = clone $this;
@@ -435,10 +457,10 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Corporate registration number (optional).
+     * Optional corporate-registration / company-number identifier.
      */
     public function withCorporateRegistrationNumber(
-        string $corporateRegistrationNumber
+        ?string $corporateRegistrationNumber
     ): self {
         $self = clone $this;
         $self['corporateRegistrationNumber'] = $corporateRegistrationNumber;
@@ -447,7 +469,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Optional customer reference identifier for your own tracking.
+     * Optional free-form string the caller can attach for their own bookkeeping. Telnyx does not interpret it.
      */
     public function withCustomerReference(string $customerReference): self
     {
@@ -458,9 +480,9 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * D-U-N-S Number (optional).
+     * Optional D-U-N-S Number.
      */
-    public function withDunBradstreetNumber(string $dunBradstreetNumber): self
+    public function withDunBradstreetNumber(?string $dunBradstreetNumber): self
     {
         $self = clone $this;
         $self['dunBradstreetNumber'] = $dunBradstreetNumber;
@@ -469,10 +491,10 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * SIC Code (optional).
+     * Optional SIC code for the primary line of business.
      */
     public function withPrimaryBusinessDomainSicCode(
-        string $primaryBusinessDomainSicCode
+        ?string $primaryBusinessDomainSicCode
     ): self {
         $self = clone $this;
         $self['primaryBusinessDomainSicCode'] = $primaryBusinessDomainSicCode;
@@ -481,10 +503,10 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Professional license number (optional).
+     * Optional professional-license number for regulated industries.
      */
     public function withProfessionalLicenseNumber(
-        string $professionalLicenseNumber
+        ?string $professionalLicenseNumber
     ): self {
         $self = clone $this;
         $self['professionalLicenseNumber'] = $professionalLicenseNumber;
@@ -493,7 +515,7 @@ final class EnterpriseCreateParams implements BaseModel
     }
 
     /**
-     * Role type in Branded Calling / Number Reputation services.
+     * `enterprise` for an organization registering its own DIRs; `bpo` for a Business Process Outsourcer placing calls on behalf of one or more enterprises.
      *
      * @param RoleType|value-of<RoleType> $roleType
      */
