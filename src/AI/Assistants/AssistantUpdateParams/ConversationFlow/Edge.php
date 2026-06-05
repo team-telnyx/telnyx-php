@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow;
 
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition;
+use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\DefaultCondition;
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\ExpressionCondition;
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Condition\LlmCondition;
 use Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow\Edge\Target;
@@ -51,7 +52,7 @@ final class Edge implements BaseModel
      * @var ConditionVariants $condition
      */
     #[Required(union: Condition::class)]
-    public LlmCondition|ExpressionCondition $condition;
+    public LlmCondition|ExpressionCondition|DefaultCondition $condition;
 
     /**
      * ID of the node this edge transitions away from.
@@ -100,7 +101,7 @@ final class Edge implements BaseModel
      */
     public static function with(
         string $id,
-        LlmCondition|array|ExpressionCondition $condition,
+        LlmCondition|array|ExpressionCondition|DefaultCondition $condition,
         string $startNodeID,
         NodeTarget|array|AssistantTarget $target,
     ): self {
@@ -131,7 +132,7 @@ final class Edge implements BaseModel
      * @param ConditionShape $condition
      */
     public function withCondition(
-        LlmCondition|array|ExpressionCondition $condition
+        LlmCondition|array|ExpressionCondition|DefaultCondition $condition
     ): self {
         $self = clone $this;
         $self['condition'] = $condition;

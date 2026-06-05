@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow;
 
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode;
+use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\SpeakNode;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\ToolNode;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
@@ -15,9 +16,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  *
  * @phpstan-import-type FlowNodeShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode
  * @phpstan-import-type ToolNodeShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\ToolNode
+ * @phpstan-import-type SpeakNodeShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\SpeakNode
  *
- * @phpstan-type NodeVariants = FlowNode|ToolNode
- * @phpstan-type NodeShape = NodeVariants|FlowNodeShape|ToolNodeShape
+ * @phpstan-type NodeVariants = FlowNode|ToolNode|SpeakNode
+ * @phpstan-type NodeShape = NodeVariants|FlowNodeShape|ToolNodeShape|SpeakNodeShape
  */
 final class Node implements ConverterSource
 {
@@ -33,6 +35,10 @@ final class Node implements ConverterSource
      */
     public static function variants(): array
     {
-        return ['prompt' => FlowNode::class, 'tool' => ToolNode::class];
+        return [
+            'prompt' => FlowNode::class,
+            'tool' => ToolNode::class,
+            'speak' => SpeakNode::class,
+        ];
     }
 }
