@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.70.0 (2026-06-05)
+
+Full Changelog: [v7.69.0...v7.70.0](https://github.com/team-telnyx/telnyx-php/compare/v7.69.0...v7.70.0)
+
+### Features
+
+* Conversation flow update ([980c2d1](https://github.com/team-telnyx/telnyx-php/commit/980c2d1e0df8467ce69f76052de59bfaa982bd26))
+
 ## 7.69.0 (2026-06-04)
 
 Full Changelog: [v7.68.1...v7.69.0](https://github.com/team-telnyx/telnyx-php/compare/v7.68.1...v7.69.0)
