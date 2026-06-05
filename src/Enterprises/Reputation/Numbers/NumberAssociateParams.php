@@ -10,17 +10,11 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Associate one or more phone numbers with an enterprise for Number Reputation monitoring.
+ * Add up to 100 phone numbers to reputation monitoring on this enterprise. Each must be in E.164 format (`+1NPANXXXXXX` for US/CA) and belong to your Telnyx phone-number inventory.
  *
- * **Validations:**
- * - Phone numbers must be in E.164 format (e.g., `+16035551234`)
- * - Phone numbers must be in-service and belong to your account (verified via Warehouse)
- * - Phone numbers must be US local numbers
- * - Phone numbers cannot already be associated with any enterprise
+ * **Prerequisite**: reputation must already be enabled on this enterprise (see `POST .../reputation`).
  *
- * **Note:** This operation is atomic — if any number fails validation, the entire request fails.
- *
- * **Maximum:** 100 phone numbers per request.
+ * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
  *
  * @see Telnyx\Services\Enterprises\Reputation\NumbersService::associate()
  *
@@ -33,7 +27,7 @@ final class NumberAssociateParams implements BaseModel
     use SdkParams;
 
     /**
-     * List of phone numbers to associate for reputation monitoring (max 100).
+     * 1–100 phone numbers in E.164 format with a leading `+`.
      *
      * @var list<string> $phoneNumbers
      */
@@ -76,7 +70,7 @@ final class NumberAssociateParams implements BaseModel
     }
 
     /**
-     * List of phone numbers to associate for reputation monitoring (max 100).
+     * 1–100 phone numbers in E.164 format with a leading `+`.
      *
      * @param list<string> $phoneNumbers
      */

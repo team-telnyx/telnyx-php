@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams;
 
 /**
- * New frequency for refreshing reputation data.
+ * How often Telnyx refreshes the stored reputation data for this enterprise's registered numbers.
  */
 enum CheckFrequency: string
 {

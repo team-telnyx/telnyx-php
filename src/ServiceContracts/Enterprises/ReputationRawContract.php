@@ -21,7 +21,7 @@ interface ReputationRawContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ReputationGetResponse>
@@ -36,7 +36,7 @@ interface ReputationRawContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -51,7 +51,7 @@ interface ReputationRawContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array<string,mixed>|ReputationEnableParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -68,7 +68,7 @@ interface ReputationRawContract
     /**
      * @api
      *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array<string,mixed>|ReputationUpdateFrequencyParams $params
      * @param RequestOpts|null $requestOptions
      *

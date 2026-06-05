@@ -10,12 +10,13 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\ReputationPhoneNumberWithReputationData;
+use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
+use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\NumbersContract;
 
 /**
- * Associate phone numbers with an enterprise for reputation monitoring and retrieve reputation scores.
+ * Phone-number reputation monitoring (spam-score lookup and tracking).
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -37,23 +38,11 @@ final class NumbersService implements NumbersContract
     /**
      * @api
      *
-     * Get detailed reputation data for a specific phone number associated with an enterprise.
+     * Retrieve one registered number with its latest reputation snapshot. The `phone_number` path parameter is in E.164 format and must be URL-encoded (e.g. `%2B19493253498`).
      *
-     * **Query Parameters:**
-     * - `fresh` (default: `false`): When `true`, fetches fresh reputation data (incurs API cost). When `false`, returns cached data. If no cached data exists, fresh data is automatically fetched.
-     *
-     * **Returns:**
-     * - `spam_risk`: Overall spam risk level (`low`, `medium`, `high`)
-     * - `spam_category`: Spam category classification
-     * - `maturity_score`: Maturity metric (0–100)
-     * - `connection_score`: Connection quality metric (0–100)
-     * - `engagement_score`: Engagement metric (0–100)
-     * - `sentiment_score`: Sentiment metric (0–100)
-     * - `last_refreshed_at`: Timestamp of last data refresh
-     *
-     * @param string $phoneNumber Path param: Phone number in E.164 format
-     * @param string $enterpriseID Path param: Unique identifier of the enterprise (UUID)
-     * @param bool $fresh Query param: When true, fetches fresh reputation data (incurs API cost). When false, returns cached data.
+     * @param string $phoneNumber Path param: Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
+     * @param string $enterpriseID Path param: The enterprise id. Lowercase UUID.
+     * @param bool $fresh Query param: When true, fetches fresh reputation data (incurs API cost). When false (default), returns cached data.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -77,17 +66,15 @@ final class NumbersService implements NumbersContract
     /**
      * @api
      *
-     * List all phone numbers associated with an enterprise for Number Reputation monitoring.
+     * Paginated list of phone numbers registered for reputation monitoring under this enterprise. The response includes the latest reputation snapshot per number where one has been collected.
      *
-     * Returns phone numbers with their cached reputation data (if available). Supports pagination and filtering by phone number.
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param int $pageNumber Page number (1-indexed)
-     * @param int $pageSize Number of items per page
-     * @param string $phoneNumber Filter by specific phone number (E.164 format)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
+     * @param int $pageSize Items per page. Default 10. Maximum 250; values above are clamped to 250.
+     * @param string $phoneNumber Filter by specific phone number (E.164 format).
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<ReputationPhoneNumberWithReputationData>
+     * @return DefaultFlatPagination<NumberListResponse>
      *
      * @throws APIException
      */
@@ -115,20 +102,14 @@ final class NumbersService implements NumbersContract
     /**
      * @api
      *
-     * Associate one or more phone numbers with an enterprise for Number Reputation monitoring.
+     * Add up to 100 phone numbers to reputation monitoring on this enterprise. Each must be in E.164 format (`+1NPANXXXXXX` for US/CA) and belong to your Telnyx phone-number inventory.
      *
-     * **Validations:**
-     * - Phone numbers must be in E.164 format (e.g., `+16035551234`)
-     * - Phone numbers must be in-service and belong to your account (verified via Warehouse)
-     * - Phone numbers must be US local numbers
-     * - Phone numbers cannot already be associated with any enterprise
+     * **Prerequisite**: reputation must already be enabled on this enterprise (see `POST .../reputation`).
      *
-     * **Note:** This operation is atomic — if any number fails validation, the entire request fails.
+     * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
      *
-     * **Maximum:** 100 phone numbers per request.
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
-     * @param list<string> $phoneNumbers List of phone numbers to associate for reputation monitoring (max 100)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param list<string> $phoneNumbers 1–100 phone numbers in E.164 format with a leading `+`.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -149,12 +130,10 @@ final class NumbersService implements NumbersContract
     /**
      * @api
      *
-     * Remove a phone number from Number Reputation monitoring for an enterprise.
+     * Stop tracking the reputation of this phone number. The number itself remains in your inventory; only the reputation registration is removed.
      *
-     * The number will no longer be tracked and reputation data will no longer be refreshed.
-     *
-     * @param string $phoneNumber Phone number in E.164 format
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -168,6 +147,32 @@ final class NumbersService implements NumbersContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->disassociate($phoneNumber, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Immediately refresh the stored reputation data for the listed numbers. This is in addition to the periodic refresh determined by `check_frequency`. Up to 100 numbers per call. The response carries the kicked-off jobs; the actual refresh runs asynchronously.
+     *
+     * **Pricing:** Forcing a refresh performs live reputation lookups, which are billable. See https://telnyx.com/pricing/numbers for current pricing.
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param list<string> $phoneNumbers Phone numbers to refresh reputation data for. 1–100 numbers per request, each in E.164 format. Reputation refreshes are subject to per-enterprise rate limits.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function refresh(
+        string $enterpriseID,
+        array $phoneNumbers,
+        RequestOptions|array|null $requestOptions = null,
+    ): NumberRefreshResponse {
+        $params = Util::removeNulls(['phoneNumbers' => $phoneNumbers]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->refresh($enterpriseID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

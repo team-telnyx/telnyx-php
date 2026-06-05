@@ -7,13 +7,17 @@ namespace Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\ReputationData;
 
 /**
+ * @phpstan-import-type ReputationDataShape from \Telnyx\ReputationData
+ *
  * @phpstan-type DataShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   enterpriseID?: string|null,
  *   phoneNumber?: string|null,
+ *   reputationData?: null|ReputationData|ReputationDataShape,
  *   updatedAt?: \DateTimeInterface|null,
  * }
  */
@@ -22,33 +26,27 @@ final class Data implements BaseModel
     /** @use SdkModel<DataShape> */
     use SdkModel;
 
-    /**
-     * Unique identifier.
-     */
     #[Optional]
     public ?string $id;
 
-    /**
-     * When the number was associated.
-     */
     #[Optional('created_at')]
     public ?\DateTimeInterface $createdAt;
 
-    /**
-     * ID of the associated enterprise.
-     */
     #[Optional('enterprise_id')]
     public ?string $enterpriseID;
 
     /**
-     * Phone number in E.164 format.
+     * E.164 with leading `+`.
      */
     #[Optional('phone_number')]
     public ?string $phoneNumber;
 
     /**
-     * When the record was last updated.
+     * `null` until the first refresh has been collected for this number.
      */
+    #[Optional('reputation_data', nullable: true)]
+    public ?ReputationData $reputationData;
+
     #[Optional('updated_at')]
     public ?\DateTimeInterface $updatedAt;
 
@@ -61,12 +59,15 @@ final class Data implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param ReputationData|ReputationDataShape|null $reputationData
      */
     public static function with(
         ?string $id = null,
         ?\DateTimeInterface $createdAt = null,
         ?string $enterpriseID = null,
         ?string $phoneNumber = null,
+        ReputationData|array|null $reputationData = null,
         ?\DateTimeInterface $updatedAt = null,
     ): self {
         $self = new self;
@@ -75,14 +76,12 @@ final class Data implements BaseModel
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+        null !== $reputationData && $self['reputationData'] = $reputationData;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
 
-    /**
-     * Unique identifier.
-     */
     public function withID(string $id): self
     {
         $self = clone $this;
@@ -91,9 +90,6 @@ final class Data implements BaseModel
         return $self;
     }
 
-    /**
-     * When the number was associated.
-     */
     public function withCreatedAt(\DateTimeInterface $createdAt): self
     {
         $self = clone $this;
@@ -102,9 +98,6 @@ final class Data implements BaseModel
         return $self;
     }
 
-    /**
-     * ID of the associated enterprise.
-     */
     public function withEnterpriseID(string $enterpriseID): self
     {
         $self = clone $this;
@@ -114,7 +107,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * Phone number in E.164 format.
+     * E.164 with leading `+`.
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
@@ -125,8 +118,19 @@ final class Data implements BaseModel
     }
 
     /**
-     * When the record was last updated.
+     * `null` until the first refresh has been collected for this number.
+     *
+     * @param ReputationData|ReputationDataShape|null $reputationData
      */
+    public function withReputationData(
+        ReputationData|array|null $reputationData
+    ): self {
+        $self = clone $this;
+        $self['reputationData'] = $reputationData;
+
+        return $self;
+    }
+
     public function withUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $self = clone $this;

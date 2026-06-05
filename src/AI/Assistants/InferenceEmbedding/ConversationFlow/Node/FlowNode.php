@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node;
 
 use Telnyx\AI\Assistants\AssistantTool;
-use Telnyx\AI\Assistants\ExternalLlm;
+use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\ExternalLlm;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\InstructionsMode;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\Position;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\ToolsMode;
@@ -22,7 +22,7 @@ use Telnyx\Core\Conversion\ListOf;
  * One step in a conversation flow, as returned by the API.
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\ExternalLlm
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\ExternalLlm
  * @phpstan-import-type PositionShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\Position
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings

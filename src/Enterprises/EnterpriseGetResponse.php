@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Enterprises;
 
-use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type EnterprisePublicShape from \Telnyx\Enterprises\EnterprisePublic
  *
  * @phpstan-type EnterpriseGetResponseShape = array{
- *   data?: null|EnterprisePublic|EnterprisePublicShape
+ *   data: EnterprisePublic|EnterprisePublicShape
  * }
  */
 final class EnterpriseGetResponse implements BaseModel
@@ -20,9 +20,23 @@ final class EnterpriseGetResponse implements BaseModel
     /** @use SdkModel<EnterpriseGetResponseShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?EnterprisePublic $data;
+    #[Required]
+    public EnterprisePublic $data;
 
+    /**
+     * `new EnterpriseGetResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * EnterpriseGetResponse::with(data: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new EnterpriseGetResponse)->withData(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -33,13 +47,13 @@ final class EnterpriseGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EnterprisePublic|EnterprisePublicShape|null $data
+     * @param EnterprisePublic|EnterprisePublicShape $data
      */
-    public static function with(EnterprisePublic|array|null $data = null): self
+    public static function with(EnterprisePublic|array $data): self
     {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
+        $self['data'] = $data;
 
         return $self;
     }

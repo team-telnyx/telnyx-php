@@ -9,14 +9,12 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Organization contact information. Note: the response returns this object with the phone field as 'phone' (not 'phone_number').
- *
  * @phpstan-type OrganizationContactShape = array{
  *   email: string,
  *   firstName: string,
  *   jobTitle: string,
  *   lastName: string,
- *   phone: string,
+ *   phoneNumber: string,
  * }
  */
 final class OrganizationContact implements BaseModel
@@ -24,35 +22,23 @@ final class OrganizationContact implements BaseModel
     /** @use SdkModel<OrganizationContactShape> */
     use SdkModel;
 
-    /**
-     * Contact's email address.
-     */
     #[Required]
     public string $email;
 
-    /**
-     * Contact's first name.
-     */
     #[Required('first_name')]
     public string $firstName;
 
-    /**
-     * Contact's job title (required).
-     */
     #[Required('job_title')]
     public string $jobTitle;
 
-    /**
-     * Contact's last name.
-     */
     #[Required('last_name')]
     public string $lastName;
 
     /**
-     * Contact's phone number in E.164 format.
+     * E.164 format with leading `+`.
      */
-    #[Required]
-    public string $phone;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /**
      * `new OrganizationContact()` is missing required properties by the API.
@@ -60,7 +46,7 @@ final class OrganizationContact implements BaseModel
      * To enforce required parameters use
      * ```
      * OrganizationContact::with(
-     *   email: ..., firstName: ..., jobTitle: ..., lastName: ..., phone: ...
+     *   email: ..., firstName: ..., jobTitle: ..., lastName: ..., phoneNumber: ...
      * )
      * ```
      *
@@ -72,7 +58,7 @@ final class OrganizationContact implements BaseModel
      *   ->withFirstName(...)
      *   ->withJobTitle(...)
      *   ->withLastName(...)
-     *   ->withPhone(...)
+     *   ->withPhoneNumber(...)
      * ```
      */
     public function __construct()
@@ -90,7 +76,7 @@ final class OrganizationContact implements BaseModel
         string $firstName,
         string $jobTitle,
         string $lastName,
-        string $phone,
+        string $phoneNumber,
     ): self {
         $self = new self;
 
@@ -98,14 +84,11 @@ final class OrganizationContact implements BaseModel
         $self['firstName'] = $firstName;
         $self['jobTitle'] = $jobTitle;
         $self['lastName'] = $lastName;
-        $self['phone'] = $phone;
+        $self['phoneNumber'] = $phoneNumber;
 
         return $self;
     }
 
-    /**
-     * Contact's email address.
-     */
     public function withEmail(string $email): self
     {
         $self = clone $this;
@@ -114,9 +97,6 @@ final class OrganizationContact implements BaseModel
         return $self;
     }
 
-    /**
-     * Contact's first name.
-     */
     public function withFirstName(string $firstName): self
     {
         $self = clone $this;
@@ -125,9 +105,6 @@ final class OrganizationContact implements BaseModel
         return $self;
     }
 
-    /**
-     * Contact's job title (required).
-     */
     public function withJobTitle(string $jobTitle): self
     {
         $self = clone $this;
@@ -136,9 +113,6 @@ final class OrganizationContact implements BaseModel
         return $self;
     }
 
-    /**
-     * Contact's last name.
-     */
     public function withLastName(string $lastName): self
     {
         $self = clone $this;
@@ -148,12 +122,12 @@ final class OrganizationContact implements BaseModel
     }
 
     /**
-     * Contact's phone number in E.164 format.
+     * E.164 format with leading `+`.
      */
-    public function withPhone(string $phone): self
+    public function withPhoneNumber(string $phoneNumber): self
     {
         $self = clone $this;
-        $self['phone'] = $phone;
+        $self['phoneNumber'] = $phoneNumber;
 
         return $self;
     }

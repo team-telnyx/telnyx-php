@@ -8,6 +8,7 @@ use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language\VoiceSettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
@@ -18,7 +19,6 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Language-specific TTS and transcription settings for Conversation Relay.

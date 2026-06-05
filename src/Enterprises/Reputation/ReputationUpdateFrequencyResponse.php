@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Enterprises\Reputation;
 
-use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -12,7 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type EnterpriseReputationPublicShape from \Telnyx\Enterprises\Reputation\EnterpriseReputationPublic
  *
  * @phpstan-type ReputationUpdateFrequencyResponseShape = array{
- *   data?: null|EnterpriseReputationPublic|EnterpriseReputationPublicShape
+ *   data: EnterpriseReputationPublic|EnterpriseReputationPublicShape
  * }
  */
 final class ReputationUpdateFrequencyResponse implements BaseModel
@@ -20,9 +20,23 @@ final class ReputationUpdateFrequencyResponse implements BaseModel
     /** @use SdkModel<ReputationUpdateFrequencyResponseShape> */
     use SdkModel;
 
-    #[Optional]
-    public ?EnterpriseReputationPublic $data;
+    #[Required]
+    public EnterpriseReputationPublic $data;
 
+    /**
+     * `new ReputationUpdateFrequencyResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * ReputationUpdateFrequencyResponse::with(data: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new ReputationUpdateFrequencyResponse)->withData(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -33,14 +47,13 @@ final class ReputationUpdateFrequencyResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param EnterpriseReputationPublic|EnterpriseReputationPublicShape|null $data
+     * @param EnterpriseReputationPublic|EnterpriseReputationPublicShape $data
      */
-    public static function with(
-        EnterpriseReputationPublic|array|null $data = null
-    ): self {
+    public static function with(EnterpriseReputationPublic|array $data): self
+    {
         $self = new self;
 
-        null !== $data && $self['data'] = $data;
+        $self['data'] = $data;
 
         return $self;
     }

@@ -10,9 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Get reputation data for a specific phone number without requiring an `enterprise_id`.
- *
- * Same response as the enterprise-scoped endpoint. Uses cached data by default.
+ * Convenience alias for `GET /v2/enterprises/{enterprise_id}/reputation/numbers/{phone_number}`.
  *
  * @see Telnyx\Services\Reputation\NumbersService::retrieve()
  *
@@ -25,7 +23,7 @@ final class NumberRetrieveParams implements BaseModel
     use SdkParams;
 
     /**
-     * When true, fetches fresh reputation data (incurs API cost). When false, returns cached data.
+     * When true, fetches fresh reputation data (incurs API cost). When false (default), returns cached data.
      */
     #[Optional]
     public ?bool $fresh;
@@ -50,7 +48,7 @@ final class NumberRetrieveParams implements BaseModel
     }
 
     /**
-     * When true, fetches fresh reputation data (incurs API cost). When false, returns cached data.
+     * When true, fetches fresh reputation data (incurs API cost). When false (default), returns cached data.
      */
     public function withFresh(bool $fresh): self
     {

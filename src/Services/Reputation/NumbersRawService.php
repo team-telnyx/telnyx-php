@@ -11,13 +11,13 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Reputation\Numbers\NumberListParams;
+use Telnyx\Reputation\Numbers\NumberListResponse;
 use Telnyx\Reputation\Numbers\NumberRetrieveParams;
-use Telnyx\ReputationPhoneNumberWithReputationData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reputation\NumbersRawContract;
 
 /**
- * Associate phone numbers with an enterprise for reputation monitoring and retrieve reputation scores.
+ * Phone-number reputation monitoring (spam-score lookup and tracking).
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -32,11 +32,9 @@ final class NumbersRawService implements NumbersRawContract
     /**
      * @api
      *
-     * Get reputation data for a specific phone number without requiring an `enterprise_id`.
+     * Convenience alias for `GET /v2/enterprises/{enterprise_id}/reputation/numbers/{phone_number}`.
      *
-     * Same response as the enterprise-scoped endpoint. Uses cached data by default.
-     *
-     * @param string $phoneNumber Phone number in E.164 format
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
      * @param array{fresh?: bool}|NumberRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -67,16 +65,14 @@ final class NumbersRawService implements NumbersRawContract
     /**
      * @api
      *
-     * List all phone numbers enrolled in Number Reputation monitoring for your account. This is a simplified endpoint that does not require an `enterprise_id` — it returns numbers across all your enterprises.
-     *
-     * Supports pagination and filtering by phone number.
+     * Convenience alias for `GET /v2/enterprises/{enterprise_id}/reputation/numbers` that returns numbers across every enterprise you own. Useful when you don't want to look up the enterprise id first.
      *
      * @param array{
      *   pageNumber?: int, pageSize?: int, phoneNumber?: string
      * }|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumberWithReputationData,>,>
+     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
      *
      * @throws APIException
      */
@@ -102,7 +98,7 @@ final class NumbersRawService implements NumbersRawContract
                 ],
             ),
             options: $options,
-            convert: ReputationPhoneNumberWithReputationData::class,
+            convert: NumberListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }
@@ -110,9 +106,9 @@ final class NumbersRawService implements NumbersRawContract
     /**
      * @api
      *
-     * Remove a phone number from Number Reputation monitoring without requiring an `enterprise_id`.
+     * Convenience alias for `DELETE /v2/enterprises/{enterprise_id}/reputation/numbers/{phone_number}`.
      *
-     * @param string $phoneNumber Phone number in E.164 format
+     * @param string $phoneNumber Phone number in E.164 format (`+1NPANXXXXXX` for US/CA). The leading `+` MUST be URL-encoded as `%2B` (e.g. `%2B19493253498`).
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

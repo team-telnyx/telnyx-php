@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\EnterpriseActivateBrandedCallingResponse;
 use Telnyx\Enterprises\EnterpriseGetResponse;
 use Telnyx\Enterprises\EnterpriseNewResponse;
 use Telnyx\Enterprises\EnterprisePublic;
@@ -41,41 +42,42 @@ final class EnterprisesTest extends TestCase
 
         $result = $this->client->enterprises->create(
             billingAddress: [
-                'administrativeArea' => 'Illinois',
+                'administrativeArea' => 'IL',
                 'city' => 'Chicago',
-                'country' => 'United States',
+                'country' => 'US',
                 'postalCode' => '60601',
-                'streetAddress' => '123 Main St',
+                'streetAddress' => '100 Main St',
             ],
             billingContact: [
-                'email' => 'billing@acme.com',
-                'firstName' => 'John',
-                'lastName' => 'Doe',
-                'phoneNumber' => '15551234568',
+                'email' => 'billing@run065.example.com',
+                'firstName' => 'Alex',
+                'lastName' => 'Bill',
+                'phoneNumber' => '+13125550001',
             ],
             countryCode: 'US',
-            doingBusinessAs: 'Acme',
+            doingBusinessAs: 'Run 065 Debug',
             fein: '12-3456789',
             industry: 'technology',
-            legalName: 'Acme Corp Inc.',
+            jurisdictionOfIncorporation: 'Delaware',
+            legalName: 'Run 065 Debug Co',
             numberOfEmployees: '51-200',
             organizationContact: [
-                'email' => 'jane.smith@acme.com',
-                'firstName' => 'Jane',
-                'jobTitle' => 'VP of Engineering',
-                'lastName' => 'Smith',
-                'phone' => '+16035551234',
+                'email' => 'org@run065.example.com',
+                'firstName' => 'Sam',
+                'jobTitle' => 'Compliance Lead',
+                'lastName' => 'Org',
+                'phoneNumber' => '+13125550000',
             ],
-            organizationLegalType: 'corporation',
+            organizationLegalType: 'llc',
             organizationPhysicalAddress: [
-                'administrativeArea' => 'Illinois',
+                'administrativeArea' => 'IL',
                 'city' => 'Chicago',
-                'country' => 'United States',
+                'country' => 'US',
                 'postalCode' => '60601',
-                'streetAddress' => '123 Main St',
+                'streetAddress' => '100 Main St',
             ],
             organizationType: 'commercial',
-            website: 'https://acme.com',
+            website: 'https://run065.example.com',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -91,47 +93,48 @@ final class EnterprisesTest extends TestCase
 
         $result = $this->client->enterprises->create(
             billingAddress: [
-                'administrativeArea' => 'Illinois',
+                'administrativeArea' => 'IL',
                 'city' => 'Chicago',
-                'country' => 'United States',
+                'country' => 'US',
                 'postalCode' => '60601',
-                'streetAddress' => '123 Main St',
-                'extendedAddress' => 'Suite 400',
+                'streetAddress' => '100 Main St',
+                'extendedAddress' => 'Suite 504',
             ],
             billingContact: [
-                'email' => 'billing@acme.com',
-                'firstName' => 'John',
-                'lastName' => 'Doe',
-                'phoneNumber' => '15551234568',
+                'email' => 'billing@run065.example.com',
+                'firstName' => 'Alex',
+                'lastName' => 'Bill',
+                'phoneNumber' => '+13125550001',
             ],
             countryCode: 'US',
-            doingBusinessAs: 'Acme',
+            doingBusinessAs: 'Run 065 Debug',
             fein: '12-3456789',
             industry: 'technology',
-            legalName: 'Acme Corp Inc.',
+            jurisdictionOfIncorporation: 'Delaware',
+            legalName: 'Run 065 Debug Co',
             numberOfEmployees: '51-200',
             organizationContact: [
-                'email' => 'jane.smith@acme.com',
-                'firstName' => 'Jane',
-                'jobTitle' => 'VP of Engineering',
-                'lastName' => 'Smith',
-                'phone' => '+16035551234',
+                'email' => 'org@run065.example.com',
+                'firstName' => 'Sam',
+                'jobTitle' => 'Compliance Lead',
+                'lastName' => 'Org',
+                'phoneNumber' => '+13125550000',
             ],
-            organizationLegalType: 'corporation',
+            organizationLegalType: 'llc',
             organizationPhysicalAddress: [
-                'administrativeArea' => 'Illinois',
+                'administrativeArea' => 'IL',
                 'city' => 'Chicago',
-                'country' => 'United States',
+                'country' => 'US',
                 'postalCode' => '60601',
-                'streetAddress' => '123 Main St',
-                'extendedAddress' => 'Suite 400',
+                'streetAddress' => '100 Main St',
+                'extendedAddress' => 'Suite 504',
             ],
             organizationType: 'commercial',
-            website: 'https://acme.com',
+            website: 'https://run065.example.com',
             corporateRegistrationNumber: 'corporate_registration_number',
-            customerReference: 'customer_reference',
+            customerReference: 'internal-id-12345',
             dunBradstreetNumber: 'dun_bradstreet_number',
-            primaryBusinessDomainSicCode: '7372',
+            primaryBusinessDomainSicCode: 'primary_business_domain_sic_code',
             professionalLicenseNumber: 'professional_license_number',
             roleType: 'enterprise',
         );
@@ -148,7 +151,7 @@ final class EnterprisesTest extends TestCase
         }
 
         $result = $this->client->enterprises->retrieve(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -163,7 +166,7 @@ final class EnterprisesTest extends TestCase
         }
 
         $result = $this->client->enterprises->update(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -196,10 +199,28 @@ final class EnterprisesTest extends TestCase
         }
 
         $result = $this->client->enterprises->delete(
-            '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+            '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testActivateBrandedCalling(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->activateBrandedCalling(
+            '4a6192a4-573d-446d-b3ce-aff9117272a6'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            EnterpriseActivateBrandedCallingResponse::class,
+            $result
+        );
     }
 }

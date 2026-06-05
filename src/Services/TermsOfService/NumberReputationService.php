@@ -8,9 +8,10 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfService\NumberReputationContract;
+use Telnyx\TermsOfService\NumberReputation\NumberReputationAgreeResponse;
 
 /**
- * Terms of Service agreement endpoints.
+ * Accept and review the Branded Calling and Phone Number Reputation terms of service.
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -32,9 +33,9 @@ final class NumberReputationService implements NumberReputationContract
     /**
      * @api
      *
-     * Accept the Terms of Service for the Number Reputation product. Must be called before using Number Reputation endpoints.
+     * Records the authenticated user's agreement to the current Phone Number Reputation ToS. No body required. Idempotent.
      *
-     * Returns `400` with error code `10015` if the user has already agreed to the current ToS version.
+     * Prerequisite for using any of the `/v2/.../reputation/*` endpoints.
      *
      * @param RequestOpts|null $requestOptions
      *
@@ -42,7 +43,7 @@ final class NumberReputationService implements NumberReputationContract
      */
     public function agree(
         RequestOptions|array|null $requestOptions = null
-    ): mixed {
+    ): NumberReputationAgreeResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->agree(requestOptions: $requestOptions);
 

@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\VirtualCrossConnects\VirtualCrossConnectCombined;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectDeleteResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectGetResponse;
+use Telnyx\VirtualCrossConnects\VirtualCrossConnectListResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectNewResponse;
 use Telnyx\VirtualCrossConnects\VirtualCrossConnectUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -121,7 +121,7 @@ final class VirtualCrossConnectsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(VirtualCrossConnectCombined::class, $item);
+            $this->assertInstanceOf(VirtualCrossConnectListResponse::class, $item);
         }
     }
 

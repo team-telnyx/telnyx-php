@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Enterprises\EnterpriseCreateParams;
 
 /**
- * Employee count range.
+ * Approximate headcount range. Used for vetting heuristics; pick the bucket that contains your current employee count.
  */
 enum NumberOfEmployees: string
 {

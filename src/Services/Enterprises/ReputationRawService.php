@@ -17,7 +17,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\ReputationRawContract;
 
 /**
- * Manage Number Reputation enrollment and check frequency settings for an enterprise.
+ * Phone-number reputation monitoring (spam-score lookup and tracking).
  *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -32,13 +32,11 @@ final class ReputationRawService implements ReputationRawContract
     /**
      * @api
      *
-     * Retrieve the current Number Reputation settings for an enterprise.
+     * Phone Number Reputation tracks how your outbound caller-IDs are perceived (spam risk, engagement, etc.) across the call-screening ecosystem. This endpoint reads the enterprise-level settings: whether the product is enabled, the refresh cadence, and the stored Letter of Authorization document id.
      *
-     * Returns the enrollment status (`pending`, `approved`, `rejected`, `deleted`), check frequency, and any rejection reasons.
+     * Returns `404` if reputation has never been enabled for this enterprise.
      *
-     * Returns `404` if reputation has not been enabled for this enterprise.
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ReputationGetResponse>
@@ -61,16 +59,9 @@ final class ReputationRawService implements ReputationRawContract
     /**
      * @api
      *
-     * Disable Number Reputation for an enterprise.
+     * Disable Phone Number Reputation. All registered numbers are de-registered as a cascade. The enterprise itself is unaffected. Returns `204` on success, `404` if reputation is not enabled for this enterprise.
      *
-     * This will:
-     * - Delete the reputation settings record
-     * - Log the deletion for audit purposes
-     * - Stop all future automated reputation checks
-     *
-     * **Note:** Can only be performed on `approved` reputation settings.
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -93,30 +84,19 @@ final class ReputationRawService implements ReputationRawContract
     /**
      * @api
      *
-     * Enable Number Reputation service for an enterprise.
+     * Activate Phone Number Reputation for the given enterprise. Requires an uploaded Letter of Authorization document (the `loa_document_id` references the Telnyx Documents API) and a refresh-frequency selection. After activation, individual phone numbers can be registered via `POST .../reputation/numbers`.
      *
-     * **Requirements:**
-     * - Signed LOA (Letter of Authorization) document ID
-     * - Reputation check frequency (defaults to `business_daily`)
-     * - Number Reputation Terms of Service must be accepted
+     * **Prerequisite**: the calling user must have agreed to the Phone Number Reputation Terms of Service (`POST /terms_of_service/number_reputation/agree`).
      *
-     * **Flow:**
-     * 1. Registers the enterprise for reputation monitoring
-     * 2. Creates reputation settings with `pending` status
-     * 3. Awaits admin approval before monitoring begins
+     * Failure modes:
+     * - `403` — Phone Number Reputation Terms of Service not accepted.
+     * - `404` — enterprise does not exist or does not belong to your account.
+     * - `400` — reputation already enabled for this enterprise.
+     * - `422` — `loa_document_id` missing or `check_frequency` invalid.
      *
-     * **Resubmission After Rejection:**
-     * If a previously rejected record exists, this endpoint will delete it and create a new `pending` record.
+     * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
      *
-     * **Available Frequencies:**
-     * - `business_daily` — Monday–Friday
-     * - `daily` — Every day
-     * - `weekly` — Once per week
-     * - `biweekly` — Once every two weeks
-     * - `monthly` — Once per month
-     * - `never` — Manual refresh only
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
      *   loaDocumentID: string,
      *   checkFrequency?: CheckFrequency|value-of<CheckFrequency>,
@@ -150,19 +130,11 @@ final class ReputationRawService implements ReputationRawContract
     /**
      * @api
      *
-     * Update how often reputation data is automatically refreshed.
+     * Update how often Telnyx refreshes the reputation data for this enterprise's registered numbers. The new frequency takes effect on the next scheduled refresh.
      *
-     * **Note:** The enterprise must have `approved` reputation settings. Updating frequency on `pending` or `rejected` settings will return an error.
+     * The enterprise's reputation must be in `approved` status. A request made while the status is `pending` is rejected with `400 Bad Request`.
      *
-     * **Available Frequencies:**
-     * - `business_daily` — Monday–Friday
-     * - `daily` — Every day including weekends
-     * - `weekly` — Once per week
-     * - `biweekly` — Once every two weeks
-     * - `monthly` — Once per month
-     * - `never` — Manual refresh only (no automatic checks)
-     *
-     * @param string $enterpriseID Unique identifier of the enterprise (UUID)
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
      *   checkFrequency: ReputationUpdateFrequencyParams\CheckFrequency|value-of<ReputationUpdateFrequencyParams\CheckFrequency>,
      * }|ReputationUpdateFrequencyParams $params

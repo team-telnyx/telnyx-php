@@ -18,26 +18,17 @@ final class BillingContact implements BaseModel
     /** @use SdkModel<BillingContactShape> */
     use SdkModel;
 
-    /**
-     * Contact's email address.
-     */
     #[Required]
     public string $email;
 
-    /**
-     * Contact's first name.
-     */
     #[Required('first_name')]
     public string $firstName;
 
-    /**
-     * Contact's last name.
-     */
     #[Required('last_name')]
     public string $lastName;
 
     /**
-     * Contact's phone number (10-15 digits).
+     * E.164 format with leading `+`.
      */
     #[Required('phone_number')]
     public string $phoneNumber;
@@ -88,9 +79,6 @@ final class BillingContact implements BaseModel
         return $self;
     }
 
-    /**
-     * Contact's email address.
-     */
     public function withEmail(string $email): self
     {
         $self = clone $this;
@@ -99,9 +87,6 @@ final class BillingContact implements BaseModel
         return $self;
     }
 
-    /**
-     * Contact's first name.
-     */
     public function withFirstName(string $firstName): self
     {
         $self = clone $this;
@@ -110,9 +95,6 @@ final class BillingContact implements BaseModel
         return $self;
     }
 
-    /**
-     * Contact's last name.
-     */
     public function withLastName(string $lastName): self
     {
         $self = clone $this;
@@ -122,7 +104,7 @@ final class BillingContact implements BaseModel
     }
 
     /**
-     * Contact's phone number (10-15 digits).
+     * E.164 format with leading `+`.
      */
     public function withPhoneNumber(string $phoneNumber): self
     {

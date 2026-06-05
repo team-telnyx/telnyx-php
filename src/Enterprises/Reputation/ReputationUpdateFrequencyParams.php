@@ -11,17 +11,9 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency;
 
 /**
- * Update how often reputation data is automatically refreshed.
+ * Update how often Telnyx refreshes the reputation data for this enterprise's registered numbers. The new frequency takes effect on the next scheduled refresh.
  *
- * **Note:** The enterprise must have `approved` reputation settings. Updating frequency on `pending` or `rejected` settings will return an error.
- *
- * **Available Frequencies:**
- * - `business_daily` — Monday–Friday
- * - `daily` — Every day including weekends
- * - `weekly` — Once per week
- * - `biweekly` — Once every two weeks
- * - `monthly` — Once per month
- * - `never` — Manual refresh only (no automatic checks)
+ * The enterprise's reputation must be in `approved` status. A request made while the status is `pending` is rejected with `400 Bad Request`.
  *
  * @see Telnyx\Services\Enterprises\ReputationService::updateFrequency()
  *
@@ -36,7 +28,7 @@ final class ReputationUpdateFrequencyParams implements BaseModel
     use SdkParams;
 
     /**
-     * New frequency for refreshing reputation data.
+     * How often Telnyx refreshes the stored reputation data for this enterprise's registered numbers.
      *
      * @var value-of<CheckFrequency> $checkFrequency
      */
@@ -79,7 +71,7 @@ final class ReputationUpdateFrequencyParams implements BaseModel
     }
 
     /**
-     * New frequency for refreshing reputation data.
+     * How often Telnyx refreshes the stored reputation data for this enterprise's registered numbers.
      *
      * @param CheckFrequency|value-of<CheckFrequency> $checkFrequency
      */
