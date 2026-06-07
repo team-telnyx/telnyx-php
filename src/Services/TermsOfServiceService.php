@@ -79,11 +79,11 @@ final class TermsOfServiceService implements TermsOfServiceContract
     /**
      * @api
      *
-     * Returns whether the authenticated user has agreed to the current Number Reputation Terms of Service. Used during onboarding to decide whether to prompt the user with the ToS dialog before continuing.
+     * Returns whether the authenticated user has agreed to the current Terms of Service for the product given by `product_type`. Used during onboarding to decide whether to prompt the user with the ToS dialog before continuing.
      *
-     * The `agreement_required: true` value means the user has not yet agreed (or has agreed to an outdated version) and must call `POST /terms_of_service/number_reputation/agree` before they can use the Number Reputation endpoints on an enterprise.
+     * `agreement_required: true` means the user has not yet agreed (or has agreed to an outdated version) and must agree before using that product's endpoints.
      *
-     * @param \Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType|value-of<\Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType> $productType Which product's ToS to check. Defaults to `branded_calling`; pass `number_reputation` to check the Number Reputation Terms of Service.
+     * @param \Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType|value-of<\Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType> $productType Which product's ToS to check. Defaults to `branded_calling`.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

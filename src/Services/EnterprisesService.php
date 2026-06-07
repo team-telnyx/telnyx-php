@@ -73,11 +73,13 @@ final class EnterprisesService implements EnterprisesContract
     /**
      * @api
      *
-     * Create the legal entity that owns your Number Reputation registrations.
+     * Create the legal entity (enterprise) that represents your business on the Telnyx platform.
      *
-     * The response carries a server-assigned `id` you will use for every subsequent call. After creating an enterprise and agreeing to the Number Reputation Terms of Service (`POST /terms_of_service/number_reputation/agree`), enable reputation monitoring via `POST /enterprises/{enterprise_id}/reputation`.
+     * The response carries a server-assigned `id` you use for every subsequent call. An enterprise is created once and reused; the API collects all required fields up front.
      *
-     * An enterprise is shared across Telnyx products; if you also use Branded Calling, the same enterprise is reused.
+     * Common failure modes:
+     * - `422` — a required field is missing or malformed (the response `errors[].source.pointer` names the field).
+     * - `409` — an enterprise with the same identifying details already exists under your account.
      *
      * @param BillingAddress|BillingAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
@@ -285,7 +287,12 @@ final class EnterprisesService implements EnterprisesContract
     /**
      * @api
      *
-     * Delete an enterprise. Fails with `400` if the enterprise still has dependent resources (e.g. active reputation settings or registered numbers); remove those first. Returns `404` if the enterprise does not exist or does not belong to your account.
+     * Soft-delete an enterprise.
+     *
+     * Failure modes:
+     * - `400` — the enterprise still has dependent resources in a non-deletable state. Remove those first; the response `detail` identifies what is blocking the delete.
+     * - `409` — the enterprise has a dependent resource with an unresolved claim. Resolve it before deleting.
+     * - `404` — the enterprise does not exist or does not belong to your account.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions

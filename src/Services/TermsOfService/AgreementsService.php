@@ -60,7 +60,7 @@ final class AgreementsService implements AgreementsContract
      *
      * Results are paginated with the standard `page[number]` / `page[size]` parameters; the response uses the standard `{data, meta}` JSON:API envelope.
      *
-     * By default this returns agreements for **all** products the user has agreed to (including Branded Calling). Pass the `product_type` query parameter to scope the result to a single product.
+     * By default this returns agreements for **all** products the user has agreed to. Pass the `product_type` query parameter to scope the result to a single product.
      *
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
