@@ -11,7 +11,6 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Dir\DirCreateParams\Document;
 use Telnyx\Enterprises\Dir\DirListParams\FilterStatus;
 use Telnyx\Enterprises\Dir\DirListParams\Sort;
-use Telnyx\Enterprises\Dir\DirListParams\Status;
 use Telnyx\Enterprises\Dir\DirListResponse;
 use Telnyx\Enterprises\Dir\DirNewResponse;
 use Telnyx\RequestOptions;
@@ -140,9 +139,7 @@ final class DirService implements DirContract
      * @param FilterStatus|value-of<FilterStatus> $filterStatus filter by DIR status
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
-     * @param string $search case-insensitive partial match on `display_name`
      * @param Sort|value-of<Sort> $sort Sort field. Allowed: `created_at`, `updated_at`, `display_name`, `status`, `submitted_at`, `verified_at`, `expiring_at`. Prefix with `-` for descending. Default `-created_at`.
-     * @param Status|value-of<Status> $status filter by DIR status
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<DirListResponse>
@@ -159,9 +156,7 @@ final class DirService implements DirContract
         FilterStatus|string|null $filterStatus = null,
         int $pageNumber = 1,
         int $pageSize = 20,
-        ?string $search = null,
         Sort|string $sort = '-created_at',
-        Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
@@ -174,9 +169,7 @@ final class DirService implements DirContract
                 'filterStatus' => $filterStatus,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'search' => $search,
                 'sort' => $sort,
-                'status' => $status,
             ],
         );
 

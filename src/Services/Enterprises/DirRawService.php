@@ -14,7 +14,6 @@ use Telnyx\Enterprises\Dir\DirCreateParams\Document;
 use Telnyx\Enterprises\Dir\DirListParams;
 use Telnyx\Enterprises\Dir\DirListParams\FilterStatus;
 use Telnyx\Enterprises\Dir\DirListParams\Sort;
-use Telnyx\Enterprises\Dir\DirListParams\Status;
 use Telnyx\Enterprises\Dir\DirListResponse;
 use Telnyx\Enterprises\Dir\DirNewResponse;
 use Telnyx\RequestOptions;
@@ -105,9 +104,7 @@ final class DirRawService implements DirRawContract
      *   filterStatus?: value-of<FilterStatus>,
      *   pageNumber?: int,
      *   pageSize?: int,
-     *   search?: string,
      *   sort?: value-of<Sort>,
-     *   status?: value-of<Status>,
      * }|DirListParams $params
      * @param RequestOpts|null $requestOptions
      *

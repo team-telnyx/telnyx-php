@@ -38,7 +38,6 @@ interface NumbersContract
      * @param string $filterPhoneNumberEq Exact phone-number match (E.164).
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
-     * @param string $phoneNumber Filter by specific phone number (E.164 format).
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<NumberListResponse>
@@ -51,7 +50,6 @@ interface NumbersContract
         ?string $filterPhoneNumberEq = null,
         int $pageNumber = 1,
         int $pageSize = 20,
-        ?string $phoneNumber = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 

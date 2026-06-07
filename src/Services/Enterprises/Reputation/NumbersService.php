@@ -73,7 +73,6 @@ final class NumbersService implements NumbersContract
      * @param string $filterPhoneNumberEq Exact phone-number match (E.164).
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Default 10. Maximum 250; values above are clamped to 250.
-     * @param string $phoneNumber Filter by specific phone number (E.164 format).
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<NumberListResponse>
@@ -86,7 +85,6 @@ final class NumbersService implements NumbersContract
         ?string $filterPhoneNumberEq = null,
         int $pageNumber = 1,
         int $pageSize = 10,
-        ?string $phoneNumber = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
@@ -95,7 +93,6 @@ final class NumbersService implements NumbersContract
                 'filterPhoneNumberEq' => $filterPhoneNumberEq,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
-                'phoneNumber' => $phoneNumber,
             ],
         );
 
