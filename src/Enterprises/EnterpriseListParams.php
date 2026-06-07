@@ -15,7 +15,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\EnterprisesService::list()
  *
  * @phpstan-type EnterpriseListParamsShape = array{
- *   legalName?: string|null, pageNumber?: int|null, pageSize?: int|null
+ *   filterLegalNameContains?: string|null,
+ *   legalName?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  * }
  */
 final class EnterpriseListParams implements BaseModel
@@ -23,6 +26,12 @@ final class EnterpriseListParams implements BaseModel
     /** @use SdkModel<EnterpriseListParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /**
+     * Case-insensitive partial match on legal name.
+     */
+    #[Optional]
+    public ?string $filterLegalNameContains;
 
     /**
      * Filter by legal name (partial match).
@@ -53,15 +62,29 @@ final class EnterpriseListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        ?string $filterLegalNameContains = null,
         ?string $legalName = null,
         ?int $pageNumber = null,
-        ?int $pageSize = null
+        ?int $pageSize = null,
     ): self {
         $self = new self;
 
+        null !== $filterLegalNameContains && $self['filterLegalNameContains'] = $filterLegalNameContains;
         null !== $legalName && $self['legalName'] = $legalName;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    /**
+     * Case-insensitive partial match on legal name.
+     */
+    public function withFilterLegalNameContains(
+        string $filterLegalNameContains
+    ): self {
+        $self = clone $this;
+        $self['filterLegalNameContains'] = $filterLegalNameContains;
 
         return $self;
     }

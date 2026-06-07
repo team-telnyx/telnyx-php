@@ -9,6 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Dir\DirCreateParams\Document;
+use Telnyx\Enterprises\Dir\DirListParams\FilterStatus;
 use Telnyx\Enterprises\Dir\DirListParams\Sort;
 use Telnyx\Enterprises\Dir\DirListParams\Status;
 use Telnyx\Enterprises\Dir\DirListResponse;
@@ -128,12 +129,15 @@ final class DirService implements DirContract
     /**
      * @api
      *
-     * Return the DIRs (Display Identity Records) belonging to a single enterprise. Pagination is JSON:API style (`page[number]`, `page[size]`, max 250). Filterable by `status`. Searchable by case-insensitive partial match on `display_name` (`search=`). Sortable by any of `created_at`, `updated_at`, `display_name`, `status`, `submitted_at`, `verified_at`, `expiring_at` (prefix `-` for descending; default `-created_at`). Supports the renewal-window filters `filter[expiring_at][gte]` / `filter[expiring_at][lte]` and the convenience `filter[expiring_within_days]` (mutually exclusive with the explicit gte/lte form).
+     * Return the DIRs (Display Identity Records) belonging to a single enterprise. Pagination is JSON:API style (`page[number]`, `page[size]`, max 250). Supports `filter[]` query params: `filter[status]`, `filter[display_name][contains]`, `filter[call_reason][contains]`, plus the renewal-window filters `filter[expiring_at][gte]` / `filter[expiring_at][lte]` and the convenience `filter[expiring_within_days]` (mutually exclusive with the explicit gte/lte form). Sortable by `created_at`, `updated_at`, `display_name`, `status`, `submitted_at`, `verified_at`, `expiring_at` (prefix `-` for descending; default `-created_at`).
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param string $filterCallReasonContains case-insensitive partial match on call reason
+     * @param string $filterDisplayNameContains case-insensitive partial match on display name
      * @param \DateTimeInterface $filterExpiringAtGte return only DIRs whose `expiring_at` is at or after this ISO-8601 timestamp
      * @param \DateTimeInterface $filterExpiringAtLte return only DIRs whose `expiring_at` is at or before this ISO-8601 timestamp
      * @param int $filterExpiringWithinDays Convenience: returns DIRs whose `expiring_at` falls within the next N days (1–365). Equivalent to setting `filter[expiring_at][gte]=<now>` + `filter[expiring_at][lte]=<now+N>`. Mutually exclusive with the explicit `[gte]`/`[lte]` filters — combining returns 400.
+     * @param FilterStatus|value-of<FilterStatus> $filterStatus filter by DIR status
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param string $search case-insensitive partial match on `display_name`
@@ -147,9 +151,12 @@ final class DirService implements DirContract
      */
     public function list(
         string $enterpriseID,
+        ?string $filterCallReasonContains = null,
+        ?string $filterDisplayNameContains = null,
         ?\DateTimeInterface $filterExpiringAtGte = null,
         ?\DateTimeInterface $filterExpiringAtLte = null,
         ?int $filterExpiringWithinDays = null,
+        FilterStatus|string|null $filterStatus = null,
         int $pageNumber = 1,
         int $pageSize = 20,
         ?string $search = null,
@@ -159,9 +166,12 @@ final class DirService implements DirContract
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
+                'filterCallReasonContains' => $filterCallReasonContains,
+                'filterDisplayNameContains' => $filterDisplayNameContains,
                 'filterExpiringAtGte' => $filterExpiringAtGte,
                 'filterExpiringAtLte' => $filterExpiringAtLte,
                 'filterExpiringWithinDays' => $filterExpiringWithinDays,
+                'filterStatus' => $filterStatus,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'search' => $search,

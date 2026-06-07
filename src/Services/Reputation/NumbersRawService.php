@@ -68,7 +68,12 @@ final class NumbersRawService implements NumbersRawContract
      * Convenience alias for `GET /v2/enterprises/{enterprise_id}/reputation/numbers` that returns numbers across every enterprise you own. Useful when you don't want to look up the enterprise id first.
      *
      * @param array{
-     *   pageNumber?: int, pageSize?: int, phoneNumber?: string
+     *   filterEnterpriseID?: string,
+     *   filterPhoneNumberContains?: string,
+     *   filterPhoneNumberEq?: string,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   phoneNumber?: string,
      * }|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -92,6 +97,9 @@ final class NumbersRawService implements NumbersRawContract
             query: Util::array_transform_keys(
                 $parsed,
                 [
+                    'filterEnterpriseID' => 'filter[enterprise_id]',
+                    'filterPhoneNumberContains' => 'filter[phone_number][contains]',
+                    'filterPhoneNumberEq' => 'filter[phone_number][eq]',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
                     'phoneNumber' => 'phone_number',

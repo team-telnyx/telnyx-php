@@ -62,6 +62,9 @@ final class NumbersService implements NumbersContract
      *
      * Convenience alias for `GET /v2/enterprises/{enterprise_id}/reputation/numbers` that returns numbers across every enterprise you own. Useful when you don't want to look up the enterprise id first.
      *
+     * @param string $filterEnterpriseID filter by enterprise ID
+     * @param string $filterPhoneNumberContains Partial match on phone number. Must contain at least 5 digits.
+     * @param string $filterPhoneNumberEq Exact phone-number match (E.164).
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param string $phoneNumber Filter by specific phone number (E.164 format).
@@ -72,6 +75,9 @@ final class NumbersService implements NumbersContract
      * @throws APIException
      */
     public function list(
+        ?string $filterEnterpriseID = null,
+        ?string $filterPhoneNumberContains = null,
+        ?string $filterPhoneNumberEq = null,
         int $pageNumber = 1,
         int $pageSize = 20,
         ?string $phoneNumber = null,
@@ -79,6 +85,9 @@ final class NumbersService implements NumbersContract
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
+                'filterEnterpriseID' => $filterEnterpriseID,
+                'filterPhoneNumberContains' => $filterPhoneNumberContains,
+                'filterPhoneNumberEq' => $filterPhoneNumberEq,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'phoneNumber' => $phoneNumber,

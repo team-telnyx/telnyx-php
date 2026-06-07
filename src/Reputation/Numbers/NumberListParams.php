@@ -15,7 +15,12 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Reputation\NumbersService::list()
  *
  * @phpstan-type NumberListParamsShape = array{
- *   pageNumber?: int|null, pageSize?: int|null, phoneNumber?: string|null
+ *   filterEnterpriseID?: string|null,
+ *   filterPhoneNumberContains?: string|null,
+ *   filterPhoneNumberEq?: string|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
+ *   phoneNumber?: string|null,
  * }
  */
 final class NumberListParams implements BaseModel
@@ -23,6 +28,24 @@ final class NumberListParams implements BaseModel
     /** @use SdkModel<NumberListParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /**
+     * Filter by enterprise ID.
+     */
+    #[Optional]
+    public ?string $filterEnterpriseID;
+
+    /**
+     * Partial match on phone number. Must contain at least 5 digits.
+     */
+    #[Optional]
+    public ?string $filterPhoneNumberContains;
+
+    /**
+     * Exact phone-number match (E.164).
+     */
+    #[Optional]
+    public ?string $filterPhoneNumberEq;
 
     /**
      * 1-based page number. Out-of-range values return an empty page with correct meta.
@@ -53,15 +76,55 @@ final class NumberListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        ?string $filterEnterpriseID = null,
+        ?string $filterPhoneNumberContains = null,
+        ?string $filterPhoneNumberEq = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?string $phoneNumber = null
+        ?string $phoneNumber = null,
     ): self {
         $self = new self;
 
+        null !== $filterEnterpriseID && $self['filterEnterpriseID'] = $filterEnterpriseID;
+        null !== $filterPhoneNumberContains && $self['filterPhoneNumberContains'] = $filterPhoneNumberContains;
+        null !== $filterPhoneNumberEq && $self['filterPhoneNumberEq'] = $filterPhoneNumberEq;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
+
+        return $self;
+    }
+
+    /**
+     * Filter by enterprise ID.
+     */
+    public function withFilterEnterpriseID(string $filterEnterpriseID): self
+    {
+        $self = clone $this;
+        $self['filterEnterpriseID'] = $filterEnterpriseID;
+
+        return $self;
+    }
+
+    /**
+     * Partial match on phone number. Must contain at least 5 digits.
+     */
+    public function withFilterPhoneNumberContains(
+        string $filterPhoneNumberContains
+    ): self {
+        $self = clone $this;
+        $self['filterPhoneNumberContains'] = $filterPhoneNumberContains;
+
+        return $self;
+    }
+
+    /**
+     * Exact phone-number match (E.164).
+     */
+    public function withFilterPhoneNumberEq(string $filterPhoneNumberEq): self
+    {
+        $self = clone $this;
+        $self['filterPhoneNumberEq'] = $filterPhoneNumberEq;
 
         return $self;
     }

@@ -14,6 +14,7 @@ use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListInfringementClaimsParams;
 use Telnyx\Dir\DirListInfringementClaimsResponse;
 use Telnyx\Dir\DirListParams;
+use Telnyx\Dir\DirListParams\FilterStatus;
 use Telnyx\Dir\DirListParams\Sort;
 use Telnyx\Dir\DirListParams\Status;
 use Telnyx\Dir\DirListResponse;
@@ -106,12 +107,16 @@ final class DirRawService implements DirRawContract
     /**
      * @api
      *
-     * Convenience endpoint that returns every DIR you own without scoping to a specific enterprise. Equivalent to calling `GET /v2/enterprises/{enterprise_id}/dir` for each enterprise and concatenating the results, but server-side and paginated as a single list.
+     * Returns every DIR (Display Identity Record) you own, across all of your enterprises, as a single list. Pagination is JSON:API style (`page[number]`, `page[size]`, max 250). Supports `filter[]` query params: `filter[enterprise_id]`, `filter[status]`, `filter[display_name][contains]`, `filter[call_reason][contains]`, plus the renewal-window filters `filter[expiring_at][gte]` / `filter[expiring_at][lte]`. Sortable by `created_at`, `updated_at`, `display_name`, `status` (prefix `-` for descending; default `-created_at`).
      *
      * @param array{
      *   enterpriseID?: string,
+     *   filterCallReasonContains?: string,
+     *   filterDisplayNameContains?: string,
+     *   filterEnterpriseID?: string,
      *   filterExpiringAtGte?: \DateTimeInterface,
      *   filterExpiringAtLte?: \DateTimeInterface,
+     *   filterStatus?: value-of<FilterStatus>,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   search?: string,
@@ -141,8 +146,12 @@ final class DirRawService implements DirRawContract
                 $parsed,
                 [
                     'enterpriseID' => 'enterprise_id',
+                    'filterCallReasonContains' => 'filter[call_reason][contains]',
+                    'filterDisplayNameContains' => 'filter[display_name][contains]',
+                    'filterEnterpriseID' => 'filter[enterprise_id]',
                     'filterExpiringAtGte' => 'filter[expiring_at][gte]',
                     'filterExpiringAtLte' => 'filter[expiring_at][lte]',
+                    'filterStatus' => 'filter[status]',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
                 ],
