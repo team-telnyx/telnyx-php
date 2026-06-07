@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.74.0 (2026-06-07)
+
+Full Changelog: [v7.73.0...v7.74.0](https://github.com/team-telnyx/telnyx-php/compare/v7.73.0...v7.74.0)
+
+### Features
+
+* specs: drop legacy plain filter params (keep filter[] canonical) on list endpoints ([60d3961](https://github.com/team-telnyx/telnyx-php/commit/60d39615905e250db156bb6525476bd775466022))
+
 ## 7.73.0 (2026-06-07)
 
 Full Changelog: [v7.72.0...v7.73.0](https://github.com/team-telnyx/telnyx-php/compare/v7.72.0...v7.73.0)
