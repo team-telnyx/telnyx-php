@@ -7,6 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
 use Telnyx\TermsOfService\TermsOfServiceStatusResponse;
 use Tests\UnsupportedMockTests;
 
@@ -26,6 +27,19 @@ final class TermsOfServiceTest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
+    }
+
+    #[Test]
+    public function testRetrieveInfo(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->termsOfService->retrieveInfo();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(TermsOfServiceGetInfoResponse::class, $result);
     }
 
     #[Test]
