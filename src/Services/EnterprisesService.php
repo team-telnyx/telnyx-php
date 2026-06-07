@@ -255,6 +255,7 @@ final class EnterprisesService implements EnterprisesContract
      *
      * Return the enterprises you own, paginated. The default page size is 20; the maximum is 250.
      *
+     * @param string $filterLegalNameContains case-insensitive partial match on legal name
      * @param string $legalName filter by legal name (partial match)
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Default 10. Maximum 250; values above are clamped to 250.
@@ -265,6 +266,7 @@ final class EnterprisesService implements EnterprisesContract
      * @throws APIException
      */
     public function list(
+        ?string $filterLegalNameContains = null,
         ?string $legalName = null,
         int $pageNumber = 1,
         int $pageSize = 10,
@@ -272,6 +274,7 @@ final class EnterprisesService implements EnterprisesContract
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
             [
+                'filterLegalNameContains' => $filterLegalNameContains,
                 'legalName' => $legalName,
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,

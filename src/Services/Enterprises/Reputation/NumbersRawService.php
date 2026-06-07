@@ -78,7 +78,11 @@ final class NumbersRawService implements NumbersRawContract
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
-     *   pageNumber?: int, pageSize?: int, phoneNumber?: string
+     *   filterPhoneNumberContains?: string,
+     *   filterPhoneNumberEq?: string,
+     *   pageNumber?: int,
+     *   pageSize?: int,
+     *   phoneNumber?: string,
      * }|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -103,6 +107,8 @@ final class NumbersRawService implements NumbersRawContract
             query: Util::array_transform_keys(
                 $parsed,
                 [
+                    'filterPhoneNumberContains' => 'filter[phone_number][contains]',
+                    'filterPhoneNumberEq' => 'filter[phone_number][eq]',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
                     'phoneNumber' => 'phone_number',

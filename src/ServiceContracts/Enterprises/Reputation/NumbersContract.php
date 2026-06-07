@@ -38,6 +38,8 @@ interface NumbersContract
      * @api
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param string $filterPhoneNumberContains Partial match on phone number. Must contain at least 5 digits.
+     * @param string $filterPhoneNumberEq Exact phone-number match (E.164).
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Default 10. Maximum 250; values above are clamped to 250.
      * @param string $phoneNumber Filter by specific phone number (E.164 format).
@@ -49,6 +51,8 @@ interface NumbersContract
      */
     public function list(
         string $enterpriseID,
+        ?string $filterPhoneNumberContains = null,
+        ?string $filterPhoneNumberEq = null,
         int $pageNumber = 1,
         int $pageSize = 10,
         ?string $phoneNumber = null,
