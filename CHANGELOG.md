@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.72.0 (2026-06-07)
+
+Full Changelog: [v7.71.0...v7.72.0](https://github.com/team-telnyx/telnyx-php/compare/v7.71.0...v7.72.0)
+
+### Features
+
+* Fix cross-product leakage: de-dup shared enterprise/ToS endpoints + neutralize descriptions ([a284983](https://github.com/team-telnyx/telnyx-php/commit/a284983eb7adb2c620ca1fc5c7b5111d8579d258))
+
 ## 7.71.0 (2026-06-07)
 
 Full Changelog: [v7.70.0...v7.71.0](https://github.com/team-telnyx/telnyx-php/compare/v7.70.0...v7.71.0)
