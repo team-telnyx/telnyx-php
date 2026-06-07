@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.73.0 (2026-06-07)
+
+Full Changelog: [v7.72.0...v7.73.0](https://github.com/team-telnyx/telnyx-php/compare/v7.72.0...v7.73.0)
+
+### Features
+
+* branded-calling: drop 'simplified'/'no enterprise_id' framing from DIR endpoints ([400c7c2](https://github.com/team-telnyx/telnyx-php/commit/400c7c2f19dc7ca93156008a745b05eb2401de1e))
+
 ## 7.72.0 (2026-06-07)
 
 Full Changelog: [v7.71.0...v7.72.0](https://github.com/team-telnyx/telnyx-php/compare/v7.71.0...v7.72.0)
