@@ -8,18 +8,23 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Dir\DirListParams\FilterStatus;
 use Telnyx\Dir\DirListParams\Sort;
 use Telnyx\Dir\DirListParams\Status;
 
 /**
- * Convenience endpoint that returns every DIR you own without scoping to a specific enterprise. Equivalent to calling `GET /v2/enterprises/{enterprise_id}/dir` for each enterprise and concatenating the results, but server-side and paginated as a single list.
+ * Returns every DIR (Display Identity Record) you own, across all of your enterprises, as a single list. Pagination is JSON:API style (`page[number]`, `page[size]`, max 250). Supports `filter[]` query params: `filter[enterprise_id]`, `filter[status]`, `filter[display_name][contains]`, `filter[call_reason][contains]`, plus the renewal-window filters `filter[expiring_at][gte]` / `filter[expiring_at][lte]`. Sortable by `created_at`, `updated_at`, `display_name`, `status` (prefix `-` for descending; default `-created_at`).
  *
  * @see Telnyx\Services\DirService::list()
  *
  * @phpstan-type DirListParamsShape = array{
  *   enterpriseID?: string|null,
+ *   filterCallReasonContains?: string|null,
+ *   filterDisplayNameContains?: string|null,
+ *   filterEnterpriseID?: string|null,
  *   filterExpiringAtGte?: \DateTimeInterface|null,
  *   filterExpiringAtLte?: \DateTimeInterface|null,
+ *   filterStatus?: null|FilterStatus|value-of<FilterStatus>,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  *   search?: string|null,
@@ -40,6 +45,24 @@ final class DirListParams implements BaseModel
     public ?string $enterpriseID;
 
     /**
+     * Case-insensitive partial match on call reason.
+     */
+    #[Optional]
+    public ?string $filterCallReasonContains;
+
+    /**
+     * Case-insensitive partial match on display name.
+     */
+    #[Optional]
+    public ?string $filterDisplayNameContains;
+
+    /**
+     * Filter by enterprise ID.
+     */
+    #[Optional]
+    public ?string $filterEnterpriseID;
+
+    /**
      * Return only DIRs whose `expiring_at` is at or after this ISO-8601 timestamp. Pairs with the `[lte]` variant to build renewal-window dashboards.
      */
     #[Optional]
@@ -50,6 +73,14 @@ final class DirListParams implements BaseModel
      */
     #[Optional]
     public ?\DateTimeInterface $filterExpiringAtLte;
+
+    /**
+     * Filter by DIR status.
+     *
+     * @var value-of<FilterStatus>|null $filterStatus
+     */
+    #[Optional(enum: FilterStatus::class)]
+    public ?string $filterStatus;
 
     /**
      * 1-based page number. Out-of-range values return an empty page with correct meta.
@@ -95,13 +126,18 @@ final class DirListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param FilterStatus|value-of<FilterStatus>|null $filterStatus
      * @param Sort|value-of<Sort>|null $sort
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $enterpriseID = null,
+        ?string $filterCallReasonContains = null,
+        ?string $filterDisplayNameContains = null,
+        ?string $filterEnterpriseID = null,
         ?\DateTimeInterface $filterExpiringAtGte = null,
         ?\DateTimeInterface $filterExpiringAtLte = null,
+        FilterStatus|string|null $filterStatus = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         ?string $search = null,
@@ -111,8 +147,12 @@ final class DirListParams implements BaseModel
         $self = new self;
 
         null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
+        null !== $filterCallReasonContains && $self['filterCallReasonContains'] = $filterCallReasonContains;
+        null !== $filterDisplayNameContains && $self['filterDisplayNameContains'] = $filterDisplayNameContains;
+        null !== $filterEnterpriseID && $self['filterEnterpriseID'] = $filterEnterpriseID;
         null !== $filterExpiringAtGte && $self['filterExpiringAtGte'] = $filterExpiringAtGte;
         null !== $filterExpiringAtLte && $self['filterExpiringAtLte'] = $filterExpiringAtLte;
+        null !== $filterStatus && $self['filterStatus'] = $filterStatus;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $search && $self['search'] = $search;
@@ -129,6 +169,41 @@ final class DirListParams implements BaseModel
     {
         $self = clone $this;
         $self['enterpriseID'] = $enterpriseID;
+
+        return $self;
+    }
+
+    /**
+     * Case-insensitive partial match on call reason.
+     */
+    public function withFilterCallReasonContains(
+        string $filterCallReasonContains
+    ): self {
+        $self = clone $this;
+        $self['filterCallReasonContains'] = $filterCallReasonContains;
+
+        return $self;
+    }
+
+    /**
+     * Case-insensitive partial match on display name.
+     */
+    public function withFilterDisplayNameContains(
+        string $filterDisplayNameContains
+    ): self {
+        $self = clone $this;
+        $self['filterDisplayNameContains'] = $filterDisplayNameContains;
+
+        return $self;
+    }
+
+    /**
+     * Filter by enterprise ID.
+     */
+    public function withFilterEnterpriseID(string $filterEnterpriseID): self
+    {
+        $self = clone $this;
+        $self['filterEnterpriseID'] = $filterEnterpriseID;
 
         return $self;
     }
@@ -153,6 +228,19 @@ final class DirListParams implements BaseModel
     ): self {
         $self = clone $this;
         $self['filterExpiringAtLte'] = $filterExpiringAtLte;
+
+        return $self;
+    }
+
+    /**
+     * Filter by DIR status.
+     *
+     * @param FilterStatus|value-of<FilterStatus> $filterStatus
+     */
+    public function withFilterStatus(FilterStatus|string $filterStatus): self
+    {
+        $self = clone $this;
+        $self['filterStatus'] = $filterStatus;
 
         return $self;
     }

@@ -9,6 +9,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\DirGetResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListInfringementClaimsResponse;
+use Telnyx\Dir\DirListParams\FilterStatus;
 use Telnyx\Dir\DirListParams\Sort;
 use Telnyx\Dir\DirListParams\Status;
 use Telnyx\Dir\DirListResponse;
@@ -66,8 +67,12 @@ interface DirContract
      * @api
      *
      * @param string $enterpriseID restrict results to a single enterprise
+     * @param string $filterCallReasonContains case-insensitive partial match on call reason
+     * @param string $filterDisplayNameContains case-insensitive partial match on display name
+     * @param string $filterEnterpriseID filter by enterprise ID
      * @param \DateTimeInterface $filterExpiringAtGte Return only DIRs whose `expiring_at` is at or after this ISO-8601 timestamp. Pairs with the `[lte]` variant to build renewal-window dashboards.
      * @param \DateTimeInterface $filterExpiringAtLte return only DIRs whose `expiring_at` is at or before this ISO-8601 timestamp
+     * @param FilterStatus|value-of<FilterStatus> $filterStatus filter by DIR status
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param string $search case-insensitive partial match on `display_name` or call reason
@@ -81,8 +86,12 @@ interface DirContract
      */
     public function list(
         ?string $enterpriseID = null,
+        ?string $filterCallReasonContains = null,
+        ?string $filterDisplayNameContains = null,
+        ?string $filterEnterpriseID = null,
         ?\DateTimeInterface $filterExpiringAtGte = null,
         ?\DateTimeInterface $filterExpiringAtLte = null,
+        FilterStatus|string|null $filterStatus = null,
         int $pageNumber = 1,
         int $pageSize = 20,
         ?string $search = null,

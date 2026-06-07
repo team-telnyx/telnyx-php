@@ -12,6 +12,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Dir\DirCreateParams;
 use Telnyx\Enterprises\Dir\DirCreateParams\Document;
 use Telnyx\Enterprises\Dir\DirListParams;
+use Telnyx\Enterprises\Dir\DirListParams\FilterStatus;
 use Telnyx\Enterprises\Dir\DirListParams\Sort;
 use Telnyx\Enterprises\Dir\DirListParams\Status;
 use Telnyx\Enterprises\Dir\DirListResponse;
@@ -92,13 +93,16 @@ final class DirRawService implements DirRawContract
     /**
      * @api
      *
-     * Return the DIRs (Display Identity Records) belonging to a single enterprise. Pagination is JSON:API style (`page[number]`, `page[size]`, max 250). Filterable by `status`. Searchable by case-insensitive partial match on `display_name` (`search=`). Sortable by any of `created_at`, `updated_at`, `display_name`, `status`, `submitted_at`, `verified_at`, `expiring_at` (prefix `-` for descending; default `-created_at`). Supports the renewal-window filters `filter[expiring_at][gte]` / `filter[expiring_at][lte]` and the convenience `filter[expiring_within_days]` (mutually exclusive with the explicit gte/lte form).
+     * Return the DIRs (Display Identity Records) belonging to a single enterprise. Pagination is JSON:API style (`page[number]`, `page[size]`, max 250). Supports `filter[]` query params: `filter[status]`, `filter[display_name][contains]`, `filter[call_reason][contains]`, plus the renewal-window filters `filter[expiring_at][gte]` / `filter[expiring_at][lte]` and the convenience `filter[expiring_within_days]` (mutually exclusive with the explicit gte/lte form). Sortable by `created_at`, `updated_at`, `display_name`, `status`, `submitted_at`, `verified_at`, `expiring_at` (prefix `-` for descending; default `-created_at`).
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
+     *   filterCallReasonContains?: string,
+     *   filterDisplayNameContains?: string,
      *   filterExpiringAtGte?: \DateTimeInterface,
      *   filterExpiringAtLte?: \DateTimeInterface,
      *   filterExpiringWithinDays?: int,
+     *   filterStatus?: value-of<FilterStatus>,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   search?: string,
@@ -128,9 +132,12 @@ final class DirRawService implements DirRawContract
             query: Util::array_transform_keys(
                 $parsed,
                 [
+                    'filterCallReasonContains' => 'filter[call_reason][contains]',
+                    'filterDisplayNameContains' => 'filter[display_name][contains]',
                     'filterExpiringAtGte' => 'filter[expiring_at][gte]',
                     'filterExpiringAtLte' => 'filter[expiring_at][lte]',
                     'filterExpiringWithinDays' => 'filter[expiring_within_days]',
+                    'filterStatus' => 'filter[status]',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
                 ],

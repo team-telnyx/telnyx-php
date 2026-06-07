@@ -186,7 +186,10 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * Return the enterprises you own, paginated. The default page size is 20; the maximum is 250.
      *
      * @param array{
-     *   legalName?: string, pageNumber?: int, pageSize?: int
+     *   filterLegalNameContains?: string,
+     *   legalName?: string,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|EnterpriseListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -210,6 +213,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
             query: Util::array_transform_keys(
                 $parsed,
                 [
+                    'filterLegalNameContains' => 'filter[legal_name][contains]',
                     'legalName' => 'legal_name',
                     'pageNumber' => 'page[number]',
                     'pageSize' => 'page[size]',
