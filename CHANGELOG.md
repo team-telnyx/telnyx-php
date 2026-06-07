@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.71.0 (2026-06-07)
+
+Full Changelog: [v7.70.0...v7.71.0](https://github.com/team-telnyx/telnyx-php/compare/v7.70.0...v7.71.0)
+
+### Features
+
+* NUM-6470: Add branded-calling-v2 OpenAPI specs (external + internal) ([f6b3953](https://github.com/team-telnyx/telnyx-php/commit/f6b3953922d759290f37ec7383512619cfa6309a))
+* specs: add GET /terms_of_service/info (branded-calling + number-reputation) ([5953551](https://github.com/team-telnyx/telnyx-php/commit/595355106fa79a1bf9c047a261d1d0111b2cec18))
+
 ## 7.70.0 (2026-06-05)
 
 Full Changelog: [v7.69.0...v7.70.0](https://github.com/team-telnyx/telnyx-php/compare/v7.69.0...v7.70.0)
