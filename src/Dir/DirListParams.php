@@ -10,7 +10,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Dir\DirListParams\FilterStatus;
 use Telnyx\Dir\DirListParams\Sort;
-use Telnyx\Dir\DirListParams\Status;
 
 /**
  * Returns every DIR (Display Identity Record) you own, across all of your enterprises, as a single list. Pagination is JSON:API style (`page[number]`, `page[size]`, max 250). Supports `filter[]` query params: `filter[enterprise_id]`, `filter[status]`, `filter[display_name][contains]`, `filter[call_reason][contains]`, plus the renewal-window filters `filter[expiring_at][gte]` / `filter[expiring_at][lte]`. Sortable by `created_at`, `updated_at`, `display_name`, `status` (prefix `-` for descending; default `-created_at`).
@@ -18,7 +17,6 @@ use Telnyx\Dir\DirListParams\Status;
  * @see Telnyx\Services\DirService::list()
  *
  * @phpstan-type DirListParamsShape = array{
- *   enterpriseID?: string|null,
  *   filterCallReasonContains?: string|null,
  *   filterDisplayNameContains?: string|null,
  *   filterEnterpriseID?: string|null,
@@ -27,9 +25,7 @@ use Telnyx\Dir\DirListParams\Status;
  *   filterStatus?: null|FilterStatus|value-of<FilterStatus>,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
- *   search?: string|null,
  *   sort?: null|Sort|value-of<Sort>,
- *   status?: null|Status|value-of<Status>,
  * }
  */
 final class DirListParams implements BaseModel
@@ -37,12 +33,6 @@ final class DirListParams implements BaseModel
     /** @use SdkModel<DirListParamsShape> */
     use SdkModel;
     use SdkParams;
-
-    /**
-     * Restrict results to a single enterprise.
-     */
-    #[Optional]
-    public ?string $enterpriseID;
 
     /**
      * Case-insensitive partial match on call reason.
@@ -95,26 +85,12 @@ final class DirListParams implements BaseModel
     public ?int $pageSize;
 
     /**
-     * Case-insensitive partial match on `display_name` or call reason.
-     */
-    #[Optional]
-    public ?string $search;
-
-    /**
      * Sort field. Allowed values: `created_at`, `updated_at`, `display_name`, `status`. Prefix with `-` for descending. Default `-created_at`.
      *
      * @var value-of<Sort>|null $sort
      */
     #[Optional(enum: Sort::class)]
     public ?string $sort;
-
-    /**
-     * Filter by DIR status.
-     *
-     * @var value-of<Status>|null $status
-     */
-    #[Optional(enum: Status::class)]
-    public ?string $status;
 
     public function __construct()
     {
@@ -128,10 +104,8 @@ final class DirListParams implements BaseModel
      *
      * @param FilterStatus|value-of<FilterStatus>|null $filterStatus
      * @param Sort|value-of<Sort>|null $sort
-     * @param Status|value-of<Status>|null $status
      */
     public static function with(
-        ?string $enterpriseID = null,
         ?string $filterCallReasonContains = null,
         ?string $filterDisplayNameContains = null,
         ?string $filterEnterpriseID = null,
@@ -140,13 +114,10 @@ final class DirListParams implements BaseModel
         FilterStatus|string|null $filterStatus = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?string $search = null,
         Sort|string|null $sort = null,
-        Status|string|null $status = null,
     ): self {
         $self = new self;
 
-        null !== $enterpriseID && $self['enterpriseID'] = $enterpriseID;
         null !== $filterCallReasonContains && $self['filterCallReasonContains'] = $filterCallReasonContains;
         null !== $filterDisplayNameContains && $self['filterDisplayNameContains'] = $filterDisplayNameContains;
         null !== $filterEnterpriseID && $self['filterEnterpriseID'] = $filterEnterpriseID;
@@ -155,20 +126,7 @@ final class DirListParams implements BaseModel
         null !== $filterStatus && $self['filterStatus'] = $filterStatus;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
-        null !== $search && $self['search'] = $search;
         null !== $sort && $self['sort'] = $sort;
-        null !== $status && $self['status'] = $status;
-
-        return $self;
-    }
-
-    /**
-     * Restrict results to a single enterprise.
-     */
-    public function withEnterpriseID(string $enterpriseID): self
-    {
-        $self = clone $this;
-        $self['enterpriseID'] = $enterpriseID;
 
         return $self;
     }
@@ -268,17 +226,6 @@ final class DirListParams implements BaseModel
     }
 
     /**
-     * Case-insensitive partial match on `display_name` or call reason.
-     */
-    public function withSearch(string $search): self
-    {
-        $self = clone $this;
-        $self['search'] = $search;
-
-        return $self;
-    }
-
-    /**
      * Sort field. Allowed values: `created_at`, `updated_at`, `display_name`, `status`. Prefix with `-` for descending. Default `-created_at`.
      *
      * @param Sort|value-of<Sort> $sort
@@ -287,19 +234,6 @@ final class DirListParams implements BaseModel
     {
         $self = clone $this;
         $self['sort'] = $sort;
-
-        return $self;
-    }
-
-    /**
-     * Filter by DIR status.
-     *
-     * @param Status|value-of<Status> $status
-     */
-    public function withStatus(Status|string $status): self
-    {
-        $self = clone $this;
-        $self['status'] = $status;
 
         return $self;
     }
