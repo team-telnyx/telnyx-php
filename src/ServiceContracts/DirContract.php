@@ -11,7 +11,6 @@ use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListInfringementClaimsResponse;
 use Telnyx\Dir\DirListParams\FilterStatus;
 use Telnyx\Dir\DirListParams\Sort;
-use Telnyx\Dir\DirListParams\Status;
 use Telnyx\Dir\DirListResponse;
 use Telnyx\Dir\DirSubmitResponse;
 use Telnyx\Dir\DirUpdateInfringementParams\Document;
@@ -66,7 +65,6 @@ interface DirContract
     /**
      * @api
      *
-     * @param string $enterpriseID restrict results to a single enterprise
      * @param string $filterCallReasonContains case-insensitive partial match on call reason
      * @param string $filterDisplayNameContains case-insensitive partial match on display name
      * @param string $filterEnterpriseID filter by enterprise ID
@@ -75,9 +73,7 @@ interface DirContract
      * @param FilterStatus|value-of<FilterStatus> $filterStatus filter by DIR status
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
-     * @param string $search case-insensitive partial match on `display_name` or call reason
      * @param Sort|value-of<Sort> $sort Sort field. Allowed values: `created_at`, `updated_at`, `display_name`, `status`. Prefix with `-` for descending. Default `-created_at`.
-     * @param Status|value-of<Status> $status filter by DIR status
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<DirListResponse>
@@ -85,7 +81,6 @@ interface DirContract
      * @throws APIException
      */
     public function list(
-        ?string $enterpriseID = null,
         ?string $filterCallReasonContains = null,
         ?string $filterDisplayNameContains = null,
         ?string $filterEnterpriseID = null,
@@ -94,9 +89,7 @@ interface DirContract
         FilterStatus|string|null $filterStatus = null,
         int $pageNumber = 1,
         int $pageSize = 20,
-        ?string $search = null,
         Sort|string $sort = '-created_at',
-        Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 

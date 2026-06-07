@@ -19,7 +19,6 @@ use Telnyx\Core\Contracts\BaseModel;
  *   filterPhoneNumberEq?: string|null,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
- *   phoneNumber?: string|null,
  * }
  */
 final class NumberListParams implements BaseModel
@@ -52,12 +51,6 @@ final class NumberListParams implements BaseModel
     #[Optional]
     public ?int $pageSize;
 
-    /**
-     * Filter by specific phone number (E.164 format).
-     */
-    #[Optional]
-    public ?string $phoneNumber;
-
     public function __construct()
     {
         $this->initialize();
@@ -73,7 +66,6 @@ final class NumberListParams implements BaseModel
         ?string $filterPhoneNumberEq = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ?string $phoneNumber = null,
     ): self {
         $self = new self;
 
@@ -81,7 +73,6 @@ final class NumberListParams implements BaseModel
         null !== $filterPhoneNumberEq && $self['filterPhoneNumberEq'] = $filterPhoneNumberEq;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
-        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
 
         return $self;
     }
@@ -127,17 +118,6 @@ final class NumberListParams implements BaseModel
     {
         $self = clone $this;
         $self['pageSize'] = $pageSize;
-
-        return $self;
-    }
-
-    /**
-     * Filter by specific phone number (E.164 format).
-     */
-    public function withPhoneNumber(string $phoneNumber): self
-    {
-        $self = clone $this;
-        $self['phoneNumber'] = $phoneNumber;
 
         return $self;
     }
