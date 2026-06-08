@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.78.0 (2026-06-08)
+
+Full Changelog: [v7.77.0...v7.78.0](https://github.com/team-telnyx/telnyx-php/compare/v7.77.0...v7.78.0)
+
+### Features
+
+* **spec:** inline 2xx response schemas — REST response coverage 41% → 91% (sync of openapi[#199](https://github.com/team-telnyx/telnyx-php/issues/199)) ([150732e](https://github.com/team-telnyx/telnyx-php/commit/150732e68d33e338a908985f2e713708c05c74ce))
+
 ## 7.77.0 (2026-06-08)
 
 Full Changelog: [v7.76.0...v7.77.0](https://github.com/team-telnyx/telnyx-php/compare/v7.76.0...v7.77.0)
