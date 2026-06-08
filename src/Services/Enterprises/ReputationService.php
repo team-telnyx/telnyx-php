@@ -15,6 +15,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\ReputationContract;
 use Telnyx\Services\Enterprises\Reputation\LoaService;
 use Telnyx\Services\Enterprises\Reputation\NumbersService;
+use Telnyx\Services\Enterprises\Reputation\RemediationService;
 
 /**
  * Phone-number reputation monitoring (spam-score lookup and tracking).
@@ -39,6 +40,11 @@ final class ReputationService implements ReputationContract
     public LoaService $loa;
 
     /**
+     * @api
+     */
+    public RemediationService $remediation;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -46,6 +52,7 @@ final class ReputationService implements ReputationContract
         $this->raw = new ReputationRawService($client);
         $this->numbers = new NumbersService($client);
         $this->loa = new LoaService($client);
+        $this->remediation = new RemediationService($client);
     }
 
     /**
