@@ -21,6 +21,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
      * @param array<string,mixed>|RunRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -37,6 +38,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param array<string,mixed>|RunListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -53,6 +55,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param array<string,mixed>|RunTriggerParams $params
      * @param RequestOpts|null $requestOptions
      *

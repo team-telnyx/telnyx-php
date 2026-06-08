@@ -36,6 +36,8 @@ final class ToolsService implements ToolsContract
      *
      * Add Assistant Tool
      *
+     * @param string $toolID unique identifier of the tool
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -58,6 +60,8 @@ final class ToolsService implements ToolsContract
      *
      * Remove Assistant Tool
      *
+     * @param string $toolID unique identifier of the tool
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -80,8 +84,8 @@ final class ToolsService implements ToolsContract
      *
      * Test a webhook tool for an assistant
      *
-     * @param string $toolID Path param
-     * @param string $assistantID Path param
+     * @param string $toolID path param: Unique identifier of the tool
+     * @param string $assistantID path param: Unique identifier of the assistant
      * @param array<string,mixed> $arguments Body param: Key-value arguments to use for the webhook test
      * @param array<string,mixed> $dynamicVariables Body param: Key-value dynamic variables to use for the webhook test
      * @param RequestOpts|null $requestOptions

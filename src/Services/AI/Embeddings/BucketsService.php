@@ -36,6 +36,7 @@ final class BucketsService implements BucketsContract
      *
      * Get all embedded files for a given user bucket, including their processing status.
      *
+     * @param string $bucketName name of the bucket
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -73,6 +74,7 @@ final class BucketsService implements BucketsContract
      *
      * Deletes an entire bucket's embeddings and disables the bucket for AI-use, returning it to normal storage pricing.
      *
+     * @param string $bucketName name of the bucket
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

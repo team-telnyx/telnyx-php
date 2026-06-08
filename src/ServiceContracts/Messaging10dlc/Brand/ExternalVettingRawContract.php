@@ -21,6 +21,7 @@ interface ExternalVettingRawContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<ExternalVettingListResponseItem>>
@@ -35,6 +36,7 @@ interface ExternalVettingRawContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param array<string,mixed>|ExternalVettingImportsParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -51,6 +53,7 @@ interface ExternalVettingRawContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param array<string,mixed>|ExternalVettingOrderParams $params
      * @param RequestOpts|null $requestOptions
      *

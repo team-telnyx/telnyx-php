@@ -40,6 +40,7 @@ interface MdrUsageReportsRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportGetResponse>
@@ -69,6 +70,7 @@ interface MdrUsageReportsRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportDeleteResponse>

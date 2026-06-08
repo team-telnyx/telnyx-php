@@ -30,6 +30,7 @@ final class BrandRawService implements BrandRawContract
      *
      * This endpoint allows you to see whether or not the supplied brand is suitable for your desired campaign use case.
      *
+     * @param string $usecase unique identifier of the usecase
      * @param array{brandID: string}|BrandQualifyByUsecaseParams $params
      * @param RequestOpts|null $requestOptions
      *

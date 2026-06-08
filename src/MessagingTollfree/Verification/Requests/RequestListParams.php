@@ -31,6 +31,9 @@ final class RequestListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     #[Required]
     public int $page;
 
@@ -48,17 +51,26 @@ final class RequestListParams implements BaseModel
     #[Optional]
     public ?string $businessName;
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $dateEnd;
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $dateStart;
 
+    /**
+     * Filter results by phone number.
+     */
     #[Optional]
     public ?string $phoneNumber;
 
     /**
-     * Tollfree verification status.
+     * Filter results by status.
      *
      * @var value-of<TfVerificationStatus>|null $status
      */
@@ -114,6 +126,9 @@ final class RequestListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     public function withPage(int $page): self
     {
         $self = clone $this;
@@ -146,6 +161,9 @@ final class RequestListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     public function withDateEnd(\DateTimeInterface $dateEnd): self
     {
         $self = clone $this;
@@ -154,6 +172,9 @@ final class RequestListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     public function withDateStart(\DateTimeInterface $dateStart): self
     {
         $self = clone $this;
@@ -162,6 +183,9 @@ final class RequestListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by phone number.
+     */
     public function withPhoneNumber(string $phoneNumber): self
     {
         $self = clone $this;
@@ -171,7 +195,7 @@ final class RequestListParams implements BaseModel
     }
 
     /**
-     * Tollfree verification status.
+     * Filter results by status.
      *
      * @param TfVerificationStatus|value-of<TfVerificationStatus> $status
      */

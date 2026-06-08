@@ -68,6 +68,7 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
      *
      * Retrieve an access IP address
      *
+     * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPAddressResponse>
@@ -129,6 +130,7 @@ final class AccessIPAddressRawService implements AccessIPAddressRawContract
      *
      * Delete access IP address
      *
+     * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPAddressResponse>

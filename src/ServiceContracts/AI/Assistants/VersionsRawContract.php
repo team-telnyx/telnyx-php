@@ -22,7 +22,7 @@ interface VersionsRawContract
     /**
      * @api
      *
-     * @param string $versionID Path param
+     * @param string $versionID path param: Unique identifier of the version
      * @param array<string,mixed>|VersionRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -39,7 +39,7 @@ interface VersionsRawContract
     /**
      * @api
      *
-     * @param string $versionID Path param
+     * @param string $versionID path param: Unique identifier of the version
      * @param array<string,mixed>|VersionUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -56,6 +56,7 @@ interface VersionsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantsList>
@@ -70,6 +71,7 @@ interface VersionsRawContract
     /**
      * @api
      *
+     * @param string $versionID unique identifier of the version
      * @param array<string,mixed>|VersionDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -86,6 +88,7 @@ interface VersionsRawContract
     /**
      * @api
      *
+     * @param string $versionID unique identifier of the version
      * @param array<string,mixed>|VersionPromoteParams $params
      * @param RequestOpts|null $requestOptions
      *

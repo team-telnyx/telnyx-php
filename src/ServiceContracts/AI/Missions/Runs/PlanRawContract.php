@@ -26,7 +26,7 @@ interface PlanRawContract
     /**
      * @api
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array<string,mixed>|PlanCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -43,6 +43,7 @@ interface PlanRawContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
      * @param array<string,mixed>|PlanRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -59,7 +60,7 @@ interface PlanRawContract
     /**
      * @api
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array<string,mixed>|PlanAddStepsToPlanParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -76,6 +77,7 @@ interface PlanRawContract
     /**
      * @api
      *
+     * @param string $stepID unique identifier of the step
      * @param array<string,mixed>|PlanGetStepDetailsParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -92,7 +94,7 @@ interface PlanRawContract
     /**
      * @api
      *
-     * @param string $stepID Path param
+     * @param string $stepID path param: Unique identifier of the step
      * @param array<string,mixed>|PlanUpdateStepParams $params
      * @param RequestOpts|null $requestOptions
      *

@@ -100,6 +100,7 @@ final class MessagingService implements MessagingContract
      *
      * Retrieves a specific MDR detailed report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -137,6 +138,7 @@ final class MessagingService implements MessagingContract
      *
      * Deletes a specific MDR detailed report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

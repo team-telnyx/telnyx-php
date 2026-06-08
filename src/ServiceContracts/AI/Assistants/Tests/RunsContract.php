@@ -17,6 +17,8 @@ interface RunsContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -30,6 +32,7 @@ interface RunsContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      * @param RequestOpts|null $requestOptions
      *
@@ -48,6 +51,7 @@ interface RunsContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param string $destinationVersionID Optional assistant version ID to use for this test run. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      * @param RequestOpts|null $requestOptions
      *

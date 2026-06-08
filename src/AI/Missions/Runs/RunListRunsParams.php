@@ -36,6 +36,9 @@ final class RunListRunsParams implements BaseModel
     #[Optional]
     public ?int $pageSize;
 
+    /**
+     * Filter results by status.
+     */
     #[Optional]
     public ?string $status;
 
@@ -85,6 +88,9 @@ final class RunListRunsParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by status.
+     */
     public function withStatus(string $status): self
     {
         $self = clone $this;

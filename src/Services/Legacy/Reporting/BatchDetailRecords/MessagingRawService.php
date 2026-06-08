@@ -79,6 +79,7 @@ final class MessagingRawService implements MessagingRawContract
      *
      * Retrieves a specific MDR detailed report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingGetResponse>
@@ -126,6 +127,7 @@ final class MessagingRawService implements MessagingRawContract
      *
      * Deletes a specific MDR detailed report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MessagingDeleteResponse>

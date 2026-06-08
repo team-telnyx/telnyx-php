@@ -70,6 +70,7 @@ final class NumberLookupRawService implements NumberLookupRawContract
      *
      * Retrieve a specific telco data usage report by its ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NumberLookupGetResponse>
@@ -117,6 +118,7 @@ final class NumberLookupRawService implements NumberLookupRawContract
      *
      * Delete a specific telco data usage report by its ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

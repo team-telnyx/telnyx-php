@@ -23,6 +23,7 @@ interface ScheduledEventsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,mixed>|ScheduledEventCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -39,6 +40,7 @@ interface ScheduledEventsRawContract
     /**
      * @api
      *
+     * @param string $eventID unique identifier of the event
      * @param array<string,mixed>|ScheduledEventRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -55,6 +57,7 @@ interface ScheduledEventsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,mixed>|ScheduledEventListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -71,6 +74,7 @@ interface ScheduledEventsRawContract
     /**
      * @api
      *
+     * @param string $eventID unique identifier of the event
      * @param array<string,mixed>|ScheduledEventDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *

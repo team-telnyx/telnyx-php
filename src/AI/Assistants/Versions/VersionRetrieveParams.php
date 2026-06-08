@@ -28,6 +28,9 @@ final class VersionRetrieveParams implements BaseModel
     #[Required]
     public string $assistantID;
 
+    /**
+     * Whether to include MCP servers in the response.
+     */
     #[Optional]
     public ?bool $includeMcpServers;
 
@@ -76,6 +79,9 @@ final class VersionRetrieveParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Whether to include MCP servers in the response.
+     */
     public function withIncludeMcpServers(bool $includeMcpServers): self
     {
         $self = clone $this;

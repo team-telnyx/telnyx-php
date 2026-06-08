@@ -27,15 +27,27 @@ final class AssistantRetrieveParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Filter results by call control id.
+     */
     #[Optional]
     public ?string $callControlID;
 
+    /**
+     * Whether to fetch dynamic variables from the configured webhook.
+     */
     #[Optional]
     public ?bool $fetchDynamicVariablesFromWebhook;
 
+    /**
+     * Start of the filter range.
+     */
     #[Optional]
     public ?string $from;
 
+    /**
+     * End of the filter range.
+     */
     #[Optional]
     public ?string $to;
 
@@ -65,6 +77,9 @@ final class AssistantRetrieveParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by call control id.
+     */
     public function withCallControlID(string $callControlID): self
     {
         $self = clone $this;
@@ -73,6 +88,9 @@ final class AssistantRetrieveParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Whether to fetch dynamic variables from the configured webhook.
+     */
     public function withFetchDynamicVariablesFromWebhook(
         bool $fetchDynamicVariablesFromWebhook
     ): self {
@@ -82,6 +100,9 @@ final class AssistantRetrieveParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Start of the filter range.
+     */
     public function withFrom(string $from): self
     {
         $self = clone $this;
@@ -90,6 +111,9 @@ final class AssistantRetrieveParams implements BaseModel
         return $self;
     }
 
+    /**
+     * End of the filter range.
+     */
     public function withTo(string $to): self
     {
         $self = clone $this;

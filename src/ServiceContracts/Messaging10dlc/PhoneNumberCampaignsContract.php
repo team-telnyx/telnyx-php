@@ -35,6 +35,7 @@ interface PhoneNumberCampaignsContract
     /**
      * @api
      *
+     * @param string $phoneNumber unique identifier of the phone number
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -47,6 +48,7 @@ interface PhoneNumberCampaignsContract
     /**
      * @api
      *
+     * @param string $campaignPhoneNumber unique identifier of the phone number
      * @param string $campaignID the ID of the campaign you want to link to the specified phone number
      * @param string $phoneNumber the phone number you want to link to a specified campaign
      * @param RequestOpts|null $requestOptions
@@ -64,6 +66,8 @@ interface PhoneNumberCampaignsContract
      * @api
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[telnyx_campaign_id], filter[telnyx_brand_id], filter[tcr_campaign_id], filter[tcr_brand_id]
+     * @param int $page page number to retrieve (1-based)
+     * @param int $recordsPerPage number of records to return per page
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
      * @param RequestOpts|null $requestOptions
      *
@@ -82,6 +86,7 @@ interface PhoneNumberCampaignsContract
     /**
      * @api
      *
+     * @param string $phoneNumber unique identifier of the phone number
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

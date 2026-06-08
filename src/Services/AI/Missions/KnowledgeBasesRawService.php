@@ -29,6 +29,7 @@ final class KnowledgeBasesRawService implements KnowledgeBasesRawContract
      *
      * Create a new knowledge base for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -53,6 +54,7 @@ final class KnowledgeBasesRawService implements KnowledgeBasesRawContract
      *
      * Delete a knowledge base from a mission
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
      * @param array{missionID: string}|KnowledgeBaseDeleteKnowledgeBaseParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -88,6 +90,7 @@ final class KnowledgeBasesRawService implements KnowledgeBasesRawContract
      *
      * Get a specific knowledge base by ID
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
      * @param array{missionID: string}|KnowledgeBaseGetKnowledgeBaseParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -123,6 +126,7 @@ final class KnowledgeBasesRawService implements KnowledgeBasesRawContract
      *
      * List all knowledge bases for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -147,6 +151,7 @@ final class KnowledgeBasesRawService implements KnowledgeBasesRawContract
      *
      * Update a knowledge base definition
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
      * @param array{missionID: string}|KnowledgeBaseUpdateKnowledgeBaseParams $params
      * @param RequestOpts|null $requestOptions
      *

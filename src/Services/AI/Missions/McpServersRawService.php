@@ -29,6 +29,7 @@ final class McpServersRawService implements McpServersRawContract
      *
      * Create a new MCP server for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -53,6 +54,7 @@ final class McpServersRawService implements McpServersRawContract
      *
      * Delete an MCP server from a mission
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param array{missionID: string}|McpServerDeleteMcpServerParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -86,6 +88,7 @@ final class McpServersRawService implements McpServersRawContract
      *
      * Get a specific MCP server by ID
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param array{missionID: string}|McpServerGetMcpServerParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -119,6 +122,7 @@ final class McpServersRawService implements McpServersRawContract
      *
      * List all MCP servers for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -143,6 +147,7 @@ final class McpServersRawService implements McpServersRawContract
      *
      * Update an MCP server definition
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param array{missionID: string}|McpServerUpdateMcpServerParams $params
      * @param RequestOpts|null $requestOptions
      *

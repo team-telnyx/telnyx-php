@@ -29,7 +29,7 @@ final class Messaging10dlcRawService implements Messaging10dlcRawContract
      *
      * Get Enum
      *
-     * @param Endpoint|value-of<Endpoint> $endpoint
+     * @param Endpoint|value-of<Endpoint> $endpoint unique identifier of the endpoint
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,mixed>|array<string,mixed>,>

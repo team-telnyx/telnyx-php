@@ -33,6 +33,7 @@ final class KnowledgeBasesService implements KnowledgeBasesContract
      *
      * Create a new knowledge base for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -52,6 +53,8 @@ final class KnowledgeBasesService implements KnowledgeBasesContract
      *
      * Delete a knowledge base from a mission
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -74,6 +77,8 @@ final class KnowledgeBasesService implements KnowledgeBasesContract
      *
      * Get a specific knowledge base by ID
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -96,6 +101,7 @@ final class KnowledgeBasesService implements KnowledgeBasesContract
      *
      * List all knowledge bases for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -115,6 +121,8 @@ final class KnowledgeBasesService implements KnowledgeBasesContract
      *
      * Update a knowledge base definition
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

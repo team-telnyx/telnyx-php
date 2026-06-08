@@ -20,6 +20,7 @@ interface PartnerCampaignsContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -32,6 +33,7 @@ interface PartnerCampaignsContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
      * @param RequestOpts|null $requestOptions

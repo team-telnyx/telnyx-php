@@ -36,6 +36,9 @@ final class MissionListEventsParams implements BaseModel
     #[Optional]
     public ?int $pageSize;
 
+    /**
+     * Filter results by type.
+     */
     #[Optional]
     public ?string $type;
 
@@ -85,6 +88,9 @@ final class MissionListEventsParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by type.
+     */
     public function withType(string $type): self
     {
         $self = clone $this;

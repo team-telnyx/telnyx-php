@@ -29,17 +29,31 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var value-of<AggregationType> $aggregationType */
+    /**
+     * Type of aggregation to apply to the results.
+     *
+     * @var value-of<AggregationType> $aggregationType
+     */
     #[Required(enum: AggregationType::class)]
     public string $aggregationType;
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $endDate;
 
-    /** @var list<string>|null $profiles */
+    /**
+     * Filter results by profile.
+     *
+     * @var list<string>|null $profiles
+     */
     #[Optional(list: 'string')]
     public ?array $profiles;
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $startDate;
 
@@ -88,6 +102,8 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
     }
 
     /**
+     * Type of aggregation to apply to the results.
+     *
      * @param AggregationType|value-of<AggregationType> $aggregationType
      */
     public function withAggregationType(
@@ -99,6 +115,9 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
         return $self;
     }
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $self = clone $this;
@@ -108,6 +127,8 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
     }
 
     /**
+     * Filter results by profile.
+     *
      * @param list<string> $profiles
      */
     public function withProfiles(array $profiles): self
@@ -118,6 +139,9 @@ final class MdrUsageReportFetchSyncParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $self = clone $this;

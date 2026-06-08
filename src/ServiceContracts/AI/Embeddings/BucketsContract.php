@@ -17,6 +17,7 @@ interface BucketsContract
     /**
      * @api
      *
+     * @param string $bucketName name of the bucket
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -40,6 +41,7 @@ interface BucketsContract
     /**
      * @api
      *
+     * @param string $bucketName name of the bucket
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

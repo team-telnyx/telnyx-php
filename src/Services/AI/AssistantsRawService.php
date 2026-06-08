@@ -141,6 +141,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Retrieve an AI Assistant configuration by `assistant_id`.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array{
      *   callControlID?: string,
      *   fetchDynamicVariablesFromWebhook?: bool,
@@ -184,6 +185,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Update an AI Assistant's attributes.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array{
      *   conversationFlow?: AssistantUpdateParams\ConversationFlow|ConversationFlowShape1,
      *   description?: string,
@@ -270,6 +272,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Delete an AI Assistant by `assistant_id`.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantDeleteResponse>
@@ -294,6 +297,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * This endpoint allows a client to send a chat message to a specific AI Assistant. The assistant processes the message and returns a relevant reply based on the current conversation context. Refer to the Conversation API to [create a conversation](https://developers.telnyx.com/api-reference/conversations/create-a-conversation), [filter existing conversations](https://developers.telnyx.com/api-reference/conversations/list-conversations), [fetch messages for a conversation](https://developers.telnyx.com/api-reference/conversations/get-conversation-messages), and [manually add messages to a conversation](https://developers.telnyx.com/api-reference/conversations/create-message).
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array{
      *   content: string, conversationID: string, name?: string
      * }|AssistantChatParams $params
@@ -328,6 +332,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Clone an existing assistant, excluding telephony and messaging settings.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
@@ -352,6 +357,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * Get an assistant texml by `assistant_id`.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
@@ -416,6 +422,7 @@ final class AssistantsRawService implements AssistantsRawContract
      * 4. Updates conversation metadata if provided
      * 5. Returns the conversation ID
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array{
      *   from: string,
      *   to: string,

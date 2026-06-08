@@ -37,6 +37,7 @@ final class ClustersRawService implements ClustersRawContract
      *
      * Fetch a cluster
      *
+     * @param string $taskID unique identifier of the task
      * @param array{
      *   showSubclusters?: bool, topNNodes?: int
      * }|ClusterRetrieveParams $params
@@ -109,6 +110,7 @@ final class ClustersRawService implements ClustersRawContract
      *
      * Delete a cluster
      *
+     * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -170,6 +172,7 @@ final class ClustersRawService implements ClustersRawContract
      *
      * Fetch a cluster visualization
      *
+     * @param string $taskID unique identifier of the task
      * @param array{clusterID?: int}|ClusterFetchGraphParams $params
      * @param RequestOpts|null $requestOptions
      *

@@ -18,6 +18,7 @@ interface BrandRawContract
     /**
      * @api
      *
+     * @param string $usecase unique identifier of the usecase
      * @param array<string,mixed>|BrandQualifyByUsecaseParams $params
      * @param RequestOpts|null $requestOptions
      *

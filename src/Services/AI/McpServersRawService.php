@@ -72,6 +72,7 @@ final class McpServersRawService implements McpServersRawContract
      *
      * Retrieve details for a specific MCP server.
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<McpServerGetResponse>
@@ -96,6 +97,7 @@ final class McpServersRawService implements McpServersRawContract
      *
      * Update an existing MCP server.
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param array{
      *   id?: string,
      *   allowedTools?: list<string>|null,
@@ -173,6 +175,7 @@ final class McpServersRawService implements McpServersRawContract
      *
      * Delete a specific MCP server.
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

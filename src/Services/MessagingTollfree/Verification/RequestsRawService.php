@@ -110,6 +110,7 @@ final class RequestsRawService implements RequestsRawContract
      *
      * Get a single verification request by its ID.
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationRequestStatus>
@@ -134,6 +135,7 @@ final class RequestsRawService implements RequestsRawContract
      *
      * Update an existing tollfree verification request. This is particularly useful when there are pending customer actions to be taken.
      *
+     * @param string $id unique identifier of the resource
      * @param array{
      *   additionalInformation: string,
      *   businessAddr1: string,
@@ -255,6 +257,7 @@ final class RequestsRawService implements RequestsRawContract
      * * `HTTP 400`: request exists but can't be deleted (i.e. not rejected)
      * * `HTTP 404`: request unknown or already deleted
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -281,6 +284,7 @@ final class RequestsRawService implements RequestsRawContract
      *
      * Returns a paginated list of historical status changes including the reason for each change and when it occurred.
      *
+     * @param string $id unique identifier of the resource
      * @param array{
      *   pageNumber: int, pageSize: int
      * }|RequestRetrieveStatusHistoryParams $params

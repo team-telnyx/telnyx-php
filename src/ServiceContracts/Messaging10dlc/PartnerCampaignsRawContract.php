@@ -23,6 +23,7 @@ interface PartnerCampaignsRawContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxDownstreamCampaign>
@@ -37,6 +38,7 @@ interface PartnerCampaignsRawContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param array<string,mixed>|PartnerCampaignUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *

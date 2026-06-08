@@ -33,6 +33,7 @@ final class ToolsService implements ToolsContract
      *
      * Create a new tool for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -52,6 +53,8 @@ final class ToolsService implements ToolsContract
      *
      * Delete a tool from a mission
      *
+     * @param string $toolID unique identifier of the tool
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -74,6 +77,8 @@ final class ToolsService implements ToolsContract
      *
      * Get a specific tool by ID
      *
+     * @param string $toolID unique identifier of the tool
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -96,6 +101,7 @@ final class ToolsService implements ToolsContract
      *
      * List all tools for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -115,6 +121,8 @@ final class ToolsService implements ToolsContract
      *
      * Update a tool definition
      *
+     * @param string $toolID unique identifier of the tool
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

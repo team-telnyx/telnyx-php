@@ -69,6 +69,7 @@ final class JobsRawService implements JobsRawContract
      *
      * Retrieve a fine tuning job by `job_id`.
      *
+     * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FineTuningJob>
@@ -116,6 +117,7 @@ final class JobsRawService implements JobsRawContract
      *
      * Cancel a fine tuning job.
      *
+     * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FineTuningJob>

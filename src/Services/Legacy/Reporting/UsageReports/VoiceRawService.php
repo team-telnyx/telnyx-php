@@ -76,6 +76,7 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Fetch single cdr usage report by id.
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceGetResponse>
@@ -132,6 +133,7 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Deletes a specific V2 legacy usage CDR report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceDeleteResponse>

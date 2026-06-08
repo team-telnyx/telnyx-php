@@ -35,7 +35,7 @@ final class EventsRawService implements EventsRawContract
      *
      * List events for a run (paginated)
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array{
      *   missionID: string,
      *   agentID?: string,
@@ -86,6 +86,7 @@ final class EventsRawService implements EventsRawContract
      *
      * Get details of a specific event
      *
+     * @param string $eventID unique identifier of the event
      * @param array{
      *   missionID: string, runID: string
      * }|EventGetEventDetailsParams $params
@@ -125,7 +126,7 @@ final class EventsRawService implements EventsRawContract
      *
      * Log an event for a run
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array{
      *   missionID: string,
      *   summary: string,

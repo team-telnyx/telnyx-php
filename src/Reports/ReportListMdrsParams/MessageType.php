@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Reports\ReportListMdrsParams;
 
 /**
- * Type of message.
+ * Filter results by message type.
  */
 enum MessageType: string
 {

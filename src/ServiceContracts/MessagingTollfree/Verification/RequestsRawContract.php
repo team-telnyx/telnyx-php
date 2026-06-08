@@ -39,6 +39,7 @@ interface RequestsRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VerificationRequestStatus>
@@ -53,6 +54,7 @@ interface RequestsRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param array<string,mixed>|RequestUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -84,6 +86,7 @@ interface RequestsRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -98,6 +101,7 @@ interface RequestsRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param array<string,mixed>|RequestRetrieveStatusHistoryParams $params
      * @param RequestOpts|null $requestOptions
      *

@@ -48,9 +48,15 @@ final class MessagingHostedNumberListParams implements BaseModel
     #[Optional]
     public ?string $filterPhoneNumberContains;
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     #[Optional]
     public ?int $pageNumber;
 
+    /**
+     * Number of items to return per page.
+     */
     #[Optional]
     public ?int $pageSize;
 
@@ -129,6 +135,9 @@ final class MessagingHostedNumberListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
@@ -137,6 +146,9 @@ final class MessagingHostedNumberListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Number of items to return per page.
+     */
     public function withPageSize(int $pageSize): self
     {
         $self = clone $this;

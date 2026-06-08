@@ -32,6 +32,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Add Assistant Tool
      *
+     * @param string $toolID unique identifier of the tool
      * @param array{assistantID: string}|ToolAddParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -65,6 +66,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Remove Assistant Tool
      *
+     * @param string $toolID unique identifier of the tool
      * @param array{assistantID: string}|ToolRemoveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -98,7 +100,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Test a webhook tool for an assistant
      *
-     * @param string $toolID Path param
+     * @param string $toolID path param: Unique identifier of the tool
      * @param array{
      *   assistantID: string,
      *   arguments?: array<string,mixed>,

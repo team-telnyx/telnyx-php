@@ -56,6 +56,7 @@ final class TagsService implements TagsContract
      *
      * Add Assistant Tag
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -78,6 +79,8 @@ final class TagsService implements TagsContract
      *
      * Remove Assistant Tag
      *
+     * @param string $tag unique identifier of the tag
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

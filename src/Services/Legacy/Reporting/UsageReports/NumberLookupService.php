@@ -74,6 +74,7 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Retrieve a specific telco data usage report by its ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -111,6 +112,7 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Delete a specific telco data usage report by its ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

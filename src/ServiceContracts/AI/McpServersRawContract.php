@@ -39,6 +39,7 @@ interface McpServersRawContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<McpServerGetResponse>
@@ -53,6 +54,7 @@ interface McpServersRawContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param array<string,mixed>|McpServerUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -84,6 +86,7 @@ interface McpServersRawContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

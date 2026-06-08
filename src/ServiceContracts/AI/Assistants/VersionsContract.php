@@ -49,9 +49,9 @@ interface VersionsContract
     /**
      * @api
      *
-     * @param string $versionID Path param
-     * @param string $assistantID Path param
-     * @param bool $includeMcpServers Query param
+     * @param string $versionID path param: Unique identifier of the version
+     * @param string $assistantID path param: Unique identifier of the assistant
+     * @param bool $includeMcpServers query param: Whether to include MCP servers in the response
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -66,8 +66,8 @@ interface VersionsContract
     /**
      * @api
      *
-     * @param string $versionID Path param
-     * @param string $assistantID Path param
+     * @param string $versionID path param: Unique identifier of the version
+     * @param string $assistantID path param: Unique identifier of the assistant
      * @param ConversationFlow|ConversationFlowShape $conversationFlow Body param: Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -143,6 +143,7 @@ interface VersionsContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -155,6 +156,8 @@ interface VersionsContract
     /**
      * @api
      *
+     * @param string $versionID unique identifier of the version
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -168,6 +171,8 @@ interface VersionsContract
     /**
      * @api
      *
+     * @param string $versionID unique identifier of the version
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

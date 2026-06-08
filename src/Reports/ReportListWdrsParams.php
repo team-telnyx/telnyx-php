@@ -37,7 +37,7 @@ final class ReportListWdrsParams implements BaseModel
     use SdkParams;
 
     /**
-     * WDR uuid.
+     * Filter results by identifier.
      */
     #[Optional]
     public ?string $id;
@@ -49,19 +49,19 @@ final class ReportListWdrsParams implements BaseModel
     public ?string $endDate;
 
     /**
-     * International mobile subscriber identity.
+     * Filter results by imsi.
      */
     #[Optional]
     public ?string $imsi;
 
     /**
-     * Mobile country code.
+     * Filter results by mcc.
      */
     #[Optional]
     public ?string $mcc;
 
     /**
-     * Mobile network code.
+     * Filter results by mnc.
      */
     #[Optional]
     public ?string $mnc;
@@ -73,31 +73,31 @@ final class ReportListWdrsParams implements BaseModel
     public ?int $pageSize;
 
     /**
-     * Phone number.
+     * Filter results by phone number.
      */
     #[Optional]
     public ?string $phoneNumber;
 
     /**
-     * Sim card unique identifier.
+     * Filter results by sim card id.
      */
     #[Optional]
     public ?string $simCardID;
 
     /**
-     * Sim group unique identifier.
+     * Filter results by sim group id.
      */
     #[Optional]
     public ?string $simGroupID;
 
     /**
-     * Sim group name.
+     * Filter results by sim group name.
      */
     #[Optional]
     public ?string $simGroupName;
 
     /**
-     * Field used to order the data. If no field is specified, default value is 'created_at'.
+     * Field and direction to sort the results by.
      *
      * @var list<string>|null $sort
      */
@@ -157,7 +157,7 @@ final class ReportListWdrsParams implements BaseModel
     }
 
     /**
-     * WDR uuid.
+     * Filter results by identifier.
      */
     public function withID(string $id): self
     {
@@ -179,7 +179,7 @@ final class ReportListWdrsParams implements BaseModel
     }
 
     /**
-     * International mobile subscriber identity.
+     * Filter results by imsi.
      */
     public function withImsi(string $imsi): self
     {
@@ -190,7 +190,7 @@ final class ReportListWdrsParams implements BaseModel
     }
 
     /**
-     * Mobile country code.
+     * Filter results by mcc.
      */
     public function withMcc(string $mcc): self
     {
@@ -201,7 +201,7 @@ final class ReportListWdrsParams implements BaseModel
     }
 
     /**
-     * Mobile network code.
+     * Filter results by mnc.
      */
     public function withMnc(string $mnc): self
     {
@@ -228,7 +228,7 @@ final class ReportListWdrsParams implements BaseModel
     }
 
     /**
-     * Phone number.
+     * Filter results by phone number.
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
@@ -239,7 +239,7 @@ final class ReportListWdrsParams implements BaseModel
     }
 
     /**
-     * Sim card unique identifier.
+     * Filter results by sim card id.
      */
     public function withSimCardID(string $simCardID): self
     {
@@ -250,7 +250,7 @@ final class ReportListWdrsParams implements BaseModel
     }
 
     /**
-     * Sim group unique identifier.
+     * Filter results by sim group id.
      */
     public function withSimGroupID(string $simGroupID): self
     {
@@ -261,7 +261,7 @@ final class ReportListWdrsParams implements BaseModel
     }
 
     /**
-     * Sim group name.
+     * Filter results by sim group name.
      */
     public function withSimGroupName(string $simGroupName): self
     {
@@ -272,7 +272,7 @@ final class ReportListWdrsParams implements BaseModel
     }
 
     /**
-     * Field used to order the data. If no field is specified, default value is 'created_at'.
+     * Field and direction to sort the results by.
      *
      * @param list<string> $sort
      */

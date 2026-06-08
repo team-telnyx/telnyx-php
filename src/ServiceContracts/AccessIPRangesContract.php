@@ -49,6 +49,7 @@ interface AccessIPRangesContract
     /**
      * @api
      *
+     * @param string $accessIPRangeID unique identifier of the access ip range
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -24,9 +24,15 @@ final class MessagingProfileListAlphanumericSenderIDsParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     #[Optional]
     public ?int $pageNumber;
 
+    /**
+     * Number of items to return per page.
+     */
     #[Optional]
     public ?int $pageSize;
 
@@ -52,6 +58,9 @@ final class MessagingProfileListAlphanumericSenderIDsParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
@@ -60,6 +69,9 @@ final class MessagingProfileListAlphanumericSenderIDsParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Number of items to return per page.
+     */
     public function withPageSize(int $pageSize): self
     {
         $self = clone $this;

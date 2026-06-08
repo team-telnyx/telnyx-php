@@ -16,6 +16,8 @@ interface UsageReportsContract
     /**
      * @api
      *
+     * @param \DateTimeInterface $endDate end of the date range filter (inclusive, ISO 8601)
+     * @param \DateTimeInterface $startDate start of the date range filter (inclusive, ISO 8601)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

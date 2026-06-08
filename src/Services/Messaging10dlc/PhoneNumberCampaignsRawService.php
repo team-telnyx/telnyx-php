@@ -69,6 +69,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      *
      * Retrieve an individual phone number/campaign assignment by `phoneNumber`.
      *
+     * @param string $phoneNumber unique identifier of the phone number
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>
@@ -93,6 +94,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      *
      * Create New Phone Number Campaign
      *
+     * @param string $campaignPhoneNumber unique identifier of the phone number
      * @param array{
      *   campaignID: string, phoneNumber: string
      * }|PhoneNumberCampaignUpdateParams $params
@@ -164,6 +166,7 @@ final class PhoneNumberCampaignsRawService implements PhoneNumberCampaignsRawCon
      *
      * This endpoint allows you to remove a campaign assignment from the supplied `phoneNumber`.
      *
+     * @param string $phoneNumber unique identifier of the phone number
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>

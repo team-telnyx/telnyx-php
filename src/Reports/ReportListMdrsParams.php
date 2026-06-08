@@ -36,25 +36,25 @@ final class ReportListMdrsParams implements BaseModel
     use SdkParams;
 
     /**
-     * Message uuid.
+     * Filter results by identifier.
      */
     #[Optional]
     public ?string $id;
 
     /**
-     * Destination number.
+     * Filter results by cld.
      */
     #[Optional]
     public ?string $cld;
 
     /**
-     * Origination number.
+     * Filter results by cli.
      */
     #[Optional]
     public ?string $cli;
 
     /**
-     * Direction (inbound or outbound).
+     * Filter results by direction.
      *
      * @var value-of<Direction>|null $direction
      */
@@ -68,7 +68,7 @@ final class ReportListMdrsParams implements BaseModel
     public ?string $endDate;
 
     /**
-     * Type of message.
+     * Filter results by message type.
      *
      * @var value-of<MessageType>|null $messageType
      */
@@ -76,7 +76,7 @@ final class ReportListMdrsParams implements BaseModel
     public ?string $messageType;
 
     /**
-     * Name of the profile.
+     * Filter results by profile.
      */
     #[Optional]
     public ?string $profile;
@@ -88,7 +88,7 @@ final class ReportListMdrsParams implements BaseModel
     public ?string $startDate;
 
     /**
-     * Message status.
+     * Filter results by status.
      *
      * @var value-of<Status>|null $status
      */
@@ -136,7 +136,7 @@ final class ReportListMdrsParams implements BaseModel
     }
 
     /**
-     * Message uuid.
+     * Filter results by identifier.
      */
     public function withID(string $id): self
     {
@@ -147,7 +147,7 @@ final class ReportListMdrsParams implements BaseModel
     }
 
     /**
-     * Destination number.
+     * Filter results by cld.
      */
     public function withCld(string $cld): self
     {
@@ -158,7 +158,7 @@ final class ReportListMdrsParams implements BaseModel
     }
 
     /**
-     * Origination number.
+     * Filter results by cli.
      */
     public function withCli(string $cli): self
     {
@@ -169,7 +169,7 @@ final class ReportListMdrsParams implements BaseModel
     }
 
     /**
-     * Direction (inbound or outbound).
+     * Filter results by direction.
      *
      * @param Direction|value-of<Direction> $direction
      */
@@ -193,7 +193,7 @@ final class ReportListMdrsParams implements BaseModel
     }
 
     /**
-     * Type of message.
+     * Filter results by message type.
      *
      * @param MessageType|value-of<MessageType> $messageType
      */
@@ -206,7 +206,7 @@ final class ReportListMdrsParams implements BaseModel
     }
 
     /**
-     * Name of the profile.
+     * Filter results by profile.
      */
     public function withProfile(string $profile): self
     {
@@ -228,7 +228,7 @@ final class ReportListMdrsParams implements BaseModel
     }
 
     /**
-     * Message status.
+     * Filter results by status.
      *
      * @param Status|value-of<Status> $status
      */

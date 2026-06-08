@@ -38,6 +38,7 @@ interface JobsContract
     /**
      * @api
      *
+     * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -61,6 +62,7 @@ interface JobsContract
     /**
      * @api
      *
+     * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

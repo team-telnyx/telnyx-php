@@ -74,6 +74,7 @@ final class JobsService implements JobsContract
      *
      * Retrieve a fine tuning job by `job_id`.
      *
+     * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -111,6 +112,7 @@ final class JobsService implements JobsContract
      *
      * Cancel a fine tuning job.
      *
+     * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

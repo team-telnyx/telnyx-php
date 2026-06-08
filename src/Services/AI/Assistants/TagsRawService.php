@@ -56,6 +56,7 @@ final class TagsRawService implements TagsRawContract
      *
      * Add Assistant Tag
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array{tag: string}|TagAddParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -88,6 +89,7 @@ final class TagsRawService implements TagsRawContract
      *
      * Remove Assistant Tag
      *
+     * @param string $tag unique identifier of the tag
      * @param array{assistantID: string}|TagRemoveParams $params
      * @param RequestOpts|null $requestOptions
      *

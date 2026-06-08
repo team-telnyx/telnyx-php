@@ -78,6 +78,7 @@ final class TestsRawService implements TestsRawContract
      *
      * Retrieves detailed information about a specific assistant test
      *
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantTest>
@@ -102,6 +103,7 @@ final class TestsRawService implements TestsRawContract
      *
      * Updates an existing assistant test configuration with new settings
      *
+     * @param string $testID unique identifier of the test
      * @param array{
      *   description?: string,
      *   destination?: string,
@@ -189,6 +191,7 @@ final class TestsRawService implements TestsRawContract
      *
      * Permanently removes an assistant test and all associated data
      *
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

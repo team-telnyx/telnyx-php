@@ -89,6 +89,7 @@ interface BrandContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -101,6 +102,7 @@ interface BrandContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param string $country ISO2 2 characters country code. Example: US - United States
      * @param string $displayName display or marketing name of the brand
      * @param string $email valid email address of brand support contact
@@ -165,8 +167,13 @@ interface BrandContract
      * @api
      *
      * @param string $brandID Filter results by the Telnyx Brand id
+     * @param string $country filter results by country
+     * @param string $displayName filter results by display name
+     * @param string $entityType filter results by entity type
+     * @param int $page page number to retrieve (1-based)
      * @param int $recordsPerPage number of records per page. maximum of 500
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param string $state filter results by state
      * @param string $tcrBrandID Filter results by the TCR Brand id
      * @param RequestOpts|null $requestOptions
      *
@@ -190,6 +197,7 @@ interface BrandContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -202,6 +210,7 @@ interface BrandContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -229,6 +238,7 @@ interface BrandContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -254,6 +264,7 @@ interface BrandContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

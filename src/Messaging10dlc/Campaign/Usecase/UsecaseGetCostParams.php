@@ -22,6 +22,9 @@ final class UsecaseGetCostParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Filter results by usecase.
+     */
     #[Required]
     public string $usecase;
 
@@ -58,6 +61,9 @@ final class UsecaseGetCostParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by usecase.
+     */
     public function withUsecase(string $usecase): self
     {
         $self = clone $this;

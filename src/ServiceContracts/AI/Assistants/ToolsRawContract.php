@@ -20,6 +20,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param array<string,mixed>|ToolAddParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -36,6 +37,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param array<string,mixed>|ToolRemoveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -52,7 +54,7 @@ interface ToolsRawContract
     /**
      * @api
      *
-     * @param string $toolID Path param
+     * @param string $toolID path param: Unique identifier of the tool
      * @param array<string,mixed>|ToolTestParams $params
      * @param RequestOpts|null $requestOptions
      *

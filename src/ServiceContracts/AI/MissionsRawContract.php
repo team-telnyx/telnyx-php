@@ -41,6 +41,7 @@ interface MissionsRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MissionGetResponse>
@@ -70,6 +71,7 @@ interface MissionsRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -84,6 +86,7 @@ interface MissionsRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -113,6 +116,7 @@ interface MissionsRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param array<string,mixed>|MissionUpdateMissionParams $params
      * @param RequestOpts|null $requestOptions
      *

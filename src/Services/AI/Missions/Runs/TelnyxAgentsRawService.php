@@ -31,6 +31,7 @@ final class TelnyxAgentsRawService implements TelnyxAgentsRawContract
      *
      * List all Telnyx agents linked to a run
      *
+     * @param string $runID unique identifier of the run
      * @param array{missionID: string}|TelnyxAgentListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -64,7 +65,7 @@ final class TelnyxAgentsRawService implements TelnyxAgentsRawContract
      *
      * Link a Telnyx AI agent (voice/messaging) to a run
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array{
      *   missionID: string, telnyxAgentID: string
      * }|TelnyxAgentLinkParams $params
@@ -101,6 +102,7 @@ final class TelnyxAgentsRawService implements TelnyxAgentsRawContract
      *
      * Unlink a Telnyx agent from a run
      *
+     * @param string $telnyxAgentID unique identifier of the telnyx agent
      * @param array{missionID: string, runID: string}|TelnyxAgentUnlinkParams $params
      * @param RequestOpts|null $requestOptions
      *

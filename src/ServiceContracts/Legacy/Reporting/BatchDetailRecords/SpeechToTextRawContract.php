@@ -36,6 +36,7 @@ interface SpeechToTextRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SpeechToTextGetResponse>
@@ -63,6 +64,7 @@ interface SpeechToTextRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SpeechToTextDeleteResponse>

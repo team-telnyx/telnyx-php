@@ -253,6 +253,7 @@ final class ConversationsService implements ConversationsContract
      *
      * Retrieve insights for a specific conversation
      *
+     * @param string $conversationID unique identifier of the conversation
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

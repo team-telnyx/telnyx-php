@@ -77,6 +77,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Get Tool
      *
+     * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ToolGetResponse>
@@ -101,6 +102,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Update Tool
      *
+     * @param string $toolID unique identifier of the tool
      * @param array{
      *   displayName?: string,
      *   function?: array<string,mixed>,
@@ -184,6 +186,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Delete Tool
      *
+     * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

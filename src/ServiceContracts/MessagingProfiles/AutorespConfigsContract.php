@@ -22,6 +22,7 @@ interface AutorespConfigsContract
     /**
      * @api
      *
+     * @param string $profileID unique identifier of the profile
      * @param list<string> $keywords
      * @param Op|value-of<Op> $op
      * @param RequestOpts|null $requestOptions
@@ -40,6 +41,8 @@ interface AutorespConfigsContract
     /**
      * @api
      *
+     * @param string $autorespCfgID unique identifier of the autoresp cfg
+     * @param string $profileID unique identifier of the profile
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -53,8 +56,8 @@ interface AutorespConfigsContract
     /**
      * @api
      *
-     * @param string $autorespCfgID Path param
-     * @param string $profileID Path param
+     * @param string $autorespCfgID path param: Unique identifier of the autoresp cfg
+     * @param string $profileID path param: Unique identifier of the profile
      * @param string $countryCode Body param
      * @param list<string> $keywords Body param
      * @param \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<\Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op Body param
@@ -76,6 +79,8 @@ interface AutorespConfigsContract
     /**
      * @api
      *
+     * @param string $profileID unique identifier of the profile
+     * @param string $countryCode filter results by country code
      * @param CreatedAt|CreatedAtShape $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
      * @param UpdatedAt|UpdatedAtShape $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
      * @param RequestOpts|null $requestOptions
@@ -93,6 +98,8 @@ interface AutorespConfigsContract
     /**
      * @api
      *
+     * @param string $autorespCfgID unique identifier of the autoresp cfg
+     * @param string $profileID unique identifier of the profile
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -29,6 +29,7 @@ final class OsrRawService implements OsrRawContract
      *
      * Get OSR campaign attributes
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>

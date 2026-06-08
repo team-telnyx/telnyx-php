@@ -57,6 +57,7 @@ final class CampaignService implements CampaignContract
      *
      * Retrieve campaign details by `campaignId`.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -76,6 +77,7 @@ final class CampaignService implements CampaignContract
      *
      * Update a campaign's properties by `campaignId`. **Please note:** only sample messages are editable.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param bool $autoRenewal help message of the campaign
      * @param string $helpMessage help message of the campaign
      * @param string $messageFlow message flow description
@@ -133,6 +135,7 @@ final class CampaignService implements CampaignContract
      *
      * Retrieve a list of campaigns associated with a supplied `brandId`.
      *
+     * @param string $brandID filter results by brand id
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
@@ -191,6 +194,7 @@ final class CampaignService implements CampaignContract
      *
      * Terminate a campaign. Note that once deactivated, a campaign cannot be restored.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -230,6 +234,7 @@ final class CampaignService implements CampaignContract
      *
      * Retrieve campaign's operation status at MNO level.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>

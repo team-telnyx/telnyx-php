@@ -39,6 +39,7 @@ interface EmbeddingsContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -33,6 +33,9 @@ final class EventListParams implements BaseModel
     #[Required]
     public string $missionID;
 
+    /**
+     * Filter results by agent id.
+     */
     #[Optional]
     public ?string $agentID;
 
@@ -48,9 +51,15 @@ final class EventListParams implements BaseModel
     #[Optional]
     public ?int $pageSize;
 
+    /**
+     * Filter results by step id.
+     */
     #[Optional]
     public ?string $stepID;
 
+    /**
+     * Filter results by type.
+     */
     #[Optional]
     public ?string $type;
 
@@ -107,6 +116,9 @@ final class EventListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by agent id.
+     */
     public function withAgentID(string $agentID): self
     {
         $self = clone $this;
@@ -137,6 +149,9 @@ final class EventListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by step id.
+     */
     public function withStepID(string $stepID): self
     {
         $self = clone $this;
@@ -145,6 +160,9 @@ final class EventListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by type.
+     */
     public function withType(string $type): self
     {
         $self = clone $this;

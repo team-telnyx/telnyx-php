@@ -81,6 +81,7 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Retrieves a specific CDR report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceGetResponse>
@@ -128,6 +129,7 @@ final class VoiceRawService implements VoiceRawContract
      *
      * Deletes a specific CDR report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceDeleteResponse>

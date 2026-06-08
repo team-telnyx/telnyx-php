@@ -35,6 +35,7 @@ final class PartnerCampaignsRawService implements PartnerCampaignsRawContract
      *
      * Retrieve campaign details by `campaignId`.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxDownstreamCampaign>
@@ -59,6 +60,7 @@ final class PartnerCampaignsRawService implements PartnerCampaignsRawContract
      *
      * Update campaign details by `campaignId`. **Please note:** Only webhook urls are editable.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param array{
      *   webhookFailoverURL?: string, webhookURL?: string
      * }|PartnerCampaignUpdateParams $params

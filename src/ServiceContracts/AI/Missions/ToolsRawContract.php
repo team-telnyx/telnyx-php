@@ -19,6 +19,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -33,6 +34,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param array<string,mixed>|ToolDeleteToolParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -49,6 +51,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param array<string,mixed>|ToolGetToolParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -65,6 +68,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -79,6 +83,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param array<string,mixed>|ToolUpdateToolParams $params
      * @param RequestOpts|null $requestOptions
      *

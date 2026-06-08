@@ -28,10 +28,17 @@ final class ScheduledEventListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var value-of<ConversationChannelType>|null $conversationChannel */
+    /**
+     * Filter results by conversation channel.
+     *
+     * @var value-of<ConversationChannelType>|null $conversationChannel
+     */
     #[Optional(enum: ConversationChannelType::class)]
     public ?string $conversationChannel;
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $fromDate;
 
@@ -41,6 +48,9 @@ final class ScheduledEventListParams implements BaseModel
     #[Optional]
     public ?int $pageSize;
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $toDate;
 
@@ -75,6 +85,8 @@ final class ScheduledEventListParams implements BaseModel
     }
 
     /**
+     * Filter results by conversation channel.
+     *
      * @param ConversationChannelType|value-of<ConversationChannelType> $conversationChannel
      */
     public function withConversationChannel(
@@ -86,6 +98,9 @@ final class ScheduledEventListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     public function withFromDate(\DateTimeInterface $fromDate): self
     {
         $self = clone $this;
@@ -110,6 +125,9 @@ final class ScheduledEventListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     public function withToDate(\DateTimeInterface $toDate): self
     {
         $self = clone $this;

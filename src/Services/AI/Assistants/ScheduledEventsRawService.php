@@ -40,6 +40,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      *
      * Create a scheduled event for an assistant
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array{
      *   scheduledAtFixedDatetime: \DateTimeInterface,
      *   telnyxAgentTarget: string,
@@ -82,6 +83,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      *
      * Retrieve a scheduled event by event ID
      *
+     * @param string $eventID unique identifier of the event
      * @param array{assistantID: string}|ScheduledEventRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -117,6 +119,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      *
      * Get scheduled events for an assistant with pagination and filtering
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array{
      *   conversationChannel?: ConversationChannelType|value-of<ConversationChannelType>,
      *   fromDate?: \DateTimeInterface,
@@ -165,6 +168,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      *
      * If the event is pending, this will cancel the event. Otherwise, this will simply remove the record of the event.
      *
+     * @param string $eventID unique identifier of the event
      * @param array{assistantID: string}|ScheduledEventDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *

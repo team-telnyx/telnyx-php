@@ -41,6 +41,7 @@ final class CampaignRawService implements CampaignRawContract
      *
      * Retrieve campaign details by `campaignId`.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxCampaignCsp>
@@ -65,6 +66,7 @@ final class CampaignRawService implements CampaignRawContract
      *
      * Update a campaign's properties by `campaignId`. **Please note:** only sample messages are editable.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param array{
      *   autoRenewal?: bool,
      *   helpMessage?: string,
@@ -168,6 +170,7 @@ final class CampaignRawService implements CampaignRawContract
      *
      * Terminate a campaign. Note that once deactivated, a campaign cannot be restored.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CampaignDeactivateResponse>
@@ -217,6 +220,7 @@ final class CampaignRawService implements CampaignRawContract
      *
      * Retrieve campaign's operation status at MNO level.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>

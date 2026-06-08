@@ -37,6 +37,7 @@ interface McpServersContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -49,6 +50,7 @@ interface McpServersContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param list<string>|null $allowedTools
      * @param RequestOpts|null $requestOptions
      *
@@ -69,6 +71,10 @@ interface McpServersContract
     /**
      * @api
      *
+     * @param int $pageNumber page number to retrieve (1-based)
+     * @param int $pageSize number of items to return per page
+     * @param string $type filter results by type
+     * @param string $url filter results by url
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
@@ -86,6 +92,7 @@ interface McpServersContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
