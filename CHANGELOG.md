@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.75.0 (2026-06-08)
+
+Full Changelog: [v7.74.0...v7.75.0](https://github.com/team-telnyx/telnyx-php/compare/v7.74.0...v7.75.0)
+
+### Features
+
+* specs: remove em dashes from branded-calling + number-reputation descriptions ([a40f885](https://github.com/team-telnyx/telnyx-php/commit/a40f885ceaf57f8664b565b3c95bd4050a08cabc))
+
 ## 7.74.0 (2026-06-07)
 
 Full Changelog: [v7.73.0...v7.74.0](https://github.com/team-telnyx/telnyx-php/compare/v7.73.0...v7.74.0)
