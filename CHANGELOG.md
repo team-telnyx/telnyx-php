@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.76.0 (2026-06-08)
+
+Full Changelog: [v7.75.0...v7.76.0](https://github.com/team-telnyx/telnyx-php/compare/v7.75.0...v7.76.0)
+
+### Features
+
+* **branded-calling:** document LOA (DIR) + reputation remediation endpoints ([9690679](https://github.com/team-telnyx/telnyx-php/commit/969067934d1bb56eec13e028f530b7873299a7fa))
+
 ## 7.75.0 (2026-06-08)
 
 Full Changelog: [v7.74.0...v7.75.0](https://github.com/team-telnyx/telnyx-php/compare/v7.74.0...v7.75.0)
