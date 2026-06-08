@@ -60,7 +60,7 @@ interface DirContract
      * @param string $filterDisplayNameContains case-insensitive partial match on display name
      * @param \DateTimeInterface $filterExpiringAtGte return only DIRs whose `expiring_at` is at or after this ISO-8601 timestamp
      * @param \DateTimeInterface $filterExpiringAtLte return only DIRs whose `expiring_at` is at or before this ISO-8601 timestamp
-     * @param int $filterExpiringWithinDays Convenience: returns DIRs whose `expiring_at` falls within the next N days (1–365). Equivalent to setting `filter[expiring_at][gte]=<now>` + `filter[expiring_at][lte]=<now+N>`. Mutually exclusive with the explicit `[gte]`/`[lte]` filters — combining returns 400.
+     * @param int $filterExpiringWithinDays Convenience: returns DIRs whose `expiring_at` falls within the next N days (1–365). Equivalent to setting `filter[expiring_at][gte]=<now>` + `filter[expiring_at][lte]=<now+N>`. Mutually exclusive with the explicit `[gte]`/`[lte]` filters - combining returns 400.
      * @param FilterStatus|value-of<FilterStatus> $filterStatus filter by DIR status
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.

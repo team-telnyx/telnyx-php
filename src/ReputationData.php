@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ReputationData\SpamRisk;
 
 /**
- * Reputation snapshot for a phone number. Each metric is a 0–100 score; `spam_risk` is a coarse bucket. Field set may grow over time — read by key.
+ * Reputation snapshot for a phone number. Each metric is a 0–100 score; `spam_risk` is a coarse bucket. Field set may grow over time - read by key.
  *
  * @phpstan-type ReputationDataShape = array{
  *   connectionScore?: int|null,

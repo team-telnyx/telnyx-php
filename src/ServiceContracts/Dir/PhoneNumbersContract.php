@@ -44,7 +44,7 @@ interface PhoneNumbersContract
      * @api
      *
      * @param string $dirID The DIR id. Lowercase UUID.
-     * @param list<Document|DocumentShape> $documents Supporting documents covering this batch. At least one entry with `document_type: letter_of_authorization` is required — the LOA authorises Telnyx to register these numbers under the DIR. Each `document_id` must come from the Telnyx Documents API. Additional document types (e.g. business registration) may be included alongside the LOA.
+     * @param list<Document|DocumentShape> $documents Supporting documents covering this batch. At least one entry with `document_type: letter_of_authorization` is required - the LOA authorises Telnyx to register these numbers under the DIR. Each `document_id` must come from the Telnyx Documents API. Additional document types (e.g. business registration) may be included alongside the LOA.
      * @param list<string> $phoneNumbers 1–15 phone numbers in E.164 format. 10-digit US numbers are auto-prefixed with `1`.
      * @param RequestOpts|null $requestOptions
      *

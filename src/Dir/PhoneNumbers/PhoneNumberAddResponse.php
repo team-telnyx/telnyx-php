@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberAddResponse\Data;
 
 /**
- * Bulk-add success response (HTTP 201). All numbers in the request were accepted into a single new batch. Every entry in `data` shares the same `batch_id` — read it from any element to obtain the batch id for subsequent `GET .../phone_number_batches/{batch_id}` calls. If any number in the request fails (schema-invalid, not in inventory, already attached to another DIR, etc.) the entire request is rejected with HTTP 400 and the canonical Telnyx error envelope; the success body described here is therefore an all-or-nothing payload.
+ * Bulk-add success response (HTTP 201). All numbers in the request were accepted into a single new batch. Every entry in `data` shares the same `batch_id` - read it from any element to obtain the batch id for subsequent `GET .../phone_number_batches/{batch_id}` calls. If any number in the request fails (schema-invalid, not in inventory, already attached to another DIR, etc.) the entire request is rejected with HTTP 400 and the canonical Telnyx error envelope; the success body described here is therefore an all-or-nothing payload.
  *
  * @phpstan-import-type DataShape from \Telnyx\Dir\PhoneNumbers\PhoneNumberAddResponse\Data
  *

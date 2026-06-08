@@ -22,9 +22,9 @@ use Telnyx\Enterprises\Dir\DirCreateParams\Document;
  * - `certify_brand_is_accurate`, `certify_no_shaft_content`, `certify_ip_ownership` MUST all be `true`.
  *
  * **Failure modes**
- * - `422` — validation error; `errors[].source.pointer` names the offending field.
- * - `403` — Branded Calling not activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
- * - `404` — enterprise does not exist or does not belong to your account.
+ * - `422` - validation error; `errors[].source.pointer` names the offending field.
+ * - `403` - Branded Calling not activated on this enterprise (see `POST /enterprises/{id}/branded_calling`).
+ * - `404` - enterprise does not exist or does not belong to your account.
  *
  * @see Telnyx\Services\Enterprises\DirService::create()
  *

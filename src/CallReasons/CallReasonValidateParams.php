@@ -23,7 +23,7 @@ final class CallReasonValidateParams implements BaseModel
     use SdkParams;
 
     /**
-     * **Bare JSON array** of candidate call-reason strings (NOT an object — there is no top-level `call_reasons` key on this endpoint). 1–10 strings, each ≤64 characters.
+     * **Bare JSON array** of candidate call-reason strings (NOT an object - there is no top-level `call_reasons` key on this endpoint). 1–10 strings, each ≤64 characters.
      *
      * @var list<string> $body
      */
@@ -66,7 +66,7 @@ final class CallReasonValidateParams implements BaseModel
     }
 
     /**
-     * **Bare JSON array** of candidate call-reason strings (NOT an object — there is no top-level `call_reasons` key on this endpoint). 1–10 strings, each ≤64 characters.
+     * **Bare JSON array** of candidate call-reason strings (NOT an object - there is no top-level `call_reasons` key on this endpoint). 1–10 strings, each ≤64 characters.
      *
      * @param list<string> $body
      */

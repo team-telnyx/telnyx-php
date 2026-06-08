@@ -6,6 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\DirCreateLoaParams\Agent;
+use Telnyx\Dir\DirCreateLoaParams\Signature;
 use Telnyx\Dir\DirGetResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListInfringementClaimsResponse;
@@ -19,6 +21,8 @@ use Telnyx\Dir\DirUpdateResponse;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type AgentShape from \Telnyx\Dir\DirCreateLoaParams\Agent
+ * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirCreateLoaParams\Signature
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateInfringementParams\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -105,6 +109,25 @@ interface DirContract
         string $dirID,
         RequestOptions|array|null $requestOptions = null
     ): mixed;
+
+    /**
+     * @api
+     *
+     * @param string $dirID the DIR id
+     * @param list<string> $phoneNumbers Telephone numbers to authorize on the DIR, in `+E164` format (`+` followed by 10-15 digits). Max 15 per request.
+     * @param Agent|AgentShape $agent Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
+     * @param Signature|SignatureShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function createLoa(
+        string $dirID,
+        array $phoneNumbers,
+        Agent|array|null $agent = null,
+        Signature|array|null $signature = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): string;
 
     /**
      * @api

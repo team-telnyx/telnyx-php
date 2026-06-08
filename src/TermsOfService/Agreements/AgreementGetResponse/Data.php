@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TermsOfService\Agreements\AgreementGetResponse\Data\ProductType;
 
 /**
- * A recorded user agreement to a product's Terms of Service. The `user_id` is intentionally NOT echoed back on this public surface — the caller already knows their own identity.
+ * A recorded user agreement to a product's Terms of Service. The `user_id` is intentionally NOT echoed back on this public surface - the caller already knows their own identity.
  *
  * @phpstan-type DataShape = array{
  *   id?: string|null,

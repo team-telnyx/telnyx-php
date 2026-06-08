@@ -8,6 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\DirCreateLoaParams\Agent;
+use Telnyx\Dir\DirCreateLoaParams\Signature;
 use Telnyx\Dir\DirGetResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListInfringementClaimsResponse;
@@ -25,6 +27,8 @@ use Telnyx\Services\Dir\PhoneNumberBatchesService;
 use Telnyx\Services\Dir\PhoneNumbersService;
 
 /**
+ * @phpstan-import-type AgentShape from \Telnyx\Dir\DirCreateLoaParams\Agent
+ * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirCreateLoaParams\Signature
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateInfringementParams\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -84,7 +88,7 @@ final class DirService implements DirContract
     /**
      * @api
      *
-     * Edit a DIR. Only DIRs in `draft`, `rejected`, `unsuccessful`, or `suspended` are editable. PATCH is a pure edit — `status` is never changed by this endpoint. To re-vet after editing, call `POST /v2/dir/{dir_id}/submit` explicitly.
+     * Edit a DIR. Only DIRs in `draft`, `rejected`, `unsuccessful`, or `suspended` are editable. PATCH is a pure edit - `status` is never changed by this endpoint. To re-vet after editing, call `POST /v2/dir/{dir_id}/submit` explicitly.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param string $authorizerEmail Contact email of the authorizer. Telnyx may send verification or infringement notices here.
@@ -192,6 +196,44 @@ final class DirService implements DirContract
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($dirID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Generate a pre-filled Letter of Authorization (LOA) PDF for a DIR. Enterprise identity (legal name, DBA, address, contact, website, tax id) and the DIR display name are read server-side; the caller supplies the telephone numbers to authorize, an optional Authorized Agent block, and an optional drawn signature.
+     *
+     * When `signature` is omitted the PDF is returned unsigned so the customer can sign it externally and upload it via the Documents API. When `signature` is present the PDF embeds the supplied image, printed name, and signed-at date.
+     *
+     * Returns `application/pdf`.
+     *
+     * @param string $dirID the DIR id
+     * @param list<string> $phoneNumbers Telephone numbers to authorize on the DIR, in `+E164` format (`+` followed by 10-15 digits). Max 15 per request.
+     * @param Agent|AgentShape $agent Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
+     * @param Signature|SignatureShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function createLoa(
+        string $dirID,
+        array $phoneNumbers,
+        Agent|array|null $agent = null,
+        Signature|array|null $signature = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): string {
+        $params = Util::removeNulls(
+            [
+                'phoneNumbers' => $phoneNumbers,
+                'agent' => $agent,
+                'signature' => $signature,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->createLoa($dirID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

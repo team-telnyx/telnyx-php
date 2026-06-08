@@ -116,7 +116,7 @@ final class Data implements BaseModel
     public ?string $resolutionNotes;
 
     /**
-     * Lifecycle status. `pending` — newly filed; the DIR is auto-suspended. `contested` — you have submitted contest evidence; awaiting Telnyx review. `resolved` — final.
+     * Lifecycle status. `pending` - newly filed; the DIR is auto-suspended. `contested` - you have submitted contest evidence; awaiting Telnyx review. `resolved` - final.
      *
      * @var value-of<Status>|null $status
      */
@@ -335,7 +335,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * Lifecycle status. `pending` — newly filed; the DIR is auto-suspended. `contested` — you have submitted contest evidence; awaiting Telnyx review. `resolved` — final.
+     * Lifecycle status. `pending` - newly filed; the DIR is auto-suspended. `contested` - you have submitted contest evidence; awaiting Telnyx review. `resolved` - final.
      *
      * @param Status|value-of<Status> $status
      */

@@ -20,7 +20,7 @@ final class BrandedCallingAgreeResponse implements BaseModel
     use SdkModel;
 
     /**
-     * A recorded user agreement to a product's Terms of Service. The `user_id` is intentionally NOT echoed back on this public surface — the caller already knows their own identity.
+     * A recorded user agreement to a product's Terms of Service. The `user_id` is intentionally NOT echoed back on this public surface - the caller already knows their own identity.
      */
     #[Required]
     public Data $data;
@@ -61,7 +61,7 @@ final class BrandedCallingAgreeResponse implements BaseModel
     }
 
     /**
-     * A recorded user agreement to a product's Terms of Service. The `user_id` is intentionally NOT echoed back on this public surface — the caller already knows their own identity.
+     * A recorded user agreement to a product's Terms of Service. The `user_id` is intentionally NOT echoed back on this public surface - the caller already knows their own identity.
      *
      * @param Data|DataShape $data
      */

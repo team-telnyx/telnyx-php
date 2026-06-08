@@ -27,7 +27,7 @@ final class Data implements BaseModel
     public bool $allPreApproved;
 
     /**
-     * Subset of the input that does NOT match the pre-vetted library. The DIR can still be submitted with these — they will go through manual review.
+     * Subset of the input that does NOT match the pre-vetted library. The DIR can still be submitted with these - they will go through manual review.
      *
      * @var list<string> $nonApprovedReasons
      */
@@ -97,7 +97,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * Subset of the input that does NOT match the pre-vetted library. The DIR can still be submitted with these — they will go through manual review.
+     * Subset of the input that does NOT match the pre-vetted library. The DIR can still be submitted with these - they will go through manual review.
      *
      * @param list<string> $nonApprovedReasons
      */
