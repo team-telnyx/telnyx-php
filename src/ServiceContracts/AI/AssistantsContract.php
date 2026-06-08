@@ -130,6 +130,11 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
+     * @param string $callControlID filter results by call control id
+     * @param bool $fetchDynamicVariablesFromWebhook whether to fetch dynamic variables from the configured webhook
+     * @param string $from start of the filter range
+     * @param string $to end of the filter range
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -146,6 +151,7 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param \Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow|ConversationFlowShape1 $conversationFlow Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -231,6 +237,7 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -243,6 +250,7 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param string $content The message content sent by the client to the assistant
      * @param string $conversationID A unique identifier for the conversation thread, used to maintain context
      * @param string $name The optional display name of the user sending the message
@@ -261,6 +269,7 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -273,6 +282,7 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -302,6 +312,7 @@ interface AssistantsContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,ConversationMetadataShape> $conversationMetadata
      * @param RequestOpts|null $requestOptions
      *

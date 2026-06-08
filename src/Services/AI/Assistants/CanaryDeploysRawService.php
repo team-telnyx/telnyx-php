@@ -37,6 +37,7 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      * Creates a new canary deploy configuration with multiple version IDs and their traffic
      * percentages for A/B testing or gradual rollouts of assistant versions.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array{rules?: list<Rule|RuleShape>}|CanaryDeployCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -72,6 +73,7 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      * Retrieves the current canary deploy configuration with all version IDs and their
      * traffic percentages for the specified assistant.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CanaryDeployResponse>
@@ -99,6 +101,7 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      * Updates the existing canary deploy configuration with new version IDs and percentages.
      *   All old versions and percentages are replaces by new ones from this request.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array{
      *   rules?: list<CanaryDeployUpdateParams\Rule|RuleShape1>,
      * }|CanaryDeployUpdateParams $params
@@ -135,6 +138,7 @@ final class CanaryDeploysRawService implements CanaryDeploysRawContract
      *
      * Removes all canary deploy configurations for the specified assistant.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

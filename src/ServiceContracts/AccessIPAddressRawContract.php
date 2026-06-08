@@ -35,6 +35,7 @@ interface AccessIPAddressRawContract
     /**
      * @api
      *
+     * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPAddressResponse>
@@ -64,6 +65,7 @@ interface AccessIPAddressRawContract
     /**
      * @api
      *
+     * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPAddressResponse>

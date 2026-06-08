@@ -34,6 +34,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Retrieves paginated history of test runs for a specific test suite with filtering options
      *
+     * @param string $suiteName name of the suite
      * @param array{
      *   pageNumber?: int, pageSize?: int, status?: string, testSuiteRunID?: string
      * }|RunListParams $params
@@ -76,6 +77,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Executes all tests within a specific test suite as a batch operation
      *
+     * @param string $suiteName name of the suite
      * @param array{destinationVersionID?: string}|RunTriggerParams $params
      * @param RequestOpts|null $requestOptions
      *

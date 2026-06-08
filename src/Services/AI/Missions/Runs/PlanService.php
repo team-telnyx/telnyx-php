@@ -42,8 +42,8 @@ final class PlanService implements PlanContract
      *
      * Create the initial plan for a run
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
      * @param list<Step|StepShape> $steps Body param
      * @param RequestOpts|null $requestOptions
      *
@@ -68,6 +68,8 @@ final class PlanService implements PlanContract
      *
      * Get the plan (all steps) for a run
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -90,8 +92,8 @@ final class PlanService implements PlanContract
      *
      * Add one or more steps to an existing plan
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
      * @param list<\Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanParams\Step|StepShape1> $steps Body param
      * @param RequestOpts|null $requestOptions
      *
@@ -116,6 +118,9 @@ final class PlanService implements PlanContract
      *
      * Get details of a specific plan step
      *
+     * @param string $stepID unique identifier of the step
+     * @param string $missionID unique identifier of the mission
+     * @param string $runID unique identifier of the run
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -139,9 +144,9 @@ final class PlanService implements PlanContract
      *
      * Update the status of a plan step
      *
-     * @param string $stepID Path param
-     * @param string $missionID Path param
-     * @param string $runID Path param
+     * @param string $stepID path param: Unique identifier of the step
+     * @param string $missionID path param: Unique identifier of the mission
+     * @param string $runID path param: Unique identifier of the run
      * @param array<string,mixed> $metadata Body param
      * @param Status|value-of<Status> $status Body param
      * @param RequestOpts|null $requestOptions

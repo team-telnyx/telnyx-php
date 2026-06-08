@@ -42,6 +42,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Creates a new canary deploy configuration with multiple version IDs and their traffic
      * percentages for A/B testing or gradual rollouts of assistant versions.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param list<Rule|RuleShape> $rules
      * @param RequestOpts|null $requestOptions
      *
@@ -68,6 +69,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Retrieves the current canary deploy configuration with all version IDs and their
      * traffic percentages for the specified assistant.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -90,6 +92,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
      * Updates the existing canary deploy configuration with new version IDs and percentages.
      *   All old versions and percentages are replaces by new ones from this request.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param list<\Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule|RuleShape1> $rules
      * @param RequestOpts|null $requestOptions
      *
@@ -115,6 +118,7 @@ final class CanaryDeploysService implements CanaryDeploysContract
      *
      * Removes all canary deploy configurations for the specified assistant.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

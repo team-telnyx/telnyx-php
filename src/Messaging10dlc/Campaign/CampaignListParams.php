@@ -29,6 +29,9 @@ final class CampaignListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Filter results by brand id.
+     */
     #[Required]
     public string $brandID;
 
@@ -95,6 +98,9 @@ final class CampaignListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by brand id.
+     */
     public function withBrandID(string $brandID): self
     {
         $self = clone $this;

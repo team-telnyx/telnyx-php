@@ -102,6 +102,7 @@ final class TestsService implements TestsContract
      *
      * Retrieves detailed information about a specific assistant test
      *
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -121,6 +122,7 @@ final class TestsService implements TestsContract
      *
      * Updates an existing assistant test configuration with new settings
      *
+     * @param string $testID unique identifier of the test
      * @param string $description updated description of the test's purpose and evaluation criteria
      * @param string $destination updated target destination for test conversations
      * @param string $instructions updated test scenario instructions and objectives
@@ -207,6 +209,7 @@ final class TestsService implements TestsContract
      *
      * Permanently removes an assistant test and all associated data
      *
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

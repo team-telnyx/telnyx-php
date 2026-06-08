@@ -21,6 +21,7 @@ interface TelnyxAgentsRawContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
      * @param array<string,mixed>|TelnyxAgentListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -37,7 +38,7 @@ interface TelnyxAgentsRawContract
     /**
      * @api
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array<string,mixed>|TelnyxAgentLinkParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -54,6 +55,7 @@ interface TelnyxAgentsRawContract
     /**
      * @api
      *
+     * @param string $telnyxAgentID unique identifier of the telnyx agent
      * @param array<string,mixed>|TelnyxAgentUnlinkParams $params
      * @param RequestOpts|null $requestOptions
      *

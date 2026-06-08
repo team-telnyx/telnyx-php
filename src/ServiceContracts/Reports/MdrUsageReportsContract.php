@@ -38,6 +38,7 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -65,6 +66,7 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -77,8 +79,10 @@ interface MdrUsageReportsContract
     /**
      * @api
      *
-     * @param \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
-     * @param list<string> $profiles
+     * @param \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType type of aggregation to apply to the results
+     * @param \DateTimeInterface $endDate end of the date range filter (inclusive, ISO 8601)
+     * @param list<string> $profiles filter results by profile
+     * @param \DateTimeInterface $startDate start of the date range filter (inclusive, ISO 8601)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

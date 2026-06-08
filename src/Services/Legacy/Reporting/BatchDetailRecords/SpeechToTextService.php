@@ -65,6 +65,7 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Retrieves a specific Speech to Text batch report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -102,6 +103,7 @@ final class SpeechToTextService implements SpeechToTextContract
      *
      * Deletes a specific Speech to Text batch report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

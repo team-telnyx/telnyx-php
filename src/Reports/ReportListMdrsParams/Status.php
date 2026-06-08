@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Reports\ReportListMdrsParams;
 
 /**
- * Message status.
+ * Filter results by status.
  */
 enum Status: string
 {

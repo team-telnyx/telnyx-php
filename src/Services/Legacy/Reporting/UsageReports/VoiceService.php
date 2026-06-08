@@ -84,6 +84,7 @@ final class VoiceService implements VoiceContract
      *
      * Fetch single cdr usage report by id.
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -129,6 +130,7 @@ final class VoiceService implements VoiceContract
      *
      * Deletes a specific V2 legacy usage CDR report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

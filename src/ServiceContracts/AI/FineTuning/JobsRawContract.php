@@ -34,6 +34,7 @@ interface JobsRawContract
     /**
      * @api
      *
+     * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FineTuningJob>
@@ -61,6 +62,7 @@ interface JobsRawContract
     /**
      * @api
      *
+     * @param string $jobID unique identifier of the job
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<FineTuningJob>

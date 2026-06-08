@@ -19,6 +19,7 @@ interface MessagesRawContract
     /**
      * @api
      *
+     * @param string $conversationID unique identifier of the conversation
      * @param array<string,mixed>|MessageListParams $params
      * @param RequestOpts|null $requestOptions
      *

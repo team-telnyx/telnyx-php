@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Reports\CdrUsageReports\CdrUsageReportFetchSyncParams;
 
+/**
+ * Filter results by product breakdown.
+ */
 enum ProductBreakdown: string
 {
     case NO_BREAKDOWN = 'NO_BREAKDOWN';

@@ -76,6 +76,7 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      *
      * Fetch a single messaging usage report by id
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportGetResponse>
@@ -135,6 +136,7 @@ final class MdrUsageReportsRawService implements MdrUsageReportsRawContract
      *
      * Delete messaging usage report by id
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MdrUsageReportDeleteResponse>

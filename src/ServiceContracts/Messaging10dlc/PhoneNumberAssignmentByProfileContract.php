@@ -36,6 +36,9 @@ interface PhoneNumberAssignmentByProfileContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
+     * @param int $page page number to retrieve (1-based)
+     * @param int $recordsPerPage number of records to return per page
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -50,6 +53,9 @@ interface PhoneNumberAssignmentByProfileContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
+     * @param int $page page number to retrieve (1-based)
+     * @param int $recordsPerPage number of records to return per page
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -64,6 +70,7 @@ interface PhoneNumberAssignmentByProfileContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

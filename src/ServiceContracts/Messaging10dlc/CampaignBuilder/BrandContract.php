@@ -16,6 +16,8 @@ interface BrandContract
     /**
      * @api
      *
+     * @param string $usecase unique identifier of the usecase
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

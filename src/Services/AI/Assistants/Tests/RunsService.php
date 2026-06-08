@@ -37,6 +37,8 @@ final class RunsService implements RunsContract
      *
      * Retrieves detailed information about a specific test run execution
      *
+     * @param string $runID unique identifier of the run
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -59,6 +61,7 @@ final class RunsService implements RunsContract
      *
      * Retrieves paginated execution history for a specific assistant test with filtering options
      *
+     * @param string $testID unique identifier of the test
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      * @param RequestOpts|null $requestOptions
      *
@@ -92,6 +95,7 @@ final class RunsService implements RunsContract
      *
      * Initiates immediate execution of a specific assistant test
      *
+     * @param string $testID unique identifier of the test
      * @param string $destinationVersionID Optional assistant version ID to use for this test run. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      * @param RequestOpts|null $requestOptions
      *

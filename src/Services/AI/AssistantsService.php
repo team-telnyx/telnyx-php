@@ -232,6 +232,11 @@ final class AssistantsService implements AssistantsContract
      *
      * Retrieve an AI Assistant configuration by `assistant_id`.
      *
+     * @param string $assistantID unique identifier of the assistant
+     * @param string $callControlID filter results by call control id
+     * @param bool $fetchDynamicVariablesFromWebhook whether to fetch dynamic variables from the configured webhook
+     * @param string $from start of the filter range
+     * @param string $to end of the filter range
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -264,6 +269,7 @@ final class AssistantsService implements AssistantsContract
      *
      * Update an AI Assistant's attributes.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param \Telnyx\AI\Assistants\AssistantUpdateParams\ConversationFlow|ConversationFlowShape1 $conversationFlow Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -398,6 +404,7 @@ final class AssistantsService implements AssistantsContract
      *
      * Delete an AI Assistant by `assistant_id`.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -417,6 +424,7 @@ final class AssistantsService implements AssistantsContract
      *
      * This endpoint allows a client to send a chat message to a specific AI Assistant. The assistant processes the message and returns a relevant reply based on the current conversation context. Refer to the Conversation API to [create a conversation](https://developers.telnyx.com/api-reference/conversations/create-a-conversation), [filter existing conversations](https://developers.telnyx.com/api-reference/conversations/list-conversations), [fetch messages for a conversation](https://developers.telnyx.com/api-reference/conversations/get-conversation-messages), and [manually add messages to a conversation](https://developers.telnyx.com/api-reference/conversations/create-message).
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param string $content The message content sent by the client to the assistant
      * @param string $conversationID A unique identifier for the conversation thread, used to maintain context
      * @param string $name The optional display name of the user sending the message
@@ -450,6 +458,7 @@ final class AssistantsService implements AssistantsContract
      *
      * Clone an existing assistant, excluding telephony and messaging settings.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -469,6 +478,7 @@ final class AssistantsService implements AssistantsContract
      *
      * Get an assistant texml by `assistant_id`.
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -525,6 +535,7 @@ final class AssistantsService implements AssistantsContract
      * 4. Updates conversation metadata if provided
      * 5. Returns the conversation ID
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,ConversationMetadataShape> $conversationMetadata
      * @param RequestOpts|null $requestOptions
      *

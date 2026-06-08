@@ -43,6 +43,7 @@ interface AdvancedOrdersContract
     /**
      * @api
      *
+     * @param string $orderID unique identifier of the order
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -66,6 +67,7 @@ interface AdvancedOrdersContract
     /**
      * @api
      *
+     * @param string $advancedOrderID unique identifier of the advanced order
      * @param list<\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature|value-of<\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\Feature>> $features
      * @param \Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType|value-of<\Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams\PhoneNumberType> $phoneNumberType
      * @param string $requirementGroupID The ID of the requirement group to associate with this advanced order

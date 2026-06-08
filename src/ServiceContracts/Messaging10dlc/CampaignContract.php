@@ -23,6 +23,7 @@ interface CampaignContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -35,6 +36,7 @@ interface CampaignContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param bool $autoRenewal help message of the campaign
      * @param string $helpMessage help message of the campaign
      * @param string $messageFlow message flow description
@@ -69,6 +71,7 @@ interface CampaignContract
     /**
      * @api
      *
+     * @param string $brandID filter results by brand id
      * @param int $page The 1-indexed page number to get. The default value is `1`.
      * @param int $recordsPerPage The amount of records per page, limited to between 1 and 500 inclusive. The default value is `10`.
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
@@ -104,6 +107,7 @@ interface CampaignContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -129,6 +133,7 @@ interface CampaignContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>

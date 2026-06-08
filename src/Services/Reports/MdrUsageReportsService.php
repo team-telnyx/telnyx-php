@@ -74,6 +74,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Fetch a single messaging usage report by id
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -119,6 +120,7 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Delete messaging usage report by id
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -138,8 +140,10 @@ final class MdrUsageReportsService implements MdrUsageReportsContract
      *
      * Generate and fetch messaging usage report synchronously. This endpoint will both generate and fetch the messaging report over a specified time period. No polling is necessary but the response may take up to a couple of minutes.
      *
-     * @param \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType
-     * @param list<string> $profiles
+     * @param \Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType|value-of<\Telnyx\Reports\MdrUsageReports\MdrUsageReportFetchSyncParams\AggregationType> $aggregationType type of aggregation to apply to the results
+     * @param \DateTimeInterface $endDate end of the date range filter (inclusive, ISO 8601)
+     * @param list<string> $profiles filter results by profile
+     * @param \DateTimeInterface $startDate start of the date range filter (inclusive, ISO 8601)
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

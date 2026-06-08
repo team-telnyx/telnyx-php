@@ -99,6 +99,7 @@ final class EmbeddingsRawService implements EmbeddingsRawContract
      * - `failure` - Task failed and no files were embedded successfully
      * - `partial_success` - Some files were embedded successfully, but at least one failed
      *
+     * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<EmbeddingGetResponse>

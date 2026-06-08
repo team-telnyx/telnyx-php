@@ -44,6 +44,7 @@ interface ToolsContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -56,6 +57,7 @@ interface ToolsContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
@@ -81,6 +83,10 @@ interface ToolsContract
     /**
      * @api
      *
+     * @param string $filterName filter results by filter name
+     * @param string $filterType filter results by filter type
+     * @param int $pageNumber page number to retrieve (1-based)
+     * @param int $pageSize number of items to return per page
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<ToolListResponse>
@@ -98,6 +104,7 @@ interface ToolsContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

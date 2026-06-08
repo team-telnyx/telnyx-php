@@ -27,15 +27,27 @@ final class McpServerListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     #[Optional]
     public ?int $pageNumber;
 
+    /**
+     * Number of items to return per page.
+     */
     #[Optional]
     public ?int $pageSize;
 
+    /**
+     * Filter results by type.
+     */
     #[Optional]
     public ?string $type;
 
+    /**
+     * Filter results by url.
+     */
     #[Optional]
     public ?string $url;
 
@@ -65,6 +77,9 @@ final class McpServerListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
@@ -73,6 +88,9 @@ final class McpServerListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Number of items to return per page.
+     */
     public function withPageSize(int $pageSize): self
     {
         $self = clone $this;
@@ -81,6 +99,9 @@ final class McpServerListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by type.
+     */
     public function withType(string $type): self
     {
         $self = clone $this;
@@ -89,6 +110,9 @@ final class McpServerListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by url.
+     */
     public function withURL(string $url): self
     {
         $self = clone $this;

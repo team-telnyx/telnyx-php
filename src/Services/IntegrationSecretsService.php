@@ -111,6 +111,7 @@ final class IntegrationSecretsService implements IntegrationSecretsContract
      *
      * Delete an integration secret given its ID.
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

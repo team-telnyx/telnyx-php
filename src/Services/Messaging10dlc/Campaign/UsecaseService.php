@@ -36,6 +36,7 @@ final class UsecaseService implements UsecaseContract
      *
      * Get Campaign Cost
      *
+     * @param string $usecase filter results by usecase
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

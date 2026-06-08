@@ -253,6 +253,7 @@ final class ConversationsRawService implements ConversationsRawContract
      *
      * Retrieve insights for a specific conversation
      *
+     * @param string $conversationID unique identifier of the conversation
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConversationGetConversationsInsightsResponse>

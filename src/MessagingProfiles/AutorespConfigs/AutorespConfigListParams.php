@@ -31,6 +31,9 @@ final class AutorespConfigListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Filter results by country code.
+     */
     #[Optional]
     public ?string $countryCode;
 
@@ -73,6 +76,9 @@ final class AutorespConfigListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by country code.
+     */
     public function withCountryCode(string $countryCode): self
     {
         $self = clone $this;

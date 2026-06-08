@@ -32,6 +32,7 @@ final class MessagesRawService implements MessagesRawContract
      *
      * Retrieve messages for a specific conversation, including tool calls made by the assistant.
      *
+     * @param string $conversationID unique identifier of the conversation
      * @param array{pageNumber?: int, pageSize?: int}|MessageListParams $params
      * @param RequestOpts|null $requestOptions
      *

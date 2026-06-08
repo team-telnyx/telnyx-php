@@ -69,9 +69,9 @@ final class VersionsService implements VersionsContract
      *
      * Retrieves a specific version of an assistant by assistant_id and version_id
      *
-     * @param string $versionID Path param
-     * @param string $assistantID Path param
-     * @param bool $includeMcpServers Query param
+     * @param string $versionID path param: Unique identifier of the version
+     * @param string $assistantID path param: Unique identifier of the assistant
+     * @param bool $includeMcpServers query param: Whether to include MCP servers in the response
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -97,8 +97,8 @@ final class VersionsService implements VersionsContract
      *
      * Updates the configuration of a specific assistant version. Can not update main version
      *
-     * @param string $versionID Path param
-     * @param string $assistantID Path param
+     * @param string $versionID path param: Unique identifier of the version
+     * @param string $assistantID path param: Unique identifier of the assistant
      * @param ConversationFlow|ConversationFlowShape $conversationFlow Body param: Conversation flow as supplied by API clients (create / update).
      *
      * A directed graph of `FlowNodeReq` connected by `FlowEdge`s. Validation
@@ -216,6 +216,7 @@ final class VersionsService implements VersionsContract
      *
      * Retrieves all versions of a specific assistant with complete configuration and metadata
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -235,6 +236,8 @@ final class VersionsService implements VersionsContract
      *
      * Permanently removes a specific version of an assistant. Can not delete main version
      *
+     * @param string $versionID unique identifier of the version
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -257,6 +260,8 @@ final class VersionsService implements VersionsContract
      *
      * Promotes a specific version to be the main/current version of the assistant. This will delete any existing canary deploy configuration and send all live production traffic to this version.
      *
+     * @param string $versionID unique identifier of the version
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

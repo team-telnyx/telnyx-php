@@ -65,6 +65,7 @@ final class InfringementClaimsRawService implements InfringementClaimsRawContrac
      * - `404` - the claim does not exist or is not against a DIR you own.
      * - `422` - `contest_notes` is too short (< 10 chars), too long (> 2000 chars), `documents` is > 20 entries, or a `document_id` is duplicated within the same submission.
      *
+     * @param string $claimID unique identifier of the claim
      * @param array{
      *   contestNotes: string, documents?: list<Document|DocumentShape>
      * }|InfringementClaimContestParams $params

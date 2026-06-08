@@ -71,6 +71,9 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
      *
+     * @param string $taskID unique identifier of the task
+     * @param int $page page number to retrieve (1-based)
+     * @param int $recordsPerPage number of records to return per page
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -96,6 +99,9 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
      *
+     * @param string $taskID unique identifier of the task
+     * @param int $page page number to retrieve (1-based)
+     * @param int $recordsPerPage number of records to return per page
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -121,6 +127,7 @@ final class PhoneNumberAssignmentByProfileService implements PhoneNumberAssignme
      *
      * Check the status of the task associated with assigning all phone numbers on a messaging profile to a campaign by `taskId`.
      *
+     * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

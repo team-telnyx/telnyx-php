@@ -32,6 +32,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param array<string,mixed>|RunCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -48,6 +49,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
      * @param array<string,mixed>|RunRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -64,7 +66,7 @@ interface RunsRawContract
     /**
      * @api
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array<string,mixed>|RunUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -81,6 +83,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param array<string,mixed>|RunListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -97,6 +100,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
      * @param array<string,mixed>|RunCancelRunParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -128,6 +132,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
      * @param array<string,mixed>|RunPauseRunParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -144,6 +149,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
      * @param array<string,mixed>|RunResumeRunParams $params
      * @param RequestOpts|null $requestOptions
      *

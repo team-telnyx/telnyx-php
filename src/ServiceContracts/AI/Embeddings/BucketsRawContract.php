@@ -18,6 +18,7 @@ interface BucketsRawContract
     /**
      * @api
      *
+     * @param string $bucketName name of the bucket
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BucketGetResponse>
@@ -45,6 +46,7 @@ interface BucketsRawContract
     /**
      * @api
      *
+     * @param string $bucketName name of the bucket
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

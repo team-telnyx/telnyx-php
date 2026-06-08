@@ -23,6 +23,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
+     * @param string $profileID unique identifier of the profile
      * @param array<string,mixed>|AutorespConfigCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -39,6 +40,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
+     * @param string $autorespCfgID unique identifier of the autoresp cfg
      * @param array<string,mixed>|AutorespConfigRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -55,7 +57,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
-     * @param string $autorespCfgID Path param
+     * @param string $autorespCfgID path param: Unique identifier of the autoresp cfg
      * @param array<string,mixed>|AutorespConfigUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -72,6 +74,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
+     * @param string $profileID unique identifier of the profile
      * @param array<string,mixed>|AutorespConfigListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -88,6 +91,7 @@ interface AutorespConfigsRawContract
     /**
      * @api
      *
+     * @param string $autorespCfgID unique identifier of the autoresp cfg
      * @param array<string,mixed>|AutorespConfigDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *

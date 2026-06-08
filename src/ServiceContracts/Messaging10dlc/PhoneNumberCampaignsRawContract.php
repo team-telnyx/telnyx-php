@@ -36,6 +36,7 @@ interface PhoneNumberCampaignsRawContract
     /**
      * @api
      *
+     * @param string $phoneNumber unique identifier of the phone number
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>
@@ -50,6 +51,7 @@ interface PhoneNumberCampaignsRawContract
     /**
      * @api
      *
+     * @param string $campaignPhoneNumber unique identifier of the phone number
      * @param array<string,mixed>|PhoneNumberCampaignUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -81,6 +83,7 @@ interface PhoneNumberCampaignsRawContract
     /**
      * @api
      *
+     * @param string $phoneNumber unique identifier of the phone number
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberCampaign>

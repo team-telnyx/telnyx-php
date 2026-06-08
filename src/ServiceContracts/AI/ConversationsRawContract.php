@@ -119,6 +119,7 @@ interface ConversationsRawContract
     /**
      * @api
      *
+     * @param string $conversationID unique identifier of the conversation
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ConversationGetConversationsInsightsResponse>

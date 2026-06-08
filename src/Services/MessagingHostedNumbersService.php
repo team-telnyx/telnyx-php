@@ -103,6 +103,8 @@ final class MessagingHostedNumbersService implements MessagingHostedNumbersContr
      * @param string $filterMessagingProfileID filter by messaging profile ID
      * @param string $filterPhoneNumber filter by exact phone number
      * @param string $filterPhoneNumberContains filter by phone number substring
+     * @param int $pageNumber page number to retrieve (1-based)
+     * @param int $pageSize number of items to return per page
      * @param SortPhoneNumber|value-of<SortPhoneNumber> $sortPhoneNumber sort by phone number
      * @param RequestOpts|null $requestOptions
      *

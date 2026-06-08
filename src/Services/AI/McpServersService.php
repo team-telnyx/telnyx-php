@@ -72,6 +72,7 @@ final class McpServersService implements McpServersContract
      *
      * Retrieve details for a specific MCP server.
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -91,6 +92,7 @@ final class McpServersService implements McpServersContract
      *
      * Update an existing MCP server.
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param list<string>|null $allowedTools
      * @param RequestOpts|null $requestOptions
      *
@@ -130,6 +132,10 @@ final class McpServersService implements McpServersContract
      *
      * Retrieve a list of MCP servers.
      *
+     * @param int $pageNumber page number to retrieve (1-based)
+     * @param int $pageSize number of items to return per page
+     * @param string $type filter results by type
+     * @param string $url filter results by url
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
@@ -163,6 +169,7 @@ final class McpServersService implements McpServersContract
      *
      * Delete a specific MCP server.
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -38,6 +38,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * Retrieve campaign details by `campaignId`.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -57,6 +58,7 @@ final class PartnerCampaignsService implements PartnerCampaignsContract
      *
      * Update campaign details by `campaignId`. **Please note:** Only webhook urls are editable.
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param string $webhookFailoverURL webhook failover to which campaign status updates are sent
      * @param string $webhookURL webhook to which campaign status updates are sent
      * @param RequestOpts|null $requestOptions

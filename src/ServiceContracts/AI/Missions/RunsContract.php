@@ -24,6 +24,7 @@ interface RunsContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param array<string,mixed> $input
      * @param array<string,mixed> $metadata
      * @param RequestOpts|null $requestOptions
@@ -40,6 +41,8 @@ interface RunsContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -53,8 +56,8 @@ interface RunsContract
     /**
      * @api
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
      * @param string $error Body param
      * @param array<string,mixed> $metadata Body param
      * @param array<string,mixed> $resultPayload Body param
@@ -78,8 +81,10 @@ interface RunsContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param int $pageNumber Page number (1-based)
      * @param int $pageSize Number of items per page
+     * @param string $status filter results by status
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<MissionRunData>
@@ -97,6 +102,8 @@ interface RunsContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -112,6 +119,7 @@ interface RunsContract
      *
      * @param int $pageNumber Page number (1-based)
      * @param int $pageSize Number of items per page
+     * @param string $status filter results by status
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<MissionRunData>
@@ -128,6 +136,8 @@ interface RunsContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -141,6 +151,8 @@ interface RunsContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

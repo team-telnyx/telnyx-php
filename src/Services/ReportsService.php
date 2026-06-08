@@ -53,15 +53,15 @@ final class ReportsService implements ReportsContract
      *
      * Fetch all Mdr records
      *
-     * @param string $id Message uuid
-     * @param string $cld Destination number
-     * @param string $cli Origination number
-     * @param Direction|value-of<Direction> $direction Direction (inbound or outbound)
+     * @param string $id filter results by identifier
+     * @param string $cld filter results by cld
+     * @param string $cli filter results by cli
+     * @param Direction|value-of<Direction> $direction filter results by direction
      * @param string $endDate Pagination end date
-     * @param MessageType|value-of<MessageType> $messageType Type of message
-     * @param string $profile Name of the profile
+     * @param MessageType|value-of<MessageType> $messageType filter results by message type
+     * @param string $profile filter results by profile
      * @param string $startDate Pagination start date
-     * @param Status|value-of<Status> $status Message status
+     * @param Status|value-of<Status> $status filter results by status
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -103,16 +103,16 @@ final class ReportsService implements ReportsContract
      *
      * Fetch all Wdr records
      *
-     * @param string $id WDR uuid
+     * @param string $id filter results by identifier
      * @param string $endDate End date
-     * @param string $imsi International mobile subscriber identity
-     * @param string $mcc Mobile country code
-     * @param string $mnc Mobile network code
-     * @param string $phoneNumber Phone number
-     * @param string $simCardID Sim card unique identifier
-     * @param string $simGroupID Sim group unique identifier
-     * @param string $simGroupName Sim group name
-     * @param list<string> $sort Field used to order the data. If no field is specified, default value is 'created_at'
+     * @param string $imsi filter results by imsi
+     * @param string $mcc filter results by mcc
+     * @param string $mnc filter results by mnc
+     * @param string $phoneNumber filter results by phone number
+     * @param string $simCardID filter results by sim card id
+     * @param string $simGroupID filter results by sim group id
+     * @param string $simGroupName filter results by sim group name
+     * @param list<string> $sort field and direction to sort the results by
      * @param string $startDate Start date
      * @param RequestOpts|null $requestOptions
      *

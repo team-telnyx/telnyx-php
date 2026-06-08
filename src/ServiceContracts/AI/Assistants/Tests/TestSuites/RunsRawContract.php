@@ -20,6 +20,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $suiteName name of the suite
      * @param array<string,mixed>|RunListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -36,6 +37,7 @@ interface RunsRawContract
     /**
      * @api
      *
+     * @param string $suiteName name of the suite
      * @param array<string,mixed>|RunTriggerParams $params
      * @param RequestOpts|null $requestOptions
      *

@@ -19,6 +19,7 @@ interface CanaryDeploysContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param list<Rule|RuleShape> $rules
      * @param RequestOpts|null $requestOptions
      *
@@ -33,6 +34,7 @@ interface CanaryDeploysContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -45,6 +47,7 @@ interface CanaryDeploysContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param list<\Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule|RuleShape1> $rules
      * @param RequestOpts|null $requestOptions
      *
@@ -59,6 +62,7 @@ interface CanaryDeploysContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -319,6 +319,8 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * List all alphanumeric sender IDs associated with a specific messaging profile.
      *
      * @param string $id the identifier of the messaging profile
+     * @param int $pageNumber page number to retrieve (1-based)
+     * @param int $pageSize number of items to return per page
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<AlphanumericSenderID>

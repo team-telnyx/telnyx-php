@@ -34,6 +34,7 @@ final class AgreementsRawService implements AgreementsRawContract
      *
      * Retrieve a single ToS agreement record. Returns `404` if the agreement does not exist or does not belong to the authenticated user.
      *
+     * @param string $agreementID unique identifier of the agreement
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AgreementGetResponse>

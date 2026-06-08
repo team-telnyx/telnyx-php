@@ -63,6 +63,7 @@ final class RunsService implements RunsContract
      *
      * Start a new run for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param array<string,mixed> $input
      * @param array<string,mixed> $metadata
      * @param RequestOpts|null $requestOptions
@@ -88,6 +89,8 @@ final class RunsService implements RunsContract
      *
      * Get details of a specific run
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -110,8 +113,8 @@ final class RunsService implements RunsContract
      *
      * Update run status and/or result
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
      * @param string $error Body param
      * @param array<string,mixed> $metadata Body param
      * @param array<string,mixed> $resultPayload Body param
@@ -153,8 +156,10 @@ final class RunsService implements RunsContract
      *
      * List all runs for a specific mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param int $pageNumber Page number (1-based)
      * @param int $pageSize Number of items per page
+     * @param string $status filter results by status
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<MissionRunData>
@@ -187,6 +192,8 @@ final class RunsService implements RunsContract
      *
      * Cancel a running or paused run
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -211,6 +218,7 @@ final class RunsService implements RunsContract
      *
      * @param int $pageNumber Page number (1-based)
      * @param int $pageSize Number of items per page
+     * @param string $status filter results by status
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<MissionRunData>
@@ -242,6 +250,8 @@ final class RunsService implements RunsContract
      *
      * Pause a running run
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -264,6 +274,8 @@ final class RunsService implements RunsContract
      *
      * Resume a paused run
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

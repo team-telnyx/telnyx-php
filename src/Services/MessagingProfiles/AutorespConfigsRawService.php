@@ -41,6 +41,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      *
      * Create auto-response setting
      *
+     * @param string $profileID unique identifier of the profile
      * @param array{
      *   countryCode: string,
      *   keywords: list<string>,
@@ -78,6 +79,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      *
      * Get Auto-Response Setting
      *
+     * @param string $autorespCfgID unique identifier of the autoresp cfg
      * @param array{profileID: string}|AutorespConfigRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -115,7 +117,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      *
      * Update Auto-Response Setting
      *
-     * @param string $autorespCfgID Path param
+     * @param string $autorespCfgID path param: Unique identifier of the autoresp cfg
      * @param array{
      *   profileID: string,
      *   countryCode: string,
@@ -160,6 +162,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      *
      * List Auto-Response Settings
      *
+     * @param string $profileID unique identifier of the profile
      * @param array{
      *   countryCode?: string,
      *   createdAt?: CreatedAt|CreatedAtShape,
@@ -203,6 +206,7 @@ final class AutorespConfigsRawService implements AutorespConfigsRawContract
      *
      * Delete Auto-Response Setting
      *
+     * @param string $autorespCfgID unique identifier of the autoresp cfg
      * @param array{profileID: string}|AutorespConfigDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *

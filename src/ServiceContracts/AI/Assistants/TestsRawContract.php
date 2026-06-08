@@ -36,6 +36,7 @@ interface TestsRawContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantTest>
@@ -50,6 +51,7 @@ interface TestsRawContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param array<string,mixed>|TestUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -81,6 +83,7 @@ interface TestsRawContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

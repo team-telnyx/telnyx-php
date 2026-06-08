@@ -29,6 +29,7 @@ interface TagsContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -42,6 +43,8 @@ interface TagsContract
     /**
      * @api
      *
+     * @param string $tag unique identifier of the tag
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

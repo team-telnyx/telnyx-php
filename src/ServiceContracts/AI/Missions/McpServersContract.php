@@ -15,6 +15,7 @@ interface McpServersContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -27,6 +28,8 @@ interface McpServersContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -40,6 +43,8 @@ interface McpServersContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -53,6 +58,7 @@ interface McpServersContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -65,6 +71,8 @@ interface McpServersContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

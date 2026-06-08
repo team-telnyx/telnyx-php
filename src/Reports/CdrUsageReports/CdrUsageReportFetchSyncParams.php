@@ -31,21 +31,39 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var value-of<AggregationType> $aggregationType */
+    /**
+     * Type of aggregation to apply to the results.
+     *
+     * @var value-of<AggregationType> $aggregationType
+     */
     #[Required(enum: AggregationType::class)]
     public string $aggregationType;
 
-    /** @var value-of<ProductBreakdown> $productBreakdown */
+    /**
+     * Filter results by product breakdown.
+     *
+     * @var value-of<ProductBreakdown> $productBreakdown
+     */
     #[Required(enum: ProductBreakdown::class)]
     public string $productBreakdown;
 
-    /** @var list<float>|null $connections */
+    /**
+     * Filter results by connection.
+     *
+     * @var list<float>|null $connections
+     */
     #[Optional(list: 'float')]
     public ?array $connections;
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $endDate;
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $startDate;
 
@@ -99,6 +117,8 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     }
 
     /**
+     * Type of aggregation to apply to the results.
+     *
      * @param AggregationType|value-of<AggregationType> $aggregationType
      */
     public function withAggregationType(
@@ -111,6 +131,8 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     }
 
     /**
+     * Filter results by product breakdown.
+     *
      * @param ProductBreakdown|value-of<ProductBreakdown> $productBreakdown
      */
     public function withProductBreakdown(
@@ -123,6 +145,8 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
     }
 
     /**
+     * Filter results by connection.
+     *
      * @param list<float> $connections
      */
     public function withConnections(array $connections): self
@@ -133,6 +157,9 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
         return $self;
     }
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $self = clone $this;
@@ -141,6 +168,9 @@ final class CdrUsageReportFetchSyncParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $self = clone $this;

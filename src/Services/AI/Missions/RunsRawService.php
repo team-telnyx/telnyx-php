@@ -44,6 +44,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Start a new run for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param array{
      *   input?: array<string,mixed>, metadata?: array<string,mixed>
      * }|RunCreateParams $params
@@ -78,6 +79,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Get details of a specific run
      *
+     * @param string $runID unique identifier of the run
      * @param array{missionID: string}|RunRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -111,7 +113,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Update run status and/or result
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array{
      *   missionID: string,
      *   error?: string,
@@ -153,6 +155,7 @@ final class RunsRawService implements RunsRawContract
      *
      * List all runs for a specific mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param array{
      *   pageNumber?: int, pageSize?: int, status?: string
      * }|RunListParams $params
@@ -191,6 +194,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Cancel a running or paused run
      *
+     * @param string $runID unique identifier of the run
      * @param array{missionID: string}|RunCancelRunParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -261,6 +265,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Pause a running run
      *
+     * @param string $runID unique identifier of the run
      * @param array{missionID: string}|RunPauseRunParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -294,6 +299,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Resume a paused run
      *
+     * @param string $runID unique identifier of the run
      * @param array{missionID: string}|RunResumeRunParams $params
      * @param RequestOpts|null $requestOptions
      *

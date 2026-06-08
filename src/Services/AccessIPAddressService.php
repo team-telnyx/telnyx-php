@@ -63,6 +63,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * Retrieve an access IP address
      *
+     * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -114,6 +115,7 @@ final class AccessIPAddressService implements AccessIPAddressContract
      *
      * Delete access IP address
      *
+     * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -104,6 +104,7 @@ interface RequestsContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -116,6 +117,7 @@ interface RequestsContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param string $additionalInformation Any additional information
      * @param string $businessAddr1 Line 1 of the business address
      * @param string $businessCity The city of the business address; the first letter should be capitalized
@@ -194,12 +196,16 @@ interface RequestsContract
     /**
      * @api
      *
+     * @param int $page page number to retrieve (1-based)
      * @param int $pageSize
      *         Request this many records per page
      *
      *         This value is automatically clamped if the provided value is too large
      * @param string $businessName Filter verification requests by business name
-     * @param TfVerificationStatus|value-of<TfVerificationStatus> $status Tollfree verification status
+     * @param \DateTimeInterface $dateEnd end of the date range filter (inclusive, ISO 8601)
+     * @param \DateTimeInterface $dateStart start of the date range filter (inclusive, ISO 8601)
+     * @param string $phoneNumber filter results by phone number
+     * @param TfVerificationStatus|value-of<TfVerificationStatus> $status filter results by status
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultPaginationForMessagingTollfree<VerificationRequestStatus>
@@ -220,6 +226,7 @@ interface RequestsContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -232,7 +239,9 @@ interface RequestsContract
     /**
      * @api
      *
-     * @param int $pageSize Request this many records per page. This value is automatically clamped if the provided value is too large.
+     * @param string $id unique identifier of the resource
+     * @param int $pageNumber page number to retrieve (1-based)
+     * @param int $pageSize number of items to return per page
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

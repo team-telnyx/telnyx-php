@@ -38,6 +38,7 @@ interface PhoneNumberAssignmentByProfileRawContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
      * @param array<string,mixed>|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -54,6 +55,7 @@ interface PhoneNumberAssignmentByProfileRawContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
      * @param array<string,mixed>|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -70,6 +72,7 @@ interface PhoneNumberAssignmentByProfileRawContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileGetStatusResponse>

@@ -105,6 +105,7 @@ final class AccessIPRangesRawService implements AccessIPRangesRawContract
      *
      * Delete access IP ranges
      *
+     * @param string $accessIPRangeID unique identifier of the access ip range
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPRange>

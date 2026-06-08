@@ -29,6 +29,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Create a new tool for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -53,6 +54,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Delete a tool from a mission
      *
+     * @param string $toolID unique identifier of the tool
      * @param array{missionID: string}|ToolDeleteToolParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -86,6 +88,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Get a specific tool by ID
      *
+     * @param string $toolID unique identifier of the tool
      * @param array{missionID: string}|ToolGetToolParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -119,6 +122,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * List all tools for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -143,6 +147,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * Update a tool definition
      *
+     * @param string $toolID unique identifier of the tool
      * @param array{missionID: string}|ToolUpdateToolParams $params
      * @param RequestOpts|null $requestOptions
      *
