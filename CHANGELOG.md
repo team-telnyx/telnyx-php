@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.77.0 (2026-06-08)
+
+Full Changelog: [v7.76.0...v7.77.0](https://github.com/team-telnyx/telnyx-php/compare/v7.76.0...v7.77.0)
+
+### Features
+
+* **spec:** backfill parameter descriptions to 100% coverage ([0de7211](https://github.com/team-telnyx/telnyx-php/commit/0de72115cf6a191faab73b860760f9b16c8eab4c))
+
 ## 7.76.0 (2026-06-08)
 
 Full Changelog: [v7.75.0...v7.76.0](https://github.com/team-telnyx/telnyx-php/compare/v7.75.0...v7.76.0)
