@@ -26,11 +26,14 @@ final class RequestRetrieveStatusHistoryParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     #[Required]
     public int $pageNumber;
 
     /**
-     * Request this many records per page. This value is automatically clamped if the provided value is too large.
+     * Number of items to return per page.
      */
     #[Required]
     public int $pageSize;
@@ -69,6 +72,9 @@ final class RequestRetrieveStatusHistoryParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
@@ -78,7 +84,7 @@ final class RequestRetrieveStatusHistoryParams implements BaseModel
     }
 
     /**
-     * Request this many records per page. This value is automatically clamped if the provided value is too large.
+     * Number of items to return per page.
      */
     public function withPageSize(int $pageSize): self
     {

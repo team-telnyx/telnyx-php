@@ -39,15 +39,27 @@ final class BrandListParams implements BaseModel
     #[Optional]
     public ?string $brandID;
 
+    /**
+     * Filter results by country.
+     */
     #[Optional]
     public ?string $country;
 
+    /**
+     * Filter results by display name.
+     */
     #[Optional]
     public ?string $displayName;
 
+    /**
+     * Filter results by entity type.
+     */
     #[Optional]
     public ?string $entityType;
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     #[Optional]
     public ?int $page;
 
@@ -65,6 +77,9 @@ final class BrandListParams implements BaseModel
     #[Optional(enum: Sort::class)]
     public ?string $sort;
 
+    /**
+     * Filter results by state.
+     */
     #[Optional]
     public ?string $state;
 
@@ -123,6 +138,9 @@ final class BrandListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by country.
+     */
     public function withCountry(string $country): self
     {
         $self = clone $this;
@@ -131,6 +149,9 @@ final class BrandListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by display name.
+     */
     public function withDisplayName(string $displayName): self
     {
         $self = clone $this;
@@ -139,6 +160,9 @@ final class BrandListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by entity type.
+     */
     public function withEntityType(string $entityType): self
     {
         $self = clone $this;
@@ -147,6 +171,9 @@ final class BrandListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     public function withPage(int $page): self
     {
         $self = clone $this;
@@ -179,6 +206,9 @@ final class BrandListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by state.
+     */
     public function withState(string $state): self
     {
         $self = clone $this;

@@ -34,6 +34,7 @@ interface InfringementClaimsRawContract
     /**
      * @api
      *
+     * @param string $claimID unique identifier of the claim
      * @param array<string,mixed>|InfringementClaimContestParams $params
      * @param RequestOpts|null $requestOptions
      *

@@ -24,6 +24,7 @@ interface ClustersRawContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
      * @param array<string,mixed>|ClusterRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -55,6 +56,7 @@ interface ClustersRawContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -84,6 +86,7 @@ interface ClustersRawContract
     /**
      * @api
      *
+     * @param string $taskID unique identifier of the task
      * @param array<string,mixed>|ClusterFetchGraphParams $params
      * @param RequestOpts|null $requestOptions
      *

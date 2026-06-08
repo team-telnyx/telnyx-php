@@ -45,6 +45,7 @@ interface BrandRawContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetResponse>
@@ -59,6 +60,7 @@ interface BrandRawContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param array<string,mixed>|BrandUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -90,6 +92,7 @@ interface BrandRawContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -104,6 +107,7 @@ interface BrandRawContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetFeedbackResponse>
@@ -135,6 +139,7 @@ interface BrandRawContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -164,6 +169,7 @@ interface BrandRawContract
     /**
      * @api
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxBrand>

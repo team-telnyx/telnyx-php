@@ -37,6 +37,7 @@ final class MessagesService implements MessagesContract
      *
      * Retrieve messages for a specific conversation, including tool calls made by the assistant.
      *
+     * @param string $conversationID unique identifier of the conversation
      * @param int $pageNumber the page number to retrieve
      * @param int $pageSize the number of messages to return per page
      * @param RequestOpts|null $requestOptions

@@ -68,6 +68,7 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
      *
      * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
      *
+     * @param string $taskID unique identifier of the task
      * @param array{
      *   page?: int, recordsPerPage?: int
      * }|PhoneNumberAssignmentByProfileListPhoneNumberStatusParams $params
@@ -102,6 +103,7 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
      *
      * Check the status of the individual phone number/campaign assignments associated with the supplied `taskId`.
      *
+     * @param string $taskID unique identifier of the task
      * @param array{
      *   page?: int, recordsPerPage?: int
      * }|PhoneNumberAssignmentByProfileRetrievePhoneNumberStatusParams $params
@@ -136,6 +138,7 @@ final class PhoneNumberAssignmentByProfileRawService implements PhoneNumberAssig
      *
      * Check the status of the task associated with assigning all phone numbers on a messaging profile to a campaign by `taskId`.
      *
+     * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PhoneNumberAssignmentByProfileGetStatusResponse>

@@ -105,6 +105,7 @@ final class BrandRawService implements BrandRawContract
      *
      * Retrieve a brand by `brandId`.
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetResponse>
@@ -129,6 +130,7 @@ final class BrandRawService implements BrandRawContract
      *
      * Update a brand's attributes by `brandId`.
      *
+     * @param string $brandID unique identifier of the brand
      * @param array{
      *   country: string,
      *   displayName: string,
@@ -232,6 +234,7 @@ final class BrandRawService implements BrandRawContract
      *
      * Delete Brand. This endpoint is used to delete a brand. Note the brand cannot be deleted if it contains one or more active campaigns, the campaigns need to be inactive and at least 3 months old due to billing purposes.
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -268,6 +271,7 @@ final class BrandRawService implements BrandRawContract
      *   found.
      * * `OTHERS` - Details of the data misrepresentation if any.
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BrandGetFeedbackResponse>
@@ -332,6 +336,7 @@ final class BrandRawService implements BrandRawContract
      *
      * Resend brand 2FA email
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -387,6 +392,7 @@ final class BrandRawService implements BrandRawContract
      *
      * This operation allows you to revet the brand. However, revetting is allowed once after the successful brand registration and thereafter limited to once every 3 months.
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxBrand>

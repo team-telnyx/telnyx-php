@@ -48,6 +48,7 @@ interface TestsContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -60,6 +61,7 @@ interface TestsContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param string $description updated description of the test's purpose and evaluation criteria
      * @param string $destination updated target destination for test conversations
      * @param string $instructions updated test scenario instructions and objectives
@@ -109,6 +111,7 @@ interface TestsContract
     /**
      * @api
      *
+     * @param string $testID unique identifier of the test
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

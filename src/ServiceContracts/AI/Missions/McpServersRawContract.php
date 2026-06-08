@@ -19,6 +19,7 @@ interface McpServersRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -33,6 +34,7 @@ interface McpServersRawContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param array<string,mixed>|McpServerDeleteMcpServerParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -49,6 +51,7 @@ interface McpServersRawContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param array<string,mixed>|McpServerGetMcpServerParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -65,6 +68,7 @@ interface McpServersRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -79,6 +83,7 @@ interface McpServersRawContract
     /**
      * @api
      *
+     * @param string $mcpServerID unique identifier of the mcp server
      * @param array<string,mixed>|McpServerUpdateMcpServerParams $params
      * @param RequestOpts|null $requestOptions
      *

@@ -34,6 +34,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      *
      * Get list of valid external vetting record for a given brand
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<list<ExternalVettingListResponseItem>>
@@ -60,6 +61,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      * vetting provider. If the vetting provider confirms validity of the record, it will be
      * saved with the brand and will be considered for future campaign qualification.
      *
+     * @param string $brandID unique identifier of the brand
      * @param array{
      *   evpID: string, vettingID: string, vettingToken?: string
      * }|ExternalVettingImportsParams $params
@@ -96,6 +98,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      *
      * Duplicate orders for the same `evpId` and `vettingClass` return `400` with code `10012` if a successful vetting exists within the last 180 days, or one is currently being processed. Failed vettings can be retried immediately.
      *
+     * @param string $brandID unique identifier of the brand
      * @param array{
      *   evpID: string, vettingClass: string
      * }|ExternalVettingOrderParams $params

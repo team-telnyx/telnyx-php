@@ -24,8 +24,8 @@ interface PlanContract
     /**
      * @api
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
      * @param list<Step|StepShape> $steps Body param
      * @param RequestOpts|null $requestOptions
      *
@@ -41,6 +41,8 @@ interface PlanContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -54,8 +56,8 @@ interface PlanContract
     /**
      * @api
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
      * @param list<\Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanParams\Step|StepShape1> $steps Body param
      * @param RequestOpts|null $requestOptions
      *
@@ -71,6 +73,9 @@ interface PlanContract
     /**
      * @api
      *
+     * @param string $stepID unique identifier of the step
+     * @param string $missionID unique identifier of the mission
+     * @param string $runID unique identifier of the run
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -85,9 +90,9 @@ interface PlanContract
     /**
      * @api
      *
-     * @param string $stepID Path param
-     * @param string $missionID Path param
-     * @param string $runID Path param
+     * @param string $stepID path param: Unique identifier of the step
+     * @param string $missionID path param: Unique identifier of the mission
+     * @param string $runID path param: Unique identifier of the run
      * @param array<string,mixed> $metadata Body param
      * @param Status|value-of<Status> $status Body param
      * @param RequestOpts|null $requestOptions

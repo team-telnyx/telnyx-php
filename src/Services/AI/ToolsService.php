@@ -84,6 +84,7 @@ final class ToolsService implements ToolsContract
      *
      * Get Tool
      *
+     * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -103,6 +104,7 @@ final class ToolsService implements ToolsContract
      *
      * Update Tool
      *
+     * @param string $toolID unique identifier of the tool
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
@@ -148,6 +150,10 @@ final class ToolsService implements ToolsContract
      *
      * List Tools
      *
+     * @param string $filterName filter results by filter name
+     * @param string $filterType filter results by filter type
+     * @param int $pageNumber page number to retrieve (1-based)
+     * @param int $pageSize number of items to return per page
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<ToolListResponse>
@@ -181,6 +187,7 @@ final class ToolsService implements ToolsContract
      *
      * Delete Tool
      *
+     * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

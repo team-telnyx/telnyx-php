@@ -19,6 +19,7 @@ interface CanaryDeploysRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,mixed>|CanaryDeployCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -35,6 +36,7 @@ interface CanaryDeploysRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CanaryDeployResponse>
@@ -49,6 +51,7 @@ interface CanaryDeploysRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,mixed>|CanaryDeployUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -65,6 +68,7 @@ interface CanaryDeploysRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

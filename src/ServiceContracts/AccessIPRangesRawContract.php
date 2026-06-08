@@ -50,6 +50,7 @@ interface AccessIPRangesRawContract
     /**
      * @api
      *
+     * @param string $accessIPRangeID unique identifier of the access ip range
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccessIPRange>

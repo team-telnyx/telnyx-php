@@ -39,6 +39,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ToolGetResponse>
@@ -53,6 +54,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param array<string,mixed>|ToolUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -84,6 +86,7 @@ interface ToolsRawContract
     /**
      * @api
      *
+     * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

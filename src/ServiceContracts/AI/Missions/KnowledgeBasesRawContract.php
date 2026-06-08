@@ -19,6 +19,7 @@ interface KnowledgeBasesRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -33,6 +34,7 @@ interface KnowledgeBasesRawContract
     /**
      * @api
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
      * @param array<string,mixed>|KnowledgeBaseDeleteKnowledgeBaseParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -49,6 +51,7 @@ interface KnowledgeBasesRawContract
     /**
      * @api
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
      * @param array<string,mixed>|KnowledgeBaseGetKnowledgeBaseParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -65,6 +68,7 @@ interface KnowledgeBasesRawContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -79,6 +83,7 @@ interface KnowledgeBasesRawContract
     /**
      * @api
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
      * @param array<string,mixed>|KnowledgeBaseUpdateKnowledgeBaseParams $params
      * @param RequestOpts|null $requestOptions
      *

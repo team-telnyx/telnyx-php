@@ -36,6 +36,8 @@ final class BrandService implements BrandContract
      *
      * This endpoint allows you to see whether or not the supplied brand is suitable for your desired campaign use case.
      *
+     * @param string $usecase unique identifier of the usecase
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

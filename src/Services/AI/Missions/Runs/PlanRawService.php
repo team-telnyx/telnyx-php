@@ -40,7 +40,7 @@ final class PlanRawService implements PlanRawContract
      *
      * Create the initial plan for a run
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array{
      *   missionID: string, steps: list<Step|StepShape>
      * }|PlanCreateParams $params
@@ -77,6 +77,7 @@ final class PlanRawService implements PlanRawContract
      *
      * Get the plan (all steps) for a run
      *
+     * @param string $runID unique identifier of the run
      * @param array{missionID: string}|PlanRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -110,7 +111,7 @@ final class PlanRawService implements PlanRawContract
      *
      * Add one or more steps to an existing plan
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array{
      *   missionID: string,
      *   steps: list<PlanAddStepsToPlanParams\Step|StepShape1>,
@@ -148,6 +149,7 @@ final class PlanRawService implements PlanRawContract
      *
      * Get details of a specific plan step
      *
+     * @param string $stepID unique identifier of the step
      * @param array{missionID: string, runID: string}|PlanGetStepDetailsParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -188,7 +190,7 @@ final class PlanRawService implements PlanRawContract
      *
      * Update the status of a plan step
      *
-     * @param string $stepID Path param
+     * @param string $stepID path param: Unique identifier of the step
      * @param array{
      *   missionID: string,
      *   runID: string,

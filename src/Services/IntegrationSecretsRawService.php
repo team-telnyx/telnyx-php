@@ -111,6 +111,7 @@ final class IntegrationSecretsRawService implements IntegrationSecretsRawContrac
      *
      * Delete an integration secret given its ID.
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>

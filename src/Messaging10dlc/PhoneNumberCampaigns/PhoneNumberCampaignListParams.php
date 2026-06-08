@@ -37,9 +37,15 @@ final class PhoneNumberCampaignListParams implements BaseModel
     #[Optional]
     public ?Filter $filter;
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     #[Optional]
     public ?int $page;
 
+    /**
+     * Number of records to return per page.
+     */
     #[Optional]
     public ?int $recordsPerPage;
 
@@ -93,6 +99,9 @@ final class PhoneNumberCampaignListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     public function withPage(int $page): self
     {
         $self = clone $this;
@@ -101,6 +110,9 @@ final class PhoneNumberCampaignListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Number of records to return per page.
+     */
     public function withRecordsPerPage(int $recordsPerPage): self
     {
         $self = clone $this;

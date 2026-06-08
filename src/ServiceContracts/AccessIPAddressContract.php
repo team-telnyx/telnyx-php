@@ -32,6 +32,7 @@ interface AccessIPAddressContract
     /**
      * @api
      *
+     * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -61,6 +62,7 @@ interface AccessIPAddressContract
     /**
      * @api
      *
+     * @param string $accessIPAddressID unique identifier of the access ip address
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

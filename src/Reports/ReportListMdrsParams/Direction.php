@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Reports\ReportListMdrsParams;
 
 /**
- * Direction (inbound or outbound).
+ * Filter results by direction.
  */
 enum Direction: string
 {

@@ -17,6 +17,8 @@ interface TelnyxAgentsContract
     /**
      * @api
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -30,8 +32,8 @@ interface TelnyxAgentsContract
     /**
      * @api
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
      * @param string $telnyxAgentID Body param: The Telnyx AI agent ID to link
      * @param RequestOpts|null $requestOptions
      *
@@ -47,6 +49,9 @@ interface TelnyxAgentsContract
     /**
      * @api
      *
+     * @param string $telnyxAgentID unique identifier of the telnyx agent
+     * @param string $missionID unique identifier of the mission
+     * @param string $runID unique identifier of the run
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -66,6 +66,7 @@ final class InfringementClaimsService implements InfringementClaimsContract
      * - `404` - the claim does not exist or is not against a DIR you own.
      * - `422` - `contest_notes` is too short (< 10 chars), too long (> 2000 chars), `documents` is > 20 entries, or a `document_id` is duplicated within the same submission.
      *
+     * @param string $claimID unique identifier of the claim
      * @param string $contestNotes Customer's response to the claim. 10–2000 characters.
      * @param list<Document|DocumentShape> $documents Up to 20 supporting documents per submission. `document_id` must be unique within this submission. Documents are aggregated into the claim's `contest_documents` across all submissions.
      * @param RequestOpts|null $requestOptions

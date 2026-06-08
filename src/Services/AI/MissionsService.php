@@ -105,6 +105,7 @@ final class MissionsService implements MissionsContract
      *
      * Get a mission by ID (includes tools, knowledge_bases, mcp_servers)
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -152,6 +153,7 @@ final class MissionsService implements MissionsContract
      *
      * Clone an existing mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -171,6 +173,7 @@ final class MissionsService implements MissionsContract
      *
      * Delete a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -192,6 +195,7 @@ final class MissionsService implements MissionsContract
      *
      * @param int $pageNumber Page number (1-based)
      * @param int $pageSize Number of items per page
+     * @param string $type filter results by type
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<EventData>
@@ -219,6 +223,7 @@ final class MissionsService implements MissionsContract
      *
      * Update a mission definition
      *
+     * @param string $missionID unique identifier of the mission
      * @param \Telnyx\AI\Missions\MissionUpdateMissionParams\ExecutionMode|value-of<\Telnyx\AI\Missions\MissionUpdateMissionParams\ExecutionMode> $executionMode
      * @param array<string,mixed> $metadata
      * @param RequestOpts|null $requestOptions

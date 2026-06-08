@@ -74,6 +74,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      *
      * Get Advanced Order
      *
+     * @param string $orderID unique identifier of the order
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AdvancedOrderGetResponse>
@@ -121,6 +122,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      *
      * Update Advanced Order
      *
+     * @param string $advancedOrderID unique identifier of the advanced order
      * @param array{
      *   areaCode?: string,
      *   comments?: string,

@@ -39,6 +39,7 @@ final class ClustersService implements ClustersContract
      *
      * Fetch a cluster
      *
+     * @param string $taskID unique identifier of the task
      * @param bool $showSubclusters whether or not to include subclusters and their nodes in the response
      * @param int $topNNodes The number of nodes in the cluster to return in the response. Nodes will be sorted by their centrality within the cluster.
      * @param RequestOpts|null $requestOptions
@@ -92,6 +93,7 @@ final class ClustersService implements ClustersContract
      *
      * Delete a cluster
      *
+     * @param string $taskID unique identifier of the task
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -149,6 +151,8 @@ final class ClustersService implements ClustersContract
      *
      * Fetch a cluster visualization
      *
+     * @param string $taskID unique identifier of the task
+     * @param int $clusterID filter results by cluster id
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

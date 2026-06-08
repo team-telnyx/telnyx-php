@@ -136,6 +136,7 @@ interface ConversationsContract
     /**
      * @api
      *
+     * @param string $conversationID unique identifier of the conversation
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -24,9 +24,15 @@ final class PhoneNumberAssignmentByProfileListPhoneNumberStatusParams implements
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     #[Optional]
     public ?int $page;
 
+    /**
+     * Number of records to return per page.
+     */
     #[Optional]
     public ?int $recordsPerPage;
 
@@ -52,6 +58,9 @@ final class PhoneNumberAssignmentByProfileListPhoneNumberStatusParams implements
         return $self;
     }
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     public function withPage(int $page): self
     {
         $self = clone $this;
@@ -60,6 +69,9 @@ final class PhoneNumberAssignmentByProfileListPhoneNumberStatusParams implements
         return $self;
     }
 
+    /**
+     * Number of records to return per page.
+     */
     public function withRecordsPerPage(int $recordsPerPage): self
     {
         $self = clone $this;

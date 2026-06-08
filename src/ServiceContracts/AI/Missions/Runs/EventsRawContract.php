@@ -23,7 +23,7 @@ interface EventsRawContract
     /**
      * @api
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array<string,mixed>|EventListParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -40,6 +40,7 @@ interface EventsRawContract
     /**
      * @api
      *
+     * @param string $eventID unique identifier of the event
      * @param array<string,mixed>|EventGetEventDetailsParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -56,7 +57,7 @@ interface EventsRawContract
     /**
      * @api
      *
-     * @param string $runID Path param
+     * @param string $runID path param: Unique identifier of the run
      * @param array<string,mixed>|EventLogParams $params
      * @param RequestOpts|null $requestOptions
      *

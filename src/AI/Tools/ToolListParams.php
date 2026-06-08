@@ -27,15 +27,27 @@ final class ToolListParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Filter results by filter name.
+     */
     #[Optional]
     public ?string $filterName;
 
+    /**
+     * Filter results by filter type.
+     */
     #[Optional]
     public ?string $filterType;
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     #[Optional]
     public ?int $pageNumber;
 
+    /**
+     * Number of items to return per page.
+     */
     #[Optional]
     public ?int $pageSize;
 
@@ -65,6 +77,9 @@ final class ToolListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by filter name.
+     */
     public function withFilterName(string $filterName): self
     {
         $self = clone $this;
@@ -73,6 +88,9 @@ final class ToolListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by filter type.
+     */
     public function withFilterType(string $filterType): self
     {
         $self = clone $this;
@@ -81,6 +99,9 @@ final class ToolListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Page number to retrieve (1-based).
+     */
     public function withPageNumber(int $pageNumber): self
     {
         $self = clone $this;
@@ -89,6 +110,9 @@ final class ToolListParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Number of items to return per page.
+     */
     public function withPageSize(int $pageSize): self
     {
         $self = clone $this;

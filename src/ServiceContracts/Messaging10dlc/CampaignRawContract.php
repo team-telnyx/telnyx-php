@@ -26,6 +26,7 @@ interface CampaignRawContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<TelnyxCampaignCsp>
@@ -40,6 +41,7 @@ interface CampaignRawContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param array<string,mixed>|CampaignUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -86,6 +88,7 @@ interface CampaignRawContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CampaignDeactivateResponse>
@@ -115,6 +118,7 @@ interface CampaignRawContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>

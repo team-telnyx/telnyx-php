@@ -152,6 +152,7 @@ final class BrandService implements BrandContract
      *
      * Retrieve a brand by `brandId`.
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -171,6 +172,7 @@ final class BrandService implements BrandContract
      *
      * Update a brand's attributes by `brandId`.
      *
+     * @param string $brandID unique identifier of the brand
      * @param string $country ISO2 2 characters country code. Example: US - United States
      * @param string $displayName display or marketing name of the brand
      * @param string $email valid email address of brand support contact
@@ -272,8 +274,13 @@ final class BrandService implements BrandContract
      * This endpoint is used to list all brands associated with your organization.
      *
      * @param string $brandID Filter results by the Telnyx Brand id
+     * @param string $country filter results by country
+     * @param string $displayName filter results by display name
+     * @param string $entityType filter results by entity type
+     * @param int $page page number to retrieve (1-based)
      * @param int $recordsPerPage number of records per page. maximum of 500
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. If not given, results are sorted by createdAt in descending order.
+     * @param string $state filter results by state
      * @param string $tcrBrandID Filter results by the TCR Brand id
      * @param RequestOpts|null $requestOptions
      *
@@ -318,6 +325,7 @@ final class BrandService implements BrandContract
      *
      * Delete Brand. This endpoint is used to delete a brand. Note the brand cannot be deleted if it contains one or more active campaigns, the campaigns need to be inactive and at least 3 months old due to billing purposes.
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -349,6 +357,7 @@ final class BrandService implements BrandContract
      *   found.
      * * `OTHERS` - Details of the data misrepresentation if any.
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -399,6 +408,7 @@ final class BrandService implements BrandContract
      *
      * Resend brand 2FA email
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -444,6 +454,7 @@ final class BrandService implements BrandContract
      *
      * This operation allows you to revet the brand. However, revetting is allowed once after the successful brand registration and thereafter limited to once every 3 months.
      *
+     * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

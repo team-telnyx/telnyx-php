@@ -15,6 +15,7 @@ interface OsrContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>

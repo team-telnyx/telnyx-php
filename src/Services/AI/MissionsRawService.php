@@ -76,6 +76,7 @@ final class MissionsRawService implements MissionsRawContract
      *
      * Get a mission by ID (includes tools, knowledge_bases, mcp_servers)
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<MissionGetResponse>
@@ -135,6 +136,7 @@ final class MissionsRawService implements MissionsRawContract
      *
      * Clone an existing mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -159,6 +161,7 @@ final class MissionsRawService implements MissionsRawContract
      *
      * Delete a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -220,6 +223,7 @@ final class MissionsRawService implements MissionsRawContract
      *
      * Update a mission definition
      *
+     * @param string $missionID unique identifier of the mission
      * @param array{
      *   description?: string,
      *   executionMode?: MissionUpdateMissionParams\ExecutionMode|value-of<MissionUpdateMissionParams\ExecutionMode>,

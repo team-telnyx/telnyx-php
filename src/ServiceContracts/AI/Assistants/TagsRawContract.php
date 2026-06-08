@@ -34,6 +34,7 @@ interface TagsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,mixed>|TagAddParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -50,6 +51,7 @@ interface TagsRawContract
     /**
      * @api
      *
+     * @param string $tag unique identifier of the tag
      * @param array<string,mixed>|TagRemoveParams $params
      * @param RequestOpts|null $requestOptions
      *

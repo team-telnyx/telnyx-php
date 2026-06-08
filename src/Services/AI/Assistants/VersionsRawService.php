@@ -67,7 +67,7 @@ final class VersionsRawService implements VersionsRawContract
      *
      * Retrieves a specific version of an assistant by assistant_id and version_id
      *
-     * @param string $versionID Path param
+     * @param string $versionID path param: Unique identifier of the version
      * @param array{
      *   assistantID: string, includeMcpServers?: bool
      * }|VersionRetrieveParams $params
@@ -107,7 +107,7 @@ final class VersionsRawService implements VersionsRawContract
      *
      * Updates the configuration of a specific assistant version. Can not update main version
      *
-     * @param string $versionID Path param
+     * @param string $versionID path param: Unique identifier of the version
      * @param array{
      *   assistantID: string,
      *   conversationFlow?: ConversationFlow|ConversationFlowShape,
@@ -173,6 +173,7 @@ final class VersionsRawService implements VersionsRawContract
      *
      * Retrieves all versions of a specific assistant with complete configuration and metadata
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantsList>
@@ -197,6 +198,7 @@ final class VersionsRawService implements VersionsRawContract
      *
      * Permanently removes a specific version of an assistant. Can not delete main version
      *
+     * @param string $versionID unique identifier of the version
      * @param array{assistantID: string}|VersionDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -230,6 +232,7 @@ final class VersionsRawService implements VersionsRawContract
      *
      * Promotes a specific version to be the main/current version of the assistant. This will delete any existing canary deploy configuration and send all live production traffic to this version.
      *
+     * @param string $versionID unique identifier of the version
      * @param array{assistantID: string}|VersionPromoteParams $params
      * @param RequestOpts|null $requestOptions
      *

@@ -16,6 +16,7 @@ interface OsrRawContract
     /**
      * @api
      *
+     * @param string $campaignID unique identifier of the campaign
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>

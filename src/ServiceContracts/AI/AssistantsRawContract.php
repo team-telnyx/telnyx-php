@@ -42,6 +42,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,mixed>|AssistantRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -58,6 +59,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,mixed>|AssistantUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -87,6 +89,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AssistantDeleteResponse>
@@ -101,6 +104,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,mixed>|AssistantChatParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -117,6 +121,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<InferenceEmbedding>
@@ -131,6 +136,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<string>
@@ -160,6 +166,7 @@ interface AssistantsRawContract
     /**
      * @api
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param array<string,mixed>|AssistantSendSMSParams $params
      * @param RequestOpts|null $requestOptions
      *

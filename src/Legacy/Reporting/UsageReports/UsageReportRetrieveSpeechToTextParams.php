@@ -24,9 +24,15 @@ final class UsageReportRetrieveSpeechToTextParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $endDate;
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     #[Optional]
     public ?\DateTimeInterface $startDate;
 
@@ -52,6 +58,9 @@ final class UsageReportRetrieveSpeechToTextParams implements BaseModel
         return $self;
     }
 
+    /**
+     * End of the date range filter (inclusive, ISO 8601).
+     */
     public function withEndDate(\DateTimeInterface $endDate): self
     {
         $self = clone $this;
@@ -60,6 +69,9 @@ final class UsageReportRetrieveSpeechToTextParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Start of the date range filter (inclusive, ISO 8601).
+     */
     public function withStartDate(\DateTimeInterface $startDate): self
     {
         $self = clone $this;

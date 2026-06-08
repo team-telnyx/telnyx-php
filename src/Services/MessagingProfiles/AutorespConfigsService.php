@@ -42,6 +42,7 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * Create auto-response setting
      *
+     * @param string $profileID unique identifier of the profile
      * @param list<string> $keywords
      * @param Op|value-of<Op> $op
      * @param RequestOpts|null $requestOptions
@@ -76,6 +77,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * Get Auto-Response Setting
      *
+     * @param string $autorespCfgID unique identifier of the autoresp cfg
+     * @param string $profileID unique identifier of the profile
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -98,8 +101,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * Update Auto-Response Setting
      *
-     * @param string $autorespCfgID Path param
-     * @param string $profileID Path param
+     * @param string $autorespCfgID path param: Unique identifier of the autoresp cfg
+     * @param string $profileID path param: Unique identifier of the profile
      * @param string $countryCode Body param
      * @param list<string> $keywords Body param
      * @param \Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op|value-of<\Telnyx\MessagingProfiles\AutorespConfigs\AutorespConfigUpdateParams\Op> $op Body param
@@ -138,6 +141,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * List Auto-Response Settings
      *
+     * @param string $profileID unique identifier of the profile
+     * @param string $countryCode filter results by country code
      * @param CreatedAt|CreatedAtShape $createdAt Consolidated created_at parameter (deepObject style). Originally: created_at[gte], created_at[lte]
      * @param UpdatedAt|UpdatedAtShape $updatedAt Consolidated updated_at parameter (deepObject style). Originally: updated_at[gte], updated_at[lte]
      * @param RequestOpts|null $requestOptions
@@ -170,6 +175,8 @@ final class AutorespConfigsService implements AutorespConfigsContract
      *
      * Delete Auto-Response Setting
      *
+     * @param string $autorespCfgID unique identifier of the autoresp cfg
+     * @param string $profileID unique identifier of the profile
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

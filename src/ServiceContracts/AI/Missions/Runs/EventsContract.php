@@ -20,13 +20,13 @@ interface EventsContract
     /**
      * @api
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
-     * @param string $agentID Query param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
+     * @param string $agentID query param: Filter results by agent id
      * @param int $pageNumber Query param: Page number (1-based)
      * @param int $pageSize Query param: Number of items per page
-     * @param string $stepID Query param
-     * @param string $type Query param
+     * @param string $stepID query param: Filter results by step id
+     * @param string $type query param: Filter results by type
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<EventData>
@@ -47,6 +47,9 @@ interface EventsContract
     /**
      * @api
      *
+     * @param string $eventID unique identifier of the event
+     * @param string $missionID unique identifier of the mission
+     * @param string $runID unique identifier of the run
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -61,8 +64,8 @@ interface EventsContract
     /**
      * @api
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
      * @param string $summary Body param
      * @param Type|value-of<Type> $type Body param
      * @param string $agentID Body param

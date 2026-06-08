@@ -35,6 +35,8 @@ final class TelnyxAgentsService implements TelnyxAgentsContract
      *
      * List all Telnyx agents linked to a run
      *
+     * @param string $runID unique identifier of the run
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -57,8 +59,8 @@ final class TelnyxAgentsService implements TelnyxAgentsContract
      *
      * Link a Telnyx AI agent (voice/messaging) to a run
      *
-     * @param string $runID Path param
-     * @param string $missionID Path param
+     * @param string $runID path param: Unique identifier of the run
+     * @param string $missionID path param: Unique identifier of the mission
      * @param string $telnyxAgentID Body param: The Telnyx AI agent ID to link
      * @param RequestOpts|null $requestOptions
      *
@@ -85,6 +87,9 @@ final class TelnyxAgentsService implements TelnyxAgentsContract
      *
      * Unlink a Telnyx agent from a run
      *
+     * @param string $telnyxAgentID unique identifier of the telnyx agent
+     * @param string $missionID unique identifier of the mission
+     * @param string $runID unique identifier of the run
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

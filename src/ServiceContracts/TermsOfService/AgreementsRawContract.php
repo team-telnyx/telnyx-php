@@ -20,6 +20,7 @@ interface AgreementsRawContract
     /**
      * @api
      *
+     * @param string $agreementID unique identifier of the agreement
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AgreementGetResponse>

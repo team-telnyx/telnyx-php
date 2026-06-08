@@ -40,6 +40,7 @@ final class ScheduledEventsService implements ScheduledEventsContract
      *
      * Create a scheduled event for an assistant
      *
+     * @param string $assistantID unique identifier of the assistant
      * @param \DateTimeInterface $scheduledAtFixedDatetime The datetime at which the event should be scheduled. Formatted as ISO 8601.
      * @param string $telnyxAgentTarget the phone number, SIP URI, to schedule the call or text from
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
@@ -90,6 +91,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
      *
      * Retrieve a scheduled event by event ID
      *
+     * @param string $eventID unique identifier of the event
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -112,7 +115,10 @@ final class ScheduledEventsService implements ScheduledEventsContract
      *
      * Get scheduled events for an assistant with pagination and filtering
      *
-     * @param ConversationChannelType|value-of<ConversationChannelType> $conversationChannel
+     * @param string $assistantID unique identifier of the assistant
+     * @param ConversationChannelType|value-of<ConversationChannelType> $conversationChannel filter results by conversation channel
+     * @param \DateTimeInterface $fromDate start of the date range filter (inclusive, ISO 8601)
+     * @param \DateTimeInterface $toDate end of the date range filter (inclusive, ISO 8601)
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<ScheduledPhoneCallEventResponse|ScheduledSMSEventResponse,>
@@ -149,6 +155,8 @@ final class ScheduledEventsService implements ScheduledEventsContract
      *
      * If the event is pending, this will cancel the event. Otherwise, this will simply remove the record of the event.
      *
+     * @param string $eventID unique identifier of the event
+     * @param string $assistantID unique identifier of the assistant
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

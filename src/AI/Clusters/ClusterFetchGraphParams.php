@@ -22,6 +22,9 @@ final class ClusterFetchGraphParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
+    /**
+     * Filter results by cluster id.
+     */
     #[Optional]
     public ?int $clusterID;
 
@@ -44,6 +47,9 @@ final class ClusterFetchGraphParams implements BaseModel
         return $self;
     }
 
+    /**
+     * Filter results by cluster id.
+     */
     public function withClusterID(int $clusterID): self
     {
         $self = clone $this;

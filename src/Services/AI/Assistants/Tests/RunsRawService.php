@@ -34,6 +34,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Retrieves detailed information about a specific test run execution
      *
+     * @param string $runID unique identifier of the run
      * @param array{testID: string}|RunRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -67,6 +68,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Retrieves paginated execution history for a specific assistant test with filtering options
      *
+     * @param string $testID unique identifier of the test
      * @param array{
      *   pageNumber?: int, pageSize?: int, status?: string
      * }|RunListParams $params
@@ -105,6 +107,7 @@ final class RunsRawService implements RunsRawContract
      *
      * Initiates immediate execution of a specific assistant test
      *
+     * @param string $testID unique identifier of the test
      * @param array{destinationVersionID?: string}|RunTriggerParams $params
      * @param RequestOpts|null $requestOptions
      *

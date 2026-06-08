@@ -37,6 +37,7 @@ interface AdvancedOrdersRawContract
     /**
      * @api
      *
+     * @param string $orderID unique identifier of the order
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AdvancedOrderGetResponse>
@@ -64,6 +65,7 @@ interface AdvancedOrdersRawContract
     /**
      * @api
      *
+     * @param string $advancedOrderID unique identifier of the advanced order
      * @param array<string,mixed>|AdvancedOrderUpdateRequirementGroupParams $params
      * @param RequestOpts|null $requestOptions
      *

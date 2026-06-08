@@ -37,6 +37,7 @@ final class RunsService implements RunsContract
      *
      * Retrieves paginated history of test runs for a specific test suite with filtering options
      *
+     * @param string $suiteName name of the suite
      * @param string $status Filter runs by execution status (pending, running, completed, failed, timeout)
      * @param string $testSuiteRunID Filter runs by specific suite execution batch ID
      * @param RequestOpts|null $requestOptions
@@ -73,6 +74,7 @@ final class RunsService implements RunsContract
      *
      * Executes all tests within a specific test suite as a batch operation
      *
+     * @param string $suiteName name of the suite
      * @param string $destinationVersionID Optional assistant version ID to use for all test runs in this suite. If provided, the version must exist or a 400 error will be returned. If not provided, test will run on main version
      * @param RequestOpts|null $requestOptions
      *

@@ -66,6 +66,7 @@ final class SpeechToTextRawService implements SpeechToTextRawContract
      *
      * Retrieves a specific Speech to Text batch report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SpeechToTextGetResponse>
@@ -113,6 +114,7 @@ final class SpeechToTextRawService implements SpeechToTextRawContract
      *
      * Deletes a specific Speech to Text batch report request by ID
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<SpeechToTextDeleteResponse>

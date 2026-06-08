@@ -15,6 +15,7 @@ interface KnowledgeBasesContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -27,6 +28,8 @@ interface KnowledgeBasesContract
     /**
      * @api
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -40,6 +43,8 @@ interface KnowledgeBasesContract
     /**
      * @api
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -53,6 +58,7 @@ interface KnowledgeBasesContract
     /**
      * @api
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -65,6 +71,8 @@ interface KnowledgeBasesContract
     /**
      * @api
      *
+     * @param string $knowledgeBaseID unique identifier of the knowledge base
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

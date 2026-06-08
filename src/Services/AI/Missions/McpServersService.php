@@ -33,6 +33,7 @@ final class McpServersService implements McpServersContract
      *
      * Create a new MCP server for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -52,6 +53,8 @@ final class McpServersService implements McpServersContract
      *
      * Delete an MCP server from a mission
      *
+     * @param string $mcpServerID unique identifier of the mcp server
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -74,6 +77,8 @@ final class McpServersService implements McpServersContract
      *
      * Get a specific MCP server by ID
      *
+     * @param string $mcpServerID unique identifier of the mcp server
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -96,6 +101,7 @@ final class McpServersService implements McpServersContract
      *
      * List all MCP servers for a mission
      *
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -115,6 +121,8 @@ final class McpServersService implements McpServersContract
      *
      * Update an MCP server definition
      *
+     * @param string $mcpServerID unique identifier of the mcp server
+     * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

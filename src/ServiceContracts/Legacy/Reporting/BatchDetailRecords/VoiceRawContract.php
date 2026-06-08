@@ -37,6 +37,7 @@ interface VoiceRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceGetResponse>
@@ -64,6 +65,7 @@ interface VoiceRawContract
     /**
      * @api
      *
+     * @param string $id unique identifier of the resource
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<VoiceDeleteResponse>
