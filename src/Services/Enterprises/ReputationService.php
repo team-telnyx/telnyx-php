@@ -98,10 +98,10 @@ final class ReputationService implements ReputationContract
      * **Prerequisite**: the calling user must have agreed to the Phone Number Reputation Terms of Service (`POST /terms_of_service/number_reputation/agree`).
      *
      * Failure modes:
-     * - `403` — Phone Number Reputation Terms of Service not accepted.
-     * - `404` — enterprise does not exist or does not belong to your account.
-     * - `400` — reputation already enabled for this enterprise.
-     * - `422` — `loa_document_id` missing or `check_frequency` invalid.
+     * - `403` - Phone Number Reputation Terms of Service not accepted.
+     * - `404` - enterprise does not exist or does not belong to your account.
+     * - `400` - reputation already enabled for this enterprise.
+     * - `422` - `loa_document_id` missing or `check_frequency` invalid.
      *
      * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
      *

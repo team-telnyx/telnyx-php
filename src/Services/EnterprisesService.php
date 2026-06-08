@@ -78,8 +78,8 @@ final class EnterprisesService implements EnterprisesContract
      * The response carries a server-assigned `id` you use for every subsequent call. An enterprise is created once and reused; the API collects all required fields up front.
      *
      * Common failure modes:
-     * - `422` — a required field is missing or malformed (the response `errors[].source.pointer` names the field).
-     * - `409` — an enterprise with the same identifying details already exists under your account.
+     * - `422` - a required field is missing or malformed (the response `errors[].source.pointer` names the field).
+     * - `409` - an enterprise with the same identifying details already exists under your account.
      *
      * @param BillingAddress|BillingAddressShape $billingAddress
      * @param BillingContact|BillingContactShape $billingContact
@@ -90,16 +90,16 @@ final class EnterprisesService implements EnterprisesContract
      * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees Approximate headcount range. Used for vetting heuristics; pick the bucket that contains your current employee count.
      * @param OrganizationContact|OrganizationContactShape $organizationContact
      * @param OrganizationLegalType|value-of<OrganizationLegalType> $organizationLegalType Legal-entity form. Pick the form that matches your incorporation documents:
-     * - `corporation` — C-corp or S-corp.
-     * - `llc` — limited liability company.
-     * - `partnership` — general/limited partnership.
-     * - `nonprofit` — non-profit corporation, charitable trust, or 501(c)(3)/equivalent.
-     * - `other` — anything else (sole proprietorships, government bodies, DBAs, etc.). You may be asked for additional documents during vetting.
+     * - `corporation` - C-corp or S-corp.
+     * - `llc` - limited liability company.
+     * - `partnership` - general/limited partnership.
+     * - `nonprofit` - non-profit corporation, charitable trust, or 501(c)(3)/equivalent.
+     * - `other` - anything else (sole proprietorships, government bodies, DBAs, etc.). You may be asked for additional documents during vetting.
      * @param PhysicalAddress|PhysicalAddressShape $organizationPhysicalAddress
      * @param OrganizationType|value-of<OrganizationType> $organizationType Organization category for vetting purposes:
-     * - `commercial` — for-profit business entities (LLC, corp, partnership, sole proprietorship). Most callers fall here.
-     * - `government` — federal/state/local government bodies.
-     * - `non_profit` — registered 501(c)(3)/equivalent (incl. educational institutions, charities, religious organisations).
+     * - `commercial` - for-profit business entities (LLC, corp, partnership, sole proprietorship). Most callers fall here.
+     * - `government` - federal/state/local government bodies.
+     * - `non_profit` - registered 501(c)(3)/equivalent (incl. educational institutions, charities, religious organisations).
      * @param string|null $corporateRegistrationNumber optional corporate-registration / company-number identifier
      * @param string $customerReference Optional free-form string the caller can attach for their own bookkeeping. Telnyx does not interpret it.
      * @param string|null $dunBradstreetNumber optional D-U-N-S Number
@@ -293,9 +293,9 @@ final class EnterprisesService implements EnterprisesContract
      * Soft-delete an enterprise.
      *
      * Failure modes:
-     * - `400` — the enterprise still has dependent resources in a non-deletable state. Remove those first; the response `detail` identifies what is blocking the delete.
-     * - `409` — the enterprise has a dependent resource with an unresolved claim. Resolve it before deleting.
-     * - `404` — the enterprise does not exist or does not belong to your account.
+     * - `400` - the enterprise still has dependent resources in a non-deletable state. Remove those first; the response `detail` identifies what is blocking the delete.
+     * - `409` - the enterprise has a dependent resource with an unresolved claim. Resolve it before deleting.
+     * - `404` - the enterprise does not exist or does not belong to your account.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
@@ -323,8 +323,8 @@ final class EnterprisesService implements EnterprisesContract
      * Prerequisite: the calling user must have agreed to the Branded Calling Terms of Service (`POST /terms_of_service/branded_calling/agree`). Without that, this endpoint returns `403 terms_of_service_not_accepted`.
      *
      * Failure modes:
-     * - `403` — Branded Calling Terms of Service not accepted.
-     * - `404` — enterprise does not exist or does not belong to your account.
+     * - `403` - Branded Calling Terms of Service not accepted.
+     * - `404` - enterprise does not exist or does not belong to your account.
      *
      * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
      *

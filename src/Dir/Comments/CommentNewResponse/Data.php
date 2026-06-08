@@ -69,7 +69,7 @@ final class Data implements BaseModel
     public ?string $entityType;
 
     /**
-     * Always `customer` on this endpoint — internal-only comments are filtered out.
+     * Always `customer` on this endpoint - internal-only comments are filtered out.
      *
      * @var value-of<Visibility>|null $visibility
      */
@@ -190,7 +190,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * Always `customer` on this endpoint — internal-only comments are filtered out.
+     * Always `customer` on this endpoint - internal-only comments are filtered out.
      *
      * @param Visibility|value-of<Visibility> $visibility
      */

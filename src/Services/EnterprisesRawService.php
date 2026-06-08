@@ -54,8 +54,8 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * The response carries a server-assigned `id` you use for every subsequent call. An enterprise is created once and reused; the API collects all required fields up front.
      *
      * Common failure modes:
-     * - `422` — a required field is missing or malformed (the response `errors[].source.pointer` names the field).
-     * - `409` — an enterprise with the same identifying details already exists under your account.
+     * - `422` - a required field is missing or malformed (the response `errors[].source.pointer` names the field).
+     * - `409` - an enterprise with the same identifying details already exists under your account.
      *
      * @param array{
      *   billingAddress: BillingAddress|BillingAddressShape,
@@ -231,9 +231,9 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * Soft-delete an enterprise.
      *
      * Failure modes:
-     * - `400` — the enterprise still has dependent resources in a non-deletable state. Remove those first; the response `detail` identifies what is blocking the delete.
-     * - `409` — the enterprise has a dependent resource with an unresolved claim. Resolve it before deleting.
-     * - `404` — the enterprise does not exist or does not belong to your account.
+     * - `400` - the enterprise still has dependent resources in a non-deletable state. Remove those first; the response `detail` identifies what is blocking the delete.
+     * - `409` - the enterprise has a dependent resource with an unresolved claim. Resolve it before deleting.
+     * - `404` - the enterprise does not exist or does not belong to your account.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
@@ -266,8 +266,8 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * Prerequisite: the calling user must have agreed to the Branded Calling Terms of Service (`POST /terms_of_service/branded_calling/agree`). Without that, this endpoint returns `403 terms_of_service_not_accepted`.
      *
      * Failure modes:
-     * - `403` — Branded Calling Terms of Service not accepted.
-     * - `404` — enterprise does not exist or does not belong to your account.
+     * - `403` - Branded Calling Terms of Service not accepted.
+     * - `404` - enterprise does not exist or does not belong to your account.
      *
      * **Pricing:** This is a billable action. See https://telnyx.com/pricing/numbers for current pricing.
      *
