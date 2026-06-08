@@ -30,7 +30,7 @@ final class PhoneNumberAddParams implements BaseModel
     use SdkParams;
 
     /**
-     * Supporting documents covering this batch. At least one entry with `document_type: letter_of_authorization` is required — the LOA authorises Telnyx to register these numbers under the DIR. Each `document_id` must come from the Telnyx Documents API. Additional document types (e.g. business registration) may be included alongside the LOA.
+     * Supporting documents covering this batch. At least one entry with `document_type: letter_of_authorization` is required - the LOA authorises Telnyx to register these numbers under the DIR. Each `document_id` must come from the Telnyx Documents API. Additional document types (e.g. business registration) may be included alongside the LOA.
      *
      * @var list<Document> $documents
      */
@@ -83,7 +83,7 @@ final class PhoneNumberAddParams implements BaseModel
     }
 
     /**
-     * Supporting documents covering this batch. At least one entry with `document_type: letter_of_authorization` is required — the LOA authorises Telnyx to register these numbers under the DIR. Each `document_id` must come from the Telnyx Documents API. Additional document types (e.g. business registration) may be included alongside the LOA.
+     * Supporting documents covering this batch. At least one entry with `document_type: letter_of_authorization` is required - the LOA authorises Telnyx to register these numbers under the DIR. Each `document_id` must come from the Telnyx Documents API. Additional document types (e.g. business registration) may be included alongside the LOA.
      *
      * @param list<Document|DocumentShape> $documents
      */

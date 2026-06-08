@@ -66,7 +66,7 @@ final class CallReasonsService implements CallReasonsContract
      *
      * Check up to 10 candidate `call_reasons` strings against Telnyx's vetting heuristics before sending them on a DIR create or update. The endpoint flags strings that are likely to be rejected during vetting (too generic, banned phrases, length issues, etc.) so you can fix them up front.
      *
-     * @param list<string> $body **Bare JSON array** of candidate call-reason strings (NOT an object — there is no top-level `call_reasons` key on this endpoint). 1–10 strings, each ≤64 characters.
+     * @param list<string> $body **Bare JSON array** of candidate call-reason strings (NOT an object - there is no top-level `call_reasons` key on this endpoint). 1–10 strings, each ≤64 characters.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

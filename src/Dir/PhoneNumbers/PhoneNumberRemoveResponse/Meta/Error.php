@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberRemoveResponse\Meta\Error\Code;
 
 /**
- * Per-number error returned by the bulk-delete endpoint. Bulk-add does not use this shape — it returns a 400 with the canonical envelope grouping numbers by failure category.
+ * Per-number error returned by the bulk-delete endpoint. Bulk-add does not use this shape - it returns a 400 with the canonical envelope grouping numbers by failure category.
  *
  * @phpstan-type ErrorShape = array{
  *   code: Code|value-of<Code>, detail: string, phoneNumber: string, title: string

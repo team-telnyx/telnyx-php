@@ -43,16 +43,16 @@ interface EnterprisesContract
      * @param NumberOfEmployees|value-of<NumberOfEmployees> $numberOfEmployees Approximate headcount range. Used for vetting heuristics; pick the bucket that contains your current employee count.
      * @param OrganizationContact|OrganizationContactShape $organizationContact
      * @param OrganizationLegalType|value-of<OrganizationLegalType> $organizationLegalType Legal-entity form. Pick the form that matches your incorporation documents:
-     * - `corporation` — C-corp or S-corp.
-     * - `llc` — limited liability company.
-     * - `partnership` — general/limited partnership.
-     * - `nonprofit` — non-profit corporation, charitable trust, or 501(c)(3)/equivalent.
-     * - `other` — anything else (sole proprietorships, government bodies, DBAs, etc.). You may be asked for additional documents during vetting.
+     * - `corporation` - C-corp or S-corp.
+     * - `llc` - limited liability company.
+     * - `partnership` - general/limited partnership.
+     * - `nonprofit` - non-profit corporation, charitable trust, or 501(c)(3)/equivalent.
+     * - `other` - anything else (sole proprietorships, government bodies, DBAs, etc.). You may be asked for additional documents during vetting.
      * @param PhysicalAddress|PhysicalAddressShape $organizationPhysicalAddress
      * @param OrganizationType|value-of<OrganizationType> $organizationType Organization category for vetting purposes:
-     * - `commercial` — for-profit business entities (LLC, corp, partnership, sole proprietorship). Most callers fall here.
-     * - `government` — federal/state/local government bodies.
-     * - `non_profit` — registered 501(c)(3)/equivalent (incl. educational institutions, charities, religious organisations).
+     * - `commercial` - for-profit business entities (LLC, corp, partnership, sole proprietorship). Most callers fall here.
+     * - `government` - federal/state/local government bodies.
+     * - `non_profit` - registered 501(c)(3)/equivalent (incl. educational institutions, charities, religious organisations).
      * @param string|null $corporateRegistrationNumber optional corporate-registration / company-number identifier
      * @param string $customerReference Optional free-form string the caller can attach for their own bookkeeping. Telnyx does not interpret it.
      * @param string|null $dunBradstreetNumber optional D-U-N-S Number

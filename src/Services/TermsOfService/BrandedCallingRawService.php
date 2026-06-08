@@ -27,7 +27,7 @@ final class BrandedCallingRawService implements BrandedCallingRawContract
     /**
      * @api
      *
-     * Records the authenticated user's agreement to the current Branded Calling ToS. No body required. Idempotent — re-calling after agreement is a no-op and returns the existing agreement.
+     * Records the authenticated user's agreement to the current Branded Calling ToS. No body required. Idempotent - re-calling after agreement is a no-op and returns the existing agreement.
      *
      * This is a prerequisite for activating Branded Calling on any enterprise (`POST /enterprises/{id}/branded_calling`); without an agreement, activation returns `403`.
      *

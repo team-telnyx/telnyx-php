@@ -61,9 +61,9 @@ final class InfringementClaimsRawService implements InfringementClaimsRawContrac
      * Only `pending` and `contested` claims accept new evidence. A `resolved` claim returns `400`.
      *
      * Failure modes:
-     * - `400` — the claim is `resolved` (terminal); cannot be contested further.
-     * - `404` — the claim does not exist or is not against a DIR you own.
-     * - `422` — `contest_notes` is too short (< 10 chars), too long (> 2000 chars), `documents` is > 20 entries, or a `document_id` is duplicated within the same submission.
+     * - `400` - the claim is `resolved` (terminal); cannot be contested further.
+     * - `404` - the claim does not exist or is not against a DIR you own.
+     * - `422` - `contest_notes` is too short (< 10 chars), too long (> 2000 chars), `documents` is > 20 entries, or a `document_id` is duplicated within the same submission.
      *
      * @param array{
      *   contestNotes: string, documents?: list<Document|DocumentShape>

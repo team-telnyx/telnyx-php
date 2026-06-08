@@ -35,7 +35,7 @@ interface CallReasonsContract
     /**
      * @api
      *
-     * @param list<string> $body **Bare JSON array** of candidate call-reason strings (NOT an object — there is no top-level `call_reasons` key on this endpoint). 1–10 strings, each ≤64 characters.
+     * @param list<string> $body **Bare JSON array** of candidate call-reason strings (NOT an object - there is no top-level `call_reasons` key on this endpoint). 1–10 strings, each ≤64 characters.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
