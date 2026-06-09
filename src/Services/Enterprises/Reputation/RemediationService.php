@@ -44,8 +44,8 @@ final class RemediationService implements RemediationContract
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param string $callPurpose how the numbers are used (free text)
-     * @param string $contactEmail contact email for tracking this request
      * @param list<string> $phoneNumbers Phone numbers in E.164 format. Each must belong to this enterprise. Maximum 2,000 per request.
+     * @param string $contactEmail optional contact email for this remediation request
      * @param string $webhookURL optional https:// URL for status notifications
      * @param RequestOpts|null $requestOptions
      *
@@ -54,16 +54,16 @@ final class RemediationService implements RemediationContract
     public function create(
         string $enterpriseID,
         string $callPurpose,
-        string $contactEmail,
         array $phoneNumbers,
+        ?string $contactEmail = null,
         ?string $webhookURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): RemediationNewResponse {
         $params = Util::removeNulls(
             [
                 'callPurpose' => $callPurpose,
-                'contactEmail' => $contactEmail,
                 'phoneNumbers' => $phoneNumbers,
+                'contactEmail' => $contactEmail,
                 'webhookURL' => $webhookURL,
             ],
         );

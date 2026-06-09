@@ -19,8 +19,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type RemediationCreateParamsShape = array{
  *   callPurpose: string,
- *   contactEmail: string,
  *   phoneNumbers: list<string>,
+ *   contactEmail?: string|null,
  *   webhookURL?: string|null,
  * }
  */
@@ -37,18 +37,18 @@ final class RemediationCreateParams implements BaseModel
     public string $callPurpose;
 
     /**
-     * Contact email for tracking this request.
-     */
-    #[Required('contact_email')]
-    public string $contactEmail;
-
-    /**
      * Phone numbers in E.164 format. Each must belong to this enterprise. Maximum 2,000 per request.
      *
      * @var list<string> $phoneNumbers
      */
     #[Required('phone_numbers', list: 'string')]
     public array $phoneNumbers;
+
+    /**
+     * Optional contact email for this remediation request.
+     */
+    #[Optional('contact_email')]
+    public ?string $contactEmail;
 
     /**
      * Optional https:// URL for status notifications.
@@ -61,18 +61,13 @@ final class RemediationCreateParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * RemediationCreateParams::with(
-     *   callPurpose: ..., contactEmail: ..., phoneNumbers: ...
-     * )
+     * RemediationCreateParams::with(callPurpose: ..., phoneNumbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new RemediationCreateParams)
-     *   ->withCallPurpose(...)
-     *   ->withContactEmail(...)
-     *   ->withPhoneNumbers(...)
+     * (new RemediationCreateParams)->withCallPurpose(...)->withPhoneNumbers(...)
      * ```
      */
     public function __construct()
@@ -89,16 +84,16 @@ final class RemediationCreateParams implements BaseModel
      */
     public static function with(
         string $callPurpose,
-        string $contactEmail,
         array $phoneNumbers,
+        ?string $contactEmail = null,
         ?string $webhookURL = null,
     ): self {
         $self = new self;
 
         $self['callPurpose'] = $callPurpose;
-        $self['contactEmail'] = $contactEmail;
         $self['phoneNumbers'] = $phoneNumbers;
 
+        null !== $contactEmail && $self['contactEmail'] = $contactEmail;
         null !== $webhookURL && $self['webhookURL'] = $webhookURL;
 
         return $self;
@@ -116,17 +111,6 @@ final class RemediationCreateParams implements BaseModel
     }
 
     /**
-     * Contact email for tracking this request.
-     */
-    public function withContactEmail(string $contactEmail): self
-    {
-        $self = clone $this;
-        $self['contactEmail'] = $contactEmail;
-
-        return $self;
-    }
-
-    /**
      * Phone numbers in E.164 format. Each must belong to this enterprise. Maximum 2,000 per request.
      *
      * @param list<string> $phoneNumbers
@@ -135,6 +119,17 @@ final class RemediationCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['phoneNumbers'] = $phoneNumbers;
+
+        return $self;
+    }
+
+    /**
+     * Optional contact email for this remediation request.
+     */
+    public function withContactEmail(string $contactEmail): self
+    {
+        $self = clone $this;
+        $self['contactEmail'] = $contactEmail;
 
         return $self;
     }
