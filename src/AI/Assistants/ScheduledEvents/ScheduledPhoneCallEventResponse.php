@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse\CallAttempt;
+use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse\CallSettings;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse\ConversationMetadata;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -14,6 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * @phpstan-import-type ConversationMetadataVariants from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse\ConversationMetadata
  * @phpstan-import-type CallAttemptShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse\CallAttempt
+ * @phpstan-import-type CallSettingsShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse\CallSettings
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledPhoneCallEventResponse\ConversationMetadata
  *
  * @phpstan-type ScheduledPhoneCallEventResponseShape = array{
@@ -24,6 +26,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   telnyxEndUserTarget: string,
  *   callAttempts?: list<CallAttempt|CallAttemptShape>|null,
  *   callDuration?: int|null,
+ *   callSettings?: null|CallSettings|CallSettingsShape,
  *   callStatus?: string|null,
  *   conversationID?: string|null,
  *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
@@ -72,6 +75,14 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
      */
     #[Optional('call_duration')]
     public ?int $callDuration;
+
+    /**
+     * Per-call telephony overrides applied when a scheduled phone-call event
+     * dispatches. Phone-call events only. New per-call dispatch options should be
+     * added here rather than as top-level event fields.
+     */
+    #[Optional('call_settings')]
+    public ?CallSettings $callSettings;
 
     /**
      * Values: busy, canceled, no-answer, ringing, completed, failed, in-progress.
@@ -166,6 +177,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
      * @param list<CallAttempt|CallAttemptShape>|null $callAttempts
+     * @param CallSettings|CallSettingsShape|null $callSettings
      * @param array<string,ConversationMetadataShape>|null $conversationMetadata
      * @param array<string,string>|null $dynamicVariables
      * @param list<string>|null $errors
@@ -179,6 +191,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
         string $telnyxEndUserTarget,
         ?array $callAttempts = null,
         ?int $callDuration = null,
+        CallSettings|array|null $callSettings = null,
         ?string $callStatus = null,
         ?string $conversationID = null,
         ?array $conversationMetadata = null,
@@ -203,6 +216,7 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
 
         null !== $callAttempts && $self['callAttempts'] = $callAttempts;
         null !== $callDuration && $self['callDuration'] = $callDuration;
+        null !== $callSettings && $self['callSettings'] = $callSettings;
         null !== $callStatus && $self['callStatus'] = $callStatus;
         null !== $conversationID && $self['conversationID'] = $conversationID;
         null !== $conversationMetadata && $self['conversationMetadata'] = $conversationMetadata;
@@ -283,6 +297,21 @@ final class ScheduledPhoneCallEventResponse implements BaseModel
     {
         $self = clone $this;
         $self['callDuration'] = $callDuration;
+
+        return $self;
+    }
+
+    /**
+     * Per-call telephony overrides applied when a scheduled phone-call event
+     * dispatches. Phone-call events only. New per-call dispatch options should be
+     * added here rather than as top-level event fields.
+     *
+     * @param CallSettings|CallSettingsShape $callSettings
+     */
+    public function withCallSettings(CallSettings|array $callSettings): self
+    {
+        $self = clone $this;
+        $self['callSettings'] = $callSettings;
 
         return $self;
     }
