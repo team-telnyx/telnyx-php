@@ -41,7 +41,6 @@ final class RemediationTest extends TestCase
         $result = $this->client->enterprises->reputation->remediation->create(
             '4a6192a4-573d-446d-b3ce-aff9117272a6',
             callPurpose: 'Appointment reminders for our dental clinic.',
-            contactEmail: 'ops@example.com',
             phoneNumbers: ['+19493253498', '+12134445566'],
         );
 
@@ -59,8 +58,8 @@ final class RemediationTest extends TestCase
         $result = $this->client->enterprises->reputation->remediation->create(
             '4a6192a4-573d-446d-b3ce-aff9117272a6',
             callPurpose: 'Appointment reminders for our dental clinic.',
-            contactEmail: 'ops@example.com',
             phoneNumbers: ['+19493253498', '+12134445566'],
+            contactEmail: 'ops@example.com',
             webhookURL: 'https://example.com/webhooks/remediation',
         );
 

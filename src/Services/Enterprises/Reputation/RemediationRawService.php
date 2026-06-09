@@ -42,8 +42,8 @@ final class RemediationRawService implements RemediationRawContract
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
      *   callPurpose: string,
-     *   contactEmail: string,
      *   phoneNumbers: list<string>,
+     *   contactEmail?: string,
      *   webhookURL?: string,
      * }|RemediationCreateParams $params
      * @param RequestOpts|null $requestOptions
