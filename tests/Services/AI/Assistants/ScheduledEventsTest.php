@@ -65,6 +65,7 @@ final class ScheduledEventsTest extends TestCase
             telnyxAgentTarget: 'telnyx_agent_target',
             telnyxConversationChannel: ConversationChannelType::PHONE_CALL,
             telnyxEndUserTarget: 'telnyx_end_user_target',
+            callSettings: ['sipRegion' => 'US'],
             conversationMetadata: ['foo' => 'string'],
             dynamicVariables: ['foo' => 'string'],
             maxRetriesClientErrors: 0,
