@@ -1,5 +1,18 @@
 # Changelog
 
+## 7.79.0 (2026-06-09)
+
+Full Changelog: [v7.78.0...v7.79.0](https://github.com/team-telnyx/telnyx-php/compare/v7.78.0...v7.79.0)
+
+### Features
+
+* Add sip region to scheduled events ([1dc4c66](https://github.com/team-telnyx/telnyx-php/commit/1dc4c661285e75d7fb71c8b52193dd96838a24da))
+
+
+### Bug Fixes
+
+* **number-reputation:** remediation contact_email is optional ([8166506](https://github.com/team-telnyx/telnyx-php/commit/8166506a1010bc55170959e42c4bb9f08155092f))
+
 ## 7.78.0 (2026-06-08)
 
 Full Changelog: [v7.77.0...v7.78.0](https://github.com/team-telnyx/telnyx-php/compare/v7.77.0...v7.78.0)
