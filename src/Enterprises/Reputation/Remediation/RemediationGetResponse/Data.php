@@ -19,13 +19,13 @@ use Telnyx\Enterprises\Reputation\Remediation\RemediationGetResponse\Data\Status
  * @phpstan-type DataShape = array{
  *   id: string,
  *   callPurpose: string,
- *   contactEmail: string,
  *   createdAt: \DateTimeInterface,
  *   phoneNumbersCount: int,
  *   phoneNumbersIneligible: int,
  *   phoneNumbersSubmitted: int,
  *   status: Status|value-of<Status>,
  *   updatedAt: \DateTimeInterface,
+ *   contactEmail?: string|null,
  *   results?: null|Results|ResultsShape,
  *   tier1CompletedAt?: \DateTimeInterface|null,
  *   tier2CompletedAt?: \DateTimeInterface|null,
@@ -42,9 +42,6 @@ final class Data implements BaseModel
 
     #[Required('call_purpose')]
     public string $callPurpose;
-
-    #[Required('contact_email')]
-    public string $contactEmail;
 
     #[Required('created_at')]
     public \DateTimeInterface $createdAt;
@@ -78,6 +75,9 @@ final class Data implements BaseModel
     #[Required('updated_at')]
     public \DateTimeInterface $updatedAt;
 
+    #[Optional('contact_email', nullable: true)]
+    public ?string $contactEmail;
+
     /**
      * Per-category buckets. Populated once results are available. Null while the request is still pending.
      */
@@ -101,7 +101,6 @@ final class Data implements BaseModel
      * Data::with(
      *   id: ...,
      *   callPurpose: ...,
-     *   contactEmail: ...,
      *   createdAt: ...,
      *   phoneNumbersCount: ...,
      *   phoneNumbersIneligible: ...,
@@ -117,7 +116,6 @@ final class Data implements BaseModel
      * (new Data)
      *   ->withID(...)
      *   ->withCallPurpose(...)
-     *   ->withContactEmail(...)
      *   ->withCreatedAt(...)
      *   ->withPhoneNumbersCount(...)
      *   ->withPhoneNumbersIneligible(...)
@@ -142,13 +140,13 @@ final class Data implements BaseModel
     public static function with(
         string $id,
         string $callPurpose,
-        string $contactEmail,
         \DateTimeInterface $createdAt,
         int $phoneNumbersCount,
         int $phoneNumbersIneligible,
         int $phoneNumbersSubmitted,
         Status|string $status,
         \DateTimeInterface $updatedAt,
+        ?string $contactEmail = null,
         Results|array|null $results = null,
         ?\DateTimeInterface $tier1CompletedAt = null,
         ?\DateTimeInterface $tier2CompletedAt = null,
@@ -158,7 +156,6 @@ final class Data implements BaseModel
 
         $self['id'] = $id;
         $self['callPurpose'] = $callPurpose;
-        $self['contactEmail'] = $contactEmail;
         $self['createdAt'] = $createdAt;
         $self['phoneNumbersCount'] = $phoneNumbersCount;
         $self['phoneNumbersIneligible'] = $phoneNumbersIneligible;
@@ -166,6 +163,7 @@ final class Data implements BaseModel
         $self['status'] = $status;
         $self['updatedAt'] = $updatedAt;
 
+        null !== $contactEmail && $self['contactEmail'] = $contactEmail;
         null !== $results && $self['results'] = $results;
         null !== $tier1CompletedAt && $self['tier1CompletedAt'] = $tier1CompletedAt;
         null !== $tier2CompletedAt && $self['tier2CompletedAt'] = $tier2CompletedAt;
@@ -186,14 +184,6 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['callPurpose'] = $callPurpose;
-
-        return $self;
-    }
-
-    public function withContactEmail(string $contactEmail): self
-    {
-        $self = clone $this;
-        $self['contactEmail'] = $contactEmail;
 
         return $self;
     }
@@ -257,6 +247,14 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    public function withContactEmail(?string $contactEmail): self
+    {
+        $self = clone $this;
+        $self['contactEmail'] = $contactEmail;
 
         return $self;
     }
