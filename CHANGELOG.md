@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.80.0 (2026-06-10)
+
+Full Changelog: [v7.79.0...v7.80.0](https://github.com/team-telnyx/telnyx-php/compare/v7.79.0...v7.80.0)
+
+### Features
+
+* branded-calling: sync PATCH /dir/{dir_id} spec with deployed service behavior ([1487baf](https://github.com/team-telnyx/telnyx-php/commit/1487baf57fa976c1425a75254bae2970c41184e9))
+
 ## 7.79.0 (2026-06-09)
 
 Full Changelog: [v7.78.0...v7.79.0](https://github.com/team-telnyx/telnyx-php/compare/v7.78.0...v7.79.0)
