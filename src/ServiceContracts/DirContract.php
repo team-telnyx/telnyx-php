@@ -15,15 +15,16 @@ use Telnyx\Dir\DirListParams\FilterStatus;
 use Telnyx\Dir\DirListParams\Sort;
 use Telnyx\Dir\DirListResponse;
 use Telnyx\Dir\DirSubmitResponse;
-use Telnyx\Dir\DirUpdateInfringementParams\Document;
 use Telnyx\Dir\DirUpdateInfringementResponse;
+use Telnyx\Dir\DirUpdateParams\Document;
 use Telnyx\Dir\DirUpdateResponse;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateParams\Document
  * @phpstan-import-type AgentShape from \Telnyx\Dir\DirCreateLoaParams\Agent
  * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirCreateLoaParams\Signature
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateInfringementParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateInfringementParams\Document as DocumentShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface DirContract
@@ -48,7 +49,11 @@ interface DirContract
      * @param string $authorizerEmail Contact email of the authorizer. Telnyx may send verification or infringement notices here.
      * @param string $authorizerName Name of the person at your enterprise authorizing this DIR. Must be a real individual.
      * @param list<string> $callReasons 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
+     * @param bool $certifyBrandIsAccurate Certification that the DIR information is accurate. Must be `true` for the DIR to be submitted for vetting.
+     * @param bool $certifyIPOwnership Certification of ownership of any logos/trademarks shown. Must be `true` for the DIR to be submitted for vetting.
+     * @param bool $certifyNoShaftContent Certification that this DIR is not used for SHAFT content (Sex, Hate, Alcohol, Firearms, Tobacco) where prohibited. Must be `true` for the DIR to be submitted for vetting.
      * @param string $displayName Name shown to call recipients. 1–35 characters, no emoji, not whitespace-only.
+     * @param list<Document|DocumentShape> $documents Additional supporting documents to attach. Append-only: existing documents are never removed or replaced, and an empty or omitted list is a no-op. Each `document_id` may appear at most once on a DIR.
      * @param string $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param bool $reselling Set to true if your organization places calls on behalf of other enterprises (BPO/reseller). Updating this triggers re-vetting on next submit.
      * @param RequestOpts|null $requestOptions
@@ -60,7 +65,11 @@ interface DirContract
         ?string $authorizerEmail = null,
         ?string $authorizerName = null,
         ?array $callReasons = null,
+        ?bool $certifyBrandIsAccurate = null,
+        ?bool $certifyIPOwnership = null,
+        ?bool $certifyNoShaftContent = null,
         ?string $displayName = null,
+        ?array $documents = null,
         ?string $logoURL = null,
         ?bool $reselling = null,
         RequestOptions|array|null $requestOptions = null,
@@ -182,7 +191,7 @@ interface DirContract
      * @param bool $certifyNoShaftContent must be `true`
      * @param string $infringementResolutionNotes explanation of how the infringement concern was addressed
      * @param list<string>|null $callReasons
-     * @param list<Document|DocumentShape>|null $documents append-only supporting documents
+     * @param list<\Telnyx\Dir\DirUpdateInfringementParams\Document|DocumentShape1>|null $documents append-only supporting documents
      * @param string|null $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param RequestOpts|null $requestOptions
      *
