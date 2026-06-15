@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.81.0 (2026-06-15)
+
+Full Changelog: [v7.80.0...v7.81.0](https://github.com/team-telnyx/telnyx-php/compare/v7.80.0...v7.81.0)
+
+### Features
+
+* Document POST /ai/assistants/{assistant_id}/instructions/enhance ([259ddf4](https://github.com/team-telnyx/telnyx-php/commit/259ddf420b5ad3ed64bfe8063bb2b40ab29ea142))
+
 ## 7.80.0 (2026-06-10)
 
 Full Changelog: [v7.79.0...v7.80.0](https://github.com/team-telnyx/telnyx-php/compare/v7.79.0...v7.80.0)
