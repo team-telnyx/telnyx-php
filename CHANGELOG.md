@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.82.0 (2026-06-16)
+
+Full Changelog: [v7.81.0...v7.82.0](https://github.com/team-telnyx/telnyx-php/compare/v7.81.0...v7.82.0)
+
+### Features
+
+* TELAPPS-719: add Inworld inworld-tts-2 model + delivery_mode to call-control voice settings ([a2b20b8](https://github.com/team-telnyx/telnyx-php/commit/a2b20b819d5be74e9390507360a99fad3d4a3d0e))
+
 ## 7.81.0 (2026-06-15)
 
 Full Changelog: [v7.80.0...v7.81.0](https://github.com/team-telnyx/telnyx-php/compare/v7.80.0...v7.81.0)
