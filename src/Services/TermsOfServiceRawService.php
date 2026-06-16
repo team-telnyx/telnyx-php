@@ -10,9 +10,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfServiceRawContract;
-use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
-use Telnyx\TermsOfService\TermsOfServiceRetrieveInfoParams;
-use Telnyx\TermsOfService\TermsOfServiceRetrieveInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoResponse;
 use Telnyx\TermsOfService\TermsOfServiceStatusParams;
 use Telnyx\TermsOfService\TermsOfServiceStatusResponse;
 
@@ -36,18 +36,18 @@ final class TermsOfServiceRawService implements TermsOfServiceRawContract
      *
      * @param array{
      *   productType?: ProductType|value-of<ProductType>
-     * }|TermsOfServiceRetrieveInfoParams $params
+     * }|TermsOfServiceInfoParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TermsOfServiceGetInfoResponse>
+     * @return BaseResponse<TermsOfServiceInfoResponse>
      *
      * @throws APIException
      */
-    public function retrieveInfo(
-        array|TermsOfServiceRetrieveInfoParams $params,
+    public function info(
+        array|TermsOfServiceInfoParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = TermsOfServiceRetrieveInfoParams::parseRequest(
+        [$parsed, $options] = TermsOfServiceInfoParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -61,7 +61,7 @@ final class TermsOfServiceRawService implements TermsOfServiceRawContract
                 ['productType' => 'product_type']
             ),
             options: $options,
-            convert: TermsOfServiceGetInfoResponse::class,
+            convert: TermsOfServiceInfoResponse::class,
         );
     }
 

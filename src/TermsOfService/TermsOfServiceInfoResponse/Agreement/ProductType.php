@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\TermsOfService\TermsOfServiceGetInfoResponse\Agreement;
+namespace Telnyx\TermsOfService\TermsOfServiceInfoResponse\Agreement;
 
 /**
  * Telnyx product the Terms of Service apply to.

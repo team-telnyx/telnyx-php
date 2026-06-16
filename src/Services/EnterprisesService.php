@@ -26,7 +26,6 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EnterprisesContract;
 use Telnyx\Services\Enterprises\DirService;
 use Telnyx\Services\Enterprises\ReputationService;
-use Telnyx\Services\Enterprises\UsageService;
 
 /**
  * Manage the legal-entity record that owns your DIRs and phone numbers.
@@ -55,11 +54,6 @@ final class EnterprisesService implements EnterprisesContract
     public DirService $dir;
 
     /**
-     * @api
-     */
-    public UsageService $usage;
-
-    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -67,7 +61,6 @@ final class EnterprisesService implements EnterprisesContract
         $this->raw = new EnterprisesRawService($client);
         $this->reputation = new ReputationService($client);
         $this->dir = new DirService($client);
-        $this->usage = new UsageService($client);
     }
 
     /**

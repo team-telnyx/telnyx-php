@@ -9,13 +9,13 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationCreateParams;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationGetResponse;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationListParams;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationListParams\FilterStatus;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationListResponse;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationRetrieveParams;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitParams;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\RemediationRawContract;
 
@@ -31,46 +31,6 @@ final class RemediationRawService implements RemediationRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
-
-    /**
-     * @api
-     *
-     * Submit a batch of phone numbers belonging to this enterprise for reputation remediation. The request is accepted asynchronously: this endpoint returns `202` with the persisted request id, then the request transitions through processing states until completion. Use the GET endpoints to poll status and per-number results.
-     *
-     * Each phone number must be in E.164 format and belong to this enterprise. A number that already has an in-flight remediation request is rejected.
-     *
-     * @param string $enterpriseID The enterprise id. Lowercase UUID.
-     * @param array{
-     *   callPurpose: string,
-     *   phoneNumbers: list<string>,
-     *   contactEmail?: string,
-     *   webhookURL?: string,
-     * }|RemediationCreateParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<RemediationNewResponse>
-     *
-     * @throws APIException
-     */
-    public function create(
-        string $enterpriseID,
-        array|RemediationCreateParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = RemediationCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: ['enterprises/%1$s/reputation/remediation', $enterpriseID],
-            body: (object) $parsed,
-            options: $options,
-            convert: RemediationNewResponse::class,
-        );
-    }
 
     /**
      * @api
@@ -156,6 +116,46 @@ final class RemediationRawService implements RemediationRawContract
             options: $options,
             convert: RemediationListResponse::class,
             page: DefaultFlatPagination::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Submit a batch of phone numbers belonging to this enterprise for reputation remediation. The request is accepted asynchronously: this endpoint returns `202` with the persisted request id, then the request transitions through processing states until completion. Use the GET endpoints to poll status and per-number results.
+     *
+     * Each phone number must be in E.164 format and belong to this enterprise. A number that already has an in-flight remediation request is rejected.
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param array{
+     *   callPurpose: string,
+     *   phoneNumbers: list<string>,
+     *   contactEmail?: string,
+     *   webhookURL?: string,
+     * }|RemediationSubmitParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<RemediationSubmitResponse>
+     *
+     * @throws APIException
+     */
+    public function submit(
+        string $enterpriseID,
+        array|RemediationSubmitParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = RemediationSubmitParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['enterprises/%1$s/reputation/remediation', $enterpriseID],
+            body: (object) $parsed,
+            options: $options,
+            convert: RemediationSubmitResponse::class,
         );
     }
 }

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse;
+namespace Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse\Data\Results;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse\Data\Status;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse\Data\Results;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse\Data\Status;
 
 /**
  * Full detail of a remediation request, returned on submit and GET by id.
  *
- * @phpstan-import-type ResultsShape from \Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse\Data\Results
+ * @phpstan-import-type ResultsShape from \Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse\Data\Results
  *
  * @phpstan-type DataShape = array{
  *   id: string,

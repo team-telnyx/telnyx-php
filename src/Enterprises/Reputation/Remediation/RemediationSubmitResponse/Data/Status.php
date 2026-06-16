@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse\Data;
+namespace Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse\Data;
 
 /**
  * Customer-facing status of a remediation request.

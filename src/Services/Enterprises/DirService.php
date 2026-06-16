@@ -15,9 +15,6 @@ use Telnyx\Enterprises\Dir\DirListResponse;
 use Telnyx\Enterprises\Dir\DirNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\DirContract;
-use Telnyx\Services\Enterprises\Dir\CommentsService;
-use Telnyx\Services\Enterprises\Dir\PhoneNumberBatchesService;
-use Telnyx\Services\Enterprises\Dir\PhoneNumbersService;
 
 /**
  * A Display Identity Record (DIR) is the verified calling identity (display name, logo, call reasons) shown to recipients on outbound calls.
@@ -33,29 +30,11 @@ final class DirService implements DirContract
     public DirRawService $raw;
 
     /**
-     * @api
-     */
-    public CommentsService $comments;
-
-    /**
-     * @api
-     */
-    public PhoneNumberBatchesService $phoneNumberBatches;
-
-    /**
-     * @api
-     */
-    public PhoneNumbersService $phoneNumbers;
-
-    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new DirRawService($client);
-        $this->comments = new CommentsService($client);
-        $this->phoneNumberBatches = new PhoneNumberBatchesService($client);
-        $this->phoneNumbers = new PhoneNumbersService($client);
     }
 
     /**

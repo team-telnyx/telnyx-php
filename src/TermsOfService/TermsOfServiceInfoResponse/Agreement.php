@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
+namespace Telnyx\TermsOfService\TermsOfServiceInfoResponse;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse\Agreement\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoResponse\Agreement\ProductType;
 
 /**
  * @phpstan-type AgreementShape = array{
