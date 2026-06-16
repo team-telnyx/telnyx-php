@@ -8,20 +8,20 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\TermsOfService\TermsOfServiceRetrieveInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams\ProductType;
 
 /**
  * Returns the available Terms of Service agreements (product, current version, terms URL, effective date). Omit `product_type` to return all products; pass it to scope to one.
  *
- * @see Telnyx\Services\TermsOfServiceService::retrieveInfo()
+ * @see Telnyx\Services\TermsOfServiceService::info()
  *
- * @phpstan-type TermsOfServiceRetrieveInfoParamsShape = array{
+ * @phpstan-type TermsOfServiceInfoParamsShape = array{
  *   productType?: null|ProductType|value-of<ProductType>
  * }
  */
-final class TermsOfServiceRetrieveInfoParams implements BaseModel
+final class TermsOfServiceInfoParams implements BaseModel
 {
-    /** @use SdkModel<TermsOfServiceRetrieveInfoParamsShape> */
+    /** @use SdkModel<TermsOfServiceInfoParamsShape> */
     use SdkModel;
     use SdkParams;
 

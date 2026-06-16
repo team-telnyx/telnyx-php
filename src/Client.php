@@ -1029,17 +1029,17 @@ class Client extends BaseClient
     /**
      * @api
      */
-    public UacConnectionsService $uacConnections;
-
-    /**
-     * @api
-     */
     public SipRegistrationStatusService $sipRegistrationStatus;
 
     /**
      * @api
      */
     public SpeechToTextService $speechToText;
+
+    /**
+     * @api
+     */
+    public UacConnectionsService $uacConnections;
 
     /**
      * @api
@@ -1280,9 +1280,9 @@ class Client extends BaseClient
         $this->callReasons = new CallReasonsService($this);
         $this->dir = new DirService($this);
         $this->infringementClaims = new InfringementClaimsService($this);
-        $this->uacConnections = new UacConnectionsService($this);
         $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
         $this->speechToText = new SpeechToTextService($this);
+        $this->uacConnections = new UacConnectionsService($this);
         $this->voiceSDKCallReports = new VoiceSDKCallReportsService($this);
     }
 

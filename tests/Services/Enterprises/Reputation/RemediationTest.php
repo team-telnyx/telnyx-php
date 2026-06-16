@@ -10,7 +10,7 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationGetResponse;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationListResponse;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -29,42 +29,6 @@ final class RemediationTest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
-    }
-
-    #[Test]
-    public function testCreate(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->enterprises->reputation->remediation->create(
-            '4a6192a4-573d-446d-b3ce-aff9117272a6',
-            callPurpose: 'Appointment reminders for our dental clinic.',
-            phoneNumbers: ['+19493253498', '+12134445566'],
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RemediationNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCreateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->enterprises->reputation->remediation->create(
-            '4a6192a4-573d-446d-b3ce-aff9117272a6',
-            callPurpose: 'Appointment reminders for our dental clinic.',
-            phoneNumbers: ['+19493253498', '+12134445566'],
-            contactEmail: 'ops@example.com',
-            webhookURL: 'https://example.com/webhooks/remediation',
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RemediationNewResponse::class, $result);
     }
 
     #[Test]
@@ -117,5 +81,41 @@ final class RemediationTest extends TestCase
             // @phpstan-ignore-next-line method.alreadyNarrowedType
             $this->assertInstanceOf(RemediationListResponse::class, $item);
         }
+    }
+
+    #[Test]
+    public function testSubmit(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->remediation->submit(
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            callPurpose: 'Appointment reminders for our dental clinic.',
+            phoneNumbers: ['+19493253498', '+12134445566'],
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RemediationSubmitResponse::class, $result);
+    }
+
+    #[Test]
+    public function testSubmitWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->enterprises->reputation->remediation->submit(
+            '4a6192a4-573d-446d-b3ce-aff9117272a6',
+            callPurpose: 'Appointment reminders for our dental clinic.',
+            phoneNumbers: ['+19493253498', '+12134445566'],
+            contactEmail: 'ops@example.com',
+            webhookURL: 'https://example.com/webhooks/remediation',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(RemediationSubmitResponse::class, $result);
     }
 }

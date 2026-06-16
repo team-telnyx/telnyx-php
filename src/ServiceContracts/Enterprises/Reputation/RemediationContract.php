@@ -9,7 +9,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationGetResponse;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationListParams\FilterStatus;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationListResponse;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -17,27 +17,6 @@ use Telnyx\RequestOptions;
  */
 interface RemediationContract
 {
-    /**
-     * @api
-     *
-     * @param string $enterpriseID The enterprise id. Lowercase UUID.
-     * @param string $callPurpose how the numbers are used (free text)
-     * @param list<string> $phoneNumbers Phone numbers in E.164 format. Each must belong to this enterprise. Maximum 2,000 per request.
-     * @param string $contactEmail optional contact email for this remediation request
-     * @param string $webhookURL optional https:// URL for status notifications
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function create(
-        string $enterpriseID,
-        string $callPurpose,
-        array $phoneNumbers,
-        ?string $contactEmail = null,
-        ?string $webhookURL = null,
-        RequestOptions|array|null $requestOptions = null,
-    ): RemediationNewResponse;
-
     /**
      * @api
      *
@@ -77,4 +56,25 @@ interface RemediationContract
         int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
+
+    /**
+     * @api
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param string $callPurpose how the numbers are used (free text)
+     * @param list<string> $phoneNumbers Phone numbers in E.164 format. Each must belong to this enterprise. Maximum 2,000 per request.
+     * @param string $contactEmail optional contact email for this remediation request
+     * @param string $webhookURL optional https:// URL for status notifications
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function submit(
+        string $enterpriseID,
+        string $callPurpose,
+        array $phoneNumbers,
+        ?string $contactEmail = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): RemediationSubmitResponse;
 }

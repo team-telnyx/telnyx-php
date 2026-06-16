@@ -7,18 +7,18 @@ namespace Telnyx\TermsOfService;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse\Agreement;
+use Telnyx\TermsOfService\TermsOfServiceInfoResponse\Agreement;
 
 /**
- * @phpstan-import-type AgreementShape from \Telnyx\TermsOfService\TermsOfServiceGetInfoResponse\Agreement
+ * @phpstan-import-type AgreementShape from \Telnyx\TermsOfService\TermsOfServiceInfoResponse\Agreement
  *
- * @phpstan-type TermsOfServiceGetInfoResponseShape = array{
+ * @phpstan-type TermsOfServiceInfoResponseShape = array{
  *   agreements?: list<Agreement|AgreementShape>|null
  * }
  */
-final class TermsOfServiceGetInfoResponse implements BaseModel
+final class TermsOfServiceInfoResponse implements BaseModel
 {
-    /** @use SdkModel<TermsOfServiceGetInfoResponseShape> */
+    /** @use SdkModel<TermsOfServiceInfoResponseShape> */
     use SdkModel;
 
     /** @var list<Agreement>|null $agreements */

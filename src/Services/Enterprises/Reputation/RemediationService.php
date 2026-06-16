@@ -11,7 +11,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationGetResponse;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationListParams\FilterStatus;
 use Telnyx\Enterprises\Reputation\Remediation\RemediationListResponse;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\RemediationContract;
 
@@ -33,45 +33,6 @@ final class RemediationService implements RemediationContract
     public function __construct(private Client $client)
     {
         $this->raw = new RemediationRawService($client);
-    }
-
-    /**
-     * @api
-     *
-     * Submit a batch of phone numbers belonging to this enterprise for reputation remediation. The request is accepted asynchronously: this endpoint returns `202` with the persisted request id, then the request transitions through processing states until completion. Use the GET endpoints to poll status and per-number results.
-     *
-     * Each phone number must be in E.164 format and belong to this enterprise. A number that already has an in-flight remediation request is rejected.
-     *
-     * @param string $enterpriseID The enterprise id. Lowercase UUID.
-     * @param string $callPurpose how the numbers are used (free text)
-     * @param list<string> $phoneNumbers Phone numbers in E.164 format. Each must belong to this enterprise. Maximum 2,000 per request.
-     * @param string $contactEmail optional contact email for this remediation request
-     * @param string $webhookURL optional https:// URL for status notifications
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function create(
-        string $enterpriseID,
-        string $callPurpose,
-        array $phoneNumbers,
-        ?string $contactEmail = null,
-        ?string $webhookURL = null,
-        RequestOptions|array|null $requestOptions = null,
-    ): RemediationNewResponse {
-        $params = Util::removeNulls(
-            [
-                'callPurpose' => $callPurpose,
-                'phoneNumbers' => $phoneNumbers,
-                'contactEmail' => $contactEmail,
-                'webhookURL' => $webhookURL,
-            ],
-        );
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->create($enterpriseID, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
     }
 
     /**
@@ -136,6 +97,45 @@ final class RemediationService implements RemediationContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list($enterpriseID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Submit a batch of phone numbers belonging to this enterprise for reputation remediation. The request is accepted asynchronously: this endpoint returns `202` with the persisted request id, then the request transitions through processing states until completion. Use the GET endpoints to poll status and per-number results.
+     *
+     * Each phone number must be in E.164 format and belong to this enterprise. A number that already has an in-flight remediation request is rejected.
+     *
+     * @param string $enterpriseID The enterprise id. Lowercase UUID.
+     * @param string $callPurpose how the numbers are used (free text)
+     * @param list<string> $phoneNumbers Phone numbers in E.164 format. Each must belong to this enterprise. Maximum 2,000 per request.
+     * @param string $contactEmail optional contact email for this remediation request
+     * @param string $webhookURL optional https:// URL for status notifications
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function submit(
+        string $enterpriseID,
+        string $callPurpose,
+        array $phoneNumbers,
+        ?string $contactEmail = null,
+        ?string $webhookURL = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): RemediationSubmitResponse {
+        $params = Util::removeNulls(
+            [
+                'callPurpose' => $callPurpose,
+                'phoneNumbers' => $phoneNumbers,
+                'contactEmail' => $contactEmail,
+                'webhookURL' => $webhookURL,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->submit($enterpriseID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

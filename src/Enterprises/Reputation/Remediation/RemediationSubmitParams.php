@@ -15,18 +15,18 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * Each phone number must be in E.164 format and belong to this enterprise. A number that already has an in-flight remediation request is rejected.
  *
- * @see Telnyx\Services\Enterprises\Reputation\RemediationService::create()
+ * @see Telnyx\Services\Enterprises\Reputation\RemediationService::submit()
  *
- * @phpstan-type RemediationCreateParamsShape = array{
+ * @phpstan-type RemediationSubmitParamsShape = array{
  *   callPurpose: string,
  *   phoneNumbers: list<string>,
  *   contactEmail?: string|null,
  *   webhookURL?: string|null,
  * }
  */
-final class RemediationCreateParams implements BaseModel
+final class RemediationSubmitParams implements BaseModel
 {
-    /** @use SdkModel<RemediationCreateParamsShape> */
+    /** @use SdkModel<RemediationSubmitParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -57,17 +57,17 @@ final class RemediationCreateParams implements BaseModel
     public ?string $webhookURL;
 
     /**
-     * `new RemediationCreateParams()` is missing required properties by the API.
+     * `new RemediationSubmitParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * RemediationCreateParams::with(callPurpose: ..., phoneNumbers: ...)
+     * RemediationSubmitParams::with(callPurpose: ..., phoneNumbers: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new RemediationCreateParams)->withCallPurpose(...)->withPhoneNumbers(...)
+     * (new RemediationSubmitParams)->withCallPurpose(...)->withPhoneNumbers(...)
      * ```
      */
     public function __construct()
