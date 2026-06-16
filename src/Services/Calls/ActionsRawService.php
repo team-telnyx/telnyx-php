@@ -1202,7 +1202,7 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   direction?: Direction|value-of<Direction>,
-     *   noiseSuppressionEngine?: NoiseSuppressionEngine|value-of<NoiseSuppressionEngine>,
+     *   noiseSuppressionEngine?: value-of<NoiseSuppressionEngine>,
      *   noiseSuppressionEngineConfig?: NoiseSuppressionEngineConfig|NoiseSuppressionEngineConfigShape,
      * }|ActionStartNoiseSuppressionParams $params
      * @param RequestOpts|null $requestOptions

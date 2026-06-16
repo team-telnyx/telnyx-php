@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
-use Telnyx\TermsOfService\TermsOfServiceRetrieveInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoResponse;
 use Telnyx\TermsOfService\TermsOfServiceStatusResponse;
 
 /**
@@ -23,10 +23,10 @@ interface TermsOfServiceContract
      *
      * @throws APIException
      */
-    public function retrieveInfo(
+    public function info(
         ProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TermsOfServiceGetInfoResponse;
+    ): TermsOfServiceInfoResponse;
 
     /**
      * @api

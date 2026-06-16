@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse\Data;
+namespace Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse\Data;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;

@@ -12,8 +12,8 @@ use Telnyx\ServiceContracts\TermsOfServiceContract;
 use Telnyx\Services\TermsOfService\AgreementsService;
 use Telnyx\Services\TermsOfService\BrandedCallingService;
 use Telnyx\Services\TermsOfService\NumberReputationService;
-use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
-use Telnyx\TermsOfService\TermsOfServiceRetrieveInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoResponse;
 use Telnyx\TermsOfService\TermsOfServiceStatusResponse;
 
 /**
@@ -64,14 +64,14 @@ final class TermsOfServiceService implements TermsOfServiceContract
      *
      * @throws APIException
      */
-    public function retrieveInfo(
+    public function info(
         ProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TermsOfServiceGetInfoResponse {
+    ): TermsOfServiceInfoResponse {
         $params = Util::removeNulls(['productType' => $productType]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveInfo(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->info(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

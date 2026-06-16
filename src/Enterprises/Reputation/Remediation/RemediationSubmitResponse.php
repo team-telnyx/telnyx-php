@@ -7,16 +7,16 @@ namespace Telnyx\Enterprises\Reputation\Remediation;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse\Data;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Enterprises\Reputation\Remediation\RemediationNewResponse\Data
+ * @phpstan-import-type DataShape from \Telnyx\Enterprises\Reputation\Remediation\RemediationSubmitResponse\Data
  *
- * @phpstan-type RemediationNewResponseShape = array{data: Data|DataShape}
+ * @phpstan-type RemediationSubmitResponseShape = array{data: Data|DataShape}
  */
-final class RemediationNewResponse implements BaseModel
+final class RemediationSubmitResponse implements BaseModel
 {
-    /** @use SdkModel<RemediationNewResponseShape> */
+    /** @use SdkModel<RemediationSubmitResponseShape> */
     use SdkModel;
 
     /**
@@ -26,17 +26,17 @@ final class RemediationNewResponse implements BaseModel
     public Data $data;
 
     /**
-     * `new RemediationNewResponse()` is missing required properties by the API.
+     * `new RemediationSubmitResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * RemediationNewResponse::with(data: ...)
+     * RemediationSubmitResponse::with(data: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new RemediationNewResponse)->withData(...)
+     * (new RemediationSubmitResponse)->withData(...)
      * ```
      */
     public function __construct()

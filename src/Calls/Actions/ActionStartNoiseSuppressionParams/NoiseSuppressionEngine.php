@@ -21,4 +21,16 @@ enum NoiseSuppressionEngine: string
     case KRISP = 'Krisp';
 
     case AI_COUSTICS = 'AiCoustics';
+
+    case AIC_L_QUAIL = 'aic_l_quail';
+
+    case AIC_L_ROOK = 'aic_l_rook';
+
+    case AIC_S_QUAIL = 'aic_s_quail';
+
+    case AIC_S_ROOK = 'aic_s_rook';
+
+    case QUAIL_VOICE_FOCUS_S = 'quail_voice_focus_s';
+
+    case QUAIL_VOICE_FOCUS_XS = 'quail_voice_focus_xs';
 }
