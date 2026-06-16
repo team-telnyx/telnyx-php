@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.83.0 (2026-06-16)
+
+Full Changelog: [v7.82.0...v7.83.0](https://github.com/team-telnyx/telnyx-php/compare/v7.82.0...v7.83.0)
+
+### Features
+
+* ENGDESK-51290: Add Aicoustic NS engines to portal backend ([c40646f](https://github.com/team-telnyx/telnyx-php/commit/c40646f1ba5fd02a096acd6b868cc325130f6ec3))
+
 ## 7.82.0 (2026-06-16)
 
 Full Changelog: [v7.81.0...v7.82.0](https://github.com/team-telnyx/telnyx-php/compare/v7.81.0...v7.82.0)
