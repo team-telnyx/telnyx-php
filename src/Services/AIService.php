@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\AI\AIGetModelsResponse;
+use Telnyx\AI\AISearchConversationHistoriesParams\RecordType;
+use Telnyx\AI\AISearchConversationHistoriesParams\Region;
+use Telnyx\AI\AISearchConversationHistoriesResponse;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -25,8 +28,6 @@ use Telnyx\Services\AI\OpenAIService;
 use Telnyx\Services\AI\ToolsService;
 
 /**
- * Generate text with LLMs.
- *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class AIService implements AIContract
@@ -162,6 +163,104 @@ final class AIService implements AIContract
     ): AIGetModelsResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveModels(requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Performs semantic vector search across conversation history records.
+     *
+     * **How it works:**
+     * 1. The query text is embedded into a 1024-dimensional vector using the multilingual-e5-large model.
+     * 2. The vector is sent to regional OpenSearch clusters for kNN search using HNSW cosine similarity.
+     * 3. When no region is specified, all regions are queried in parallel (fan-out) and results are merged by score.
+     * 4. Results are ranked by cosine similarity score (descending) and truncated to `top_k`.
+     *
+     * **Authentication:** Requires a Telnyx API key via `Authorization: Bearer <key>`. Results are automatically scoped to the caller's organization — `organization_id` is injected from the auth token and cannot be overridden.
+     *
+     * **Chunking:** Records are split into chunks of up to 480 tokens with 64-token overlap at ingestion time. Each search result represents a single chunk, with `chunk_index` and `chunk_total` indicating its position within the original record.
+     *
+     * **Filtering:** Use `filter[field][operator]=value` query parameters to narrow results before vector search.
+     *
+     * Top-level filterable fields: `user_id`, `record_type`, `region`, `document_id`, `record_id`, `record_created_at`, `ingested_at`, `retention`
+     *
+     * Note: `retention` is filter-only — it can be used to narrow results but is not returned in the response body.
+     *
+     * Metadata fields: any field not in the list above is resolved to `data.metadata.<field>` in OpenSearch (e.g., `filter[language]=en` → `data.metadata.language`).
+     *
+     * Supported filter operators:
+     * - `eq` — exact match (default when no operator specified)
+     * - `in` — match any of comma-separated values
+     * - `gte`, `gt`, `lte`, `lt` — range comparisons (useful for date filtering)
+     * - `contains` — wildcard substring match
+     *
+     * **Examples:**
+     * ```
+     * GET /v2/ai/conversation_histories?q=billing+issue&record_type=voice&top_k=10
+     * GET /v2/ai/conversation_histories?q=setup+guide&record_type=knowledge_base&region=USA&min_score=0.5
+     * GET /v2/ai/conversation_histories?q=refund&record_type=voice&filter[record_created_at][gte]=2026-01-01T00:00:00Z
+     * GET /v2/ai/conversation_histories?q=outage&record_type=voice&filter[region][in]=USA,DEU
+     * GET /v2/ai/conversation_histories?q=hold+time&record_type=voice&filter[language]=en
+     * ```
+     *
+     * @param string $q Natural language search query. The text is embedded into a 1024-dimensional vector and compared against indexed record chunks using kNN cosine similarity.
+     * @param RecordType|value-of<RecordType> $recordType The type of records to search. Each record type is stored in a separate vector index.
+     * @param string $filterDocumentID Filter by document identifier (exact match). Populated for knowledge_base records.
+     * @param \DateTimeInterface $filterIngestedAtGte only include records ingested (chunked, embedded, and indexed) on or after this ISO 8601 timestamp
+     * @param \DateTimeInterface $filterIngestedAtLte only include records ingested (chunked, embedded, and indexed) on or before this ISO 8601 timestamp
+     * @param \DateTimeInterface $filterRecordCreatedAtGte only include records whose original creation time is on or after this ISO 8601 timestamp
+     * @param \DateTimeInterface $filterRecordCreatedAtLte only include records whose original creation time is on or before this ISO 8601 timestamp
+     * @param string $filterRecordID filter to chunks belonging to a specific parent record (exact match)
+     * @param string $filterRegionIn Filter by the region stored on the record. Comma-separated to match multiple regions (USA, DEU, AUS, UAE). Distinct from the `region` parameter, which selects which cluster(s) are queried.
+     * @param string $filterRetention Filter by retention policy (exact match). Filter-only: not returned in the response body.
+     * @param string $filterUserID filter to records owned by a specific user (exact match)
+     * @param float $minScore Minimum cosine similarity score threshold (0.0 to 1.0). Results below this threshold are excluded.
+     * @param Region|value-of<Region> $region Restrict search to a specific region's OpenSearch cluster. When omitted, all regions are queried in parallel (fan-out) and results are merged by cosine similarity score.
+     * @param int $topK Maximum number of results to return. Defaults to 20, maximum 100.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function searchConversationHistories(
+        string $q,
+        RecordType|string $recordType,
+        ?string $filterDocumentID = null,
+        ?\DateTimeInterface $filterIngestedAtGte = null,
+        ?\DateTimeInterface $filterIngestedAtLte = null,
+        ?\DateTimeInterface $filterRecordCreatedAtGte = null,
+        ?\DateTimeInterface $filterRecordCreatedAtLte = null,
+        ?string $filterRecordID = null,
+        ?string $filterRegionIn = null,
+        ?string $filterRetention = null,
+        ?string $filterUserID = null,
+        float $minScore = 0,
+        Region|string|null $region = null,
+        int $topK = 20,
+        RequestOptions|array|null $requestOptions = null,
+    ): AISearchConversationHistoriesResponse {
+        $params = Util::removeNulls(
+            [
+                'q' => $q,
+                'recordType' => $recordType,
+                'filterDocumentID' => $filterDocumentID,
+                'filterIngestedAtGte' => $filterIngestedAtGte,
+                'filterIngestedAtLte' => $filterIngestedAtLte,
+                'filterRecordCreatedAtGte' => $filterRecordCreatedAtGte,
+                'filterRecordCreatedAtLte' => $filterRecordCreatedAtLte,
+                'filterRecordID' => $filterRecordID,
+                'filterRegionIn' => $filterRegionIn,
+                'filterRetention' => $filterRetention,
+                'filterUserID' => $filterUserID,
+                'minScore' => $minScore,
+                'region' => $region,
+                'topK' => $topK,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->searchConversationHistories(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
