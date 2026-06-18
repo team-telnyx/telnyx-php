@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.84.0 (2026-06-18)
+
+Full Changelog: [v7.83.0...v7.84.0](https://github.com/team-telnyx/telnyx-php/compare/v7.83.0...v7.84.0)
+
+### Features
+
+* add transcriptions-search API spec (dev/external) ([ec4529c](https://github.com/team-telnyx/telnyx-php/commit/ec4529ccdede2d9cf3abf31f3da590712f4c7c4e))
+
 ## 7.83.0 (2026-06-16)
 
 Full Changelog: [v7.82.0...v7.83.0](https://github.com/team-telnyx/telnyx-php/compare/v7.82.0...v7.83.0)
