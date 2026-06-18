@@ -6,6 +6,7 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\AIGetModelsResponse;
+use Telnyx\AI\AISearchConversationHistoriesResponse;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
@@ -70,6 +71,56 @@ final class AITest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AIGetModelsResponse::class, $result);
+    }
+
+    #[Test]
+    public function testSearchConversationHistories(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->searchConversationHistories(
+            q: 'customer called about billing issue',
+            recordType: 'voice'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AISearchConversationHistoriesResponse::class,
+            $result
+        );
+    }
+
+    #[Test]
+    public function testSearchConversationHistoriesWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->searchConversationHistories(
+            q: 'customer called about billing issue',
+            recordType: 'voice',
+            filterDocumentID: 'doc-789',
+            filterIngestedAtGte: new \DateTimeImmutable('2026-01-01T00:00:00Z'),
+            filterIngestedAtLte: new \DateTimeImmutable('2026-12-31T23:59:59Z'),
+            filterRecordCreatedAtGte: new \DateTimeImmutable('2026-01-01T00:00:00Z'),
+            filterRecordCreatedAtLte: new \DateTimeImmutable('2026-12-31T23:59:59Z'),
+            filterRecordID: 'rec-001',
+            filterRegionIn: 'USA,DEU',
+            filterRetention: 'filter[retention]',
+            filterUserID: 'user-123',
+            minScore: 0.5,
+            region: 'USA',
+            topK: 10,
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            AISearchConversationHistoriesResponse::class,
+            $result
+        );
     }
 
     #[Test]

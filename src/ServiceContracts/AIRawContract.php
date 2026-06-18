@@ -6,6 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\AI\AICreateResponseDeprecatedParams;
 use Telnyx\AI\AIGetModelsResponse;
+use Telnyx\AI\AISearchConversationHistoriesParams;
+use Telnyx\AI\AISearchConversationHistoriesResponse;
 use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -47,6 +49,21 @@ interface AIRawContract
      */
     public function retrieveModels(
         RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|AISearchConversationHistoriesParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<AISearchConversationHistoriesResponse>
+     *
+     * @throws APIException
+     */
+    public function searchConversationHistories(
+        array|AISearchConversationHistoriesParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
