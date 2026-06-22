@@ -6,16 +6,15 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams;
-use Telnyx\Conferences\ConferenceGetParticipantResponse;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams;
 use Telnyx\Conferences\ConferenceListParticipantsParams;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
+use Telnyx\Conferences\ConferenceParticipantResource;
 use Telnyx\Conferences\ConferenceRetrieveParams;
 use Telnyx\Conferences\ConferenceRetrieveParticipantParams;
 use Telnyx\Conferences\ConferenceUpdateParticipantParams;
-use Telnyx\Conferences\ConferenceUpdateParticipantResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
@@ -97,7 +96,7 @@ interface ConferencesRawContract
      * @param array<string,mixed>|ConferenceRetrieveParticipantParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceGetParticipantResponse>
+     * @return BaseResponse<ConferenceParticipantResource>
      *
      * @throws APIException
      */
@@ -114,7 +113,7 @@ interface ConferencesRawContract
      * @param array<string,mixed>|ConferenceUpdateParticipantParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceUpdateParticipantResponse>
+     * @return BaseResponse<ConferenceParticipantResource>
      *
      * @throws APIException
      */

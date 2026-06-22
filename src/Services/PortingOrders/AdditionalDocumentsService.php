@@ -11,8 +11,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams\AdditionalDocument;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
+use Telnyx\PortingOrders\AdditionalDocuments\PortingAdditionalDocument;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\AdditionalDocumentsContract;
 
@@ -75,7 +75,7 @@ final class AdditionalDocumentsService implements AdditionalDocumentsContract
      * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<AdditionalDocumentListResponse>
+     * @return DefaultFlatPagination<PortingAdditionalDocument>
      *
      * @throws APIException
      */

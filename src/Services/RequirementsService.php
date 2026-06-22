@@ -9,10 +9,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Requirements\DocReqsRequirement;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams\Filter;
 use Telnyx\Requirements\RequirementListParams\Sort;
-use Telnyx\Requirements\RequirementListResponse;
 use Telnyx\ServiceContracts\RequirementsContract;
 
 /**
@@ -65,7 +65,7 @@ final class RequirementsService implements RequirementsContract
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirements (deepObject style). Originally: sort[]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<RequirementListResponse>
+     * @return DefaultFlatPagination<DocReqsRequirement>
      *
      * @throws APIException
      */

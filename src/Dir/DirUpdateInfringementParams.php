@@ -9,14 +9,13 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\DirUpdateInfringementParams\Document;
 
 /**
  * Push a fix for a DIR that is `suspended` with an open infringement claim back into vetting. `POST /dir/{dir_id}/submit` is blocked while a claim is open, so this is the customer-callable path to update the DIR's content and re-certify before Telnyx adjudicates the claim. All four certification booleans must be `true`. Optional content fields (`display_name`, `logo_url`, `call_reasons`, `documents`) update the DIR; documents are append-only.
  *
  * @see Telnyx\Services\DirService::updateInfringement()
  *
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateInfringementParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  *
  * @phpstan-type DirUpdateInfringementParamsShape = array{
  *   certifyBrandIsAccurate: bool,

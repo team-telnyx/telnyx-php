@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# PHP SDK uses GitHub webhook auto-sync for Packagist publishing.
+# No secret checks needed — no API tokens required.
+# release-please uses SDK_WRITE_TOKEN (set at org level).
+
+echo "The environment is ready to push releases!"

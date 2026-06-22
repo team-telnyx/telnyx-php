@@ -7,12 +7,10 @@ namespace Telnyx\Services\Enterprises;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
+use Telnyx\Enterprises\Reputation\ReputationCheckFrequency;
 use Telnyx\Enterprises\Reputation\ReputationEnableParams;
-use Telnyx\Enterprises\Reputation\ReputationEnableParams\CheckFrequency;
-use Telnyx\Enterprises\Reputation\ReputationEnableResponse;
-use Telnyx\Enterprises\Reputation\ReputationGetResponse;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams;
-use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\ReputationRawContract;
 
@@ -39,7 +37,7 @@ final class ReputationRawService implements ReputationRawContract
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationGetResponse>
+     * @return BaseResponse<EnterpriseReputationPublicWrapped>
      *
      * @throws APIException
      */
@@ -52,7 +50,7 @@ final class ReputationRawService implements ReputationRawContract
             method: 'get',
             path: ['enterprises/%1$s/reputation', $enterpriseID],
             options: $requestOptions,
-            convert: ReputationGetResponse::class,
+            convert: EnterpriseReputationPublicWrapped::class,
         );
     }
 
@@ -99,11 +97,11 @@ final class ReputationRawService implements ReputationRawContract
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
      *   loaDocumentID: string,
-     *   checkFrequency?: CheckFrequency|value-of<CheckFrequency>,
+     *   checkFrequency?: ReputationCheckFrequency|value-of<ReputationCheckFrequency>,
      * }|ReputationEnableParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationEnableResponse>
+     * @return BaseResponse<EnterpriseReputationPublicWrapped>
      *
      * @throws APIException
      */
@@ -123,7 +121,7 @@ final class ReputationRawService implements ReputationRawContract
             path: ['enterprises/%1$s/reputation', $enterpriseID],
             body: (object) $parsed,
             options: $options,
-            convert: ReputationEnableResponse::class,
+            convert: EnterpriseReputationPublicWrapped::class,
         );
     }
 
@@ -136,11 +134,11 @@ final class ReputationRawService implements ReputationRawContract
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
-     *   checkFrequency: ReputationUpdateFrequencyParams\CheckFrequency|value-of<ReputationUpdateFrequencyParams\CheckFrequency>,
+     *   checkFrequency: ReputationCheckFrequency|value-of<ReputationCheckFrequency>
      * }|ReputationUpdateFrequencyParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationUpdateFrequencyResponse>
+     * @return BaseResponse<EnterpriseReputationPublicWrapped>
      *
      * @throws APIException
      */
@@ -160,7 +158,7 @@ final class ReputationRawService implements ReputationRawContract
             path: ['enterprises/%1$s/reputation/frequency', $enterpriseID],
             body: (object) $parsed,
             options: $options,
-            convert: ReputationUpdateFrequencyResponse::class,
+            convert: EnterpriseReputationPublicWrapped::class,
         );
     }
 }

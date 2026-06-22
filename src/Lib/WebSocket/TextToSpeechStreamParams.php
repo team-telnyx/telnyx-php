@@ -50,13 +50,13 @@ class TextToSpeechStreamParams
      */
     public function __construct(array $params = [])
     {
-        $this->voice = isset($params['voice']) ? (string) $params['voice'] : null;
-        $this->voiceProvider = isset($params['voice_provider']) ? (string) $params['voice_provider'] : null;
-        $this->outputFormat = isset($params['output_format']) ? (string) $params['output_format'] : null;
-        $this->sampleRate = isset($params['sample_rate']) ? (int) $params['sample_rate'] : null;
-        $this->language = isset($params['language']) ? (string) $params['language'] : null;
-        $this->speakingRate = isset($params['speaking_rate']) ? (float) $params['speaking_rate'] : null;
-        $this->clientRef = isset($params['client_ref']) ? (string) $params['client_ref'] : null;
+        $this->voice = isset($params['voice']) && is_scalar($params['voice']) ? (string) $params['voice'] : null;
+        $this->voiceProvider = isset($params['voice_provider']) && is_scalar($params['voice_provider']) ? (string) $params['voice_provider'] : null;
+        $this->outputFormat = isset($params['output_format']) && is_scalar($params['output_format']) ? (string) $params['output_format'] : null;
+        $this->sampleRate = isset($params['sample_rate']) && is_scalar($params['sample_rate']) ? (int) $params['sample_rate'] : null;
+        $this->language = isset($params['language']) && is_scalar($params['language']) ? (string) $params['language'] : null;
+        $this->speakingRate = isset($params['speaking_rate']) && is_scalar($params['speaking_rate']) ? (float) $params['speaking_rate'] : null;
+        $this->clientRef = isset($params['client_ref']) && is_scalar($params['client_ref']) ? (string) $params['client_ref'] : null;
     }
 
     /**

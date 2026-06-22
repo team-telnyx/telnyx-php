@@ -9,20 +9,20 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirStatus;
+use Telnyx\Dir\DirWrapped;
+use Telnyx\Dir\Document;
 use Telnyx\Enterprises\Dir\DirCreateParams;
-use Telnyx\Enterprises\Dir\DirCreateParams\Document;
 use Telnyx\Enterprises\Dir\DirListParams;
-use Telnyx\Enterprises\Dir\DirListParams\FilterStatus;
 use Telnyx\Enterprises\Dir\DirListParams\Sort;
-use Telnyx\Enterprises\Dir\DirListResponse;
-use Telnyx\Enterprises\Dir\DirNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\DirRawContract;
 
 /**
  * A Display Identity Record (DIR) is the verified calling identity (display name, logo, call reasons) shown to recipients on outbound calls.
  *
- * @phpstan-import-type DocumentShape from \Telnyx\Enterprises\Dir\DirCreateParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class DirRawService implements DirRawContract
@@ -65,7 +65,7 @@ final class DirRawService implements DirRawContract
      * }|DirCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirNewResponse>
+     * @return BaseResponse<DirWrapped>
      *
      * @throws APIException
      */
@@ -85,7 +85,7 @@ final class DirRawService implements DirRawContract
             path: ['enterprises/%1$s/dir', $enterpriseID],
             body: (object) $parsed,
             options: $options,
-            convert: DirNewResponse::class,
+            convert: DirWrapped::class,
         );
     }
 
@@ -101,14 +101,14 @@ final class DirRawService implements DirRawContract
      *   filterExpiringAtGte?: \DateTimeInterface,
      *   filterExpiringAtLte?: \DateTimeInterface,
      *   filterExpiringWithinDays?: int,
-     *   filterStatus?: value-of<FilterStatus>,
+     *   filterStatus?: value-of<DirStatus>,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   sort?: value-of<Sort>,
      * }|DirListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DirListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<Dir>>
      *
      * @throws APIException
      */
@@ -140,7 +140,7 @@ final class DirRawService implements DirRawContract
                 ],
             ),
             options: $options,
-            convert: DirListResponse::class,
+            convert: Dir::class,
             page: DefaultFlatPagination::class,
         );
     }

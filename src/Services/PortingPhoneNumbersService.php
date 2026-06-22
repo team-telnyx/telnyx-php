@@ -8,8 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumber;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingPhoneNumbersContract;
 
@@ -42,7 +42,7 @@ final class PortingPhoneNumbersService implements PortingPhoneNumbersContract
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[porting_order_status]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PortingPhoneNumberListResponse>
+     * @return DefaultFlatPagination<PortingPhoneNumber>
      *
      * @throws APIException
      */

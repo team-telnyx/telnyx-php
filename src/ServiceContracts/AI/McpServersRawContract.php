@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI;
 
+use Telnyx\AI\McpServers\McpServer;
 use Telnyx\AI\McpServers\McpServerCreateParams;
-use Telnyx\AI\McpServers\McpServerGetResponse;
 use Telnyx\AI\McpServers\McpServerListParams;
-use Telnyx\AI\McpServers\McpServerListResponse;
-use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateParams;
-use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPaginationTopLevelArray;
@@ -27,7 +24,7 @@ interface McpServersRawContract
      * @param array<string,mixed>|McpServerCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<McpServerNewResponse>
+     * @return BaseResponse<McpServer>
      *
      * @throws APIException
      */
@@ -42,7 +39,7 @@ interface McpServersRawContract
      * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<McpServerGetResponse>
+     * @return BaseResponse<McpServer>
      *
      * @throws APIException
      */
@@ -58,7 +55,7 @@ interface McpServersRawContract
      * @param array<string,mixed>|McpServerUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<McpServerUpdateResponse>
+     * @return BaseResponse<McpServer>
      *
      * @throws APIException
      */
@@ -74,7 +71,7 @@ interface McpServersRawContract
      * @param array<string,mixed>|McpServerListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPaginationTopLevelArray<McpServerListResponse>>
+     * @return BaseResponse<DefaultFlatPaginationTopLevelArray<McpServer>>
      *
      * @throws APIException
      */

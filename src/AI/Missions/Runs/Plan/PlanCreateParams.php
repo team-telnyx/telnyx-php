@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs\Plan;
 
-use Telnyx\AI\Missions\Runs\Plan\PlanCreateParams\Step;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -15,10 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\Missions\Runs\PlanService::create()
  *
- * @phpstan-import-type StepShape from \Telnyx\AI\Missions\Runs\Plan\PlanCreateParams\Step
+ * @phpstan-import-type CreatePlanStepRequestShape from \Telnyx\AI\Missions\Runs\Plan\CreatePlanStepRequest
  *
  * @phpstan-type PlanCreateParamsShape = array{
- *   missionID: string, steps: list<Step|StepShape>
+ *   missionID: string,
+ *   steps: list<CreatePlanStepRequest|CreatePlanStepRequestShape>,
  * }
  */
 final class PlanCreateParams implements BaseModel
@@ -30,8 +30,8 @@ final class PlanCreateParams implements BaseModel
     #[Required]
     public string $missionID;
 
-    /** @var list<Step> $steps */
-    #[Required(list: Step::class)]
+    /** @var list<CreatePlanStepRequest> $steps */
+    #[Required(list: CreatePlanStepRequest::class)]
     public array $steps;
 
     /**
@@ -58,7 +58,7 @@ final class PlanCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Step|StepShape> $steps
+     * @param list<CreatePlanStepRequest|CreatePlanStepRequestShape> $steps
      */
     public static function with(string $missionID, array $steps): self
     {
@@ -79,7 +79,7 @@ final class PlanCreateParams implements BaseModel
     }
 
     /**
-     * @param list<Step|StepShape> $steps
+     * @param list<CreatePlanStepRequest|CreatePlanStepRequestShape> $steps
      */
     public function withSteps(array $steps): self
     {

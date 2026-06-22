@@ -7,9 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
+use Telnyx\CustomStorageCredentials\CredentialsResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -44,7 +42,7 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CustomStorageCredentialNewResponse::class, $result);
+        $this->assertInstanceOf(CredentialsResponse::class, $result);
     }
 
     #[Test]
@@ -65,7 +63,7 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CustomStorageCredentialNewResponse::class, $result);
+        $this->assertInstanceOf(CredentialsResponse::class, $result);
     }
 
     #[Test]
@@ -80,7 +78,7 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CustomStorageCredentialGetResponse::class, $result);
+        $this->assertInstanceOf(CredentialsResponse::class, $result);
     }
 
     #[Test]
@@ -97,10 +95,7 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            CustomStorageCredentialUpdateResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(CredentialsResponse::class, $result);
     }
 
     #[Test]
@@ -121,10 +116,7 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            CustomStorageCredentialUpdateResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(CredentialsResponse::class, $result);
     }
 
     #[Test]

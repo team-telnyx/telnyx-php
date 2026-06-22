@@ -47,11 +47,11 @@ class SttServerEvent
     public function __construct(array $data)
     {
         $this->rawData = $data;
-        $this->type = isset($data['type']) ? (string) $data['type'] : 'unknown';
-        $this->transcript = isset($data['transcript']) ? (string) $data['transcript'] : null;
+        $this->type = isset($data['type']) && is_scalar($data['type']) ? (string) $data['type'] : 'unknown';
+        $this->transcript = isset($data['transcript']) && is_scalar($data['transcript']) ? (string) $data['transcript'] : null;
         $this->isFinal = isset($data['is_final']) ? (bool) $data['is_final'] : null;
-        $this->confidence = isset($data['confidence']) ? (float) $data['confidence'] : null;
-        $this->error = isset($data['error']) ? (string) $data['error'] : null;
+        $this->confidence = isset($data['confidence']) && is_scalar($data['confidence']) ? (float) $data['confidence'] : null;
+        $this->error = isset($data['error']) && is_scalar($data['error']) ? (string) $data['error'] : null;
     }
 
     /**

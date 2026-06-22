@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node;
 
 use Telnyx\AI\Assistants\AssistantTool;
-use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\ToolNode\Position;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\ToolNode\Type;
+use Telnyx\AI\Assistants\NodePosition;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,14 +16,14 @@ use Telnyx\Core\Contracts\BaseModel;
  * A standalone tool step in a conversation flow, as returned by the API.
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
- * @phpstan-import-type PositionShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\ToolNode\Position
+ * @phpstan-import-type NodePositionShape from \Telnyx\AI\Assistants\NodePosition
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  *
  * @phpstan-type ToolNodeShape = array{
  *   id: string,
  *   sharedToolID: string,
  *   name?: string|null,
- *   position?: null|Position|PositionShape,
+ *   position?: null|NodePosition|NodePositionShape,
  *   tool?: list<AssistantToolShape>|null,
  *   type?: null|Type|value-of<Type>,
  * }
@@ -55,7 +55,7 @@ final class ToolNode implements BaseModel
      * Optional canvas coordinates used by authoring UIs to lay out the graph. Ignored by the runtime; round-trips so frontends can persist graph layout across reloads.
      */
     #[Optional]
-    public ?Position $position;
+    public ?NodePosition $position;
 
     /**
      * Full tool definition resolved from `shared_tool_id` server-side. Populated on responses so clients can render the node without a follow-up fetch. Ignored on input — set `shared_tool_id`.
@@ -97,7 +97,7 @@ final class ToolNode implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Position|PositionShape|null $position
+     * @param NodePosition|NodePositionShape|null $position
      * @param list<AssistantToolShape>|null $tool
      * @param Type|value-of<Type>|null $type
      */
@@ -105,7 +105,7 @@ final class ToolNode implements BaseModel
         string $id,
         string $sharedToolID,
         ?string $name = null,
-        Position|array|null $position = null,
+        NodePosition|array|null $position = null,
         ?array $tool = null,
         Type|string|null $type = null,
     ): self {
@@ -158,9 +158,9 @@ final class ToolNode implements BaseModel
     /**
      * Optional canvas coordinates used by authoring UIs to lay out the graph. Ignored by the runtime; round-trips so frontends can persist graph layout across reloads.
      *
-     * @param Position|PositionShape $position
+     * @param NodePosition|NodePositionShape $position
      */
-    public function withPosition(Position|array $position): self
+    public function withPosition(NodePosition|array $position): self
     {
         $self = clone $this;
         $self['position'] = $position;

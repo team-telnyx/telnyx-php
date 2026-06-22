@@ -11,7 +11,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsRawContract;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
-use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody;
 
 /**
  * TeXML REST Commands.
@@ -37,7 +37,7 @@ final class RecordingsRawService implements RecordingsRawContract
      * }|RecordingRecordingSidJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingRecordingSidJsonResponse>
+     * @return BaseResponse<TexmlCreateCallRecordingResponseBody>
      *
      * @throws APIException
      */
@@ -70,7 +70,7 @@ final class RecordingsRawService implements RecordingsRawContract
                 array_flip(['accountSid', 'callSid'])
             ),
             options: $options,
-            convert: RecordingRecordingSidJsonResponse::class,
+            convert: TexmlCreateCallRecordingResponseBody::class,
         );
     }
 }

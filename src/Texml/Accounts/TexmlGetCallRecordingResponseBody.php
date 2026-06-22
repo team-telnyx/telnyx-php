@@ -7,8 +7,8 @@ namespace Telnyx\Texml\Accounts;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Channels;
-use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Source;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingSource;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TwimlRecordingChannels;
 use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
 
 /**
@@ -17,7 +17,7 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
  * @phpstan-type TexmlGetCallRecordingResponseBodyShape = array{
  *   accountSid?: string|null,
  *   callSid?: string|null,
- *   channels?: null|Channels|value-of<Channels>,
+ *   channels?: null|TwimlRecordingChannels|value-of<TwimlRecordingChannels>,
  *   conferenceSid?: string|null,
  *   dateCreated?: \DateTimeInterface|null,
  *   dateUpdated?: \DateTimeInterface|null,
@@ -25,7 +25,7 @@ use Telnyx\Texml\Accounts\TexmlGetCallRecordingResponseBody\Status;
  *   errorCode?: string|null,
  *   mediaURL?: string|null,
  *   sid?: string|null,
- *   source?: null|Source|value-of<Source>,
+ *   source?: null|RecordingSource|value-of<RecordingSource>,
  *   startTime?: \DateTimeInterface|null,
  *   status?: null|Status|value-of<Status>,
  *   subresourcesUris?: null|TexmlRecordingSubresourcesUris|TexmlRecordingSubresourcesUrisShape,
@@ -43,8 +43,8 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     #[Optional('call_sid')]
     public ?string $callSid;
 
-    /** @var value-of<Channels>|null $channels */
-    #[Optional(enum: Channels::class)]
+    /** @var value-of<TwimlRecordingChannels>|null $channels */
+    #[Optional(enum: TwimlRecordingChannels::class)]
     public ?int $channels;
 
     #[Optional('conference_sid', nullable: true)]
@@ -77,9 +77,9 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     /**
      * Defines how the recording was created.
      *
-     * @var value-of<Source>|null $source
+     * @var value-of<RecordingSource>|null $source
      */
-    #[Optional(enum: Source::class)]
+    #[Optional(enum: RecordingSource::class)]
     public ?string $source;
 
     #[Optional('start_time')]
@@ -111,15 +111,15 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Channels|value-of<Channels>|null $channels
-     * @param Source|value-of<Source>|null $source
+     * @param TwimlRecordingChannels|value-of<TwimlRecordingChannels>|null $channels
+     * @param RecordingSource|value-of<RecordingSource>|null $source
      * @param Status|value-of<Status>|null $status
      * @param TexmlRecordingSubresourcesUris|TexmlRecordingSubresourcesUrisShape|null $subresourcesUris
      */
     public static function with(
         ?string $accountSid = null,
         ?string $callSid = null,
-        Channels|int|null $channels = null,
+        TwimlRecordingChannels|int|null $channels = null,
         ?string $conferenceSid = null,
         ?\DateTimeInterface $dateCreated = null,
         ?\DateTimeInterface $dateUpdated = null,
@@ -127,7 +127,7 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
         ?string $errorCode = null,
         ?string $mediaURL = null,
         ?string $sid = null,
-        Source|string|null $source = null,
+        RecordingSource|string|null $source = null,
         ?\DateTimeInterface $startTime = null,
         Status|string|null $status = null,
         TexmlRecordingSubresourcesUris|array|null $subresourcesUris = null,
@@ -171,9 +171,9 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     }
 
     /**
-     * @param Channels|value-of<Channels> $channels
+     * @param TwimlRecordingChannels|value-of<TwimlRecordingChannels> $channels
      */
-    public function withChannels(Channels|int $channels): self
+    public function withChannels(TwimlRecordingChannels|int $channels): self
     {
         $self = clone $this;
         $self['channels'] = $channels;
@@ -246,9 +246,9 @@ final class TexmlGetCallRecordingResponseBody implements BaseModel
     /**
      * Defines how the recording was created.
      *
-     * @param Source|value-of<Source> $source
+     * @param RecordingSource|value-of<RecordingSource> $source
      */
-    public function withSource(Source|string $source): self
+    public function withSource(RecordingSource|string $source): self
     {
         $self = clone $this;
         $self['source'] = $source;

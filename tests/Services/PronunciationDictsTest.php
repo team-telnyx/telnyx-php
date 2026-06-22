@@ -9,9 +9,7 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PronunciationDicts\PronunciationDictData;
-use Telnyx\PronunciationDicts\PronunciationDictGetResponse;
-use Telnyx\PronunciationDicts\PronunciationDictNewResponse;
-use Telnyx\PronunciationDicts\PronunciationDictUpdateResponse;
+use Telnyx\PronunciationDicts\PronunciationDictResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +43,7 @@ final class PronunciationDictsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PronunciationDictNewResponse::class, $result);
+        $this->assertInstanceOf(PronunciationDictResponse::class, $result);
     }
 
     #[Test]
@@ -61,7 +59,7 @@ final class PronunciationDictsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PronunciationDictNewResponse::class, $result);
+        $this->assertInstanceOf(PronunciationDictResponse::class, $result);
     }
 
     #[Test]
@@ -76,7 +74,7 @@ final class PronunciationDictsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PronunciationDictGetResponse::class, $result);
+        $this->assertInstanceOf(PronunciationDictResponse::class, $result);
     }
 
     #[Test]
@@ -91,7 +89,7 @@ final class PronunciationDictsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PronunciationDictUpdateResponse::class, $result);
+        $this->assertInstanceOf(PronunciationDictResponse::class, $result);
     }
 
     #[Test]

@@ -10,13 +10,12 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\ConferencesContract;
 use Telnyx\Services\Texml\Accounts\Conferences\ParticipantsService;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceResource;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
-use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 
 /**
  * TeXML REST Commands.
@@ -59,7 +58,7 @@ final class ConferencesService implements ConferencesContract
         string $conferenceSid,
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
-    ): ConferenceGetResponse {
+    ): ConferenceResource {
         $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type
@@ -89,7 +88,7 @@ final class ConferencesService implements ConferencesContract
         ?string $announceURL = null,
         ?string $status = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ConferenceUpdateResponse {
+    ): ConferenceResource {
         $params = Util::removeNulls(
             [
                 'accountSid' => $accountSid,
@@ -190,7 +189,7 @@ final class ConferencesService implements ConferencesContract
         string $conferenceSid,
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
-    ): ConferenceGetRecordingsJsonResponse {
+    ): TexmlGetCallRecordingsResponseBody {
         $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type

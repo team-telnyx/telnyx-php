@@ -7,7 +7,6 @@ namespace Telnyx\ServiceContracts\Calls;
 use Telnyx\AI\Assistants\Assistant;
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionAddAIAssistantMessagesResponse;
-use Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig;
 use Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection;
 use Telnyx\Calls\Actions\ActionAnswerParams\PreferredCodecs;
 use Telnyx\Calls\Actions\ActionAnswerParams\Record;
@@ -26,16 +25,13 @@ use Telnyx\Calls\Actions\ActionBridgeResponse;
 use Telnyx\Calls\Actions\ActionEnqueueResponse;
 use Telnyx\Calls\Actions\ActionGatherResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
-use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingAIResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingAudioResponse;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\Language;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\ServiceLevel;
-use Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\InworldVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingSpeakResponse;
 use Telnyx\Calls\Actions\ActionHangupResponse;
-use Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant;
 use Telnyx\Calls\Actions\ActionJoinAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
@@ -49,8 +45,6 @@ use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
 use Telnyx\Calls\Actions\ActionSpeakResponse;
 use Telnyx\Calls\Actions\ActionStartAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Interruptible;
-use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptibleGreeting;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams\StreamType;
@@ -72,10 +66,6 @@ use Telnyx\Calls\Actions\ActionStartSiprecParams\SipTransport;
 use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineAssemblyaiConfig;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
-use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineXaiConfig;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStopConversationRelayResponse;
@@ -97,7 +87,9 @@ use Telnyx\Calls\Actions\ActionTransferParams\SipRegion;
 use Telnyx\Calls\Actions\ActionTransferParams\SipTransportProtocol;
 use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
+use Telnyx\Calls\Actions\AIAssistantJoinParticipant;
 use Telnyx\Calls\Actions\AwsVoiceSettings;
+use Telnyx\Calls\Actions\ConversationRelayInterruptible;
 use Telnyx\Calls\Actions\DeepgramNova2Config;
 use Telnyx\Calls\Actions\DeepgramNova3Config;
 use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
@@ -106,12 +98,19 @@ use Telnyx\Calls\Actions\InterruptionSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Calls\Actions\TranscriptionConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineXaiConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CallAssistantRequest;
+use Telnyx\Calls\ConversationRelayEmbeddedConfig;
+use Telnyx\Calls\ConversationRelayInterruptionSettings;
+use Telnyx\Calls\ConversationRelayLanguage;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\SipHeader;
@@ -122,14 +121,16 @@ use Telnyx\Calls\StreamBidirectionalSamplingRate;
 use Telnyx\Calls\StreamBidirectionalTargetLegs;
 use Telnyx\Calls\StreamCodec;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
+use Telnyx\XaiVoiceSettings;
 
 /**
  * @phpstan-import-type MessageShape from \Telnyx\Calls\Actions\ActionAddAIAssistantMessagesParams\Message
- * @phpstan-import-type ConversationRelayConfigShape from \Telnyx\Calls\Actions\ActionAnswerParams\ConversationRelayConfig
+ * @phpstan-import-type ConversationRelayEmbeddedConfigShape from \Telnyx\Calls\ConversationRelayEmbeddedConfig
  * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\Actions\ActionAnswerParams\DeepfakeDetection
  * @phpstan-import-type TranscriptionStartRequestShape from \Telnyx\Calls\Actions\TranscriptionStartRequest
  * @phpstan-import-type WebhookRetriesPolicyShape from \Telnyx\Calls\Actions\ActionAnswerParams\WebhookRetriesPolicy
@@ -137,15 +138,13 @@ use Telnyx\RimeVoiceSettings;
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
- * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
- * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant as ParticipantShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
- * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
- * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
+ * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
+ * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
@@ -158,8 +157,9 @@ use Telnyx\RimeVoiceSettings;
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
- * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings as InterruptionSettingsShape1
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
+ * @phpstan-import-type AIAssistantJoinParticipantShape from \Telnyx\Calls\Actions\AIAssistantJoinParticipant
  * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
  */
 interface ActionsContract
@@ -191,7 +191,7 @@ interface ActionsContract
      * @param string $billingGroupID Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
-     * @param ConversationRelayConfig|ConversationRelayConfigShape $conversationRelayConfig Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.
+     * @param ConversationRelayEmbeddedConfig|ConversationRelayEmbeddedConfigShape $conversationRelayConfig Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.
      * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE response
      * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
      * @param PreferredCodecs|value-of<PreferredCodecs> $preferredCodecs the list of comma-separated codecs in a preferred order for the forked media to be received
@@ -229,7 +229,7 @@ interface ActionsContract
         ?string $billingGroupID = null,
         ?string $clientState = null,
         ?string $commandID = null,
-        ConversationRelayConfig|array|null $conversationRelayConfig = null,
+        ConversationRelayEmbeddedConfig|array|null $conversationRelayConfig = null,
         ?array $customHeaders = null,
         DeepfakeDetection|array|null $deepfakeDetection = null,
         PreferredCodecs|string|null $preferredCodecs = null,
@@ -381,7 +381,7 @@ interface ActionsContract
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $gatherEndedSpeech Text that will be played when the gathering has finished. There is a 3,000 character limit.
      * @param string $greeting Text that will be played when the gathering starts, if none then nothing will be played when the gathering starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
-     * @param InterruptionSettings|InterruptionSettingsShape1 $interruptionSettings Settings for handling user interruptions during assistant speech
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings Settings for handling user interruptions during assistant speech
      * @param GoogleTranscriptionLanguage|value-of<GoogleTranscriptionLanguage> $language Language to use for speech recognition
      * @param list<MessageHistory|MessageHistoryShape> $messageHistory the message history you want the voice assistant to be aware of, this can be useful to keep the context of the conversation, or to pass additional information to the voice assistant
      * @param bool $sendMessageHistoryUpdates Default is `false`. If set to `true`, the voice assistant will send updates to the message history via the `call.ai_gather.message_history_updated` callback in real time as the message history is updated.
@@ -517,7 +517,7 @@ interface ActionsContract
         string $terminatingDigit = '#',
         int $timeoutMillis = 60000,
         string $validDigits = '0123456789#*',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|\Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionGatherUsingSpeakResponse;
 
@@ -545,7 +545,7 @@ interface ActionsContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param string $conversationID the ID of the AI assistant conversation to join
-     * @param Participant|ParticipantShape $participant
+     * @param AIAssistantJoinParticipant|AIAssistantJoinParticipantShape $participant
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param RequestOpts|null $requestOptions
@@ -555,7 +555,7 @@ interface ActionsContract
     public function joinAIAssistant(
         string $callControlID,
         string $conversationID,
-        Participant|array $participant,
+        AIAssistantJoinParticipant|array $participant,
         ?string $clientState = null,
         ?string $commandID = null,
         RequestOptions|array|null $requestOptions = null,
@@ -750,7 +750,7 @@ interface ActionsContract
         \Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel|string $serviceLevel = 'premium',
         ?string $stop = null,
         TargetLegs|string $targetLegs = 'self',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings|\Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionSpeakResponse;
 
@@ -762,9 +762,9 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param string $greeting Text that will be played when the assistant starts, if none then nothing will be played when the assistant starts. The greeting can be text for any voice or SSML for `AWS.Polly.<voice_id>` voices. There is a 3,000 character limit.
-     * @param InterruptionSettings|InterruptionSettingsShape1 $interruptionSettings Settings for handling user interruptions during assistant speech
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings Settings for handling user interruptions during assistant speech
      * @param list<MessageHistoryShape1> $messageHistory A list of messages to seed the conversation history before the assistant starts. Follows the same message format as the `ai_assistant_add_messages` command.
-     * @param list<\Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant|ParticipantShape1> $participants a list of participants to add to the conversation when it starts
+     * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape> $participants a list of participants to add to the conversation when it starts
      * @param bool $sendMessageHistoryUpdates when `true`, a webhook is sent each time the conversation message history is updated
      * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
      * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
@@ -793,7 +793,7 @@ interface ActionsContract
         bool $sendMessageHistoryUpdates = false,
         TranscriptionConfig|array|null $transcription = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartAIAssistantResponse;
 
@@ -810,11 +810,11 @@ interface ActionsContract
      * @param array<string,mixed> $customParameters Custom key-value parameters forwarded to the relay session as `assistant.dynamic_variables`. If `assistant.dynamic_variables` is also present, these values are merged in.
      * @param bool $dtmfDetection Public alias for `conversation_relay_dtmf_detection`. If both are present, this value wins.
      * @param string $greeting text played when the relay session starts
-     * @param Interruptible|value-of<Interruptible> $interruptible Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
-     * @param InterruptibleGreeting|value-of<InterruptibleGreeting> $interruptibleGreeting Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
-     * @param \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings|InterruptionSettingsShape $interruptionSettings settings for handling caller interruptions during Conversation Relay speech
+     * @param ConversationRelayInterruptible|value-of<ConversationRelayInterruptible> $interruptible Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
+     * @param ConversationRelayInterruptible|value-of<ConversationRelayInterruptible> $interruptibleGreeting Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
+     * @param ConversationRelayInterruptionSettings|ConversationRelayInterruptionSettingsShape $interruptionSettings settings for handling caller interruptions during Conversation Relay speech
      * @param string $language Default language for the relay session. This value is used for both text-to-speech and speech recognition.
-     * @param list<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language|LanguageShape> $languages per-language TTS and transcription settings
+     * @param list<ConversationRelayLanguage|ConversationRelayLanguageShape> $languages per-language TTS and transcription settings
      * @param string $provider Structured voice provider. Must be supplied together with `structured_provider`.
      * @param array<string,mixed> $structuredProvider Provider-specific structured voice settings. Must be supplied together with `provider`; Telnyx sends the value as the nested provider configuration for Conversation Relay.
      * @param array<string,mixed> $transcription Not supported for Conversation Relay start requests. Use `transcription_engine` and `transcription_engine_config` instead.
@@ -847,9 +847,9 @@ interface ActionsContract
         ?array $customParameters = null,
         bool $dtmfDetection = false,
         ?string $greeting = null,
-        Interruptible|string $interruptible = 'any',
-        InterruptibleGreeting|string $interruptibleGreeting = 'any',
-        \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings|array|null $interruptionSettings = null,
+        ConversationRelayInterruptible|string $interruptible = 'any',
+        ConversationRelayInterruptible|string $interruptibleGreeting = 'any',
+        ConversationRelayInterruptionSettings|array|null $interruptionSettings = null,
         string $language = 'en',
         ?array $languages = null,
         ?string $provider = null,
@@ -860,7 +860,7 @@ interface ActionsContract
         ?string $ttsProvider = null,
         ?string $url = null,
         string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\InworldVoiceSettings|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\XaiVoiceSettings|null $voiceSettings = null,
+        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartConversationRelayResponse;
 

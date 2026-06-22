@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI\Assistants;
 
-use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployCreateParams\Rule;
 use Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployResponse;
+use Telnyx\AI\Assistants\CanaryDeploys\RuleInput;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployCreateParams\Rule
- * @phpstan-import-type RuleShape from \Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule as RuleShape1
+ * @phpstan-import-type RuleInputShape from \Telnyx\AI\Assistants\CanaryDeploys\RuleInput
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface CanaryDeploysContract
@@ -20,7 +19,7 @@ interface CanaryDeploysContract
      * @api
      *
      * @param string $assistantID unique identifier of the assistant
-     * @param list<Rule|RuleShape> $rules
+     * @param list<RuleInput|RuleInputShape> $rules
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -48,7 +47,7 @@ interface CanaryDeploysContract
      * @api
      *
      * @param string $assistantID unique identifier of the assistant
-     * @param list<\Telnyx\AI\Assistants\CanaryDeploys\CanaryDeployUpdateParams\Rule|RuleShape1> $rules
+     * @param list<RuleInput|RuleInputShape> $rules
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

@@ -7,14 +7,11 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\EnterpriseActivateBrandedCallingResponse;
 use Telnyx\Enterprises\EnterpriseCreateParams;
-use Telnyx\Enterprises\EnterpriseGetResponse;
 use Telnyx\Enterprises\EnterpriseListParams;
-use Telnyx\Enterprises\EnterpriseNewResponse;
 use Telnyx\Enterprises\EnterprisePublic;
+use Telnyx\Enterprises\EnterprisePublicWrapped;
 use Telnyx\Enterprises\EnterpriseUpdateParams;
-use Telnyx\Enterprises\EnterpriseUpdateResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -28,7 +25,7 @@ interface EnterprisesRawContract
      * @param array<string,mixed>|EnterpriseCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EnterpriseNewResponse>
+     * @return BaseResponse<EnterprisePublicWrapped>
      *
      * @throws APIException
      */
@@ -43,7 +40,7 @@ interface EnterprisesRawContract
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EnterpriseGetResponse>
+     * @return BaseResponse<EnterprisePublicWrapped>
      *
      * @throws APIException
      */
@@ -59,7 +56,7 @@ interface EnterprisesRawContract
      * @param array<string,mixed>|EnterpriseUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EnterpriseUpdateResponse>
+     * @return BaseResponse<EnterprisePublicWrapped>
      *
      * @throws APIException
      */
@@ -105,11 +102,11 @@ interface EnterprisesRawContract
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EnterpriseActivateBrandedCallingResponse>
+     * @return BaseResponse<EnterprisePublicWrapped>
      *
      * @throws APIException
      */
-    public function activateBrandedCalling(
+    public function brandedCalling(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse;

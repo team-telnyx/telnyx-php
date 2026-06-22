@@ -8,9 +8,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\WebhookDeliveries\WebhookDelivery;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -38,7 +38,7 @@ interface WebhookDeliveriesRawContract
      * @param array<string,mixed>|WebhookDeliveryListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WebhookDeliveryListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WebhookDelivery>>
      *
      * @throws APIException
      */
