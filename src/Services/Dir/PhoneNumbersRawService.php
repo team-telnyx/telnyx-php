@@ -9,12 +9,12 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\Document;
+use Telnyx\Dir\PhoneNumberBatches\DirPhoneNumberStatus;
+use Telnyx\Dir\PhoneNumbers\DirPhoneNumber;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberAddParams;
-use Telnyx\Dir\PhoneNumbers\PhoneNumberAddParams\Document;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberAddResponse;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberListParams;
-use Telnyx\Dir\PhoneNumbers\PhoneNumberListParams\Status;
-use Telnyx\Dir\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberRemoveParams;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberRemoveResponse;
 use Telnyx\RequestOptions;
@@ -23,7 +23,7 @@ use Telnyx\ServiceContracts\Dir\PhoneNumbersRawContract;
 /**
  * Associate phone numbers with a verified DIR so calls from those numbers carry the DIR's display identity.
  *
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\PhoneNumbers\PhoneNumberAddParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PhoneNumbersRawService implements PhoneNumbersRawContract
@@ -41,11 +41,11 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param array{
-     *   pageNumber?: int, pageSize?: int, status?: value-of<Status>
+     *   pageNumber?: int, pageSize?: int, status?: value-of<DirPhoneNumberStatus>
      * }|PhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<DirPhoneNumber>>
      *
      * @throws APIException
      */
@@ -68,7 +68,7 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PhoneNumberListResponse::class,
+            convert: DirPhoneNumber::class,
             page: DefaultFlatPagination::class,
         );
     }

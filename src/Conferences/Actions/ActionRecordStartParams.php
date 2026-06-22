@@ -6,7 +6,6 @@ namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Channels;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Format;
-use Telnyx\Conferences\Actions\ActionRecordStartParams\Region;
 use Telnyx\Conferences\Actions\ActionRecordStartParams\Trim;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -29,7 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   commandID?: string|null,
  *   customFileName?: string|null,
  *   playBeep?: bool|null,
- *   region?: null|Region|value-of<Region>,
+ *   region?: null|ConferenceRegion|value-of<ConferenceRegion>,
  *   trim?: null|Trim|value-of<Trim>,
  * }
  */
@@ -76,9 +75,9 @@ final class ActionRecordStartParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @var value-of<Region>|null $region
+     * @var value-of<ConferenceRegion>|null $region
      */
-    #[Optional(enum: Region::class)]
+    #[Optional(enum: ConferenceRegion::class)]
     public ?string $region;
 
     /**
@@ -115,7 +114,7 @@ final class ActionRecordStartParams implements BaseModel
      *
      * @param Format|value-of<Format> $format
      * @param Channels|value-of<Channels>|null $channels
-     * @param Region|value-of<Region>|null $region
+     * @param ConferenceRegion|value-of<ConferenceRegion>|null $region
      * @param Trim|value-of<Trim>|null $trim
      */
     public static function with(
@@ -124,7 +123,7 @@ final class ActionRecordStartParams implements BaseModel
         ?string $commandID = null,
         ?string $customFileName = null,
         ?bool $playBeep = null,
-        Region|string|null $region = null,
+        ConferenceRegion|string|null $region = null,
         Trim|string|null $trim = null,
     ): self {
         $self = new self;
@@ -203,9 +202,9 @@ final class ActionRecordStartParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @param Region|value-of<Region> $region
+     * @param ConferenceRegion|value-of<ConferenceRegion> $region
      */
-    public function withRegion(Region|string $region): self
+    public function withRegion(ConferenceRegion|string $region): self
     {
         $self = clone $this;
         $self['region'] = $region;

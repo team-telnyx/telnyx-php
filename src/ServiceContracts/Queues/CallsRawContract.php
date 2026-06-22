@@ -9,10 +9,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
-use Telnyx\Queues\Calls\CallListResponse;
 use Telnyx\Queues\Calls\CallRemoveParams;
 use Telnyx\Queues\Calls\CallRetrieveParams;
 use Telnyx\Queues\Calls\CallUpdateParams;
+use Telnyx\Queues\Calls\QueueCall;
 use Telnyx\RequestOptions;
 
 /**
@@ -61,7 +61,7 @@ interface CallsRawContract
      * @param array<string,mixed>|CallListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<CallListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<QueueCall>>
      *
      * @throws APIException
      */

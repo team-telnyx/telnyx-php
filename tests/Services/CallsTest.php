@@ -5,6 +5,7 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\Calls\Actions\ConversationRelayInterruptible;
 use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
 use Telnyx\Calls\CallDialResponse;
 use Telnyx\Calls\CallGetStatusResponse;
@@ -153,13 +154,13 @@ final class CallsTest extends TestCase
                 'customParameters' => ['customer_id' => 'bar'],
                 'dtmfDetection' => true,
                 'greeting' => 'Hi! Ask me anything!',
-                'interruptible' => 'speech',
-                'interruptibleGreeting' => 'dtmf',
+                'interruptible' => ConversationRelayInterruptible::SPEECH,
+                'interruptibleGreeting' => ConversationRelayInterruptible::DTMF,
                 'interruptionSettings' => [
                     'enable' => true,
-                    'interruptible' => 'speech',
-                    'interruptibleGreeting' => 'speech',
-                    'welcomeGreetingInterruptible' => 'speech',
+                    'interruptible' => ConversationRelayInterruptible::SPEECH,
+                    'interruptibleGreeting' => ConversationRelayInterruptible::SPEECH,
+                    'welcomeGreetingInterruptible' => ConversationRelayInterruptible::SPEECH,
                 ],
                 'language' => 'en-US',
                 'languages' => [

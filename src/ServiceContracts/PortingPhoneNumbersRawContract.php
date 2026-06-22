@@ -7,8 +7,8 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumber;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -22,7 +22,7 @@ interface PortingPhoneNumbersRawContract
      * @param array<string,mixed>|PortingPhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingPhoneNumberListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<PortingPhoneNumber>>
      *
      * @throws APIException
      */

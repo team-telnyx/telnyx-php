@@ -14,7 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\NetworksService::update()
  *
- * @phpstan-type NetworkUpdateParamsShape = array{name: string}
+ * @phpstan-import-type NetworkCreateShape from \Telnyx\Networks\NetworkCreate
+ *
+ * @phpstan-type NetworkUpdateParamsShape = array{
+ *   networkCreate: NetworkCreate|NetworkCreateShape
+ * }
  */
 final class NetworkUpdateParams implements BaseModel
 {
@@ -22,24 +26,21 @@ final class NetworkUpdateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /**
-     * A user specified name for the network.
-     */
     #[Required]
-    public string $name;
+    public NetworkCreate $networkCreate;
 
     /**
      * `new NetworkUpdateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * NetworkUpdateParams::with(name: ...)
+     * NetworkUpdateParams::with(networkCreate: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new NetworkUpdateParams)->withName(...)
+     * (new NetworkUpdateParams)->withNetworkCreate(...)
      * ```
      */
     public function __construct()
@@ -51,23 +52,25 @@ final class NetworkUpdateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param NetworkCreate|NetworkCreateShape $networkCreate
      */
-    public static function with(string $name): self
+    public static function with(NetworkCreate|array $networkCreate): self
     {
         $self = new self;
 
-        $self['name'] = $name;
+        $self['networkCreate'] = $networkCreate;
 
         return $self;
     }
 
     /**
-     * A user specified name for the network.
+     * @param NetworkCreate|NetworkCreateShape $networkCreate
      */
-    public function withName(string $name): self
+    public function withNetworkCreate(NetworkCreate|array $networkCreate): self
     {
         $self = clone $this;
-        $self['name'] = $name;
+        $self['networkCreate'] = $networkCreate;
 
         return $self;
     }

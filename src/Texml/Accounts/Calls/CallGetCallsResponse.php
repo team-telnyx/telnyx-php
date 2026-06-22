@@ -7,13 +7,12 @@ namespace Telnyx\Texml\Accounts\Calls;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call;
 
 /**
- * @phpstan-import-type CallShape from \Telnyx\Texml\Accounts\Calls\CallGetCallsResponse\Call
+ * @phpstan-import-type CallResourceShape from \Telnyx\Texml\Accounts\Calls\CallResource
  *
  * @phpstan-type CallGetCallsResponseShape = array{
- *   calls?: list<Call|CallShape>|null,
+ *   calls?: list<CallResource|CallResourceShape>|null,
  *   end?: int|null,
  *   firstPageUri?: string|null,
  *   nextPageUri?: string|null,
@@ -28,8 +27,8 @@ final class CallGetCallsResponse implements BaseModel
     /** @use SdkModel<CallGetCallsResponseShape> */
     use SdkModel;
 
-    /** @var list<Call>|null $calls */
-    #[Optional(list: Call::class)]
+    /** @var list<CallResource>|null $calls */
+    #[Optional(list: CallResource::class)]
     public ?array $calls;
 
     /**
@@ -84,7 +83,7 @@ final class CallGetCallsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Call|CallShape>|null $calls
+     * @param list<CallResource|CallResourceShape>|null $calls
      */
     public static function with(
         ?array $calls = null,
@@ -111,7 +110,7 @@ final class CallGetCallsResponse implements BaseModel
     }
 
     /**
-     * @param list<Call|CallShape> $calls
+     * @param list<CallResource|CallResourceShape> $calls
      */
     public function withCalls(array $calls): self
     {

@@ -8,10 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData;
+use Telnyx\CustomStorageCredentials\CredentialsResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Telnyx\CustomStorageCredentials\GcsConfigurationData;
 use Telnyx\CustomStorageCredentials\S3ConfigurationData;
 use Telnyx\RequestOptions;
@@ -56,7 +54,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         Backend|string $backend,
         GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
         RequestOptions|array|null $requestOptions = null,
-    ): CustomStorageCredentialNewResponse {
+    ): CredentialsResponse {
         $params = Util::removeNulls(
             ['backend' => $backend, 'configuration' => $configuration]
         );
@@ -80,7 +78,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
     public function retrieve(
         string $connectionID,
         RequestOptions|array|null $requestOptions = null
-    ): CustomStorageCredentialGetResponse {
+    ): CredentialsResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($connectionID, requestOptions: $requestOptions);
 
@@ -104,7 +102,7 @@ final class CustomStorageCredentialsService implements CustomStorageCredentialsC
         \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|string $backend,
         GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
         RequestOptions|array|null $requestOptions = null,
-    ): CustomStorageCredentialUpdateResponse {
+    ): CredentialsResponse {
         $params = Util::removeNulls(
             ['backend' => $backend, 'configuration' => $configuration]
         );

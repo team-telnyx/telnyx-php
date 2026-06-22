@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type OpenAICreateResponseParamsShape = array{
  *   conversation?: string|null,
- *   input?: mixed,
+ *   input?: array<string,mixed>|null,
  *   instructions?: string|null,
  *   model?: string|null,
  *   stream?: bool|null,
@@ -42,9 +42,11 @@ final class OpenAICreateResponseParams implements BaseModel
 
     /**
      * The input items for this turn, using the OpenAI Responses API input format.
+     *
+     * @var array<string,mixed>|null $input
      */
-    #[Optional]
-    public mixed $input;
+    #[Optional(map: 'mixed')]
+    public ?array $input;
 
     /**
      * Optional system/developer instructions for the model. When used with a persisted `conversation`, send these on the first request that creates the thread; subsequent turns can rely on the stored history.
@@ -73,10 +75,12 @@ final class OpenAICreateResponseParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param array<string,mixed>|null $input
      */
     public static function with(
         ?string $conversation = null,
-        mixed $input = null,
+        ?array $input = null,
         ?string $instructions = null,
         ?string $model = null,
         ?bool $stream = null,
@@ -105,8 +109,10 @@ final class OpenAICreateResponseParams implements BaseModel
 
     /**
      * The input items for this turn, using the OpenAI Responses API input format.
+     *
+     * @param array<string,mixed> $input
      */
-    public function withInput(mixed $input): self
+    public function withInput(array $input): self
     {
         $self = clone $this;
         $self['input'] = $input;

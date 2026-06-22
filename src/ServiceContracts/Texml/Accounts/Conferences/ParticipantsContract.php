@@ -7,7 +7,6 @@ namespace Telnyx\ServiceContracts\Texml\Accounts\Conferences;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\AmdStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Beep;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecord;
@@ -22,9 +21,9 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Trim;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsResponse;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantResource;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\AnnounceMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldMethod;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 
 /**
  * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\CustomHeader
@@ -47,7 +46,7 @@ interface ParticipantsContract
         string $accountSid,
         string $conferenceSid,
         RequestOptions|array|null $requestOptions = null,
-    ): ParticipantGetResponse;
+    ): ParticipantResource;
 
     /**
      * @api
@@ -86,7 +85,7 @@ interface ParticipantsContract
         ?bool $muted = null,
         ?string $waitURL = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ParticipantUpdateResponse;
+    ): ParticipantResource;
 
     /**
      * @api

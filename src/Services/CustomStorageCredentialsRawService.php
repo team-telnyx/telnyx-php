@@ -7,12 +7,10 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\CustomStorageCredentials\CredentialsResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\CustomStorageCredentialsRawContract;
 
@@ -42,7 +40,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
      * }|CustomStorageCredentialCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CustomStorageCredentialNewResponse>
+     * @return BaseResponse<CredentialsResponse>
      *
      * @throws APIException
      */
@@ -62,7 +60,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
             path: ['custom_storage_credentials/%1$s', $connectionID],
             body: (object) $parsed,
             options: $options,
-            convert: CustomStorageCredentialNewResponse::class,
+            convert: CredentialsResponse::class,
         );
     }
 
@@ -74,7 +72,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control, TeXML) or Sip connection resource
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CustomStorageCredentialGetResponse>
+     * @return BaseResponse<CredentialsResponse>
      *
      * @throws APIException
      */
@@ -87,7 +85,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
             method: 'get',
             path: ['custom_storage_credentials/%1$s', $connectionID],
             options: $requestOptions,
-            convert: CustomStorageCredentialGetResponse::class,
+            convert: CredentialsResponse::class,
         );
     }
 
@@ -103,7 +101,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
      * }|CustomStorageCredentialUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CustomStorageCredentialUpdateResponse>
+     * @return BaseResponse<CredentialsResponse>
      *
      * @throws APIException
      */
@@ -123,7 +121,7 @@ final class CustomStorageCredentialsRawService implements CustomStorageCredentia
             path: ['custom_storage_credentials/%1$s', $connectionID],
             body: (object) $parsed,
             options: $options,
-            convert: CustomStorageCredentialUpdateResponse::class,
+            convert: CredentialsResponse::class,
         );
     }
 

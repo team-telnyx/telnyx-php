@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI;
 
+use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\AI\Tools\ToolCreateParams;
-use Telnyx\AI\Tools\ToolGetResponse;
 use Telnyx\AI\Tools\ToolListParams;
-use Telnyx\AI\Tools\ToolListResponse;
-use Telnyx\AI\Tools\ToolNewResponse;
 use Telnyx\AI\Tools\ToolUpdateParams;
-use Telnyx\AI\Tools\ToolUpdateResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
@@ -27,7 +24,7 @@ interface ToolsRawContract
      * @param array<string,mixed>|ToolCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ToolNewResponse>
+     * @return BaseResponse<SharedToolResponse>
      *
      * @throws APIException
      */
@@ -42,7 +39,7 @@ interface ToolsRawContract
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ToolGetResponse>
+     * @return BaseResponse<SharedToolResponse>
      *
      * @throws APIException
      */
@@ -58,7 +55,7 @@ interface ToolsRawContract
      * @param array<string,mixed>|ToolUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ToolUpdateResponse>
+     * @return BaseResponse<SharedToolResponse>
      *
      * @throws APIException
      */
@@ -74,7 +71,7 @@ interface ToolsRawContract
      * @param array<string,mixed>|ToolListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ToolListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<SharedToolResponse>>
      *
      * @throws APIException
      */

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node;
 
-use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\SpeakNode\Position;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\SpeakNode\Type;
+use Telnyx\AI\Assistants\NodePosition;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -14,13 +14,13 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * A standalone scripted-message step in a flow, as returned by the API.
  *
- * @phpstan-import-type PositionShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\SpeakNode\Position
+ * @phpstan-import-type NodePositionShape from \Telnyx\AI\Assistants\NodePosition
  *
  * @phpstan-type SpeakNodeShape = array{
  *   id: string,
  *   message: string,
  *   name?: string|null,
- *   position?: null|Position|PositionShape,
+ *   position?: null|NodePosition|NodePositionShape,
  *   type?: null|Type|value-of<Type>,
  * }
  */
@@ -51,7 +51,7 @@ final class SpeakNode implements BaseModel
      * Optional canvas coordinates used by authoring UIs to lay out the graph. Ignored by the runtime; round-trips so frontends can persist graph layout across reloads.
      */
     #[Optional]
-    public ?Position $position;
+    public ?NodePosition $position;
 
     /**
      * Node kind discriminator. Always `speak` for a speak node.
@@ -85,14 +85,14 @@ final class SpeakNode implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Position|PositionShape|null $position
+     * @param NodePosition|NodePositionShape|null $position
      * @param Type|value-of<Type>|null $type
      */
     public static function with(
         string $id,
         string $message,
         ?string $name = null,
-        Position|array|null $position = null,
+        NodePosition|array|null $position = null,
         Type|string|null $type = null,
     ): self {
         $self = new self;
@@ -143,9 +143,9 @@ final class SpeakNode implements BaseModel
     /**
      * Optional canvas coordinates used by authoring UIs to lay out the graph. Ignored by the runtime; round-trips so frontends can persist graph layout across reloads.
      *
-     * @param Position|PositionShape $position
+     * @param NodePosition|NodePositionShape $position
      */
-    public function withPosition(Position|array $position): self
+    public function withPosition(NodePosition|array $position): self
     {
         $self = clone $this;
         $self['position'] = $position;

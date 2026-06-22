@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\ScheduledEvents;
 
-use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\CallSettings;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -18,7 +17,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Assistants\ScheduledEventsService::create()
  *
  * @phpstan-import-type ConversationMetadataVariants from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata
- * @phpstan-import-type CallSettingsShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\CallSettings
+ * @phpstan-import-type ScheduledCallSettingsShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledCallSettings
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata
  *
  * @phpstan-type ScheduledEventCreateParamsShape = array{
@@ -26,7 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   telnyxAgentTarget: string,
  *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
  *   telnyxEndUserTarget: string,
- *   callSettings?: null|CallSettings|CallSettingsShape,
+ *   callSettings?: null|ScheduledCallSettings|ScheduledCallSettingsShape,
  *   conversationMetadata?: array<string,ConversationMetadataShape>|null,
  *   dynamicVariables?: array<string,string>|null,
  *   maxRetriesClientErrors?: int|null,
@@ -71,7 +70,7 @@ final class ScheduledEventCreateParams implements BaseModel
      * added here rather than as top-level event fields.
      */
     #[Optional('call_settings')]
-    public ?CallSettings $callSettings;
+    public ?ScheduledCallSettings $callSettings;
 
     /**
      * Metadata associated with the conversation. Telnyx provides several pieces of metadata, but customers can also add their own.
@@ -138,7 +137,7 @@ final class ScheduledEventCreateParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param ConversationChannelType|value-of<ConversationChannelType> $telnyxConversationChannel
-     * @param CallSettings|CallSettingsShape|null $callSettings
+     * @param ScheduledCallSettings|ScheduledCallSettingsShape|null $callSettings
      * @param array<string,ConversationMetadataShape>|null $conversationMetadata
      * @param array<string,string>|null $dynamicVariables
      */
@@ -147,7 +146,7 @@ final class ScheduledEventCreateParams implements BaseModel
         string $telnyxAgentTarget,
         ConversationChannelType|string $telnyxConversationChannel,
         string $telnyxEndUserTarget,
-        CallSettings|array|null $callSettings = null,
+        ScheduledCallSettings|array|null $callSettings = null,
         ?array $conversationMetadata = null,
         ?array $dynamicVariables = null,
         ?int $maxRetriesClientErrors = null,
@@ -222,10 +221,11 @@ final class ScheduledEventCreateParams implements BaseModel
      * dispatches. Phone-call events only. New per-call dispatch options should be
      * added here rather than as top-level event fields.
      *
-     * @param CallSettings|CallSettingsShape $callSettings
+     * @param ScheduledCallSettings|ScheduledCallSettingsShape $callSettings
      */
-    public function withCallSettings(CallSettings|array $callSettings): self
-    {
+    public function withCallSettings(
+        ScheduledCallSettings|array $callSettings
+    ): self {
         $self = clone $this;
         $self['callSettings'] = $callSettings;
 

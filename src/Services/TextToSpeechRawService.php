@@ -10,33 +10,35 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TextToSpeechRawContract;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Aws;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Azure;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Elevenlabs;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Minimax;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\OutputType;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Provider;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai;
-use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\TextType;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechResponse;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
+use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams;
+use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
 
 /**
  * Text to speech streaming command operations.
  *
- * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Aws
- * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Azure
- * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Elevenlabs
- * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Minimax
- * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble
- * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime
- * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx
- * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai
+ * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws
+ * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure
+ * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs
+ * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
+ * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
+ * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime
+ * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx
+ * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class TextToSpeechRawService implements TextToSpeechRawContract
@@ -77,18 +79,18 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *   voice?: string,
      *   voiceSettings?: array<string,mixed>,
      *   xai?: Xai|XaiShape,
-     * }|TextToSpeechGenerateParams $params
+     * }|TextToSpeechGenerateSpeechParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TextToSpeechGenerateResponse>
+     * @return BaseResponse<TextToSpeechGenerateSpeechResponse>
      *
      * @throws APIException
      */
-    public function generate(
-        array|TextToSpeechGenerateParams $params,
+    public function generateSpeech(
+        array|TextToSpeechGenerateSpeechParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = TextToSpeechGenerateParams::parseRequest(
+        [$parsed, $options] = TextToSpeechGenerateSpeechParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -99,7 +101,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
             path: 'text-to-speech/speech',
             body: (object) $parsed,
             options: $options,
-            convert: TextToSpeechGenerateResponse::class,
+            convert: TextToSpeechGenerateSpeechResponse::class,
         );
     }
 
@@ -136,6 +138,67 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
             query: Util::array_transform_keys($parsed, ['apiKey' => 'api_key']),
             options: $options,
             convert: TextToSpeechListVoicesResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
+     *
+     * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `rime`, `resemble`, `elevenlabs`, `xai`.
+     *
+     * **Connection flow:**
+     * 1. Open WebSocket with query parameters specifying provider, voice, and model.
+     * 2. Send an initial handshake message `{"text": " "}` (single space) with optional `voice_settings` to initialize the session.
+     * 3. Send text messages as `{"text": "Hello world"}`.
+     * 4. Receive audio chunks as JSON frames with base64-encoded audio.
+     * 5. A final frame with `isFinal: true` indicates the end of audio for the current text.
+     *
+     * To interrupt and restart synthesis mid-stream, send `{"force": true}` — the current worker is stopped and a new one is started.
+     *
+     * **Note:** The Telnyx `Ultra` model is not available over WebSocket. Use the HTTP POST `/text-to-speech/speech` endpoint instead.
+     *
+     * @param array{
+     *   audioFormat?: AudioFormat|value-of<AudioFormat>,
+     *   disableCache?: bool,
+     *   modelID?: string,
+     *   provider?: TextToSpeechRetrieveSpeechParams\Provider|value-of<TextToSpeechRetrieveSpeechParams\Provider>,
+     *   socketID?: string,
+     *   voice?: string,
+     *   voiceID?: string,
+     * }|TextToSpeechRetrieveSpeechParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<mixed>
+     *
+     * @throws APIException
+     */
+    public function retrieveSpeech(
+        array|TextToSpeechRetrieveSpeechParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = TextToSpeechRetrieveSpeechParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: 'text-to-speech/speech',
+            query: Util::array_transform_keys(
+                $parsed,
+                [
+                    'audioFormat' => 'audio_format',
+                    'disableCache' => 'disable_cache',
+                    'modelID' => 'model_id',
+                    'socketID' => 'socket_id',
+                    'voiceID' => 'voice_id',
+                ],
+            ),
+            options: $options,
+            convert: null,
         );
     }
 }

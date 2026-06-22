@@ -5,10 +5,7 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\McpServers\McpServerGetResponse;
-use Telnyx\AI\McpServers\McpServerListResponse;
-use Telnyx\AI\McpServers\McpServerNewResponse;
-use Telnyx\AI\McpServers\McpServerUpdateResponse;
+use Telnyx\AI\McpServers\McpServer;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPaginationTopLevelArray;
@@ -46,7 +43,7 @@ final class McpServersTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(McpServerNewResponse::class, $result);
+        $this->assertInstanceOf(McpServer::class, $result);
     }
 
     #[Test]
@@ -65,7 +62,7 @@ final class McpServersTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(McpServerNewResponse::class, $result);
+        $this->assertInstanceOf(McpServer::class, $result);
     }
 
     #[Test]
@@ -78,7 +75,7 @@ final class McpServersTest extends TestCase
         $result = $this->client->ai->mcpServers->retrieve('mcp_server_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(McpServerGetResponse::class, $result);
+        $this->assertInstanceOf(McpServer::class, $result);
     }
 
     #[Test]
@@ -91,7 +88,7 @@ final class McpServersTest extends TestCase
         $result = $this->client->ai->mcpServers->update('mcp_server_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(McpServerUpdateResponse::class, $result);
+        $this->assertInstanceOf(McpServer::class, $result);
     }
 
     #[Test]
@@ -108,7 +105,7 @@ final class McpServersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(McpServerListResponse::class, $item);
+            $this->assertInstanceOf(McpServer::class, $item);
         }
     }
 

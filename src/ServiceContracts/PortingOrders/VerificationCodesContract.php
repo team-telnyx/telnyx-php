@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\PortingOrders\VerificationCodes\PortingVerificationCode;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\VerificationMethod;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams\VerificationCode;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse;
@@ -30,7 +30,7 @@ interface VerificationCodesContract
      * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<VerificationCodeListResponse>
+     * @return DefaultFlatPagination<PortingVerificationCode>
      *
      * @throws APIException
      */

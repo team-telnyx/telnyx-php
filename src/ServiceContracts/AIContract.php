@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AI\AIGetModelsResponse;
-use Telnyx\AI\AISearchConversationHistoriesParams\RecordType;
-use Telnyx\AI\AISearchConversationHistoriesParams\Region;
-use Telnyx\AI\AISearchConversationHistoriesResponse;
+use Telnyx\AI\AIGetConversationHistoriesResponse;
+use Telnyx\AI\AIRetrieveConversationHistoriesParams\RecordType;
+use Telnyx\AI\AIRetrieveConversationHistoriesParams\Region;
 use Telnyx\AI\AISummarizeResponse;
+use Telnyx\AI\ModelsResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
@@ -22,7 +22,7 @@ interface AIContract
      *
      * @api
      *
-     * @param array<string,mixed> $body
+     * @param array<string,mixed> $responseRequest
      * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
@@ -30,22 +30,9 @@ interface AIContract
      * @throws APIException
      */
     public function createResponseDeprecated(
-        array $body,
+        array $responseRequest,
         RequestOptions|array|null $requestOptions = null
     ): array;
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function retrieveModels(
-        RequestOptions|array|null $requestOptions = null
-    ): AIGetModelsResponse;
 
     /**
      * @api
@@ -68,7 +55,7 @@ interface AIContract
      *
      * @throws APIException
      */
-    public function searchConversationHistories(
+    public function retrieveConversationHistories(
         string $q,
         RecordType|string $recordType,
         ?string $filterDocumentID = null,
@@ -84,7 +71,20 @@ interface AIContract
         Region|string|null $region = null,
         int $topK = 20,
         RequestOptions|array|null $requestOptions = null,
-    ): AISearchConversationHistoriesResponse;
+    ): AIGetConversationHistoriesResponse;
+
+    /**
+     * @deprecated
+     *
+     * @api
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveModels(
+        RequestOptions|array|null $requestOptions = null
+    ): ModelsResponse;
 
     /**
      * @api

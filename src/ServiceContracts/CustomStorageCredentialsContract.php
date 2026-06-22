@@ -6,10 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CustomStorageCredentials\AzureConfigurationData;
+use Telnyx\CustomStorageCredentials\CredentialsResponse;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialCreateParams\Backend;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
-use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Telnyx\CustomStorageCredentials\GcsConfigurationData;
 use Telnyx\CustomStorageCredentials\S3ConfigurationData;
 use Telnyx\RequestOptions;
@@ -36,7 +34,7 @@ interface CustomStorageCredentialsContract
         Backend|string $backend,
         GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
         RequestOptions|array|null $requestOptions = null,
-    ): CustomStorageCredentialNewResponse;
+    ): CredentialsResponse;
 
     /**
      * @api
@@ -49,7 +47,7 @@ interface CustomStorageCredentialsContract
     public function retrieve(
         string $connectionID,
         RequestOptions|array|null $requestOptions = null
-    ): CustomStorageCredentialGetResponse;
+    ): CredentialsResponse;
 
     /**
      * @api
@@ -66,7 +64,7 @@ interface CustomStorageCredentialsContract
         \Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend|string $backend,
         GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
         RequestOptions|array|null $requestOptions = null,
-    ): CustomStorageCredentialUpdateResponse;
+    ): CredentialsResponse;
 
     /**
      * @api

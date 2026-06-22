@@ -7,8 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
+use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVetting;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -58,7 +57,7 @@ final class ExternalVettingTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ExternalVettingImportsResponse::class, $result);
+        $this->assertInstanceOf(ExternalVetting::class, $result);
     }
 
     #[Test]
@@ -76,7 +75,7 @@ final class ExternalVettingTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ExternalVettingImportsResponse::class, $result);
+        $this->assertInstanceOf(ExternalVetting::class, $result);
     }
 
     #[Test]
@@ -93,7 +92,7 @@ final class ExternalVettingTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ExternalVettingOrderResponse::class, $result);
+        $this->assertInstanceOf(ExternalVetting::class, $result);
     }
 
     #[Test]
@@ -110,6 +109,6 @@ final class ExternalVettingTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ExternalVettingOrderResponse::class, $result);
+        $this->assertInstanceOf(ExternalVetting::class, $result);
     }
 }

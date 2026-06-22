@@ -12,11 +12,11 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type DocumentLinkListResponseShape = array{
  *   id?: string|null,
  *   createdAt?: string|null,
+ *   recordType?: string|null,
+ *   updatedAt?: string|null,
  *   documentID?: string|null,
  *   linkedRecordType?: string|null,
  *   linkedResourceID?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: string|null,
  * }
  */
 final class DocumentLinkListResponse implements BaseModel
@@ -37,6 +37,18 @@ final class DocumentLinkListResponse implements BaseModel
     public ?string $createdAt;
 
     /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
+
+    /**
      * Identifies the associated document.
      */
     #[Optional('document_id')]
@@ -54,18 +66,6 @@ final class DocumentLinkListResponse implements BaseModel
     #[Optional('linked_resource_id')]
     public ?string $linkedResourceID;
 
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Optional('record_type')]
-    public ?string $recordType;
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was updated.
-     */
-    #[Optional('updated_at')]
-    public ?string $updatedAt;
-
     public function __construct()
     {
         $this->initialize();
@@ -79,21 +79,21 @@ final class DocumentLinkListResponse implements BaseModel
     public static function with(
         ?string $id = null,
         ?string $createdAt = null,
+        ?string $recordType = null,
+        ?string $updatedAt = null,
         ?string $documentID = null,
         ?string $linkedRecordType = null,
         ?string $linkedResourceID = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $recordType && $self['recordType'] = $recordType;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $documentID && $self['documentID'] = $documentID;
         null !== $linkedRecordType && $self['linkedRecordType'] = $linkedRecordType;
         null !== $linkedResourceID && $self['linkedResourceID'] = $linkedResourceID;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
@@ -116,6 +116,28 @@ final class DocumentLinkListResponse implements BaseModel
     {
         $self = clone $this;
         $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
@@ -149,28 +171,6 @@ final class DocumentLinkListResponse implements BaseModel
     {
         $self = clone $this;
         $self['linkedResourceID'] = $linkedResourceID;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was updated.
-     */
-    public function withUpdatedAt(string $updatedAt): self
-    {
-        $self = clone $this;
-        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
