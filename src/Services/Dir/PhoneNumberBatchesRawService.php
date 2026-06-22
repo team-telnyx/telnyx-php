@@ -9,10 +9,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\PhoneNumberBatches\DirPhoneNumberStatus;
+use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatch;
 use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchGetResponse;
 use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchListParams;
-use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchListParams\FilterStatus;
-use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchListResponse;
 use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Dir\PhoneNumberBatchesRawContract;
@@ -71,11 +71,13 @@ final class PhoneNumberBatchesRawService implements PhoneNumberBatchesRawContrac
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param array{
-     *   filterStatus?: value-of<FilterStatus>, pageNumber?: int, pageSize?: int
+     *   filterStatus?: value-of<DirPhoneNumberStatus>,
+     *   pageNumber?: int,
+     *   pageSize?: int,
      * }|PhoneNumberBatchListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberBatchListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberBatch>>
      *
      * @throws APIException
      */
@@ -102,7 +104,7 @@ final class PhoneNumberBatchesRawService implements PhoneNumberBatchesRawContrac
                 ],
             ),
             options: $options,
-            convert: PhoneNumberBatchListResponse::class,
+            convert: PhoneNumberBatch::class,
             page: DefaultFlatPagination::class,
         );
     }

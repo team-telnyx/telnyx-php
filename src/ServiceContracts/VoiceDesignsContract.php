@@ -8,11 +8,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\VoiceDesigns\VoiceDesignCreateParams\Provider;
-use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
 use Telnyx\VoiceDesigns\VoiceDesignListParams\Sort;
-use Telnyx\VoiceDesigns\VoiceDesignListResponse;
-use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
 use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
+use Telnyx\VoiceDesigns\VoiceDesignResponse;
+use Telnyx\VoiceDesigns\VoiceDesignSummaryData;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -50,7 +49,7 @@ interface VoiceDesignsContract
         ?float $topP = null,
         ?string $voiceDesignID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceDesignNewResponse;
+    ): VoiceDesignResponse;
 
     /**
      * @api
@@ -65,7 +64,7 @@ interface VoiceDesignsContract
         string $id,
         ?int $version = null,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceDesignGetResponse;
+    ): VoiceDesignResponse;
 
     /**
      * @api
@@ -76,7 +75,7 @@ interface VoiceDesignsContract
      * @param Sort|value-of<Sort> $sort Sort order. Prefix with `-` for descending. Defaults to `-created_at`.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<VoiceDesignListResponse>
+     * @return DefaultFlatPagination<VoiceDesignSummaryData>
      *
      * @throws APIException
      */

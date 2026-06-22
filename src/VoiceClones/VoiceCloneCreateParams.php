@@ -8,19 +8,21 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Params;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\MinimaxDesignClone;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\TelnyxDesignClone;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\MinimaxDesignClone;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\TelnyxDesignClone;
 
 /**
  * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
  *
  * @see Telnyx\Services\VoiceClonesService::create()
  *
- * @phpstan-import-type ParamsVariants from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
- * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
+ * @phpstan-import-type VoiceCloneRequestVariants from \Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest
+ * @phpstan-import-type VoiceCloneRequestShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest
  *
- * @phpstan-type VoiceCloneCreateParamsShape = array{params: ParamsShape}
+ * @phpstan-type VoiceCloneCreateParamsShape = array{
+ *   voiceCloneRequest: VoiceCloneRequestShape
+ * }
  */
 final class VoiceCloneCreateParams implements BaseModel
 {
@@ -31,23 +33,23 @@ final class VoiceCloneCreateParams implements BaseModel
     /**
      * Request body for creating a voice clone from an existing voice design.
      *
-     * @var ParamsVariants $params
+     * @var VoiceCloneRequestVariants $voiceCloneRequest
      */
-    #[Required(union: Params::class)]
-    public TelnyxDesignClone|MinimaxDesignClone $params;
+    #[Required(union: VoiceCloneRequest::class)]
+    public TelnyxDesignClone|MinimaxDesignClone $voiceCloneRequest;
 
     /**
      * `new VoiceCloneCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * VoiceCloneCreateParams::with(params: ...)
+     * VoiceCloneCreateParams::with(voiceCloneRequest: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new VoiceCloneCreateParams)->withParams(...)
+     * (new VoiceCloneCreateParams)->withVoiceCloneRequest(...)
      * ```
      */
     public function __construct()
@@ -60,14 +62,14 @@ final class VoiceCloneCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ParamsShape $params
+     * @param VoiceCloneRequestShape $voiceCloneRequest
      */
     public static function with(
-        TelnyxDesignClone|array|MinimaxDesignClone $params
+        TelnyxDesignClone|array|MinimaxDesignClone $voiceCloneRequest
     ): self {
         $self = new self;
 
-        $self['params'] = $params;
+        $self['voiceCloneRequest'] = $voiceCloneRequest;
 
         return $self;
     }
@@ -75,13 +77,13 @@ final class VoiceCloneCreateParams implements BaseModel
     /**
      * Request body for creating a voice clone from an existing voice design.
      *
-     * @param ParamsShape $params
+     * @param VoiceCloneRequestShape $voiceCloneRequest
      */
-    public function withParams(
-        TelnyxDesignClone|array|MinimaxDesignClone $params
+    public function withVoiceCloneRequest(
+        TelnyxDesignClone|array|MinimaxDesignClone $voiceCloneRequest
     ): self {
         $self = clone $this;
-        $self['params'] = $params;
+        $self['voiceCloneRequest'] = $voiceCloneRequest;
 
         return $self;
     }

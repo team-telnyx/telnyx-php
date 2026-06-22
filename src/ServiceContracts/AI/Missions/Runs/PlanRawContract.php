@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Missions\Runs;
 
 use Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanParams;
-use Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanResponse;
 use Telnyx\AI\Missions\Runs\Plan\PlanCreateParams;
 use Telnyx\AI\Missions\Runs\Plan\PlanGetResponse;
 use Telnyx\AI\Missions\Runs\Plan\PlanGetStepDetailsParams;
-use Telnyx\AI\Missions\Runs\Plan\PlanGetStepDetailsResponse;
-use Telnyx\AI\Missions\Runs\Plan\PlanNewResponse;
 use Telnyx\AI\Missions\Runs\Plan\PlanRetrieveParams;
+use Telnyx\AI\Missions\Runs\Plan\PlanStepResponse;
+use Telnyx\AI\Missions\Runs\Plan\PlanStepsCreatedResponse;
 use Telnyx\AI\Missions\Runs\Plan\PlanUpdateStepParams;
-use Telnyx\AI\Missions\Runs\Plan\PlanUpdateStepResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -30,7 +28,7 @@ interface PlanRawContract
      * @param array<string,mixed>|PlanCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PlanNewResponse>
+     * @return BaseResponse<PlanStepsCreatedResponse>
      *
      * @throws APIException
      */
@@ -64,7 +62,7 @@ interface PlanRawContract
      * @param array<string,mixed>|PlanAddStepsToPlanParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PlanAddStepsToPlanResponse>
+     * @return BaseResponse<PlanStepsCreatedResponse>
      *
      * @throws APIException
      */
@@ -81,7 +79,7 @@ interface PlanRawContract
      * @param array<string,mixed>|PlanGetStepDetailsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PlanGetStepDetailsResponse>
+     * @return BaseResponse<PlanStepResponse>
      *
      * @throws APIException
      */
@@ -98,7 +96,7 @@ interface PlanRawContract
      * @param array<string,mixed>|PlanUpdateStepParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PlanUpdateStepResponse>
+     * @return BaseResponse<PlanStepResponse>
      *
      * @throws APIException
      */

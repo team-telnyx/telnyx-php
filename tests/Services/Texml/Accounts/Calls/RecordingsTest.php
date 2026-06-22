@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -49,7 +49,10 @@ final class RecordingsTest extends TestCase
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RecordingRecordingSidJsonResponse::class, $result);
+        $this->assertInstanceOf(
+            TexmlCreateCallRecordingResponseBody::class,
+            $result
+        );
     }
 
     #[Test]
@@ -74,6 +77,9 @@ final class RecordingsTest extends TestCase
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RecordingRecordingSidJsonResponse::class, $result);
+        $this->assertInstanceOf(
+            TexmlCreateCallRecordingResponseBody::class,
+            $result
+        );
     }
 }

@@ -8,7 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\PhoneNumbers\PhoneNumberListParams\Status;
+use Telnyx\Dir\PhoneNumberBatches\DirPhoneNumberStatus;
 
 /**
  * List the phone numbers registered under a DIR. The enterprise is resolved server-side from the DIR id.
@@ -18,7 +18,7 @@ use Telnyx\Dir\PhoneNumbers\PhoneNumberListParams\Status;
  * @phpstan-type PhoneNumberListParamsShape = array{
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
- *   status?: null|Status|value-of<Status>,
+ *   status?: null|DirPhoneNumberStatus|value-of<DirPhoneNumberStatus>,
  * }
  */
 final class PhoneNumberListParams implements BaseModel
@@ -42,9 +42,9 @@ final class PhoneNumberListParams implements BaseModel
     /**
      * Filter by phone-number status.
      *
-     * @var value-of<Status>|null $status
+     * @var value-of<DirPhoneNumberStatus>|null $status
      */
-    #[Optional(enum: Status::class)]
+    #[Optional(enum: DirPhoneNumberStatus::class)]
     public ?string $status;
 
     public function __construct()
@@ -57,12 +57,12 @@ final class PhoneNumberListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status>|null $status
+     * @param DirPhoneNumberStatus|value-of<DirPhoneNumberStatus>|null $status
      */
     public static function with(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        Status|string|null $status = null
+        DirPhoneNumberStatus|string|null $status = null,
     ): self {
         $self = new self;
 
@@ -98,9 +98,9 @@ final class PhoneNumberListParams implements BaseModel
     /**
      * Filter by phone-number status.
      *
-     * @param Status|value-of<Status> $status
+     * @param DirPhoneNumberStatus|value-of<DirPhoneNumberStatus> $status
      */
-    public function withStatus(Status|string $status): self
+    public function withStatus(DirPhoneNumberStatus|string $status): self
     {
         $self = clone $this;
         $self['status'] = $status;

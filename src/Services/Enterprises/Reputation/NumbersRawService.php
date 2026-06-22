@@ -10,14 +10,14 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateParams;
-use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberDisassociateParams;
-use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberListParams;
-use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRetrieveParams;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberList;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\NumbersRawContract;
 
@@ -43,7 +43,7 @@ final class NumbersRawService implements NumbersRawContract
      * @param array{enterpriseID: string, fresh?: bool}|NumberRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<NumberGetResponse>
+     * @return BaseResponse<ReputationPhoneNumberWithReputation>
      *
      * @throws APIException
      */
@@ -67,7 +67,7 @@ final class NumbersRawService implements NumbersRawContract
             ],
             query: $parsed,
             options: $options,
-            convert: NumberGetResponse::class,
+            convert: ReputationPhoneNumberWithReputation::class,
         );
     }
 
@@ -85,7 +85,7 @@ final class NumbersRawService implements NumbersRawContract
      * }|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumber>>
      *
      * @throws APIException
      */
@@ -113,7 +113,7 @@ final class NumbersRawService implements NumbersRawContract
                 ],
             ),
             options: $options,
-            convert: NumberListResponse::class,
+            convert: ReputationPhoneNumber::class,
             page: DefaultFlatPagination::class,
         );
     }
@@ -131,7 +131,7 @@ final class NumbersRawService implements NumbersRawContract
      * @param array{phoneNumbers: list<string>}|NumberAssociateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<NumberAssociateResponse>
+     * @return BaseResponse<ReputationPhoneNumberList>
      *
      * @throws APIException
      */
@@ -151,7 +151,7 @@ final class NumbersRawService implements NumbersRawContract
             path: ['enterprises/%1$s/reputation/numbers', $enterpriseID],
             body: (object) $parsed,
             options: $options,
-            convert: NumberAssociateResponse::class,
+            convert: ReputationPhoneNumberList::class,
         );
     }
 

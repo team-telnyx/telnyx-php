@@ -7,10 +7,9 @@ namespace Telnyx\Texml\Accounts\Conferences\Participants;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant;
 
 /**
- * @phpstan-import-type ParticipantShape from \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant
+ * @phpstan-import-type ParticipantResourceShape from \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantResource
  *
  * @phpstan-type ParticipantGetParticipantsResponseShape = array{
  *   end?: int|null,
@@ -18,7 +17,7 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsRes
  *   nextPageUri?: string|null,
  *   page?: int|null,
  *   pageSize?: int|null,
- *   participants?: list<Participant|ParticipantShape>|null,
+ *   participants?: list<ParticipantResource|ParticipantResourceShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
  * }
@@ -58,8 +57,8 @@ final class ParticipantGetParticipantsResponse implements BaseModel
     #[Optional('page_size')]
     public ?int $pageSize;
 
-    /** @var list<Participant>|null $participants */
-    #[Optional(list: Participant::class)]
+    /** @var list<ParticipantResource>|null $participants */
+    #[Optional(list: ParticipantResource::class)]
     public ?array $participants;
 
     /**
@@ -84,7 +83,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Participant|ParticipantShape>|null $participants
+     * @param list<ParticipantResource|ParticipantResourceShape>|null $participants
      */
     public static function with(
         ?int $end = null,
@@ -166,7 +165,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel
     }
 
     /**
-     * @param list<Participant|ParticipantShape> $participants
+     * @param list<ParticipantResource|ParticipantResourceShape> $participants
      */
     public function withParticipants(array $participants): self
     {

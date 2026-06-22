@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\TermsOfService\Agreements\AgreementGetResponse;
-use Telnyx\TermsOfService\Agreements\AgreementListResponse;
+use Telnyx\TermsOfService\Agreements\TosAgreement;
+use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +42,7 @@ final class AgreementsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AgreementGetResponse::class, $result);
+        $this->assertInstanceOf(TosAgreementWrapped::class, $result);
     }
 
     #[Test]
@@ -59,7 +59,7 @@ final class AgreementsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(AgreementListResponse::class, $item);
+            $this->assertInstanceOf(TosAgreement::class, $item);
         }
     }
 }

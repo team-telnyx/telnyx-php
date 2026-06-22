@@ -6,8 +6,11 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Assistants\AssistantsList;
+use Telnyx\AI\Assistants\AuthenticationMethod;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\InferenceEmbedding;
+use Telnyx\AI\Assistants\ObservabilityStatus;
+use Telnyx\AI\Assistants\PromptSyncStatus;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -97,7 +100,7 @@ final class VersionsTest extends TestCase
                         'externalLlm' => [
                             'baseURL' => 'base_url',
                             'model' => 'model',
-                            'authenticationMethod' => 'token',
+                            'authenticationMethod' => AuthenticationMethod::TOKEN,
                             'certificateRef' => 'certificate_ref',
                             'forwardMetadata' => true,
                             'llmAPIKeyRef' => 'llm_api_key_ref',
@@ -155,7 +158,7 @@ final class VersionsTest extends TestCase
                         'externalLlm' => [
                             'baseURL' => 'base_url',
                             'model' => 'model',
-                            'authenticationMethod' => 'token',
+                            'authenticationMethod' => AuthenticationMethod::TOKEN,
                             'certificateRef' => 'certificate_ref',
                             'forwardMetadata' => true,
                             'llmAPIKeyRef' => 'llm_api_key_ref',
@@ -243,7 +246,7 @@ final class VersionsTest extends TestCase
             externalLlm: [
                 'baseURL' => 'base_url',
                 'model' => 'model',
-                'authenticationMethod' => 'token',
+                'authenticationMethod' => AuthenticationMethod::TOKEN,
                 'certificateRef' => 'certificate_ref',
                 'forwardMetadata' => true,
                 'llmAPIKeyRef' => 'llm_api_key_ref',
@@ -253,7 +256,7 @@ final class VersionsTest extends TestCase
                 'externalLlm' => [
                     'baseURL' => 'base_url',
                     'model' => 'model',
-                    'authenticationMethod' => 'token',
+                    'authenticationMethod' => AuthenticationMethod::TOKEN,
                     'certificateRef' => 'certificate_ref',
                     'forwardMetadata' => true,
                     'llmAPIKeyRef' => 'llm_api_key_ref',
@@ -293,11 +296,11 @@ final class VersionsTest extends TestCase
                 'host' => 'host',
                 'promptLabel' => 'prompt_label',
                 'promptName' => 'prompt_name',
-                'promptSync' => 'enabled',
+                'promptSync' => PromptSyncStatus::ENABLED,
                 'promptVersion' => 1,
                 'publicKeyRef' => 'public_key_ref',
                 'secretKeyRef' => 'secret_key_ref',
-                'status' => 'enabled',
+                'status' => ObservabilityStatus::ENABLED,
             ],
             postConversationSettings: ['enabled' => true],
             privacySettings: ['dataRetention' => true],

@@ -15,14 +15,13 @@ use Telnyx\VoiceDesigns\VoiceDesignCreateParams;
 use Telnyx\VoiceDesigns\VoiceDesignCreateParams\Provider;
 use Telnyx\VoiceDesigns\VoiceDesignDeleteVersionParams;
 use Telnyx\VoiceDesigns\VoiceDesignDownloadSampleParams;
-use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
 use Telnyx\VoiceDesigns\VoiceDesignListParams;
 use Telnyx\VoiceDesigns\VoiceDesignListParams\Sort;
-use Telnyx\VoiceDesigns\VoiceDesignListResponse;
-use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
 use Telnyx\VoiceDesigns\VoiceDesignRenameParams;
 use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
+use Telnyx\VoiceDesigns\VoiceDesignResponse;
 use Telnyx\VoiceDesigns\VoiceDesignRetrieveParams;
+use Telnyx\VoiceDesigns\VoiceDesignSummaryData;
 
 /**
  * Create and manage AI-generated voice designs using natural language prompts.
@@ -57,7 +56,7 @@ final class VoiceDesignsRawService implements VoiceDesignsRawContract
      * }|VoiceDesignCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceDesignNewResponse>
+     * @return BaseResponse<VoiceDesignResponse>
      *
      * @throws APIException
      */
@@ -76,7 +75,7 @@ final class VoiceDesignsRawService implements VoiceDesignsRawContract
             path: 'voice_designs',
             body: (object) $parsed,
             options: $options,
-            convert: VoiceDesignNewResponse::class,
+            convert: VoiceDesignResponse::class,
         );
     }
 
@@ -89,7 +88,7 @@ final class VoiceDesignsRawService implements VoiceDesignsRawContract
      * @param array{version?: int}|VoiceDesignRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceDesignGetResponse>
+     * @return BaseResponse<VoiceDesignResponse>
      *
      * @throws APIException
      */
@@ -109,7 +108,7 @@ final class VoiceDesignsRawService implements VoiceDesignsRawContract
             path: ['voice_designs/%1$s', $id],
             query: $parsed,
             options: $options,
-            convert: VoiceDesignGetResponse::class,
+            convert: VoiceDesignResponse::class,
         );
     }
 
@@ -126,7 +125,7 @@ final class VoiceDesignsRawService implements VoiceDesignsRawContract
      * }|VoiceDesignListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VoiceDesignListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<VoiceDesignSummaryData>>
      *
      * @throws APIException
      */
@@ -152,7 +151,7 @@ final class VoiceDesignsRawService implements VoiceDesignsRawContract
                 ],
             ),
             options: $options,
-            convert: VoiceDesignListResponse::class,
+            convert: VoiceDesignSummaryData::class,
             page: DefaultFlatPagination::class,
         );
     }

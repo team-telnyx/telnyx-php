@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Telnyx\Calls\ConversationRelayEmbeddedConfig;
+
+/**
+ * Engine to use for speech recognition. Legacy values `A` - `Google`, `B` - `Telnyx` are supported for backward compatibility. For Conversation Relay, use this field with `transcription_engine_config`; the `transcription` object is not supported.
+ */
+enum TranscriptionEngine: string
+{
+    case GOOGLE = 'Google';
+
+    case TELNYX = 'Telnyx';
+
+    case DEEPGRAM = 'Deepgram';
+
+    case AZURE = 'Azure';
+
+    case X_AI = 'xAI';
+
+    case ASSEMBLY_AI = 'AssemblyAI';
+
+    case SPEECHMATICS = 'Speechmatics';
+
+    case SONIOX = 'Soniox';
+
+    case A = 'A';
+
+    case B = 'B';
+}

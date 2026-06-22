@@ -6,12 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Missions\Runs\MissionRunData;
-use Telnyx\AI\Missions\Runs\RunCancelRunResponse;
-use Telnyx\AI\Missions\Runs\RunGetResponse;
-use Telnyx\AI\Missions\Runs\RunNewResponse;
-use Telnyx\AI\Missions\Runs\RunPauseRunResponse;
-use Telnyx\AI\Missions\Runs\RunResumeRunResponse;
-use Telnyx\AI\Missions\Runs\RunUpdateResponse;
+use Telnyx\AI\Missions\Runs\MissionRunResponse;
+use Telnyx\AI\Missions\Runs\RunStatus;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
@@ -47,7 +43,7 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunNewResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +59,7 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunGetResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -79,7 +75,7 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunGetResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -95,7 +91,7 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunUpdateResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -112,11 +108,11 @@ final class RunsTest extends TestCase
             metadata: ['foo' => 'bar'],
             resultPayload: ['foo' => 'bar'],
             resultSummary: 'result_summary',
-            status: 'pending',
+            status: RunStatus::PENDING,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunUpdateResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -152,7 +148,7 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunCancelRunResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -168,7 +164,7 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunCancelRunResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -202,7 +198,7 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunPauseRunResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -218,7 +214,7 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunPauseRunResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -234,7 +230,7 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunResumeRunResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 
     #[Test]
@@ -250,6 +246,6 @@ final class RunsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RunResumeRunResponse::class, $result);
+        $this->assertInstanceOf(MissionRunResponse::class, $result);
     }
 }

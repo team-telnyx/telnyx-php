@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Telnyx\Connections;
 
-use Telnyx\Connections\ConnectionGetResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Connections\ConnectionGetResponse\Data
+ * @phpstan-import-type ConnectionShape from \Telnyx\Connections\Connection
  *
- * @phpstan-type ConnectionGetResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type ConnectionGetResponseShape = array{
+ *   data?: null|Connection|ConnectionShape
+ * }
  */
 final class ConnectionGetResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class ConnectionGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?Connection $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class ConnectionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param Connection|ConnectionShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(Connection|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class ConnectionGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param Connection|ConnectionShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(Connection|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

@@ -7,10 +7,10 @@ namespace Telnyx\ServiceContracts\Texml\Accounts\Calls;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRetrieveRecordingsJsonParams;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -24,7 +24,7 @@ interface RecordingsJsonRawContract
      * @param array<string,mixed>|RecordingsJsonRecordingsJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingsJsonRecordingsJsonResponse>
+     * @return BaseResponse<TexmlCreateCallRecordingResponseBody>
      *
      * @throws APIException
      */
@@ -41,7 +41,7 @@ interface RecordingsJsonRawContract
      * @param array<string,mixed>|RecordingsJsonRetrieveRecordingsJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingsJsonGetRecordingsJsonResponse>
+     * @return BaseResponse<TexmlGetCallRecordingsResponseBody>
      *
      * @throws APIException
      */

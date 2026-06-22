@@ -6,11 +6,10 @@ namespace Telnyx\Services\AI\Missions\Runs;
 
 use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsParams;
-use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsResponse;
 use Telnyx\AI\Missions\Runs\Events\EventListParams;
 use Telnyx\AI\Missions\Runs\Events\EventLogParams;
-use Telnyx\AI\Missions\Runs\Events\EventLogParams\Type;
-use Telnyx\AI\Missions\Runs\Events\EventLogResponse;
+use Telnyx\AI\Missions\Runs\Events\EventResponse;
+use Telnyx\AI\Missions\Runs\Events\EventType;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -92,7 +91,7 @@ final class EventsRawService implements EventsRawContract
      * }|EventGetEventDetailsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EventGetEventDetailsResponse>
+     * @return BaseResponse<EventResponse>
      *
      * @throws APIException
      */
@@ -117,7 +116,7 @@ final class EventsRawService implements EventsRawContract
                 'ai/missions/%1$s/runs/%2$s/events/%3$s', $missionID, $runID, $eventID,
             ],
             options: $options,
-            convert: EventGetEventDetailsResponse::class,
+            convert: EventResponse::class,
         );
     }
 
@@ -130,7 +129,7 @@ final class EventsRawService implements EventsRawContract
      * @param array{
      *   missionID: string,
      *   summary: string,
-     *   type: value-of<Type>,
+     *   type: value-of<EventType>,
      *   agentID?: string,
      *   idempotencyKey?: string,
      *   payload?: array<string,mixed>,
@@ -138,7 +137,7 @@ final class EventsRawService implements EventsRawContract
      * }|EventLogParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EventLogResponse>
+     * @return BaseResponse<EventResponse>
      *
      * @throws APIException
      */
@@ -160,7 +159,7 @@ final class EventsRawService implements EventsRawContract
             path: ['ai/missions/%1$s/runs/%2$s/events', $missionID, $runID],
             body: (object) array_diff_key($parsed, array_flip(['missionID'])),
             options: $options,
-            convert: EventLogResponse::class,
+            convert: EventResponse::class,
         );
     }
 }

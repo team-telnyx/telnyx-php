@@ -7,14 +7,15 @@ namespace Telnyx\Dir\PhoneNumbers;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\PhoneNumbers\PhoneNumberAddResponse\Data;
 
 /**
  * Bulk-add success response (HTTP 201). All numbers in the request were accepted into a single new batch. Every entry in `data` shares the same `batch_id` - read it from any element to obtain the batch id for subsequent `GET .../phone_number_batches/{batch_id}` calls. If any number in the request fails (schema-invalid, not in inventory, already attached to another DIR, etc.) the entire request is rejected with HTTP 400 and the canonical Telnyx error envelope; the success body described here is therefore an all-or-nothing payload.
  *
- * @phpstan-import-type DataShape from \Telnyx\Dir\PhoneNumbers\PhoneNumberAddResponse\Data
+ * @phpstan-import-type DirPhoneNumberShape from \Telnyx\Dir\PhoneNumbers\DirPhoneNumber
  *
- * @phpstan-type PhoneNumberAddResponseShape = array{data: list<Data|DataShape>}
+ * @phpstan-type PhoneNumberAddResponseShape = array{
+ *   data: list<DirPhoneNumber|DirPhoneNumberShape>
+ * }
  */
 final class PhoneNumberAddResponse implements BaseModel
 {
@@ -24,9 +25,9 @@ final class PhoneNumberAddResponse implements BaseModel
     /**
      * Phone numbers accepted into the new batch. List order mirrors the request order. Each element shares the same `batch_id`.
      *
-     * @var list<Data> $data
+     * @var list<DirPhoneNumber> $data
      */
-    #[Required(list: Data::class)]
+    #[Required(list: DirPhoneNumber::class)]
     public array $data;
 
     /**
@@ -53,7 +54,7 @@ final class PhoneNumberAddResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape> $data
+     * @param list<DirPhoneNumber|DirPhoneNumberShape> $data
      */
     public static function with(array $data): self
     {
@@ -67,7 +68,7 @@ final class PhoneNumberAddResponse implements BaseModel
     /**
      * Phone numbers accepted into the new batch. List order mirrors the request order. Each element shares the same `batch_id`.
      *
-     * @param list<Data|DataShape> $data
+     * @param list<DirPhoneNumber|DirPhoneNumberShape> $data
      */
     public function withData(array $data): self
     {

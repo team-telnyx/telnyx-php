@@ -11,12 +11,13 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardPeersRawContract;
+use Telnyx\WireguardPeers\WireguardPeer;
 use Telnyx\WireguardPeers\WireguardPeerCreateParams;
+use Telnyx\WireguardPeers\WireguardPeerCreateParams\Body;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
 use Telnyx\WireguardPeers\WireguardPeerListParams;
 use Telnyx\WireguardPeers\WireguardPeerListParams\Filter;
-use Telnyx\WireguardPeers\WireguardPeerListResponse;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse;
 use Telnyx\WireguardPeers\WireguardPeerUpdateParams;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
@@ -24,6 +25,7 @@ use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 /**
  * WireGuard Interface operations.
  *
+ * @phpstan-import-type BodyShape from \Telnyx\WireguardPeers\WireguardPeerCreateParams\Body
  * @phpstan-import-type FilterShape from \Telnyx\WireguardPeers\WireguardPeerListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -40,7 +42,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      *
      * Create a new WireGuard Peer. Current limitation of 5 peers per interface can be created.
      *
-     * @param array{wireguardInterfaceID: string}|WireguardPeerCreateParams $params
+     * @param array{body: Body|BodyShape}|WireguardPeerCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardPeerNewResponse>
@@ -60,7 +62,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
         return $this->client->request(
             method: 'post',
             path: 'wireguard_peers',
-            body: (object) $parsed,
+            body: (object) $parsed['body'],
             options: $options,
             convert: WireguardPeerNewResponse::class,
         );
@@ -134,7 +136,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
      * }|WireguardPeerListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WireguardPeerListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WireguardPeer>>
      *
      * @throws APIException
      */
@@ -156,7 +158,7 @@ final class WireguardPeersRawService implements WireguardPeersRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: WireguardPeerListResponse::class,
+            convert: WireguardPeer::class,
             page: DefaultFlatPagination::class,
         );
     }

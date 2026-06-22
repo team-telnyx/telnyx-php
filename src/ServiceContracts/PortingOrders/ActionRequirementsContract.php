@@ -10,7 +10,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams\Para
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort;
-use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
+use Telnyx\PortingOrders\ActionRequirements\PortingActionRequirement;
 use Telnyx\RequestOptions;
 
 /**
@@ -29,7 +29,7 @@ interface ActionRequirementsContract
      * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<ActionRequirementListResponse>
+     * @return DefaultFlatPagination<PortingActionRequirement>
      *
      * @throws APIException
      */

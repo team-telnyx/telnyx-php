@@ -10,11 +10,11 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Requirements\DocReqsRequirement;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
 use Telnyx\Requirements\RequirementListParams\Filter;
 use Telnyx\Requirements\RequirementListParams\Sort;
-use Telnyx\Requirements\RequirementListResponse;
 use Telnyx\ServiceContracts\RequirementsRawContract;
 
 /**
@@ -69,7 +69,7 @@ final class RequirementsRawService implements RequirementsRawContract
      * }|RequirementListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RequirementListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<DocReqsRequirement>>
      *
      * @throws APIException
      */
@@ -91,7 +91,7 @@ final class RequirementsRawService implements RequirementsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: RequirementListResponse::class,
+            convert: DocReqsRequirement::class,
             page: DefaultFlatPagination::class,
         );
     }

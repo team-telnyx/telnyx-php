@@ -8,18 +8,15 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Dir\DirCreateLoaParams\Agent;
-use Telnyx\Dir\DirCreateLoaParams\Signature;
-use Telnyx\Dir\DirGetResponse;
+use Telnyx\Dir\Dir;
 use Telnyx\Dir\DirListDocumentTypesResponse;
-use Telnyx\Dir\DirListInfringementClaimsResponse;
-use Telnyx\Dir\DirListParams\FilterStatus;
 use Telnyx\Dir\DirListParams\Sort;
-use Telnyx\Dir\DirListResponse;
-use Telnyx\Dir\DirSubmitResponse;
-use Telnyx\Dir\DirUpdateInfringementResponse;
-use Telnyx\Dir\DirUpdateParams\Document;
-use Telnyx\Dir\DirUpdateResponse;
+use Telnyx\Dir\DirNewLoaParams\Signature;
+use Telnyx\Dir\DirStatus;
+use Telnyx\Dir\DirWrapped;
+use Telnyx\Dir\Document;
+use Telnyx\Enterprises\Reputation\Loa\AgentInput;
+use Telnyx\InfringementClaims\InfringementClaim;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DirContract;
 use Telnyx\Services\Dir\CommentsService;
@@ -27,11 +24,10 @@ use Telnyx\Services\Dir\PhoneNumberBatchesService;
 use Telnyx\Services\Dir\PhoneNumbersService;
 
 /**
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateParams\Document
- * @phpstan-import-type AgentShape from \Telnyx\Dir\DirCreateLoaParams\Agent
- * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirCreateLoaParams\Signature
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateInfringementParams\Document as DocumentShape1
+ * @phpstan-import-type AgentInputShape from \Telnyx\Enterprises\Reputation\Loa\AgentInput
+ * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirNewLoaParams\Signature
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  */
 final class DirService implements DirContract
 {
@@ -79,7 +75,7 @@ final class DirService implements DirContract
     public function retrieve(
         string $dirID,
         RequestOptions|array|null $requestOptions = null
-    ): DirGetResponse {
+    ): DirWrapped {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($dirID, requestOptions: $requestOptions);
 
@@ -119,7 +115,7 @@ final class DirService implements DirContract
         ?string $logoURL = null,
         ?bool $reselling = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DirUpdateResponse {
+    ): DirWrapped {
         $params = Util::removeNulls(
             [
                 'authorizerEmail' => $authorizerEmail,
@@ -151,13 +147,13 @@ final class DirService implements DirContract
      * @param string $filterEnterpriseID filter by enterprise ID
      * @param \DateTimeInterface $filterExpiringAtGte Return only DIRs whose `expiring_at` is at or after this ISO-8601 timestamp. Pairs with the `[lte]` variant to build renewal-window dashboards.
      * @param \DateTimeInterface $filterExpiringAtLte return only DIRs whose `expiring_at` is at or before this ISO-8601 timestamp
-     * @param FilterStatus|value-of<FilterStatus> $filterStatus filter by DIR status
+     * @param DirStatus|value-of<DirStatus> $filterStatus filter by DIR status
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param Sort|value-of<Sort> $sort Sort field. Allowed values: `created_at`, `updated_at`, `display_name`, `status`. Prefix with `-` for descending. Default `-created_at`.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<DirListResponse>
+     * @return DefaultFlatPagination<Dir>
      *
      * @throws APIException
      */
@@ -167,7 +163,7 @@ final class DirService implements DirContract
         ?string $filterEnterpriseID = null,
         ?\DateTimeInterface $filterExpiringAtGte = null,
         ?\DateTimeInterface $filterExpiringAtLte = null,
-        FilterStatus|string|null $filterStatus = null,
+        DirStatus|string|null $filterStatus = null,
         int $pageNumber = 1,
         int $pageSize = 20,
         Sort|string $sort = '-created_at',
@@ -216,44 +212,6 @@ final class DirService implements DirContract
     /**
      * @api
      *
-     * Generate a pre-filled Letter of Authorization (LOA) PDF for a DIR. Enterprise identity (legal name, DBA, address, contact, website, tax id) and the DIR display name are read server-side; the caller supplies the telephone numbers to authorize, an optional Authorized Agent block, and an optional drawn signature.
-     *
-     * When `signature` is omitted the PDF is returned unsigned so the customer can sign it externally and upload it via the Documents API. When `signature` is present the PDF embeds the supplied image, printed name, and signed-at date.
-     *
-     * Returns `application/pdf`.
-     *
-     * @param string $dirID the DIR id
-     * @param list<string> $phoneNumbers Telephone numbers to authorize on the DIR, in `+E164` format (`+` followed by 10-15 digits). Max 15 per request.
-     * @param Agent|AgentShape $agent Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
-     * @param Signature|SignatureShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function createLoa(
-        string $dirID,
-        array $phoneNumbers,
-        Agent|array|null $agent = null,
-        Signature|array|null $signature = null,
-        RequestOptions|array|null $requestOptions = null,
-    ): string {
-        $params = Util::removeNulls(
-            [
-                'phoneNumbers' => $phoneNumbers,
-                'agent' => $agent,
-                'signature' => $signature,
-            ],
-        );
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createLoa($dirID, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @api
-     *
      * Reference list of `document_type` values accepted by `DirCreateRequest.documents[].document_type` and the infringement-contest endpoint. Each entry has a stable `short_name` (used in API calls) and a customer-facing description.
      *
      * @param RequestOpts|null $requestOptions
@@ -279,7 +237,7 @@ final class DirService implements DirContract
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<DirListInfringementClaimsResponse>
+     * @return DefaultFlatPagination<InfringementClaim>
      *
      * @throws APIException
      */
@@ -302,6 +260,44 @@ final class DirService implements DirContract
     /**
      * @api
      *
+     * Generate a pre-filled Letter of Authorization (LOA) PDF for a DIR. Enterprise identity (legal name, DBA, address, contact, website, tax id) and the DIR display name are read server-side; the caller supplies the telephone numbers to authorize, an optional Authorized Agent block, and an optional drawn signature.
+     *
+     * When `signature` is omitted the PDF is returned unsigned so the customer can sign it externally and upload it via the Documents API. When `signature` is present the PDF embeds the supplied image, printed name, and signed-at date.
+     *
+     * Returns `application/pdf`.
+     *
+     * @param string $dirID the DIR id
+     * @param list<string> $phoneNumbers Telephone numbers to authorize on the DIR, in `+E164` format (`+` followed by 10-15 digits). Max 15 per request.
+     * @param AgentInput|AgentInputShape $agent Third-party reseller / partner managing the enterprise's phone numbers. Omit when the enterprise works directly with Telnyx.
+     * @param Signature|SignatureShape $signature Optional. When provided the rendered PDF embeds the signature image, printed name, and signed-at date. When absent the PDF is returned unsigned so the customer can sign externally and upload it via the Documents API.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function newLoa(
+        string $dirID,
+        array $phoneNumbers,
+        AgentInput|array|null $agent = null,
+        Signature|array|null $signature = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): string {
+        $params = Util::removeNulls(
+            [
+                'phoneNumbers' => $phoneNumbers,
+                'agent' => $agent,
+                'signature' => $signature,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->newLoa($dirID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * Submit a DIR for vetting. Sends the DIR back through the vetting cycle from any non-terminal status. When re-submitting from `suspended` or `expired`, the DIR's previous Branded Calling registration is torn down transactionally and its phone numbers flip back to `submitted`. When re-submitting from `verified`, the existing registration stays live throughout the new vetting cycle.
      *
      * Returns `400` from `submitted`/`in_review`/`permanently_rejected`. Returns `409` if the DIR has an unresolved infringement claim.
@@ -314,7 +310,7 @@ final class DirService implements DirContract
     public function submit(
         string $dirID,
         RequestOptions|array|null $requestOptions = null
-    ): DirSubmitResponse {
+    ): DirWrapped {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->submit($dirID, requestOptions: $requestOptions);
 
@@ -333,7 +329,7 @@ final class DirService implements DirContract
      * @param bool $certifyNoShaftContent must be `true`
      * @param string $infringementResolutionNotes explanation of how the infringement concern was addressed
      * @param list<string>|null $callReasons
-     * @param list<\Telnyx\Dir\DirUpdateInfringementParams\Document|DocumentShape1>|null $documents append-only supporting documents
+     * @param list<Document|DocumentShape>|null $documents append-only supporting documents
      * @param string|null $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param RequestOpts|null $requestOptions
      *
@@ -351,7 +347,7 @@ final class DirService implements DirContract
         ?array $documents = null,
         ?string $logoURL = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DirUpdateInfringementResponse {
+    ): DirWrapped {
         $params = Util::removeNulls(
             [
                 'certifyBrandIsAccurate' => $certifyBrandIsAccurate,

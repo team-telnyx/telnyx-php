@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions;
 
-use Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\Calls\ActionsService::joinAIAssistant()
  *
- * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionJoinAIAssistantParams\Participant
+ * @phpstan-import-type AIAssistantJoinParticipantShape from \Telnyx\Calls\Actions\AIAssistantJoinParticipant
  *
  * @phpstan-type ActionJoinAIAssistantParamsShape = array{
  *   conversationID: string,
- *   participant: Participant|ParticipantShape,
+ *   participant: AIAssistantJoinParticipant|AIAssistantJoinParticipantShape,
  *   clientState?: string|null,
  *   commandID?: string|null,
  * }
@@ -38,7 +37,7 @@ final class ActionJoinAIAssistantParams implements BaseModel
     public string $conversationID;
 
     #[Required]
-    public Participant $participant;
+    public AIAssistantJoinParticipant $participant;
 
     /**
      * Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -76,11 +75,11 @@ final class ActionJoinAIAssistantParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Participant|ParticipantShape $participant
+     * @param AIAssistantJoinParticipant|AIAssistantJoinParticipantShape $participant
      */
     public static function with(
         string $conversationID,
-        Participant|array $participant,
+        AIAssistantJoinParticipant|array $participant,
         ?string $clientState = null,
         ?string $commandID = null,
     ): self {
@@ -107,10 +106,11 @@ final class ActionJoinAIAssistantParams implements BaseModel
     }
 
     /**
-     * @param Participant|ParticipantShape $participant
+     * @param AIAssistantJoinParticipant|AIAssistantJoinParticipantShape $participant
      */
-    public function withParticipant(Participant|array $participant): self
-    {
+    public function withParticipant(
+        AIAssistantJoinParticipant|array $participant
+    ): self {
         $self = clone $this;
         $self['participant'] = $participant;
 

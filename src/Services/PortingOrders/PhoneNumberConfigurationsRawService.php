@@ -14,8 +14,8 @@ use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreat
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Sort;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PortingPhoneNumberConfiguration;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\PhoneNumberConfigurationsRawContract;
 
@@ -81,7 +81,7 @@ final class PhoneNumberConfigurationsRawService implements PhoneNumberConfigurat
      * }|PhoneNumberConfigurationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberConfigurationListResponse,>,>
+     * @return BaseResponse<DefaultFlatPagination<PortingPhoneNumberConfiguration>>
      *
      * @throws APIException
      */
@@ -103,7 +103,7 @@ final class PhoneNumberConfigurationsRawService implements PhoneNumberConfigurat
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PhoneNumberConfigurationListResponse::class,
+            convert: PortingPhoneNumberConfiguration::class,
             page: DefaultFlatPagination::class,
         );
     }

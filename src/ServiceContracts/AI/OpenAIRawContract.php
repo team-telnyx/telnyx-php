@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI;
 
+use Telnyx\AI\ModelsResponse;
 use Telnyx\AI\OpenAI\OpenAICreateResponseParams;
-use Telnyx\AI\OpenAI\OpenAIListModelsResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -35,7 +35,7 @@ interface OpenAIRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<OpenAIListModelsResponse>
+     * @return BaseResponse<ModelsResponse>
      *
      * @throws APIException
      */

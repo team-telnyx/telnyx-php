@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\BulkSimCardActions;
 
-use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse\Data
+ * @phpstan-import-type BulkSimCardActionDetailedShape from \Telnyx\BulkSimCardActions\BulkSimCardActionDetailed
  *
  * @phpstan-type BulkSimCardActionGetResponseShape = array{
- *   data?: null|Data|DataShape
+ *   data?: null|BulkSimCardActionDetailed|BulkSimCardActionDetailedShape
  * }
  */
 final class BulkSimCardActionGetResponse implements BaseModel
@@ -22,7 +21,7 @@ final class BulkSimCardActionGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?BulkSimCardActionDetailed $data;
 
     public function __construct()
     {
@@ -34,10 +33,11 @@ final class BulkSimCardActionGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param BulkSimCardActionDetailed|BulkSimCardActionDetailedShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
-    {
+    public static function with(
+        BulkSimCardActionDetailed|array|null $data = null
+    ): self {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class BulkSimCardActionGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param BulkSimCardActionDetailed|BulkSimCardActionDetailedShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(BulkSimCardActionDetailed|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

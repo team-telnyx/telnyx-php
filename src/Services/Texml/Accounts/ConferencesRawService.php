@@ -10,10 +10,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\ConferencesRawContract;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceResource;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveParams;
@@ -21,7 +21,6 @@ use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsJsonParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
-use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 
 /**
  * TeXML REST Commands.
@@ -45,7 +44,7 @@ final class ConferencesRawService implements ConferencesRawContract
      * @param array{accountSid: string}|ConferenceRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceGetResponse>
+     * @return BaseResponse<ConferenceResource>
      *
      * @throws APIException
      */
@@ -68,7 +67,7 @@ final class ConferencesRawService implements ConferencesRawContract
                 'texml/Accounts/%1$s/Conferences/%2$s', $accountSid, $conferenceSid,
             ],
             options: $options,
-            convert: ConferenceGetResponse::class,
+            convert: ConferenceResource::class,
         );
     }
 
@@ -86,7 +85,7 @@ final class ConferencesRawService implements ConferencesRawContract
      * }|ConferenceUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceUpdateResponse>
+     * @return BaseResponse<ConferenceResource>
      *
      * @throws APIException
      */
@@ -111,7 +110,7 @@ final class ConferencesRawService implements ConferencesRawContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
-            convert: ConferenceUpdateResponse::class,
+            convert: ConferenceResource::class,
         );
     }
 
@@ -214,7 +213,7 @@ final class ConferencesRawService implements ConferencesRawContract
      * @param array{accountSid: string}|ConferenceRetrieveRecordingsJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceGetRecordingsJsonResponse>
+     * @return BaseResponse<TexmlGetCallRecordingsResponseBody>
      *
      * @throws APIException
      */
@@ -239,7 +238,7 @@ final class ConferencesRawService implements ConferencesRawContract
                 $conferenceSid,
             ],
             options: $options,
-            convert: ConferenceGetRecordingsJsonResponse::class,
+            convert: TexmlGetCallRecordingsResponseBody::class,
         );
     }
 }

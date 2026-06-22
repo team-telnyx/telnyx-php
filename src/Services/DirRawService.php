@@ -9,32 +9,28 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Dir\DirCreateLoaParams;
-use Telnyx\Dir\DirCreateLoaParams\Agent;
-use Telnyx\Dir\DirCreateLoaParams\Signature;
-use Telnyx\Dir\DirGetResponse;
+use Telnyx\Dir\Dir;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListInfringementClaimsParams;
-use Telnyx\Dir\DirListInfringementClaimsResponse;
 use Telnyx\Dir\DirListParams;
-use Telnyx\Dir\DirListParams\FilterStatus;
 use Telnyx\Dir\DirListParams\Sort;
-use Telnyx\Dir\DirListResponse;
-use Telnyx\Dir\DirSubmitResponse;
+use Telnyx\Dir\DirNewLoaParams;
+use Telnyx\Dir\DirNewLoaParams\Signature;
+use Telnyx\Dir\DirStatus;
 use Telnyx\Dir\DirUpdateInfringementParams;
-use Telnyx\Dir\DirUpdateInfringementResponse;
 use Telnyx\Dir\DirUpdateParams;
-use Telnyx\Dir\DirUpdateParams\Document;
-use Telnyx\Dir\DirUpdateResponse;
+use Telnyx\Dir\DirWrapped;
+use Telnyx\Dir\Document;
+use Telnyx\Enterprises\Reputation\Loa\AgentInput;
+use Telnyx\InfringementClaims\InfringementClaim;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DirRawContract;
 
 /**
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateParams\Document
- * @phpstan-import-type AgentShape from \Telnyx\Dir\DirCreateLoaParams\Agent
- * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirCreateLoaParams\Signature
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateInfringementParams\Document as DocumentShape1
+ * @phpstan-import-type AgentInputShape from \Telnyx\Enterprises\Reputation\Loa\AgentInput
+ * @phpstan-import-type SignatureShape from \Telnyx\Dir\DirNewLoaParams\Signature
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  */
 final class DirRawService implements DirRawContract
 {
@@ -52,7 +48,7 @@ final class DirRawService implements DirRawContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirGetResponse>
+     * @return BaseResponse<DirWrapped>
      *
      * @throws APIException
      */
@@ -65,7 +61,7 @@ final class DirRawService implements DirRawContract
             method: 'get',
             path: ['dir/%1$s', $dirID],
             options: $requestOptions,
-            convert: DirGetResponse::class,
+            convert: DirWrapped::class,
         );
     }
 
@@ -89,7 +85,7 @@ final class DirRawService implements DirRawContract
      * }|DirUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirUpdateResponse>
+     * @return BaseResponse<DirWrapped>
      *
      * @throws APIException
      */
@@ -109,7 +105,7 @@ final class DirRawService implements DirRawContract
             path: ['dir/%1$s', $dirID],
             body: (object) $parsed,
             options: $options,
-            convert: DirUpdateResponse::class,
+            convert: DirWrapped::class,
         );
     }
 
@@ -124,14 +120,14 @@ final class DirRawService implements DirRawContract
      *   filterEnterpriseID?: string,
      *   filterExpiringAtGte?: \DateTimeInterface,
      *   filterExpiringAtLte?: \DateTimeInterface,
-     *   filterStatus?: value-of<FilterStatus>,
+     *   filterStatus?: value-of<DirStatus>,
      *   pageNumber?: int,
      *   pageSize?: int,
      *   sort?: value-of<Sort>,
      * }|DirListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DirListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<Dir>>
      *
      * @throws APIException
      */
@@ -162,7 +158,7 @@ final class DirRawService implements DirRawContract
                 ],
             ),
             options: $options,
-            convert: DirListResponse::class,
+            convert: Dir::class,
             page: DefaultFlatPagination::class,
         );
     }
@@ -189,48 +185,6 @@ final class DirRawService implements DirRawContract
             path: ['dir/%1$s', $dirID],
             options: $requestOptions,
             convert: null,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Generate a pre-filled Letter of Authorization (LOA) PDF for a DIR. Enterprise identity (legal name, DBA, address, contact, website, tax id) and the DIR display name are read server-side; the caller supplies the telephone numbers to authorize, an optional Authorized Agent block, and an optional drawn signature.
-     *
-     * When `signature` is omitted the PDF is returned unsigned so the customer can sign it externally and upload it via the Documents API. When `signature` is present the PDF embeds the supplied image, printed name, and signed-at date.
-     *
-     * Returns `application/pdf`.
-     *
-     * @param string $dirID the DIR id
-     * @param array{
-     *   phoneNumbers: list<string>,
-     *   agent?: Agent|AgentShape,
-     *   signature?: Signature|SignatureShape,
-     * }|DirCreateLoaParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<string>
-     *
-     * @throws APIException
-     */
-    public function createLoa(
-        string $dirID,
-        array|DirCreateLoaParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = DirCreateLoaParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: ['dir/%1$s/loa', $dirID],
-            headers: ['Accept' => 'application/pdf'],
-            body: (object) $parsed,
-            options: $options,
-            convert: 'string',
         );
     }
 
@@ -268,7 +222,7 @@ final class DirRawService implements DirRawContract
      * }|DirListInfringementClaimsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DirListInfringementClaimsResponse>>
+     * @return BaseResponse<DefaultFlatPagination<InfringementClaim>>
      *
      * @throws APIException
      */
@@ -291,8 +245,50 @@ final class DirRawService implements DirRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: DirListInfringementClaimsResponse::class,
+            convert: InfringementClaim::class,
             page: DefaultFlatPagination::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Generate a pre-filled Letter of Authorization (LOA) PDF for a DIR. Enterprise identity (legal name, DBA, address, contact, website, tax id) and the DIR display name are read server-side; the caller supplies the telephone numbers to authorize, an optional Authorized Agent block, and an optional drawn signature.
+     *
+     * When `signature` is omitted the PDF is returned unsigned so the customer can sign it externally and upload it via the Documents API. When `signature` is present the PDF embeds the supplied image, printed name, and signed-at date.
+     *
+     * Returns `application/pdf`.
+     *
+     * @param string $dirID the DIR id
+     * @param array{
+     *   phoneNumbers: list<string>,
+     *   agent?: AgentInput|AgentInputShape,
+     *   signature?: Signature|SignatureShape,
+     * }|DirNewLoaParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<string>
+     *
+     * @throws APIException
+     */
+    public function newLoa(
+        string $dirID,
+        array|DirNewLoaParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = DirNewLoaParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['dir/%1$s/loa', $dirID],
+            headers: ['Accept' => 'application/pdf'],
+            body: (object) $parsed,
+            options: $options,
+            convert: 'string',
         );
     }
 
@@ -306,7 +302,7 @@ final class DirRawService implements DirRawContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirSubmitResponse>
+     * @return BaseResponse<DirWrapped>
      *
      * @throws APIException
      */
@@ -319,7 +315,7 @@ final class DirRawService implements DirRawContract
             method: 'post',
             path: ['dir/%1$s/submit', $dirID],
             options: $requestOptions,
-            convert: DirSubmitResponse::class,
+            convert: DirWrapped::class,
         );
     }
 
@@ -337,12 +333,12 @@ final class DirRawService implements DirRawContract
      *   infringementResolutionNotes: string,
      *   callReasons?: list<string>|null,
      *   displayName?: string|null,
-     *   documents?: list<DirUpdateInfringementParams\Document|DocumentShape1>|null,
+     *   documents?: list<Document|DocumentShape>|null,
      *   logoURL?: string|null,
      * }|DirUpdateInfringementParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirUpdateInfringementResponse>
+     * @return BaseResponse<DirWrapped>
      *
      * @throws APIException
      */
@@ -362,7 +358,7 @@ final class DirRawService implements DirRawContract
             path: ['dir/%1$s/infringement_update', $dirID],
             body: (object) $parsed,
             options: $options,
-            convert: DirUpdateInfringementResponse::class,
+            convert: DirWrapped::class,
         );
     }
 }

@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
+use Telnyx\PortingOrders\Comments\PortingOrdersComment;
 use Telnyx\RequestOptions;
 
 /**
@@ -35,7 +35,7 @@ interface CommentsContract
      * @param string $id Porting Order id
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<CommentListResponse>
+     * @return DefaultFlatPagination<PortingOrdersComment>
      *
      * @throws APIException
      */

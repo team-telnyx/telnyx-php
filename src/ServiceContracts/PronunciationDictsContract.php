@@ -7,14 +7,11 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PronunciationDicts\PronunciationDictData;
-use Telnyx\PronunciationDicts\PronunciationDictGetResponse;
-use Telnyx\PronunciationDicts\PronunciationDictNewResponse;
-use Telnyx\PronunciationDicts\PronunciationDictUpdateResponse;
+use Telnyx\PronunciationDicts\PronunciationDictResponse;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type ItemShape from \Telnyx\PronunciationDicts\PronunciationDictCreateParams\Item
- * @phpstan-import-type ItemShape from \Telnyx\PronunciationDicts\PronunciationDictUpdateParams\Item as ItemShape1
+ * @phpstan-import-type PronunciationDictItemShape from \Telnyx\PronunciationDicts\PronunciationDictItem
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface PronunciationDictsContract
@@ -22,7 +19,7 @@ interface PronunciationDictsContract
     /**
      * @api
      *
-     * @param list<ItemShape> $items List of pronunciation items (alias or phoneme type). At least one item is required.
+     * @param list<PronunciationDictItemShape> $items List of pronunciation items (alias or phoneme type). At least one item is required.
      * @param string $name Human-readable name. Must be unique within the organization.
      * @param RequestOpts|null $requestOptions
      *
@@ -32,7 +29,7 @@ interface PronunciationDictsContract
         array $items,
         string $name,
         RequestOptions|array|null $requestOptions = null,
-    ): PronunciationDictNewResponse;
+    ): PronunciationDictResponse;
 
     /**
      * @api
@@ -45,13 +42,13 @@ interface PronunciationDictsContract
     public function retrieve(
         string $id,
         RequestOptions|array|null $requestOptions = null
-    ): PronunciationDictGetResponse;
+    ): PronunciationDictResponse;
 
     /**
      * @api
      *
      * @param string $id the UUID of the pronunciation dictionary
-     * @param list<ItemShape1> $items updated list of pronunciation items (alias or phoneme type)
+     * @param list<PronunciationDictItemShape> $items updated list of pronunciation items (alias or phoneme type)
      * @param string $name updated dictionary name
      * @param RequestOpts|null $requestOptions
      *
@@ -62,7 +59,7 @@ interface PronunciationDictsContract
         ?array $items = null,
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
-    ): PronunciationDictUpdateResponse;
+    ): PronunciationDictResponse;
 
     /**
      * @api

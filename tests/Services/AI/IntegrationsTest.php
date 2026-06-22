@@ -5,7 +5,7 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Integrations\IntegrationGetResponse;
+use Telnyx\AI\Integrations\Integration;
 use Telnyx\AI\Integrations\IntegrationListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
@@ -39,7 +39,7 @@ final class IntegrationsTest extends TestCase
         $result = $this->client->ai->integrations->retrieve('integration_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(IntegrationGetResponse::class, $result);
+        $this->assertInstanceOf(Integration::class, $result);
     }
 
     #[Test]

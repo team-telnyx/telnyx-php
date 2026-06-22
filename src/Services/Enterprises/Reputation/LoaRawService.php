@@ -7,18 +7,18 @@ namespace Telnyx\Services\Enterprises\Reputation;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
+use Telnyx\Enterprises\Reputation\Loa\AgentInput;
 use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams;
-use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Agent;
 use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Signature;
 use Telnyx\Enterprises\Reputation\Loa\LoaUpdateParams;
-use Telnyx\Enterprises\Reputation\Loa\LoaUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\Reputation\LoaRawContract;
 
 /**
  * Phone-number reputation monitoring (spam-score lookup and tracking).
  *
- * @phpstan-import-type AgentShape from \Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Agent
+ * @phpstan-import-type AgentInputShape from \Telnyx\Enterprises\Reputation\Loa\AgentInput
  * @phpstan-import-type SignatureShape from \Telnyx\Enterprises\Reputation\Loa\LoaRenderParams\Signature
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -39,7 +39,7 @@ final class LoaRawService implements LoaRawContract
      * @param array{loaDocumentID: string}|LoaUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<LoaUpdateResponse>
+     * @return BaseResponse<EnterpriseReputationPublicWrapped>
      *
      * @throws APIException
      */
@@ -59,7 +59,7 @@ final class LoaRawService implements LoaRawContract
             path: ['enterprises/%1$s/reputation/loa', $enterpriseID],
             body: (object) $parsed,
             options: $options,
-            convert: LoaUpdateResponse::class,
+            convert: EnterpriseReputationPublicWrapped::class,
         );
     }
 
@@ -70,7 +70,7 @@ final class LoaRawService implements LoaRawContract
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param array{
-     *   agent?: Agent|AgentShape, signature?: Signature|SignatureShape
+     *   agent?: AgentInput|AgentInputShape, signature?: Signature|SignatureShape
      * }|LoaRenderParams $params
      * @param RequestOpts|null $requestOptions
      *

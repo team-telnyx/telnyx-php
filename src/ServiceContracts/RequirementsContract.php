@@ -7,10 +7,10 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Requirements\DocReqsRequirement;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams\Filter;
 use Telnyx\Requirements\RequirementListParams\Sort;
-use Telnyx\Requirements\RequirementListResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\Requirements\RequirementListParams\Filter
@@ -38,7 +38,7 @@ interface RequirementsContract
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirements (deepObject style). Originally: sort[]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<RequirementListResponse>
+     * @return DefaultFlatPagination<DocReqsRequirement>
      *
      * @throws APIException
      */

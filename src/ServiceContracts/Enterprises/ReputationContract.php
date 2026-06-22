@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Enterprises;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Enterprises\Reputation\ReputationEnableParams\CheckFrequency;
-use Telnyx\Enterprises\Reputation\ReputationEnableResponse;
-use Telnyx\Enterprises\Reputation\ReputationGetResponse;
-use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyResponse;
+use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
+use Telnyx\Enterprises\Reputation\ReputationCheckFrequency;
 use Telnyx\RequestOptions;
 
 /**
@@ -27,7 +25,7 @@ interface ReputationContract
     public function retrieve(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
-    ): ReputationGetResponse;
+    ): EnterpriseReputationPublicWrapped;
 
     /**
      * @api
@@ -47,7 +45,7 @@ interface ReputationContract
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param string $loaDocumentID Id of the signed Letter of Authorization document, returned by the Telnyx Documents API after upload (upload via `POST /v2/documents`; see https://developers.telnyx.com/api/documents).
-     * @param CheckFrequency|value-of<CheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
+     * @param ReputationCheckFrequency|value-of<ReputationCheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -55,22 +53,22 @@ interface ReputationContract
     public function enable(
         string $enterpriseID,
         string $loaDocumentID,
-        CheckFrequency|string $checkFrequency = 'business_daily',
+        ReputationCheckFrequency|string|null $checkFrequency = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ReputationEnableResponse;
+    ): EnterpriseReputationPublicWrapped;
 
     /**
      * @api
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
-     * @param \Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency|value-of<\Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
+     * @param ReputationCheckFrequency|value-of<ReputationCheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function updateFrequency(
         string $enterpriseID,
-        \Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency|string $checkFrequency,
+        ReputationCheckFrequency|string $checkFrequency,
         RequestOptions|array|null $requestOptions = null,
-    ): ReputationUpdateFrequencyResponse;
+    ): EnterpriseReputationPublicWrapped;
 }

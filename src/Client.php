@@ -739,6 +739,11 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public SpeechToTextService $speechToText;
+
+    /**
+     * @api
+     */
     public RequirementGroupsService $requirementGroups;
 
     /**
@@ -946,10 +951,6 @@ class Client extends BaseClient
      */
     public OrganizationsService $organizations;
 
-    private ?string $oauthAccessToken = null;
-
-    private ?int $oauthTokenExpiresAt = null;
-
     /**
      * @api
      */
@@ -1018,6 +1019,21 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public UacConnectionsService $uacConnections;
+
+    /**
+     * @api
+     */
+    public VoiceSDKCallReportsService $voiceSDKCallReports;
+
+    /**
+     * @api
+     */
+    public SipRegistrationStatusService $sipRegistrationStatus;
+
+    /**
+     * @api
+     */
     public CallReasonsService $callReasons;
 
     /**
@@ -1030,25 +1046,9 @@ class Client extends BaseClient
      */
     public InfringementClaimsService $infringementClaims;
 
-    /**
-     * @api
-     */
-    public SipRegistrationStatusService $sipRegistrationStatus;
+    private ?string $oauthAccessToken = null;
 
-    /**
-     * @api
-     */
-    public SpeechToTextService $speechToText;
-
-    /**
-     * @api
-     */
-    public UacConnectionsService $uacConnections;
-
-    /**
-     * @api
-     */
-    public VoiceSDKCallReportsService $voiceSDKCallReports;
+    private ?int $oauthTokenExpiresAt = null;
 
     /**
      * @param RequestOpts|null $requestOptions
@@ -1095,7 +1095,7 @@ class Client extends BaseClient
             'Accept' => 'application/json',
             'User-Agent' => sprintf('telnyx/PHP %s', VERSION),
             'X-Stainless-Lang' => 'php',
-            'X-Stainless-Package-Version' => '7.40.1',
+            'X-Stainless-Package-Version' => '7.74.0',
             'X-Stainless-Arch' => Util::machtype(),
             'X-Stainless-OS' => Util::ostype(),
             'X-Stainless-Runtime' => php_sapi_name(),
@@ -1226,6 +1226,7 @@ class Client extends BaseClient
         $this->regions = new RegionsService($this);
         $this->regulatoryRequirements = new RegulatoryRequirementsService($this);
         $this->reports = new ReportsService($this);
+        $this->speechToText = new SpeechToTextService($this);
         $this->requirementGroups = new RequirementGroupsService($this);
         $this->requirementTypes = new RequirementTypesService($this);
         $this->requirements = new RequirementsService($this);
@@ -1281,13 +1282,12 @@ class Client extends BaseClient
         $this->reputation = new ReputationService($this);
         $this->termsOfService = new TermsOfServiceService($this);
         $this->pronunciationDicts = new PronunciationDictsService($this);
+        $this->uacConnections = new UacConnectionsService($this);
+        $this->voiceSDKCallReports = new VoiceSDKCallReportsService($this);
+        $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
         $this->callReasons = new CallReasonsService($this);
         $this->dir = new DirService($this);
         $this->infringementClaims = new InfringementClaimsService($this);
-        $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
-        $this->speechToText = new SpeechToTextService($this);
-        $this->uacConnections = new UacConnectionsService($this);
-        $this->voiceSDKCallReports = new VoiceSDKCallReportsService($this);
     }
 
     /** @return array<string,string> */
@@ -1344,14 +1344,12 @@ class Client extends BaseClient
 
     private function getOAuthAccessToken(): string
     {
-        // Check if we have a valid cached token (with 10 second buffer before expiry)
         if (null !== $this->oauthAccessToken && null !== $this->oauthTokenExpiresAt) {
             if (time() < ($this->oauthTokenExpiresAt - 10)) {
                 return $this->oauthAccessToken;
             }
         }
 
-        // Fetch new token
         $this->refreshOAuthToken();
 
         assert(null !== $this->oauthAccessToken);
@@ -1374,19 +1372,19 @@ class Client extends BaseClient
         $request = $request->withBody($body);
 
         $response = $this->options->transporter->sendRequest($request);
+        $data = json_decode((string) $response->getBody(), true);
 
-        if ($response->getStatusCode() >= 400) {
-            throw Core\Exceptions\APIStatusException::from(request: $request, response: $response, message: 'OAuth token request failed');
+        if (!is_array($data)) {
+            throw new \RuntimeException('Invalid OAuth token response');
         }
 
-        /** @var array{access_token?: string, expires_in?: int} */
-        $data = json_decode($response->getBody()->getContents(), true);
-
-        if (!isset($data['access_token'])) {
-            throw new Core\Exceptions\APIConnectionException($request, message: 'OAuth token response missing access_token');
+        $accessToken = $data['access_token'] ?? null;
+        if (!is_string($accessToken)) {
+            throw new \RuntimeException('Failed to obtain OAuth access token');
         }
 
-        $this->oauthAccessToken = $data['access_token'];
-        $this->oauthTokenExpiresAt = time() + ($data['expires_in'] ?? 3600);
+        $this->oauthAccessToken = $accessToken;
+        $expiresIn = $data['expires_in'] ?? 3600;
+        $this->oauthTokenExpiresAt = time() + (is_int($expiresIn) ? $expiresIn : 3600);
     }
 }
