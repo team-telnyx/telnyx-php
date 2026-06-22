@@ -119,13 +119,22 @@ jobs:
           # We fetch origin/master and restore release-please.yml from there.
           git fetch origin master:refs/remotes/origin/master 2>/dev/null || true
 
-          # Restore release-please.yml from master (it only exists there)
+          # Restore prod-owned files from origin/master
+          #
+          # IMPORTANT: All prod-owned files must be restored from origin/master,
+          # NOT from `next`. During promote, the staging tree fully replaces
+          # `next`, so `next` no longer has prod-owned files. `master` is the
+          # source of truth for prod-owned files (it's where release-please
+          # merges release PRs).
+          #
+          # release-please.yml: only exists on master (staging doesn't have it)
+          # release-please-config.json: staging doesn't have it; master has the
+          #   correct version (no prerelease/versioning:prerelease)
+          # ci.yml, release-doctor.yml, bin/check-release-environment: prod
+          #   versions differ from staging
+          # .release-please-manifest.json: master has the latest released version
           git checkout origin/master -- \
             .github/workflows/release-please.yml \
-            2>/dev/null || true
-
-          # Restore remaining prod-owned files from next
-          git checkout next -- \
             .github/workflows/ci.yml \
             .github/workflows/release-doctor.yml \
             release-please-config.json \
