@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.0.0](https://github.com/team-telnyx/telnyx-php/compare/v7.84.0...v8.0.0) (2026-06-22)
+
+
+### Features
+
+* add release-please workflow + fix config for self-hosted releases ([45c7197](https://github.com/team-telnyx/telnyx-php/commit/45c719717afa5826fc0c211bbc6e69b979d239ef))
+
 ## 7.84.0 (2026-06-18)
 
 Full Changelog: [v7.83.0...v7.84.0](https://github.com/team-telnyx/telnyx-php/compare/v7.83.0...v7.84.0)
