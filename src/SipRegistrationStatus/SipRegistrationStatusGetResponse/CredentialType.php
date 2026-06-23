@@ -10,4 +10,6 @@ namespace Telnyx\SipRegistrationStatus\SipRegistrationStatusGetResponse;
 enum CredentialType: string
 {
     case UAC_EXTERNAL_CREDENTIAL = 'uac_external_credential';
+
+    case TELEPHONY_CREDENTIAL = 'telephony_credential';
 }
