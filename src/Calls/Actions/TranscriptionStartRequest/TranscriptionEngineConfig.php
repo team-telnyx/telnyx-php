@@ -12,6 +12,7 @@ use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineAssemblyaiConfig;
+use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineParakeetConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineXaiConfig;
@@ -27,13 +28,14 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type TranscriptionEngineAssemblyaiConfigShape from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineAssemblyaiConfig
  * @phpstan-import-type TranscriptionEngineSpeechmaticsConfigShape from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineSpeechmaticsConfig
  * @phpstan-import-type TranscriptionEngineSonioxConfigShape from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineSonioxConfig
+ * @phpstan-import-type TranscriptionEngineParakeetConfigShape from \Telnyx\Calls\Actions\TranscriptionStartRequest\TranscriptionEngineConfig\TranscriptionEngineParakeetConfig
  * @phpstan-import-type TranscriptionEngineAConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineAConfig
  * @phpstan-import-type TranscriptionEngineBConfigShape from \Telnyx\Calls\Actions\TranscriptionEngineBConfig
  * @phpstan-import-type DeepgramNova2ConfigShape from \Telnyx\Calls\Actions\DeepgramNova2Config
  * @phpstan-import-type DeepgramNova3ConfigShape from \Telnyx\Calls\Actions\DeepgramNova3Config
  *
- * @phpstan-type TranscriptionEngineConfigVariants = TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config
- * @phpstan-type TranscriptionEngineConfigShape = TranscriptionEngineConfigVariants|TranscriptionEngineGoogleConfigShape|TranscriptionEngineTelnyxConfigShape|TranscriptionEngineAzureConfigShape|TranscriptionEngineXaiConfigShape|TranscriptionEngineAssemblyaiConfigShape|TranscriptionEngineSpeechmaticsConfigShape|TranscriptionEngineSonioxConfigShape|TranscriptionEngineAConfigShape|TranscriptionEngineBConfigShape|DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
+ * @phpstan-type TranscriptionEngineConfigVariants = TranscriptionEngineGoogleConfig|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config
+ * @phpstan-type TranscriptionEngineConfigShape = TranscriptionEngineConfigVariants|TranscriptionEngineGoogleConfigShape|TranscriptionEngineTelnyxConfigShape|TranscriptionEngineAzureConfigShape|TranscriptionEngineXaiConfigShape|TranscriptionEngineAssemblyaiConfigShape|TranscriptionEngineSpeechmaticsConfigShape|TranscriptionEngineSonioxConfigShape|TranscriptionEngineParakeetConfigShape|TranscriptionEngineAConfigShape|TranscriptionEngineBConfigShape|DeepgramNova2ConfigShape|DeepgramNova3ConfigShape
  */
 final class TranscriptionEngineConfig implements ConverterSource
 {
@@ -57,6 +59,7 @@ final class TranscriptionEngineConfig implements ConverterSource
             'AssemblyAI' => TranscriptionEngineAssemblyaiConfig::class,
             'Speechmatics' => TranscriptionEngineSpeechmaticsConfig::class,
             'Soniox' => TranscriptionEngineSonioxConfig::class,
+            'Parakeet' => TranscriptionEngineParakeetConfig::class,
             'A' => TranscriptionEngineAConfig::class,
             'B' => TranscriptionEngineBConfig::class,
             'deepgram/nova-2' => DeepgramNova2Config::class,

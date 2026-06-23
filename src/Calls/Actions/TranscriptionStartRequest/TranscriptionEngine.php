@@ -25,6 +25,8 @@ enum TranscriptionEngine: string
 
     case SONIOX = 'Soniox';
 
+    case PARAKEET = 'Parakeet';
+
     case A = 'A';
 
     case B = 'B';
