@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\SipRegistrationStatus;
 
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -16,7 +17,9 @@ use Telnyx\SipRegistrationStatus\SipRegistrationStatusRetrieveParams\CredentialT
  * @see Telnyx\Services\SipRegistrationStatusService::retrieve()
  *
  * @phpstan-type SipRegistrationStatusRetrieveParamsShape = array{
- *   connectionID: string, credentialType: CredentialType|value-of<CredentialType>
+ *   credentialType: CredentialType|value-of<CredentialType>,
+ *   connectionID?: string|null,
+ *   username?: string|null,
  * }
  */
 final class SipRegistrationStatusRetrieveParams implements BaseModel
@@ -26,13 +29,7 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
     use SdkParams;
 
     /**
-     * Identifier of the UAC connection to look up.
-     */
-    #[Required]
-    public string $connectionID;
-
-    /**
-     * The kind of credential to look up. Only `uac_external_credential` is supported today.
+     * The kind of credential to look up. `uac_external_credential` is keyed by `connection_id`; `telephony_credential` is keyed by `username`.
      *
      * @var value-of<CredentialType> $credentialType
      */
@@ -40,21 +37,29 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
     public string $credentialType;
 
     /**
+     * Identifier of the UAC connection to look up. Required when `credential_type` is `uac_external_credential`.
+     */
+    #[Optional]
+    public ?string $connectionID;
+
+    /**
+     * SIP username of the telephony credential to look up. Required when `credential_type` is `telephony_credential`.
+     */
+    #[Optional]
+    public ?string $username;
+
+    /**
      * `new SipRegistrationStatusRetrieveParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * SipRegistrationStatusRetrieveParams::with(
-     *   connectionID: ..., credentialType: ...
-     * )
+     * SipRegistrationStatusRetrieveParams::with(credentialType: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new SipRegistrationStatusRetrieveParams)
-     *   ->withConnectionID(...)
-     *   ->withCredentialType(...)
+     * (new SipRegistrationStatusRetrieveParams)->withCredentialType(...)
      * ```
      */
     public function __construct()
@@ -70,19 +75,36 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
      * @param CredentialType|value-of<CredentialType> $credentialType
      */
     public static function with(
-        string $connectionID,
-        CredentialType|string $credentialType
+        CredentialType|string $credentialType,
+        ?string $connectionID = null,
+        ?string $username = null,
     ): self {
         $self = new self;
 
-        $self['connectionID'] = $connectionID;
+        $self['credentialType'] = $credentialType;
+
+        null !== $connectionID && $self['connectionID'] = $connectionID;
+        null !== $username && $self['username'] = $username;
+
+        return $self;
+    }
+
+    /**
+     * The kind of credential to look up. `uac_external_credential` is keyed by `connection_id`; `telephony_credential` is keyed by `username`.
+     *
+     * @param CredentialType|value-of<CredentialType> $credentialType
+     */
+    public function withCredentialType(
+        CredentialType|string $credentialType
+    ): self {
+        $self = clone $this;
         $self['credentialType'] = $credentialType;
 
         return $self;
     }
 
     /**
-     * Identifier of the UAC connection to look up.
+     * Identifier of the UAC connection to look up. Required when `credential_type` is `uac_external_credential`.
      */
     public function withConnectionID(string $connectionID): self
     {
@@ -93,15 +115,12 @@ final class SipRegistrationStatusRetrieveParams implements BaseModel
     }
 
     /**
-     * The kind of credential to look up. Only `uac_external_credential` is supported today.
-     *
-     * @param CredentialType|value-of<CredentialType> $credentialType
+     * SIP username of the telephony credential to look up. Required when `credential_type` is `telephony_credential`.
      */
-    public function withCredentialType(
-        CredentialType|string $credentialType
-    ): self {
+    public function withUsername(string $username): self
+    {
         $self = clone $this;
-        $self['credentialType'] = $credentialType;
+        $self['username'] = $username;
 
         return $self;
     }

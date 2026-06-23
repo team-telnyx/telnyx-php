@@ -37,19 +37,25 @@ final class SipRegistrationStatusService implements SipRegistrationStatusContrac
      *
      * Returns the live SIP registration state of a UAC connection: whether it is currently registered, when it last registered, and the last response Telnyx received from the registrar. Only `uac_external_credential` is supported today.
      *
-     * @param string $connectionID identifier of the UAC connection to look up
-     * @param CredentialType|value-of<CredentialType> $credentialType The kind of credential to look up. Only `uac_external_credential` is supported today.
+     * @param CredentialType|value-of<CredentialType> $credentialType The kind of credential to look up. `uac_external_credential` is keyed by `connection_id`; `telephony_credential` is keyed by `username`.
+     * @param string $connectionID Identifier of the UAC connection to look up. Required when `credential_type` is `uac_external_credential`.
+     * @param string $username SIP username of the telephony credential to look up. Required when `credential_type` is `telephony_credential`.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
-        string $connectionID,
         CredentialType|string $credentialType,
+        ?string $connectionID = null,
+        ?string $username = null,
         RequestOptions|array|null $requestOptions = null,
     ): SipRegistrationStatusGetResponse {
         $params = Util::removeNulls(
-            ['connectionID' => $connectionID, 'credentialType' => $credentialType]
+            [
+                'credentialType' => $credentialType,
+                'connectionID' => $connectionID,
+                'username' => $username,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type

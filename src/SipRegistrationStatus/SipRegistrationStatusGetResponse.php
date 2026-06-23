@@ -31,7 +31,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     use SdkModel;
 
     /**
-     * Identifier of the UAC connection.
+     * Identifier of the connection associated with the credential.
      */
     #[Optional('connection_id')]
     public ?string $connectionID;
@@ -69,7 +69,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     public ?bool $registered;
 
     /**
-     * Detailed registration information reported by the registrar.
+     * Detailed registration information reported by the registrar. The populated fields depend on `credential_type`.
      */
     #[Optional('sip_registration_details')]
     public ?SipRegistrationDetails $sipRegistrationDetails;
@@ -121,7 +121,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     }
 
     /**
-     * Identifier of the UAC connection.
+     * Identifier of the connection associated with the credential.
      */
     public function withConnectionID(string $connectionID): self
     {
@@ -191,7 +191,7 @@ final class SipRegistrationStatusGetResponse implements BaseModel
     }
 
     /**
-     * Detailed registration information reported by the registrar.
+     * Detailed registration information reported by the registrar. The populated fields depend on `credential_type`.
      *
      * @param SipRegistrationDetails|SipRegistrationDetailsShape $sipRegistrationDetails
      */
