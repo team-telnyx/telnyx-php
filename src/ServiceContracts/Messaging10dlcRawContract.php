@@ -21,7 +21,7 @@ interface Messaging10dlcRawContract
      * @param Endpoint|string $endpoint unique identifier of the endpoint
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,mixed>|array<string,mixed>,>
+     * @return BaseResponse<list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,string>|array<string,mixed>,>
      *
      * @throws APIException
      */
