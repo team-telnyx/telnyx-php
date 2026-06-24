@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.76.0](https://github.com/team-telnyx/telnyx-php/compare/v8.0.0...v7.76.0) (2026-06-23)
+
+
+### Bug Fixes
+
+* remove `|| true` from github-release step ([#306](https://github.com/team-telnyx/telnyx-php/issues/306)) ([46d6df9](https://github.com/team-telnyx/telnyx-php/commit/46d6df9e84b72b65f87818f7e7990f8ffb5423c2))
+
 ## [8.0.0](https://github.com/team-telnyx/telnyx-php/compare/v7.84.0...v8.0.0) (2026-06-22)
 
 

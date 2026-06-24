@@ -102,6 +102,7 @@ use Telnyx\Calls\Actions\TranscriptionEngineAssemblyaiConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineAzureConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineBConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineGoogleConfig;
+use Telnyx\Calls\Actions\TranscriptionEngineParakeetConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineSonioxConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineSpeechmaticsConfig;
 use Telnyx\Calls\Actions\TranscriptionEngineTelnyxConfig;
@@ -1081,7 +1082,7 @@ interface ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine|string $transcriptionEngine = 'Google',
-        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config|null $transcriptionEngineConfig = null,
+        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config|null $transcriptionEngineConfig = null,
         string $transcriptionTracks = 'inbound',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartTranscriptionResponse;
