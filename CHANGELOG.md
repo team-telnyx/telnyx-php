@@ -1,5 +1,34 @@
 # Changelog
 
+## [7.76.0](https://github.com/team-telnyx/telnyx-php/compare/v7.76.0...v7.76.0) (2026-06-24)
+
+
+### Features
+
+* add release-please workflow + fix config for self-hosted releases ([45c7197](https://github.com/team-telnyx/telnyx-php/commit/45c719717afa5826fc0c211bbc6e69b979d239ef))
+* Add sip region to scheduled events ([a225bbd](https://github.com/team-telnyx/telnyx-php/commit/a225bbd3361cad12bb7cad02a7e0c8d081f61b75))
+* add transcriptions-search API spec (dev/external) ([7ac0d09](https://github.com/team-telnyx/telnyx-php/commit/7ac0d09c79d1dd4152cacc6e17e7c633a86a37df))
+* branded-calling: sync PATCH /dir/{dir_id} spec with deployed service behavior ([efd7809](https://github.com/team-telnyx/telnyx-php/commit/efd7809912bbd68288b9f8dfd946f9a8538b7c71))
+* Document POST /ai/assistants/{assistant_id}/instructions/enhance ([399ff85](https://github.com/team-telnyx/telnyx-php/commit/399ff8555fd171ff9fa53d0ec9df92668ddbcdbe))
+* ENGDESK-51290: Add Aicoustic NS engines to portal backend ([35746fd](https://github.com/team-telnyx/telnyx-php/commit/35746fdcd1cc9d45e4be55a47bb53e48e2dc907a))
+* **spec:** backfill parameter descriptions to 100% coverage ([5a447b6](https://github.com/team-telnyx/telnyx-php/commit/5a447b618d184c276fd20d123063ced4a9f1ea3a))
+* **spec:** inline 2xx response schemas — REST response coverage 41% → 91% (sync of openapi[#199](https://github.com/team-telnyx/telnyx-php/issues/199)) ([fecee29](https://github.com/team-telnyx/telnyx-php/commit/fecee29eb572e93864178f58d89567d083ac3565))
+* TELAPPS-719: add Inworld inworld-tts-2 model + delivery_mode to call-control voice settings ([2406977](https://github.com/team-telnyx/telnyx-php/commit/240697757451977195d5d433ec2968f266bfa44f))
+
+
+### Bug Fixes
+
+* **number-reputation:** remediation contact_email is optional ([1cfb11f](https://github.com/team-telnyx/telnyx-php/commit/1cfb11f5c6e049a0250a3829497127aea4a5a47e))
+* remove `|| true` from github-release step ([#306](https://github.com/team-telnyx/telnyx-php/issues/306)) ([46d6df9](https://github.com/team-telnyx/telnyx-php/commit/46d6df9e84b72b65f87818f7e7990f8ffb5423c2))
+* restore release-please-config.json ([8f74e6f](https://github.com/team-telnyx/telnyx-php/commit/8f74e6f29c8b229552331b66d3a0b196be38db69))
+* restore release-please-config.json lost in promote merge ([c76b9d9](https://github.com/team-telnyx/telnyx-php/commit/c76b9d9006fc739ec904cdbc6ac04caf0ab959fc))
+
+
+### Chores
+
+* promote from staging 365caf5 ([96b58a0](https://github.com/team-telnyx/telnyx-php/commit/96b58a09db24b7f8885739601a83d3f121688cf4))
+* set release version to 8.0.0 for breaking changes ([ee2410f](https://github.com/team-telnyx/telnyx-php/commit/ee2410f8429491c1cff2817df5df54bbe6167c55))
+
 ## [7.76.0](https://github.com/team-telnyx/telnyx-php/compare/v8.0.0...v7.76.0) (2026-06-23)
 
 
