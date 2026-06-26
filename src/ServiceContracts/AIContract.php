@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\AI\AIGetModelsResponse;
-use Telnyx\AI\AISearchConversationHistoriesParams\RecordType;
 use Telnyx\AI\AISearchConversationHistoriesParams\Region;
 use Telnyx\AI\AISearchConversationHistoriesResponse;
 use Telnyx\AI\AISummarizeResponse;
@@ -50,9 +49,7 @@ interface AIContract
     /**
      * @api
      *
-     * @param string $q Natural language search query. The text is embedded into a 1024-dimensional vector and compared against indexed record chunks using kNN cosine similarity.
-     * @param RecordType|value-of<RecordType> $recordType The type of records to search. Each record type is stored in a separate vector index.
-     * @param string $filterDocumentID Filter by document identifier (exact match). Populated for knowledge_base records.
+     * @param string $q Natural language search query. The text is embedded into a 1024-dimensional vector and compared against indexed record chunks using semantic similarity.
      * @param \DateTimeInterface $filterIngestedAtGte only include records ingested (chunked, embedded, and indexed) on or after this ISO 8601 timestamp
      * @param \DateTimeInterface $filterIngestedAtLte only include records ingested (chunked, embedded, and indexed) on or before this ISO 8601 timestamp
      * @param \DateTimeInterface $filterRecordCreatedAtGte only include records whose original creation time is on or after this ISO 8601 timestamp
@@ -62,16 +59,15 @@ interface AIContract
      * @param string $filterRetention Filter by retention policy (exact match). Filter-only: not returned in the response body.
      * @param string $filterUserID filter to records owned by a specific user (exact match)
      * @param float $minScore Minimum cosine similarity score threshold (0.0 to 1.0). Results below this threshold are excluded.
-     * @param Region|value-of<Region> $region Restrict search to a specific region's OpenSearch cluster. When omitted, all regions are queried in parallel (fan-out) and results are merged by cosine similarity score.
-     * @param int $topK Maximum number of results to return. Defaults to 20, maximum 100.
+     * @param int $pageNumber Page number to return (1-based). Defaults to 1.
+     * @param int $pageSize Number of results per page. Defaults to 20, maximum 100.
+     * @param Region|value-of<Region> $region Restrict search to a specific region. When omitted, all regions are queried in parallel (fan-out) and results are merged by similarity score.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function searchConversationHistories(
         string $q,
-        RecordType|string $recordType,
-        ?string $filterDocumentID = null,
         ?\DateTimeInterface $filterIngestedAtGte = null,
         ?\DateTimeInterface $filterIngestedAtLte = null,
         ?\DateTimeInterface $filterRecordCreatedAtGte = null,
@@ -81,8 +77,9 @@ interface AIContract
         ?string $filterRetention = null,
         ?string $filterUserID = null,
         float $minScore = 0,
+        int $pageNumber = 1,
+        int $pageSize = 20,
         Region|string|null $region = null,
-        int $topK = 20,
         RequestOptions|array|null $requestOptions = null,
     ): AISearchConversationHistoriesResponse;
 

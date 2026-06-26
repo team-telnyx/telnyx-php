@@ -8,21 +8,13 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
-To use this package, install via Composer by adding the following to your application's `composer.json`:
+<!-- x-release-please-start-version -->
 
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:stainless-sdks/telnyx-php.git"
-    }
-  ],
-  "require": {
-    "telnyx/telnyx-php": "dev-main"
-  }
-}
 ```
+composer require "telnyx/telnyx-php 7.84.0"
+```
+
+<!-- x-release-please-end -->
 
 ## Usage
 
@@ -228,4 +220,4 @@ PHP 8.1.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/stainless-sdks/telnyx-php/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/team-telnyx/telnyx-php/tree/master/CONTRIBUTING.md).

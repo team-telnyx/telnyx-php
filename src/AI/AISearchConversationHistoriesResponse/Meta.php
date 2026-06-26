@@ -21,13 +21,13 @@ final class Meta implements BaseModel
     use SdkModel;
 
     /**
-     * Current page number (always 1 — this API does not support pagination, use top_k instead).
+     * Current page number (1-based), matching the requested page[number].
      */
     #[Required('page_number')]
     public int $pageNumber;
 
     /**
-     * Number of results per page (equals the effective top_k value).
+     * Number of results per page, matching the requested page[size].
      */
     #[Required('page_size')]
     public int $pageSize;
@@ -39,7 +39,7 @@ final class Meta implements BaseModel
     public int $totalPages;
 
     /**
-     * Total number of matching results across all queried regions (before top_k truncation).
+     * Total number of matching results across all queried regions.
      */
     #[Required('total_results')]
     public int $totalResults;
@@ -89,7 +89,7 @@ final class Meta implements BaseModel
     }
 
     /**
-     * Current page number (always 1 — this API does not support pagination, use top_k instead).
+     * Current page number (1-based), matching the requested page[number].
      */
     public function withPageNumber(int $pageNumber): self
     {
@@ -100,7 +100,7 @@ final class Meta implements BaseModel
     }
 
     /**
-     * Number of results per page (equals the effective top_k value).
+     * Number of results per page, matching the requested page[size].
      */
     public function withPageSize(int $pageSize): self
     {
@@ -122,7 +122,7 @@ final class Meta implements BaseModel
     }
 
     /**
-     * Total number of matching results across all queried regions (before top_k truncation).
+     * Total number of matching results across all queried regions.
      */
     public function withTotalResults(int $totalResults): self
     {
