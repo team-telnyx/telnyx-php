@@ -57,15 +57,15 @@ class TtsServerEvent
     public function __construct(array $data)
     {
         $this->rawData = $data;
-        $this->type = isset($data['type']) ? (string) $data['type'] : 'unknown';
-        $this->audio = isset($data['audio']) ? (string) $data['audio'] : null;
-        $this->text = isset($data['text']) ? (string) $data['text'] : null;
+        $this->type = isset($data['type']) && is_scalar($data['type']) ? (string) $data['type'] : 'unknown';
+        $this->audio = isset($data['audio']) && is_scalar($data['audio']) ? (string) $data['audio'] : null;
+        $this->text = isset($data['text']) && is_scalar($data['text']) ? (string) $data['text'] : null;
         $this->isFinal = isset($data['is_final']) ? (bool) $data['is_final'] : null;
         $this->cached = isset($data['cached']) ? (bool) $data['cached'] : null;
-        $this->timeToFirstAudioFrameMs = isset($data['time_to_first_audio_frame_ms'])
+        $this->timeToFirstAudioFrameMs = isset($data['time_to_first_audio_frame_ms']) && is_scalar($data['time_to_first_audio_frame_ms'])
             ? (int) $data['time_to_first_audio_frame_ms']
             : null;
-        $this->error = isset($data['error']) ? (string) $data['error'] : null;
+        $this->error = isset($data['error']) && is_scalar($data['error']) ? (string) $data['error'] : null;
     }
 
     /**

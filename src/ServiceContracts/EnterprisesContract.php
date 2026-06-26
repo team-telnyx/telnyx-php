@@ -8,16 +8,13 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\BillingAddress;
 use Telnyx\Enterprises\BillingContact;
-use Telnyx\Enterprises\EnterpriseActivateBrandedCallingResponse;
 use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
 use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
-use Telnyx\Enterprises\EnterpriseGetResponse;
-use Telnyx\Enterprises\EnterpriseNewResponse;
 use Telnyx\Enterprises\EnterprisePublic;
-use Telnyx\Enterprises\EnterpriseUpdateResponse;
+use Telnyx\Enterprises\EnterprisePublicWrapped;
 use Telnyx\Enterprises\OrganizationContact;
 use Telnyx\Enterprises\PhysicalAddress;
 use Telnyx\RequestOptions;
@@ -85,7 +82,7 @@ interface EnterprisesContract
         ?string $professionalLicenseNumber = null,
         RoleType|string $roleType = 'enterprise',
         RequestOptions|array|null $requestOptions = null,
-    ): EnterpriseNewResponse;
+    ): EnterprisePublicWrapped;
 
     /**
      * @api
@@ -98,7 +95,7 @@ interface EnterprisesContract
     public function retrieve(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
-    ): EnterpriseGetResponse;
+    ): EnterprisePublicWrapped;
 
     /**
      * @api
@@ -135,7 +132,7 @@ interface EnterprisesContract
         ?string $professionalLicenseNumber = null,
         ?string $website = null,
         RequestOptions|array|null $requestOptions = null,
-    ): EnterpriseUpdateResponse;
+    ): EnterprisePublicWrapped;
 
     /**
      * @api
@@ -179,8 +176,8 @@ interface EnterprisesContract
      *
      * @throws APIException
      */
-    public function activateBrandedCalling(
+    public function brandedCalling(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
-    ): EnterpriseActivateBrandedCallingResponse;
+    ): EnterprisePublicWrapped;
 }

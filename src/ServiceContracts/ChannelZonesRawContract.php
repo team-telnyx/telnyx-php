@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\ChannelZones\ChannelZoneListParams;
-use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateParams;
-use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
+use Telnyx\ChannelZones\GcbChannelZone;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
@@ -25,7 +24,7 @@ interface ChannelZonesRawContract
      * @param array<string,mixed>|ChannelZoneUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ChannelZoneUpdateResponse>
+     * @return BaseResponse<GcbChannelZone>
      *
      * @throws APIException
      */
@@ -41,7 +40,7 @@ interface ChannelZonesRawContract
      * @param array<string,mixed>|ChannelZoneListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ChannelZoneListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<GcbChannelZone>>
      *
      * @throws APIException
      */

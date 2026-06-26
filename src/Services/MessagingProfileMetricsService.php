@@ -7,7 +7,7 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\MessagingProfileMetrics\MessagingProfileMetricListParams\TimeFrame;
+use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
 use Telnyx\MessagingProfileMetrics\MessagingProfileMetricListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfileMetricsContract;
@@ -35,13 +35,13 @@ final class MessagingProfileMetricsService implements MessagingProfileMetricsCon
      *
      * List high-level metrics for all messaging profiles belonging to the authenticated user.
      *
-     * @param TimeFrame|value-of<TimeFrame> $timeFrame the time frame for metrics
+     * @param MessagingMetricsTimeFrame|value-of<MessagingMetricsTimeFrame> $timeFrame the time frame for metrics
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function list(
-        TimeFrame|string $timeFrame = '24h',
+        MessagingMetricsTimeFrame|string $timeFrame = '24h',
         RequestOptions|array|null $requestOptions = null,
     ): MessagingProfileMetricListResponse {
         $params = Util::removeNulls(['timeFrame' => $timeFrame]);

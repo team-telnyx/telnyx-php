@@ -10,13 +10,10 @@ use Telnyx\DefaultPaginationForQueues;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Queues\QueueCreateParams;
 use Telnyx\Texml\Accounts\Queues\QueueDeleteParams;
-use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
 use Telnyx\Texml\Accounts\Queues\QueueListParams;
-use Telnyx\Texml\Accounts\Queues\QueueListResponse;
-use Telnyx\Texml\Accounts\Queues\QueueNewResponse;
+use Telnyx\Texml\Accounts\Queues\QueueResource;
 use Telnyx\Texml\Accounts\Queues\QueueRetrieveParams;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateParams;
-use Telnyx\Texml\Accounts\Queues\QueueUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -30,7 +27,7 @@ interface QueuesRawContract
      * @param array<string,mixed>|QueueCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<QueueNewResponse>
+     * @return BaseResponse<QueueResource>
      *
      * @throws APIException
      */
@@ -47,7 +44,7 @@ interface QueuesRawContract
      * @param array<string,mixed>|QueueRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<QueueGetResponse>
+     * @return BaseResponse<QueueResource>
      *
      * @throws APIException
      */
@@ -64,7 +61,7 @@ interface QueuesRawContract
      * @param array<string,mixed>|QueueUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<QueueUpdateResponse>
+     * @return BaseResponse<QueueResource>
      *
      * @throws APIException
      */
@@ -81,7 +78,7 @@ interface QueuesRawContract
      * @param array<string,mixed>|QueueListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPaginationForQueues<QueueListResponse>>
+     * @return BaseResponse<DefaultPaginationForQueues<QueueResource>>
      *
      * @throws APIException
      */

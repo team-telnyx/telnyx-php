@@ -9,10 +9,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\ExternalConnections\Releases\Release;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
-use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\ReleasesRawContract;
@@ -76,7 +76,7 @@ final class ReleasesRawService implements ReleasesRawContract
      * }|ReleaseListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ReleaseListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<Release>>
      *
      * @throws APIException
      */
@@ -99,7 +99,7 @@ final class ReleasesRawService implements ReleasesRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: ReleaseListResponse::class,
+            convert: Release::class,
             page: DefaultFlatPagination::class,
         );
     }

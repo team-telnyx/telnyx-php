@@ -6,10 +6,10 @@ namespace Telnyx\ServiceContracts\Enterprises\Reputation;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
-use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberList;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
 use Telnyx\RequestOptions;
 
 /**
@@ -32,7 +32,7 @@ interface NumbersContract
         string $enterpriseID,
         bool $fresh = false,
         RequestOptions|array|null $requestOptions = null,
-    ): NumberGetResponse;
+    ): ReputationPhoneNumberWithReputation;
 
     /**
      * @api
@@ -44,7 +44,7 @@ interface NumbersContract
      * @param int $pageSize Items per page. Default 10. Maximum 250; values above are clamped to 250.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<NumberListResponse>
+     * @return DefaultFlatPagination<ReputationPhoneNumber>
      *
      * @throws APIException
      */
@@ -70,7 +70,7 @@ interface NumbersContract
         string $enterpriseID,
         array $phoneNumbers,
         RequestOptions|array|null $requestOptions = null,
-    ): NumberAssociateResponse;
+    ): ReputationPhoneNumberList;
 
     /**
      * @api

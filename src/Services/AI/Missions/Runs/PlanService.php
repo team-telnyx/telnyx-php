@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Missions\Runs;
 
-use Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanResponse;
-use Telnyx\AI\Missions\Runs\Plan\PlanCreateParams\Step;
+use Telnyx\AI\Missions\Runs\Plan\CreatePlanStepRequest;
 use Telnyx\AI\Missions\Runs\Plan\PlanGetResponse;
-use Telnyx\AI\Missions\Runs\Plan\PlanGetStepDetailsResponse;
-use Telnyx\AI\Missions\Runs\Plan\PlanNewResponse;
-use Telnyx\AI\Missions\Runs\Plan\PlanUpdateStepParams\Status;
-use Telnyx\AI\Missions\Runs\Plan\PlanUpdateStepResponse;
+use Telnyx\AI\Missions\Runs\Plan\PlanStepResponse;
+use Telnyx\AI\Missions\Runs\Plan\PlanStepsCreatedResponse;
+use Telnyx\AI\Missions\Runs\Plan\StepStatus;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -18,8 +16,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Missions\Runs\PlanContract;
 
 /**
- * @phpstan-import-type StepShape from \Telnyx\AI\Missions\Runs\Plan\PlanCreateParams\Step
- * @phpstan-import-type StepShape from \Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanParams\Step as StepShape1
+ * @phpstan-import-type CreatePlanStepRequestShape from \Telnyx\AI\Missions\Runs\Plan\CreatePlanStepRequest
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PlanService implements PlanContract
@@ -44,7 +41,7 @@ final class PlanService implements PlanContract
      *
      * @param string $runID path param: Unique identifier of the run
      * @param string $missionID path param: Unique identifier of the mission
-     * @param list<Step|StepShape> $steps Body param
+     * @param list<CreatePlanStepRequest|CreatePlanStepRequestShape> $steps Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -54,7 +51,7 @@ final class PlanService implements PlanContract
         string $missionID,
         array $steps,
         RequestOptions|array|null $requestOptions = null,
-    ): PlanNewResponse {
+    ): PlanStepsCreatedResponse {
         $params = Util::removeNulls(['missionID' => $missionID, 'steps' => $steps]);
 
         // @phpstan-ignore-next-line argument.type
@@ -94,7 +91,7 @@ final class PlanService implements PlanContract
      *
      * @param string $runID path param: Unique identifier of the run
      * @param string $missionID path param: Unique identifier of the mission
-     * @param list<\Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanParams\Step|StepShape1> $steps Body param
+     * @param list<CreatePlanStepRequest|CreatePlanStepRequestShape> $steps Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -104,7 +101,7 @@ final class PlanService implements PlanContract
         string $missionID,
         array $steps,
         RequestOptions|array|null $requestOptions = null,
-    ): PlanAddStepsToPlanResponse {
+    ): PlanStepsCreatedResponse {
         $params = Util::removeNulls(['missionID' => $missionID, 'steps' => $steps]);
 
         // @phpstan-ignore-next-line argument.type
@@ -130,7 +127,7 @@ final class PlanService implements PlanContract
         string $missionID,
         string $runID,
         RequestOptions|array|null $requestOptions = null,
-    ): PlanGetStepDetailsResponse {
+    ): PlanStepResponse {
         $params = Util::removeNulls(['missionID' => $missionID, 'runID' => $runID]);
 
         // @phpstan-ignore-next-line argument.type
@@ -148,7 +145,7 @@ final class PlanService implements PlanContract
      * @param string $missionID path param: Unique identifier of the mission
      * @param string $runID path param: Unique identifier of the run
      * @param array<string,mixed> $metadata Body param
-     * @param Status|value-of<Status> $status Body param
+     * @param StepStatus|value-of<StepStatus> $status Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -158,9 +155,9 @@ final class PlanService implements PlanContract
         string $missionID,
         string $runID,
         ?array $metadata = null,
-        Status|string|null $status = null,
+        StepStatus|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
-    ): PlanUpdateStepResponse {
+    ): PlanStepResponse {
         $params = Util::removeNulls(
             [
                 'missionID' => $missionID,

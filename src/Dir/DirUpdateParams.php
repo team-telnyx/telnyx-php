@@ -8,14 +8,13 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\DirUpdateParams\Document;
 
 /**
  * Edit a DIR. DIRs in `draft`, `rejected`, `unsuccessful`, or `suspended` can be edited freely: PATCH is a pure edit, `status` is never changed, and you re-vet by calling `POST /v2/dir/{dir_id}/submit` explicitly. A `verified` DIR can also be edited in place: a PATCH that changes any value returns the DIR to `draft` and branded delivery stops until you re-submit and the DIR is approved again, while a PATCH that changes nothing (an empty body or values identical to the current ones) leaves the DIR `verified`, so idempotent retries are safe. DIRs in any other status (`submitted`, `in_review`, `expired`, `infringement_claimed`, `permanently_rejected`) cannot be edited.
  *
  * @see Telnyx\Services\DirService::update()
  *
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  *
  * @phpstan-type DirUpdateParamsShape = array{
  *   authorizerEmail?: string|null,

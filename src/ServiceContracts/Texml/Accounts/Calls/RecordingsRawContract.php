@@ -8,7 +8,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams;
-use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -22,7 +22,7 @@ interface RecordingsRawContract
      * @param array<string,mixed>|RecordingRecordingSidJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingRecordingSidJsonResponse>
+     * @return BaseResponse<TexmlCreateCallRecordingResponseBody>
      *
      * @throws APIException
      */

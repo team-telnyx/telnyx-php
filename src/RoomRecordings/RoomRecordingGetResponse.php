@@ -7,12 +7,13 @@ namespace Telnyx\RoomRecordings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\RoomRecordings\RoomRecordingGetResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\RoomRecordings\RoomRecordingGetResponse\Data
+ * @phpstan-import-type RoomRecordingShape from \Telnyx\RoomRecordings\RoomRecording
  *
- * @phpstan-type RoomRecordingGetResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type RoomRecordingGetResponseShape = array{
+ *   data?: null|RoomRecording|RoomRecordingShape
+ * }
  */
 final class RoomRecordingGetResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class RoomRecordingGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?RoomRecording $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class RoomRecordingGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param RoomRecording|RoomRecordingShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(RoomRecording|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class RoomRecordingGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param RoomRecording|RoomRecordingShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(RoomRecording|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

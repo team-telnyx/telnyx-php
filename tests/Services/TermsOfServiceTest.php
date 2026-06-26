@@ -7,8 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\TermsOfService\TermsOfServiceInfoResponse;
-use Telnyx\TermsOfService\TermsOfServiceStatusResponse;
+use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
+use Telnyx\TermsOfService\TermsOfServiceGetStatusResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -30,28 +30,28 @@ final class TermsOfServiceTest extends TestCase
     }
 
     #[Test]
-    public function testInfo(): void
+    public function testRetrieveInfo(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->termsOfService->info();
+        $result = $this->client->termsOfService->retrieveInfo();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TermsOfServiceInfoResponse::class, $result);
+        $this->assertInstanceOf(TermsOfServiceGetInfoResponse::class, $result);
     }
 
     #[Test]
-    public function testStatus(): void
+    public function testRetrieveStatus(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->termsOfService->status();
+        $result = $this->client->termsOfService->retrieveStatus();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TermsOfServiceStatusResponse::class, $result);
+        $this->assertInstanceOf(TermsOfServiceGetStatusResponse::class, $result);
     }
 }

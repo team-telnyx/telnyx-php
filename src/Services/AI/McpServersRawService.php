@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
+use Telnyx\AI\McpServers\McpServer;
 use Telnyx\AI\McpServers\McpServerCreateParams;
-use Telnyx\AI\McpServers\McpServerGetResponse;
 use Telnyx\AI\McpServers\McpServerListParams;
-use Telnyx\AI\McpServers\McpServerListResponse;
-use Telnyx\AI\McpServers\McpServerNewResponse;
 use Telnyx\AI\McpServers\McpServerUpdateParams;
-use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -44,7 +41,7 @@ final class McpServersRawService implements McpServersRawContract
      * }|McpServerCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<McpServerNewResponse>
+     * @return BaseResponse<McpServer>
      *
      * @throws APIException
      */
@@ -63,7 +60,7 @@ final class McpServersRawService implements McpServersRawContract
             path: 'ai/mcp_servers',
             body: (object) $parsed,
             options: $options,
-            convert: McpServerNewResponse::class,
+            convert: McpServer::class,
         );
     }
 
@@ -75,7 +72,7 @@ final class McpServersRawService implements McpServersRawContract
      * @param string $mcpServerID unique identifier of the mcp server
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<McpServerGetResponse>
+     * @return BaseResponse<McpServer>
      *
      * @throws APIException
      */
@@ -88,7 +85,7 @@ final class McpServersRawService implements McpServersRawContract
             method: 'get',
             path: ['ai/mcp_servers/%1$s', $mcpServerID],
             options: $requestOptions,
-            convert: McpServerGetResponse::class,
+            convert: McpServer::class,
         );
     }
 
@@ -109,7 +106,7 @@ final class McpServersRawService implements McpServersRawContract
      * }|McpServerUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<McpServerUpdateResponse>
+     * @return BaseResponse<McpServer>
      *
      * @throws APIException
      */
@@ -129,7 +126,7 @@ final class McpServersRawService implements McpServersRawContract
             path: ['ai/mcp_servers/%1$s', $mcpServerID],
             body: (object) $parsed,
             options: $options,
-            convert: McpServerUpdateResponse::class,
+            convert: McpServer::class,
         );
     }
 
@@ -143,7 +140,7 @@ final class McpServersRawService implements McpServersRawContract
      * }|McpServerListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPaginationTopLevelArray<McpServerListResponse>>
+     * @return BaseResponse<DefaultFlatPaginationTopLevelArray<McpServer>>
      *
      * @throws APIException
      */
@@ -165,7 +162,7 @@ final class McpServersRawService implements McpServersRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: McpServerListResponse::class,
+            convert: McpServer::class,
             page: DefaultFlatPaginationTopLevelArray::class,
         );
     }

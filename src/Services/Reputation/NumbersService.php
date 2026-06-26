@@ -8,8 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Reputation\Numbers\NumberListResponse;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reputation\NumbersContract;
 
@@ -48,7 +48,7 @@ final class NumbersService implements NumbersContract
         string $phoneNumber,
         bool $fresh = false,
         RequestOptions|array|null $requestOptions = null,
-    ): NumberGetResponse {
+    ): ReputationPhoneNumberWithReputation {
         $params = Util::removeNulls(['fresh' => $fresh]);
 
         // @phpstan-ignore-next-line argument.type
@@ -69,7 +69,7 @@ final class NumbersService implements NumbersContract
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<NumberListResponse>
+     * @return DefaultFlatPagination<ReputationPhoneNumber>
      *
      * @throws APIException
      */

@@ -7,12 +7,11 @@ namespace Telnyx\ExternalConnections\Releases;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\ExternalConnections\Releases\ReleaseGetResponse\Data
+ * @phpstan-import-type ReleaseShape from \Telnyx\ExternalConnections\Releases\Release
  *
- * @phpstan-type ReleaseGetResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type ReleaseGetResponseShape = array{data?: null|Release|ReleaseShape}
  */
 final class ReleaseGetResponse implements BaseModel
 {
@@ -20,7 +19,7 @@ final class ReleaseGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?Release $data;
 
     public function __construct()
     {
@@ -32,9 +31,9 @@ final class ReleaseGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param Release|ReleaseShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(Release|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +43,9 @@ final class ReleaseGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param Release|ReleaseShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(Release|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

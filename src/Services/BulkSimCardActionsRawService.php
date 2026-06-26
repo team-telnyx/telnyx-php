@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
+use Telnyx\BulkSimCardActions\BulkSimCardActionDetailed;
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
-use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -66,7 +66,7 @@ final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContrac
      * }|BulkSimCardActionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<BulkSimCardActionListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<BulkSimCardActionDetailed>>
      *
      * @throws APIException
      */
@@ -92,7 +92,7 @@ final class BulkSimCardActionsRawService implements BulkSimCardActionsRawContrac
                 ],
             ),
             options: $options,
-            convert: BulkSimCardActionListResponse::class,
+            convert: BulkSimCardActionDetailed::class,
             page: DefaultFlatPagination::class,
         );
     }

@@ -7,13 +7,15 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams\Body;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceRead;
 
 /**
+ * @phpstan-import-type BodyShape from \Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams\Body
  * @phpstan-import-type FilterShape from \Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -22,20 +24,14 @@ interface WireguardInterfacesContract
     /**
      * @api
      *
-     * @param string $regionCode the region the interface should be deployed to
-     * @param bool $enableSipTrunking enable SIP traffic forwarding over VPN interface
-     * @param string $name a user specified name for the interface
-     * @param string $networkID the id of the network associated with the interface
+     * @param Body|BodyShape $body
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string $regionCode,
-        ?bool $enableSipTrunking = null,
-        ?string $name = null,
-        ?string $networkID = null,
-        RequestOptions|array|null $requestOptions = null,
+        Body|array $body,
+        RequestOptions|array|null $requestOptions = null
     ): WireguardInterfaceNewResponse;
 
     /**
@@ -57,7 +53,7 @@ interface WireguardInterfacesContract
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<WireguardInterfaceListResponse>
+     * @return DefaultFlatPagination<WireguardInterfaceRead>
      *
      * @throws APIException
      */

@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Missions\Runs;
 
 use Telnyx\AI\Missions\Runs\Events\EventData;
-use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsResponse;
-use Telnyx\AI\Missions\Runs\Events\EventLogParams\Type;
-use Telnyx\AI\Missions\Runs\Events\EventLogResponse;
+use Telnyx\AI\Missions\Runs\Events\EventResponse;
+use Telnyx\AI\Missions\Runs\Events\EventType;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
@@ -59,7 +58,7 @@ interface EventsContract
         string $missionID,
         string $runID,
         RequestOptions|array|null $requestOptions = null,
-    ): EventGetEventDetailsResponse;
+    ): EventResponse;
 
     /**
      * @api
@@ -67,7 +66,7 @@ interface EventsContract
      * @param string $runID path param: Unique identifier of the run
      * @param string $missionID path param: Unique identifier of the mission
      * @param string $summary Body param
-     * @param Type|value-of<Type> $type Body param
+     * @param EventType|value-of<EventType> $type Body param
      * @param string $agentID Body param
      * @param string $idempotencyKey Body param: Prevents duplicate events on retry
      * @param array<string,mixed> $payload Body param
@@ -80,11 +79,11 @@ interface EventsContract
         string $runID,
         string $missionID,
         string $summary,
-        Type|string $type,
+        EventType|string $type,
         ?string $agentID = null,
         ?string $idempotencyKey = null,
         ?array $payload = null,
         ?string $stepID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): EventLogResponse;
+    ): EventResponse;
 }

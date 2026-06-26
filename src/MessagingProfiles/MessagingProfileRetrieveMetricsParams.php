@@ -8,7 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams\TimeFrame;
+use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
 
 /**
  * Get detailed metrics for a specific messaging profile, broken down by time interval.
@@ -16,7 +16,7 @@ use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams\TimeFrame;
  * @see Telnyx\Services\MessagingProfilesService::retrieveMetrics()
  *
  * @phpstan-type MessagingProfileRetrieveMetricsParamsShape = array{
- *   timeFrame?: null|TimeFrame|value-of<TimeFrame>
+ *   timeFrame?: null|MessagingMetricsTimeFrame|value-of<MessagingMetricsTimeFrame>
  * }
  */
 final class MessagingProfileRetrieveMetricsParams implements BaseModel
@@ -28,9 +28,9 @@ final class MessagingProfileRetrieveMetricsParams implements BaseModel
     /**
      * The time frame for metrics.
      *
-     * @var value-of<TimeFrame>|null $timeFrame
+     * @var value-of<MessagingMetricsTimeFrame>|null $timeFrame
      */
-    #[Optional(enum: TimeFrame::class)]
+    #[Optional(enum: MessagingMetricsTimeFrame::class)]
     public ?string $timeFrame;
 
     public function __construct()
@@ -43,10 +43,11 @@ final class MessagingProfileRetrieveMetricsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param TimeFrame|value-of<TimeFrame>|null $timeFrame
+     * @param MessagingMetricsTimeFrame|value-of<MessagingMetricsTimeFrame>|null $timeFrame
      */
-    public static function with(TimeFrame|string|null $timeFrame = null): self
-    {
+    public static function with(
+        MessagingMetricsTimeFrame|string|null $timeFrame = null
+    ): self {
         $self = new self;
 
         null !== $timeFrame && $self['timeFrame'] = $timeFrame;
@@ -57,10 +58,11 @@ final class MessagingProfileRetrieveMetricsParams implements BaseModel
     /**
      * The time frame for metrics.
      *
-     * @param TimeFrame|value-of<TimeFrame> $timeFrame
+     * @param MessagingMetricsTimeFrame|value-of<MessagingMetricsTimeFrame> $timeFrame
      */
-    public function withTimeFrame(TimeFrame|string $timeFrame): self
-    {
+    public function withTimeFrame(
+        MessagingMetricsTimeFrame|string $timeFrame
+    ): self {
         $self = clone $this;
         $self['timeFrame'] = $timeFrame;
 

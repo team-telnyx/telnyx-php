@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AI\AIGetModelsResponse;
-use Telnyx\AI\AISearchConversationHistoriesParams\Region;
-use Telnyx\AI\AISearchConversationHistoriesResponse;
+use Telnyx\AI\AIGetConversationHistoriesResponse;
+use Telnyx\AI\AIRetrieveConversationHistoriesParams\Region;
 use Telnyx\AI\AISummarizeResponse;
+use Telnyx\AI\ModelsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -123,7 +123,7 @@ final class AIService implements AIContract
      *
      * **Deprecated**: Use `POST /v2/ai/openai/responses` instead. This endpoint is compatible with the [OpenAI Responses API](https://developers.openai.com/api/reference/responses/overview) and may be used with the OpenAI JS or Python SDK. Response id parameter is not supported at the moment. Use the `conversation` parameter with a Telnyx Conversation ID to leverage persistent conversations.
      *
-     * @param array<string,mixed> $body
+     * @param array<string,mixed> $responseRequest
      * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
@@ -131,37 +131,13 @@ final class AIService implements AIContract
      * @throws APIException
      */
     public function createResponseDeprecated(
-        array $body,
+        array $responseRequest,
         RequestOptions|array|null $requestOptions = null
     ): array {
-        $params = Util::removeNulls(['body' => $body]);
+        $params = Util::removeNulls(['responseRequest' => $responseRequest]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->createResponseDeprecated(params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * **Deprecated**: Use `GET /v2/ai/openai/models` instead.
-     *
-     * Returns the same `ModelsResponse` payload as the OpenAI-compatible endpoint — open-source LLMs hosted on Telnyx (e.g. `moonshotai/Kimi-K2.6`, `zai-org/GLM-5.1-FP8`, `MiniMaxAI/MiniMax-M2.7`), embedding models, and fine-tuned models — kept around for backwards compatibility. New integrations should use `/v2/ai/openai/models`.
-     *
-     * Model ids follow the `{organization}/{model_name}` convention from Hugging Face.
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function retrieveModels(
-        RequestOptions|array|null $requestOptions = null
-    ): AIGetModelsResponse {
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveModels(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -221,7 +197,7 @@ final class AIService implements AIContract
      *
      * @throws APIException
      */
-    public function searchConversationHistories(
+    public function retrieveConversationHistories(
         string $q,
         ?\DateTimeInterface $filterIngestedAtGte = null,
         ?\DateTimeInterface $filterIngestedAtLte = null,
@@ -236,7 +212,7 @@ final class AIService implements AIContract
         int $pageSize = 20,
         Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AISearchConversationHistoriesResponse {
+    ): AIGetConversationHistoriesResponse {
         $params = Util::removeNulls(
             [
                 'q' => $q,
@@ -256,7 +232,31 @@ final class AIService implements AIContract
         );
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->searchConversationHistories(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->retrieveConversationHistories(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @deprecated
+     *
+     * @api
+     *
+     * **Deprecated**: Use `GET /v2/ai/openai/models` instead.
+     *
+     * Returns the same `ModelsResponse` payload as the OpenAI-compatible endpoint — open-source LLMs hosted on Telnyx (e.g. `moonshotai/Kimi-K2.6`, `zai-org/GLM-5.1-FP8`, `MiniMaxAI/MiniMax-M2.7`), embedding models, and fine-tuned models — kept around for backwards compatibility. New integrations should use `/v2/ai/openai/models`.
+     *
+     * Model ids follow the `{organization}/{model_name}` convention from Hugging Face.
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveModels(
+        RequestOptions|array|null $requestOptions = null
+    ): ModelsResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieveModels(requestOptions: $requestOptions);
 
         return $response->parse();
     }

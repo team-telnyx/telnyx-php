@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node;
 
 use Telnyx\AI\Assistants\AssistantTool;
-use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\ExternalLlm;
+use Telnyx\AI\Assistants\ExternalLlm;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\InstructionsMode;
-use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\Position;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\ToolsMode;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\Type;
+use Telnyx\AI\Assistants\NodePosition;
 use Telnyx\AI\Assistants\TranscriptionSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Core\Attributes\Optional;
@@ -22,8 +22,8 @@ use Telnyx\Core\Conversion\ListOf;
  * One step in a conversation flow, as returned by the API.
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
- * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\ExternalLlm
- * @phpstan-import-type PositionShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node\FlowNode\Position
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\ExternalLlm
+ * @phpstan-import-type NodePositionShape from \Telnyx\AI\Assistants\NodePosition
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
@@ -36,7 +36,7 @@ use Telnyx\Core\Conversion\ListOf;
  *   llmAPIKeyRef?: string|null,
  *   model?: string|null,
  *   name?: string|null,
- *   position?: null|Position|PositionShape,
+ *   position?: null|NodePosition|NodePositionShape,
  *   sharedToolIDs?: list<string>|null,
  *   tools?: list<list<AssistantToolShape>>|null,
  *   toolsMode?: null|ToolsMode|value-of<ToolsMode>,
@@ -98,7 +98,7 @@ final class FlowNode implements BaseModel
      * Optional canvas coordinates used by authoring UIs to lay out the graph. Ignored by the runtime; round-trips so frontends can persist graph layout across reloads.
      */
     #[Optional]
-    public ?Position $position;
+    public ?NodePosition $position;
 
     /**
      * IDs of shared (org-level) tools available at this node. Knowledge bases are attached the same way — via a shared retrieval tool. Tools not listed here are not callable while this node is active.
@@ -170,7 +170,7 @@ final class FlowNode implements BaseModel
      *
      * @param ExternalLlm|ExternalLlmShape|null $externalLlm
      * @param InstructionsMode|value-of<InstructionsMode>|null $instructionsMode
-     * @param Position|PositionShape|null $position
+     * @param NodePosition|NodePositionShape|null $position
      * @param list<string>|null $sharedToolIDs
      * @param list<list<AssistantToolShape>>|null $tools
      * @param ToolsMode|value-of<ToolsMode>|null $toolsMode
@@ -186,7 +186,7 @@ final class FlowNode implements BaseModel
         ?string $llmAPIKeyRef = null,
         ?string $model = null,
         ?string $name = null,
-        Position|array|null $position = null,
+        NodePosition|array|null $position = null,
         ?array $sharedToolIDs = null,
         ?array $tools = null,
         ToolsMode|string|null $toolsMode = null,
@@ -300,9 +300,9 @@ final class FlowNode implements BaseModel
     /**
      * Optional canvas coordinates used by authoring UIs to lay out the graph. Ignored by the runtime; round-trips so frontends can persist graph layout across reloads.
      *
-     * @param Position|PositionShape $position
+     * @param NodePosition|NodePositionShape $position
      */
-    public function withPosition(Position|array $position): self
+    public function withPosition(NodePosition|array $position): self
     {
         $self = clone $this;
         $self['position'] = $position;

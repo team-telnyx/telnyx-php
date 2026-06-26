@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\PhoneNumbers\DirPhoneNumber;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberAddResponse;
-use Telnyx\Dir\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Dir\PhoneNumbers\PhoneNumberRemoveResponse;
 use Tests\UnsupportedMockTests;
 
@@ -47,7 +47,7 @@ final class PhoneNumbersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PhoneNumberListResponse::class, $item);
+            $this->assertInstanceOf(DirPhoneNumber::class, $item);
         }
     }
 

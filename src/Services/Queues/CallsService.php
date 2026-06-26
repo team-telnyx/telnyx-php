@@ -9,7 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
-use Telnyx\Queues\Calls\CallListResponse;
+use Telnyx\Queues\Calls\QueueCall;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Queues\CallsContract;
 
@@ -93,7 +93,7 @@ final class CallsService implements CallsContract
      * @param string $queueName Uniquely identifies the queue by name
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<CallListResponse>
+     * @return DefaultFlatPagination<QueueCall>
      *
      * @throws APIException
      */

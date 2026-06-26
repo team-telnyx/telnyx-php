@@ -12,16 +12,18 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WireguardInterfacesRawContract;
 use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams;
+use Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams\Body;
 use Telnyx\WireguardInterfaces\WireguardInterfaceDeleteResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceGetResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams;
 use Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter;
-use Telnyx\WireguardInterfaces\WireguardInterfaceListResponse;
 use Telnyx\WireguardInterfaces\WireguardInterfaceNewResponse;
+use Telnyx\WireguardInterfaces\WireguardInterfaceRead;
 
 /**
  * WireGuard Interface operations.
  *
+ * @phpstan-import-type BodyShape from \Telnyx\WireguardInterfaces\WireguardInterfaceCreateParams\Body
  * @phpstan-import-type FilterShape from \Telnyx\WireguardInterfaces\WireguardInterfaceListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -38,12 +40,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      *
      * Create a new WireGuard Interface. Current limitation of 10 interfaces per user can be created.
      *
-     * @param array{
-     *   regionCode: string,
-     *   enableSipTrunking?: bool,
-     *   name?: string,
-     *   networkID?: string,
-     * }|WireguardInterfaceCreateParams $params
+     * @param array{body: Body|BodyShape}|WireguardInterfaceCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WireguardInterfaceNewResponse>
@@ -63,7 +60,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
         return $this->client->request(
             method: 'post',
             path: 'wireguard_interfaces',
-            body: (object) $parsed,
+            body: (object) $parsed['body'],
             options: $options,
             convert: WireguardInterfaceNewResponse::class,
         );
@@ -104,7 +101,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
      * }|WireguardInterfaceListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WireguardInterfaceListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<WireguardInterfaceRead>>
      *
      * @throws APIException
      */
@@ -126,7 +123,7 @@ final class WireguardInterfacesRawService implements WireguardInterfacesRawContr
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: WireguardInterfaceListResponse::class,
+            convert: WireguardInterfaceRead::class,
             page: DefaultFlatPagination::class,
         );
     }

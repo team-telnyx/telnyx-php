@@ -5,7 +5,7 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\OpenAI\OpenAIListModelsResponse;
+use Telnyx\AI\ModelsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -51,6 +51,6 @@ final class OpenAITest extends TestCase
         $result = $this->client->ai->openai->listModels();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(OpenAIListModelsResponse::class, $result);
+        $this->assertInstanceOf(ModelsResponse::class, $result);
     }
 }

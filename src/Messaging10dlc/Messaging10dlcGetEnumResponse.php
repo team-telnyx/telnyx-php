@@ -14,7 +14,7 @@ use Telnyx\Messaging10dlc\Messaging10dlcGetEnumResponse\EnumPaginatedResponse;
 /**
  * @phpstan-import-type EnumPaginatedResponseShape from \Telnyx\Messaging10dlc\Messaging10dlcGetEnumResponse\EnumPaginatedResponse
  *
- * @phpstan-type Messaging10dlcGetEnumResponseVariants = list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,mixed>|array<string,mixed>
+ * @phpstan-type Messaging10dlcGetEnumResponseVariants = list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,string>|array<string,mixed>
  * @phpstan-type Messaging10dlcGetEnumResponseShape = Messaging10dlcGetEnumResponseVariants|EnumPaginatedResponseShape
  */
 final class Messaging10dlcGetEnumResponse implements ConverterSource
@@ -29,7 +29,7 @@ final class Messaging10dlcGetEnumResponse implements ConverterSource
         return [
             new ListOf('string'),
             new ListOf(new MapOf('mixed')),
-            new MapOf('mixed'),
+            new MapOf('string'),
             new MapOf('mixed'),
             EnumPaginatedResponse::class,
         ];

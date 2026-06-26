@@ -11,9 +11,24 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\CallsRawContract;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\AsyncAmdStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\DeepfakeDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\DeepfakeDetectionCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\DetectionMode;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\MachineDetection;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\MediaEncryption;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\SupervisingRole;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse;
-use Telnyx\Texml\Accounts\Calls\CallGetResponse;
+use Telnyx\Texml\Accounts\Calls\CallResource;
 use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams;
 use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams\Status;
 use Telnyx\Texml\Accounts\Calls\CallRetrieveParams;
@@ -29,12 +44,11 @@ use Telnyx\Texml\Accounts\Calls\CallUpdateParams;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams\FallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams\Method;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams\StatusCallbackMethod;
-use Telnyx\Texml\Accounts\Calls\CallUpdateResponse;
 
 /**
  * TeXML REST Commands.
  *
- * @phpstan-import-type ParamsShape from \Telnyx\Texml\Accounts\Calls\CallCallsParams\Params
+ * @phpstan-import-type CustomHeaderShape from \Telnyx\Texml\Accounts\Calls\CallCallsParams\CustomHeader
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class CallsRawService implements CallsRawContract
@@ -54,7 +68,7 @@ final class CallsRawService implements CallsRawContract
      * @param array{accountSid: string}|CallRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CallGetResponse>
+     * @return BaseResponse<CallResource>
      *
      * @throws APIException
      */
@@ -75,7 +89,7 @@ final class CallsRawService implements CallsRawContract
             method: 'get',
             path: ['texml/Accounts/%1$s/Calls/%2$s', $accountSid, $callSid],
             options: $options,
-            convert: CallGetResponse::class,
+            convert: CallResource::class,
         );
     }
 
@@ -98,7 +112,7 @@ final class CallsRawService implements CallsRawContract
      * }|CallUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CallUpdateResponse>
+     * @return BaseResponse<CallResource>
      *
      * @throws APIException
      */
@@ -121,7 +135,7 @@ final class CallsRawService implements CallsRawContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
-            convert: CallUpdateResponse::class,
+            convert: CallResource::class,
         );
     }
 
@@ -131,7 +145,53 @@ final class CallsRawService implements CallsRawContract
      * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
      *
      * @param string $accountSid the id of the account the resource belongs to
-     * @param array{params: ParamsShape}|CallCallsParams $params
+     * @param array{
+     *   url?: string|null,
+     *   applicationSid?: string,
+     *   asyncAmd?: bool,
+     *   asyncAmdStatusCallback?: string,
+     *   asyncAmdStatusCallbackMethod?: AsyncAmdStatusCallbackMethod|value-of<AsyncAmdStatusCallbackMethod>,
+     *   callerID?: string,
+     *   cancelPlaybackOnDetectMessageEnd?: bool,
+     *   cancelPlaybackOnMachineDetection?: bool,
+     *   customHeaders?: list<CustomHeader|CustomHeaderShape>,
+     *   deepfakeDetection?: DeepfakeDetection|value-of<DeepfakeDetection>,
+     *   deepfakeDetectionCallbackMethod?: DeepfakeDetectionCallbackMethod|value-of<DeepfakeDetectionCallbackMethod>,
+     *   deepfakeDetectionCallbackURL?: string,
+     *   detectionMode?: DetectionMode|value-of<DetectionMode>,
+     *   fallbackURL?: string,
+     *   from?: string,
+     *   machineDetection?: MachineDetection|value-of<MachineDetection>,
+     *   machineDetectionPromptEndTimeout?: int,
+     *   machineDetectionSilenceTimeout?: int,
+     *   machineDetectionSpeechEndThreshold?: int,
+     *   machineDetectionSpeechThreshold?: int,
+     *   machineDetectionTimeout?: int,
+     *   mediaEncryption?: MediaEncryption|value-of<MediaEncryption>,
+     *   preferredCodecs?: string,
+     *   record?: bool,
+     *   recordingChannels?: RecordingChannels|value-of<RecordingChannels>,
+     *   recordingStatusCallback?: string,
+     *   recordingStatusCallbackEvent?: string,
+     *   recordingStatusCallbackMethod?: RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>,
+     *   recordingTimeout?: int,
+     *   recordingTrack?: RecordingTrack|value-of<RecordingTrack>,
+     *   sendRecordingURL?: bool,
+     *   sipAuthPassword?: string,
+     *   sipAuthUsername?: string,
+     *   sipRegion?: SipRegion|value-of<SipRegion>,
+     *   statusCallback?: string,
+     *   statusCallbackEvent?: StatusCallbackEvent|value-of<StatusCallbackEvent>,
+     *   statusCallbackMethod?: CallCallsParams\StatusCallbackMethod|value-of<CallCallsParams\StatusCallbackMethod>,
+     *   superviseCallSid?: string,
+     *   supervisingRole?: SupervisingRole|value-of<SupervisingRole>,
+     *   texml?: string|null,
+     *   timeLimit?: int,
+     *   timeoutSeconds?: int,
+     *   to?: string,
+     *   trim?: Trim|value-of<Trim>,
+     *   urlMethod?: URLMethod|value-of<URLMethod>,
+     * }|CallCallsParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<CallCallsResponse>
@@ -152,7 +212,7 @@ final class CallsRawService implements CallsRawContract
         return $this->client->request(
             method: 'post',
             path: ['texml/Accounts/%1$s/Calls', $accountSid],
-            body: (object) $parsed['params'],
+            body: (object) $parsed,
             options: $options,
             convert: CallCallsResponse::class,
         );

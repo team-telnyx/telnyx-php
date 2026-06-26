@@ -7,19 +7,18 @@ namespace Telnyx\PronunciationDicts;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PronunciationDicts\PronunciationDictData\Item;
 use Telnyx\PronunciationDicts\PronunciationDictData\RecordType;
 
 /**
  * A pronunciation dictionary record.
  *
- * @phpstan-import-type ItemVariants from \Telnyx\PronunciationDicts\PronunciationDictData\Item
- * @phpstan-import-type ItemShape from \Telnyx\PronunciationDicts\PronunciationDictData\Item
+ * @phpstan-import-type PronunciationDictItemVariants from \Telnyx\PronunciationDicts\PronunciationDictItem
+ * @phpstan-import-type PronunciationDictItemShape from \Telnyx\PronunciationDicts\PronunciationDictItem
  *
  * @phpstan-type PronunciationDictDataShape = array{
  *   id?: string|null,
  *   createdAt?: \DateTimeInterface|null,
- *   items?: list<ItemShape>|null,
+ *   items?: list<PronunciationDictItemShape>|null,
  *   name?: string|null,
  *   recordType?: null|RecordType|value-of<RecordType>,
  *   updatedAt?: \DateTimeInterface|null,
@@ -46,9 +45,9 @@ final class PronunciationDictData implements BaseModel
     /**
      * List of pronunciation items (alias or phoneme type).
      *
-     * @var list<ItemVariants>|null $items
+     * @var list<PronunciationDictItemVariants>|null $items
      */
-    #[Optional(list: Item::class)]
+    #[Optional(list: PronunciationDictItem::class)]
     public ?array $items;
 
     /**
@@ -87,7 +86,7 @@ final class PronunciationDictData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ItemShape>|null $items
+     * @param list<PronunciationDictItemShape>|null $items
      * @param RecordType|value-of<RecordType>|null $recordType
      */
     public static function with(
@@ -137,7 +136,7 @@ final class PronunciationDictData implements BaseModel
     /**
      * List of pronunciation items (alias or phoneme type).
      *
-     * @param list<ItemShape> $items
+     * @param list<PronunciationDictItemShape> $items
      */
     public function withItems(array $items): self
     {

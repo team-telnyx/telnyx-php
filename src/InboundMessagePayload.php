@@ -16,13 +16,12 @@ use Telnyx\InboundMessagePayload\Media;
 use Telnyx\InboundMessagePayload\RecordType;
 use Telnyx\InboundMessagePayload\To;
 use Telnyx\InboundMessagePayload\Type;
-use Telnyx\Messages\MessagingError;
 
 /**
  * @phpstan-import-type CcShape from \Telnyx\InboundMessagePayload\Cc
  * @phpstan-import-type CostShape from \Telnyx\InboundMessagePayload\Cost
  * @phpstan-import-type CostBreakdownShape from \Telnyx\InboundMessagePayload\CostBreakdown
- * @phpstan-import-type MessagingErrorShape from \Telnyx\Messages\MessagingError
+ * @phpstan-import-type MessagingErrorShape from \Telnyx\MessagingError
  * @phpstan-import-type FromShape from \Telnyx\InboundMessagePayload\From
  * @phpstan-import-type MediaShape from \Telnyx\InboundMessagePayload\Media
  * @phpstan-import-type ToShape from \Telnyx\InboundMessagePayload\To
