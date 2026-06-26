@@ -5,16 +5,21 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Missions;
 
 use Telnyx\AI\Missions\Runs\MissionRunData;
-use Telnyx\AI\Missions\Runs\MissionRunResponse;
 use Telnyx\AI\Missions\Runs\RunCancelRunParams;
+use Telnyx\AI\Missions\Runs\RunCancelRunResponse;
 use Telnyx\AI\Missions\Runs\RunCreateParams;
+use Telnyx\AI\Missions\Runs\RunGetResponse;
 use Telnyx\AI\Missions\Runs\RunListParams;
 use Telnyx\AI\Missions\Runs\RunListRunsParams;
+use Telnyx\AI\Missions\Runs\RunNewResponse;
 use Telnyx\AI\Missions\Runs\RunPauseRunParams;
+use Telnyx\AI\Missions\Runs\RunPauseRunResponse;
 use Telnyx\AI\Missions\Runs\RunResumeRunParams;
+use Telnyx\AI\Missions\Runs\RunResumeRunResponse;
 use Telnyx\AI\Missions\Runs\RunRetrieveParams;
-use Telnyx\AI\Missions\Runs\RunStatus;
 use Telnyx\AI\Missions\Runs\RunUpdateParams;
+use Telnyx\AI\Missions\Runs\RunUpdateParams\Status;
+use Telnyx\AI\Missions\Runs\RunUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -45,7 +50,7 @@ final class RunsRawService implements RunsRawContract
      * }|RunCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunNewResponse>
      *
      * @throws APIException
      */
@@ -65,7 +70,7 @@ final class RunsRawService implements RunsRawContract
             path: ['ai/missions/%1$s/runs', $missionID],
             body: (object) $parsed,
             options: $options,
-            convert: MissionRunResponse::class,
+            convert: RunNewResponse::class,
         );
     }
 
@@ -78,7 +83,7 @@ final class RunsRawService implements RunsRawContract
      * @param array{missionID: string}|RunRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunGetResponse>
      *
      * @throws APIException
      */
@@ -99,7 +104,7 @@ final class RunsRawService implements RunsRawContract
             method: 'get',
             path: ['ai/missions/%1$s/runs/%2$s', $missionID, $runID],
             options: $options,
-            convert: MissionRunResponse::class,
+            convert: RunGetResponse::class,
         );
     }
 
@@ -115,11 +120,11 @@ final class RunsRawService implements RunsRawContract
      *   metadata?: array<string,mixed>,
      *   resultPayload?: array<string,mixed>,
      *   resultSummary?: string,
-     *   status?: RunStatus|value-of<RunStatus>,
+     *   status?: Status|value-of<Status>,
      * }|RunUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunUpdateResponse>
      *
      * @throws APIException
      */
@@ -141,7 +146,7 @@ final class RunsRawService implements RunsRawContract
             path: ['ai/missions/%1$s/runs/%2$s', $missionID, $runID],
             body: (object) array_diff_key($parsed, array_flip(['missionID'])),
             options: $options,
-            convert: MissionRunResponse::class,
+            convert: RunUpdateResponse::class,
         );
     }
 
@@ -193,7 +198,7 @@ final class RunsRawService implements RunsRawContract
      * @param array{missionID: string}|RunCancelRunParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunCancelRunResponse>
      *
      * @throws APIException
      */
@@ -214,7 +219,7 @@ final class RunsRawService implements RunsRawContract
             method: 'post',
             path: ['ai/missions/%1$s/runs/%2$s/cancel', $missionID, $runID],
             options: $options,
-            convert: MissionRunResponse::class,
+            convert: RunCancelRunResponse::class,
         );
     }
 
@@ -264,7 +269,7 @@ final class RunsRawService implements RunsRawContract
      * @param array{missionID: string}|RunPauseRunParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunPauseRunResponse>
      *
      * @throws APIException
      */
@@ -285,7 +290,7 @@ final class RunsRawService implements RunsRawContract
             method: 'post',
             path: ['ai/missions/%1$s/runs/%2$s/pause', $missionID, $runID],
             options: $options,
-            convert: MissionRunResponse::class,
+            convert: RunPauseRunResponse::class,
         );
     }
 
@@ -298,7 +303,7 @@ final class RunsRawService implements RunsRawContract
      * @param array{missionID: string}|RunResumeRunParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunResumeRunResponse>
      *
      * @throws APIException
      */
@@ -319,7 +324,7 @@ final class RunsRawService implements RunsRawContract
             method: 'post',
             path: ['ai/missions/%1$s/runs/%2$s/resume', $missionID, $runID],
             options: $options,
-            convert: MissionRunResponse::class,
+            convert: RunResumeRunResponse::class,
         );
     }
 }

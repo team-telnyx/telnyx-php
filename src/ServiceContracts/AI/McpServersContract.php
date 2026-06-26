@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI;
 
-use Telnyx\AI\McpServers\McpServer;
+use Telnyx\AI\McpServers\McpServerGetResponse;
+use Telnyx\AI\McpServers\McpServerListResponse;
+use Telnyx\AI\McpServers\McpServerNewResponse;
+use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPaginationTopLevelArray;
 use Telnyx\RequestOptions;
@@ -29,7 +32,7 @@ interface McpServersContract
         ?array $allowedTools = null,
         ?string $apiKeyRef = null,
         RequestOptions|array|null $requestOptions = null,
-    ): McpServer;
+    ): McpServerNewResponse;
 
     /**
      * @api
@@ -42,7 +45,7 @@ interface McpServersContract
     public function retrieve(
         string $mcpServerID,
         RequestOptions|array|null $requestOptions = null
-    ): McpServer;
+    ): McpServerGetResponse;
 
     /**
      * @api
@@ -63,7 +66,7 @@ interface McpServersContract
         ?string $type = null,
         ?string $url = null,
         RequestOptions|array|null $requestOptions = null,
-    ): McpServer;
+    ): McpServerUpdateResponse;
 
     /**
      * @api
@@ -74,7 +77,7 @@ interface McpServersContract
      * @param string $url filter results by url
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPaginationTopLevelArray<McpServer>
+     * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
      *
      * @throws APIException
      */

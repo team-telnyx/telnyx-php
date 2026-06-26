@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Versions;
 
-use Telnyx\AI\Assistants\AssistantIntegration;
-use Telnyx\AI\Assistants\AssistantMcpServer;
 use Telnyx\AI\Assistants\AssistantTool;
-use Telnyx\AI\Assistants\ConversationFlowReq;
 use Telnyx\AI\Assistants\EnabledFeatures;
-use Telnyx\AI\Assistants\ExternalLlmReq;
-use Telnyx\AI\Assistants\FallbackConfigReq;
-use Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings;
 use Telnyx\AI\Assistants\InsightSettings;
 use Telnyx\AI\Assistants\MessagingSettings;
 use Telnyx\AI\Assistants\ObservabilityReq;
-use Telnyx\AI\Assistants\PostConversationSettingsReq;
 use Telnyx\AI\Assistants\PrivacySettings;
 use Telnyx\AI\Assistants\TelephonySettings;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings;
 use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\AI\Assistants\WidgetSettings;
 use Telnyx\Core\Attributes\Optional;
@@ -33,16 +33,16 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\Assistants\VersionsService::update()
  *
  * @phpstan-import-type AssistantToolVariants from \Telnyx\AI\Assistants\AssistantTool
- * @phpstan-import-type ConversationFlowReqShape from \Telnyx\AI\Assistants\ConversationFlowReq
- * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
- * @phpstan-import-type FallbackConfigReqShape from \Telnyx\AI\Assistants\FallbackConfigReq
+ * @phpstan-import-type ConversationFlowShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ExternalLlm
+ * @phpstan-import-type FallbackConfigShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\FallbackConfig
  * @phpstan-import-type InsightSettingsShape from \Telnyx\AI\Assistants\InsightSettings
- * @phpstan-import-type AssistantIntegrationShape from \Telnyx\AI\Assistants\AssistantIntegration
- * @phpstan-import-type InferenceEmbeddingInterruptionSettingsShape from \Telnyx\AI\Assistants\InferenceEmbeddingInterruptionSettings
- * @phpstan-import-type AssistantMcpServerShape from \Telnyx\AI\Assistants\AssistantMcpServer
+ * @phpstan-import-type IntegrationShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\Integration
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\InterruptionSettings
+ * @phpstan-import-type McpServerShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\McpServer
  * @phpstan-import-type MessagingSettingsShape from \Telnyx\AI\Assistants\MessagingSettings
  * @phpstan-import-type ObservabilityReqShape from \Telnyx\AI\Assistants\ObservabilityReq
- * @phpstan-import-type PostConversationSettingsReqShape from \Telnyx\AI\Assistants\PostConversationSettingsReq
+ * @phpstan-import-type PostConversationSettingsShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\PostConversationSettings
  * @phpstan-import-type PrivacySettingsShape from \Telnyx\AI\Assistants\PrivacySettings
  * @phpstan-import-type TelephonySettingsShape from \Telnyx\AI\Assistants\TelephonySettings
  * @phpstan-import-type AssistantToolShape from \Telnyx\AI\Assistants\AssistantTool
@@ -52,26 +52,26 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-type VersionUpdateParamsShape = array{
  *   assistantID: string,
- *   conversationFlow?: null|ConversationFlowReq|ConversationFlowReqShape,
+ *   conversationFlow?: null|ConversationFlow|ConversationFlowShape,
  *   description?: string|null,
  *   dynamicVariables?: array<string,mixed>|null,
  *   dynamicVariablesWebhookTimeoutMs?: int|null,
  *   dynamicVariablesWebhookURL?: string|null,
  *   enabledFeatures?: list<EnabledFeatures|value-of<EnabledFeatures>>|null,
- *   externalLlm?: null|ExternalLlmReq|ExternalLlmReqShape,
- *   fallbackConfig?: null|FallbackConfigReq|FallbackConfigReqShape,
+ *   externalLlm?: null|ExternalLlm|ExternalLlmShape,
+ *   fallbackConfig?: null|FallbackConfig|FallbackConfigShape,
  *   greeting?: string|null,
  *   insightSettings?: null|InsightSettings|InsightSettingsShape,
  *   instructions?: string|null,
- *   integrations?: list<AssistantIntegration|AssistantIntegrationShape>|null,
- *   interruptionSettings?: null|InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape,
+ *   integrations?: list<Integration|IntegrationShape>|null,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   llmAPIKeyRef?: string|null,
- *   mcpServers?: list<AssistantMcpServer|AssistantMcpServerShape>|null,
+ *   mcpServers?: list<McpServer|McpServerShape>|null,
  *   messagingSettings?: null|MessagingSettings|MessagingSettingsShape,
  *   model?: string|null,
  *   name?: string|null,
  *   observabilitySettings?: null|ObservabilityReq|ObservabilityReqShape,
- *   postConversationSettings?: null|PostConversationSettingsReq|PostConversationSettingsReqShape,
+ *   postConversationSettings?: null|PostConversationSettings|PostConversationSettingsShape,
  *   privacySettings?: null|PrivacySettings|PrivacySettingsShape,
  *   tags?: list<string>|null,
  *   telephonySettings?: null|TelephonySettings|TelephonySettingsShape,
@@ -100,7 +100,7 @@ final class VersionUpdateParams implements BaseModel
      * node, and that every edge's endpoints reference real nodes.
      */
     #[Optional('conversation_flow')]
-    public ?ConversationFlowReq $conversationFlow;
+    public ?ConversationFlow $conversationFlow;
 
     #[Optional]
     public ?string $description;
@@ -130,10 +130,10 @@ final class VersionUpdateParams implements BaseModel
     public ?array $enabledFeatures;
 
     #[Optional('external_llm')]
-    public ?ExternalLlmReq $externalLlm;
+    public ?ExternalLlm $externalLlm;
 
     #[Optional('fallback_config')]
-    public ?FallbackConfigReq $fallbackConfig;
+    public ?FallbackConfig $fallbackConfig;
 
     /**
      * Text that the assistant will use to start the conversation. This may be templated with [dynamic variables](https://developers.telnyx.com/docs/inference/ai-assistants/dynamic-variables). Use an empty string to have the assistant wait for the user to speak first. Use the special value `<assistant-speaks-first-with-model-generated-message>` to have the assistant generate the greeting based on the system instructions.
@@ -153,16 +153,16 @@ final class VersionUpdateParams implements BaseModel
     /**
      * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
      *
-     * @var list<AssistantIntegration>|null $integrations
+     * @var list<Integration>|null $integrations
      */
-    #[Optional(list: AssistantIntegration::class)]
+    #[Optional(list: Integration::class)]
     public ?array $integrations;
 
     /**
      * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
      */
     #[Optional('interruption_settings')]
-    public ?InferenceEmbeddingInterruptionSettings $interruptionSettings;
+    public ?InterruptionSettings $interruptionSettings;
 
     /**
      * This is only needed when using third-party inference providers selected by `model`. The `identifier` for an integration secret [/v2/integration_secrets](https://developers.telnyx.com/api-reference/integration-secrets/create-a-secret) that refers to your LLM provider's API key. For bring-your-own endpoint authentication, use `external_llm.llm_api_key_ref` instead. Warning: Free plans are unlikely to work with this integration.
@@ -173,9 +173,9 @@ final class VersionUpdateParams implements BaseModel
     /**
      * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
      *
-     * @var list<AssistantMcpServer>|null $mcpServers
+     * @var list<McpServer>|null $mcpServers
      */
-    #[Optional('mcp_servers', list: AssistantMcpServer::class)]
+    #[Optional('mcp_servers', list: McpServer::class)]
     public ?array $mcpServers;
 
     #[Optional('messaging_settings')]
@@ -197,7 +197,7 @@ final class VersionUpdateParams implements BaseModel
      * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
      */
     #[Optional('post_conversation_settings')]
-    public ?PostConversationSettingsReq $postConversationSettings;
+    public ?PostConversationSettings $postConversationSettings;
 
     #[Optional('privacy_settings')]
     public ?PrivacySettings $privacySettings;
@@ -271,18 +271,18 @@ final class VersionUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConversationFlowReq|ConversationFlowReqShape|null $conversationFlow
+     * @param ConversationFlow|ConversationFlowShape|null $conversationFlow
      * @param array<string,mixed>|null $dynamicVariables
      * @param list<EnabledFeatures|value-of<EnabledFeatures>>|null $enabledFeatures
-     * @param ExternalLlmReq|ExternalLlmReqShape|null $externalLlm
-     * @param FallbackConfigReq|FallbackConfigReqShape|null $fallbackConfig
+     * @param ExternalLlm|ExternalLlmShape|null $externalLlm
+     * @param FallbackConfig|FallbackConfigShape|null $fallbackConfig
      * @param InsightSettings|InsightSettingsShape|null $insightSettings
-     * @param list<AssistantIntegration|AssistantIntegrationShape>|null $integrations
-     * @param InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape|null $interruptionSettings
-     * @param list<AssistantMcpServer|AssistantMcpServerShape>|null $mcpServers
+     * @param list<Integration|IntegrationShape>|null $integrations
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param list<McpServer|McpServerShape>|null $mcpServers
      * @param MessagingSettings|MessagingSettingsShape|null $messagingSettings
      * @param ObservabilityReq|ObservabilityReqShape|null $observabilitySettings
-     * @param PostConversationSettingsReq|PostConversationSettingsReqShape|null $postConversationSettings
+     * @param PostConversationSettings|PostConversationSettingsShape|null $postConversationSettings
      * @param PrivacySettings|PrivacySettingsShape|null $privacySettings
      * @param list<string>|null $tags
      * @param TelephonySettings|TelephonySettingsShape|null $telephonySettings
@@ -294,26 +294,26 @@ final class VersionUpdateParams implements BaseModel
      */
     public static function with(
         string $assistantID,
-        ConversationFlowReq|array|null $conversationFlow = null,
+        ConversationFlow|array|null $conversationFlow = null,
         ?string $description = null,
         ?array $dynamicVariables = null,
         ?int $dynamicVariablesWebhookTimeoutMs = null,
         ?string $dynamicVariablesWebhookURL = null,
         ?array $enabledFeatures = null,
-        ExternalLlmReq|array|null $externalLlm = null,
-        FallbackConfigReq|array|null $fallbackConfig = null,
+        ExternalLlm|array|null $externalLlm = null,
+        FallbackConfig|array|null $fallbackConfig = null,
         ?string $greeting = null,
         InsightSettings|array|null $insightSettings = null,
         ?string $instructions = null,
         ?array $integrations = null,
-        InferenceEmbeddingInterruptionSettings|array|null $interruptionSettings = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
         ?string $llmAPIKeyRef = null,
         ?array $mcpServers = null,
         MessagingSettings|array|null $messagingSettings = null,
         ?string $model = null,
         ?string $name = null,
         ObservabilityReq|array|null $observabilitySettings = null,
-        PostConversationSettingsReq|array|null $postConversationSettings = null,
+        PostConversationSettings|array|null $postConversationSettings = null,
         PrivacySettings|array|null $privacySettings = null,
         ?array $tags = null,
         TelephonySettings|array|null $telephonySettings = null,
@@ -376,10 +376,10 @@ final class VersionUpdateParams implements BaseModel
      * enforces unique node/edge IDs, that `start_node_id` references a real
      * node, and that every edge's endpoints reference real nodes.
      *
-     * @param ConversationFlowReq|ConversationFlowReqShape $conversationFlow
+     * @param ConversationFlow|ConversationFlowShape $conversationFlow
      */
     public function withConversationFlow(
-        ConversationFlowReq|array $conversationFlow
+        ConversationFlow|array $conversationFlow
     ): self {
         $self = clone $this;
         $self['conversationFlow'] = $conversationFlow;
@@ -444,9 +444,9 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * @param ExternalLlmReq|ExternalLlmReqShape $externalLlm
+     * @param ExternalLlm|ExternalLlmShape $externalLlm
      */
-    public function withExternalLlm(ExternalLlmReq|array $externalLlm): self
+    public function withExternalLlm(ExternalLlm|array $externalLlm): self
     {
         $self = clone $this;
         $self['externalLlm'] = $externalLlm;
@@ -455,10 +455,10 @@ final class VersionUpdateParams implements BaseModel
     }
 
     /**
-     * @param FallbackConfigReq|FallbackConfigReqShape $fallbackConfig
+     * @param FallbackConfig|FallbackConfigShape $fallbackConfig
      */
     public function withFallbackConfig(
-        FallbackConfigReq|array $fallbackConfig
+        FallbackConfig|array $fallbackConfig
     ): self {
         $self = clone $this;
         $self['fallbackConfig'] = $fallbackConfig;
@@ -503,7 +503,7 @@ final class VersionUpdateParams implements BaseModel
     /**
      * Connected integrations attached to the assistant. The catalog of available integrations is at `/ai/integrations`; the user's connected integrations are at `/ai/integrations/connections`. Each item references a catalog integration by `integration_id`.
      *
-     * @param list<AssistantIntegration|AssistantIntegrationShape> $integrations
+     * @param list<Integration|IntegrationShape> $integrations
      */
     public function withIntegrations(array $integrations): self
     {
@@ -516,10 +516,10 @@ final class VersionUpdateParams implements BaseModel
     /**
      * Settings for interruptions and how the assistant decides the user has finished speaking. These timings are most relevant when using non turn-taking transcription models. For turn-taking models like `deepgram/flux`, end-of-turn behavior is controlled by the transcription end-of-turn settings under `transcription.settings` (`eot_threshold`, `eot_timeout_ms`, `eager_eot_threshold`).
      *
-     * @param InferenceEmbeddingInterruptionSettings|InferenceEmbeddingInterruptionSettingsShape $interruptionSettings
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
-        InferenceEmbeddingInterruptionSettings|array $interruptionSettings
+        InterruptionSettings|array $interruptionSettings
     ): self {
         $self = clone $this;
         $self['interruptionSettings'] = $interruptionSettings;
@@ -541,7 +541,7 @@ final class VersionUpdateParams implements BaseModel
     /**
      * MCP servers attached to the assistant. Create MCP servers with `/ai/mcp_servers`, then reference them by `id` here.
      *
-     * @param list<AssistantMcpServer|AssistantMcpServerShape> $mcpServers
+     * @param list<McpServer|McpServerShape> $mcpServers
      */
     public function withMcpServers(array $mcpServers): self
     {
@@ -597,10 +597,10 @@ final class VersionUpdateParams implements BaseModel
     /**
      * Configuration for post-conversation processing. When enabled, the assistant receives one additional LLM turn after the conversation ends, allowing it to execute tool calls such as logging to a CRM or sending a summary. The assistant can execute multiple parallel or sequential tools during this phase. Telephony-control tools (e.g. hangup, transfer) are unavailable post-conversation. Beta feature.
      *
-     * @param PostConversationSettingsReq|PostConversationSettingsReqShape $postConversationSettings
+     * @param PostConversationSettings|PostConversationSettingsShape $postConversationSettings
      */
     public function withPostConversationSettings(
-        PostConversationSettingsReq|array $postConversationSettings
+        PostConversationSettings|array $postConversationSettings
     ): self {
         $self = clone $this;
         $self['postConversationSettings'] = $postConversationSettings;

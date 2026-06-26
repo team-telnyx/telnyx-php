@@ -8,12 +8,11 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Networks\Network;
-use Telnyx\Networks\NetworkCreate;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesResponse;
 use Telnyx\Networks\NetworkListParams\Filter;
+use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateResponse;
 use Telnyx\RequestOptions;
@@ -25,7 +24,6 @@ use Telnyx\Services\Networks\DefaultGatewayService;
  *
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListInterfacesParams\Filter as FilterShape1
- * @phpstan-import-type NetworkCreateShape from \Telnyx\Networks\NetworkCreate
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NetworksService implements NetworksContract
@@ -54,16 +52,16 @@ final class NetworksService implements NetworksContract
      *
      * Create a new Network.
      *
-     * @param NetworkCreate|NetworkCreateShape $networkCreate
+     * @param string $name a user specified name for the network
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        NetworkCreate|array $networkCreate,
-        RequestOptions|array|null $requestOptions = null,
+        string $name,
+        RequestOptions|array|null $requestOptions = null
     ): NetworkNewResponse {
-        $params = Util::removeNulls(['networkCreate' => $networkCreate]);
+        $params = Util::removeNulls(['name' => $name]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -97,17 +95,17 @@ final class NetworksService implements NetworksContract
      * Update a Network.
      *
      * @param string $networkID identifies the resource
-     * @param NetworkCreate|NetworkCreateShape $networkCreate
+     * @param string $name a user specified name for the network
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function update(
         string $networkID,
-        NetworkCreate|array $networkCreate,
+        string $name,
         RequestOptions|array|null $requestOptions = null,
     ): NetworkUpdateResponse {
-        $params = Util::removeNulls(['networkCreate' => $networkCreate]);
+        $params = Util::removeNulls(['name' => $name]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->update($networkID, params: $params, requestOptions: $requestOptions);
@@ -123,7 +121,7 @@ final class NetworksService implements NetworksContract
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[name]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<Network>
+     * @return DefaultFlatPagination<NetworkListResponse>
      *
      * @throws APIException
      */

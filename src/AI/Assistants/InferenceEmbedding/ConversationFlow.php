@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\InferenceEmbedding;
 
-use Telnyx\AI\Assistants\FlowEdge;
+use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Edge;
 use Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -16,12 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @phpstan-import-type NodeVariants from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node
  * @phpstan-import-type NodeShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Node
- * @phpstan-import-type FlowEdgeShape from \Telnyx\AI\Assistants\FlowEdge
+ * @phpstan-import-type EdgeShape from \Telnyx\AI\Assistants\InferenceEmbedding\ConversationFlow\Edge
  *
  * @phpstan-type ConversationFlowShape = array{
- *   nodes: list<NodeShape>,
- *   startNodeID: string,
- *   edges?: list<FlowEdge|FlowEdgeShape>|null,
+ *   nodes: list<NodeShape>, startNodeID: string, edges?: list<Edge|EdgeShape>|null
  * }
  */
 final class ConversationFlow implements BaseModel
@@ -46,9 +44,9 @@ final class ConversationFlow implements BaseModel
     /**
      * Directed transitions between nodes.
      *
-     * @var list<FlowEdge>|null $edges
+     * @var list<Edge>|null $edges
      */
-    #[Optional(list: FlowEdge::class)]
+    #[Optional(list: Edge::class)]
     public ?array $edges;
 
     /**
@@ -76,7 +74,7 @@ final class ConversationFlow implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<NodeShape> $nodes
-     * @param list<FlowEdge|FlowEdgeShape>|null $edges
+     * @param list<Edge|EdgeShape>|null $edges
      */
     public static function with(
         array $nodes,
@@ -120,7 +118,7 @@ final class ConversationFlow implements BaseModel
     /**
      * Directed transitions between nodes.
      *
-     * @param list<FlowEdge|FlowEdgeShape> $edges
+     * @param list<Edge|EdgeShape> $edges
      */
     public function withEdges(array $edges): self
     {

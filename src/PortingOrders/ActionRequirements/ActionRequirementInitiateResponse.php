@@ -7,12 +7,13 @@ namespace Telnyx\PortingOrders\ActionRequirements;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data;
 
 /**
- * @phpstan-import-type PortingActionRequirementShape from \Telnyx\PortingOrders\ActionRequirements\PortingActionRequirement
+ * @phpstan-import-type DataShape from \Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse\Data
  *
  * @phpstan-type ActionRequirementInitiateResponseShape = array{
- *   data?: null|PortingActionRequirement|PortingActionRequirementShape
+ *   data?: null|Data|DataShape
  * }
  */
 final class ActionRequirementInitiateResponse implements BaseModel
@@ -21,7 +22,7 @@ final class ActionRequirementInitiateResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?PortingActionRequirement $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -33,11 +34,10 @@ final class ActionRequirementInitiateResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingActionRequirement|PortingActionRequirementShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(
-        PortingActionRequirement|array|null $data = null
-    ): self {
+    public static function with(Data|array|null $data = null): self
+    {
         $self = new self;
 
         null !== $data && $self['data'] = $data;
@@ -46,9 +46,9 @@ final class ActionRequirementInitiateResponse implements BaseModel
     }
 
     /**
-     * @param PortingActionRequirement|PortingActionRequirementShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(PortingActionRequirement|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

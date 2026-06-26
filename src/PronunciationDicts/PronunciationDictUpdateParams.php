@@ -8,17 +8,18 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PronunciationDicts\PronunciationDictUpdateParams\Item;
 
 /**
  * Update the name and/or items of an existing pronunciation dictionary. Uses optimistic locking — if the dictionary was modified concurrently, the request returns 409 Conflict.
  *
  * @see Telnyx\Services\PronunciationDictsService::update()
  *
- * @phpstan-import-type PronunciationDictItemVariants from \Telnyx\PronunciationDicts\PronunciationDictItem
- * @phpstan-import-type PronunciationDictItemShape from \Telnyx\PronunciationDicts\PronunciationDictItem
+ * @phpstan-import-type ItemVariants from \Telnyx\PronunciationDicts\PronunciationDictUpdateParams\Item
+ * @phpstan-import-type ItemShape from \Telnyx\PronunciationDicts\PronunciationDictUpdateParams\Item
  *
  * @phpstan-type PronunciationDictUpdateParamsShape = array{
- *   items?: list<PronunciationDictItemShape>|null, name?: string|null
+ *   items?: list<ItemShape>|null, name?: string|null
  * }
  */
 final class PronunciationDictUpdateParams implements BaseModel
@@ -30,9 +31,9 @@ final class PronunciationDictUpdateParams implements BaseModel
     /**
      * Updated list of pronunciation items (alias or phoneme type).
      *
-     * @var list<PronunciationDictItemVariants>|null $items
+     * @var list<ItemVariants>|null $items
      */
-    #[Optional(list: PronunciationDictItem::class)]
+    #[Optional(list: Item::class)]
     public ?array $items;
 
     /**
@@ -51,7 +52,7 @@ final class PronunciationDictUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PronunciationDictItemShape>|null $items
+     * @param list<ItemShape>|null $items
      */
     public static function with(?array $items = null, ?string $name = null): self
     {
@@ -66,7 +67,7 @@ final class PronunciationDictUpdateParams implements BaseModel
     /**
      * Updated list of pronunciation items (alias or phoneme type).
      *
-     * @param list<PronunciationDictItemShape> $items
+     * @param list<ItemShape> $items
      */
     public function withItems(array $items): self
     {

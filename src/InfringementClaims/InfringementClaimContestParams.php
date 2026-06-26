@@ -9,7 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\Document;
+use Telnyx\InfringementClaims\InfringementClaimContestParams\Document;
 
 /**
  * Submit a written response and supporting documents disputing the claim. The first call moves the claim from `pending` to `contested`; subsequent calls append supplementary evidence without changing status. The `documents[]` you attach are aggregated across rounds in the claim's `contest_documents` field.
@@ -23,7 +23,7 @@ use Telnyx\Dir\Document;
  *
  * @see Telnyx\Services\InfringementClaimsService::contest()
  *
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\InfringementClaims\InfringementClaimContestParams\Document
  *
  * @phpstan-type InfringementClaimContestParamsShape = array{
  *   contestNotes: string, documents?: list<Document|DocumentShape>|null

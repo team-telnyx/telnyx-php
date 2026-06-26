@@ -6,8 +6,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\Missions\Runs\Events\EventData;
-use Telnyx\AI\Missions\Runs\Events\EventResponse;
-use Telnyx\AI\Missions\Runs\Events\EventType;
+use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsResponse;
+use Telnyx\AI\Missions\Runs\Events\EventLogResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
@@ -92,7 +92,7 @@ final class EventsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EventResponse::class, $result);
+        $this->assertInstanceOf(EventGetEventDetailsResponse::class, $result);
     }
 
     #[Test]
@@ -109,7 +109,7 @@ final class EventsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EventResponse::class, $result);
+        $this->assertInstanceOf(EventGetEventDetailsResponse::class, $result);
     }
 
     #[Test]
@@ -123,11 +123,11 @@ final class EventsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             summary: 'summary',
-            type: EventType::STATUS_CHANGE,
+            type: 'status_change',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EventResponse::class, $result);
+        $this->assertInstanceOf(EventLogResponse::class, $result);
     }
 
     #[Test]
@@ -141,7 +141,7 @@ final class EventsTest extends TestCase
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             summary: 'summary',
-            type: EventType::STATUS_CHANGE,
+            type: 'status_change',
             agentID: 'agent_id',
             idempotencyKey: 'idempotency_key',
             payload: ['foo' => 'bar'],
@@ -149,6 +149,6 @@ final class EventsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EventResponse::class, $result);
+        $this->assertInstanceOf(EventLogResponse::class, $result);
     }
 }

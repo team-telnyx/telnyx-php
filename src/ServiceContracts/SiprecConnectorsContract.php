@@ -6,7 +6,9 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\SiprecConnectors\SiprecConnectorResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -30,7 +32,7 @@ interface SiprecConnectorsContract
         int $port,
         ?string $appSubdomain = null,
         RequestOptions|array|null $requestOptions = null,
-    ): SiprecConnectorResponse;
+    ): SiprecConnectorNewResponse;
 
     /**
      * @api
@@ -43,7 +45,7 @@ interface SiprecConnectorsContract
     public function retrieve(
         string $connectorName,
         RequestOptions|array|null $requestOptions = null
-    ): SiprecConnectorResponse;
+    ): SiprecConnectorGetResponse;
 
     /**
      * @api
@@ -64,7 +66,7 @@ interface SiprecConnectorsContract
         int $port,
         ?string $appSubdomain = null,
         RequestOptions|array|null $requestOptions = null,
-    ): SiprecConnectorResponse;
+    ): SiprecConnectorUpdateResponse;
 
     /**
      * @api

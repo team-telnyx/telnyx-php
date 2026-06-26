@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Messaging10dlc\Brand;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVetting;
+use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
+use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
+use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -19,7 +21,7 @@ interface ExternalVettingContract
      * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<ExternalVetting>
+     * @return list<ExternalVettingListResponseItem>
      *
      * @throws APIException
      */
@@ -45,7 +47,7 @@ interface ExternalVettingContract
         string $vettingID,
         ?string $vettingToken = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ExternalVetting;
+    ): ExternalVettingImportsResponse;
 
     /**
      * @api
@@ -62,5 +64,5 @@ interface ExternalVettingContract
         string $evpID,
         string $vettingClass,
         RequestOptions|array|null $requestOptions = null,
-    ): ExternalVetting;
+    ): ExternalVettingOrderResponse;
 }

@@ -17,15 +17,17 @@ use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams;
 use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
-use Telnyx\VoiceClones\VoiceCloneResponse;
+use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
+use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender;
+use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
 /**
  * Capture and manage voice identities as clones for use in text-to-speech synthesis.
  *
- * @phpstan-import-type VoiceCloneRequestShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest
- * @phpstan-import-type VoiceCloneUploadRequestShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest
+ * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
+ * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params as ParamsShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoiceClonesRawService implements VoiceClonesRawContract
@@ -41,12 +43,10 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      *
      * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
      *
-     * @param array{
-     *   voiceCloneRequest: VoiceCloneRequestShape
-     * }|VoiceCloneCreateParams $params
+     * @param array{params: ParamsShape}|VoiceCloneCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceCloneResponse>
+     * @return BaseResponse<VoiceCloneNewResponse>
      *
      * @throws APIException
      */
@@ -63,9 +63,9 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
         return $this->client->request(
             method: 'post',
             path: 'voice_clones',
-            body: (object) $parsed['voiceCloneRequest'],
+            body: (object) $parsed['params'],
             options: $options,
-            convert: VoiceCloneResponse::class,
+            convert: VoiceCloneNewResponse::class,
         );
     }
 
@@ -80,7 +80,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      * }|VoiceCloneUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceCloneResponse>
+     * @return BaseResponse<VoiceCloneUpdateResponse>
      *
      * @throws APIException
      */
@@ -100,7 +100,7 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
             path: ['voice_clones/%1$s', $id],
             body: (object) $parsed,
             options: $options,
-            convert: VoiceCloneResponse::class,
+            convert: VoiceCloneUpdateResponse::class,
         );
     }
 
@@ -180,12 +180,10 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
      *
      * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
-     * @param array{
-     *   voiceCloneUploadRequest: VoiceCloneUploadRequestShape
-     * }|VoiceCloneCreateFromUploadParams $params
+     * @param array{params: ParamsShape1}|VoiceCloneCreateFromUploadParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceCloneResponse>
+     * @return BaseResponse<VoiceCloneNewFromUploadResponse>
      *
      * @throws APIException
      */
@@ -203,9 +201,9 @@ final class VoiceClonesRawService implements VoiceClonesRawContract
             method: 'post',
             path: 'voice_clones/from_upload',
             headers: ['Content-Type' => 'multipart/form-data'],
-            body: (object) $parsed['voiceCloneUploadRequest'],
+            body: (object) $parsed['params'],
             options: $options,
-            convert: VoiceCloneResponse::class,
+            convert: VoiceCloneNewFromUploadResponse::class,
         );
     }
 

@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\ExternalConnections\Releases\Release;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
+use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -78,7 +78,7 @@ final class ReleasesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(Release::class, $item);
+            $this->assertInstanceOf(ReleaseListResponse::class, $item);
         }
     }
 }

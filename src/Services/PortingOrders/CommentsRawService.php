@@ -11,8 +11,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
+use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
-use Telnyx\PortingOrders\Comments\PortingOrdersComment;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\CommentsRawContract;
 
@@ -71,7 +71,7 @@ final class CommentsRawService implements CommentsRawContract
      * @param array{pageNumber?: int, pageSize?: int}|CommentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingOrdersComment>>
+     * @return BaseResponse<DefaultFlatPagination<CommentListResponse>>
      *
      * @throws APIException
      */
@@ -94,7 +94,7 @@ final class CommentsRawService implements CommentsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PortingOrdersComment::class,
+            convert: CommentListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

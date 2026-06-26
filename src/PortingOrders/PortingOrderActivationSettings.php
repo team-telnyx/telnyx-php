@@ -7,11 +7,11 @@ namespace Telnyx\PortingOrders;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingPhoneNumbers\PortingOrderActivationStatus;
+use Telnyx\PortingOrders\PortingOrderActivationSettings\ActivationStatus;
 
 /**
  * @phpstan-type PortingOrderActivationSettingsShape = array{
- *   activationStatus?: null|PortingOrderActivationStatus|value-of<PortingOrderActivationStatus>,
+ *   activationStatus?: null|ActivationStatus|value-of<ActivationStatus>,
  *   fastPortEligible?: bool|null,
  *   focDatetimeActual?: \DateTimeInterface|null,
  *   focDatetimeRequested?: \DateTimeInterface|null,
@@ -25,12 +25,12 @@ final class PortingOrderActivationSettings implements BaseModel
     /**
      * Activation status.
      *
-     * @var value-of<PortingOrderActivationStatus>|null $activationStatus
+     * @var value-of<ActivationStatus>|null $activationStatus
      */
     #[Optional(
         'activation_status',
-        enum: PortingOrderActivationStatus::class,
-        nullable: true,
+        enum: ActivationStatus::class,
+        nullable: true
     )]
     public ?string $activationStatus;
 
@@ -62,10 +62,10 @@ final class PortingOrderActivationSettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderActivationStatus|value-of<PortingOrderActivationStatus>|null $activationStatus
+     * @param ActivationStatus|value-of<ActivationStatus>|null $activationStatus
      */
     public static function with(
-        PortingOrderActivationStatus|string|null $activationStatus = null,
+        ActivationStatus|string|null $activationStatus = null,
         ?bool $fastPortEligible = null,
         ?\DateTimeInterface $focDatetimeActual = null,
         ?\DateTimeInterface $focDatetimeRequested = null,
@@ -83,10 +83,10 @@ final class PortingOrderActivationSettings implements BaseModel
     /**
      * Activation status.
      *
-     * @param PortingOrderActivationStatus|value-of<PortingOrderActivationStatus>|null $activationStatus
+     * @param ActivationStatus|value-of<ActivationStatus>|null $activationStatus
      */
     public function withActivationStatus(
-        PortingOrderActivationStatus|string|null $activationStatus
+        ActivationStatus|string|null $activationStatus
     ): self {
         $self = clone $this;
         $self['activationStatus'] = $activationStatus;

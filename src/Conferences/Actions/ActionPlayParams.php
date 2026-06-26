@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
+use Telnyx\Conferences\Actions\ActionPlayParams\Region;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
@@ -22,7 +23,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callControlIDs?: list<string>|null,
  *   loop?: LoopcountShape|null,
  *   mediaName?: string|null,
- *   region?: null|ConferenceRegion|value-of<ConferenceRegion>,
+ *   region?: null|Region|value-of<Region>,
  * }
  */
 final class ActionPlayParams implements BaseModel
@@ -62,9 +63,9 @@ final class ActionPlayParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @var value-of<ConferenceRegion>|null $region
+     * @var value-of<Region>|null $region
      */
-    #[Optional(enum: ConferenceRegion::class)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     public function __construct()
@@ -79,14 +80,14 @@ final class ActionPlayParams implements BaseModel
      *
      * @param list<string>|null $callControlIDs
      * @param LoopcountShape|null $loop
-     * @param ConferenceRegion|value-of<ConferenceRegion>|null $region
+     * @param Region|value-of<Region>|null $region
      */
     public static function with(
         ?string $audioURL = null,
         ?array $callControlIDs = null,
         string|int|null $loop = null,
         ?string $mediaName = null,
-        ConferenceRegion|string|null $region = null,
+        Region|string|null $region = null,
     ): self {
         $self = new self;
 
@@ -150,9 +151,9 @@ final class ActionPlayParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @param ConferenceRegion|value-of<ConferenceRegion> $region
+     * @param Region|value-of<Region> $region
      */
-    public function withRegion(ConferenceRegion|string $region): self
+    public function withRegion(Region|string $region): self
     {
         $self = clone $this;
         $self['region'] = $region;

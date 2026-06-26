@@ -7,10 +7,10 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
-use Telnyx\TermsOfService\TermsOfServiceGetStatusResponse;
-use Telnyx\TermsOfService\TermsOfServiceRetrieveInfoParams;
-use Telnyx\TermsOfService\TermsOfServiceRetrieveStatusParams;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams;
+use Telnyx\TermsOfService\TermsOfServiceInfoResponse;
+use Telnyx\TermsOfService\TermsOfServiceStatusParams;
+use Telnyx\TermsOfService\TermsOfServiceStatusResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -20,30 +20,30 @@ interface TermsOfServiceRawContract
     /**
      * @api
      *
-     * @param array<string,mixed>|TermsOfServiceRetrieveInfoParams $params
+     * @param array<string,mixed>|TermsOfServiceInfoParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TermsOfServiceGetInfoResponse>
+     * @return BaseResponse<TermsOfServiceInfoResponse>
      *
      * @throws APIException
      */
-    public function retrieveInfo(
-        array|TermsOfServiceRetrieveInfoParams $params,
+    public function info(
+        array|TermsOfServiceInfoParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
-     * @param array<string,mixed>|TermsOfServiceRetrieveStatusParams $params
+     * @param array<string,mixed>|TermsOfServiceStatusParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TermsOfServiceGetStatusResponse>
+     * @return BaseResponse<TermsOfServiceStatusResponse>
      *
      * @throws APIException
      */
-    public function retrieveStatus(
-        array|TermsOfServiceRetrieveStatusParams $params,
+    public function status(
+        array|TermsOfServiceStatusParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

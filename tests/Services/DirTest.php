@@ -8,10 +8,13 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirGetResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
-use Telnyx\Dir\DirWrapped;
-use Telnyx\InfringementClaims\InfringementClaim;
+use Telnyx\Dir\DirListInfringementClaimsResponse;
+use Telnyx\Dir\DirListResponse;
+use Telnyx\Dir\DirSubmitResponse;
+use Telnyx\Dir\DirUpdateInfringementResponse;
+use Telnyx\Dir\DirUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -44,7 +47,7 @@ final class DirTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DirWrapped::class, $result);
+        $this->assertInstanceOf(DirGetResponse::class, $result);
     }
 
     #[Test]
@@ -59,7 +62,7 @@ final class DirTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DirWrapped::class, $result);
+        $this->assertInstanceOf(DirUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -76,7 +79,7 @@ final class DirTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(Dir::class, $item);
+            $this->assertInstanceOf(DirListResponse::class, $item);
         }
     }
 
@@ -93,6 +96,53 @@ final class DirTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testCreateLoa(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->dir->createLoa(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            phoneNumbers: ['+13125550000']
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
+    }
+
+    #[Test]
+    public function testCreateLoaWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->dir->createLoa(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            phoneNumbers: ['+13125550000'],
+            agent: [
+                'administrativeArea' => 'administrative_area',
+                'city' => 'city',
+                'contactEmail' => 'dev@stainless.com',
+                'contactName' => 'contact_name',
+                'contactPhone' => '+13125550000',
+                'contactTitle' => 'contact_title',
+                'country' => 'US',
+                'legalName' => 'legal_name',
+                'postalCode' => 'postal_code',
+                'streetAddress' => 'street_address',
+                'dba' => 'dba',
+                'extendedAddress' => 'extended_address',
+            ],
+            signature: ['imageBase64' => 'x', 'signerName' => 'signer_name'],
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertIsString($result);
     }
 
     #[Test]
@@ -124,55 +174,8 @@ final class DirTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(InfringementClaim::class, $item);
+            $this->assertInstanceOf(DirListInfringementClaimsResponse::class, $item);
         }
-    }
-
-    #[Test]
-    public function testNewLoa(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->dir->newLoa(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            phoneNumbers: ['+13125550000']
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsString($result);
-    }
-
-    #[Test]
-    public function testNewLoaWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->dir->newLoa(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            phoneNumbers: ['+13125550000'],
-            agent: [
-                'administrativeArea' => 'administrative_area',
-                'city' => 'city',
-                'contactEmail' => 'dev@stainless.com',
-                'contactName' => 'contact_name',
-                'contactPhone' => '+13125550000',
-                'contactTitle' => 'contact_title',
-                'country' => 'US',
-                'legalName' => 'legal_name',
-                'postalCode' => 'postal_code',
-                'streetAddress' => 'street_address',
-                'dba' => 'dba',
-                'extendedAddress' => 'extended_address',
-            ],
-            signature: ['imageBase64' => 'x', 'signerName' => 'signer_name'],
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsString($result);
     }
 
     #[Test]
@@ -187,7 +190,7 @@ final class DirTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DirWrapped::class, $result);
+        $this->assertInstanceOf(DirSubmitResponse::class, $result);
     }
 
     #[Test]
@@ -207,7 +210,7 @@ final class DirTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DirWrapped::class, $result);
+        $this->assertInstanceOf(DirUpdateInfringementResponse::class, $result);
     }
 
     #[Test]
@@ -237,6 +240,6 @@ final class DirTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DirWrapped::class, $result);
+        $this->assertInstanceOf(DirUpdateInfringementResponse::class, $result);
     }
 }

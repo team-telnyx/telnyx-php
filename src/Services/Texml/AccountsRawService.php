@@ -10,10 +10,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\AccountsRawContract;
+use Telnyx\Texml\Accounts\AccountGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
 use Telnyx\Texml\Accounts\AccountRetrieveRecordingsJsonParams;
 use Telnyx\Texml\Accounts\AccountRetrieveTranscriptionsJsonParams;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 
 /**
  * TeXML REST Commands.
@@ -39,7 +39,7 @@ final class AccountsRawService implements AccountsRawContract
      * }|AccountRetrieveRecordingsJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TexmlGetCallRecordingsResponseBody>
+     * @return BaseResponse<AccountGetRecordingsJsonResponse>
      *
      * @throws APIException
      */
@@ -66,7 +66,7 @@ final class AccountsRawService implements AccountsRawContract
                 ],
             ),
             options: $options,
-            convert: TexmlGetCallRecordingsResponseBody::class,
+            convert: AccountGetRecordingsJsonResponse::class,
         );
     }
 

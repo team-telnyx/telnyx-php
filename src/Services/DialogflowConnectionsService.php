@@ -8,7 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
-use Telnyx\DialogflowConnections\DialogflowConnectionResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DialogflowConnectionsContract;
 
@@ -55,7 +57,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         ?string $environment = null,
         ?string $location = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DialogflowConnectionResponse {
+    ): DialogflowConnectionNewResponse {
         $params = Util::removeNulls(
             [
                 'serviceAccount' => $serviceAccount,
@@ -85,7 +87,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
     public function retrieve(
         string $connectionID,
         RequestOptions|array|null $requestOptions = null
-    ): DialogflowConnectionResponse {
+    ): DialogflowConnectionGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($connectionID, requestOptions: $requestOptions);
 
@@ -115,7 +117,7 @@ final class DialogflowConnectionsService implements DialogflowConnectionsContrac
         ?string $environment = null,
         ?string $location = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DialogflowConnectionResponse {
+    ): DialogflowConnectionUpdateResponse {
         $params = Util::removeNulls(
             [
                 'serviceAccount' => $serviceAccount,

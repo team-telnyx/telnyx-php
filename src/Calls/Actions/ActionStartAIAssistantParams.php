@@ -6,7 +6,9 @@ namespace Telnyx\Calls\Actions;
 
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory;
+use Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant;
 use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings;
+use Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -14,7 +16,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Start an AI assistant on the call.
@@ -31,7 +32,7 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory
- * @phpstan-import-type AIAssistantJoinParticipantShape from \Telnyx\Calls\Actions\AIAssistantJoinParticipant
+ * @phpstan-import-type ParticipantShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\Participant
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings
  *
@@ -42,7 +43,7 @@ use Telnyx\XaiVoiceSettings;
  *   greeting?: string|null,
  *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   messageHistory?: list<MessageHistoryShape>|null,
- *   participants?: list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape>|null,
+ *   participants?: list<Participant|ParticipantShape>|null,
  *   sendMessageHistoryUpdates?: bool|null,
  *   transcription?: null|TranscriptionConfig|TranscriptionConfigShape,
  *   voice?: string|null,
@@ -96,9 +97,9 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * A list of participants to add to the conversation when it starts.
      *
-     * @var list<AIAssistantJoinParticipant>|null $participants
+     * @var list<Participant>|null $participants
      */
-    #[Optional(list: AIAssistantJoinParticipant::class)]
+    #[Optional(list: Participant::class)]
     public ?array $participants;
 
     /**
@@ -148,7 +149,7 @@ final class ActionStartAIAssistantParams implements BaseModel
      * @param CallAssistantRequest|CallAssistantRequestShape|null $assistant
      * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
      * @param list<MessageHistoryShape>|null $messageHistory
-     * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape>|null $participants
+     * @param list<Participant|ParticipantShape>|null $participants
      * @param TranscriptionConfig|TranscriptionConfigShape|null $transcription
      * @param VoiceSettingsShape|null $voiceSettings
      */
@@ -258,7 +259,7 @@ final class ActionStartAIAssistantParams implements BaseModel
     /**
      * A list of participants to add to the conversation when it starts.
      *
-     * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape> $participants
+     * @param list<Participant|ParticipantShape> $participants
      */
     public function withParticipants(array $participants): self
     {

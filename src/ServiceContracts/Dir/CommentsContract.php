@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts\Dir;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\Comments\CommentListParams\CommentType;
+use Telnyx\Dir\Comments\CommentListResponse;
 use Telnyx\Dir\Comments\CommentNewResponse;
-use Telnyx\Dir\Comments\CommentType;
-use Telnyx\Dir\Comments\DirComment;
 use Telnyx\RequestOptions;
 
 /**
@@ -42,7 +42,7 @@ interface CommentsContract
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<DirComment>
+     * @return DefaultFlatPagination<CommentListResponse>
      *
      * @throws APIException
      */

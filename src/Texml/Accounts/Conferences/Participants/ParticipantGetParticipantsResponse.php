@@ -7,9 +7,10 @@ namespace Telnyx\Texml\Accounts\Conferences\Participants;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant;
 
 /**
- * @phpstan-import-type ParticipantResourceShape from \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantResource
+ * @phpstan-import-type ParticipantShape from \Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse\Participant
  *
  * @phpstan-type ParticipantGetParticipantsResponseShape = array{
  *   end?: int|null,
@@ -17,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   nextPageUri?: string|null,
  *   page?: int|null,
  *   pageSize?: int|null,
- *   participants?: list<ParticipantResource|ParticipantResourceShape>|null,
+ *   participants?: list<Participant|ParticipantShape>|null,
  *   start?: int|null,
  *   uri?: string|null,
  * }
@@ -57,8 +58,8 @@ final class ParticipantGetParticipantsResponse implements BaseModel
     #[Optional('page_size')]
     public ?int $pageSize;
 
-    /** @var list<ParticipantResource>|null $participants */
-    #[Optional(list: ParticipantResource::class)]
+    /** @var list<Participant>|null $participants */
+    #[Optional(list: Participant::class)]
     public ?array $participants;
 
     /**
@@ -83,7 +84,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ParticipantResource|ParticipantResourceShape>|null $participants
+     * @param list<Participant|ParticipantShape>|null $participants
      */
     public static function with(
         ?int $end = null,
@@ -165,7 +166,7 @@ final class ParticipantGetParticipantsResponse implements BaseModel
     }
 
     /**
-     * @param list<ParticipantResource|ParticipantResourceShape> $participants
+     * @param list<Participant|ParticipantShape> $participants
      */
     public function withParticipants(array $participants): self
     {

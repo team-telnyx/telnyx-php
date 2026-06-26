@@ -7,11 +7,11 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\GlobalIPs\GlobalIP;
 use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
 use Telnyx\GlobalIPs\GlobalIPListParams;
+use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
 
@@ -56,7 +56,7 @@ interface GlobalIPsRawContract
      * @param array<string,mixed>|GlobalIPListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<GlobalIP>>
+     * @return BaseResponse<DefaultFlatPagination<GlobalIPListResponse>>
      *
      * @throws APIException
      */

@@ -7,8 +7,8 @@ namespace Telnyx\ServiceContracts\PortingOrders;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PortingOrders\VerificationCodes\PortingVerificationCode;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse;
@@ -26,7 +26,7 @@ interface VerificationCodesRawContract
      * @param array<string,mixed>|VerificationCodeListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingVerificationCode>>
+     * @return BaseResponse<DefaultFlatPagination<VerificationCodeListResponse>>
      *
      * @throws APIException
      */

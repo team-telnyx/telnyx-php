@@ -9,7 +9,7 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
-use Telnyx\Queues\Calls\QueueCall;
+use Telnyx\Queues\Calls\CallListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -109,7 +109,7 @@ final class CallsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(QueueCall::class, $item);
+            $this->assertInstanceOf(CallListResponse::class, $item);
         }
     }
 

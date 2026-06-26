@@ -9,7 +9,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SiprecConnectorsContract;
-use Telnyx\SiprecConnectors\SiprecConnectorResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
 /**
  * SIPREC connectors configuration.
@@ -50,7 +52,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         int $port,
         ?string $appSubdomain = null,
         RequestOptions|array|null $requestOptions = null,
-    ): SiprecConnectorResponse {
+    ): SiprecConnectorNewResponse {
         $params = Util::removeNulls(
             [
                 'host' => $host,
@@ -79,7 +81,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
     public function retrieve(
         string $connectorName,
         RequestOptions|array|null $requestOptions = null
-    ): SiprecConnectorResponse {
+    ): SiprecConnectorGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($connectorName, requestOptions: $requestOptions);
 
@@ -107,7 +109,7 @@ final class SiprecConnectorsService implements SiprecConnectorsContract
         int $port,
         ?string $appSubdomain = null,
         RequestOptions|array|null $requestOptions = null,
-    ): SiprecConnectorResponse {
+    ): SiprecConnectorUpdateResponse {
         $params = Util::removeNulls(
             [
                 'host' => $host,

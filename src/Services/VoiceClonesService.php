@@ -10,22 +10,24 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceClonesContract;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxQwen3TtsClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxUltraClone;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\MinimaxDesignClone;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\TelnyxDesignClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxQwen3TtsClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxUltraClone;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\MinimaxDesignClone;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\TelnyxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
-use Telnyx\VoiceClones\VoiceCloneResponse;
+use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
+use Telnyx\VoiceClones\VoiceCloneNewResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender;
+use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
 /**
  * Capture and manage voice identities as clones for use in text-to-speech synthesis.
  *
- * @phpstan-import-type VoiceCloneRequestShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest
- * @phpstan-import-type VoiceCloneUploadRequestShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest
+ * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
+ * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params as ParamsShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class VoiceClonesService implements VoiceClonesContract
@@ -48,19 +50,19 @@ final class VoiceClonesService implements VoiceClonesContract
      *
      * Creates a new voice clone by capturing the voice identity of an existing voice design. The clone can then be used for text-to-speech synthesis.
      *
-     * @param VoiceCloneRequestShape $voiceCloneRequest request body for creating a voice clone from an existing voice design
+     * @param ParamsShape $params request body for creating a voice clone from an existing voice design
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        TelnyxDesignClone|array|MinimaxDesignClone $voiceCloneRequest,
+        TelnyxDesignClone|array|MinimaxDesignClone $params,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceCloneResponse {
-        $params = Util::removeNulls(['voiceCloneRequest' => $voiceCloneRequest]);
+    ): VoiceCloneNewResponse {
+        $params1 = Util::removeNulls(['params' => $params]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->create(params: $params1, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -84,7 +86,7 @@ final class VoiceClonesService implements VoiceClonesContract
         Gender|string|null $gender = null,
         ?string $language = null,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceCloneResponse {
+    ): VoiceCloneUpdateResponse {
         $params = Util::removeNulls(
             ['name' => $name, 'gender' => $gender, 'language' => $language]
         );
@@ -160,21 +162,19 @@ final class VoiceClonesService implements VoiceClonesContract
      *
      * Creates a new voice clone by uploading an audio file directly. Supported formats: WAV, MP3, FLAC, OGG, M4A. For best results, provide 5–10 seconds of clear speech. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      *
-     * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
+     * @param ParamsShape1 $params Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createFromUpload(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $voiceCloneUploadRequest,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $params,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceCloneResponse {
-        $params = Util::removeNulls(
-            ['voiceCloneUploadRequest' => $voiceCloneUploadRequest]
-        );
+    ): VoiceCloneNewFromUploadResponse {
+        $params1 = Util::removeNulls(['params' => $params]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createFromUpload(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->createFromUpload(params: $params1, requestOptions: $requestOptions);
 
         return $response->parse();
     }

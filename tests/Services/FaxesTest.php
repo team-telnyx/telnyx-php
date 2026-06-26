@@ -11,7 +11,6 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\Faxes\Fax;
 use Telnyx\Faxes\FaxGetResponse;
 use Telnyx\Faxes\FaxNewResponse;
-use Telnyx\Faxes\Quality;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -67,7 +66,7 @@ final class FaxesTest extends TestCase
             mediaURL: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
             monochrome: true,
             previewFormat: 'pdf',
-            quality: Quality::HIGH,
+            quality: 'high',
             storeMedia: true,
             storePreview: true,
             t38Enabled: true,

@@ -5,9 +5,10 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Missions\ExecutionMode;
 use Telnyx\AI\Missions\MissionData;
-use Telnyx\AI\Missions\MissionResponse;
+use Telnyx\AI\Missions\MissionGetResponse;
+use Telnyx\AI\Missions\MissionNewResponse;
+use Telnyx\AI\Missions\MissionUpdateMissionResponse;
 use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\Client;
 use Telnyx\Core\Util;
@@ -42,7 +43,7 @@ final class MissionsTest extends TestCase
         $result = $this->client->ai->missions->create(name: 'name');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MissionResponse::class, $result);
+        $this->assertInstanceOf(MissionNewResponse::class, $result);
     }
 
     #[Test]
@@ -55,14 +56,14 @@ final class MissionsTest extends TestCase
         $result = $this->client->ai->missions->create(
             name: 'name',
             description: 'description',
-            executionMode: ExecutionMode::EXTERNAL,
+            executionMode: 'external',
             instructions: 'instructions',
             metadata: ['foo' => 'bar'],
             model: 'model',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MissionResponse::class, $result);
+        $this->assertInstanceOf(MissionNewResponse::class, $result);
     }
 
     #[Test]
@@ -77,7 +78,7 @@ final class MissionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MissionResponse::class, $result);
+        $this->assertInstanceOf(MissionGetResponse::class, $result);
     }
 
     #[Test]
@@ -156,6 +157,6 @@ final class MissionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(MissionResponse::class, $result);
+        $this->assertInstanceOf(MissionUpdateMissionResponse::class, $result);
     }
 }

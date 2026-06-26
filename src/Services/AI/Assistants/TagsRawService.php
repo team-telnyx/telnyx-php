@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\AI\Assistants\Tags\TagAddParams;
+use Telnyx\AI\Assistants\Tags\TagAddResponse;
+use Telnyx\AI\Assistants\Tags\TagListResponse;
 use Telnyx\AI\Assistants\Tags\TagRemoveParams;
-use Telnyx\AI\Assistants\Tags\TagsResponse;
+use Telnyx\AI\Assistants\Tags\TagRemoveResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -33,7 +35,7 @@ final class TagsRawService implements TagsRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TagsResponse>
+     * @return BaseResponse<TagListResponse>
      *
      * @throws APIException
      */
@@ -45,7 +47,7 @@ final class TagsRawService implements TagsRawContract
             method: 'get',
             path: 'ai/assistants/tags',
             options: $requestOptions,
-            convert: TagsResponse::class,
+            convert: TagListResponse::class,
         );
     }
 
@@ -58,7 +60,7 @@ final class TagsRawService implements TagsRawContract
      * @param array{tag: string}|TagAddParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TagsResponse>
+     * @return BaseResponse<TagAddResponse>
      *
      * @throws APIException
      */
@@ -78,7 +80,7 @@ final class TagsRawService implements TagsRawContract
             path: ['ai/assistants/%1$s/tags', $assistantID],
             body: (object) $parsed,
             options: $options,
-            convert: TagsResponse::class,
+            convert: TagAddResponse::class,
         );
     }
 
@@ -91,7 +93,7 @@ final class TagsRawService implements TagsRawContract
      * @param array{assistantID: string}|TagRemoveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TagsResponse>
+     * @return BaseResponse<TagRemoveResponse>
      *
      * @throws APIException
      */
@@ -112,7 +114,7 @@ final class TagsRawService implements TagsRawContract
             method: 'delete',
             path: ['ai/assistants/%1$s/tags/%2$s', $assistantID, $tag],
             options: $options,
-            convert: TagsResponse::class,
+            convert: TagRemoveResponse::class,
         );
     }
 }

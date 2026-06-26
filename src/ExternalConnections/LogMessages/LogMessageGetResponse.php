@@ -7,9 +7,10 @@ namespace Telnyx\ExternalConnections\LogMessages;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage;
 
 /**
- * @phpstan-import-type LogMessageShape from \Telnyx\ExternalConnections\LogMessages\LogMessage
+ * @phpstan-import-type LogMessageShape from \Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse\LogMessage
  *
  * @phpstan-type LogMessageGetResponseShape = array{
  *   logMessages?: list<LogMessage|LogMessageShape>|null

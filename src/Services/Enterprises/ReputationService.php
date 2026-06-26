@@ -7,8 +7,10 @@ namespace Telnyx\Services\Enterprises;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
-use Telnyx\Enterprises\Reputation\ReputationCheckFrequency;
+use Telnyx\Enterprises\Reputation\ReputationEnableParams\CheckFrequency;
+use Telnyx\Enterprises\Reputation\ReputationEnableResponse;
+use Telnyx\Enterprises\Reputation\ReputationGetResponse;
+use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Enterprises\ReputationContract;
 use Telnyx\Services\Enterprises\Reputation\LoaService;
@@ -68,7 +70,7 @@ final class ReputationService implements ReputationContract
     public function retrieve(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
-    ): EnterpriseReputationPublicWrapped {
+    ): ReputationGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($enterpriseID, requestOptions: $requestOptions);
 
@@ -112,7 +114,7 @@ final class ReputationService implements ReputationContract
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param string $loaDocumentID Id of the signed Letter of Authorization document, returned by the Telnyx Documents API after upload (upload via `POST /v2/documents`; see https://developers.telnyx.com/api/documents).
-     * @param ReputationCheckFrequency|value-of<ReputationCheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
+     * @param CheckFrequency|value-of<CheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -120,9 +122,9 @@ final class ReputationService implements ReputationContract
     public function enable(
         string $enterpriseID,
         string $loaDocumentID,
-        ReputationCheckFrequency|string|null $checkFrequency = null,
+        CheckFrequency|string $checkFrequency = 'business_daily',
         RequestOptions|array|null $requestOptions = null,
-    ): EnterpriseReputationPublicWrapped {
+    ): ReputationEnableResponse {
         $params = Util::removeNulls(
             ['loaDocumentID' => $loaDocumentID, 'checkFrequency' => $checkFrequency]
         );
@@ -141,16 +143,16 @@ final class ReputationService implements ReputationContract
      * The enterprise's reputation must be in `approved` status. A request made while the status is `pending` is rejected with `400 Bad Request`.
      *
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
-     * @param ReputationCheckFrequency|value-of<ReputationCheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
+     * @param \Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency|value-of<\Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency> $checkFrequency how often Telnyx refreshes the stored reputation data for this enterprise's registered numbers
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function updateFrequency(
         string $enterpriseID,
-        ReputationCheckFrequency|string $checkFrequency,
+        \Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams\CheckFrequency|string $checkFrequency,
         RequestOptions|array|null $requestOptions = null,
-    ): EnterpriseReputationPublicWrapped {
+    ): ReputationUpdateFrequencyResponse {
         $params = Util::removeNulls(['checkFrequency' => $checkFrequency]);
 
         // @phpstan-ignore-next-line argument.type

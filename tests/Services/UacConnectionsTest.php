@@ -8,13 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\UacConnections\UacConnection;
 use Telnyx\UacConnections\UacConnectionDeleteResponse;
 use Telnyx\UacConnections\UacConnectionGetResponse;
+use Telnyx\UacConnections\UacConnectionListResponse;
 use Telnyx\UacConnections\UacConnectionNewResponse;
 use Telnyx\UacConnections\UacConnectionUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -101,7 +100,7 @@ final class UacConnectionsTest extends TestCase
                 'jitterbufferMsecMax' => 200,
                 'jitterbufferMsecMin' => 60,
             ],
-            noiseSuppression: ConnectionNoiseSuppression::BOTH,
+            noiseSuppression: 'both',
             noiseSuppressionDetails: [
                 'attenuationLimit' => 80, 'engine' => 'deep_filter_net',
             ],
@@ -176,7 +175,7 @@ final class UacConnectionsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(UacConnection::class, $item);
+            $this->assertInstanceOf(UacConnectionListResponse::class, $item);
         }
     }
 

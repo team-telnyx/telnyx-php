@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
+use Telnyx\Enterprises\Reputation\Loa\LoaUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -41,7 +41,7 @@ final class LoaTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
+        $this->assertInstanceOf(LoaUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -57,7 +57,7 @@ final class LoaTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
+        $this->assertInstanceOf(LoaUpdateResponse::class, $result);
     }
 
     #[Test]

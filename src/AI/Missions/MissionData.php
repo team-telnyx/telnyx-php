@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions;
 
+use Telnyx\AI\Missions\MissionData\ExecutionMode;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;

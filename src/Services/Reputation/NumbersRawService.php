@@ -9,9 +9,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
-use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
+use Telnyx\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Reputation\Numbers\NumberListParams;
+use Telnyx\Reputation\Numbers\NumberListResponse;
 use Telnyx\Reputation\Numbers\NumberRetrieveParams;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Reputation\NumbersRawContract;
@@ -38,7 +38,7 @@ final class NumbersRawService implements NumbersRawContract
      * @param array{fresh?: bool}|NumberRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationPhoneNumberWithReputation>
+     * @return BaseResponse<NumberGetResponse>
      *
      * @throws APIException
      */
@@ -58,7 +58,7 @@ final class NumbersRawService implements NumbersRawContract
             path: ['reputation/numbers/%1$s', $phoneNumber],
             query: $parsed,
             options: $options,
-            convert: ReputationPhoneNumberWithReputation::class,
+            convert: NumberGetResponse::class,
         );
     }
 
@@ -76,7 +76,7 @@ final class NumbersRawService implements NumbersRawContract
      * }|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumber>>
+     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
      *
      * @throws APIException
      */
@@ -104,7 +104,7 @@ final class NumbersRawService implements NumbersRawContract
                 ],
             ),
             options: $options,
-            convert: ReputationPhoneNumber::class,
+            convert: NumberListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

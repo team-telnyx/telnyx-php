@@ -8,19 +8,17 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams\Body;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayRead;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PublicInternetGatewaysContract;
 
 /**
  * Public Internet Gateway operations.
  *
- * @phpstan-import-type BodyShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams\Body
  * @phpstan-import-type FilterShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -44,16 +42,22 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      *
      * Create a new Public Internet Gateway.
      *
-     * @param Body|BodyShape $body
+     * @param string $name a user specified name for the interface
+     * @param string $networkID the id of the network associated with the interface
+     * @param string $regionCode the region interface is deployed to
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        Body|array $body,
-        RequestOptions|array|null $requestOptions = null
+        ?string $name = null,
+        ?string $networkID = null,
+        ?string $regionCode = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PublicInternetGatewayNewResponse {
-        $params = Util::removeNulls(['body' => $body]);
+        $params = Util::removeNulls(
+            ['name' => $name, 'networkID' => $networkID, 'regionCode' => $regionCode]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -89,7 +93,7 @@ final class PublicInternetGatewaysService implements PublicInternetGatewaysContr
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[network_id]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PublicInternetGatewayRead>
+     * @return DefaultFlatPagination<PublicInternetGatewayListResponse>
      *
      * @throws APIException
      */

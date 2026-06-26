@@ -11,8 +11,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams\PhoneNumberConfiguration;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Filter;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams\Sort;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PortingPhoneNumberConfiguration;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\PhoneNumberConfigurationsContract;
 
@@ -72,7 +72,7 @@ final class PhoneNumberConfigurationsService implements PhoneNumberConfiguration
      * @param Sort|SortShape $sort Consolidated sort parameter (deepObject style). Originally: sort[value]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<PortingPhoneNumberConfiguration>
+     * @return DefaultFlatPagination<PhoneNumberConfigurationListResponse>
      *
      * @throws APIException
      */

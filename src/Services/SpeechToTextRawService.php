@@ -12,14 +12,12 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SpeechToTextRawContract;
 use Telnyx\SpeechToText\SpeechToTextListProvidersParams;
 use Telnyx\SpeechToText\SpeechToTextListProvidersParams\Provider;
+use Telnyx\SpeechToText\SpeechToTextListProvidersParams\ServiceType;
 use Telnyx\SpeechToText\SpeechToTextListProvidersResponse;
-use Telnyx\SpeechToText\SpeechToTextRetrieveTranscriptionParams;
-use Telnyx\SpeechToText\SpeechToTextRetrieveTranscriptionParams\InputFormat;
-use Telnyx\SpeechToText\SpeechToTextRetrieveTranscriptionParams\Model;
-use Telnyx\SpeechToText\SpeechToTextRetrieveTranscriptionParams\TranscriptionEngine;
-use Telnyx\SpeechToText\SttServiceType;
 
 /**
+ * Discover available speech-to-text providers, models, and supported languages.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class SpeechToTextRawService implements SpeechToTextRawContract
@@ -44,8 +42,7 @@ final class SpeechToTextRawService implements SpeechToTextRawContract
      * Use this endpoint to discover which (provider, model) combinations are available for the surface you need, and which language codes each accepts. `auto` in a `languages` array indicates the provider performs language detection.
      *
      * @param array{
-     *   provider?: value-of<Provider>,
-     *   serviceType?: SttServiceType|value-of<SttServiceType>,
+     *   provider?: value-of<Provider>, serviceType?: ServiceType|value-of<ServiceType>
      * }|SpeechToTextListProvidersParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -75,66 +72,6 @@ final class SpeechToTextRawService implements SpeechToTextRawContract
             ),
             options: $options,
             convert: SpeechToTextListProvidersResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Open a WebSocket connection to stream audio and receive transcriptions in real-time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header.
-     *
-     * Supported engines: `Azure`, `Deepgram`, `Google`, `Telnyx`, `xAI`, `Speechmatics`, `Soniox`.
-     *
-     * **Connection flow:**
-     * 1. Open WebSocket with query parameters specifying engine, input format, and language.
-     * 2. Send binary audio frames (mp3/wav format).
-     * 3. Receive JSON transcript frames with `transcript`, `is_final`, and `confidence` fields.
-     * 4. Close connection when done.
-     *
-     * @param array{
-     *   inputFormat: InputFormat|value-of<InputFormat>,
-     *   transcriptionEngine: TranscriptionEngine|value-of<TranscriptionEngine>,
-     *   endpointing?: int,
-     *   interimResults?: bool,
-     *   keyterm?: string,
-     *   keywords?: string,
-     *   language?: string,
-     *   model?: value-of<Model>,
-     *   redact?: string,
-     * }|SpeechToTextRetrieveTranscriptionParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<mixed>
-     *
-     * @throws APIException
-     */
-    public function retrieveTranscription(
-        array|SpeechToTextRetrieveTranscriptionParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = SpeechToTextRetrieveTranscriptionParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-        $path = $this
-            ->client
-            ->baseUrlOverridden ? 'speech-to-text/transcription' : 'wss://api.telnyx.com/v2/speech-to-text/transcription';
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: $path,
-            query: Util::array_transform_keys(
-                $parsed,
-                [
-                    'inputFormat' => 'input_format',
-                    'transcriptionEngine' => 'transcription_engine',
-                    'interimResults' => 'interim_results',
-                ],
-            ),
-            headers: ['Content-Type' => 'application/octet-stream'],
-            options: $options,
-            convert: null,
         );
     }
 }

@@ -10,17 +10,18 @@ use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
+use Telnyx\Conferences\Actions\ActionSpeakParams\Region;
 use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings;
+use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Convert text to speech and play it to all or some participants.
@@ -37,7 +38,7 @@ use Telnyx\XaiVoiceSettings;
  *   commandID?: string|null,
  *   language?: null|Language|value-of<Language>,
  *   payloadType?: null|PayloadType|value-of<PayloadType>,
- *   region?: null|ConferenceRegion|value-of<ConferenceRegion>,
+ *   region?: null|Region|value-of<Region>,
  *   voiceSettings?: VoiceSettingsShape|null,
  * }
  */
@@ -107,9 +108,9 @@ final class ActionSpeakParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @var value-of<ConferenceRegion>|null $region
+     * @var value-of<Region>|null $region
      */
-    #[Optional(enum: ConferenceRegion::class)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     /**
@@ -147,7 +148,7 @@ final class ActionSpeakParams implements BaseModel
      * @param list<string>|null $callControlIDs
      * @param Language|value-of<Language>|null $language
      * @param PayloadType|value-of<PayloadType>|null $payloadType
-     * @param ConferenceRegion|value-of<ConferenceRegion>|null $region
+     * @param Region|value-of<Region>|null $region
      * @param VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
@@ -157,7 +158,7 @@ final class ActionSpeakParams implements BaseModel
         ?string $commandID = null,
         Language|string|null $language = null,
         PayloadType|string|null $payloadType = null,
-        ConferenceRegion|string|null $region = null,
+        Region|string|null $region = null,
         ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|MinimaxVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|InworldVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
     ): self {
         $self = new self;
@@ -265,9 +266,9 @@ final class ActionSpeakParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @param ConferenceRegion|value-of<ConferenceRegion> $region
+     * @param Region|value-of<Region> $region
      */
-    public function withRegion(ConferenceRegion|string $region): self
+    public function withRegion(Region|string $region): self
     {
         $self = clone $this;
         $self['region'] = $region;

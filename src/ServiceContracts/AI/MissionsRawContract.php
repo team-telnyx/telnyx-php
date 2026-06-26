@@ -6,10 +6,12 @@ namespace Telnyx\ServiceContracts\AI;
 
 use Telnyx\AI\Missions\MissionCreateParams;
 use Telnyx\AI\Missions\MissionData;
+use Telnyx\AI\Missions\MissionGetResponse;
 use Telnyx\AI\Missions\MissionListEventsParams;
 use Telnyx\AI\Missions\MissionListParams;
-use Telnyx\AI\Missions\MissionResponse;
+use Telnyx\AI\Missions\MissionNewResponse;
 use Telnyx\AI\Missions\MissionUpdateMissionParams;
+use Telnyx\AI\Missions\MissionUpdateMissionResponse;
 use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -27,7 +29,7 @@ interface MissionsRawContract
      * @param array<string,mixed>|MissionCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionResponse>
+     * @return BaseResponse<MissionNewResponse>
      *
      * @throws APIException
      */
@@ -42,7 +44,7 @@ interface MissionsRawContract
      * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionResponse>
+     * @return BaseResponse<MissionGetResponse>
      *
      * @throws APIException
      */
@@ -118,7 +120,7 @@ interface MissionsRawContract
      * @param array<string,mixed>|MissionUpdateMissionParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionResponse>
+     * @return BaseResponse<MissionUpdateMissionResponse>
      *
      * @throws APIException
      */

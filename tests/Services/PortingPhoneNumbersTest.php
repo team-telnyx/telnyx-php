@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumber;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -43,7 +43,7 @@ final class PortingPhoneNumbersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PortingPhoneNumber::class, $item);
+            $this->assertInstanceOf(PortingPhoneNumberListResponse::class, $item);
         }
     }
 }

@@ -9,9 +9,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Recordings\RecordingDeleteResponse;
+use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams;
 use Telnyx\Recordings\RecordingListParams\Filter;
-use Telnyx\Recordings\RecordingResponse;
 use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsRawContract;
@@ -38,7 +39,7 @@ final class RecordingsRawService implements RecordingsRawContract
      * @param string $recordingID uniquely identifies the recording by id
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingResponse>
+     * @return BaseResponse<RecordingGetResponse>
      *
      * @throws APIException
      */
@@ -51,7 +52,7 @@ final class RecordingsRawService implements RecordingsRawContract
             method: 'get',
             path: ['recordings/%1$s', $recordingID],
             options: $requestOptions,
-            convert: RecordingResponse::class,
+            convert: RecordingGetResponse::class,
         );
     }
 
@@ -100,7 +101,7 @@ final class RecordingsRawService implements RecordingsRawContract
      * @param string $recordingID uniquely identifies the recording by id
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingResponse>
+     * @return BaseResponse<RecordingDeleteResponse>
      *
      * @throws APIException
      */
@@ -113,7 +114,7 @@ final class RecordingsRawService implements RecordingsRawContract
             method: 'delete',
             path: ['recordings/%1$s', $recordingID],
             options: $requestOptions,
-            convert: RecordingResponse::class,
+            convert: RecordingDeleteResponse::class,
         );
     }
 }

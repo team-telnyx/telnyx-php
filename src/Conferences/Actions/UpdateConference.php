@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
+use Telnyx\Conferences\Actions\UpdateConference\Region;
 use Telnyx\Conferences\Actions\UpdateConference\SupervisorRole;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -15,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callControlID: string,
  *   supervisorRole: SupervisorRole|value-of<SupervisorRole>,
  *   commandID?: string|null,
- *   region?: null|ConferenceRegion|value-of<ConferenceRegion>,
+ *   region?: null|Region|value-of<Region>,
  *   whisperCallControlIDs?: list<string>|null,
  * }
  */
@@ -47,9 +48,9 @@ final class UpdateConference implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @var value-of<ConferenceRegion>|null $region
+     * @var value-of<Region>|null $region
      */
-    #[Optional(enum: ConferenceRegion::class)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     /**
@@ -85,14 +86,14 @@ final class UpdateConference implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param SupervisorRole|value-of<SupervisorRole> $supervisorRole
-     * @param ConferenceRegion|value-of<ConferenceRegion>|null $region
+     * @param Region|value-of<Region>|null $region
      * @param list<string>|null $whisperCallControlIDs
      */
     public static function with(
         string $callControlID,
         SupervisorRole|string $supervisorRole,
         ?string $commandID = null,
-        ConferenceRegion|string|null $region = null,
+        Region|string|null $region = null,
         ?array $whisperCallControlIDs = null,
     ): self {
         $self = new self;
@@ -146,9 +147,9 @@ final class UpdateConference implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @param ConferenceRegion|value-of<ConferenceRegion> $region
+     * @param Region|value-of<Region> $region
      */
-    public function withRegion(ConferenceRegion|string $region): self
+    public function withRegion(Region|string $region): self
     {
         $self = clone $this;
         $self['region'] = $region;

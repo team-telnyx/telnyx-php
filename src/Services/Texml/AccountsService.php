@@ -14,8 +14,8 @@ use Telnyx\Services\Texml\Accounts\ConferencesService;
 use Telnyx\Services\Texml\Accounts\QueuesService;
 use Telnyx\Services\Texml\Accounts\RecordingsService;
 use Telnyx\Services\Texml\Accounts\TranscriptionsService;
+use Telnyx\Texml\Accounts\AccountGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 
 /**
  * TeXML REST Commands.
@@ -86,7 +86,7 @@ final class AccountsService implements AccountsContract
         ?int $page = null,
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TexmlGetCallRecordingsResponseBody {
+    ): AccountGetRecordingsJsonResponse {
         $params = Util::removeNulls(
             ['dateCreated' => $dateCreated, 'page' => $page, 'pageSize' => $pageSize]
         );

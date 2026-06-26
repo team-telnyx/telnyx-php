@@ -9,13 +9,13 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsJsonRawContract;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingTrack;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRetrieveRecordingsJsonParams;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 
 /**
  * TeXML REST Commands.
@@ -48,7 +48,7 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
      * }|RecordingsJsonRecordingsJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TexmlCreateCallRecordingResponseBody>
+     * @return BaseResponse<RecordingsJsonRecordingsJsonResponse>
      *
      * @throws APIException
      */
@@ -73,7 +73,7 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
-            convert: TexmlCreateCallRecordingResponseBody::class,
+            convert: RecordingsJsonRecordingsJsonResponse::class,
         );
     }
 
@@ -88,7 +88,7 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
      * }|RecordingsJsonRetrieveRecordingsJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TexmlGetCallRecordingsResponseBody>
+     * @return BaseResponse<RecordingsJsonGetRecordingsJsonResponse>
      *
      * @throws APIException
      */
@@ -111,7 +111,7 @@ final class RecordingsJsonRawService implements RecordingsJsonRawContract
                 'texml/Accounts/%1$s/Calls/%2$s/Recordings.json', $accountSid, $callSid,
             ],
             options: $options,
-            convert: TexmlGetCallRecordingsResponseBody::class,
+            convert: RecordingsJsonGetRecordingsJsonResponse::class,
         );
     }
 }

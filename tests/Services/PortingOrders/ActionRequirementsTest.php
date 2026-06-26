@@ -9,7 +9,7 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
-use Telnyx\PortingOrders\ActionRequirements\PortingActionRequirement;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -46,7 +46,7 @@ final class ActionRequirementsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PortingActionRequirement::class, $item);
+            $this->assertInstanceOf(ActionRequirementListResponse::class, $item);
         }
     }
 

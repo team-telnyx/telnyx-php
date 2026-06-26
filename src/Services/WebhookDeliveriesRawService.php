@@ -11,10 +11,10 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesRawContract;
-use Telnyx\WebhookDeliveries\WebhookDelivery;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
+use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 
 /**
  * Webhooks operations.
@@ -65,7 +65,7 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
      * }|WebhookDeliveryListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<WebhookDelivery>>
+     * @return BaseResponse<DefaultFlatPagination<WebhookDeliveryListResponse>>
      *
      * @throws APIException
      */
@@ -87,7 +87,7 @@ final class WebhookDeliveriesRawService implements WebhookDeliveriesRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: WebhookDelivery::class,
+            convert: WebhookDeliveryListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

@@ -8,16 +8,15 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\WireguardPeers\WireguardPeerCreateParams\Body;
 
 /**
  * Create a new WireGuard Peer. Current limitation of 5 peers per interface can be created.
  *
  * @see Telnyx\Services\WireguardPeersService::create()
  *
- * @phpstan-import-type BodyShape from \Telnyx\WireguardPeers\WireguardPeerCreateParams\Body
- *
- * @phpstan-type WireguardPeerCreateParamsShape = array{body: Body|BodyShape}
+ * @phpstan-type WireguardPeerCreateParamsShape = array{
+ *   wireguardInterfaceID: string
+ * }
  */
 final class WireguardPeerCreateParams implements BaseModel
 {
@@ -25,21 +24,24 @@ final class WireguardPeerCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Required]
-    public Body $body;
+    /**
+     * The id of the wireguard interface associated with the peer.
+     */
+    #[Required('wireguard_interface_id')]
+    public string $wireguardInterfaceID;
 
     /**
      * `new WireguardPeerCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * WireguardPeerCreateParams::with(body: ...)
+     * WireguardPeerCreateParams::with(wireguardInterfaceID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new WireguardPeerCreateParams)->withBody(...)
+     * (new WireguardPeerCreateParams)->withWireguardInterfaceID(...)
      * ```
      */
     public function __construct()
@@ -51,25 +53,23 @@ final class WireguardPeerCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param Body|BodyShape $body
      */
-    public static function with(Body|array $body): self
+    public static function with(string $wireguardInterfaceID): self
     {
         $self = new self;
 
-        $self['body'] = $body;
+        $self['wireguardInterfaceID'] = $wireguardInterfaceID;
 
         return $self;
     }
 
     /**
-     * @param Body|BodyShape $body
+     * The id of the wireguard interface associated with the peer.
      */
-    public function withBody(Body|array $body): self
+    public function withWireguardInterfaceID(string $wireguardInterfaceID): self
     {
         $self = clone $this;
-        $self['body'] = $body;
+        $self['wireguardInterfaceID'] = $wireguardInterfaceID;
 
         return $self;
     }

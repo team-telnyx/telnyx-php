@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\ObservabilityReq\PromptSync;
+use Telnyx\AI\Assistants\ObservabilityReq\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
@@ -13,11 +15,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *   host?: string|null,
  *   promptLabel?: string|null,
  *   promptName?: string|null,
- *   promptSync?: null|PromptSyncStatus|value-of<PromptSyncStatus>,
+ *   promptSync?: null|PromptSync|value-of<PromptSync>,
  *   promptVersion?: int|null,
  *   publicKeyRef?: string|null,
  *   secretKeyRef?: string|null,
- *   status?: null|ObservabilityStatus|value-of<ObservabilityStatus>,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class ObservabilityReq implements BaseModel
@@ -41,9 +43,9 @@ final class ObservabilityReq implements BaseModel
      * `instructions` to Langfuse via create_prompt and stores the returned
      * version in prompt_version.
      *
-     * @var value-of<PromptSyncStatus>|null $promptSync
+     * @var value-of<PromptSync>|null $promptSync
      */
-    #[Optional('prompt_sync', enum: PromptSyncStatus::class)]
+    #[Optional('prompt_sync', enum: PromptSync::class)]
     public ?string $promptSync;
 
     #[Optional('prompt_version')]
@@ -55,8 +57,8 @@ final class ObservabilityReq implements BaseModel
     #[Optional('secret_key_ref')]
     public ?string $secretKeyRef;
 
-    /** @var value-of<ObservabilityStatus>|null $status */
-    #[Optional(enum: ObservabilityStatus::class)]
+    /** @var value-of<Status>|null $status */
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     public function __construct()
@@ -69,18 +71,18 @@ final class ObservabilityReq implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PromptSyncStatus|value-of<PromptSyncStatus>|null $promptSync
-     * @param ObservabilityStatus|value-of<ObservabilityStatus>|null $status
+     * @param PromptSync|value-of<PromptSync>|null $promptSync
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $host = null,
         ?string $promptLabel = null,
         ?string $promptName = null,
-        PromptSyncStatus|string|null $promptSync = null,
+        PromptSync|string|null $promptSync = null,
         ?int $promptVersion = null,
         ?string $publicKeyRef = null,
         ?string $secretKeyRef = null,
-        ObservabilityStatus|string|null $status = null,
+        Status|string|null $status = null,
     ): self {
         $self = new self;
 
@@ -127,9 +129,9 @@ final class ObservabilityReq implements BaseModel
      * `instructions` to Langfuse via create_prompt and stores the returned
      * version in prompt_version.
      *
-     * @param PromptSyncStatus|value-of<PromptSyncStatus> $promptSync
+     * @param PromptSync|value-of<PromptSync> $promptSync
      */
-    public function withPromptSync(PromptSyncStatus|string $promptSync): self
+    public function withPromptSync(PromptSync|string $promptSync): self
     {
         $self = clone $this;
         $self['promptSync'] = $promptSync;
@@ -162,9 +164,9 @@ final class ObservabilityReq implements BaseModel
     }
 
     /**
-     * @param ObservabilityStatus|value-of<ObservabilityStatus> $status
+     * @param Status|value-of<Status> $status
      */
-    public function withStatus(ObservabilityStatus|string $status): self
+    public function withStatus(Status|string $status): self
     {
         $self = clone $this;
         $self['status'] = $status;

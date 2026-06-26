@@ -9,7 +9,6 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
 use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
 use Telnyx\MessagingProfiles\MessagingProfileDeleteResponse;
@@ -17,6 +16,7 @@ use Telnyx\MessagingProfiles\MessagingProfileGetMetricsResponse;
 use Telnyx\MessagingProfiles\MessagingProfileGetResponse;
 use Telnyx\MessagingProfiles\MessagingProfileListParams\Filter;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
+use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams\TimeFrame;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
 use Telnyx\MessagingProfiles\URLShortenerSettings;
@@ -405,14 +405,14 @@ final class MessagingProfilesService implements MessagingProfilesContract
      * Get detailed metrics for a specific messaging profile, broken down by time interval.
      *
      * @param string $id the identifier of the messaging profile
-     * @param MessagingMetricsTimeFrame|value-of<MessagingMetricsTimeFrame> $timeFrame the time frame for metrics
+     * @param TimeFrame|value-of<TimeFrame> $timeFrame the time frame for metrics
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieveMetrics(
         string $id,
-        MessagingMetricsTimeFrame|string $timeFrame = '24h',
+        TimeFrame|string $timeFrame = '24h',
         RequestOptions|array|null $requestOptions = null,
     ): MessagingProfileGetMetricsResponse {
         $params = Util::removeNulls(['timeFrame' => $timeFrame]);

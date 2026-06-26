@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Texml\Accounts\Transcriptions;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\Texml\Accounts\Transcriptions\Json\TexmlRecordingTranscription;
+use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -41,5 +41,5 @@ interface JsonContract
         string $recordingTranscriptionSid,
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
-    ): TexmlRecordingTranscription;
+    ): JsonGetRecordingTranscriptionSidJsonResponse;
 }

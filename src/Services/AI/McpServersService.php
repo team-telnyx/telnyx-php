@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\McpServers\McpServer;
+use Telnyx\AI\McpServers\McpServerGetResponse;
+use Telnyx\AI\McpServers\McpServerListResponse;
+use Telnyx\AI\McpServers\McpServerNewResponse;
+use Telnyx\AI\McpServers\McpServerUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -47,7 +50,7 @@ final class McpServersService implements McpServersContract
         ?array $allowedTools = null,
         ?string $apiKeyRef = null,
         RequestOptions|array|null $requestOptions = null,
-    ): McpServer {
+    ): McpServerNewResponse {
         $params = Util::removeNulls(
             [
                 'name' => $name,
@@ -77,7 +80,7 @@ final class McpServersService implements McpServersContract
     public function retrieve(
         string $mcpServerID,
         RequestOptions|array|null $requestOptions = null
-    ): McpServer {
+    ): McpServerGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($mcpServerID, requestOptions: $requestOptions);
 
@@ -105,7 +108,7 @@ final class McpServersService implements McpServersContract
         ?string $type = null,
         ?string $url = null,
         RequestOptions|array|null $requestOptions = null,
-    ): McpServer {
+    ): McpServerUpdateResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,
@@ -135,7 +138,7 @@ final class McpServersService implements McpServersContract
      * @param string $url filter results by url
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPaginationTopLevelArray<McpServer>
+     * @return DefaultFlatPaginationTopLevelArray<McpServerListResponse>
      *
      * @throws APIException
      */

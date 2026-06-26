@@ -5,7 +5,8 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\ChannelZones\GcbChannelZone;
+use Telnyx\ChannelZones\ChannelZoneListResponse;
+use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
@@ -42,7 +43,7 @@ final class ChannelZonesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(GcbChannelZone::class, $result);
+        $this->assertInstanceOf(ChannelZoneUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -58,7 +59,7 @@ final class ChannelZonesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(GcbChannelZone::class, $result);
+        $this->assertInstanceOf(ChannelZoneUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +76,7 @@ final class ChannelZonesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(GcbChannelZone::class, $item);
+            $this->assertInstanceOf(ChannelZoneListResponse::class, $item);
         }
     }
 }

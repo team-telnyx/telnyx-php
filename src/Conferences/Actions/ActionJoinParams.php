@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionJoinParams\BeepEnabled;
+use Telnyx\Conferences\Actions\ActionJoinParams\Region;
 use Telnyx\Conferences\Actions\ActionJoinParams\SupervisorRole;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -32,7 +33,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   holdAudioURL?: string|null,
  *   holdMediaName?: string|null,
  *   mute?: bool|null,
- *   region?: null|ConferenceRegion|value-of<ConferenceRegion>,
+ *   region?: null|Region|value-of<Region>,
  *   softEndConferenceOnExit?: bool|null,
  *   startConferenceOnEnter?: bool|null,
  *   supervisorRole?: null|SupervisorRole|value-of<SupervisorRole>,
@@ -104,9 +105,9 @@ final class ActionJoinParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @var value-of<ConferenceRegion>|null $region
+     * @var value-of<Region>|null $region
      */
-    #[Optional(enum: ConferenceRegion::class)]
+    #[Optional(enum: Region::class)]
     public ?string $region;
 
     /**
@@ -162,7 +163,7 @@ final class ActionJoinParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BeepEnabled|value-of<BeepEnabled>|null $beepEnabled
-     * @param ConferenceRegion|value-of<ConferenceRegion>|null $region
+     * @param Region|value-of<Region>|null $region
      * @param SupervisorRole|value-of<SupervisorRole>|null $supervisorRole
      * @param list<string>|null $whisperCallControlIDs
      */
@@ -176,7 +177,7 @@ final class ActionJoinParams implements BaseModel
         ?string $holdAudioURL = null,
         ?string $holdMediaName = null,
         ?bool $mute = null,
-        ConferenceRegion|string|null $region = null,
+        Region|string|null $region = null,
         ?bool $softEndConferenceOnExit = null,
         ?bool $startConferenceOnEnter = null,
         SupervisorRole|string|null $supervisorRole = null,
@@ -307,9 +308,9 @@ final class ActionJoinParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @param ConferenceRegion|value-of<ConferenceRegion> $region
+     * @param Region|value-of<Region> $region
      */
-    public function withRegion(ConferenceRegion|string $region): self
+    public function withRegion(Region|string $region): self
     {
         $self = clone $this;
         $self['region'] = $region;

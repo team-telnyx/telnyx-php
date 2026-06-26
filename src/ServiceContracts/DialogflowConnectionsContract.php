@@ -6,7 +6,9 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
-use Telnyx\DialogflowConnections\DialogflowConnectionResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -35,7 +37,7 @@ interface DialogflowConnectionsContract
         ?string $environment = null,
         ?string $location = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DialogflowConnectionResponse;
+    ): DialogflowConnectionNewResponse;
 
     /**
      * @api
@@ -48,7 +50,7 @@ interface DialogflowConnectionsContract
     public function retrieve(
         string $connectionID,
         RequestOptions|array|null $requestOptions = null
-    ): DialogflowConnectionResponse;
+    ): DialogflowConnectionGetResponse;
 
     /**
      * @api
@@ -71,7 +73,7 @@ interface DialogflowConnectionsContract
         ?string $environment = null,
         ?string $location = null,
         RequestOptions|array|null $requestOptions = null,
-    ): DialogflowConnectionResponse;
+    ): DialogflowConnectionUpdateResponse;
 
     /**
      * @api

@@ -7,7 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\InfringementClaims\InfringementClaimWrapped;
+use Telnyx\InfringementClaims\InfringementClaimContestResponse;
+use Telnyx\InfringementClaims\InfringementClaimGetResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -40,7 +41,7 @@ final class InfringementClaimsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(InfringementClaimWrapped::class, $result);
+        $this->assertInstanceOf(InfringementClaimGetResponse::class, $result);
     }
 
     #[Test]
@@ -56,7 +57,7 @@ final class InfringementClaimsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(InfringementClaimWrapped::class, $result);
+        $this->assertInstanceOf(InfringementClaimContestResponse::class, $result);
     }
 
     #[Test]
@@ -79,6 +80,6 @@ final class InfringementClaimsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(InfringementClaimWrapped::class, $result);
+        $this->assertInstanceOf(InfringementClaimContestResponse::class, $result);
     }
 }

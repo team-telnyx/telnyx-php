@@ -8,7 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Recordings\RecordingResponse;
+use Telnyx\Recordings\RecordingDeleteResponse;
+use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingResponseData;
 use Tests\UnsupportedMockTests;
 
@@ -40,7 +41,7 @@ final class RecordingsTest extends TestCase
         $result = $this->client->recordings->retrieve('recording_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RecordingResponse::class, $result);
+        $this->assertInstanceOf(RecordingGetResponse::class, $result);
     }
 
     #[Test]
@@ -71,6 +72,6 @@ final class RecordingsTest extends TestCase
         $result = $this->client->recordings->delete('recording_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(RecordingResponse::class, $result);
+        $this->assertInstanceOf(RecordingDeleteResponse::class, $result);
     }
 }

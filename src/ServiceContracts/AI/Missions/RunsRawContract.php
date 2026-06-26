@@ -5,15 +5,20 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Missions;
 
 use Telnyx\AI\Missions\Runs\MissionRunData;
-use Telnyx\AI\Missions\Runs\MissionRunResponse;
 use Telnyx\AI\Missions\Runs\RunCancelRunParams;
+use Telnyx\AI\Missions\Runs\RunCancelRunResponse;
 use Telnyx\AI\Missions\Runs\RunCreateParams;
+use Telnyx\AI\Missions\Runs\RunGetResponse;
 use Telnyx\AI\Missions\Runs\RunListParams;
 use Telnyx\AI\Missions\Runs\RunListRunsParams;
+use Telnyx\AI\Missions\Runs\RunNewResponse;
 use Telnyx\AI\Missions\Runs\RunPauseRunParams;
+use Telnyx\AI\Missions\Runs\RunPauseRunResponse;
 use Telnyx\AI\Missions\Runs\RunResumeRunParams;
+use Telnyx\AI\Missions\Runs\RunResumeRunResponse;
 use Telnyx\AI\Missions\Runs\RunRetrieveParams;
 use Telnyx\AI\Missions\Runs\RunUpdateParams;
+use Telnyx\AI\Missions\Runs\RunUpdateResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
@@ -31,7 +36,7 @@ interface RunsRawContract
      * @param array<string,mixed>|RunCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunNewResponse>
      *
      * @throws APIException
      */
@@ -48,7 +53,7 @@ interface RunsRawContract
      * @param array<string,mixed>|RunRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunGetResponse>
      *
      * @throws APIException
      */
@@ -65,7 +70,7 @@ interface RunsRawContract
      * @param array<string,mixed>|RunUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunUpdateResponse>
      *
      * @throws APIException
      */
@@ -99,7 +104,7 @@ interface RunsRawContract
      * @param array<string,mixed>|RunCancelRunParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunCancelRunResponse>
      *
      * @throws APIException
      */
@@ -131,7 +136,7 @@ interface RunsRawContract
      * @param array<string,mixed>|RunPauseRunParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunPauseRunResponse>
      *
      * @throws APIException
      */
@@ -148,7 +153,7 @@ interface RunsRawContract
      * @param array<string,mixed>|RunResumeRunParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionRunResponse>
+     * @return BaseResponse<RunResumeRunResponse>
      *
      * @throws APIException
      */

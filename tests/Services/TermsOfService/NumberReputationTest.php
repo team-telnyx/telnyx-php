@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
+use Telnyx\TermsOfService\NumberReputation\NumberReputationAgreeResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,6 +38,6 @@ final class NumberReputationTest extends TestCase
         $result = $this->client->termsOfService->numberReputation->agree();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TosAgreementWrapped::class, $result);
+        $this->assertInstanceOf(NumberReputationAgreeResponse::class, $result);
     }
 }

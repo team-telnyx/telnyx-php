@@ -10,10 +10,11 @@ use Telnyx\Core\Util;
 use Telnyx\Messaging10dlc\Brand\AltBusinessIDType;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
+use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceResponse;
+use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Messaging10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Messaging10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Messaging10dlc\Brand\BrandListResponse;
-use Telnyx\Messaging10dlc\Brand\BrandSMSOtpStatus;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Messaging10dlc\Brand\EntityType;
 use Telnyx\Messaging10dlc\Brand\StockExchange;
@@ -393,7 +394,7 @@ final class BrandService implements BrandContract
         string $referenceID,
         ?string $brandID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): BrandSMSOtpStatus {
+    ): BrandGetSMSOtpByReferenceResponse {
         $params = Util::removeNulls(['brandID' => $brandID]);
 
         // @phpstan-ignore-next-line argument.type
@@ -441,7 +442,7 @@ final class BrandService implements BrandContract
     public function retrieveSMSOtpStatus(
         string $brandID,
         RequestOptions|array|null $requestOptions = null
-    ): BrandSMSOtpStatus {
+    ): BrandGetSMSOtpStatusResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveSMSOtpStatus($brandID, requestOptions: $requestOptions);
 

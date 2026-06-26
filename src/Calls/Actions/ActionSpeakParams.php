@@ -10,16 +10,16 @@ use Telnyx\Calls\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Calls\Actions\ActionSpeakParams\ServiceLevel;
 use Telnyx\Calls\Actions\ActionSpeakParams\TargetLegs;
 use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings;
+use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Convert text to speech and play it back on the call. If multiple speak text commands are issued consecutively, the audio files will be placed in a queue awaiting playback.

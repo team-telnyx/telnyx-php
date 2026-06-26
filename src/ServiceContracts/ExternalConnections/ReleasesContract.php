@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\ExternalConnections\Releases\Release;
 use Telnyx\ExternalConnections\Releases\ReleaseGetResponse;
 use Telnyx\ExternalConnections\Releases\ReleaseListParams\Filter;
+use Telnyx\ExternalConnections\Releases\ReleaseListResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -39,7 +39,7 @@ interface ReleasesContract
      * @param Filter|FilterShape $filter Filter parameter for releases (deepObject style). Supports filtering by status, civic_address_id, location_id, and phone_number with eq/contains operations.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<Release>
+     * @return DefaultFlatPagination<ReleaseListResponse>
      *
      * @throws APIException
      */

@@ -5,10 +5,11 @@ namespace Tests\Services\AI\Missions\Runs;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanResponse;
 use Telnyx\AI\Missions\Runs\Plan\PlanGetResponse;
-use Telnyx\AI\Missions\Runs\Plan\PlanStepResponse;
-use Telnyx\AI\Missions\Runs\Plan\PlanStepsCreatedResponse;
-use Telnyx\AI\Missions\Runs\Plan\StepStatus;
+use Telnyx\AI\Missions\Runs\Plan\PlanGetStepDetailsResponse;
+use Telnyx\AI\Missions\Runs\Plan\PlanNewResponse;
+use Telnyx\AI\Missions\Runs\Plan\PlanUpdateStepResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -47,7 +48,7 @@ final class PlanTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PlanStepsCreatedResponse::class, $result);
+        $this->assertInstanceOf(PlanNewResponse::class, $result);
     }
 
     #[Test]
@@ -72,7 +73,7 @@ final class PlanTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PlanStepsCreatedResponse::class, $result);
+        $this->assertInstanceOf(PlanNewResponse::class, $result);
     }
 
     #[Test]
@@ -123,7 +124,7 @@ final class PlanTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PlanStepsCreatedResponse::class, $result);
+        $this->assertInstanceOf(PlanAddStepsToPlanResponse::class, $result);
     }
 
     #[Test]
@@ -148,7 +149,7 @@ final class PlanTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PlanStepsCreatedResponse::class, $result);
+        $this->assertInstanceOf(PlanAddStepsToPlanResponse::class, $result);
     }
 
     #[Test]
@@ -165,7 +166,7 @@ final class PlanTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PlanStepResponse::class, $result);
+        $this->assertInstanceOf(PlanGetStepDetailsResponse::class, $result);
     }
 
     #[Test]
@@ -182,7 +183,7 @@ final class PlanTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PlanStepResponse::class, $result);
+        $this->assertInstanceOf(PlanGetStepDetailsResponse::class, $result);
     }
 
     #[Test]
@@ -199,7 +200,7 @@ final class PlanTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PlanStepResponse::class, $result);
+        $this->assertInstanceOf(PlanUpdateStepResponse::class, $result);
     }
 
     #[Test]
@@ -214,10 +215,10 @@ final class PlanTest extends TestCase
             missionID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             runID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
             metadata: ['foo' => 'bar'],
-            status: StepStatus::PENDING,
+            status: 'pending',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PlanStepResponse::class, $result);
+        $this->assertInstanceOf(PlanUpdateStepResponse::class, $result);
     }
 }

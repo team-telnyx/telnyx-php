@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\WireguardPeers\WireguardPeer;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
+use Telnyx\WireguardPeers\WireguardPeerListResponse;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -40,7 +40,9 @@ final class WireguardPeersTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->wireguardPeers->create(body: []);
+        $result = $this->client->wireguardPeers->create(
+            wireguardInterfaceID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WireguardPeerNewResponse::class, $result);
@@ -53,7 +55,9 @@ final class WireguardPeersTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->wireguardPeers->create(body: []);
+        $result = $this->client->wireguardPeers->create(
+            wireguardInterfaceID: '6a09cdc3-8948-47f0-aa62-74ac943d6c58'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WireguardPeerNewResponse::class, $result);
@@ -103,7 +107,7 @@ final class WireguardPeersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(WireguardPeer::class, $item);
+            $this->assertInstanceOf(WireguardPeerListResponse::class, $item);
         }
     }
 

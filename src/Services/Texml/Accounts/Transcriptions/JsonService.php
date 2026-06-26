@@ -9,7 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonContract;
-use Telnyx\Texml\Accounts\Transcriptions\Json\TexmlRecordingTranscription;
+use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 
 /**
  * TeXML REST Commands.
@@ -70,7 +70,7 @@ final class JsonService implements JsonContract
         string $recordingTranscriptionSid,
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
-    ): TexmlRecordingTranscription {
+    ): JsonGetRecordingTranscriptionSidJsonResponse {
         $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type

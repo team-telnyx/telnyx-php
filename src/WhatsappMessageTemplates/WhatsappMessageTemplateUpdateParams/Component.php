@@ -7,20 +7,20 @@ namespace Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
-use Telnyx\Whatsapp\Templates\WhatsappTemplateBodyComponent;
-use Telnyx\Whatsapp\Templates\WhatsappTemplateButtonsComponent;
-use Telnyx\Whatsapp\Templates\WhatsappTemplateCarouselComponent;
-use Telnyx\Whatsapp\Templates\WhatsappTemplateFooterComponent;
-use Telnyx\Whatsapp\Templates\WhatsappTemplateHeaderComponent;
+use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateBodyComponent;
+use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateButtonsComponent;
+use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateCarouselComponent;
+use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateFooterComponent;
+use Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateHeaderComponent;
 
 /**
  * A template component. Additional Meta component types not listed here are also accepted.
  *
- * @phpstan-import-type WhatsappTemplateHeaderComponentShape from \Telnyx\Whatsapp\Templates\WhatsappTemplateHeaderComponent
- * @phpstan-import-type WhatsappTemplateBodyComponentShape from \Telnyx\Whatsapp\Templates\WhatsappTemplateBodyComponent
- * @phpstan-import-type WhatsappTemplateFooterComponentShape from \Telnyx\Whatsapp\Templates\WhatsappTemplateFooterComponent
- * @phpstan-import-type WhatsappTemplateButtonsComponentShape from \Telnyx\Whatsapp\Templates\WhatsappTemplateButtonsComponent
- * @phpstan-import-type WhatsappTemplateCarouselComponentShape from \Telnyx\Whatsapp\Templates\WhatsappTemplateCarouselComponent
+ * @phpstan-import-type WhatsappTemplateHeaderComponentShape from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateHeaderComponent
+ * @phpstan-import-type WhatsappTemplateBodyComponentShape from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateBodyComponent
+ * @phpstan-import-type WhatsappTemplateFooterComponentShape from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateFooterComponent
+ * @phpstan-import-type WhatsappTemplateButtonsComponentShape from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateButtonsComponent
+ * @phpstan-import-type WhatsappTemplateCarouselComponentShape from \Telnyx\WhatsappMessageTemplates\WhatsappMessageTemplateUpdateParams\Component\WhatsappTemplateCarouselComponent
  *
  * @phpstan-type ComponentVariants = WhatsappTemplateHeaderComponent|WhatsappTemplateBodyComponent|WhatsappTemplateFooterComponent|WhatsappTemplateButtonsComponent|WhatsappTemplateCarouselComponent
  * @phpstan-type ComponentShape = ComponentVariants|WhatsappTemplateHeaderComponentShape|WhatsappTemplateBodyComponentShape|WhatsappTemplateFooterComponentShape|WhatsappTemplateButtonsComponentShape|WhatsappTemplateCarouselComponentShape

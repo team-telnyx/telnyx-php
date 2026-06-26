@@ -7,10 +7,10 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\RoomRecordings\RoomRecording;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse;
 use Telnyx\RoomRecordings\RoomRecordingListParams\Filter;
+use Telnyx\RoomRecordings\RoomRecordingListResponse;
 
 /**
  * @phpstan-import-type FilterShape from \Telnyx\RoomRecordings\RoomRecordingListParams\Filter
@@ -38,7 +38,7 @@ interface RoomRecordingsContract
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[date_ended_at][eq], filter[date_ended_at][gte], filter[date_ended_at][lte], filter[date_started_at][eq], filter[date_started_at][gte], filter[date_started_at][lte], filter[room_id], filter[participant_id], filter[session_id], filter[status], filter[type], filter[duration_secs]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<RoomRecording>
+     * @return DefaultFlatPagination<RoomRecordingListResponse>
      *
      * @throws APIException
      */

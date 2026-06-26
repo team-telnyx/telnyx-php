@@ -9,16 +9,17 @@ use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams;
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
+use Telnyx\Conferences\ConferenceGetParticipantResponse;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams;
 use Telnyx\Conferences\ConferenceListParams\Filter;
 use Telnyx\Conferences\ConferenceListParticipantsParams;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
-use Telnyx\Conferences\ConferenceParticipantResource;
 use Telnyx\Conferences\ConferenceRetrieveParams;
 use Telnyx\Conferences\ConferenceRetrieveParticipantParams;
 use Telnyx\Conferences\ConferenceUpdateParticipantParams;
+use Telnyx\Conferences\ConferenceUpdateParticipantResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -220,7 +221,7 @@ final class ConferencesRawService implements ConferencesRawContract
      * @param array{id: string}|ConferenceRetrieveParticipantParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceParticipantResource>
+     * @return BaseResponse<ConferenceGetParticipantResponse>
      *
      * @throws APIException
      */
@@ -241,7 +242,7 @@ final class ConferencesRawService implements ConferencesRawContract
             method: 'get',
             path: ['conferences/%1$s/participants/%2$s', $id, $participantID],
             options: $options,
-            convert: ConferenceParticipantResource::class,
+            convert: ConferenceGetParticipantResponse::class,
         );
     }
 
@@ -259,7 +260,7 @@ final class ConferencesRawService implements ConferencesRawContract
      * }|ConferenceUpdateParticipantParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceParticipantResource>
+     * @return BaseResponse<ConferenceUpdateParticipantResponse>
      *
      * @throws APIException
      */
@@ -281,7 +282,7 @@ final class ConferencesRawService implements ConferencesRawContract
             path: ['conferences/%1$s/participants/%2$s', $id, $participantID],
             body: (object) array_diff_key($parsed, array_flip(['id'])),
             options: $options,
-            convert: ConferenceParticipantResource::class,
+            convert: ConferenceUpdateParticipantResponse::class,
         );
     }
 }

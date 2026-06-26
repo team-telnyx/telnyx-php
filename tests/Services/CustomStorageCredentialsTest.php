@@ -7,7 +7,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\CustomStorageCredentials\CredentialsResponse;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialGetResponse;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialNewResponse;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +44,7 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CredentialsResponse::class, $result);
+        $this->assertInstanceOf(CustomStorageCredentialNewResponse::class, $result);
     }
 
     #[Test]
@@ -63,7 +65,7 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CredentialsResponse::class, $result);
+        $this->assertInstanceOf(CustomStorageCredentialNewResponse::class, $result);
     }
 
     #[Test]
@@ -78,7 +80,7 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CredentialsResponse::class, $result);
+        $this->assertInstanceOf(CustomStorageCredentialGetResponse::class, $result);
     }
 
     #[Test]
@@ -95,7 +97,10 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CredentialsResponse::class, $result);
+        $this->assertInstanceOf(
+            CustomStorageCredentialUpdateResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -116,7 +121,10 @@ final class CustomStorageCredentialsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CredentialsResponse::class, $result);
+        $this->assertInstanceOf(
+            CustomStorageCredentialUpdateResponse::class,
+            $result
+        );
     }
 
     #[Test]

@@ -7,10 +7,10 @@ namespace Telnyx\Texml\Accounts;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\Transcriptions\Json\TexmlRecordingTranscription;
+use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription;
 
 /**
- * @phpstan-import-type TexmlRecordingTranscriptionShape from \Telnyx\Texml\Accounts\Transcriptions\Json\TexmlRecordingTranscription
+ * @phpstan-import-type TranscriptionShape from \Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse\Transcription
  *
  * @phpstan-type AccountGetTranscriptionsJsonResponseShape = array{
  *   end?: int|null,
@@ -20,7 +20,7 @@ use Telnyx\Texml\Accounts\Transcriptions\Json\TexmlRecordingTranscription;
  *   pageSize?: int|null,
  *   previousPageUri?: string|null,
  *   start?: int|null,
- *   transcriptions?: list<TexmlRecordingTranscription|TexmlRecordingTranscriptionShape>|null,
+ *   transcriptions?: list<Transcription|TranscriptionShape>|null,
  *   uri?: string|null,
  * }
  */
@@ -71,8 +71,8 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     #[Optional]
     public ?int $start;
 
-    /** @var list<TexmlRecordingTranscription>|null $transcriptions */
-    #[Optional(list: TexmlRecordingTranscription::class)]
+    /** @var list<Transcription>|null $transcriptions */
+    #[Optional(list: Transcription::class)]
     public ?array $transcriptions;
 
     /**
@@ -91,7 +91,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<TexmlRecordingTranscription|TexmlRecordingTranscriptionShape>|null $transcriptions
+     * @param list<Transcription|TranscriptionShape>|null $transcriptions
      */
     public static function with(
         ?int $end = null,
@@ -197,7 +197,7 @@ final class AccountGetTranscriptionsJsonResponse implements BaseModel
     }
 
     /**
-     * @param list<TexmlRecordingTranscription|TexmlRecordingTranscriptionShape> $transcriptions
+     * @param list<Transcription|TranscriptionShape> $transcriptions
      */
     public function withTranscriptions(array $transcriptions): self
     {

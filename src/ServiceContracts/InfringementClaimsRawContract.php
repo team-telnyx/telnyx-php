@@ -7,7 +7,8 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\InfringementClaims\InfringementClaimContestParams;
-use Telnyx\InfringementClaims\InfringementClaimWrapped;
+use Telnyx\InfringementClaims\InfringementClaimContestResponse;
+use Telnyx\InfringementClaims\InfringementClaimGetResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -21,7 +22,7 @@ interface InfringementClaimsRawContract
      * @param string $claimID claim id (lowercase UUID)
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<InfringementClaimWrapped>
+     * @return BaseResponse<InfringementClaimGetResponse>
      *
      * @throws APIException
      */
@@ -37,7 +38,7 @@ interface InfringementClaimsRawContract
      * @param array<string,mixed>|InfringementClaimContestParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<InfringementClaimWrapped>
+     * @return BaseResponse<InfringementClaimContestResponse>
      *
      * @throws APIException
      */

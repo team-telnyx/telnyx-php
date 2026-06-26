@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TermsOfService\Agreements\TosProductType;
-use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
-use Telnyx\TermsOfService\TermsOfServiceGetStatusResponse;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoResponse;
+use Telnyx\TermsOfService\TermsOfServiceStatusResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -18,26 +18,26 @@ interface TermsOfServiceContract
     /**
      * @api
      *
-     * @param TosProductType|value-of<TosProductType> $productType Optional product filter. Omit to return info for all products.
+     * @param ProductType|value-of<ProductType> $productType Optional product filter. Omit to return info for all products.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function retrieveInfo(
-        TosProductType|string|null $productType = null,
+    public function info(
+        ProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TermsOfServiceGetInfoResponse;
+    ): TermsOfServiceInfoResponse;
 
     /**
      * @api
      *
-     * @param TosProductType|value-of<TosProductType> $productType Which product's ToS to check. Defaults to `branded_calling`.
+     * @param \Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType|value-of<\Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType> $productType Which product's ToS to check. Defaults to `branded_calling`.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function retrieveStatus(
-        TosProductType|string|null $productType = null,
+    public function status(
+        \Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TermsOfServiceGetStatusResponse;
+    ): TermsOfServiceStatusResponse;
 }

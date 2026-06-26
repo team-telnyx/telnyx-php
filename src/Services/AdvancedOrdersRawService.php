@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AdvancedOrders\AdvancedOrder;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
+use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -44,7 +46,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      * }|AdvancedOrderCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AdvancedOrder>
+     * @return BaseResponse<AdvancedOrderNewResponse>
      *
      * @throws APIException
      */
@@ -63,7 +65,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
             path: 'advanced_orders',
             body: (object) $parsed,
             options: $options,
-            convert: AdvancedOrder::class,
+            convert: AdvancedOrderNewResponse::class,
         );
     }
 
@@ -75,7 +77,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      * @param string $orderID unique identifier of the order
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AdvancedOrder>
+     * @return BaseResponse<AdvancedOrderGetResponse>
      *
      * @throws APIException
      */
@@ -88,7 +90,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
             method: 'get',
             path: ['advanced_orders/%1$s', $orderID],
             options: $requestOptions,
-            convert: AdvancedOrder::class,
+            convert: AdvancedOrderGetResponse::class,
         );
     }
 
@@ -133,7 +135,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
      * }|AdvancedOrderUpdateRequirementGroupParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AdvancedOrder>
+     * @return BaseResponse<AdvancedOrderUpdateRequirementGroupResponse>
      *
      * @throws APIException
      */
@@ -153,7 +155,7 @@ final class AdvancedOrdersRawService implements AdvancedOrdersRawContract
             path: ['advanced_orders/%1$s/requirement_group', $advancedOrderID],
             body: (object) $parsed,
             options: $options,
-            convert: AdvancedOrder::class,
+            convert: AdvancedOrderUpdateRequirementGroupResponse::class,
         );
     }
 }

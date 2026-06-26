@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationListParams\FilterStatus;
 
 /**
  * Paginated list of remediation requests for this enterprise. List items omit per-number results and webhook URLs to keep the response small; call GET by id for full detail. Supports JSON:API pagination and optional filters on status and created-at range.
@@ -17,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type RemediationListParamsShape = array{
  *   filterCreatedAtGte?: \DateTimeInterface|null,
  *   filterCreatedAtLte?: \DateTimeInterface|null,
- *   filterStatus?: null|RemediationStatus|value-of<RemediationStatus>,
+ *   filterStatus?: null|FilterStatus|value-of<FilterStatus>,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  * }
@@ -43,9 +44,9 @@ final class RemediationListParams implements BaseModel
     /**
      * Filter by customer-facing status.
      *
-     * @var value-of<RemediationStatus>|null $filterStatus
+     * @var value-of<FilterStatus>|null $filterStatus
      */
-    #[Optional(enum: RemediationStatus::class)]
+    #[Optional(enum: FilterStatus::class)]
     public ?string $filterStatus;
 
     /**
@@ -70,12 +71,12 @@ final class RemediationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RemediationStatus|value-of<RemediationStatus>|null $filterStatus
+     * @param FilterStatus|value-of<FilterStatus>|null $filterStatus
      */
     public static function with(
         ?\DateTimeInterface $filterCreatedAtGte = null,
         ?\DateTimeInterface $filterCreatedAtLte = null,
-        RemediationStatus|string|null $filterStatus = null,
+        FilterStatus|string|null $filterStatus = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
@@ -117,11 +118,10 @@ final class RemediationListParams implements BaseModel
     /**
      * Filter by customer-facing status.
      *
-     * @param RemediationStatus|value-of<RemediationStatus> $filterStatus
+     * @param FilterStatus|value-of<FilterStatus> $filterStatus
      */
-    public function withFilterStatus(
-        RemediationStatus|string $filterStatus
-    ): self {
+    public function withFilterStatus(FilterStatus|string $filterStatus): self
+    {
         $self = clone $this;
         $self['filterStatus'] = $filterStatus;
 

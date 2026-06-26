@@ -8,7 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForQueues;
-use Telnyx\Texml\Accounts\Queues\QueueResource;
+use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
+use Telnyx\Texml\Accounts\Queues\QueueListResponse;
+use Telnyx\Texml\Accounts\Queues\QueueNewResponse;
+use Telnyx\Texml\Accounts\Queues\QueueUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +42,7 @@ final class QueuesTest extends TestCase
         $result = $this->client->texml->accounts->queues->create('account_sid');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(QueueResource::class, $result);
+        $this->assertInstanceOf(QueueNewResponse::class, $result);
     }
 
     #[Test]
@@ -55,7 +58,7 @@ final class QueuesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(QueueResource::class, $result);
+        $this->assertInstanceOf(QueueGetResponse::class, $result);
     }
 
     #[Test]
@@ -71,7 +74,7 @@ final class QueuesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(QueueResource::class, $result);
+        $this->assertInstanceOf(QueueGetResponse::class, $result);
     }
 
     #[Test]
@@ -87,7 +90,7 @@ final class QueuesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(QueueResource::class, $result);
+        $this->assertInstanceOf(QueueUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -104,7 +107,7 @@ final class QueuesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(QueueResource::class, $result);
+        $this->assertInstanceOf(QueueUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -121,7 +124,7 @@ final class QueuesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(QueueResource::class, $item);
+            $this->assertInstanceOf(QueueListResponse::class, $item);
         }
     }
 

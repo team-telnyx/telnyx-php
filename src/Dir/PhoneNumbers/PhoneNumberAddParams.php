@@ -8,7 +8,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\Document;
+use Telnyx\Dir\PhoneNumbers\PhoneNumberAddParams\Document;
 
 /**
  * Register phone numbers under a DIR. The enterprise is resolved server-side from the DIR id. Same body, failure modes, and batch semantics whichever path form you use.
@@ -17,7 +17,7 @@ use Telnyx\Dir\Document;
  *
  * @see Telnyx\Services\Dir\PhoneNumbersService::add()
  *
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\PhoneNumbers\PhoneNumberAddParams\Document
  *
  * @phpstan-type PhoneNumberAddParamsShape = array{
  *   documents: list<Document|DocumentShape>, phoneNumbers: list<string>

@@ -9,8 +9,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\Comments\CommentCreateParams;
 use Telnyx\PortingOrders\Comments\CommentListParams;
+use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
-use Telnyx\PortingOrders\Comments\PortingOrdersComment;
 use Telnyx\RequestOptions;
 
 /**
@@ -42,7 +42,7 @@ interface CommentsRawContract
      * @param array<string,mixed>|CommentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingOrdersComment>>
+     * @return BaseResponse<DefaultFlatPagination<CommentListResponse>>
      *
      * @throws APIException
      */

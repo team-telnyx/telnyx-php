@@ -7,12 +7,13 @@ namespace Telnyx\WebhookDeliveries;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data;
 
 /**
- * @phpstan-import-type WebhookDeliveryShape from \Telnyx\WebhookDeliveries\WebhookDelivery
+ * @phpstan-import-type DataShape from \Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse\Data
  *
  * @phpstan-type WebhookDeliveryGetResponseShape = array{
- *   data?: null|WebhookDelivery|WebhookDeliveryShape
+ *   data?: null|Data|DataShape
  * }
  */
 final class WebhookDeliveryGetResponse implements BaseModel
@@ -24,7 +25,7 @@ final class WebhookDeliveryGetResponse implements BaseModel
      * Record of all attempts to deliver a webhook.
      */
     #[Optional]
-    public ?WebhookDelivery $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -36,9 +37,9 @@ final class WebhookDeliveryGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WebhookDelivery|WebhookDeliveryShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(WebhookDelivery|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -50,9 +51,9 @@ final class WebhookDeliveryGetResponse implements BaseModel
     /**
      * Record of all attempts to deliver a webhook.
      *
-     * @param WebhookDelivery|WebhookDeliveryShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(WebhookDelivery|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

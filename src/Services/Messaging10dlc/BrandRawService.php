@@ -13,11 +13,12 @@ use Telnyx\Messaging10dlc\Brand\BrandCreateParams;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceParams;
+use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceResponse;
+use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Messaging10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Messaging10dlc\Brand\BrandListParams;
 use Telnyx\Messaging10dlc\Brand\BrandListParams\Sort;
 use Telnyx\Messaging10dlc\Brand\BrandListResponse;
-use Telnyx\Messaging10dlc\Brand\BrandSMSOtpStatus;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpParams;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Messaging10dlc\Brand\BrandUpdateParams;
@@ -306,7 +307,7 @@ final class BrandRawService implements BrandRawContract
      * @param array{brandID?: string}|BrandGetSMSOtpByReferenceParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<BrandSMSOtpStatus>
+     * @return BaseResponse<BrandGetSMSOtpByReferenceResponse>
      *
      * @throws APIException
      */
@@ -326,7 +327,7 @@ final class BrandRawService implements BrandRawContract
             path: ['10dlc/brand/smsOtp/%1$s', $referenceID],
             query: Util::array_transform_keys($parsed, ['brandID' => 'brandId']),
             options: $options,
-            convert: BrandSMSOtpStatus::class,
+            convert: BrandGetSMSOtpByReferenceResponse::class,
         );
     }
 
@@ -369,7 +370,7 @@ final class BrandRawService implements BrandRawContract
      * @param string $brandID The Brand ID for which to query OTP status
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<BrandSMSOtpStatus>
+     * @return BaseResponse<BrandGetSMSOtpStatusResponse>
      *
      * @throws APIException
      */
@@ -382,7 +383,7 @@ final class BrandRawService implements BrandRawContract
             method: 'get',
             path: ['10dlc/brand/%1$s/smsOtp', $brandID],
             options: $requestOptions,
-            convert: BrandSMSOtpStatus::class,
+            convert: BrandGetSMSOtpStatusResponse::class,
         );
     }
 

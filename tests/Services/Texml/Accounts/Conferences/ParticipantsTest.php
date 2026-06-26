@@ -8,8 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsResponse;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantResource;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -51,7 +52,7 @@ final class ParticipantsTest extends TestCase
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ParticipantResource::class, $result);
+        $this->assertInstanceOf(ParticipantGetResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +76,7 @@ final class ParticipantsTest extends TestCase
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ParticipantResource::class, $result);
+        $this->assertInstanceOf(ParticipantGetResponse::class, $result);
     }
 
     #[Test]
@@ -92,7 +93,7 @@ final class ParticipantsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ParticipantResource::class, $result);
+        $this->assertInstanceOf(ParticipantUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -120,7 +121,7 @@ final class ParticipantsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ParticipantResource::class, $result);
+        $this->assertInstanceOf(ParticipantUpdateResponse::class, $result);
     }
 
     #[Test]

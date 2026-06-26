@@ -10,5 +10,15 @@ parameters:
         - identifier: parameter.defaultValue
         - identifier: trait.unused
         - identifier: property.onlyWritten
+        # WebSocket library casts mixed values from JSON arrays - these are safe
+        -
+            identifier: cast.string
+            path: src/Lib/WebSocket/*
+        -
+            identifier: cast.int
+            path: src/Lib/WebSocket/*
+        -
+            identifier: cast.double
+            path: src/Lib/WebSocket/*
 
     reportUnmatchedIgnoredErrors: false

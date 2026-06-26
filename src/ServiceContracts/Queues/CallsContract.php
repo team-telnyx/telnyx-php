@@ -7,7 +7,7 @@ namespace Telnyx\ServiceContracts\Queues;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
-use Telnyx\Queues\Calls\QueueCall;
+use Telnyx\Queues\Calls\CallListResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -53,7 +53,7 @@ interface CallsContract
      * @param string $queueName Uniquely identifies the queue by name
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<QueueCall>
+     * @return DefaultFlatPagination<CallListResponse>
      *
      * @throws APIException
      */

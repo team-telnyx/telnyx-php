@@ -6,10 +6,10 @@ namespace Telnyx\ServiceContracts\ExternalConnections;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPaginationForLogMessages;
-use Telnyx\ExternalConnections\LogMessages\LogMessage;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter;
+use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -37,7 +37,7 @@ interface LogMessagesContract
      * @param Filter|FilterShape $filter Filter parameter for log messages (deepObject style). Supports filtering by external_connection_id and telephone_number with eq/contains operations.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPaginationForLogMessages<LogMessage>
+     * @return DefaultPaginationForLogMessages<LogMessageListResponse>
      *
      * @throws APIException
      */

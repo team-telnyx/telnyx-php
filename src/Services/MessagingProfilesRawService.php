@@ -10,7 +10,6 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
 use Telnyx\MessagingProfiles\MessagingProfile;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams;
 use Telnyx\MessagingProfiles\MessagingProfileCreateParams\WebhookAPIVersion;
@@ -24,6 +23,7 @@ use Telnyx\MessagingProfiles\MessagingProfileListPhoneNumbersParams;
 use Telnyx\MessagingProfiles\MessagingProfileListShortCodesParams;
 use Telnyx\MessagingProfiles\MessagingProfileNewResponse;
 use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams;
+use Telnyx\MessagingProfiles\MessagingProfileRetrieveMetricsParams\TimeFrame;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateParams;
 use Telnyx\MessagingProfiles\MessagingProfileUpdateResponse;
 use Telnyx\MessagingProfiles\NumberPoolSettings;
@@ -368,7 +368,7 @@ final class MessagingProfilesRawService implements MessagingProfilesRawContract
      *
      * @param string $id the identifier of the messaging profile
      * @param array{
-     *   timeFrame?: MessagingMetricsTimeFrame|value-of<MessagingMetricsTimeFrame>
+     *   timeFrame?: TimeFrame|value-of<TimeFrame>
      * }|MessagingProfileRetrieveMetricsParams $params
      * @param RequestOpts|null $requestOptions
      *

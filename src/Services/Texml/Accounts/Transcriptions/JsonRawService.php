@@ -10,8 +10,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Transcriptions\JsonRawContract;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonDeleteRecordingTranscriptionSidJsonParams;
+use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonRetrieveRecordingTranscriptionSidJsonParams;
-use Telnyx\Texml\Accounts\Transcriptions\Json\TexmlRecordingTranscription;
 
 /**
  * TeXML REST Commands.
@@ -77,7 +77,7 @@ final class JsonRawService implements JsonRawContract
      * }|JsonRetrieveRecordingTranscriptionSidJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TexmlRecordingTranscription>
+     * @return BaseResponse<JsonGetRecordingTranscriptionSidJsonResponse>
      *
      * @throws APIException
      */
@@ -102,7 +102,7 @@ final class JsonRawService implements JsonRawContract
                 $recordingTranscriptionSid,
             ],
             options: $options,
-            convert: TexmlRecordingTranscription::class,
+            convert: JsonGetRecordingTranscriptionSidJsonResponse::class,
         );
     }
 }

@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Dir\DirListParams\FilterStatus;
 use Telnyx\Dir\DirListParams\Sort;
 
 /**
@@ -21,7 +22,7 @@ use Telnyx\Dir\DirListParams\Sort;
  *   filterEnterpriseID?: string|null,
  *   filterExpiringAtGte?: \DateTimeInterface|null,
  *   filterExpiringAtLte?: \DateTimeInterface|null,
- *   filterStatus?: null|DirStatus|value-of<DirStatus>,
+ *   filterStatus?: null|FilterStatus|value-of<FilterStatus>,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  *   sort?: null|Sort|value-of<Sort>,
@@ -66,9 +67,9 @@ final class DirListParams implements BaseModel
     /**
      * Filter by DIR status.
      *
-     * @var value-of<DirStatus>|null $filterStatus
+     * @var value-of<FilterStatus>|null $filterStatus
      */
-    #[Optional(enum: DirStatus::class)]
+    #[Optional(enum: FilterStatus::class)]
     public ?string $filterStatus;
 
     /**
@@ -101,7 +102,7 @@ final class DirListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DirStatus|value-of<DirStatus>|null $filterStatus
+     * @param FilterStatus|value-of<FilterStatus>|null $filterStatus
      * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
@@ -110,7 +111,7 @@ final class DirListParams implements BaseModel
         ?string $filterEnterpriseID = null,
         ?\DateTimeInterface $filterExpiringAtGte = null,
         ?\DateTimeInterface $filterExpiringAtLte = null,
-        DirStatus|string|null $filterStatus = null,
+        FilterStatus|string|null $filterStatus = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
         Sort|string|null $sort = null,
@@ -192,9 +193,9 @@ final class DirListParams implements BaseModel
     /**
      * Filter by DIR status.
      *
-     * @param DirStatus|value-of<DirStatus> $filterStatus
+     * @param FilterStatus|value-of<FilterStatus> $filterStatus
      */
-    public function withFilterStatus(DirStatus|string $filterStatus): self
+    public function withFilterStatus(FilterStatus|string $filterStatus): self
     {
         $self = clone $this;
         $self['filterStatus'] = $filterStatus;

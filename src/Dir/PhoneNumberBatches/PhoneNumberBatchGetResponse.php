@@ -7,13 +7,12 @@ namespace Telnyx\Dir\PhoneNumberBatches;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchGetResponse\Data;
 
 /**
- * @phpstan-import-type PhoneNumberBatchShape from \Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatch
+ * @phpstan-import-type DataShape from \Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchGetResponse\Data
  *
- * @phpstan-type PhoneNumberBatchGetResponseShape = array{
- *   data: PhoneNumberBatch|PhoneNumberBatchShape
- * }
+ * @phpstan-type PhoneNumberBatchGetResponseShape = array{data: Data|DataShape}
  */
 final class PhoneNumberBatchGetResponse implements BaseModel
 {
@@ -24,7 +23,7 @@ final class PhoneNumberBatchGetResponse implements BaseModel
      * A phone-number batch groups all numbers added in a single bulk-add request. Telnyx vets the batch as a unit. The response embeds the full `phone_numbers` array so you can read per-number status without a separate call, plus a batch-level `status` summarising the unit's progress.
      */
     #[Required]
-    public PhoneNumberBatch $data;
+    public Data $data;
 
     /**
      * `new PhoneNumberBatchGetResponse()` is missing required properties by the API.
@@ -50,9 +49,9 @@ final class PhoneNumberBatchGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PhoneNumberBatch|PhoneNumberBatchShape $data
+     * @param Data|DataShape $data
      */
-    public static function with(PhoneNumberBatch|array $data): self
+    public static function with(Data|array $data): self
     {
         $self = new self;
 
@@ -64,9 +63,9 @@ final class PhoneNumberBatchGetResponse implements BaseModel
     /**
      * A phone-number batch groups all numbers added in a single bulk-add request. Telnyx vets the batch as a unit. The response embeds the full `phone_numbers` array so you can read per-number status without a separate call, plus a batch-level `status` summarising the unit's progress.
      *
-     * @param PhoneNumberBatch|PhoneNumberBatchShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(PhoneNumberBatch|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

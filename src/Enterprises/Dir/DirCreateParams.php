@@ -9,7 +9,7 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\Document;
+use Telnyx\Enterprises\Dir\DirCreateParams\Document;
 
 /**
  * Create a new DIR under the given enterprise. The DIR starts in `draft` status; it must be submitted (`POST .../submit`) and approved by Telnyx before any phone number can be attached.
@@ -28,7 +28,7 @@ use Telnyx\Dir\Document;
  *
  * @see Telnyx\Services\Enterprises\DirService::create()
  *
- * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Enterprises\Dir\DirCreateParams\Document
  *
  * @phpstan-type DirCreateParamsShape = array{
  *   authorizerEmail: string,

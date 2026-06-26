@@ -7,8 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\Texml\Accounts\AccountGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -41,7 +41,7 @@ final class AccountsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TexmlGetCallRecordingsResponseBody::class, $result);
+        $this->assertInstanceOf(AccountGetRecordingsJsonResponse::class, $result);
     }
 
     #[Test]

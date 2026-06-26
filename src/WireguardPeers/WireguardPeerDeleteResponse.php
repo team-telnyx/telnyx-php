@@ -7,12 +7,13 @@ namespace Telnyx\WireguardPeers;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\WireguardPeers\WireguardPeerDeleteResponse\Data;
 
 /**
- * @phpstan-import-type WireguardPeerShape from \Telnyx\WireguardPeers\WireguardPeer
+ * @phpstan-import-type DataShape from \Telnyx\WireguardPeers\WireguardPeerDeleteResponse\Data
  *
  * @phpstan-type WireguardPeerDeleteResponseShape = array{
- *   data?: null|WireguardPeer|WireguardPeerShape
+ *   data?: null|Data|DataShape
  * }
  */
 final class WireguardPeerDeleteResponse implements BaseModel
@@ -21,7 +22,7 @@ final class WireguardPeerDeleteResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?WireguardPeer $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -33,9 +34,9 @@ final class WireguardPeerDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param WireguardPeer|WireguardPeerShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(WireguardPeer|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +46,9 @@ final class WireguardPeerDeleteResponse implements BaseModel
     }
 
     /**
-     * @param WireguardPeer|WireguardPeerShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(WireguardPeer|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

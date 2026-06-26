@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AdvancedOrders\AdvancedOrder;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
+use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
@@ -36,7 +38,7 @@ interface AdvancedOrdersContract
         int $quantity = 1,
         ?string $requirementGroupID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AdvancedOrder;
+    ): AdvancedOrderNewResponse;
 
     /**
      * @api
@@ -49,7 +51,7 @@ interface AdvancedOrdersContract
     public function retrieve(
         string $orderID,
         RequestOptions|array|null $requestOptions = null
-    ): AdvancedOrder;
+    ): AdvancedOrderGetResponse;
 
     /**
      * @api
@@ -84,5 +86,5 @@ interface AdvancedOrdersContract
         int $quantity = 1,
         ?string $requirementGroupID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AdvancedOrder;
+    ): AdvancedOrderUpdateRequirementGroupResponse;
 }

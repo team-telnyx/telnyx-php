@@ -9,10 +9,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PortingOrders\VerificationCodes\PortingVerificationCode;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Filter;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListParams\Sort;
+use Telnyx\PortingOrders\VerificationCodes\VerificationCodeListResponse;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeSendParams\VerificationMethod;
 use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyParams;
@@ -51,7 +51,7 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
      * }|VerificationCodeListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingVerificationCode>>
+     * @return BaseResponse<DefaultFlatPagination<VerificationCodeListResponse>>
      *
      * @throws APIException
      */
@@ -74,7 +74,7 @@ final class VerificationCodesRawService implements VerificationCodesRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PortingVerificationCode::class,
+            convert: VerificationCodeListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

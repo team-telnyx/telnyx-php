@@ -10,9 +10,9 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfService\AgreementsContract;
-use Telnyx\TermsOfService\Agreements\TosAgreement;
-use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
-use Telnyx\TermsOfService\Agreements\TosProductType;
+use Telnyx\TermsOfService\Agreements\AgreementGetResponse;
+use Telnyx\TermsOfService\Agreements\AgreementListParams\ProductType;
+use Telnyx\TermsOfService\Agreements\AgreementListResponse;
 
 /**
  * Accept and review the Branded Calling and Phone Number Reputation terms of service.
@@ -47,7 +47,7 @@ final class AgreementsService implements AgreementsContract
     public function retrieve(
         string $agreementID,
         RequestOptions|array|null $requestOptions = null
-    ): TosAgreementWrapped {
+    ): AgreementGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($agreementID, requestOptions: $requestOptions);
 
@@ -65,17 +65,17 @@ final class AgreementsService implements AgreementsContract
      *
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
-     * @param TosProductType|value-of<TosProductType> $productType Optional filter. Omit to list the user's agreements for **every** product (branded_calling and number_reputation); pass a value to return only that product's agreements.
+     * @param ProductType|value-of<ProductType> $productType Optional filter. Omit to list the user's agreements for **every** product (branded_calling and number_reputation); pass a value to return only that product's agreements.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<TosAgreement>
+     * @return DefaultFlatPagination<AgreementListResponse>
      *
      * @throws APIException
      */
     public function list(
         int $pageNumber = 1,
         int $pageSize = 20,
-        TosProductType|string|null $productType = null,
+        ProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(

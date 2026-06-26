@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AdvancedOrders\AdvancedOrder;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\Feature;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams\PhoneNumberType;
+use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
+use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -54,7 +56,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         int $quantity = 1,
         ?string $requirementGroupID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AdvancedOrder {
+    ): AdvancedOrderNewResponse {
         $params = Util::removeNulls(
             [
                 'areaCode' => $areaCode,
@@ -87,7 +89,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
     public function retrieve(
         string $orderID,
         RequestOptions|array|null $requestOptions = null
-    ): AdvancedOrder {
+    ): AdvancedOrderGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($orderID, requestOptions: $requestOptions);
 
@@ -136,7 +138,7 @@ final class AdvancedOrdersService implements AdvancedOrdersContract
         int $quantity = 1,
         ?string $requirementGroupID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AdvancedOrder {
+    ): AdvancedOrderUpdateRequirementGroupResponse {
         $params = Util::removeNulls(
             [
                 'areaCode' => $areaCode,

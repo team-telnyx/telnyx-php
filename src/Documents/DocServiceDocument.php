@@ -16,16 +16,16 @@ use Telnyx\Documents\DocServiceDocument\Status;
  *
  * @phpstan-type DocServiceDocumentShape = array{
  *   id?: string|null,
- *   createdAt?: string|null,
- *   recordType?: string|null,
- *   updatedAt?: string|null,
  *   avScanStatus?: null|AvScanStatus|value-of<AvScanStatus>,
  *   contentType?: string|null,
+ *   createdAt?: string|null,
  *   customerReference?: string|null,
  *   filename?: string|null,
+ *   recordType?: string|null,
  *   sha256?: string|null,
  *   size?: null|Size|SizeShape,
  *   status?: null|Status|value-of<Status>,
+ *   updatedAt?: string|null,
  * }
  */
 final class DocServiceDocument implements BaseModel
@@ -38,24 +38,6 @@ final class DocServiceDocument implements BaseModel
      */
     #[Optional]
     public ?string $id;
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was created.
-     */
-    #[Optional('created_at')]
-    public ?string $createdAt;
-
-    /**
-     * Identifies the type of the resource.
-     */
-    #[Optional('record_type')]
-    public ?string $recordType;
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was updated.
-     */
-    #[Optional('updated_at')]
-    public ?string $updatedAt;
 
     /**
      * The antivirus scan status of the document.
@@ -72,6 +54,12 @@ final class DocServiceDocument implements BaseModel
     public ?string $contentType;
 
     /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    #[Optional('created_at')]
+    public ?string $createdAt;
+
+    /**
      * Optional reference string for customer tracking.
      */
     #[Optional('customer_reference')]
@@ -82,6 +70,12 @@ final class DocServiceDocument implements BaseModel
      */
     #[Optional]
     public ?string $filename;
+
+    /**
+     * Identifies the type of the resource.
+     */
+    #[Optional('record_type')]
+    public ?string $recordType;
 
     /**
      * The document's SHA256 hash provided for optional verification purposes.
@@ -103,6 +97,12 @@ final class DocServiceDocument implements BaseModel
     #[Optional(enum: Status::class)]
     public ?string $status;
 
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    #[Optional('updated_at')]
+    public ?string $updatedAt;
+
     public function __construct()
     {
         $this->initialize();
@@ -119,30 +119,30 @@ final class DocServiceDocument implements BaseModel
      */
     public static function with(
         ?string $id = null,
-        ?string $createdAt = null,
-        ?string $recordType = null,
-        ?string $updatedAt = null,
         AvScanStatus|string|null $avScanStatus = null,
         ?string $contentType = null,
+        ?string $createdAt = null,
         ?string $customerReference = null,
         ?string $filename = null,
+        ?string $recordType = null,
         ?string $sha256 = null,
         Size|array|null $size = null,
         Status|string|null $status = null,
+        ?string $updatedAt = null,
     ): self {
         $self = new self;
 
         null !== $id && $self['id'] = $id;
-        null !== $createdAt && $self['createdAt'] = $createdAt;
-        null !== $recordType && $self['recordType'] = $recordType;
-        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
         null !== $avScanStatus && $self['avScanStatus'] = $avScanStatus;
         null !== $contentType && $self['contentType'] = $contentType;
+        null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $customerReference && $self['customerReference'] = $customerReference;
         null !== $filename && $self['filename'] = $filename;
+        null !== $recordType && $self['recordType'] = $recordType;
         null !== $sha256 && $self['sha256'] = $sha256;
         null !== $size && $self['size'] = $size;
         null !== $status && $self['status'] = $status;
+        null !== $updatedAt && $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
@@ -154,39 +154,6 @@ final class DocServiceDocument implements BaseModel
     {
         $self = clone $this;
         $self['id'] = $id;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was created.
-     */
-    public function withCreatedAt(string $createdAt): self
-    {
-        $self = clone $this;
-        $self['createdAt'] = $createdAt;
-
-        return $self;
-    }
-
-    /**
-     * Identifies the type of the resource.
-     */
-    public function withRecordType(string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * ISO 8601 formatted date-time indicating when the resource was updated.
-     */
-    public function withUpdatedAt(string $updatedAt): self
-    {
-        $self = clone $this;
-        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }
@@ -216,6 +183,17 @@ final class DocServiceDocument implements BaseModel
     }
 
     /**
+     * ISO 8601 formatted date-time indicating when the resource was created.
+     */
+    public function withCreatedAt(string $createdAt): self
+    {
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
+
+        return $self;
+    }
+
+    /**
      * Optional reference string for customer tracking.
      */
     public function withCustomerReference(string $customerReference): self
@@ -233,6 +211,17 @@ final class DocServiceDocument implements BaseModel
     {
         $self = clone $this;
         $self['filename'] = $filename;
+
+        return $self;
+    }
+
+    /**
+     * Identifies the type of the resource.
+     */
+    public function withRecordType(string $recordType): self
+    {
+        $self = clone $this;
+        $self['recordType'] = $recordType;
 
         return $self;
     }
@@ -270,6 +259,17 @@ final class DocServiceDocument implements BaseModel
     {
         $self = clone $this;
         $self['status'] = $status;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date-time indicating when the resource was updated.
+     */
+    public function withUpdatedAt(string $updatedAt): self
+    {
+        $self = clone $this;
+        $self['updatedAt'] = $updatedAt;
 
         return $self;
     }

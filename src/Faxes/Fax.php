@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Faxes\Fax\Direction;
+use Telnyx\Faxes\Fax\Quality;
 use Telnyx\Faxes\Fax\RecordType;
 use Telnyx\Faxes\Fax\Status;
 

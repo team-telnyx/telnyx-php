@@ -16,13 +16,12 @@ use Telnyx\Messages\MessageCancelScheduledResponse\Media;
 use Telnyx\Messages\MessageCancelScheduledResponse\RecordType;
 use Telnyx\Messages\MessageCancelScheduledResponse\To;
 use Telnyx\Messages\MessageCancelScheduledResponse\Type;
-use Telnyx\MessagingError;
 
 /**
  * @phpstan-import-type CcShape from \Telnyx\Messages\MessageCancelScheduledResponse\Cc
  * @phpstan-import-type CostShape from \Telnyx\Messages\MessageCancelScheduledResponse\Cost
  * @phpstan-import-type CostBreakdownShape from \Telnyx\Messages\MessageCancelScheduledResponse\CostBreakdown
- * @phpstan-import-type MessagingErrorShape from \Telnyx\MessagingError
+ * @phpstan-import-type MessagingErrorShape from \Telnyx\Messages\MessagingError
  * @phpstan-import-type FromShape from \Telnyx\Messages\MessageCancelScheduledResponse\From
  * @phpstan-import-type MediaShape from \Telnyx\Messages\MessageCancelScheduledResponse\Media
  * @phpstan-import-type ToShape from \Telnyx\Messages\MessageCancelScheduledResponse\To
