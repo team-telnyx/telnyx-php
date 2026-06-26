@@ -10,20 +10,18 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams\Body;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayRead;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PublicInternetGatewaysRawContract;
 
 /**
  * Public Internet Gateway operations.
  *
- * @phpstan-import-type BodyShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams\Body
  * @phpstan-import-type FilterShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -40,7 +38,9 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      *
      * Create a new Public Internet Gateway.
      *
-     * @param array{body: Body|BodyShape}|PublicInternetGatewayCreateParams $params
+     * @param array{
+     *   name?: string, networkID?: string, regionCode?: string
+     * }|PublicInternetGatewayCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PublicInternetGatewayNewResponse>
@@ -60,7 +60,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
         return $this->client->request(
             method: 'post',
             path: 'public_internet_gateways',
-            body: (object) $parsed['body'],
+            body: (object) $parsed,
             options: $options,
             convert: PublicInternetGatewayNewResponse::class,
         );
@@ -101,7 +101,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
      * }|PublicInternetGatewayListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PublicInternetGatewayRead>>
+     * @return BaseResponse<DefaultFlatPagination<PublicInternetGatewayListResponse>>
      *
      * @throws APIException
      */
@@ -123,7 +123,7 @@ final class PublicInternetGatewaysRawService implements PublicInternetGatewaysRa
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PublicInternetGatewayRead::class,
+            convert: PublicInternetGatewayListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

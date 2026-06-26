@@ -9,8 +9,8 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationCreateParams;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListParams;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationListResponse;
 use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse;
-use Telnyx\PortingOrders\PhoneNumberConfigurations\PortingPhoneNumberConfiguration;
 use Telnyx\RequestOptions;
 
 /**
@@ -39,7 +39,7 @@ interface PhoneNumberConfigurationsRawContract
      * @param array<string,mixed>|PhoneNumberConfigurationListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingPhoneNumberConfiguration>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberConfigurationListResponse,>,>
      *
      * @throws APIException
      */

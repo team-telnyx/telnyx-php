@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI;
 
-use Telnyx\AI\Tools\SharedToolResponse;
+use Telnyx\AI\Tools\ToolGetResponse;
+use Telnyx\AI\Tools\ToolListResponse;
+use Telnyx\AI\Tools\ToolNewResponse;
+use Telnyx\AI\Tools\ToolUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
@@ -36,7 +39,7 @@ interface ToolsContract
         int $timeoutMs = 5000,
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
-    ): SharedToolResponse;
+    ): ToolNewResponse;
 
     /**
      * @api
@@ -49,7 +52,7 @@ interface ToolsContract
     public function retrieve(
         string $toolID,
         RequestOptions|array|null $requestOptions = null
-    ): SharedToolResponse;
+    ): ToolGetResponse;
 
     /**
      * @api
@@ -75,7 +78,7 @@ interface ToolsContract
         ?string $type = null,
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
-    ): SharedToolResponse;
+    ): ToolUpdateResponse;
 
     /**
      * @api
@@ -86,7 +89,7 @@ interface ToolsContract
      * @param int $pageSize number of items to return per page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<SharedToolResponse>
+     * @return DefaultFlatPagination<ToolListResponse>
      *
      * @throws APIException
      */

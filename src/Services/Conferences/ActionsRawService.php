@@ -44,9 +44,9 @@ use Telnyx\Conferences\Actions\ActionUnholdResponse;
 use Telnyx\Conferences\Actions\ActionUnmuteParams;
 use Telnyx\Conferences\Actions\ActionUnmuteResponse;
 use Telnyx\Conferences\Actions\ActionUpdateParams;
+use Telnyx\Conferences\Actions\ActionUpdateParams\Region;
 use Telnyx\Conferences\Actions\ActionUpdateParams\SupervisorRole;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
-use Telnyx\Conferences\Actions\ConferenceRegion;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -77,7 +77,7 @@ final class ActionsRawService implements ActionsRawContract
      *   callControlID: string,
      *   supervisorRole: SupervisorRole|value-of<SupervisorRole>,
      *   commandID?: string,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: Region|value-of<Region>,
      *   whisperCallControlIDs?: list<string>,
      * }|ActionUpdateParams $params
      * @param RequestOpts|null $requestOptions
@@ -199,7 +199,7 @@ final class ActionsRawService implements ActionsRawContract
      *   audioURL?: string,
      *   callControlIDs?: list<string>,
      *   mediaName?: string,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionHoldParams\Region|value-of<ActionHoldParams\Region>,
      * }|ActionHoldParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -248,7 +248,7 @@ final class ActionsRawService implements ActionsRawContract
      *   holdAudioURL?: string,
      *   holdMediaName?: string,
      *   mute?: bool,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionJoinParams\Region|value-of<ActionJoinParams\Region>,
      *   softEndConferenceOnExit?: bool,
      *   startConferenceOnEnter?: bool,
      *   supervisorRole?: ActionJoinParams\SupervisorRole|value-of<ActionJoinParams\SupervisorRole>,
@@ -294,7 +294,7 @@ final class ActionsRawService implements ActionsRawContract
      *   callControlID: string,
      *   beepEnabled?: ActionLeaveParams\BeepEnabled|value-of<ActionLeaveParams\BeepEnabled>,
      *   commandID?: string,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionLeaveParams\Region|value-of<ActionLeaveParams\Region>,
      * }|ActionLeaveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -330,7 +330,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlIDs?: list<string>,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionMuteParams\Region|value-of<ActionMuteParams\Region>,
      * }|ActionMuteParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -369,7 +369,7 @@ final class ActionsRawService implements ActionsRawContract
      *   callControlIDs?: list<string>,
      *   loop?: LoopcountShape,
      *   mediaName?: string,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionPlayParams\Region|value-of<ActionPlayParams\Region>,
      * }|ActionPlayParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -406,7 +406,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   commandID?: string,
      *   recordingID?: string,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionRecordPauseParams\Region|value-of<ActionRecordPauseParams\Region>,
      * }|ActionRecordPauseParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -443,7 +443,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param array{
      *   commandID?: string,
      *   recordingID?: string,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionRecordResumeParams\Region|value-of<ActionRecordResumeParams\Region>,
      * }|ActionRecordResumeParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -487,7 +487,7 @@ final class ActionsRawService implements ActionsRawContract
      *   commandID?: string,
      *   customFileName?: string,
      *   playBeep?: bool,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionRecordStartParams\Region|value-of<ActionRecordStartParams\Region>,
      *   trim?: Trim|value-of<Trim>,
      * }|ActionRecordStartParams $params
      * @param RequestOpts|null $requestOptions
@@ -530,7 +530,7 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   recordingID?: string,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionRecordStopParams\Region|value-of<ActionRecordStopParams\Region>,
      * }|ActionRecordStopParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -609,7 +609,7 @@ final class ActionsRawService implements ActionsRawContract
      *   commandID?: string,
      *   language?: value-of<Language>,
      *   payloadType?: PayloadType|value-of<PayloadType>,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionSpeakParams\Region|value-of<ActionSpeakParams\Region>,
      *   voiceSettings?: VoiceSettingsShape,
      * }|ActionSpeakParams $params
      * @param RequestOpts|null $requestOptions
@@ -646,7 +646,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlIDs?: list<string>,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionStopParams\Region|value-of<ActionStopParams\Region>,
      * }|ActionStopParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -682,7 +682,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlIDs: list<string>,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionUnholdParams\Region|value-of<ActionUnholdParams\Region>,
      * }|ActionUnholdParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -718,7 +718,7 @@ final class ActionsRawService implements ActionsRawContract
      * @param string $id Uniquely identifies the conference by id or name
      * @param array{
      *   callControlIDs?: list<string>,
-     *   region?: ConferenceRegion|value-of<ConferenceRegion>,
+     *   region?: ActionUnmuteParams\Region|value-of<ActionUnmuteParams\Region>,
      * }|ActionUnmuteParams $params
      * @param RequestOpts|null $requestOptions
      *

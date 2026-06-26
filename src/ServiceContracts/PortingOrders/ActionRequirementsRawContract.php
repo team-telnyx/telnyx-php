@@ -10,7 +10,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
-use Telnyx\PortingOrders\ActionRequirements\PortingActionRequirement;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -25,7 +25,7 @@ interface ActionRequirementsRawContract
      * @param array<string,mixed>|ActionRequirementListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingActionRequirement>>
+     * @return BaseResponse<DefaultFlatPagination<ActionRequirementListResponse>>
      *
      * @throws APIException
      */

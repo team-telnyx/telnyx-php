@@ -7,13 +7,12 @@ namespace Telnyx\Requirements;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Requirements\RequirementGetResponse\Data;
 
 /**
- * @phpstan-import-type DocReqsRequirementShape from \Telnyx\Requirements\DocReqsRequirement
+ * @phpstan-import-type DataShape from \Telnyx\Requirements\RequirementGetResponse\Data
  *
- * @phpstan-type RequirementGetResponseShape = array{
- *   data?: null|DocReqsRequirement|DocReqsRequirementShape
- * }
+ * @phpstan-type RequirementGetResponseShape = array{data?: null|Data|DataShape}
  */
 final class RequirementGetResponse implements BaseModel
 {
@@ -21,7 +20,7 @@ final class RequirementGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?DocReqsRequirement $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -33,9 +32,9 @@ final class RequirementGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DocReqsRequirement|DocReqsRequirementShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(DocReqsRequirement|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +44,9 @@ final class RequirementGetResponse implements BaseModel
     }
 
     /**
-     * @param DocReqsRequirement|DocReqsRequirementShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(DocReqsRequirement|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

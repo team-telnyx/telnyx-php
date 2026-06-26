@@ -7,15 +7,14 @@ namespace Telnyx\VoiceDesigns;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\VoiceDesigns\VoiceDesignRenameResponse\Data;
 
 /**
  * Response envelope for a voice design after a rename operation (no version-specific fields).
  *
- * @phpstan-import-type VoiceDesignSummaryDataShape from \Telnyx\VoiceDesigns\VoiceDesignSummaryData
+ * @phpstan-import-type DataShape from \Telnyx\VoiceDesigns\VoiceDesignRenameResponse\Data
  *
- * @phpstan-type VoiceDesignRenameResponseShape = array{
- *   data?: null|VoiceDesignSummaryData|VoiceDesignSummaryDataShape
- * }
+ * @phpstan-type VoiceDesignRenameResponseShape = array{data?: null|Data|DataShape}
  */
 final class VoiceDesignRenameResponse implements BaseModel
 {
@@ -26,7 +25,7 @@ final class VoiceDesignRenameResponse implements BaseModel
      * A summarized voice design object (without version-specific fields).
      */
     #[Optional]
-    public ?VoiceDesignSummaryData $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -38,9 +37,9 @@ final class VoiceDesignRenameResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param VoiceDesignSummaryData|VoiceDesignSummaryDataShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(VoiceDesignSummaryData|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -52,9 +51,9 @@ final class VoiceDesignRenameResponse implements BaseModel
     /**
      * A summarized voice design object (without version-specific fields).
      *
-     * @param VoiceDesignSummaryData|VoiceDesignSummaryDataShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(VoiceDesignSummaryData|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

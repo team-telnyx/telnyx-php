@@ -7,11 +7,12 @@ namespace Telnyx\Dir\Comments;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Dir\Comments\CommentNewResponse\Data;
 
 /**
- * @phpstan-import-type DirCommentShape from \Telnyx\Dir\Comments\DirComment
+ * @phpstan-import-type DataShape from \Telnyx\Dir\Comments\CommentNewResponse\Data
  *
- * @phpstan-type CommentNewResponseShape = array{data: DirComment|DirCommentShape}
+ * @phpstan-type CommentNewResponseShape = array{data: Data|DataShape}
  */
 final class CommentNewResponse implements BaseModel
 {
@@ -19,7 +20,7 @@ final class CommentNewResponse implements BaseModel
     use SdkModel;
 
     #[Required]
-    public DirComment $data;
+    public Data $data;
 
     /**
      * `new CommentNewResponse()` is missing required properties by the API.
@@ -45,9 +46,9 @@ final class CommentNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DirComment|DirCommentShape $data
+     * @param Data|DataShape $data
      */
-    public static function with(DirComment|array $data): self
+    public static function with(Data|array $data): self
     {
         $self = new self;
 
@@ -57,9 +58,9 @@ final class CommentNewResponse implements BaseModel
     }
 
     /**
-     * @param DirComment|DirCommentShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(DirComment|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

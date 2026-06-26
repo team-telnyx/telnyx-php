@@ -40,43 +40,4 @@ final class SpeechToTextTest extends TestCase
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(SpeechToTextListProvidersResponse::class, $result);
     }
-
-    #[Test]
-    public function testRetrieveTranscription(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->speechToText->retrieveTranscription(
-            inputFormat: 'mp3',
-            transcriptionEngine: 'Azure'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
-    }
-
-    #[Test]
-    public function testRetrieveTranscriptionWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->speechToText->retrieveTranscription(
-            inputFormat: 'mp3',
-            transcriptionEngine: 'Azure',
-            endpointing: 0,
-            interimResults: true,
-            keyterm: 'keyterm',
-            keywords: 'keywords',
-            language: 'language',
-            model: 'fast',
-            redact: 'redact',
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
-    }
 }

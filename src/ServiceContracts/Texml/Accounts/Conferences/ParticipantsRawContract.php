@@ -9,12 +9,13 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantDeleteParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsResponse;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantResource;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantRetrieveParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantRetrieveParticipantsParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -28,7 +29,7 @@ interface ParticipantsRawContract
      * @param array<string,mixed>|ParticipantRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ParticipantResource>
+     * @return BaseResponse<ParticipantGetResponse>
      *
      * @throws APIException
      */
@@ -45,7 +46,7 @@ interface ParticipantsRawContract
      * @param array<string,mixed>|ParticipantUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ParticipantResource>
+     * @return BaseResponse<ParticipantUpdateResponse>
      *
      * @throws APIException
      */

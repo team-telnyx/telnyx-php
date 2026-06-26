@@ -6,9 +6,10 @@ namespace Telnyx\ServiceContracts\AI\Missions\Runs;
 
 use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsParams;
+use Telnyx\AI\Missions\Runs\Events\EventGetEventDetailsResponse;
 use Telnyx\AI\Missions\Runs\Events\EventListParams;
 use Telnyx\AI\Missions\Runs\Events\EventLogParams;
-use Telnyx\AI\Missions\Runs\Events\EventResponse;
+use Telnyx\AI\Missions\Runs\Events\EventLogResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
@@ -43,7 +44,7 @@ interface EventsRawContract
      * @param array<string,mixed>|EventGetEventDetailsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EventResponse>
+     * @return BaseResponse<EventGetEventDetailsResponse>
      *
      * @throws APIException
      */
@@ -60,7 +61,7 @@ interface EventsRawContract
      * @param array<string,mixed>|EventLogParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EventResponse>
+     * @return BaseResponse<EventLogResponse>
      *
      * @throws APIException
      */

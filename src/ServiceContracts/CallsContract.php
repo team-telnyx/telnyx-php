@@ -9,6 +9,7 @@ use Telnyx\Calls\CallAssistantRequest;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig;
 use Telnyx\Calls\CallDialParams\DeepfakeDetection;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
@@ -26,7 +27,6 @@ use Telnyx\Calls\CallDialParams\WebhookURLMethod;
 use Telnyx\Calls\CallDialParams\WebhookURLsMethod;
 use Telnyx\Calls\CallDialResponse;
 use Telnyx\Calls\CallGetStatusResponse;
-use Telnyx\Calls\ConversationRelayEmbeddedConfig;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\SipHeader;
@@ -44,7 +44,7 @@ use Telnyx\RequestOptions;
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
- * @phpstan-import-type ConversationRelayEmbeddedConfigShape from \Telnyx\Calls\ConversationRelayEmbeddedConfig
+ * @phpstan-import-type ConversationRelayConfigShape from \Telnyx\Calls\CallDialParams\ConversationRelayConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\CallDialParams\DeepfakeDetection
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -72,7 +72,7 @@ interface CallsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore others Dial commands with the same `command_id`.
      * @param ConferenceConfig|ConferenceConfigShape $conferenceConfig optional configuration parameters to dial new participant into a conference
-     * @param ConversationRelayEmbeddedConfig|ConversationRelayEmbeddedConfigShape $conversationRelayConfig Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.
+     * @param ConversationRelayConfig|ConversationRelayConfigShape $conversationRelayConfig Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.
      * @param list<CustomSipHeader|CustomSipHeaderShape> $customHeaders custom headers to be added to the SIP INVITE
      * @param DeepfakeDetection|DeepfakeDetectionShape $deepfakeDetection Enables deepfake detection on the call. When enabled, audio from the remote party is streamed to a detection service that analyzes whether the voice is AI-generated. Results are delivered via the `call.deepfake_detection.result` webhook.
      * @param DialogflowConfig|DialogflowConfigShape $dialogflowConfig
@@ -139,7 +139,7 @@ interface CallsContract
         ?string $clientState = null,
         ?string $commandID = null,
         ConferenceConfig|array|null $conferenceConfig = null,
-        ConversationRelayEmbeddedConfig|array|null $conversationRelayConfig = null,
+        ConversationRelayConfig|array|null $conversationRelayConfig = null,
         ?array $customHeaders = null,
         DeepfakeDetection|array|null $deepfakeDetection = null,
         DialogflowConfig|array|null $dialogflowConfig = null,

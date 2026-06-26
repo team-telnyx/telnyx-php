@@ -11,10 +11,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams;
+use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppression;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
@@ -72,7 +72,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
      *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
-     *   noiseSuppression?: ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>,
+     *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: CredentialOutbound|CredentialOutboundShape,
@@ -153,7 +153,7 @@ final class CredentialConnectionsRawService implements CredentialConnectionsRawC
      *   inbound?: CredentialInbound|CredentialInboundShape,
      *   iosPushCredentialID?: string|null,
      *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
-     *   noiseSuppression?: ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>,
+     *   noiseSuppression?: CredentialConnectionUpdateParams\NoiseSuppression|value-of<CredentialConnectionUpdateParams\NoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: CredentialOutbound|CredentialOutboundShape,

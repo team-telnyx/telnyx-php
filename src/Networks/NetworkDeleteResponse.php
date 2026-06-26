@@ -7,13 +7,12 @@ namespace Telnyx\Networks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Networks\NetworkDeleteResponse\Data;
 
 /**
- * @phpstan-import-type NetworkShape from \Telnyx\Networks\Network
+ * @phpstan-import-type DataShape from \Telnyx\Networks\NetworkDeleteResponse\Data
  *
- * @phpstan-type NetworkDeleteResponseShape = array{
- *   data?: null|Network|NetworkShape
- * }
+ * @phpstan-type NetworkDeleteResponseShape = array{data?: null|Data|DataShape}
  */
 final class NetworkDeleteResponse implements BaseModel
 {
@@ -21,7 +20,7 @@ final class NetworkDeleteResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Network $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -33,9 +32,9 @@ final class NetworkDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Network|NetworkShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(Network|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +44,9 @@ final class NetworkDeleteResponse implements BaseModel
     }
 
     /**
-     * @param Network|NetworkShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(Network|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

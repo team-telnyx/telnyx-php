@@ -9,9 +9,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PortingPhoneNumbers\PortingPhoneNumber;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams;
 use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListParams\Filter;
+use Telnyx\PortingPhoneNumbers\PortingPhoneNumberListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingPhoneNumbersRawContract;
 
@@ -39,7 +39,7 @@ final class PortingPhoneNumbersRawService implements PortingPhoneNumbersRawContr
      * }|PortingPhoneNumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingPhoneNumber>>
+     * @return BaseResponse<DefaultFlatPagination<PortingPhoneNumberListResponse>>
      *
      * @throws APIException
      */
@@ -61,7 +61,7 @@ final class PortingPhoneNumbersRawService implements PortingPhoneNumbersRawContr
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PortingPhoneNumber::class,
+            convert: PortingPhoneNumberListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

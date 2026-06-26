@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\Missions\ExecutionMode;
 use Telnyx\AI\Missions\MissionCreateParams;
+use Telnyx\AI\Missions\MissionCreateParams\ExecutionMode;
 use Telnyx\AI\Missions\MissionData;
+use Telnyx\AI\Missions\MissionGetResponse;
 use Telnyx\AI\Missions\MissionListEventsParams;
 use Telnyx\AI\Missions\MissionListParams;
-use Telnyx\AI\Missions\MissionResponse;
+use Telnyx\AI\Missions\MissionNewResponse;
 use Telnyx\AI\Missions\MissionUpdateMissionParams;
+use Telnyx\AI\Missions\MissionUpdateMissionResponse;
 use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -46,7 +48,7 @@ final class MissionsRawService implements MissionsRawContract
      * }|MissionCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionResponse>
+     * @return BaseResponse<MissionNewResponse>
      *
      * @throws APIException
      */
@@ -65,7 +67,7 @@ final class MissionsRawService implements MissionsRawContract
             path: 'ai/missions',
             body: (object) $parsed,
             options: $options,
-            convert: MissionResponse::class,
+            convert: MissionNewResponse::class,
         );
     }
 
@@ -77,7 +79,7 @@ final class MissionsRawService implements MissionsRawContract
      * @param string $missionID unique identifier of the mission
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionResponse>
+     * @return BaseResponse<MissionGetResponse>
      *
      * @throws APIException
      */
@@ -90,7 +92,7 @@ final class MissionsRawService implements MissionsRawContract
             method: 'get',
             path: ['ai/missions/%1$s', $missionID],
             options: $requestOptions,
-            convert: MissionResponse::class,
+            convert: MissionGetResponse::class,
         );
     }
 
@@ -224,7 +226,7 @@ final class MissionsRawService implements MissionsRawContract
      * @param string $missionID unique identifier of the mission
      * @param array{
      *   description?: string,
-     *   executionMode?: ExecutionMode|value-of<ExecutionMode>,
+     *   executionMode?: MissionUpdateMissionParams\ExecutionMode|value-of<MissionUpdateMissionParams\ExecutionMode>,
      *   instructions?: string,
      *   metadata?: array<string,mixed>,
      *   model?: string,
@@ -232,7 +234,7 @@ final class MissionsRawService implements MissionsRawContract
      * }|MissionUpdateMissionParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<MissionResponse>
+     * @return BaseResponse<MissionUpdateMissionResponse>
      *
      * @throws APIException
      */
@@ -252,7 +254,7 @@ final class MissionsRawService implements MissionsRawContract
             path: ['ai/missions/%1$s', $missionID],
             body: (object) $parsed,
             options: $options,
-            convert: MissionResponse::class,
+            convert: MissionUpdateMissionResponse::class,
         );
     }
 }

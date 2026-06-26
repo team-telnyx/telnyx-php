@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\BulkSimCardActions\BulkSimCardActionDetailed;
 use Telnyx\BulkSimCardActions\BulkSimCardActionGetResponse;
 use Telnyx\BulkSimCardActions\BulkSimCardActionListParams\FilterActionType;
+use Telnyx\BulkSimCardActions\BulkSimCardActionListResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
@@ -37,7 +37,7 @@ interface BulkSimCardActionsContract
      * @param int $pageSize the size of the page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<BulkSimCardActionDetailed>
+     * @return DefaultFlatPagination<BulkSimCardActionListResponse>
      *
      * @throws APIException
      */

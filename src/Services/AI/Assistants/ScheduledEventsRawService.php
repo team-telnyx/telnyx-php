@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\Services\AI\Assistants;
 
 use Telnyx\AI\Assistants\ScheduledEvents\ConversationChannelType;
-use Telnyx\AI\Assistants\ScheduledEvents\ScheduledCallSettings;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams;
+use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\CallSettings;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventDeleteParams;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListParams;
 use Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventListResponse;
@@ -25,7 +25,7 @@ use Telnyx\ServiceContracts\AI\Assistants\ScheduledEventsRawContract;
 /**
  * Configure AI assistant specifications.
  *
- * @phpstan-import-type ScheduledCallSettingsShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledCallSettings
+ * @phpstan-import-type CallSettingsShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\CallSettings
  * @phpstan-import-type ConversationMetadataShape from \Telnyx\AI\Assistants\ScheduledEvents\ScheduledEventCreateParams\ConversationMetadata
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -48,7 +48,7 @@ final class ScheduledEventsRawService implements ScheduledEventsRawContract
      *   telnyxAgentTarget: string,
      *   telnyxConversationChannel: ConversationChannelType|value-of<ConversationChannelType>,
      *   telnyxEndUserTarget: string,
-     *   callSettings?: ScheduledCallSettings|ScheduledCallSettingsShape,
+     *   callSettings?: CallSettings|CallSettingsShape,
      *   conversationMetadata?: array<string,ConversationMetadataShape>,
      *   dynamicVariables?: array<string,string>,
      *   maxRetriesClientErrors?: int,

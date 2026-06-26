@@ -11,9 +11,9 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Dir\Comments\CommentCreateParams;
 use Telnyx\Dir\Comments\CommentListParams;
+use Telnyx\Dir\Comments\CommentListParams\CommentType;
+use Telnyx\Dir\Comments\CommentListResponse;
 use Telnyx\Dir\Comments\CommentNewResponse;
-use Telnyx\Dir\Comments\CommentType;
-use Telnyx\Dir\Comments\DirComment;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Dir\CommentsRawContract;
 
@@ -76,7 +76,7 @@ final class CommentsRawService implements CommentsRawContract
      * }|CommentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DirComment>>
+     * @return BaseResponse<DefaultFlatPagination<CommentListResponse>>
      *
      * @throws APIException
      */
@@ -103,7 +103,7 @@ final class CommentsRawService implements CommentsRawContract
                 ],
             ),
             options: $options,
-            convert: DirComment::class,
+            convert: CommentListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

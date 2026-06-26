@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\ChannelZones\ChannelZoneListParams;
+use Telnyx\ChannelZones\ChannelZoneListResponse;
 use Telnyx\ChannelZones\ChannelZoneUpdateParams;
-use Telnyx\ChannelZones\GcbChannelZone;
+use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -37,7 +38,7 @@ final class ChannelZonesRawService implements ChannelZonesRawContract
      * @param array{channels: int}|ChannelZoneUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<GcbChannelZone>
+     * @return BaseResponse<ChannelZoneUpdateResponse>
      *
      * @throws APIException
      */
@@ -57,7 +58,7 @@ final class ChannelZonesRawService implements ChannelZonesRawContract
             path: ['channel_zones/%1$s', $channelZoneID],
             body: (object) $parsed,
             options: $options,
-            convert: GcbChannelZone::class,
+            convert: ChannelZoneUpdateResponse::class,
         );
     }
 
@@ -69,7 +70,7 @@ final class ChannelZonesRawService implements ChannelZonesRawContract
      * @param array{pageNumber?: int, pageSize?: int}|ChannelZoneListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<GcbChannelZone>>
+     * @return BaseResponse<DefaultFlatPagination<ChannelZoneListResponse>>
      *
      * @throws APIException
      */
@@ -91,7 +92,7 @@ final class ChannelZonesRawService implements ChannelZonesRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: GcbChannelZone::class,
+            convert: ChannelZoneListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

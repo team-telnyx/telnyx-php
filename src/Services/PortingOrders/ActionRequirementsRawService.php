@@ -15,7 +15,7 @@ use Telnyx\PortingOrders\ActionRequirements\ActionRequirementInitiateResponse;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Filter;
 use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListParams\Sort;
-use Telnyx\PortingOrders\ActionRequirements\PortingActionRequirement;
+use Telnyx\PortingOrders\ActionRequirements\ActionRequirementListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\ActionRequirementsRawContract;
 
@@ -49,7 +49,7 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
      * }|ActionRequirementListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingActionRequirement>>
+     * @return BaseResponse<DefaultFlatPagination<ActionRequirementListResponse>>
      *
      * @throws APIException
      */
@@ -72,7 +72,7 @@ final class ActionRequirementsRawService implements ActionRequirementsRawContrac
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PortingActionRequirement::class,
+            convert: ActionRequirementListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

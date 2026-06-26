@@ -7,15 +7,18 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirCreateLoaParams;
+use Telnyx\Dir\DirGetResponse;
 use Telnyx\Dir\DirListDocumentTypesResponse;
 use Telnyx\Dir\DirListInfringementClaimsParams;
+use Telnyx\Dir\DirListInfringementClaimsResponse;
 use Telnyx\Dir\DirListParams;
-use Telnyx\Dir\DirNewLoaParams;
+use Telnyx\Dir\DirListResponse;
+use Telnyx\Dir\DirSubmitResponse;
 use Telnyx\Dir\DirUpdateInfringementParams;
+use Telnyx\Dir\DirUpdateInfringementResponse;
 use Telnyx\Dir\DirUpdateParams;
-use Telnyx\Dir\DirWrapped;
-use Telnyx\InfringementClaims\InfringementClaim;
+use Telnyx\Dir\DirUpdateResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -29,7 +32,7 @@ interface DirRawContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirWrapped>
+     * @return BaseResponse<DirGetResponse>
      *
      * @throws APIException
      */
@@ -45,7 +48,7 @@ interface DirRawContract
      * @param array<string,mixed>|DirUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirWrapped>
+     * @return BaseResponse<DirUpdateResponse>
      *
      * @throws APIException
      */
@@ -61,7 +64,7 @@ interface DirRawContract
      * @param array<string,mixed>|DirListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<Dir>>
+     * @return BaseResponse<DefaultFlatPagination<DirListResponse>>
      *
      * @throws APIException
      */
@@ -88,6 +91,23 @@ interface DirRawContract
     /**
      * @api
      *
+     * @param string $dirID the DIR id
+     * @param array<string,mixed>|DirCreateLoaParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<string>
+     *
+     * @throws APIException
+     */
+    public function createLoa(
+        string $dirID,
+        array|DirCreateLoaParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<DirListDocumentTypesResponse>
@@ -105,7 +125,7 @@ interface DirRawContract
      * @param array<string,mixed>|DirListInfringementClaimsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<InfringementClaim>>
+     * @return BaseResponse<DefaultFlatPagination<DirListInfringementClaimsResponse>>
      *
      * @throws APIException
      */
@@ -118,27 +138,10 @@ interface DirRawContract
     /**
      * @api
      *
-     * @param string $dirID the DIR id
-     * @param array<string,mixed>|DirNewLoaParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<string>
-     *
-     * @throws APIException
-     */
-    public function newLoa(
-        string $dirID,
-        array|DirNewLoaParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirWrapped>
+     * @return BaseResponse<DirSubmitResponse>
      *
      * @throws APIException
      */
@@ -154,7 +157,7 @@ interface DirRawContract
      * @param array<string,mixed>|DirUpdateInfringementParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirWrapped>
+     * @return BaseResponse<DirUpdateInfringementResponse>
      *
      * @throws APIException
      */

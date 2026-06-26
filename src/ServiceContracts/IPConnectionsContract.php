@@ -8,7 +8,6 @@ use Telnyx\ConnectionJitterBuffer;
 use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
@@ -16,6 +15,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\IPConnections\InboundIP;
 use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
+use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
@@ -53,7 +53,7 @@ interface IPConnectionsContract
      * @param Inbound|InboundShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
-     * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      * @param OutboundIP|OutboundIPShape $outbound
@@ -81,7 +81,7 @@ interface IPConnectionsContract
         Inbound|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
-        ConnectionNoiseSuppression|string|null $noiseSuppression = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         OutboundIP|array|null $outbound = null,
@@ -123,7 +123,7 @@ interface IPConnectionsContract
      * @param InboundIP|InboundIPShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
-     * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     * @param \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression|value-of<\Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      * @param OutboundIP|OutboundIPShape $outbound
@@ -152,7 +152,7 @@ interface IPConnectionsContract
         InboundIP|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
-        ConnectionNoiseSuppression|string|null $noiseSuppression = null,
+        \Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         OutboundIP|array|null $outbound = null,

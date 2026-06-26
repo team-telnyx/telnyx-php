@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\Dir;
 
-use Telnyx\CallReasons\BrandedCallingPaginationMeta;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Dir\DirListDocumentTypesResponse\Data;
+use Telnyx\Dir\DirListDocumentTypesResponse\Meta;
 
 /**
  * @phpstan-import-type DataShape from \Telnyx\Dir\DirListDocumentTypesResponse\Data
- * @phpstan-import-type BrandedCallingPaginationMetaShape from \Telnyx\CallReasons\BrandedCallingPaginationMeta
+ * @phpstan-import-type MetaShape from \Telnyx\Dir\DirListDocumentTypesResponse\Meta
  *
  * @phpstan-type DirListDocumentTypesResponseShape = array{
- *   data: list<Data|DataShape>,
- *   meta: BrandedCallingPaginationMeta|BrandedCallingPaginationMetaShape,
+ *   data: list<Data|DataShape>, meta: Meta|MetaShape
  * }
  */
 final class DirListDocumentTypesResponse implements BaseModel
@@ -32,7 +31,7 @@ final class DirListDocumentTypesResponse implements BaseModel
      * JSON:API pagination metadata returned with every paginated list response. Page numbering is 1-based. `page_size` reports the number of items actually returned in `data` for this page; the requested size is taken from the `page[size]` query parameter.
      */
     #[Required]
-    public BrandedCallingPaginationMeta $meta;
+    public Meta $meta;
 
     /**
      * `new DirListDocumentTypesResponse()` is missing required properties by the API.
@@ -59,12 +58,10 @@ final class DirListDocumentTypesResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<Data|DataShape> $data
-     * @param BrandedCallingPaginationMeta|BrandedCallingPaginationMetaShape $meta
+     * @param Meta|MetaShape $meta
      */
-    public static function with(
-        array $data,
-        BrandedCallingPaginationMeta|array $meta
-    ): self {
+    public static function with(array $data, Meta|array $meta): self
+    {
         $self = new self;
 
         $self['data'] = $data;
@@ -87,9 +84,9 @@ final class DirListDocumentTypesResponse implements BaseModel
     /**
      * JSON:API pagination metadata returned with every paginated list response. Page numbering is 1-based. `page_size` reports the number of items actually returned in `data` for this page; the requested size is taken from the `page[size]` query parameter.
      *
-     * @param BrandedCallingPaginationMeta|BrandedCallingPaginationMetaShape $meta
+     * @param Meta|MetaShape $meta
      */
-    public function withMeta(BrandedCallingPaginationMeta|array $meta): self
+    public function withMeta(Meta|array $meta): self
     {
         $self = clone $this;
         $self['meta'] = $meta;

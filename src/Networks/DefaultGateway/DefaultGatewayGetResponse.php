@@ -8,13 +8,14 @@ use Telnyx\AuthenticationProviders\PaginationMeta;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse\Data;
 
 /**
- * @phpstan-import-type DefaultGatewayShape from \Telnyx\Networks\DefaultGateway\DefaultGateway
+ * @phpstan-import-type DataShape from \Telnyx\Networks\DefaultGateway\DefaultGatewayGetResponse\Data
  * @phpstan-import-type PaginationMetaShape from \Telnyx\AuthenticationProviders\PaginationMeta
  *
  * @phpstan-type DefaultGatewayGetResponseShape = array{
- *   data?: list<DefaultGateway|DefaultGatewayShape>|null,
+ *   data?: list<Data|DataShape>|null,
  *   meta?: null|PaginationMeta|PaginationMetaShape,
  * }
  */
@@ -23,8 +24,8 @@ final class DefaultGatewayGetResponse implements BaseModel
     /** @use SdkModel<DefaultGatewayGetResponseShape> */
     use SdkModel;
 
-    /** @var list<DefaultGateway>|null $data */
-    #[Optional(list: DefaultGateway::class)]
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
     public ?array $data;
 
     #[Optional]
@@ -40,7 +41,7 @@ final class DefaultGatewayGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<DefaultGateway|DefaultGatewayShape>|null $data
+     * @param list<Data|DataShape>|null $data
      * @param PaginationMeta|PaginationMetaShape|null $meta
      */
     public static function with(
@@ -56,7 +57,7 @@ final class DefaultGatewayGetResponse implements BaseModel
     }
 
     /**
-     * @param list<DefaultGateway|DefaultGatewayShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

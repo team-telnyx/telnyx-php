@@ -8,6 +8,7 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Enterprises\Reputation\Remediation\RemediationListResponse\Status;
 
 /**
  * Slim list-endpoint shape. Omits per-number results and webhook URLs to keep responses small.
@@ -17,7 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callPurpose: string,
  *   createdAt: \DateTimeInterface,
  *   phoneNumbersCount: int,
- *   status: RemediationStatus|value-of<RemediationStatus>,
+ *   status: Status|value-of<Status>,
  *   updatedAt: \DateTimeInterface,
  *   tier1CompletedAt?: \DateTimeInterface|null,
  *   tier2CompletedAt?: \DateTimeInterface|null,
@@ -43,9 +44,9 @@ final class RemediationListResponse implements BaseModel
     /**
      * Customer-facing status of a remediation request.
      *
-     * @var value-of<RemediationStatus> $status
+     * @var value-of<Status> $status
      */
-    #[Required(enum: RemediationStatus::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     #[Required('updated_at')]
@@ -94,14 +95,14 @@ final class RemediationListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RemediationStatus|value-of<RemediationStatus> $status
+     * @param Status|value-of<Status> $status
      */
     public static function with(
         string $id,
         string $callPurpose,
         \DateTimeInterface $createdAt,
         int $phoneNumbersCount,
-        RemediationStatus|string $status,
+        Status|string $status,
         \DateTimeInterface $updatedAt,
         ?\DateTimeInterface $tier1CompletedAt = null,
         ?\DateTimeInterface $tier2CompletedAt = null,
@@ -156,9 +157,9 @@ final class RemediationListResponse implements BaseModel
     /**
      * Customer-facing status of a remediation request.
      *
-     * @param RemediationStatus|value-of<RemediationStatus> $status
+     * @param Status|value-of<Status> $status
      */
-    public function withStatus(RemediationStatus|string $status): self
+    public function withStatus(Status|string $status): self
     {
         $self = clone $this;
         $self['status'] = $status;

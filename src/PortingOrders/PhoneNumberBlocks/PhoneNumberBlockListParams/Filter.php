@@ -7,11 +7,11 @@ namespace Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\ActivationStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\PortabilityStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\Status\PortingOrderMultipleStatus;
 use Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\SupportKey;
-use Telnyx\PortingPhoneNumbers\PortingOrderActivationStatus;
 
 /**
  * Consolidated filter parameter (deepObject style). Originally: filter[porting_order_id], filter[support_key], filter[status], filter[phone_number], filter[activation_status], filter[portability_status].
@@ -22,7 +22,7 @@ use Telnyx\PortingPhoneNumbers\PortingOrderActivationStatus;
  * @phpstan-import-type SupportKeyShape from \Telnyx\PortingOrders\PhoneNumberBlocks\PhoneNumberBlockListParams\Filter\SupportKey
  *
  * @phpstan-type FilterShape = array{
- *   activationStatus?: null|PortingOrderActivationStatus|value-of<PortingOrderActivationStatus>,
+ *   activationStatus?: null|ActivationStatus|value-of<ActivationStatus>,
  *   phoneNumber?: list<string>|null,
  *   portabilityStatus?: null|PortabilityStatus|value-of<PortabilityStatus>,
  *   portingOrderID?: list<string>|null,
@@ -38,9 +38,9 @@ final class Filter implements BaseModel
     /**
      * Filter results by activation status.
      *
-     * @var value-of<PortingOrderActivationStatus>|null $activationStatus
+     * @var value-of<ActivationStatus>|null $activationStatus
      */
-    #[Optional('activation_status', enum: PortingOrderActivationStatus::class)]
+    #[Optional('activation_status', enum: ActivationStatus::class)]
     public ?string $activationStatus;
 
     /**
@@ -93,7 +93,7 @@ final class Filter implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortingOrderActivationStatus|value-of<PortingOrderActivationStatus>|null $activationStatus
+     * @param ActivationStatus|value-of<ActivationStatus>|null $activationStatus
      * @param list<string>|null $phoneNumber
      * @param PortabilityStatus|value-of<PortabilityStatus>|null $portabilityStatus
      * @param list<string>|null $portingOrderID
@@ -101,7 +101,7 @@ final class Filter implements BaseModel
      * @param SupportKeyShape|null $supportKey
      */
     public static function with(
-        PortingOrderActivationStatus|string|null $activationStatus = null,
+        ActivationStatus|string|null $activationStatus = null,
         ?array $phoneNumber = null,
         PortabilityStatus|string|null $portabilityStatus = null,
         ?array $portingOrderID = null,
@@ -123,10 +123,10 @@ final class Filter implements BaseModel
     /**
      * Filter results by activation status.
      *
-     * @param PortingOrderActivationStatus|value-of<PortingOrderActivationStatus> $activationStatus
+     * @param ActivationStatus|value-of<ActivationStatus> $activationStatus
      */
     public function withActivationStatus(
-        PortingOrderActivationStatus|string $activationStatus
+        ActivationStatus|string $activationStatus
     ): self {
         $self = clone $this;
         $self['activationStatus'] = $activationStatus;

@@ -7,7 +7,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\DialogflowConnections\DialogflowConnectionResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -52,7 +54,7 @@ final class DialogflowConnectionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DialogflowConnectionResponse::class, $result);
+        $this->assertInstanceOf(DialogflowConnectionNewResponse::class, $result);
     }
 
     #[Test]
@@ -83,7 +85,7 @@ final class DialogflowConnectionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DialogflowConnectionResponse::class, $result);
+        $this->assertInstanceOf(DialogflowConnectionNewResponse::class, $result);
     }
 
     #[Test]
@@ -96,7 +98,7 @@ final class DialogflowConnectionsTest extends TestCase
         $result = $this->client->dialogflowConnections->retrieve('connection_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DialogflowConnectionResponse::class, $result);
+        $this->assertInstanceOf(DialogflowConnectionGetResponse::class, $result);
     }
 
     #[Test]
@@ -123,7 +125,7 @@ final class DialogflowConnectionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DialogflowConnectionResponse::class, $result);
+        $this->assertInstanceOf(DialogflowConnectionUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -154,7 +156,7 @@ final class DialogflowConnectionsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DialogflowConnectionResponse::class, $result);
+        $this->assertInstanceOf(DialogflowConnectionUpdateResponse::class, $result);
     }
 
     #[Test]

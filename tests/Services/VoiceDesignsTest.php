@@ -8,9 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
+use Telnyx\VoiceDesigns\VoiceDesignListResponse;
+use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
 use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
-use Telnyx\VoiceDesigns\VoiceDesignResponse;
-use Telnyx\VoiceDesigns\VoiceDesignSummaryData;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -44,7 +45,7 @@ final class VoiceDesignsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceDesignResponse::class, $result);
+        $this->assertInstanceOf(VoiceDesignNewResponse::class, $result);
     }
 
     #[Test]
@@ -69,7 +70,7 @@ final class VoiceDesignsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceDesignResponse::class, $result);
+        $this->assertInstanceOf(VoiceDesignNewResponse::class, $result);
     }
 
     #[Test]
@@ -82,7 +83,7 @@ final class VoiceDesignsTest extends TestCase
         $result = $this->client->voiceDesigns->retrieve('id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceDesignResponse::class, $result);
+        $this->assertInstanceOf(VoiceDesignGetResponse::class, $result);
     }
 
     #[Test]
@@ -99,7 +100,7 @@ final class VoiceDesignsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(VoiceDesignSummaryData::class, $item);
+            $this->assertInstanceOf(VoiceDesignListResponse::class, $item);
         }
     }
 

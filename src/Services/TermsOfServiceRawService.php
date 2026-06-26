@@ -10,11 +10,11 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfServiceRawContract;
-use Telnyx\TermsOfService\Agreements\TosProductType;
-use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
-use Telnyx\TermsOfService\TermsOfServiceGetStatusResponse;
-use Telnyx\TermsOfService\TermsOfServiceRetrieveInfoParams;
-use Telnyx\TermsOfService\TermsOfServiceRetrieveStatusParams;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoResponse;
+use Telnyx\TermsOfService\TermsOfServiceStatusParams;
+use Telnyx\TermsOfService\TermsOfServiceStatusResponse;
 
 /**
  * Accept and review the Branded Calling and Phone Number Reputation terms of service.
@@ -35,19 +35,19 @@ final class TermsOfServiceRawService implements TermsOfServiceRawContract
      * Returns the available Terms of Service agreements (product, current version, terms URL, effective date). Omit `product_type` to return all products; pass it to scope to one.
      *
      * @param array{
-     *   productType?: TosProductType|value-of<TosProductType>
-     * }|TermsOfServiceRetrieveInfoParams $params
+     *   productType?: ProductType|value-of<ProductType>
+     * }|TermsOfServiceInfoParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TermsOfServiceGetInfoResponse>
+     * @return BaseResponse<TermsOfServiceInfoResponse>
      *
      * @throws APIException
      */
-    public function retrieveInfo(
-        array|TermsOfServiceRetrieveInfoParams $params,
+    public function info(
+        array|TermsOfServiceInfoParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = TermsOfServiceRetrieveInfoParams::parseRequest(
+        [$parsed, $options] = TermsOfServiceInfoParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -61,7 +61,7 @@ final class TermsOfServiceRawService implements TermsOfServiceRawContract
                 ['productType' => 'product_type']
             ),
             options: $options,
-            convert: TermsOfServiceGetInfoResponse::class,
+            convert: TermsOfServiceInfoResponse::class,
         );
     }
 
@@ -73,19 +73,19 @@ final class TermsOfServiceRawService implements TermsOfServiceRawContract
      * `agreement_required: true` means the user has not yet agreed (or has agreed to an outdated version) and must agree before using that product's endpoints.
      *
      * @param array{
-     *   productType?: TosProductType|value-of<TosProductType>
-     * }|TermsOfServiceRetrieveStatusParams $params
+     *   productType?: TermsOfServiceStatusParams\ProductType|value-of<TermsOfServiceStatusParams\ProductType>,
+     * }|TermsOfServiceStatusParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TermsOfServiceGetStatusResponse>
+     * @return BaseResponse<TermsOfServiceStatusResponse>
      *
      * @throws APIException
      */
-    public function retrieveStatus(
-        array|TermsOfServiceRetrieveStatusParams $params,
+    public function status(
+        array|TermsOfServiceStatusParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = TermsOfServiceRetrieveStatusParams::parseRequest(
+        [$parsed, $options] = TermsOfServiceStatusParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -99,7 +99,7 @@ final class TermsOfServiceRawService implements TermsOfServiceRawContract
                 ['productType' => 'product_type']
             ),
             options: $options,
-            convert: TermsOfServiceGetStatusResponse::class,
+            convert: TermsOfServiceStatusResponse::class,
         );
     }
 }

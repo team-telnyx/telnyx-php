@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI;
 
-use Telnyx\AI\Integrations\Integration;
+use Telnyx\AI\Integrations\IntegrationGetResponse;
 use Telnyx\AI\Integrations\IntegrationListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -21,7 +21,7 @@ interface IntegrationsRawContract
      * @param string $integrationID The integration id
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<Integration>
+     * @return BaseResponse<IntegrationGetResponse>
      *
      * @throws APIException
      */

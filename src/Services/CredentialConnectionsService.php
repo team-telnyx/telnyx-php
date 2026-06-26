@@ -10,9 +10,9 @@ use Telnyx\ConnectionNoiseSuppressionDetails;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\CredentialConnection;
+use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppression;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
@@ -81,7 +81,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @param CredentialInbound|CredentialInboundShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
-     * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      * @param CredentialOutbound|CredentialOutboundShape $outbound
@@ -111,7 +111,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
         CredentialInbound|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
-        ConnectionNoiseSuppression|string|null $noiseSuppression = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         CredentialOutbound|array|null $outbound = null,
@@ -198,7 +198,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
      * @param CredentialInbound|CredentialInboundShape $inbound
      * @param string|null $iosPushCredentialID The uuid of the push credential for Ios
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape $jitterBuffer Configuration options for Jitter Buffer. Enables Jitter Buffer for RTP streams of SIP Trunking calls. The feature is off unless enabled. You may define min and max values in msec for customized buffering behaviors. Larger values add latency but tolerate more jitter, while smaller values reduce latency but are more sensitive to jitter and reordering.
-     * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
+     * @param \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\NoiseSuppression|value-of<\Telnyx\CredentialConnections\CredentialConnectionUpdateParams\NoiseSuppression> $noiseSuppression Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape $noiseSuppressionDetails Configuration options for noise suppression. These settings are stored regardless of the noise_suppression value, but only take effect when noise_suppression is not 'disabled'. If you disable noise suppression and later re-enable it, the previously configured settings will be used.
      * @param bool $onnetT38PassthroughEnabled Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
      * @param CredentialOutbound|CredentialOutboundShape $outbound
@@ -229,7 +229,7 @@ final class CredentialConnectionsService implements CredentialConnectionsContrac
         CredentialInbound|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
-        ConnectionNoiseSuppression|string|null $noiseSuppression = null,
+        \Telnyx\CredentialConnections\CredentialConnectionUpdateParams\NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         bool $onnetT38PassthroughEnabled = false,
         CredentialOutbound|array|null $outbound = null,

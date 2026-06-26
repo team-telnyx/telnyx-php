@@ -8,9 +8,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\Requirements\DocReqsRequirement;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
+use Telnyx\Requirements\RequirementListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -38,7 +38,7 @@ interface RequirementsRawContract
      * @param array<string,mixed>|RequirementListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DocReqsRequirement>>
+     * @return BaseResponse<DefaultFlatPagination<RequirementListResponse>>
      *
      * @throws APIException
      */

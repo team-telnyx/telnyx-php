@@ -9,7 +9,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfService\BrandedCallingRawContract;
-use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
+use Telnyx\TermsOfService\BrandedCalling\BrandedCallingAgreeResponse;
 
 /**
  * Accept and review the Branded Calling and Phone Number Reputation terms of service.
@@ -33,7 +33,7 @@ final class BrandedCallingRawService implements BrandedCallingRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TosAgreementWrapped>
+     * @return BaseResponse<BrandedCallingAgreeResponse>
      *
      * @throws APIException
      */
@@ -45,7 +45,7 @@ final class BrandedCallingRawService implements BrandedCallingRawContract
             method: 'post',
             path: 'terms_of_service/branded_calling/agree',
             options: $requestOptions,
-            convert: TosAgreementWrapped::class,
+            convert: BrandedCallingAgreeResponse::class,
         );
     }
 }

@@ -7,12 +7,13 @@ namespace Telnyx\GlobalIPHealthChecks;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse\Data;
 
 /**
- * @phpstan-import-type GlobalIPHealthCheckShape from \Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheck
+ * @phpstan-import-type DataShape from \Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse\Data
  *
  * @phpstan-type GlobalIPHealthCheckGetResponseShape = array{
- *   data?: null|GlobalIPHealthCheck|GlobalIPHealthCheckShape
+ *   data?: null|Data|DataShape
  * }
  */
 final class GlobalIPHealthCheckGetResponse implements BaseModel
@@ -21,7 +22,7 @@ final class GlobalIPHealthCheckGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?GlobalIPHealthCheck $data;
+    public ?Data $data;
 
     public function __construct()
     {
@@ -33,9 +34,9 @@ final class GlobalIPHealthCheckGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param GlobalIPHealthCheck|GlobalIPHealthCheckShape|null $data
+     * @param Data|DataShape|null $data
      */
-    public static function with(GlobalIPHealthCheck|array|null $data = null): self
+    public static function with(Data|array|null $data = null): self
     {
         $self = new self;
 
@@ -45,9 +46,9 @@ final class GlobalIPHealthCheckGetResponse implements BaseModel
     }
 
     /**
-     * @param GlobalIPHealthCheck|GlobalIPHealthCheckShape $data
+     * @param Data|DataShape $data
      */
-    public function withData(GlobalIPHealthCheck|array $data): self
+    public function withData(Data|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

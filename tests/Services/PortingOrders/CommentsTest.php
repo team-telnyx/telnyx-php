@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\PortingOrders\Comments\CommentListResponse;
 use Telnyx\PortingOrders\Comments\CommentNewResponse;
-use Telnyx\PortingOrders\Comments\PortingOrdersComment;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -61,7 +61,7 @@ final class CommentsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PortingOrdersComment::class, $item);
+            $this->assertInstanceOf(CommentListResponse::class, $item);
         }
     }
 }

@@ -7,12 +7,13 @@ namespace Telnyx\PortingOrders\PhoneNumberConfigurations;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse\Data;
 
 /**
- * @phpstan-import-type PortingPhoneNumberConfigurationShape from \Telnyx\PortingOrders\PhoneNumberConfigurations\PortingPhoneNumberConfiguration
+ * @phpstan-import-type DataShape from \Telnyx\PortingOrders\PhoneNumberConfigurations\PhoneNumberConfigurationNewResponse\Data
  *
  * @phpstan-type PhoneNumberConfigurationNewResponseShape = array{
- *   data?: list<PortingPhoneNumberConfiguration|PortingPhoneNumberConfigurationShape>|null,
+ *   data?: list<Data|DataShape>|null
  * }
  */
 final class PhoneNumberConfigurationNewResponse implements BaseModel
@@ -20,8 +21,8 @@ final class PhoneNumberConfigurationNewResponse implements BaseModel
     /** @use SdkModel<PhoneNumberConfigurationNewResponseShape> */
     use SdkModel;
 
-    /** @var list<PortingPhoneNumberConfiguration>|null $data */
-    #[Optional(list: PortingPhoneNumberConfiguration::class)]
+    /** @var list<Data>|null $data */
+    #[Optional(list: Data::class)]
     public ?array $data;
 
     public function __construct()
@@ -34,7 +35,7 @@ final class PhoneNumberConfigurationNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<PortingPhoneNumberConfiguration|PortingPhoneNumberConfigurationShape>|null $data
+     * @param list<Data|DataShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -46,7 +47,7 @@ final class PhoneNumberConfigurationNewResponse implements BaseModel
     }
 
     /**
-     * @param list<PortingPhoneNumberConfiguration|PortingPhoneNumberConfigurationShape> $data
+     * @param list<Data|DataShape> $data
      */
     public function withData(array $data): self
     {

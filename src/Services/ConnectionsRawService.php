@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\Services;
 
 use Telnyx\Client;
-use Telnyx\Connections\Connection;
 use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsParams;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams;
 use Telnyx\Connections\ConnectionListParams\Filter;
 use Telnyx\Connections\ConnectionListParams\Sort;
+use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -69,7 +69,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
      * }|ConnectionListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<Connection>>
+     * @return BaseResponse<DefaultFlatPagination<ConnectionListResponse>>
      *
      * @throws APIException
      */
@@ -91,7 +91,7 @@ final class ConnectionsRawService implements ConnectionsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: Connection::class,
+            convert: ConnectionListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

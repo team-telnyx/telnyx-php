@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\CredentialConnection;
 use Telnyx\CredentialConnections\CredentialConnectionDeleteResponse;
 use Telnyx\CredentialConnections\CredentialConnectionGetResponse;
@@ -94,7 +93,7 @@ final class CredentialConnectionsTest extends TestCase
                 'jitterbufferMsecMax' => 200,
                 'jitterbufferMsecMin' => 60,
             ],
-            noiseSuppression: ConnectionNoiseSuppression::BOTH,
+            noiseSuppression: 'both',
             noiseSuppressionDetails: [
                 'attenuationLimit' => 80, 'engine' => 'deep_filter_net',
             ],

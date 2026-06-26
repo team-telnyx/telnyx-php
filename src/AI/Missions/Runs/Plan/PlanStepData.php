@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs\Plan;
 
+use Telnyx\AI\Missions\Runs\Plan\PlanStepData\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -14,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   description: string,
  *   runID: string,
  *   sequence: int,
- *   status: StepStatus|value-of<StepStatus>,
+ *   status: Status|value-of<Status>,
  *   stepID: string,
  *   completedAt?: \DateTimeInterface|null,
  *   metadata?: array<string,mixed>|null,
@@ -36,8 +37,8 @@ final class PlanStepData implements BaseModel
     #[Required]
     public int $sequence;
 
-    /** @var value-of<StepStatus> $status */
-    #[Required(enum: StepStatus::class)]
+    /** @var value-of<Status> $status */
+    #[Required(enum: Status::class)]
     public string $status;
 
     #[Required('step_id')]
@@ -87,14 +88,14 @@ final class PlanStepData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param StepStatus|value-of<StepStatus> $status
+     * @param Status|value-of<Status> $status
      * @param array<string,mixed>|null $metadata
      */
     public static function with(
         string $description,
         string $runID,
         int $sequence,
-        StepStatus|string $status,
+        Status|string $status,
         string $stepID,
         ?\DateTimeInterface $completedAt = null,
         ?array $metadata = null,
@@ -142,9 +143,9 @@ final class PlanStepData implements BaseModel
     }
 
     /**
-     * @param StepStatus|value-of<StepStatus> $status
+     * @param Status|value-of<Status> $status
      */
-    public function withStatus(StepStatus|string $status): self
+    public function withStatus(Status|string $status): self
     {
         $self = clone $this;
         $self['status'] = $status;

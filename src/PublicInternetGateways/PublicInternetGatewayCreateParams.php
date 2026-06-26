@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\PublicInternetGateways;
 
-use Telnyx\Core\Attributes\Required;
+use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams\Body;
 
 /**
  * Create a new Public Internet Gateway.
  *
  * @see Telnyx\Services\PublicInternetGatewaysService::create()
  *
- * @phpstan-import-type BodyShape from \Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams\Body
- *
  * @phpstan-type PublicInternetGatewayCreateParamsShape = array{
- *   body: Body|BodyShape
+ *   name?: string|null, networkID?: string|null, regionCode?: string|null
  * }
  */
 final class PublicInternetGatewayCreateParams implements BaseModel
@@ -27,23 +24,24 @@ final class PublicInternetGatewayCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    #[Required]
-    public Body $body;
+    /**
+     * A user specified name for the interface.
+     */
+    #[Optional]
+    public ?string $name;
 
     /**
-     * `new PublicInternetGatewayCreateParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * PublicInternetGatewayCreateParams::with(body: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new PublicInternetGatewayCreateParams)->withBody(...)
-     * ```
+     * The id of the network associated with the interface.
      */
+    #[Optional('network_id')]
+    public ?string $networkID;
+
+    /**
+     * The region interface is deployed to.
+     */
+    #[Optional('region_code')]
+    public ?string $regionCode;
+
     public function __construct()
     {
         $this->initialize();
@@ -53,25 +51,50 @@ final class PublicInternetGatewayCreateParams implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param Body|BodyShape $body
      */
-    public static function with(Body|array $body): self
-    {
+    public static function with(
+        ?string $name = null,
+        ?string $networkID = null,
+        ?string $regionCode = null
+    ): self {
         $self = new self;
 
-        $self['body'] = $body;
+        null !== $name && $self['name'] = $name;
+        null !== $networkID && $self['networkID'] = $networkID;
+        null !== $regionCode && $self['regionCode'] = $regionCode;
 
         return $self;
     }
 
     /**
-     * @param Body|BodyShape $body
+     * A user specified name for the interface.
      */
-    public function withBody(Body|array $body): self
+    public function withName(string $name): self
     {
         $self = clone $this;
-        $self['body'] = $body;
+        $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * The id of the network associated with the interface.
+     */
+    public function withNetworkID(string $networkID): self
+    {
+        $self = clone $this;
+        $self['networkID'] = $networkID;
+
+        return $self;
+    }
+
+    /**
+     * The region interface is deployed to.
+     */
+    public function withRegionCode(string $regionCode): self
+    {
+        $self = clone $this;
+        $self['regionCode'] = $regionCode;
 
         return $self;
     }

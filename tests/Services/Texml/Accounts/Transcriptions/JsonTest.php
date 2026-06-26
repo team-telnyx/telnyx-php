@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\Texml\Accounts\Transcriptions\Json\TexmlRecordingTranscription;
+use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -94,7 +94,10 @@ final class JsonTest extends TestCase
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TexmlRecordingTranscription::class, $result);
+        $this->assertInstanceOf(
+            JsonGetRecordingTranscriptionSidJsonResponse::class,
+            $result
+        );
     }
 
     #[Test]
@@ -117,6 +120,9 @@ final class JsonTest extends TestCase
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TexmlRecordingTranscription::class, $result);
+        $this->assertInstanceOf(
+            JsonGetRecordingTranscriptionSidJsonResponse::class,
+            $result
+        );
     }
 }

@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\GlobalIPs\GlobalIP;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
+use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
 
@@ -52,7 +52,7 @@ interface GlobalIPsContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<GlobalIP>
+     * @return DefaultFlatPagination<GlobalIPListResponse>
      *
      * @throws APIException
      */

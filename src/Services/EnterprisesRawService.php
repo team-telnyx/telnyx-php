@@ -11,16 +11,19 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\BillingAddress;
 use Telnyx\Enterprises\BillingContact;
+use Telnyx\Enterprises\EnterpriseActivateBrandedCallingResponse;
 use Telnyx\Enterprises\EnterpriseCreateParams;
 use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
 use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
+use Telnyx\Enterprises\EnterpriseGetResponse;
 use Telnyx\Enterprises\EnterpriseListParams;
+use Telnyx\Enterprises\EnterpriseNewResponse;
 use Telnyx\Enterprises\EnterprisePublic;
-use Telnyx\Enterprises\EnterprisePublicWrapped;
 use Telnyx\Enterprises\EnterpriseUpdateParams;
+use Telnyx\Enterprises\EnterpriseUpdateResponse;
 use Telnyx\Enterprises\OrganizationContact;
 use Telnyx\Enterprises\PhysicalAddress;
 use Telnyx\RequestOptions;
@@ -78,7 +81,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * }|EnterpriseCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EnterprisePublicWrapped>
+     * @return BaseResponse<EnterpriseNewResponse>
      *
      * @throws APIException
      */
@@ -97,7 +100,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
             path: 'enterprises',
             body: (object) $parsed,
             options: $options,
-            convert: EnterprisePublicWrapped::class,
+            convert: EnterpriseNewResponse::class,
         );
     }
 
@@ -109,7 +112,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EnterprisePublicWrapped>
+     * @return BaseResponse<EnterpriseGetResponse>
      *
      * @throws APIException
      */
@@ -122,7 +125,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
             method: 'get',
             path: ['enterprises/%1$s', $enterpriseID],
             options: $requestOptions,
-            convert: EnterprisePublicWrapped::class,
+            convert: EnterpriseGetResponse::class,
         );
     }
 
@@ -153,7 +156,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * }|EnterpriseUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EnterprisePublicWrapped>
+     * @return BaseResponse<EnterpriseUpdateResponse>
      *
      * @throws APIException
      */
@@ -173,7 +176,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
             path: ['enterprises/%1$s', $enterpriseID],
             body: (object) $parsed,
             options: $options,
-            convert: EnterprisePublicWrapped::class,
+            convert: EnterpriseUpdateResponse::class,
         );
     }
 
@@ -271,11 +274,11 @@ final class EnterprisesRawService implements EnterprisesRawContract
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EnterprisePublicWrapped>
+     * @return BaseResponse<EnterpriseActivateBrandedCallingResponse>
      *
      * @throws APIException
      */
-    public function brandedCalling(
+    public function activateBrandedCalling(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
@@ -284,7 +287,7 @@ final class EnterprisesRawService implements EnterprisesRawContract
             method: 'post',
             path: ['enterprises/%1$s/branded_calling', $enterpriseID],
             options: $requestOptions,
-            convert: EnterprisePublicWrapped::class,
+            convert: EnterpriseActivateBrandedCallingResponse::class,
         );
     }
 }

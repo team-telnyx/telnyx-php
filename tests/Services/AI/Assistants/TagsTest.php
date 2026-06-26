@@ -5,7 +5,9 @@ namespace Tests\Services\AI\Assistants;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Assistants\Tags\TagsResponse;
+use Telnyx\AI\Assistants\Tags\TagAddResponse;
+use Telnyx\AI\Assistants\Tags\TagListResponse;
+use Telnyx\AI\Assistants\Tags\TagRemoveResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -38,7 +40,7 @@ final class TagsTest extends TestCase
         $result = $this->client->ai->assistants->tags->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TagsResponse::class, $result);
+        $this->assertInstanceOf(TagListResponse::class, $result);
     }
 
     #[Test]
@@ -54,7 +56,7 @@ final class TagsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TagsResponse::class, $result);
+        $this->assertInstanceOf(TagAddResponse::class, $result);
     }
 
     #[Test]
@@ -70,7 +72,7 @@ final class TagsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TagsResponse::class, $result);
+        $this->assertInstanceOf(TagAddResponse::class, $result);
     }
 
     #[Test]
@@ -86,7 +88,7 @@ final class TagsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TagsResponse::class, $result);
+        $this->assertInstanceOf(TagRemoveResponse::class, $result);
     }
 
     #[Test]
@@ -102,6 +104,6 @@ final class TagsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TagsResponse::class, $result);
+        $this->assertInstanceOf(TagRemoveResponse::class, $result);
     }
 }

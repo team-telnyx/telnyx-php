@@ -6,11 +6,11 @@ namespace Telnyx\ServiceContracts\Texml\Accounts\Calls;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingTrack;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -44,7 +44,7 @@ interface RecordingsJsonContract
         RecordingTrack|string|null $recordingTrack = null,
         bool $sendRecordingURL = true,
         RequestOptions|array|null $requestOptions = null,
-    ): TexmlCreateCallRecordingResponseBody;
+    ): RecordingsJsonRecordingsJsonResponse;
 
     /**
      * @api
@@ -59,5 +59,5 @@ interface RecordingsJsonContract
         string $callSid,
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
-    ): TexmlGetCallRecordingsResponseBody;
+    ): RecordingsJsonGetRecordingsJsonResponse;
 }

@@ -10,8 +10,8 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentCreateParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams;
+use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
-use Telnyx\PortingOrders\AdditionalDocuments\PortingAdditionalDocument;
 use Telnyx\RequestOptions;
 
 /**
@@ -43,7 +43,7 @@ interface AdditionalDocumentsRawContract
      * @param array<string,mixed>|AdditionalDocumentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PortingAdditionalDocument>>
+     * @return BaseResponse<DefaultFlatPagination<AdditionalDocumentListResponse>>
      *
      * @throws APIException
      */

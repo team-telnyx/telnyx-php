@@ -11,10 +11,10 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfService\AgreementsRawContract;
+use Telnyx\TermsOfService\Agreements\AgreementGetResponse;
 use Telnyx\TermsOfService\Agreements\AgreementListParams;
-use Telnyx\TermsOfService\Agreements\TosAgreement;
-use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
-use Telnyx\TermsOfService\Agreements\TosProductType;
+use Telnyx\TermsOfService\Agreements\AgreementListParams\ProductType;
+use Telnyx\TermsOfService\Agreements\AgreementListResponse;
 
 /**
  * Accept and review the Branded Calling and Phone Number Reputation terms of service.
@@ -37,7 +37,7 @@ final class AgreementsRawService implements AgreementsRawContract
      * @param string $agreementID unique identifier of the agreement
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TosAgreementWrapped>
+     * @return BaseResponse<AgreementGetResponse>
      *
      * @throws APIException
      */
@@ -50,7 +50,7 @@ final class AgreementsRawService implements AgreementsRawContract
             method: 'get',
             path: ['terms_of_service/agreements/%1$s', $agreementID],
             options: $requestOptions,
-            convert: TosAgreementWrapped::class,
+            convert: AgreementGetResponse::class,
         );
     }
 
@@ -66,11 +66,11 @@ final class AgreementsRawService implements AgreementsRawContract
      * @param array{
      *   pageNumber?: int,
      *   pageSize?: int,
-     *   productType?: TosProductType|value-of<TosProductType>,
+     *   productType?: ProductType|value-of<ProductType>,
      * }|AgreementListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<TosAgreement>>
+     * @return BaseResponse<DefaultFlatPagination<AgreementListResponse>>
      *
      * @throws APIException
      */
@@ -96,7 +96,7 @@ final class AgreementsRawService implements AgreementsRawContract
                 ],
             ),
             options: $options,
-            convert: TosAgreement::class,
+            convert: AgreementListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

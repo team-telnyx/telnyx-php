@@ -9,7 +9,7 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingGetResponse;
-use Telnyx\MobilePhoneNumbers\Messaging\MobilePhoneNumberWithMessagingSettings;
+use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -57,10 +57,7 @@ final class MessagingTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(
-                MobilePhoneNumberWithMessagingSettings::class,
-                $item
-            );
+            $this->assertInstanceOf(MessagingListResponse::class, $item);
         }
     }
 }

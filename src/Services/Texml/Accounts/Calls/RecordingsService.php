@@ -10,7 +10,7 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsContract;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody;
+use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
 
 /**
  * TeXML REST Commands.
@@ -51,7 +51,7 @@ final class RecordingsService implements RecordingsContract
         string $callSid,
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TexmlCreateCallRecordingResponseBody {
+    ): RecordingRecordingSidJsonResponse {
         $params = Util::removeNulls(
             ['accountSid' => $accountSid, 'callSid' => $callSid, 'status' => $status]
         );

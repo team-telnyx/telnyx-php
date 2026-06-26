@@ -125,6 +125,7 @@ trait SdkModel
         }
 
         if (array_key_exists($offset, array: self::$converter->properties)) {
+            // @phpstan-ignore isset.property
             if (isset($this->{$offset})) {
                 return true;
             }

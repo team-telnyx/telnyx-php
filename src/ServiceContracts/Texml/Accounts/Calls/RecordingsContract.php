@@ -7,7 +7,7 @@ namespace Telnyx\ServiceContracts\Texml\Accounts\Calls;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonParams\Status;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody;
+use Telnyx\Texml\Accounts\Calls\Recordings\RecordingRecordingSidJsonResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -31,5 +31,5 @@ interface RecordingsContract
         string $callSid,
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TexmlCreateCallRecordingResponseBody;
+    ): RecordingRecordingSidJsonResponse;
 }

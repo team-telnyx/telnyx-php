@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs;
 
+use Telnyx\AI\Missions\Runs\RunUpdateParams\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -21,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   metadata?: array<string,mixed>|null,
  *   resultPayload?: array<string,mixed>|null,
  *   resultSummary?: string|null,
- *   status?: null|RunStatus|value-of<RunStatus>,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class RunUpdateParams implements BaseModel
@@ -47,8 +48,8 @@ final class RunUpdateParams implements BaseModel
     #[Optional('result_summary')]
     public ?string $resultSummary;
 
-    /** @var value-of<RunStatus>|null $status */
-    #[Optional(enum: RunStatus::class)]
+    /** @var value-of<Status>|null $status */
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -77,7 +78,7 @@ final class RunUpdateParams implements BaseModel
      *
      * @param array<string,mixed>|null $metadata
      * @param array<string,mixed>|null $resultPayload
-     * @param RunStatus|value-of<RunStatus>|null $status
+     * @param Status|value-of<Status>|null $status
      */
     public static function with(
         string $missionID,
@@ -85,7 +86,7 @@ final class RunUpdateParams implements BaseModel
         ?array $metadata = null,
         ?array $resultPayload = null,
         ?string $resultSummary = null,
-        RunStatus|string|null $status = null,
+        Status|string|null $status = null,
     ): self {
         $self = new self;
 
@@ -147,9 +148,9 @@ final class RunUpdateParams implements BaseModel
     }
 
     /**
-     * @param RunStatus|value-of<RunStatus> $status
+     * @param Status|value-of<Status> $status
      */
-    public function withStatus(RunStatus|string $status): self
+    public function withStatus(Status|string $status): self
     {
         $self = clone $this;
         $self['status'] = $status;

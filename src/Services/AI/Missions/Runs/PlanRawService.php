@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI\Missions\Runs;
 
-use Telnyx\AI\Missions\Runs\Plan\CreatePlanStepRequest;
 use Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanParams;
+use Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanResponse;
 use Telnyx\AI\Missions\Runs\Plan\PlanCreateParams;
+use Telnyx\AI\Missions\Runs\Plan\PlanCreateParams\Step;
 use Telnyx\AI\Missions\Runs\Plan\PlanGetResponse;
 use Telnyx\AI\Missions\Runs\Plan\PlanGetStepDetailsParams;
+use Telnyx\AI\Missions\Runs\Plan\PlanGetStepDetailsResponse;
+use Telnyx\AI\Missions\Runs\Plan\PlanNewResponse;
 use Telnyx\AI\Missions\Runs\Plan\PlanRetrieveParams;
-use Telnyx\AI\Missions\Runs\Plan\PlanStepResponse;
-use Telnyx\AI\Missions\Runs\Plan\PlanStepsCreatedResponse;
 use Telnyx\AI\Missions\Runs\Plan\PlanUpdateStepParams;
-use Telnyx\AI\Missions\Runs\Plan\StepStatus;
+use Telnyx\AI\Missions\Runs\Plan\PlanUpdateStepParams\Status;
+use Telnyx\AI\Missions\Runs\Plan\PlanUpdateStepResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -21,7 +23,8 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\Missions\Runs\PlanRawContract;
 
 /**
- * @phpstan-import-type CreatePlanStepRequestShape from \Telnyx\AI\Missions\Runs\Plan\CreatePlanStepRequest
+ * @phpstan-import-type StepShape from \Telnyx\AI\Missions\Runs\Plan\PlanCreateParams\Step
+ * @phpstan-import-type StepShape from \Telnyx\AI\Missions\Runs\Plan\PlanAddStepsToPlanParams\Step as StepShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PlanRawService implements PlanRawContract
@@ -39,12 +42,11 @@ final class PlanRawService implements PlanRawContract
      *
      * @param string $runID path param: Unique identifier of the run
      * @param array{
-     *   missionID: string,
-     *   steps: list<CreatePlanStepRequest|CreatePlanStepRequestShape>,
+     *   missionID: string, steps: list<Step|StepShape>
      * }|PlanCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PlanStepsCreatedResponse>
+     * @return BaseResponse<PlanNewResponse>
      *
      * @throws APIException
      */
@@ -66,7 +68,7 @@ final class PlanRawService implements PlanRawContract
             path: ['ai/missions/%1$s/runs/%2$s/plan', $missionID, $runID],
             body: (object) array_diff_key($parsed, array_flip(['missionID'])),
             options: $options,
-            convert: PlanStepsCreatedResponse::class,
+            convert: PlanNewResponse::class,
         );
     }
 
@@ -112,11 +114,11 @@ final class PlanRawService implements PlanRawContract
      * @param string $runID path param: Unique identifier of the run
      * @param array{
      *   missionID: string,
-     *   steps: list<CreatePlanStepRequest|CreatePlanStepRequestShape>,
+     *   steps: list<PlanAddStepsToPlanParams\Step|StepShape1>,
      * }|PlanAddStepsToPlanParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PlanStepsCreatedResponse>
+     * @return BaseResponse<PlanAddStepsToPlanResponse>
      *
      * @throws APIException
      */
@@ -138,7 +140,7 @@ final class PlanRawService implements PlanRawContract
             path: ['ai/missions/%1$s/runs/%2$s/plan/steps', $missionID, $runID],
             body: (object) array_diff_key($parsed, array_flip(['missionID'])),
             options: $options,
-            convert: PlanStepsCreatedResponse::class,
+            convert: PlanAddStepsToPlanResponse::class,
         );
     }
 
@@ -151,7 +153,7 @@ final class PlanRawService implements PlanRawContract
      * @param array{missionID: string, runID: string}|PlanGetStepDetailsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PlanStepResponse>
+     * @return BaseResponse<PlanGetStepDetailsResponse>
      *
      * @throws APIException
      */
@@ -179,7 +181,7 @@ final class PlanRawService implements PlanRawContract
                 $stepID,
             ],
             options: $options,
-            convert: PlanStepResponse::class,
+            convert: PlanGetStepDetailsResponse::class,
         );
     }
 
@@ -193,11 +195,11 @@ final class PlanRawService implements PlanRawContract
      *   missionID: string,
      *   runID: string,
      *   metadata?: array<string,mixed>,
-     *   status?: StepStatus|value-of<StepStatus>,
+     *   status?: Status|value-of<Status>,
      * }|PlanUpdateStepParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PlanStepResponse>
+     * @return BaseResponse<PlanUpdateStepResponse>
      *
      * @throws APIException
      */
@@ -229,7 +231,7 @@ final class PlanRawService implements PlanRawContract
                 array_flip(['missionID', 'runID'])
             ),
             options: $options,
-            convert: PlanStepResponse::class,
+            convert: PlanUpdateStepResponse::class,
         );
     }
 }

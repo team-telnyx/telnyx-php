@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\Integrations\Integration;
+use Telnyx\AI\Integrations\IntegrationGetResponse;
 use Telnyx\AI\Integrations\IntegrationListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
@@ -31,7 +31,7 @@ final class IntegrationsRawService implements IntegrationsRawContract
      * @param string $integrationID The integration id
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<Integration>
+     * @return BaseResponse<IntegrationGetResponse>
      *
      * @throws APIException
      */
@@ -44,7 +44,7 @@ final class IntegrationsRawService implements IntegrationsRawContract
             method: 'get',
             path: ['ai/integrations/%1$s', $integrationID],
             options: $requestOptions,
-            convert: Integration::class,
+            convert: IntegrationGetResponse::class,
         );
     }
 

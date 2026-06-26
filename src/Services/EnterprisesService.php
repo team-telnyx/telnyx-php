@@ -10,13 +10,16 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\BillingAddress;
 use Telnyx\Enterprises\BillingContact;
+use Telnyx\Enterprises\EnterpriseActivateBrandedCallingResponse;
 use Telnyx\Enterprises\EnterpriseCreateParams\Industry;
 use Telnyx\Enterprises\EnterpriseCreateParams\NumberOfEmployees;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationLegalType;
 use Telnyx\Enterprises\EnterpriseCreateParams\OrganizationType;
 use Telnyx\Enterprises\EnterpriseCreateParams\RoleType;
+use Telnyx\Enterprises\EnterpriseGetResponse;
+use Telnyx\Enterprises\EnterpriseNewResponse;
 use Telnyx\Enterprises\EnterprisePublic;
-use Telnyx\Enterprises\EnterprisePublicWrapped;
+use Telnyx\Enterprises\EnterpriseUpdateResponse;
 use Telnyx\Enterprises\OrganizationContact;
 use Telnyx\Enterprises\PhysicalAddress;
 use Telnyx\RequestOptions;
@@ -122,7 +125,7 @@ final class EnterprisesService implements EnterprisesContract
         ?string $professionalLicenseNumber = null,
         RoleType|string $roleType = 'enterprise',
         RequestOptions|array|null $requestOptions = null,
-    ): EnterprisePublicWrapped {
+    ): EnterpriseNewResponse {
         $params = Util::removeNulls(
             [
                 'billingAddress' => $billingAddress,
@@ -167,7 +170,7 @@ final class EnterprisesService implements EnterprisesContract
     public function retrieve(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
-    ): EnterprisePublicWrapped {
+    ): EnterpriseGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($enterpriseID, requestOptions: $requestOptions);
 
@@ -211,7 +214,7 @@ final class EnterprisesService implements EnterprisesContract
         ?string $professionalLicenseNumber = null,
         ?string $website = null,
         RequestOptions|array|null $requestOptions = null,
-    ): EnterprisePublicWrapped {
+    ): EnterpriseUpdateResponse {
         $params = Util::removeNulls(
             [
                 'billingAddress' => $billingAddress,
@@ -323,12 +326,12 @@ final class EnterprisesService implements EnterprisesContract
      *
      * @throws APIException
      */
-    public function brandedCalling(
+    public function activateBrandedCalling(
         string $enterpriseID,
         RequestOptions|array|null $requestOptions = null
-    ): EnterprisePublicWrapped {
+    ): EnterpriseActivateBrandedCallingResponse {
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->brandedCalling($enterpriseID, requestOptions: $requestOptions);
+        $response = $this->raw->activateBrandedCalling($enterpriseID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

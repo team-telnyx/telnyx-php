@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts\Reputation;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
-use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
+use Telnyx\Reputation\Numbers\NumberGetResponse;
+use Telnyx\Reputation\Numbers\NumberListResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -28,7 +28,7 @@ interface NumbersContract
         string $phoneNumber,
         bool $fresh = false,
         RequestOptions|array|null $requestOptions = null,
-    ): ReputationPhoneNumberWithReputation;
+    ): NumberGetResponse;
 
     /**
      * @api
@@ -40,7 +40,7 @@ interface NumbersContract
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<ReputationPhoneNumber>
+     * @return DefaultFlatPagination<NumberListResponse>
      *
      * @throws APIException
      */

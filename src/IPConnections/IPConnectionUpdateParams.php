@@ -11,10 +11,10 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
+use Telnyx\IPConnections\IPConnectionUpdateParams\NoiseSuppression;
 use Telnyx\IPConnections\IPConnectionUpdateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
 
@@ -42,7 +42,7 @@ use Telnyx\IPConnections\IPConnectionUpdateParams\WebhookAPIVersion;
  *   inbound?: null|InboundIP|InboundIPShape,
  *   iosPushCredentialID?: string|null,
  *   jitterBuffer?: null|ConnectionJitterBuffer|ConnectionJitterBufferShape,
- *   noiseSuppression?: null|ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>,
+ *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
  *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: null|OutboundIP|OutboundIPShape,
@@ -136,9 +136,9 @@ final class IPConnectionUpdateParams implements BaseModel
     /**
      * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      *
-     * @var value-of<ConnectionNoiseSuppression>|null $noiseSuppression
+     * @var value-of<NoiseSuppression>|null $noiseSuppression
      */
-    #[Optional('noise_suppression', enum: ConnectionNoiseSuppression::class)]
+    #[Optional('noise_suppression', enum: NoiseSuppression::class)]
     public ?string $noiseSuppression;
 
     /**
@@ -216,7 +216,7 @@ final class IPConnectionUpdateParams implements BaseModel
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param InboundIP|InboundIPShape|null $inbound
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape|null $jitterBuffer
-     * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>|null $noiseSuppression
+     * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param OutboundIP|OutboundIPShape|null $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
@@ -237,7 +237,7 @@ final class IPConnectionUpdateParams implements BaseModel
         InboundIP|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
-        ConnectionNoiseSuppression|string|null $noiseSuppression = null,
+        NoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
         OutboundIP|array|null $outbound = null,
@@ -424,10 +424,10 @@ final class IPConnectionUpdateParams implements BaseModel
     /**
      * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      *
-     * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression
+     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
      */
     public function withNoiseSuppression(
-        ConnectionNoiseSuppression|string $noiseSuppression
+        NoiseSuppression|string $noiseSuppression
     ): self {
         $self = clone $this;
         $self['noiseSuppression'] = $noiseSuppression;

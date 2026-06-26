@@ -10,7 +10,9 @@ use Telnyx\Core\FileParam;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\VoiceClones\VoiceCloneData;
-use Telnyx\VoiceClones\VoiceCloneResponse;
+use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
+use Telnyx\VoiceClones\VoiceCloneNewResponse;
+use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,7 +41,7 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->create(
-            voiceCloneRequest: [
+            params: [
                 'gender' => 'male',
                 'language' => 'en',
                 'name' => 'clone-narrator',
@@ -49,7 +51,7 @@ final class VoiceClonesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceCloneResponse::class, $result);
+        $this->assertInstanceOf(VoiceCloneNewResponse::class, $result);
     }
 
     #[Test]
@@ -60,7 +62,7 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->create(
-            voiceCloneRequest: [
+            params: [
                 'gender' => 'male',
                 'language' => 'en',
                 'name' => 'clone-narrator',
@@ -70,7 +72,7 @@ final class VoiceClonesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceCloneResponse::class, $result);
+        $this->assertInstanceOf(VoiceCloneNewResponse::class, $result);
     }
 
     #[Test]
@@ -86,7 +88,7 @@ final class VoiceClonesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceCloneResponse::class, $result);
+        $this->assertInstanceOf(VoiceCloneUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -104,7 +106,7 @@ final class VoiceClonesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceCloneResponse::class, $result);
+        $this->assertInstanceOf(VoiceCloneUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -148,7 +150,7 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->createFromUpload(
-            voiceCloneUploadRequest: [
+            params: [
                 'audioFile' => FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
                 'gender' => 'male',
                 'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
@@ -158,7 +160,7 @@ final class VoiceClonesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceCloneResponse::class, $result);
+        $this->assertInstanceOf(VoiceCloneNewFromUploadResponse::class, $result);
     }
 
     #[Test]
@@ -169,7 +171,7 @@ final class VoiceClonesTest extends TestCase
         }
 
         $result = $this->client->voiceClones->createFromUpload(
-            voiceCloneUploadRequest: [
+            params: [
                 'audioFile' => FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
                 'gender' => 'male',
                 'language' => 'lkf-Lz1vLbBu-9uDh-9AHaOS2D-Cbf',
@@ -182,7 +184,7 @@ final class VoiceClonesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VoiceCloneResponse::class, $result);
+        $this->assertInstanceOf(VoiceCloneNewFromUploadResponse::class, $result);
     }
 
     #[Test]

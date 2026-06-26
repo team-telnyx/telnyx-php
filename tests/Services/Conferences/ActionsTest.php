@@ -23,7 +23,6 @@ use Telnyx\Conferences\Actions\ActionStopResponse;
 use Telnyx\Conferences\Actions\ActionUnholdResponse;
 use Telnyx\Conferences\Actions\ActionUnmuteResponse;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
-use Telnyx\Conferences\Actions\ConferenceRegion;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
 
@@ -74,7 +73,7 @@ final class ActionsTest extends TestCase
             callControlID: 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             supervisorRole: 'whisper',
             commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
-            region: ConferenceRegion::US,
+            region: 'US',
             whisperCallControlIDs: [
                 'v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ',
                 'v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw',
@@ -194,7 +193,7 @@ final class ActionsTest extends TestCase
             holdAudioURL: 'http://www.example.com/audio.wav',
             holdMediaName: 'my_media_uploaded_to_media_storage_api',
             mute: true,
-            region: ConferenceRegion::US,
+            region: 'US',
             softEndConferenceOnExit: true,
             startConferenceOnEnter: true,
             supervisorRole: 'whisper',
@@ -236,7 +235,7 @@ final class ActionsTest extends TestCase
             callControlID: 'c46e06d7-b78f-4b13-96b6-c576af9640ff',
             beepEnabled: 'never',
             commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
-            region: ConferenceRegion::US,
+            region: 'US',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -325,7 +324,7 @@ final class ActionsTest extends TestCase
             commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
             customFileName: 'my_recording_file_name',
             playBeep: true,
-            region: ConferenceRegion::US,
+            region: 'US',
             trim: 'trim-silence',
         );
 
@@ -417,7 +416,7 @@ final class ActionsTest extends TestCase
             commandID: '891510ac-f3e4-11e8-af5b-de00688a4901',
             language: 'en-US',
             payloadType: 'text',
-            region: ConferenceRegion::US,
+            region: 'US',
             voiceSettings: [
                 'type' => 'elevenlabs', 'apiKeyRef' => 'my_elevenlabs_api_key',
             ],
@@ -470,7 +469,7 @@ final class ActionsTest extends TestCase
             callControlIDs: [
                 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
             ],
-            region: ConferenceRegion::US,
+            region: 'US',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

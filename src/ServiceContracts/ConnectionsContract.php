@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\Connections\Connection;
 use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
 use Telnyx\Connections\ConnectionListParams\Filter;
 use Telnyx\Connections\ConnectionListParams\Sort;
+use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
@@ -50,7 +50,7 @@ interface ConnectionsContract
      * </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<Connection>
+     * @return DefaultFlatPagination<ConnectionListResponse>
      *
      * @throws APIException
      */

@@ -5,8 +5,13 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Missions;
 
 use Telnyx\AI\Missions\Runs\MissionRunData;
-use Telnyx\AI\Missions\Runs\MissionRunResponse;
-use Telnyx\AI\Missions\Runs\RunStatus;
+use Telnyx\AI\Missions\Runs\RunCancelRunResponse;
+use Telnyx\AI\Missions\Runs\RunGetResponse;
+use Telnyx\AI\Missions\Runs\RunNewResponse;
+use Telnyx\AI\Missions\Runs\RunPauseRunResponse;
+use Telnyx\AI\Missions\Runs\RunResumeRunResponse;
+use Telnyx\AI\Missions\Runs\RunUpdateParams\Status;
+use Telnyx\AI\Missions\Runs\RunUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
@@ -31,7 +36,7 @@ interface RunsContract
         ?array $input = null,
         ?array $metadata = null,
         RequestOptions|array|null $requestOptions = null,
-    ): MissionRunResponse;
+    ): RunNewResponse;
 
     /**
      * @api
@@ -46,7 +51,7 @@ interface RunsContract
         string $runID,
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
-    ): MissionRunResponse;
+    ): RunGetResponse;
 
     /**
      * @api
@@ -57,7 +62,7 @@ interface RunsContract
      * @param array<string,mixed> $metadata Body param
      * @param array<string,mixed> $resultPayload Body param
      * @param string $resultSummary Body param
-     * @param RunStatus|value-of<RunStatus> $status Body param
+     * @param Status|value-of<Status> $status Body param
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -69,9 +74,9 @@ interface RunsContract
         ?array $metadata = null,
         ?array $resultPayload = null,
         ?string $resultSummary = null,
-        RunStatus|string|null $status = null,
+        Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
-    ): MissionRunResponse;
+    ): RunUpdateResponse;
 
     /**
      * @api
@@ -107,7 +112,7 @@ interface RunsContract
         string $runID,
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
-    ): MissionRunResponse;
+    ): RunCancelRunResponse;
 
     /**
      * @api
@@ -141,7 +146,7 @@ interface RunsContract
         string $runID,
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
-    ): MissionRunResponse;
+    ): RunPauseRunResponse;
 
     /**
      * @api
@@ -156,5 +161,5 @@ interface RunsContract
         string $runID,
         string $missionID,
         RequestOptions|array|null $requestOptions = null,
-    ): MissionRunResponse;
+    ): RunResumeRunResponse;
 }

@@ -10,12 +10,12 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\RoomRecordings\RoomRecording;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse;
 use Telnyx\RoomRecordings\RoomRecordingListParams;
 use Telnyx\RoomRecordings\RoomRecordingListParams\Filter;
+use Telnyx\RoomRecordings\RoomRecordingListResponse;
 use Telnyx\ServiceContracts\RoomRecordingsRawContract;
 
 /**
@@ -68,7 +68,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
      * }|RoomRecordingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RoomRecording>>
+     * @return BaseResponse<DefaultFlatPagination<RoomRecordingListResponse>>
      *
      * @throws APIException
      */
@@ -90,7 +90,7 @@ final class RoomRecordingsRawService implements RoomRecordingsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: RoomRecording::class,
+            convert: RoomRecordingListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

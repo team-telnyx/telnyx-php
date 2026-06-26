@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
-use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\DefaultFlatPagination;
@@ -96,7 +95,7 @@ final class FqdnConnectionsTest extends TestCase
                 'jitterbufferMsecMin' => 60,
             ],
             microsoftTeamsSbc: true,
-            noiseSuppression: ConnectionNoiseSuppression::BOTH,
+            noiseSuppression: 'both',
             noiseSuppressionDetails: [
                 'attenuationLimit' => 80, 'engine' => 'deep_filter_net',
             ],

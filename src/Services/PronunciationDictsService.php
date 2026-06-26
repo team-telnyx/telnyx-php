@@ -9,14 +9,17 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PronunciationDicts\PronunciationDictData;
-use Telnyx\PronunciationDicts\PronunciationDictResponse;
+use Telnyx\PronunciationDicts\PronunciationDictGetResponse;
+use Telnyx\PronunciationDicts\PronunciationDictNewResponse;
+use Telnyx\PronunciationDicts\PronunciationDictUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PronunciationDictsContract;
 
 /**
  * Manage pronunciation dictionaries for text-to-speech synthesis. Dictionaries contain alias items (text replacement) and phoneme items (IPA pronunciation notation) that control how specific words are spoken.
  *
- * @phpstan-import-type PronunciationDictItemShape from \Telnyx\PronunciationDicts\PronunciationDictItem
+ * @phpstan-import-type ItemShape from \Telnyx\PronunciationDicts\PronunciationDictCreateParams\Item
+ * @phpstan-import-type ItemShape from \Telnyx\PronunciationDicts\PronunciationDictUpdateParams\Item as ItemShape1
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PronunciationDictsService implements PronunciationDictsContract
@@ -48,7 +51,7 @@ final class PronunciationDictsService implements PronunciationDictsContract
      * - Alias/phoneme value: max 500 characters
      * - File upload: max 1MB (1,048,576 bytes)
      *
-     * @param list<PronunciationDictItemShape> $items List of pronunciation items (alias or phoneme type). At least one item is required.
+     * @param list<ItemShape> $items List of pronunciation items (alias or phoneme type). At least one item is required.
      * @param string $name Human-readable name. Must be unique within the organization.
      * @param RequestOpts|null $requestOptions
      *
@@ -58,7 +61,7 @@ final class PronunciationDictsService implements PronunciationDictsContract
         array $items,
         string $name,
         RequestOptions|array|null $requestOptions = null
-    ): PronunciationDictResponse {
+    ): PronunciationDictNewResponse {
         $params = Util::removeNulls(['items' => $items, 'name' => $name]);
 
         // @phpstan-ignore-next-line argument.type
@@ -80,7 +83,7 @@ final class PronunciationDictsService implements PronunciationDictsContract
     public function retrieve(
         string $id,
         RequestOptions|array|null $requestOptions = null
-    ): PronunciationDictResponse {
+    ): PronunciationDictGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
 
@@ -93,7 +96,7 @@ final class PronunciationDictsService implements PronunciationDictsContract
      * Update the name and/or items of an existing pronunciation dictionary. Uses optimistic locking — if the dictionary was modified concurrently, the request returns 409 Conflict.
      *
      * @param string $id the UUID of the pronunciation dictionary
-     * @param list<PronunciationDictItemShape> $items updated list of pronunciation items (alias or phoneme type)
+     * @param list<ItemShape1> $items updated list of pronunciation items (alias or phoneme type)
      * @param string $name updated dictionary name
      * @param RequestOpts|null $requestOptions
      *
@@ -104,7 +107,7 @@ final class PronunciationDictsService implements PronunciationDictsContract
         ?array $items = null,
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
-    ): PronunciationDictResponse {
+    ): PronunciationDictUpdateResponse {
         $params = Util::removeNulls(['items' => $items, 'name' => $name]);
 
         // @phpstan-ignore-next-line argument.type

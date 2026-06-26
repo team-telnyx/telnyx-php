@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\Integrations\Integration;
+use Telnyx\AI\Integrations\IntegrationGetResponse;
 use Telnyx\AI\Integrations\IntegrationListResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -49,7 +49,7 @@ final class IntegrationsService implements IntegrationsContract
     public function retrieve(
         string $integrationID,
         RequestOptions|array|null $requestOptions = null
-    ): Integration {
+    ): IntegrationGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($integrationID, requestOptions: $requestOptions);
 

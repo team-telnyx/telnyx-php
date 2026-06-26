@@ -7,9 +7,9 @@ namespace Telnyx\ServiceContracts\Dir;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatch;
 use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchGetResponse;
 use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchListParams;
+use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchListResponse;
 use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchRetrieveParams;
 use Telnyx\RequestOptions;
 
@@ -42,7 +42,7 @@ interface PhoneNumberBatchesRawContract
      * @param array<string,mixed>|PhoneNumberBatchListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PhoneNumberBatch>>
+     * @return BaseResponse<DefaultFlatPagination<PhoneNumberBatchListResponse>>
      *
      * @throws APIException
      */

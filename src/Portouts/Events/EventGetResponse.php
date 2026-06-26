@@ -7,20 +7,21 @@ namespace Telnyx\Portouts\Events;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Portouts\Events\EventGetResponse\Data;
 
 /**
- * @phpstan-import-type PortoutEventVariants from \Telnyx\Portouts\Events\PortoutEvent
- * @phpstan-import-type PortoutEventShape from \Telnyx\Portouts\Events\PortoutEvent
+ * @phpstan-import-type DataVariants from \Telnyx\Portouts\Events\EventGetResponse\Data
+ * @phpstan-import-type DataShape from \Telnyx\Portouts\Events\EventGetResponse\Data
  *
- * @phpstan-type EventGetResponseShape = array{data?: PortoutEventShape|null}
+ * @phpstan-type EventGetResponseShape = array{data?: DataShape|null}
  */
 final class EventGetResponse implements BaseModel
 {
     /** @use SdkModel<EventGetResponseShape> */
     use SdkModel;
 
-    /** @var PortoutEventVariants|null $data */
-    #[Optional(union: PortoutEvent::class)]
+    /** @var DataVariants|null $data */
+    #[Optional(union: Data::class)]
     public WebhookPortoutStatusChanged|WebhookPortoutNewComment|WebhookPortoutFocDateChanged|null $data;
 
     public function __construct()
@@ -33,7 +34,7 @@ final class EventGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PortoutEventShape|null $data
+     * @param DataShape|null $data
      */
     public static function with(
         WebhookPortoutStatusChanged|array|WebhookPortoutNewComment|WebhookPortoutFocDateChanged|null $data = null,
@@ -46,7 +47,7 @@ final class EventGetResponse implements BaseModel
     }
 
     /**
-     * @param PortoutEventShape $data
+     * @param DataShape $data
      */
     public function withData(
         WebhookPortoutStatusChanged|array|WebhookPortoutNewComment|WebhookPortoutFocDateChanged $data,

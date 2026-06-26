@@ -9,8 +9,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams\DialogflowAPI;
-use Telnyx\DialogflowConnections\DialogflowConnectionResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams;
+use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\DialogflowConnectionsRawContract;
 
@@ -42,7 +44,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
      * }|DialogflowConnectionCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DialogflowConnectionResponse>
+     * @return BaseResponse<DialogflowConnectionNewResponse>
      *
      * @throws APIException
      */
@@ -62,7 +64,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
             path: ['dialogflow_connections/%1$s', $connectionID],
             body: (object) $parsed,
             options: $options,
-            convert: DialogflowConnectionResponse::class,
+            convert: DialogflowConnectionNewResponse::class,
         );
     }
 
@@ -74,7 +76,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DialogflowConnectionResponse>
+     * @return BaseResponse<DialogflowConnectionGetResponse>
      *
      * @throws APIException
      */
@@ -87,7 +89,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
             method: 'get',
             path: ['dialogflow_connections/%1$s', $connectionID],
             options: $requestOptions,
-            convert: DialogflowConnectionResponse::class,
+            convert: DialogflowConnectionGetResponse::class,
         );
     }
 
@@ -106,7 +108,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
      * }|DialogflowConnectionUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DialogflowConnectionResponse>
+     * @return BaseResponse<DialogflowConnectionUpdateResponse>
      *
      * @throws APIException
      */
@@ -126,7 +128,7 @@ final class DialogflowConnectionsRawService implements DialogflowConnectionsRawC
             path: ['dialogflow_connections/%1$s', $connectionID],
             body: (object) $parsed,
             options: $options,
-            convert: DialogflowConnectionResponse::class,
+            convert: DialogflowConnectionUpdateResponse::class,
         );
     }
 

@@ -12,7 +12,7 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\Porting\Events\EventGetResponse;
 use Telnyx\Porting\Events\EventListParams;
 use Telnyx\Porting\Events\EventListParams\Filter;
-use Telnyx\Porting\Events\PortingEvent;
+use Telnyx\Porting\Events\EventListResponse;
 use Telnyx\Porting\Events\PortingEventDeletedPayload;
 use Telnyx\Porting\Events\PortingEventMessagingChangedPayload;
 use Telnyx\Porting\Events\PortingEventNewCommentEvent;
@@ -93,7 +93,7 @@ final class EventsRawService implements EventsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: PortingEvent::class,
+            convert: EventListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

@@ -8,8 +8,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonDeleteRecordingTranscriptionSidJsonParams;
+use Telnyx\Texml\Accounts\Transcriptions\Json\JsonGetRecordingTranscriptionSidJsonResponse;
 use Telnyx\Texml\Accounts\Transcriptions\Json\JsonRetrieveRecordingTranscriptionSidJsonParams;
-use Telnyx\Texml\Accounts\Transcriptions\Json\TexmlRecordingTranscription;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -40,7 +40,7 @@ interface JsonRawContract
      * @param array<string,mixed>|JsonRetrieveRecordingTranscriptionSidJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TexmlRecordingTranscription>
+     * @return BaseResponse<JsonGetRecordingTranscriptionSidJsonResponse>
      *
      * @throws APIException
      */

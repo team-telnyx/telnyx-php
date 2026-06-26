@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartConversationRelayParams;
 
-use Telnyx\Calls\Actions\ConversationRelayInterruptible;
-use Telnyx\Calls\ConversationRelayLanguage;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Interruptible;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\InterruptibleGreeting;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -14,14 +15,14 @@ use Telnyx\Core\Contracts\BaseModel;
 /**
  * Conversation Relay connection settings. This object can provide `url`, `dtmf_detection`, `interruptible`, `interruptible_greeting`, and `languages`. Top-level aliases override nested values when both are present.
  *
- * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
+ * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language
  *
  * @phpstan-type ConversationRelaySettingsShape = array{
  *   url: string,
  *   dtmfDetection?: bool|null,
- *   interruptible?: null|ConversationRelayInterruptible|value-of<ConversationRelayInterruptible>,
- *   interruptibleGreeting?: null|ConversationRelayInterruptible|value-of<ConversationRelayInterruptible>,
- *   languages?: list<ConversationRelayLanguage|ConversationRelayLanguageShape>|null,
+ *   interruptible?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Interruptible|value-of<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Interruptible>,
+ *   interruptibleGreeting?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\InterruptibleGreeting|value-of<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\InterruptibleGreeting>,
+ *   languages?: list<\Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings\Language|LanguageShape>|null,
  * }
  */
 final class ConversationRelaySettings implements BaseModel
@@ -44,28 +45,32 @@ final class ConversationRelaySettings implements BaseModel
     /**
      * Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
      *
-     * @var value-of<ConversationRelayInterruptible>|null $interruptible
+     * @var value-of<Interruptible>|null $interruptible
      */
-    #[Optional(enum: ConversationRelayInterruptible::class)]
+    #[Optional(
+        enum: Interruptible::class,
+    )]
     public ?string $interruptible;
 
     /**
      * Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
      *
-     * @var value-of<ConversationRelayInterruptible>|null $interruptibleGreeting
+     * @var value-of<InterruptibleGreeting>|null $interruptibleGreeting
      */
     #[Optional(
         'interruptible_greeting',
-        enum: ConversationRelayInterruptible::class
+        enum: InterruptibleGreeting::class,
     )]
     public ?string $interruptibleGreeting;
 
     /**
      * Language-specific TTS and transcription settings.
      *
-     * @var list<ConversationRelayLanguage>|null $languages
+     * @var list<Language>|null $languages
      */
-    #[Optional(list: ConversationRelayLanguage::class)]
+    #[Optional(
+        list: Language::class,
+    )]
     public ?array $languages;
 
     /**
@@ -92,15 +97,15 @@ final class ConversationRelaySettings implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ConversationRelayInterruptible|value-of<ConversationRelayInterruptible>|null $interruptible
-     * @param ConversationRelayInterruptible|value-of<ConversationRelayInterruptible>|null $interruptibleGreeting
-     * @param list<ConversationRelayLanguage|ConversationRelayLanguageShape>|null $languages
+     * @param Interruptible|value-of<Interruptible>|null $interruptible
+     * @param InterruptibleGreeting|value-of<InterruptibleGreeting>|null $interruptibleGreeting
+     * @param list<Language|LanguageShape>|null $languages
      */
     public static function with(
         string $url,
         ?bool $dtmfDetection = null,
-        ConversationRelayInterruptible|string|null $interruptible = null,
-        ConversationRelayInterruptible|string|null $interruptibleGreeting = null,
+        Interruptible|string|null $interruptible = null,
+        InterruptibleGreeting|string|null $interruptibleGreeting = null,
         ?array $languages = null,
     ): self {
         $self = new self;
@@ -140,10 +145,10 @@ final class ConversationRelaySettings implements BaseModel
     /**
      * Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
      *
-     * @param ConversationRelayInterruptible|value-of<ConversationRelayInterruptible> $interruptible
+     * @param Interruptible|value-of<Interruptible> $interruptible
      */
     public function withInterruptible(
-        ConversationRelayInterruptible|string $interruptible
+        Interruptible|string $interruptible,
     ): self {
         $self = clone $this;
         $self['interruptible'] = $interruptible;
@@ -154,10 +159,10 @@ final class ConversationRelaySettings implements BaseModel
     /**
      * Controls when caller input can interrupt assistant speech. `any` allows speech or DTMF interruptions; `none` disables interruptions; `speech` allows speech only; `dtmf` allows DTMF only.
      *
-     * @param ConversationRelayInterruptible|value-of<ConversationRelayInterruptible> $interruptibleGreeting
+     * @param InterruptibleGreeting|value-of<InterruptibleGreeting> $interruptibleGreeting
      */
     public function withInterruptibleGreeting(
-        ConversationRelayInterruptible|string $interruptibleGreeting
+        InterruptibleGreeting|string $interruptibleGreeting,
     ): self {
         $self = clone $this;
         $self['interruptibleGreeting'] = $interruptibleGreeting;
@@ -168,7 +173,7 @@ final class ConversationRelaySettings implements BaseModel
     /**
      * Language-specific TTS and transcription settings.
      *
-     * @param list<ConversationRelayLanguage|ConversationRelayLanguageShape> $languages
+     * @param list<Language|LanguageShape> $languages
      */
     public function withLanguages(array $languages): self
     {

@@ -8,11 +8,12 @@ use Telnyx\Client;
 use Telnyx\Conferences\Conference;
 use Telnyx\Conferences\ConferenceCreateParams\BeepEnabled;
 use Telnyx\Conferences\ConferenceCreateParams\Region;
+use Telnyx\Conferences\ConferenceGetParticipantResponse;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParams\Filter;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
-use Telnyx\Conferences\ConferenceParticipantResource;
+use Telnyx\Conferences\ConferenceUpdateParticipantResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
@@ -227,7 +228,7 @@ final class ConferencesService implements ConferencesContract
         string $participantID,
         string $id,
         RequestOptions|array|null $requestOptions = null,
-    ): ConferenceParticipantResource {
+    ): ConferenceGetParticipantResponse {
         $params = Util::removeNulls(['id' => $id]);
 
         // @phpstan-ignore-next-line argument.type
@@ -257,7 +258,7 @@ final class ConferencesService implements ConferencesContract
         ?bool $endConferenceOnExit = null,
         ?bool $softEndConferenceOnExit = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ConferenceParticipantResource {
+    ): ConferenceUpdateParticipantResponse {
         $params = Util::removeNulls(
             [
                 'id' => $id,

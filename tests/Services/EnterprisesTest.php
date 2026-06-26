@@ -8,8 +8,11 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Enterprises\EnterpriseActivateBrandedCallingResponse;
+use Telnyx\Enterprises\EnterpriseGetResponse;
+use Telnyx\Enterprises\EnterpriseNewResponse;
 use Telnyx\Enterprises\EnterprisePublic;
-use Telnyx\Enterprises\EnterprisePublicWrapped;
+use Telnyx\Enterprises\EnterpriseUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -78,7 +81,7 @@ final class EnterprisesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EnterprisePublicWrapped::class, $result);
+        $this->assertInstanceOf(EnterpriseNewResponse::class, $result);
     }
 
     #[Test]
@@ -137,7 +140,7 @@ final class EnterprisesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EnterprisePublicWrapped::class, $result);
+        $this->assertInstanceOf(EnterpriseNewResponse::class, $result);
     }
 
     #[Test]
@@ -152,7 +155,7 @@ final class EnterprisesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EnterprisePublicWrapped::class, $result);
+        $this->assertInstanceOf(EnterpriseGetResponse::class, $result);
     }
 
     #[Test]
@@ -167,7 +170,7 @@ final class EnterprisesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EnterprisePublicWrapped::class, $result);
+        $this->assertInstanceOf(EnterpriseUpdateResponse::class, $result);
     }
 
     #[Test]
@@ -204,17 +207,20 @@ final class EnterprisesTest extends TestCase
     }
 
     #[Test]
-    public function testBrandedCalling(): void
+    public function testActivateBrandedCalling(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->enterprises->brandedCalling(
+        $result = $this->client->enterprises->activateBrandedCalling(
             '4a6192a4-573d-446d-b3ce-aff9117272a6'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(EnterprisePublicWrapped::class, $result);
+        $this->assertInstanceOf(
+            EnterpriseActivateBrandedCallingResponse::class,
+            $result
+        );
     }
 }

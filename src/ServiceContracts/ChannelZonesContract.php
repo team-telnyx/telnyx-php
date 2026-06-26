@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\ChannelZones\GcbChannelZone;
+use Telnyx\ChannelZones\ChannelZoneListResponse;
+use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
@@ -27,14 +28,14 @@ interface ChannelZonesContract
         string $channelZoneID,
         int $channels,
         RequestOptions|array|null $requestOptions = null,
-    ): GcbChannelZone;
+    ): ChannelZoneUpdateResponse;
 
     /**
      * @api
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<GcbChannelZone>
+     * @return DefaultFlatPagination<ChannelZoneListResponse>
      *
      * @throws APIException
      */

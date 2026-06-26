@@ -9,11 +9,11 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheck;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckCreateParams;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListParams;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPHealthChecksRawContract;
@@ -101,7 +101,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
      * }|GlobalIPHealthCheckListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<GlobalIPHealthCheck>>
+     * @return BaseResponse<DefaultFlatPagination<GlobalIPHealthCheckListResponse>>
      *
      * @throws APIException
      */
@@ -123,7 +123,7 @@ final class GlobalIPHealthChecksRawService implements GlobalIPHealthChecksRawCon
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: GlobalIPHealthCheck::class,
+            convert: GlobalIPHealthCheckListResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

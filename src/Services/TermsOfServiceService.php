@@ -12,9 +12,9 @@ use Telnyx\ServiceContracts\TermsOfServiceContract;
 use Telnyx\Services\TermsOfService\AgreementsService;
 use Telnyx\Services\TermsOfService\BrandedCallingService;
 use Telnyx\Services\TermsOfService\NumberReputationService;
-use Telnyx\TermsOfService\Agreements\TosProductType;
-use Telnyx\TermsOfService\TermsOfServiceGetInfoResponse;
-use Telnyx\TermsOfService\TermsOfServiceGetStatusResponse;
+use Telnyx\TermsOfService\TermsOfServiceInfoParams\ProductType;
+use Telnyx\TermsOfService\TermsOfServiceInfoResponse;
+use Telnyx\TermsOfService\TermsOfServiceStatusResponse;
 
 /**
  * Accept and review the Branded Calling and Phone Number Reputation terms of service.
@@ -59,19 +59,19 @@ final class TermsOfServiceService implements TermsOfServiceContract
      *
      * Returns the available Terms of Service agreements (product, current version, terms URL, effective date). Omit `product_type` to return all products; pass it to scope to one.
      *
-     * @param TosProductType|value-of<TosProductType> $productType Optional product filter. Omit to return info for all products.
+     * @param ProductType|value-of<ProductType> $productType Optional product filter. Omit to return info for all products.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function retrieveInfo(
-        TosProductType|string|null $productType = null,
+    public function info(
+        ProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TermsOfServiceGetInfoResponse {
+    ): TermsOfServiceInfoResponse {
         $params = Util::removeNulls(['productType' => $productType]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveInfo(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->info(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -83,19 +83,19 @@ final class TermsOfServiceService implements TermsOfServiceContract
      *
      * `agreement_required: true` means the user has not yet agreed (or has agreed to an outdated version) and must agree before using that product's endpoints.
      *
-     * @param TosProductType|value-of<TosProductType> $productType Which product's ToS to check. Defaults to `branded_calling`.
+     * @param \Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType|value-of<\Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType> $productType Which product's ToS to check. Defaults to `branded_calling`.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
-    public function retrieveStatus(
-        TosProductType|string|null $productType = null,
+    public function status(
+        \Telnyx\TermsOfService\TermsOfServiceStatusParams\ProductType|string|null $productType = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TermsOfServiceGetStatusResponse {
+    ): TermsOfServiceStatusResponse {
         $params = Util::removeNulls(['productType' => $productType]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveStatus(params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->status(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

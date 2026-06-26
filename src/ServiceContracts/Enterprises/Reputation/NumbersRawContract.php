@@ -8,14 +8,14 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberDisassociateParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberListParams;
+use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshParams;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRetrieveParams;
-use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
-use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberList;
-use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
 use Telnyx\RequestOptions;
 
 /**
@@ -30,7 +30,7 @@ interface NumbersRawContract
      * @param array<string,mixed>|NumberRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationPhoneNumberWithReputation>
+     * @return BaseResponse<NumberGetResponse>
      *
      * @throws APIException
      */
@@ -47,7 +47,7 @@ interface NumbersRawContract
      * @param array<string,mixed>|NumberListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ReputationPhoneNumber>>
+     * @return BaseResponse<DefaultFlatPagination<NumberListResponse>>
      *
      * @throws APIException
      */
@@ -64,7 +64,7 @@ interface NumbersRawContract
      * @param array<string,mixed>|NumberAssociateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationPhoneNumberList>
+     * @return BaseResponse<NumberAssociateResponse>
      *
      * @throws APIException
      */

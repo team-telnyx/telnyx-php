@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts\Enterprises\Reputation;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
 use Telnyx\Enterprises\Reputation\Loa\LoaRenderParams;
 use Telnyx\Enterprises\Reputation\Loa\LoaUpdateParams;
+use Telnyx\Enterprises\Reputation\Loa\LoaUpdateResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -23,7 +23,7 @@ interface LoaRawContract
      * @param array<string,mixed>|LoaUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<EnterpriseReputationPublicWrapped>
+     * @return BaseResponse<LoaUpdateResponse>
      *
      * @throws APIException
      */

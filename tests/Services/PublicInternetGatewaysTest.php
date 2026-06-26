@@ -10,8 +10,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayRead;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -39,20 +39,7 @@ final class PublicInternetGatewaysTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->publicInternetGateways->create(body: []);
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PublicInternetGatewayNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCreateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->publicInternetGateways->create(body: []);
+        $result = $this->client->publicInternetGateways->create();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PublicInternetGatewayNewResponse::class, $result);
@@ -87,7 +74,7 @@ final class PublicInternetGatewaysTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PublicInternetGatewayRead::class, $item);
+            $this->assertInstanceOf(PublicInternetGatewayListResponse::class, $item);
         }
     }
 

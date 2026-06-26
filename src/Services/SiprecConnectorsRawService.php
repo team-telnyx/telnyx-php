@@ -10,8 +10,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\SiprecConnectorsRawContract;
 use Telnyx\SiprecConnectors\SiprecConnectorCreateParams;
-use Telnyx\SiprecConnectors\SiprecConnectorResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateParams;
+use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
 /**
  * SIPREC connectors configuration.
@@ -36,7 +38,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      * }|SiprecConnectorCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<SiprecConnectorResponse>
+     * @return BaseResponse<SiprecConnectorNewResponse>
      *
      * @throws APIException
      */
@@ -55,7 +57,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
             path: 'siprec_connectors',
             body: (object) $parsed,
             options: $options,
-            convert: SiprecConnectorResponse::class,
+            convert: SiprecConnectorNewResponse::class,
         );
     }
 
@@ -67,7 +69,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      * @param string $connectorName uniquely identifies a SIPREC connector
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<SiprecConnectorResponse>
+     * @return BaseResponse<SiprecConnectorGetResponse>
      *
      * @throws APIException
      */
@@ -80,7 +82,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
             method: 'get',
             path: ['siprec_connectors/%1$s', $connectorName],
             options: $requestOptions,
-            convert: SiprecConnectorResponse::class,
+            convert: SiprecConnectorGetResponse::class,
         );
     }
 
@@ -95,7 +97,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
      * }|SiprecConnectorUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<SiprecConnectorResponse>
+     * @return BaseResponse<SiprecConnectorUpdateResponse>
      *
      * @throws APIException
      */
@@ -115,7 +117,7 @@ final class SiprecConnectorsRawService implements SiprecConnectorsRawContract
             path: ['siprec_connectors/%1$s', $connectorName],
             body: (object) $parsed,
             options: $options,
-            convert: SiprecConnectorResponse::class,
+            convert: SiprecConnectorUpdateResponse::class,
         );
     }
 

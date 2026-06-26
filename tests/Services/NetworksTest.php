@@ -8,10 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Networks\Network;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
 use Telnyx\Networks\NetworkListInterfacesResponse;
+use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateResponse;
 use Tests\UnsupportedMockTests;
@@ -41,7 +41,7 @@ final class NetworksTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->networks->create(networkCreate: []);
+        $result = $this->client->networks->create(name: 'test network');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NetworkNewResponse::class, $result);
@@ -54,7 +54,7 @@ final class NetworksTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->networks->create(networkCreate: []);
+        $result = $this->client->networks->create(name: 'test network');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(NetworkNewResponse::class, $result);
@@ -84,7 +84,7 @@ final class NetworksTest extends TestCase
 
         $result = $this->client->networks->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            networkCreate: []
+            name: 'test network'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -100,7 +100,7 @@ final class NetworksTest extends TestCase
 
         $result = $this->client->networks->update(
             '6a09cdc3-8948-47f0-aa62-74ac943d6c58',
-            networkCreate: []
+            name: 'test network'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -121,7 +121,7 @@ final class NetworksTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(Network::class, $item);
+            $this->assertInstanceOf(NetworkListResponse::class, $item);
         }
     }
 

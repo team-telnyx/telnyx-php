@@ -9,11 +9,8 @@ use Telnyx\AI\Assistants\AssistantChatResponse;
 use Telnyx\AI\Assistants\AssistantDeleteResponse;
 use Telnyx\AI\Assistants\AssistantSendSMSResponse;
 use Telnyx\AI\Assistants\AssistantsList;
-use Telnyx\AI\Assistants\AuthenticationMethod;
 use Telnyx\AI\Assistants\EnabledFeatures;
 use Telnyx\AI\Assistants\InferenceEmbedding;
-use Telnyx\AI\Assistants\ObservabilityStatus;
-use Telnyx\AI\Assistants\PromptSyncStatus;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -70,7 +67,7 @@ final class AssistantsTest extends TestCase
                         'externalLlm' => [
                             'baseURL' => 'base_url',
                             'model' => 'model',
-                            'authenticationMethod' => AuthenticationMethod::TOKEN,
+                            'authenticationMethod' => 'token',
                             'certificateRef' => 'certificate_ref',
                             'forwardMetadata' => true,
                             'llmAPIKeyRef' => 'llm_api_key_ref',
@@ -128,7 +125,7 @@ final class AssistantsTest extends TestCase
                         'externalLlm' => [
                             'baseURL' => 'base_url',
                             'model' => 'model',
-                            'authenticationMethod' => AuthenticationMethod::TOKEN,
+                            'authenticationMethod' => 'token',
                             'certificateRef' => 'certificate_ref',
                             'forwardMetadata' => true,
                             'llmAPIKeyRef' => 'llm_api_key_ref',
@@ -216,7 +213,7 @@ final class AssistantsTest extends TestCase
             externalLlm: [
                 'baseURL' => 'base_url',
                 'model' => 'model',
-                'authenticationMethod' => AuthenticationMethod::TOKEN,
+                'authenticationMethod' => 'token',
                 'certificateRef' => 'certificate_ref',
                 'forwardMetadata' => true,
                 'llmAPIKeyRef' => 'llm_api_key_ref',
@@ -226,7 +223,7 @@ final class AssistantsTest extends TestCase
                 'externalLlm' => [
                     'baseURL' => 'base_url',
                     'model' => 'model',
-                    'authenticationMethod' => AuthenticationMethod::TOKEN,
+                    'authenticationMethod' => 'token',
                     'certificateRef' => 'certificate_ref',
                     'forwardMetadata' => true,
                     'llmAPIKeyRef' => 'llm_api_key_ref',
@@ -264,11 +261,11 @@ final class AssistantsTest extends TestCase
                 'host' => 'host',
                 'promptLabel' => 'prompt_label',
                 'promptName' => 'prompt_name',
-                'promptSync' => PromptSyncStatus::ENABLED,
+                'promptSync' => 'enabled',
                 'promptVersion' => 1,
                 'publicKeyRef' => 'public_key_ref',
                 'secretKeyRef' => 'secret_key_ref',
-                'status' => ObservabilityStatus::ENABLED,
+                'status' => 'enabled',
             ],
             postConversationSettings: ['enabled' => true],
             privacySettings: ['dataRetention' => true],

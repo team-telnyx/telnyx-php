@@ -7,8 +7,9 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Recordings\RecordingDeleteResponse;
+use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams;
-use Telnyx\Recordings\RecordingResponse;
 use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 
@@ -23,7 +24,7 @@ interface RecordingsRawContract
      * @param string $recordingID uniquely identifies the recording by id
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingResponse>
+     * @return BaseResponse<RecordingGetResponse>
      *
      * @throws APIException
      */
@@ -53,7 +54,7 @@ interface RecordingsRawContract
      * @param string $recordingID uniquely identifies the recording by id
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<RecordingResponse>
+     * @return BaseResponse<RecordingDeleteResponse>
      *
      * @throws APIException
      */

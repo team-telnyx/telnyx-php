@@ -6,8 +6,8 @@ namespace Telnyx\ServiceContracts\Texml;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\Texml\Accounts\AccountGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\AccountGetTranscriptionsJsonResponse;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -31,7 +31,7 @@ interface AccountsContract
         ?int $page = null,
         ?int $pageSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TexmlGetCallRecordingsResponseBody;
+    ): AccountGetRecordingsJsonResponse;
 
     /**
      * @api

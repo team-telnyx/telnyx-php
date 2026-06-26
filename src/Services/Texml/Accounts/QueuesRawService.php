@@ -13,10 +13,13 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\QueuesRawContract;
 use Telnyx\Texml\Accounts\Queues\QueueCreateParams;
 use Telnyx\Texml\Accounts\Queues\QueueDeleteParams;
+use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
 use Telnyx\Texml\Accounts\Queues\QueueListParams;
-use Telnyx\Texml\Accounts\Queues\QueueResource;
+use Telnyx\Texml\Accounts\Queues\QueueListResponse;
+use Telnyx\Texml\Accounts\Queues\QueueNewResponse;
 use Telnyx\Texml\Accounts\Queues\QueueRetrieveParams;
 use Telnyx\Texml\Accounts\Queues\QueueUpdateParams;
+use Telnyx\Texml\Accounts\Queues\QueueUpdateResponse;
 
 /**
  * TeXML REST Commands.
@@ -40,7 +43,7 @@ final class QueuesRawService implements QueuesRawContract
      * @param array{friendlyName?: string, maxSize?: int}|QueueCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<QueueResource>
+     * @return BaseResponse<QueueNewResponse>
      *
      * @throws APIException
      */
@@ -61,7 +64,7 @@ final class QueuesRawService implements QueuesRawContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) $parsed,
             options: $options,
-            convert: QueueResource::class,
+            convert: QueueNewResponse::class,
         );
     }
 
@@ -74,7 +77,7 @@ final class QueuesRawService implements QueuesRawContract
      * @param array{accountSid: string}|QueueRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<QueueResource>
+     * @return BaseResponse<QueueGetResponse>
      *
      * @throws APIException
      */
@@ -95,7 +98,7 @@ final class QueuesRawService implements QueuesRawContract
             method: 'get',
             path: ['texml/Accounts/%1$s/Queues/%2$s', $accountSid, $queueSid],
             options: $options,
-            convert: QueueResource::class,
+            convert: QueueGetResponse::class,
         );
     }
 
@@ -108,7 +111,7 @@ final class QueuesRawService implements QueuesRawContract
      * @param array{accountSid: string, maxSize?: int}|QueueUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<QueueResource>
+     * @return BaseResponse<QueueUpdateResponse>
      *
      * @throws APIException
      */
@@ -131,7 +134,7 @@ final class QueuesRawService implements QueuesRawContract
             headers: ['Content-Type' => 'application/x-www-form-urlencoded'],
             body: (object) array_diff_key($parsed, array_flip(['accountSid'])),
             options: $options,
-            convert: QueueResource::class,
+            convert: QueueUpdateResponse::class,
         );
     }
 
@@ -150,7 +153,7 @@ final class QueuesRawService implements QueuesRawContract
      * }|QueueListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPaginationForQueues<QueueResource>>
+     * @return BaseResponse<DefaultPaginationForQueues<QueueListResponse>>
      *
      * @throws APIException
      */
@@ -179,7 +182,7 @@ final class QueuesRawService implements QueuesRawContract
                 ],
             ),
             options: $options,
-            convert: QueueResource::class,
+            convert: QueueListResponse::class,
             page: DefaultPaginationForQueues::class,
         );
     }

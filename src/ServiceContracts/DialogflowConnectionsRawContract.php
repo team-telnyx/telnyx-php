@@ -7,8 +7,10 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DialogflowConnections\DialogflowConnectionCreateParams;
-use Telnyx\DialogflowConnections\DialogflowConnectionResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionGetResponse;
+use Telnyx\DialogflowConnections\DialogflowConnectionNewResponse;
 use Telnyx\DialogflowConnections\DialogflowConnectionUpdateParams;
+use Telnyx\DialogflowConnections\DialogflowConnectionUpdateResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -23,7 +25,7 @@ interface DialogflowConnectionsRawContract
      * @param array<string,mixed>|DialogflowConnectionCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DialogflowConnectionResponse>
+     * @return BaseResponse<DialogflowConnectionNewResponse>
      *
      * @throws APIException
      */
@@ -39,7 +41,7 @@ interface DialogflowConnectionsRawContract
      * @param string $connectionID uniquely identifies a Telnyx application (Call Control)
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DialogflowConnectionResponse>
+     * @return BaseResponse<DialogflowConnectionGetResponse>
      *
      * @throws APIException
      */
@@ -55,7 +57,7 @@ interface DialogflowConnectionsRawContract
      * @param array<string,mixed>|DialogflowConnectionUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DialogflowConnectionResponse>
+     * @return BaseResponse<DialogflowConnectionUpdateResponse>
      *
      * @throws APIException
      */

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\ChannelZones\GcbChannelZone;
+use Telnyx\ChannelZones\ChannelZoneListResponse;
+use Telnyx\ChannelZones\ChannelZoneUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -47,7 +48,7 @@ final class ChannelZonesService implements ChannelZonesContract
         string $channelZoneID,
         int $channels,
         RequestOptions|array|null $requestOptions = null,
-    ): GcbChannelZone {
+    ): ChannelZoneUpdateResponse {
         $params = Util::removeNulls(['channels' => $channels]);
 
         // @phpstan-ignore-next-line argument.type
@@ -63,7 +64,7 @@ final class ChannelZonesService implements ChannelZonesContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<GcbChannelZone>
+     * @return DefaultFlatPagination<ChannelZoneListResponse>
      *
      * @throws APIException
      */
