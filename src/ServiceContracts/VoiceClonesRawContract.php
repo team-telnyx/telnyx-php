@@ -12,10 +12,8 @@ use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams;
 use Telnyx\VoiceClones\VoiceCloneCreateParams;
 use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams;
-use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
-use Telnyx\VoiceClones\VoiceCloneNewResponse;
+use Telnyx\VoiceClones\VoiceCloneResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams;
-use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -28,7 +26,7 @@ interface VoiceClonesRawContract
      * @param array<string,mixed>|VoiceCloneCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceCloneNewResponse>
+     * @return BaseResponse<VoiceCloneResponse>
      *
      * @throws APIException
      */
@@ -44,7 +42,7 @@ interface VoiceClonesRawContract
      * @param array<string,mixed>|VoiceCloneUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceCloneUpdateResponse>
+     * @return BaseResponse<VoiceCloneResponse>
      *
      * @throws APIException
      */
@@ -90,7 +88,7 @@ interface VoiceClonesRawContract
      * @param array<string,mixed>|VoiceCloneCreateFromUploadParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceCloneNewFromUploadResponse>
+     * @return BaseResponse<VoiceCloneResponse>
      *
      * @throws APIException
      */

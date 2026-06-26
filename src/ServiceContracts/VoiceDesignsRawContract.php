@@ -11,13 +11,12 @@ use Telnyx\RequestOptions;
 use Telnyx\VoiceDesigns\VoiceDesignCreateParams;
 use Telnyx\VoiceDesigns\VoiceDesignDeleteVersionParams;
 use Telnyx\VoiceDesigns\VoiceDesignDownloadSampleParams;
-use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
 use Telnyx\VoiceDesigns\VoiceDesignListParams;
-use Telnyx\VoiceDesigns\VoiceDesignListResponse;
-use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
 use Telnyx\VoiceDesigns\VoiceDesignRenameParams;
 use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
+use Telnyx\VoiceDesigns\VoiceDesignResponse;
 use Telnyx\VoiceDesigns\VoiceDesignRetrieveParams;
+use Telnyx\VoiceDesigns\VoiceDesignSummaryData;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -30,7 +29,7 @@ interface VoiceDesignsRawContract
      * @param array<string,mixed>|VoiceDesignCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceDesignNewResponse>
+     * @return BaseResponse<VoiceDesignResponse>
      *
      * @throws APIException
      */
@@ -46,7 +45,7 @@ interface VoiceDesignsRawContract
      * @param array<string,mixed>|VoiceDesignRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VoiceDesignGetResponse>
+     * @return BaseResponse<VoiceDesignResponse>
      *
      * @throws APIException
      */
@@ -62,7 +61,7 @@ interface VoiceDesignsRawContract
      * @param array<string,mixed>|VoiceDesignListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VoiceDesignListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<VoiceDesignSummaryData>>
      *
      * @throws APIException
      */

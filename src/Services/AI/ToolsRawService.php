@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
+use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\AI\Tools\ToolCreateParams;
-use Telnyx\AI\Tools\ToolGetResponse;
 use Telnyx\AI\Tools\ToolListParams;
-use Telnyx\AI\Tools\ToolListResponse;
-use Telnyx\AI\Tools\ToolNewResponse;
 use Telnyx\AI\Tools\ToolUpdateParams;
-use Telnyx\AI\Tools\ToolUpdateResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
@@ -49,7 +46,7 @@ final class ToolsRawService implements ToolsRawContract
      * }|ToolCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ToolNewResponse>
+     * @return BaseResponse<SharedToolResponse>
      *
      * @throws APIException
      */
@@ -68,7 +65,7 @@ final class ToolsRawService implements ToolsRawContract
             path: 'ai/tools',
             body: (object) $parsed,
             options: $options,
-            convert: ToolNewResponse::class,
+            convert: SharedToolResponse::class,
         );
     }
 
@@ -80,7 +77,7 @@ final class ToolsRawService implements ToolsRawContract
      * @param string $toolID unique identifier of the tool
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ToolGetResponse>
+     * @return BaseResponse<SharedToolResponse>
      *
      * @throws APIException
      */
@@ -93,7 +90,7 @@ final class ToolsRawService implements ToolsRawContract
             method: 'get',
             path: ['ai/tools/%1$s', $toolID],
             options: $requestOptions,
-            convert: ToolGetResponse::class,
+            convert: SharedToolResponse::class,
         );
     }
 
@@ -115,7 +112,7 @@ final class ToolsRawService implements ToolsRawContract
      * }|ToolUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ToolUpdateResponse>
+     * @return BaseResponse<SharedToolResponse>
      *
      * @throws APIException
      */
@@ -135,7 +132,7 @@ final class ToolsRawService implements ToolsRawContract
             path: ['ai/tools/%1$s', $toolID],
             body: (object) $parsed,
             options: $options,
-            convert: ToolUpdateResponse::class,
+            convert: SharedToolResponse::class,
         );
     }
 
@@ -149,7 +146,7 @@ final class ToolsRawService implements ToolsRawContract
      * }|ToolListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<ToolListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<SharedToolResponse>>
      *
      * @throws APIException
      */
@@ -176,7 +173,7 @@ final class ToolsRawService implements ToolsRawContract
                 ],
             ),
             options: $options,
-            convert: ToolListResponse::class,
+            convert: SharedToolResponse::class,
             page: DefaultFlatPagination::class,
         );
     }

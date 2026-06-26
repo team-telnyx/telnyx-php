@@ -1,335 +1,383 @@
 # Changelog
 
-## 7.85.0 (2026-06-26)
-
-Full Changelog: [v7.84.0...v7.85.0](https://github.com/team-telnyx/telnyx-php/compare/v7.84.0...v7.85.0)
-
-### Features
-
-* **transcriptions-search:** hide record_type, remove document_id, scrub internal references ([83733a3](https://github.com/team-telnyx/telnyx-php/commit/83733a36f9c0f8339918c1ec6bf63fcaf561a625))
+## [7.75.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.74.0...v7.75.0) (2026-06-22)
 
 
 ### Bug Fixes
 
-* add --local flag so release-please scans next branch for commits ([081c1c0](https://github.com/team-telnyx/telnyx-php/commit/081c1c08ebc88b9f052870410106bc90c4d8f018))
-* correct stale .release-please-manifest.json to 8.0.0 ([64b7b18](https://github.com/team-telnyx/telnyx-php/commit/64b7b181701fa4cb47a1d13e1b5e2cae97f361c2))
+* replace oauthClientAuth() throw with proper OAuth2 token flow ([034a3c8](https://github.com/team-telnyx/telnyx-php-staging/commit/034a3c8fb397aa101546667c6941bd94b6286952))
 
 
 ### Chores
 
-* sync repo ([23f8d61](https://github.com/team-telnyx/telnyx-php/commit/23f8d61289f4d060f44436f6b3a2c6d4e330c8a7))
+* preserve repo-owned files not part of SDK generation ([79b5444](https://github.com/team-telnyx/telnyx-php-staging/commit/79b544438c6998b1d20b845e7b3650434d537754))
+* release php 7.75.0 ([33731e5](https://github.com/team-telnyx/telnyx-php-staging/commit/33731e5031030e0454866fe165754845060e66da))
 
-## 7.84.0 (2026-06-18)
+## [7.74.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.73.2...v7.74.0) (2026-06-20)
 
-Full Changelog: [v7.83.0...v7.84.0](https://github.com/team-telnyx/telnyx-php/compare/v7.83.0...v7.84.0)
 
-### Features
+### Chores
 
-* add transcriptions-search API spec (dev/external) ([ec4529c](https://github.com/team-telnyx/telnyx-php/commit/ec4529ccdede2d9cf3abf31f3da590712f4c7c4e))
+* preserve repo-owned files not part of SDK generation ([36b00a8](https://github.com/team-telnyx/telnyx-php-staging/commit/36b00a852be54f6f2c815b87ab58d233aac246e2))
+* release php 7.74.0 ([ca951ed](https://github.com/team-telnyx/telnyx-php-staging/commit/ca951edebc778ef21439627aedf4909611a84e48))
+* remove stale files from previous generation ([396e9e3](https://github.com/team-telnyx/telnyx-php-staging/commit/396e9e3699f0630343761a331525855a9b1c2faf))
 
-## 7.83.0 (2026-06-16)
-
-Full Changelog: [v7.82.0...v7.83.0](https://github.com/team-telnyx/telnyx-php/compare/v7.82.0...v7.83.0)
-
-### Features
-
-* ENGDESK-51290: Add Aicoustic NS engines to portal backend ([c40646f](https://github.com/team-telnyx/telnyx-php/commit/c40646f1ba5fd02a096acd6b868cc325130f6ec3))
-
-## 7.82.0 (2026-06-16)
-
-Full Changelog: [v7.81.0...v7.82.0](https://github.com/team-telnyx/telnyx-php/compare/v7.81.0...v7.82.0)
-
-### Features
-
-* TELAPPS-719: add Inworld inworld-tts-2 model + delivery_mode to call-control voice settings ([a2b20b8](https://github.com/team-telnyx/telnyx-php/commit/a2b20b819d5be74e9390507360a99fad3d4a3d0e))
-
-## 7.81.0 (2026-06-15)
-
-Full Changelog: [v7.80.0...v7.81.0](https://github.com/team-telnyx/telnyx-php/compare/v7.80.0...v7.81.0)
-
-### Features
-
-* Document POST /ai/assistants/{assistant_id}/instructions/enhance ([259ddf4](https://github.com/team-telnyx/telnyx-php/commit/259ddf420b5ad3ed64bfe8063bb2b40ab29ea142))
-
-## 7.80.0 (2026-06-10)
-
-Full Changelog: [v7.79.0...v7.80.0](https://github.com/team-telnyx/telnyx-php/compare/v7.79.0...v7.80.0)
-
-### Features
-
-* branded-calling: sync PATCH /dir/{dir_id} spec with deployed service behavior ([1487baf](https://github.com/team-telnyx/telnyx-php/commit/1487baf57fa976c1425a75254bae2970c41184e9))
-
-## 7.79.0 (2026-06-09)
-
-Full Changelog: [v7.78.0...v7.79.0](https://github.com/team-telnyx/telnyx-php/compare/v7.78.0...v7.79.0)
-
-### Features
-
-* Add sip region to scheduled events ([1dc4c66](https://github.com/team-telnyx/telnyx-php/commit/1dc4c661285e75d7fb71c8b52193dd96838a24da))
+## [7.73.2](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.73.1...v7.73.2) (2026-06-19)
 
 
 ### Bug Fixes
 
-* **number-reputation:** remediation contact_email is optional ([8166506](https://github.com/team-telnyx/telnyx-php/commit/8166506a1010bc55170959e42c4bb9f08155092f))
+* add test job to staging CI to match prod ([f04b7ce](https://github.com/team-telnyx/telnyx-php-staging/commit/f04b7cee68ca9299ed05a6400ce9a1224196a758))
+* add test job to staging CI to match prod ([1b84d9b](https://github.com/team-telnyx/telnyx-php-staging/commit/1b84d9b9aa437c19d459dd097886bae423cb8c83))
+* backport OAuth client credentials + ED25519 webhook tests from prod ([3e6d3c1](https://github.com/team-telnyx/telnyx-php-staging/commit/3e6d3c1da920fa998433ce8435ba76798458c9c1))
 
-## 7.78.0 (2026-06-08)
+## [7.73.1](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.73.0...v7.73.1) (2026-06-19)
 
-Full Changelog: [v7.77.0...v7.78.0](https://github.com/team-telnyx/telnyx-php/compare/v7.77.0...v7.78.0)
-
-### Features
-
-* **spec:** inline 2xx response schemas — REST response coverage 41% → 91% (sync of openapi[#199](https://github.com/team-telnyx/telnyx-php/issues/199)) ([150732e](https://github.com/team-telnyx/telnyx-php/commit/150732e68d33e338a908985f2e713708c05c74ce))
-
-## 7.77.0 (2026-06-08)
-
-Full Changelog: [v7.76.0...v7.77.0](https://github.com/team-telnyx/telnyx-php/compare/v7.76.0...v7.77.0)
-
-### Features
-
-* **spec:** backfill parameter descriptions to 100% coverage ([0de7211](https://github.com/team-telnyx/telnyx-php/commit/0de72115cf6a191faab73b860760f9b16c8eab4c))
-
-## 7.76.0 (2026-06-08)
-
-Full Changelog: [v7.75.0...v7.76.0](https://github.com/team-telnyx/telnyx-php/compare/v7.75.0...v7.76.0)
-
-### Features
-
-* **branded-calling:** document LOA (DIR) + reputation remediation endpoints ([9690679](https://github.com/team-telnyx/telnyx-php/commit/969067934d1bb56eec13e028f530b7873299a7fa))
-
-## 7.75.0 (2026-06-08)
-
-Full Changelog: [v7.74.0...v7.75.0](https://github.com/team-telnyx/telnyx-php/compare/v7.74.0...v7.75.0)
-
-### Features
-
-* specs: remove em dashes from branded-calling + number-reputation descriptions ([a40f885](https://github.com/team-telnyx/telnyx-php/commit/a40f885ceaf57f8664b565b3c95bd4050a08cabc))
-
-## 7.74.0 (2026-06-07)
-
-Full Changelog: [v7.73.0...v7.74.0](https://github.com/team-telnyx/telnyx-php/compare/v7.73.0...v7.74.0)
-
-### Features
-
-* specs: drop legacy plain filter params (keep filter[] canonical) on list endpoints ([60d3961](https://github.com/team-telnyx/telnyx-php/commit/60d39615905e250db156bb6525476bd775466022))
-
-## 7.73.0 (2026-06-07)
-
-Full Changelog: [v7.72.0...v7.73.0](https://github.com/team-telnyx/telnyx-php/compare/v7.72.0...v7.73.0)
-
-### Features
-
-* branded-calling: drop 'simplified'/'no enterprise_id' framing from DIR endpoints ([400c7c2](https://github.com/team-telnyx/telnyx-php/commit/400c7c2f19dc7ca93156008a745b05eb2401de1e))
-
-## 7.72.0 (2026-06-07)
-
-Full Changelog: [v7.71.0...v7.72.0](https://github.com/team-telnyx/telnyx-php/compare/v7.71.0...v7.72.0)
-
-### Features
-
-* Fix cross-product leakage: de-dup shared enterprise/ToS endpoints + neutralize descriptions ([a284983](https://github.com/team-telnyx/telnyx-php/commit/a284983eb7adb2c620ca1fc5c7b5111d8579d258))
-
-## 7.71.0 (2026-06-07)
-
-Full Changelog: [v7.70.0...v7.71.0](https://github.com/team-telnyx/telnyx-php/compare/v7.70.0...v7.71.0)
-
-### Features
-
-* NUM-6470: Add branded-calling-v2 OpenAPI specs (external + internal) ([f6b3953](https://github.com/team-telnyx/telnyx-php/commit/f6b3953922d759290f37ec7383512619cfa6309a))
-* specs: add GET /terms_of_service/info (branded-calling + number-reputation) ([5953551](https://github.com/team-telnyx/telnyx-php/commit/595355106fa79a1bf9c047a261d1d0111b2cec18))
-
-## 7.70.0 (2026-06-05)
-
-Full Changelog: [v7.69.0...v7.70.0](https://github.com/team-telnyx/telnyx-php/compare/v7.69.0...v7.70.0)
-
-### Features
-
-* Conversation flow update ([980c2d1](https://github.com/team-telnyx/telnyx-php/commit/980c2d1e0df8467ce69f76052de59bfaa982bd26))
-
-## 7.69.0 (2026-06-04)
-
-Full Changelog: [v7.68.1...v7.69.0](https://github.com/team-telnyx/telnyx-php/compare/v7.68.1...v7.69.0)
-
-### Features
-
-* **inference:** expose description on transfer tool params ([3cd061a](https://github.com/team-telnyx/telnyx-php/commit/3cd061ad91e954a98367c5fbddc8d2ff375059de))
-
-## 7.68.1 (2026-06-04)
-
-Full Changelog: [v7.68.0...v7.68.1](https://github.com/team-telnyx/telnyx-php/compare/v7.68.0...v7.68.1)
 
 ### Bug Fixes
 
-* **inference:** extract recursive expression AST into named Expression schema ([52e2d08](https://github.com/team-telnyx/telnyx-php/commit/52e2d08dbccf97250ca4729b40a303e2d50b5ea9))
+* add missing WebSocket test files to PRESERVE_PATHS ([6ccde95](https://github.com/team-telnyx/telnyx-php-staging/commit/6ccde956ba121628ec6198b2ceb2559227c6f863))
+* add missing WebSocket test files to PRESERVE_PATHS ([0ce6d7c](https://github.com/team-telnyx/telnyx-php-staging/commit/0ce6d7c3b0a00217ecafad257b228db6f6bc10c8))
+* remove unnecessary token checks, align with prod webhook-based publishing ([590d359](https://github.com/team-telnyx/telnyx-php-staging/commit/590d359cdc8bff13c83acee4761eb12a0d2fee5a))
+* remove unnecessary token checks, align with prod webhook-based publishing ([9b6e7c9](https://github.com/team-telnyx/telnyx-php-staging/commit/9b6e7c9cea9dd3d7f41f739259587ccceb8f64ec))
 
-## 7.68.0 (2026-06-04)
+## [7.73.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.72.0...v7.73.0) (2026-06-18)
 
-Full Changelog: [v7.67.0...v7.68.0](https://github.com/team-telnyx/telnyx-php/compare/v7.67.0...v7.68.0)
 
-### Features
+### Chores
 
-* add assistant_id to MessagingProfile and request schemas ([4b2832c](https://github.com/team-telnyx/telnyx-php/commit/4b2832c7462c16daaa6f62752b08a3eb3e8a2a3b))
+* preserve repo-owned files not part of SDK generation ([9d0b3f2](https://github.com/team-telnyx/telnyx-php-staging/commit/9d0b3f2d0cb0d4580a5f95de258e8c60c0079f55))
+* release php 7.73.0 ([270ad62](https://github.com/team-telnyx/telnyx-php-staging/commit/270ad625479110eecfe24160a19dbde80a0c005b))
+* sync OpenAPI spec from cde0bc4 ([0c45ea3](https://github.com/team-telnyx/telnyx-php-staging/commit/0c45ea3571cd355968a960a903a22392c55b76c5))
+* sync OpenAPI spec from cde0bc4 ([3052797](https://github.com/team-telnyx/telnyx-php-staging/commit/3052797b835148ccd05a4e3610e633509ac1739c))
 
-## 7.67.0 (2026-06-03)
+## [7.72.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.71.0...v7.72.0) (2026-06-18)
 
-Full Changelog: [v7.66.0...v7.67.0](https://github.com/team-telnyx/telnyx-php/compare/v7.66.0...v7.67.0)
 
-### Features
+### Chores
 
-* TELAPPS-406: nest service_types with per-service languages in STT spec ([188d461](https://github.com/team-telnyx/telnyx-php/commit/188d46154193c1a1ac13948cc82e44dc00dd65e8))
+* preserve repo-owned files not part of SDK generation ([a1eee57](https://github.com/team-telnyx/telnyx-php-staging/commit/a1eee57cdeb55bb25e8d5c9353d460a6903cc208))
+* release php 7.72.0 ([6bae5a3](https://github.com/team-telnyx/telnyx-php-staging/commit/6bae5a32392923fd05a5afb38d0fd2fe0ee16207))
+* sync OpenAPI spec from 18f622e ([81197ed](https://github.com/team-telnyx/telnyx-php-staging/commit/81197ed02573d9cbd2f49129b59defba883b2105))
+* sync OpenAPI spec from 18f622e ([8c56292](https://github.com/team-telnyx/telnyx-php-staging/commit/8c56292811956177225952355705f1acf72b86ff))
 
-## 7.66.0 (2026-06-03)
+## [7.71.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.70.0...v7.71.0) (2026-06-18)
 
-Full Changelog: [v7.65.0...v7.66.0](https://github.com/team-telnyx/telnyx-php/compare/v7.65.0...v7.66.0)
 
-### Features
+### Chores
 
-* Update conversation flow ([88d1a0a](https://github.com/team-telnyx/telnyx-php/commit/88d1a0a4d8c12c89845f3d19c2f99ffb74eb9d34))
+* preserve repo-owned files not part of SDK generation ([37c22ea](https://github.com/team-telnyx/telnyx-php-staging/commit/37c22ea69029b8e45a25297d55f5cd08fa23e4e5))
+* release php 7.71.0 ([09fd540](https://github.com/team-telnyx/telnyx-php-staging/commit/09fd540a7919cc230728d1b6da60693514ef3446))
+* sync OpenAPI spec from aa30ef4 ([91e78ea](https://github.com/team-telnyx/telnyx-php-staging/commit/91e78eaa6591b9f41551ab349750302c0d8cfef8))
+* sync OpenAPI spec from aa30ef4 ([d268316](https://github.com/team-telnyx/telnyx-php-staging/commit/d2683167e64b7e07c476905f070eca6cb298699e))
 
-## 7.65.0 (2026-06-03)
-
-Full Changelog: [v7.64.1...v7.65.0](https://github.com/team-telnyx/telnyx-php/compare/v7.64.1...v7.65.0)
-
-### Features
-
-* AI-assistants conversation flow ([44cd440](https://github.com/team-telnyx/telnyx-php/commit/44cd4403618f156b27dc1c7e8681c6d04e521804))
-
-## 7.64.1 (2026-06-02)
-
-Full Changelog: [v7.64.0...v7.64.1](https://github.com/team-telnyx/telnyx-php/compare/v7.64.0...v7.64.1)
-
-### Bug Fixes
-
-* **sip-registration-status:** move operation under UAC Connections tag ([afaa746](https://github.com/team-telnyx/telnyx-php/commit/afaa74653ab0b8e6ad18fc1306b71c8dfba77479))
-
-## 7.64.0 (2026-06-02)
-
-Full Changelog: [v7.63.2...v7.64.0](https://github.com/team-telnyx/telnyx-php/compare/v7.63.2...v7.64.0)
-
-### Features
-
-* **sip-registration-status:** finalize phase 1 response shape with status mapping ([6f78d7a](https://github.com/team-telnyx/telnyx-php/commit/6f78d7a57a150d09c1265c8d84465738291faf70))
+## [7.70.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.69.0...v7.70.0) (2026-06-18)
 
 
 ### Bug Fixes
 
-* **sip-registration-status:** rename detail field to sip_uri_user_host ([dcd0b71](https://github.com/team-telnyx/telnyx-php/commit/dcd0b7179ed1489af48fc8aa0ebeac038c0d39a8))
+* update transforms for inlined response schemas ([6d146e1](https://github.com/team-telnyx/telnyx-php-staging/commit/6d146e114df7afb2fadb630f75ebf6b7f0c2d63f))
+* update transforms for inlined response schemas ([918686c](https://github.com/team-telnyx/telnyx-php-staging/commit/918686c9ea38931b1b199a601839949e57a3f5e7))
 
-## 7.63.2 (2026-06-02)
 
-Full Changelog: [v7.63.1...v7.63.2](https://github.com/team-telnyx/telnyx-php/compare/v7.63.1...v7.63.2)
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([a080d87](https://github.com/team-telnyx/telnyx-php-staging/commit/a080d8764594b74bbbfd53e78cfc03935a8c0071))
+* release php 7.70.0 ([03624d9](https://github.com/team-telnyx/telnyx-php-staging/commit/03624d9a98c62fe9213c221a2e92fc4f09b4641b))
+
+## [7.69.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.68.0...v7.69.0) (2026-06-16)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([1c1c995](https://github.com/team-telnyx/telnyx-php-staging/commit/1c1c995e51deaa4daebcbb969ad66993bd10e6c1))
+* release php 7.69.0 ([c317ab2](https://github.com/team-telnyx/telnyx-php-staging/commit/c317ab2fcafbc442f1205f07d8491e5bfd2eac18))
+
+## [7.68.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.67.0...v7.68.0) (2026-06-16)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([75a50fd](https://github.com/team-telnyx/telnyx-php-staging/commit/75a50fd07002d15f03a97b807fd4e35f6c8ece3b))
+* release php 7.68.0 ([900ecd1](https://github.com/team-telnyx/telnyx-php-staging/commit/900ecd11c56c01bd462b5df74684b12b7f0feea4))
+
+## [7.67.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.66.0...v7.67.0) (2026-06-16)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([32a32e2](https://github.com/team-telnyx/telnyx-php-staging/commit/32a32e26b9f15ce77b0e8a797de2c17fc41ddd49))
+* release php 7.67.0 ([350eb8f](https://github.com/team-telnyx/telnyx-php-staging/commit/350eb8fbdef0980e6d281de029f4daf6695bd0ad))
+* sync OpenAPI spec from e44bbbc ([a67c50f](https://github.com/team-telnyx/telnyx-php-staging/commit/a67c50fc4e88638003256e6a1dc4767b4f2681c2))
+* sync OpenAPI spec from e44bbbc ([155b2e4](https://github.com/team-telnyx/telnyx-php-staging/commit/155b2e421e9aedd46be84f92a12b81432e622b40))
+
+## [7.66.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.65.0...v7.66.0) (2026-06-15)
+
 
 ### Bug Fixes
 
-* **sip-registration-status:** drop user_id query param ([0f82df7](https://github.com/team-telnyx/telnyx-php/commit/0f82df7bf144e18e8772832f23230eacb0213573))
+* rename DIR method names to match published SDKs ([15fabc1](https://github.com/team-telnyx/telnyx-php-staging/commit/15fabc111d82e4d15625cd54b778a852fbf068c7))
+* rename DIR method names to match published SDKs ([463bc06](https://github.com/team-telnyx/telnyx-php-staging/commit/463bc06775dfc85f2c3de3550303368427752402))
 
-## 7.63.1 (2026-06-01)
 
-Full Changelog: [v7.63.0...v7.63.1](https://github.com/team-telnyx/telnyx-php/compare/v7.63.0...v7.63.1)
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([52e1dbf](https://github.com/team-telnyx/telnyx-php-staging/commit/52e1dbf233800091f4a2694b0636f17e33bdc364))
+* release php 7.66.0 ([eb79d3b](https://github.com/team-telnyx/telnyx-php-staging/commit/eb79d3bbe3449ddebb709b88a0d4dae4eddaf8d1))
+
+## [7.65.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.64.0...v7.65.0) (2026-06-15)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([d1c1d89](https://github.com/team-telnyx/telnyx-php-staging/commit/d1c1d8906df7dbf0b8165242406d03b75deda0d2))
+* release php 7.65.0 ([d84a986](https://github.com/team-telnyx/telnyx-php-staging/commit/d84a986ea5ce04dab3ee18d53538588c32b83247))
+* sync OpenAPI spec from 3b5c722 ([adee10b](https://github.com/team-telnyx/telnyx-php-staging/commit/adee10b0cf5c94192294ac3f7f25b64d4241afd3))
+* sync OpenAPI spec from 3b5c722 ([01f2922](https://github.com/team-telnyx/telnyx-php-staging/commit/01f29221c104c46b63c48a43933ae7d2f30d617a))
+
+## [7.64.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.63.0...v7.64.0) (2026-06-10)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([f257a30](https://github.com/team-telnyx/telnyx-php-staging/commit/f257a30d1d54cd8b74b65ca53839f679923e1d2b))
+* release php 7.64.0 ([53e41b7](https://github.com/team-telnyx/telnyx-php-staging/commit/53e41b7178542cc187861356bb83a54dbd5586a7))
+* sync OpenAPI spec from b9f127e ([fcc63f2](https://github.com/team-telnyx/telnyx-php-staging/commit/fcc63f2fc0253822a6dc9e0a01bbae5b669b8a26))
+* sync OpenAPI spec from b9f127e ([6bb431d](https://github.com/team-telnyx/telnyx-php-staging/commit/6bb431dde2f0b5877b6035753a1c92bdcba1964c))
+
+## [7.63.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.62.0...v7.63.0) (2026-06-09)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([357e65e](https://github.com/team-telnyx/telnyx-php-staging/commit/357e65e13bf8dd4f338726c0e79b182663323b8a))
+* release php 7.63.0 ([ef2032e](https://github.com/team-telnyx/telnyx-php-staging/commit/ef2032e1bd3a43de73f9a29c14f1d76137562c75))
+* sync OpenAPI spec from 2677196 ([2ba103f](https://github.com/team-telnyx/telnyx-php-staging/commit/2ba103fd6746545c680ea485493182e4946e2054))
+* sync OpenAPI spec from 2677196 ([a197f4e](https://github.com/team-telnyx/telnyx-php-staging/commit/a197f4ec3e9dcf7c4fdb2797096d688820077541))
+
+## [7.62.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.61.0...v7.62.0) (2026-06-09)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([f1ad3d4](https://github.com/team-telnyx/telnyx-php-staging/commit/f1ad3d4fb3f04d9cf8f9dfe1bde9d3dd83b8b7c4))
+* release php 7.62.0 ([c9f8d28](https://github.com/team-telnyx/telnyx-php-staging/commit/c9f8d2867a3a35e1999699be25a1322b08738bde))
+* sync OpenAPI spec from c319cee ([113ca15](https://github.com/team-telnyx/telnyx-php-staging/commit/113ca152138d77f24e03d5b13db74fcdb9a986e8))
+* sync OpenAPI spec from c319cee ([2562e6f](https://github.com/team-telnyx/telnyx-php-staging/commit/2562e6f447cfe22fb33af62117aec70af3cc70d2))
+
+## [7.61.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.60.0...v7.61.0) (2026-06-08)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([7ffe0bb](https://github.com/team-telnyx/telnyx-php-staging/commit/7ffe0bb220d539d81c11c6f56efa89d80ae42ec6))
+* release php 7.61.0 ([8799559](https://github.com/team-telnyx/telnyx-php-staging/commit/87995598ab9990ce5c52a3feba5c4b65fea88c0e))
+* sync OpenAPI spec from aae7c19 ([b544fa2](https://github.com/team-telnyx/telnyx-php-staging/commit/b544fa2891cc61cf9dae9accd67d1f05ff62e1fa))
+* sync OpenAPI spec from aae7c19 ([8e9c929](https://github.com/team-telnyx/telnyx-php-staging/commit/8e9c929d07826f116798ed10261d826807414b00))
+
+## [7.60.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.59.0...v7.60.0) (2026-06-08)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([b55f2d1](https://github.com/team-telnyx/telnyx-php-staging/commit/b55f2d1bd569cb3f601b3708f232344305583bcd))
+* release php 7.60.0 ([b2e95a3](https://github.com/team-telnyx/telnyx-php-staging/commit/b2e95a3da2bd8750fd5a3a0e5eeee26990c99653))
+* sync OpenAPI spec from a13d4b1 ([f4a0c85](https://github.com/team-telnyx/telnyx-php-staging/commit/f4a0c85d03fdee5e864c761f35062d1bcaad93f0))
+* sync OpenAPI spec from a13d4b1 ([cd08ba7](https://github.com/team-telnyx/telnyx-php-staging/commit/cd08ba793a52c49475e466dbfd353d2a2ff62232))
+
+## [7.59.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.58.0...v7.59.0) (2026-06-08)
+
+
+### Features
+
+* add ED25519 webhook verification and WebSocket streaming ([18a0ad3](https://github.com/team-telnyx/telnyx-php-staging/commit/18a0ad39cf8385d882704715e4e600c8cb13a1a4))
+* add ED25519 webhook verification and WebSocket streaming ([9d16c6a](https://github.com/team-telnyx/telnyx-php-staging/commit/9d16c6a0f410d706e05d4fc7476276db42e6982d))
+
 
 ### Bug Fixes
 
-* **sip-registration-status:** scope to phase 1 uac_third-party_credential ([a5d4378](https://github.com/team-telnyx/telnyx-php/commit/a5d4378ddc6b991283eadde9381710ea85c12fdf))
+* rename loa methods patch_all/create → update/render to match upstream ([34966aa](https://github.com/team-telnyx/telnyx-php-staging/commit/34966aa910305d3c209fa691710efac0de106f7d))
+* restore composer.lock with ratchet/pawl from main ([f26c7b3](https://github.com/team-telnyx/telnyx-php-staging/commit/f26c7b357286581278fab26d647f97fa4c742aaf))
 
-## 7.63.0 (2026-05-29)
 
-Full Changelog: [v7.62.0...v7.63.0](https://github.com/team-telnyx/telnyx-php/compare/v7.62.0...v7.63.0)
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([98859eb](https://github.com/team-telnyx/telnyx-php-staging/commit/98859eb8ead2ecb80ce06b3ec967c8c9aa400b6f))
+* preserve repo-owned files not part of SDK generation ([4576aa8](https://github.com/team-telnyx/telnyx-php-staging/commit/4576aa847d114b19024a45b2a5aba460e600822b))
+* release php 7.58.0 ([d559f6e](https://github.com/team-telnyx/telnyx-php-staging/commit/d559f6e0edfcc547eedc46858b6da3b0b9b23529))
+* release php 7.59.0 ([d413d7c](https://github.com/team-telnyx/telnyx-php-staging/commit/d413d7cf7c97d1c32ef45d8b46f85fdbf8b325e4))
+
+## [7.58.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.58.0...v7.58.0) (2026-06-08)
+
 
 ### Features
 
-* **sip-registration-status:** add OpenAPI spec for /v2/sip_registration_status ([9f8cec8](https://github.com/team-telnyx/telnyx-php/commit/9f8cec8ff6cbef57a5672dcd24800e8a7e359946))
+* add ED25519 webhook verification and WebSocket streaming ([18a0ad3](https://github.com/team-telnyx/telnyx-php-staging/commit/18a0ad39cf8385d882704715e4e600c8cb13a1a4))
+* add ED25519 webhook verification and WebSocket streaming ([9d16c6a](https://github.com/team-telnyx/telnyx-php-staging/commit/9d16c6a0f410d706e05d4fc7476276db42e6982d))
 
-## 7.62.0 (2026-05-28)
 
-Full Changelog: [v7.61.0...v7.62.0](https://github.com/team-telnyx/telnyx-php/compare/v7.61.0...v7.62.0)
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([4576aa8](https://github.com/team-telnyx/telnyx-php-staging/commit/4576aa847d114b19024a45b2a5aba460e600822b))
+* release php 7.58.0 ([d559f6e](https://github.com/team-telnyx/telnyx-php-staging/commit/d559f6e0edfcc547eedc46858b6da3b0b9b23529))
+
+## [7.58.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.58.0...v7.58.0) (2026-06-08)
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([4576aa8](https://github.com/team-telnyx/telnyx-php-staging/commit/4576aa847d114b19024a45b2a5aba460e600822b))
+* release php 7.58.0 ([d559f6e](https://github.com/team-telnyx/telnyx-php-staging/commit/d559f6e0edfcc547eedc46858b6da3b0b9b23529))
+
+## [7.58.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.57.0...v7.58.0) (2026-06-08)
+
+
+### Bug Fixes
+
+* remove agent_input model from loa subresource to fix duplicate TypeScript export ([2f097aa](https://github.com/team-telnyx/telnyx-php-staging/commit/2f097aa75e83f781f41d7c4459d3d8907fabda53))
+* remove agent_input model from loa subresource to fix duplicate TypeScript export ([0e44ae6](https://github.com/team-telnyx/telnyx-php-staging/commit/0e44ae6bf0c690b29c0c3e438e8a20a95c9e4d8c))
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([803a5dc](https://github.com/team-telnyx/telnyx-php-staging/commit/803a5dcae305b04d4eaca7d492c53dc59cf95f87))
+* release php 7.58.0 ([d48d277](https://github.com/team-telnyx/telnyx-php-staging/commit/d48d2774a837d050aa8541d77699524095ce5820))
+
+## [7.57.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.56.1...v7.57.0) (2026-06-08)
+
 
 ### Features
 
-* **api:** manual updates ([0e791ba](https://github.com/team-telnyx/telnyx-php/commit/0e791ba98ec4463fa7474cb6b51d23c294550040))
-
-## 7.61.0 (2026-05-28)
-
-Full Changelog: [v7.60.0...v7.61.0](https://github.com/team-telnyx/telnyx-php/compare/v7.60.0...v7.61.0)
-
-### Features
-
-* **api:** manual updates ([7d06daf](https://github.com/team-telnyx/telnyx-php/commit/7d06daf685ba8740eb7465cc18857d0935e92e27))
-
-## 7.60.0 (2026-05-28)
-
-Full Changelog: [v7.59.0...v7.60.0](https://github.com/team-telnyx/telnyx-php/compare/v7.59.0...v7.60.0)
-
-### Features
-
-* **api:** manual updates ([457380d](https://github.com/team-telnyx/telnyx-php/commit/457380ded46341a016ffe2b1c4e504edc67d3983))
-
-## 7.59.0 (2026-05-27)
-
-Full Changelog: [v7.58.0...v7.59.0](https://github.com/team-telnyx/telnyx-php/compare/v7.58.0...v7.59.0)
-
-### Features
-
-* TELAPPS-406: document GET /speech-to-text/providers endpoint ([8804d1f](https://github.com/team-telnyx/telnyx-php/commit/8804d1f2588e748caf7e558077d9ac672dafc5e7))
-
-## 7.58.0 (2026-05-27)
-
-Full Changelog: [v7.57.0...v7.58.0](https://github.com/team-telnyx/telnyx-php/compare/v7.57.0...v7.58.0)
-
-### Features
-
-* TELAPPS-5698 document conversation relay API shape ([f608f1d](https://github.com/team-telnyx/telnyx-php/commit/f608f1dabd5253feab7570c1f2a6bd1bd8897336))
-
-## 7.57.0 (2026-05-27)
-
-Full Changelog: [v7.56.0...v7.57.0](https://github.com/team-telnyx/telnyx-php/compare/v7.56.0...v7.57.0)
-
-### Features
-
-* TELAPPS-531: document Rime ArcanaV3 and Coda voice models ([020c9aa](https://github.com/team-telnyx/telnyx-php/commit/020c9aa10a4602f076b0debc1caf24754178aee6))
+* add ED25519 webhook signature verification ([0f56b9e](https://github.com/team-telnyx/telnyx-php-staging/commit/0f56b9ee598bdbcad9e60da00d97f6825c806465))
+* add ED25519 webhook signature verification trait ([545d8ab](https://github.com/team-telnyx/telnyx-php-staging/commit/545d8abc7aa553982176bbce7dabf73e10ea2071))
+* add SpeechToTextStreamParams.php for WebSocket streaming ([c2c6260](https://github.com/team-telnyx/telnyx-php-staging/commit/c2c6260e82447a72886ada523c6dd82c4fb84100))
+* add SpeechToTextWS.php for WebSocket streaming ([3b7f3c8](https://github.com/team-telnyx/telnyx-php-staging/commit/3b7f3c87dfd01641430a67e9227b0a2e608b963e))
+* add StreamClientEvent.php for WebSocket streaming ([aeb4d4e](https://github.com/team-telnyx/telnyx-php-staging/commit/aeb4d4e85977c0b2bd5b2cab9478e5bc55f49937))
+* add SttServerEvent.php for WebSocket streaming ([e212a78](https://github.com/team-telnyx/telnyx-php-staging/commit/e212a784bfb3d395890d0df53b5a66934921baec))
+* add TextToSpeechStreamParams.php for WebSocket streaming ([a1ba372](https://github.com/team-telnyx/telnyx-php-staging/commit/a1ba3720dd9e865ca4fa22d0680a88f8231e6de2))
+* add TextToSpeechWS.php for WebSocket streaming ([dc1b2a0](https://github.com/team-telnyx/telnyx-php-staging/commit/dc1b2a029b66c021416ae7d06b03da85b862a807))
+* add TtsServerEvent.php for WebSocket streaming ([f18fe08](https://github.com/team-telnyx/telnyx-php-staging/commit/f18fe086cb699a036277f881ea2a42d6610f2e93))
+* add TtsStreamMessage.php for WebSocket streaming ([dad14c0](https://github.com/team-telnyx/telnyx-php-staging/commit/dad14c0328e44dea6941cf2013a4ac1b716bfb36))
+* add WebhookVerificationException ([1bf9bdf](https://github.com/team-telnyx/telnyx-php-staging/commit/1bf9bdf78bb09dc823c899ac1548b4485df9eeb9))
+* add WebSocket streaming custom code for STT/TTS ([628266b](https://github.com/team-telnyx/telnyx-php-staging/commit/628266b9e6d8555ae8cd42591f5c04f59739f8e5))
+* add WebSocketClient.php for WebSocket streaming ([6b3db03](https://github.com/team-telnyx/telnyx-php-staging/commit/6b3db03a8aea6fe1a351d7ffc8fe3ed91a3484d6))
+* add WebSocketError.php for WebSocket streaming ([c55e333](https://github.com/team-telnyx/telnyx-php-staging/commit/c55e3339dc2c75594c7a91bf6641e5a0f85da147))
+* update composer.json with WebSocket dependencies ([196aecf](https://github.com/team-telnyx/telnyx-php-staging/commit/196aecff98f5613567369db82580519b7835fbb5))
+* update composer.lock with WebSocket dependencies ([bb2fbd6](https://github.com/team-telnyx/telnyx-php-staging/commit/bb2fbd69f7591d6bf76828fccd03636f23c9f85d))
+* update WebhooksService to use ED25519 verification trait ([2509064](https://github.com/team-telnyx/telnyx-php-staging/commit/2509064c44b938868a889ceeee2a5abf82099e2c))
 
 
-### Documentation
+### Bug Fixes
 
-* add voice sdk debug call report spec ([d19624b](https://github.com/team-telnyx/telnyx-php/commit/d19624bd868c40fb9b9160022e91a84ec077740d))
+* add ratchet/pawl dependencies to composer.lock (preserving staging PHPStan version) ([5eedcdd](https://github.com/team-telnyx/telnyx-php-staging/commit/5eedcddfa6090647db748770913f5cebba741624))
+* **ci:** pass release-please pr output via env to avoid shell injection ([d29f907](https://github.com/team-telnyx/telnyx-php-staging/commit/d29f9075893e567d1679b1dd59a5c64cdd9d122c))
+* **ci:** pass release-please pr output via env to avoid shell injection ([aa446a9](https://github.com/team-telnyx/telnyx-php-staging/commit/aa446a99226bfc184cc3347ddf563d2b7720c314))
+* extract PR number from JSON output for auto-merge ([ff6fefb](https://github.com/team-telnyx/telnyx-php-staging/commit/ff6fefb4d0717a09131897ae2b24812197cb2e1f))
+* guard mixed-to-scalar casts in WebSocket value objects ([30d6c16](https://github.com/team-telnyx/telnyx-php-staging/commit/30d6c169fb0aa6929af10c0e83607cd8bf79ee93))
+* pin phpstan to staging version (2.1.33) to avoid pre-existing lint errors ([e4572c8](https://github.com/team-telnyx/telnyx-php-staging/commit/e4572c85f861a630d1709d7c2340dcc46dc8842b))
+* use upstream composer.lock with WebSocket dependencies ([4370733](https://github.com/team-telnyx/telnyx-php-staging/commit/4370733bd6c4406081913f9622ca8803f18d04e6))
 
-## 7.56.0 (2026-05-26)
 
-Full Changelog: [v7.55.0...v7.56.0](https://github.com/team-telnyx/telnyx-php/compare/v7.55.0...v7.56.0)
+### Chores
 
-### Features
+* preserve repo-owned files not part of SDK generation ([0d8e518](https://github.com/team-telnyx/telnyx-php-staging/commit/0d8e518cf96cdf4d8c535ca782a6ff4fe330f8ae))
+* preserve repo-owned files not part of SDK generation ([d272c7e](https://github.com/team-telnyx/telnyx-php-staging/commit/d272c7eeaf1e2fddf99c68beb1fbcc0f0148991b))
+* preserve repo-owned files not part of SDK generation ([0fc26a2](https://github.com/team-telnyx/telnyx-php-staging/commit/0fc26a22fe4a2211d6f0973768f406cd9034c265))
+* release php 7.57.0 ([70a5fd3](https://github.com/team-telnyx/telnyx-php-staging/commit/70a5fd379a417fad1fd76e0b81871a0a97f4240e))
+* release php 7.57.0 ([532bc44](https://github.com/team-telnyx/telnyx-php-staging/commit/532bc44aa1970cb3264a2cb738630cd1263eab5c))
+* release php 7.57.0 ([424a979](https://github.com/team-telnyx/telnyx-php-staging/commit/424a97928f0a52dffadf2c40105e7e9f5fda0793))
+* sync OpenAPI spec from 6eae6a5 ([939ea93](https://github.com/team-telnyx/telnyx-php-staging/commit/939ea9324fe1158620acabb67583b60c02a2a07b))
+* sync OpenAPI spec from 6eae6a5 ([1f53c6b](https://github.com/team-telnyx/telnyx-php-staging/commit/1f53c6b95e6b32d3e0053cc35e50395d17af69d6))
+* sync OpenAPI spec from 95f10ce ([74a8bee](https://github.com/team-telnyx/telnyx-php-staging/commit/74a8bee0c77732d2c7709242eaec8b88adc3a260))
+* sync OpenAPI spec from 95f10ce ([9251ea5](https://github.com/team-telnyx/telnyx-php-staging/commit/9251ea502c4445231bd95c6a425b73cf80fe99ef))
+* sync OpenAPI spec from 9f5f345 ([54f8edd](https://github.com/team-telnyx/telnyx-php-staging/commit/54f8eddfe8e321dc24c5784cd5228adf9ef71f7e))
+* sync OpenAPI spec from 9f5f345 ([2ad9709](https://github.com/team-telnyx/telnyx-php-staging/commit/2ad9709647fe6223d74d2bc9543ba88390e120da))
 
-* TELAPPS-523: document stop_on_conversation_end on assistant recording_settings ([9331fd8](https://github.com/team-telnyx/telnyx-php/commit/9331fd8772d8dc59250ceae47c1baccb5b1011d3))
+## [7.56.1](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.56.0...v7.56.1) (2026-06-07)
 
-## 7.55.0 (2026-05-22)
 
-Full Changelog: [v7.54.0...v7.55.0](https://github.com/team-telnyx/telnyx-php/compare/v7.54.0...v7.55.0)
+### Bug Fixes
 
-### Features
+* use release-please output directly for auto-merge (avoid race condition) ([cb26788](https://github.com/team-telnyx/telnyx-php-staging/commit/cb267886b9efb7f086c9b3262897321884262600))
+* use release-please output directly for auto-merge (avoid race condition) ([14db857](https://github.com/team-telnyx/telnyx-php-staging/commit/14db857db1c62bfb50edcddc04eb8fb8bcd8549c))
 
-* MSG-919: documentation for Whatsapp user data ([d03e2be](https://github.com/team-telnyx/telnyx-php/commit/d03e2bececa4671d2f0cbaa93f421ef9fafdb318))
+## [7.56.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.55.0...v7.56.0) (2026-06-07)
 
-## 7.54.0 (2026-05-22)
 
-Full Changelog: [v7.53.0...v7.54.0](https://github.com/team-telnyx/telnyx-php/compare/v7.53.0...v7.54.0)
+### Chores
 
-### Features
+* preserve repo-owned files not part of SDK generation ([b0be053](https://github.com/team-telnyx/telnyx-php-staging/commit/b0be053c1a07266362c136df17ce93bf2026c4c4))
+* preserve repo-owned files not part of SDK generation ([d4b4870](https://github.com/team-telnyx/telnyx-php-staging/commit/d4b4870dac1f3754fd19cadc4748dbef62f298df))
+* release php 7.56.0 ([04b4bfa](https://github.com/team-telnyx/telnyx-php-staging/commit/04b4bfaacbf15dcc22455f45654209e320eb20a0))
+* release php 7.56.0 ([74cdbb4](https://github.com/team-telnyx/telnyx-php-staging/commit/74cdbb479034ef891bff76f5e77197fb3f2ae812))
+* sync OpenAPI spec from 0193002 ([4f1270b](https://github.com/team-telnyx/telnyx-php-staging/commit/4f1270b7a569e22bdf14898e1ffe215e1abf297c))
+* sync OpenAPI spec from 0193002 ([30ddead](https://github.com/team-telnyx/telnyx-php-staging/commit/30ddead9d11ff138257579d5b1846f8106706927))
+* sync OpenAPI spec from 8faa4be ([f800810](https://github.com/team-telnyx/telnyx-php-staging/commit/f8008103bd3f109ee832abe532f52083e941e933))
+* sync OpenAPI spec from 8faa4be ([d05bddd](https://github.com/team-telnyx/telnyx-php-staging/commit/d05bddd191c1757e1c3e172f38fb6e739e786824))
 
-* TELAPPS-72: document send_digits_on_answer on Dial + Transfer ([24bc8ae](https://github.com/team-telnyx/telnyx-php/commit/24bc8ae851a3455bacb1bbe253e01d5af4966170))
+## [7.55.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.54.0...v7.55.0) (2026-06-07)
 
-## 7.53.0 (2026-05-20)
-
-Full Changelog: [v7.52.0...v7.53.0](https://github.com/team-telnyx/telnyx-php/compare/v7.52.0...v7.53.0)
 
 ### Features
 
-* TELAPPS-483: Add async webhook timeout to OpenAPI ([7a566d8](https://github.com/team-telnyx/telnyx-php/commit/7a566d8d03b829590393c6986b78c274e8498a1d))
+* enable GitHub auto-merge on release PRs ([5052b6b](https://github.com/team-telnyx/telnyx-php-staging/commit/5052b6b33b71c3d723baf3fb4dc932710eb0cbdc))
+* enable GitHub auto-merge on release PRs ([a4bc9f8](https://github.com/team-telnyx/telnyx-php-staging/commit/a4bc9f8cb978672cce97cfde37329ef51da3e2bd))
 
-## 7.52.0 (2026-05-18)
 
-Full Changelog: [v7.51.0...v7.52.0](https://github.com/team-telnyx/telnyx-php/compare/v7.51.0...v7.52.0)
+### Bug Fixes
+
+* correct auto-merge output name and PR search pattern ([972f55a](https://github.com/team-telnyx/telnyx-php-staging/commit/972f55a6ec95d273ce38592e5d33ab27bd61bba2))
+* correct auto-merge output name and PR search pattern ([42f5f7b](https://github.com/team-telnyx/telnyx-php-staging/commit/42f5f7b1a0a993babbf6c8169027fe8aa133d16c))
+* restore ${{ }} expressions in release-please workflow ([0ec9383](https://github.com/team-telnyx/telnyx-php-staging/commit/0ec93831ccf0fa2cc8d5bd08090842accbdcd623))
+* restore ${{ }} expressions in release-please workflow ([b686189](https://github.com/team-telnyx/telnyx-php-staging/commit/b68618986dd24d0d873a4c6fd332e7dab2f8e5b1))
+
+## [7.54.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.53.0...v7.54.0) (2026-06-07)
+
 
 ### Features
 
-* Telapps 101 soniox spec ([57e7570](https://github.com/team-telnyx/telnyx-php/commit/57e757007b71acdee7987d02db8194052a5821d6))
+* enable automerge for release PRs ([14ade31](https://github.com/team-telnyx/telnyx-php-staging/commit/14ade319cf5d9be8a503e5ed9bfd34d271a72c0b))
+* enable automerge for release PRs ([7f6463e](https://github.com/team-telnyx/telnyx-php-staging/commit/7f6463e0a426a6a2ba4f54ef27bbef612e60e10d))
+
+## [7.53.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.52.0...v7.53.0) (2026-06-07)
+
+
+### Bug Fixes
+
+* remove text_to_speech retrieve_speech mapping ([8d34d9f](https://github.com/team-telnyx/telnyx-php-staging/commit/8d34d9fd29aae2327379b91e5b8df1530e2fb69f))
+* rename create_speech to generate_speech to match spec operationId ([809e386](https://github.com/team-telnyx/telnyx-php-staging/commit/809e386deb44d89c60e53dc795b240039cc765d0))
+* use PAT for release-please to trigger CI ([5780f35](https://github.com/team-telnyx/telnyx-php-staging/commit/5780f352519600321b2393de25a3c46f9909dcfa))
+* use PAT for release-please to trigger CI ([86dd6c1](https://github.com/team-telnyx/telnyx-php-staging/commit/86dd6c1482616216746f21b2576c823736ac4f5b))
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([23ba921](https://github.com/team-telnyx/telnyx-php-staging/commit/23ba9217553212503a51c87cd1b196d761e0cfc9))
+* preserve repo-owned files not part of SDK generation ([16ae030](https://github.com/team-telnyx/telnyx-php-staging/commit/16ae0300dec571f57d70716d30b2db528f25f3bb))
+* preserve repo-owned files not part of SDK generation ([939129e](https://github.com/team-telnyx/telnyx-php-staging/commit/939129ea634d97d5cd546838647c7ca3ae89be49))
+* release php 7.53.0 ([f9c6fe6](https://github.com/team-telnyx/telnyx-php-staging/commit/f9c6fe6ea3317e3ac090b6edf6234e8aa2c7de31))
+* release php 7.53.0 ([ad0995b](https://github.com/team-telnyx/telnyx-php-staging/commit/ad0995b5337a437ae7bfdf3b447ec793e400b190))
+* release php 7.53.0 ([1632c8e](https://github.com/team-telnyx/telnyx-php-staging/commit/1632c8ef35c2a229e18241d2af3c64f75ad606ab))
+
+
+### Build System
+
+* **deps-dev:** bump symfony/process from 7.4.3 to 7.4.13 ([2351161](https://github.com/team-telnyx/telnyx-php-staging/commit/23511613cfea0306d239e9923305e52167999010))
+
+## [7.52.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.51.0...v7.52.0) (2026-06-06)
+
+
+### Bug Fixes
+
+* **go:** use model mapping for DirPhoneNumberStatus dedup ([85cf7cf](https://github.com/team-telnyx/telnyx-php-staging/commit/85cf7cfe947b385dcb0b42a59876b2bf250bdd69))
+
+
+### Chores
+
+* preserve repo-owned files not part of SDK generation ([0d785f4](https://github.com/team-telnyx/telnyx-php-staging/commit/0d785f4131a8cf93fef29e75fda9dbab294b45de))
+* release php 7.52.0 ([9143d3a](https://github.com/team-telnyx/telnyx-php-staging/commit/9143d3a9ed43c0d91c51b6189dadd96e82a4403f))
+* release php 7.52.0 ([ea732c4](https://github.com/team-telnyx/telnyx-php-staging/commit/ea732c47bc2b79d03d106fbed0ad519a567a5012))
+* release php 7.52.0 ([5730b50](https://github.com/team-telnyx/telnyx-php-staging/commit/5730b50442e0573527ac76f7457f43c40eca5601))
 
 ## 7.51.0 (2026-05-18)
 

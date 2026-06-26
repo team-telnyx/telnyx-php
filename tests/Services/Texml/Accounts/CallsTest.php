@@ -9,10 +9,9 @@ use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse;
-use Telnyx\Texml\Accounts\Calls\CallGetResponse;
+use Telnyx\Texml\Accounts\Calls\CallResource;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse;
-use Telnyx\Texml\Accounts\Calls\CallUpdateResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -46,7 +45,7 @@ final class CallsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CallGetResponse::class, $result);
+        $this->assertInstanceOf(CallResource::class, $result);
     }
 
     #[Test]
@@ -62,7 +61,7 @@ final class CallsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CallGetResponse::class, $result);
+        $this->assertInstanceOf(CallResource::class, $result);
     }
 
     #[Test]
@@ -78,7 +77,7 @@ final class CallsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CallUpdateResponse::class, $result);
+        $this->assertInstanceOf(CallResource::class, $result);
     }
 
     #[Test]
@@ -102,7 +101,7 @@ final class CallsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CallUpdateResponse::class, $result);
+        $this->assertInstanceOf(CallResource::class, $result);
     }
 
     #[Test]
@@ -112,74 +111,7 @@ final class CallsTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->texml->accounts->calls->calls(
-            'account_sid',
-            params: ['url' => 'https://www.example.com/texml.xml']
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(CallCallsResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCallsWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->texml->accounts->calls->calls(
-            'account_sid',
-            params: [
-                'url' => 'https://www.example.com/texml.xml',
-                'applicationSid' => 'example-app-sid',
-                'asyncAmd' => true,
-                'asyncAmdStatusCallback' => 'https://www.example.com/callback',
-                'asyncAmdStatusCallbackMethod' => 'GET',
-                'callerID' => 'Info',
-                'cancelPlaybackOnDetectMessageEnd' => false,
-                'cancelPlaybackOnMachineDetection' => false,
-                'customHeaders' => [
-                    ['name' => 'X-Custom-Header', 'value' => 'custom-value'],
-                ],
-                'deepfakeDetection' => 'Enable',
-                'deepfakeDetectionCallbackMethod' => 'GET',
-                'deepfakeDetectionCallbackURL' => 'https://www.example.com/deepfake-callback',
-                'detectionMode' => 'Premium',
-                'fallbackURL' => 'https://www.example.com/instructions-fallback.xml',
-                'from' => '+13120001234',
-                'machineDetection' => 'Enable',
-                'machineDetectionPromptEndTimeout' => 5000,
-                'machineDetectionSilenceTimeout' => 2000,
-                'machineDetectionSpeechEndThreshold' => 2000,
-                'machineDetectionSpeechThreshold' => 2000,
-                'machineDetectionTimeout' => 5000,
-                'mediaEncryption' => 'disabled',
-                'preferredCodecs' => 'PCMA,PCMU',
-                'record' => false,
-                'recordingChannels' => 'dual',
-                'recordingStatusCallback' => 'https://example.com/recording_status_callback',
-                'recordingStatusCallbackEvent' => 'in-progress completed absent',
-                'recordingStatusCallbackMethod' => 'GET',
-                'recordingTimeout' => 5,
-                'recordingTrack' => 'inbound',
-                'sendRecordingURL' => false,
-                'sipAuthPassword' => '1234',
-                'sipAuthUsername' => 'user',
-                'sipRegion' => 'Canada',
-                'statusCallback' => 'https://www.example.com/statuscallback-listener',
-                'statusCallbackEvent' => 'initiated',
-                'statusCallbackMethod' => 'GET',
-                'superviseCallSid' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
-                'supervisingRole' => 'monitor',
-                'texml' => 'Texml',
-                'timeLimit' => 3600,
-                'timeout' => 60,
-                'to' => '+13121230000',
-                'trim' => 'trim-silence',
-                'urlMethod' => 'GET',
-            ],
-        );
+        $result = $this->client->texml->accounts->calls->calls('account_sid');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(CallCallsResponse::class, $result);

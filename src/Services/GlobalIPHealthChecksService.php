@@ -8,9 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheck;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckDeleteResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckGetResponse;
-use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckListResponse;
 use Telnyx\GlobalIPHealthChecks\GlobalIPHealthCheckNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPHealthChecksContract;
@@ -94,7 +94,7 @@ final class GlobalIPHealthChecksService implements GlobalIPHealthChecksContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<GlobalIPHealthCheckListResponse>
+     * @return DefaultFlatPagination<GlobalIPHealthCheck>
      *
      * @throws APIException
      */

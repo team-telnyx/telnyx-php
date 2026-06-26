@@ -9,11 +9,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PronunciationDicts\PronunciationDictCreateParams;
 use Telnyx\PronunciationDicts\PronunciationDictData;
-use Telnyx\PronunciationDicts\PronunciationDictGetResponse;
 use Telnyx\PronunciationDicts\PronunciationDictListParams;
-use Telnyx\PronunciationDicts\PronunciationDictNewResponse;
+use Telnyx\PronunciationDicts\PronunciationDictResponse;
 use Telnyx\PronunciationDicts\PronunciationDictUpdateParams;
-use Telnyx\PronunciationDicts\PronunciationDictUpdateResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -27,7 +25,7 @@ interface PronunciationDictsRawContract
      * @param array<string,mixed>|PronunciationDictCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PronunciationDictNewResponse>
+     * @return BaseResponse<PronunciationDictResponse>
      *
      * @throws APIException
      */
@@ -42,7 +40,7 @@ interface PronunciationDictsRawContract
      * @param string $id the UUID of the pronunciation dictionary
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PronunciationDictGetResponse>
+     * @return BaseResponse<PronunciationDictResponse>
      *
      * @throws APIException
      */
@@ -58,7 +56,7 @@ interface PronunciationDictsRawContract
      * @param array<string,mixed>|PronunciationDictUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PronunciationDictUpdateResponse>
+     * @return BaseResponse<PronunciationDictResponse>
      *
      * @throws APIException
      */

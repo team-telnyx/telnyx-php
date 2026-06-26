@@ -9,11 +9,11 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Calls\RecordingsJsonContract;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonParams\RecordingTrack;
-use Telnyx\Texml\Accounts\Calls\RecordingsJson\RecordingsJsonRecordingsJsonResponse;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlCreateCallRecordingResponseBody;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 
 /**
  * TeXML REST Commands.
@@ -64,7 +64,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
         RecordingTrack|string|null $recordingTrack = null,
         bool $sendRecordingURL = true,
         RequestOptions|array|null $requestOptions = null,
-    ): RecordingsJsonRecordingsJsonResponse {
+    ): TexmlCreateCallRecordingResponseBody {
         $params = Util::removeNulls(
             [
                 'accountSid' => $accountSid,
@@ -99,7 +99,7 @@ final class RecordingsJsonService implements RecordingsJsonContract
         string $callSid,
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
-    ): RecordingsJsonGetRecordingsJsonResponse {
+    ): TexmlGetCallRecordingsResponseBody {
         $params = Util::removeNulls(['accountSid' => $accountSid]);
 
         // @phpstan-ignore-next-line argument.type

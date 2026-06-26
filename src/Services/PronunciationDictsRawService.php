@@ -11,19 +11,16 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PronunciationDicts\PronunciationDictCreateParams;
 use Telnyx\PronunciationDicts\PronunciationDictData;
-use Telnyx\PronunciationDicts\PronunciationDictGetResponse;
 use Telnyx\PronunciationDicts\PronunciationDictListParams;
-use Telnyx\PronunciationDicts\PronunciationDictNewResponse;
+use Telnyx\PronunciationDicts\PronunciationDictResponse;
 use Telnyx\PronunciationDicts\PronunciationDictUpdateParams;
-use Telnyx\PronunciationDicts\PronunciationDictUpdateResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PronunciationDictsRawContract;
 
 /**
  * Manage pronunciation dictionaries for text-to-speech synthesis. Dictionaries contain alias items (text replacement) and phoneme items (IPA pronunciation notation) that control how specific words are spoken.
  *
- * @phpstan-import-type ItemShape from \Telnyx\PronunciationDicts\PronunciationDictCreateParams\Item
- * @phpstan-import-type ItemShape from \Telnyx\PronunciationDicts\PronunciationDictUpdateParams\Item as ItemShape1
+ * @phpstan-import-type PronunciationDictItemShape from \Telnyx\PronunciationDicts\PronunciationDictItem
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class PronunciationDictsRawService implements PronunciationDictsRawContract
@@ -49,11 +46,11 @@ final class PronunciationDictsRawService implements PronunciationDictsRawContrac
      * - File upload: max 1MB (1,048,576 bytes)
      *
      * @param array{
-     *   items: list<ItemShape>, name: string
+     *   items: list<PronunciationDictItemShape>, name: string
      * }|PronunciationDictCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PronunciationDictNewResponse>
+     * @return BaseResponse<PronunciationDictResponse>
      *
      * @throws APIException
      */
@@ -72,7 +69,7 @@ final class PronunciationDictsRawService implements PronunciationDictsRawContrac
             path: 'pronunciation_dicts',
             body: (object) $parsed,
             options: $options,
-            convert: PronunciationDictNewResponse::class,
+            convert: PronunciationDictResponse::class,
         );
     }
 
@@ -84,7 +81,7 @@ final class PronunciationDictsRawService implements PronunciationDictsRawContrac
      * @param string $id the UUID of the pronunciation dictionary
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PronunciationDictGetResponse>
+     * @return BaseResponse<PronunciationDictResponse>
      *
      * @throws APIException
      */
@@ -97,7 +94,7 @@ final class PronunciationDictsRawService implements PronunciationDictsRawContrac
             method: 'get',
             path: ['pronunciation_dicts/%1$s', $id],
             options: $requestOptions,
-            convert: PronunciationDictGetResponse::class,
+            convert: PronunciationDictResponse::class,
         );
     }
 
@@ -108,11 +105,11 @@ final class PronunciationDictsRawService implements PronunciationDictsRawContrac
      *
      * @param string $id the UUID of the pronunciation dictionary
      * @param array{
-     *   items?: list<ItemShape1>, name?: string
+     *   items?: list<PronunciationDictItemShape>, name?: string
      * }|PronunciationDictUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<PronunciationDictUpdateResponse>
+     * @return BaseResponse<PronunciationDictResponse>
      *
      * @throws APIException
      */
@@ -132,7 +129,7 @@ final class PronunciationDictsRawService implements PronunciationDictsRawContrac
             path: ['pronunciation_dicts/%1$s', $id],
             body: (object) $parsed,
             options: $options,
-            convert: PronunciationDictUpdateResponse::class,
+            convert: PronunciationDictResponse::class,
         );
     }
 

@@ -10,9 +10,9 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\WebhookDeliveriesContract;
+use Telnyx\WebhookDeliveries\WebhookDelivery;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
 use Telnyx\WebhookDeliveries\WebhookDeliveryListParams\Filter;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 
 /**
  * Webhooks operations.
@@ -63,7 +63,7 @@ final class WebhookDeliveriesService implements WebhookDeliveriesContract
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[status][eq], filter[event_type], filter[webhook][contains], filter[attempts][contains], filter[started_at][gte], filter[started_at][lte], filter[finished_at][gte], filter[finished_at][lte]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<WebhookDeliveryListResponse>
+     * @return DefaultFlatPagination<WebhookDelivery>
      *
      * @throws APIException
      */

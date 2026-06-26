@@ -8,9 +8,9 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\TermsOfService\Agreements\AgreementGetResponse;
 use Telnyx\TermsOfService\Agreements\AgreementListParams;
-use Telnyx\TermsOfService\Agreements\AgreementListResponse;
+use Telnyx\TermsOfService\Agreements\TosAgreement;
+use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -23,7 +23,7 @@ interface AgreementsRawContract
      * @param string $agreementID unique identifier of the agreement
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AgreementGetResponse>
+     * @return BaseResponse<TosAgreementWrapped>
      *
      * @throws APIException
      */
@@ -38,7 +38,7 @@ interface AgreementsRawContract
      * @param array<string,mixed>|AgreementListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<AgreementListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<TosAgreement>>
      *
      * @throws APIException
      */

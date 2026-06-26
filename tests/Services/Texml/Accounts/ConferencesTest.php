@@ -7,11 +7,10 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceResource;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +44,7 @@ final class ConferencesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ConferenceGetResponse::class, $result);
+        $this->assertInstanceOf(ConferenceResource::class, $result);
     }
 
     #[Test]
@@ -61,7 +60,7 @@ final class ConferencesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ConferenceGetResponse::class, $result);
+        $this->assertInstanceOf(ConferenceResource::class, $result);
     }
 
     #[Test]
@@ -77,7 +76,7 @@ final class ConferencesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ConferenceUpdateResponse::class, $result);
+        $this->assertInstanceOf(ConferenceResource::class, $result);
     }
 
     #[Test]
@@ -96,7 +95,7 @@ final class ConferencesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ConferenceUpdateResponse::class, $result);
+        $this->assertInstanceOf(ConferenceResource::class, $result);
     }
 
     #[Test]
@@ -162,10 +161,7 @@ final class ConferencesTest extends TestCase
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            ConferenceGetRecordingsJsonResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(TexmlGetCallRecordingsResponseBody::class, $result);
     }
 
     #[Test]
@@ -184,9 +180,6 @@ final class ConferencesTest extends TestCase
         ;
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            ConferenceGetRecordingsJsonResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(TexmlGetCallRecordingsResponseBody::class, $result);
     }
 }

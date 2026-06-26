@@ -11,7 +11,7 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingGetResponse;
 use Telnyx\MobilePhoneNumbers\Messaging\MessagingListParams;
-use Telnyx\MobilePhoneNumbers\Messaging\MessagingListResponse;
+use Telnyx\MobilePhoneNumbers\Messaging\MobilePhoneNumberWithMessagingSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MobilePhoneNumbers\MessagingRawContract;
 
@@ -59,7 +59,7 @@ final class MessagingRawService implements MessagingRawContract
      * @param array{pageNumber?: int, pageSize?: int}|MessagingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<MessagingListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<MobilePhoneNumberWithMessagingSettings,>,>
      *
      * @throws APIException
      */
@@ -81,7 +81,7 @@ final class MessagingRawService implements MessagingRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: MessagingListResponse::class,
+            convert: MobilePhoneNumberWithMessagingSettings::class,
             page: DefaultFlatPagination::class,
         );
     }

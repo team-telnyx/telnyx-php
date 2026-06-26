@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\WebhookDeliveries\WebhookDelivery;
 use Telnyx\WebhookDeliveries\WebhookDeliveryGetResponse;
-use Telnyx\WebhookDeliveries\WebhookDeliveryListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -59,7 +59,7 @@ final class WebhookDeliveriesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(WebhookDeliveryListResponse::class, $item);
+            $this->assertInstanceOf(WebhookDelivery::class, $item);
         }
     }
 }

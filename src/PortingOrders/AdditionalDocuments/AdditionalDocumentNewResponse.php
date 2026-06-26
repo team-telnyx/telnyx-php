@@ -7,13 +7,12 @@ namespace Telnyx\PortingOrders\AdditionalDocuments;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse\Data
+ * @phpstan-import-type PortingAdditionalDocumentShape from \Telnyx\PortingOrders\AdditionalDocuments\PortingAdditionalDocument
  *
  * @phpstan-type AdditionalDocumentNewResponseShape = array{
- *   data?: list<Data|DataShape>|null
+ *   data?: list<PortingAdditionalDocument|PortingAdditionalDocumentShape>|null
  * }
  */
 final class AdditionalDocumentNewResponse implements BaseModel
@@ -21,8 +20,8 @@ final class AdditionalDocumentNewResponse implements BaseModel
     /** @use SdkModel<AdditionalDocumentNewResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
+    /** @var list<PortingAdditionalDocument>|null $data */
+    #[Optional(list: PortingAdditionalDocument::class)]
     public ?array $data;
 
     public function __construct()
@@ -35,7 +34,7 @@ final class AdditionalDocumentNewResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape>|null $data
+     * @param list<PortingAdditionalDocument|PortingAdditionalDocumentShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -47,7 +46,7 @@ final class AdditionalDocumentNewResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * @param list<PortingAdditionalDocument|PortingAdditionalDocumentShape> $data
      */
     public function withData(array $data): self
     {

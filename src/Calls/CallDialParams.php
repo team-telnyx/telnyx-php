@@ -8,7 +8,6 @@ use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetection;
 use Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig;
 use Telnyx\Calls\CallDialParams\ConferenceConfig;
-use Telnyx\Calls\CallDialParams\ConversationRelayConfig;
 use Telnyx\Calls\CallDialParams\DeepfakeDetection;
 use Telnyx\Calls\CallDialParams\MediaEncryption;
 use Telnyx\Calls\CallDialParams\Privacy;
@@ -56,7 +55,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-import-type AnsweringMachineDetectionConfigShape from \Telnyx\Calls\CallDialParams\AnsweringMachineDetectionConfig
  * @phpstan-import-type CallAssistantRequestShape from \Telnyx\Calls\CallAssistantRequest
  * @phpstan-import-type ConferenceConfigShape from \Telnyx\Calls\CallDialParams\ConferenceConfig
- * @phpstan-import-type ConversationRelayConfigShape from \Telnyx\Calls\CallDialParams\ConversationRelayConfig
+ * @phpstan-import-type ConversationRelayEmbeddedConfigShape from \Telnyx\Calls\ConversationRelayEmbeddedConfig
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type DeepfakeDetectionShape from \Telnyx\Calls\CallDialParams\DeepfakeDetection
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -79,7 +78,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   conferenceConfig?: null|ConferenceConfig|ConferenceConfigShape,
- *   conversationRelayConfig?: null|ConversationRelayConfig|ConversationRelayConfigShape,
+ *   conversationRelayConfig?: null|ConversationRelayEmbeddedConfig|ConversationRelayEmbeddedConfigShape,
  *   customHeaders?: list<CustomSipHeader|CustomSipHeaderShape>|null,
  *   deepfakeDetection?: null|DeepfakeDetection|DeepfakeDetectionShape,
  *   dialogflowConfig?: null|DialogflowConfig|DialogflowConfigShape,
@@ -225,7 +224,7 @@ final class CallDialParams implements BaseModel
      * Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.
      */
     #[Optional('conversation_relay_config')]
-    public ?ConversationRelayConfig $conversationRelayConfig;
+    public ?ConversationRelayEmbeddedConfig $conversationRelayConfig;
 
     /**
      * Custom headers to be added to the SIP INVITE.
@@ -591,7 +590,7 @@ final class CallDialParams implements BaseModel
      * @param AnsweringMachineDetectionConfig|AnsweringMachineDetectionConfigShape|null $answeringMachineDetectionConfig
      * @param CallAssistantRequest|CallAssistantRequestShape|null $assistant
      * @param ConferenceConfig|ConferenceConfigShape|null $conferenceConfig
-     * @param ConversationRelayConfig|ConversationRelayConfigShape|null $conversationRelayConfig
+     * @param ConversationRelayEmbeddedConfig|ConversationRelayEmbeddedConfigShape|null $conversationRelayConfig
      * @param list<CustomSipHeader|CustomSipHeaderShape>|null $customHeaders
      * @param DeepfakeDetection|DeepfakeDetectionShape|null $deepfakeDetection
      * @param DialogflowConfig|DialogflowConfigShape|null $dialogflowConfig
@@ -633,7 +632,7 @@ final class CallDialParams implements BaseModel
         ?string $clientState = null,
         ?string $commandID = null,
         ConferenceConfig|array|null $conferenceConfig = null,
-        ConversationRelayConfig|array|null $conversationRelayConfig = null,
+        ConversationRelayEmbeddedConfig|array|null $conversationRelayConfig = null,
         ?array $customHeaders = null,
         DeepfakeDetection|array|null $deepfakeDetection = null,
         DialogflowConfig|array|null $dialogflowConfig = null,
@@ -911,10 +910,10 @@ final class CallDialParams implements BaseModel
     /**
      * Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.
      *
-     * @param ConversationRelayConfig|ConversationRelayConfigShape $conversationRelayConfig
+     * @param ConversationRelayEmbeddedConfig|ConversationRelayEmbeddedConfigShape $conversationRelayConfig
      */
     public function withConversationRelayConfig(
-        ConversationRelayConfig|array $conversationRelayConfig
+        ConversationRelayEmbeddedConfig|array $conversationRelayConfig
     ): self {
         $self = clone $this;
         $self['conversationRelayConfig'] = $conversationRelayConfig;

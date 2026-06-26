@@ -6,9 +6,8 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Recordings\RecordingDeleteResponse;
-use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams\Filter;
+use Telnyx\Recordings\RecordingResponse;
 use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 
@@ -29,7 +28,7 @@ interface RecordingsContract
     public function retrieve(
         string $recordingID,
         RequestOptions|array|null $requestOptions = null
-    ): RecordingGetResponse;
+    ): RecordingResponse;
 
     /**
      * @api
@@ -59,5 +58,5 @@ interface RecordingsContract
     public function delete(
         string $recordingID,
         RequestOptions|array|null $requestOptions = null
-    ): RecordingDeleteResponse;
+    ): RecordingResponse;
 }

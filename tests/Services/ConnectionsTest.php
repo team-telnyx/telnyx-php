@@ -6,9 +6,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
+use Telnyx\Connections\Connection;
 use Telnyx\Connections\ConnectionGetResponse;
 use Telnyx\Connections\ConnectionListActiveCallsResponse;
-use Telnyx\Connections\ConnectionListResponse;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
@@ -58,7 +58,7 @@ final class ConnectionsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(ConnectionListResponse::class, $item);
+            $this->assertInstanceOf(Connection::class, $item);
         }
     }
 

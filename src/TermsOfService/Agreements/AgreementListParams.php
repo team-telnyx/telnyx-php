@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\TermsOfService\Agreements\AgreementListParams\ProductType;
 
 /**
  * Returns the Terms of Service agreements the authenticated user has on file. Each entry records the version agreed to and when. Most users only have one agreement per product, but if the ToS is updated and the user re-agrees a new entry is added.
@@ -22,7 +21,7 @@ use Telnyx\TermsOfService\Agreements\AgreementListParams\ProductType;
  * @phpstan-type AgreementListParamsShape = array{
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
- *   productType?: null|ProductType|value-of<ProductType>,
+ *   productType?: null|TosProductType|value-of<TosProductType>,
  * }
  */
 final class AgreementListParams implements BaseModel
@@ -46,9 +45,9 @@ final class AgreementListParams implements BaseModel
     /**
      * Optional filter. Omit to list the user's agreements for **every** product (branded_calling and number_reputation); pass a value to return only that product's agreements.
      *
-     * @var value-of<ProductType>|null $productType
+     * @var value-of<TosProductType>|null $productType
      */
-    #[Optional(enum: ProductType::class)]
+    #[Optional(enum: TosProductType::class)]
     public ?string $productType;
 
     public function __construct()
@@ -61,12 +60,12 @@ final class AgreementListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ProductType|value-of<ProductType>|null $productType
+     * @param TosProductType|value-of<TosProductType>|null $productType
      */
     public static function with(
         ?int $pageNumber = null,
         ?int $pageSize = null,
-        ProductType|string|null $productType = null,
+        TosProductType|string|null $productType = null,
     ): self {
         $self = new self;
 
@@ -102,9 +101,9 @@ final class AgreementListParams implements BaseModel
     /**
      * Optional filter. Omit to list the user's agreements for **every** product (branded_calling and number_reputation); pass a value to return only that product's agreements.
      *
-     * @param ProductType|value-of<ProductType> $productType
+     * @param TosProductType|value-of<TosProductType> $productType
      */
-    public function withProductType(ProductType|string $productType): self
+    public function withProductType(TosProductType|string $productType): self
     {
         $self = clone $this;
         $self['productType'] = $productType;

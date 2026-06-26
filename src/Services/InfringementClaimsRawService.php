@@ -7,17 +7,16 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Dir\Document;
 use Telnyx\InfringementClaims\InfringementClaimContestParams;
-use Telnyx\InfringementClaims\InfringementClaimContestParams\Document;
-use Telnyx\InfringementClaims\InfringementClaimContestResponse;
-use Telnyx\InfringementClaims\InfringementClaimGetResponse;
+use Telnyx\InfringementClaims\InfringementClaimWrapped;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InfringementClaimsRawContract;
 
 /**
  * Trademark or impersonation claims filed against your DIR. Customers may contest a claim with supporting evidence.
  *
- * @phpstan-import-type DocumentShape from \Telnyx\InfringementClaims\InfringementClaimContestParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class InfringementClaimsRawService implements InfringementClaimsRawContract
@@ -36,7 +35,7 @@ final class InfringementClaimsRawService implements InfringementClaimsRawContrac
      * @param string $claimID claim id (lowercase UUID)
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<InfringementClaimGetResponse>
+     * @return BaseResponse<InfringementClaimWrapped>
      *
      * @throws APIException
      */
@@ -49,7 +48,7 @@ final class InfringementClaimsRawService implements InfringementClaimsRawContrac
             method: 'get',
             path: ['infringement_claims/%1$s', $claimID],
             options: $requestOptions,
-            convert: InfringementClaimGetResponse::class,
+            convert: InfringementClaimWrapped::class,
         );
     }
 
@@ -71,7 +70,7 @@ final class InfringementClaimsRawService implements InfringementClaimsRawContrac
      * }|InfringementClaimContestParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<InfringementClaimContestResponse>
+     * @return BaseResponse<InfringementClaimWrapped>
      *
      * @throws APIException
      */
@@ -91,7 +90,7 @@ final class InfringementClaimsRawService implements InfringementClaimsRawContrac
             path: ['infringement_claims/%1$s/contest', $claimID],
             body: (object) $parsed,
             options: $options,
-            convert: InfringementClaimContestResponse::class,
+            convert: InfringementClaimWrapped::class,
         );
     }
 }

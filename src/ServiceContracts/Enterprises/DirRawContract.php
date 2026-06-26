@@ -7,10 +7,10 @@ namespace Telnyx\ServiceContracts\Enterprises;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirWrapped;
 use Telnyx\Enterprises\Dir\DirCreateParams;
 use Telnyx\Enterprises\Dir\DirListParams;
-use Telnyx\Enterprises\Dir\DirListResponse;
-use Telnyx\Enterprises\Dir\DirNewResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -25,7 +25,7 @@ interface DirRawContract
      * @param array<string,mixed>|DirCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DirNewResponse>
+     * @return BaseResponse<DirWrapped>
      *
      * @throws APIException
      */
@@ -42,7 +42,7 @@ interface DirRawContract
      * @param array<string,mixed>|DirListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<DirListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<Dir>>
      *
      * @throws APIException
      */
