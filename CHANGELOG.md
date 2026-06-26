@@ -1,5 +1,24 @@
 # Changelog
 
+## 7.85.0 (2026-06-26)
+
+Full Changelog: [v7.84.0...v7.85.0](https://github.com/team-telnyx/telnyx-php/compare/v7.84.0...v7.85.0)
+
+### Features
+
+* **transcriptions-search:** hide record_type, remove document_id, scrub internal references ([83733a3](https://github.com/team-telnyx/telnyx-php/commit/83733a36f9c0f8339918c1ec6bf63fcaf561a625))
+
+
+### Bug Fixes
+
+* add --local flag so release-please scans next branch for commits ([081c1c0](https://github.com/team-telnyx/telnyx-php/commit/081c1c08ebc88b9f052870410106bc90c4d8f018))
+* correct stale .release-please-manifest.json to 8.0.0 ([64b7b18](https://github.com/team-telnyx/telnyx-php/commit/64b7b181701fa4cb47a1d13e1b5e2cae97f361c2))
+
+
+### Chores
+
+* sync repo ([23f8d61](https://github.com/team-telnyx/telnyx-php/commit/23f8d61289f4d060f44436f6b3a2c6d4e330c8a7))
+
 ## 7.84.0 (2026-06-18)
 
 Full Changelog: [v7.83.0...v7.84.0](https://github.com/team-telnyx/telnyx-php/compare/v7.83.0...v7.84.0)
