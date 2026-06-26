@@ -79,7 +79,7 @@ final class Messaging10dlcService implements Messaging10dlcContract
      * @param Endpoint|value-of<Endpoint> $endpoint unique identifier of the endpoint
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,mixed>|array<string,mixed>
+     * @return list<string>|list<array<string,mixed>>|EnumPaginatedResponse|array<string,string>|array<string,mixed>
      *
      * @throws APIException
      */
