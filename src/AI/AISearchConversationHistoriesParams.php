@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI;
 
-use Telnyx\AI\AISearchConversationHistoriesParams\RecordType;
 use Telnyx\AI\AISearchConversationHistoriesParams\Region;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -17,9 +16,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * **How it works:**
  * 1. The query text is embedded into a 1024-dimensional vector using the multilingual-e5-large model.
- * 2. The vector is sent to regional OpenSearch clusters for kNN search using HNSW cosine similarity.
+ * 2. The vector is compared against indexed record chunks using semantic similarity search.
  * 3. When no region is specified, all regions are queried in parallel (fan-out) and results are merged by score.
- * 4. Results are ranked by cosine similarity score (descending) and truncated to `top_k`.
+ * 4. Results are ranked by similarity score (descending) and paginated via `page[number]` / `page[size]`.
  *
  * **Authentication:** Requires a Telnyx API key via `Authorization: Bearer <key>`. Results are automatically scoped to the caller's organization — `organization_id` is injected from the auth token and cannot be overridden.
  *
@@ -27,11 +26,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * **Filtering:** Use `filter[field][operator]=value` query parameters to narrow results before vector search.
  *
- * Top-level filterable fields: `user_id`, `record_type`, `region`, `document_id`, `record_id`, `record_created_at`, `ingested_at`, `retention`
+ * Top-level filterable fields: `user_id`, `region`, `record_id`, `record_created_at`, `ingested_at`, `retention`
  *
  * Note: `retention` is filter-only — it can be used to narrow results but is not returned in the response body.
  *
- * Metadata fields: any field not in the list above is resolved to `data.metadata.<field>` in OpenSearch (e.g., `filter[language]=en` → `data.metadata.language`).
+ * Metadata fields: any field not in the list above is resolved to `data.metadata.<field>` (e.g., `filter[language]=en` → `data.metadata.language`).
  *
  * Supported filter operators:
  * - `eq` — exact match (default when no operator specified)
@@ -41,19 +40,17 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * **Examples:**
  * ```
- * GET /v2/ai/conversation_histories?q=billing+issue&record_type=voice&top_k=10
- * GET /v2/ai/conversation_histories?q=setup+guide&record_type=knowledge_base&region=USA&min_score=0.5
- * GET /v2/ai/conversation_histories?q=refund&record_type=voice&filter[record_created_at][gte]=2026-01-01T00:00:00Z
- * GET /v2/ai/conversation_histories?q=outage&record_type=voice&filter[region][in]=USA,DEU
- * GET /v2/ai/conversation_histories?q=hold+time&record_type=voice&filter[language]=en
+ * GET /v2/ai/conversation_histories?q=billing+issue&page[size]=10
+ * GET /v2/ai/conversation_histories?q=setup+guide&region=USA&min_score=0.5
+ * GET /v2/ai/conversation_histories?q=refund&filter[record_created_at][gte]=2026-01-01T00:00:00Z
+ * GET /v2/ai/conversation_histories?q=outage&filter[region][in]=USA,DEU
+ * GET /v2/ai/conversation_histories?q=hold+time&filter[language]=en
  * ```
  *
  * @see Telnyx\Services\AIService::searchConversationHistories()
  *
  * @phpstan-type AISearchConversationHistoriesParamsShape = array{
  *   q: string,
- *   recordType: RecordType|value-of<RecordType>,
- *   filterDocumentID?: string|null,
  *   filterIngestedAtGte?: \DateTimeInterface|null,
  *   filterIngestedAtLte?: \DateTimeInterface|null,
  *   filterRecordCreatedAtGte?: \DateTimeInterface|null,
@@ -63,8 +60,9 @@ use Telnyx\Core\Contracts\BaseModel;
  *   filterRetention?: string|null,
  *   filterUserID?: string|null,
  *   minScore?: float|null,
+ *   pageNumber?: int|null,
+ *   pageSize?: int|null,
  *   region?: null|Region|value-of<Region>,
- *   topK?: int|null,
  * }
  */
 final class AISearchConversationHistoriesParams implements BaseModel
@@ -74,24 +72,10 @@ final class AISearchConversationHistoriesParams implements BaseModel
     use SdkParams;
 
     /**
-     * Natural language search query. The text is embedded into a 1024-dimensional vector and compared against indexed record chunks using kNN cosine similarity.
+     * Natural language search query. The text is embedded into a 1024-dimensional vector and compared against indexed record chunks using semantic similarity.
      */
     #[Required]
     public string $q;
-
-    /**
-     * The type of records to search. Each record type is stored in a separate vector index.
-     *
-     * @var value-of<RecordType> $recordType
-     */
-    #[Required(enum: RecordType::class)]
-    public string $recordType;
-
-    /**
-     * Filter by document identifier (exact match). Populated for knowledge_base records.
-     */
-    #[Optional]
-    public ?string $filterDocumentID;
 
     /**
      * Only include records ingested (chunked, embedded, and indexed) on or after this ISO 8601 timestamp.
@@ -148,7 +132,19 @@ final class AISearchConversationHistoriesParams implements BaseModel
     public ?float $minScore;
 
     /**
-     * Restrict search to a specific region's OpenSearch cluster. When omitted, all regions are queried in parallel (fan-out) and results are merged by cosine similarity score.
+     * Page number to return (1-based). Defaults to 1.
+     */
+    #[Optional]
+    public ?int $pageNumber;
+
+    /**
+     * Number of results per page. Defaults to 20, maximum 100.
+     */
+    #[Optional]
+    public ?int $pageSize;
+
+    /**
+     * Restrict search to a specific region. When omitted, all regions are queried in parallel (fan-out) and results are merged by similarity score.
      *
      * @var value-of<Region>|null $region
      */
@@ -156,23 +152,17 @@ final class AISearchConversationHistoriesParams implements BaseModel
     public ?string $region;
 
     /**
-     * Maximum number of results to return. Defaults to 20, maximum 100.
-     */
-    #[Optional]
-    public ?int $topK;
-
-    /**
      * `new AISearchConversationHistoriesParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AISearchConversationHistoriesParams::with(q: ..., recordType: ...)
+     * AISearchConversationHistoriesParams::with(q: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new AISearchConversationHistoriesParams)->withQ(...)->withRecordType(...)
+     * (new AISearchConversationHistoriesParams)->withQ(...)
      * ```
      */
     public function __construct()
@@ -185,13 +175,10 @@ final class AISearchConversationHistoriesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
      * @param Region|value-of<Region>|null $region
      */
     public static function with(
         string $q,
-        RecordType|string $recordType,
-        ?string $filterDocumentID = null,
         ?\DateTimeInterface $filterIngestedAtGte = null,
         ?\DateTimeInterface $filterIngestedAtLte = null,
         ?\DateTimeInterface $filterRecordCreatedAtGte = null,
@@ -201,15 +188,14 @@ final class AISearchConversationHistoriesParams implements BaseModel
         ?string $filterRetention = null,
         ?string $filterUserID = null,
         ?float $minScore = null,
+        ?int $pageNumber = null,
+        ?int $pageSize = null,
         Region|string|null $region = null,
-        ?int $topK = null,
     ): self {
         $self = new self;
 
         $self['q'] = $q;
-        $self['recordType'] = $recordType;
 
-        null !== $filterDocumentID && $self['filterDocumentID'] = $filterDocumentID;
         null !== $filterIngestedAtGte && $self['filterIngestedAtGte'] = $filterIngestedAtGte;
         null !== $filterIngestedAtLte && $self['filterIngestedAtLte'] = $filterIngestedAtLte;
         null !== $filterRecordCreatedAtGte && $self['filterRecordCreatedAtGte'] = $filterRecordCreatedAtGte;
@@ -219,43 +205,20 @@ final class AISearchConversationHistoriesParams implements BaseModel
         null !== $filterRetention && $self['filterRetention'] = $filterRetention;
         null !== $filterUserID && $self['filterUserID'] = $filterUserID;
         null !== $minScore && $self['minScore'] = $minScore;
+        null !== $pageNumber && $self['pageNumber'] = $pageNumber;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $region && $self['region'] = $region;
-        null !== $topK && $self['topK'] = $topK;
 
         return $self;
     }
 
     /**
-     * Natural language search query. The text is embedded into a 1024-dimensional vector and compared against indexed record chunks using kNN cosine similarity.
+     * Natural language search query. The text is embedded into a 1024-dimensional vector and compared against indexed record chunks using semantic similarity.
      */
     public function withQ(string $q): self
     {
         $self = clone $this;
         $self['q'] = $q;
-
-        return $self;
-    }
-
-    /**
-     * The type of records to search. Each record type is stored in a separate vector index.
-     *
-     * @param RecordType|value-of<RecordType> $recordType
-     */
-    public function withRecordType(RecordType|string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
-
-        return $self;
-    }
-
-    /**
-     * Filter by document identifier (exact match). Populated for knowledge_base records.
-     */
-    public function withFilterDocumentID(string $filterDocumentID): self
-    {
-        $self = clone $this;
-        $self['filterDocumentID'] = $filterDocumentID;
 
         return $self;
     }
@@ -364,7 +327,29 @@ final class AISearchConversationHistoriesParams implements BaseModel
     }
 
     /**
-     * Restrict search to a specific region's OpenSearch cluster. When omitted, all regions are queried in parallel (fan-out) and results are merged by cosine similarity score.
+     * Page number to return (1-based). Defaults to 1.
+     */
+    public function withPageNumber(int $pageNumber): self
+    {
+        $self = clone $this;
+        $self['pageNumber'] = $pageNumber;
+
+        return $self;
+    }
+
+    /**
+     * Number of results per page. Defaults to 20, maximum 100.
+     */
+    public function withPageSize(int $pageSize): self
+    {
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    /**
+     * Restrict search to a specific region. When omitted, all regions are queried in parallel (fan-out) and results are merged by similarity score.
      *
      * @param Region|value-of<Region> $region
      */
@@ -372,17 +357,6 @@ final class AISearchConversationHistoriesParams implements BaseModel
     {
         $self = clone $this;
         $self['region'] = $region;
-
-        return $self;
-    }
-
-    /**
-     * Maximum number of results to return. Defaults to 20, maximum 100.
-     */
-    public function withTopK(int $topK): self
-    {
-        $self = clone $this;
-        $self['topK'] = $topK;
 
         return $self;
     }

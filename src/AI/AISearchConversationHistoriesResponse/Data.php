@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\AISearchConversationHistoriesResponse;
 
-use Telnyx\AI\AISearchConversationHistoriesResponse\Data\RecordType;
 use Telnyx\AI\AISearchConversationHistoriesResponse\Data\Region;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
@@ -18,12 +17,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   id: string,
  *   chunkIndex: int,
  *   chunkTotal: int,
- *   documentID: string|null,
  *   ingestedAt: \DateTimeInterface,
  *   organizationID: string,
  *   recordCreatedAt: \DateTimeInterface,
  *   recordID: string,
- *   recordType: RecordType|value-of<RecordType>,
  *   region: Region|value-of<Region>,
  *   score: float,
  *   text: string,
@@ -55,12 +52,6 @@ final class Data implements BaseModel
     public int $chunkTotal;
 
     /**
-     * Document identifier. Present only for knowledge_base records; null for all other record types.
-     */
-    #[Required('document_id')]
-    public ?string $documentID;
-
-    /**
      * When the record was chunked, embedded, and indexed (ISO 8601).
      */
     #[Required('ingested_at')]
@@ -83,14 +74,6 @@ final class Data implements BaseModel
      */
     #[Required('record_id')]
     public string $recordID;
-
-    /**
-     * Type of the record.
-     *
-     * @var value-of<RecordType> $recordType
-     */
-    #[Required('record_type', enum: RecordType::class)]
-    public string $recordType;
 
     /**
      * The region where this record is stored.
@@ -119,7 +102,7 @@ final class Data implements BaseModel
     public string $userID;
 
     /**
-     * Arbitrary metadata attached to the record at ingestion time. Stored as a flat_object in OpenSearch and filterable via filter[field]=value query parameters.
+     * Arbitrary metadata attached to the record at ingestion time. Filterable via filter[field]=value query parameters.
      *
      * @var array<string,mixed>|null $metadata
      */
@@ -135,12 +118,10 @@ final class Data implements BaseModel
      *   id: ...,
      *   chunkIndex: ...,
      *   chunkTotal: ...,
-     *   documentID: ...,
      *   ingestedAt: ...,
      *   organizationID: ...,
      *   recordCreatedAt: ...,
      *   recordID: ...,
-     *   recordType: ...,
      *   region: ...,
      *   score: ...,
      *   text: ...,
@@ -155,12 +136,10 @@ final class Data implements BaseModel
      *   ->withID(...)
      *   ->withChunkIndex(...)
      *   ->withChunkTotal(...)
-     *   ->withDocumentID(...)
      *   ->withIngestedAt(...)
      *   ->withOrganizationID(...)
      *   ->withRecordCreatedAt(...)
      *   ->withRecordID(...)
-     *   ->withRecordType(...)
      *   ->withRegion(...)
      *   ->withScore(...)
      *   ->withText(...)
@@ -177,7 +156,6 @@ final class Data implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param RecordType|value-of<RecordType> $recordType
      * @param Region|value-of<Region> $region
      * @param array<string,mixed>|null $metadata
      */
@@ -185,12 +163,10 @@ final class Data implements BaseModel
         string $id,
         int $chunkIndex,
         int $chunkTotal,
-        ?string $documentID,
         \DateTimeInterface $ingestedAt,
         string $organizationID,
         \DateTimeInterface $recordCreatedAt,
         string $recordID,
-        RecordType|string $recordType,
         Region|string $region,
         float $score,
         string $text,
@@ -202,12 +178,10 @@ final class Data implements BaseModel
         $self['id'] = $id;
         $self['chunkIndex'] = $chunkIndex;
         $self['chunkTotal'] = $chunkTotal;
-        $self['documentID'] = $documentID;
         $self['ingestedAt'] = $ingestedAt;
         $self['organizationID'] = $organizationID;
         $self['recordCreatedAt'] = $recordCreatedAt;
         $self['recordID'] = $recordID;
-        $self['recordType'] = $recordType;
         $self['region'] = $region;
         $self['score'] = $score;
         $self['text'] = $text;
@@ -247,17 +221,6 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['chunkTotal'] = $chunkTotal;
-
-        return $self;
-    }
-
-    /**
-     * Document identifier. Present only for knowledge_base records; null for all other record types.
-     */
-    public function withDocumentID(?string $documentID): self
-    {
-        $self = clone $this;
-        $self['documentID'] = $documentID;
 
         return $self;
     }
@@ -303,19 +266,6 @@ final class Data implements BaseModel
     {
         $self = clone $this;
         $self['recordID'] = $recordID;
-
-        return $self;
-    }
-
-    /**
-     * Type of the record.
-     *
-     * @param RecordType|value-of<RecordType> $recordType
-     */
-    public function withRecordType(RecordType|string $recordType): self
-    {
-        $self = clone $this;
-        $self['recordType'] = $recordType;
 
         return $self;
     }
@@ -367,7 +317,7 @@ final class Data implements BaseModel
     }
 
     /**
-     * Arbitrary metadata attached to the record at ingestion time. Stored as a flat_object in OpenSearch and filterable via filter[field]=value query parameters.
+     * Arbitrary metadata attached to the record at ingestion time. Filterable via filter[field]=value query parameters.
      *
      * @param array<string,mixed> $metadata
      */

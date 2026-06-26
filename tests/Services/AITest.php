@@ -81,8 +81,7 @@ final class AITest extends TestCase
         }
 
         $result = $this->client->ai->searchConversationHistories(
-            q: 'customer called about billing issue',
-            recordType: 'voice'
+            q: 'customer called about billing issue'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -101,8 +100,6 @@ final class AITest extends TestCase
 
         $result = $this->client->ai->searchConversationHistories(
             q: 'customer called about billing issue',
-            recordType: 'voice',
-            filterDocumentID: 'doc-789',
             filterIngestedAtGte: new \DateTimeImmutable('2026-01-01T00:00:00Z'),
             filterIngestedAtLte: new \DateTimeImmutable('2026-12-31T23:59:59Z'),
             filterRecordCreatedAtGte: new \DateTimeImmutable('2026-01-01T00:00:00Z'),
@@ -112,8 +109,9 @@ final class AITest extends TestCase
             filterRetention: 'filter[retention]',
             filterUserID: 'user-123',
             minScore: 0.5,
+            pageNumber: 1,
+            pageSize: 10,
             region: 'USA',
-            topK: 10,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
