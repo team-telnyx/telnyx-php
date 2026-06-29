@@ -187,7 +187,7 @@ final class DocumentsRawService implements DocumentsRawContract
         return $this->client->request(
             method: 'get',
             path: ['documents/%1$s/download', $id],
-            headers: ['Accept' => '*'],
+            headers: ['Accept' => 'application/octet-stream'],
             options: $requestOptions,
             convert: 'string',
         );
