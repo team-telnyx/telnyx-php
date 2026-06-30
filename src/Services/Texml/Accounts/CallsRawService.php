@@ -22,7 +22,6 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\SupervisingRole;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
@@ -181,7 +180,7 @@ final class CallsRawService implements CallsRawContract
      *   sipAuthUsername?: string,
      *   sipRegion?: SipRegion|value-of<SipRegion>,
      *   statusCallback?: string,
-     *   statusCallbackEvent?: StatusCallbackEvent|value-of<StatusCallbackEvent>,
+     *   statusCallbackEvent?: string,
      *   statusCallbackMethod?: CallCallsParams\StatusCallbackMethod|value-of<CallCallsParams\StatusCallbackMethod>,
      *   superviseCallSid?: string,
      *   supervisingRole?: SupervisingRole|value-of<SupervisingRole>,
