@@ -25,6 +25,8 @@ use Telnyx\ServiceContracts\DirContract;
 use Telnyx\Services\Dir\CommentsService;
 use Telnyx\Services\Dir\PhoneNumberBatchesService;
 use Telnyx\Services\Dir\PhoneNumbersService;
+use Telnyx\Services\Dir\ReferencesService;
+use Telnyx\Services\Dir\VerifyEmailService;
 
 /**
  * @phpstan-import-type DocumentShape from \Telnyx\Dir\DirUpdateParams\Document
@@ -56,6 +58,16 @@ final class DirService implements DirContract
     public PhoneNumbersService $phoneNumbers;
 
     /**
+     * @api
+     */
+    public ReferencesService $references;
+
+    /**
+     * @api
+     */
+    public VerifyEmailService $verifyEmail;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -64,6 +76,8 @@ final class DirService implements DirContract
         $this->comments = new CommentsService($client);
         $this->phoneNumberBatches = new PhoneNumberBatchesService($client);
         $this->phoneNumbers = new PhoneNumbersService($client);
+        $this->references = new ReferencesService($client);
+        $this->verifyEmail = new VerifyEmailService($client);
     }
 
     /**
