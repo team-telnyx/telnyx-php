@@ -17,7 +17,6 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\SupervisingRole;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
@@ -125,7 +124,7 @@ interface CallsContract
      * @param string $sipAuthUsername the username to use for SIP authentication
      * @param SipRegion|value-of<SipRegion> $sipRegion defines the SIP region to be used for the call
      * @param string $statusCallback URL destination for Telnyx to send status callback events to for the call
-     * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space.
+     * @param string $statusCallbackEvent The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space.
      * @param \Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod|value-of<\Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod> $statusCallbackMethod HTTP request type used for `StatusCallback`
      * @param string $superviseCallSid The call control ID of the existing call to supervise. When provided, the created leg will be added to the specified call in supervising mode. Status callbacks and action callbacks will NOT be sent for the supervising leg.
      * @param SupervisingRole|value-of<SupervisingRole> $supervisingRole The supervising role for the new leg. Determines the audio behavior: barge (hear both sides), whisper (only hear supervisor), monitor (hear both sides but supervisor muted). Default: barge
@@ -175,7 +174,7 @@ interface CallsContract
         ?string $sipAuthUsername = null,
         SipRegion|string $sipRegion = 'US',
         ?string $statusCallback = null,
-        StatusCallbackEvent|string $statusCallbackEvent = 'completed',
+        string $statusCallbackEvent = 'completed',
         \Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod|string $statusCallbackMethod = 'POST',
         ?string $superviseCallSid = null,
         SupervisingRole|string $supervisingRole = 'barge',

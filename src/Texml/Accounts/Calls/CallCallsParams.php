@@ -19,7 +19,6 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingChannels;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\RecordingTrack;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\SipRegion;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackEvent;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\SupervisingRole;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams\Trim;
@@ -68,7 +67,7 @@ use Telnyx\Texml\Accounts\Calls\CallCallsParams\URLMethod;
  *   sipAuthUsername?: string|null,
  *   sipRegion?: null|SipRegion|value-of<SipRegion>,
  *   statusCallback?: string|null,
- *   statusCallbackEvent?: null|StatusCallbackEvent|value-of<StatusCallbackEvent>,
+ *   statusCallbackEvent?: string|null,
  *   statusCallbackMethod?: null|StatusCallbackMethod|value-of<StatusCallbackMethod>,
  *   superviseCallSid?: string|null,
  *   supervisingRole?: null|SupervisingRole|value-of<SupervisingRole>,
@@ -326,10 +325,8 @@ final class CallCallsParams implements BaseModel
 
     /**
      * The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space.
-     *
-     * @var value-of<StatusCallbackEvent>|null $statusCallbackEvent
      */
-    #[Optional('StatusCallbackEvent', enum: StatusCallbackEvent::class)]
+    #[Optional('StatusCallbackEvent')]
     public ?string $statusCallbackEvent;
 
     /**
@@ -412,7 +409,6 @@ final class CallCallsParams implements BaseModel
      * @param RecordingStatusCallbackMethod|value-of<RecordingStatusCallbackMethod>|null $recordingStatusCallbackMethod
      * @param RecordingTrack|value-of<RecordingTrack>|null $recordingTrack
      * @param SipRegion|value-of<SipRegion>|null $sipRegion
-     * @param StatusCallbackEvent|value-of<StatusCallbackEvent>|null $statusCallbackEvent
      * @param StatusCallbackMethod|value-of<StatusCallbackMethod>|null $statusCallbackMethod
      * @param SupervisingRole|value-of<SupervisingRole>|null $supervisingRole
      * @param Trim|value-of<Trim>|null $trim
@@ -454,7 +450,7 @@ final class CallCallsParams implements BaseModel
         ?string $sipAuthUsername = null,
         SipRegion|string|null $sipRegion = null,
         ?string $statusCallback = null,
-        StatusCallbackEvent|string|null $statusCallbackEvent = null,
+        ?string $statusCallbackEvent = null,
         StatusCallbackMethod|string|null $statusCallbackMethod = null,
         ?string $superviseCallSid = null,
         SupervisingRole|string|null $supervisingRole = null,
@@ -941,12 +937,9 @@ final class CallCallsParams implements BaseModel
 
     /**
      * The call events for which Telnyx should send a webhook. Multiple events can be defined when separated by a space.
-     *
-     * @param StatusCallbackEvent|value-of<StatusCallbackEvent> $statusCallbackEvent
      */
-    public function withStatusCallbackEvent(
-        StatusCallbackEvent|string $statusCallbackEvent
-    ): self {
+    public function withStatusCallbackEvent(string $statusCallbackEvent): self
+    {
         $self = clone $this;
         $self['statusCallbackEvent'] = $statusCallbackEvent;
 
