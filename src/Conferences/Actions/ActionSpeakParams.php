@@ -12,16 +12,16 @@ use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Region;
 use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings;
-use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings;
-use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
+use Telnyx\XaiVoiceSettings;
 
 /**
  * Convert text to speech and play it to all or some participants.

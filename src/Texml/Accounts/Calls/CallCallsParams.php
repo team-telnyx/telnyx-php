@@ -8,19 +8,16 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\ApplicationDefault;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithTeXml;
-use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params\WithURL;
+use Telnyx\Texml\Accounts\Calls\CallCallsParams\Params;
 
 /**
  * Initiate an outbound TeXML call. Telnyx will request TeXML from the XML Request URL configured for the connection in the Mission Control Portal.
  *
  * @see Telnyx\Services\Texml\Accounts\CallsService::calls()
  *
- * @phpstan-import-type ParamsVariants from \Telnyx\Texml\Accounts\Calls\CallCallsParams\Params
  * @phpstan-import-type ParamsShape from \Telnyx\Texml\Accounts\Calls\CallCallsParams\Params
  *
- * @phpstan-type CallCallsParamsShape = array{params: ParamsShape}
+ * @phpstan-type CallCallsParamsShape = array{params: Params|ParamsShape}
  */
 final class CallCallsParams implements BaseModel
 {
@@ -28,9 +25,11 @@ final class CallCallsParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var ParamsVariants $params */
+    /**
+     * Initiate a TeXML call. Provide either `Url` (fetches TeXML from URL) or `Texml` (inline TeXML), or neither (uses the application default). `Url` and `Texml` are mutually exclusive.
+     */
     #[Required]
-    public WithURL|WithTeXml|ApplicationDefault $params;
+    public Params $params;
 
     /**
      * `new CallCallsParams()` is missing required properties by the API.
@@ -56,11 +55,10 @@ final class CallCallsParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ParamsShape $params
+     * @param Params|ParamsShape $params
      */
-    public static function with(
-        WithURL|array|WithTeXml|ApplicationDefault $params
-    ): self {
+    public static function with(Params|array $params): self
+    {
         $self = new self;
 
         $self['params'] = $params;
@@ -69,11 +67,12 @@ final class CallCallsParams implements BaseModel
     }
 
     /**
-     * @param ParamsShape $params
+     * Initiate a TeXML call. Provide either `Url` (fetches TeXML from URL) or `Texml` (inline TeXML), or neither (uses the application default). `Url` and `Texml` are mutually exclusive.
+     *
+     * @param Params|ParamsShape $params
      */
-    public function withParams(
-        WithURL|array|WithTeXml|ApplicationDefault $params
-    ): self {
+    public function withParams(Params|array $params): self
+    {
         $self = clone $this;
         $self['params'] = $params;
 

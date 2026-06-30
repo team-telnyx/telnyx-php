@@ -7,8 +7,8 @@ namespace Telnyx\Services\Dir;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmCodeResponse;
-use Telnyx\Dir\VerifyEmail\VerifyEmailSendCodeResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailSendResponse;
 use Telnyx\Dir\VerifyEmail\VerifyEmailStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Dir\VerifyEmailContract;
@@ -46,15 +46,15 @@ final class VerifyEmailService implements VerifyEmailContract
      *
      * @throws APIException
      */
-    public function confirmCode(
+    public function confirm(
         string $dirID,
         string $code,
         RequestOptions|array|null $requestOptions = null,
-    ): VerifyEmailConfirmCodeResponse {
+    ): VerifyEmailConfirmResponse {
         $params = Util::removeNulls(['code' => $code]);
 
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->confirmCode($dirID, params: $params, requestOptions: $requestOptions);
+        $response = $this->raw->confirm($dirID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -71,12 +71,12 @@ final class VerifyEmailService implements VerifyEmailContract
      *
      * @throws APIException
      */
-    public function sendCode(
+    public function send(
         string $dirID,
         RequestOptions|array|null $requestOptions = null
-    ): VerifyEmailSendCodeResponse {
+    ): VerifyEmailSendResponse {
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->sendCode($dirID, requestOptions: $requestOptions);
+        $response = $this->raw->send($dirID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

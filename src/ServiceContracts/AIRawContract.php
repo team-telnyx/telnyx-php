@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AI\AICreateResponseDeprecatedParams;
+use Telnyx\AI\AICreateResponseParams;
 use Telnyx\AI\AIGetModelsResponse;
-use Telnyx\AI\AISearchConversationHistoriesParams;
-use Telnyx\AI\AISearchConversationHistoriesResponse;
+use Telnyx\AI\AIListConversationHistoriesParams;
+use Telnyx\AI\AIListConversationHistoriesResponse;
 use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -24,15 +25,30 @@ interface AIRawContract
      *
      * @api
      *
-     * @param array<string,mixed>|AICreateResponseDeprecatedParams $params
+     * @param array<string,mixed>|AICreateResponseParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<array<string,mixed>>
      *
      * @throws APIException
      */
-    public function createResponseDeprecated(
-        array|AICreateResponseDeprecatedParams $params,
+    public function createResponse(
+        array|AICreateResponseParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|AIListConversationHistoriesParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<DefaultFlatPagination<AIListConversationHistoriesResponse>>
+     *
+     * @throws APIException
+     */
+    public function listConversationHistories(
+        array|AIListConversationHistoriesParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
@@ -49,21 +65,6 @@ interface AIRawContract
      */
     public function retrieveModels(
         RequestOptions|array|null $requestOptions = null
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param array<string,mixed>|AISearchConversationHistoriesParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<AISearchConversationHistoriesResponse>
-     *
-     * @throws APIException
-     */
-    public function searchConversationHistories(
-        array|AISearchConversationHistoriesParams $params,
-        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**

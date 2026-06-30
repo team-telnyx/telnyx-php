@@ -6,9 +6,9 @@ namespace Telnyx\ServiceContracts\Dir;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmCodeParams;
-use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmCodeResponse;
-use Telnyx\Dir\VerifyEmail\VerifyEmailSendCodeResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmParams;
+use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailSendResponse;
 use Telnyx\Dir\VerifyEmail\VerifyEmailStatusResponse;
 use Telnyx\RequestOptions;
 
@@ -21,16 +21,16 @@ interface VerifyEmailRawContract
      * @api
      *
      * @param string $dirID The DIR id. Lowercase UUID.
-     * @param array<string,mixed>|VerifyEmailConfirmCodeParams $params
+     * @param array<string,mixed>|VerifyEmailConfirmParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerifyEmailConfirmCodeResponse>
+     * @return BaseResponse<VerifyEmailConfirmResponse>
      *
      * @throws APIException
      */
-    public function confirmCode(
+    public function confirm(
         string $dirID,
-        array|VerifyEmailConfirmCodeParams $params,
+        array|VerifyEmailConfirmParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
@@ -40,11 +40,11 @@ interface VerifyEmailRawContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerifyEmailSendCodeResponse>
+     * @return BaseResponse<VerifyEmailSendResponse>
      *
      * @throws APIException
      */
-    public function sendCode(
+    public function send(
         string $dirID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse;

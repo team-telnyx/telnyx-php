@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\AI\AIGetModelsResponse;
-use Telnyx\AI\AISearchConversationHistoriesParams\Region;
-use Telnyx\AI\AISearchConversationHistoriesResponse;
+use Telnyx\AI\AIListConversationHistoriesParams\Region;
+use Telnyx\AI\AIListConversationHistoriesResponse;
 use Telnyx\AI\AISummarizeResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -21,30 +22,17 @@ interface AIContract
      *
      * @api
      *
-     * @param array<string,mixed> $body
+     * @param array<string,mixed> $input
      * @param RequestOpts|null $requestOptions
      *
      * @return array<string,mixed>
      *
      * @throws APIException
      */
-    public function createResponseDeprecated(
-        array $body,
+    public function createResponse(
+        array $input,
         RequestOptions|array|null $requestOptions = null
     ): array;
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function retrieveModels(
-        RequestOptions|array|null $requestOptions = null
-    ): AIGetModelsResponse;
 
     /**
      * @api
@@ -64,9 +52,11 @@ interface AIContract
      * @param Region|value-of<Region> $region Restrict search to a specific region. When omitted, all regions are queried in parallel (fan-out) and results are merged by similarity score.
      * @param RequestOpts|null $requestOptions
      *
+     * @return DefaultFlatPagination<AIListConversationHistoriesResponse>
+     *
      * @throws APIException
      */
-    public function searchConversationHistories(
+    public function listConversationHistories(
         string $q,
         ?\DateTimeInterface $filterIngestedAtGte = null,
         ?\DateTimeInterface $filterIngestedAtLte = null,
@@ -81,7 +71,20 @@ interface AIContract
         int $pageSize = 20,
         Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
-    ): AISearchConversationHistoriesResponse;
+    ): DefaultFlatPagination;
+
+    /**
+     * @deprecated
+     *
+     * @api
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveModels(
+        RequestOptions|array|null $requestOptions = null
+    ): AIGetModelsResponse;
 
     /**
      * @api

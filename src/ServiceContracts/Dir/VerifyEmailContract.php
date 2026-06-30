@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\Dir;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmCodeResponse;
-use Telnyx\Dir\VerifyEmail\VerifyEmailSendCodeResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailSendResponse;
 use Telnyx\Dir\VerifyEmail\VerifyEmailStatusResponse;
 use Telnyx\RequestOptions;
 
@@ -24,11 +24,11 @@ interface VerifyEmailContract
      *
      * @throws APIException
      */
-    public function confirmCode(
+    public function confirm(
         string $dirID,
         string $code,
         RequestOptions|array|null $requestOptions = null,
-    ): VerifyEmailConfirmCodeResponse;
+    ): VerifyEmailConfirmResponse;
 
     /**
      * @api
@@ -38,10 +38,10 @@ interface VerifyEmailContract
      *
      * @throws APIException
      */
-    public function sendCode(
+    public function send(
         string $dirID,
         RequestOptions|array|null $requestOptions = null
-    ): VerifyEmailSendCodeResponse;
+    ): VerifyEmailSendResponse;
 
     /**
      * @api

@@ -739,6 +739,11 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public SpeechToTextService $speechToText;
+
+    /**
+     * @api
+     */
     public RequirementGroupsService $requirementGroups;
 
     /**
@@ -1014,6 +1019,21 @@ class Client extends BaseClient
     /**
      * @api
      */
+    public UacConnectionsService $uacConnections;
+
+    /**
+     * @api
+     */
+    public VoiceSDKCallReportsService $voiceSDKCallReports;
+
+    /**
+     * @api
+     */
+    public SipRegistrationStatusService $sipRegistrationStatus;
+
+    /**
+     * @api
+     */
     public CallReasonsService $callReasons;
 
     /**
@@ -1025,26 +1045,6 @@ class Client extends BaseClient
      * @api
      */
     public InfringementClaimsService $infringementClaims;
-
-    /**
-     * @api
-     */
-    public SipRegistrationStatusService $sipRegistrationStatus;
-
-    /**
-     * @api
-     */
-    public SpeechToTextService $speechToText;
-
-    /**
-     * @api
-     */
-    public UacConnectionsService $uacConnections;
-
-    /**
-     * @api
-     */
-    public VoiceSDKCallReportsService $voiceSDKCallReports;
 
     /**
      * @param RequestOpts|null $requestOptions
@@ -1222,6 +1222,7 @@ class Client extends BaseClient
         $this->regions = new RegionsService($this);
         $this->regulatoryRequirements = new RegulatoryRequirementsService($this);
         $this->reports = new ReportsService($this);
+        $this->speechToText = new SpeechToTextService($this);
         $this->requirementGroups = new RequirementGroupsService($this);
         $this->requirementTypes = new RequirementTypesService($this);
         $this->requirements = new RequirementsService($this);
@@ -1277,13 +1278,12 @@ class Client extends BaseClient
         $this->reputation = new ReputationService($this);
         $this->termsOfService = new TermsOfServiceService($this);
         $this->pronunciationDicts = new PronunciationDictsService($this);
+        $this->uacConnections = new UacConnectionsService($this);
+        $this->voiceSDKCallReports = new VoiceSDKCallReportsService($this);
+        $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
         $this->callReasons = new CallReasonsService($this);
         $this->dir = new DirService($this);
         $this->infringementClaims = new InfringementClaimsService($this);
-        $this->sipRegistrationStatus = new SipRegistrationStatusService($this);
-        $this->speechToText = new SpeechToTextService($this);
-        $this->uacConnections = new UacConnectionsService($this);
-        $this->voiceSDKCallReports = new VoiceSDKCallReportsService($this);
     }
 
     /** @return array<string,string> */
