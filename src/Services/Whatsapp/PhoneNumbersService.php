@@ -12,6 +12,7 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbersContract;
 use Telnyx\Services\Whatsapp\PhoneNumbers\CallingSettingsService;
 use Telnyx\Services\Whatsapp\PhoneNumbers\ProfileService;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
 
@@ -89,6 +90,30 @@ final class PhoneNumbersService implements PhoneNumbersContract
     ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($phoneNumber, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Returns whether the 24-hour conversation window is currently open for a given source/destination pair. If window_active is false, only template messages may be sent.
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param string $destinationNumber Destination phone number in E.164 format
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function getConversationWindow(
+        string $phoneNumber,
+        string $destinationNumber,
+        RequestOptions|array|null $requestOptions = null,
+    ): PhoneNumberGetConversationWindowResponse {
+        $params = Util::removeNulls(['destinationNumber' => $destinationNumber]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getConversationWindow($phoneNumber, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

@@ -8,6 +8,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowParams;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams;
@@ -46,6 +48,23 @@ interface PhoneNumbersRawContract
     public function delete(
         string $phoneNumber,
         RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param array<string,mixed>|PhoneNumberGetConversationWindowParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<PhoneNumberGetConversationWindowResponse>
+     *
+     * @throws APIException
+     */
+    public function getConversationWindow(
+        string $phoneNumber,
+        array|PhoneNumberGetConversationWindowParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**

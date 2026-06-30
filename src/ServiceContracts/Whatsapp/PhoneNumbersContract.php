@@ -7,6 +7,7 @@ namespace Telnyx\ServiceContracts\Whatsapp;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
 
@@ -42,6 +43,21 @@ interface PhoneNumbersContract
         string $phoneNumber,
         RequestOptions|array|null $requestOptions = null
     ): mixed;
+
+    /**
+     * @api
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param string $destinationNumber Destination phone number in E.164 format
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function getConversationWindow(
+        string $phoneNumber,
+        string $destinationNumber,
+        RequestOptions|array|null $requestOptions = null,
+    ): PhoneNumberGetConversationWindowResponse;
 
     /**
      * @api
