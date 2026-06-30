@@ -10,8 +10,8 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayRead;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -74,7 +74,7 @@ final class PublicInternetGatewaysTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(PublicInternetGatewayRead::class, $item);
+            $this->assertInstanceOf(PublicInternetGatewayListResponse::class, $item);
         }
     }
 

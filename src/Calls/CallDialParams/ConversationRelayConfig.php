@@ -10,26 +10,26 @@ use Telnyx\Calls\Actions\ElevenLabsVoiceSettings;
 use Telnyx\Calls\Actions\TelnyxVoiceSettings;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Interruptible;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\InterruptibleGreeting;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\InterruptionSettings;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\TranscriptionEngine;
 use Telnyx\Calls\CallDialParams\ConversationRelayConfig\VoiceSettings;
-use Telnyx\Calls\ConversationRelayInterruptionSettings;
-use Telnyx\Calls\ConversationRelayLanguage;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\CallDialParams\ConversationRelayConfig\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Starts a Conversation Relay session automatically when the answered/dialed call is answered. This embedded shape is supported on `answer` and `dial`. It uses public field names (`url`, `dtmf_detection`, `greeting`, `voice`, `language`, etc.) and maps them to the underlying Conversation Relay action. `client_state`, `tts_language`, and `transcription_language` inside this object are ignored; use the parent command's `client_state` and `command_id` fields instead.
  *
  * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\CallDialParams\ConversationRelayConfig\VoiceSettings
- * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
- * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\CallDialParams\ConversationRelayConfig\InterruptionSettings
+ * @phpstan-import-type LanguageShape from \Telnyx\Calls\CallDialParams\ConversationRelayConfig\Language
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\CallDialParams\ConversationRelayConfig\VoiceSettings
  *
  * @phpstan-type ConversationRelayConfigShape = array{
@@ -39,9 +39,9 @@ use Telnyx\XaiVoiceSettings;
  *   greeting?: string|null,
  *   interruptible?: null|Interruptible|value-of<Interruptible>,
  *   interruptibleGreeting?: null|InterruptibleGreeting|value-of<InterruptibleGreeting>,
- *   interruptionSettings?: null|ConversationRelayInterruptionSettings|ConversationRelayInterruptionSettingsShape,
+ *   interruptionSettings?: null|InterruptionSettings|InterruptionSettingsShape,
  *   language?: string|null,
- *   languages?: list<ConversationRelayLanguage|ConversationRelayLanguageShape>|null,
+ *   languages?: list<Language|LanguageShape>|null,
  *   provider?: string|null,
  *   structuredProvider?: array<string,mixed>|null,
  *   transcriptionEngine?: null|TranscriptionEngine|value-of<TranscriptionEngine>,
@@ -102,7 +102,7 @@ final class ConversationRelayConfig implements BaseModel
      * Settings for handling caller interruptions during Conversation Relay speech.
      */
     #[Optional('interruption_settings')]
-    public ?ConversationRelayInterruptionSettings $interruptionSettings;
+    public ?InterruptionSettings $interruptionSettings;
 
     /**
      * Default language for both text-to-speech and speech recognition.
@@ -113,9 +113,9 @@ final class ConversationRelayConfig implements BaseModel
     /**
      * Per-language TTS and transcription settings.
      *
-     * @var list<ConversationRelayLanguage>|null $languages
+     * @var list<Language>|null $languages
      */
-    #[Optional(list: ConversationRelayLanguage::class)]
+    #[Optional(list: Language::class)]
     public ?array $languages;
 
     /**
@@ -203,8 +203,8 @@ final class ConversationRelayConfig implements BaseModel
      * @param array<string,mixed>|null $customParameters
      * @param Interruptible|value-of<Interruptible>|null $interruptible
      * @param InterruptibleGreeting|value-of<InterruptibleGreeting>|null $interruptibleGreeting
-     * @param ConversationRelayInterruptionSettings|ConversationRelayInterruptionSettingsShape|null $interruptionSettings
-     * @param list<ConversationRelayLanguage|ConversationRelayLanguageShape>|null $languages
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param list<Language|LanguageShape>|null $languages
      * @param array<string,mixed>|null $structuredProvider
      * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
      * @param array<string,mixed>|null $transcriptionEngineConfig
@@ -217,7 +217,7 @@ final class ConversationRelayConfig implements BaseModel
         ?string $greeting = null,
         Interruptible|string|null $interruptible = null,
         InterruptibleGreeting|string|null $interruptibleGreeting = null,
-        ConversationRelayInterruptionSettings|array|null $interruptionSettings = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
         ?string $language = null,
         ?array $languages = null,
         ?string $provider = null,
@@ -327,10 +327,10 @@ final class ConversationRelayConfig implements BaseModel
     /**
      * Settings for handling caller interruptions during Conversation Relay speech.
      *
-     * @param ConversationRelayInterruptionSettings|ConversationRelayInterruptionSettingsShape $interruptionSettings
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
-        ConversationRelayInterruptionSettings|array $interruptionSettings
+        InterruptionSettings|array $interruptionSettings
     ): self {
         $self = clone $this;
         $self['interruptionSettings'] = $interruptionSettings;
@@ -352,7 +352,7 @@ final class ConversationRelayConfig implements BaseModel
     /**
      * Per-language TTS and transcription settings.
      *
-     * @param list<ConversationRelayLanguage|ConversationRelayLanguageShape> $languages
+     * @param list<Language|LanguageShape> $languages
      */
     public function withLanguages(array $languages): self
     {

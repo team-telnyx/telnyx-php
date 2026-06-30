@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow\Node;
 
-use Telnyx\AI\Assistants\ExternalLlmReq;
 use Telnyx\AI\Assistants\TranscriptionSettings;
+use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow\Node\FlowNodeReq\ExternalLlm;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow\Node\FlowNodeReq\InstructionsMode;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow\Node\FlowNodeReq\Position;
 use Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow\Node\FlowNodeReq\ToolsMode;
@@ -22,7 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * Each node carries the prompt, tool scope, and optional overrides for
  * model/voice/transcription. Unset overrides cascade from the assistant.
  *
- * @phpstan-import-type ExternalLlmReqShape from \Telnyx\AI\Assistants\ExternalLlmReq
+ * @phpstan-import-type ExternalLlmShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow\Node\FlowNodeReq\ExternalLlm
  * @phpstan-import-type PositionShape from \Telnyx\AI\Assistants\Versions\VersionUpdateParams\ConversationFlow\Node\FlowNodeReq\Position
  * @phpstan-import-type TranscriptionSettingsShape from \Telnyx\AI\Assistants\TranscriptionSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
@@ -30,7 +30,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type FlowNodeReqShape = array{
  *   id: string,
  *   instructions: string,
- *   externalLlm?: null|ExternalLlmReq|ExternalLlmReqShape,
+ *   externalLlm?: null|ExternalLlm|ExternalLlmShape,
  *   instructionsMode?: null|InstructionsMode|value-of<InstructionsMode>,
  *   llmAPIKeyRef?: string|null,
  *   model?: string|null,
@@ -64,7 +64,7 @@ final class FlowNodeReq implements BaseModel
      * Override for `Assistant.external_llm` while this node is active. Use this to route a node's turns to a different external LLM (different `model`, `base_url`, credentials). Part of the LLM bundle — see `model` for cascade semantics. Mutually exclusive with `model` on the node (a single LLM identity per node).
      */
     #[Optional('external_llm')]
-    public ?ExternalLlmReq $externalLlm;
+    public ?ExternalLlm $externalLlm;
 
     /**
      * How `instructions` combine with the assistant-level instructions. `replace` (default): the node's instructions are used alone. `append`: the node's instructions are concatenated after the assistant's instructions.
@@ -158,7 +158,7 @@ final class FlowNodeReq implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param ExternalLlmReq|ExternalLlmReqShape|null $externalLlm
+     * @param ExternalLlm|ExternalLlmShape|null $externalLlm
      * @param InstructionsMode|value-of<InstructionsMode>|null $instructionsMode
      * @param Position|PositionShape|null $position
      * @param list<string>|null $sharedToolIDs
@@ -170,7 +170,7 @@ final class FlowNodeReq implements BaseModel
     public static function with(
         string $id,
         string $instructions,
-        ExternalLlmReq|array|null $externalLlm = null,
+        ExternalLlm|array|null $externalLlm = null,
         InstructionsMode|string|null $instructionsMode = null,
         ?string $llmAPIKeyRef = null,
         ?string $model = null,
@@ -227,9 +227,9 @@ final class FlowNodeReq implements BaseModel
     /**
      * Override for `Assistant.external_llm` while this node is active. Use this to route a node's turns to a different external LLM (different `model`, `base_url`, credentials). Part of the LLM bundle — see `model` for cascade semantics. Mutually exclusive with `model` on the node (a single LLM identity per node).
      *
-     * @param ExternalLlmReq|ExternalLlmReqShape $externalLlm
+     * @param ExternalLlm|ExternalLlmShape $externalLlm
      */
-    public function withExternalLlm(ExternalLlmReq|array $externalLlm): self
+    public function withExternalLlm(ExternalLlm|array $externalLlm): self
     {
         $self = clone $this;
         $self['externalLlm'] = $externalLlm;

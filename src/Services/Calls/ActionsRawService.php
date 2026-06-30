@@ -68,6 +68,7 @@ use Telnyx\Calls\Actions\ActionStartConversationRelayParams;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Interruptible;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptibleGreeting;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartConversationRelayResponse;
 use Telnyx\Calls\Actions\ActionStartForkingParams;
@@ -131,12 +132,9 @@ use Telnyx\Calls\Actions\ActionTransferResponse;
 use Telnyx\Calls\Actions\ActionUpdateClientStateParams;
 use Telnyx\Calls\Actions\ActionUpdateClientStateResponse;
 use Telnyx\Calls\Actions\GoogleTranscriptionLanguage;
-use Telnyx\Calls\Actions\InterruptionSettings;
 use Telnyx\Calls\Actions\TranscriptionConfig;
 use Telnyx\Calls\Actions\TranscriptionStartRequest;
 use Telnyx\Calls\CallAssistantRequest;
-use Telnyx\Calls\ConversationRelayInterruptionSettings;
-use Telnyx\Calls\ConversationRelayLanguage;
 use Telnyx\Calls\CustomSipHeader;
 use Telnyx\Calls\DialogflowConfig;
 use Telnyx\Calls\SipHeader;
@@ -171,8 +169,8 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
- * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
- * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
+ * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
@@ -185,7 +183,7 @@ use Telnyx\ServiceContracts\Calls\ActionsRawContract;
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
  * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
  * @phpstan-import-type SoundModificationsShape from \Telnyx\Calls\SoundModifications
- * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\InterruptionSettings as InterruptionSettingsShape1
  * @phpstan-import-type TranscriptionConfigShape from \Telnyx\Calls\Actions\TranscriptionConfig
  * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount
  */
@@ -480,7 +478,7 @@ final class ActionsRawService implements ActionsRawContract
      *   commandID?: string,
      *   gatherEndedSpeech?: string,
      *   greeting?: string,
-     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
+     *   interruptionSettings?: \Telnyx\Calls\Actions\InterruptionSettings|InterruptionSettingsShape1,
      *   language?: value-of<GoogleTranscriptionLanguage>,
      *   messageHistory?: list<MessageHistory|MessageHistoryShape>,
      *   sendMessageHistoryUpdates?: bool,
@@ -1052,7 +1050,7 @@ final class ActionsRawService implements ActionsRawContract
      *   clientState?: string,
      *   commandID?: string,
      *   greeting?: string,
-     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
+     *   interruptionSettings?: \Telnyx\Calls\Actions\InterruptionSettings|InterruptionSettingsShape1,
      *   messageHistory?: list<MessageHistoryShape1>,
      *   participants?: list<ActionStartAIAssistantParams\Participant|ParticipantShape1>,
      *   sendMessageHistoryUpdates?: bool,
@@ -1108,9 +1106,9 @@ final class ActionsRawService implements ActionsRawContract
      *   greeting?: string,
      *   interruptible?: Interruptible|value-of<Interruptible>,
      *   interruptibleGreeting?: InterruptibleGreeting|value-of<InterruptibleGreeting>,
-     *   interruptionSettings?: ConversationRelayInterruptionSettings|ConversationRelayInterruptionSettingsShape,
+     *   interruptionSettings?: InterruptionSettings|InterruptionSettingsShape,
      *   language?: string,
-     *   languages?: list<ConversationRelayLanguage|ConversationRelayLanguageShape>,
+     *   languages?: list<ActionStartConversationRelayParams\Language|LanguageShape>,
      *   provider?: string,
      *   structuredProvider?: array<string,mixed>,
      *   transcription?: array<string,mixed>,

@@ -7,16 +7,14 @@ namespace Telnyx\VoiceSDKCallReports\VoiceSDKCallReportListResponse\Logs;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\VoiceSDKCallReports\VoiceSDKCallReportLogEntry;
+use Telnyx\VoiceSDKCallReports\VoiceSDKCallReportListResponse\Logs\Entries\Entry;
 
 /**
  * Raw logs object emitted by the Voice SDK when logs are grouped under an entries field.
  *
- * @phpstan-import-type VoiceSDKCallReportLogEntryShape from \Telnyx\VoiceSDKCallReports\VoiceSDKCallReportLogEntry
+ * @phpstan-import-type EntryShape from \Telnyx\VoiceSDKCallReports\VoiceSDKCallReportListResponse\Logs\Entries\Entry
  *
- * @phpstan-type EntriesShape = array{
- *   entries?: list<VoiceSDKCallReportLogEntry|VoiceSDKCallReportLogEntryShape>|null,
- * }
+ * @phpstan-type EntriesShape = array{entries?: list<Entry|EntryShape>|null}
  */
 final class Entries implements BaseModel
 {
@@ -26,9 +24,9 @@ final class Entries implements BaseModel
     /**
      * Raw log entries when the SDK groups logs under an entries field.
      *
-     * @var list<VoiceSDKCallReportLogEntry>|null $entries
+     * @var list<Entry>|null $entries
      */
-    #[Optional(list: VoiceSDKCallReportLogEntry::class)]
+    #[Optional(list: Entry::class)]
     public ?array $entries;
 
     public function __construct()
@@ -41,7 +39,7 @@ final class Entries implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<VoiceSDKCallReportLogEntry|VoiceSDKCallReportLogEntryShape>|null $entries
+     * @param list<Entry|EntryShape>|null $entries
      */
     public static function with(?array $entries = null): self
     {
@@ -55,7 +53,7 @@ final class Entries implements BaseModel
     /**
      * Raw log entries when the SDK groups logs under an entries field.
      *
-     * @param list<VoiceSDKCallReportLogEntry|VoiceSDKCallReportLogEntryShape> $entries
+     * @param list<Entry|EntryShape> $entries
      */
     public function withEntries(array $entries): self
     {

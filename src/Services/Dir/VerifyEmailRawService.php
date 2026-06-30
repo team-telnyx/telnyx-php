@@ -7,9 +7,9 @@ namespace Telnyx\Services\Dir;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmParams;
-use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmResponse;
-use Telnyx\Dir\VerifyEmail\VerifyEmailSendResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmCodeParams;
+use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmCodeResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailSendCodeResponse;
 use Telnyx\Dir\VerifyEmail\VerifyEmailStatusResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Dir\VerifyEmailRawContract;
@@ -35,19 +35,19 @@ final class VerifyEmailRawService implements VerifyEmailRawContract
      * For security, any failure (wrong, expired, already-used, or too many attempts) returns the same generic message.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
-     * @param array{code: string}|VerifyEmailConfirmParams $params
+     * @param array{code: string}|VerifyEmailConfirmCodeParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerifyEmailConfirmResponse>
+     * @return BaseResponse<VerifyEmailConfirmCodeResponse>
      *
      * @throws APIException
      */
-    public function confirm(
+    public function confirmCode(
         string $dirID,
-        array|VerifyEmailConfirmParams $params,
+        array|VerifyEmailConfirmCodeParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
-        [$parsed, $options] = VerifyEmailConfirmParams::parseRequest(
+        [$parsed, $options] = VerifyEmailConfirmCodeParams::parseRequest(
             $params,
             $requestOptions,
         );
@@ -58,7 +58,7 @@ final class VerifyEmailRawService implements VerifyEmailRawContract
             path: ['dir/%1$s/verify_email/confirm', $dirID],
             body: (object) $parsed,
             options: $options,
-            convert: VerifyEmailConfirmResponse::class,
+            convert: VerifyEmailConfirmCodeResponse::class,
         );
     }
 
@@ -72,11 +72,11 @@ final class VerifyEmailRawService implements VerifyEmailRawContract
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<VerifyEmailSendResponse>
+     * @return BaseResponse<VerifyEmailSendCodeResponse>
      *
      * @throws APIException
      */
-    public function send(
+    public function sendCode(
         string $dirID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
@@ -85,7 +85,7 @@ final class VerifyEmailRawService implements VerifyEmailRawContract
             method: 'post',
             path: ['dir/%1$s/verify_email', $dirID],
             options: $requestOptions,
-            convert: VerifyEmailSendResponse::class,
+            convert: VerifyEmailSendCodeResponse::class,
         );
     }
 

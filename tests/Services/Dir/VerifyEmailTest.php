@@ -7,8 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmResponse;
-use Telnyx\Dir\VerifyEmail\VerifyEmailSendResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailConfirmCodeResponse;
+use Telnyx\Dir\VerifyEmail\VerifyEmailSendCodeResponse;
 use Telnyx\Dir\VerifyEmail\VerifyEmailStatusResponse;
 use Tests\UnsupportedMockTests;
 
@@ -31,50 +31,50 @@ final class VerifyEmailTest extends TestCase
     }
 
     #[Test]
-    public function testConfirm(): void
+    public function testConfirmCode(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->dir->verifyEmail->confirm(
+        $result = $this->client->dir->verifyEmail->confirmCode(
             '16635d38-75a6-4481-82e8-69af60e05011',
             code: '482915'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerifyEmailConfirmResponse::class, $result);
+        $this->assertInstanceOf(VerifyEmailConfirmCodeResponse::class, $result);
     }
 
     #[Test]
-    public function testConfirmWithOptionalParams(): void
+    public function testConfirmCodeWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->dir->verifyEmail->confirm(
+        $result = $this->client->dir->verifyEmail->confirmCode(
             '16635d38-75a6-4481-82e8-69af60e05011',
             code: '482915'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerifyEmailConfirmResponse::class, $result);
+        $this->assertInstanceOf(VerifyEmailConfirmCodeResponse::class, $result);
     }
 
     #[Test]
-    public function testSend(): void
+    public function testSendCode(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->dir->verifyEmail->send(
+        $result = $this->client->dir->verifyEmail->sendCode(
             '16635d38-75a6-4481-82e8-69af60e05011'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(VerifyEmailSendResponse::class, $result);
+        $this->assertInstanceOf(VerifyEmailSendCodeResponse::class, $result);
     }
 
     #[Test]

@@ -8,6 +8,7 @@ use Telnyx\AI\Assistants\Assistant;
 use Telnyx\AzureVoiceSettings;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory;
 use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings;
+use Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -15,7 +16,6 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Gather parameters defined in the request payload using a voice assistant.

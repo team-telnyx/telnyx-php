@@ -114,11 +114,7 @@ final class CallsTest extends TestCase
 
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
-            params: [
-                'applicationSid' => 'example-app-sid',
-                'from' => '+13120001234',
-                'to' => '+13121230000',
-            ],
+            params: ['url' => 'https://www.example.com/texml.xml']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -135,9 +131,8 @@ final class CallsTest extends TestCase
         $result = $this->client->texml->accounts->calls->calls(
             'account_sid',
             params: [
+                'url' => 'https://www.example.com/texml.xml',
                 'applicationSid' => 'example-app-sid',
-                'from' => '+13120001234',
-                'to' => '+13121230000',
                 'asyncAmd' => true,
                 'asyncAmdStatusCallback' => 'https://www.example.com/callback',
                 'asyncAmdStatusCallbackMethod' => 'GET',
@@ -152,6 +147,7 @@ final class CallsTest extends TestCase
                 'deepfakeDetectionCallbackURL' => 'https://www.example.com/deepfake-callback',
                 'detectionMode' => 'Premium',
                 'fallbackURL' => 'https://www.example.com/instructions-fallback.xml',
+                'from' => '+13120001234',
                 'machineDetection' => 'Enable',
                 'machineDetectionPromptEndTimeout' => 5000,
                 'machineDetectionSilenceTimeout' => 2000,
@@ -172,15 +168,15 @@ final class CallsTest extends TestCase
                 'sipAuthUsername' => 'user',
                 'sipRegion' => 'Canada',
                 'statusCallback' => 'https://www.example.com/statuscallback-listener',
-                'statusCallbackEvent' => 'initiated',
+                'statusCallbackEvent' => 'initiated answered',
                 'statusCallbackMethod' => 'GET',
                 'superviseCallSid' => 'v3:MdI91X4lWFEs7IgbBEOT9M4AigoY08M0WWZFISt1Yw2axZ_IiE4pqg',
                 'supervisingRole' => 'monitor',
-                'texml' => '<?xml version="1.0" encoding="UTF-8"?><Response><Say>Hello</Say></Response>',
+                'texml' => 'Texml',
                 'timeLimit' => 3600,
                 'timeout' => 60,
+                'to' => '+13121230000',
                 'trim' => 'trim-silence',
-                'url' => 'https://www.example.com/texml.xml',
                 'urlMethod' => 'GET',
             ],
         );

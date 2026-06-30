@@ -26,6 +26,8 @@ use Telnyx\Conferences\Actions\ActionRecordStopResponse;
 use Telnyx\Conferences\Actions\ActionSendDtmfResponse;
 use Telnyx\Conferences\Actions\ActionSpeakParams\Language;
 use Telnyx\Conferences\Actions\ActionSpeakParams\PayloadType;
+use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Conferences\Actions\ActionSpeakParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Conferences\Actions\ActionSpeakResponse;
 use Telnyx\Conferences\Actions\ActionStopResponse;
 use Telnyx\Conferences\Actions\ActionUnholdResponse;
@@ -34,12 +36,10 @@ use Telnyx\Conferences\Actions\ActionUpdateParams\Region;
 use Telnyx\Conferences\Actions\ActionUpdateParams\SupervisorRole;
 use Telnyx\Conferences\Actions\ActionUpdateResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\RequestOptions;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * @phpstan-import-type LoopcountShape from \Telnyx\Calls\Actions\Loopcount

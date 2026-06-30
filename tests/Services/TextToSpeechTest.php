@@ -7,8 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
-use Telnyx\TextToSpeech\TextToSpeechNewSpeechResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -30,29 +30,16 @@ final class TextToSpeechTest extends TestCase
     }
 
     #[Test]
-    public function testCreateSpeech(): void
+    public function testGenerate(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->textToSpeech->createSpeech();
+        $result = $this->client->textToSpeech->generate();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(TextToSpeechNewSpeechResponse::class, $result);
-    }
-
-    #[Test]
-    public function testGenerateSpeech(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->textToSpeech->generateSpeech();
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
+        $this->assertInstanceOf(TextToSpeechGenerateResponse::class, $result);
     }
 
     #[Test]

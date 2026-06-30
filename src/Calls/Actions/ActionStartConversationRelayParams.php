@@ -9,19 +9,19 @@ use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Interruptible;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptibleGreeting;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\TranscriptionEngine;
 use Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings;
-use Telnyx\Calls\ConversationRelayInterruptionSettings;
-use Telnyx\Calls\ConversationRelayLanguage;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\InworldVoiceSettings;
+use Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings\XaiVoiceSettings;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\InworldVoiceSettings;
 use Telnyx\MinimaxVoiceSettings;
 use Telnyx\ResembleVoiceSettings;
 use Telnyx\RimeVoiceSettings;
-use Telnyx\XaiVoiceSettings;
 
 /**
  * Start a Conversation Relay session on an active call. Conversation Relay connects the call audio to your WebSocket so your application can exchange realtime messages with the caller while Telnyx handles speech recognition and text-to-speech. Only one AI Assistant or Conversation Relay session can be active on a call at a time.
@@ -35,8 +35,8 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type VoiceSettingsVariants from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
- * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
- * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
+ * @phpstan-import-type InterruptionSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings
+ * @phpstan-import-type LanguageShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Language
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings
  *
  * @phpstan-type ActionStartConversationRelayParamsShape = array{
@@ -51,9 +51,9 @@ use Telnyx\XaiVoiceSettings;
  *   greeting?: string|null,
  *   interruptible?: null|Interruptible|value-of<Interruptible>,
  *   interruptibleGreeting?: null|InterruptibleGreeting|value-of<InterruptibleGreeting>,
- *   interruptionSettings?: null|ConversationRelayInterruptionSettings|ConversationRelayInterruptionSettingsShape,
+ *   interruptionSettings?: null|\Telnyx\Calls\Actions\ActionStartConversationRelayParams\InterruptionSettings|InterruptionSettingsShape,
  *   language?: string|null,
- *   languages?: list<ConversationRelayLanguage|ConversationRelayLanguageShape>|null,
+ *   languages?: list<Language|LanguageShape>|null,
  *   provider?: string|null,
  *   structuredProvider?: array<string,mixed>|null,
  *   transcription?: array<string,mixed>|null,
@@ -147,7 +147,7 @@ final class ActionStartConversationRelayParams implements BaseModel
      * Settings for handling caller interruptions during Conversation Relay speech.
      */
     #[Optional('interruption_settings')]
-    public ?ConversationRelayInterruptionSettings $interruptionSettings;
+    public ?InterruptionSettings $interruptionSettings;
 
     /**
      * Default language for the relay session. This value is used for both text-to-speech and speech recognition.
@@ -158,9 +158,9 @@ final class ActionStartConversationRelayParams implements BaseModel
     /**
      * Per-language TTS and transcription settings.
      *
-     * @var list<ConversationRelayLanguage>|null $languages
+     * @var list<Language>|null $languages
      */
-    #[Optional(list: ConversationRelayLanguage::class)]
+    #[Optional(list: Language::class)]
     public ?array $languages;
 
     /**
@@ -178,7 +178,7 @@ final class ActionStartConversationRelayParams implements BaseModel
     public ?array $structuredProvider;
 
     /**
-     * @deprecated Not supported for Conversation Relay start requests. Use `transcription_engine` and `transcription_engine_config` instead.
+     * @deprecated
      *
      * Not supported for Conversation Relay start requests. Use `transcription_engine` and `transcription_engine_config` instead.
      *
@@ -252,8 +252,8 @@ final class ActionStartConversationRelayParams implements BaseModel
      * @param array<string,mixed>|null $customParameters
      * @param Interruptible|value-of<Interruptible>|null $interruptible
      * @param InterruptibleGreeting|value-of<InterruptibleGreeting>|null $interruptibleGreeting
-     * @param ConversationRelayInterruptionSettings|ConversationRelayInterruptionSettingsShape|null $interruptionSettings
-     * @param list<ConversationRelayLanguage|ConversationRelayLanguageShape>|null $languages
+     * @param InterruptionSettings|InterruptionSettingsShape|null $interruptionSettings
+     * @param list<Language|LanguageShape>|null $languages
      * @param array<string,mixed>|null $structuredProvider
      * @param array<string,mixed>|null $transcription
      * @param TranscriptionEngine|value-of<TranscriptionEngine>|null $transcriptionEngine
@@ -272,7 +272,7 @@ final class ActionStartConversationRelayParams implements BaseModel
         ?string $greeting = null,
         Interruptible|string|null $interruptible = null,
         InterruptibleGreeting|string|null $interruptibleGreeting = null,
-        ConversationRelayInterruptionSettings|array|null $interruptionSettings = null,
+        InterruptionSettings|array|null $interruptionSettings = null,
         ?string $language = null,
         ?array $languages = null,
         ?string $provider = null,
@@ -451,10 +451,10 @@ final class ActionStartConversationRelayParams implements BaseModel
     /**
      * Settings for handling caller interruptions during Conversation Relay speech.
      *
-     * @param ConversationRelayInterruptionSettings|ConversationRelayInterruptionSettingsShape $interruptionSettings
+     * @param InterruptionSettings|InterruptionSettingsShape $interruptionSettings
      */
     public function withInterruptionSettings(
-        ConversationRelayInterruptionSettings|array $interruptionSettings
+        InterruptionSettings|array $interruptionSettings,
     ): self {
         $self = clone $this;
         $self['interruptionSettings'] = $interruptionSettings;
@@ -476,7 +476,7 @@ final class ActionStartConversationRelayParams implements BaseModel
     /**
      * Per-language TTS and transcription settings.
      *
-     * @param list<ConversationRelayLanguage|ConversationRelayLanguageShape> $languages
+     * @param list<Language|LanguageShape> $languages
      */
     public function withLanguages(array $languages): self
     {
