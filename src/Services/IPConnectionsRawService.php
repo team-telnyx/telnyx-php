@@ -11,6 +11,7 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
+use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
@@ -19,7 +20,6 @@ use Telnyx\IPConnections\InboundIP;
 use Telnyx\IPConnections\IPConnection;
 use Telnyx\IPConnections\IPConnectionCreateParams;
 use Telnyx\IPConnections\IPConnectionCreateParams\Inbound;
-use Telnyx\IPConnections\IPConnectionCreateParams\NoiseSuppression;
 use Telnyx\IPConnections\IPConnectionCreateParams\TransportProtocol;
 use Telnyx\IPConnections\IPConnectionCreateParams\WebhookAPIVersion;
 use Telnyx\IPConnections\IPConnectionDeleteResponse;
@@ -72,7 +72,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *   inbound?: Inbound|InboundShape,
      *   iosPushCredentialID?: string|null,
      *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
-     *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
+     *   noiseSuppression?: ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: OutboundIP|OutboundIPShape,
@@ -153,7 +153,7 @@ final class IPConnectionsRawService implements IPConnectionsRawContract
      *   inbound?: InboundIP|InboundIPShape,
      *   iosPushCredentialID?: string|null,
      *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
-     *   noiseSuppression?: IPConnectionUpdateParams\NoiseSuppression|value-of<IPConnectionUpdateParams\NoiseSuppression>,
+     *   noiseSuppression?: ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: OutboundIP|OutboundIPShape,

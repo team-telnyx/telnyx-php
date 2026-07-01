@@ -7,16 +7,15 @@ namespace Telnyx\ServiceContracts\Texml\Accounts;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceResource;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsJsonParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveRecordingsParams;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams;
-use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -30,7 +29,7 @@ interface ConferencesRawContract
      * @param array<string,mixed>|ConferenceRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceGetResponse>
+     * @return BaseResponse<ConferenceResource>
      *
      * @throws APIException
      */
@@ -47,7 +46,7 @@ interface ConferencesRawContract
      * @param array<string,mixed>|ConferenceUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceUpdateResponse>
+     * @return BaseResponse<ConferenceResource>
      *
      * @throws APIException
      */
@@ -98,7 +97,7 @@ interface ConferencesRawContract
      * @param array<string,mixed>|ConferenceRetrieveRecordingsJsonParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ConferenceGetRecordingsJsonResponse>
+     * @return BaseResponse<TexmlGetCallRecordingsResponseBody>
      *
      * @throws APIException
      */

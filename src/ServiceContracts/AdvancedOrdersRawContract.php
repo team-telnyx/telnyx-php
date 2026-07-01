@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
+use Telnyx\AdvancedOrders\AdvancedOrder;
 use Telnyx\AdvancedOrders\AdvancedOrderCreateParams;
-use Telnyx\AdvancedOrders\AdvancedOrderGetResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderListResponse;
-use Telnyx\AdvancedOrders\AdvancedOrderNewResponse;
 use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupParams;
-use Telnyx\AdvancedOrders\AdvancedOrderUpdateRequirementGroupResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -25,7 +23,7 @@ interface AdvancedOrdersRawContract
      * @param array<string,mixed>|AdvancedOrderCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AdvancedOrderNewResponse>
+     * @return BaseResponse<AdvancedOrder>
      *
      * @throws APIException
      */
@@ -40,7 +38,7 @@ interface AdvancedOrdersRawContract
      * @param string $orderID unique identifier of the order
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AdvancedOrderGetResponse>
+     * @return BaseResponse<AdvancedOrder>
      *
      * @throws APIException
      */
@@ -69,7 +67,7 @@ interface AdvancedOrdersRawContract
      * @param array<string,mixed>|AdvancedOrderUpdateRequirementGroupParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<AdvancedOrderUpdateRequirementGroupResponse>
+     * @return BaseResponse<AdvancedOrder>
      *
      * @throws APIException
      */

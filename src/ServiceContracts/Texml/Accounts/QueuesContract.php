@@ -7,10 +7,7 @@ namespace Telnyx\ServiceContracts\Texml\Accounts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultPaginationForQueues;
 use Telnyx\RequestOptions;
-use Telnyx\Texml\Accounts\Queues\QueueGetResponse;
-use Telnyx\Texml\Accounts\Queues\QueueListResponse;
-use Telnyx\Texml\Accounts\Queues\QueueNewResponse;
-use Telnyx\Texml\Accounts\Queues\QueueUpdateResponse;
+use Telnyx\Texml\Accounts\Queues\QueueResource;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -32,7 +29,7 @@ interface QueuesContract
         ?string $friendlyName = null,
         ?int $maxSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): QueueNewResponse;
+    ): QueueResource;
 
     /**
      * @api
@@ -47,7 +44,7 @@ interface QueuesContract
         string $queueSid,
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
-    ): QueueGetResponse;
+    ): QueueResource;
 
     /**
      * @api
@@ -64,7 +61,7 @@ interface QueuesContract
         string $accountSid,
         ?int $maxSize = null,
         RequestOptions|array|null $requestOptions = null,
-    ): QueueUpdateResponse;
+    ): QueueResource;
 
     /**
      * @api
@@ -77,7 +74,7 @@ interface QueuesContract
      * @param string $pageToken used to request the next page of results
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultPaginationForQueues<QueueListResponse>
+     * @return DefaultPaginationForQueues<QueueResource>
      *
      * @throws APIException
      */

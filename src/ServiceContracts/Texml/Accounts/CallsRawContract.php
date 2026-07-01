@@ -10,7 +10,7 @@ use Telnyx\RequestOptions;
 use Telnyx\Texml\Accounts\Calls\CallCallsParams;
 use Telnyx\Texml\Accounts\Calls\CallCallsResponse;
 use Telnyx\Texml\Accounts\Calls\CallGetCallsResponse;
-use Telnyx\Texml\Accounts\Calls\CallGetResponse;
+use Telnyx\Texml\Accounts\Calls\CallResource;
 use Telnyx\Texml\Accounts\Calls\CallRetrieveCallsParams;
 use Telnyx\Texml\Accounts\Calls\CallRetrieveParams;
 use Telnyx\Texml\Accounts\Calls\CallSiprecJsonParams;
@@ -18,7 +18,6 @@ use Telnyx\Texml\Accounts\Calls\CallSiprecJsonResponse;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonParams;
 use Telnyx\Texml\Accounts\Calls\CallStreamsJsonResponse;
 use Telnyx\Texml\Accounts\Calls\CallUpdateParams;
-use Telnyx\Texml\Accounts\Calls\CallUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -32,7 +31,7 @@ interface CallsRawContract
      * @param array<string,mixed>|CallRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CallGetResponse>
+     * @return BaseResponse<CallResource>
      *
      * @throws APIException
      */
@@ -49,7 +48,7 @@ interface CallsRawContract
      * @param array<string,mixed>|CallUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<CallUpdateResponse>
+     * @return BaseResponse<CallResource>
      *
      * @throws APIException
      */

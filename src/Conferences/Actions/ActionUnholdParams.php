@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\Conferences\Actions;
 
-use Telnyx\Conferences\Actions\ActionUnholdParams\Region;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -17,7 +16,8 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Conferences\ActionsService::unhold()
  *
  * @phpstan-type ActionUnholdParamsShape = array{
- *   callControlIDs: list<string>, region?: null|Region|value-of<Region>
+ *   callControlIDs: list<string>,
+ *   region?: null|ConferenceRegion|value-of<ConferenceRegion>,
  * }
  */
 final class ActionUnholdParams implements BaseModel
@@ -37,9 +37,9 @@ final class ActionUnholdParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @var value-of<Region>|null $region
+     * @var value-of<ConferenceRegion>|null $region
      */
-    #[Optional(enum: Region::class)]
+    #[Optional(enum: ConferenceRegion::class)]
     public ?string $region;
 
     /**
@@ -67,11 +67,11 @@ final class ActionUnholdParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $callControlIDs
-     * @param Region|value-of<Region>|null $region
+     * @param ConferenceRegion|value-of<ConferenceRegion>|null $region
      */
     public static function with(
         array $callControlIDs,
-        Region|string|null $region = null
+        ConferenceRegion|string|null $region = null
     ): self {
         $self = new self;
 
@@ -98,9 +98,9 @@ final class ActionUnholdParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @param Region|value-of<Region> $region
+     * @param ConferenceRegion|value-of<ConferenceRegion> $region
      */
-    public function withRegion(Region|string $region): self
+    public function withRegion(ConferenceRegion|string $region): self
     {
         $self = clone $this;
         $self['region'] = $region;

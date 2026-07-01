@@ -17,8 +17,10 @@ use Telnyx\Core\Contracts\BaseModel;
  *   transcriptionEngine: TranscriptionEngine|value-of<TranscriptionEngine>,
  *   transcriptionModel: TranscriptionModel|value-of<TranscriptionModel>,
  *   interimResults?: bool|null,
+ *   keyterms?: list<string>|null,
  *   keywordsBoosting?: array<string,float>|null,
  *   language?: null|Language|value-of<Language>,
+ *   smartFormat?: bool|null,
  *   utteranceEndMs?: int|null,
  * }
  */
@@ -42,6 +44,14 @@ final class DeepgramNova3Config implements BaseModel
     public ?bool $interimResults;
 
     /**
+     * Nova-3 keyterm prompting. Up to 100 domain-specific terms or brand names to bias recognition toward. Nova-3-only; use `hints` on Nova-2.
+     *
+     * @var list<string>|null $keyterms
+     */
+    #[Optional(list: 'string')]
+    public ?array $keyterms;
+
+    /**
      * Keywords and their respective intensifiers (boosting values) to improve transcription accuracy for specific words or phrases. The intensifier should be a numeric value. Example: `{"snuffleupagus": 5, "systrom": 2, "krieger": 1}`.
      *
      * @var array<string,float>|null $keywordsBoosting
@@ -56,6 +66,12 @@ final class DeepgramNova3Config implements BaseModel
      */
     #[Optional(enum: Language::class)]
     public ?string $language;
+
+    /**
+     * Enable Deepgram's smart formatting (capitalization, punctuation, and digit normalization). Note: Telnyx defaults this to `true`, overriding Deepgram's underlying default of `false` — omit the field to get a smart-formatted transcript, or set it to `false` to receive the raw lowercase transcript without punctuation.
+     */
+    #[Optional('smart_format')]
+    public ?bool $smartFormat;
 
     /**
      * Number of milliseconds of silence to consider an utterance ended. Ranges from 0 to 5000 ms.
@@ -91,6 +107,7 @@ final class DeepgramNova3Config implements BaseModel
      *
      * @param TranscriptionEngine|value-of<TranscriptionEngine> $transcriptionEngine
      * @param TranscriptionModel|value-of<TranscriptionModel> $transcriptionModel
+     * @param list<string>|null $keyterms
      * @param array<string,float>|null $keywordsBoosting
      * @param Language|value-of<Language>|null $language
      */
@@ -98,8 +115,10 @@ final class DeepgramNova3Config implements BaseModel
         TranscriptionEngine|string $transcriptionEngine,
         TranscriptionModel|string $transcriptionModel,
         ?bool $interimResults = null,
+        ?array $keyterms = null,
         ?array $keywordsBoosting = null,
         Language|string|null $language = null,
+        ?bool $smartFormat = null,
         ?int $utteranceEndMs = null,
     ): self {
         $self = new self;
@@ -108,8 +127,10 @@ final class DeepgramNova3Config implements BaseModel
         $self['transcriptionModel'] = $transcriptionModel;
 
         null !== $interimResults && $self['interimResults'] = $interimResults;
+        null !== $keyterms && $self['keyterms'] = $keyterms;
         null !== $keywordsBoosting && $self['keywordsBoosting'] = $keywordsBoosting;
         null !== $language && $self['language'] = $language;
+        null !== $smartFormat && $self['smartFormat'] = $smartFormat;
         null !== $utteranceEndMs && $self['utteranceEndMs'] = $utteranceEndMs;
 
         return $self;
@@ -151,6 +172,19 @@ final class DeepgramNova3Config implements BaseModel
     }
 
     /**
+     * Nova-3 keyterm prompting. Up to 100 domain-specific terms or brand names to bias recognition toward. Nova-3-only; use `hints` on Nova-2.
+     *
+     * @param list<string> $keyterms
+     */
+    public function withKeyterms(array $keyterms): self
+    {
+        $self = clone $this;
+        $self['keyterms'] = $keyterms;
+
+        return $self;
+    }
+
+    /**
      * Keywords and their respective intensifiers (boosting values) to improve transcription accuracy for specific words or phrases. The intensifier should be a numeric value. Example: `{"snuffleupagus": 5, "systrom": 2, "krieger": 1}`.
      *
      * @param array<string,float> $keywordsBoosting
@@ -172,6 +206,17 @@ final class DeepgramNova3Config implements BaseModel
     {
         $self = clone $this;
         $self['language'] = $language;
+
+        return $self;
+    }
+
+    /**
+     * Enable Deepgram's smart formatting (capitalization, punctuation, and digit normalization). Note: Telnyx defaults this to `true`, overriding Deepgram's underlying default of `false` — omit the field to get a smart-formatted transcript, or set it to `false` to receive the raw lowercase transcript without punctuation.
+     */
+    public function withSmartFormat(bool $smartFormat): self
+    {
+        $self = clone $this;
+        $self['smartFormat'] = $smartFormat;
 
         return $self;
     }

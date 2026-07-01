@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\Comments\CommentListParams\CommentType;
 
 /**
  * List the comments on a DIR. The enterprise is resolved server-side from the DIR id.

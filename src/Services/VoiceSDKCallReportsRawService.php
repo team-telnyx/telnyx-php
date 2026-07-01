@@ -12,10 +12,9 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceSDKCallReportsRawContract;
-use Telnyx\VoiceSDKCallReports\VoiceSDKCallReportGetResponseItem;
+use Telnyx\VoiceSDKCallReports\VoiceSDKCallReport;
 use Telnyx\VoiceSDKCallReports\VoiceSDKCallReportListParams;
 use Telnyx\VoiceSDKCallReports\VoiceSDKCallReportListParams\Sort;
-use Telnyx\VoiceSDKCallReports\VoiceSDKCallReportListResponse;
 
 /**
  * Retrieve raw Voice SDK call report stats payloads for WebRTC call troubleshooting.
@@ -38,7 +37,7 @@ final class VoiceSDKCallReportsRawService implements VoiceSDKCallReportsRawContr
      * @param string $callID call identifier used to retrieve reports owned by the authenticated user
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<VoiceSDKCallReportGetResponseItem>>
+     * @return BaseResponse<list<VoiceSDKCallReport>>
      *
      * @throws APIException
      */
@@ -51,7 +50,7 @@ final class VoiceSDKCallReportsRawService implements VoiceSDKCallReportsRawContr
             method: 'get',
             path: ['voice_sdk_call_reports/%1$s', $callID],
             options: $requestOptions,
-            convert: new ListOf(VoiceSDKCallReportGetResponseItem::class),
+            convert: new ListOf(VoiceSDKCallReport::class),
         );
     }
 
@@ -65,7 +64,7 @@ final class VoiceSDKCallReportsRawService implements VoiceSDKCallReportsRawContr
      * }|VoiceSDKCallReportListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VoiceSDKCallReportListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<VoiceSDKCallReport>>
      *
      * @throws APIException
      */
@@ -87,7 +86,7 @@ final class VoiceSDKCallReportsRawService implements VoiceSDKCallReportsRawContr
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: VoiceSDKCallReportListResponse::class,
+            convert: VoiceSDKCallReport::class,
             page: DefaultFlatPagination::class,
         );
     }

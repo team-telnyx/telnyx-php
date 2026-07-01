@@ -6,11 +6,9 @@ namespace Telnyx\ServiceContracts\Messaging10dlc\Brand;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVetting;
 use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingImportsParams;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderParams;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -24,7 +22,7 @@ interface ExternalVettingRawContract
      * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ExternalVettingListResponseItem>>
+     * @return BaseResponse<list<ExternalVetting>>
      *
      * @throws APIException
      */
@@ -40,7 +38,7 @@ interface ExternalVettingRawContract
      * @param array<string,mixed>|ExternalVettingImportsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ExternalVettingImportsResponse>
+     * @return BaseResponse<ExternalVetting>
      *
      * @throws APIException
      */
@@ -57,7 +55,7 @@ interface ExternalVettingRawContract
      * @param array<string,mixed>|ExternalVettingOrderParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ExternalVettingOrderResponse>
+     * @return BaseResponse<ExternalVetting>
      *
      * @throws APIException
      */

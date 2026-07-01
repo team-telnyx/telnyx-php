@@ -11,7 +11,6 @@ use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Conferences\ParticipantsRawContract;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantDeleteParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\AmdStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Beep;
@@ -27,12 +26,12 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Trim;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsResponse;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantResource;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantRetrieveParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantRetrieveParticipantsParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\AnnounceMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldMethod;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 
 /**
  * TeXML REST Commands.
@@ -59,7 +58,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
      * }|ParticipantRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ParticipantGetResponse>
+     * @return BaseResponse<ParticipantResource>
      *
      * @throws APIException
      */
@@ -87,7 +86,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
                 $callSidOrParticipantLabel,
             ],
             options: $options,
-            convert: ParticipantGetResponse::class,
+            convert: ParticipantResource::class,
         );
     }
 
@@ -114,7 +113,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
      * }|ParticipantUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ParticipantUpdateResponse>
+     * @return BaseResponse<ParticipantResource>
      *
      * @throws APIException
      */
@@ -147,7 +146,7 @@ final class ParticipantsRawService implements ParticipantsRawContract
                 array_flip(['accountSid', 'conferenceSid'])
             ),
             options: $options,
-            convert: ParticipantUpdateResponse::class,
+            convert: ParticipantResource::class,
         );
     }
 

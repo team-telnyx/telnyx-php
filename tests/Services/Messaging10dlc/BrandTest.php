@@ -10,10 +10,9 @@ use Telnyx\Core\Util;
 use Telnyx\Messaging10dlc\Brand\AltBusinessIDType;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
-use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceResponse;
-use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Messaging10dlc\Brand\BrandIdentityStatus;
 use Telnyx\Messaging10dlc\Brand\BrandListResponse;
+use Telnyx\Messaging10dlc\Brand\BrandSMSOtpStatus;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Messaging10dlc\Brand\EntityType;
 use Telnyx\Messaging10dlc\Brand\StockExchange;
@@ -226,7 +225,7 @@ final class BrandTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(BrandGetSMSOtpByReferenceResponse::class, $result);
+        $this->assertInstanceOf(BrandSMSOtpStatus::class, $result);
     }
 
     #[Test]
@@ -254,7 +253,7 @@ final class BrandTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(BrandGetSMSOtpStatusResponse::class, $result);
+        $this->assertInstanceOf(BrandSMSOtpStatus::class, $result);
     }
 
     #[Test]

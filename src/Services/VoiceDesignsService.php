@@ -11,11 +11,10 @@ use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\VoiceDesignsContract;
 use Telnyx\VoiceDesigns\VoiceDesignCreateParams\Provider;
-use Telnyx\VoiceDesigns\VoiceDesignGetResponse;
 use Telnyx\VoiceDesigns\VoiceDesignListParams\Sort;
-use Telnyx\VoiceDesigns\VoiceDesignListResponse;
-use Telnyx\VoiceDesigns\VoiceDesignNewResponse;
 use Telnyx\VoiceDesigns\VoiceDesignRenameResponse;
+use Telnyx\VoiceDesigns\VoiceDesignResponse;
+use Telnyx\VoiceDesigns\VoiceDesignSummaryData;
 
 /**
  * Create and manage AI-generated voice designs using natural language prompts.
@@ -70,7 +69,7 @@ final class VoiceDesignsService implements VoiceDesignsContract
         ?float $topP = null,
         ?string $voiceDesignID = null,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceDesignNewResponse {
+    ): VoiceDesignResponse {
         $params = Util::removeNulls(
             [
                 'prompt' => $prompt,
@@ -108,7 +107,7 @@ final class VoiceDesignsService implements VoiceDesignsContract
         string $id,
         ?int $version = null,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceDesignGetResponse {
+    ): VoiceDesignResponse {
         $params = Util::removeNulls(['version' => $version]);
 
         // @phpstan-ignore-next-line argument.type
@@ -128,7 +127,7 @@ final class VoiceDesignsService implements VoiceDesignsContract
      * @param Sort|value-of<Sort> $sort Sort order. Prefix with `-` for descending. Defaults to `-created_at`.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<VoiceDesignListResponse>
+     * @return DefaultFlatPagination<VoiceDesignSummaryData>
      *
      * @throws APIException
      */

@@ -8,9 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Recordings\RecordingDeleteResponse;
-use Telnyx\Recordings\RecordingGetResponse;
 use Telnyx\Recordings\RecordingListParams\Filter;
+use Telnyx\Recordings\RecordingResponse;
 use Telnyx\Recordings\RecordingResponseData;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\RecordingsContract;
@@ -56,7 +55,7 @@ final class RecordingsService implements RecordingsContract
     public function retrieve(
         string $recordingID,
         RequestOptions|array|null $requestOptions = null
-    ): RecordingGetResponse {
+    ): RecordingResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($recordingID, requestOptions: $requestOptions);
 
@@ -108,7 +107,7 @@ final class RecordingsService implements RecordingsContract
     public function delete(
         string $recordingID,
         RequestOptions|array|null $requestOptions = null
-    ): RecordingDeleteResponse {
+    ): RecordingResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($recordingID, requestOptions: $requestOptions);
 

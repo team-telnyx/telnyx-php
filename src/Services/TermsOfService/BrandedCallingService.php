@@ -8,7 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\TermsOfService\BrandedCallingContract;
-use Telnyx\TermsOfService\BrandedCalling\BrandedCallingAgreeResponse;
+use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
 
 /**
  * Accept and review the Branded Calling and Phone Number Reputation terms of service.
@@ -43,7 +43,7 @@ final class BrandedCallingService implements BrandedCallingContract
      */
     public function agree(
         RequestOptions|array|null $requestOptions = null
-    ): BrandedCallingAgreeResponse {
+    ): TosAgreementWrapped {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->agree(requestOptions: $requestOptions);
 

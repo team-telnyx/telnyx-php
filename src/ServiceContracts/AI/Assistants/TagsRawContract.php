@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts\AI\Assistants;
 
 use Telnyx\AI\Assistants\Tags\TagAddParams;
-use Telnyx\AI\Assistants\Tags\TagAddResponse;
-use Telnyx\AI\Assistants\Tags\TagListResponse;
 use Telnyx\AI\Assistants\Tags\TagRemoveParams;
-use Telnyx\AI\Assistants\Tags\TagRemoveResponse;
+use Telnyx\AI\Assistants\Tags\TagsResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -23,7 +21,7 @@ interface TagsRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TagListResponse>
+     * @return BaseResponse<TagsResponse>
      *
      * @throws APIException
      */
@@ -38,7 +36,7 @@ interface TagsRawContract
      * @param array<string,mixed>|TagAddParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TagAddResponse>
+     * @return BaseResponse<TagsResponse>
      *
      * @throws APIException
      */
@@ -55,7 +53,7 @@ interface TagsRawContract
      * @param array<string,mixed>|TagRemoveParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<TagRemoveResponse>
+     * @return BaseResponse<TagsResponse>
      *
      * @throws APIException
      */

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\InfringementClaims\InfringementClaimContestParams\Document;
-use Telnyx\InfringementClaims\InfringementClaimContestResponse;
-use Telnyx\InfringementClaims\InfringementClaimGetResponse;
+use Telnyx\Dir\Document;
+use Telnyx\InfringementClaims\InfringementClaimWrapped;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type DocumentShape from \Telnyx\InfringementClaims\InfringementClaimContestParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface InfringementClaimsContract
@@ -27,7 +26,7 @@ interface InfringementClaimsContract
     public function retrieve(
         string $claimID,
         RequestOptions|array|null $requestOptions = null
-    ): InfringementClaimGetResponse;
+    ): InfringementClaimWrapped;
 
     /**
      * @api
@@ -44,5 +43,5 @@ interface InfringementClaimsContract
         string $contestNotes,
         ?array $documents = null,
         RequestOptions|array|null $requestOptions = null,
-    ): InfringementClaimContestResponse;
+    ): InfringementClaimWrapped;
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions;
 
-use Telnyx\AI\Missions\MissionUpdateMissionParams\ExecutionMode;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;

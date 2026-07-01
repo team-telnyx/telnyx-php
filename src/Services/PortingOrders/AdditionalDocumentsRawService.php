@@ -15,8 +15,8 @@ use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentDeleteParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Filter;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListParams\Sort;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
+use Telnyx\PortingOrders\AdditionalDocuments\PortingAdditionalDocument;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\PortingOrders\AdditionalDocumentsRawContract;
 
@@ -85,7 +85,7 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
      * }|AdditionalDocumentListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<AdditionalDocumentListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<PortingAdditionalDocument>>
      *
      * @throws APIException
      */
@@ -108,7 +108,7 @@ final class AdditionalDocumentsRawService implements AdditionalDocumentsRawContr
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: AdditionalDocumentListResponse::class,
+            convert: PortingAdditionalDocument::class,
             page: DefaultFlatPagination::class,
         );
     }

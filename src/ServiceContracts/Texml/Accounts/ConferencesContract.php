@@ -6,13 +6,12 @@ namespace Telnyx\ServiceContracts\Texml\Accounts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
+use Telnyx\Texml\Accounts\Calls\RecordingsJson\TexmlGetCallRecordingsResponseBody;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsJsonResponse;
 use Telnyx\Texml\Accounts\Conferences\ConferenceGetRecordingsResponse;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetResponse;
+use Telnyx\Texml\Accounts\Conferences\ConferenceResource;
 use Telnyx\Texml\Accounts\Conferences\ConferenceRetrieveConferencesParams\Status;
 use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateParams\AnnounceMethod;
-use Telnyx\Texml\Accounts\Conferences\ConferenceUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -32,7 +31,7 @@ interface ConferencesContract
         string $conferenceSid,
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
-    ): ConferenceGetResponse;
+    ): ConferenceResource;
 
     /**
      * @api
@@ -53,7 +52,7 @@ interface ConferencesContract
         ?string $announceURL = null,
         ?string $status = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ConferenceUpdateResponse;
+    ): ConferenceResource;
 
     /**
      * @api
@@ -110,5 +109,5 @@ interface ConferencesContract
         string $conferenceSid,
         string $accountSid,
         RequestOptions|array|null $requestOptions = null,
-    ): ConferenceGetRecordingsJsonResponse;
+    ): TexmlGetCallRecordingsResponseBody;
 }

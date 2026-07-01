@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentListResponse;
 use Telnyx\PortingOrders\AdditionalDocuments\AdditionalDocumentNewResponse;
+use Telnyx\PortingOrders\AdditionalDocuments\PortingAdditionalDocument;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -61,7 +61,7 @@ final class AdditionalDocumentsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(AdditionalDocumentListResponse::class, $item);
+            $this->assertInstanceOf(PortingAdditionalDocument::class, $item);
         }
     }
 

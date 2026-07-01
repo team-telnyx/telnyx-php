@@ -6,15 +6,15 @@ namespace Telnyx\ServiceContracts\Enterprises;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\Dir\DirCreateParams\Document;
-use Telnyx\Enterprises\Dir\DirListParams\FilterStatus;
+use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirStatus;
+use Telnyx\Dir\DirWrapped;
+use Telnyx\Dir\Document;
 use Telnyx\Enterprises\Dir\DirListParams\Sort;
-use Telnyx\Enterprises\Dir\DirListResponse;
-use Telnyx\Enterprises\Dir\DirNewResponse;
 use Telnyx\RequestOptions;
 
 /**
- * @phpstan-import-type DocumentShape from \Telnyx\Enterprises\Dir\DirCreateParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface DirContract
@@ -50,7 +50,7 @@ interface DirContract
         ?string $logoURL = null,
         bool $reselling = false,
         RequestOptions|array|null $requestOptions = null,
-    ): DirNewResponse;
+    ): DirWrapped;
 
     /**
      * @api
@@ -61,13 +61,13 @@ interface DirContract
      * @param \DateTimeInterface $filterExpiringAtGte return only DIRs whose `expiring_at` is at or after this ISO-8601 timestamp
      * @param \DateTimeInterface $filterExpiringAtLte return only DIRs whose `expiring_at` is at or before this ISO-8601 timestamp
      * @param int $filterExpiringWithinDays Convenience: returns DIRs whose `expiring_at` falls within the next N days (1–365). Equivalent to setting `filter[expiring_at][gte]=<now>` + `filter[expiring_at][lte]=<now+N>`. Mutually exclusive with the explicit `[gte]`/`[lte]` filters - combining returns 400.
-     * @param FilterStatus|value-of<FilterStatus> $filterStatus filter by DIR status
+     * @param DirStatus|value-of<DirStatus> $filterStatus filter by DIR status
      * @param int $pageNumber 1-based page number. Out-of-range values return an empty page with correct meta.
      * @param int $pageSize Items per page. Maximum 250; values above are clamped to 250.
      * @param Sort|value-of<Sort> $sort Sort field. Allowed: `created_at`, `updated_at`, `display_name`, `status`, `submitted_at`, `verified_at`, `expiring_at`. Prefix with `-` for descending. Default `-created_at`.
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<DirListResponse>
+     * @return DefaultFlatPagination<Dir>
      *
      * @throws APIException
      */
@@ -78,7 +78,7 @@ interface DirContract
         ?\DateTimeInterface $filterExpiringAtGte = null,
         ?\DateTimeInterface $filterExpiringAtLte = null,
         ?int $filterExpiringWithinDays = null,
-        FilterStatus|string|null $filterStatus = null,
+        DirStatus|string|null $filterStatus = null,
         int $pageNumber = 1,
         int $pageSize = 20,
         Sort|string $sort = '-created_at',

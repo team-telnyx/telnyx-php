@@ -11,10 +11,12 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Whatsapp\PhoneNumbersRawContract;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberResendVerificationParams\VerificationMethod;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberRetrieveConversationWindowParams;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberVerifyParams;
 
 /**
@@ -124,6 +126,46 @@ final class PhoneNumbersRawService implements PhoneNumbersRawContract
             body: (object) $parsed,
             options: $options,
             convert: null,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Returns whether the 24-hour conversation window is currently open for a given source/destination pair. If window_active is false, only template messages may be sent.
+     *
+     * @param string $phoneNumber Phone number (E.164 format)
+     * @param array{
+     *   destinationNumber: string
+     * }|PhoneNumberRetrieveConversationWindowParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<PhoneNumberGetConversationWindowResponse>
+     *
+     * @throws APIException
+     */
+    public function retrieveConversationWindow(
+        string $phoneNumber,
+        array|PhoneNumberRetrieveConversationWindowParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = PhoneNumberRetrieveConversationWindowParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: [
+                'v2/whatsapp/phone_numbers/%1$s/conversation_window', $phoneNumber,
+            ],
+            query: Util::array_transform_keys(
+                $parsed,
+                ['destinationNumber' => 'destination_number']
+            ),
+            options: $options,
+            convert: PhoneNumberGetConversationWindowResponse::class,
         );
     }
 
