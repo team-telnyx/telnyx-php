@@ -9,11 +9,11 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForLogMessages;
+use Telnyx\ExternalConnections\LogMessages\LogMessage;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams;
 use Telnyx\ExternalConnections\LogMessages\LogMessageListParams\Filter;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\ExternalConnections\LogMessagesRawContract;
 
@@ -66,7 +66,7 @@ final class LogMessagesRawService implements LogMessagesRawContract
      * }|LogMessageListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultPaginationForLogMessages<LogMessageListResponse>>
+     * @return BaseResponse<DefaultPaginationForLogMessages<LogMessage>>
      *
      * @throws APIException
      */
@@ -88,7 +88,7 @@ final class LogMessagesRawService implements LogMessagesRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: LogMessageListResponse::class,
+            convert: LogMessage::class,
             page: DefaultPaginationForLogMessages::class,
         );
     }

@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberGetConversationWindowResponse;
 use Telnyx\Whatsapp\PhoneNumbers\PhoneNumberListResponse;
 use Tests\UnsupportedMockTests;
 
@@ -73,6 +74,44 @@ final class PhoneNumbersTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testRetrieveConversationWindow(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->whatsapp->phoneNumbers->retrieveConversationWindow(
+            'phone_number',
+            destinationNumber: '+353894650851'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PhoneNumberGetConversationWindowResponse::class,
+            $result
+        );
+    }
+
+    #[Test]
+    public function testRetrieveConversationWindowWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->whatsapp->phoneNumbers->retrieveConversationWindow(
+            'phone_number',
+            destinationNumber: '+353894650851'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(
+            PhoneNumberGetConversationWindowResponse::class,
+            $result
+        );
     }
 
     #[Test]

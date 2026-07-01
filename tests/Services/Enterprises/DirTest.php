@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\Dir\DirListResponse;
-use Telnyx\Enterprises\Dir\DirNewResponse;
+use Telnyx\Dir\Dir;
+use Telnyx\Dir\DirWrapped;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -48,7 +48,7 @@ final class DirTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DirNewResponse::class, $result);
+        $this->assertInstanceOf(DirWrapped::class, $result);
     }
 
     #[Test]
@@ -79,7 +79,7 @@ final class DirTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(DirNewResponse::class, $result);
+        $this->assertInstanceOf(DirWrapped::class, $result);
     }
 
     #[Test]
@@ -98,7 +98,7 @@ final class DirTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(DirListResponse::class, $item);
+            $this->assertInstanceOf(Dir::class, $item);
         }
     }
 }

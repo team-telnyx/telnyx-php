@@ -16,7 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AIService::createResponseDeprecated()
  *
  * @phpstan-type AICreateResponseDeprecatedParamsShape = array{
- *   body: array<string,mixed>
+ *   responseRequest: array<string,mixed>
  * }
  */
 final class AICreateResponseDeprecatedParams implements BaseModel
@@ -25,22 +25,22 @@ final class AICreateResponseDeprecatedParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var array<string,mixed> $body */
+    /** @var array<string,mixed> $responseRequest */
     #[Required(map: 'mixed')]
-    public array $body;
+    public array $responseRequest;
 
     /**
      * `new AICreateResponseDeprecatedParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AICreateResponseDeprecatedParams::with(body: ...)
+     * AICreateResponseDeprecatedParams::with(responseRequest: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new AICreateResponseDeprecatedParams)->withBody(...)
+     * (new AICreateResponseDeprecatedParams)->withResponseRequest(...)
      * ```
      */
     public function __construct()
@@ -53,24 +53,24 @@ final class AICreateResponseDeprecatedParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param array<string,mixed> $body
+     * @param array<string,mixed> $responseRequest
      */
-    public static function with(array $body): self
+    public static function with(array $responseRequest): self
     {
         $self = new self;
 
-        $self['body'] = $body;
+        $self['responseRequest'] = $responseRequest;
 
         return $self;
     }
 
     /**
-     * @param array<string,mixed> $body
+     * @param array<string,mixed> $responseRequest
      */
-    public function withBody(array $body): self
+    public function withResponseRequest(array $responseRequest): self
     {
         $self = clone $this;
-        $self['body'] = $body;
+        $self['responseRequest'] = $responseRequest;
 
         return $self;
     }

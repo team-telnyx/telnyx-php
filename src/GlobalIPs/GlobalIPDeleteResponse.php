@@ -7,12 +7,13 @@ namespace Telnyx\GlobalIPs;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\GlobalIPs\GlobalIPDeleteResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\GlobalIPs\GlobalIPDeleteResponse\Data
+ * @phpstan-import-type GlobalIPShape from \Telnyx\GlobalIPs\GlobalIP
  *
- * @phpstan-type GlobalIPDeleteResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type GlobalIPDeleteResponseShape = array{
+ *   data?: null|GlobalIP|GlobalIPShape
+ * }
  */
 final class GlobalIPDeleteResponse implements BaseModel
 {
@@ -20,7 +21,7 @@ final class GlobalIPDeleteResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?GlobalIP $data;
 
     public function __construct()
     {
@@ -32,9 +33,9 @@ final class GlobalIPDeleteResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param GlobalIP|GlobalIPShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(GlobalIP|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +45,9 @@ final class GlobalIPDeleteResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param GlobalIP|GlobalIPShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(GlobalIP|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

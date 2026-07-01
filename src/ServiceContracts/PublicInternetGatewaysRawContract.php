@@ -11,8 +11,8 @@ use Telnyx\PublicInternetGateways\PublicInternetGatewayCreateParams;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayDeleteResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayGetResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayListParams;
-use Telnyx\PublicInternetGateways\PublicInternetGatewayListResponse;
 use Telnyx\PublicInternetGateways\PublicInternetGatewayNewResponse;
+use Telnyx\PublicInternetGateways\PublicInternetGatewayRead;
 use Telnyx\RequestOptions;
 
 /**
@@ -56,7 +56,7 @@ interface PublicInternetGatewaysRawContract
      * @param array<string,mixed>|PublicInternetGatewayListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<PublicInternetGatewayListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<PublicInternetGatewayRead>>
      *
      * @throws APIException
      */

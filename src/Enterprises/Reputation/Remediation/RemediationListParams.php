@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\Reputation\Remediation\RemediationListParams\FilterStatus;
 
 /**
  * Paginated list of remediation requests for this enterprise. List items omit per-number results and webhook URLs to keep the response small; call GET by id for full detail. Supports JSON:API pagination and optional filters on status and created-at range.
@@ -18,7 +17,7 @@ use Telnyx\Enterprises\Reputation\Remediation\RemediationListParams\FilterStatus
  * @phpstan-type RemediationListParamsShape = array{
  *   filterCreatedAtGte?: \DateTimeInterface|null,
  *   filterCreatedAtLte?: \DateTimeInterface|null,
- *   filterStatus?: null|FilterStatus|value-of<FilterStatus>,
+ *   filterStatus?: null|RemediationStatus|value-of<RemediationStatus>,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  * }
@@ -44,9 +43,9 @@ final class RemediationListParams implements BaseModel
     /**
      * Filter by customer-facing status.
      *
-     * @var value-of<FilterStatus>|null $filterStatus
+     * @var value-of<RemediationStatus>|null $filterStatus
      */
-    #[Optional(enum: FilterStatus::class)]
+    #[Optional(enum: RemediationStatus::class)]
     public ?string $filterStatus;
 
     /**
@@ -71,12 +70,12 @@ final class RemediationListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterStatus|value-of<FilterStatus>|null $filterStatus
+     * @param RemediationStatus|value-of<RemediationStatus>|null $filterStatus
      */
     public static function with(
         ?\DateTimeInterface $filterCreatedAtGte = null,
         ?\DateTimeInterface $filterCreatedAtLte = null,
-        FilterStatus|string|null $filterStatus = null,
+        RemediationStatus|string|null $filterStatus = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
@@ -118,10 +117,11 @@ final class RemediationListParams implements BaseModel
     /**
      * Filter by customer-facing status.
      *
-     * @param FilterStatus|value-of<FilterStatus> $filterStatus
+     * @param RemediationStatus|value-of<RemediationStatus> $filterStatus
      */
-    public function withFilterStatus(FilterStatus|string $filterStatus): self
-    {
+    public function withFilterStatus(
+        RemediationStatus|string $filterStatus
+    ): self {
         $self = clone $this;
         $self['filterStatus'] = $filterStatus;
 

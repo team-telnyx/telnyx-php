@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Networks;
 
 use Telnyx\Core\Attributes\Optional;
-use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 
@@ -15,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   createdAt?: string|null,
  *   recordType?: string|null,
  *   updatedAt?: string|null,
- *   name: string,
+ *   name?: string|null,
  * }
  */
 final class NetworkCreate implements BaseModel
@@ -50,23 +49,9 @@ final class NetworkCreate implements BaseModel
     /**
      * A user specified name for the network.
      */
-    #[Required]
-    public string $name;
+    #[Optional]
+    public ?string $name;
 
-    /**
-     * `new NetworkCreate()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * NetworkCreate::with(name: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new NetworkCreate)->withName(...)
-     * ```
-     */
     public function __construct()
     {
         $this->initialize();
@@ -78,20 +63,19 @@ final class NetworkCreate implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        string $name,
         ?string $id = null,
         ?string $createdAt = null,
         ?string $recordType = null,
         ?string $updatedAt = null,
+        ?string $name = null,
     ): self {
         $self = new self;
-
-        $self['name'] = $name;
 
         null !== $id && $self['id'] = $id;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $recordType && $self['recordType'] = $recordType;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $name && $self['name'] = $name;
 
         return $self;
     }

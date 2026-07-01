@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\Tools\ToolGetResponse;
-use Telnyx\AI\Tools\ToolListResponse;
-use Telnyx\AI\Tools\ToolNewResponse;
-use Telnyx\AI\Tools\ToolUpdateResponse;
+use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
@@ -59,7 +56,7 @@ final class ToolsService implements ToolsContract
         int $timeoutMs = 5000,
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ToolNewResponse {
+    ): SharedToolResponse {
         $params = Util::removeNulls(
             [
                 'displayName' => $displayName,
@@ -92,7 +89,7 @@ final class ToolsService implements ToolsContract
     public function retrieve(
         string $toolID,
         RequestOptions|array|null $requestOptions = null
-    ): ToolGetResponse {
+    ): SharedToolResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($toolID, requestOptions: $requestOptions);
 
@@ -125,7 +122,7 @@ final class ToolsService implements ToolsContract
         ?string $type = null,
         ?array $webhook = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ToolUpdateResponse {
+    ): SharedToolResponse {
         $params = Util::removeNulls(
             [
                 'displayName' => $displayName,
@@ -156,7 +153,7 @@ final class ToolsService implements ToolsContract
      * @param int $pageSize number of items to return per page
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<ToolListResponse>
+     * @return DefaultFlatPagination<SharedToolResponse>
      *
      * @throws APIException
      */

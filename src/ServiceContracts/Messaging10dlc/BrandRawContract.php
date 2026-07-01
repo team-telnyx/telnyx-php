@@ -10,10 +10,9 @@ use Telnyx\Messaging10dlc\Brand\BrandCreateParams;
 use Telnyx\Messaging10dlc\Brand\BrandGetFeedbackResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetResponse;
 use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceParams;
-use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpByReferenceResponse;
-use Telnyx\Messaging10dlc\Brand\BrandGetSMSOtpStatusResponse;
 use Telnyx\Messaging10dlc\Brand\BrandListParams;
 use Telnyx\Messaging10dlc\Brand\BrandListResponse;
+use Telnyx\Messaging10dlc\Brand\BrandSMSOtpStatus;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpParams;
 use Telnyx\Messaging10dlc\Brand\BrandTriggerSMSOtpResponse;
 use Telnyx\Messaging10dlc\Brand\BrandUpdateParams;
@@ -126,7 +125,7 @@ interface BrandRawContract
      * @param array<string,mixed>|BrandGetSMSOtpByReferenceParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<BrandGetSMSOtpByReferenceResponse>
+     * @return BaseResponse<BrandSMSOtpStatus>
      *
      * @throws APIException
      */
@@ -157,7 +156,7 @@ interface BrandRawContract
      * @param string $brandID The Brand ID for which to query OTP status
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<BrandGetSMSOtpStatusResponse>
+     * @return BaseResponse<BrandSMSOtpStatus>
      *
      * @throws APIException
      */

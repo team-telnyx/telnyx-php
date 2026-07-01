@@ -7,13 +7,12 @@ namespace Telnyx\Texml\Accounts\Conferences;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference;
 
 /**
- * @phpstan-import-type ConferenceShape from \Telnyx\Texml\Accounts\Conferences\ConferenceGetConferencesResponse\Conference
+ * @phpstan-import-type ConferenceResourceShape from \Telnyx\Texml\Accounts\Conferences\ConferenceResource
  *
  * @phpstan-type ConferenceGetConferencesResponseShape = array{
- *   conferences?: list<Conference|ConferenceShape>|null,
+ *   conferences?: list<ConferenceResource|ConferenceResourceShape>|null,
  *   end?: int|null,
  *   firstPageUri?: string|null,
  *   nextPageUri?: string|null,
@@ -28,8 +27,8 @@ final class ConferenceGetConferencesResponse implements BaseModel
     /** @use SdkModel<ConferenceGetConferencesResponseShape> */
     use SdkModel;
 
-    /** @var list<Conference>|null $conferences */
-    #[Optional(list: Conference::class)]
+    /** @var list<ConferenceResource>|null $conferences */
+    #[Optional(list: ConferenceResource::class)]
     public ?array $conferences;
 
     /**
@@ -84,7 +83,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Conference|ConferenceShape>|null $conferences
+     * @param list<ConferenceResource|ConferenceResourceShape>|null $conferences
      */
     public static function with(
         ?array $conferences = null,
@@ -111,7 +110,7 @@ final class ConferenceGetConferencesResponse implements BaseModel
     }
 
     /**
-     * @param list<Conference|ConferenceShape> $conferences
+     * @param list<ConferenceResource|ConferenceResourceShape> $conferences
      */
     public function withConferences(array $conferences): self
     {

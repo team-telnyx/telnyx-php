@@ -5,10 +5,7 @@ namespace Tests\Services\AI;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\Tools\ToolGetResponse;
-use Telnyx\AI\Tools\ToolListResponse;
-use Telnyx\AI\Tools\ToolNewResponse;
-use Telnyx\AI\Tools\ToolUpdateResponse;
+use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
@@ -45,7 +42,7 @@ final class ToolsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ToolNewResponse::class, $result);
+        $this->assertInstanceOf(SharedToolResponse::class, $result);
     }
 
     #[Test]
@@ -67,7 +64,7 @@ final class ToolsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ToolNewResponse::class, $result);
+        $this->assertInstanceOf(SharedToolResponse::class, $result);
     }
 
     #[Test]
@@ -80,7 +77,7 @@ final class ToolsTest extends TestCase
         $result = $this->client->ai->tools->retrieve('tool_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ToolGetResponse::class, $result);
+        $this->assertInstanceOf(SharedToolResponse::class, $result);
     }
 
     #[Test]
@@ -93,7 +90,7 @@ final class ToolsTest extends TestCase
         $result = $this->client->ai->tools->update('tool_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ToolUpdateResponse::class, $result);
+        $this->assertInstanceOf(SharedToolResponse::class, $result);
     }
 
     #[Test]
@@ -110,7 +107,7 @@ final class ToolsTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(ToolListResponse::class, $item);
+            $this->assertInstanceOf(SharedToolResponse::class, $item);
         }
     }
 

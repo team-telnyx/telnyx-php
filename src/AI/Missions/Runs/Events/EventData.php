@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs\Events;
 
-use Telnyx\AI\Missions\Runs\Events\EventData\Type;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   runID: string,
  *   summary: string,
  *   timestamp: \DateTimeInterface,
- *   type: Type|value-of<Type>,
+ *   type: EventType|value-of<EventType>,
  *   agentID?: string|null,
  *   idempotencyKey?: string|null,
  *   payload?: array<string,mixed>|null,
@@ -40,8 +39,8 @@ final class EventData implements BaseModel
     #[Required]
     public \DateTimeInterface $timestamp;
 
-    /** @var value-of<Type> $type */
-    #[Required(enum: Type::class)]
+    /** @var value-of<EventType> $type */
+    #[Required(enum: EventType::class)]
     public string $type;
 
     #[Optional('agent_id')]
@@ -88,7 +87,7 @@ final class EventData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param EventType|value-of<EventType> $type
      * @param array<string,mixed>|null $payload
      */
     public static function with(
@@ -96,7 +95,7 @@ final class EventData implements BaseModel
         string $runID,
         string $summary,
         \DateTimeInterface $timestamp,
-        Type|string $type,
+        EventType|string $type,
         ?string $agentID = null,
         ?string $idempotencyKey = null,
         ?array $payload = null,
@@ -151,9 +150,9 @@ final class EventData implements BaseModel
     }
 
     /**
-     * @param Type|value-of<Type> $type
+     * @param EventType|value-of<EventType> $type
      */
-    public function withType(Type|string $type): self
+    public function withType(EventType|string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;

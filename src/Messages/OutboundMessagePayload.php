@@ -16,12 +16,13 @@ use Telnyx\Messages\OutboundMessagePayload\Media;
 use Telnyx\Messages\OutboundMessagePayload\RecordType;
 use Telnyx\Messages\OutboundMessagePayload\To;
 use Telnyx\Messages\OutboundMessagePayload\Type;
+use Telnyx\MessagingError;
 
 /**
  * @phpstan-import-type CcShape from \Telnyx\Messages\OutboundMessagePayload\Cc
  * @phpstan-import-type CostShape from \Telnyx\Messages\OutboundMessagePayload\Cost
  * @phpstan-import-type CostBreakdownShape from \Telnyx\Messages\OutboundMessagePayload\CostBreakdown
- * @phpstan-import-type MessagingErrorShape from \Telnyx\Messages\MessagingError
+ * @phpstan-import-type MessagingErrorShape from \Telnyx\MessagingError
  * @phpstan-import-type FromShape from \Telnyx\Messages\OutboundMessagePayload\From
  * @phpstan-import-type MediaShape from \Telnyx\Messages\OutboundMessagePayload\Media
  * @phpstan-import-type ToShape from \Telnyx\Messages\OutboundMessagePayload\To

@@ -7,12 +7,11 @@ namespace Telnyx\Queues\Calls;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Queues\Calls\CallGetResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\Queues\Calls\CallGetResponse\Data
+ * @phpstan-import-type QueueCallShape from \Telnyx\Queues\Calls\QueueCall
  *
- * @phpstan-type CallGetResponseShape = array{data?: null|Data|DataShape}
+ * @phpstan-type CallGetResponseShape = array{data?: null|QueueCall|QueueCallShape}
  */
 final class CallGetResponse implements BaseModel
 {
@@ -20,7 +19,7 @@ final class CallGetResponse implements BaseModel
     use SdkModel;
 
     #[Optional]
-    public ?Data $data;
+    public ?QueueCall $data;
 
     public function __construct()
     {
@@ -32,9 +31,9 @@ final class CallGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Data|DataShape|null $data
+     * @param QueueCall|QueueCallShape|null $data
      */
-    public static function with(Data|array|null $data = null): self
+    public static function with(QueueCall|array|null $data = null): self
     {
         $self = new self;
 
@@ -44,9 +43,9 @@ final class CallGetResponse implements BaseModel
     }
 
     /**
-     * @param Data|DataShape $data
+     * @param QueueCall|QueueCallShape $data
      */
-    public function withData(Data|array $data): self
+    public function withData(QueueCall|array $data): self
     {
         $self = clone $this;
         $self['data'] = $data;

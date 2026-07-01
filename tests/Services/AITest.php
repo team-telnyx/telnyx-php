@@ -5,9 +5,9 @@ namespace Tests\Services;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Telnyx\AI\AIGetModelsResponse;
-use Telnyx\AI\AISearchConversationHistoriesResponse;
+use Telnyx\AI\AIGetConversationHistoriesResponse;
 use Telnyx\AI\AISummarizeResponse;
+use Telnyx\AI\ModelsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -38,7 +38,7 @@ final class AITest extends TestCase
         }
 
         $result = $this->client->ai->createResponseDeprecated(
-            body: ['model' => 'bar', 'input' => 'bar']
+            responseRequest: ['model' => 'bar', 'input' => 'bar']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -53,7 +53,7 @@ final class AITest extends TestCase
         }
 
         $result = $this->client->ai->createResponseDeprecated(
-            body: ['model' => 'bar', 'input' => 'bar']
+            responseRequest: ['model' => 'bar', 'input' => 'bar']
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -61,44 +61,28 @@ final class AITest extends TestCase
     }
 
     #[Test]
-    public function testRetrieveModels(): void
+    public function testRetrieveConversationHistories(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->retrieveModels();
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(AIGetModelsResponse::class, $result);
-    }
-
-    #[Test]
-    public function testSearchConversationHistories(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->searchConversationHistories(
+        $result = $this->client->ai->retrieveConversationHistories(
             q: 'customer called about billing issue'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            AISearchConversationHistoriesResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(AIGetConversationHistoriesResponse::class, $result);
     }
 
     #[Test]
-    public function testSearchConversationHistoriesWithOptionalParams(): void
+    public function testRetrieveConversationHistoriesWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->ai->searchConversationHistories(
+        $result = $this->client->ai->retrieveConversationHistories(
             q: 'customer called about billing issue',
             filterIngestedAtGte: new \DateTimeImmutable('2026-01-01T00:00:00Z'),
             filterIngestedAtLte: new \DateTimeImmutable('2026-12-31T23:59:59Z'),
@@ -115,10 +99,20 @@ final class AITest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            AISearchConversationHistoriesResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(AIGetConversationHistoriesResponse::class, $result);
+    }
+
+    #[Test]
+    public function testRetrieveModels(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->ai->retrieveModels();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ModelsResponse::class, $result);
     }
 
     #[Test]

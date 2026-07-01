@@ -7,9 +7,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\Enterprises\Reputation\ReputationEnableResponse;
-use Telnyx\Enterprises\Reputation\ReputationGetResponse;
-use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyResponse;
+use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
+use Telnyx\Enterprises\Reputation\ReputationCheckFrequency;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -42,7 +41,7 @@ final class ReputationTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReputationGetResponse::class, $result);
+        $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
     }
 
     #[Test]
@@ -73,7 +72,7 @@ final class ReputationTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReputationEnableResponse::class, $result);
+        $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
     }
 
     #[Test]
@@ -86,11 +85,11 @@ final class ReputationTest extends TestCase
         $result = $this->client->enterprises->reputation->enable(
             '4a6192a4-573d-446d-b3ce-aff9117272a6',
             loaDocumentID: '2a7e8337-e803-4057-a4ae-26c40eb0bc6c',
-            checkFrequency: 'business_daily',
+            checkFrequency: ReputationCheckFrequency::BUSINESS_DAILY,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReputationEnableResponse::class, $result);
+        $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
     }
 
     #[Test]
@@ -102,11 +101,11 @@ final class ReputationTest extends TestCase
 
         $result = $this->client->enterprises->reputation->updateFrequency(
             '4a6192a4-573d-446d-b3ce-aff9117272a6',
-            checkFrequency: 'weekly'
+            checkFrequency: ReputationCheckFrequency::WEEKLY,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReputationUpdateFrequencyResponse::class, $result);
+        $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
     }
 
     #[Test]
@@ -118,10 +117,10 @@ final class ReputationTest extends TestCase
 
         $result = $this->client->enterprises->reputation->updateFrequency(
             '4a6192a4-573d-446d-b3ce-aff9117272a6',
-            checkFrequency: 'weekly'
+            checkFrequency: ReputationCheckFrequency::WEEKLY,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ReputationUpdateFrequencyResponse::class, $result);
+        $this->assertInstanceOf(EnterpriseReputationPublicWrapped::class, $result);
     }
 }

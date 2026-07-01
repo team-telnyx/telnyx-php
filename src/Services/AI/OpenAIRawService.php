@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
+use Telnyx\AI\ModelsResponse;
 use Telnyx\AI\OpenAI\OpenAICreateResponseParams;
-use Telnyx\AI\OpenAI\OpenAIListModelsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\MapOf;
@@ -37,7 +37,7 @@ final class OpenAIRawService implements OpenAIRawContract
      *
      * @param array{
      *   conversation?: string,
-     *   input?: mixed,
+     *   input?: array<string,mixed>,
      *   instructions?: string,
      *   model?: string,
      *   stream?: bool,
@@ -78,7 +78,7 @@ final class OpenAIRawService implements OpenAIRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<OpenAIListModelsResponse>
+     * @return BaseResponse<ModelsResponse>
      *
      * @throws APIException
      */
@@ -90,7 +90,7 @@ final class OpenAIRawService implements OpenAIRawContract
             method: 'get',
             path: 'ai/openai/models',
             options: $requestOptions,
-            convert: OpenAIListModelsResponse::class,
+            convert: ModelsResponse::class,
         );
     }
 }

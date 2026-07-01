@@ -9,7 +9,6 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Enterprises\Reputation\ReputationEnableParams\CheckFrequency;
 
 /**
  * Activate Phone Number Reputation for the given enterprise. Requires an uploaded Letter of Authorization document (the `loa_document_id` references the Telnyx Documents API) and a refresh-frequency selection. After activation, individual phone numbers can be registered via `POST .../reputation/numbers`.
@@ -28,7 +27,7 @@ use Telnyx\Enterprises\Reputation\ReputationEnableParams\CheckFrequency;
  *
  * @phpstan-type ReputationEnableParamsShape = array{
  *   loaDocumentID: string,
- *   checkFrequency?: null|CheckFrequency|value-of<CheckFrequency>,
+ *   checkFrequency?: null|ReputationCheckFrequency|value-of<ReputationCheckFrequency>,
  * }
  */
 final class ReputationEnableParams implements BaseModel
@@ -46,9 +45,9 @@ final class ReputationEnableParams implements BaseModel
     /**
      * How often Telnyx refreshes the stored reputation data for this enterprise's registered numbers.
      *
-     * @var value-of<CheckFrequency>|null $checkFrequency
+     * @var value-of<ReputationCheckFrequency>|null $checkFrequency
      */
-    #[Optional('check_frequency', enum: CheckFrequency::class)]
+    #[Optional('check_frequency', enum: ReputationCheckFrequency::class)]
     public ?string $checkFrequency;
 
     /**
@@ -75,11 +74,11 @@ final class ReputationEnableParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CheckFrequency|value-of<CheckFrequency>|null $checkFrequency
+     * @param ReputationCheckFrequency|value-of<ReputationCheckFrequency>|null $checkFrequency
      */
     public static function with(
         string $loaDocumentID,
-        CheckFrequency|string|null $checkFrequency = null
+        ReputationCheckFrequency|string|null $checkFrequency = null,
     ): self {
         $self = new self;
 
@@ -104,10 +103,10 @@ final class ReputationEnableParams implements BaseModel
     /**
      * How often Telnyx refreshes the stored reputation data for this enterprise's registered numbers.
      *
-     * @param CheckFrequency|value-of<CheckFrequency> $checkFrequency
+     * @param ReputationCheckFrequency|value-of<ReputationCheckFrequency> $checkFrequency
      */
     public function withCheckFrequency(
-        CheckFrequency|string $checkFrequency
+        ReputationCheckFrequency|string $checkFrequency
     ): self {
         $self = clone $this;
         $self['checkFrequency'] = $checkFrequency;

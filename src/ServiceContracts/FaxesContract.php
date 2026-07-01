@@ -8,10 +8,10 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Faxes\Fax;
 use Telnyx\Faxes\FaxCreateParams\PreviewFormat;
-use Telnyx\Faxes\FaxCreateParams\Quality;
 use Telnyx\Faxes\FaxGetResponse;
 use Telnyx\Faxes\FaxListParams\Filter;
 use Telnyx\Faxes\FaxNewResponse;
+use Telnyx\Faxes\Quality;
 use Telnyx\RequestOptions;
 
 /**

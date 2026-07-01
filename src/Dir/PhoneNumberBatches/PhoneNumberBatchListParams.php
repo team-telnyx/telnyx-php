@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchListParams\FilterStatus;
 
 /**
  * List the phone-number batches submitted under a DIR. The enterprise is resolved server-side from the DIR id.
@@ -16,7 +15,7 @@ use Telnyx\Dir\PhoneNumberBatches\PhoneNumberBatchListParams\FilterStatus;
  * @see Telnyx\Services\Dir\PhoneNumberBatchesService::list()
  *
  * @phpstan-type PhoneNumberBatchListParamsShape = array{
- *   filterStatus?: null|FilterStatus|value-of<FilterStatus>,
+ *   filterStatus?: null|DirPhoneNumberStatus|value-of<DirPhoneNumberStatus>,
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  * }
@@ -30,9 +29,9 @@ final class PhoneNumberBatchListParams implements BaseModel
     /**
      * Restrict to batches whose aggregate status equals this value.
      *
-     * @var value-of<FilterStatus>|null $filterStatus
+     * @var value-of<DirPhoneNumberStatus>|null $filterStatus
      */
-    #[Optional(enum: FilterStatus::class)]
+    #[Optional(enum: DirPhoneNumberStatus::class)]
     public ?string $filterStatus;
 
     /**
@@ -57,10 +56,10 @@ final class PhoneNumberBatchListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param FilterStatus|value-of<FilterStatus>|null $filterStatus
+     * @param DirPhoneNumberStatus|value-of<DirPhoneNumberStatus>|null $filterStatus
      */
     public static function with(
-        FilterStatus|string|null $filterStatus = null,
+        DirPhoneNumberStatus|string|null $filterStatus = null,
         ?int $pageNumber = null,
         ?int $pageSize = null,
     ): self {
@@ -76,10 +75,11 @@ final class PhoneNumberBatchListParams implements BaseModel
     /**
      * Restrict to batches whose aggregate status equals this value.
      *
-     * @param FilterStatus|value-of<FilterStatus> $filterStatus
+     * @param DirPhoneNumberStatus|value-of<DirPhoneNumberStatus> $filterStatus
      */
-    public function withFilterStatus(FilterStatus|string $filterStatus): self
-    {
+    public function withFilterStatus(
+        DirPhoneNumberStatus|string $filterStatus
+    ): self {
         $self = clone $this;
         $self['filterStatus'] = $filterStatus;
 

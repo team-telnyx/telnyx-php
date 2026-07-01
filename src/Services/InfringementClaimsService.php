@@ -7,16 +7,15 @@ namespace Telnyx\Services;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\InfringementClaims\InfringementClaimContestParams\Document;
-use Telnyx\InfringementClaims\InfringementClaimContestResponse;
-use Telnyx\InfringementClaims\InfringementClaimGetResponse;
+use Telnyx\Dir\Document;
+use Telnyx\InfringementClaims\InfringementClaimWrapped;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\InfringementClaimsContract;
 
 /**
  * Trademark or impersonation claims filed against your DIR. Customers may contest a claim with supporting evidence.
  *
- * @phpstan-import-type DocumentShape from \Telnyx\InfringementClaims\InfringementClaimContestParams\Document
+ * @phpstan-import-type DocumentShape from \Telnyx\Dir\Document
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class InfringementClaimsService implements InfringementClaimsContract
@@ -47,7 +46,7 @@ final class InfringementClaimsService implements InfringementClaimsContract
     public function retrieve(
         string $claimID,
         RequestOptions|array|null $requestOptions = null
-    ): InfringementClaimGetResponse {
+    ): InfringementClaimWrapped {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($claimID, requestOptions: $requestOptions);
 
@@ -78,7 +77,7 @@ final class InfringementClaimsService implements InfringementClaimsContract
         string $contestNotes,
         ?array $documents = null,
         RequestOptions|array|null $requestOptions = null,
-    ): InfringementClaimContestResponse {
+    ): InfringementClaimWrapped {
         $params = Util::removeNulls(
             ['contestNotes' => $contestNotes, 'documents' => $documents]
         );

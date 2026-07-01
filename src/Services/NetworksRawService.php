@@ -9,6 +9,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\Networks\Network;
+use Telnyx\Networks\NetworkCreate;
 use Telnyx\Networks\NetworkCreateParams;
 use Telnyx\Networks\NetworkDeleteResponse;
 use Telnyx\Networks\NetworkGetResponse;
@@ -16,7 +18,6 @@ use Telnyx\Networks\NetworkListInterfacesParams;
 use Telnyx\Networks\NetworkListInterfacesResponse;
 use Telnyx\Networks\NetworkListParams;
 use Telnyx\Networks\NetworkListParams\Filter;
-use Telnyx\Networks\NetworkListResponse;
 use Telnyx\Networks\NetworkNewResponse;
 use Telnyx\Networks\NetworkUpdateParams;
 use Telnyx\Networks\NetworkUpdateResponse;
@@ -28,6 +29,7 @@ use Telnyx\ServiceContracts\NetworksRawContract;
  *
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListParams\Filter
  * @phpstan-import-type FilterShape from \Telnyx\Networks\NetworkListInterfacesParams\Filter as FilterShape1
+ * @phpstan-import-type NetworkCreateShape from \Telnyx\Networks\NetworkCreate
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class NetworksRawService implements NetworksRawContract
@@ -43,7 +45,9 @@ final class NetworksRawService implements NetworksRawContract
      *
      * Create a new Network.
      *
-     * @param array{name: string}|NetworkCreateParams $params
+     * @param array{
+     *   networkCreate: NetworkCreate|NetworkCreateShape
+     * }|NetworkCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkNewResponse>
@@ -63,7 +67,7 @@ final class NetworksRawService implements NetworksRawContract
         return $this->client->request(
             method: 'post',
             path: 'networks',
-            body: (object) $parsed,
+            body: (object) $parsed['networkCreate'],
             options: $options,
             convert: NetworkNewResponse::class,
         );
@@ -100,7 +104,9 @@ final class NetworksRawService implements NetworksRawContract
      * Update a Network.
      *
      * @param string $networkID identifies the resource
-     * @param array{name: string}|NetworkUpdateParams $params
+     * @param array{
+     *   networkCreate: NetworkCreate|NetworkCreateShape
+     * }|NetworkUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<NetworkUpdateResponse>
@@ -121,7 +127,7 @@ final class NetworksRawService implements NetworksRawContract
         return $this->client->request(
             method: 'patch',
             path: ['networks/%1$s', $networkID],
-            body: (object) $parsed,
+            body: (object) $parsed['networkCreate'],
             options: $options,
             convert: NetworkUpdateResponse::class,
         );
@@ -137,7 +143,7 @@ final class NetworksRawService implements NetworksRawContract
      * }|NetworkListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<NetworkListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<Network>>
      *
      * @throws APIException
      */
@@ -159,7 +165,7 @@ final class NetworksRawService implements NetworksRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: NetworkListResponse::class,
+            convert: Network::class,
             page: DefaultFlatPagination::class,
         );
     }

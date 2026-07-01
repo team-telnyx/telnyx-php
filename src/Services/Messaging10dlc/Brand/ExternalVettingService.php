@@ -7,9 +7,7 @@ namespace Telnyx\Services\Messaging10dlc\Brand;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
+use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVetting;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Brand\ExternalVettingContract;
 
@@ -41,7 +39,7 @@ final class ExternalVettingService implements ExternalVettingContract
      * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
-     * @return list<ExternalVettingListResponseItem>
+     * @return list<ExternalVetting>
      *
      * @throws APIException
      */
@@ -76,7 +74,7 @@ final class ExternalVettingService implements ExternalVettingContract
         string $vettingID,
         ?string $vettingToken = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ExternalVettingImportsResponse {
+    ): ExternalVetting {
         $params = Util::removeNulls(
             [
                 'evpID' => $evpID,
@@ -110,7 +108,7 @@ final class ExternalVettingService implements ExternalVettingContract
         string $evpID,
         string $vettingClass,
         RequestOptions|array|null $requestOptions = null,
-    ): ExternalVettingOrderResponse {
+    ): ExternalVetting {
         $params = Util::removeNulls(
             ['evpID' => $evpID, 'vettingClass' => $vettingClass]
         );
