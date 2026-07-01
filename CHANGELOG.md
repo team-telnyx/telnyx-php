@@ -1,5 +1,30 @@
 # Changelog
 
+## [7.86.0](https://github.com/team-telnyx/telnyx-php/compare/v8.0.0...v7.86.0) (2026-07-01)
+
+
+### Features
+
+* **transcriptions-search:** hide record_type, remove document_id, scrub internal references ([e156c05](https://github.com/team-telnyx/telnyx-php/commit/e156c05a23babeaf7d68dd4a66371632e6df0234))
+
+
+### Bug Fixes
+
+* add --local flag so release-please scans next branch for commits ([02bea8c](https://github.com/team-telnyx/telnyx-php/commit/02bea8c0073ee32f4037ef5a8a4bd2117590ed69))
+* add --local flag so release-please scans next branch for commits ([081c1c0](https://github.com/team-telnyx/telnyx-php/commit/081c1c08ebc88b9f052870410106bc90c4d8f018))
+* correct stale .release-please-manifest.json to 8.0.0 ([f5fef74](https://github.com/team-telnyx/telnyx-php/commit/f5fef748931ac8f03d298aa4f3df465c97464005))
+* correct stale .release-please-manifest.json to 8.0.0 ([64b7b18](https://github.com/team-telnyx/telnyx-php/commit/64b7b181701fa4cb47a1d13e1b5e2cae97f361c2))
+* remove `|| true` from github-release step ([#306](https://github.com/team-telnyx/telnyx-php/issues/306)) ([46d6df9](https://github.com/team-telnyx/telnyx-php/commit/46d6df9e84b72b65f87818f7e7990f8ffb5423c2))
+* remove prerelease flags, fix schema URL to googleapis ([45e8abf](https://github.com/team-telnyx/telnyx-php/commit/45e8abf23643678a860ab4a1231e04842ade684d))
+* sync manifest and Version.php to v8.0.0 ([4693786](https://github.com/team-telnyx/telnyx-php/commit/46937864a66ec782c26be5de9fb23296a4df8e59))
+* sync manifest to v8.0.0 (was stuck at 7.85.0 after manual major release) ([f8f0ccd](https://github.com/team-telnyx/telnyx-php/commit/f8f0ccd5b202359fb6fdebc48ce1067bf538f2cb))
+* sync Version.php to 8.0.0 ([852875e](https://github.com/team-telnyx/telnyx-php/commit/852875efe5e8016ea606313da7ef8974d789f47c))
+
+
+### Chores
+
+* sync repo ([4789a44](https://github.com/team-telnyx/telnyx-php/commit/4789a4457cb67ce42dd9cc497e75070fa9d59147))
+
 ## 7.85.0 (2026-06-26)
 
 Full Changelog: [v7.84.0...v7.85.0](https://github.com/team-telnyx/telnyx-php/compare/v7.84.0...v7.85.0)
