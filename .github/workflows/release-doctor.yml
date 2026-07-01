@@ -14,9 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Verify Packagist webhook
+      - name: Check release environment
         run: |
-          echo "Packagist publishing is handled via GitHub webhook auto-sync."
-          echo "No API tokens or manual publish steps are required."
-          echo "Ensure the Packagist webhook is active at:"
-          echo "  https://github.com/team-telnyx/telnyx-php/settings/hooks"
+          bash ./bin/check-release-environment
+        env:
+          RELEASE_PLEASE_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          PACKAGIST_USERNAME: ${{ secrets.TELNYX_PACKAGIST_USERNAME || secrets.PACKAGIST_USERNAME }}
+          PACKAGIST_SAFE_KEY: ${{ secrets.TELNYX_PACKAGIST_SAFE_KEY || secrets.PACKAGIST_SAFE_KEY }}

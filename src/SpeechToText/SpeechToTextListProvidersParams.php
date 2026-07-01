@@ -9,7 +9,6 @@ use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\SpeechToText\SpeechToTextListProvidersParams\Provider;
-use Telnyx\SpeechToText\SpeechToTextListProvidersParams\ServiceType;
 
 /**
  * Retrieve the canonical list of supported speech-to-text providers, models, accepted language codes, and the service types each model supports.
@@ -26,7 +25,7 @@ use Telnyx\SpeechToText\SpeechToTextListProvidersParams\ServiceType;
  *
  * @phpstan-type SpeechToTextListProvidersParamsShape = array{
  *   provider?: null|Provider|value-of<Provider>,
- *   serviceType?: null|ServiceType|value-of<ServiceType>,
+ *   serviceType?: null|SttServiceType|value-of<SttServiceType>,
  * }
  */
 final class SpeechToTextListProvidersParams implements BaseModel
@@ -46,9 +45,9 @@ final class SpeechToTextListProvidersParams implements BaseModel
     /**
      * Filter to entries that support the given service type. For backward compatibility with the values that briefly shipped before the product-aligned rename, the legacy aliases `file_transcription`, `in_call_transcription`, and `ai_assistant_transcription` are silently accepted and normalized to `file_based`, `in_call`, and `ai_assistant` respectively. The response always emits the canonical (post-rename) values.
      *
-     * @var value-of<ServiceType>|null $serviceType
+     * @var value-of<SttServiceType>|null $serviceType
      */
-    #[Optional(enum: ServiceType::class)]
+    #[Optional(enum: SttServiceType::class)]
     public ?string $serviceType;
 
     public function __construct()
@@ -62,11 +61,11 @@ final class SpeechToTextListProvidersParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Provider|value-of<Provider>|null $provider
-     * @param ServiceType|value-of<ServiceType>|null $serviceType
+     * @param SttServiceType|value-of<SttServiceType>|null $serviceType
      */
     public static function with(
         Provider|string|null $provider = null,
-        ServiceType|string|null $serviceType = null
+        SttServiceType|string|null $serviceType = null
     ): self {
         $self = new self;
 
@@ -92,9 +91,9 @@ final class SpeechToTextListProvidersParams implements BaseModel
     /**
      * Filter to entries that support the given service type. For backward compatibility with the values that briefly shipped before the product-aligned rename, the legacy aliases `file_transcription`, `in_call_transcription`, and `ai_assistant_transcription` are silently accepted and normalized to `file_based`, `in_call`, and `ai_assistant` respectively. The response always emits the canonical (post-rename) values.
      *
-     * @param ServiceType|value-of<ServiceType> $serviceType
+     * @param SttServiceType|value-of<SttServiceType> $serviceType
      */
-    public function withServiceType(ServiceType|string $serviceType): self
+    public function withServiceType(SttServiceType|string $serviceType): self
     {
         $self = clone $this;
         $self['serviceType'] = $serviceType;

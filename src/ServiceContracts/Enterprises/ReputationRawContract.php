@@ -6,11 +6,9 @@ namespace Telnyx\ServiceContracts\Enterprises;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Enterprises\Reputation\EnterpriseReputationPublicWrapped;
 use Telnyx\Enterprises\Reputation\ReputationEnableParams;
-use Telnyx\Enterprises\Reputation\ReputationEnableResponse;
-use Telnyx\Enterprises\Reputation\ReputationGetResponse;
 use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyParams;
-use Telnyx\Enterprises\Reputation\ReputationUpdateFrequencyResponse;
 use Telnyx\RequestOptions;
 
 /**
@@ -24,7 +22,7 @@ interface ReputationRawContract
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationGetResponse>
+     * @return BaseResponse<EnterpriseReputationPublicWrapped>
      *
      * @throws APIException
      */
@@ -55,7 +53,7 @@ interface ReputationRawContract
      * @param array<string,mixed>|ReputationEnableParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationEnableResponse>
+     * @return BaseResponse<EnterpriseReputationPublicWrapped>
      *
      * @throws APIException
      */
@@ -72,7 +70,7 @@ interface ReputationRawContract
      * @param array<string,mixed>|ReputationUpdateFrequencyParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ReputationUpdateFrequencyResponse>
+     * @return BaseResponse<EnterpriseReputationPublicWrapped>
      *
      * @throws APIException
      */

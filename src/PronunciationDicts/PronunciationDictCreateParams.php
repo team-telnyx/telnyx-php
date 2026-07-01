@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PronunciationDicts\PronunciationDictCreateParams\Item;
 
 /**
  * Create a new pronunciation dictionary for the authenticated organization. Each dictionary contains a list of items that control how specific words are spoken. Items can be alias type (text replacement) or phoneme type (IPA pronunciation notation).
@@ -24,11 +23,11 @@ use Telnyx\PronunciationDicts\PronunciationDictCreateParams\Item;
  *
  * @see Telnyx\Services\PronunciationDictsService::create()
  *
- * @phpstan-import-type ItemVariants from \Telnyx\PronunciationDicts\PronunciationDictCreateParams\Item
- * @phpstan-import-type ItemShape from \Telnyx\PronunciationDicts\PronunciationDictCreateParams\Item
+ * @phpstan-import-type PronunciationDictItemVariants from \Telnyx\PronunciationDicts\PronunciationDictItem
+ * @phpstan-import-type PronunciationDictItemShape from \Telnyx\PronunciationDicts\PronunciationDictItem
  *
  * @phpstan-type PronunciationDictCreateParamsShape = array{
- *   items: list<ItemShape>, name: string
+ *   items: list<PronunciationDictItemShape>, name: string
  * }
  */
 final class PronunciationDictCreateParams implements BaseModel
@@ -40,9 +39,9 @@ final class PronunciationDictCreateParams implements BaseModel
     /**
      * List of pronunciation items (alias or phoneme type). At least one item is required.
      *
-     * @var list<ItemVariants> $items
+     * @var list<PronunciationDictItemVariants> $items
      */
-    #[Required(list: Item::class)]
+    #[Required(list: PronunciationDictItem::class)]
     public array $items;
 
     /**
@@ -75,7 +74,7 @@ final class PronunciationDictCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<ItemShape> $items
+     * @param list<PronunciationDictItemShape> $items
      */
     public static function with(array $items, string $name): self
     {
@@ -90,7 +89,7 @@ final class PronunciationDictCreateParams implements BaseModel
     /**
      * List of pronunciation items (alias or phoneme type). At least one item is required.
      *
-     * @param list<ItemShape> $items
+     * @param list<PronunciationDictItemShape> $items
      */
     public function withItems(array $items): self
     {

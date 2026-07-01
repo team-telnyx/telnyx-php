@@ -8,11 +8,11 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\RoomRecordings\RoomRecording;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkParams;
 use Telnyx\RoomRecordings\RoomRecordingDeleteBulkResponse;
 use Telnyx\RoomRecordings\RoomRecordingGetResponse;
 use Telnyx\RoomRecordings\RoomRecordingListParams;
-use Telnyx\RoomRecordings\RoomRecordingListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -40,7 +40,7 @@ interface RoomRecordingsRawContract
      * @param array<string,mixed>|RoomRecordingListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<RoomRecordingListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<RoomRecording>>
      *
      * @throws APIException
      */

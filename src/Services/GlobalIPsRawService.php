@@ -9,11 +9,11 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
+use Telnyx\GlobalIPs\GlobalIP;
 use Telnyx\GlobalIPs\GlobalIPCreateParams;
 use Telnyx\GlobalIPs\GlobalIPDeleteResponse;
 use Telnyx\GlobalIPs\GlobalIPGetResponse;
 use Telnyx\GlobalIPs\GlobalIPListParams;
-use Telnyx\GlobalIPs\GlobalIPListResponse;
 use Telnyx\GlobalIPs\GlobalIPNewResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\GlobalIPsRawContract;
@@ -97,7 +97,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
      * @param array{pageNumber?: int, pageSize?: int}|GlobalIPListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<GlobalIPListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<GlobalIP>>
      *
      * @throws APIException
      */
@@ -119,7 +119,7 @@ final class GlobalIPsRawService implements GlobalIPsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: GlobalIPListResponse::class,
+            convert: GlobalIP::class,
             page: DefaultFlatPagination::class,
         );
     }

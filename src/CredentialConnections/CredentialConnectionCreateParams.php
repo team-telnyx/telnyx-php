@@ -11,7 +11,6 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\CredentialConnections\CredentialConnectionCreateParams\NoiseSuppression;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\SipUriCallingPreference;
 use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVersion;
 
@@ -41,7 +40,7 @@ use Telnyx\CredentialConnections\CredentialConnectionCreateParams\WebhookAPIVers
  *   inbound?: null|CredentialInbound|CredentialInboundShape,
  *   iosPushCredentialID?: string|null,
  *   jitterBuffer?: null|ConnectionJitterBuffer|ConnectionJitterBufferShape,
- *   noiseSuppression?: null|NoiseSuppression|value-of<NoiseSuppression>,
+ *   noiseSuppression?: null|ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>,
  *   noiseSuppressionDetails?: null|ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
  *   onnetT38PassthroughEnabled?: bool|null,
  *   outbound?: null|CredentialOutbound|CredentialOutboundShape,
@@ -150,9 +149,9 @@ final class CredentialConnectionCreateParams implements BaseModel
     /**
      * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      *
-     * @var value-of<NoiseSuppression>|null $noiseSuppression
+     * @var value-of<ConnectionNoiseSuppression>|null $noiseSuppression
      */
-    #[Optional('noise_suppression', enum: NoiseSuppression::class)]
+    #[Optional('noise_suppression', enum: ConnectionNoiseSuppression::class)]
     public ?string $noiseSuppression;
 
     /**
@@ -252,7 +251,7 @@ final class CredentialConnectionCreateParams implements BaseModel
      * @param EncryptedMedia|value-of<EncryptedMedia>|null $encryptedMedia
      * @param CredentialInbound|CredentialInboundShape|null $inbound
      * @param ConnectionJitterBuffer|ConnectionJitterBufferShape|null $jitterBuffer
-     * @param NoiseSuppression|value-of<NoiseSuppression>|null $noiseSuppression
+     * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>|null $noiseSuppression
      * @param ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape|null $noiseSuppressionDetails
      * @param CredentialOutbound|CredentialOutboundShape|null $outbound
      * @param ConnectionRtcpSettings|ConnectionRtcpSettingsShape|null $rtcpSettings
@@ -275,7 +274,7 @@ final class CredentialConnectionCreateParams implements BaseModel
         CredentialInbound|array|null $inbound = null,
         ?string $iosPushCredentialID = null,
         ConnectionJitterBuffer|array|null $jitterBuffer = null,
-        NoiseSuppression|string|null $noiseSuppression = null,
+        ConnectionNoiseSuppression|string|null $noiseSuppression = null,
         ConnectionNoiseSuppressionDetails|array|null $noiseSuppressionDetails = null,
         ?bool $onnetT38PassthroughEnabled = null,
         CredentialOutbound|array|null $outbound = null,
@@ -490,10 +489,10 @@ final class CredentialConnectionCreateParams implements BaseModel
     /**
      * Controls when noise suppression is applied to calls. When set to 'inbound', noise suppression is applied to incoming audio. When set to 'outbound', it's applied to outgoing audio. When set to 'both', it's applied in both directions. When set to 'disabled', noise suppression is turned off.
      *
-     * @param NoiseSuppression|value-of<NoiseSuppression> $noiseSuppression
+     * @param ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression> $noiseSuppression
      */
     public function withNoiseSuppression(
-        NoiseSuppression|string $noiseSuppression
+        ConnectionNoiseSuppression|string $noiseSuppression
     ): self {
         $self = clone $this;
         $self['noiseSuppression'] = $noiseSuppression;

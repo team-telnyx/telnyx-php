@@ -7,9 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
-use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
-use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -44,7 +42,7 @@ final class SiprecConnectorsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(SiprecConnectorNewResponse::class, $result);
+        $this->assertInstanceOf(SiprecConnectorResponse::class, $result);
     }
 
     #[Test]
@@ -62,7 +60,7 @@ final class SiprecConnectorsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(SiprecConnectorNewResponse::class, $result);
+        $this->assertInstanceOf(SiprecConnectorResponse::class, $result);
     }
 
     #[Test]
@@ -75,7 +73,7 @@ final class SiprecConnectorsTest extends TestCase
         $result = $this->client->siprecConnectors->retrieve('connector_name');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(SiprecConnectorGetResponse::class, $result);
+        $this->assertInstanceOf(SiprecConnectorResponse::class, $result);
     }
 
     #[Test]
@@ -93,7 +91,7 @@ final class SiprecConnectorsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(SiprecConnectorUpdateResponse::class, $result);
+        $this->assertInstanceOf(SiprecConnectorResponse::class, $result);
     }
 
     #[Test]
@@ -112,7 +110,7 @@ final class SiprecConnectorsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(SiprecConnectorUpdateResponse::class, $result);
+        $this->assertInstanceOf(SiprecConnectorResponse::class, $result);
     }
 
     #[Test]

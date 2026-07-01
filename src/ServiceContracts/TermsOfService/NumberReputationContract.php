@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\TermsOfService;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TermsOfService\NumberReputation\NumberReputationAgreeResponse;
+use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -22,5 +22,5 @@ interface NumberReputationContract
      */
     public function agree(
         RequestOptions|array|null $requestOptions = null
-    ): NumberReputationAgreeResponse;
+    ): TosAgreementWrapped;
 }

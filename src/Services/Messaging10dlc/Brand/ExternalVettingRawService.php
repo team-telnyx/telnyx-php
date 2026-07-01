@@ -8,11 +8,9 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Conversion\ListOf;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVetting;
 use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingImportsParams;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingImportsResponse;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingListResponseItem;
 use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderParams;
-use Telnyx\Messaging10dlc\Brand\ExternalVetting\ExternalVettingOrderResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Messaging10dlc\Brand\ExternalVettingRawContract;
 
@@ -37,7 +35,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      * @param string $brandID unique identifier of the brand
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<ExternalVettingListResponseItem>>
+     * @return BaseResponse<list<ExternalVetting>>
      *
      * @throws APIException
      */
@@ -50,7 +48,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
             method: 'get',
             path: ['10dlc/brand/%1$s/externalVetting', $brandID],
             options: $requestOptions,
-            convert: new ListOf(ExternalVettingListResponseItem::class),
+            convert: new ListOf(ExternalVetting::class),
         );
     }
 
@@ -67,7 +65,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      * }|ExternalVettingImportsParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ExternalVettingImportsResponse>
+     * @return BaseResponse<ExternalVetting>
      *
      * @throws APIException
      */
@@ -87,7 +85,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
             path: ['10dlc/brand/%1$s/externalVetting', $brandID],
             body: (object) $parsed,
             options: $options,
-            convert: ExternalVettingImportsResponse::class,
+            convert: ExternalVetting::class,
         );
     }
 
@@ -104,7 +102,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
      * }|ExternalVettingOrderParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<ExternalVettingOrderResponse>
+     * @return BaseResponse<ExternalVetting>
      *
      * @throws APIException
      */
@@ -124,7 +122,7 @@ final class ExternalVettingRawService implements ExternalVettingRawContract
             path: ['10dlc/brand/%1$s/externalVetting', $brandID],
             body: (object) $parsed,
             options: $options,
-            convert: ExternalVettingOrderResponse::class,
+            convert: ExternalVetting::class,
         );
     }
 }

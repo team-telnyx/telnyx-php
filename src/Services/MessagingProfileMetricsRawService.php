@@ -8,8 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
+use Telnyx\MessagingProfileMetrics\MessagingMetricsTimeFrame;
 use Telnyx\MessagingProfileMetrics\MessagingProfileMetricListParams;
-use Telnyx\MessagingProfileMetrics\MessagingProfileMetricListParams\TimeFrame;
 use Telnyx\MessagingProfileMetrics\MessagingProfileMetricListResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagingProfileMetricsRawContract;
@@ -31,7 +31,7 @@ final class MessagingProfileMetricsRawService implements MessagingProfileMetrics
      * List high-level metrics for all messaging profiles belonging to the authenticated user.
      *
      * @param array{
-     *   timeFrame?: TimeFrame|value-of<TimeFrame>
+     *   timeFrame?: MessagingMetricsTimeFrame|value-of<MessagingMetricsTimeFrame>
      * }|MessagingProfileMetricListParams $params
      * @param RequestOpts|null $requestOptions
      *

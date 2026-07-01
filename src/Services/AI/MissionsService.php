@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
-use Telnyx\AI\Missions\MissionCreateParams\ExecutionMode;
+use Telnyx\AI\Missions\ExecutionMode;
 use Telnyx\AI\Missions\MissionData;
-use Telnyx\AI\Missions\MissionGetResponse;
-use Telnyx\AI\Missions\MissionNewResponse;
-use Telnyx\AI\Missions\MissionUpdateMissionResponse;
+use Telnyx\AI\Missions\MissionResponse;
 use Telnyx\AI\Missions\Runs\Events\EventData;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -77,12 +75,12 @@ final class MissionsService implements MissionsContract
     public function create(
         string $name,
         ?string $description = null,
-        ExecutionMode|string $executionMode = 'external',
+        ExecutionMode|string|null $executionMode = null,
         ?string $instructions = null,
         ?array $metadata = null,
         ?string $model = null,
         RequestOptions|array|null $requestOptions = null,
-    ): MissionNewResponse {
+    ): MissionResponse {
         $params = Util::removeNulls(
             [
                 'name' => $name,
@@ -113,7 +111,7 @@ final class MissionsService implements MissionsContract
     public function retrieve(
         string $missionID,
         RequestOptions|array|null $requestOptions = null
-    ): MissionGetResponse {
+    ): MissionResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($missionID, requestOptions: $requestOptions);
 
@@ -224,7 +222,7 @@ final class MissionsService implements MissionsContract
      * Update a mission definition
      *
      * @param string $missionID unique identifier of the mission
-     * @param \Telnyx\AI\Missions\MissionUpdateMissionParams\ExecutionMode|value-of<\Telnyx\AI\Missions\MissionUpdateMissionParams\ExecutionMode> $executionMode
+     * @param ExecutionMode|value-of<ExecutionMode> $executionMode
      * @param array<string,mixed> $metadata
      * @param RequestOpts|null $requestOptions
      *
@@ -233,13 +231,13 @@ final class MissionsService implements MissionsContract
     public function updateMission(
         string $missionID,
         ?string $description = null,
-        \Telnyx\AI\Missions\MissionUpdateMissionParams\ExecutionMode|string|null $executionMode = null,
+        ExecutionMode|string|null $executionMode = null,
         ?string $instructions = null,
         ?array $metadata = null,
         ?string $model = null,
         ?string $name = null,
         RequestOptions|array|null $requestOptions = null,
-    ): MissionUpdateMissionResponse {
+    ): MissionResponse {
         $params = Util::removeNulls(
             [
                 'description' => $description,

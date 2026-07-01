@@ -6,29 +6,30 @@ namespace Telnyx\ServiceContracts;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Aws;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Azure;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Elevenlabs;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Minimax;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\OutputType;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Provider;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\TextType;
-use Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai;
-use Telnyx\TextToSpeech\TextToSpeechGenerateResponse;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\TextType;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechResponse;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
+use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
 
 /**
- * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Aws
- * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Azure
- * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Elevenlabs
- * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Minimax
- * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Resemble
- * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Rime
- * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Telnyx
- * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateParams\Xai
+ * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws
+ * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure
+ * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs
+ * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
+ * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
+ * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime
+ * @phpstan-import-type TelnyxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx
+ * @phpstan-import-type XaiShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface TextToSpeechContract
@@ -56,7 +57,7 @@ interface TextToSpeechContract
      *
      * @throws APIException
      */
-    public function generate(
+    public function generateSpeech(
         Aws|array|null $aws = null,
         Azure|array|null $azure = null,
         bool $disableCache = false,
@@ -74,7 +75,7 @@ interface TextToSpeechContract
         ?array $voiceSettings = null,
         Xai|array|null $xai = null,
         RequestOptions|array|null $requestOptions = null,
-    ): TextToSpeechGenerateResponse;
+    ): TextToSpeechGenerateSpeechResponse;
 
     /**
      * @api
@@ -90,4 +91,29 @@ interface TextToSpeechContract
         \Telnyx\TextToSpeech\TextToSpeechListVoicesParams\Provider|string|null $provider = null,
         RequestOptions|array|null $requestOptions = null,
     ): TextToSpeechListVoicesResponse;
+
+    /**
+     * @api
+     *
+     * @param AudioFormat|value-of<AudioFormat> $audioFormat Audio output format override. Supported for Telnyx models. `pcm` and `wav` are available for `Natural`/`NaturalHD` models. The `Ultra` model outputs PCM at 24kHz s16le or MP3 at 128kbps 24kHz.
+     * @param bool $disableCache when `true`, bypass the audio cache and generate fresh audio
+     * @param string $modelID Model identifier for the chosen provider. Examples: `Natural`, `NaturalHD`, `Ultra` (Telnyx); `Polly.Generative` (AWS).
+     * @param \Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\Provider|value-of<\Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\Provider> $provider TTS provider. Defaults to `telnyx` if not specified. Ignored when `voice` is provided.
+     * @param string $socketID Client-provided socket identifier for tracking. If not provided, one is generated server-side.
+     * @param string $voice Voice identifier in the format `provider.model_id.voice_id` or `provider.voice_id` (e.g. `telnyx.NaturalHD.Telnyx_Alloy`, `Telnyx.Ultra.<voice_id>`, or `azure.en-US-AvaMultilingualNeural`). When provided, the `provider`, `model_id`, and `voice_id` are extracted automatically. Takes precedence over individual `provider`/`model_id`/`voice_id` parameters.
+     * @param string $voiceID voice identifier for the chosen provider
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieveSpeech(
+        AudioFormat|string|null $audioFormat = null,
+        bool $disableCache = false,
+        ?string $modelID = null,
+        \Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\Provider|string $provider = 'telnyx',
+        ?string $socketID = null,
+        ?string $voice = null,
+        ?string $voiceID = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): mixed;
 }

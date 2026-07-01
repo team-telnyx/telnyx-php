@@ -8,9 +8,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\VoiceSDKCallReports\VoiceSDKCallReportGetResponseItem;
+use Telnyx\VoiceSDKCallReports\VoiceSDKCallReport;
 use Telnyx\VoiceSDKCallReports\VoiceSDKCallReportListParams;
-use Telnyx\VoiceSDKCallReports\VoiceSDKCallReportListResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -23,7 +22,7 @@ interface VoiceSDKCallReportsRawContract
      * @param string $callID call identifier used to retrieve reports owned by the authenticated user
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<list<VoiceSDKCallReportGetResponseItem>>
+     * @return BaseResponse<list<VoiceSDKCallReport>>
      *
      * @throws APIException
      */
@@ -38,7 +37,7 @@ interface VoiceSDKCallReportsRawContract
      * @param array<string,mixed>|VoiceSDKCallReportListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<VoiceSDKCallReportListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<VoiceSDKCallReport>>
      *
      * @throws APIException
      */

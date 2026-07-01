@@ -7,13 +7,13 @@ namespace Telnyx\SpeechToText\SpeechToTextListProvidersResponse\Data;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\SpeechToText\SpeechToTextListProvidersResponse\Data\ServiceType\Type;
+use Telnyx\SpeechToText\SttServiceType;
 
 /**
  * A supported service surface for a given (provider, model), along with the language codes accepted on that surface. Language support can differ per surface — for example, a model may accept a narrower language set for streaming than for file transcription.
  *
  * @phpstan-type ServiceTypeShape = array{
- *   languages: list<string>, type: Type|value-of<Type>
+ *   languages: list<string>, type: SttServiceType|value-of<SttServiceType>
  * }
  */
 final class ServiceType implements BaseModel
@@ -32,9 +32,9 @@ final class ServiceType implements BaseModel
     /**
      * Service surface a model is available on. `ai_assistant` is the STT surface configured via Call Control voice-assistant transcription; it covers both live-streaming and non-streaming/batch models (matching the `TranscriptionConfig.model` enum on `call-control` voice assistants).
      *
-     * @var value-of<Type> $type
+     * @var value-of<SttServiceType> $type
      */
-    #[Required(enum: Type::class)]
+    #[Required(enum: SttServiceType::class)]
     public string $type;
 
     /**
@@ -62,10 +62,12 @@ final class ServiceType implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param list<string> $languages
-     * @param Type|value-of<Type> $type
+     * @param SttServiceType|value-of<SttServiceType> $type
      */
-    public static function with(array $languages, Type|string $type): self
-    {
+    public static function with(
+        array $languages,
+        SttServiceType|string $type
+    ): self {
         $self = new self;
 
         $self['languages'] = $languages;
@@ -90,9 +92,9 @@ final class ServiceType implements BaseModel
     /**
      * Service surface a model is available on. `ai_assistant` is the STT surface configured via Call Control voice-assistant transcription; it covers both live-streaming and non-streaming/batch models (matching the `TranscriptionConfig.model` enum on `call-control` voice assistants).
      *
-     * @param Type|value-of<Type> $type
+     * @param SttServiceType|value-of<SttServiceType> $type
      */
-    public function withType(Type|string $type): self
+    public function withType(SttServiceType|string $type): self
     {
         $self = clone $this;
         $self['type'] = $type;

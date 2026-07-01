@@ -7,14 +7,16 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
+use Telnyx\WireguardPeers\WireguardPeer;
+use Telnyx\WireguardPeers\WireguardPeerCreateParams\Body;
 use Telnyx\WireguardPeers\WireguardPeerDeleteResponse;
 use Telnyx\WireguardPeers\WireguardPeerGetResponse;
 use Telnyx\WireguardPeers\WireguardPeerListParams\Filter;
-use Telnyx\WireguardPeers\WireguardPeerListResponse;
 use Telnyx\WireguardPeers\WireguardPeerNewResponse;
 use Telnyx\WireguardPeers\WireguardPeerUpdateResponse;
 
 /**
+ * @phpstan-import-type BodyShape from \Telnyx\WireguardPeers\WireguardPeerCreateParams\Body
  * @phpstan-import-type FilterShape from \Telnyx\WireguardPeers\WireguardPeerListParams\Filter
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
@@ -23,14 +25,14 @@ interface WireguardPeersContract
     /**
      * @api
      *
-     * @param string $wireguardInterfaceID the id of the wireguard interface associated with the peer
+     * @param Body|BodyShape $body
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        string $wireguardInterfaceID,
-        RequestOptions|array|null $requestOptions = null,
+        Body|array $body,
+        RequestOptions|array|null $requestOptions = null
     ): WireguardPeerNewResponse;
 
     /**
@@ -67,7 +69,7 @@ interface WireguardPeersContract
      * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[wireguard_interface_id]
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPagination<WireguardPeerListResponse>
+     * @return DefaultFlatPagination<WireguardPeer>
      *
      * @throws APIException
      */

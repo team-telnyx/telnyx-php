@@ -8,10 +8,8 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\SiprecConnectors\SiprecConnectorCreateParams;
-use Telnyx\SiprecConnectors\SiprecConnectorGetResponse;
-use Telnyx\SiprecConnectors\SiprecConnectorNewResponse;
+use Telnyx\SiprecConnectors\SiprecConnectorResponse;
 use Telnyx\SiprecConnectors\SiprecConnectorUpdateParams;
-use Telnyx\SiprecConnectors\SiprecConnectorUpdateResponse;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -24,7 +22,7 @@ interface SiprecConnectorsRawContract
      * @param array<string,mixed>|SiprecConnectorCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<SiprecConnectorNewResponse>
+     * @return BaseResponse<SiprecConnectorResponse>
      *
      * @throws APIException
      */
@@ -39,7 +37,7 @@ interface SiprecConnectorsRawContract
      * @param string $connectorName uniquely identifies a SIPREC connector
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<SiprecConnectorGetResponse>
+     * @return BaseResponse<SiprecConnectorResponse>
      *
      * @throws APIException
      */
@@ -55,7 +53,7 @@ interface SiprecConnectorsRawContract
      * @param array<string,mixed>|SiprecConnectorUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<SiprecConnectorUpdateResponse>
+     * @return BaseResponse<SiprecConnectorResponse>
      *
      * @throws APIException
      */

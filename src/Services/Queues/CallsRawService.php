@@ -11,10 +11,10 @@ use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\Queues\Calls\CallGetResponse;
 use Telnyx\Queues\Calls\CallListParams;
-use Telnyx\Queues\Calls\CallListResponse;
 use Telnyx\Queues\Calls\CallRemoveParams;
 use Telnyx\Queues\Calls\CallRetrieveParams;
 use Telnyx\Queues\Calls\CallUpdateParams;
+use Telnyx\Queues\Calls\QueueCall;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Queues\CallsRawContract;
 
@@ -109,7 +109,7 @@ final class CallsRawService implements CallsRawContract
      * @param array{pageNumber?: int, pageSize?: int}|CallListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPagination<CallListResponse>>
+     * @return BaseResponse<DefaultFlatPagination<QueueCall>>
      *
      * @throws APIException
      */
@@ -132,7 +132,7 @@ final class CallsRawService implements CallsRawContract
                 ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
-            convert: CallListResponse::class,
+            convert: QueueCall::class,
             page: DefaultFlatPagination::class,
         );
     }

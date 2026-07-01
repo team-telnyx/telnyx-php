@@ -11,13 +11,13 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\CredentialConnections\AnchorsiteOverride;
+use Telnyx\CredentialConnections\ConnectionNoiseSuppression;
 use Telnyx\CredentialConnections\ConnectionRtcpSettings;
 use Telnyx\CredentialConnections\DtmfType;
 use Telnyx\CredentialConnections\EncryptedMedia;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\FqdnConnections\FqdnConnection;
 use Telnyx\FqdnConnections\FqdnConnectionCreateParams;
-use Telnyx\FqdnConnections\FqdnConnectionCreateParams\NoiseSuppression;
 use Telnyx\FqdnConnections\FqdnConnectionDeleteResponse;
 use Telnyx\FqdnConnections\FqdnConnectionGetResponse;
 use Telnyx\FqdnConnections\FqdnConnectionListParams;
@@ -71,7 +71,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   iosPushCredentialID?: string|null,
      *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
      *   microsoftTeamsSbc?: bool,
-     *   noiseSuppression?: NoiseSuppression|value-of<NoiseSuppression>,
+     *   noiseSuppression?: ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: OutboundFqdn|OutboundFqdnShape,
@@ -152,7 +152,7 @@ final class FqdnConnectionsRawService implements FqdnConnectionsRawContract
      *   inbound?: InboundFqdn|InboundFqdnShape,
      *   iosPushCredentialID?: string|null,
      *   jitterBuffer?: ConnectionJitterBuffer|ConnectionJitterBufferShape,
-     *   noiseSuppression?: FqdnConnectionUpdateParams\NoiseSuppression|value-of<FqdnConnectionUpdateParams\NoiseSuppression>,
+     *   noiseSuppression?: ConnectionNoiseSuppression|value-of<ConnectionNoiseSuppression>,
      *   noiseSuppressionDetails?: ConnectionNoiseSuppressionDetails|ConnectionNoiseSuppressionDetailsShape,
      *   onnetT38PassthroughEnabled?: bool,
      *   outbound?: OutboundFqdn|OutboundFqdnShape,

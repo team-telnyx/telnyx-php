@@ -7,13 +7,12 @@ namespace Telnyx\PortingOrders\VerificationCodes;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\PortingOrders\VerificationCodes\VerificationCodeVerifyResponse\Data
+ * @phpstan-import-type PortingVerificationCodeShape from \Telnyx\PortingOrders\VerificationCodes\PortingVerificationCode
  *
  * @phpstan-type VerificationCodeVerifyResponseShape = array{
- *   data?: list<Data|DataShape>|null
+ *   data?: list<PortingVerificationCode|PortingVerificationCodeShape>|null
  * }
  */
 final class VerificationCodeVerifyResponse implements BaseModel
@@ -21,8 +20,8 @@ final class VerificationCodeVerifyResponse implements BaseModel
     /** @use SdkModel<VerificationCodeVerifyResponseShape> */
     use SdkModel;
 
-    /** @var list<Data>|null $data */
-    #[Optional(list: Data::class)]
+    /** @var list<PortingVerificationCode>|null $data */
+    #[Optional(list: PortingVerificationCode::class)]
     public ?array $data;
 
     public function __construct()
@@ -35,7 +34,7 @@ final class VerificationCodeVerifyResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<Data|DataShape>|null $data
+     * @param list<PortingVerificationCode|PortingVerificationCodeShape>|null $data
      */
     public static function with(?array $data = null): self
     {
@@ -47,7 +46,7 @@ final class VerificationCodeVerifyResponse implements BaseModel
     }
 
     /**
-     * @param list<Data|DataShape> $data
+     * @param list<PortingVerificationCode|PortingVerificationCodeShape> $data
      */
     public function withData(array $data): self
     {

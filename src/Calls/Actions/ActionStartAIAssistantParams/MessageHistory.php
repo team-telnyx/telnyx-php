@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls\Actions\ActionStartAIAssistantParams;
 
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\AssistantMessage;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\DeveloperMessage;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\SystemMessage;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\ToolMessage;
-use Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\UserMessage;
+use Telnyx\Calls\Actions\AssistantMessage;
+use Telnyx\Calls\Actions\DeveloperMessage;
+use Telnyx\Calls\Actions\SystemMessage;
+use Telnyx\Calls\Actions\ToolMessage;
+use Telnyx\Calls\Actions\UserMessage;
 use Telnyx\Core\Concerns\SdkUnion;
 use Telnyx\Core\Conversion\Contracts\Converter;
 use Telnyx\Core\Conversion\Contracts\ConverterSource;
@@ -16,11 +16,11 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
 /**
  * Messages sent by an end user.
  *
- * @phpstan-import-type UserMessageShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\UserMessage
- * @phpstan-import-type AssistantMessageShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\AssistantMessage
- * @phpstan-import-type ToolMessageShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\ToolMessage
- * @phpstan-import-type SystemMessageShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\SystemMessage
- * @phpstan-import-type DeveloperMessageShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory\DeveloperMessage
+ * @phpstan-import-type UserMessageShape from \Telnyx\Calls\Actions\UserMessage
+ * @phpstan-import-type AssistantMessageShape from \Telnyx\Calls\Actions\AssistantMessage
+ * @phpstan-import-type ToolMessageShape from \Telnyx\Calls\Actions\ToolMessage
+ * @phpstan-import-type SystemMessageShape from \Telnyx\Calls\Actions\SystemMessage
+ * @phpstan-import-type DeveloperMessageShape from \Telnyx\Calls\Actions\DeveloperMessage
  *
  * @phpstan-type MessageHistoryVariants = UserMessage|AssistantMessage|ToolMessage|SystemMessage|DeveloperMessage
  * @phpstan-type MessageHistoryShape = MessageHistoryVariants|UserMessageShape|AssistantMessageShape|ToolMessageShape|SystemMessageShape|DeveloperMessageShape

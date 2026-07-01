@@ -10,7 +10,6 @@ use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Texml\Accounts\Conferences\ParticipantsContract;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetParticipantsResponse;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantGetResponse;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\AmdStatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Beep;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\ConferenceRecord;
@@ -25,9 +24,9 @@ use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\StatusCallbackMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsParams\Trim;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantParticipantsResponse;
+use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantResource;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\AnnounceMethod;
 use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateParams\HoldMethod;
-use Telnyx\Texml\Accounts\Conferences\Participants\ParticipantUpdateResponse;
 
 /**
  * TeXML REST Commands.
@@ -67,7 +66,7 @@ final class ParticipantsService implements ParticipantsContract
         string $accountSid,
         string $conferenceSid,
         RequestOptions|array|null $requestOptions = null,
-    ): ParticipantGetResponse {
+    ): ParticipantResource {
         $params = Util::removeNulls(
             ['accountSid' => $accountSid, 'conferenceSid' => $conferenceSid]
         );
@@ -117,7 +116,7 @@ final class ParticipantsService implements ParticipantsContract
         ?bool $muted = null,
         ?string $waitURL = null,
         RequestOptions|array|null $requestOptions = null,
-    ): ParticipantUpdateResponse {
+    ): ParticipantResource {
         $params = Util::removeNulls(
             [
                 'accountSid' => $accountSid,

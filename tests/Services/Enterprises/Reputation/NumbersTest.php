@@ -8,10 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Enterprises\Reputation\Numbers\NumberAssociateResponse;
-use Telnyx\Enterprises\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Enterprises\Reputation\Numbers\NumberListResponse;
 use Telnyx\Enterprises\Reputation\Numbers\NumberRefreshResponse;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberList;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -45,7 +45,10 @@ final class NumbersTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NumberGetResponse::class, $result);
+        $this->assertInstanceOf(
+            ReputationPhoneNumberWithReputation::class,
+            $result
+        );
     }
 
     #[Test]
@@ -62,7 +65,10 @@ final class NumbersTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NumberGetResponse::class, $result);
+        $this->assertInstanceOf(
+            ReputationPhoneNumberWithReputation::class,
+            $result
+        );
     }
 
     #[Test]
@@ -81,7 +87,7 @@ final class NumbersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(NumberListResponse::class, $item);
+            $this->assertInstanceOf(ReputationPhoneNumber::class, $item);
         }
     }
 
@@ -98,7 +104,7 @@ final class NumbersTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NumberAssociateResponse::class, $result);
+        $this->assertInstanceOf(ReputationPhoneNumberList::class, $result);
     }
 
     #[Test]
@@ -114,7 +120,7 @@ final class NumbersTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NumberAssociateResponse::class, $result);
+        $this->assertInstanceOf(ReputationPhoneNumberList::class, $result);
     }
 
     #[Test]

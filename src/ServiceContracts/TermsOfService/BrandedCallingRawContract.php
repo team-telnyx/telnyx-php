@@ -7,7 +7,7 @@ namespace Telnyx\ServiceContracts\TermsOfService;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
-use Telnyx\TermsOfService\BrandedCalling\BrandedCallingAgreeResponse;
+use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -19,7 +19,7 @@ interface BrandedCallingRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<BrandedCallingAgreeResponse>
+     * @return BaseResponse<TosAgreementWrapped>
      *
      * @throws APIException
      */

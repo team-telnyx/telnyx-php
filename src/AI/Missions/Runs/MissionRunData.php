@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Missions\Runs;
 
-use Telnyx\AI\Missions\Runs\MissionRunData\Status;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -15,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   missionID: string,
  *   runID: string,
  *   startedAt: \DateTimeInterface,
- *   status: Status|value-of<Status>,
+ *   status: RunStatus|value-of<RunStatus>,
  *   updatedAt: \DateTimeInterface,
  *   error?: string|null,
  *   finishedAt?: \DateTimeInterface|null,
@@ -39,8 +38,8 @@ final class MissionRunData implements BaseModel
     #[Required('started_at')]
     public \DateTimeInterface $startedAt;
 
-    /** @var value-of<Status> $status */
-    #[Required(enum: Status::class)]
+    /** @var value-of<RunStatus> $status */
+    #[Required(enum: RunStatus::class)]
     public string $status;
 
     #[Required('updated_at')]
@@ -98,7 +97,7 @@ final class MissionRunData implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Status|value-of<Status> $status
+     * @param RunStatus|value-of<RunStatus> $status
      * @param array<string,mixed>|null $input
      * @param array<string,mixed>|null $metadata
      * @param array<string,mixed>|null $resultPayload
@@ -107,7 +106,7 @@ final class MissionRunData implements BaseModel
         string $missionID,
         string $runID,
         \DateTimeInterface $startedAt,
-        Status|string $status,
+        RunStatus|string $status,
         \DateTimeInterface $updatedAt,
         ?string $error = null,
         ?\DateTimeInterface $finishedAt = null,
@@ -159,9 +158,9 @@ final class MissionRunData implements BaseModel
     }
 
     /**
-     * @param Status|value-of<Status> $status
+     * @param RunStatus|value-of<RunStatus> $status
      */
-    public function withStatus(Status|string $status): self
+    public function withStatus(RunStatus|string $status): self
     {
         $self = clone $this;
         $self['status'] = $status;

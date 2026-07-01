@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
-use Telnyx\Reputation\Numbers\NumberGetResponse;
-use Telnyx\Reputation\Numbers\NumberListResponse;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumber;
+use Telnyx\Enterprises\Reputation\Numbers\ReputationPhoneNumberWithReputation;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -40,7 +40,10 @@ final class NumbersTest extends TestCase
         $result = $this->client->reputation->numbers->retrieve('+19493253498');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NumberGetResponse::class, $result);
+        $this->assertInstanceOf(
+            ReputationPhoneNumberWithReputation::class,
+            $result
+        );
     }
 
     #[Test]
@@ -57,7 +60,7 @@ final class NumbersTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(NumberListResponse::class, $item);
+            $this->assertInstanceOf(ReputationPhoneNumber::class, $item);
         }
     }
 

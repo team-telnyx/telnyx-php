@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\DefaultPaginationForLogMessages;
+use Telnyx\ExternalConnections\LogMessages\LogMessage;
 use Telnyx\ExternalConnections\LogMessages\LogMessageDismissResponse;
 use Telnyx\ExternalConnections\LogMessages\LogMessageGetResponse;
-use Telnyx\ExternalConnections\LogMessages\LogMessageListResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -60,7 +60,7 @@ final class LogMessagesTest extends TestCase
 
         if ($item = $page->getItems()[0] ?? null) {
             // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(LogMessageListResponse::class, $item);
+            $this->assertInstanceOf(LogMessage::class, $item);
         }
     }
 

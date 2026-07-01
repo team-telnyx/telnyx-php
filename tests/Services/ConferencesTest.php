@@ -7,11 +7,10 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Conferences\Conference;
-use Telnyx\Conferences\ConferenceGetParticipantResponse;
 use Telnyx\Conferences\ConferenceGetResponse;
 use Telnyx\Conferences\ConferenceListParticipantsResponse;
 use Telnyx\Conferences\ConferenceNewResponse;
-use Telnyx\Conferences\ConferenceUpdateParticipantResponse;
+use Telnyx\Conferences\ConferenceParticipantResource;
 use Telnyx\Core\Util;
 use Telnyx\DefaultFlatPagination;
 use Tests\UnsupportedMockTests;
@@ -138,7 +137,7 @@ final class ConferencesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ConferenceGetParticipantResponse::class, $result);
+        $this->assertInstanceOf(ConferenceParticipantResource::class, $result);
     }
 
     #[Test]
@@ -154,7 +153,7 @@ final class ConferencesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ConferenceGetParticipantResponse::class, $result);
+        $this->assertInstanceOf(ConferenceParticipantResource::class, $result);
     }
 
     #[Test]
@@ -170,10 +169,7 @@ final class ConferencesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            ConferenceUpdateParticipantResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(ConferenceParticipantResource::class, $result);
     }
 
     #[Test]
@@ -192,9 +188,6 @@ final class ConferencesTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(
-            ConferenceUpdateParticipantResponse::class,
-            $result
-        );
+        $this->assertInstanceOf(ConferenceParticipantResource::class, $result);
     }
 }

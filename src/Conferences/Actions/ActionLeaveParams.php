@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Telnyx\Conferences\Actions;
 
 use Telnyx\Conferences\Actions\ActionLeaveParams\BeepEnabled;
-use Telnyx\Conferences\Actions\ActionLeaveParams\Region;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
@@ -25,7 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   callControlID: string,
  *   beepEnabled?: null|BeepEnabled|value-of<BeepEnabled>,
  *   commandID?: string|null,
- *   region?: null|Region|value-of<Region>,
+ *   region?: null|ConferenceRegion|value-of<ConferenceRegion>,
  * }
  */
 final class ActionLeaveParams implements BaseModel
@@ -57,9 +56,9 @@ final class ActionLeaveParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @var value-of<Region>|null $region
+     * @var value-of<ConferenceRegion>|null $region
      */
-    #[Optional(enum: Region::class)]
+    #[Optional(enum: ConferenceRegion::class)]
     public ?string $region;
 
     /**
@@ -87,13 +86,13 @@ final class ActionLeaveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param BeepEnabled|value-of<BeepEnabled>|null $beepEnabled
-     * @param Region|value-of<Region>|null $region
+     * @param ConferenceRegion|value-of<ConferenceRegion>|null $region
      */
     public static function with(
         string $callControlID,
         BeepEnabled|string|null $beepEnabled = null,
         ?string $commandID = null,
-        Region|string|null $region = null,
+        ConferenceRegion|string|null $region = null,
     ): self {
         $self = new self;
 
@@ -144,9 +143,9 @@ final class ActionLeaveParams implements BaseModel
     /**
      * Region where the conference data is located. Defaults to the region defined in user's data locality settings (Europe or US).
      *
-     * @param Region|value-of<Region> $region
+     * @param ConferenceRegion|value-of<ConferenceRegion> $region
      */
-    public function withRegion(Region|string $region): self
+    public function withRegion(ConferenceRegion|string $region): self
     {
         $self = clone $this;
         $self['region'] = $region;

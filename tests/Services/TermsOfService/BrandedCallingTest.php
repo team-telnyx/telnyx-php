@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
-use Telnyx\TermsOfService\BrandedCalling\BrandedCallingAgreeResponse;
+use Telnyx\TermsOfService\Agreements\TosAgreementWrapped;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -38,6 +38,6 @@ final class BrandedCallingTest extends TestCase
         $result = $this->client->termsOfService->brandedCalling->agree();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(BrandedCallingAgreeResponse::class, $result);
+        $this->assertInstanceOf(TosAgreementWrapped::class, $result);
     }
 }

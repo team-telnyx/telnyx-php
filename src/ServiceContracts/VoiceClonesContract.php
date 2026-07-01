@@ -7,22 +7,20 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\MinimaxClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxQwen3TtsClone;
-use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params\TelnyxUltraClone;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\MinimaxDesignClone;
-use Telnyx\VoiceClones\VoiceCloneCreateParams\Params\TelnyxDesignClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\MinimaxClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxQwen3TtsClone;
+use Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest\TelnyxUltraClone;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\MinimaxDesignClone;
+use Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest\TelnyxDesignClone;
 use Telnyx\VoiceClones\VoiceCloneData;
 use Telnyx\VoiceClones\VoiceCloneListParams\FilterProvider;
 use Telnyx\VoiceClones\VoiceCloneListParams\Sort;
-use Telnyx\VoiceClones\VoiceCloneNewFromUploadResponse;
-use Telnyx\VoiceClones\VoiceCloneNewResponse;
+use Telnyx\VoiceClones\VoiceCloneResponse;
 use Telnyx\VoiceClones\VoiceCloneUpdateParams\Gender;
-use Telnyx\VoiceClones\VoiceCloneUpdateResponse;
 
 /**
- * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\Params
- * @phpstan-import-type ParamsShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\Params as ParamsShape1
+ * @phpstan-import-type VoiceCloneRequestShape from \Telnyx\VoiceClones\VoiceCloneCreateParams\VoiceCloneRequest
+ * @phpstan-import-type VoiceCloneUploadRequestShape from \Telnyx\VoiceClones\VoiceCloneCreateFromUploadParams\VoiceCloneUploadRequest
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface VoiceClonesContract
@@ -30,15 +28,15 @@ interface VoiceClonesContract
     /**
      * @api
      *
-     * @param ParamsShape $params request body for creating a voice clone from an existing voice design
+     * @param VoiceCloneRequestShape $voiceCloneRequest request body for creating a voice clone from an existing voice design
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
-        TelnyxDesignClone|array|MinimaxDesignClone $params,
+        TelnyxDesignClone|array|MinimaxDesignClone $voiceCloneRequest,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceCloneNewResponse;
+    ): VoiceCloneResponse;
 
     /**
      * @api
@@ -57,7 +55,7 @@ interface VoiceClonesContract
         Gender|string|null $gender = null,
         ?string $language = null,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceCloneUpdateResponse;
+    ): VoiceCloneResponse;
 
     /**
      * @api
@@ -98,15 +96,15 @@ interface VoiceClonesContract
     /**
      * @api
      *
-     * @param ParamsShape1 $params Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
+     * @param VoiceCloneUploadRequestShape $voiceCloneUploadRequest Multipart form data for creating a voice clone from a direct audio upload. Maximum file size: 5MB for Telnyx, 20MB for Minimax.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function createFromUpload(
-        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $params,
+        TelnyxQwen3TtsClone|array|TelnyxUltraClone|MinimaxClone $voiceCloneUploadRequest,
         RequestOptions|array|null $requestOptions = null,
-    ): VoiceCloneNewFromUploadResponse;
+    ): VoiceCloneResponse;
 
     /**
      * @api
