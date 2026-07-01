@@ -44,7 +44,6 @@ Full Changelog: [v8.1.0...v7.86.0](https://github.com/team-telnyx/telnyx-php/com
 * **api:** manual updates ([39e3e83](https://github.com/team-telnyx/telnyx-php/commit/39e3e83e6cba843eb06d11a2c3d8347ebe9bfda3))
 * **api:** manual updates ([2e428ec](https://github.com/team-telnyx/telnyx-php/commit/2e428ecc3322e001bcfb82788ee41ca39451382d))
 * **api:** manual updates ([17a2659](https://github.com/team-telnyx/telnyx-php/commit/17a2659924d29c3f6ee77d99f762a58b15176346))
-* **api:** manual updates ([a2d1a90](https://github.com/team-telnyx/telnyx-php/commit/a2d1a90f0e758afa7fc04441d059961e82668527))
 * **api:** Merge pull request [#39](https://github.com/team-telnyx/telnyx-php/issues/39) from stainless-sdks/revert-a988c49-stainless-changes ([5a68a6f](https://github.com/team-telnyx/telnyx-php/commit/5a68a6f84c1a3497128c80d859724628838dae95))
 * **api:** Merge pull request [#46](https://github.com/team-telnyx/telnyx-php/issues/46) from stainless-sdks/FixModelRecommendation ([6e4dd37](https://github.com/team-telnyx/telnyx-php/commit/6e4dd374581b8984c7882be9e343324e99c5eda3))
 * Assistant tool targets master ([59ba4d5](https://github.com/team-telnyx/telnyx-php/commit/59ba4d5af465945571254a99efe3e98cf4fdd205))
@@ -118,16 +117,17 @@ Full Changelog: [v8.1.0...v7.86.0](https://github.com/team-telnyx/telnyx-php/com
 ### Bug Fixes
 
 * add --local flag so release-please scans next branch for commits ([081c1c0](https://github.com/team-telnyx/telnyx-php/commit/081c1c08ebc88b9f052870410106bc90c4d8f018))
+* add head -1 to Release-As grep to prevent multi-line output ([bb4e10a](https://github.com/team-telnyx/telnyx-php/commit/bb4e10a32b5a3198906fcf6e029bc6718e1a843c))
 * **client:** properly generate file params ([cd406a9](https://github.com/team-telnyx/telnyx-php/commit/cd406a94bc108e0a641c52d0f56f6c23f5165887))
 * **client:** resolve serialization issue with unions and enums ([e9aa384](https://github.com/team-telnyx/telnyx-php/commit/e9aa3841ed630b5b99b8625e90b5292c2994ec56))
 * correct stale .release-please-manifest.json to 8.0.0 ([64b7b18](https://github.com/team-telnyx/telnyx-php/commit/64b7b181701fa4cb47a1d13e1b5e2cae97f361c2))
 * guzzle requires special handling to enable streaming ([b5198d6](https://github.com/team-telnyx/telnyx-php/commit/b5198d68aa4fe27649f7ccd28d0598cd111e6bfa))
 * **inference:** extract recursive expression AST into named Expression schema ([e3a84c9](https://github.com/team-telnyx/telnyx-php/commit/e3a84c9c746be63c0ed2518c5256f4255c03037a))
 * **number-reputation:** remediation contact_email is optional ([1cfb11f](https://github.com/team-telnyx/telnyx-php/commit/1cfb11f5c6e049a0250a3829497127aea4a5a47e))
+* pass SDK_WRITE_TOKEN to check-release-environment instead of RELEASE_PLEASE_TOKEN ([422664c](https://github.com/team-telnyx/telnyx-php/commit/422664c9e819d826f37a96f6e30cc60b86878580))
 * populate enum-typed properties with enum instances ([811f4b2](https://github.com/team-telnyx/telnyx-php/commit/811f4b24cf8c51ce5bdd65a8088a93e301816553))
 * remove `|| true` from github-release step ([#306](https://github.com/team-telnyx/telnyx-php/issues/306)) ([46d6df9](https://github.com/team-telnyx/telnyx-php/commit/46d6df9e84b72b65f87818f7e7990f8ffb5423c2))
 * remove prerelease flags, fix schema URL to googleapis ([45e8abf](https://github.com/team-telnyx/telnyx-php/commit/45e8abf23643678a860ab4a1231e04842ade684d))
-* rename number-reputation ToS route to use underscores ([026a1e2](https://github.com/team-telnyx/telnyx-php/commit/026a1e202a829383b28a2ed7636f9a4cf8cf9d1e))
 * resolve PHPStan lint errors with minimal changes ([c1cee63](https://github.com/team-telnyx/telnyx-php/commit/c1cee63f422b5bca5aa5bf87fc09a0aec2937b98))
 * restore release-please-config.json lost in promote merge ([c76b9d9](https://github.com/team-telnyx/telnyx-php/commit/c76b9d9006fc739ec904cdbc6ac04caf0ab959fc))
 * revert enum parsing change that lead to unconditional failure ([6092114](https://github.com/team-telnyx/telnyx-php/commit/60921141d86e42948e704191985788898131577f))
@@ -156,6 +156,7 @@ Full Changelog: [v8.1.0...v7.86.0](https://github.com/team-telnyx/telnyx-php/com
 
 ### Chores
 
+* merge master into next (resolve conflicts, keep next versions) ([724bdbb](https://github.com/team-telnyx/telnyx-php/commit/724bdbbfbfa76ef64a9fe87c011e2f0c0649d34d))
 * merge master into next (resolve version conflicts, keep 8.1.0) ([4a9d194](https://github.com/team-telnyx/telnyx-php/commit/4a9d194f9199d93bb3ec71b4d3d0bef0759a7f9a))
 * promote from staging 283b4a0 ([c599bd2](https://github.com/team-telnyx/telnyx-php/commit/c599bd2f4c8884b9c020d2781006d7eb1e949374))
 * promote from staging 283b4a0 ([4e14d9b](https://github.com/team-telnyx/telnyx-php/commit/4e14d9bf40a4701fde054ad1c865d7df58b32988))
@@ -181,7 +182,6 @@ Full Changelog: [v8.1.0...v7.86.0](https://github.com/team-telnyx/telnyx-php/com
 * add supported file formats to Send Fax endpoint ([6ef2389](https://github.com/team-telnyx/telnyx-php/commit/6ef2389c85d99a0e0db7f614b82d60915daf6569))
 * add UAC connection OpenAPI docs ([8a97cf8](https://github.com/team-telnyx/telnyx-php/commit/8a97cf8f9cdf8fd624f1e8727799a9edbcbced13))
 * add voice sdk debug call report spec ([7ff521b](https://github.com/team-telnyx/telnyx-php/commit/7ff521b9d81cb4fc0c21f9636add6851acbd0a14))
-* **branded-calling:** add Number Reputation API specs ([a8b1f43](https://github.com/team-telnyx/telnyx-php/commit/a8b1f435b5a68d9017e2357bfab0e1f94fed3eaf))
 * document dynamic variable support for voice_settings.voice ([01d5ab8](https://github.com/team-telnyx/telnyx-php/commit/01d5ab82ddd228e8fac250c2917af63ec8fa90a8))
 * fix voice settings available voices link ([44b01b7](https://github.com/team-telnyx/telnyx-php/commit/44b01b77b787e23a81a4db3bac2760efe5a6e8b5))
 * improve examples ([5506db6](https://github.com/team-telnyx/telnyx-php/commit/5506db6660e05790af30fa2971e32ea2b1f815a6))
