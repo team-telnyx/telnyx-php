@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.86.0](https://github.com/team-telnyx/telnyx-php/compare/v7.85.0...v7.86.0) (2026-07-01)
+
+
+### Bug Fixes
+
+* remove prerelease flags, fix schema URL to googleapis ([45e8abf](https://github.com/team-telnyx/telnyx-php/commit/45e8abf23643678a860ab4a1231e04842ade684d))
+
 ## 7.85.0 (2026-06-26)
 
 Full Changelog: [v7.84.0...v7.85.0](https://github.com/team-telnyx/telnyx-php/compare/v7.84.0...v7.85.0)
