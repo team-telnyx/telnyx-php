@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.88.0 (2026-07-02)
+
+Full Changelog: [v7.87.0...v7.88.0](https://github.com/team-telnyx/telnyx-php/compare/v7.87.0...v7.88.0)
+
+### Chores
+
+* promote from staging 55bde8c ([3bd40a9](https://github.com/team-telnyx/telnyx-php/commit/3bd40a92d09e7aa202557e3861a95c15be88bb93))
+* sync repo ([85cea8b](https://github.com/team-telnyx/telnyx-php/commit/85cea8b6b8a0be3bcfff7dfd4eb5e6dea5590d34))
+
 ## [7.75.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.74.0...v7.75.0) (2026-06-22)
 
 
