@@ -15,7 +15,7 @@ jobs:
 
       - name: Publish to Packagist
         run: |-
-          curl --fail-with-body -X POST -H 'Content-Type: application/json' "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_SAFE_KEY}" -d '{"repository":"https://github.com/stainless-sdks/telnyx-php"}'
+          curl --fail-with-body -X POST -H 'Content-Type: application/json' "https://packagist.org/api/update-package?username=${PACKAGIST_USERNAME}&apiToken=${PACKAGIST_SAFE_KEY}" -d '{"repository":"https://github.com/team-telnyx/telnyx-php"}'
         env:
           PACKAGIST_USERNAME: ${{ secrets.TELNYX_PACKAGIST_USERNAME || secrets.PACKAGIST_USERNAME }}
           PACKAGIST_SAFE_KEY: ${{ secrets.TELNYX_PACKAGIST_SAFE_KEY || secrets.PACKAGIST_SAFE_KEY }}

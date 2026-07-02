@@ -74,7 +74,7 @@ final class DirUpdateInfringementParams implements BaseModel
     public ?string $displayName;
 
     /**
-     * Append-only supporting documents.
+     * Append-only supporting documents to attach while resolving the claim (e.g. authorization or licensing proof).
      *
      * @var list<Document>|null $documents
      */
@@ -229,7 +229,7 @@ final class DirUpdateInfringementParams implements BaseModel
     }
 
     /**
-     * Append-only supporting documents.
+     * Append-only supporting documents to attach while resolving the claim (e.g. authorization or licensing proof).
      *
      * @param list<Document|DocumentShape>|null $documents
      */

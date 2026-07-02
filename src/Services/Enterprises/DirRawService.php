@@ -54,11 +54,11 @@ final class DirRawService implements DirRawContract
      * @param array{
      *   authorizerEmail: string,
      *   authorizerName: string,
+     *   callReasons: list<string>,
      *   certifyBrandIsAccurate: bool,
      *   certifyIPOwnership: bool,
      *   certifyNoShaftContent: bool,
      *   displayName: string,
-     *   callReasons?: list<string>,
      *   documents?: list<Document|DocumentShape>,
      *   logoURL?: string,
      *   reselling?: bool,

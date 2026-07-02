@@ -41,6 +41,7 @@ final class DirTest extends TestCase
             '4a6192a4-573d-446d-b3ce-aff9117272a6',
             authorizerEmail: 'sam@acmeplumbing.example.com',
             authorizerName: 'Sam Owner',
+            callReasons: ['Appointment reminders', 'Billing inquiries'],
             certifyBrandIsAccurate: true,
             certifyIPOwnership: true,
             certifyNoShaftContent: true,
@@ -62,11 +63,11 @@ final class DirTest extends TestCase
             '4a6192a4-573d-446d-b3ce-aff9117272a6',
             authorizerEmail: 'sam@acmeplumbing.example.com',
             authorizerName: 'Sam Owner',
+            callReasons: ['Appointment reminders', 'Billing inquiries'],
             certifyBrandIsAccurate: true,
             certifyIPOwnership: true,
             certifyNoShaftContent: true,
             displayName: 'Acme Plumbing',
-            callReasons: ['Appointment reminders', 'Billing inquiries'],
             documents: [
                 [
                     'documentID' => '2a7e8337-e803-4057-a4ae-26c40eb0bc6c',
