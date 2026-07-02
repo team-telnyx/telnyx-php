@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.87.0](https://github.com/team-telnyx/telnyx-php/compare/v7.86.0...v7.87.0) (2026-07-02)
+
+
+### Bug Fixes
+
+* add head -1 to Release-As grep to prevent multi-line output ([bb4e10a](https://github.com/team-telnyx/telnyx-php/commit/bb4e10a32b5a3198906fcf6e029bc6718e1a843c))
+
+
+### Chores
+
+* merge master into next (resolve conflicts, keep next versions) ([724bdbb](https://github.com/team-telnyx/telnyx-php/commit/724bdbbfbfa76ef64a9fe87c011e2f0c0649d34d))
+
 ## 7.86.0 (2026-07-01)
 
 Full Changelog: [v8.1.0...v7.86.0](https://github.com/team-telnyx/telnyx-php/compare/v8.1.0...v7.86.0)
