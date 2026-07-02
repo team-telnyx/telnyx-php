@@ -25,11 +25,11 @@ interface DirContract
      * @param string $enterpriseID The enterprise id. Lowercase UUID.
      * @param string $authorizerEmail Contact email of the authorizer. Telnyx may send verification or infringement-notice email here; use a monitored mailbox.
      * @param string $authorizerName Name of the person at your enterprise who is authorizing this DIR registration. Must be a real individual (used for audit and trademark-claim contests).
+     * @param list<string> $callReasons 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
      * @param bool $certifyBrandIsAccurate must be `true`
      * @param bool $certifyIPOwnership Must be `true`. Confirms ownership of any logos/trademarks shown.
      * @param bool $certifyNoShaftContent Must be `true`. Confirms this DIR is not used for SHAFT content (Sex, Hate, Alcohol, Firearms, Tobacco) where prohibited.
      * @param string $displayName Name shown to call recipients. No emoji; not whitespace-only.
-     * @param list<string> $callReasons 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
      * @param list<Document|DocumentShape> $documents Supporting documents. Each `document_id` may appear at most once on a DIR.
      * @param string $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param bool $reselling set to true if your organization places calls on behalf of other enterprises (BPO/reseller)
@@ -41,11 +41,11 @@ interface DirContract
         string $enterpriseID,
         string $authorizerEmail,
         string $authorizerName,
+        array $callReasons,
         bool $certifyBrandIsAccurate,
         bool $certifyIPOwnership,
         bool $certifyNoShaftContent,
         string $displayName,
-        ?array $callReasons = null,
         ?array $documents = null,
         ?string $logoURL = null,
         bool $reselling = false,
