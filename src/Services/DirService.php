@@ -343,7 +343,7 @@ final class DirService implements DirContract
      * @param bool $certifyNoShaftContent must be `true`
      * @param string $infringementResolutionNotes explanation of how the infringement concern was addressed
      * @param list<string>|null $callReasons
-     * @param list<Document|DocumentShape>|null $documents append-only supporting documents
+     * @param list<Document|DocumentShape>|null $documents Append-only supporting documents to attach while resolving the claim (e.g. authorization or licensing proof).
      * @param string|null $logoURL publicly accessible HTTPS URL (max 128 chars) to a 256x256 BMP logo (max 1 MB)
      * @param RequestOpts|null $requestOptions
      *

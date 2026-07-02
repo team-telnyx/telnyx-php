@@ -9,6 +9,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\StorageContract;
 use Telnyx\Services\Storage\BucketsService;
+use Telnyx\Services\Storage\KvsService;
 use Telnyx\Services\Storage\MigrationSourcesService;
 use Telnyx\Services\Storage\MigrationsService;
 use Telnyx\Storage\StorageListMigrationSourceCoverageResponse;
@@ -41,6 +42,11 @@ final class StorageService implements StorageContract
     public MigrationsService $migrations;
 
     /**
+     * @api
+     */
+    public KvsService $kvs;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -49,6 +55,7 @@ final class StorageService implements StorageContract
         $this->buckets = new BucketsService($client);
         $this->migrationSources = new MigrationSourcesService($client);
         $this->migrations = new MigrationsService($client);
+        $this->kvs = new KvsService($client);
     }
 
     /**

@@ -33,11 +33,11 @@ use Telnyx\Dir\Document;
  * @phpstan-type DirCreateParamsShape = array{
  *   authorizerEmail: string,
  *   authorizerName: string,
+ *   callReasons: list<string>,
  *   certifyBrandIsAccurate: bool,
  *   certifyIPOwnership: bool,
  *   certifyNoShaftContent: bool,
  *   displayName: string,
- *   callReasons?: list<string>|null,
  *   documents?: list<Document|DocumentShape>|null,
  *   logoURL?: string|null,
  *   reselling?: bool|null,
@@ -62,6 +62,14 @@ final class DirCreateParams implements BaseModel
     public string $authorizerName;
 
     /**
+     * 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
+     *
+     * @var list<string> $callReasons
+     */
+    #[Required('call_reasons', list: 'string')]
+    public array $callReasons;
+
+    /**
      * Must be `true`.
      */
     #[Required('certify_brand_is_accurate')]
@@ -84,14 +92,6 @@ final class DirCreateParams implements BaseModel
      */
     #[Required('display_name')]
     public string $displayName;
-
-    /**
-     * 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
-     *
-     * @var list<string>|null $callReasons
-     */
-    #[Optional('call_reasons', list: 'string')]
-    public ?array $callReasons;
 
     /**
      * Supporting documents. Each `document_id` may appear at most once on a DIR.
@@ -121,6 +121,7 @@ final class DirCreateParams implements BaseModel
      * DirCreateParams::with(
      *   authorizerEmail: ...,
      *   authorizerName: ...,
+     *   callReasons: ...,
      *   certifyBrandIsAccurate: ...,
      *   certifyIPOwnership: ...,
      *   certifyNoShaftContent: ...,
@@ -134,6 +135,7 @@ final class DirCreateParams implements BaseModel
      * (new DirCreateParams)
      *   ->withAuthorizerEmail(...)
      *   ->withAuthorizerName(...)
+     *   ->withCallReasons(...)
      *   ->withCertifyBrandIsAccurate(...)
      *   ->withCertifyIPOwnership(...)
      *   ->withCertifyNoShaftContent(...)
@@ -150,17 +152,17 @@ final class DirCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $callReasons
+     * @param list<string> $callReasons
      * @param list<Document|DocumentShape>|null $documents
      */
     public static function with(
         string $authorizerEmail,
         string $authorizerName,
+        array $callReasons,
         bool $certifyBrandIsAccurate,
         bool $certifyIPOwnership,
         bool $certifyNoShaftContent,
         string $displayName,
-        ?array $callReasons = null,
         ?array $documents = null,
         ?string $logoURL = null,
         ?bool $reselling = null,
@@ -169,12 +171,12 @@ final class DirCreateParams implements BaseModel
 
         $self['authorizerEmail'] = $authorizerEmail;
         $self['authorizerName'] = $authorizerName;
+        $self['callReasons'] = $callReasons;
         $self['certifyBrandIsAccurate'] = $certifyBrandIsAccurate;
         $self['certifyIPOwnership'] = $certifyIPOwnership;
         $self['certifyNoShaftContent'] = $certifyNoShaftContent;
         $self['displayName'] = $displayName;
 
-        null !== $callReasons && $self['callReasons'] = $callReasons;
         null !== $documents && $self['documents'] = $documents;
         null !== $logoURL && $self['logoURL'] = $logoURL;
         null !== $reselling && $self['reselling'] = $reselling;
@@ -200,6 +202,19 @@ final class DirCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['authorizerName'] = $authorizerName;
+
+        return $self;
+    }
+
+    /**
+     * 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
+     *
+     * @param list<string> $callReasons
+     */
+    public function withCallReasons(array $callReasons): self
+    {
+        $self = clone $this;
+        $self['callReasons'] = $callReasons;
 
         return $self;
     }
@@ -245,19 +260,6 @@ final class DirCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['displayName'] = $displayName;
-
-        return $self;
-    }
-
-    /**
-     * 1–10 reasons your business calls customers. Validate phrasing against `POST /call_reasons/validate`.
-     *
-     * @param list<string> $callReasons
-     */
-    public function withCallReasons(array $callReasons): self
-    {
-        $self = clone $this;
-        $self['callReasons'] = $callReasons;
 
         return $self;
     }
