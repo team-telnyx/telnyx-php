@@ -75,5 +75,8 @@
     "build:docs": "curl --etag-save ./vendor/ag.etags --etag-compare ./vendor/ag.etags --create-dirs --remote-name --output-dir ./vendor/bin --no-progress-meter -- https://github.com/ApiGen/ApiGen/releases/latest/download/apigen.phar && php ./vendor/bin/apigen.phar --output docs -- src",
     "lint": "./scripts/lint",
     "test": "./scripts/test"
+  },
+  "suggest": {
+    "guzzlehttp/guzzle": "Required unless you provide another PSR-18 client implementation - php-http/discovery's composer plugin can auto-install one, but only if the plugin is allowed"
   }
 }
