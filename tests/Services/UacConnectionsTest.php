@@ -88,6 +88,7 @@ final class UacConnectionsTest extends TestCase
                 'shakenStirEnabled' => true,
                 'simultaneousRinging' => 'disabled',
                 'sipCompactHeadersEnabled' => true,
+                'sipRegion' => 'US',
                 'timeout1xxSecs' => 10,
                 'timeout2xxSecs' => 20,
             ],

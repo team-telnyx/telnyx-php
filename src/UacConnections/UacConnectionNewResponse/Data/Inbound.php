@@ -11,6 +11,7 @@ use Telnyx\UacConnections\UacConnectionNewResponse\Data\Inbound\AniNumberFormat;
 use Telnyx\UacConnections\UacConnectionNewResponse\Data\Inbound\DefaultRoutingMethod;
 use Telnyx\UacConnections\UacConnectionNewResponse\Data\Inbound\DnisNumberFormat;
 use Telnyx\UacConnections\UacConnectionNewResponse\Data\Inbound\SimultaneousRinging;
+use Telnyx\UacConnections\UacConnectionNewResponse\Data\Inbound\SipRegion;
 use Telnyx\UacConnections\UacConnectionNewResponse\Data\Inbound\SipSubdomainReceiveSettings;
 
 /**
@@ -26,6 +27,7 @@ use Telnyx\UacConnections\UacConnectionNewResponse\Data\Inbound\SipSubdomainRece
  *   shakenStirEnabled?: bool|null,
  *   simultaneousRinging?: null|SimultaneousRinging|value-of<SimultaneousRinging>,
  *   sipCompactHeadersEnabled?: bool|null,
+ *   sipRegion?: null|SipRegion|value-of<SipRegion>,
  *   sipSubdomain?: string|null,
  *   sipSubdomainReceiveSettings?: null|SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>,
  *   timeout1xxSecs?: int|null,
@@ -110,6 +112,14 @@ final class Inbound implements BaseModel
     public ?bool $sipCompactHeadersEnabled;
 
     /**
+     * Selects which `sip_region` to receive inbound calls from. If null, the default region (US) will be used.
+     *
+     * @var value-of<SipRegion>|null $sipRegion
+     */
+    #[Optional('sip_region', enum: SipRegion::class)]
+    public ?string $sipRegion;
+
+    /**
      * The Telnyx-generated SIP subdomain for this UAC connection.
      */
     #[Optional('sip_subdomain')]
@@ -153,6 +163,7 @@ final class Inbound implements BaseModel
      * @param DefaultRoutingMethod|value-of<DefaultRoutingMethod>|null $defaultRoutingMethod
      * @param DnisNumberFormat|value-of<DnisNumberFormat>|null $dnisNumberFormat
      * @param SimultaneousRinging|value-of<SimultaneousRinging>|null $simultaneousRinging
+     * @param SipRegion|value-of<SipRegion>|null $sipRegion
      * @param SipSubdomainReceiveSettings|value-of<SipSubdomainReceiveSettings>|null $sipSubdomainReceiveSettings
      */
     public static function with(
@@ -167,6 +178,7 @@ final class Inbound implements BaseModel
         ?bool $shakenStirEnabled = null,
         SimultaneousRinging|string|null $simultaneousRinging = null,
         ?bool $sipCompactHeadersEnabled = null,
+        SipRegion|string|null $sipRegion = null,
         ?string $sipSubdomain = null,
         SipSubdomainReceiveSettings|string|null $sipSubdomainReceiveSettings = null,
         ?int $timeout1xxSecs = null,
@@ -185,6 +197,7 @@ final class Inbound implements BaseModel
         null !== $shakenStirEnabled && $self['shakenStirEnabled'] = $shakenStirEnabled;
         null !== $simultaneousRinging && $self['simultaneousRinging'] = $simultaneousRinging;
         null !== $sipCompactHeadersEnabled && $self['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
+        null !== $sipRegion && $self['sipRegion'] = $sipRegion;
         null !== $sipSubdomain && $self['sipSubdomain'] = $sipSubdomain;
         null !== $sipSubdomainReceiveSettings && $self['sipSubdomainReceiveSettings'] = $sipSubdomainReceiveSettings;
         null !== $timeout1xxSecs && $self['timeout1xxSecs'] = $timeout1xxSecs;
@@ -323,6 +336,19 @@ final class Inbound implements BaseModel
     ): self {
         $self = clone $this;
         $self['sipCompactHeadersEnabled'] = $sipCompactHeadersEnabled;
+
+        return $self;
+    }
+
+    /**
+     * Selects which `sip_region` to receive inbound calls from. If null, the default region (US) will be used.
+     *
+     * @param SipRegion|value-of<SipRegion> $sipRegion
+     */
+    public function withSipRegion(SipRegion|string $sipRegion): self
+    {
+        $self = clone $this;
+        $self['sipRegion'] = $sipRegion;
 
         return $self;
     }
