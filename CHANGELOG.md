@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.92.0](https://github.com/team-telnyx/telnyx-php/compare/v7.91.0...v7.92.0) (2026-07-03)
+
+
+### Bug Fixes
+
+* **release:** scan next's commits in release-pr (stop depending on master hotfixes) ([#338](https://github.com/team-telnyx/telnyx-php/issues/338)) ([9158bd1](https://github.com/team-telnyx/telnyx-php/commit/9158bd1c30720f410444c6bc86ba47aca99dacc3))
+
 ## 7.91.0 (2026-07-03)
 
 Full Changelog: [v7.90.0...v7.91.0](https://github.com/team-telnyx/telnyx-php/compare/v7.90.0...v7.91.0)
