@@ -83,7 +83,7 @@ final class SpeechToTextRawService implements SpeechToTextRawContract
      *
      * Open a WebSocket connection to stream audio and receive transcriptions in real-time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header.
      *
-     * Supported engines: `Azure`, `Deepgram`, `Google`, `Telnyx`, `xAI`, `Speechmatics`, `Soniox`.
+     * Supported engines: `Azure`, `Deepgram`, `Google`, `Telnyx`, `xAI`, `Speechmatics`, `Soniox`, `Parakeet`.
      *
      * **Connection flow:**
      * 1. Open WebSocket with query parameters specifying engine, input format, and language.

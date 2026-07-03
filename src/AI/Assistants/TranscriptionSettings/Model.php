@@ -14,6 +14,7 @@ namespace Telnyx\AI\Assistants\TranscriptionSettings;
  * - `assemblyai/universal-streaming` is a multilingual streaming model with configurable turn detection.
  * - `xai/grok-stt` is a multilingual Grok STT model.
  * - `soniox/stt-rt-v4` is a multilingual streaming model with automatic language detection and configurable endpointing.
+ * - `parakeet/tdt-0.6b-v3` is a multilingual transcription model with automatic language detection.
  */
 enum Model: string
 {
@@ -30,6 +31,8 @@ enum Model: string
     case XAI_GROK_STT = 'xai/grok-stt';
 
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
+
+    case PARAKEET_TDT_0_6B_V3 = 'parakeet/tdt-0.6b-v3';
 
     case DISTIL_WHISPER_DISTIL_LARGE_V2 = 'distil-whisper/distil-large-v2';
 

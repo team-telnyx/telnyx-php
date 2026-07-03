@@ -47,6 +47,7 @@ final class TranscriptionSettings implements BaseModel
      * - `assemblyai/universal-streaming` is a multilingual streaming model with configurable turn detection.
      * - `xai/grok-stt` is a multilingual Grok STT model.
      * - `soniox/stt-rt-v4` is a multilingual streaming model with automatic language detection and configurable endpointing.
+     * - `parakeet/tdt-0.6b-v3` is a multilingual transcription model with automatic language detection.
      *
      * @var value-of<Model>|null $model
      */
@@ -125,6 +126,7 @@ final class TranscriptionSettings implements BaseModel
      * - `assemblyai/universal-streaming` is a multilingual streaming model with configurable turn detection.
      * - `xai/grok-stt` is a multilingual Grok STT model.
      * - `soniox/stt-rt-v4` is a multilingual streaming model with automatic language detection and configurable endpointing.
+     * - `parakeet/tdt-0.6b-v3` is a multilingual transcription model with automatic language detection.
      *
      * @param Model|value-of<Model> $model
      */

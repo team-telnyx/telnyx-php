@@ -36,6 +36,7 @@ final class TranscriptionConfig implements BaseModel
      * - `assemblyai/universal-streaming` for live streaming transcription.
      * - `xai/grok-stt` for live streaming transcription.
      * - `soniox/stt-rt-v4` for live streaming multilingual transcription with automatic language detection.
+     * - `parakeet/tdt-0.6b-v3` for multilingual transcription with automatic language detection.
      * - `azure/fast` and `azure/realtime`; Azure models require `region`, and unsupported regions require `api_key_ref`.
      * - `google/latest_long` for non-streaming multilingual transcription.
      * - `distil-whisper/distil-large-v2` for lower-latency English-only non-streaming transcription.
@@ -90,6 +91,7 @@ final class TranscriptionConfig implements BaseModel
      * - `assemblyai/universal-streaming` for live streaming transcription.
      * - `xai/grok-stt` for live streaming transcription.
      * - `soniox/stt-rt-v4` for live streaming multilingual transcription with automatic language detection.
+     * - `parakeet/tdt-0.6b-v3` for multilingual transcription with automatic language detection.
      * - `azure/fast` and `azure/realtime`; Azure models require `region`, and unsupported regions require `api_key_ref`.
      * - `google/latest_long` for non-streaming multilingual transcription.
      * - `distil-whisper/distil-large-v2` for lower-latency English-only non-streaming transcription.

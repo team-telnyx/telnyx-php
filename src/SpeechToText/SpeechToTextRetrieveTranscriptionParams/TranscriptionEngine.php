@@ -22,4 +22,6 @@ enum TranscriptionEngine: string
     case SPEECHMATICS = 'Speechmatics';
 
     case SONIOX = 'Soniox';
+
+    case PARAKEET = 'Parakeet';
 }

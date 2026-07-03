@@ -40,4 +40,6 @@ enum Model: string
     case SPEECHMATICS_STANDARD = 'speechmatics/standard';
 
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
+
+    case PARAKEET_TDT_0_6B_V3 = 'parakeet/tdt-0.6b-v3';
 }
