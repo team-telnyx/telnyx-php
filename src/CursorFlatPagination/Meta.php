@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Storage\Kvs\Keys\KeyListResponse;
+namespace Telnyx\CursorFlatPagination;
 
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
@@ -16,15 +16,9 @@ final class Meta implements BaseModel
     /** @use SdkModel<MetaShape> */
     use SdkModel;
 
-    /**
-     * Opaque cursor for the next page; pass it back as the `cursor` query parameter. Omitted when there are no further results.
-     */
     #[Optional]
     public ?string $cursor;
 
-    /**
-     * Whether more results are available on a following page.
-     */
     #[Optional('has_more')]
     public ?bool $hasMore;
 
@@ -50,9 +44,6 @@ final class Meta implements BaseModel
         return $self;
     }
 
-    /**
-     * Opaque cursor for the next page; pass it back as the `cursor` query parameter. Omitted when there are no further results.
-     */
     public function withCursor(string $cursor): self
     {
         $self = clone $this;
@@ -61,9 +52,6 @@ final class Meta implements BaseModel
         return $self;
     }
 
-    /**
-     * Whether more results are available on a following page.
-     */
     public function withHasMore(bool $hasMore): self
     {
         $self = clone $this;

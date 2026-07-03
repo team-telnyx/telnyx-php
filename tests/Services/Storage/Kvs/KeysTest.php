@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\FileParam;
 use Telnyx\Core\Util;
+use Telnyx\CursorFlatPagination;
 use Telnyx\Storage\Kvs\Keys\KeyListResponse;
 use Tests\UnsupportedMockTests;
 
@@ -70,8 +71,8 @@ final class KeysTest extends TestCase
 
         $result = $this->client->storage->kvs->keys->update(
             'key',
+            FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
             id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            body: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -87,8 +88,8 @@ final class KeysTest extends TestCase
 
         $result = $this->client->storage->kvs->keys->update(
             'key',
+            FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
             id: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            body: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
             ttlSecs: 1,
         );
 
@@ -103,12 +104,17 @@ final class KeysTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->storage->kvs->keys->list(
+        $page = $this->client->storage->kvs->keys->list(
             '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(KeyListResponse::class, $result);
+        $this->assertInstanceOf(CursorFlatPagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(KeyListResponse::class, $item);
+        }
     }
 
     #[Test]

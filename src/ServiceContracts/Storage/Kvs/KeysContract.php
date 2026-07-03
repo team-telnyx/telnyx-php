@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\Storage\Kvs;
 
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\FileParam;
+use Telnyx\CursorFlatPagination;
 use Telnyx\RequestOptions;
 use Telnyx\Storage\Kvs\Keys\KeyListResponse;
 
@@ -17,7 +18,7 @@ interface KeysContract
     /**
      * @api
      *
-     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`; URL-encode it so the whole string is treated as one key (for example `user/1` -> `user%2F1`).
+     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`. When calling the HTTP API directly, URL-encode the key so the whole string is treated as one key (for example `user/1` -> `user%2F1`). SDK users should pass the key raw - SDKs URL-encode path parameters automatically.
      * @param string $id KV namespace ID
      * @param RequestOpts|null $requestOptions
      *
@@ -32,9 +33,9 @@ interface KeysContract
     /**
      * @api
      *
-     * @param string $key Path param: Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`; URL-encode it so the whole string is treated as one key (for example `user/1` -> `user%2F1`).
-     * @param string $id Path param: KV namespace ID
+     * @param string $key Path param: Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`. When calling the HTTP API directly, URL-encode the key so the whole string is treated as one key (for example `user/1` -> `user%2F1`). SDK users should pass the key raw - SDKs URL-encode path parameters automatically.
      * @param string|FileParam $body body param: Raw value bytes, stored verbatim
+     * @param string $id Path param: KV namespace ID
      * @param int $ttlSecs Query param: Time-to-live in seconds. When set, the key expires and is deleted after this duration. Requires a namespace provisioned with TTL support; namespaces without it return a `409`.
      * @param RequestOpts|null $requestOptions
      *
@@ -42,8 +43,8 @@ interface KeysContract
      */
     public function update(
         string $key,
-        string $id,
         string|FileParam $body,
+        string $id,
         ?int $ttlSecs = null,
         RequestOptions|array|null $requestOptions = null,
     ): mixed;
@@ -57,6 +58,8 @@ interface KeysContract
      * @param string $prefix return only keys that start with this prefix
      * @param RequestOpts|null $requestOptions
      *
+     * @return CursorFlatPagination<KeyListResponse>
+     *
      * @throws APIException
      */
     public function list(
@@ -65,12 +68,12 @@ interface KeysContract
         int $limit = 1000,
         ?string $prefix = null,
         RequestOptions|array|null $requestOptions = null,
-    ): KeyListResponse;
+    ): CursorFlatPagination;
 
     /**
      * @api
      *
-     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`; URL-encode it so the whole string is treated as one key (for example `user/1` -> `user%2F1`).
+     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`. When calling the HTTP API directly, URL-encode the key so the whole string is treated as one key (for example `user/1` -> `user%2F1`). SDK users should pass the key raw - SDKs URL-encode path parameters automatically.
      * @param string $id KV namespace ID
      * @param RequestOpts|null $requestOptions
      *

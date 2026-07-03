@@ -129,6 +129,18 @@ final class ModelOf implements Converter
     public function from(array $data): BaseModel
     {
         $instance = $this->class->newInstanceWithoutConstructor();
+
+        // newInstanceWithoutConstructor() bypasses the constructor's
+        // initialize(), leaving optional typed properties in the fatal
+        // "uninitialized" state instead of the intended "unset" state
+        // (where __get returns null). Unset them here; __unserialize
+        // re-assigns any that are present in the payload.
+        foreach ($this->properties as $name => $info) {
+            if ($info->optional) {
+                unset($instance->{$name});
+            }
+        }
+
         // @phpstan-ignore-next-line
         $instance->__unserialize($data);
 
