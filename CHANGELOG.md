@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.89.0](https://github.com/team-telnyx/telnyx-php/compare/v7.88.0...v7.89.0) (2026-07-03)
+
+
+### Bug Fixes
+
+* use git reset --hard for tree replacement, force-push, and fix PR URL regex in release-please.yml ([#329](https://github.com/team-telnyx/telnyx-php/issues/329)) ([5bf0d6c](https://github.com/team-telnyx/telnyx-php/commit/5bf0d6ce019950c3015fbd1eb8f73f31a5e03615))
+
 ## 7.88.0 (2026-07-02)
 
 Full Changelog: [v7.87.0...v7.88.0](https://github.com/team-telnyx/telnyx-php/compare/v7.87.0...v7.88.0)
