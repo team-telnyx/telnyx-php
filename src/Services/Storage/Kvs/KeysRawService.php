@@ -35,7 +35,7 @@ final class KeysRawService implements KeysRawContract
      *
      * Returns the raw stored value for a key. The response body is the value exactly as it was written; the `Content-Type` header echoes the value's stored content type (defaults to `application/octet-stream`).
      *
-     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`; URL-encode it so the whole string is treated as one key (for example `user/1` -> `user%2F1`).
+     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`. When calling the HTTP API directly, URL-encode the key so the whole string is treated as one key (for example `user/1` -> `user%2F1`). SDK users should pass the key raw - SDKs URL-encode path parameters automatically.
      * @param array{id: string}|KeyRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -59,7 +59,7 @@ final class KeysRawService implements KeysRawContract
         return $this->client->request(
             method: 'get',
             path: ['storage/kvs/%1$s/keys/%2$s', $id, $key],
-            headers: ['Accept' => '*/*'],
+            headers: ['Accept' => 'application/octet-stream'],
             options: $options,
             convert: 'string',
         );
@@ -105,7 +105,7 @@ final class KeysRawService implements KeysRawContract
      *
      * Deletes a key. Idempotent: deleting a key that does not exist still succeeds. The namespace itself must exist and be provisioned.
      *
-     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`; URL-encode it so the whole string is treated as one key (for example `user/1` -> `user%2F1`).
+     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`. When calling the HTTP API directly, URL-encode the key so the whole string is treated as one key (for example `user/1` -> `user%2F1`). SDK users should pass the key raw - SDKs URL-encode path parameters automatically.
      * @param array{id: string}|KeyDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -139,10 +139,9 @@ final class KeysRawService implements KeysRawContract
      *
      * Creates or replaces the value for a key. The request body is stored verbatim as the value — no base64, no JSON envelope — up to 1 MiB. The request's `Content-Type` header is stored with the value and echoed back on retrieval. Returns `201` when the key is created and `200` when an existing key is updated.
      *
-     * @param string $key Path param: Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`; URL-encode it so the whole string is treated as one key (for example `user/1` -> `user%2F1`).
-     * @param array{
-     *   id: string, body: string|FileParam, ttlSecs?: int
-     * }|KeySetParams $params
+     * @param string $key Path param: Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`. When calling the HTTP API directly, URL-encode the key so the whole string is treated as one key (for example `user/1` -> `user%2F1`). SDK users should pass the key raw - SDKs URL-encode path parameters automatically.
+     * @param string|FileParam $body body param: Raw value bytes, stored verbatim
+     * @param array{id: string, ttlSecs?: int}|KeySetParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<mixed>
@@ -151,6 +150,7 @@ final class KeysRawService implements KeysRawContract
      */
     public function set(
         string $key,
+        string|FileParam $body,
         array|KeySetParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
@@ -161,9 +161,6 @@ final class KeysRawService implements KeysRawContract
         $id = $parsed['id'];
         unset($parsed['id']);
 
-        /** @var array<string,mixed> */
-        $body = $parsed['body'];
-
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'put',
@@ -172,8 +169,8 @@ final class KeysRawService implements KeysRawContract
                 array_diff_key($parsed, array_flip(['body'])),
                 ['ttlSecs' => 'ttl_secs']
             ),
-            headers: ['Content-Type' => '*/*'],
-            body: array_diff_key($body, array_flip(['id'])),
+            headers: ['Content-Type' => 'application/octet-stream'],
+            body: $parsed,
             options: $options,
             convert: null,
         );

@@ -6,6 +6,7 @@ namespace Telnyx\ServiceContracts\Storage\Kvs;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\FileParam;
 use Telnyx\RequestOptions;
 use Telnyx\Storage\Kvs\Keys\KeyDeleteParams;
 use Telnyx\Storage\Kvs\Keys\KeyListParams;
@@ -21,7 +22,7 @@ interface KeysRawContract
     /**
      * @api
      *
-     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`; URL-encode it so the whole string is treated as one key (for example `user/1` -> `user%2F1`).
+     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`. When calling the HTTP API directly, URL-encode the key so the whole string is treated as one key (for example `user/1` -> `user%2F1`). SDK users should pass the key raw - SDKs URL-encode path parameters automatically.
      * @param array<string,mixed>|KeyRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -55,7 +56,7 @@ interface KeysRawContract
     /**
      * @api
      *
-     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`; URL-encode it so the whole string is treated as one key (for example `user/1` -> `user%2F1`).
+     * @param string $key Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`. When calling the HTTP API directly, URL-encode the key so the whole string is treated as one key (for example `user/1` -> `user%2F1`). SDK users should pass the key raw - SDKs URL-encode path parameters automatically.
      * @param array<string,mixed>|KeyDeleteParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -72,7 +73,8 @@ interface KeysRawContract
     /**
      * @api
      *
-     * @param string $key Path param: Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`; URL-encode it so the whole string is treated as one key (for example `user/1` -> `user%2F1`).
+     * @param string $key Path param: Key name. Allowed characters: `a-z A-Z 0-9 - _ / = .`; maximum 256 characters; names starting with `_` are reserved for system use. May contain `/`. When calling the HTTP API directly, URL-encode the key so the whole string is treated as one key (for example `user/1` -> `user%2F1`). SDK users should pass the key raw - SDKs URL-encode path parameters automatically.
+     * @param string|FileParam $body body param: Raw value bytes, stored verbatim
      * @param array<string,mixed>|KeySetParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -82,6 +84,7 @@ interface KeysRawContract
      */
     public function set(
         string $key,
+        string|FileParam $body,
         array|KeySetParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
