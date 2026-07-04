@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.92.0](https://github.com/team-telnyx/telnyx-php/compare/v7.91.0...v7.92.0) (2026-07-04)
+
+
+### Bug Fixes
+
+* **release:** ghost guard also verifies the GitHub Release exists ([#341](https://github.com/team-telnyx/telnyx-php/issues/341)) ([4bca5a3](https://github.com/team-telnyx/telnyx-php/commit/4bca5a3ce5b463f185de8d3f5dee2a3e31a46d64))
+* **release:** scan next's commits in release-pr (stop depending on master hotfixes) ([#338](https://github.com/team-telnyx/telnyx-php/issues/338)) ([9158bd1](https://github.com/team-telnyx/telnyx-php/commit/9158bd1c30720f410444c6bc86ba47aca99dacc3))
+
 ## 7.91.0 (2026-07-03)
 
 Full Changelog: [v7.90.0...v7.91.0](https://github.com/team-telnyx/telnyx-php/compare/v7.90.0...v7.91.0)
