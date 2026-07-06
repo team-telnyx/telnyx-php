@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts;
 
-use Telnyx\AI\AICreateResponseDeprecatedParams;
 use Telnyx\AI\AIGetConversationHistoriesResponse;
 use Telnyx\AI\AIRetrieveConversationHistoriesParams;
 use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
-use Telnyx\AI\ModelsResponse;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
@@ -19,23 +17,6 @@ use Telnyx\RequestOptions;
  */
 interface AIRawContract
 {
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * @param array<string,mixed>|AICreateResponseDeprecatedParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<array<string,mixed>>
-     *
-     * @throws APIException
-     */
-    public function createResponseDeprecated(
-        array|AICreateResponseDeprecatedParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
     /**
      * @api
      *
@@ -49,21 +30,6 @@ interface AIRawContract
     public function retrieveConversationHistories(
         array|AIRetrieveConversationHistoriesParams $params,
         RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<ModelsResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveModels(
-        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**

@@ -7,7 +7,6 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\AI\AIGetConversationHistoriesResponse;
 use Telnyx\AI\AISummarizeResponse;
-use Telnyx\AI\ModelsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Tests\UnsupportedMockTests;
@@ -28,36 +27,6 @@ final class AITest extends TestCase
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
-    }
-
-    #[Test]
-    public function testCreateResponseDeprecated(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->createResponseDeprecated(
-            responseRequest: ['model' => 'bar', 'input' => 'bar']
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsArray($result);
-    }
-
-    #[Test]
-    public function testCreateResponseDeprecatedWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->createResponseDeprecated(
-            responseRequest: ['model' => 'bar', 'input' => 'bar']
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsArray($result);
     }
 
     #[Test]
@@ -100,19 +69,6 @@ final class AITest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(AIGetConversationHistoriesResponse::class, $result);
-    }
-
-    #[Test]
-    public function testRetrieveModels(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->ai->retrieveModels();
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(ModelsResponse::class, $result);
     }
 
     #[Test]
