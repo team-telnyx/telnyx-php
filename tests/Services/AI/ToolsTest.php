@@ -55,6 +55,7 @@ final class ToolsTest extends TestCase
         $result = $this->client->ai->tools->create(
             displayName: 'display_name',
             type: 'type',
+            clientSideTool: ['foo' => 'bar'],
             function: ['foo' => 'bar'],
             handoff: ['foo' => 'bar'],
             invite: ['foo' => 'bar'],

@@ -37,6 +37,7 @@ final class ToolsRawService implements ToolsRawContract
      * @param array{
      *   displayName: string,
      *   type: string,
+     *   clientSideTool?: array<string,mixed>,
      *   function?: array<string,mixed>,
      *   handoff?: array<string,mixed>,
      *   invite?: array<string,mixed>,
@@ -101,6 +102,7 @@ final class ToolsRawService implements ToolsRawContract
      *
      * @param string $toolID unique identifier of the tool
      * @param array{
+     *   clientSideTool?: array<string,mixed>,
      *   displayName?: string,
      *   function?: array<string,mixed>,
      *   handoff?: array<string,mixed>,

@@ -37,6 +37,7 @@ final class ToolsService implements ToolsContract
      *
      * Create Tool
      *
+     * @param array<string,mixed> $clientSideTool
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
@@ -49,6 +50,7 @@ final class ToolsService implements ToolsContract
     public function create(
         string $displayName,
         string $type,
+        ?array $clientSideTool = null,
         ?array $function = null,
         ?array $handoff = null,
         ?array $invite = null,
@@ -61,6 +63,7 @@ final class ToolsService implements ToolsContract
             [
                 'displayName' => $displayName,
                 'type' => $type,
+                'clientSideTool' => $clientSideTool,
                 'function' => $function,
                 'handoff' => $handoff,
                 'invite' => $invite,
@@ -102,6 +105,7 @@ final class ToolsService implements ToolsContract
      * Update Tool
      *
      * @param string $toolID unique identifier of the tool
+     * @param array<string,mixed> $clientSideTool
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
@@ -113,6 +117,7 @@ final class ToolsService implements ToolsContract
      */
     public function update(
         string $toolID,
+        ?array $clientSideTool = null,
         ?string $displayName = null,
         ?array $function = null,
         ?array $handoff = null,
@@ -125,6 +130,7 @@ final class ToolsService implements ToolsContract
     ): SharedToolResponse {
         $params = Util::removeNulls(
             [
+                'clientSideTool' => $clientSideTool,
                 'displayName' => $displayName,
                 'function' => $function,
                 'handoff' => $handoff,

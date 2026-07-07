@@ -18,6 +18,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @phpstan-type ToolCreateParamsShape = array{
  *   displayName: string,
  *   type: string,
+ *   clientSideTool?: array<string,mixed>|null,
  *   function?: array<string,mixed>|null,
  *   handoff?: array<string,mixed>|null,
  *   invite?: array<string,mixed>|null,
@@ -37,6 +38,10 @@ final class ToolCreateParams implements BaseModel
 
     #[Required]
     public string $type;
+
+    /** @var array<string,mixed>|null $clientSideTool */
+    #[Optional('client_side_tool', map: 'mixed')]
+    public ?array $clientSideTool;
 
     /** @var array<string,mixed>|null $function */
     #[Optional(map: 'mixed')]
@@ -85,6 +90,7 @@ final class ToolCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param array<string,mixed>|null $clientSideTool
      * @param array<string,mixed>|null $function
      * @param array<string,mixed>|null $handoff
      * @param array<string,mixed>|null $invite
@@ -94,6 +100,7 @@ final class ToolCreateParams implements BaseModel
     public static function with(
         string $displayName,
         string $type,
+        ?array $clientSideTool = null,
         ?array $function = null,
         ?array $handoff = null,
         ?array $invite = null,
@@ -106,6 +113,7 @@ final class ToolCreateParams implements BaseModel
         $self['displayName'] = $displayName;
         $self['type'] = $type;
 
+        null !== $clientSideTool && $self['clientSideTool'] = $clientSideTool;
         null !== $function && $self['function'] = $function;
         null !== $handoff && $self['handoff'] = $handoff;
         null !== $invite && $self['invite'] = $invite;
@@ -128,6 +136,17 @@ final class ToolCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
+     * @param array<string,mixed> $clientSideTool
+     */
+    public function withClientSideTool(array $clientSideTool): self
+    {
+        $self = clone $this;
+        $self['clientSideTool'] = $clientSideTool;
 
         return $self;
     }

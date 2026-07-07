@@ -17,6 +17,7 @@ interface ToolsContract
     /**
      * @api
      *
+     * @param array<string,mixed> $clientSideTool
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
@@ -29,6 +30,7 @@ interface ToolsContract
     public function create(
         string $displayName,
         string $type,
+        ?array $clientSideTool = null,
         ?array $function = null,
         ?array $handoff = null,
         ?array $invite = null,
@@ -55,6 +57,7 @@ interface ToolsContract
      * @api
      *
      * @param string $toolID unique identifier of the tool
+     * @param array<string,mixed> $clientSideTool
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
@@ -66,6 +69,7 @@ interface ToolsContract
      */
     public function update(
         string $toolID,
+        ?array $clientSideTool = null,
         ?string $displayName = null,
         ?array $function = null,
         ?array $handoff = null,

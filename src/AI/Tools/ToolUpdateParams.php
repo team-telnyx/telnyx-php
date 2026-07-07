@@ -15,6 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\ToolsService::update()
  *
  * @phpstan-type ToolUpdateParamsShape = array{
+ *   clientSideTool?: array<string,mixed>|null,
  *   displayName?: string|null,
  *   function?: array<string,mixed>|null,
  *   handoff?: array<string,mixed>|null,
@@ -30,6 +31,10 @@ final class ToolUpdateParams implements BaseModel
     /** @use SdkModel<ToolUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /** @var array<string,mixed>|null $clientSideTool */
+    #[Optional('client_side_tool', map: 'mixed')]
+    public ?array $clientSideTool;
 
     #[Optional('display_name')]
     public ?string $displayName;
@@ -70,6 +75,7 @@ final class ToolUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param array<string,mixed>|null $clientSideTool
      * @param array<string,mixed>|null $function
      * @param array<string,mixed>|null $handoff
      * @param array<string,mixed>|null $invite
@@ -77,6 +83,7 @@ final class ToolUpdateParams implements BaseModel
      * @param array<string,mixed>|null $webhook
      */
     public static function with(
+        ?array $clientSideTool = null,
         ?string $displayName = null,
         ?array $function = null,
         ?array $handoff = null,
@@ -88,6 +95,7 @@ final class ToolUpdateParams implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $clientSideTool && $self['clientSideTool'] = $clientSideTool;
         null !== $displayName && $self['displayName'] = $displayName;
         null !== $function && $self['function'] = $function;
         null !== $handoff && $self['handoff'] = $handoff;
@@ -96,6 +104,17 @@ final class ToolUpdateParams implements BaseModel
         null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
         null !== $type && $self['type'] = $type;
         null !== $webhook && $self['webhook'] = $webhook;
+
+        return $self;
+    }
+
+    /**
+     * @param array<string,mixed> $clientSideTool
+     */
+    public function withClientSideTool(array $clientSideTool): self
+    {
+        $self = clone $this;
+        $self['clientSideTool'] = $clientSideTool;
 
         return $self;
     }
