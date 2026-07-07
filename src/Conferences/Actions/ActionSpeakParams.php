@@ -67,6 +67,7 @@ final class ActionSpeakParams implements BaseModel
      * - **Rime:** Use `Rime.<model_id>.<voice_id>` (e.g., `Rime.Arcana.cove`). Supported model_ids: `Arcana`, `Mist`, `ArcanaV3`, `Coda`. Use `voice_settings` to configure voice_speed.
      * - **Resemble:** Use `Resemble.Turbo.<voice_id>` (e.g., `Resemble.Turbo.my_voice`). Only `Turbo` model is supported. Use `voice_settings` to configure precision, sample_rate, and format.
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`. Use `voice_settings` to configure `delivery_mode` (`STABLE`, `BALANCED`, `CREATIVE`), supported by `TTS2` only.
+     * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
@@ -200,6 +201,7 @@ final class ActionSpeakParams implements BaseModel
      * - **Rime:** Use `Rime.<model_id>.<voice_id>` (e.g., `Rime.Arcana.cove`). Supported model_ids: `Arcana`, `Mist`, `ArcanaV3`, `Coda`. Use `voice_settings` to configure voice_speed.
      * - **Resemble:** Use `Resemble.Turbo.<voice_id>` (e.g., `Resemble.Turbo.my_voice`). Only `Turbo` model is supported. Use `voice_settings` to configure precision, sample_rate, and format.
      * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`. Use `voice_settings` to configure `delivery_mode` (`STABLE`, `BALANCED`, `CREATIVE`), supported by `TTS2` only.
+     * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      *
      * For service_level basic, you may define the gender of the speaker (male or female).
