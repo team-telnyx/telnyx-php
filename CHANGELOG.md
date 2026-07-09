@@ -1,13 +1,19 @@
 # Changelog
 
-## 7.91.0 (2026-07-03)
+## 7.92.0 (2026-07-04)
 
-Full Changelog: [v7.90.0...v7.91.0](https://github.com/team-telnyx/telnyx-php/compare/v7.90.0...v7.91.0)
+Full Changelog: [v7.91.0...v7.92.0](https://github.com/team-telnyx/telnyx-php/compare/v7.91.0...v7.92.0)
+
+### Bug Fixes
+
+* **release:** ghost guard also verifies the GitHub Release exists ([#341](https://github.com/team-telnyx/telnyx-php/issues/341)) ([4bca5a3](https://github.com/team-telnyx/telnyx-php/commit/4bca5a3ce5b463f185de8d3f5dee2a3e31a46d64))
+* **release:** scan next's commits in release-pr (stop depending on master hotfixes) ([#338](https://github.com/team-telnyx/telnyx-php/issues/338)) ([9158bd1](https://github.com/team-telnyx/telnyx-php/commit/9158bd1c30720f410444c6bc86ba47aca99dacc3))
+
 
 ### Chores
 
-* promote from staging 97c4334 ([ef5524e](https://github.com/team-telnyx/telnyx-php/commit/ef5524e2ed28e91e7a88bb1a97aa30e95abbc32b))
-* promote from staging d0cc54d ([c90c96b](https://github.com/team-telnyx/telnyx-php/commit/c90c96bd9aeb575f4e2a85fb4e14fddc7cfcd0f5))
+* promote from staging 290c352 ([cdaf766](https://github.com/team-telnyx/telnyx-php/commit/cdaf76625d8f65989af775e2e523edc77361aa19))
+* promote from staging 94cc024 ([094e8ba](https://github.com/team-telnyx/telnyx-php/commit/094e8baebfdb90b376cece5c25b73cbcdb2efc13))
 
 ## [7.75.0](https://github.com/team-telnyx/telnyx-php-staging/compare/v7.74.0...v7.75.0) (2026-06-22)
 

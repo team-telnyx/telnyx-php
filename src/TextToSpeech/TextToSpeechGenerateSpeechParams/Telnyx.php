@@ -10,7 +10,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx\Emotion;
 
 /**
- * Telnyx provider-specific parameters. Use `voice_speed` and `temperature` for `Natural` and `NaturalHD` models. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`.
+ * Telnyx provider-specific parameters. Use `voice_speed` and `temperature` for `Natural` and `NaturalHD` models. For the `Ultra` model, use `voice_speed`, `volume`, and `emotion`. `Bayan` and `Sukhan` don't use `temperature`, `volume`, or `emotion`, and don't support `voice_speed`. `Sukhan`'s `response_format` is restricted to `mp3` or `pcm` (no `wav`).
  *
  * @phpstan-type TelnyxShape = array{
  *   emotion?: null|Emotion|value-of<Emotion>,
@@ -53,7 +53,7 @@ final class Telnyx implements BaseModel
     public ?float $temperature;
 
     /**
-     * Voice speed multiplier. Applies to all models. Range: 0.5 to 2.0.
+     * Voice speed multiplier. Applies to all models except `Bayan` and `Sukhan`, which don't support it. Range: 0.5 to 2.0.
      */
     #[Optional('voice_speed')]
     public ?float $voiceSpeed;
@@ -143,7 +143,7 @@ final class Telnyx implements BaseModel
     }
 
     /**
-     * Voice speed multiplier. Applies to all models. Range: 0.5 to 2.0.
+     * Voice speed multiplier. Applies to all models except `Bayan` and `Sukhan`, which don't support it. Range: 0.5 to 2.0.
      */
     public function withVoiceSpeed(float $voiceSpeed): self
     {
