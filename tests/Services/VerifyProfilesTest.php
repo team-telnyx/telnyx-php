@@ -82,7 +82,7 @@ final class VerifyProfilesTest extends TestCase
             whatsapp: [
                 'defaultVerificationTimeoutSecs' => 300,
                 'senderPhoneNumber' => '+13035551234',
-                'templateID' => 'authentication_template_name',
+                'templateID' => 'authentication_template_id',
                 'wabaID' => '1234567890',
                 'whitelistedDestinations' => ['US', 'CA'],
             ],
