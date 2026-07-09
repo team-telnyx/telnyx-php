@@ -9,6 +9,8 @@ on:
     branches:
       - next
       - master
+  # Manual retrigger (e.g. after a transient reusable-workflow failure).
+  workflow_dispatch: {}
 
 jobs:
   release-please:
