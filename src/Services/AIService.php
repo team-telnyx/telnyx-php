@@ -12,6 +12,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
+use Telnyx\Services\AI\AnthropicService;
 use Telnyx\Services\AI\AssistantsService;
 use Telnyx\Services\AI\AudioService;
 use Telnyx\Services\AI\ChatService;
@@ -96,6 +97,11 @@ final class AIService implements AIContract
     public ToolsService $tools;
 
     /**
+     * @api
+     */
+    public AnthropicService $anthropic;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -113,6 +119,7 @@ final class AIService implements AIContract
         $this->missions = new MissionsService($client);
         $this->openai = new OpenAIService($client);
         $this->tools = new ToolsService($client);
+        $this->anthropic = new AnthropicService($client);
     }
 
     /**
