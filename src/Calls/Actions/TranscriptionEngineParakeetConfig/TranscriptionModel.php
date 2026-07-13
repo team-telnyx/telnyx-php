@@ -9,5 +9,5 @@ namespace Telnyx\Calls\Actions\TranscriptionEngineParakeetConfig;
  */
 enum TranscriptionModel: string
 {
-    case PARAKEET_TDT_0_6B_V3 = 'parakeet/tdt-0.6b-v3';
+    case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
 }
