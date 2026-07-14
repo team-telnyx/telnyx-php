@@ -23,6 +23,7 @@ use Telnyx\Requirements\RequirementListParams\Sort;
  *   pageNumber?: int|null,
  *   pageSize?: int|null,
  *   sort?: list<Sort|value-of<Sort>>|null,
+ *   version?: int|null,
  * }
  */
 final class RequirementListParams implements BaseModel
@@ -51,6 +52,12 @@ final class RequirementListParams implements BaseModel
     #[Optional(list: Sort::class)]
     public ?array $sort;
 
+    /**
+     * Filter by requirement version number. When omitted, returns the currently-active version.
+     */
+    #[Optional]
+    public ?int $version;
+
     public function __construct()
     {
         $this->initialize();
@@ -69,6 +76,7 @@ final class RequirementListParams implements BaseModel
         ?int $pageNumber = null,
         ?int $pageSize = null,
         ?array $sort = null,
+        ?int $version = null,
     ): self {
         $self = new self;
 
@@ -76,6 +84,7 @@ final class RequirementListParams implements BaseModel
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
         null !== $sort && $self['sort'] = $sort;
+        null !== $version && $self['version'] = $version;
 
         return $self;
     }
@@ -118,6 +127,17 @@ final class RequirementListParams implements BaseModel
     {
         $self = clone $this;
         $self['sort'] = $sort;
+
+        return $self;
+    }
+
+    /**
+     * Filter by requirement version number. When omitted, returns the currently-active version.
+     */
+    public function withVersion(int $version): self
+    {
+        $self = clone $this;
+        $self['version'] = $version;
 
         return $self;
     }

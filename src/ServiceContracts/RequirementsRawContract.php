@@ -11,6 +11,7 @@ use Telnyx\RequestOptions;
 use Telnyx\Requirements\DocReqsRequirement;
 use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
+use Telnyx\Requirements\RequirementRetrieveParams;
 
 /**
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
@@ -21,6 +22,7 @@ interface RequirementsRawContract
      * @api
      *
      * @param string $id Uniquely identifies the requirement_type record
+     * @param array<string,mixed>|RequirementRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementGetResponse>
@@ -29,7 +31,8 @@ interface RequirementsRawContract
      */
     public function retrieve(
         string $id,
-        RequestOptions|array|null $requestOptions = null
+        array|RequirementRetrieveParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
