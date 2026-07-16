@@ -74,7 +74,7 @@ interface ManagedAccountsContract
     /**
      * @api
      *
-     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq]
+     * @param Filter|FilterShape $filter Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq], filter[status][eq]
      * @param bool $includeCancelledAccounts specifies if cancelled accounts should be included in the results
      * @param Sort|value-of<Sort> $sort Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
      * That is: <ul>
