@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
+use Telnyx\AI\Tools\PayToolParams;
 use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
@@ -15,6 +16,7 @@ use Telnyx\ServiceContracts\AI\ToolsContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ToolsService implements ToolsContract
@@ -41,6 +43,7 @@ final class ToolsService implements ToolsContract
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
+     * @param PayToolParams|PayToolParamsShape $pay
      * @param array<string,mixed> $retrieval
      * @param array<string,mixed> $webhook
      * @param RequestOpts|null $requestOptions
@@ -54,6 +57,7 @@ final class ToolsService implements ToolsContract
         ?array $function = null,
         ?array $handoff = null,
         ?array $invite = null,
+        PayToolParams|array|null $pay = null,
         ?array $retrieval = null,
         int $timeoutMs = 5000,
         ?array $webhook = null,
@@ -67,6 +71,7 @@ final class ToolsService implements ToolsContract
                 'function' => $function,
                 'handoff' => $handoff,
                 'invite' => $invite,
+                'pay' => $pay,
                 'retrieval' => $retrieval,
                 'timeoutMs' => $timeoutMs,
                 'webhook' => $webhook,
@@ -109,6 +114,7 @@ final class ToolsService implements ToolsContract
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
+     * @param PayToolParams|PayToolParamsShape $pay
      * @param array<string,mixed> $retrieval
      * @param array<string,mixed> $webhook
      * @param RequestOpts|null $requestOptions
@@ -122,6 +128,7 @@ final class ToolsService implements ToolsContract
         ?array $function = null,
         ?array $handoff = null,
         ?array $invite = null,
+        PayToolParams|array|null $pay = null,
         ?array $retrieval = null,
         ?int $timeoutMs = null,
         ?string $type = null,
@@ -135,6 +142,7 @@ final class ToolsService implements ToolsContract
                 'function' => $function,
                 'handoff' => $handoff,
                 'invite' => $invite,
+                'pay' => $pay,
                 'retrieval' => $retrieval,
                 'timeoutMs' => $timeoutMs,
                 'type' => $type,

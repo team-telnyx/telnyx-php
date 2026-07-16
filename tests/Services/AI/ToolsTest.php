@@ -59,6 +59,12 @@ final class ToolsTest extends TestCase
             function: ['foo' => 'bar'],
             handoff: ['foo' => 'bar'],
             invite: ['foo' => 'bar'],
+            pay: [
+                'connectorName' => 'connector_name',
+                'currency' => 'currency',
+                'description' => 'description',
+                'paymentMethod' => 'payment_method',
+            ],
             retrieval: ['foo' => 'bar'],
             timeoutMs: 0,
             webhook: ['foo' => 'bar'],

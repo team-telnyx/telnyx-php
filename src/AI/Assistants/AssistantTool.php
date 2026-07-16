@@ -9,6 +9,7 @@ use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
 use Telnyx\AI\Assistants\AssistantTool\InviteTool;
+use Telnyx\AI\Assistants\AssistantTool\PayTool;
 use Telnyx\AI\Assistants\AssistantTool\SendMessageTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\AssistantTool\SkipTurnTool;
@@ -30,9 +31,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type DtmfToolShape from \Telnyx\AI\Assistants\AssistantTool\DtmfTool
  * @phpstan-import-type SendMessageToolShape from \Telnyx\AI\Assistants\AssistantTool\SendMessageTool
  * @phpstan-import-type SkipTurnToolShape from \Telnyx\AI\Assistants\AssistantTool\SkipTurnTool
+ * @phpstan-import-type PayToolShape from \Telnyx\AI\Assistants\AssistantTool\PayTool
  *
- * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|ClientSideTool|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool
- * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|ClientSideToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape
+ * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|ClientSideTool|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool|PayTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|ClientSideToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape|PayToolShape
  */
 final class AssistantTool implements ConverterSource
 {
@@ -60,6 +62,7 @@ final class AssistantTool implements ConverterSource
             'send_dtmf' => DtmfTool::class,
             'send_message' => SendMessageTool::class,
             'skip_turn' => SkipTurnTool::class,
+            'pay' => PayTool::class,
         ];
     }
 }

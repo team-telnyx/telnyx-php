@@ -15,6 +15,8 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\ToolsService::create()
  *
+ * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
+ *
  * @phpstan-type ToolCreateParamsShape = array{
  *   displayName: string,
  *   type: string,
@@ -22,6 +24,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   function?: array<string,mixed>|null,
  *   handoff?: array<string,mixed>|null,
  *   invite?: array<string,mixed>|null,
+ *   pay?: null|PayToolParams|PayToolParamsShape,
  *   retrieval?: array<string,mixed>|null,
  *   timeoutMs?: int|null,
  *   webhook?: array<string,mixed>|null,
@@ -54,6 +57,9 @@ final class ToolCreateParams implements BaseModel
     /** @var array<string,mixed>|null $invite */
     #[Optional(map: 'mixed')]
     public ?array $invite;
+
+    #[Optional]
+    public ?PayToolParams $pay;
 
     /** @var array<string,mixed>|null $retrieval */
     #[Optional(map: 'mixed')]
@@ -94,6 +100,7 @@ final class ToolCreateParams implements BaseModel
      * @param array<string,mixed>|null $function
      * @param array<string,mixed>|null $handoff
      * @param array<string,mixed>|null $invite
+     * @param PayToolParams|PayToolParamsShape|null $pay
      * @param array<string,mixed>|null $retrieval
      * @param array<string,mixed>|null $webhook
      */
@@ -104,6 +111,7 @@ final class ToolCreateParams implements BaseModel
         ?array $function = null,
         ?array $handoff = null,
         ?array $invite = null,
+        PayToolParams|array|null $pay = null,
         ?array $retrieval = null,
         ?int $timeoutMs = null,
         ?array $webhook = null,
@@ -117,6 +125,7 @@ final class ToolCreateParams implements BaseModel
         null !== $function && $self['function'] = $function;
         null !== $handoff && $self['handoff'] = $handoff;
         null !== $invite && $self['invite'] = $invite;
+        null !== $pay && $self['pay'] = $pay;
         null !== $retrieval && $self['retrieval'] = $retrieval;
         null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
         null !== $webhook && $self['webhook'] = $webhook;
@@ -180,6 +189,17 @@ final class ToolCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['invite'] = $invite;
+
+        return $self;
+    }
+
+    /**
+     * @param PayToolParams|PayToolParamsShape $pay
+     */
+    public function withPay(PayToolParams|array $pay): self
+    {
+        $self = clone $this;
+        $self['pay'] = $pay;
 
         return $self;
     }

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Telnyx\ServiceContracts\AI;
 
+use Telnyx\AI\Tools\PayToolParams;
 use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\DefaultFlatPagination;
 use Telnyx\RequestOptions;
 
 /**
+ * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 interface ToolsContract
@@ -21,6 +23,7 @@ interface ToolsContract
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
+     * @param PayToolParams|PayToolParamsShape $pay
      * @param array<string,mixed> $retrieval
      * @param array<string,mixed> $webhook
      * @param RequestOpts|null $requestOptions
@@ -34,6 +37,7 @@ interface ToolsContract
         ?array $function = null,
         ?array $handoff = null,
         ?array $invite = null,
+        PayToolParams|array|null $pay = null,
         ?array $retrieval = null,
         int $timeoutMs = 5000,
         ?array $webhook = null,
@@ -61,6 +65,7 @@ interface ToolsContract
      * @param array<string,mixed> $function
      * @param array<string,mixed> $handoff
      * @param array<string,mixed> $invite
+     * @param PayToolParams|PayToolParamsShape $pay
      * @param array<string,mixed> $retrieval
      * @param array<string,mixed> $webhook
      * @param RequestOpts|null $requestOptions
@@ -74,6 +79,7 @@ interface ToolsContract
         ?array $function = null,
         ?array $handoff = null,
         ?array $invite = null,
+        PayToolParams|array|null $pay = null,
         ?array $retrieval = null,
         ?int $timeoutMs = null,
         ?string $type = null,
