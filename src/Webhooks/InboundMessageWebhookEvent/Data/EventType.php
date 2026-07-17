@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\Webhooks\InboundMessage;
+namespace Telnyx\Webhooks\InboundMessageWebhookEvent\Data;
 
 /**
  * The type of event being delivered.

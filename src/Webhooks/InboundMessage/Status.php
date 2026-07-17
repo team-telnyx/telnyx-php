@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\InboundMessage;
 
-enum RecordType: string
+enum Status: string
 {
-    case EMAIL_MESSAGE = 'email_message';
+    case RECEIVED = 'received';
 }
