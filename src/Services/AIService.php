@@ -7,12 +7,12 @@ namespace Telnyx\Services;
 use Telnyx\AI\AIGetConversationHistoriesResponse;
 use Telnyx\AI\AIRetrieveConversationHistoriesParams\Region;
 use Telnyx\AI\AISummarizeResponse;
-use Telnyx\AI\ModelsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AIContract;
+use Telnyx\Services\AI\AnthropicService;
 use Telnyx\Services\AI\AssistantsService;
 use Telnyx\Services\AI\AudioService;
 use Telnyx\Services\AI\ChatService;
@@ -97,6 +97,11 @@ final class AIService implements AIContract
     public ToolsService $tools;
 
     /**
+     * @api
+     */
+    public AnthropicService $anthropic;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -114,32 +119,7 @@ final class AIService implements AIContract
         $this->missions = new MissionsService($client);
         $this->openai = new OpenAIService($client);
         $this->tools = new ToolsService($client);
-    }
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * **Deprecated**: Use `POST /v2/ai/openai/responses` instead. This endpoint is compatible with the [OpenAI Responses API](https://developers.openai.com/api/reference/responses/overview) and may be used with the OpenAI JS or Python SDK. Response id parameter is not supported at the moment. Use the `conversation` parameter with a Telnyx Conversation ID to leverage persistent conversations.
-     *
-     * @param array<string,mixed> $responseRequest
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return array<string,mixed>
-     *
-     * @throws APIException
-     */
-    public function createResponseDeprecated(
-        array $responseRequest,
-        RequestOptions|array|null $requestOptions = null
-    ): array {
-        $params = Util::removeNulls(['responseRequest' => $responseRequest]);
-
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->createResponseDeprecated(params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
+        $this->anthropic = new AnthropicService($client);
     }
 
     /**
@@ -233,30 +213,6 @@ final class AIService implements AIContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieveConversationHistories(params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
-    }
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * **Deprecated**: Use `GET /v2/ai/openai/models` instead.
-     *
-     * Returns the same `ModelsResponse` payload as the OpenAI-compatible endpoint — open-source LLMs hosted on Telnyx (e.g. `moonshotai/Kimi-K2.6`, `zai-org/GLM-5.1-FP8`, `MiniMaxAI/MiniMax-M2.7`), embedding models, and fine-tuned models — kept around for backwards compatibility. New integrations should use `/v2/ai/openai/models`.
-     *
-     * Model ids follow the `{organization}/{model_name}` convention from Hugging Face.
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function retrieveModels(
-        RequestOptions|array|null $requestOptions = null
-    ): ModelsResponse {
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieveModels(requestOptions: $requestOptions);
 
         return $response->parse();
     }

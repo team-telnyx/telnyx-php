@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.93.0](https://github.com/team-telnyx/telnyx-php/compare/v7.92.0...v7.93.0) (2026-07-17)
+
+
+### Bug Fixes
+
+* **release:** assert a release PR exists for unreleased commits ([#349](https://github.com/team-telnyx/telnyx-php/issues/349)) ([02e8412](https://github.com/team-telnyx/telnyx-php/commit/02e84124ddf4ae9c12990153cf21dc90593caa7a))
+* **release:** restore inline release workflow — reusable is unresolvable ([#347](https://github.com/team-telnyx/telnyx-php/issues/347)) ([49a4bee](https://github.com/team-telnyx/telnyx-php/commit/49a4bee582fc568614efd28977dc037473566699))
+
 ## 7.92.0 (2026-07-04)
 
 Full Changelog: [v7.91.0...v7.92.0](https://github.com/team-telnyx/telnyx-php/compare/v7.91.0...v7.92.0)

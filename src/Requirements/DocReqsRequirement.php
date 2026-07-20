@@ -19,11 +19,14 @@ use Telnyx\Requirements\DocReqsRequirement\PhoneNumberType;
  *   action?: null|Action|value-of<Action>,
  *   countryCode?: string|null,
  *   createdAt?: string|null,
+ *   effectiveEndAt?: \DateTimeInterface|null,
+ *   effectiveStartAt?: \DateTimeInterface|null,
  *   locality?: string|null,
  *   phoneNumberType?: null|PhoneNumberType|value-of<PhoneNumberType>,
  *   recordType?: string|null,
- *   requirementsTypes?: list<DocReqsRequirementType|DocReqsRequirementTypeShape>|null,
+ *   requirementTypes?: list<DocReqsRequirementType|DocReqsRequirementTypeShape>|null,
  *   updatedAt?: string|null,
+ *   version?: int|null,
  * }
  */
 final class DocReqsRequirement implements BaseModel
@@ -58,6 +61,18 @@ final class DocReqsRequirement implements BaseModel
     public ?string $createdAt;
 
     /**
+     * When this version was superseded. NULL means this is the active or pending version.
+     */
+    #[Optional('effective_end_at', nullable: true)]
+    public ?\DateTimeInterface $effectiveEndAt;
+
+    /**
+     * When this version became (or will become) active.
+     */
+    #[Optional('effective_start_at', nullable: true)]
+    public ?\DateTimeInterface $effectiveStartAt;
+
+    /**
      * The locality where this requirement applies.
      */
     #[Optional]
@@ -80,16 +95,22 @@ final class DocReqsRequirement implements BaseModel
     /**
      * Lists the requirement types necessary to fulfill this requirement.
      *
-     * @var list<DocReqsRequirementType>|null $requirementsTypes
+     * @var list<DocReqsRequirementType>|null $requirementTypes
      */
-    #[Optional('requirements_types', list: DocReqsRequirementType::class)]
-    public ?array $requirementsTypes;
+    #[Optional('requirement_types', list: DocReqsRequirementType::class)]
+    public ?array $requirementTypes;
 
     /**
      * ISO 8601 formatted date-time indicating when the resource was last updated.
      */
     #[Optional('updated_at')]
     public ?string $updatedAt;
+
+    /**
+     * Version number. Increments with each new version. Defaults to 1.
+     */
+    #[Optional]
+    public ?int $version;
 
     public function __construct()
     {
@@ -103,18 +124,21 @@ final class DocReqsRequirement implements BaseModel
      *
      * @param Action|value-of<Action>|null $action
      * @param PhoneNumberType|value-of<PhoneNumberType>|null $phoneNumberType
-     * @param list<DocReqsRequirementType|DocReqsRequirementTypeShape>|null $requirementsTypes
+     * @param list<DocReqsRequirementType|DocReqsRequirementTypeShape>|null $requirementTypes
      */
     public static function with(
         ?string $id = null,
         Action|string|null $action = null,
         ?string $countryCode = null,
         ?string $createdAt = null,
+        ?\DateTimeInterface $effectiveEndAt = null,
+        ?\DateTimeInterface $effectiveStartAt = null,
         ?string $locality = null,
         PhoneNumberType|string|null $phoneNumberType = null,
         ?string $recordType = null,
-        ?array $requirementsTypes = null,
+        ?array $requirementTypes = null,
         ?string $updatedAt = null,
+        ?int $version = null,
     ): self {
         $self = new self;
 
@@ -122,11 +146,14 @@ final class DocReqsRequirement implements BaseModel
         null !== $action && $self['action'] = $action;
         null !== $countryCode && $self['countryCode'] = $countryCode;
         null !== $createdAt && $self['createdAt'] = $createdAt;
+        null !== $effectiveEndAt && $self['effectiveEndAt'] = $effectiveEndAt;
+        null !== $effectiveStartAt && $self['effectiveStartAt'] = $effectiveStartAt;
         null !== $locality && $self['locality'] = $locality;
         null !== $phoneNumberType && $self['phoneNumberType'] = $phoneNumberType;
         null !== $recordType && $self['recordType'] = $recordType;
-        null !== $requirementsTypes && $self['requirementsTypes'] = $requirementsTypes;
+        null !== $requirementTypes && $self['requirementTypes'] = $requirementTypes;
         null !== $updatedAt && $self['updatedAt'] = $updatedAt;
+        null !== $version && $self['version'] = $version;
 
         return $self;
     }
@@ -178,6 +205,30 @@ final class DocReqsRequirement implements BaseModel
     }
 
     /**
+     * When this version was superseded. NULL means this is the active or pending version.
+     */
+    public function withEffectiveEndAt(
+        ?\DateTimeInterface $effectiveEndAt
+    ): self {
+        $self = clone $this;
+        $self['effectiveEndAt'] = $effectiveEndAt;
+
+        return $self;
+    }
+
+    /**
+     * When this version became (or will become) active.
+     */
+    public function withEffectiveStartAt(
+        ?\DateTimeInterface $effectiveStartAt
+    ): self {
+        $self = clone $this;
+        $self['effectiveStartAt'] = $effectiveStartAt;
+
+        return $self;
+    }
+
+    /**
      * The locality where this requirement applies.
      */
     public function withLocality(string $locality): self
@@ -216,12 +267,12 @@ final class DocReqsRequirement implements BaseModel
     /**
      * Lists the requirement types necessary to fulfill this requirement.
      *
-     * @param list<DocReqsRequirementType|DocReqsRequirementTypeShape> $requirementsTypes
+     * @param list<DocReqsRequirementType|DocReqsRequirementTypeShape> $requirementTypes
      */
-    public function withRequirementsTypes(array $requirementsTypes): self
+    public function withRequirementTypes(array $requirementTypes): self
     {
         $self = clone $this;
-        $self['requirementsTypes'] = $requirementsTypes;
+        $self['requirementTypes'] = $requirementTypes;
 
         return $self;
     }
@@ -233,6 +284,17 @@ final class DocReqsRequirement implements BaseModel
     {
         $self = clone $this;
         $self['updatedAt'] = $updatedAt;
+
+        return $self;
+    }
+
+    /**
+     * Version number. Increments with each new version. Defaults to 1.
+     */
+    public function withVersion(int $version): self
+    {
+        $self = clone $this;
+        $self['version'] = $version;
 
         return $self;
     }

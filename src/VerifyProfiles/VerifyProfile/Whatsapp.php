@@ -56,7 +56,7 @@ final class Whatsapp implements BaseModel
     public ?string $senderPhoneNumber;
 
     /**
-     * Customer pre-approved authentication template name registered on Meta.
+     * Customer pre-approved authentication template ID registered on Meta.
      */
     #[Optional('template_id', nullable: true)]
     public ?string $templateID;
@@ -168,7 +168,7 @@ final class Whatsapp implements BaseModel
     }
 
     /**
-     * Customer pre-approved authentication template name registered on Meta.
+     * Customer pre-approved authentication template ID registered on Meta.
      */
     public function withTemplateID(?string $templateID): self
     {

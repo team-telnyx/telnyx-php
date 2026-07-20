@@ -7,7 +7,6 @@ namespace Telnyx\ServiceContracts;
 use Telnyx\AI\AIGetConversationHistoriesResponse;
 use Telnyx\AI\AIRetrieveConversationHistoriesParams\Region;
 use Telnyx\AI\AISummarizeResponse;
-use Telnyx\AI\ModelsResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\RequestOptions;
 
@@ -16,23 +15,6 @@ use Telnyx\RequestOptions;
  */
 interface AIContract
 {
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * @param array<string,mixed> $responseRequest
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return array<string,mixed>
-     *
-     * @throws APIException
-     */
-    public function createResponseDeprecated(
-        array $responseRequest,
-        RequestOptions|array|null $requestOptions = null
-    ): array;
-
     /**
      * @api
      *
@@ -69,19 +51,6 @@ interface AIContract
         Region|string|null $region = null,
         RequestOptions|array|null $requestOptions = null,
     ): AIGetConversationHistoriesResponse;
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @throws APIException
-     */
-    public function retrieveModels(
-        RequestOptions|array|null $requestOptions = null
-    ): ModelsResponse;
 
     /**
      * @api

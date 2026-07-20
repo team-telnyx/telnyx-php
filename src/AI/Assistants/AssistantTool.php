@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Telnyx\AI\Assistants;
 
+use Telnyx\AI\Assistants\AssistantTool\ClientSideTool;
 use Telnyx\AI\Assistants\AssistantTool\DtmfTool;
 use Telnyx\AI\Assistants\AssistantTool\HandoffTool;
 use Telnyx\AI\Assistants\AssistantTool\InferenceEmbeddingTransferTool;
 use Telnyx\AI\Assistants\AssistantTool\InviteTool;
+use Telnyx\AI\Assistants\AssistantTool\PayTool;
 use Telnyx\AI\Assistants\AssistantTool\SendMessageTool;
 use Telnyx\AI\Assistants\AssistantTool\SipReferTool;
 use Telnyx\AI\Assistants\AssistantTool\SkipTurnTool;
@@ -19,6 +21,7 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * The handoff tool allows the assistant to hand off control of the conversation to another AI assistant. By default, this will happen transparently to the end user.
  *
  * @phpstan-import-type InferenceEmbeddingWebhookToolParamsShape from \Telnyx\AI\Assistants\InferenceEmbeddingWebhookToolParams
+ * @phpstan-import-type ClientSideToolShape from \Telnyx\AI\Assistants\AssistantTool\ClientSideTool
  * @phpstan-import-type RetrievalToolShape from \Telnyx\AI\Assistants\RetrievalTool
  * @phpstan-import-type HandoffToolShape from \Telnyx\AI\Assistants\AssistantTool\HandoffTool
  * @phpstan-import-type HangupToolShape from \Telnyx\AI\Assistants\HangupTool
@@ -28,9 +31,10 @@ use Telnyx\Core\Conversion\Contracts\ConverterSource;
  * @phpstan-import-type DtmfToolShape from \Telnyx\AI\Assistants\AssistantTool\DtmfTool
  * @phpstan-import-type SendMessageToolShape from \Telnyx\AI\Assistants\AssistantTool\SendMessageTool
  * @phpstan-import-type SkipTurnToolShape from \Telnyx\AI\Assistants\AssistantTool\SkipTurnTool
+ * @phpstan-import-type PayToolShape from \Telnyx\AI\Assistants\AssistantTool\PayTool
  *
- * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool
- * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape
+ * @phpstan-type AssistantToolVariants = InferenceEmbeddingWebhookToolParams|ClientSideTool|RetrievalTool|HandoffTool|HangupTool|InferenceEmbeddingTransferTool|InviteTool|SipReferTool|DtmfTool|SendMessageTool|SkipTurnTool|PayTool
+ * @phpstan-type AssistantToolShape = AssistantToolVariants|InferenceEmbeddingWebhookToolParamsShape|ClientSideToolShape|RetrievalToolShape|HandoffToolShape|HangupToolShape|InferenceEmbeddingTransferToolShape|InviteToolShape|SipReferToolShape|DtmfToolShape|SendMessageToolShape|SkipTurnToolShape|PayToolShape
  */
 final class AssistantTool implements ConverterSource
 {
@@ -48,6 +52,7 @@ final class AssistantTool implements ConverterSource
     {
         return [
             'webhook' => InferenceEmbeddingWebhookToolParams::class,
+            'client_side_tool' => ClientSideTool::class,
             'retrieval' => RetrievalTool::class,
             'handoff' => HandoffTool::class,
             'hangup' => HangupTool::class,
@@ -57,6 +62,7 @@ final class AssistantTool implements ConverterSource
             'send_dtmf' => DtmfTool::class,
             'send_message' => SendMessageTool::class,
             'skip_turn' => SkipTurnTool::class,
+            'pay' => PayTool::class,
         ];
     }
 }

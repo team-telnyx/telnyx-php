@@ -42,16 +42,20 @@ final class RequirementsService implements RequirementsContract
      * Retrieve a document requirement record
      *
      * @param string $id Uniquely identifies the requirement_type record
+     * @param int $version Filter by requirement version number. When omitted, returns the currently-active version.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        RequestOptions|array|null $requestOptions = null
+        ?int $version = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RequirementGetResponse {
+        $params = Util::removeNulls(['version' => $version]);
+
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieve($id, requestOptions: $requestOptions);
+        $response = $this->raw->retrieve($id, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -63,6 +67,7 @@ final class RequirementsService implements RequirementsContract
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirements (deepObject style). Originally: sort[]
+     * @param int $version Filter by requirement version number. When omitted, returns the currently-active version.
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<DocReqsRequirement>
@@ -74,6 +79,7 @@ final class RequirementsService implements RequirementsContract
         ?int $pageNumber = null,
         ?int $pageSize = null,
         ?array $sort = null,
+        ?int $version = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination {
         $params = Util::removeNulls(
@@ -82,6 +88,7 @@ final class RequirementsService implements RequirementsContract
                 'pageNumber' => $pageNumber,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
+                'version' => $version,
             ],
         );
 

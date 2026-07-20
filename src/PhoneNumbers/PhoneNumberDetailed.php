@@ -27,6 +27,7 @@ use Telnyx\PhoneNumbers\PhoneNumberDetailed\Status;
  *   recordType: string,
  *   status: Status|value-of<Status>,
  *   tags: list<string>,
+ *   activatedAt?: \DateTimeInterface|null,
  *   billingGroupID?: string|null,
  *   callForwardingEnabled?: bool|null,
  *   callRecordingEnabled?: bool|null,
@@ -124,6 +125,12 @@ final class PhoneNumberDetailed implements BaseModel
      */
     #[Required(list: 'string')]
     public array $tags;
+
+    /**
+     * ISO 8601 formatted date indicating when the phone number was first activated (transitioned from purchase-pending or port-pending to active). Will be null for numbers that have not yet been activated, or for legacy numbers activated before this field was tracked.
+     */
+    #[Optional('activated_at', nullable: true)]
+    public ?\DateTimeInterface $activatedAt;
 
     /**
      * Identifies the billing group associated with the phone number.
@@ -305,6 +312,7 @@ final class PhoneNumberDetailed implements BaseModel
         string $recordType,
         Status|string $status,
         array $tags,
+        ?\DateTimeInterface $activatedAt = null,
         ?string $billingGroupID = null,
         ?bool $callForwardingEnabled = null,
         ?bool $callRecordingEnabled = null,
@@ -338,6 +346,7 @@ final class PhoneNumberDetailed implements BaseModel
         $self['status'] = $status;
         $self['tags'] = $tags;
 
+        null !== $activatedAt && $self['activatedAt'] = $activatedAt;
         null !== $billingGroupID && $self['billingGroupID'] = $billingGroupID;
         null !== $callForwardingEnabled && $self['callForwardingEnabled'] = $callForwardingEnabled;
         null !== $callRecordingEnabled && $self['callRecordingEnabled'] = $callRecordingEnabled;
@@ -485,6 +494,17 @@ final class PhoneNumberDetailed implements BaseModel
     {
         $self = clone $this;
         $self['tags'] = $tags;
+
+        return $self;
+    }
+
+    /**
+     * ISO 8601 formatted date indicating when the phone number was first activated (transitioned from purchase-pending or port-pending to active). Will be null for numbers that have not yet been activated, or for legacy numbers activated before this field was tracked.
+     */
+    public function withActivatedAt(?\DateTimeInterface $activatedAt): self
+    {
+        $self = clone $this;
+        $self['activatedAt'] = $activatedAt;
 
         return $self;
     }

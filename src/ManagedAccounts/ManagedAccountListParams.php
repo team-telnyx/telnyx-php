@@ -33,7 +33,7 @@ final class ManagedAccountListParams implements BaseModel
     use SdkParams;
 
     /**
-     * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
+     * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq], filter[status][eq].
      */
     #[Optional]
     public ?Filter $filter;
@@ -101,7 +101,7 @@ final class ManagedAccountListParams implements BaseModel
     }
 
     /**
-     * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq].
+     * Consolidated filter parameter (deepObject style). Originally: filter[email][contains], filter[email][eq], filter[organization_name][contains], filter[organization_name][eq], filter[status][eq].
      *
      * @param Filter|FilterShape $filter
      */

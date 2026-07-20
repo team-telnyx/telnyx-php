@@ -22,7 +22,7 @@ final class TranscriptionConfig implements BaseModel
     use SdkModel;
 
     /**
-     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. Supported and meaningful values depend on the selected transcription `model`. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`. For `soniox/stt-rt-v4`, `auto` omits the language hint and lets Soniox auto-detect; ISO 639-1 codes (e.g. `en`, `es`) bias detection toward that language.
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. Supported and meaningful values depend on the selected transcription `model`. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`. For `soniox/stt-rt-v4`, `auto` omits the language hint and lets Soniox auto-detect; ISO 639-1 codes (e.g. `en`, `es`) bias detection toward that language. For `assemblyai/universal-streaming`, `auto` (or unset) enables native multilingual code-switching; ISO 639-1 codes (`en`, `es`, `de`, `fr`, `pt`, `it`, `tr`, `nl`, `sv`, `no`, `da`, `fi`, `hi`, `vi`, `ar`, `he`, `ja`, `zh`) bias the session to that language.
      */
     #[Optional]
     public ?string $language;
@@ -36,7 +36,7 @@ final class TranscriptionConfig implements BaseModel
      * - `assemblyai/universal-streaming` for live streaming transcription.
      * - `xai/grok-stt` for live streaming transcription.
      * - `soniox/stt-rt-v4` for live streaming multilingual transcription with automatic language detection.
-     * - `parakeet/tdt-0.6b-v3` for multilingual transcription with automatic language detection.
+     * - `nvidia/parakeet-v3` for multilingual transcription with automatic language detection.
      * - `azure/fast` and `azure/realtime`; Azure models require `region`, and unsupported regions require `api_key_ref`.
      * - `google/latest_long` for non-streaming multilingual transcription.
      * - `distil-whisper/distil-large-v2` for lower-latency English-only non-streaming transcription.
@@ -72,7 +72,7 @@ final class TranscriptionConfig implements BaseModel
     }
 
     /**
-     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. Supported and meaningful values depend on the selected transcription `model`. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`. For `soniox/stt-rt-v4`, `auto` omits the language hint and lets Soniox auto-detect; ISO 639-1 codes (e.g. `en`, `es`) bias detection toward that language.
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. Supported and meaningful values depend on the selected transcription `model`. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`. For `soniox/stt-rt-v4`, `auto` omits the language hint and lets Soniox auto-detect; ISO 639-1 codes (e.g. `en`, `es`) bias detection toward that language. For `assemblyai/universal-streaming`, `auto` (or unset) enables native multilingual code-switching; ISO 639-1 codes (`en`, `es`, `de`, `fr`, `pt`, `it`, `tr`, `nl`, `sv`, `no`, `da`, `fi`, `hi`, `vi`, `ar`, `he`, `ja`, `zh`) bias the session to that language.
      */
     public function withLanguage(string $language): self
     {
@@ -91,7 +91,7 @@ final class TranscriptionConfig implements BaseModel
      * - `assemblyai/universal-streaming` for live streaming transcription.
      * - `xai/grok-stt` for live streaming transcription.
      * - `soniox/stt-rt-v4` for live streaming multilingual transcription with automatic language detection.
-     * - `parakeet/tdt-0.6b-v3` for multilingual transcription with automatic language detection.
+     * - `nvidia/parakeet-v3` for multilingual transcription with automatic language detection.
      * - `azure/fast` and `azure/realtime`; Azure models require `region`, and unsupported regions require `api_key_ref`.
      * - `google/latest_long` for non-streaming multilingual transcription.
      * - `distil-whisper/distil-large-v2` for lower-latency English-only non-streaming transcription.

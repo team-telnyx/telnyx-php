@@ -14,6 +14,7 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\AI\ConversationsContract;
+use Telnyx\Services\AI\Conversations\ConversationInsightsService;
 use Telnyx\Services\AI\Conversations\InsightGroupsService;
 use Telnyx\Services\AI\Conversations\InsightsService;
 use Telnyx\Services\AI\Conversations\MessagesService;
@@ -48,6 +49,11 @@ final class ConversationsService implements ConversationsContract
     public MessagesService $messages;
 
     /**
+     * @api
+     */
+    public ConversationInsightsService $conversationInsights;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
@@ -56,6 +62,7 @@ final class ConversationsService implements ConversationsContract
         $this->insightGroups = new InsightGroupsService($client);
         $this->insights = new InsightsService($client);
         $this->messages = new MessagesService($client);
+        $this->conversationInsights = new ConversationInsightsService($client);
     }
 
     /**

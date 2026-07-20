@@ -14,11 +14,15 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\AI\ToolsService::update()
  *
+ * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
+ *
  * @phpstan-type ToolUpdateParamsShape = array{
+ *   clientSideTool?: array<string,mixed>|null,
  *   displayName?: string|null,
  *   function?: array<string,mixed>|null,
  *   handoff?: array<string,mixed>|null,
  *   invite?: array<string,mixed>|null,
+ *   pay?: null|PayToolParams|PayToolParamsShape,
  *   retrieval?: array<string,mixed>|null,
  *   timeoutMs?: int|null,
  *   type?: string|null,
@@ -30,6 +34,10 @@ final class ToolUpdateParams implements BaseModel
     /** @use SdkModel<ToolUpdateParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    /** @var array<string,mixed>|null $clientSideTool */
+    #[Optional('client_side_tool', map: 'mixed')]
+    public ?array $clientSideTool;
 
     #[Optional('display_name')]
     public ?string $displayName;
@@ -45,6 +53,9 @@ final class ToolUpdateParams implements BaseModel
     /** @var array<string,mixed>|null $invite */
     #[Optional(map: 'mixed')]
     public ?array $invite;
+
+    #[Optional]
+    public ?PayToolParams $pay;
 
     /** @var array<string,mixed>|null $retrieval */
     #[Optional(map: 'mixed')]
@@ -70,17 +81,21 @@ final class ToolUpdateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param array<string,mixed>|null $clientSideTool
      * @param array<string,mixed>|null $function
      * @param array<string,mixed>|null $handoff
      * @param array<string,mixed>|null $invite
+     * @param PayToolParams|PayToolParamsShape|null $pay
      * @param array<string,mixed>|null $retrieval
      * @param array<string,mixed>|null $webhook
      */
     public static function with(
+        ?array $clientSideTool = null,
         ?string $displayName = null,
         ?array $function = null,
         ?array $handoff = null,
         ?array $invite = null,
+        PayToolParams|array|null $pay = null,
         ?array $retrieval = null,
         ?int $timeoutMs = null,
         ?string $type = null,
@@ -88,14 +103,27 @@ final class ToolUpdateParams implements BaseModel
     ): self {
         $self = new self;
 
+        null !== $clientSideTool && $self['clientSideTool'] = $clientSideTool;
         null !== $displayName && $self['displayName'] = $displayName;
         null !== $function && $self['function'] = $function;
         null !== $handoff && $self['handoff'] = $handoff;
         null !== $invite && $self['invite'] = $invite;
+        null !== $pay && $self['pay'] = $pay;
         null !== $retrieval && $self['retrieval'] = $retrieval;
         null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
         null !== $type && $self['type'] = $type;
         null !== $webhook && $self['webhook'] = $webhook;
+
+        return $self;
+    }
+
+    /**
+     * @param array<string,mixed> $clientSideTool
+     */
+    public function withClientSideTool(array $clientSideTool): self
+    {
+        $self = clone $this;
+        $self['clientSideTool'] = $clientSideTool;
 
         return $self;
     }
@@ -137,6 +165,17 @@ final class ToolUpdateParams implements BaseModel
     {
         $self = clone $this;
         $self['invite'] = $invite;
+
+        return $self;
+    }
+
+    /**
+     * @param PayToolParams|PayToolParamsShape $pay
+     */
+    public function withPay(PayToolParams|array $pay): self
+    {
+        $self = clone $this;
+        $self['pay'] = $pay;
 
         return $self;
     }

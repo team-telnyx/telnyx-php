@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Telnyx\Services;
 
-use Telnyx\AI\AICreateResponseDeprecatedParams;
 use Telnyx\AI\AIGetConversationHistoriesResponse;
 use Telnyx\AI\AIRetrieveConversationHistoriesParams;
 use Telnyx\AI\AIRetrieveConversationHistoriesParams\Region;
 use Telnyx\AI\AISummarizeParams;
 use Telnyx\AI\AISummarizeResponse;
-use Telnyx\AI\ModelsResponse;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
-use Telnyx\Core\Conversion\MapOf;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\RequestOptions;
@@ -29,41 +26,6 @@ final class AIRawService implements AIRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * **Deprecated**: Use `POST /v2/ai/openai/responses` instead. This endpoint is compatible with the [OpenAI Responses API](https://developers.openai.com/api/reference/responses/overview) and may be used with the OpenAI JS or Python SDK. Response id parameter is not supported at the moment. Use the `conversation` parameter with a Telnyx Conversation ID to leverage persistent conversations.
-     *
-     * @param array{
-     *   responseRequest: array<string,mixed>
-     * }|AICreateResponseDeprecatedParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<array<string,mixed>>
-     *
-     * @throws APIException
-     */
-    public function createResponseDeprecated(
-        array|AICreateResponseDeprecatedParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = AICreateResponseDeprecatedParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: 'ai/responses',
-            body: $parsed['responseRequest'],
-            options: $options,
-            convert: new MapOf('mixed'),
-        );
-    }
 
     /**
      * @api
@@ -155,35 +117,6 @@ final class AIRawService implements AIRawContract
             ),
             options: $options,
             convert: AIGetConversationHistoriesResponse::class,
-        );
-    }
-
-    /**
-     * @deprecated
-     *
-     * @api
-     *
-     * **Deprecated**: Use `GET /v2/ai/openai/models` instead.
-     *
-     * Returns the same `ModelsResponse` payload as the OpenAI-compatible endpoint — open-source LLMs hosted on Telnyx (e.g. `moonshotai/Kimi-K2.6`, `zai-org/GLM-5.1-FP8`, `MiniMaxAI/MiniMax-M2.7`), embedding models, and fine-tuned models — kept around for backwards compatibility. New integrations should use `/v2/ai/openai/models`.
-     *
-     * Model ids follow the `{organization}/{model_name}` convention from Hugging Face.
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<ModelsResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieveModels(
-        RequestOptions|array|null $requestOptions = null
-    ): BaseResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: 'ai/models',
-            options: $requestOptions,
-            convert: ModelsResponse::class,
         );
     }
 

@@ -15,6 +15,7 @@ use Telnyx\Requirements\RequirementGetResponse;
 use Telnyx\Requirements\RequirementListParams;
 use Telnyx\Requirements\RequirementListParams\Filter;
 use Telnyx\Requirements\RequirementListParams\Sort;
+use Telnyx\Requirements\RequirementRetrieveParams;
 use Telnyx\ServiceContracts\RequirementsRawContract;
 
 /**
@@ -37,6 +38,7 @@ final class RequirementsRawService implements RequirementsRawContract
      * Retrieve a document requirement record
      *
      * @param string $id Uniquely identifies the requirement_type record
+     * @param array{version?: int}|RequirementRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<RequirementGetResponse>
@@ -45,13 +47,20 @@ final class RequirementsRawService implements RequirementsRawContract
      */
     public function retrieve(
         string $id,
-        RequestOptions|array|null $requestOptions = null
+        array|RequirementRetrieveParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
+        [$parsed, $options] = RequirementRetrieveParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['requirements/%1$s', $id],
-            options: $requestOptions,
+            query: $parsed,
+            options: $options,
             convert: RequirementGetResponse::class,
         );
     }
@@ -66,6 +75,7 @@ final class RequirementsRawService implements RequirementsRawContract
      *   pageNumber?: int,
      *   pageSize?: int,
      *   sort?: list<Sort|value-of<Sort>>,
+     *   version?: int,
      * }|RequirementListParams $params
      * @param RequestOpts|null $requestOptions
      *

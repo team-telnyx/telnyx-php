@@ -22,13 +22,15 @@ interface RequirementsContract
      * @api
      *
      * @param string $id Uniquely identifies the requirement_type record
+     * @param int $version Filter by requirement version number. When omitted, returns the currently-active version.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         string $id,
-        RequestOptions|array|null $requestOptions = null
+        ?int $version = null,
+        RequestOptions|array|null $requestOptions = null,
     ): RequirementGetResponse;
 
     /**
@@ -36,6 +38,7 @@ interface RequirementsContract
      *
      * @param Filter|FilterShape $filter Consolidated filter parameter for requirements (deepObject style). Originally: filter[country_code], filter[phone_number_type], filter[action]
      * @param list<Sort|value-of<Sort>> $sort Consolidated sort parameter for requirements (deepObject style). Originally: sort[]
+     * @param int $version Filter by requirement version number. When omitted, returns the currently-active version.
      * @param RequestOpts|null $requestOptions
      *
      * @return DefaultFlatPagination<DocReqsRequirement>
@@ -47,6 +50,7 @@ interface RequirementsContract
         ?int $pageNumber = null,
         ?int $pageSize = null,
         ?array $sort = null,
+        ?int $version = null,
         RequestOptions|array|null $requestOptions = null,
     ): DefaultFlatPagination;
 }

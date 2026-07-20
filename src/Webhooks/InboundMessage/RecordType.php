@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Webhooks\InboundMessage;
 
-/**
- * Identifies the type of the resource.
- */
 enum RecordType: string
 {
-    case EVENT = 'event';
+    case EMAIL_MESSAGE = 'email_message';
 }

@@ -24,16 +24,14 @@ use Telnyx\Messages\MessageSendParams\Encoding;
 use Telnyx\Messages\MessageSendResponse;
 use Telnyx\Messages\MessageSendShortCodeParams;
 use Telnyx\Messages\MessageSendShortCodeResponse;
-use Telnyx\Messages\MessageSendWhatsappParams;
-use Telnyx\Messages\MessageSendWhatsappResponse;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderParams;
 use Telnyx\Messages\MessageSendWithAlphanumericSenderResponse;
-use Telnyx\Messages\WhatsappMessageContent;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\MessagesRawContract;
 
 /**
- * @phpstan-import-type WhatsappMessageContentShape from \Telnyx\Messages\WhatsappMessageContent
+ * Messages.
+ *
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class MessagesRawService implements MessagesRawContract
@@ -382,44 +380,6 @@ final class MessagesRawService implements MessagesRawContract
             body: (object) $parsed,
             options: $options,
             convert: MessageSendShortCodeResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Send a Whatsapp message
-     *
-     * @param array{
-     *   from: string,
-     *   to: string,
-     *   whatsappMessage: WhatsappMessageContent|WhatsappMessageContentShape,
-     *   messagingProfileID?: string,
-     *   type?: MessageSendWhatsappParams\Type|value-of<MessageSendWhatsappParams\Type>,
-     *   webhookURL?: string,
-     * }|MessageSendWhatsappParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<MessageSendWhatsappResponse>
-     *
-     * @throws APIException
-     */
-    public function sendWhatsapp(
-        array|MessageSendWhatsappParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = MessageSendWhatsappParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: 'messages/whatsapp',
-            body: (object) $parsed,
-            options: $options,
-            convert: MessageSendWhatsappResponse::class,
         );
     }
 

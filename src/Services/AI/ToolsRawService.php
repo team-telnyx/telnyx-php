@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Services\AI;
 
+use Telnyx\AI\Tools\PayToolParams;
 use Telnyx\AI\Tools\SharedToolResponse;
 use Telnyx\AI\Tools\ToolCreateParams;
 use Telnyx\AI\Tools\ToolListParams;
@@ -19,6 +20,7 @@ use Telnyx\ServiceContracts\AI\ToolsRawContract;
 /**
  * Configure AI assistant specifications.
  *
+ * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
  * @phpstan-import-type RequestOpts from \Telnyx\RequestOptions
  */
 final class ToolsRawService implements ToolsRawContract
@@ -37,9 +39,11 @@ final class ToolsRawService implements ToolsRawContract
      * @param array{
      *   displayName: string,
      *   type: string,
+     *   clientSideTool?: array<string,mixed>,
      *   function?: array<string,mixed>,
      *   handoff?: array<string,mixed>,
      *   invite?: array<string,mixed>,
+     *   pay?: PayToolParams|PayToolParamsShape,
      *   retrieval?: array<string,mixed>,
      *   timeoutMs?: int,
      *   webhook?: array<string,mixed>,
@@ -101,10 +105,12 @@ final class ToolsRawService implements ToolsRawContract
      *
      * @param string $toolID unique identifier of the tool
      * @param array{
+     *   clientSideTool?: array<string,mixed>,
      *   displayName?: string,
      *   function?: array<string,mixed>,
      *   handoff?: array<string,mixed>,
      *   invite?: array<string,mixed>,
+     *   pay?: PayToolParams|PayToolParamsShape,
      *   retrieval?: array<string,mixed>,
      *   timeoutMs?: int,
      *   type?: string,

@@ -93,6 +93,7 @@ interface CallsContract
      * @param int $recordTimeoutSecs The number of seconds that Telnyx will wait for the recording to be stopped if silence is detected when `record` is specified. The timer only starts when the speech is detected. Please note that call transcription is used to detect silence and the related charge will be applied. The minimum value is 0. The default value is 0 (infinite).
      * @param RecordTrack|value-of<RecordTrack> $recordTrack The audio track to be recorded. Can be either `both`, `inbound` or `outbound`. If only single track is specified (`inbound`, `outbound`), `channels` configuration is ignored and it will be recorded as mono (single channel).
      * @param RecordTrim|value-of<RecordTrim> $recordTrim when set to `trim-silence`, silence will be removed from the beginning and end of the recording
+     * @param bool $retryOnTimeout Whether to keep trying the remaining routing paths (e.g. alternate providers/gateways) for the same destination after `timeout_secs` is reached for the current attempt. When set to `false`, reaching `timeout_secs` aborts the entire dial attempt and the `call.hangup` webhook reports a `hangup_cause` of `no_answer` instead of `timeout`.
      * @param string $sendDigitsOnAnswer DTMF digits to send automatically after the called party answers. Useful for reaching an extension behind an IVR (e.g. `"200"` to dial extension 200 once the called party picks up). Allowed characters: `0-9`, `A-D`, `w` (0.5s pause), `W` (1s pause), `*`, `#`. Maximum 64 characters. When omitted, no automatic DTMF is sent. May also be supplied inline by appending `,<digits>` to `to` (e.g. `to=+18004247767,200`); if both forms are present, this explicit field takes precedence.
      * @param bool $sendSilenceWhenIdle generate silence RTP packets when no transmission available
      * @param string $sipAuthPassword SIP Authentication password used for SIP challenges
@@ -160,6 +161,7 @@ interface CallsContract
         int $recordTimeoutSecs = 0,
         RecordTrack|string $recordTrack = 'both',
         RecordTrim|string|null $recordTrim = null,
+        bool $retryOnTimeout = true,
         ?string $sendDigitsOnAnswer = null,
         bool $sendSilenceWhenIdle = false,
         ?string $sipAuthPassword = null,

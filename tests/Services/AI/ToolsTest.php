@@ -55,9 +55,16 @@ final class ToolsTest extends TestCase
         $result = $this->client->ai->tools->create(
             displayName: 'display_name',
             type: 'type',
+            clientSideTool: ['foo' => 'bar'],
             function: ['foo' => 'bar'],
             handoff: ['foo' => 'bar'],
             invite: ['foo' => 'bar'],
+            pay: [
+                'connectorName' => 'connector_name',
+                'currency' => 'currency',
+                'description' => 'description',
+                'paymentMethod' => 'payment_method',
+            ],
             retrieval: ['foo' => 'bar'],
             timeoutMs: 0,
             webhook: ['foo' => 'bar'],
