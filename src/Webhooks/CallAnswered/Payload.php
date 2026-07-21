@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Telnyx\Webhooks\CallAnswered;
 
 use Telnyx\Calls\CustomSipHeader;
-use Telnyx\Calls\SipHeader;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\Webhooks\CallAnswered\Payload\SipHeader;
 use Telnyx\Webhooks\CallAnswered\Payload\State;
 
 /**
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
- * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Webhooks\CallAnswered\Payload\SipHeader
  *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,

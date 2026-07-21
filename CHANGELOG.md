@@ -1,5 +1,18 @@
 # Changelog
 
+## [7.94.0](https://github.com/team-telnyx/telnyx-php/compare/v7.93.0...v7.94.0) (2026-07-21)
+
+
+### Features
+
+* promote from staging dadcd15 ([254940c](https://github.com/team-telnyx/telnyx-php/commit/254940c7c1856664a8ed2ca6fc8a3fdc43321e50))
+
+
+### Bug Fixes
+
+* **call-control:** support inbound Diversion headers ([#2664](https://github.com/team-telnyx/telnyx-php/issues/2664)) ([f68d583](https://github.com/team-telnyx/telnyx-php/commit/f68d58311b3b8aeabfe6d4f5f8a055584ec63bb7))
+* scan next commits when creating release PR ([#351](https://github.com/team-telnyx/telnyx-php/issues/351)) ([4b18606](https://github.com/team-telnyx/telnyx-php/commit/4b18606673da9cb7b2eedc18ce6ef0155006d77c))
+
 ## [7.93.0](https://github.com/team-telnyx/telnyx-php/compare/v7.92.0...v7.93.0) (2026-07-17)
 
 
