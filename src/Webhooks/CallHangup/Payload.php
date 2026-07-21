@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Telnyx\Webhooks\CallHangup;
 
 use Telnyx\Calls\CustomSipHeader;
-use Telnyx\Calls\SipHeader;
 use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\CallHangup\Payload\CallQualityStats;
 use Telnyx\Webhooks\CallHangup\Payload\HangupCause;
 use Telnyx\Webhooks\CallHangup\Payload\HangupSource;
+use Telnyx\Webhooks\CallHangup\Payload\SipHeader;
 use Telnyx\Webhooks\CallHangup\Payload\State;
 
 /**
  * @phpstan-import-type CallQualityStatsShape from \Telnyx\Webhooks\CallHangup\Payload\CallQualityStats
  * @phpstan-import-type CustomSipHeaderShape from \Telnyx\Calls\CustomSipHeader
- * @phpstan-import-type SipHeaderShape from \Telnyx\Calls\SipHeader
+ * @phpstan-import-type SipHeaderShape from \Telnyx\Webhooks\CallHangup\Payload\SipHeader
  *
  * @phpstan-type PayloadShape = array{
  *   callControlID?: string|null,

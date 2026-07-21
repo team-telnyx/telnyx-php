@@ -1,5 +1,20 @@
 # Changelog
 
+## [7.94.0](https://github.com/team-telnyx/telnyx-php/compare/v7.93.0...v7.94.0) (2026-07-21)
+
+
+### Features
+
+* promote from staging dadcd15 ([c32861c](https://github.com/team-telnyx/telnyx-php/commit/c32861c233f5e8776985416aca286dd084f555bf))
+
+
+### Bug Fixes
+
+* **release:** configure identity before synthetic commit ([#355](https://github.com/team-telnyx/telnyx-php/issues/355)) ([e5fb7b2](https://github.com/team-telnyx/telnyx-php/commit/e5fb7b2e6bbcc2579710db0ac04ad22119ec02ab))
+* **release:** handle dirty local release checkout ([#357](https://github.com/team-telnyx/telnyx-php/issues/357)) ([66298d1](https://github.com/team-telnyx/telnyx-php/commit/66298d1c2e85a584d8d1df7d97801ac196d24126))
+* **release:** keep release PR history on production base ([#353](https://github.com/team-telnyx/telnyx-php/issues/353)) ([40cf321](https://github.com/team-telnyx/telnyx-php/commit/40cf32185b1f86ff5be0d6a5cc504581591f97e3))
+* scan next commits when creating release PR ([#351](https://github.com/team-telnyx/telnyx-php/issues/351)) ([4b18606](https://github.com/team-telnyx/telnyx-php/commit/4b18606673da9cb7b2eedc18ce6ef0155006d77c))
+
 ## [7.93.0](https://github.com/team-telnyx/telnyx-php/compare/v7.92.0...v7.93.0) (2026-07-17)
 
 
