@@ -32,7 +32,7 @@ final class TranscriptionSettings implements BaseModel
     public ?string $apiKeyRef;
 
     /**
-     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`. For `soniox/stt-rt-v4`, `auto` omits the language hint and lets Soniox auto-detect; ISO 639-1 codes (e.g. `en`, `es`) bias detection toward that language.
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`. For `soniox/stt-rt-v4`, `auto` omits the language hint and lets Soniox auto-detect; ISO 639-1 codes (e.g. `en`, `es`) bias detection toward that language. For `humain/realtime`, supported values are `ar`, `en`, `codeswitch` (Arabic/English code-switching), and `auto` (resolves server-side to code-switching). Unlike other models, `humain/realtime` does not fall back to `auto` when `language` is omitted — omitting it applies `en` instead.
      */
     #[Optional]
     public ?string $language;
@@ -48,6 +48,7 @@ final class TranscriptionSettings implements BaseModel
      * - `xai/grok-stt` is a multilingual Grok STT model.
      * - `soniox/stt-rt-v4` is a multilingual streaming model with automatic language detection and configurable endpointing.
      * - `nvidia/parakeet-v3` is a multilingual transcription model with automatic language detection.
+     * - `humain/realtime` is a streaming model with native Arabic and Arabic/English code-switching support.
      *
      * @var value-of<Model>|null $model
      */
@@ -106,7 +107,7 @@ final class TranscriptionSettings implements BaseModel
     }
 
     /**
-     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`. For `soniox/stt-rt-v4`, `auto` omits the language hint and lets Soniox auto-detect; ISO 639-1 codes (e.g. `en`, `es`) bias detection toward that language.
+     * The language of the audio to be transcribed. If not set, or if set to `auto`, supported models will automatically detect the language. For `deepgram/flux`, supported values are: `auto` (Telnyx language detection controls the language hint), `multi` (no language hint), and language-specific hints `en`, `es`, `fr`, `de`, `hi`, `ru`, `pt`, `ja`, `it`, and `nl`. For `soniox/stt-rt-v4`, `auto` omits the language hint and lets Soniox auto-detect; ISO 639-1 codes (e.g. `en`, `es`) bias detection toward that language. For `humain/realtime`, supported values are `ar`, `en`, `codeswitch` (Arabic/English code-switching), and `auto` (resolves server-side to code-switching). Unlike other models, `humain/realtime` does not fall back to `auto` when `language` is omitted — omitting it applies `en` instead.
      */
     public function withLanguage(string $language): self
     {
@@ -127,6 +128,7 @@ final class TranscriptionSettings implements BaseModel
      * - `xai/grok-stt` is a multilingual Grok STT model.
      * - `soniox/stt-rt-v4` is a multilingual streaming model with automatic language detection and configurable endpointing.
      * - `nvidia/parakeet-v3` is a multilingual transcription model with automatic language detection.
+     * - `humain/realtime` is a streaming model with native Arabic and Arabic/English code-switching support.
      *
      * @param Model|value-of<Model> $model
      */

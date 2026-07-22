@@ -15,6 +15,7 @@ namespace Telnyx\AI\Assistants\TranscriptionSettings;
  * - `xai/grok-stt` is a multilingual Grok STT model.
  * - `soniox/stt-rt-v4` is a multilingual streaming model with automatic language detection and configurable endpointing.
  * - `nvidia/parakeet-v3` is a multilingual transcription model with automatic language detection.
+ * - `humain/realtime` is a streaming model with native Arabic and Arabic/English code-switching support.
  */
 enum Model: string
 {
@@ -33,6 +34,8 @@ enum Model: string
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
 
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
+
+    case HUMAIN_REALTIME = 'humain/realtime';
 
     case DISTIL_WHISPER_DISTIL_LARGE_V2 = 'distil-whisper/distil-large-v2';
 
