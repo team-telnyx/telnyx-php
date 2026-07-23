@@ -14,9 +14,9 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
-use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Telnyx;
@@ -27,6 +27,7 @@ use Telnyx\TextToSpeech\TextToSpeechListVoicesParams;
 use Telnyx\TextToSpeech\TextToSpeechListVoicesResponse;
 use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams;
 use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
+use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\Provider;
 
 /**
  * Text to speech streaming command operations.
@@ -34,6 +35,7 @@ use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
  * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws
  * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure
  * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs
+ * @phpstan-import-type HumainShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain
  * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
  * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime
@@ -58,7 +60,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy` or `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`, `humain`.
      *
      * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
      *
@@ -67,10 +69,11 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *   azure?: Azure|AzureShape,
      *   disableCache?: bool,
      *   elevenlabs?: Elevenlabs|ElevenlabsShape,
+     *   humain?: Humain|HumainShape,
      *   language?: string,
      *   minimax?: Minimax|MinimaxShape,
      *   outputType?: OutputType|value-of<OutputType>,
-     *   provider?: Provider|value-of<Provider>,
+     *   provider?: TextToSpeechGenerateSpeechParams\Provider|value-of<TextToSpeechGenerateSpeechParams\Provider>,
      *   resemble?: Resemble|ResembleShape,
      *   rime?: Rime|RimeShape,
      *   telnyx?: Telnyx|TelnyxShape,
@@ -146,7 +149,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *
      * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `rime`, `resemble`, `elevenlabs`, `xai`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `rime`, `resemble`, `elevenlabs`, `xai`, `humain`.
      *
      * **Connection flow:**
      * 1. Open WebSocket with query parameters specifying provider, voice, and model.
@@ -163,7 +166,7 @@ final class TextToSpeechRawService implements TextToSpeechRawContract
      *   audioFormat?: AudioFormat|value-of<AudioFormat>,
      *   disableCache?: bool,
      *   modelID?: string,
-     *   provider?: TextToSpeechRetrieveSpeechParams\Provider|value-of<TextToSpeechRetrieveSpeechParams\Provider>,
+     *   provider?: value-of<Provider>,
      *   socketID?: string,
      *   voice?: string,
      *   voiceID?: string,

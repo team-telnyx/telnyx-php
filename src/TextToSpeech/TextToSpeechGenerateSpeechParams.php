@@ -11,6 +11,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
@@ -27,7 +28,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  *
  * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy` or `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
  *
- * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`.
+ * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`, `humain`.
  *
  * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
  *
@@ -36,6 +37,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws
  * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure
  * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs
+ * @phpstan-import-type HumainShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain
  * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
  * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime
@@ -47,6 +49,7 @@ use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Xai;
  *   azure?: null|Azure|AzureShape,
  *   disableCache?: bool|null,
  *   elevenlabs?: null|Elevenlabs|ElevenlabsShape,
+ *   humain?: null|Humain|HumainShape,
  *   language?: string|null,
  *   minimax?: null|Minimax|MinimaxShape,
  *   outputType?: null|OutputType|value-of<OutputType>,
@@ -90,6 +93,12 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      */
     #[Optional]
     public ?Elevenlabs $elevenlabs;
+
+    /**
+     * Humain provider-specific parameters. Unlike other providers, Humain has no format/sample-rate negotiation (output is always PCM16 24kHz mono) and no language parameter — language is fixed per voice.
+     */
+    #[Optional]
+    public ?Humain $humain;
 
     /**
      * Language code (e.g. `en-US`). Usage varies by provider.
@@ -184,6 +193,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
      * @param Aws|AwsShape|null $aws
      * @param Azure|AzureShape|null $azure
      * @param Elevenlabs|ElevenlabsShape|null $elevenlabs
+     * @param Humain|HumainShape|null $humain
      * @param Minimax|MinimaxShape|null $minimax
      * @param OutputType|value-of<OutputType>|null $outputType
      * @param Provider|value-of<Provider>|null $provider
@@ -199,6 +209,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
         Azure|array|null $azure = null,
         ?bool $disableCache = null,
         Elevenlabs|array|null $elevenlabs = null,
+        Humain|array|null $humain = null,
         ?string $language = null,
         Minimax|array|null $minimax = null,
         OutputType|string|null $outputType = null,
@@ -218,6 +229,7 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
         null !== $azure && $self['azure'] = $azure;
         null !== $disableCache && $self['disableCache'] = $disableCache;
         null !== $elevenlabs && $self['elevenlabs'] = $elevenlabs;
+        null !== $humain && $self['humain'] = $humain;
         null !== $language && $self['language'] = $language;
         null !== $minimax && $self['minimax'] = $minimax;
         null !== $outputType && $self['outputType'] = $outputType;
@@ -280,6 +292,19 @@ final class TextToSpeechGenerateSpeechParams implements BaseModel
     {
         $self = clone $this;
         $self['elevenlabs'] = $elevenlabs;
+
+        return $self;
+    }
+
+    /**
+     * Humain provider-specific parameters. Unlike other providers, Humain has no format/sample-rate negotiation (output is always PCM16 24kHz mono) and no language parameter — language is fixed per voice.
+     *
+     * @param Humain|HumainShape $humain
+     */
+    public function withHumain(Humain|array $humain): self
+    {
+        $self = clone $this;
+        $self['humain'] = $humain;
 
         return $self;
     }

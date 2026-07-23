@@ -26,4 +26,6 @@ enum Provider: string
     case RESEMBLE = 'resemble';
 
     case XAI = 'xai';
+
+    case HUMAIN = 'humain';
 }

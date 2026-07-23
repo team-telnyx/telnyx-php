@@ -12,6 +12,7 @@ use Telnyx\ServiceContracts\TextToSpeechContract;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs;
+use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\OutputType;
 use Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Provider;
@@ -30,6 +31,7 @@ use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\AudioFormat;
  * @phpstan-import-type AwsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Aws
  * @phpstan-import-type AzureShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Azure
  * @phpstan-import-type ElevenlabsShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Elevenlabs
+ * @phpstan-import-type HumainShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Humain
  * @phpstan-import-type MinimaxShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Minimax
  * @phpstan-import-type ResembleShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Resemble
  * @phpstan-import-type RimeShape from \Telnyx\TextToSpeech\TextToSpeechGenerateSpeechParams\Rime
@@ -61,7 +63,7 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * The `voice` parameter provides a convenient shorthand to specify provider, model, and voice in a single string (e.g. `telnyx.NaturalHD.Alloy` or `Telnyx.Ultra.<voice_id>`). Alternatively, specify `provider` explicitly along with provider-specific parameters.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `elevenlabs`, `minimax`, `rime`, `resemble`, `xai`, `humain`.
      *
      * The Telnyx `Ultra` model supports 44 languages with emotion control, speed adjustment, and volume control. Use the `telnyx` provider-specific parameters to configure these features.
      *
@@ -69,6 +71,7 @@ final class TextToSpeechService implements TextToSpeechContract
      * @param Azure|AzureShape $azure azure Cognitive Services provider-specific parameters
      * @param bool $disableCache when `true`, bypass the audio cache and generate fresh audio
      * @param Elevenlabs|ElevenlabsShape $elevenlabs elevenLabs provider-specific parameters
+     * @param Humain|HumainShape $humain Humain provider-specific parameters. Unlike other providers, Humain has no format/sample-rate negotiation (output is always PCM16 24kHz mono) and no language parameter — language is fixed per voice.
      * @param string $language Language code (e.g. `en-US`). Usage varies by provider.
      * @param Minimax|MinimaxShape $minimax minimax provider-specific parameters
      * @param OutputType|value-of<OutputType> $outputType Determines the response format. `binary_output` returns raw audio bytes, `base64_output` returns base64-encoded audio in JSON.
@@ -90,6 +93,7 @@ final class TextToSpeechService implements TextToSpeechContract
         Azure|array|null $azure = null,
         bool $disableCache = false,
         Elevenlabs|array|null $elevenlabs = null,
+        Humain|array|null $humain = null,
         ?string $language = null,
         Minimax|array|null $minimax = null,
         OutputType|string $outputType = 'binary_output',
@@ -110,6 +114,7 @@ final class TextToSpeechService implements TextToSpeechContract
                 'azure' => $azure,
                 'disableCache' => $disableCache,
                 'elevenlabs' => $elevenlabs,
+                'humain' => $humain,
                 'language' => $language,
                 'minimax' => $minimax,
                 'outputType' => $outputType,
@@ -162,7 +167,7 @@ final class TextToSpeechService implements TextToSpeechContract
      *
      * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
      *
-     * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `rime`, `resemble`, `elevenlabs`, `xai`.
+     * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `rime`, `resemble`, `elevenlabs`, `xai`, `humain`.
      *
      * **Connection flow:**
      * 1. Open WebSocket with query parameters specifying provider, voice, and model.

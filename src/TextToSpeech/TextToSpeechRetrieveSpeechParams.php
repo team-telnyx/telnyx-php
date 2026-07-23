@@ -14,7 +14,7 @@ use Telnyx\TextToSpeech\TextToSpeechRetrieveSpeechParams\Provider;
 /**
  * Open a WebSocket connection to stream text and receive synthesized audio in real time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header. Send JSON frames with text to synthesize; receive JSON frames containing base64-encoded audio chunks.
  *
- * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `rime`, `resemble`, `elevenlabs`, `xai`.
+ * Supported providers: `aws`, `telnyx`, `azure`, `murfai`, `minimax`, `rime`, `resemble`, `elevenlabs`, `xai`, `humain`.
  *
  * **Connection flow:**
  * 1. Open WebSocket with query parameters specifying provider, voice, and model.
