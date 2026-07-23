@@ -36,7 +36,7 @@ final class Data implements BaseModel
     /**
      * When the window closes. Null if no active window.
      */
-    #[Optional('window_expires_at')]
+    #[Optional('window_expires_at', nullable: true)]
     public ?\DateTimeInterface $windowExpiresAt;
 
     /**
@@ -98,7 +98,7 @@ final class Data implements BaseModel
      * When the window closes. Null if no active window.
      */
     public function withWindowExpiresAt(
-        \DateTimeInterface $windowExpiresAt
+        ?\DateTimeInterface $windowExpiresAt
     ): self {
         $self = clone $this;
         $self['windowExpiresAt'] = $windowExpiresAt;

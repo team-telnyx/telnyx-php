@@ -35,7 +35,7 @@ final class ActionsRawService implements ActionsRawContract
      * Change the bundle status for a phone number (set to being in a bundle or remove from a bundle)
      *
      * @param string $id identifies the resource
-     * @param array{bundleID: string}|ActionChangeBundleStatusParams $params
+     * @param array{bundleID: string|null}|ActionChangeBundleStatusParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ActionChangeBundleStatusResponse>

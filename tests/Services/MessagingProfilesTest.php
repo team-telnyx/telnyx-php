@@ -63,7 +63,7 @@ final class MessagingProfilesTest extends TestCase
         $result = $this->client->messagingProfiles->create(
             name: 'My name',
             whitelistedDestinations: ['US'],
-            aiAssistantID: 'ai_assistant_id',
+            aiAssistantID: 'ai_assistant-a80a9d4a-728c-4593-852c-2e93ad890000',
             alphaSender: 'sqF',
             dailySpendLimit: '269125115713',
             dailySpendLimitEnabled: true,

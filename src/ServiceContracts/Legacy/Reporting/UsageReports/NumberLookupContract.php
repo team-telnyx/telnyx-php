@@ -7,8 +7,9 @@ namespace Telnyx\ServiceContracts\Legacy\Reporting\UsageReports;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\TelcoDataUsageReportResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -51,13 +52,19 @@ interface NumberLookupContract
     /**
      * @api
      *
+     * @param int $page page number to retrieve (1-based)
+     * @param int $perPage filter results by per page
      * @param RequestOpts|null $requestOptions
+     *
+     * @return PerPagePagination<TelcoDataUsageReportResponse>
      *
      * @throws APIException
      */
     public function list(
-        RequestOptions|array|null $requestOptions = null
-    ): NumberLookupListResponse;
+        ?int $page = null,
+        ?int $perPage = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): PerPagePagination;
 
     /**
      * @api

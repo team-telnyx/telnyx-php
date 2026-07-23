@@ -65,7 +65,11 @@ final class ShortCode implements BaseModel
     #[Optional('short_code')]
     public ?string $shortCode;
 
-    /** @var list<string>|null $tags */
+    /**
+     * Tags associated with the resource.
+     *
+     * @var list<string>|null $tags
+     */
     #[Optional(list: 'string')]
     public ?array $tags;
 
@@ -196,6 +200,8 @@ final class ShortCode implements BaseModel
     }
 
     /**
+     * Tags associated with the resource.
+     *
      * @param list<string> $tags
      */
     public function withTags(array $tags): self
