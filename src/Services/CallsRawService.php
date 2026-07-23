@@ -122,6 +122,7 @@ final class CallsRawService implements CallsRawContract
      *   recordTrack?: RecordTrack|value-of<RecordTrack>,
      *   recordTrim?: RecordTrim|value-of<RecordTrim>,
      *   retryOnTimeout?: bool,
+     *   routeToMobile?: bool,
      *   sendDigitsOnAnswer?: string,
      *   sendSilenceWhenIdle?: bool,
      *   sipAuthPassword?: string,

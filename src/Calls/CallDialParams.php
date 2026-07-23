@@ -100,6 +100,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   recordTrack?: null|RecordTrack|value-of<RecordTrack>,
  *   recordTrim?: null|RecordTrim|value-of<RecordTrim>,
  *   retryOnTimeout?: bool|null,
+ *   routeToMobile?: bool|null,
  *   sendDigitsOnAnswer?: string|null,
  *   sendSilenceWhenIdle?: bool|null,
  *   sipAuthPassword?: string|null,
@@ -365,6 +366,12 @@ final class CallDialParams implements BaseModel
      */
     #[Optional('retry_on_timeout')]
     public ?bool $retryOnTimeout;
+
+    /**
+     * When set to true, routes the call directly to the mobile device associated with the destination Telnyx Mobile number, bypassing Inbound Calls Interception configured in the Telnyx Portal under Mobile Numbers → select the number → Voice → Call Interception. Use this when transferring an intercepted call to the mobile device to prevent the call from being intercepted again. Defaults to false.
+     */
+    #[Optional('route_to_mobile')]
+    public ?bool $routeToMobile;
 
     /**
      * DTMF digits to send automatically after the called party answers. Useful for reaching an extension behind an IVR (e.g. `"200"` to dial extension 200 once the called party picks up). Allowed characters: `0-9`, `A-D`, `w` (0.5s pause), `W` (1s pause), `*`, `#`. Maximum 64 characters. When omitted, no automatic DTMF is sent. May also be supplied inline by appending `,<digits>` to `to` (e.g. `to=+18004247767,200`); if both forms are present, this explicit field takes precedence.
@@ -661,6 +668,7 @@ final class CallDialParams implements BaseModel
         RecordTrack|string|null $recordTrack = null,
         RecordTrim|string|null $recordTrim = null,
         ?bool $retryOnTimeout = null,
+        ?bool $routeToMobile = null,
         ?string $sendDigitsOnAnswer = null,
         ?bool $sendSilenceWhenIdle = null,
         ?string $sipAuthPassword = null,
@@ -728,6 +736,7 @@ final class CallDialParams implements BaseModel
         null !== $recordTrack && $self['recordTrack'] = $recordTrack;
         null !== $recordTrim && $self['recordTrim'] = $recordTrim;
         null !== $retryOnTimeout && $self['retryOnTimeout'] = $retryOnTimeout;
+        null !== $routeToMobile && $self['routeToMobile'] = $routeToMobile;
         null !== $sendDigitsOnAnswer && $self['sendDigitsOnAnswer'] = $sendDigitsOnAnswer;
         null !== $sendSilenceWhenIdle && $self['sendSilenceWhenIdle'] = $sendSilenceWhenIdle;
         null !== $sipAuthPassword && $self['sipAuthPassword'] = $sipAuthPassword;
@@ -1179,6 +1188,17 @@ final class CallDialParams implements BaseModel
     {
         $self = clone $this;
         $self['retryOnTimeout'] = $retryOnTimeout;
+
+        return $self;
+    }
+
+    /**
+     * When set to true, routes the call directly to the mobile device associated with the destination Telnyx Mobile number, bypassing Inbound Calls Interception configured in the Telnyx Portal under Mobile Numbers → select the number → Voice → Call Interception. Use this when transferring an intercepted call to the mobile device to prevent the call from being intercepted again. Defaults to false.
+     */
+    public function withRouteToMobile(bool $routeToMobile): self
+    {
+        $self = clone $this;
+        $self['routeToMobile'] = $routeToMobile;
 
         return $self;
     }
