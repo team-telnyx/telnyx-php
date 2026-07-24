@@ -465,6 +465,7 @@ final class AssistantsTest extends TestCase
             content: 'Tell me a joke about cats',
             conversationID: '42b20469-1215-4a9a-8964-c36f66b406f4',
             name: 'Charlie',
+            stream: true,
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

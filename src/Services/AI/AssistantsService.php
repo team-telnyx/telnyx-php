@@ -428,6 +428,7 @@ final class AssistantsService implements AssistantsContract
      * @param string $content The message content sent by the client to the assistant
      * @param string $conversationID A unique identifier for the conversation thread, used to maintain context
      * @param string $name The optional display name of the user sending the message
+     * @param bool $stream When true, the response is streamed as Server-Sent Events (`text/event-stream`): `delta` events carry content fragments as they are generated, a final `done` event carries the full content plus `whatsapp_template`, and a terminal `error` event reports failures that happen after streaming started. When false (default), the response is a single JSON object.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -437,6 +438,7 @@ final class AssistantsService implements AssistantsContract
         string $content,
         string $conversationID,
         ?string $name = null,
+        bool $stream = false,
         RequestOptions|array|null $requestOptions = null,
     ): AssistantChatResponse {
         $params = Util::removeNulls(
@@ -444,6 +446,7 @@ final class AssistantsService implements AssistantsContract
                 'content' => $content,
                 'conversationID' => $conversationID,
                 'name' => $name,
+                'stream' => $stream,
             ],
         );
 
