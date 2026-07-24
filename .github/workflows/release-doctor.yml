@@ -19,5 +19,3 @@ jobs:
           bash ./bin/check-release-environment
         env:
           SDK_WRITE_TOKEN: ${{ secrets.SDK_WRITE_TOKEN }}
-          PACKAGIST_USERNAME: ${{ secrets.TELNYX_PACKAGIST_USERNAME || secrets.PACKAGIST_USERNAME }}
-          PACKAGIST_SAFE_KEY: ${{ secrets.TELNYX_PACKAGIST_SAFE_KEY || secrets.PACKAGIST_SAFE_KEY }}
