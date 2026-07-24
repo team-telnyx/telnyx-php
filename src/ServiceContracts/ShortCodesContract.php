@@ -36,7 +36,7 @@ interface ShortCodesContract
      *
      * @param string $id The id of the short code
      * @param string $messagingProfileID unique identifier for a messaging profile
-     * @param list<string> $tags
+     * @param list<string> $tags tags associated with the resource
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

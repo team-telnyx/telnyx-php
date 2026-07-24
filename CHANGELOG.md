@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.95.0](https://github.com/team-telnyx/telnyx-php/compare/v7.94.0...v7.95.0) (2026-07-24)
+
+
+### Features
+
+* promote from staging da2007d ([88c6454](https://github.com/team-telnyx/telnyx-php/commit/88c64544b754d8f146608159fdc2d6a2f48973d3))
+
+
+### Bug Fixes
+
+* **ci:** remove unused Packagist credentials ([#360](https://github.com/team-telnyx/telnyx-php/issues/360)) ([8b9707d](https://github.com/team-telnyx/telnyx-php/commit/8b9707d75a84468bb271d23f5167b5a8929cd597))
+
 ## [7.94.0](https://github.com/team-telnyx/telnyx-php/compare/v7.93.0...v7.94.0) (2026-07-21)
 
 

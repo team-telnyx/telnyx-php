@@ -19,9 +19,11 @@ use Telnyx\Messaging10dlc\PhoneNumberCampaigns\PhoneNumberCampaign\AssignmentSta
  *   assignmentStatus?: null|AssignmentStatus|value-of<AssignmentStatus>,
  *   brandID?: string|null,
  *   failureReasons?: string|null,
+ *   nonTmobileNumberMappingStatus?: string|null,
  *   tcrBrandID?: string|null,
  *   tcrCampaignID?: string|null,
  *   telnyxCampaignID?: string|null,
+ *   tmobileNumberMappingStatus?: string|null,
  * }
  */
 final class PhoneNumberCampaign implements BaseModel
@@ -65,6 +67,12 @@ final class PhoneNumberCampaign implements BaseModel
     public ?string $failureReasons;
 
     /**
+     * The assignment status of the number towards other carriers.
+     */
+    #[Optional]
+    public ?string $nonTmobileNumberMappingStatus;
+
+    /**
      * TCR's alphanumeric ID for the brand.
      */
     #[Optional('tcrBrandId')]
@@ -81,6 +89,12 @@ final class PhoneNumberCampaign implements BaseModel
      */
     #[Optional('telnyxCampaignId')]
     public ?string $telnyxCampaignID;
+
+    /**
+     * The T-Mobile assignment status of the number.
+     */
+    #[Optional]
+    public ?string $tmobileNumberMappingStatus;
 
     /**
      * `new PhoneNumberCampaign()` is missing required properties by the API.
@@ -122,9 +136,11 @@ final class PhoneNumberCampaign implements BaseModel
         AssignmentStatus|string|null $assignmentStatus = null,
         ?string $brandID = null,
         ?string $failureReasons = null,
+        ?string $nonTmobileNumberMappingStatus = null,
         ?string $tcrBrandID = null,
         ?string $tcrCampaignID = null,
         ?string $telnyxCampaignID = null,
+        ?string $tmobileNumberMappingStatus = null,
     ): self {
         $self = new self;
 
@@ -136,9 +152,11 @@ final class PhoneNumberCampaign implements BaseModel
         null !== $assignmentStatus && $self['assignmentStatus'] = $assignmentStatus;
         null !== $brandID && $self['brandID'] = $brandID;
         null !== $failureReasons && $self['failureReasons'] = $failureReasons;
+        null !== $nonTmobileNumberMappingStatus && $self['nonTmobileNumberMappingStatus'] = $nonTmobileNumberMappingStatus;
         null !== $tcrBrandID && $self['tcrBrandID'] = $tcrBrandID;
         null !== $tcrCampaignID && $self['tcrCampaignID'] = $tcrCampaignID;
         null !== $telnyxCampaignID && $self['telnyxCampaignID'] = $telnyxCampaignID;
+        null !== $tmobileNumberMappingStatus && $self['tmobileNumberMappingStatus'] = $tmobileNumberMappingStatus;
 
         return $self;
     }
@@ -215,6 +233,18 @@ final class PhoneNumberCampaign implements BaseModel
     }
 
     /**
+     * The assignment status of the number towards other carriers.
+     */
+    public function withNonTmobileNumberMappingStatus(
+        string $nonTmobileNumberMappingStatus
+    ): self {
+        $self = clone $this;
+        $self['nonTmobileNumberMappingStatus'] = $nonTmobileNumberMappingStatus;
+
+        return $self;
+    }
+
+    /**
      * TCR's alphanumeric ID for the brand.
      */
     public function withTcrBrandID(string $tcrBrandID): self
@@ -243,6 +273,18 @@ final class PhoneNumberCampaign implements BaseModel
     {
         $self = clone $this;
         $self['telnyxCampaignID'] = $telnyxCampaignID;
+
+        return $self;
+    }
+
+    /**
+     * The T-Mobile assignment status of the number.
+     */
+    public function withTmobileNumberMappingStatus(
+        string $tmobileNumberMappingStatus
+    ): self {
+        $self = clone $this;
+        $self['tmobileNumberMappingStatus'] = $tmobileNumberMappingStatus;
 
         return $self;
     }

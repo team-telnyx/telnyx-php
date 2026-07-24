@@ -9,8 +9,9 @@ use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\TelcoDataUsageReportResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\NumberLookupContract;
 
@@ -94,15 +95,23 @@ final class NumberLookupService implements NumberLookupContract
      *
      * Retrieve a paginated list of telco data usage reports
      *
+     * @param int $page page number to retrieve (1-based)
+     * @param int $perPage filter results by per page
      * @param RequestOpts|null $requestOptions
+     *
+     * @return PerPagePagination<TelcoDataUsageReportResponse>
      *
      * @throws APIException
      */
     public function list(
-        RequestOptions|array|null $requestOptions = null
-    ): NumberLookupListResponse {
+        ?int $page = null,
+        ?int $perPage = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): PerPagePagination {
+        $params = Util::removeNulls(['page' => $page, 'perPage' => $perPage]);
+
         // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->list(requestOptions: $requestOptions);
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

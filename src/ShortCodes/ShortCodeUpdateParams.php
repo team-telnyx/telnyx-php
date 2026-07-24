@@ -32,7 +32,11 @@ final class ShortCodeUpdateParams implements BaseModel
     #[Required('messaging_profile_id')]
     public string $messagingProfileID;
 
-    /** @var list<string>|null $tags */
+    /**
+     * Tags associated with the resource.
+     *
+     * @var list<string>|null $tags
+     */
     #[Optional(list: 'string')]
     public ?array $tags;
 
@@ -87,6 +91,8 @@ final class ShortCodeUpdateParams implements BaseModel
     }
 
     /**
+     * Tags associated with the resource.
+     *
      * @param list<string> $tags
      */
     public function withTags(array $tags): self

@@ -217,6 +217,7 @@ final class CallsTest extends TestCase
             recordTrack: 'outbound',
             recordTrim: 'trim-silence',
             retryOnTimeout: true,
+            routeToMobile: true,
             sendDigitsOnAnswer: 'wwww200',
             sendSilenceWhenIdle: true,
             sipAuthPassword: 'password',

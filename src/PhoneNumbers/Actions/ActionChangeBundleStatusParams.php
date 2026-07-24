@@ -14,7 +14,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * @see Telnyx\Services\PhoneNumbers\ActionsService::changeBundleStatus()
  *
- * @phpstan-type ActionChangeBundleStatusParamsShape = array{bundleID: string}
+ * @phpstan-type ActionChangeBundleStatusParamsShape = array{bundleID: string|null}
  */
 final class ActionChangeBundleStatusParams implements BaseModel
 {
@@ -26,7 +26,7 @@ final class ActionChangeBundleStatusParams implements BaseModel
      * The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
      */
     #[Required('bundle_id')]
-    public string $bundleID;
+    public ?string $bundleID;
 
     /**
      * `new ActionChangeBundleStatusParams()` is missing required properties by the API.
@@ -52,7 +52,7 @@ final class ActionChangeBundleStatusParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $bundleID): self
+    public static function with(?string $bundleID): self
     {
         $self = new self;
 
@@ -64,7 +64,7 @@ final class ActionChangeBundleStatusParams implements BaseModel
     /**
      * The new bundle_id setting for the number. If you are assigning the number to a bundle, this is the unique ID of the bundle you wish to use. If you are removing the number from a bundle, this must be null. You cannot assign a number from one bundle to another directly. You must first remove it from a bundle, and then assign it to a new bundle.
      */
-    public function withBundleID(string $bundleID): self
+    public function withBundleID(?string $bundleID): self
     {
         $self = clone $this;
         $self['bundleID'] = $bundleID;

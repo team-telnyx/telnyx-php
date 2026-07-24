@@ -7,11 +7,14 @@ namespace Telnyx\Services\Legacy\Reporting\UsageReports;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
+use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams\AggregationType;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListParams;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\TelcoDataUsageReportResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\Legacy\Reporting\UsageReports\NumberLookupRawContract;
 
@@ -95,21 +98,30 @@ final class NumberLookupRawService implements NumberLookupRawContract
      *
      * Retrieve a paginated list of telco data usage reports
      *
+     * @param array{page?: int, perPage?: int}|NumberLookupListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<NumberLookupListResponse>
+     * @return BaseResponse<PerPagePagination<TelcoDataUsageReportResponse>>
      *
      * @throws APIException
      */
     public function list(
-        RequestOptions|array|null $requestOptions = null
+        array|NumberLookupListParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
+        [$parsed, $options] = NumberLookupListParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'legacy/reporting/usage_reports/number_lookup',
-            options: $requestOptions,
-            convert: NumberLookupListResponse::class,
+            query: Util::array_transform_keys($parsed, ['perPage' => 'per_page']),
+            options: $options,
+            convert: TelcoDataUsageReportResponse::class,
+            page: PerPagePagination::class,
         );
     }
 

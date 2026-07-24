@@ -42,4 +42,6 @@ enum Model: string
     case SONIOX_STT_RT_V4 = 'soniox/stt-rt-v4';
 
     case NVIDIA_PARAKEET_V3 = 'nvidia/parakeet-v3';
+
+    case HUMAIN_REALTIME = 'humain/realtime';
 }
