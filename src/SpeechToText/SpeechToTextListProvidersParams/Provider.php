@@ -21,6 +21,8 @@ enum Provider: string
 
     case PARAKEET = 'parakeet';
 
+    case HUMAIN = 'humain';
+
     case AZURE = 'azure';
 
     case OPENAI = 'openai';

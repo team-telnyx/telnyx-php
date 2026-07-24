@@ -1018,6 +1018,7 @@ final class ActionsTest extends TestCase
             recordTimeoutSecs: 100,
             recordTrack: 'outbound',
             recordTrim: 'trim-silence',
+            routeToMobile: true,
             sendDigitsOnAnswer: 'wwww200',
             sipAuthPassword: 'password',
             sipAuthUsername: 'username',

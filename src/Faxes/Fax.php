@@ -18,8 +18,10 @@ use Telnyx\Faxes\Fax\Status;
  *   connectionID?: string|null,
  *   createdAt?: \DateTimeInterface|null,
  *   direction?: null|Direction|value-of<Direction>,
+ *   failureReason?: string|null,
  *   from?: string|null,
  *   fromDisplayName?: string|null,
+ *   internalFailureReason?: string|null,
  *   mediaName?: string|null,
  *   mediaURL?: string|null,
  *   previewURL?: string|null,
@@ -72,6 +74,12 @@ final class Fax implements BaseModel
     public ?string $direction;
 
     /**
+     * Customer-facing failure reason for the fax. Present on every fax object (null when the fax has not failed). Mapped from the more granular `internal_failure_reason`. Common values include: `receiver_call_dropped`, `sender_call_dropped`, `sender_canceled`, `carrier_lost`, `service_unavailable`, `fax_signaling_error`, `receiver_communication_error`, `sender_communication_error`, `receiver_decline`, `receiver_recovery_on_timer_expire`, `receiver_no_response`, `receiver_invalid_number_format`, `receiver_no_answer`, `receiver_incompatible_destination`, `receiver_unallocated_number`, `destination_unreachable`, `user_busy`, `invalid_ecm_response_from_receiver`, `fax_initial_communication_timeout`, `destination_not_in_service_plan`, `account_disabled`, `destination_invalid`, `no_outbound_profile`, `destination_not_in_countries_whitelist`, `user_channel_limit_exceeded`, `outbound_profile_channel_limit_exceeded`, `connection_channel_limit_exceeded`, `outbound_profile_daily_spend_limit_exceeded`, `unverified_origination_number`, `unverified_destination_not_allowed`, `file_format_invalid`, `file_download_failed`, `file_size_limit_exceeded`, `page_count_limit_exceeded`, `media_processing_exception`.
+     */
+    #[Optional('failure_reason', nullable: true)]
+    public ?string $failureReason;
+
+    /**
      * The phone number, in E.164 format, the fax will be sent from.
      */
     #[Optional]
@@ -82,6 +90,12 @@ final class Fax implements BaseModel
      */
     #[Optional('from_display_name')]
     public ?string $fromDisplayName;
+
+    /**
+     * Internal, more granular failure reason for the fax. Present on every fax object (null when the fax has not failed). Useful for deeper debugging beyond the customer-facing `failure_reason`.
+     */
+    #[Optional('internal_failure_reason', nullable: true)]
+    public ?string $internalFailureReason;
 
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_name and media_url/contents can't be submitted together.
@@ -182,8 +196,10 @@ final class Fax implements BaseModel
         ?string $connectionID = null,
         ?\DateTimeInterface $createdAt = null,
         Direction|string|null $direction = null,
+        ?string $failureReason = null,
         ?string $from = null,
         ?string $fromDisplayName = null,
+        ?string $internalFailureReason = null,
         ?string $mediaName = null,
         ?string $mediaURL = null,
         ?string $previewURL = null,
@@ -204,8 +220,10 @@ final class Fax implements BaseModel
         null !== $connectionID && $self['connectionID'] = $connectionID;
         null !== $createdAt && $self['createdAt'] = $createdAt;
         null !== $direction && $self['direction'] = $direction;
+        null !== $failureReason && $self['failureReason'] = $failureReason;
         null !== $from && $self['from'] = $from;
         null !== $fromDisplayName && $self['fromDisplayName'] = $fromDisplayName;
+        null !== $internalFailureReason && $self['internalFailureReason'] = $internalFailureReason;
         null !== $mediaName && $self['mediaName'] = $mediaName;
         null !== $mediaURL && $self['mediaURL'] = $mediaURL;
         null !== $previewURL && $self['previewURL'] = $previewURL;
@@ -280,6 +298,17 @@ final class Fax implements BaseModel
     }
 
     /**
+     * Customer-facing failure reason for the fax. Present on every fax object (null when the fax has not failed). Mapped from the more granular `internal_failure_reason`. Common values include: `receiver_call_dropped`, `sender_call_dropped`, `sender_canceled`, `carrier_lost`, `service_unavailable`, `fax_signaling_error`, `receiver_communication_error`, `sender_communication_error`, `receiver_decline`, `receiver_recovery_on_timer_expire`, `receiver_no_response`, `receiver_invalid_number_format`, `receiver_no_answer`, `receiver_incompatible_destination`, `receiver_unallocated_number`, `destination_unreachable`, `user_busy`, `invalid_ecm_response_from_receiver`, `fax_initial_communication_timeout`, `destination_not_in_service_plan`, `account_disabled`, `destination_invalid`, `no_outbound_profile`, `destination_not_in_countries_whitelist`, `user_channel_limit_exceeded`, `outbound_profile_channel_limit_exceeded`, `connection_channel_limit_exceeded`, `outbound_profile_daily_spend_limit_exceeded`, `unverified_origination_number`, `unverified_destination_not_allowed`, `file_format_invalid`, `file_download_failed`, `file_size_limit_exceeded`, `page_count_limit_exceeded`, `media_processing_exception`.
+     */
+    public function withFailureReason(?string $failureReason): self
+    {
+        $self = clone $this;
+        $self['failureReason'] = $failureReason;
+
+        return $self;
+    }
+
+    /**
      * The phone number, in E.164 format, the fax will be sent from.
      */
     public function withFrom(string $from): self
@@ -297,6 +326,18 @@ final class Fax implements BaseModel
     {
         $self = clone $this;
         $self['fromDisplayName'] = $fromDisplayName;
+
+        return $self;
+    }
+
+    /**
+     * Internal, more granular failure reason for the fax. Present on every fax object (null when the fax has not failed). Useful for deeper debugging beyond the customer-facing `failure_reason`.
+     */
+    public function withInternalFailureReason(
+        ?string $internalFailureReason
+    ): self {
+        $self = clone $this;
+        $self['internalFailureReason'] = $internalFailureReason;
 
         return $self;
     }

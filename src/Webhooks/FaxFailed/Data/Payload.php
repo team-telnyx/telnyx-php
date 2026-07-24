@@ -8,7 +8,6 @@ use Telnyx\Core\Attributes\Optional;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\Webhooks\FaxFailed\Data\Payload\Direction;
-use Telnyx\Webhooks\FaxFailed\Data\Payload\FailureReason;
 use Telnyx\Webhooks\FaxFailed\Data\Payload\Status;
 
 /**
@@ -16,9 +15,10 @@ use Telnyx\Webhooks\FaxFailed\Data\Payload\Status;
  *   clientState?: string|null,
  *   connectionID?: string|null,
  *   direction?: null|Direction|value-of<Direction>,
- *   failureReason?: null|FailureReason|value-of<FailureReason>,
+ *   failureReason?: string|null,
  *   faxID?: string|null,
  *   from?: string|null,
+ *   internalFailureReason?: string|null,
  *   mediaName?: string|null,
  *   originalMediaURL?: string|null,
  *   status?: null|Status|value-of<Status>,
@@ -52,11 +52,9 @@ final class Payload implements BaseModel
     public ?string $direction;
 
     /**
-     * Cause of the sending failure.
-     *
-     * @var value-of<FailureReason>|null $failureReason
+     * Customer-facing cause of the fax failure. Mapped from the more granular `internal_failure_reason`.
      */
-    #[Optional('failure_reason', enum: FailureReason::class)]
+    #[Optional('failure_reason')]
     public ?string $failureReason;
 
     /**
@@ -70,6 +68,12 @@ final class Payload implements BaseModel
      */
     #[Optional]
     public ?string $from;
+
+    /**
+     * Internal, more granular cause of the fax failure. Useful for deeper debugging beyond the customer-facing `failure_reason`.
+     */
+    #[Optional('internal_failure_reason')]
+    public ?string $internalFailureReason;
 
     /**
      * The media_name used for the fax's media. Must point to a file previously uploaded to api.telnyx.com/v2/media by the same user/organization. Supported formats: PDF, TIFF, JPEG, PNG, DOC, DOCX, RTF, and TXT. media_name and media_url/contents can't be submitted together.
@@ -114,16 +118,16 @@ final class Payload implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Direction|value-of<Direction>|null $direction
-     * @param FailureReason|value-of<FailureReason>|null $failureReason
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
         ?string $clientState = null,
         ?string $connectionID = null,
         Direction|string|null $direction = null,
-        FailureReason|string|null $failureReason = null,
+        ?string $failureReason = null,
         ?string $faxID = null,
         ?string $from = null,
+        ?string $internalFailureReason = null,
         ?string $mediaName = null,
         ?string $originalMediaURL = null,
         Status|string|null $status = null,
@@ -138,6 +142,7 @@ final class Payload implements BaseModel
         null !== $failureReason && $self['failureReason'] = $failureReason;
         null !== $faxID && $self['faxID'] = $faxID;
         null !== $from && $self['from'] = $from;
+        null !== $internalFailureReason && $self['internalFailureReason'] = $internalFailureReason;
         null !== $mediaName && $self['mediaName'] = $mediaName;
         null !== $originalMediaURL && $self['originalMediaURL'] = $originalMediaURL;
         null !== $status && $self['status'] = $status;
@@ -183,11 +188,9 @@ final class Payload implements BaseModel
     }
 
     /**
-     * Cause of the sending failure.
-     *
-     * @param FailureReason|value-of<FailureReason> $failureReason
+     * Customer-facing cause of the fax failure. Mapped from the more granular `internal_failure_reason`.
      */
-    public function withFailureReason(FailureReason|string $failureReason): self
+    public function withFailureReason(string $failureReason): self
     {
         $self = clone $this;
         $self['failureReason'] = $failureReason;
@@ -213,6 +216,18 @@ final class Payload implements BaseModel
     {
         $self = clone $this;
         $self['from'] = $from;
+
+        return $self;
+    }
+
+    /**
+     * Internal, more granular cause of the fax failure. Useful for deeper debugging beyond the customer-facing `failure_reason`.
+     */
+    public function withInternalFailureReason(
+        string $internalFailureReason
+    ): self {
+        $self = clone $this;
+        $self['internalFailureReason'] = $internalFailureReason;
 
         return $self;
     }

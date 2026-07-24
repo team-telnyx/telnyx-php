@@ -8,8 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\TelcoDataUsageReportResponse;
+use Telnyx\PerPagePagination;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -77,17 +78,16 @@ final class NumberLookupTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this
-            ->client
-            ->legacy
-            ->reporting
-            ->usageReports
-            ->numberLookup
-            ->list()
-        ;
+        $page = $this->client->legacy->reporting->usageReports->numberLookup->list(
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(NumberLookupListResponse::class, $result);
+        $this->assertInstanceOf(PerPagePagination::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(TelcoDataUsageReportResponse::class, $item);
+        }
     }
 
     #[Test]

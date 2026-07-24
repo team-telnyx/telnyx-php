@@ -16,7 +16,7 @@ use Telnyx\SpeechToText\SpeechToTextRetrieveTranscriptionParams\TranscriptionEng
 /**
  * Open a WebSocket connection to stream audio and receive transcriptions in real-time. Authentication is provided via the standard `Authorization: Bearer <API_KEY>` header.
  *
- * Supported engines: `Azure`, `Deepgram`, `Google`, `Telnyx`, `xAI`, `Speechmatics`, `Soniox`, `Parakeet`.
+ * Supported engines: `Azure`, `Deepgram`, `Google`, `Telnyx`, `xAI`, `Speechmatics`, `Soniox`, `Parakeet`, `Humain`.
  *
  * **Connection flow:**
  * 1. Open WebSocket with query parameters specifying engine, input format, and language.

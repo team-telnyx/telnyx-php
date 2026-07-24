@@ -8,8 +8,10 @@ use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupCreateParams;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupGetResponse;
-use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupListParams;
 use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\NumberLookupNewResponse;
+use Telnyx\Legacy\Reporting\UsageReports\NumberLookup\TelcoDataUsageReportResponse;
+use Telnyx\PerPagePagination;
 use Telnyx\RequestOptions;
 
 /**
@@ -50,14 +52,16 @@ interface NumberLookupRawContract
     /**
      * @api
      *
+     * @param array<string,mixed>|NumberLookupListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<NumberLookupListResponse>
+     * @return BaseResponse<PerPagePagination<TelcoDataUsageReportResponse>>
      *
      * @throws APIException
      */
     public function list(
-        RequestOptions|array|null $requestOptions = null
+        array|NumberLookupListParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
