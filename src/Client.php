@@ -45,6 +45,15 @@ use Telnyx\Services\DocumentLinksService;
 use Telnyx\Services\DocumentsService;
 use Telnyx\Services\DynamicEmergencyAddressesService;
 use Telnyx\Services\DynamicEmergencyEndpointsService;
+use Telnyx\Services\EmailBlocksService;
+use Telnyx\Services\EmailDomainsService;
+use Telnyx\Services\EmailEventsService;
+use Telnyx\Services\EmailInboxesService;
+use Telnyx\Services\EmailMessagesService;
+use Telnyx\Services\EmailTemplatesService;
+use Telnyx\Services\EmailThreadsService;
+use Telnyx\Services\EmailUnsubscribeGroupsService;
+use Telnyx\Services\EmailValidationsService;
 use Telnyx\Services\EnterprisesService;
 use Telnyx\Services\ExternalConnectionsService;
 use Telnyx\Services\FaxApplicationsService;
@@ -1046,6 +1055,51 @@ class Client extends BaseClient
      */
     public InfringementClaimsService $infringementClaims;
 
+    /**
+     * @api
+     */
+    public EmailBlocksService $emailBlocks;
+
+    /**
+     * @api
+     */
+    public EmailDomainsService $emailDomains;
+
+    /**
+     * @api
+     */
+    public EmailEventsService $emailEvents;
+
+    /**
+     * @api
+     */
+    public EmailInboxesService $emailInboxes;
+
+    /**
+     * @api
+     */
+    public EmailMessagesService $emailMessages;
+
+    /**
+     * @api
+     */
+    public EmailTemplatesService $emailTemplates;
+
+    /**
+     * @api
+     */
+    public EmailThreadsService $emailThreads;
+
+    /**
+     * @api
+     */
+    public EmailUnsubscribeGroupsService $emailUnsubscribeGroups;
+
+    /**
+     * @api
+     */
+    public EmailValidationsService $emailValidations;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1288,6 +1342,15 @@ class Client extends BaseClient
         $this->callReasons = new CallReasonsService($this);
         $this->dir = new DirService($this);
         $this->infringementClaims = new InfringementClaimsService($this);
+        $this->emailBlocks = new EmailBlocksService($this);
+        $this->emailDomains = new EmailDomainsService($this);
+        $this->emailEvents = new EmailEventsService($this);
+        $this->emailInboxes = new EmailInboxesService($this);
+        $this->emailMessages = new EmailMessagesService($this);
+        $this->emailTemplates = new EmailTemplatesService($this);
+        $this->emailThreads = new EmailThreadsService($this);
+        $this->emailUnsubscribeGroups = new EmailUnsubscribeGroupsService($this);
+        $this->emailValidations = new EmailValidationsService($this);
     }
 
     /** @return array<string,string> */
