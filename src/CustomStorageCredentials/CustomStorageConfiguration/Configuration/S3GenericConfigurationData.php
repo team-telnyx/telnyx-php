@@ -2,26 +2,34 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\CustomStorageCredentials;
+namespace Telnyx\CustomStorageCredentials\CustomStorageConfiguration\Configuration;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\CustomStorageCredentials\S3ConfigurationData\Backend;
 
 /**
- * @phpstan-type S3ConfigurationDataShape = array{
+ * @phpstan-type S3GenericConfigurationDataShape = array{
  *   awsAccessKeyID: string,
  *   awsSecretAccessKey: string,
- *   backend: Backend|value-of<Backend>,
+ *   backend: 's3-generic',
  *   bucket: string,
+ *   endpoint: string,
  *   region: string,
  * }
  */
-final class S3ConfigurationData implements BaseModel
+final class S3GenericConfigurationData implements BaseModel
 {
-    /** @use SdkModel<S3ConfigurationDataShape> */
+    /** @use SdkModel<S3GenericConfigurationDataShape> */
     use SdkModel;
+
+    /**
+     * Storage backend type.
+     *
+     * @var 's3-generic' $backend
+     */
+    #[Required]
+    public string $backend = 's3-generic';
 
     /**
      * AWS credentials access key id.
@@ -36,18 +44,16 @@ final class S3ConfigurationData implements BaseModel
     public string $awsSecretAccessKey;
 
     /**
-     * Storage backend type.
-     *
-     * @var value-of<Backend> $backend
-     */
-    #[Required(enum: Backend::class)]
-    public string $backend;
-
-    /**
      * Name of the bucket to be used to store recording files.
      */
     #[Required]
     public string $bucket;
+
+    /**
+     * URL of an S3-compatible storage endpoint, used to direct uploads and presigned download URLs to a non-AWS store (for example MinIO, Cloudflare R2, Wasabi, Backblaze B2, or Supabase). A bare host (https://s3.example.com) or a path-prefixed URL (https://xyz.supabase.co/storage/v1/s3) is accepted, and must use the http or https scheme.
+     */
+    #[Required]
+    public string $endpoint;
 
     /**
      * Region where the bucket is located.
@@ -56,15 +62,15 @@ final class S3ConfigurationData implements BaseModel
     public string $region;
 
     /**
-     * `new S3ConfigurationData()` is missing required properties by the API.
+     * `new S3GenericConfigurationData()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * S3ConfigurationData::with(
+     * S3GenericConfigurationData::with(
      *   awsAccessKeyID: ...,
      *   awsSecretAccessKey: ...,
-     *   backend: ...,
      *   bucket: ...,
+     *   endpoint: ...,
      *   region: ...,
      * )
      * ```
@@ -72,11 +78,11 @@ final class S3ConfigurationData implements BaseModel
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new S3ConfigurationData)
+     * (new S3GenericConfigurationData)
      *   ->withAwsAccessKeyID(...)
      *   ->withAwsSecretAccessKey(...)
-     *   ->withBackend(...)
      *   ->withBucket(...)
+     *   ->withEndpoint(...)
      *   ->withRegion(...)
      * ```
      */
@@ -89,22 +95,20 @@ final class S3ConfigurationData implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
-     *
-     * @param Backend|value-of<Backend> $backend
      */
     public static function with(
         string $awsAccessKeyID,
         string $awsSecretAccessKey,
-        Backend|string $backend,
         string $bucket,
+        string $endpoint,
         string $region,
     ): self {
         $self = new self;
 
         $self['awsAccessKeyID'] = $awsAccessKeyID;
         $self['awsSecretAccessKey'] = $awsSecretAccessKey;
-        $self['backend'] = $backend;
         $self['bucket'] = $bucket;
+        $self['endpoint'] = $endpoint;
         $self['region'] = $region;
 
         return $self;
@@ -135,9 +139,9 @@ final class S3ConfigurationData implements BaseModel
     /**
      * Storage backend type.
      *
-     * @param Backend|value-of<Backend> $backend
+     * @param 's3-generic' $backend
      */
-    public function withBackend(Backend|string $backend): self
+    public function withBackend(string $backend): self
     {
         $self = clone $this;
         $self['backend'] = $backend;
@@ -152,6 +156,17 @@ final class S3ConfigurationData implements BaseModel
     {
         $self = clone $this;
         $self['bucket'] = $bucket;
+
+        return $self;
+    }
+
+    /**
+     * URL of an S3-compatible storage endpoint, used to direct uploads and presigned download URLs to a non-AWS store (for example MinIO, Cloudflare R2, Wasabi, Backblaze B2, or Supabase). A bare host (https://s3.example.com) or a path-prefixed URL (https://xyz.supabase.co/storage/v1/s3) is accepted, and must use the http or https scheme.
+     */
+    public function withEndpoint(string $endpoint): self
+    {
+        $self = clone $this;
+        $self['endpoint'] = $endpoint;
 
         return $self;
     }
