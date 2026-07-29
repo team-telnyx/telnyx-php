@@ -35,6 +35,11 @@ use Telnyx\Calls\Actions\ActionHangupResponse;
 use Telnyx\Calls\Actions\ActionJoinAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
+use Telnyx\Calls\Actions\ActionPayParams\Currency;
+use Telnyx\Calls\Actions\ActionPayParams\PaymentMethod;
+use Telnyx\Calls\Actions\ActionPayParams\Prompts;
+use Telnyx\Calls\Actions\ActionPayParams\TransactionType;
+use Telnyx\Calls\Actions\ActionPayResponse;
 use Telnyx\Calls\Actions\ActionReferResponse;
 use Telnyx\Calls\Actions\ActionRejectParams\Cause;
 use Telnyx\Calls\Actions\ActionRejectResponse;
@@ -145,6 +150,7 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
+ * @phpstan-import-type PromptsShape from \Telnyx\Calls\Actions\ActionPayParams\Prompts
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
@@ -941,6 +947,94 @@ final class ActionsService implements ActionsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->pauseRecording($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Collect payment details from the caller using DTMF and either charge or tokenize the payment method through a configured Pay connector. Pay pauses active call recordings while sensitive payment details are collected.
+     *
+     * When `payment_token` is supplied, the DTMF collection steps are skipped and the existing token is sent to the connector.
+     *
+     * **Expected Webhooks:**
+     *
+     * - `call.payment.progress`
+     * - `call.payment.completed`
+     *
+     * **Test mode card numbers:** `4111111111111111` (Visa), `5555555555554444` (Mastercard), `378282246310005` (American Express), `6011111111111117` (Discover), `3065930009020004` (Diners Club), `3566002020360505` (JCB), `6200000000000005` (UnionPay), and `6771798021000008` (Maestro). Test-mode connectors reject other card numbers before contacting the configured processor. The UnionPay and Maestro numbers are accepted for processor testing, but Pay currently does not emit a card type for them.
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param float $amount Amount to charge. Required when `transaction_type` is `charge`.
+     * @param string $clientState base64-encoded state included in subsequent webhooks
+     * @param string $commandID Idempotency key for the command. Telnyx ignores a duplicate command with the same `command_id` for the same `call_control_id`.
+     * @param string $connectorName name of the Pay connector used to process the transaction
+     * @param Currency|value-of<Currency> $currency Currency used for the transaction. Pay currently supports USD only.
+     * @param string $description optional description forwarded with the payment transaction
+     * @param int $interDigitTimeoutMillis time in milliseconds to wait between consecutive DTMF digits
+     * @param string $language language used for payment prompts
+     * @param int $maxAttempts maximum number of attempts for each payment collection step
+     * @param array<string,mixed> $metadata metadata forwarded to the Pay connector
+     * @param array<string,mixed> $parameters additional parameters forwarded to the Pay connector
+     * @param PaymentMethod|value-of<PaymentMethod> $paymentMethod payment method to collect
+     * @param string $paymentToken Existing payment token. When supplied, payment-detail collection is skipped.
+     * @param Prompts|PromptsShape $prompts custom text-to-speech prompts keyed by payment collection step
+     * @param string $serviceLevel Speech synthesis service level used for payment prompts. Pay defaults to `premium`.
+     * @param int $timeoutMillis time in milliseconds to wait for DTMF input for each collection step
+     * @param TransactionType|value-of<TransactionType> $transactionType Transaction to perform. If omitted, Pay infers `tokenize` when `amount` is absent or zero and `charge` when `amount` is positive.
+     * @param string $voice Voice used for payment prompts. Accepts `male`, `female`, or a provider voice in `<Provider>.<Model>.<VoiceId>` format, for example `AWS.Polly.Joanna` or `Telnyx.KokoroTTS.af`.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function pay(
+        string $callControlID,
+        ?float $amount = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        string $connectorName = 'Default',
+        Currency|string $currency = 'USD',
+        ?string $description = null,
+        int $interDigitTimeoutMillis = 5000,
+        string $language = 'en-US',
+        int $maxAttempts = 3,
+        ?array $metadata = null,
+        ?array $parameters = null,
+        PaymentMethod|string $paymentMethod = 'credit-card',
+        ?string $paymentToken = null,
+        Prompts|array|null $prompts = null,
+        string $serviceLevel = 'premium',
+        int $timeoutMillis = 5000,
+        TransactionType|string|null $transactionType = null,
+        string $voice = 'female',
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionPayResponse {
+        $params = Util::removeNulls(
+            [
+                'amount' => $amount,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'connectorName' => $connectorName,
+                'currency' => $currency,
+                'description' => $description,
+                'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
+                'language' => $language,
+                'maxAttempts' => $maxAttempts,
+                'metadata' => $metadata,
+                'parameters' => $parameters,
+                'paymentMethod' => $paymentMethod,
+                'paymentToken' => $paymentToken,
+                'prompts' => $prompts,
+                'serviceLevel' => $serviceLevel,
+                'timeoutMillis' => $timeoutMillis,
+                'transactionType' => $transactionType,
+                'voice' => $voice,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->pay($callControlID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

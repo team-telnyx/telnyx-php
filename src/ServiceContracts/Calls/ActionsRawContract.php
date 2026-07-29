@@ -28,6 +28,8 @@ use Telnyx\Calls\Actions\ActionLeaveQueueParams;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingParams;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
+use Telnyx\Calls\Actions\ActionPayParams;
+use Telnyx\Calls\Actions\ActionPayResponse;
 use Telnyx\Calls\Actions\ActionReferParams;
 use Telnyx\Calls\Actions\ActionReferResponse;
 use Telnyx\Calls\Actions\ActionRejectParams;
@@ -294,6 +296,23 @@ interface ActionsRawContract
     public function pauseRecording(
         string $callControlID,
         array|ActionPauseRecordingParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param array<string,mixed>|ActionPayParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ActionPayResponse>
+     *
+     * @throws APIException
+     */
+    public function pay(
+        string $callControlID,
+        array|ActionPayParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
