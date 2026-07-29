@@ -225,7 +225,7 @@ final class Data implements BaseModel
         array $to,
         ?string $htmlBody,
         ?string $textBody,
-        array $templateVariables = (object) [],
+        array $templateVariables = [],
         ?bool $inlineCss = null,
         ?array $recipientStatuses = null,
         ?bool $sandbox = null,

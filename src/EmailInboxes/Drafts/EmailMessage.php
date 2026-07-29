@@ -204,7 +204,7 @@ final class EmailMessage implements BaseModel
         string $subject,
         ?string $templateID,
         array $to,
-        array $templateVariables = (object) [],
+        array $templateVariables = [],
         ?bool $inlineCss = null,
         ?array $recipientStatuses = null,
         ?bool $sandbox = null,

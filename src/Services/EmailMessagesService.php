@@ -146,7 +146,7 @@ final class EmailMessagesService implements EmailMessagesContract
         ?string $subject = null,
         ?array $tags = null,
         ?string $templateID = null,
-        array $templateVariables = (object) [],
+        array $templateVariables = [],
         ?string $textBody = null,
         TrackingSettings|array|null $trackingSettings = null,
         ?string $idempotencyKey = null,

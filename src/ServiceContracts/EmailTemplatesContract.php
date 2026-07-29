@@ -112,7 +112,7 @@ interface EmailTemplatesContract
      */
     public function render(
         string $id,
-        array $templateVariables = (object) [],
+        array $templateVariables = [],
         RequestOptions|array|null $requestOptions = null,
     ): EmailTemplateRenderResponse;
 }
