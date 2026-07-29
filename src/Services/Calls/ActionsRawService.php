@@ -209,7 +209,10 @@ final class ActionsRawService implements ActionsRawContract
      *
      * @param string $callControlID Unique identifier and token for controlling the call
      * @param array{
-     *   clientState?: string, commandID?: string, messages?: list<MessageShape>
+     *   clientState?: string,
+     *   commandID?: string,
+     *   messages?: list<MessageShape>,
+     *   triggerResponse?: bool,
      * }|ActionAddAIAssistantMessagesParams $params
      * @param RequestOpts|null $requestOptions
      *

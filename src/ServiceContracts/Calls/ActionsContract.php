@@ -179,6 +179,7 @@ interface ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param list<MessageShape> $messages the messages to add to the conversation
+     * @param bool $triggerResponse When `true`, the injected messages immediately trigger an assistant response/turn instead of waiting for the next natural turn or idle timeout. This may interrupt a user who is still speaking.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -188,6 +189,7 @@ interface ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         ?array $messages = null,
+        bool $triggerResponse = false,
         RequestOptions|array|null $requestOptions = null,
     ): ActionAddAIAssistantMessagesResponse;
 

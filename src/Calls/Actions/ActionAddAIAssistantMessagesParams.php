@@ -22,6 +22,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   clientState?: string|null,
  *   commandID?: string|null,
  *   messages?: list<MessageShape>|null,
+ *   triggerResponse?: bool|null,
  * }
  */
 final class ActionAddAIAssistantMessagesParams implements BaseModel
@@ -50,6 +51,12 @@ final class ActionAddAIAssistantMessagesParams implements BaseModel
     #[Optional(list: Message::class)]
     public ?array $messages;
 
+    /**
+     * When `true`, the injected messages immediately trigger an assistant response/turn instead of waiting for the next natural turn or idle timeout. This may interrupt a user who is still speaking.
+     */
+    #[Optional('trigger_response')]
+    public ?bool $triggerResponse;
+
     public function __construct()
     {
         $this->initialize();
@@ -65,13 +72,15 @@ final class ActionAddAIAssistantMessagesParams implements BaseModel
     public static function with(
         ?string $clientState = null,
         ?string $commandID = null,
-        ?array $messages = null
+        ?array $messages = null,
+        ?bool $triggerResponse = null,
     ): self {
         $self = new self;
 
         null !== $clientState && $self['clientState'] = $clientState;
         null !== $commandID && $self['commandID'] = $commandID;
         null !== $messages && $self['messages'] = $messages;
+        null !== $triggerResponse && $self['triggerResponse'] = $triggerResponse;
 
         return $self;
     }
@@ -107,6 +116,17 @@ final class ActionAddAIAssistantMessagesParams implements BaseModel
     {
         $self = clone $this;
         $self['messages'] = $messages;
+
+        return $self;
+    }
+
+    /**
+     * When `true`, the injected messages immediately trigger an assistant response/turn instead of waiting for the next natural turn or idle timeout. This may interrupt a user who is still speaking.
+     */
+    public function withTriggerResponse(bool $triggerResponse): self
+    {
+        $self = clone $this;
+        $self['triggerResponse'] = $triggerResponse;
 
         return $self;
     }
