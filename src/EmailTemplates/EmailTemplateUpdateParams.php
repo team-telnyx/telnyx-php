@@ -10,7 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 
 /**
- * Replaces template fields. Behaves identically to PATCH; provided for compatibility with Phoenix resource routes.
+ * Updates one or more template fields.
  *
  * @see Telnyx\Services\EmailTemplatesService::update()
  *

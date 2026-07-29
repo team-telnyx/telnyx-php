@@ -105,7 +105,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
     /**
      * @api
      *
-     * Replaces template fields. Behaves identically to PATCH; provided for compatibility with Phoenix resource routes.
+     * Updates one or more template fields.
      *
      * @param string $id email template UUID
      * @param array{
@@ -133,7 +133,7 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
-            method: 'put',
+            method: 'patch',
             path: ['email_templates/%1$s', $id],
             body: (object) $parsed,
             options: $options,

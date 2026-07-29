@@ -128,13 +128,7 @@ final class DraftsRawService implements DraftsRawContract
     /**
      * @api
      *
-     * Updates the supplied fields on a draft. `account_id` and `inbox_id` are
-     * server-owned and ignored if present in the body, so a draft can never be moved
-     * between accounts or inboxes.
-     *
-     * A draft that is being sent or has already been sent is immutable and returns
-     * 422 — modifying it would race with delivery or rewrite the record of what was
-     * actually sent.
+     * Identical to `PUT`; both apply a partial update to the supplied fields.
      *
      * @param string $draftID path param: Email draft UUID
      * @param array{
@@ -176,7 +170,7 @@ final class DraftsRawService implements DraftsRawContract
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
-            method: 'put',
+            method: 'patch',
             path: ['email_inboxes/%1$s/drafts/%2$s', $inboxID, $draftID],
             body: (object) array_diff_key($parsed, array_flip(['inboxID'])),
             options: $options,

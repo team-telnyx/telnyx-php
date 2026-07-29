@@ -7,7 +7,7 @@ namespace Telnyx\Services\EmailInboxes;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\EmailInboxes\Filters\FilterDeleteAllParams\Type;
+use Telnyx\EmailInboxes\Filters\FilterCreateParams\Type;
 use Telnyx\EmailInboxes\Filters\FilterDeleteAllResponse;
 use Telnyx\EmailInboxes\Filters\FilterListResponse;
 use Telnyx\EmailInboxes\Filters\FilterNewResponse;
@@ -37,25 +37,23 @@ final class FiltersService implements FiltersContract
     /**
      * @api
      *
-     * Replaces both sender filter lists atomically. Omitting either list clears
-     * that list. Use `POST` or `DELETE` for incremental changes.
+     * Adds entries to either the allowlist or blocklist. The operation is an
+     * idempotent set union: entries already present remain unchanged.
      *
      * @param string $inboxID email inbox UUID
-     * @param list<string> $allowlist
-     * @param list<string> $blocklist
+     * @param list<string> $entries
+     * @param Type|value-of<Type> $type the list to change
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $inboxID,
-        ?array $allowlist = null,
-        ?array $blocklist = null,
+        array $entries,
+        Type|string $type,
         RequestOptions|array|null $requestOptions = null,
     ): FilterNewResponse {
-        $params = Util::removeNulls(
-            ['allowlist' => $allowlist, 'blocklist' => $blocklist]
-        );
+        $params = Util::removeNulls(['entries' => $entries, 'type' => $type]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create($inboxID, params: $params, requestOptions: $requestOptions);
@@ -94,7 +92,7 @@ final class FiltersService implements FiltersContract
      *
      * @param string $inboxID email inbox UUID
      * @param list<string> $entries
-     * @param Type|value-of<Type> $type the list to change
+     * @param \Telnyx\EmailInboxes\Filters\FilterDeleteAllParams\Type|value-of<\Telnyx\EmailInboxes\Filters\FilterDeleteAllParams\Type> $type the list to change
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -102,7 +100,7 @@ final class FiltersService implements FiltersContract
     public function deleteAll(
         string $inboxID,
         array $entries,
-        Type|string $type,
+        \Telnyx\EmailInboxes\Filters\FilterDeleteAllParams\Type|string $type,
         RequestOptions|array|null $requestOptions = null,
     ): FilterDeleteAllResponse {
         $params = Util::removeNulls(['entries' => $entries, 'type' => $type]);

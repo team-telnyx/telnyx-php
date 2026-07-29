@@ -114,10 +114,10 @@ final class DraftsTest extends TestCase
             labels: ['string'],
             metadata: (object) [],
             replyTo: 'reply_to',
-            subject: 'Quarterly update (revised)',
+            subject: 'subject',
             tags: ['string'],
             text: 'text',
-            textBody: 'Updated body.',
+            textBody: 'text_body',
             to: ['string'],
         );
 

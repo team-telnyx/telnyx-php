@@ -12,13 +12,7 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\EmailMessages\EmailAddressInput;
 
 /**
- * Updates the supplied fields on a draft. `account_id` and `inbox_id` are
- * server-owned and ignored if present in the body, so a draft can never be moved
- * between accounts or inboxes.
- *
- * A draft that is being sent or has already been sent is immutable and returns
- * 422 — modifying it would race with delivery or rewrite the record of what was
- * actually sent.
+ * Identical to `PUT`; both apply a partial update to the supplied fields.
  *
  * @see Telnyx\Services\EmailInboxes\DraftsService::update()
  *

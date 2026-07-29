@@ -134,13 +134,7 @@ final class DraftsService implements DraftsContract
     /**
      * @api
      *
-     * Updates the supplied fields on a draft. `account_id` and `inbox_id` are
-     * server-owned and ignored if present in the body, so a draft can never be moved
-     * between accounts or inboxes.
-     *
-     * A draft that is being sent or has already been sent is immutable and returns
-     * 422 — modifying it would race with delivery or rewrite the record of what was
-     * actually sent.
+     * Identical to `PUT`; both apply a partial update to the supplied fields.
      *
      * @param string $draftID path param: Email draft UUID
      * @param string $inboxID path param: Email inbox UUID

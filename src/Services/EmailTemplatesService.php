@@ -97,7 +97,7 @@ final class EmailTemplatesService implements EmailTemplatesContract
     /**
      * @api
      *
-     * Replaces template fields. Behaves identically to PATCH; provided for compatibility with Phoenix resource routes.
+     * Updates one or more template fields.
      *
      * @param string $id email template UUID
      * @param string|null $htmlBody liquid template HTML body

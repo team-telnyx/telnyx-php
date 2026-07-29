@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace Telnyx\EmailInboxes\Filters;
 
-use Telnyx\Core\Attributes\Optional;
+use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
+use Telnyx\EmailInboxes\Filters\FilterCreateParams\Type;
 
 /**
- * Replaces both sender filter lists atomically. Omitting either list clears
- * that list. Use `POST` or `DELETE` for incremental changes.
+ * Adds entries to either the allowlist or blocklist. The operation is an
+ * idempotent set union: entries already present remain unchanged.
  *
  * @see Telnyx\Services\EmailInboxes\FiltersService::create()
  *
  * @phpstan-type FilterCreateParamsShape = array{
- *   allowlist?: list<string>|null, blocklist?: list<string>|null
+ *   entries: list<string>, type: Type|value-of<Type>
  * }
  */
 final class FilterCreateParams implements BaseModel
@@ -25,14 +26,32 @@ final class FilterCreateParams implements BaseModel
     use SdkModel;
     use SdkParams;
 
-    /** @var list<string>|null $allowlist */
-    #[Optional(list: 'string')]
-    public ?array $allowlist;
+    /** @var list<string> $entries */
+    #[Required(list: 'string')]
+    public array $entries;
 
-    /** @var list<string>|null $blocklist */
-    #[Optional(list: 'string')]
-    public ?array $blocklist;
+    /**
+     * The list to change.
+     *
+     * @var value-of<Type> $type
+     */
+    #[Required(enum: Type::class)]
+    public string $type;
 
+    /**
+     * `new FilterCreateParams()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * FilterCreateParams::with(entries: ..., type: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new FilterCreateParams)->withEntries(...)->withType(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -43,39 +62,39 @@ final class FilterCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param list<string>|null $allowlist
-     * @param list<string>|null $blocklist
+     * @param list<string> $entries
+     * @param Type|value-of<Type> $type
      */
-    public static function with(
-        ?array $allowlist = null,
-        ?array $blocklist = null
-    ): self {
+    public static function with(array $entries, Type|string $type): self
+    {
         $self = new self;
 
-        null !== $allowlist && $self['allowlist'] = $allowlist;
-        null !== $blocklist && $self['blocklist'] = $blocklist;
+        $self['entries'] = $entries;
+        $self['type'] = $type;
 
         return $self;
     }
 
     /**
-     * @param list<string> $allowlist
+     * @param list<string> $entries
      */
-    public function withAllowlist(array $allowlist): self
+    public function withEntries(array $entries): self
     {
         $self = clone $this;
-        $self['allowlist'] = $allowlist;
+        $self['entries'] = $entries;
 
         return $self;
     }
 
     /**
-     * @param list<string> $blocklist
+     * The list to change.
+     *
+     * @param Type|value-of<Type> $type
      */
-    public function withBlocklist(array $blocklist): self
+    public function withType(Type|string $type): self
     {
         $self = clone $this;
-        $self['blocklist'] = $blocklist;
+        $self['type'] = $type;
 
         return $self;
     }

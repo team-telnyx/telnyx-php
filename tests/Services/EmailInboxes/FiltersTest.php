@@ -38,7 +38,26 @@ final class FiltersTest extends TestCase
         }
 
         $result = $this->client->emailInboxes->filters->create(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            entries: ['@spam.example'],
+            type: 'blocklist',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FilterNewResponse::class, $result);
+    }
+
+    #[Test]
+    public function testCreateWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailInboxes->filters->create(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            entries: ['@spam.example'],
+            type: 'blocklist',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

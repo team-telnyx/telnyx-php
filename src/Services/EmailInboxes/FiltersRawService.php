@@ -8,8 +8,8 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\EmailInboxes\Filters\FilterCreateParams;
+use Telnyx\EmailInboxes\Filters\FilterCreateParams\Type;
 use Telnyx\EmailInboxes\Filters\FilterDeleteAllParams;
-use Telnyx\EmailInboxes\Filters\FilterDeleteAllParams\Type;
 use Telnyx\EmailInboxes\Filters\FilterDeleteAllResponse;
 use Telnyx\EmailInboxes\Filters\FilterListResponse;
 use Telnyx\EmailInboxes\Filters\FilterNewResponse;
@@ -32,12 +32,12 @@ final class FiltersRawService implements FiltersRawContract
     /**
      * @api
      *
-     * Replaces both sender filter lists atomically. Omitting either list clears
-     * that list. Use `POST` or `DELETE` for incremental changes.
+     * Adds entries to either the allowlist or blocklist. The operation is an
+     * idempotent set union: entries already present remain unchanged.
      *
      * @param string $inboxID email inbox UUID
      * @param array{
-     *   allowlist?: list<string>, blocklist?: list<string>
+     *   entries: list<string>, type: Type|value-of<Type>
      * }|FilterCreateParams $params
      * @param RequestOpts|null $requestOptions
      *
@@ -57,7 +57,7 @@ final class FiltersRawService implements FiltersRawContract
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
-            method: 'put',
+            method: 'post',
             path: ['email_inboxes/%1$s/filters', $inboxID],
             body: (object) $parsed,
             options: $options,
@@ -101,7 +101,8 @@ final class FiltersRawService implements FiltersRawContract
      *
      * @param string $inboxID email inbox UUID
      * @param array{
-     *   entries: list<string>, type: Type|value-of<Type>
+     *   entries: list<string>,
+     *   type: FilterDeleteAllParams\Type|value-of<FilterDeleteAllParams\Type>,
      * }|FilterDeleteAllParams $params
      * @param RequestOpts|null $requestOptions
      *
