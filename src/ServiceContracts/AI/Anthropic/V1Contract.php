@@ -25,7 +25,7 @@ interface V1Contract
      * @param int $maxRetries maximum number of retries for the request
      * @param list<array<string,mixed>> $mcpServers list of MCP (Model Context Protocol) servers to make available to the model
      * @param array<string,mixed> $metadata an object describing metadata about the request
-     * @param string $serviceTier service tier for the request
+     * @param string $serviceTier The service tier to use for this request. Supported values vary by model; use the Telnyx models endpoint and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
      * @param list<string> $stopSequences custom sequences that will cause the model to stop generating
      * @param bool $stream whether to stream the response as Anthropic-format Server-Sent Events
      * @param SystemShape $system System prompt. Can be a string or an array of content blocks following the Anthropic API format.

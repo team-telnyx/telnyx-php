@@ -54,6 +54,7 @@ final class ChatRawService implements ChatRawContract
      *   presencePenalty?: float,
      *   responseFormat?: ResponseFormat|ResponseFormatShape,
      *   seed?: int,
+     *   serviceTier?: string,
      *   stop?: StopShape,
      *   stream?: bool,
      *   temperature?: float,

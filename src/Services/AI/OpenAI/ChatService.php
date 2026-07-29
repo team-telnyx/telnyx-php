@@ -58,6 +58,7 @@ final class ChatService implements ChatContract
      * @param float $presencePenalty higher values will penalize the model from repeating the same output tokens
      * @param ResponseFormat|ResponseFormatShape $responseFormat Use this is you want to guarantee a JSON output without defining a schema. For control over the schema, use `guided_json`.
      * @param int $seed if specified, the system will make a best effort to sample deterministically, such that repeated requests with the same `seed` and parameters should return the same result
+     * @param string $serviceTier The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
      * @param StopShape $stop Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
      * @param bool $stream whether or not to stream data-only server-sent events as they become available
      * @param float $temperature Adjusts the "creativity" of the model. Lower values make the model more deterministic and repetitive, while higher values make the model more random and creative.
@@ -91,6 +92,7 @@ final class ChatService implements ChatContract
         float $presencePenalty = 0,
         ResponseFormat|array|null $responseFormat = null,
         ?int $seed = null,
+        ?string $serviceTier = null,
         string|array|null $stop = null,
         bool $stream = false,
         float $temperature = 0.1,
@@ -121,6 +123,7 @@ final class ChatService implements ChatContract
                 'presencePenalty' => $presencePenalty,
                 'responseFormat' => $responseFormat,
                 'seed' => $seed,
+                'serviceTier' => $serviceTier,
                 'stop' => $stop,
                 'stream' => $stream,
                 'temperature' => $temperature,

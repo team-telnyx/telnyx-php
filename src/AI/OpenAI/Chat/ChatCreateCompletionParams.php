@@ -46,6 +46,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   presencePenalty?: float|null,
  *   responseFormat?: null|ResponseFormat|ResponseFormatShape,
  *   seed?: int|null,
+ *   serviceTier?: string|null,
  *   stop?: StopShape|null,
  *   stream?: bool|null,
  *   temperature?: float|null,
@@ -177,6 +178,12 @@ final class ChatCreateCompletionParams implements BaseModel
     public ?int $seed;
 
     /**
+     * The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
+     */
+    #[Optional('service_tier')]
+    public ?string $serviceTier;
+
+    /**
      * Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence.
      *
      * @var StopVariants|null $stop
@@ -277,6 +284,7 @@ final class ChatCreateCompletionParams implements BaseModel
         ?float $presencePenalty = null,
         ResponseFormat|array|null $responseFormat = null,
         ?int $seed = null,
+        ?string $serviceTier = null,
         string|array|null $stop = null,
         ?bool $stream = null,
         ?float $temperature = null,
@@ -307,6 +315,7 @@ final class ChatCreateCompletionParams implements BaseModel
         null !== $presencePenalty && $self['presencePenalty'] = $presencePenalty;
         null !== $responseFormat && $self['responseFormat'] = $responseFormat;
         null !== $seed && $self['seed'] = $seed;
+        null !== $serviceTier && $self['serviceTier'] = $serviceTier;
         null !== $stop && $self['stop'] = $stop;
         null !== $stream && $self['stream'] = $stream;
         null !== $temperature && $self['temperature'] = $temperature;
@@ -522,6 +531,17 @@ final class ChatCreateCompletionParams implements BaseModel
     {
         $self = clone $this;
         $self['seed'] = $seed;
+
+        return $self;
+    }
+
+    /**
+     * The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
+     */
+    public function withServiceTier(string $serviceTier): self
+    {
+        $self = clone $this;
+        $self['serviceTier'] = $serviceTier;
 
         return $self;
     }

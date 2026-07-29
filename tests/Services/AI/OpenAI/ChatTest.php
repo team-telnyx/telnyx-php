@@ -74,6 +74,7 @@ final class ChatTest extends TestCase
             presencePenalty: 0,
             responseFormat: ['type' => 'text'],
             seed: 0,
+            serviceTier: 'service_tier',
             stop: 'string',
             stream: true,
             temperature: 0,

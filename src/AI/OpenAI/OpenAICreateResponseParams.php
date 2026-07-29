@@ -25,6 +25,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   input?: array<string,mixed>|null,
  *   instructions?: string|null,
  *   model?: string|null,
+ *   serviceTier?: string|null,
  *   stream?: bool|null,
  * }
  */
@@ -61,6 +62,12 @@ final class OpenAICreateResponseParams implements BaseModel
     public ?string $model;
 
     /**
+     * The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
+     */
+    #[Optional('service_tier')]
+    public ?string $serviceTier;
+
+    /**
      * Set to `true` to stream Server-Sent Events, matching OpenAI's Responses streaming format.
      */
     #[Optional]
@@ -83,6 +90,7 @@ final class OpenAICreateResponseParams implements BaseModel
         ?array $input = null,
         ?string $instructions = null,
         ?string $model = null,
+        ?string $serviceTier = null,
         ?bool $stream = null,
     ): self {
         $self = new self;
@@ -91,6 +99,7 @@ final class OpenAICreateResponseParams implements BaseModel
         null !== $input && $self['input'] = $input;
         null !== $instructions && $self['instructions'] = $instructions;
         null !== $model && $self['model'] = $model;
+        null !== $serviceTier && $self['serviceTier'] = $serviceTier;
         null !== $stream && $self['stream'] = $stream;
 
         return $self;
@@ -138,6 +147,17 @@ final class OpenAICreateResponseParams implements BaseModel
     {
         $self = clone $this;
         $self['model'] = $model;
+
+        return $self;
+    }
+
+    /**
+     * The service tier to use for this request. Supported values vary by model; use `GET /v2/ai/openai/models` and inspect the model's `service_tiers` field. If omitted, Telnyx-hosted models use `default`.
+     */
+    public function withServiceTier(string $serviceTier): self
+    {
+        $self = clone $this;
+        $self['serviceTier'] = $serviceTier;
 
         return $self;
     }

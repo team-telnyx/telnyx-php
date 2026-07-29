@@ -40,6 +40,7 @@ final class OpenAIRawService implements OpenAIRawContract
      *   input?: array<string,mixed>,
      *   instructions?: string,
      *   model?: string,
+     *   serviceTier?: string,
      *   stream?: bool,
      * }|OpenAICreateResponseParams $params
      * @param RequestOpts|null $requestOptions
