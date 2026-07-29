@@ -127,6 +127,7 @@ use Telnyx\Services\PortingOrdersService;
 use Telnyx\Services\PortingPhoneNumbersService;
 use Telnyx\Services\PortingService;
 use Telnyx\Services\PortoutsService;
+use Telnyx\Services\PricingService;
 use Telnyx\Services\PrivateWirelessGatewaysService;
 use Telnyx\Services\PronunciationDictsService;
 use Telnyx\Services\PublicInternetGatewaysService;
@@ -1100,6 +1101,11 @@ class Client extends BaseClient
      */
     public EmailValidationsService $emailValidations;
 
+    /**
+     * @api
+     */
+    public PricingService $pricing;
+
     private ?string $oauthAccessToken = null;
 
     private ?int $oauthTokenExpiresAt = null;
@@ -1351,6 +1357,7 @@ class Client extends BaseClient
         $this->emailThreads = new EmailThreadsService($this);
         $this->emailUnsubscribeGroups = new EmailUnsubscribeGroupsService($this);
         $this->emailValidations = new EmailValidationsService($this);
+        $this->pricing = new PricingService($this);
     }
 
     /** @return array<string,string> */
