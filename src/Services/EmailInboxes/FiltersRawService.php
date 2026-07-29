@@ -7,12 +7,14 @@ namespace Telnyx\Services\EmailInboxes;
 use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\EmailInboxes\Filters\FilterCreateParams;
-use Telnyx\EmailInboxes\Filters\FilterCreateParams\Type;
+use Telnyx\EmailInboxes\Filters\FilterAddParams;
+use Telnyx\EmailInboxes\Filters\FilterAddParams\Type;
+use Telnyx\EmailInboxes\Filters\FilterAddResponse;
 use Telnyx\EmailInboxes\Filters\FilterDeleteAllParams;
 use Telnyx\EmailInboxes\Filters\FilterDeleteAllResponse;
 use Telnyx\EmailInboxes\Filters\FilterListResponse;
-use Telnyx\EmailInboxes\Filters\FilterNewResponse;
+use Telnyx\EmailInboxes\Filters\FilterReplaceParams;
+use Telnyx\EmailInboxes\Filters\FilterReplaceResponse;
 use Telnyx\RequestOptions;
 use Telnyx\ServiceContracts\EmailInboxes\FiltersRawContract;
 
@@ -28,42 +30,6 @@ final class FiltersRawService implements FiltersRawContract
      * @internal
      */
     public function __construct(private Client $client) {}
-
-    /**
-     * @api
-     *
-     * Adds entries to either the allowlist or blocklist. The operation is an
-     * idempotent set union: entries already present remain unchanged.
-     *
-     * @param string $inboxID email inbox UUID
-     * @param array{
-     *   entries: list<string>, type: Type|value-of<Type>
-     * }|FilterCreateParams $params
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<FilterNewResponse>
-     *
-     * @throws APIException
-     */
-    public function create(
-        string $inboxID,
-        array|FilterCreateParams $params,
-        RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse {
-        [$parsed, $options] = FilterCreateParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
-
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'post',
-            path: ['email_inboxes/%1$s/filters', $inboxID],
-            body: (object) $parsed,
-            options: $options,
-            convert: FilterNewResponse::class,
-        );
-    }
 
     /**
      * @api
@@ -89,6 +55,42 @@ final class FiltersRawService implements FiltersRawContract
             path: ['email_inboxes/%1$s/filters', $inboxID],
             options: $requestOptions,
             convert: FilterListResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Adds entries to either the allowlist or blocklist. The operation is an
+     * idempotent set union: entries already present remain unchanged.
+     *
+     * @param string $inboxID email inbox UUID
+     * @param array{
+     *   entries: list<string>, type: Type|value-of<Type>
+     * }|FilterAddParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<FilterAddResponse>
+     *
+     * @throws APIException
+     */
+    public function add(
+        string $inboxID,
+        array|FilterAddParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = FilterAddParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['email_inboxes/%1$s/filters', $inboxID],
+            body: (object) $parsed,
+            options: $options,
+            convert: FilterAddResponse::class,
         );
     }
 
@@ -127,6 +129,42 @@ final class FiltersRawService implements FiltersRawContract
             body: (object) $parsed,
             options: $options,
             convert: FilterDeleteAllResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Replaces both sender filter lists atomically. Omitting either list clears
+     * that list. Use `POST` or `DELETE` for incremental changes.
+     *
+     * @param string $inboxID email inbox UUID
+     * @param array{
+     *   allowlist?: list<string>, blocklist?: list<string>
+     * }|FilterReplaceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<FilterReplaceResponse>
+     *
+     * @throws APIException
+     */
+    public function replace(
+        string $inboxID,
+        array|FilterReplaceParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = FilterReplaceParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'put',
+            path: ['email_inboxes/%1$s/filters', $inboxID],
+            body: (object) $parsed,
+            options: $options,
+            convert: FilterReplaceResponse::class,
         );
     }
 }

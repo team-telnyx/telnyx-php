@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailInboxes\Filters\FilterNewResponse\Data;
+namespace Telnyx\EmailInboxes\Filters\FilterReplaceResponse\Data;
 
 enum RecordType: string
 {

@@ -7,9 +7,10 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Telnyx\Client;
 use Telnyx\Core\Util;
+use Telnyx\EmailInboxes\Filters\FilterAddResponse;
 use Telnyx\EmailInboxes\Filters\FilterDeleteAllResponse;
 use Telnyx\EmailInboxes\Filters\FilterListResponse;
-use Telnyx\EmailInboxes\Filters\FilterNewResponse;
+use Telnyx\EmailInboxes\Filters\FilterReplaceResponse;
 use Tests\UnsupportedMockTests;
 
 /**
@@ -31,40 +32,6 @@ final class FiltersTest extends TestCase
     }
 
     #[Test]
-    public function testCreate(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->emailInboxes->filters->create(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            entries: ['@spam.example'],
-            type: 'blocklist',
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(FilterNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testCreateWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server tests are disabled');
-        }
-
-        $result = $this->client->emailInboxes->filters->create(
-            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-            entries: ['@spam.example'],
-            type: 'blocklist',
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(FilterNewResponse::class, $result);
-    }
-
-    #[Test]
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
@@ -77,6 +44,40 @@ final class FiltersTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FilterListResponse::class, $result);
+    }
+
+    #[Test]
+    public function testAdd(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailInboxes->filters->add(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            entries: ['@spam.example'],
+            type: 'blocklist',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FilterAddResponse::class, $result);
+    }
+
+    #[Test]
+    public function testAddWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailInboxes->filters->add(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            entries: ['@spam.example'],
+            type: 'blocklist',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FilterAddResponse::class, $result);
     }
 
     #[Test]
@@ -111,5 +112,20 @@ final class FiltersTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(FilterDeleteAllResponse::class, $result);
+    }
+
+    #[Test]
+    public function testReplace(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailInboxes->filters->replace(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(FilterReplaceResponse::class, $result);
     }
 }

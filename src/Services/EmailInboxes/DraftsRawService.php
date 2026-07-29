@@ -13,6 +13,7 @@ use Telnyx\EmailInboxes\Drafts\DraftDeleteParams;
 use Telnyx\EmailInboxes\Drafts\DraftListParams;
 use Telnyx\EmailInboxes\Drafts\DraftListParams\FilterStatus;
 use Telnyx\EmailInboxes\Drafts\DraftListResponse;
+use Telnyx\EmailInboxes\Drafts\DraftPatchParams;
 use Telnyx\EmailInboxes\Drafts\DraftRetrieveParams;
 use Telnyx\EmailInboxes\Drafts\DraftSendParams;
 use Telnyx\EmailInboxes\Drafts\DraftUpdateParams;
@@ -128,7 +129,13 @@ final class DraftsRawService implements DraftsRawContract
     /**
      * @api
      *
-     * Identical to `PUT`; both apply a partial update to the supplied fields.
+     * Updates the supplied fields on a draft. `account_id` and `inbox_id` are
+     * server-owned and ignored if present in the body, so a draft can never be moved
+     * between accounts or inboxes.
+     *
+     * A draft that is being sent or has already been sent is immutable and returns
+     * 422 — modifying it would race with delivery or rewrite the record of what was
+     * actually sent.
      *
      * @param string $draftID path param: Email draft UUID
      * @param array{
@@ -170,7 +177,7 @@ final class DraftsRawService implements DraftsRawContract
 
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
-            method: 'patch',
+            method: 'put',
             path: ['email_inboxes/%1$s/drafts/%2$s', $inboxID, $draftID],
             body: (object) array_diff_key($parsed, array_flip(['inboxID'])),
             options: $options,
@@ -255,6 +262,59 @@ final class DraftsRawService implements DraftsRawContract
             path: ['email_inboxes/%1$s/drafts/%2$s', $inboxID, $draftID],
             options: $options,
             convert: null,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Identical to `PUT`; both apply a partial update to the supplied fields.
+     *
+     * @param string $draftID path param: Email draft UUID
+     * @param array{
+     *   inboxID: string,
+     *   attachments?: list<mixed>,
+     *   bcc?: list<EmailAddressInputShape>,
+     *   cc?: list<EmailAddressInputShape>,
+     *   fromEmail?: string,
+     *   fromName?: string,
+     *   headers?: array<string,string>,
+     *   html?: string,
+     *   htmlBody?: string,
+     *   labels?: list<string>,
+     *   metadata?: mixed,
+     *   replyTo?: string,
+     *   subject?: string,
+     *   tags?: list<string>,
+     *   text?: string,
+     *   textBody?: string,
+     *   to?: list<EmailAddressInputShape>,
+     * }|DraftPatchParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<EmailDraftResponse>
+     *
+     * @throws APIException
+     */
+    public function patch(
+        string $draftID,
+        array|DraftPatchParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = DraftPatchParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+        $inboxID = $parsed['inboxID'];
+        unset($parsed['inboxID']);
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'patch',
+            path: ['email_inboxes/%1$s/drafts/%2$s', $inboxID, $draftID],
+            body: (object) array_diff_key($parsed, array_flip(['inboxID'])),
+            options: $options,
+            convert: EmailDraftResponse::class,
         );
     }
 

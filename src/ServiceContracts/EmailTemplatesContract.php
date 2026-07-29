@@ -115,4 +115,26 @@ interface EmailTemplatesContract
         array $templateVariables = [],
         RequestOptions|array|null $requestOptions = null,
     ): EmailTemplateRenderResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id email template UUID
+     * @param string|null $htmlBody liquid template HTML body
+     * @param string|null $subject liquid template subject
+     * @param string|null $textBody liquid template text body
+     * @param list<string> $variables
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function replace(
+        string $id,
+        ?string $htmlBody = null,
+        ?string $name = null,
+        ?string $subject = null,
+        ?string $textBody = null,
+        ?array $variables = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): EmailTemplateResponse;
 }

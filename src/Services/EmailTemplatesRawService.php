@@ -13,6 +13,7 @@ use Telnyx\EmailTemplates\EmailTemplateListParams;
 use Telnyx\EmailTemplates\EmailTemplateListResponse;
 use Telnyx\EmailTemplates\EmailTemplateRenderParams;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
+use Telnyx\EmailTemplates\EmailTemplateReplaceParams;
 use Telnyx\EmailTemplates\EmailTemplateResponse;
 use Telnyx\EmailTemplates\EmailTemplateUpdateParams;
 use Telnyx\RequestOptions;
@@ -234,6 +235,45 @@ final class EmailTemplatesRawService implements EmailTemplatesRawContract
             body: (object) $parsed,
             options: $options,
             convert: EmailTemplateRenderResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Replaces template fields. Behaves identically to PATCH; provided for compatibility with Phoenix resource routes.
+     *
+     * @param string $id email template UUID
+     * @param array{
+     *   htmlBody?: string|null,
+     *   name?: string,
+     *   subject?: string|null,
+     *   textBody?: string|null,
+     *   variables?: list<string>,
+     * }|EmailTemplateReplaceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<EmailTemplateResponse>
+     *
+     * @throws APIException
+     */
+    public function replace(
+        string $id,
+        array|EmailTemplateReplaceParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = EmailTemplateReplaceParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'put',
+            path: ['email_templates/%1$s', $id],
+            body: (object) $parsed,
+            options: $options,
+            convert: EmailTemplateResponse::class,
         );
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailInboxes\Filters\FilterCreateParams;
+namespace Telnyx\EmailInboxes\Filters\FilterAddParams;
 
 /**
  * The list to change.

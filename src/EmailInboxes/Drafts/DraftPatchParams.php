@@ -12,20 +12,14 @@ use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\EmailMessages\EmailAddressInput;
 
 /**
- * Updates the supplied fields on a draft. `account_id` and `inbox_id` are
- * server-owned and ignored if present in the body, so a draft can never be moved
- * between accounts or inboxes.
+ * Identical to `PUT`; both apply a partial update to the supplied fields.
  *
- * A draft that is being sent or has already been sent is immutable and returns
- * 422 — modifying it would race with delivery or rewrite the record of what was
- * actually sent.
- *
- * @see Telnyx\Services\EmailInboxes\DraftsService::update()
+ * @see Telnyx\Services\EmailInboxes\DraftsService::patch()
  *
  * @phpstan-import-type EmailAddressInputShape from \Telnyx\EmailMessages\EmailAddressInput
  * @phpstan-import-type EmailAddressInputVariants from \Telnyx\EmailMessages\EmailAddressInput
  *
- * @phpstan-type DraftUpdateParamsShape = array{
+ * @phpstan-type DraftPatchParamsShape = array{
  *   inboxID: string,
  *   attachments?: list<mixed>|null,
  *   bcc?: list<EmailAddressInputShape>|null,
@@ -45,9 +39,9 @@ use Telnyx\EmailMessages\EmailAddressInput;
  *   to?: list<EmailAddressInputShape>|null,
  * }
  */
-final class DraftUpdateParams implements BaseModel
+final class DraftPatchParams implements BaseModel
 {
-    /** @use SdkModel<DraftUpdateParamsShape> */
+    /** @use SdkModel<DraftPatchParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -116,17 +110,17 @@ final class DraftUpdateParams implements BaseModel
     public ?array $to;
 
     /**
-     * `new DraftUpdateParams()` is missing required properties by the API.
+     * `new DraftPatchParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * DraftUpdateParams::with(inboxID: ...)
+     * DraftPatchParams::with(inboxID: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new DraftUpdateParams)->withInboxID(...)
+     * (new DraftPatchParams)->withInboxID(...)
      * ```
      */
     public function __construct()

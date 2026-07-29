@@ -11,6 +11,7 @@ use Telnyx\EmailTemplates\EmailTemplateListParams;
 use Telnyx\EmailTemplates\EmailTemplateListResponse;
 use Telnyx\EmailTemplates\EmailTemplateRenderParams;
 use Telnyx\EmailTemplates\EmailTemplateRenderResponse;
+use Telnyx\EmailTemplates\EmailTemplateReplaceParams;
 use Telnyx\EmailTemplates\EmailTemplateResponse;
 use Telnyx\EmailTemplates\EmailTemplateUpdateParams;
 use Telnyx\RequestOptions;
@@ -111,6 +112,23 @@ interface EmailTemplatesRawContract
     public function render(
         string $id,
         array|EmailTemplateRenderParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $id email template UUID
+     * @param array<string,mixed>|EmailTemplateReplaceParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<EmailTemplateResponse>
+     *
+     * @throws APIException
+     */
+    public function replace(
+        string $id,
+        array|EmailTemplateReplaceParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

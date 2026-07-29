@@ -134,7 +134,13 @@ final class DraftsService implements DraftsContract
     /**
      * @api
      *
-     * Identical to `PUT`; both apply a partial update to the supplied fields.
+     * Updates the supplied fields on a draft. `account_id` and `inbox_id` are
+     * server-owned and ignored if present in the body, so a draft can never be moved
+     * between accounts or inboxes.
+     *
+     * A draft that is being sent or has already been sent is immutable and returns
+     * 422 — modifying it would race with delivery or rewrite the record of what was
+     * actually sent.
      *
      * @param string $draftID path param: Email draft UUID
      * @param string $inboxID path param: Email inbox UUID
@@ -263,6 +269,82 @@ final class DraftsService implements DraftsContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->delete($draftID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Identical to `PUT`; both apply a partial update to the supplied fields.
+     *
+     * @param string $draftID path param: Email draft UUID
+     * @param string $inboxID path param: Email inbox UUID
+     * @param list<mixed> $attachments Body param
+     * @param list<EmailAddressInputShape> $bcc Body param
+     * @param list<EmailAddressInputShape> $cc Body param
+     * @param string $fromEmail Body param
+     * @param string $fromName Body param
+     * @param array<string,string> $headers Body param
+     * @param string $html body param: Alias for `html_body`, matching the send endpoint
+     * @param string $htmlBody Body param
+     * @param list<string> $labels Body param
+     * @param mixed $metadata Body param
+     * @param string $replyTo Body param
+     * @param string $subject Body param
+     * @param list<string> $tags Body param
+     * @param string $text body param: Alias for `text_body`, matching the send endpoint
+     * @param string $textBody Body param
+     * @param list<EmailAddressInputShape> $to Body param
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function patch(
+        string $draftID,
+        string $inboxID,
+        ?array $attachments = null,
+        ?array $bcc = null,
+        ?array $cc = null,
+        ?string $fromEmail = null,
+        ?string $fromName = null,
+        ?array $headers = null,
+        ?string $html = null,
+        ?string $htmlBody = null,
+        ?array $labels = null,
+        mixed $metadata = null,
+        ?string $replyTo = null,
+        ?string $subject = null,
+        ?array $tags = null,
+        ?string $text = null,
+        ?string $textBody = null,
+        ?array $to = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): EmailDraftResponse {
+        $params = Util::removeNulls(
+            [
+                'inboxID' => $inboxID,
+                'attachments' => $attachments,
+                'bcc' => $bcc,
+                'cc' => $cc,
+                'fromEmail' => $fromEmail,
+                'fromName' => $fromName,
+                'headers' => $headers,
+                'html' => $html,
+                'htmlBody' => $htmlBody,
+                'labels' => $labels,
+                'metadata' => $metadata,
+                'replyTo' => $replyTo,
+                'subject' => $subject,
+                'tags' => $tags,
+                'text' => $text,
+                'textBody' => $textBody,
+                'to' => $to,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->patch($draftID, params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

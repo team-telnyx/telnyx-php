@@ -7,33 +7,33 @@ namespace Telnyx\EmailInboxes\Filters;
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailInboxes\Filters\FilterNewResponse\Data;
+use Telnyx\EmailInboxes\Filters\FilterAddResponse\Data;
 
 /**
- * @phpstan-import-type DataShape from \Telnyx\EmailInboxes\Filters\FilterNewResponse\Data
+ * @phpstan-import-type DataShape from \Telnyx\EmailInboxes\Filters\FilterAddResponse\Data
  *
- * @phpstan-type FilterNewResponseShape = array{data: Data|DataShape}
+ * @phpstan-type FilterAddResponseShape = array{data: Data|DataShape}
  */
-final class FilterNewResponse implements BaseModel
+final class FilterAddResponse implements BaseModel
 {
-    /** @use SdkModel<FilterNewResponseShape> */
+    /** @use SdkModel<FilterAddResponseShape> */
     use SdkModel;
 
     #[Required]
     public Data $data;
 
     /**
-     * `new FilterNewResponse()` is missing required properties by the API.
+     * `new FilterAddResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * FilterNewResponse::with(data: ...)
+     * FilterAddResponse::with(data: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new FilterNewResponse)->withData(...)
+     * (new FilterAddResponse)->withData(...)
      * ```
      */
     public function __construct()

@@ -114,10 +114,10 @@ final class DraftsTest extends TestCase
             labels: ['string'],
             metadata: (object) [],
             replyTo: 'reply_to',
-            subject: 'subject',
+            subject: 'Quarterly update (revised)',
             tags: ['string'],
             text: 'text',
-            textBody: 'text_body',
+            textBody: 'Updated body.',
             to: ['string'],
         );
 
@@ -170,6 +170,54 @@ final class DraftsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertNull($result);
+    }
+
+    #[Test]
+    public function testPatch(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailInboxes->drafts->patch(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            inboxID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EmailDraftResponse::class, $result);
+    }
+
+    #[Test]
+    public function testPatchWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailInboxes->drafts->patch(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            inboxID: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+            attachments: [(object) []],
+            bcc: ['string'],
+            cc: ['string'],
+            fromEmail: 'from_email',
+            fromName: 'from_name',
+            headers: ['foo' => 'string'],
+            html: 'html',
+            htmlBody: 'html_body',
+            labels: ['string'],
+            metadata: (object) [],
+            replyTo: 'reply_to',
+            subject: 'subject',
+            tags: ['string'],
+            text: 'text',
+            textBody: 'text_body',
+            to: ['string'],
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EmailDraftResponse::class, $result);
     }
 
     #[Test]

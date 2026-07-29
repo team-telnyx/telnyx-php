@@ -8,21 +8,21 @@ use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailInboxes\Filters\FilterCreateParams\Type;
+use Telnyx\EmailInboxes\Filters\FilterAddParams\Type;
 
 /**
  * Adds entries to either the allowlist or blocklist. The operation is an
  * idempotent set union: entries already present remain unchanged.
  *
- * @see Telnyx\Services\EmailInboxes\FiltersService::create()
+ * @see Telnyx\Services\EmailInboxes\FiltersService::add()
  *
- * @phpstan-type FilterCreateParamsShape = array{
+ * @phpstan-type FilterAddParamsShape = array{
  *   entries: list<string>, type: Type|value-of<Type>
  * }
  */
-final class FilterCreateParams implements BaseModel
+final class FilterAddParams implements BaseModel
 {
-    /** @use SdkModel<FilterCreateParamsShape> */
+    /** @use SdkModel<FilterAddParamsShape> */
     use SdkModel;
     use SdkParams;
 
@@ -39,17 +39,17 @@ final class FilterCreateParams implements BaseModel
     public string $type;
 
     /**
-     * `new FilterCreateParams()` is missing required properties by the API.
+     * `new FilterAddParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * FilterCreateParams::with(entries: ..., type: ...)
+     * FilterAddParams::with(entries: ..., type: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new FilterCreateParams)->withEntries(...)->withType(...)
+     * (new FilterAddParams)->withEntries(...)->withType(...)
      * ```
      */
     public function __construct()

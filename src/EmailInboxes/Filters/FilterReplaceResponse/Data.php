@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Telnyx\EmailInboxes\Filters\FilterNewResponse;
+namespace Telnyx\EmailInboxes\Filters\FilterReplaceResponse;
 
 use Telnyx\Core\Attributes\Required;
 use Telnyx\Core\Concerns\SdkModel;
 use Telnyx\Core\Contracts\BaseModel;
-use Telnyx\EmailInboxes\Filters\FilterNewResponse\Data\RecordType;
+use Telnyx\EmailInboxes\Filters\FilterReplaceResponse\Data\RecordType;
 
 /**
  * @phpstan-type DataShape = array{

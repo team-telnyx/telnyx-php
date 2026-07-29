@@ -202,4 +202,43 @@ final class EmailTemplatesService implements EmailTemplatesContract
 
         return $response->parse();
     }
+
+    /**
+     * @api
+     *
+     * Replaces template fields. Behaves identically to PATCH; provided for compatibility with Phoenix resource routes.
+     *
+     * @param string $id email template UUID
+     * @param string|null $htmlBody liquid template HTML body
+     * @param string|null $subject liquid template subject
+     * @param string|null $textBody liquid template text body
+     * @param list<string> $variables
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function replace(
+        string $id,
+        ?string $htmlBody = null,
+        ?string $name = null,
+        ?string $subject = null,
+        ?string $textBody = null,
+        ?array $variables = null,
+        RequestOptions|array|null $requestOptions = null,
+    ): EmailTemplateResponse {
+        $params = Util::removeNulls(
+            [
+                'htmlBody' => $htmlBody,
+                'name' => $name,
+                'subject' => $subject,
+                'textBody' => $textBody,
+                'variables' => $variables,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->replace($id, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
 }

@@ -10,6 +10,7 @@ use Telnyx\EmailInboxes\Drafts\DraftCreateParams;
 use Telnyx\EmailInboxes\Drafts\DraftDeleteParams;
 use Telnyx\EmailInboxes\Drafts\DraftListParams;
 use Telnyx\EmailInboxes\Drafts\DraftListResponse;
+use Telnyx\EmailInboxes\Drafts\DraftPatchParams;
 use Telnyx\EmailInboxes\Drafts\DraftRetrieveParams;
 use Telnyx\EmailInboxes\Drafts\DraftSendParams;
 use Telnyx\EmailInboxes\Drafts\DraftUpdateParams;
@@ -104,6 +105,23 @@ interface DraftsRawContract
     public function delete(
         string $draftID,
         array|DraftDeleteParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param string $draftID path param: Email draft UUID
+     * @param array<string,mixed>|DraftPatchParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<EmailDraftResponse>
+     *
+     * @throws APIException
+     */
+    public function patch(
+        string $draftID,
+        array|DraftPatchParams $params,
         RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 

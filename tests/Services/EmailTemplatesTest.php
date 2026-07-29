@@ -135,4 +135,19 @@ final class EmailTemplatesTest extends TestCase
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(EmailTemplateRenderResponse::class, $result);
     }
+
+    #[Test]
+    public function testReplace(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->emailTemplates->replace(
+            '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(EmailTemplateResponse::class, $result);
+    }
 }
