@@ -149,12 +149,11 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type PromptsShape from \Telnyx\Calls\Actions\ActionPayParams\Prompts
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
  * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -833,18 +832,6 @@ interface ActionsContract
      * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape> $participants a list of participants to add to the conversation when it starts
      * @param bool $sendMessageHistoryUpdates when `true`, a webhook is sent each time the conversation message history is updated
      * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
-     * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
-     *
-     *  **Supported Providers:**
-     * - **AWS:** Use `AWS.Polly.<VoiceId>` (e.g., `AWS.Polly.Joanna`). For neural voices, which provide more realistic, human-like speech, append `-Neural` to the `VoiceId` (e.g., `AWS.Polly.Joanna-Neural`). Check the [available voices](https://docs.aws.amazon.com/polly/latest/dg/available-voices.html) for compatibility.
-     * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
-     * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
-     *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
-     * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`.
-     * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
-     * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
-     * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     * @param VoiceSettingsShape3 $voiceSettings The settings associated with the voice selected
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -860,8 +847,6 @@ interface ActionsContract
         array $participants = [],
         bool $sendMessageHistoryUpdates = false,
         TranscriptionConfig|array|null $transcription = null,
-        string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartAIAssistantResponse;
 
@@ -901,7 +886,7 @@ interface ActionsContract
      * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     * @param VoiceSettingsShape4 $voiceSettings The settings associated with the voice selected
+     * @param VoiceSettingsShape3 $voiceSettings The settings associated with the voice selected
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException

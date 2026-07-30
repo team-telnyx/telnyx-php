@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Telnyx\Calls;
 
+use Telnyx\AI\Assistants\VoiceSettings;
 use Telnyx\Calls\CallAssistantRequest\DynamicVariable;
 use Telnyx\Calls\CallAssistantRequest\ExternalLlm;
 use Telnyx\Calls\CallAssistantRequest\FallbackConfig;
@@ -23,6 +24,7 @@ use Telnyx\Core\Conversion\MapOf;
  * @phpstan-import-type ExternalLlmShape from \Telnyx\Calls\CallAssistantRequest\ExternalLlm
  * @phpstan-import-type FallbackConfigShape from \Telnyx\Calls\CallAssistantRequest\FallbackConfig
  * @phpstan-import-type ToolShape from \Telnyx\Calls\CallAssistantRequest\Tool
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\AI\Assistants\VoiceSettings
  *
  * @phpstan-type CallAssistantRequestShape = array{
  *   id: string,
@@ -38,6 +40,7 @@ use Telnyx\Core\Conversion\MapOf;
  *   observabilitySettings?: array<string,mixed>|null,
  *   openaiAPIKeyRef?: string|null,
  *   tools?: list<ToolShape>|null,
+ *   voiceSettings?: null|VoiceSettings|VoiceSettingsShape,
  * }
  */
 final class CallAssistantRequest implements BaseModel
@@ -133,6 +136,9 @@ final class CallAssistantRequest implements BaseModel
     #[Optional(list: Tool::class)]
     public ?array $tools;
 
+    #[Optional('voice_settings')]
+    public ?VoiceSettings $voiceSettings;
+
     /**
      * `new CallAssistantRequest()` is missing required properties by the API.
      *
@@ -163,6 +169,7 @@ final class CallAssistantRequest implements BaseModel
      * @param list<array<string,mixed>>|null $mcpServers
      * @param array<string,mixed>|null $observabilitySettings
      * @param list<ToolShape>|null $tools
+     * @param VoiceSettings|VoiceSettingsShape|null $voiceSettings
      */
     public static function with(
         string $id,
@@ -178,6 +185,7 @@ final class CallAssistantRequest implements BaseModel
         ?array $observabilitySettings = null,
         ?string $openaiAPIKeyRef = null,
         ?array $tools = null,
+        VoiceSettings|array|null $voiceSettings = null,
     ): self {
         $self = new self;
 
@@ -195,6 +203,7 @@ final class CallAssistantRequest implements BaseModel
         null !== $observabilitySettings && $self['observabilitySettings'] = $observabilitySettings;
         null !== $openaiAPIKeyRef && $self['openaiAPIKeyRef'] = $openaiAPIKeyRef;
         null !== $tools && $self['tools'] = $tools;
+        null !== $voiceSettings && $self['voiceSettings'] = $voiceSettings;
 
         return $self;
     }
@@ -352,6 +361,17 @@ final class CallAssistantRequest implements BaseModel
     {
         $self = clone $this;
         $self['tools'] = $tools;
+
+        return $self;
+    }
+
+    /**
+     * @param VoiceSettings|VoiceSettingsShape $voiceSettings
+     */
+    public function withVoiceSettings(VoiceSettings|array $voiceSettings): self
+    {
+        $self = clone $this;
+        $self['voiceSettings'] = $voiceSettings;
 
         return $self;
     }
