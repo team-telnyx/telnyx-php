@@ -26,4 +26,6 @@ enum TranscriptionEngine: string
     case PARAKEET = 'Parakeet';
 
     case HUMAIN = 'Humain';
+
+    case RESON8 = 'Reson8';
 }
