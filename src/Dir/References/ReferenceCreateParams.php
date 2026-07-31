@@ -14,7 +14,11 @@ use Telnyx\Core\Contracts\BaseModel;
  *
  * The DIR's authorizer email must be verified first (see the email-verification endpoint). Until it is, this returns `409` and no references are stored.
  *
- * The request body carries exactly two business references plus one financial reference. On success the references are stored and the response echoes them in the same shape as the GET. Submitting again converges on the already-stored references rather than erroring.
+ * The request body carries exactly two business references plus one financial reference. The first submission stores them and returns `201`. Resubmitting returns `200`: identical values are simply confirmed and nothing is written, while changed values replace those references.
+ *
+ * Replacing a reference is allowed only while the DIR itself is still editable, the same window in which a single reference may be updated; once the DIR has been submitted for vetting this returns `400`. A replaced reference's pending verification call is cancelled and its dial-in code stops working, and the replacement contact is emailed fresh scheduling details. References whose details did not change keep their existing call, code, and the notice already sent to them.
+ *
+ * The response always echoes the stored references in the same shape as the GET.
  *
  * @see Telnyx\Services\Dir\ReferencesService::create()
  *
@@ -32,7 +36,7 @@ final class ReferenceCreateParams implements BaseModel
     use SdkParams;
 
     /**
-     * Exactly two business references.
+     * Exactly two business references. Array order determines each one's slot: the first entry becomes slot 1 and the second becomes slot 2. Those slots are what you pass when updating a single reference later.
      *
      * @var list<ReferenceInput> $businessReferences
      */
@@ -87,7 +91,7 @@ final class ReferenceCreateParams implements BaseModel
     }
 
     /**
-     * Exactly two business references.
+     * Exactly two business references. Array order determines each one's slot: the first entry becomes slot 1 and the second becomes slot 2. Those slots are what you pass when updating a single reference later.
      *
      * @param list<ReferenceInput|ReferenceInputShape> $businessReferences
      */

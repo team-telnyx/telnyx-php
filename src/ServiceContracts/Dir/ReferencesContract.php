@@ -21,7 +21,7 @@ interface ReferencesContract
      * @api
      *
      * @param string $dirID The DIR id. Lowercase UUID.
-     * @param list<ReferenceInput|ReferenceInputShape> $businessReferences exactly two business references
+     * @param list<ReferenceInput|ReferenceInputShape> $businessReferences Exactly two business references. Array order determines each one's slot: the first entry becomes slot 1 and the second becomes slot 2. Those slots are what you pass when updating a single reference later.
      * @param ReferenceInput|ReferenceInputShape $financialReference One reference supplied at submit. The reference type is implied by the field that carries it (business_references vs financial_reference).
      * @param RequestOpts|null $requestOptions
      *
@@ -37,7 +37,7 @@ interface ReferencesContract
     /**
      * @api
      *
-     * @param int $slot Path param: Reference slot. Business references use slots 0 and 1; the financial reference uses slot 0.
+     * @param int $slot Path param: Reference slot, counting from 1. Business references are slots 1 and 2, matching the order they were sent in the `business_references` array; the financial reference is slot 1. Every reference returned by the submit and list endpoints carries its own `ref_type` and `slot`, so you do not need to derive them.
      * @param string $dirID Path param: The DIR id. Lowercase UUID.
      * @param RefType|value-of<RefType> $refType path param: Reference type to address
      * @param string $email body param: Reference contact email address

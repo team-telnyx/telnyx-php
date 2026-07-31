@@ -42,10 +42,14 @@ final class ReferencesService implements ReferencesContract
      *
      * The DIR's authorizer email must be verified first (see the email-verification endpoint). Until it is, this returns `409` and no references are stored.
      *
-     * The request body carries exactly two business references plus one financial reference. On success the references are stored and the response echoes them in the same shape as the GET. Submitting again converges on the already-stored references rather than erroring.
+     * The request body carries exactly two business references plus one financial reference. The first submission stores them and returns `201`. Resubmitting returns `200`: identical values are simply confirmed and nothing is written, while changed values replace those references.
+     *
+     * Replacing a reference is allowed only while the DIR itself is still editable, the same window in which a single reference may be updated; once the DIR has been submitted for vetting this returns `400`. A replaced reference's pending verification call is cancelled and its dial-in code stops working, and the replacement contact is emailed fresh scheduling details. References whose details did not change keep their existing call, code, and the notice already sent to them.
+     *
+     * The response always echoes the stored references in the same shape as the GET.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
-     * @param list<ReferenceInput|ReferenceInputShape> $businessReferences exactly two business references
+     * @param list<ReferenceInput|ReferenceInputShape> $businessReferences Exactly two business references. Array order determines each one's slot: the first entry becomes slot 1 and the second becomes slot 2. Those slots are what you pass when updating a single reference later.
      * @param ReferenceInput|ReferenceInputShape $financialReference One reference supplied at submit. The reference type is implied by the field that carries it (business_references vs financial_reference).
      * @param RequestOpts|null $requestOptions
      *
@@ -77,7 +81,7 @@ final class ReferencesService implements ReferencesContract
      *
      * Cosmetic fields (full name, job title, organization, relationship, email) are always editable. The phone number and timezone may only be changed while a scheduled call has not yet been dialed; if a call is in progress or all attempts are complete, those fields are locked. Changing the timezone reschedules any pending call into the new local calling window.
      *
-     * @param int $slot Path param: Reference slot. Business references use slots 0 and 1; the financial reference uses slot 0.
+     * @param int $slot Path param: Reference slot, counting from 1. Business references are slots 1 and 2, matching the order they were sent in the `business_references` array; the financial reference is slot 1. Every reference returned by the submit and list endpoints carries its own `ref_type` and `slot`, so you do not need to derive them.
      * @param string $dirID Path param: The DIR id. Lowercase UUID.
      * @param RefType|value-of<RefType> $refType path param: Reference type to address
      * @param string $email body param: Reference contact email address
@@ -129,7 +133,7 @@ final class ReferencesService implements ReferencesContract
      *
      * List the business and financial references submitted for a DIR.
      *
-     * Returns the two business references (slots 0 and 1) followed by the single financial reference. Each entry carries only the customer-supplied details (name, title, organization, relationship, phone, email, timezone). Returns an empty list when no references were submitted.
+     * Returns the two business references (slots 1 and 2) followed by the single financial reference. Each entry carries its `ref_type` and `slot`, which together address the reference when updating it, alongside the details supplied when it was submitted (name, title, organization, relationship, phone, email, timezone). No internal identifiers are exposed. Returns an empty list when no references were submitted.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions

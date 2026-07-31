@@ -37,7 +37,7 @@ interface ReferencesRawContract
     /**
      * @api
      *
-     * @param int $slot Path param: Reference slot. Business references use slots 0 and 1; the financial reference uses slot 0.
+     * @param int $slot Path param: Reference slot, counting from 1. Business references are slots 1 and 2, matching the order they were sent in the `business_references` array; the financial reference is slot 1. Every reference returned by the submit and list endpoints carries its own `ref_type` and `slot`, so you do not need to derive them.
      * @param array<string,mixed>|ReferenceUpdateParams $params
      * @param RequestOpts|null $requestOptions
      *
