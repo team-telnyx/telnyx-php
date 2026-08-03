@@ -75,6 +75,7 @@ final class UacConnectionsTest extends TestCase
                 'password' => 'testtesttest',
                 'proxy' => 'sip-pbx.acme.example',
                 'transport' => 'TLS',
+                'userAgent' => 'Telnyx-Usage-Voice-Trunk/1.0',
                 'username' => 'ext8492',
             ],
             inbound: [
