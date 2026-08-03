@@ -292,7 +292,7 @@ final class AssistantsRawService implements AssistantsRawContract
      *
      * @param string $assistantID unique identifier of the assistant
      * @param array{
-     *   content: string, conversationID: string, name?: string
+     *   content: string, conversationID: string, name?: string, stream?: bool
      * }|AssistantChatParams $params
      * @param RequestOpts|null $requestOptions
      *

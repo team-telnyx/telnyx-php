@@ -35,6 +35,11 @@ use Telnyx\Calls\Actions\ActionHangupResponse;
 use Telnyx\Calls\Actions\ActionJoinAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
+use Telnyx\Calls\Actions\ActionPayParams\Currency;
+use Telnyx\Calls\Actions\ActionPayParams\PaymentMethod;
+use Telnyx\Calls\Actions\ActionPayParams\Prompts;
+use Telnyx\Calls\Actions\ActionPayParams\TransactionType;
+use Telnyx\Calls\Actions\ActionPayResponse;
 use Telnyx\Calls\Actions\ActionReferResponse;
 use Telnyx\Calls\Actions\ActionRejectParams\Cause;
 use Telnyx\Calls\Actions\ActionRejectResponse;
@@ -67,6 +72,7 @@ use Telnyx\Calls\Actions\ActionStartSiprecResponse;
 use Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter;
 use Telnyx\Calls\Actions\ActionStartStreamingResponse;
 use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineHumainConfig;
+use Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngineConfig\TranscriptionEngineReson8Config;
 use Telnyx\Calls\Actions\ActionStartTranscriptionResponse;
 use Telnyx\Calls\Actions\ActionStopAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionStopConversationRelayResponse;
@@ -145,14 +151,14 @@ use Telnyx\XaiVoiceSettings;
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\MessageHistory
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingAIParams\VoiceSettings
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionGatherUsingSpeakParams\VoiceSettings as VoiceSettingsShape1
+ * @phpstan-import-type PromptsShape from \Telnyx\Calls\Actions\ActionPayParams\Prompts
  * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionSpeakParams\VoiceSettings as VoiceSettingsShape2
  * @phpstan-import-type MessageHistoryShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\MessageHistory as MessageHistoryShape1
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartAIAssistantParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type AssistantShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\Assistant as AssistantShape1
  * @phpstan-import-type ConversationRelaySettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\ConversationRelaySettings
  * @phpstan-import-type ConversationRelayInterruptionSettingsShape from \Telnyx\Calls\ConversationRelayInterruptionSettings
  * @phpstan-import-type ConversationRelayLanguageShape from \Telnyx\Calls\ConversationRelayLanguage
- * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape4
+ * @phpstan-import-type VoiceSettingsShape from \Telnyx\Calls\Actions\ActionStartConversationRelayParams\VoiceSettings as VoiceSettingsShape3
  * @phpstan-import-type NoiseSuppressionEngineConfigShape from \Telnyx\Calls\Actions\ActionStartNoiseSuppressionParams\NoiseSuppressionEngineConfig
  * @phpstan-import-type CustomParameterShape from \Telnyx\Calls\Actions\ActionStartStreamingParams\CustomParameter
  * @phpstan-import-type DialogflowConfigShape from \Telnyx\Calls\DialogflowConfig
@@ -193,6 +199,7 @@ final class ActionsService implements ActionsContract
      * @param string $clientState Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
      * @param string $commandID Use this field to avoid duplicate commands. Telnyx will ignore any command with the same `command_id` for the same `call_control_id`.
      * @param list<MessageShape> $messages the messages to add to the conversation
+     * @param bool $triggerResponse When `true`, the injected messages immediately trigger an assistant response/turn instead of waiting for the next natural turn or idle timeout. This may interrupt a user who is still speaking.
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -202,6 +209,7 @@ final class ActionsService implements ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         ?array $messages = null,
+        bool $triggerResponse = false,
         RequestOptions|array|null $requestOptions = null,
     ): ActionAddAIAssistantMessagesResponse {
         $params = Util::removeNulls(
@@ -209,6 +217,7 @@ final class ActionsService implements ActionsContract
                 'clientState' => $clientState,
                 'commandID' => $commandID,
                 'messages' => $messages,
+                'triggerResponse' => $triggerResponse,
             ],
         );
 
@@ -948,6 +957,94 @@ final class ActionsService implements ActionsContract
     /**
      * @api
      *
+     * Collect payment details from the caller using DTMF and either charge or tokenize the payment method through a configured Pay connector. Pay pauses active call recordings while sensitive payment details are collected.
+     *
+     * When `payment_token` is supplied, the DTMF collection steps are skipped and the existing token is sent to the connector.
+     *
+     * **Expected Webhooks:**
+     *
+     * - `call.payment.progress`
+     * - `call.payment.completed`
+     *
+     * **Test mode card numbers:** `4111111111111111` (Visa), `5555555555554444` (Mastercard), `378282246310005` (American Express), `6011111111111117` (Discover), `3065930009020004` (Diners Club), `3566002020360505` (JCB), `6200000000000005` (UnionPay), and `6771798021000008` (Maestro). Test-mode connectors reject other card numbers before contacting the configured processor. The UnionPay and Maestro numbers are accepted for processor testing, but Pay currently does not emit a card type for them.
+     *
+     * @param string $callControlID Unique identifier and token for controlling the call
+     * @param float $amount Amount to charge. Required when `transaction_type` is `charge`.
+     * @param string $clientState base64-encoded state included in subsequent webhooks
+     * @param string $commandID Idempotency key for the command. Telnyx ignores a duplicate command with the same `command_id` for the same `call_control_id`.
+     * @param string $connectorName name of the Pay connector used to process the transaction
+     * @param Currency|value-of<Currency> $currency Currency used for the transaction. Pay currently supports USD only.
+     * @param string $description optional description forwarded with the payment transaction
+     * @param int $interDigitTimeoutMillis time in milliseconds to wait between consecutive DTMF digits
+     * @param string $language language used for payment prompts
+     * @param int $maxAttempts maximum number of attempts for each payment collection step
+     * @param array<string,mixed> $metadata metadata forwarded to the Pay connector
+     * @param array<string,mixed> $parameters additional parameters forwarded to the Pay connector
+     * @param PaymentMethod|value-of<PaymentMethod> $paymentMethod payment method to collect
+     * @param string $paymentToken Existing payment token. When supplied, payment-detail collection is skipped.
+     * @param Prompts|PromptsShape $prompts custom text-to-speech prompts keyed by payment collection step
+     * @param string $serviceLevel Speech synthesis service level used for payment prompts. Pay defaults to `premium`.
+     * @param int $timeoutMillis time in milliseconds to wait for DTMF input for each collection step
+     * @param TransactionType|value-of<TransactionType> $transactionType Transaction to perform. If omitted, Pay infers `tokenize` when `amount` is absent or zero and `charge` when `amount` is positive.
+     * @param string $voice Voice used for payment prompts. Accepts `male`, `female`, or a provider voice in `<Provider>.<Model>.<VoiceId>` format, for example `AWS.Polly.Joanna` or `Telnyx.KokoroTTS.af`.
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function pay(
+        string $callControlID,
+        ?float $amount = null,
+        ?string $clientState = null,
+        ?string $commandID = null,
+        string $connectorName = 'Default',
+        Currency|string $currency = 'USD',
+        ?string $description = null,
+        int $interDigitTimeoutMillis = 5000,
+        string $language = 'en-US',
+        int $maxAttempts = 3,
+        ?array $metadata = null,
+        ?array $parameters = null,
+        PaymentMethod|string $paymentMethod = 'credit-card',
+        ?string $paymentToken = null,
+        Prompts|array|null $prompts = null,
+        string $serviceLevel = 'premium',
+        int $timeoutMillis = 5000,
+        TransactionType|string|null $transactionType = null,
+        string $voice = 'female',
+        RequestOptions|array|null $requestOptions = null,
+    ): ActionPayResponse {
+        $params = Util::removeNulls(
+            [
+                'amount' => $amount,
+                'clientState' => $clientState,
+                'commandID' => $commandID,
+                'connectorName' => $connectorName,
+                'currency' => $currency,
+                'description' => $description,
+                'interDigitTimeoutMillis' => $interDigitTimeoutMillis,
+                'language' => $language,
+                'maxAttempts' => $maxAttempts,
+                'metadata' => $metadata,
+                'parameters' => $parameters,
+                'paymentMethod' => $paymentMethod,
+                'paymentToken' => $paymentToken,
+                'prompts' => $prompts,
+                'serviceLevel' => $serviceLevel,
+                'timeoutMillis' => $timeoutMillis,
+                'transactionType' => $transactionType,
+                'voice' => $voice,
+            ],
+        );
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->pay($callControlID, params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
      * Initiate a SIP Refer on a Call Control call. You can initiate a SIP Refer at any point in the duration of a call.
      *
      * **Expected Webhooks:**
@@ -1255,18 +1352,6 @@ final class ActionsService implements ActionsContract
      * @param list<AIAssistantJoinParticipant|AIAssistantJoinParticipantShape> $participants a list of participants to add to the conversation when it starts
      * @param bool $sendMessageHistoryUpdates when `true`, a webhook is sent each time the conversation message history is updated
      * @param TranscriptionConfig|TranscriptionConfigShape $transcription The settings associated with speech to text for the voice assistant. This is only relevant if the assistant uses a text-to-text language model. Any assistant using a model with native audio support (e.g. `fixie-ai/ultravox-v0_4`) will ignore this field.
-     * @param string $voice The voice to be used by the voice assistant. Currently we support ElevenLabs, Telnyx and AWS voices.
-     *
-     *  **Supported Providers:**
-     * - **AWS:** Use `AWS.Polly.<VoiceId>` (e.g., `AWS.Polly.Joanna`). For neural voices, which provide more realistic, human-like speech, append `-Neural` to the `VoiceId` (e.g., `AWS.Polly.Joanna-Neural`). Check the [available voices](https://docs.aws.amazon.com/polly/latest/dg/available-voices.html) for compatibility.
-     * - **Azure:** Use `Azure.<VoiceId>. (e.g. Azure.en-CA-ClaraNeural, Azure.en-CA-LiamNeural, Azure.en-US-BrianMultilingualNeural, Azure.en-US-Ava:DragonHDLatestNeural. For a complete list of voices, go to [Azure Voice Gallery](https://speech.microsoft.com/portal/voicegallery).)
-     * - **ElevenLabs:** Use `ElevenLabs.<ModelId>.<VoiceId>` (e.g., `ElevenLabs.BaseModel.John`). The `ModelId` part is optional. To use ElevenLabs, you must provide your ElevenLabs API key as an integration secret under `"voice_settings": {"api_key_ref": "<secret_id>"}`. See [integration secrets documentation](https://developers.telnyx.com/api/secrets-manager/integration-secrets/create-integration-secret) for details. Check [available voices](https://elevenlabs.io/docs/api-reference/get-voices).
-     *  - **Telnyx:** Use `Telnyx.<model_id>.<voice_id>`
-     * - **Inworld:** Use `Inworld.<ModelId>.<VoiceId>` (e.g., `Inworld.Mini.Loretta`, `Inworld.Max.Oliver`, `Inworld.TTS2.Loretta`). Supported models: `Mini`, `Max`, `TTS2`.
-     * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
-     * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
-     * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     * @param VoiceSettingsShape3 $voiceSettings The settings associated with the voice selected
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -1282,8 +1367,6 @@ final class ActionsService implements ActionsContract
         array $participants = [],
         bool $sendMessageHistoryUpdates = false,
         TranscriptionConfig|array|null $transcription = null,
-        string $voice = 'Telnyx.KokoroTTS.af',
-        ElevenLabsVoiceSettings|array|TelnyxVoiceSettings|AwsVoiceSettings|AzureVoiceSettings|RimeVoiceSettings|ResembleVoiceSettings|XaiVoiceSettings|null $voiceSettings = null,
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartAIAssistantResponse {
         $params = Util::removeNulls(
@@ -1297,8 +1380,6 @@ final class ActionsService implements ActionsContract
                 'participants' => $participants,
                 'sendMessageHistoryUpdates' => $sendMessageHistoryUpdates,
                 'transcription' => $transcription,
-                'voice' => $voice,
-                'voiceSettings' => $voiceSettings,
             ],
         );
 
@@ -1350,7 +1431,7 @@ final class ActionsService implements ActionsContract
      * - **Fish Audio:** Use `FishAudio.<ModelId>.<VoiceId>` (e.g., `FishAudio.s2.1-pro.<reference_id>`). Supported models: `s2.1-pro`, `s2-pro`, `s1`. `VoiceId` is a Fish Voice-Library reference ID.
      * - **xAI:** Use `xAI.<VoiceId>` (e.g., `xAI.eve`). Available voices: `eve`, `ara`, `rex`, `sal`, `leo`.
      * - **Humain:** Use `Humain.<VoiceId>` (e.g., `Humain.sara-ar`). Available voices: `sara-en`, `abdulaziz-en`, `sara-ar`, `abdulaziz-ar`, `nourah-ar`, `abdullah-ar`. Native Arabic (Saudi dialect) and English voices only — no `ModelId` segment.
-     * @param VoiceSettingsShape4 $voiceSettings The settings associated with the voice selected
+     * @param VoiceSettingsShape3 $voiceSettings The settings associated with the voice selected
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
@@ -1802,7 +1883,7 @@ final class ActionsService implements ActionsContract
         ?string $clientState = null,
         ?string $commandID = null,
         \Telnyx\Calls\Actions\ActionStartTranscriptionParams\TranscriptionEngine|string $transcriptionEngine = 'Google',
-        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineHumainConfig|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config|null $transcriptionEngineConfig = null,
+        TranscriptionEngineGoogleConfig|array|TranscriptionEngineTelnyxConfig|TranscriptionEngineAzureConfig|TranscriptionEngineXaiConfig|TranscriptionEngineAssemblyaiConfig|TranscriptionEngineSpeechmaticsConfig|TranscriptionEngineSonioxConfig|TranscriptionEngineParakeetConfig|TranscriptionEngineHumainConfig|TranscriptionEngineReson8Config|TranscriptionEngineAConfig|TranscriptionEngineBConfig|DeepgramNova2Config|DeepgramNova3Config|null $transcriptionEngineConfig = null,
         string $transcriptionTracks = 'inbound',
         RequestOptions|array|null $requestOptions = null,
     ): ActionStartTranscriptionResponse {

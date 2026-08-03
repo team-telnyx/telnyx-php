@@ -10,6 +10,7 @@ use Telnyx\Core\Concerns\SdkParams;
 use Telnyx\Core\Contracts\BaseModel;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Backend;
 use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration;
+use Telnyx\CustomStorageCredentials\CustomStorageCredentialUpdateParams\Configuration\S3GenericConfigurationData;
 
 /**
  * Updates a stored custom credentials configuration.
@@ -35,7 +36,7 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
 
     /** @var ConfigurationVariants $configuration */
     #[Required(union: Configuration::class)]
-    public GcsConfigurationData|S3ConfigurationData|AzureConfigurationData $configuration;
+    public GcsConfigurationData|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData $configuration;
 
     /**
      * `new CustomStorageCredentialUpdateParams()` is missing required properties by the API.
@@ -68,7 +69,7 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
      */
     public static function with(
         Backend|string $backend,
-        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
+        GcsConfigurationData|array|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData $configuration,
     ): self {
         $self = new self;
 
@@ -93,7 +94,7 @@ final class CustomStorageCredentialUpdateParams implements BaseModel
      * @param ConfigurationShape $configuration
      */
     public function withConfiguration(
-        GcsConfigurationData|array|S3ConfigurationData|AzureConfigurationData $configuration,
+        GcsConfigurationData|array|S3ConfigurationData|S3GenericConfigurationData|AzureConfigurationData $configuration,
     ): self {
         $self = clone $this;
         $self['configuration'] = $configuration;

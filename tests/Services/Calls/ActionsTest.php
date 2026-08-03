@@ -17,6 +17,7 @@ use Telnyx\Calls\Actions\ActionHangupResponse;
 use Telnyx\Calls\Actions\ActionJoinAIAssistantResponse;
 use Telnyx\Calls\Actions\ActionLeaveQueueResponse;
 use Telnyx\Calls\Actions\ActionPauseRecordingResponse;
+use Telnyx\Calls\Actions\ActionPayResponse;
 use Telnyx\Calls\Actions\ActionReferResponse;
 use Telnyx\Calls\Actions\ActionRejectResponse;
 use Telnyx\Calls\Actions\ActionResumeRecordingResponse;
@@ -411,6 +412,19 @@ final class ActionsTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ActionPauseRecordingResponse::class, $result);
+    }
+
+    #[Test]
+    public function testPay(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->calls->actions->pay('call_control_id');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ActionPayResponse::class, $result);
     }
 
     #[Test]

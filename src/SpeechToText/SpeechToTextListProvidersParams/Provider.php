@@ -23,6 +23,8 @@ enum Provider: string
 
     case HUMAIN = 'humain';
 
+    case RESON8 = 'reson8';
+
     case AZURE = 'azure';
 
     case OPENAI = 'openai';

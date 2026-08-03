@@ -314,7 +314,7 @@ final class DirService implements DirContract
      *
      * Submit a DIR for vetting. Sends the DIR back through the vetting cycle from any non-terminal status. When re-submitting from `suspended` or `expired`, the DIR's previous Branded Calling registration is torn down transactionally and its phone numbers flip back to `submitted`. When re-submitting from `verified`, the existing registration stays live throughout the new vetting cycle.
      *
-     * Returns `400` from `submitted`/`in_review`/`permanently_rejected`. Returns `409` if the DIR has an unresolved infringement claim.
+     * Returns `400` from `submitted`/`in_review`/`permanently_rejected`. Returns `400` if the DIR's business and financial references have not been submitted. Returns `409` if the DIR has an unresolved infringement claim.
      *
      * @param string $dirID The DIR id. Lowercase UUID.
      * @param RequestOpts|null $requestOptions

@@ -16,7 +16,10 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\AssistantsService::chat()
  *
  * @phpstan-type AssistantChatParamsShape = array{
- *   content: string, conversationID: string, name?: string|null
+ *   content: string,
+ *   conversationID: string,
+ *   name?: string|null,
+ *   stream?: bool|null,
  * }
  */
 final class AssistantChatParams implements BaseModel
@@ -42,6 +45,12 @@ final class AssistantChatParams implements BaseModel
      */
     #[Optional]
     public ?string $name;
+
+    /**
+     * When true, the response is streamed as Server-Sent Events (`text/event-stream`): `delta` events carry content fragments as they are generated, a final `done` event carries the full content plus `whatsapp_template`, and a terminal `error` event reports failures that happen after streaming started. When false (default), the response is a single JSON object.
+     */
+    #[Optional]
+    public ?bool $stream;
 
     /**
      * `new AssistantChatParams()` is missing required properties by the API.
@@ -70,7 +79,8 @@ final class AssistantChatParams implements BaseModel
     public static function with(
         string $content,
         string $conversationID,
-        ?string $name = null
+        ?string $name = null,
+        ?bool $stream = null,
     ): self {
         $self = new self;
 
@@ -78,6 +88,7 @@ final class AssistantChatParams implements BaseModel
         $self['conversationID'] = $conversationID;
 
         null !== $name && $self['name'] = $name;
+        null !== $stream && $self['stream'] = $stream;
 
         return $self;
     }
@@ -111,6 +122,17 @@ final class AssistantChatParams implements BaseModel
     {
         $self = clone $this;
         $self['name'] = $name;
+
+        return $self;
+    }
+
+    /**
+     * When true, the response is streamed as Server-Sent Events (`text/event-stream`): `delta` events carry content fragments as they are generated, a final `done` event carries the full content plus `whatsapp_template`, and a terminal `error` event reports failures that happen after streaming started. When false (default), the response is a single JSON object.
+     */
+    public function withStream(bool $stream): self
+    {
+        $self = clone $this;
+        $self['stream'] = $stream;
 
         return $self;
     }
