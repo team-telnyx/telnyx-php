@@ -67,6 +67,17 @@ final class ToolsTest extends TestCase
             ],
             retrieval: ['foo' => 'bar'],
             timeoutMs: 0,
+            updateDynamicVariables: [
+                'description' => 'Collect caller details into conversation variables.',
+                'name' => 'collect_details',
+                'updatableVariables' => [
+                    [
+                        'name' => 'customer_name',
+                        'description' => 'The caller\'s full name.',
+                        'type' => 'string',
+                    ],
+                ],
+            ],
             webhook: ['foo' => 'bar'],
         );
 

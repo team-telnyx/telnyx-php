@@ -16,6 +16,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\AI\ToolsService::create()
  *
  * @phpstan-import-type PayToolParamsShape from \Telnyx\AI\Tools\PayToolParams
+ * @phpstan-import-type UpdateDynamicVariablesToolParamsShape from \Telnyx\AI\Tools\UpdateDynamicVariablesToolParams
  *
  * @phpstan-type ToolCreateParamsShape = array{
  *   displayName: string,
@@ -27,6 +28,7 @@ use Telnyx\Core\Contracts\BaseModel;
  *   pay?: null|PayToolParams|PayToolParamsShape,
  *   retrieval?: array<string,mixed>|null,
  *   timeoutMs?: int|null,
+ *   updateDynamicVariables?: null|UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape,
  *   webhook?: array<string,mixed>|null,
  * }
  */
@@ -68,6 +70,12 @@ final class ToolCreateParams implements BaseModel
     #[Optional('timeout_ms')]
     public ?int $timeoutMs;
 
+    /**
+     * Configuration for an update_dynamic_variables tool.
+     */
+    #[Optional('update_dynamic_variables')]
+    public ?UpdateDynamicVariablesToolParams $updateDynamicVariables;
+
     /** @var array<string,mixed>|null $webhook */
     #[Optional(map: 'mixed')]
     public ?array $webhook;
@@ -102,6 +110,7 @@ final class ToolCreateParams implements BaseModel
      * @param array<string,mixed>|null $invite
      * @param PayToolParams|PayToolParamsShape|null $pay
      * @param array<string,mixed>|null $retrieval
+     * @param UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape|null $updateDynamicVariables
      * @param array<string,mixed>|null $webhook
      */
     public static function with(
@@ -114,6 +123,7 @@ final class ToolCreateParams implements BaseModel
         PayToolParams|array|null $pay = null,
         ?array $retrieval = null,
         ?int $timeoutMs = null,
+        UpdateDynamicVariablesToolParams|array|null $updateDynamicVariables = null,
         ?array $webhook = null,
     ): self {
         $self = new self;
@@ -128,6 +138,7 @@ final class ToolCreateParams implements BaseModel
         null !== $pay && $self['pay'] = $pay;
         null !== $retrieval && $self['retrieval'] = $retrieval;
         null !== $timeoutMs && $self['timeoutMs'] = $timeoutMs;
+        null !== $updateDynamicVariables && $self['updateDynamicVariables'] = $updateDynamicVariables;
         null !== $webhook && $self['webhook'] = $webhook;
 
         return $self;
@@ -219,6 +230,20 @@ final class ToolCreateParams implements BaseModel
     {
         $self = clone $this;
         $self['timeoutMs'] = $timeoutMs;
+
+        return $self;
+    }
+
+    /**
+     * Configuration for an update_dynamic_variables tool.
+     *
+     * @param UpdateDynamicVariablesToolParams|UpdateDynamicVariablesToolParamsShape $updateDynamicVariables
+     */
+    public function withUpdateDynamicVariables(
+        UpdateDynamicVariablesToolParams|array $updateDynamicVariables
+    ): self {
+        $self = clone $this;
+        $self['updateDynamicVariables'] = $updateDynamicVariables;
 
         return $self;
     }

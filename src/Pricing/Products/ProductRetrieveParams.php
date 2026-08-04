@@ -15,7 +15,7 @@ use Telnyx\Core\Contracts\BaseModel;
  * @see Telnyx\Services\Pricing\ProductsService::retrieve()
  *
  * @phpstan-type ProductRetrieveParamsShape = array{
- *   pageNumber?: int|null, pageSize?: int|null
+ *   filterCountryISO?: string|null, pageNumber?: int|null, pageSize?: int|null
  * }
  */
 final class ProductRetrieveParams implements BaseModel
@@ -23,6 +23,9 @@ final class ProductRetrieveParams implements BaseModel
     /** @use SdkModel<ProductRetrieveParamsShape> */
     use SdkModel;
     use SdkParams;
+
+    #[Optional(nullable: true)]
+    public ?string $filterCountryISO;
 
     /**
      * Page number (1-based).
@@ -47,13 +50,23 @@ final class ProductRetrieveParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
+        ?string $filterCountryISO = null,
         ?int $pageNumber = null,
-        ?int $pageSize = null
+        ?int $pageSize = null,
     ): self {
         $self = new self;
 
+        null !== $filterCountryISO && $self['filterCountryISO'] = $filterCountryISO;
         null !== $pageNumber && $self['pageNumber'] = $pageNumber;
         null !== $pageSize && $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    public function withFilterCountryISO(?string $filterCountryISO): self
+    {
+        $self = clone $this;
+        $self['filterCountryISO'] = $filterCountryISO;
 
         return $self;
     }

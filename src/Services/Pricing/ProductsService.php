@@ -7,7 +7,7 @@ namespace Telnyx\Services\Pricing;
 use Telnyx\Client;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Pricing\Products\ProductGetResponse;
 use Telnyx\Pricing\Products\ProductListResponse;
 use Telnyx\RequestOptions;
@@ -47,12 +47,17 @@ final class ProductsService implements ProductsContract
      */
     public function retrieve(
         string $slug,
+        ?string $filterCountryISO = null,
         int $pageNumber = 1,
-        int $pageSize = 25,
+        int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
     ): ProductGetResponse {
         $params = Util::removeNulls(
-            ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
+            [
+                'filterCountryISO' => $filterCountryISO,
+                'pageNumber' => $pageNumber,
+                'pageSize' => $pageSize,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type
@@ -70,15 +75,15 @@ final class ProductsService implements ProductsContract
      * @param int $pageSize number of items per page (max 100)
      * @param RequestOpts|null $requestOptions
      *
-     * @return DefaultFlatPaginationForInexplicitNumberOrders<ProductListResponse>
+     * @return DefaultFlatPagination<ProductListResponse>
      *
      * @throws APIException
      */
     public function list(
         int $pageNumber = 1,
-        int $pageSize = 25,
+        int $pageSize = 20,
         RequestOptions|array|null $requestOptions = null,
-    ): DefaultFlatPaginationForInexplicitNumberOrders {
+    ): DefaultFlatPagination {
         $params = Util::removeNulls(
             ['pageNumber' => $pageNumber, 'pageSize' => $pageSize]
         );

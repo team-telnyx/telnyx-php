@@ -8,7 +8,7 @@ use Telnyx\Client;
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
 use Telnyx\Core\Util;
-use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Pricing\Products\ProductGetResponse;
 use Telnyx\Pricing\Products\ProductListParams;
 use Telnyx\Pricing\Products\ProductListResponse;
@@ -35,7 +35,9 @@ final class ProductsRawService implements ProductsRawContract
      * Returns pricing entries for a single product. Most products return standard rate entries with fields like rate, unit, country_iso, direction, and tiers. Inference products return model-specific fields (model, input_rate, output_rate, cached_input_rate) with tiered pricing. Some products use rate decks (pricing_type: rate_deck) where rates are determined dynamically.
      *
      * @param string $slug product slug from the catalog listing
-     * @param array{pageNumber?: int, pageSize?: int}|ProductRetrieveParams $params
+     * @param array{
+     *   filterCountryISO?: string|null, pageNumber?: int, pageSize?: int
+     * }|ProductRetrieveParams $params
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<ProductGetResponse>
@@ -58,7 +60,11 @@ final class ProductsRawService implements ProductsRawContract
             path: ['pricing/products/%1$s', $slug],
             query: Util::array_transform_keys(
                 $parsed,
-                ['pageNumber' => 'page_number', 'pageSize' => 'page_size']
+                [
+                    'filterCountryISO' => 'filter[country_iso]',
+                    'pageNumber' => 'page[number]',
+                    'pageSize' => 'page[size]',
+                ],
             ),
             options: $options,
             convert: ProductGetResponse::class,
@@ -73,7 +79,7 @@ final class ProductsRawService implements ProductsRawContract
      * @param array{pageNumber?: int, pageSize?: int}|ProductListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPaginationForInexplicitNumberOrders<ProductListResponse,>,>
+     * @return BaseResponse<DefaultFlatPagination<ProductListResponse>>
      *
      * @throws APIException
      */
@@ -92,11 +98,11 @@ final class ProductsRawService implements ProductsRawContract
             path: 'pricing/products',
             query: Util::array_transform_keys(
                 $parsed,
-                ['pageNumber' => 'page_number', 'pageSize' => 'page_size']
+                ['pageNumber' => 'page[number]', 'pageSize' => 'page[size]']
             ),
             options: $options,
             convert: ProductListResponse::class,
-            page: DefaultFlatPaginationForInexplicitNumberOrders::class,
+            page: DefaultFlatPagination::class,
         );
     }
 }

@@ -6,7 +6,7 @@ namespace Telnyx\ServiceContracts\Pricing;
 
 use Telnyx\Core\Contracts\BaseResponse;
 use Telnyx\Core\Exceptions\APIException;
-use Telnyx\DefaultFlatPaginationForInexplicitNumberOrders;
+use Telnyx\DefaultFlatPagination;
 use Telnyx\Pricing\Products\ProductGetResponse;
 use Telnyx\Pricing\Products\ProductListParams;
 use Telnyx\Pricing\Products\ProductListResponse;
@@ -41,7 +41,7 @@ interface ProductsRawContract
      * @param array<string,mixed>|ProductListParams $params
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<DefaultFlatPaginationForInexplicitNumberOrders<ProductListResponse,>,>
+     * @return BaseResponse<DefaultFlatPagination<ProductListResponse>>
      *
      * @throws APIException
      */
